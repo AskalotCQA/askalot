@@ -1,0 +1,16 @@
+.bundle
+.idea
+.project
+.sass-cache
+.tags
+
+Gemfile.lock.tags
+
+config/configuration.yml
+config/database.yml
+
+db/*.sqlite3
+log/*.log
+
+tags
+tmp
