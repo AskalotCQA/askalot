@@ -1,0 +1,14 @@
+defaults: &defaults
+  secret_token: TODO
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults
