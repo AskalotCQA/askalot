@@ -1,0 +1,31 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: naruby_development
+  pool: 5
+  username: postgres
+  password: postgres
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: naruby_test
+  pool: 5
+  username: postgres
+  password: postgres
+
+staging:
+  adapter: postgresql
+  encoding: unicode
+  database: naruby_production
+  pool: 5
+  username: postgres
+  password: postgres
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: naruby_production
+  pool: 5
+  username: postgres
+  password: postgres
