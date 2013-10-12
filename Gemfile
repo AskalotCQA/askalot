@@ -22,7 +22,7 @@ gem 'font-awesome-rails', '~> 3.2.1.3'
 
 # javascripts
 gem 'therubyracer', platforms: :ruby
-gem 'turbolinks'
+# gem 'turbolinks'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
