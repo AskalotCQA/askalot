@@ -6,13 +6,17 @@ gem 'rails', '4.0.0'
 gem 'pg'
 
 # searching
-gem 'tire'
+# gem 'tire'
 
 # configuration
 gem 'squire', '~> 1.2.6'
 
+# authentification
+gem 'devise', '~> 3.1.1'
+gem 'cancan', '~> 1.6.9'
+
 # helpers
-gem 'protected_attributes'
+# gem 'protected_attributes'
 gem 'jbuilder', '~> 1.2'
 
 # stylesheets
