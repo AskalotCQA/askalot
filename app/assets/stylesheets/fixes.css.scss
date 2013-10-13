@@ -3,7 +3,8 @@
 
 // general
 
-address, form, nav, p, dl, ol, ul, table {
+address, form, nav, p, dl, ol, ul, table,
+.alert {
   &:last-child {
     margin-bottom: 0px;
   }

@@ -30,7 +30,6 @@ sk:
     new_password: 'Nové heslo'
     confirm_password: 'Potvrdenie hesla'
 
-
     leave_current_password: 'ponechajte prázdne pokiaľ nechcete zmeniť'
     enter_current_password: 'pre potvrdenie potrebujeme Vaše aktuálne heslo'
 
