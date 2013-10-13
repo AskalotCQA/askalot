@@ -38,10 +38,10 @@ module TagHelper
   end
 
   def navbar_logo_tag(title, options = {})
-    classes = [:capital]
+    classes = [:'navbar-brand']
     classes << :active if current_page? root_path
 
-    content_tag :li, link_to(title || :'', root_path, class: options[:type] || :brand), class: classes
+    link_to title, root_path, class: classes
   end
 
   def navbar_li_tag(body, url, options = {})
