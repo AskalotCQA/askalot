@@ -6,6 +6,8 @@
 @import 'twitter/bootstrap';
 @import 'font-awesome';
 
+// general
+
 html {
   height: 100%;
   overflow-y: scroll;
@@ -20,14 +22,12 @@ section + section {
   padding-top: 100px;
 }
 
-address, form, nav, p, dl, ol, ul, table {
-  &:last-child {
-    margin-bottom: 0px;
-  }
-}
+// header
 
 header {
 }
+
+// footer
 
 footer {
   margin: 100px 0px;

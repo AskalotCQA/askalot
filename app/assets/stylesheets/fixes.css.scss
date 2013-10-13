@@ -1,2 +1,17 @@
 @import 'mixins';
 @import 'variables';
+
+// general
+
+address, form, nav, p, dl, ol, ul, table {
+  &:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+// forms
+
+.form-title {
+  margin: ($line-height-computed * 2) 0 $line-height-computed;
+  padding-bottom: ($line-height-computed / 2) - 1;
+}
