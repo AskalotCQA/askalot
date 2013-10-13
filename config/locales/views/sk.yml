@@ -9,6 +9,9 @@ sk:
     users:
       sign_up: 'Registrácia'
       sign_in: 'Prihlásenie'
+      sign_out: 'Odhlásiť'
+      signed_in: 'Prihlásený ako %{login}.'
+      profile: 'Profil'
 
   helpers:
     page_entries_info:
