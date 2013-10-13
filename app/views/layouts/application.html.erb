@@ -7,7 +7,20 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <%# TODO: Extract to separate partial %>
+    <%# TODO (smolnar) refactor %>
+    <section id="header">
+      <% if current_user %>
+        <%= link_to t('views.users.profile'), edit_user_registration_path %> |
+        <%= t('views.users.signed_in', login: current_user.login) %>
+        <%= link_to t('views.users.sign_out'), destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%# TODO (smolnar) consider using different locale paths for links %>
+        <%= link_to t('views.users.sign_up'), new_user_registration_path %> | 
+        <%= link_to t('views.users.sign_in'), new_user_session_path %>
+      <% end %>
+    </section>
+
+    <%# TODO (smolnar) extract to separate partial %>
     <% if flash.any? %>
       <section id="flash">
         <div class="row">

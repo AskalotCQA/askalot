@@ -6,7 +6,6 @@ gem 'rails', '4.0.0'
 gem 'pg'
 
 # searching
-# gem 'tire'
 
 # configuration
 gem 'squire', '~> 1.2.6'

@@ -1,0 +1,6 @@
+<h1><%= @user.login %></h1>
+
+<%# TODO (smolnar) refactor to use locales %>
+<% if can? :edit, @user %>
+  <%= link_to 'Edit profile', edit_user_registration_path %>
+<% end %>

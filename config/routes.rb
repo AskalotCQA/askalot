@@ -54,4 +54,6 @@ NaRuby::Application.routes.draw do
   #     resources :products
   #   end
   devise_for :users
+
+  match 'users/:login', via: :get, to: 'users#show', as: :user
 end
