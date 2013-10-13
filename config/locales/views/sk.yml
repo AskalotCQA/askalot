@@ -6,6 +6,7 @@ sk:
       previous: '<i class="icon-angle-left"></i>'
       next: '<i class="icon-angle-right"></i>'
       truncate: '&hellip;'
+
     users:
       sign_up: 'Registrácia'
       sign_in: 'Prihlásenie'
