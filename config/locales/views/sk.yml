@@ -8,11 +8,12 @@ sk:
       truncate: '&hellip;'
 
     users:
-      sign_up: 'Registrácia'
-      sign_in: 'Prihlásenie'
+      sign_up: 'Registrovať'
+      sign_in: 'Prihlásiť'
       sign_out: 'Odhlásiť'
       signed_in: 'Prihlásený ako %{login}.'
       profile: 'Profil'
+      settings: 'Nastavenia'
 
   helpers:
     page_entries_info:

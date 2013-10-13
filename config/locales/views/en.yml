@@ -1,8 +1,1 @@
 en:
-  views:
-    users:
-      sign_up: 'Sign Up'
-      sign_in: 'Sign In'
-      sign_out: 'Sign Out'
-      signed_in: 'Signed in as %{login}.'
-      profile: 'Profil'
