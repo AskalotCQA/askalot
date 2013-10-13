@@ -13,7 +13,7 @@
             <%= t('user.signed_in', login: current_user.login) %>
           </p>
           <%= navbar_dropdown_tag :'caret-down', current_user.email, '#', join: :append do %>
-            <li><%= icon_link_to :heart, t('user.profile'), user_registration_path %></li>
+            <li><%= icon_link_to :heart, t('user.profile'), user_path(current_user) %></li>
             <li><%= icon_link_to :cog, t('user.settings'), edit_user_registration_path %></li>
             <li><%= icon_link_to :signout, t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
           <% end %>
