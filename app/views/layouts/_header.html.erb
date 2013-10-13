@@ -10,16 +10,16 @@
       <ul class="nav navbar-nav pull-right">
         <% if user_signed_in? %>
           <p class="navbar-text">
-            <%= t('views.users.signed_in', login: current_user.login) %>
+            <%= t('user.signed_in', login: current_user.login) %>
           </p>
           <%= navbar_dropdown_tag :'caret-down', current_user.email, '#', join: :append do %>
-            <li><%= icon_link_to :heart, t('views.users.profile'), user_registration_path %></li>
-            <li><%= icon_link_to :cog, t('views.users.settings'), edit_user_registration_path %></li>
-            <li><%= icon_link_to :signout, t('views.users.sign_out'), destroy_user_session_path, method: :delete %></li>
+            <li><%= icon_link_to :heart, t('user.profile'), user_registration_path %></li>
+            <li><%= icon_link_to :cog, t('user.settings'), edit_user_registration_path %></li>
+            <li><%= icon_link_to :signout, t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
           <% end %>
         <% else %>
-          <li><%= icon_link_to :leaf, t('views.users.sign_up'), new_user_registration_path %></li>
-          <li><%= icon_link_to :signin, t('views.users.sign_in'), new_user_session_path %></li>
+          <li><%= icon_link_to :leaf, t('user.sign_up'), new_user_registration_path %></li>
+          <li><%= icon_link_to :signin, t('user.sign_in'), new_user_session_path %></li>
         <% end %>
       </ul>
     </div>
