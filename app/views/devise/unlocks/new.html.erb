@@ -1,12 +1,22 @@
-<h2>Resend unlock instructions</h2>
+<% provide :title, t('user.locked_account') %>
 
-<%= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
+<section>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <h1 class="form-title"><%= yield :title %></h1>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+      <%= form_for resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post } do |f| %>
+        <%= devise_error_messages! %>
 
-  <div><%= f.submit "Resend unlock instructions" %></div>
-<% end %>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, class: :'form-control' %>
+        </div>
 
-<%= render "devise/shared/links" %>
+        <button type="submit" class="btn btn-info btn-lg"><%= t('user.unlock_account') %></button>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%= render 'devise/shared/links' %>

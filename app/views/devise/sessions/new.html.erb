@@ -1,17 +1,31 @@
-<h2>Sign in</h2>
+<% provide :title, t('user.session_start') %>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :login %><br />
-  <%= f.text_field :login, :autofocus => true %></div>
+<section>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <h1 class="form-title"><%= yield :title %></h1>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+      <%= form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
+        <div class="form-group">
+          <%= f.label :login %>
+          <%= f.text_field :login, autofocus: true, class: :'form-control' %>
+        </div>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+        <div class="form-group">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: :'form-control' %>
+        </div>
 
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
+        <% if devise_mapping.rememberable? %>
+          <div class="checkbox">
+            <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+          </div>
+        <% end %>
 
-<%= render "devise/shared/links" %>
+        <button type="submit" class="btn btn-primary btn-lg"><%= t('user.sign_in') %></button>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%= render 'devise/shared/links' %>

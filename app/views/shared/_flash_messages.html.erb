@@ -1,15 +1,13 @@
 <% if flash.any? %>
-  <section id="flash">
-    <div class="row">
-      <div class="col-md-12">
-        <% flash.each do |type, messages| %>
-          <% Array.wrap(messages).each do |message| %>
-            <div class="alert alert-<%= type %> alert-dismissable">
-              <%= close_link_to_alert %> <%= message %>
-            </div>
-          <% end %>
+  <div class="row">
+    <div class="col-md-12">
+      <% flash.each do |type, messages| %>
+        <% Array.wrap(messages).each do |message| %>
+          <div class="alert alert-<%= flash_type_to_class type %> alert-dismissable">
+            <%= close_link_to_alert %> <%= message %>
+          </div>
         <% end %>
-      </div>
+      <% end %>
     </div>
-  </section>
+  </div>
 <% end %>

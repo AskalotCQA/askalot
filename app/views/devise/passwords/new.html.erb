@@ -1,12 +1,22 @@
-<h2>Forgot your password?</h2>
+<% provide :title, t('user.forgotten_password') %>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
+<section>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <h1 class="form-title"><%= yield :title %></h1>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+      <%= form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :post } do |f| %>
+        <%= devise_error_messages! %>
 
-  <div><%= f.submit "Send me reset password instructions" %></div>
-<% end %>
+        <div class="form-group">
+          <%= f.label :email %>
+          <%= f.email_field :email, autofocus: true, class: :'form-control' %>
+        </div>
 
-<%= render "devise/shared/links" %>
+        <button type="submit" class="btn btn-info btn-lg"><%= t('user.reset_password') %></button>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%= render 'devise/shared/links' %>

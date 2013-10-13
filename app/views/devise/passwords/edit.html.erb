@@ -1,16 +1,29 @@
-<h2>Change your password</h2>
+<% provide :title, t('user.password_change') %>
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+<section>
+  <div class="row">
+    <div class="col-md-offset-2 col-md-8">
+      <h1 class="form-title"><%= yield :title %></h1>
 
-  <div><%= f.label :password, "New password" %><br />
-  <%= f.password_field :password, :autofocus => true %></div>
+      <%= form_for resource, as: resource_name, url: password_path(resource_name), html: { method: :put } do |f| %>
+        <%= devise_error_messages! %>
 
-  <div><%= f.label :password_confirmation, "Confirm new password" %><br />
-  <%= f.password_field :password_confirmation %></div>
+        <%= f.hidden_field :reset_password_token %>
 
-  <div><%= f.submit "Change my password" %></div>
-<% end %>
+        <div class="form-group">
+          <%= f.label :password, t('user.new_password') %>
+          <%= f.password_field :password, autofocus: true, class: :'form-control' %>
+        </div>
 
-<%= render "devise/shared/links" %>
+        <div class="form-group">
+          <%= f.label :password_confirmation, t('user.confirm_password') %>
+          <%= f.password_field :password_confirmation, class: :'form-control' %>
+        </div>
+
+        <button type="submit" class="btn btn-info btn-lg"><%= t('user.change_password') %></button>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%= render 'devise/shared/links' %>
