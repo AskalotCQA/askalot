@@ -2,7 +2,8 @@ sk:
   activerecord:
     attributes:
       user:
+        current_password: 'Aktuálne heslo'
         email: 'E-mail'
         password: 'Heslo'
         password_confirmation: 'Potvrdenie hesla'
-        current_password: 'Aktuálne heslo'
+        remember_me: 'Zapamätať'
