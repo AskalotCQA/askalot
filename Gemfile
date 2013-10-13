@@ -30,6 +30,10 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
 
+# pagination
+gem 'kaminari',           '~> 0.14.1'
+gem 'kaminari-bootstrap', '~> 0.1.3'
+
 # documentation
 group :doc do
   gem 'sdoc', require: false
