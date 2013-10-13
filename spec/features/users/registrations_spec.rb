@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'User Registrations' do
+describe 'User Sign Up' do
   context 'when using login' do
     it 'should register user' do
       visit root_path
@@ -14,7 +14,7 @@ describe 'User Registrations' do
 
       click_button 'Sign up'
 
-      page.should have_content('A message with a confirmation link has been sent to your email address. Please open the link to activate your account.')
+      page.should have_content('A message with a confirmation link has been sent to your email address.')
     end
   end
 end
