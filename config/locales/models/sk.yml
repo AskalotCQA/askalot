@@ -1,1 +1,8 @@
 sk:
+  activerecord:
+    attributes:
+      user:
+        email: 'E-mail'
+        password: 'Heslo'
+        password_confirmation: 'Potvrdenie hesla'
+        current_password: 'Aktuálne heslo'
