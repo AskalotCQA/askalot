@@ -14,8 +14,8 @@
         </div>
 
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div>
-            Currently waiting confirmation for: <%= resource.unconfirmed_email %>
+          <div class="form-group">
+            <p class="help-block"><%= t('confirmation_pending', email: resource.unconfirmed_email) %></p>
           </div>
         <% end %>
 

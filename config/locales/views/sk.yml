@@ -18,6 +18,7 @@ sk:
     sign_up_with: 'Registrovať cez %{provider}'
     sign_in_with: 'Prihlásiť cez %{provider}'
 
+    confirmation_pending: 'Čaká sa na potvrdenie e-mailu %{email}.'
     signed_in_as: 'Prihlásený ako %{login}'
 
     confirm_registration: 'Poslať inštrukcie pre potvrdenie registrácie'
