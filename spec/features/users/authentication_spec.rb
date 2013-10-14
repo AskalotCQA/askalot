@@ -25,7 +25,19 @@ describe 'User Authentication' do
 
   context 'when using AIS account' do
     it 'should register user' do
-      pending
+      visit root_url
+
+      click_link 'Prihlásiť'
+
+      fill_in 'user_login', with: 'xmylogin1'
+      fill_in 'user_password', with: 'password'
+
+      click_button 'Prihlásiť'
+
+      current_path.should eql(edit_user_registration_path)
+
+      page.should have_content('')
+      page.should have_content('xmylogin1')
     end
   end
 end

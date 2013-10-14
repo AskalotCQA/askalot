@@ -13,7 +13,12 @@ FactoryGirl.define do
     end
 
     trait :unconfirmed do
-      confirmed_at nil
+      after :create do |user|
+        user.confirmation_token = nil
+        user.confirmed_at = nil
+
+        user.save!
+      end
     end
   end
 end
