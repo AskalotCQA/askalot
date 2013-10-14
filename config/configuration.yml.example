@@ -1,6 +1,10 @@
 defaults: &defaults
   secret_token: TODO
 
+  mailer:
+    username: TODO
+    password: TODO
+
 development:
   <<: *defaults
 
