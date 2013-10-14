@@ -46,6 +46,10 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  config.expect_with :rspec do |c|
+    c.syntax = :expect # Allow only usage of expect syntax
+  end
+
   # Devise through Warden Test Helpers
   config.include Warden::Test::Helpers
 

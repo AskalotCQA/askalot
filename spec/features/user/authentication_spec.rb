@@ -4,7 +4,7 @@ describe 'User Authentication' do
   let(:user) { create :user, password: 'password' }
 
   context 'when registered' do
-    it 'should sign in user successfully' do
+    it 'signs in user successfully' do
       visit root_url
 
       click_link 'Prihlásiť'
@@ -14,17 +14,17 @@ describe 'User Authentication' do
 
       click_button 'Prihlásiť'
 
-      page.should have_content('Úspešne prihlásený.')
-      page.should have_content("Prihlásený ako #{user.login}")
+      expect(page).to have_content('Úspešne prihlásený.')
+      expect(page).to have_content("Prihlásený ako #{user.login}")
 
       click_link 'Odhlásiť'
 
-      page.should have_content('Úspešne odhlásený.')
+      expect(page).to  have_content('Úspešne odhlásený.')
     end
   end
 
   context 'when using AIS account' do
-    it 'should register user' do
+    it 'sings up user' do
       visit root_url
 
       click_link 'Prihlásiť'
@@ -34,10 +34,10 @@ describe 'User Authentication' do
 
       click_button 'Prihlásiť'
 
-      current_path.should eql(edit_user_registration_path)
+      expect(current_path).to eql(edit_user_registration_path)
 
-      page.should have_content('')
-      page.should have_content('xmylogin1')
+      expect(page).to have_content('')
+      expect(page).to have_content('xmylogin1')
     end
   end
 end
