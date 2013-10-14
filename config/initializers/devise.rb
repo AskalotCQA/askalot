@@ -4,7 +4,7 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = '113c8c1e3c99f57d70ac8e076be7766039fad9e4d2ea4835ca6c51573c03a37abb0b269643c36c9ec0ba9e6d1ef9fc96b7436615269e7e253dbe731abc826b65'
+  config.secret_key = ::Configuration.devise.key
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -256,7 +256,7 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
-  # Allow insecure token lookup for test environment in 
+  # Allow insecure token lookup for test environment in
   # order to easily use generated tokens
   # TODO (smolnar) try to find another solution for accessing token in emails
   config.allow_insecure_token_lookup = true if Rails.env.test?

@@ -1,9 +1,12 @@
 defaults: &defaults
-  secret_token: TODO
+  devise:
+    key: TODO
 
   mailer:
     username: TODO
     password: TODO
+
+  secret_token: TODO
 
 development:
   <<: *defaults
