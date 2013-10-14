@@ -7,12 +7,11 @@ class User < ActiveRecord::Base
          :rememberable,
          :trackable,
          :validatable,
+
          authentication_keys: [:login]
 
-  validates :login,
-    presence: true,
-    uniqueness: { case_sensitive: false }, # TODO (smolnar) check uniqueness value select in db
-    format: { with: /\A[a-z0-9_]+\z/ }
+  # TODO (smolnar) check uniqueness value select in db
+  validates :login, format: { with: /\A[a-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
 
   before_save do
     self.login = login.downcase
