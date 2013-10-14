@@ -1,25 +1,25 @@
 require 'spec_helper'
 
-describe 'User Sign In' do
+describe 'User Authentication' do
   let(:user) { create :user, password: 'password' }
 
   context 'when registered' do
     it 'should sign in user successfully' do
       visit root_url
 
-      click_link 'Sign In'
+      click_link 'Prihlásiť'
 
       fill_in 'user_login', with: user.login
       fill_in 'user_password', with: 'password'
 
-      click_button 'Sign in'
+      click_button 'Prihlásiť'
 
-      page.should have_content('Signed in successfully.')
-      page.should have_content("Signed in as #{user.login}")
+      page.should have_content('Úspešne prihlásený.')
+      page.should have_content("Prihlásený ako #{user.login}")
 
-      click_link 'Sign Out'
+      click_link 'Odhlásiť'
 
-      page.should have_content('Signed out successfully.')
+      page.should have_content('Úspešne odhlásený.')
     end
   end
 
