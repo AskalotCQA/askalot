@@ -51,11 +51,16 @@ RSpec.configure do |config|
 
   Warden.test_mode!
 
+  config.before :each do
+    Warden.test_reset!
+  end
+
   # FactoryGirl
   config.include FactoryGirl::Syntax::Methods
 
   # Include support
   config.include FixtureHelper
+  config.include EmailHelper
 
   # Specify paths to use DatabaseCleaner for
   DatabaseHelper.clean 'models', 'features', 'requests'
