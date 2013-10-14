@@ -5,8 +5,6 @@ gem 'rails', '4.0.0'
 # database
 gem 'pg'
 
-# searching
-
 # configuration
 gem 'squire', '~> 1.2.6'
 
@@ -16,7 +14,6 @@ gem 'cancan', '~> 1.6.9'
 gem 'net-ldap'
 
 # helpers
-# gem 'protected_attributes'
 gem 'jbuilder', '~> 1.2'
 
 # stylesheets
