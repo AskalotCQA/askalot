@@ -6,7 +6,26 @@ class User < ActiveRecord::Base
          :registerable,
          :rememberable,
          :trackable,
-         :validatable
+         :validatable,
+         authentication_keys: [:login]
 
-  validates :login, presence: true
+  validates :login,
+    presence: true,
+    uniqueness: { case_sensitive: false }, # TODO (smolnar) check uniqueness value select in db
+    format: { with: /\A[a-z0-9_]+\z/ }
+
+  before_save do
+    self.login = login.downcase
+  end
+
+  def self.find_first_by_auth_conditions(warden_conditions)
+    conditions = warden_conditions.dup
+    login      = conditions.delete(:login)
+
+    if login
+      where(conditions).where(["login = :value OR email = :value", { :value => login.downcase }]).first
+    else
+      where(conditions).first
+    end
+  end
 end
