@@ -37,5 +37,5 @@ NaRuby::Application.configure do
   config.action_mailer.delivery_method     = :test
   config.action_mailer.default_url_options = { host: 'www.example.com' }
 
-  config.i18n.default_locale = :en
+  config.i18n.default_locale = :sk
 end
