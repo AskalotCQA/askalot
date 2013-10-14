@@ -25,19 +25,25 @@ describe 'User Authentication' do
 
   context 'when using AIS account' do
     it 'sings up user' do
+      data = {
+        uid:  ['xuser1'],
+        mail: ['xuser1@stuba.sk']
+      }
+
+      Stuba::Ais.stub(:authenticate) { Stuba::User.new(data) }
+
       visit root_url
 
       click_link 'Prihlásiť'
 
-      fill_in 'user_login', with: 'xmylogin1'
+      fill_in 'user_login', with: 'xuser1'
       fill_in 'user_password', with: 'password'
 
       click_button 'Prihlásiť'
 
-      expect(current_path).to eql(edit_user_registration_path)
-
-      expect(page).to have_content('')
-      expect(page).to have_content('xmylogin1')
+      expect(page).to have_content('Úspešne prihlásený.')
+      expect(page).to have_content('xuser1')
+      expect(page).to have_content('xuser1@stuba.sk')
     end
   end
 end

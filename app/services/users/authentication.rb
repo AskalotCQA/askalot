@@ -1,14 +1,13 @@
 module Users
   class Authentication
-    attr_accessor :service, :session, :params
+    attr_accessor :service, :params
 
-    def initialize(service, session, params)
+    def initialize(service, params)
       @service = service
-      @session = session
       @params  = params
     end
 
-    def valid?
+    def authorized?
       !!user
     end
 
@@ -16,11 +15,14 @@ module Users
       attributes = {
         login: user.login,
         email: user.email,
-        password: user.password,
-        password_confirmation: user.password
+        password: @params[:password],
+        password_confirmation: @params[:password]
       }
 
-      User.new_with_session(attributes, @session).save!
+      user = User.new(attributes)
+
+      user.skip_confirmation!
+      user.save!
     end
 
     private

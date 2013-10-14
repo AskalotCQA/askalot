@@ -1,13 +1,9 @@
 class SessionsController < Devise::SessionsController
   def create
-    service = Users::Authentication.new(Stuba::Ais, session, params[:user])
+    service = Users::Authentication.new(Stuba::Ais, params[:user])
 
-    if service.valid?
-      service.create_user!
+    service.create_user! if service.authorized?
 
-      redirect_to edit_user_registration_path
-    else
-      super
-    end
+    super
   end
 end
