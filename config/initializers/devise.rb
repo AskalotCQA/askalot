@@ -256,7 +256,8 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
-  # TODO (smolnar) allow insecure token lookup for test environment in 
+  # Allow insecure token lookup for test environment in 
   # order to easily use generated tokens
+  # TODO (smolnar) try to find another solution for accessing token in emails
   config.allow_insecure_token_lookup = true if Rails.env.test?
 end
