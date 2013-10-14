@@ -1,22 +1,18 @@
 <% provide :title, t('user.locked_account') %>
 
 <section>
-  <div class="row">
-    <div class="col-md-offset-2 col-md-8">
-      <h1 class="form-title"><%= yield :title %></h1>
+  <h1 class="form-title"><%= yield :title %></h1>
 
-      <%= form_for resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post } do |f| %>
-        <%= devise_error_messages! %>
+  <%= form_for resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post } do |f| %>
+    <%= devise_error_messages! %>
 
-        <div class="form-group">
-          <%= f.label :email %>
-          <%= f.email_field :email, autofocus: true, class: :'form-control' %>
-        </div>
-
-        <button type="submit" class="btn btn-info btn-lg"><%= t('user.unlock_account') %></button>
-      <% end %>
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, autofocus: true, class: :'form-control' %>
     </div>
-  </div>
+
+    <button type="submit" class="btn btn-info btn-lg"><%= t('user.unlock_account') %></button>
+  <% end %>
 </section>
 
 <%= render 'devise/shared/links' %>

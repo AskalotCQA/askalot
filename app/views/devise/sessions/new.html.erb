@@ -1,31 +1,27 @@
 <% provide :title, t('user.session_start') %>
 
 <section>
-  <div class="row">
-    <div class="col-md-offset-2 col-md-8">
-      <h1 class="form-title"><%= yield :title %></h1>
+  <h1 class="form-title"><%= yield :title %></h1>
 
-      <%= form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
-        <div class="form-group">
-          <%= f.label :login %>
-          <%= f.text_field :login, autofocus: true, class: :'form-control' %>
-        </div>
-
-        <div class="form-group">
-          <%= f.label :password %>
-          <%= f.password_field :password, class: :'form-control' %>
-        </div>
-
-        <% if devise_mapping.rememberable? %>
-          <div class="checkbox">
-            <%= f.check_box :remember_me %> <%= f.label :remember_me %>
-          </div>
-        <% end %>
-
-        <button type="submit" class="btn btn-primary btn-lg"><%= t('user.sign_in') %></button>
-      <% end %>
+  <%= form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
+    <div class="form-group">
+      <%= f.label :login %>
+      <%= f.text_field :login, autofocus: true, class: :'form-control' %>
     </div>
-  </div>
+
+    <div class="form-group">
+      <%= f.label :password %>
+      <%= f.password_field :password, class: :'form-control' %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="checkbox">
+        <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+      </div>
+    <% end %>
+
+    <button type="submit" class="btn btn-primary btn-lg"><%= t('user.sign_in') %></button>
+  <% end %>
 </section>
 
 <%= render 'devise/shared/links' %>

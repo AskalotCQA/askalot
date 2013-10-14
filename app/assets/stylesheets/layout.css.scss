@@ -27,6 +27,12 @@ section + section {
 header {
 }
 
+// jumbotron
+
+.jumbotron {
+  text-shadow: 0 0 16px $jumbotron-color;
+}
+
 // footer
 
 footer {
