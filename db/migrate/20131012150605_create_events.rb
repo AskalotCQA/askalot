@@ -3,9 +3,9 @@ class CreateEvents < ActiveRecord::Migration
     create_table :events do |t|
       t.json :data, null: false
 
-      t.datetime :created_ad, null: false
+      t.datetime :created_at, null: false
     end
 
-    add_index :events, :created_ad
+    add_index :events, :created_at
   end
 end

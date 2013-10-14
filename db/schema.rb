@@ -18,10 +18,10 @@ ActiveRecord::Schema.define(version: 20131012191904) do
 
   create_table "events", force: true do |t|
     t.json     "data",       null: false
-    t.datetime "created_ad", null: false
+    t.datetime "created_at", null: false
   end
 
-  add_index "events", ["created_ad"], name: "index_events_on_created_ad", using: :btree
+  add_index "events", ["created_at"], name: "index_events_on_created_at", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "login",                               null: false
