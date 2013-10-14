@@ -1,33 +1,29 @@
 <section>
-  <div class="row">
-    <div class="col-md-offset-2 col-md-8">
-      <ul class="list-unstyled">
-        <% if controller_name != 'sessions' %>
-          <li><%= link_to t('user.sign_in'), new_session_path(resource_name) %></li>
-        <% end %>
+  <ul class="list-unstyled">
+    <% if controller_name != 'sessions' %>
+      <li><%= link_to t('user.sign_in'), new_session_path(resource_name) %></li>
+    <% end %>
 
-        <% if devise_mapping.registerable? && controller_name != 'registrations' %>
-          <li><%= link_to t('user.sign_up'), new_registration_path(resource_name) %></li>
-        <% end %>
+    <% if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <li><%= link_to t('user.sign_up'), new_registration_path(resource_name) %></li>
+    <% end %>
 
-        <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-          <li><%= link_to t('user.forgotten_password'), new_password_path(resource_name) %></li>
-        <% end %>
+    <% if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+      <li><%= link_to t('user.forgotten_password'), new_password_path(resource_name) %></li>
+    <% end %>
 
-        <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
-          <li><%= link_to t('user.unconfirmed_registration'), new_confirmation_path(resource_name) %></li>
-        <% end %>
+    <% if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+      <li><%= link_to t('user.unconfirmed_registration'), new_confirmation_path(resource_name) %></li>
+    <% end %>
 
-        <% if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
-          <li><%= link_to t('user.locked_account'), new_unlock_path(resource_name) %></li>
-        <% end %>
+    <% if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+      <li><%= link_to t('user.locked_account'), new_unlock_path(resource_name) %></li>
+    <% end %>
 
-        <% if devise_mapping.omniauthable? %>
-          <% resource_class.omniauth_providers.each do |provider| %>
-            <li><%= link_to t('user.sign_in_with', provider: provider.to_s.titleize), omniauth_authorize_path(resource_name, provider) %></li>
-          <% end %>
-        <% end %>
-      </ul>
-    </div>
-  </div>
+    <% if devise_mapping.omniauthable? %>
+      <% resource_class.omniauth_providers.each do |provider| %>
+        <li><%= link_to t('user.sign_in_with', provider: provider.to_s.titleize), omniauth_authorize_path(resource_name, provider) %></li>
+      <% end %>
+    <% end %>
+  </ul>
 </section>
