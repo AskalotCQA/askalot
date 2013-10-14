@@ -3,34 +3,34 @@ require 'spec_helper'
 describe User do
   let(:user) { create :user }
 
-  it 'should require login' do
+  it 'requires login' do
     user = build :user, login: ''
 
-    user.should_not be_valid
+    expect(user).not_to be_valid
 
     user = build :user, login: 'tra-lala'
 
-    user.should_not be_valid
+    expect(user).not_to be_valid
   end
 
   describe '.find_first_by_auth_conditions' do
     context 'when providing login' do
-      it 'should find user' do
+      it 'finds user by login' do
         other = User.find_first_by_auth_conditions(login: user.login)
 
-        other.should eql(user)
+        expect(other).to eql(user)
 
         other = User.find_first_by_auth_conditions(login: user.login.upcase)
 
-        other.should eql(user)
+        expect(other).to eql(user)
       end
     end
 
     context 'when providing email' do
-      it 'should find user' do
+      it 'finds user by email' do
         other = User.find_first_by_auth_conditions(login: user.email)
 
-        other.should eql(user)
+        expect(other).to eql(user)
       end
     end
   end

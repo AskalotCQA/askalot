@@ -1,7 +1,7 @@
 NaRuby::Application.routes.draw do
   root 'static_pages#home'
 
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'sessions' }
 
   match 'users/:login', via: :get, to: 'users#show', as: :user
 

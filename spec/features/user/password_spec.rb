@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'User Password' do
   let(:user) { create :user }
 
-  it 'should allow to allow password change' do
+  it 'allows user to change password' do
     visit root_url
 
     click_link 'Prihlásiť'
@@ -21,6 +21,6 @@ describe 'User Password' do
 
     click_button 'Zmeniť'
 
-    page.should have_content('Vaše heslo bolo úspešne zmenené. Teraz ste prihlásený.')
+    expect(page).to have_content('Vaše heslo bolo úspešne zmenené. Teraz ste prihlásený.')
   end
 end

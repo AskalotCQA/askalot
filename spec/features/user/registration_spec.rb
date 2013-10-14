@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'User Registration' do
   context 'when using login' do
-    it 'should register user' do
+    it 'signs up user' do
       visit root_path
 
       click_link 'Registrovať'
@@ -14,9 +14,9 @@ describe 'User Registration' do
 
       click_button 'Registrovať'
 
-      page.should have_content('Správa s potvrdzovacím odkazom bola odoslaná na Vašu e-mailovú adresu.')
+      expect(page).to have_content('Správa s potvrdzovacím odkazom bola odoslaná na Vašu e-mailovú adresu.')
 
-      last_email.to.should eql(['example@gmail.com'])
+      expect(last_email.to).to eql(['example@gmail.com'])
     end
   end
 end

@@ -2,31 +2,36 @@ require 'spec_helper'
 
 describe Stuba::Ais do
   describe '.authenticate' do
-    it 'should gain credentials for a user' do
+    it 'gains credentials for a user' do
       ldap    = double(:ldap)
       request = double(:request)
 
-      ldap.should_receive(:new).with({
+      options = {
         host: 'ldap.stuba.sk',
         port: 389,
         auth: {
           method: :simple,
-          username: 'uid=username,ou=People,dc=stuba,dc=sk',
+          username: 'uid=xuser1,ou=People,dc=stuba,dc=sk',
           password: 'password'
         }
-      }).and_return(request)
+      }
 
-      request.should_receive(:search).with({
+      expect(ldap).to receive(:build).with(options).and_return(request)
+      expect(ldap).to receive(:build_filter).with(:eq, 'uid', 'xuser1').and_return('filter')
+
+      query = {
         base: 'dc=stuba, dc=sk',
-        filter: Net::LDAP::Filter.eq('uid', 'username'),
+        filter: 'filter',
         return_result: true
-      }).and_return([{ uid: ['username'] }])
+      }
 
-      stub_const('Net::Ldap', ldap)
+      expect(request).to receive(:search).with(query).and_return([{ uid: ['xuser1'] }])
 
-      user = Stuba::Ais.authenticate 'username', 'password'
+      stub_const('Stuba::LDAP', ldap)
 
-      user.login.should eql('username')
+      user = Stuba::Ais.authenticate('xuser1', 'password')
+
+      expect(user.login).to eql('xuser1')
     end
   end
 end
