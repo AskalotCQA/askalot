@@ -2,15 +2,14 @@ module Concerns::Logging
   extend ActiveSupport::Concern
 
   def logger
-    @logger ||= Events::Management.new request: request, params: params, user: current_user
+    @logger ||= Events::Management.new
   end
 
   def log(data)
-    logger.log data
+    logger.log(data.merge snapshot: { request: request, params: params, user: current_user })
   end
 
-  # TODO (zbell) impl
-#  def log_controller_action
-#    logger.log action: "#{params[:action]}.#{params[:action]}"
-#  end
+  def log_current_action
+    log action: "#{params[:controller]}.#{params[:action]}"
+  end
 end
