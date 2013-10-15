@@ -1,33 +1,35 @@
 class Events::Management
-  attr_reader :request, :session, :params, :user
-
-  def initialize(attributes = {})
-    @request = attributes.fetch :request
-    @session = attributes[:session] || @request.session_options
-    @params  = attributes.fetch :params
-    @user    = attributes[:user]
-  end
-
   def log(data)
-    data = data.clone
+    data     = data.clone
+    snapshot = data.delete :snapshot
 
     fail if data[:action].blank?
 
-    put_request data, request
-    put_session data, session
-    put_params  data, params
-    put_user    data, user
+    request = snapshot.fetch :request
+    session = request.session_options.to_hash
+    params  = snapshot.fetch :params
+    user    = snapshot[:user]
+
+    put_request(data, request)
+    put_session(data, session)
+    put_params(data, params)
+
+    if user
+      put_user(data, user)
+    else
+      fail if data[:user]
+    end
 
     #TODO (zbell) rm
-    puts JSON.pretty_generate secure(data)
+    puts JSON.pretty_generate secure(data) if Rails.env.development?
 
     Event.create! data: secure(data)
   end
 
   private
 
-  def put_request(data, request)
-    data.deep_merge! request: {
+  def put_request(hash, request)
+    hash[:request] = {
       fullpath: request.fullpath,
       ip: request.ip,
       method: request.method,
@@ -39,25 +41,25 @@ class Events::Management
     }
   end
 
-  def put_session(data, session)
-    data.deep_merge! session: session.to_hash
+  def put_session(hash, session)
+    hash[:session] = session
   end
 
-  def put_params(data, params)
-    data.deep_merge! params: params
+  def put_params(hash, params)
+    hash[:params] = params
   end
 
-  def put_user(data, user)
-    data.deep_merge! user: {
+  def put_user(hash, user)
+    hash.deep_merge! user: {
       id: user.id,
       login: user.login,
       email: user.email
     }
   end
 
-  def secure(data, key = nil)
-    return data.inject({}) { |h, (k, v)| h[k] = secure v, k; h } if data.is_a? Hash
+  def secure(value, key = nil)
+    return value.inject({}) { |h, (k, v)| h[k] = secure v, k; h } if value.is_a? Hash
 
-    key.to_s =~ /password|token/i ? :__SECURED__ : data
+    key.to_s =~ /password|token/i ? :__SECURED__ : value
   end
 end
