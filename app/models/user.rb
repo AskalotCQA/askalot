@@ -23,6 +23,6 @@ class User < ActiveRecord::Base
 
     return where(conditions).first unless login
 
-    where(conditions).where(["login = :value OR email = :value", { :value => login.downcase }]).first
+    where(conditions).where(["login = :value OR email = :value", { value: login.downcase }]).first
   end
 end
