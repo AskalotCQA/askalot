@@ -16,6 +16,7 @@ describe Users::Authentication do
 
   describe '#create_user!' do
     it 'creates user with session' do
+      pending
     end
   end
 end
