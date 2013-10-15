@@ -1,34 +1,32 @@
-module Users
-  class Authentication
-    attr_accessor :service, :params
+class Users::Authentication
+  attr_accessor :service, :params
 
-    def initialize(service, params)
-      @service = service
-      @params  = params
-    end
+  def initialize(service, params)
+    @service = service
+    @params  = params
+  end
 
-    def authorized?
-      !!user
-    end
+  def authorized?
+    !!user
+  end
 
-    def create_user!
-      attributes = {
-        login: user.login,
-        email: user.email,
-        password: @params[:password],
-        password_confirmation: @params[:password]
-      }
+  def create_user!
+    attributes = {
+      login: user.login,
+      email: user.email,
+      password: @params[:password],
+      password_confirmation: @params[:password]
+    }
 
-      user = User.new(attributes)
+    user = User.new(attributes)
 
-      user.skip_confirmation!
-      user.save!
-    end
+    user.skip_confirmation!
+    user.save!
+  end
 
-    private
+  private
 
-    def user
-      @user ||= service.authenticate(params[:login], params[:password])
-    end
+  def user
+    @user ||= service.authenticate params[:login], params[:password]
   end
 end
