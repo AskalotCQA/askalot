@@ -11,10 +11,9 @@ module Stuba
         }
       })
 
-      treebase = 'dc=stuba, dc=sk'
-      filter   = Stuba::LDAP.build_filter(:eq, 'uid', username)
-
-      entries = request.search(base: treebase, filter: filter, return_result: true)
+      treebase = 'dc=stuba,dc=sk'
+      filter   = Stuba::LDAP.build_filter :eq, 'uid', username
+      entries  = request.search base: treebase, filter: filter, return_result: true
 
       Stuba::User.new(entries.first) if entries.present?
     end
