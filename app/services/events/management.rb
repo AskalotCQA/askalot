@@ -1,5 +1,11 @@
-module Concerns::EventManagement
-  extend ActiveSupport::Concern
+class Events::Management
+  attr_reader :request, :session, :user
+
+  def initialize(attributes = {})
+    @request = attributes.fetch :request
+    @session = attributes[:session] || @request.session_options
+    @user    = attributes[:user]
+  end
 
   def log(data)
     data = data.clone
@@ -7,8 +13,8 @@ module Concerns::EventManagement
     fail if data[:action].blank?
 
     put_request data, request
-    put_session data, request.session_options
-    put_user    data, current_user if user_signed_in?
+    put_session data, session
+    put_user    data, user
 
     #TODO (zbell) rm
     puts JSON.pretty_generate secure(data)
