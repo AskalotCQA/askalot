@@ -1,9 +1,10 @@
 class Events::Management
-  attr_reader :request, :session, :user
+  attr_reader :request, :session, :params, :user
 
   def initialize(attributes = {})
     @request = attributes.fetch :request
     @session = attributes[:session] || @request.session_options
+    @params  = attributes.fetch :params
     @user    = attributes[:user]
   end
 
@@ -14,6 +15,7 @@ class Events::Management
 
     put_request data, request
     put_session data, session
+    put_params  data, params
     put_user    data, user
 
     #TODO (zbell) rm
@@ -30,7 +32,6 @@ class Events::Management
       ip: request.ip,
       method: request.method,
       media_type: request.media_type,
-      query_parameters: request.query_parameters,
       remote_ip: request.remote_ip,
       original_fullpath: request.original_fullpath,
       original_url: request.original_url,
@@ -39,9 +40,11 @@ class Events::Management
   end
 
   def put_session(data, session)
-    data.deep_merge! session: {
-      id: session[:id]
-    }
+    data.deep_merge! session: session.to_hash
+  end
+
+  def put_params(data, params)
+    data.deep_merge! params: params
   end
 
   def put_user(data, user)
