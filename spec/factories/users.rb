@@ -12,6 +12,11 @@ FactoryGirl.define do
       user.confirm!
     end
 
+    trait :with_ais do
+      ais_uid '1234'
+      ais_login 'user'
+    end
+
     trait :unconfirmed do
       after :create do |user|
         user.confirmation_token = nil
