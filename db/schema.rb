@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20131012191904) do
     t.string   "login",                               null: false
     t.string   "ais_uid"
     t.string   "ais_login"
-    t.string   "nick"
+    t.string   "nick",                                null: false
     t.string   "name"
     t.string   "first"
     t.string   "middle"
