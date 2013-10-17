@@ -1,22 +1,27 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
-      t.string :login, null: false
+      # Authenticatable
+      t.string :login,              null: false
+      t.string :email,              null: false, default: ''
+      t.string :encrypted_password, null: false, default: ''
+
+      # AIS Data
       t.string :ais_uid
       t.string :ais_login
+
+      # Profile Data
       t.string :nick, null: false
       t.string :name
       t.string :first
       t.string :middle
       t.string :last
       t.text   :about
+
+      # Social Data
       t.string :facebook
       t.string :twitter
       t.string :linkedin
-
-      # Authenticatable
-      t.string :email,              null: false, default: ''
-      t.string :encrypted_password, null: false, default: ''
 
       # Confirmable
       t.string   :confirmation_token
