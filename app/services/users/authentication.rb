@@ -1,5 +1,5 @@
 class Users::Authentication
-  attr_accessor :service, :params
+  attr_accessor :service, :factory, :params
 
   def initialize(service, params)
     @service = service
@@ -7,26 +7,30 @@ class Users::Authentication
   end
 
   def authorized?
-    !!user
+    !!service_user
   end
 
-  def create_user!
-    attributes = {
-      login: user.login,
-      email: user.email,
-      password: @params[:password],
-      password_confirmation: @params[:password]
-    }
+  def authenticate!
+    fail 'Unauthorized access.' unless authorized?
 
-    user = User.new(attributes)
+    @user ||= factory.find_by login: @params[:login]
 
-    user.skip_confirmation!
-    user.save!
+    create_user! unless @user
+
+    @user
+  end
+
+  def factory
+    @factory ||= User
   end
 
   private
 
-  def user
-    @user ||= service.authenticate params[:login], params[:password]
+  def create_user!
+    @user = factory.create_without_confirmation!(service_user.to_params)
+  end
+
+  def service_user
+    @service_user ||= service.authenticate params[:login], params[:password]
   end
 end
