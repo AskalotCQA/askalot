@@ -10,7 +10,7 @@ describe Users::Authentication do
 
       expect(service).to receive(:authenticate).with('user', 'password').and_return(double.as_null_object)
 
-      expect(authorization).to be_valid
+      expect(authorization).to be_authorized
     end
   end
 

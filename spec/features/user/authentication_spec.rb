@@ -5,7 +5,7 @@ describe 'User Authentication' do
 
   context 'when registered' do
     it 'signs in user successfully' do
-      visit root_url
+      visit root_path
 
       click_link 'Prihlásiť'
 
@@ -19,7 +19,7 @@ describe 'User Authentication' do
 
       click_link 'Odhlásiť'
 
-      expect(page).to  have_content('Úspešne odhlásený.')
+      expect(page).to have_content('Úspešne odhlásený.')
     end
   end
 
@@ -30,7 +30,7 @@ describe 'User Authentication' do
         mail: ['xuser1@stuba.sk']
       }
 
-      Stuba::Ais.stub(:authenticate) { Stuba::User.new(data) }
+      Stuba::Ais.stub(:authenticate!) { Stuba::User.new(data) }
 
       visit root_url
 

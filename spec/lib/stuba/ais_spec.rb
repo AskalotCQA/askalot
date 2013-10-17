@@ -20,7 +20,7 @@ describe Stuba::Ais do
       expect(ldap).to receive(:build_filter).with(:eq, 'uid', 'xuser1').and_return('filter')
 
       query = {
-        base: 'dc=stuba, dc=sk',
+        base: 'dc=stuba,dc=sk',
         filter: 'filter',
         return_result: true
       }
