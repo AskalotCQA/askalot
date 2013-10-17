@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+# TODO (smolnar) Refactor, move persistance to Event spec
+
 describe Events::Management do
   describe '#log' do
     let(:management) { Events::Management.new }
@@ -92,7 +94,7 @@ describe Events::Management do
     it 'secures passwords and tokens' do
       data  = { action: 'hello', snapshot: { request: request, params: params }}
       event = management.log data
-      
+
       expect(event.data[:params][:authenticity_token]).to eql :__SECURED__
       expect(event.data[:params][:user][:password]).to eql :__SECURED__
     end
