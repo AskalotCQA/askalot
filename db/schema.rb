@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20131012191904) do
 
   create_table "users", force: true do |t|
     t.string   "login",                               null: false
+    t.string   "ais_uid"
+    t.string   "ais_login"
+    t.string   "nick"
+    t.string   "name"
+    t.string   "first"
+    t.string   "middle"
+    t.string   "last"
+    t.text     "about"
+    t.string   "facebook"
+    t.string   "twitter"
+    t.string   "linkedin"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "confirmation_token"
