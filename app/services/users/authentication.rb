@@ -11,7 +11,7 @@ class Users::Authentication
   end
 
   def authenticate!
-    fail 'Unauthorized access.' unless authorized?
+    fail 'Unauthorized access' unless authorized?
 
     @user ||= factory.find_by login: @params[:login]
 

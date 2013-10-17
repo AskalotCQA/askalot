@@ -4,12 +4,12 @@ module Stuba
       @data = data
     end
 
-    def login
-      @login ||= @data[:uid].first
-    end
-
     def uid
       @uid ||= @data[:uisid].first
+    end
+
+    def login
+      @login ||= @data[:uid].first
     end
 
     def email
@@ -34,10 +34,10 @@ module Stuba
 
     def to_params
       {
-        login: login,
-        email: email,
         ais_uid: uid,
         ais_login: login,
+        login: login,
+        email: email,
         name: name,
         first: first,
         middle: middle,

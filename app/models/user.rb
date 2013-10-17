@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
          :rememberable,
          :trackable,
          :validatable,
+
          authentication_keys: [:login]
 
   # TODO (smolnar) check uniqueness value select in db
@@ -24,7 +25,6 @@ class User < ActiveRecord::Base
 
     user.skip_confirmation!
     user.save!
-
     user
   end
 
