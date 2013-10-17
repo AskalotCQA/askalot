@@ -14,7 +14,7 @@ describe 'User Authentication' do
 
       click_button 'Prihlásiť'
 
-      expect(page).to have_content('Nesprávny login alebo heslo.')
+      expect(page).to have_content('Nesprávne prihlasovacie údaje.')
     end
   end
 
