@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Stuba::Ais do
+describe Stuba::AIS do
   describe '.authenticate' do
     it 'gains credentials for a user' do
       ldap    = double(:ldap)
@@ -29,7 +29,7 @@ describe Stuba::Ais do
 
       stub_const('Stuba::LDAP', ldap)
 
-      user = Stuba::Ais.authenticate('xuser1', 'password')
+      user = Stuba::AIS.authenticate('xuser1', 'password')
 
       expect(user.login).to eql('xuser1')
     end

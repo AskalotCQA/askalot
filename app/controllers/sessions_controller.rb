@@ -1,6 +1,6 @@
 class SessionsController < Devise::SessionsController
   def create
-    service = Users::Authentication.new Stuba::Ais, params[:user]
+    service = Users::Authentication.new Stuba::AIS, params[:user]
 
     if service.authorized?
       self.resource = service.authenticate!

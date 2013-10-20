@@ -1,5 +1,5 @@
 module Stuba
-  class Ais
+  class AIS
     def self.authenticate(username, password)
       request = Stuba::LDAP.build({
         host: 'ldap.stuba.sk',

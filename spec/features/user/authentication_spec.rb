@@ -5,6 +5,8 @@ describe 'User Authentication' do
 
   context 'when not registered' do
     it 'does not sign in user successfully' do
+      Stuba::AIS.stub(:authenticate) { nil }
+
       visit root_path
 
       click_link 'Prihlásiť'
@@ -20,6 +22,8 @@ describe 'User Authentication' do
 
   context 'when registered' do
     it 'signs in user successfully' do
+      Stuba::AIS.stub(:authenticate) { nil }
+
       visit root_path
 
       click_link 'Prihlásiť'
@@ -49,7 +53,7 @@ describe 'User Authentication' do
         mail: ['xuser1@is.stuba.sk','xuser1@stuba.sk']
       }
 
-      Stuba::Ais.stub(:authenticate) { Stuba::User.new(data) }
+      Stuba::AIS.stub(:authenticate) { Stuba::User.new(data) }
 
       visit root_url
 
