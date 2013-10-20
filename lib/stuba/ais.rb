@@ -1,6 +1,8 @@
+require 'timeout'
+
 module Stuba
   class AIS
-    def self.authenticate(username, password)
+    def self.authenticate(username, password, options = {})
       request = Stuba::LDAP.build({
         host: 'ldap.stuba.sk',
         port: 389,
@@ -13,9 +15,15 @@ module Stuba
 
       treebase = 'dc=stuba,dc=sk'
       filter   = Stuba::LDAP.build_filter :eq, 'uid', username
-      entries  = request.search base: treebase, filter: filter, return_result: true
 
-      Stuba::User.new(entries.first) if entries.present?
+      begin
+        Timeout.timeout(options[:timeout] || 3) do
+          entries = request.search base: treebase, filter: filter, return_result: true
+
+          Stuba::User.new(entries.first) if entries.present?
+        end
+      rescue Timeout::Error
+      end
     end
   end
 end
