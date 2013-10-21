@@ -16,7 +16,7 @@ describe Stuba::AIS do
       }
     end
 
-    let(:query) do  
+    let(:query) do
       {
         base: 'dc=stuba,dc=sk',
         filter: 'filter',
@@ -47,10 +47,10 @@ describe Stuba::AIS do
         expect(ldap).to receive(:build_filter).with(:eq, 'uid', 'xuser1').and_return('filter')
 
         expect(request).to receive(:search).with(query) do
-          sleep 300
+          sleep 10
         end
 
-        user = Stuba::AIS.authenticate('xuser1', 'password')
+        user = Stuba::AIS.authenticate('xuser1', 'password', timeout: 0.1)
 
         expect(user).to be_nil
       end
