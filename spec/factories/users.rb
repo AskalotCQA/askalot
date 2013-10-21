@@ -3,7 +3,7 @@
 FactoryGirl.define do
   factory :user do
     sequence(:login) { |n| "user_#{n}" }
-    sequence(:email) { |n| "user#{n}@gmail.com" }
+    sequence(:email) { |n| "user_#{n}@example.com" }
 
     password              'password'
     password_confirmation 'password'
@@ -13,7 +13,7 @@ FactoryGirl.define do
     end
 
     trait :with_ais do
-      ais_uid '1234'
+      ais_uid   '1234'
       ais_login 'user'
     end
 
