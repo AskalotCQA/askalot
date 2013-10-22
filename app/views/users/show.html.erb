@@ -1,6 +1,50 @@
-<h1><%= @user.login %></h1>
+<h1 xmlns="http://www.w3.org/1999/html"><%= @user.login %></h1>
 
 <%# TODO (smolnar) refactor to use locales %>
 <% if current_user == @user %>
   <%= link_to t('user.edit_profile'), edit_user_registration_path %>
 <% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <% gravatar_id = Digest::MD5::hexdigest(@user.email).downcase
+         "http://gravatar.com/avatar/#{gravatar_id}.png" %>
+      <%= image_tag "http://gravatar.com/avatar/#{gravatar_id}.png", :class => "img-responsive img-square" %>
+      <div class="form-group">
+        <%= @user.about %>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= @user.login %>
+      </div>
+      <div class="form-group">
+        <%= @user.first %>
+      </div>
+      <div class="form-group">
+        <%= @user.last %>
+      </div>
+      <div class="form-group">
+        <%= @user.email %>
+      </div>
+      <div class="form-group">
+        <%= @user.ais_uid %>
+      </div>
+      <div class="form-group">
+        <%= @user.ais_login %>
+      </div>
+      <div class="cal-md-4">
+        <div class="form-group">
+          <%= @user.facebook %>
+        </div>
+        <div class="form-group">
+          <%= @user.twitter %>
+        </div>
+        <div class="form-group">
+          <%= @user.linkedin %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
