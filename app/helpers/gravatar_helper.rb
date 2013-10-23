@@ -1,4 +1,4 @@
-module
+module GravatarHelper
   def gravatar_url(email, options = {})
     hash   = Digest::MD5::hexdigest(email).downcase
     rating = options[:rating] || :g
@@ -10,6 +10,6 @@ module
   def gravatar_image_tag(email, options = {})
     classes = options.delete(:class)
 
-    image_tag gravatar_url(email, options), class: classes
+    image_tag gravatar_url(email, options), alt: nil, class: classes
   end
 end
