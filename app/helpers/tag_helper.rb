@@ -7,8 +7,12 @@ module TagHelper
     content_tag :span, body, options.merge(class: "badge badge-#{type.to_s}")
   end
 
+  # TODO (zbell) refactor icon_* and navbar_* and link_*
   def icon_tag(type, options = {})
-    icon  = content_tag :i, nil, class: "icon-#{type.to_s}"
+    classes = ["icon-#{type.to_s}"]
+    classes << 'icon-fixed-width' if options.delete(:fixed)
+
+    icon  = content_tag :i, nil, class: classes
     label = options.delete(:label)
 
     return icon if label.blank?
