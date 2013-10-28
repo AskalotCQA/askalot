@@ -43,7 +43,7 @@ describe 'User Authentication' do
   end
 
   context 'when using AIS account' do
-    it 'sings up user' do
+    it 'signs up user' do
       data = {
         uisid: ['1234'],
         uid: ['xuser1'],
@@ -55,7 +55,7 @@ describe 'User Authentication' do
 
       Stuba::AIS.stub(:authenticate) { Stuba::User.new(data) }
 
-      visit root_url
+      visit root_path
 
       click_link 'Prihlásiť'
 
