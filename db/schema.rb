@@ -11,10 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131012191904) do
+ActiveRecord::Schema.define(version: 20131029185422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
 
   create_table "events", force: true do |t|
     t.json     "data",       null: false
@@ -23,10 +31,21 @@ ActiveRecord::Schema.define(version: 20131012191904) do
 
   add_index "events", ["created_at"], name: "index_events_on_created_at", using: :btree
 
+  create_table "questions", force: true do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "category_id", null: false
+    t.string   "title",       null: false
+    t.text     "text",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
+  add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
+  add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "login",                               null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
     t.string   "ais_uid"
     t.string   "ais_login"
     t.string   "nick",                                null: false
@@ -38,6 +57,8 @@ ActiveRecord::Schema.define(version: 20131012191904) do
     t.string   "facebook"
     t.string   "twitter"
     t.string   "linkedin"
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -57,16 +78,9 @@ ActiveRecord::Schema.define(version: 20131012191904) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree
-  add_index "users", ["ais_uid"], name: "index_users_on_ais_uid", unique: true, using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["first"], name: "index_users_on_first", using: :btree
-  add_index "users", ["last"], name: "index_users_on_last", using: :btree
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
-  add_index "users", ["middle"], name: "index_users_on_middle", using: :btree
-  add_index "users", ["name"], name: "index_users_on_name", using: :btree
-  add_index "users", ["nick"], name: "index_users_on_nick", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
