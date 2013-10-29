@@ -3,5 +3,5 @@ class Question < ActiveRecord::Base
   belongs_to :category
 
   validates :title, presence: true
-  validates :text, presence: true
+  validates :text,  presence: true
 end
