@@ -8,7 +8,7 @@ sk:
     failure:
       already_authenticated: 'Už ste prihlásený.'
       inactive: 'Váš účet ešte nebol aktivovaný.'
-      invalid: 'Nesprávny e-mail alebo heslo.'
+      invalid: 'Nesprávne prihlasovacie údaje.'
       invalid_token: 'Nesprávny overovací symbol.'
       locked: 'Váš účet je zamknutý.'
       not_found_in_database: 'Nesprávne prihlasovacie údaje.'
