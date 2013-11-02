@@ -1,5 +1,15 @@
 <% provide :title, t('user.account_settings') %>
 
+<div class="row">
+  <div class="col-md-4">
+    <ul class="nav nav-pills">
+      <li class="active"><a href="#">Profil</a></li>
+      <li><a href="#">Sociálne siete</a></li>
+      <li><a href="#">Nastavenia</a></li>
+      <li><a href="#">Zmena hesla</a></li>
+    </ul>
+  </div>
+  <div class="col-md-8">
 <section>
   <h1 class="form-title"><%= yield :title %></h1>
 
@@ -82,7 +92,8 @@
     <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
   <% end %>
 </section>
-
+</div>
+</div>
 <!-- TODO (zbell) use modal for confirmation + user must enter login on submit -->
 <!--
 <section>
