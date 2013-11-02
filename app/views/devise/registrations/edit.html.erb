@@ -5,14 +5,12 @@
     <ul class="nav nav-pills">
       <li class="active"><a href="#">Profil</a></li>
       <li><a href="#">Sociálne siete</a></li>
-      <li><a href="#">Nastavenia</a></li>
-      <li><a href="#">Zmena hesla</a></li>
+      <li><a href="#">Súkromie</a></li>
+      <li><a href="#">Nastavenia účtu</a></li>
     </ul>
   </div>
   <div class="col-md-8">
 <section>
-  <h1 class="form-title"><%= yield :title %></h1>
-
   <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } do |f| %>
     <%= devise_error_messages! %>
 
