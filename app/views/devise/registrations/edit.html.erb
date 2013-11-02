@@ -3,14 +3,14 @@
 <div class="row">
   <div class="col-md-4">
     <ul class="nav nav-pills">
-      <li class="active"><a href="#">Profil</a></li>
-      <li><a href="#">Sociálne siete</a></li>
-      <li><a href="#">Súkromie</a></li>
-      <li><a href="#">Nastavenia účtu</a></li>
+      <li class="active"><a href="#profile" data-toggle="pill">Profil</a></li>
+      <li><a href="#social" data-toggle="pill" >Sociálne siete</a></li>
+      <li><a href="#privacy" data-toggle="pill">Súkromie</a></li>
+      <li><a href="#account_settings" data-toggle="pill">Nastavenia účtu</a></li>
     </ul>
   </div>
-  <div class="col-md-8">
-    <div id="profile">
+  <div class="col-md-8 tab-content">
+    <div class="tab-pane active" id="profile">
       <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } do |f| %>
         <%= devise_error_messages! %>
 
@@ -43,7 +43,7 @@
       <% end %>
     </div>
 
-    <div id="account_settings">
+    <div class="tab-pane" id="account_settings">
       <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put} do |f| %>
         <!-- TODO (zbell) handle autofocus -->
         <div class="form-group">
@@ -77,7 +77,7 @@
       <% end %>
     </div>
 
-    <div id="social">
+    <div class="tab-pane" id="social">
       <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put} do |f| %>
 
         <div class="form-group">
