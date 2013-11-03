@@ -1,5 +1,6 @@
 <% provide :title, t('user.account_settings') %>
 
+<!-- TODO (harinek) localization) -->
 <div class="row">
   <div class="col-md-4">
     <ul class="nav nav-pills">
@@ -9,17 +10,19 @@
       <li><a href="#user-account" data-toggle="pill">Nastavenia účtu</a></li>
     </ul>
   </div>
-  <div class="col-md-8 tab-content">
-    <div class="tab-pane active" id="user-profile">
-      <%= render "edit_profile" %>
-    </div>
+  <div class="col-md-8">
+    <div class="tab-content">
+      <div class="tab-pane active" id="user-profile">
+        <%= render "edit_profile" %>
+      </div>
 
-    <div class="tab-pane" id="user-account">
-      <%= render "edit_account" %>
-    </div>
+      <div class="tab-pane" id="user-account">
+        <%= render "edit_account" %>
+      </div>
 
-    <div class="tab-pane" id="user-social">
-      <%= render "edit_social" %>
+      <div class="tab-pane" id="user-social">
+        <%= render "edit_social" %>
+      </div>
     </div>
   </div>
 </div>
