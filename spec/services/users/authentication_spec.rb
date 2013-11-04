@@ -33,9 +33,7 @@ describe Users::Authentication do
           ais_login: 'user'
         }
 
-
         expect(service).to receive(:authenticate).with('user', 'password').and_return(service_user)
-
         expect(factory).to receive(:find_by).with(login: 'user')
         expect(factory).to receive(:create_without_confirmation!).with(attributes)
         expect(service_user).to receive(:to_params).and_return(attributes)
