@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'User Profile' do
   let(:user) { create :user }
 
-  context 'when showing current user' do
+  context 'with current user' do
     before :each do
       login_as user
     end

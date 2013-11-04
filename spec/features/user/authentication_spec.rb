@@ -42,7 +42,7 @@ describe 'User Authentication' do
     end
   end
 
-  context 'when using AIS account' do
+  context 'with AIS credentials' do
     it 'signs up user' do
       data = {
         uisid: ['1234'],
