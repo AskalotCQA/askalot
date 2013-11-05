@@ -11,6 +11,7 @@ NaRuby::Application.routes.draw do
 
   resources :questions
 
+  resources :questions
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

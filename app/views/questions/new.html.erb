@@ -1,0 +1,21 @@
+<% provide(:title, 'question.create') %>
+
+  <h1 class="form-title"><%= yield :title %></h1>
+
+
+  <%= form_for :question, :url => new_question_path(@question) do |f| %>
+
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, autofocus: true, class: :'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :text %>
+        <%= f.text_area :text, class: :'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :tags %>
+        <%= f.text_field :text, class: :'form-control' %>
+      </div>
+      <button type="submit" class="btn btn-success btn-lg">Vlož otázku</button>
+  <% end %>
