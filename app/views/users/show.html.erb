@@ -8,29 +8,30 @@
           <%= gravatar_image_tag @user.email, size: :'230', class: :'img-responsive' %>
         </li>
         <li class="list-group-item">
-          <span class="glyphicon glyphicon-envelope"></span>
+          <%= icon_tag :'envelope-alt', fixed: true %>
           <a class="email js-obfuscate-email" href="mailto:<%= @user.email %>"> <%= @user.email %></a>
         </li>
         <li class="list-group-item">
-          <span class=" icon-facebook"></span>
+          <%= icon_tag :facebook, fixed: true %>
           <a class="facebook" href="<%= @user.facebook %>"> Facebook/<%= @user.first %> </a>
         </li>
         <li class="list-group-item">
-          <span class=" icon-twitter"></span>
+          <%= icon_tag :twitter, fixed: true %>
           <a class="twitter" href="<%= @user.twitter %>"><%= @user.twitter %></a>
         </li>
       </ul>
-
     </form>
   </div>
   <div class="col-md-4">
-        <h2 class="media-heading">  <%= @user.login %>
-          <small><%= [@user.first, @user.middle, @user.last].join(' ').squeeze(' ') %></small>
-        </h2>
-        <hr/>
+    <h2 class="media-heading">  <%= @user.login %>
+      <small><%= user_name @user %></small>
+    </h2>
+    <hr/>
+
+    <h4>O mne:</h4><br>
+
     <p>
-      <strong>O mne:</strong><br>
-       <%= @user.about %>
+      <%= @user.about %>
     </p>
 
   </div>
