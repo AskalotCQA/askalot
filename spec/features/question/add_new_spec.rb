@@ -19,8 +19,8 @@ describe 'User Profile' do
 
       click_link 'Add new question'
 
-      fill_in 'title', :with => 'Lorem ipsum title?'
-      fill_in 'text', :with => 'Sample blah blah text'
+      fill_in 'title',  :with => 'Lorem ipsum title?'
+      fill_in 'text',   :with => 'Sample blah blah text'
 
       click_button 'Vložiť otázku'
 
@@ -32,8 +32,8 @@ describe 'User Profile' do
 
       click_link 'Add new question'
 
-      fill_in 'title', :with => ''
-      fill_in 'text', :with => 'Sample blah blah text'
+      fill_in 'title',  :with => ''
+      fill_in 'text',   :with => 'Sample blah blah text'
 
       click_button 'Vložiť otázku'
 
@@ -45,8 +45,8 @@ describe 'User Profile' do
 
       click_link 'Add new question'
 
-      fill_in 'title', :with => 'Lorem ipsum title?'
-      fill_in 'text', :with => ''
+      fill_in 'title',  :with => 'Lorem ipsum title?'
+      fill_in 'text',   :with => ''
 
       click_button 'Vložiť otázku'
 
