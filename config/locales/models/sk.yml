@@ -13,7 +13,11 @@ sk:
         middle: 'Druhé meno'
         last: 'Priezvisko'
         about: 'O mne'
+        gravatar_email: 'Email pre Gravatar'
 
         facebook: 'Facebook'
         twitter: 'Twitter'
         linkedin: 'Linkedin'
+
+        flag_show_name:  'Zobraziť meno ostatným používateľom'
+        flag_show_email: 'Zobraziť email ostatným používateľom'
