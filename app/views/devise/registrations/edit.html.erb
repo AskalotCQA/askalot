@@ -1,88 +1,35 @@
 <% provide :title, t('user.account_settings') %>
 
-<section>
-  <h1 class="form-title"><%= yield :title %></h1>
-
-  <%= form_for resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } do |f| %>
-    <%= devise_error_messages! %>
-
-    <div class="form-group">
-      <%= f.label :nick %>
-      <%= f.text_field :nick, class: :'form-control'  %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :first %>
-      <%= f.text_field :first, class: :'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :middle %>
-      <%= f.text_field :middle, class: :'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :last %>
-      <%= f.text_field :last, class: :'form-control'%>
-    </div>
-
-    <!-- TODO (zbell) handle autofocus -->
-    <div class="form-group">
-      <%= f.label :email %>
-      <%= f.email_field :email, autofocus: true, class: :'form-control' %>
-    </div>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div class="form-group">
-        <p class="help-block"><%= t('confirmation_pending', email: resource.unconfirmed_email) %></p>
+<!-- TODO (harinek) localization) -->
+<div class="row">
+  <div class="col-md-4">
+    <ul class="nav nav-pills">
+      <li class="active"><a href="#user-profile" data-toggle="pill">Profil</a></li>
+      <li><a href="#user-social" data-toggle="pill" >Sociálne siete</a></li>
+      <li><a href="#user-privacy" data-toggle="pill">Súkromie</a></li>
+      <li><a href="#user-account" data-toggle="pill">Nastavenia účtu</a></li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <div class="tab-content">
+      <div class="tab-pane active" id="user-profile">
+        <%= render "edit_profile" %>
       </div>
-    <% end %>
 
-    <div class="form-group">
-      <%= f.label :password %> <em>(<%= t('user.leave_current_password') %>)</em>
-      <%= f.password_field :password, autocomplete: :off, class: :'form-control' %>
-    </div>
+      <div class="tab-pane" id="user-social">
+        <%= render "edit_social" %>
+      </div>
 
-    <div class="form-group">
-      <%= f.label :password_confirmation %>
-      <%= f.password_field :password_confirmation, class: :'form-control' %>
-    </div>
+      <div class="tab-pane" id="user-privacy">
+        <%= render "edit_privacy" %>
+      </div>
 
-    <div class="form-group">
-      <%= f.label :current_password %> <em>(<%= t('user.enter_current_password') %>)</em>
-      <%= f.password_field :current_password, class: :'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :about %>
-      <%= f.text_area :about, class: :'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <div class="input-group">
-        <span class="input-group-addon"><%= icon_tag :facebook, fixed: true %></span>
-        <%= f.text_field :facebook, class: :'form-control' %>
+      <div class="tab-pane" id="user-account">
+        <%= render "edit_account" %>
       </div>
     </div>
-
-    <div class="form-group">
-      <div class="input-group">
-        <span class="input-group-addon"><%= icon_tag :twitter, fixed: true %></span>
-        <%= f.text_field :twitter, class: :'form-control' %>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <div class="input-group">
-        <span class="input-group-addon"><%= icon_tag :linkedin, fixed: true %></span>
-        <%= f.text_field :linkedin, class: :'form-control' %>
-      </div>
-    </div>
-
-    <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
-  <% end %>
-</section>
-
+  </div>
+</div>
 <!-- TODO (zbell) use modal for confirmation + user must enter login on submit -->
 <!--
 <section>
