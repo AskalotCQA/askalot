@@ -16,6 +16,8 @@ NaRuby::Application.routes.draw do
 
   match 'users/:login', via: :get, to: 'users#show', as: :user
 
+  get '/questions/:id', to: 'questions#show'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
