@@ -14,6 +14,6 @@ sk:
         last: 'Priezvisko'
         about: 'O mne'
 
-        facebook: 'facebook.com/'
-        twitter: 'twitter.com/'
-        linkedin: 'linkedin.com/'
+        facebook: 'Facebook'
+        twitter: 'Twitter'
+        linkedin: 'Linkedin'
