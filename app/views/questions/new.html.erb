@@ -1,0 +1,17 @@
+<% provide(:title, 'question.create') %>
+
+<h1 class="form-title"><%= yield :title %></h1>
+
+
+<form role="form">
+  <div class="form-group">
+    <label for="title">Nadpis otázky</label>
+    <input type="text" class="form-control" placeholder="Napíš nadpis otázky">
+  </div>
+  <div class="form-group">
+    <label for="text">Zadanie otázky</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Napíš znenie otázky">
+  </div>
+  <button type="submit" class="btn btn-default">Vlož otázku</button>
+</form>
+
