@@ -10,11 +10,6 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :gravatar_email %>
-    <%= f.text_field :gravatar_email, class: :'form-control' %>
-  </div>
-
-  <div class="form-group">
     <%= f.label :last %>
     <%= f.text_field :last, class: :'form-control'%>
   </div>
@@ -22,6 +17,11 @@
   <div class="form-group">
     <%= f.label :about %>
     <%= f.text_area :about, class: :'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :gravatar_email %>
+    <%= f.text_field :gravatar_email, class: :'form-control' %>
   </div>
 
   <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
