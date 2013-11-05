@@ -1,13 +1,8 @@
 <% provide(:title, 'questions.index') %>
-<h1> All questions</h1>
+<h1>Zobrazenie otazok</h1>
 
-<%= form_for resource, as: resource_name, role: :form, url: question_path(resource_name) do |f| %>
-    <%= devise_error_messages! %>
-
-    <%= will_paginate %>
-    <ul class="questions">
-        <%= render @questions%>
-    </ul>
-
-    <%= will_paginate %>
-<% end %>
+<%= paginate @questions %>
+<div id="questions">
+  <% render @questions%>
+</div>
+<p><%= link_to "New question", new_question_path %></p>
