@@ -1,4 +1,17 @@
 <h1><%= @question.title %></h1>
 
-<b><%= @question.user.nick %></b>
-<%= @question.text %>
+<div class="row">
+
+  <div class="col-md-2">
+    <%= gravatar_image_tag @question.user.email, class: :'img-square' %>
+
+    <div class="form-group">
+      <%= @question.user.nick %>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <%= @question.text %>
+  </div>
+
+</div>

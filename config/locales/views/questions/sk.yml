@@ -1,4 +1,3 @@
 sk:
   question:
-    not_found: 'Otázka nenájdená'
     answered: 'zodpovedaná'
