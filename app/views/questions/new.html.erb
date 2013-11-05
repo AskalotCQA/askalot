@@ -1,17 +1,21 @@
 <% provide(:title, 'question.create') %>
 
-<h1 class="form-title"><%= yield :title %></h1>
+  <h1 class="form-title"><%= yield :title %></h1>
 
 
-<form role="form">
-  <div class="form-group">
-    <label for="title">Nadpis otázky</label>
-    <input type="text" class="form-control" placeholder="Napíš nadpis otázky">
-  </div>
-  <div class="form-group">
-    <label for="text">Zadanie otázky</label>
-    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Napíš znenie otázky">
-  </div>
-  <button type="submit" class="btn btn-default">Vlož otázku</button>
-</form>
+  <%= form_for :question, :url => new_question_path(@question) do |f| %>
 
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, autofocus: true, class: :'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :text %>
+        <%= f.text_area :text, class: :'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :tags %>
+        <%= f.text_field :text, class: :'form-control' %>
+      </div>
+      <button type="submit" class="btn btn-success btn-lg">Vlož otázku</button>
+  <% end %>
