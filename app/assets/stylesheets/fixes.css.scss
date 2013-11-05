@@ -16,12 +16,3 @@ address, form, nav, p, dl, ol, ul, table,
   margin: ($line-height-computed * 2) 0 $line-height-computed;
   padding-bottom: ($line-height-computed / 2) - 1;
 }
-
-// icons
-
-.icon-fixed-width[class^="icon-"],
-.icon-fixed-width[class*=" icon-"] {
-  padding-right: 0;
-  text-align: center;
-}
-

@@ -7,10 +7,9 @@ module TagHelper
     content_tag :span, body, options.merge(class: "badge badge-#{type.to_s}")
   end
 
-  # TODO (zbell) refactor icon_* and navbar_* and link_*
   def icon_tag(type, options = {})
-    classes = ["icon-#{type.to_s}"]
-    classes << 'icon-fixed-width' if options.delete(:fixed)
+    classes = ['fa', "fa-#{type.to_s}"]
+    classes << 'fa-fw' if options.delete(:fixed)
 
     icon  = content_tag :i, nil, class: classes
     label = options.delete(:label)
@@ -19,26 +18,20 @@ module TagHelper
 
     label = label.to_s.html_safe
     join  = options.delete(:join)
-    wrap  = options.delete(:wrap)
-    space = content_tag :i, '&nbsp;'.html_safe, class: :'icon-space'
-    body  = [icon, space, wrap.nil? || wrap ? content_tag(:span, label, options) : label]
+    body  = [icon, label]
 
     body.reverse! if join == :append
     body.join.html_safe
   end
 
   def icon_link_to(type, body, url = nil, options = {})
-    options[:class] = Array.wrap(options[:class]) << :icon
-
-    link_to icon_tag(type, label: body, join: options.delete(:join), wrap: options.delete(:wrap)), url, options
+    link_to icon_tag(type, label: body, fixed: options.delete(:fixed), join: options.delete(:join)), url, options
   end
 
   def icon_mail_to(type, body, url = nil, options = {})
-    options[:class] = Array.wrap(options[:class]) << :icon
-
     url = body if url.blank?
 
-    mail_to url, icon_tag(type, label: body, join: options.delete(:join)), options
+    mail_to url, icon_tag(type, label: body, fixed: options.delete(:fixed), join: options.delete(:join)), options
   end
 
   def navbar_logo_tag(title, options = {})
@@ -56,13 +49,13 @@ module TagHelper
   end
 
   def navbar_link_tag(type, body, url, options = {})
-    navbar_li_tag icon_link_to(type, body, url), url, options
+    navbar_li_tag icon_link_to(type, body, url, fixed: true), url, options
   end
 
   def navbar_dropdown_tag(type, body, url, options = {}, &block)
     caret = options.delete(:caret)
-    body  = icon_tag(caret, label: body, join: :append, wrap: true) if caret
-    link  = icon_link_to(type, body, url, class: :'dropdown-toggle', :'data-toggle' => :dropdown, join: options.delete(:join), wrap: !caret)
+    body  = icon_tag(caret, label: body, fixed:true, join: :append) if caret
+    link  = icon_link_to(type, body, url, class: :'dropdown-toggle', :'data-toggle' => :dropdown, fixed: true, join: options.delete(:join))
     list  = content_tag :ul, capture(&block), class: :'dropdown-menu'
     body  = (link << list).html_safe
 
