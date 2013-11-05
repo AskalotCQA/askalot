@@ -1,23 +1,12 @@
 NaRuby::Application.routes.draw do
   root 'static_pages#home'
 
-  devise_for :users, controllers: { sessions: 'sessions' }, skip: :registrations
-
-  devise_scope :user do
-    resource :registration,
-      only: [:new, :create, :edit, :update],
-      path: 'users',
-      path_names: { new: 'sign_up' },
-      controller: 'devise/registrations',
-      as: :user_registration do
-        get :cancel
-      end
-  end
+  devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }
 
   match 'users/:login', via: :get, to: 'users#show', as: :user
 
   resources :users, only: [] do
-    patch :profile, on: :collection, to: 'users#update'
+    patch :profile, on: :collection, to: 'users#update_profile'
   end
 
   # Example of regular route:
