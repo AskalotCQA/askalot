@@ -1,4 +1,6 @@
 module DeviseHelper
+
+  # TODO (smolnar) create models for error models
   def devise_error_messages!
     messages = resource.errors.full_messages
 
