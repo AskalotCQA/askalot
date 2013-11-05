@@ -25,11 +25,11 @@
   </div>
   <div class="col-md-4">
         <h2 class="media-heading">  <%= @user.login %>
-          <small><%= @user.first %> <%= @user.middle %> <%= @user.last %></small>
+          <small><%= [@user.first, @user.middle, @user.last].join(' ').squeeze(' ') %></small>
         </h2>
-        <hr style="margin:8px auto">
+        <hr/>
     <p>
-      <b>O mne:</b><br>
+      <strong>O mne:</strong><br>
        <%= @user.about %>
     </p>
 
