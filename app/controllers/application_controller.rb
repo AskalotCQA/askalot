@@ -17,9 +17,15 @@ class ApplicationController < ActionController::Base
   protected
 
   include Concerns::Logging
+  include Concerns::Flash
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit :login, :email, :password, :password_confirmation }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit :nick, :first, :middle, :last, :email, :password, :password_confirmation, :current_password, :about, :facebook, :twitter, :linkedin }
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit :email, :password, :password_confirmation, :current_password }
+  end
+
+  # TODO (smolnar) resolve
+  def after_update_path_for(resource)
+    edit_user_registration_path
   end
 end
