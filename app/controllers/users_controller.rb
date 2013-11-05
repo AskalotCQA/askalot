@@ -7,9 +7,9 @@ class UsersController < ApplicationController
 
   def update_profile
     if current_user.update_attributes(user_params)
-      flash[:notice] = t('devise.registrations.updated')
+      flash[:notice] = t 'devise.registrations.updated'
     else
-      flash_error_messages(current_user)
+      flash_error_messages_for current_user
     end
 
     redirect_to edit_user_registration_path
