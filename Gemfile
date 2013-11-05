@@ -60,6 +60,9 @@ group :development, :test do
   gem 'capybara', '~> 2.1.0'
   gem 'selenium-webdriver'
   gem 'guard-rspec'
+
+  # database
+  gem 'faker', '1.1.2'
 end
 
 # Use ActiveModel has_secure_password
