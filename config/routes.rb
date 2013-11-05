@@ -16,6 +16,10 @@ NaRuby::Application.routes.draw do
 
   match 'users/:login', via: :get, to: 'users#show', as: :user
 
+  resources :users, only: [] do
+    patch :profile, on: :collection, to: 'users#update'
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
