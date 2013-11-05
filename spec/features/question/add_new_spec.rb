@@ -14,7 +14,7 @@ describe 'User Profile' do
       click_link 'Add new question'
     end
 
-    it 'inserts new question successfully' do
+    it 'adds new question successfully' do
       visit root_path
 
       click_link 'Add new question'
@@ -25,6 +25,32 @@ describe 'User Profile' do
       click_button 'Vložiť otázku'
 
       expect(page).to have_content('Vaša otázka bola úspešne vložená.')
+    end
+
+    it 'adds new question unsuccessfully with empty title' do
+      visit root_path
+
+      click_link 'Add new question'
+
+      fill_in 'title', :with => ''
+      fill_in 'text', :with => 'Sample blah blah text'
+
+      click_button 'Vložiť otázku'
+
+      expect(page).to have_content('Musíte vyplniť nadpis otázky!')
+    end
+
+    it 'adds new question unsuccessfully with empty title' do
+      visit root_path
+
+      click_link 'Add new question'
+
+      fill_in 'title', :with => 'Lorem ipsum title?'
+      fill_in 'text', :with => ''
+
+      click_button 'Vložiť otázku'
+
+      expect(page).to have_content('Musíte vyplniť znenie otázky!')
     end
 
   end
