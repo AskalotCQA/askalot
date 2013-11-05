@@ -1,0 +1,13 @@
+<% provide(:title, 'questions.index') %>
+<h1>Zobrazenie otázok</h1>
+
+
+<ul class="users">
+  <% @questions.each do |question| %>
+      <li>
+        <%= link_to question.title, question %>
+      </li>
+  <% end %>
+</ul>
+
+<p><%= link_to "New question", new_question_path %></p>
