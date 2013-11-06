@@ -19,7 +19,7 @@
           <% end %>
         <% else %>
           <li><%= icon_link_to :leaf, t('user.sign_up'), new_user_registration_path, fixed: true %></li>
-          <li><%= icon_link_to :signin, t('user.sign_in'), new_user_session_path, fixed: true %></li>
+          <li><%= icon_link_to :'sign-in', t('user.sign_in'), new_user_session_path, fixed: true %></li>
         <% end %>
       </ul>
     </div>
