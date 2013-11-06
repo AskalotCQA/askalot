@@ -11,7 +11,7 @@
     <%= render 'layouts/header' %>
     <div class="container">
       <%= render 'shared/flash_messages' %>
-      <% if devise_controller? %>
+      <% if use_narrower_layout? %>
         <div class="row">
           <div class="col-md-offset-3 col-md-6">
             <%= yield %>

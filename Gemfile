@@ -15,6 +15,7 @@ gem 'net-ldap'
 
 # helpers
 gem 'jbuilder', '~> 1.2'
+gem 'actionview-encoded_mail_to'
 
 # stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -23,7 +24,6 @@ gem 'font-awesome-rails', '~> 4.0.3.0'
 
 # javascripts
 gem 'therubyracer', platforms: :ruby
-# gem 'turbolinks'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'

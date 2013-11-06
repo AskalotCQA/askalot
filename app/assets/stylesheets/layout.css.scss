@@ -18,8 +18,18 @@ body {
   margin-top: 50px;
 }
 
-section + section {
-  padding-top: 100px;
+section {
+  &:first-child {
+    padding-top: 50px;
+  }
+
+  & + section {
+    padding-top: 100px;
+  }
+}
+
+.tab-content, .tab-navigation {
+  padding-top: 50px;
 }
 
 // header
@@ -37,4 +47,11 @@ header {
 
 footer {
   margin: 100px 0px;
+}
+
+// profile
+
+img.list-group-item {
+  border: none;
+  padding: 0;
 }

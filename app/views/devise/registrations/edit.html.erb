@@ -1,16 +1,17 @@
+<!-- TODO (harinek) localization) -->
+
 <% provide :title, t('user.settings') %>
 
-<!-- TODO (harinek) localization) -->
 <div class="row">
-  <div class="col-md-4">
-    <ul class="nav nav-pills">
+  <div class="col-md-offset-1 col-md-3">
+    <ul class="nav nav-pills nav-stacked tab-navigation">
       <li class="active"><a href="#user-profile" data-toggle="pill"><%= t :'user.edit_profile' %></a></li>
       <li><a href="#user-social" data-toggle="pill"><%= t :'user.edit_social' %></a></li>
       <li><a href="#user-privacy" data-toggle="pill"><%= t :'user.edit_privacy' %></a></li>
       <li><a href="#user-account" data-toggle="pill"><%= t :'user.edit_account' %></a></li>
     </ul>
   </div>
-  <div class="col-md-8">
+  <div class="col-md-5">
     <div class="tab-content">
       <div class="tab-pane active" id="user-profile">
         <%= render "edit_profile" %>

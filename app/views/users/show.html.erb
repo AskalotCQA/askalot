@@ -1,38 +1,59 @@
 <%# TODO (smolnar) refactor to use locales %>
+<%# TODO (zbell) add {facebook,twitter,linkedin}_url to User model %>
 
 <div class="row">
-  <div class="col-md-3">
-    <form class="form-horizontal" role="form">
-      <ul class="list-group">
-        <li class="list-group-item">
-          <%= gravatar_image_tag @user.email, size: :'230', class: :'img-responsive' %>
-        </li>
-        <li class="list-group-item">
-          <%= icon_tag :'envelope-alt', fixed: true %>
-          <a class="email js-obfuscate-email" href="mailto:<%= @user.email %>"> <%= @user.email %></a>
-        </li>
-        <li class="list-group-item">
-          <%= icon_tag :facebook, fixed: true %>
-          <a class="facebook" href="<%= @user.facebook %>"><%= @user.facebook %> </a>
-        </li>
-        <li class="list-group-item">
-          <%= icon_tag :twitter, fixed: true %>
-          <a class="twitter" href="<%= @user.twitter %>"><%= @user.twitter %></a>
-        </li>
-      </ul>
-    </form>
+  <div class="col-md-offset-1 col-md-3">
+    <section>
+      <div class="list-group">
+        <%= gravatar_image_tag @user.gravatar_email, size: 263, class: :'list-group-item img-responsive' %>
+
+        <span class="list-group-item">
+          <%= icon_tag :'envelope-o', fixed: true %>
+          <%= mail_to @user.email, nil, encode: :hex %>
+        </span>
+
+        <% unless @user.facebook.blank? %>
+          <span class="list-group-item">
+            <%= icon_tag :facebook, fixed: true %>
+            <a class="facebook" href="https://facebook.com/<%= @user.facebook %>"><%= @user.facebook %> </a>
+          </span>
+        <% end %>
+
+        <% unless  @user.twitter.blank? %>
+          <span class="list-group-item">
+            <%= icon_tag :twitter, fixed: true %>
+            <a class="twitter" href="https://twitter.com/<%= @user.twitter %>"><%= @user.twitter %></a>
+          </span>
+        <% end %>
+
+        <% unless  @user.linkedin.blank? %>
+          <span class="list-group-item">
+            <%= icon_tag :linkedin, fixed: true %>
+            <a class="twitter" href="https://linkedin.com/<%= @user.linkedin %>"><%= @user.linkedin %></a>
+          </span>
+        <% end %>
+      </div>
+    </section>
   </div>
-  <div class="col-md-4">
-    <h2 class="media-heading">  <%= @user.login %>
-      <small><%= @user.name %></small>
-    </h2>
-    <hr/>
+  <div class="col-md-7">
+    <section>
+      <h1>
+        <%= @user.login %>
 
-    <h4>O mne:</h4><br>
+        <% if @user.name %>
+          <small><%= @user.name %>xxx</small>
+        <% end %>
+      </h1>
 
-    <p>
-      <%= @user.about %>
-    </p>
+      <hr/>
 
+      <% if @user.about %>
+        <h4>O mne</h4>
+
+        <p>
+          <%= @user.about %>
+        </p>
+      <% end %>
+    </section>
   </div>
 </div>

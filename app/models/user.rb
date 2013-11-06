@@ -14,8 +14,10 @@ class User < ActiveRecord::Base
   validates :login, format: { with: /\A[a-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :nick, presence: true
 
+  # TODO (zbell) add missing validations!
+
   def gravatar_email
-    read_attribute(:gravatar_email) || read_attribute(:email)
+    read_attribute(:gravatar_email) || email
   end
 
   def login=(value)

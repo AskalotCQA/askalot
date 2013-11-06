@@ -1,8 +1,17 @@
 <%= form_for resource, as: :user, url: profile_users_path, html: { method: :patch } do |f| %>
+  <%= devise_error_messages! %>
+
   <div class="form-group">
     <%= f.label :nick %>
-    <%= f.text_field :nick, class: :'form-control'  %>
+    <%= f.text_field :nick, class: :'form-control' %>
   </div>
+
+  <div class="form-group">
+    <%= f.label :gravatar_email %>
+    <%= f.text_field :gravatar_email, class: :'form-control' %>
+  </div>
+
+  <br/>
 
   <div class="form-group">
     <%= f.label :first %>
@@ -14,14 +23,11 @@
     <%= f.text_field :last, class: :'form-control'%>
   </div>
 
+  <br/>
+
   <div class="form-group">
     <%= f.label :about %>
     <%= f.text_area :about, class: :'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :gravatar_email %>
-    <%= f.text_field :gravatar_email, class: :'form-control' %>
   </div>
 
   <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>

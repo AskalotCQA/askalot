@@ -10,6 +10,8 @@ GEM
       erubis (~> 2.7.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
+    actionview-encoded_mail_to (1.0.4)
+      rails
     activemodel (4.0.0)
       activesupport (= 4.0.0)
       builder (~> 3.1.0)
@@ -247,6 +249,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  actionview-encoded_mail_to
   bootstrap-sass-rails (~> 3.0.0.3)
   cancan (~> 1.6.9)
   capistrano (~> 2.15.5)

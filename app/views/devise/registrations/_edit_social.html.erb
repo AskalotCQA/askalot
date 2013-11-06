@@ -1,4 +1,6 @@
 <%= form_for resource, as: :user, url: profile_users_path, html: { method: :patch } do |f| %>
+  <%= devise_error_messages! %>
+
   <div class="form-group">
     <div class="input-group">
       <span class="input-group-addon"><%= icon_tag :facebook, fixed: true %></span>

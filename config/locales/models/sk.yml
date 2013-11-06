@@ -13,7 +13,8 @@ sk:
         middle: 'Druhé meno'
         last: 'Priezvisko'
         about: 'O mne'
-        gravatar_email: 'Email pre Gravatar'
+
+        gravatar_email: 'Gravatar e-mail'
 
         facebook: 'Facebook'
         twitter: 'Twitter'
