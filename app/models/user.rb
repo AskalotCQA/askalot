@@ -41,6 +41,10 @@ class User < ActiveRecord::Base
     where(conditions).where(["login = :value OR email = :value", { value: login.downcase }]).first
   end
 
+  def name
+    "#{first} #{middle} #{last}".squeeze(' ')
+  end
+
   def can_destroy?
     false
   end

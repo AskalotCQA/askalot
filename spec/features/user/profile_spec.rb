@@ -14,6 +14,9 @@ describe 'User Profile' do
       click_link 'Profil'
 
       expect(page).to have_content(user.login)
+      expect(page).to have_content(user.email)
+      expect(page).to have_content("#{user.first} #{user.last}")
+      expect(page).to have_content(user.about)
     end
 
     it 'edits user account', js: true do

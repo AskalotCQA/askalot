@@ -1,48 +1,38 @@
-<h1><%= @user.login %></h1>
-
 <%# TODO (smolnar) refactor to use locales %>
-<% if current_user == @user %>
-  <%= link_to t('user.edit_profile'), edit_user_registration_path %>
-<% end %>
 
 <div class="row">
-  <div class="col-md-2">
-
-    <%= gravatar_image_tag @user.email, class: :'img-square' %>
-
-    <div class="form-group">
-      <%= @user.about %>
-    </div>
+  <div class="col-md-3">
+    <form class="form-horizontal" role="form">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <%= gravatar_image_tag @user.email, size: :'230', class: :'img-responsive' %>
+        </li>
+        <li class="list-group-item">
+          <%= icon_tag :'envelope-alt', fixed: true %>
+          <a class="email js-obfuscate-email" href="mailto:<%= @user.email %>"> <%= @user.email %></a>
+        </li>
+        <li class="list-group-item">
+          <%= icon_tag :facebook, fixed: true %>
+          <a class="facebook" href="<%= @user.facebook %>"><%= @user.facebook %> </a>
+        </li>
+        <li class="list-group-item">
+          <%= icon_tag :twitter, fixed: true %>
+          <a class="twitter" href="<%= @user.twitter %>"><%= @user.twitter %></a>
+        </li>
+      </ul>
+    </form>
   </div>
   <div class="col-md-4">
-    <div class="form-group">
-      <%= @user.login %>
-    </div>
-    <div class="form-group">
-      <%= @user.first %>
-    </div>
-    <div class="form-group">
-      <%= @user.last %>
-    </div>
-    <div class="form-group">
-      <%= @user.email %>
-    </div>
-    <div class="form-group">
-      <%= @user.ais_uid %>
-    </div>
-    <div class="form-group">
-      <%= @user.ais_login %>
-    </div>
-    <div class="cal-md-4">
-      <div class="form-group">
-        <%= @user.facebook %>
-      </div>
-      <div class="form-group">
-        <%= @user.twitter %>
-      </div>
-      <div class="form-group">
-        <%= @user.linkedin %>
-      </div>
-    </div>
+    <h2 class="media-heading">  <%= @user.login %>
+      <small><%= @user.name %></small>
+    </h2>
+    <hr/>
+
+    <h4>O mne:</h4><br>
+
+    <p>
+      <%= @user.about %>
+    </p>
+
   </div>
 </div>
