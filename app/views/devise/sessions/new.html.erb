@@ -4,6 +4,8 @@
   <h1 class="form-title"><%= yield :title %></h1>
 
   <%= form_for resource, as: resource_name, url: session_path(resource_name) do |f| %>
+    <%= devise_error_messages! %>
+
     <div class="form-group">
       <%= f.label :login %>
       <%= f.text_field :login, autofocus: true, class: :'form-control' %>

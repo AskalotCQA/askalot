@@ -38,3 +38,10 @@ sk:
     unconfirmed_registration: 'Nepotvrdená registrácia?'
     forgotten_password: 'Zabudli ste heslo?'
     locked_account: 'Zamknutý účet?'
+
+    settings: 'Nastavenia'
+
+    edit_profile: 'Profil'
+    edit_social: 'Sociálne siete'
+    edit_privacy: 'Súkromie'
+    edit_account: 'Nastavenia účtu'
