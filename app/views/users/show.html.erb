@@ -40,14 +40,14 @@
       <h1>
         <%= @user.login %>
 
-        <% if @user.name %>
-          <small><%= @user.name %>xxx</small>
+        <% unless @user.name.blank? %>
+          <small><%= @user.name %></small>
         <% end %>
       </h1>
 
       <hr/>
 
-      <% if @user.about %>
+      <% unless @user.about.blank? %>
         <h4>O mne</h4>
 
         <p>
