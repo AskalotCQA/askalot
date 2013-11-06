@@ -18,6 +18,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:nick, :first, :last, :about, :facebook, :twitter, :linkedin, :gravatar_email, :flag_show_name, :flag_show_email)
+    params.require(:user).permit(:nick, :first, :last, :about, :gravatar_email, :facebook, :twitter, :linkedin, :flag_show_name, :flag_show_email)
   end
 end
