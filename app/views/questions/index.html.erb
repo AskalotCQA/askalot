@@ -5,11 +5,12 @@
     <section>
       <div class="page-header">
         <h1>Zobrazenie otázok</h1>
+        <p><%= link_to "New question", new_question_path %></p>
       </div>
-
-      <%= render 'questions', questions: @questions %>
-
-      <p><%= link_to "New question", new_question_path %></p>
+      <%= paginate @questions, :window => 3  %>
+      <div>
+        <%= render 'questions', questions: @questions %>
+      </div>
     </section>
   </div>
 </div>
