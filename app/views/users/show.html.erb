@@ -1,48 +1,59 @@
-<h1><%= @user.login %></h1>
-
 <%# TODO (smolnar) refactor to use locales %>
-<% if current_user == @user %>
-  <%= link_to t('user.edit_profile'), edit_user_registration_path %>
-<% end %>
+<%# TODO (zbell) add {facebook,twitter,linkedin}_url to User model %>
 
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-offset-1 col-md-3">
+    <section>
+      <div class="list-group">
+        <%= gravatar_image_tag @user.gravatar_email, size: 263, class: :'list-group-item img-responsive' %>
 
-    <%= gravatar_image_tag @user.email, class: :'img-square' %>
+        <span class="list-group-item">
+          <%= icon_tag :'envelope-o', fixed: true %>
+          <%= mail_to @user.email, nil, encode: :hex %>
+        </span>
 
-    <div class="form-group">
-      <%= @user.about %>
-    </div>
+        <% unless @user.facebook.blank? %>
+          <span class="list-group-item">
+            <%= icon_tag :facebook, fixed: true %>
+            <a class="facebook" href="https://facebook.com/<%= @user.facebook %>"><%= @user.facebook %> </a>
+          </span>
+        <% end %>
+
+        <% unless  @user.twitter.blank? %>
+          <span class="list-group-item">
+            <%= icon_tag :twitter, fixed: true %>
+            <a class="twitter" href="https://twitter.com/<%= @user.twitter %>"><%= @user.twitter %></a>
+          </span>
+        <% end %>
+
+        <% unless  @user.linkedin.blank? %>
+          <span class="list-group-item">
+            <%= icon_tag :linkedin, fixed: true %>
+            <a class="twitter" href="https://linkedin.com/<%= @user.linkedin %>"><%= @user.linkedin %></a>
+          </span>
+        <% end %>
+      </div>
+    </section>
   </div>
-  <div class="col-md-4">
-    <div class="form-group">
-      <%= @user.login %>
-    </div>
-    <div class="form-group">
-      <%= @user.first %>
-    </div>
-    <div class="form-group">
-      <%= @user.last %>
-    </div>
-    <div class="form-group">
-      <%= @user.email %>
-    </div>
-    <div class="form-group">
-      <%= @user.ais_uid %>
-    </div>
-    <div class="form-group">
-      <%= @user.ais_login %>
-    </div>
-    <div class="cal-md-4">
-      <div class="form-group">
-        <%= @user.facebook %>
-      </div>
-      <div class="form-group">
-        <%= @user.twitter %>
-      </div>
-      <div class="form-group">
-        <%= @user.linkedin %>
-      </div>
-    </div>
+  <div class="col-md-7">
+    <section>
+      <h1>
+        <%= @user.login %>
+
+        <% unless @user.name.blank? %>
+          <small><%= @user.name %></small>
+        <% end %>
+      </h1>
+
+      <hr/>
+
+      <% unless @user.about.blank? %>
+        <h4>O mne</h4>
+
+        <p>
+          <%= @user.about %>
+        </p>
+      <% end %>
+    </section>
   </div>
 </div>

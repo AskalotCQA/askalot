@@ -14,6 +14,12 @@ class User < ActiveRecord::Base
   validates :login, format: { with: /\A[a-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :nick, presence: true
 
+  # TODO (zbell) add missing validations!
+
+  def gravatar_email
+    read_attribute(:gravatar_email) || email
+  end
+
   def login=(value)
     write_attribute(:login, value.downcase)
 
@@ -35,6 +41,14 @@ class User < ActiveRecord::Base
     return where(conditions).first unless login
 
     where(conditions).where(["login = :value OR email = :value", { value: login.downcase }]).first
+  end
+
+  def name
+    "#{first} #{middle} #{last}".squeeze(' ')
+  end
+
+  def can_destroy?
+    false
   end
 
   protected

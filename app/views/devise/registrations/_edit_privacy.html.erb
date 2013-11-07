@@ -1,0 +1,13 @@
+<%= form_for resource, as: :user, url: profile_users_path, html: { method: :patch } do |f| %>
+  <div class="form-group">
+    <%= f.label :flag_show_name %>
+    <%= f.check_box :flag_show_name, class: :'form-control'%>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :flag_show_email %>
+    <%= f.check_box :flag_show_email, class: :'form-control' %>
+  </div>
+
+  <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
+<% end %>

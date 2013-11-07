@@ -1,8 +1,8 @@
 module DeviseHelper
-  def devise_error_messages!
-    messages = resource.errors.full_messages
+  include Concerns::Flash
 
-    flash.now[:error] = Array.wrap(flash.now[:error]) + messages unless messages.empty?
+  def devise_error_messages!
+    flash_error_messages_for resource
 
     nil
   end

@@ -1,13 +1,15 @@
 <% provide(:title, 'questions.index') %>
-<h1>Zobrazenie otázok</h1>
 
+<div class="row">
+  <div class="col-md-12">
+    <section>
+      <div class="page-header">
+        <h1>Zobrazenie otázok</h1>
+      </div>
 
-<ul class="users">
-  <% @questions.each do |question| %>
-      <li>
-        <%= link_to question.title, question %>
-      </li>
-  <% end %>
-</ul>
+      <%= render 'questions', questions: @questions %>
 
-<p><%= link_to "New question", new_question_path %></p>
+      <p><%= link_to "New question", new_question_path %></p>
+    </section>
+  </div>
+</div>

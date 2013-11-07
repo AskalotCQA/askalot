@@ -1,0 +1,8 @@
+<ol class="list-unstyled">
+  <% questions.each do |question| %>
+    <li>
+      <h3><%= link_to question.title, question %></h3>
+      <p><%= question.text %></p>
+    </li>
+  <% end %>
+</ol>
