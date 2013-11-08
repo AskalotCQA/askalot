@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'User Confirmation' do
+describe 'Account Confirmation' do
   let(:user) { create :user, :unconfirmed }
 
   it 'confirms user registration' do
