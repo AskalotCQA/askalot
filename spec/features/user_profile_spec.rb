@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'User Profile' do
   let(:user) { create :user }
 
-  context 'with current user' do
+  context 'with registered user' do
     before :each do
       login_as user
     end
@@ -96,6 +96,35 @@ describe 'User Profile' do
       expect(page).to have_field('user_facebook', with: 'facebook.com/nicky.nickmann')
       expect(page).to have_field('user_twitter',  with: 'twitter.com/nnickmann')
       expect(page).to have_field('user_linkedin', with: 'linkedin.com/nick.nickmann.jr')
+    end
+  end
+
+  context 'with AIS user' do
+    let(:user) { build :user, :as_ais }
+
+    before :each do
+      login_as_ais user
+    end
+
+    it 'disallows editing of first and last name', js: true do
+      visit root_path
+
+      click_link user.email
+      click_link 'Nastavenia'
+
+      fill_in 'user_nick', with: 'Nicky'
+      fill_in 'user_about', with: 'Lorem ipsum'
+
+      expect(page).not_to have_field('user_first')
+      expect(page).not_to have_field('user_last')
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
+      expect(page.current_path).to eql(edit_user_registration_path)
+
+      expect(page).to have_field('user_nick',  with: 'Nicky')
+      expect(page).to have_field('user_about', with: 'Lorem ipsum')
     end
   end
 end
