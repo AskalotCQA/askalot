@@ -2,5 +2,8 @@
   <div class="container">
     <h1>na&#x042f;uby <span data-placement="top" data-toggle="tooltip" data-original-title="Community Question Answering">CQA</span> <%= icon_tag :'comments-o' %></h1>
     <p>Webový komunitný systém otázok a odpovedí ďalšej generácie</p>
+
+    <%# TODO (smolnar) fix spaces with icons on links and buttons  %>
+    <%= icon_link_to :'plus-circle', "&nbsp;#{t('question.new')}".html_safe, new_question_path, class: 'btn btn-success' %>
   </div>
 </div>

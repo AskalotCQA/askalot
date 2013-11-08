@@ -1,11 +1,11 @@
-<% provide(:title, 'question.create') %>
+<% provide :title, t('question.new') %>
 
 <div class="row">
   <div class="col-md-offset-3 col-md-6">
     <section>
-      <h1 class="form-title"><%= yield :title %></h1>
+      <h1 class="form-title"><%= t 'question.create.title' %></h1>
 
-      <%= form_for :question, :url => new_question_path(@question) do |f| %>
+      <%= form_for @question do |f| %>
         <div class="form-group">
           <%= f.label :title %>
           <%= f.text_field :title, autofocus: true, class: :'form-control' %>
@@ -15,10 +15,10 @@
           <%= f.text_area :text, class: :'form-control' %>
         </div>
         <div class="form-group">
-          <%= f.label :tags %>
-          <%= f.text_field :text, class: :'form-control' %>
+          <%= f.label :category_id %>
+          <%= f.collection_select :category_id, Category.all, :id, :name, {}, { class: :'form-control' } %>
         </div>
-        <button type="submit" class="btn btn-success btn-lg">Vlož otázku</button>
+        <button type="submit" class="btn btn-success btn-lg"><%= t 'question.create.submit' %></button>
       <% end %>
     </section>
   </div>

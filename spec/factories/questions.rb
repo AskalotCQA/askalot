@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :question do
     sequence(:title) { |n| "Title #{n}" }
 
-    text 'Text'
+    text 'Lorem ipsum'
 
     association :category
     association :user

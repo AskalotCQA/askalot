@@ -2,25 +2,29 @@ require 'spec_helper'
 
 describe 'Add Question' do
   let(:user) { create :user }
+  let!(:category) { create :category }
 
   context 'with current user' do
     before :each do
       login_as user
     end
 
-    it 'adds new question' do
+    it 'adds new question', js: true do
       visit root_path
 
-      click_link 'Pridať novú otázku'
+      click_link 'Opýtať sa otázku'
 
       fill_in 'question_title', with: ''
       fill_in 'question_text',  with: ''
 
+      click_button 'Vložiť otázku'
+
       expect(page).to have_content('Nadpis – je povinná položka')
-      expect(page).to have_content('Text – je povinná položka')
+      expect(page).to have_content('Text otázky – je povinná položka')
 
       fill_in 'question_title', with: 'Lorem ipsum title?'
       fill_in 'question_text',  with: 'Lorem ipsum'
+      select category.name, from: 'question_category_id'
 
       click_button 'Vložiť otázku'
 
