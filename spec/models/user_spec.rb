@@ -13,7 +13,7 @@ describe User do
     expect(user).not_to be_valid
   end
 
-  context 'when using AIS login' do
+  context 'with AIS credentials' do
     it 'does not require password' do
       user = build :user, :with_ais, password: nil, password_confirmation: nil
 
@@ -36,7 +36,7 @@ describe User do
   end
 
   describe '.find_first_by_auth_conditions' do
-    context 'when providing login' do
+    context 'with login' do
       it 'finds user by login' do
         other = User.find_first_by_auth_conditions(login: user.login)
 
@@ -48,7 +48,7 @@ describe User do
       end
     end
 
-    context 'when providing email' do
+    context 'with email' do
       it 'finds user by email' do
         other = User.find_first_by_auth_conditions(login: user.email)
 

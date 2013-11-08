@@ -46,13 +46,6 @@ describe Users::Authentication do
       it 'raises an exception' do
         subject.factory = factory
 
-        attributes = {
-          login: 'user',
-          email: 'example@gmail.com',
-          ais_uid: '1234',
-          ais_login: 'user'
-        }
-
         expect(service).to receive(:authenticate).with('user', 'password').and_return(nil)
 
         expect { subject.authenticate! }.to raise_error RuntimeError, /Unauthorized access/
