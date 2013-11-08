@@ -1,4 +1,3 @@
-<%# TODO (smolnar) refactor to use locales %>
 <%# TODO (zbell) add {facebook,twitter,linkedin}_url to User model %>
 
 <div class="row">
@@ -15,21 +14,21 @@
         <% unless @user.facebook.blank? %>
           <span class="list-group-item">
             <%= icon_tag :facebook, fixed: true %>
-            <a class="facebook" href="https://facebook.com/<%= @user.facebook %>"><%= @user.facebook %> </a>
+            <a class="facebook" href="<%= @user.facebook %>"><%= @user.facebook %> </a>
           </span>
         <% end %>
 
         <% unless  @user.twitter.blank? %>
           <span class="list-group-item">
             <%= icon_tag :twitter, fixed: true %>
-            <a class="twitter" href="https://twitter.com/<%= @user.twitter %>"><%= @user.twitter %></a>
+            <a class="twitter" href="<%= @user.twitter %>"><%= @user.twitter %></a>
           </span>
         <% end %>
 
         <% unless  @user.linkedin.blank? %>
           <span class="list-group-item">
             <%= icon_tag :linkedin, fixed: true %>
-            <a class="twitter" href="https://linkedin.com/<%= @user.linkedin %>"><%= @user.linkedin %></a>
+            <a class="twitter" href="<%= @user.linkedin %>"><%= @user.linkedin %></a>
           </span>
         <% end %>
       </div>
