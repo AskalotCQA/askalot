@@ -82,9 +82,9 @@ describe 'User Profile' do
       # TODO (smolnar) Add invalid values for models validations and check if the page shows
       # errors
 
-      fill_in 'user_facebook', with: 'facebook.com/nicky.nickmann'
-      fill_in 'user_twitter',  with: 'twitter.com/nnickmann'
-      fill_in 'user_linkedin', with: 'linkedin.com/nick.nickmann.jr'
+      fill_in 'user_facebook', with: 'http://facebook.com/nicky.nickmann'
+      fill_in 'user_twitter',  with: 'http://twitter.com/nnickmann'
+      fill_in 'user_linkedin', with: 'http://linkedin.com/nick.nickmann.jr'
 
       click_button 'Uložiť'
 
@@ -93,9 +93,9 @@ describe 'User Profile' do
 
       click_link 'Sociálne siete'
 
-      expect(page).to have_field('user_facebook', with: 'facebook.com/nicky.nickmann')
-      expect(page).to have_field('user_twitter',  with: 'twitter.com/nnickmann')
-      expect(page).to have_field('user_linkedin', with: 'linkedin.com/nick.nickmann.jr')
+      expect(page).to have_field('user_facebook', with: 'http://facebook.com/nicky.nickmann')
+      expect(page).to have_field('user_twitter',  with: 'http://twitter.com/nnickmann')
+      expect(page).to have_field('user_linkedin', with: 'http://linkedin.com/nick.nickmann.jr')
     end
   end
 
