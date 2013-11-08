@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe User do
   let(:user) { create :user }
+  let(:ability) { Ability.new(user) }
 
   it 'requires login' do
     user = build :user, login: ''
@@ -14,11 +15,19 @@ describe User do
   end
 
   context 'with AIS credentials' do
-    it 'does not require password' do
-      user = build :user, :with_ais, password: nil, password_confirmation: nil
+    let(:user) { build :user, :as_ais }
 
-      expect(user.encrypted_password).to be_empty
+    it 'disallows changing of first name' do
+      expect(ability).not_to be_able_to(:change_name, user)
+    end
+
+    it 'disallows changing of last name' do
+      expect(ability).not_to be_able_to(:change_name, user)
+    end
+
+    it 'does not require password' do
       expect(user).to be_valid
+      expect(user.encrypted_password).to be_empty
     end
   end
 
