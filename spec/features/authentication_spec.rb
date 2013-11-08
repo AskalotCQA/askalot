@@ -44,39 +44,24 @@ describe 'Authentication' do
 
   context 'with AIS credentials' do
     it 'signs up user' do
-      data = {
-        uisid: ['1234'],
-        uid: ['xuser1'],
-        cn: ['Bc. Janko Hrasko'],
-        sn: ['Hrasko'],
-        givenname: ['Janko'],
-        mail: ['xuser1@is.stuba.sk','xuser1@stuba.sk']
-      }
+      user = build :user, :as_ais
 
-      Stuba::AIS.stub(:authenticate) { Stuba::User.new(data) }
+      stub_ais_user user
 
       visit root_path
 
       click_link 'Prihlásiť'
 
-      fill_in 'user_login', with: 'xuser1'
+      fill_in 'user_login', with: user.login
       fill_in 'user_password', with: 'password'
 
       click_button 'Prihlásiť'
 
       expect(page).to have_content('Úspešne prihlásený.')
-      expect(page).to have_content('xuser1')
-      expect(page).to have_content('xuser1@stuba.sk')
+      expect(page).to have_content(user.login)
+      expect(page).to have_content(user.email)
 
       expect(User).to have(1).record
-
-      user = User.first
-
-      expect(user.login).to eql('xuser1')
-      expect(user.ais_login).to eql('xuser1')
-      expect(user.ais_uid).to eql('1234')
-      expect(user.nick).to eql('xuser1')
-      expect(user.encrypted_password).to be_empty
     end
   end
 end
