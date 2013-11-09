@@ -2,9 +2,7 @@ class Question < ActiveRecord::Base
   belongs_to :author, class_name: :User
   belongs_to :category
 
-  has_many :taggings, class_name: :QuestionTagging
-
-  has_many :tags, through: :taggings
+  acts_as_taggable
 
   validates :title, presence: true
   validates :text,  presence: true
