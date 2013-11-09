@@ -12,7 +12,7 @@ describe 'Add Question' do
     it 'adds new question', js: true do
       visit root_path
 
-      click_link 'Opýtať sa otázku'
+      click_link 'Vložiť novú otázku'
 
       fill_in 'question_title', with: ''
       fill_in 'question_text',  with: ''
