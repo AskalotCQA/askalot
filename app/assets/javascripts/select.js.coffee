@@ -16,7 +16,8 @@ $(document).ready ->
             q: term
             type: $(this).attr('data-type')
             context: $(this).attr('context')
+            page: page - 1
           results: (data, page) ->
-            results: data
+            data
       }
     $(this).select2(options)
