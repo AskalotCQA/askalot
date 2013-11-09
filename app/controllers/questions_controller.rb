@@ -26,6 +26,6 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :text, :tags).merge(author: current_user)
+    params.require(:question).permit(:title, :text, :category_id, :tag_list).merge(author: current_user)
   end
 end
