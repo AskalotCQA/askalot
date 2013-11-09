@@ -94,5 +94,9 @@ describe 'User Profile' do
       expect(page).to have_field('user_twitter',  with: 'twitter.com/nnickmann')
       expect(page).to have_field('user_linkedin', with: 'linkedin.com/nick.nickmann.jr')
     end
+
+    it 'edits user privacy', js: true do
+      pending
+    end
   end
 end
