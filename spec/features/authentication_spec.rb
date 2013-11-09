@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'User Authentication' do
+describe 'Authentication' do
   let(:user) { create :user, password: 'password' }
 
   context 'when not registered' do

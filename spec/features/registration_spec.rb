@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe 'User Registration' do
-  context 'when using login' do
+describe 'Registration' do
+  context 'with provided login' do
     it 'signs up user' do
       visit root_path
 
