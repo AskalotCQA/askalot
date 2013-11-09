@@ -13,6 +13,9 @@ gem 'devise', '~> 3.1.1'
 gem 'cancan', '~> 1.6.9'
 gem 'net-ldap'
 
+# plugins
+gem 'acts-as-taggable-on'
+
 # helpers
 gem 'jbuilder', '~> 1.2'
 gem 'actionview-encoded_mail_to'
@@ -27,7 +30,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'select2-rails'
+gem 'select2-rails', '~> 3.4.9'
 
 # pagination
 gem 'kaminari',           '~> 0.14.1'
