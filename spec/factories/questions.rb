@@ -7,6 +7,6 @@ FactoryGirl.define do
     text 'Lorem ipsum'
 
     association :category
-    association :user
+    association :author
   end
 end
