@@ -22,5 +22,18 @@ namespace :fixtures do
         end
       end
     end
+    namespace :category do
+      desc "Fill category table with sample data"
+      task populate: :environment do
+        Category.create!(name: "Sample name",
+                         id: 1)
+        99.times do |n|
+          name  = "sample name-#{n+1}"
+          id = n+1
+          Question.create!(name: name,
+                           id: id)
+        end
+      end
+      end
   end
 end

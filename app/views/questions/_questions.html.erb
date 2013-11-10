@@ -1,8 +1,20 @@
 <ol class="list-unstyled">
   <% questions.each do |question| %>
-    <li>
-      <h3><%= link_to question.title, question %></h3>
-      <p><%= question.text %></p>
-    </li>
+      <div>
+        <h3><%= link_to question.title, question %></h3>
+        <span><%= question.text %> </span>
+        <div >
+             <a class="label label-success"  href=#> <%= question.category.name %> </a>
+             <a class="label label-info"  href=#> <%= question.tags.name %> </a>
+         </div>
+         <div >
+             <span><%= time_ago_in_words(question.created_at) %> </span>
+             <a href=#> <%=  question.author.login %> </a>
+           <span><%question.tags.count %> </span>
+           <%question.tags do |tag| %>
+               <span><%= tag.id %> </span>
+           <% end %>
+        </div>
+      </div>
   <% end %>
 </ol>
