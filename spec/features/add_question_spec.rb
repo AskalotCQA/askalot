@@ -22,7 +22,7 @@ describe 'Add Question' do
       fill_in 'question_title', with: 'Lorem ipsum title?'
       fill_in 'question_text',  with: 'Lorem ipsum'
 
-      click_button 'Vložiť otázku'
+      click_button 'Vlož otázku'
 
       expect(page).to have_content('Vaša otázka bola úspešne vložená.')
     end
