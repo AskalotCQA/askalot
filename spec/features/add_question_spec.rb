@@ -12,15 +12,15 @@ describe 'Add Question' do
     it 'adds new question', js: true do
       visit root_path
 
-      click_link 'Vložiť novú otázku'
+      click_link 'Pridať novú otázku'
 
       fill_in 'question_title', with: ''
       fill_in 'question_text',  with: ''
 
-      click_button 'Vložiť otázku'
+      click_button 'Pridať otázku'
 
       expect(page).to have_content('Nadpis – je povinná položka')
-      expect(page).to have_content('Text otázky – je povinná položka')
+      expect(page).to have_content('Text – je povinná položka')
 
       fill_in 'question_title', with: 'Lorem ipsum title?'
       fill_in 'question_text',  with: 'Lorem ipsum'
@@ -29,9 +29,9 @@ describe 'Add Question' do
 
       fill_in 'question_tag_list', with: 'tag1 Tag2 tAg3'
 
-      click_button 'Vložiť otázku'
+      click_button 'Pridať otázku'
 
-      expect(page).to have_content('Vaša otázka bola úspešne vložená.')
+      expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
 
       # TODO (smolnar) remove! use content check for attributes
 
