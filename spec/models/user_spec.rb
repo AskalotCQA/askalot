@@ -15,10 +15,26 @@ describe User do
 
   context 'with AIS credentials' do
     it 'does not require password' do
-      user = build :user, :with_ais, password: nil, password_confirmation: nil
+      user = build :user, :as_ais
 
-      expect(user.encrypted_password).to be_empty
       expect(user).to be_valid
+      expect(user.encrypted_password).to be_empty
+    end
+  end
+
+  describe 'Abilities' do
+    let(:ability) { Ability.new(user) }
+
+    context 'with AIS credentials' do
+      let(:user) { build :user, :as_ais }
+
+      it 'disallows changing of first name' do
+        expect(ability).not_to be_able_to(:change_name, user)
+      end
+
+      it 'disallows changing of last name' do
+        expect(ability).not_to be_able_to(:change_name, user)
+      end
     end
   end
 
