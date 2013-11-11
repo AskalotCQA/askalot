@@ -63,6 +63,8 @@ ActiveRecord::Schema.define(version: 20131111001542) do
 
   create_table "users", force: true do |t|
     t.string   "login",                                 null: false
+    t.string   "email",                  default: "",   null: false
+    t.string   "encrypted_password",     default: "",   null: false
     t.string   "ais_uid"
     t.string   "ais_login"
     t.string   "nick",                                  null: false
@@ -74,8 +76,6 @@ ActiveRecord::Schema.define(version: 20131111001542) do
     t.string   "facebook"
     t.string   "twitter"
     t.string   "linkedin"
-    t.string   "email",                  default: "",   null: false
-    t.string   "encrypted_password",     default: "",   null: false
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -98,9 +98,16 @@ ActiveRecord::Schema.define(version: 20131111001542) do
     t.boolean  "flag_show_email",        default: true, null: false
   end
 
+  add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree
+  add_index "users", ["ais_uid"], name: "index_users_on_ais_uid", unique: true, using: :btree
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["first"], name: "index_users_on_first", using: :btree
+  add_index "users", ["last"], name: "index_users_on_last", using: :btree
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
+  add_index "users", ["middle"], name: "index_users_on_middle", using: :btree
+  add_index "users", ["name"], name: "index_users_on_name", using: :btree
+  add_index "users", ["nick"], name: "index_users_on_nick", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
