@@ -8,6 +8,9 @@ require 'rspec/autorun'
 require 'capybara/rspec'
 require 'capybara/rails'
 
+# Cancan
+require 'cancan/matchers'
+
 Capybara.default_selector = :css
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -65,6 +68,7 @@ RSpec.configure do |config|
   # Include support
   config.include FixtureHelper
   config.include EmailHelper
+  config.include Users::AuthenticationHelper
 
   config.before(:each) { reset_emails }
 

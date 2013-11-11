@@ -1,24 +1,8 @@
 <%= form_for resource, as: :user, url: profile_users_path, html: { method: :patch } do |f| %>
-  <div class="form-group">
-    <div class="input-group">
-      <span class="input-group-addon"><%= icon_tag :facebook, fixed: true %></span>
-      <%= f.text_field :facebook, placeholder: 'http://www.facebook.com/username', class: :'form-control' %>
-    </div>
-  </div>
 
-  <div class="form-group">
-    <div class="input-group">
-      <span class="input-group-addon"><%= icon_tag :twitter, fixed: true %></span>
-      <%= f.text_field :twitter, placeholder: 'http://twitter.com/username', class: :'form-control' %>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="input-group">
-      <span class="input-group-addon"><%= icon_tag :linkedin, fixed: true %></span>
-      <%= f.text_field :linkedin, placeholder: 'http://www.linkedin.com/in/username', class: :'form-control' %>
-    </div>
-  </div>
+  <%= render 'social_network_input', social_network: :facebook, form_field: f, placeholder: 'http://facebook.com/username' %>
+  <%= render 'social_network_input', social_network: :twitter,  form_field: f, placeholder: 'http://twitter.com/username' %>
+  <%= render 'social_network_input', social_network: :linkedin, form_field: f, placeholder: 'http://linkedin.com/li/username' %>
 
   <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
 <% end %>
