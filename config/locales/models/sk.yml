@@ -25,6 +25,6 @@ sk:
 
       question:
         title: 'Nadpis'
-        text: 'Text otázky'
+        text: 'Text'
         tag_list: 'Tagy'
         category_id: 'Kategória'

@@ -1,7 +1,7 @@
 sk:
   question:
     new:
-      title: 'Vložiť novú otázku'
-      submit: 'Vložiť otázku'
+      title: 'Pridať novú otázku'
+      submit: 'Pridať otázku'
 
-    successfully_created: 'Vaša otázka bola úspešne vložená.'
+    successfully_created: 'Vaša otázka bola úspešne pridaná.'

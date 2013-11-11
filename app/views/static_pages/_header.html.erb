@@ -1,9 +1,15 @@
 <div class="jumbotron">
   <div class="container">
-    <h1>na&#x042f;uby <span data-placement="top" data-toggle="tooltip" data-original-title="Community Question Answering">CQA</span> <%= icon_tag :'comments-o' %></h1>
-    <p>Webový komunitný systém otázok a odpovedí ďalšej generácie</p>
+    <h1>
+      na&#x042f;uby <span data-placement="top" data-toggle="tooltip" data-original-title="Community Question Answering">CQA</span> <%= icon_tag :'comments-o' %>
 
-    <%# TODO (smolnar) fix spaces with icons on links and buttons  %>
-    <%= icon_link_to :'plus-circle', "&nbsp;#{t('question.new.title')}".html_safe, new_question_path, class: 'btn btn-success' %>
+      <span class="pull-right">
+        <%= icon_link_to :'plus-circle', t('question.new.title'), new_question_path, class: 'btn btn-success btn-lg', fixed: true %>
+      </span>
+    </h1>
+
+    <p>
+      Webový komunitný systém otázok a odpovedí ďalšej generácie
+    </p>
   </div>
 </div>
