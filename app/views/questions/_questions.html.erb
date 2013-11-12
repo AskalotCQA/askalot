@@ -1,15 +1,11 @@
 
   <% questions.each do |question| %>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title"><%= link_to question.title %></h3>
+      <div style= "border-bottom-style:inset;border-bottom-width:1px;border-spacing:2px;">
+        <div >
+            <h3 ><%= link_to question.title %></h3>
         </div>
-        <div class="panel-body">
+        <div >
           <div class="row">
-          <div class="col-md-10">
-            <span><%= question.text %> </span>
-          </div>
-            <div class="row">
             <div class="col-md-9">
                 <a class="label label-success" style="margin: 3px"  href=#> <%= question.category.name %> </a>
                 <%question.tags do |tag| %>
@@ -19,7 +15,6 @@
             <div class="col-md-3">
                 <span><%= time_ago_in_words(question.created_at) %> </span>
                 <a href=#> <%=  question.author.login %> </a>
-            </div>
             </div>
           </div>
         </div>

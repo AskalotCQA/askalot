@@ -6,7 +6,7 @@ namespace :db do
                          author_id: 5,
                          category_id: 5)
         99.times do |n|
-          title  = "sample title-#{n+1}"
+          title  = "SampleQuestion-#{n+1}"
           text = "sample-#{n+1}text"
           user_id = n+1
           category_id=n+1
@@ -18,23 +18,23 @@ namespace :db do
       end
       desc "Fill table category with sample data"
       task populate: :environment do
-        Category.create!(name: "Sample name")
+        Category.create!(name: "SampleCategory")
         99.times do |n|
-          name  = "sample name-#{n+1}"
+          name  = "sampleCategory-#{n+1}"
           Category.create!(name: name)
         end
       end
 
       desc "Fill table users with sample data"
       task populate: :environment do
-        User.create_without_confirmation!(login: "sampl1s0elogin",
+        User.create_without_confirmation!(login: "SamplUser",
                      email: "example@railstutorial.org",
                      encrypted_password: "password123",
                      nick: "sample nick",
                      password: "password123")
         99.times do |n|
-          login  = "samplename#{n+1}"
-          email = "example-#{n+1}@railstutorial.org"
+          login  = "UserLogin#{n+1}"
+          email = "example-#{n+1}@naruby.org"
           encrypted_password= "password123"
           nick= "samplenick-#{n+1}"
           password= "password123"
