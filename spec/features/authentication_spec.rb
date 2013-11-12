@@ -46,7 +46,7 @@ describe 'Authentication' do
     it 'signs up user' do
       user = build :user, :as_ais
 
-      stub_ais_user user
+      stub_ais_for user
 
       visit root_path
 

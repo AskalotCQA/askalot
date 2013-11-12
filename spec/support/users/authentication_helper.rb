@@ -1,6 +1,6 @@
 module Users
   module AuthenticationHelper
-    def stub_ais_user(user = nil, options = {})
+    def stub_ais_for(user = nil, options = {})
       user ||= build :user, :as_ais
 
       data = {
@@ -17,8 +17,8 @@ module Users
       end
     end
 
-    def login_as_ais(user, options = {})
-      stub_ais_user(user, options)
+    def ais_login_as(user, options = {})
+      stub_ais_for user, options
 
       visit new_user_session_path
 

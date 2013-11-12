@@ -22,3 +22,9 @@ sk:
 
         flag_show_name:  'Zobraziť meno ostatným používateľom'
         flag_show_email: 'Zobraziť email ostatným používateľom'
+
+      question:
+        title: 'Nadpis'
+        text: 'Text'
+        tag_list: 'Tagy'
+        category_id: 'Kategória'

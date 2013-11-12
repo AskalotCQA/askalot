@@ -12,5 +12,5 @@ config/database.yml
 db/*.sqlite3
 log/*.log
 
-tags
 tmp
+/tags
