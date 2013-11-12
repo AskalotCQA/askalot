@@ -4,8 +4,12 @@ sk:
       title: 'Pridať novú otázku'
       submit: 'Pridať otázku'
 
+<<<<<<< HEAD
+    successfully_created: 'Vaša otázka bola úspešne pridaná.'
+=======
     successfully_created: 'Vaša otázka bola úspešne pridaná.'
 
     index:
       title: 'Zobrazenie nových otázok'
       new:   'Nová otázka'
+>>>>>>> Add test for show new questions, fix view, add locales
