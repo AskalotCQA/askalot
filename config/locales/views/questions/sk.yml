@@ -1,7 +1,7 @@
 sk:
   question:
-    new_question: 'Vloženie novej otázky'
-    question_title: 'Nadpis'
-    question_text: 'Znenie otázky'
-    question_tags: 'Tagy'
-    insert_question: 'Vlož otázku'
+    new:
+      title: 'Pridať novú otázku'
+      submit: 'Pridať otázku'
+
+    successfully_created: 'Vaša otázka bola úspešne pridaná.'

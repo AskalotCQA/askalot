@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106113301) do
+ActiveRecord::Schema.define(version: 20131111001542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,30 +31,11 @@ ActiveRecord::Schema.define(version: 20131106113301) do
 
   add_index "events", ["created_at"], name: "index_events_on_created_at", using: :btree
 
-  create_table "question_taggings", force: true do |t|
-    t.integer  "question_id"
-    t.integer  "question_tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "question_taggings", ["question_id"], name: "index_question_taggings_on_question_id", using: :btree
-  add_index "question_taggings", ["question_tag_id"], name: "index_question_taggings_on_question_tag_id", using: :btree
-
-  create_table "question_tags", force: true do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "question_tags", ["name"], name: "index_question_tags_on_name", using: :btree
-
   create_table "questions", force: true do |t|
     t.integer  "author_id",   null: false
     t.integer  "category_id", null: false
     t.string   "title",       null: false
     t.text     "text",        null: false
-    t.boolean  "answered",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -62,6 +43,23 @@ ActiveRecord::Schema.define(version: 20131106113301) do
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
 
   create_table "users", force: true do |t|
     t.string   "login",                                 null: false
