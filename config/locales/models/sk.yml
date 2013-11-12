@@ -24,13 +24,7 @@ sk:
         flag_show_email: 'Zobraziť email ostatným používateľom'
 
       question:
-<<<<<<< HEAD
-        title: 'Názov otázky'
-        text: 'Text otázky'
-        tags: 'Tagy'
-=======
         title: 'Nadpis'
         text: 'Text'
         tag_list: 'Tagy'
         category_id: 'Kategória'
->>>>>>> dab1bca98917b4fec06674bb59b7f0a60f7243d8
