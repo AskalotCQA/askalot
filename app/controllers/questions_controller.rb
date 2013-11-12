@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
     if @question.save
       flash[:notice] = t('question.successfully_created')
 
-      redirect_to questions_path
+      redirect_to question_path(@question)
     else
       flash_error_messages_for @question
 
