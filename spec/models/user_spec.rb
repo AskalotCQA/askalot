@@ -5,11 +5,44 @@ describe User do
 
   it 'requires login' do
     user = build :user, login: ''
-
     expect(user).not_to be_valid
 
     user = build :user, login: 'tra-lala'
+    expect(user).not_to be_valid
+  end
 
+  it 'requires nick' do
+    user = build :user, nick: ''
+    expect(user).not_to be_valid
+
+    user = build :user, nick: 'bad-nick?'
+    expect(user).not_to be_valid
+  end
+
+  it 'requires correct email' do
+    user = build :user, email: 'mail.mailer.com'
+    expect(user).not_to be_valid
+
+    user = build :user, gravatar_email: 'gravatar.mailer.com'
+    expect(user).not_to be_valid
+  end
+
+  it 'requires correct name' do
+    user = build :user, first: '12First'
+    expect(user).not_to be_valid
+
+    user = build :user, last: '21Last'
+    expect(user).not_to be_valid
+  end
+
+  it 'requires correct social stuff' do
+    user = build :user, facebook: 'http://www.facebook.com'
+    expect(user).not_to be_valid
+
+    user = build :user, twitter: 'htpp://twitter.com'
+    expect(user).not_to be_valid
+
+    user = build :user, linkedin: 'http://www.linkedin.com/in/'
     expect(user).not_to be_valid
   end
 
