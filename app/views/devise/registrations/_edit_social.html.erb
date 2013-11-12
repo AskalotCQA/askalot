@@ -1,5 +1,6 @@
 <%= form_for resource, as: :user, url: profile_users_path, html: { method: :patch } do |f| %>
 
+
   <%= render 'social_network_input', social_network: :facebook, form_field: f, placeholder: 'http://facebook.com/username' %>
   <%= render 'social_network_input', social_network: :twitter,  form_field: f, placeholder: 'http://twitter.com/username' %>
   <%= render 'social_network_input', social_network: :linkedin, form_field: f, placeholder: 'http://linkedin.com/li/username' %>

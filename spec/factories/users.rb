@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :user do
+  factory :user, aliases: [:author] do
     sequence(:login) { |n| "user_#{n}" }
     sequence(:email) { |n| "user_#{n}@example.com" }
 

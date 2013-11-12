@@ -1,0 +1,7 @@
+sk:
+  question:
+    new:
+      title: 'Pridať novú otázku'
+      submit: 'Pridať otázku'
+
+    successfully_created: 'Vaša otázka bola úspešne pridaná.'
