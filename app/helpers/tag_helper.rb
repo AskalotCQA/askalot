@@ -75,7 +75,7 @@ module TagHelper
   end
 
   def close_link_to(url = nil, options = {})
-    link_to icon_tag(:remove), url || '#', options.merge(class: :close)
+    link_to icon_tag(:times), url || '#', options.merge(class: :close, :'aria-hidden' => true)
   end
 
   def close_link_to_alert(options = {})

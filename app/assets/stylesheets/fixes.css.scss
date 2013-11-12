@@ -10,6 +10,17 @@ address, form, nav, p, dl, ol, ul, table,
   }
 }
 
+.alert-dismissable .close {
+  top: 0px;
+  padding: 0px 5px;
+
+  font-size: $font-size-base;
+
+  i {
+    line-height: $line-height-computed + 1;
+  }
+}
+
 // forms
 
 .form-title {
