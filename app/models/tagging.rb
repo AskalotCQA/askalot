@@ -1,2 +1,2 @@
-class Tagging < ActsAsTaggableOn
+class Tagging < ActsAsTaggableOn::Tagging
 end
