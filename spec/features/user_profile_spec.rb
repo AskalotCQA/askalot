@@ -67,11 +67,10 @@ describe 'User Profile' do
       expect(page).to have_content('Prezývka – je povinná položka.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
-      fill_in 'user_nick', with: ''
+      fill_in 'user_nick', with: '*()BadNick*-'
       fill_in 'user_first', with: '65badFirst?#$%'
-      fill_in 'user_last', with: '(BadLast)'
+      fill_in 'user_last', with: '(01BadLast)'
       fill_in 'user_gravatar_email', with: 'gravatar.email'
-      fill_in 'user_about', with: ''
 
       click_button 'Uložiť'
 
@@ -79,14 +78,7 @@ describe 'User Profile' do
       expect(page).to have_content('Gravatar e-mail – nie je platná hodnota.')
       expect(page).to have_content('Krstné meno – nie je platná hodnota.')
       expect(page).to have_content('Priezvisko – nie je platná hodnota.')
-      expect(page).to have_content('O mne – nie je platná hodnota.')
       expect(page.current_path).to eql(edit_user_registration_path)
-
-      #TODO (jharinek) Change this fields
-#      expect(page).to have_field('user_first', with: 'Nick')
-#      expect(page).to have_field('user_last',  with: 'Nickmann')
-#      expect(page).to have_field('user_about', with: 'Lorem Ipsum')
-#      expect(page).to have_field('user_nick',  with: 'Nicky')
 
       click_link 'Profil'
 
