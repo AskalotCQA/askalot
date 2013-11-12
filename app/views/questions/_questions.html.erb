@@ -10,15 +10,13 @@
             <span><%= question.text %> </span>
           </div>
             <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <a class="label label-success" style="margin: 3px"  href=#> <%= question.category.name %> </a>
-                <a class="label label-info"  href=#> <%= question.tags.name %> </a>
-                <span><%question.tags %> </span>
                 <%question.tags do |tag| %>
-                    <span><%= tag.id %> </span>
+                  <a class="label label-info"  href=#> <%= tag.name %> </a>
                  <% end %>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <span><%= time_ago_in_words(question.created_at) %> </span>
                 <a href=#> <%=  question.author.login %> </a>
             </div>

@@ -5,3 +5,7 @@ sk:
       submit: 'Pridať otázku'
 
     successfully_created: 'Vaša otázka bola úspešne pridaná.'
+
+    index:
+      title: 'Zobrazenie nových otázok'
+      new:   'Nová otázka'
