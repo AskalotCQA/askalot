@@ -4,6 +4,11 @@
 .sass-cache
 .tags
 
+.~lock.*
+*.*~
+
+/tags
+
 Gemfile.lock.tags
 
 config/configuration.yml
@@ -13,4 +18,3 @@ db/*.sqlite3
 log/*.log
 
 tmp
-/tags
