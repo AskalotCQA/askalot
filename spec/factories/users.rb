@@ -8,13 +8,23 @@ FactoryGirl.define do
     password              'password'
     password_confirmation 'password'
 
+    nick  'jnash'
+    first 'John'
+    last  'Nash'
+    about 'Lorem ipsum'
+
     after :create do |user|
       user.confirm!
     end
 
-    trait :with_ais do
-      ais_uid   '1234'
-      ais_login 'user'
+    trait :as_ais do
+      sequence(:login)     { |n| "xuser#{n}" }
+      sequence(:email)     { |n| "xuser#{n}@stuba.sk" }
+      sequence(:ais_uid)  { |n| n }
+      sequence(:ais_login) { |n| "xuser#{n}" }
+
+      password              nil
+      password_confirmation nil
     end
 
     trait :unconfirmed do

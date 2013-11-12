@@ -18,6 +18,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:nick, :first, :last, :about, :gravatar_email, :facebook, :twitter, :linkedin, :flag_show_name, :flag_show_email)
+    attributes = [:nick, :about, :gravatar_email, :facebook, :twitter, :linkedin, :flag_show_name, :flag_show_email]
+
+    attributes += [:first, :last] if can? :change_name, current_user
+
+    params.require(:user).permit(attributes)
   end
 end
