@@ -19,10 +19,15 @@
   padding: 0;
 }
 
+.select2-results {
+  padding: 0px;
+  margin: 4px 0 0 0;
+
+}
+
 /**
  * Adjust Select2 inputs to fit Bootstrap 3 default .form-control appearance.
  */
-
 @mixin bootstrap-input-defaults {
   border-color: $input-border;
   border-radius: $input-border-radius;
@@ -159,7 +164,7 @@
 
 .select2-container .select2-choice .select2-arrow,
 .select2-container .select2-choice div /* 1 */ {
-  border-left: 1px solid $input-border;
+  border-left: 0px solid $input-border;
   background: none;
   @include reset-filter;
 }
