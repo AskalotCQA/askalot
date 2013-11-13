@@ -13,8 +13,9 @@
 #= require jquery
 #= require jquery_ujs
 #= require twitter/bootstrap
+#= require i18n
+#= require i18n/translations
 #= require select2
-#= require_tree ./locales
 #= require select
 #
 #= require fixes

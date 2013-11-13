@@ -29,4 +29,7 @@ NaRuby::Application.configure do
 
   # Default url options for ActionMailer
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Precompilation for I18n-js
+  config.assets.initialize_on_precompile = true
 end

@@ -3,9 +3,9 @@
 class window.Select extends Module
   defaults:
     formatSearching: ->
-      "<span>#{locales['sk']['select2']['searching']}</span>"
+      "<span>#{I18n.t('question.tag.searching')}</span>"
     formatNoMatches: ->
-      "<span>#{locales['sk']['select2']['no_results']}</span>"
+      "<span>#{I18n.t('question.tag.no_matches_found')}</span>"
     tokenizer: (input, selection, callback, options) ->
       tokenizer = /,/
 
@@ -24,7 +24,7 @@ class window.Select extends Module
         values = $(element).val().split(',').map (e) -> { id: e, text: e }
 
         callback(values)
-      createSearchChoice : (term, data) -> { id: term, text: "#{term} (#{locales['sk']['select2']['tag']['new']})" } if data.length == 0
+      createSearchChoice : (term, data) -> { id: term, text: "#{term} (#{I18n.t('question.tag.new')})" } if data.length == 0
       ajax:
         url: '/tags/suggest'
         dataType: 'json'
