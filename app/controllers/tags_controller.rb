@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-  # TODO (smolnar) 
+  # TODO (smolnar)
   # * remove AR relation, use elasticsearch
   # * use pagination
 
@@ -9,9 +9,9 @@ class TagsController < ApplicationController
     tags = relation.joins(:tag).where('tags.name LIKE ?', "#{params[:q]}%").select('tags.name').limit(10).distinct
 
     render json: {
-      results: tags.uniq.map { |e| 
-        { 
-          id: e.name,
+      results: tags.uniq.map { |e|
+        {
+          id:    e.name,
           text: "#{e.name} (#{relation.joins(:tag).where(:'tags.name' => e.name).count})"
         }
       },
