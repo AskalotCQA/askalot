@@ -9,4 +9,4 @@ sk:
       success: 'Vaša otázka bola úspešne pridaná.'
 
     tag:
-      placeholder: 'Stlačte enter pre pridanie tagu'
+      placeholder: 'elasticsearch, linux-server, use-case'
