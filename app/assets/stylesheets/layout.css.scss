@@ -16,21 +16,21 @@ html {
 
 body {
   height: 100%;
-  margin-top: 50px;
+  margin-top: $navbar-height;
 }
 
 section {
   &:first-child {
-    padding-top: 50px;
+    padding-top: $navbar-height;
   }
 
   & + section {
-    padding-top: 100px;
+    padding-top: 0.5 * $navbar-height;
   }
 }
 
 .tab-content, .tab-navigation {
-  padding-top: 50px;
+  padding-top: $navbar-height;
 }
 
 // header
