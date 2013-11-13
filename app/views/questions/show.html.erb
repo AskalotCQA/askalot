@@ -1,14 +1,10 @@
 <div class="row">
   <div class="col-md-2">
-    <div class="list-group">
-      <section>
-        <%= gravatar_image_tag @question.author.email, size: 165, class: :'list-group-item img-responsive' %>
-
-        <span class="list-group-item">
-          <%= @question.author.nick %>
-        </span>
-      </section>
-    </div>
+    <section>
+      <a href="<%= user_path @author.login %>" data-placement="left" data-toggle="tooltip" title="<%= @author.nick %>">
+        <%= gravatar_image_tag @author.email, size: 67, class: :'list-group-item img-responsive' %>
+      </a>
+    </section>
   </div>
 
   <div class="col-md-10">
