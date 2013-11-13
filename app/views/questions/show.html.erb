@@ -1,17 +1,27 @@
-<h1><%= @question.title %></h1>
-
 <div class="row">
-
   <div class="col-md-2">
-    <%= gravatar_image_tag @question.author.email, class: :'img-square' %>
+    <div class="list-group">
+      <section>
+        <%= gravatar_image_tag @question.author.email, size: 165, class: :'list-group-item img-responsive' %>
 
-    <div class="form-group">
-      <%= @question.author.nick %>
+        <span class="list-group-item">
+          <%= @question.author.nick %>
+        </span>
+      </section>
     </div>
   </div>
 
-  <div class="col-md-4">
-    <%= @question.text %>
-  </div>
+  <div class="col-md-10">
+    <section>
+      <h1>
+        <%= @question.title %>
+      </h1>
 
+      <hr/>
+
+      <p>
+        <%= @question.text %>
+      </p>
+    </section>
+  </div>
 </div>
