@@ -9,6 +9,9 @@ describe User do
 
     user = build :user, login: 'tra-lala'
     expect(user).not_to be_valid
+
+    user = build :user, login: 'userlogin'
+    expect(user).to be_valid
   end
 
   it 'requires nick' do
@@ -17,6 +20,9 @@ describe User do
 
     user = build :user, nick: 'bad-nick?'
     expect(user).not_to be_valid
+
+    user = build :user, nick: 'nickname'
+    expect(user).to be_valid
   end
 
   it 'requires correct email' do
@@ -25,6 +31,12 @@ describe User do
 
     user = build :user, gravatar_email: 'gravatar.mailer.com'
     expect(user).not_to be_valid
+
+    user = build :user, email: 'mail@mailer.com'
+    expect(user).to be_valid
+
+    user = build :user, gravatar_email: 'gravatar@mailer.com'
+    expect(user).to be_valid
   end
 
   it 'requires correct name' do
@@ -33,9 +45,15 @@ describe User do
 
     user = build :user, last: '21Last'
     expect(user).not_to be_valid
+
+    user = build :user, first: 'First'
+    expect(user).to be_valid
+
+    user = build :user, last: 'Last'
+    expect(user).to be_valid
   end
 
-  it 'requires correct social stuff' do
+  it 'requires correct social links' do
     user = build :user, facebook: 'http://www.facebook.com'
     expect(user).not_to be_valid
 
@@ -44,6 +62,15 @@ describe User do
 
     user = build :user, linkedin: 'http://www.linkedin.com/in/'
     expect(user).not_to be_valid
+
+    user = build :user, facebook: 'http://www.facebook.com/username'
+    expect(user).to be_valid
+
+    user = build :user, twitter: 'htpp://twitter.com/username'
+    expect(user).to be_valid
+
+    user = build :user, linkedin: 'http://www.linkedin.com/in/username'
+    expect(user).to be_valid
   end
 
   context 'with AIS credentials' do
