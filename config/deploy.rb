@@ -25,6 +25,13 @@ set :ssh_options, { forward_agent: true }
 
 default_run_options[:pty] = true
 
+namespace :fixtures do
+  desc "Creates fixtures data"
+  task :all, roles: :db do
+    run "cd #{current_path}; RAILS_ENV=#{rails_env} bundle exec rake fixtures:all"
+  end
+end
+
 namespace :db do
   desc "Creates DB"
   task :create, roles: :db do
