@@ -5,7 +5,8 @@ sk:
       submit: 'Pridať'
       feature: 'Pridať otázku'
 
-    successfully_created: 'Vaša otázka bola úspešne pridaná.'
+    create:
+      success: 'Vaša otázka bola úspešne pridaná.'
 
     tag:
       placeholder: 'Stlačte enter pre pridanie tagu'

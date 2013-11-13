@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
 
     if @question.save
-      flash[:notice] = t('question.successfully_created')
+      flash[:notice] = t('question.create.success')
 
       redirect_to question_path(@question)
     else
