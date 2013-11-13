@@ -7,6 +7,10 @@ $(document).ready ->
         tags: true
         multiple: true
         tokenSeparators: [',', ' ']
+        initSelection: (element, callback) ->
+          values = $(element).val().split(',').map (e) -> { id: e, text: e }
+
+          callback(values)
         createSearchChoice : (term, data) ->
           { id: term, text: term } if data.length == 0
         ajax:
@@ -20,4 +24,5 @@ $(document).ready ->
           results: (data, page) ->
             data
       }
+
     $(this).select2(options)
