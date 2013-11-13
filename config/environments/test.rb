@@ -38,4 +38,7 @@ NaRuby::Application.configure do
   config.action_mailer.default_url_options = { host: 'www.example.com' }
 
   config.i18n.default_locale = :sk
+
+  # Precompilation for I18n-js
+  config.assets.initialize_on_precompile = true
 end
