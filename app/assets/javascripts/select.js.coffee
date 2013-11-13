@@ -3,9 +3,9 @@
 class window.Select extends Module
   defaults:
     formatSearching: ->
-      "<span>Hľadám.</span>"
+      "<span>#{locales['sk']['select2']['searching']}</span>"
     formatNoMatches: ->
-      "<span>Neboli nájdené žiadne výsledky.</span>"
+      "<span>#{locales['sk']['select2']['no_results']}</span>"
     tokenizer: (input, selection, callback, options) ->
       tokenizer = /,/
 
@@ -24,9 +24,7 @@ class window.Select extends Module
         values = $(element).val().split(',').map (e) -> { id: e, text: e }
 
         callback(values)
-      createSearchChoice : (term, data) -> { id: term, text: term, label: term } if data.length == 0
-      formatResult: (data) ->
-        data.label
+      createSearchChoice : (term, data) -> { id: term, text: "#{term} (#{locales['sk']['select2']['tag']['new']})" } if data.length == 0
       ajax:
         url: '/tags/suggest'
         dataType: 'json'
