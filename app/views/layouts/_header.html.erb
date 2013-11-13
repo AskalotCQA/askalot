@@ -11,17 +11,6 @@
     </div>
     <div class="collapse navbar-collapse"><!-- TODO(zbell) use hidden-xs -->
       <ul class="nav navbar-nav pull-right">
-<!-- TODO(zbell) rm
-          <p class="navbar-text">
-            <%= t('user.signed_in_as', login: current_user.login) %>
-          </p>
-          <li><%= icon_link_to :'plus-circle', nil, new_question_path %></li>
-          <%= navbar_dropdown_tag :'caret-down', current_user.login, '#', join: :append do %>
-            <li><%= icon_link_to :user, '???', user_path(current_user.login), fixed: true %></li>
-            <li><%= icon_link_to :cog, t('user.settings'), edit_user_registration_path, fixed: true %></li>
-            <li><%= icon_link_to :'sign-out', t('user.sign_out'), destroy_user_session_path, fixed: true, method: :delete %></li>
-          <% end %>
--->
         <% if user_signed_in? %>
           <li><%= icon_link_to :'plus-circle', nil, new_question_path %></li>
           <li><%= link_to current_user.login, user_path(current_user.login) %></li>
