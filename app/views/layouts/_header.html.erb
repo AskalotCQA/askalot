@@ -13,8 +13,8 @@
       <ul class="nav navbar-nav pull-right">
         <% if user_signed_in? %>
           <li><%= icon_link_to :'plus-circle', nil, new_question_path %></li>
-          <li><%= link_to current_user.login, user_path(current_user.login) %></li>
-          <%= navbar_dropdown_tag :'cog', nil, '#', join: :append do %>
+          <li><%= link_to current_user.nick, user_path(current_user.login) %></li>
+          <%= navbar_dropdown_tag :'cog', nil, '#' do %>
             <li><%= link_to t('user.edit.profile'), edit_user_registration_path %></li>
             <li><%= link_to t('user.edit.social'), edit_user_registration_path %></li>
             <li><%= link_to t('user.edit.privacy'), edit_user_registration_path %></li>

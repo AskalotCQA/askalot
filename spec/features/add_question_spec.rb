@@ -9,15 +9,15 @@ describe 'Add Question' do
       login_as user
     end
 
-    it 'adds new question', js: true do
+    it 'adds new question' do
       visit root_path
 
-      click_link 'Pridať novú otázku'
+      click_link 'Pridať otázku'
 
       fill_in 'question_title', with: ''
       fill_in 'question_text',  with: ''
 
-      click_button 'Pridať otázku'
+      click_button 'Pridať'
 
       expect(page).to have_content('Nadpis – je povinná položka')
       expect(page).to have_content('Text – je povinná položka')
@@ -29,7 +29,7 @@ describe 'Add Question' do
 
       fill_in 'question_tag_list', with: 'tag1 Tag2 tAg3'
 
-      click_button 'Pridať otázku'
+      click_button 'Pridať'
 
       expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
 

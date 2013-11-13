@@ -11,7 +11,7 @@ describe 'User Profile' do
     it 'shows user profile' do
       visit root_path
 
-      click_link 'Profil'
+      click_link user.nick
 
       expect(page).to have_content(user.login)
       expect(page).to have_content(user.email)
@@ -20,12 +20,9 @@ describe 'User Profile' do
     end
 
     it 'edits user account', js: true do
-      visit root_path
+      visit user_registration_path
 
-      click_link user.email
-      click_link 'Nastavenia'
-
-      click_link 'Nastavenia účtu'
+      click_link 'Účet'
 
       fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
 
@@ -47,12 +44,11 @@ describe 'User Profile' do
     end
 
     it 'edits basic user profile', js: true do
-      visit root_path
+      visit user_registration_path
 
-      click_link user.email
-      click_link 'Nastavenia'
+      click_link 'Profil'
 
-      # TODO (smolnar) Add invalid values for models validations and check if the page shows 
+      # TODO (smolnar) Add invalid values for models validations and check if the page shows
       # errors
 
       fill_in 'user_nick',  with: 'Nicky'
@@ -72,10 +68,7 @@ describe 'User Profile' do
     end
 
     it 'edits user social links', js: true do
-      visit root_path
-
-      click_link user.email
-      click_link 'Nastavenia'
+      visit user_registration_path
 
       click_link 'Sociálne siete'
 
@@ -107,10 +100,9 @@ describe 'User Profile' do
     end
 
     it 'disallows editing of first and last name', js: true do
-      visit root_path
+      visit user_registration_path
 
-      click_link user.email
-      click_link 'Nastavenia'
+      click_link 'Profil'
 
       fill_in 'user_nick', with: 'Nicky'
       fill_in 'user_about', with: 'Lorem ipsum'
