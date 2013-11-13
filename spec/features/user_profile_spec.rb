@@ -114,7 +114,7 @@ describe 'User Profile' do
 
       expect(page).to have_content('Facebook – nie je platná hodnota.')
       expect(page).to have_content('Twitter – nie je platná hodnota.')
-      expect(page).to have_content('Linked in – nie je platná hodnota.')
+      expect(page).to have_content('Linkedin – nie je platná hodnota.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
       click_link 'Sociálne siete'
