@@ -12,7 +12,14 @@ class User < ActiveRecord::Base
 
   # TODO (smolnar) check uniqueness value select in db
   validates :login, format: { with: /\A[a-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
-  validates :nick, presence: true
+  validates :nick, format: { with: /\A[a-z0-9_]+\z/ }, presence: true
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/}, presence: true, uniqueness: { case_sensitive: false }
+  validates :gravatar_email, format: { with: /\A\z|\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }
+  validates :first, format: { with: /\A[A-Z][a-z]*\z/ }
+  validates :last, format: { with: /\A[A-Z][a-z]*\z/ }
+  validates :facebook, format: { with: /\A\z|\A(http:\/\/)?(www.)?facebook.com\/[A-Za-z._\-]+\z/ }
+  validates :twitter, format: { with: /\A\z|\A(http:\/\/)?(www.)?twitter.com\/[A-Za-z._\-]+\z/ }
+  validates :linkedin, format: { with: /\A\z|\A(http:\/\/)?(www.)?linkedin.com\/in\/[A-Za-z._\-]+\z/ }
 
   # TODO (zbell) add missing validations!
 
