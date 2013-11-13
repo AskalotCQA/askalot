@@ -91,6 +91,7 @@ GEM
     ffi (1.9.3)
     font-awesome-rails (4.0.3.0)
       railties (>= 3.2, < 5.0)
+    forgery (0.5.0)
     formatador (0.2.4)
     fuubar (1.2.1)
       rspec (~> 2.0)
@@ -269,6 +270,7 @@ DEPENDENCIES
   factory_girl_rails
   faker (= 1.1.2)
   font-awesome-rails (~> 4.0.3.0)
+  forgery
   fuubar
   guard-rspec
   hirb

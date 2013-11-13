@@ -19,6 +19,7 @@ gem 'acts-as-taggable-on'
 # helpers
 gem 'jbuilder', '~> 1.2'
 gem 'actionview-encoded_mail_to'
+gem 'forgery'
 
 # stylesheets
 gem 'sass-rails', '~> 4.0.0'
