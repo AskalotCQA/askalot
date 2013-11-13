@@ -68,7 +68,8 @@ RSpec.configure do |config|
   # Include support
   config.include FixtureHelper
   config.include EmailHelper
-  config.include Users::AuthenticationHelper
+  config.include Users::AuthenticationHelper, type: :feature
+  config.include Select2Helper, type: :feature
 
   config.before(:each) { reset_emails }
 
