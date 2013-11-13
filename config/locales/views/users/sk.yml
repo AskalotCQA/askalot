@@ -8,10 +8,6 @@ sk:
     account_unlock: 'Odomknutie účtu'
     account_deletion: 'Zrušenie účtu'
 
-    profile: 'Profil'
-    edit_profile: 'Upraviť profil'
-    settings: 'Nastavenia'
-
     sign_up: 'Registrovať'
     sign_in: 'Prihlásiť'
     sign_out: 'Odhlásiť'
@@ -41,7 +37,13 @@ sk:
 
     settings: 'Nastavenia'
 
-    edit_profile: 'Profil'
-    edit_social: 'Sociálne siete'
-    edit_privacy: 'Súkromie'
-    edit_account: 'Nastavenia účtu'
+    profile: 'Profil'
+    social: 'Sociálne siete'
+    privacy: 'Súkromie'
+    account: 'Účet'
+
+    edit:
+      profile: 'Úprava profilu'
+      social: 'Sociálne siete'
+      privacy: 'Správa súkromia'
+      account: 'Nastavenia účtu'

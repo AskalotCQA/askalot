@@ -17,7 +17,7 @@
           </p>
           <li><%= icon_link_to :'plus-circle', nil, new_question_path %></li>
           <%= navbar_dropdown_tag :'caret-down', current_user.login, '#', join: :append do %>
-            <li><%= icon_link_to :user, t('user.profile'), user_path(current_user.login), fixed: true %></li>
+            <li><%= icon_link_to :user, '???', user_path(current_user.login), fixed: true %></li>
             <li><%= icon_link_to :cog, t('user.settings'), edit_user_registration_path, fixed: true %></li>
             <li><%= icon_link_to :'sign-out', t('user.sign_out'), destroy_user_session_path, fixed: true, method: :delete %></li>
           <% end %>
@@ -26,10 +26,10 @@
           <li><%= icon_link_to :'plus-circle', nil, new_question_path %></li>
           <li><%= link_to current_user.login, user_path(current_user.login) %></li>
           <%= navbar_dropdown_tag :'cog', nil, '#', join: :append do %>
-            <li><%= link_to t('user.edit_profile'), edit_user_registration_path(tab: :profile) %></li>
-            <li><%= link_to t('user.edit_social'), edit_user_registration_path(tab: :social) %></li>
-            <li><%= link_to t('user.edit_privacy'), edit_user_registration_path(tab: :privacy) %></li>
-            <li><%= link_to t('user.edit_account'), edit_user_registration_path(tab: :account) %></li>
+            <li><%= link_to t('user.edit.profile'), edit_user_registration_path %></li>
+            <li><%= link_to t('user.edit.social'), edit_user_registration_path %></li>
+            <li><%= link_to t('user.edit.privacy'), edit_user_registration_path %></li>
+            <li><%= link_to t('user.edit.account'), edit_user_registration_path %></li>
             <li class="divider"></li>
             <li><%= link_to t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
           <% end %>
