@@ -9,17 +9,31 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav pull-right">
         <% if user_signed_in? %>
+          <!-- TODO(zbell) rm
           <p class="navbar-text">
             <%= t('user.signed_in_as', login: current_user.login) %>
           </p>
-          <%= navbar_dropdown_tag :'caret-down', current_user.email, '#', join: :append do %>
-            <li><%= icon_link_to :heart, t('user.profile'), user_path(current_user.login), fixed: true %></li>
+          <li><%= icon_link_to :'plus-circle', nil, new_question_path %></li>
+          <%= navbar_dropdown_tag :'caret-down', current_user.login, '#', join: :append do %>
+            <li><%= icon_link_to :user, t('user.profile'), user_path(current_user.login), fixed: true %></li>
             <li><%= icon_link_to :cog, t('user.settings'), edit_user_registration_path, fixed: true %></li>
             <li><%= icon_link_to :'sign-out', t('user.sign_out'), destroy_user_session_path, fixed: true, method: :delete %></li>
           <% end %>
+          -->
+          <li><%= icon_link_to :'plus-circle', nil, new_question_path %></li>
+          <li><%= link_to current_user.login, user_path(current_user.login) %></li>
+          <%= navbar_dropdown_tag :'cog', nil, '#', join: :append do %>
+
+            <li><%= link_to t('user.edit_profile'), edit_user_registration_path(tab: :profile) %></li>
+            <li><%= link_to t('user.edit_social'), edit_user_registration_path(tab: :social) %></li>
+            <li><%= link_to t('user.edit_privacy'), edit_user_registration_path(tab: :privacy) %></li>
+            <li><%= link_to t('user.edit_account'), edit_user_registration_path(tab: :account) %></li>
+            <li class="divider"></li>
+            <li><%= link_to t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
+          <% end %>
         <% else %>
-          <li><%= icon_link_to :leaf, t('user.sign_up'), new_user_registration_path, fixed: true %></li>
-          <li><%= icon_link_to :'sign-in', t('user.sign_in'), new_user_session_path, fixed: true %></li>
+          <li><%= link_to t('user.sign_up'), new_user_registration_path %></li>
+          <li><%= link_to t('user.sign_in'), new_user_session_path %></li>
         <% end %>
       </ul>
     </div>
