@@ -4,7 +4,7 @@
   <!-- TODO (zbell) handle autofocus -->
   <div class="form-group">
     <%= f.label :email %>
-    <%= f.email_field :email, autofocus: true, class: :'form-control' %>
+    <%= f.text_field :email, autofocus: true, class: :'form-control' %>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
