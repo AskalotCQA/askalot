@@ -34,7 +34,7 @@ describe 'Authentication' do
       click_button 'Prihlásiť'
 
       expect(page).to have_content('Úspešne prihlásený.')
-      expect(page).to have_content("#{user.login}")
+      expect(page).to have_content(user.nick)
 
       click_link 'Odhlásiť'
 

@@ -13,14 +13,14 @@ describe 'User Profile' do
 
       click_link user.nick
 
-      expect(page).to have_content(user.login)
+      expect(page).to have_content(user.nick)
       expect(page).to have_content(user.email)
       expect(page).to have_content("#{user.first} #{user.last}")
       expect(page).to have_content(user.about)
     end
 
     it 'edits user account', js: true do
-      visit user_registration_path
+      visit edit_user_registration_path
 
       click_link 'Účet'
 
@@ -30,7 +30,7 @@ describe 'User Profile' do
 
       expect(page).to have_content('Aktuálne heslo – je povinná položka')
 
-      click_link 'Nastavenia účtu'
+      click_link 'Účet'
 
       fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
       fill_in 'user_password', with: 'new password'
@@ -44,7 +44,7 @@ describe 'User Profile' do
     end
 
     it 'edits basic user profile', js: true do
-      visit user_registration_path
+      visit edit_user_registration_path
 
       click_link 'Profil'
 
@@ -68,7 +68,7 @@ describe 'User Profile' do
     end
 
     it 'edits user social links', js: true do
-      visit user_registration_path
+      visit edit_user_registration_path
 
       click_link 'Sociálne siete'
 
@@ -100,7 +100,7 @@ describe 'User Profile' do
     end
 
     it 'disallows editing of first and last name', js: true do
-      visit user_registration_path
+      visit edit_user_registration_path
 
       click_link 'Profil'
 
