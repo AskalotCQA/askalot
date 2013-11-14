@@ -17,4 +17,6 @@ config/database.yml
 db/*.sqlite3
 log/*.log
 
+public/javascripts
+
 tmp
