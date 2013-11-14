@@ -24,6 +24,14 @@ describe 'User Profile' do
 
       click_link 'Účet'
 
+      fill_in 'user_email', with: 'nicky.nickmangmail.com'
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('E-mail – nie je platná hodnota.')
+
+      click_link 'Nastavenia účtu'
+
       fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
 
       click_button 'Uložiť'
@@ -48,8 +56,27 @@ describe 'User Profile' do
 
       click_link 'Profil'
 
-      # TODO (smolnar) Add invalid values for models validations and check if the page shows
-      # errors
+      fill_in 'user_nick', with: ''
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('Prezývka – je povinná položka.')
+      expect(page.current_path).to eql(edit_user_registration_path)
+
+      fill_in 'user_nick', with: '*()BadNick*-'
+      fill_in 'user_first', with: '65badFirst?#$%'
+      fill_in 'user_last', with: '(01BadLast)'
+      fill_in 'user_gravatar_email', with: 'gravatar.email'
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('Prezývka – nie je platná hodnota.')
+      expect(page).to have_content('Gravatar e-mail – nie je platná hodnota.')
+      expect(page).to have_content('Krstné meno – nie je platná hodnota.')
+      expect(page).to have_content('Priezvisko – nie je platná hodnota.')
+      expect(page.current_path).to eql(edit_user_registration_path)
+
+      click_link 'Profil'
 
       fill_in 'user_nick',  with: 'Nicky'
       fill_in 'user_first', with: 'Nick'
@@ -72,12 +99,22 @@ describe 'User Profile' do
 
       click_link 'Sociálne siete'
 
-      # TODO (smolnar) Add invalid values for models validations and check if the page shows
-      # errors
+      fill_in 'user_facebook', with: 'http://facebook.com/'
+      fill_in 'user_twitter',  with: 'http://twitter.com/'
+      fill_in 'user_linkedin', with: 'http://linkedin.com/in/'
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('Facebook – nie je platná hodnota.')
+      expect(page).to have_content('Twitter – nie je platná hodnota.')
+      expect(page).to have_content('Linkedin – nie je platná hodnota.')
+      expect(page.current_path).to eql(edit_user_registration_path)
+
+      click_link 'Sociálne siete'
 
       fill_in 'user_facebook', with: 'http://facebook.com/nicky.nickmann'
       fill_in 'user_twitter',  with: 'http://twitter.com/nnickmann'
-      fill_in 'user_linkedin', with: 'http://linkedin.com/nick.nickmann.jr'
+      fill_in 'user_linkedin', with: 'http://linkedin.com/in/nick.nickmann.jr'
 
       click_button 'Uložiť'
 
@@ -88,7 +125,7 @@ describe 'User Profile' do
 
       expect(page).to have_field('user_facebook', with: 'http://facebook.com/nicky.nickmann')
       expect(page).to have_field('user_twitter',  with: 'http://twitter.com/nnickmann')
-      expect(page).to have_field('user_linkedin', with: 'http://linkedin.com/nick.nickmann.jr')
+      expect(page).to have_field('user_linkedin', with: 'http://linkedin.com/in/nick.nickmann.jr')
     end
   end
 
