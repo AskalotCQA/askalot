@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
 
   def show
-    @user = User.find_by_login params[:login]
+    @user = User.find_by_nick params[:nick]
   end
 
   def update_profile

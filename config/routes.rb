@@ -13,7 +13,7 @@ NaRuby::Application.routes.draw do
     get :suggest, on: :collection
   end
 
-  match 'users/:login', via: :get, to: 'users#show', as: :user
+  match 'users/:nick', via: :get, to: 'users#show', as: :user
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
