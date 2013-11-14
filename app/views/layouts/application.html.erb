@@ -22,13 +22,9 @@
       <% end %>
     </div>
     <%= render 'layouts/footer' %>
-    <%= render 'layouts/fixes' %>
+    <%= render 'shared/fixes' %>
+    <%= render 'shared/locales' %>
     <%= javascript_include_tag 'application' %>
     <%= yield :scripts %>
-
-    <script type="text/javascript">
-      I18n.locale        = "<%= I18n.locale %>";
-      I18n.defaultLocale = "<%= I18n.default_locale %>";
-    </script>
   </body>
 </html>
