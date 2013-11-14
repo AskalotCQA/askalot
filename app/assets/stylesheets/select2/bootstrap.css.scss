@@ -22,7 +22,6 @@
 .select2-results {
   padding: 0px;
   margin: 4px 0 0 0;
-
 }
 
 /**
@@ -117,15 +116,15 @@
 }
 
 .select2-chosen,
-.select2-choice > span:first-child, /* 1 */
+.select2-choice > span:first-child,
 .select2-container .select2-choices .select2-search-field input {
   padding: $padding-base-vertical $padding-base-horizontal;
 }
 
 .input-sm .select2-chosen,
 .input-group-sm .select2-chosen,
-.input-sm .select2-choice > span:first-child, /* 1 */
-.input-group-sm .select2-choice > span:first-child, /* 1 */
+.input-sm .select2-choice > span:first-child,
+.input-group-sm .select2-choice > span:first-child,
 .input-sm .select2-choices .select2-search-field input,
 .input-group-sm .select2-choices .select2-search-field input {
   padding: $padding-small-vertical $padding-small-horizontal;
@@ -133,8 +132,8 @@
 
 .input-lg .select2-chosen,
 .input-group-lg .select2-chosen,
-.input-lg .select2-choice > span:first-child, /* 1 */
-.input-group-lg .select2-choice > span:first-child, /* 1 */
+.input-lg .select2-choice > span:first-child,
+.input-group-lg .select2-choice > span:first-child,
 .input-lg .select2-choices .select2-search-field input,
 .input-group-lg .select2-choices .select2-search-field input {
   padding: $padding-large-vertical $padding-large-horizontal;
@@ -163,14 +162,14 @@
  */
 
 .select2-container .select2-choice .select2-arrow,
-.select2-container .select2-choice div /* 1 */ {
+.select2-container .select2-choice div {
   border-left: 0px solid $input-border;
   background: none;
   @include reset-filter;
 }
 
 .select2-dropdown-open .select2-choice .select2-arrow,
-.select2-dropdown-open .select2-choice div /* 1 */ {
+.select2-dropdown-open .select2-choice div {
   border-left-color: transparent;
   background: none;
   @include reset-filter;
@@ -184,40 +183,40 @@
  */
 
 .select2-container .select2-choice .select2-arrow b,
-.select2-container .select2-choice div b /* 1 */ {
+.select2-container .select2-choice div b {
   background-position: 0 3px;
 }
 
 .select2-dropdown-open .select2-choice .select2-arrow b,
-.select2-dropdown-open .select2-choice div b /* 1 */ {
+.select2-dropdown-open .select2-choice div b {
   background-position: -18px 3px;
 }
 
 .select2-container.input-sm .select2-choice .select2-arrow b,
 .input-group-sm .select2-container .select2-choice .select2-arrow b,
-.select2-container.input-sm .select2-choice div b, /* 1 */
-.input-group-sm .select2-container .select2-choice div b /* 1 */ {
+.select2-container.input-sm .select2-choice div b,
+.input-group-sm .select2-container .select2-choice div b {
   background-position: 0 1px;
 }
 
 .select2-dropdown-open.input-sm .select2-choice .select2-arrow b,
 .input-group-sm .select2-dropdown-open .select2-choice .select2-arrow b,
-.select2-dropdown-open.input-sm .select2-choice div b, /* 1 */
-.input-group-sm .select2-dropdown-open .select2-choice div b /* 1 */ {
+.select2-dropdown-open.input-sm .select2-choice div b,
+.input-group-sm .select2-dropdown-open .select2-choice div b {
   background-position: -18px 1px;
 }
 
 .select2-container.input-lg .select2-choice .select2-arrow b,
 .input-group-lg .select2-container .select2-choice .select2-arrow b,
-.select2-container.input-lg .select2-choice div b, /* 1 */
-.input-group-lg .select2-container .select2-choice div b /* 1 */ {
+.select2-container.input-lg .select2-choice div b,
+.input-group-lg .select2-container .select2-choice div b {
   background-position: 0 9px;
 }
 
 .select2-dropdown-open.input-lg .select2-choice .select2-arrow b,
 .input-group-lg .select2-dropdown-open .select2-choice .select2-arrow b,
-.select2-dropdown-open.input-lg .select2-choice div b, /* 1 */
-.input-group-lg .select2-dropdown-open .select2-choice div b /* 1 */ {
+.select2-dropdown-open.input-lg .select2-choice div b,
+.input-group-lg .select2-dropdown-open .select2-choice div b {
   background-position: -18px 9px;
 }
 
@@ -392,6 +391,7 @@
 .select2-results .select2-selection-limit {
   background-color: $state-warning-bg;
   color: $state-warning-text;
+  padding: $padding-base-vertical $padding-base-horizontal;
 }
 
 /**
@@ -409,9 +409,9 @@
     background-color: $input-bg-disabled;
     border-color: $input-border;
     .select2-arrow,
-    div /* 1 */ {
+    div {
       background-color: transparent;
-      border-left: 1px solid transparent; /* 2 */
+      border-left: 1px solid transparent;
     }
   }
 }
