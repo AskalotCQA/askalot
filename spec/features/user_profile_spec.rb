@@ -132,7 +132,7 @@ describe 'User Profile' do
 
       expect(page).to have_field('user_facebook', with: 'http://facebook.com/nicky.nickmann')
       expect(page).to have_field('user_twitter',  with: 'http://twitter.com/nnickmann')
-      expect(page).to have_field('user_linkedin', with: 'http://linkedin.com/nick.nickmann.jr')
+      expect(page).to have_field('user_linkedin', with: 'http://linkedin.com/in/nick.nickmann.jr')
     end
   end
 

@@ -21,7 +21,7 @@ describe User do
     user = build :user, nick: 'bad-nick?'
     expect(user).not_to be_valid
 
-    user = build :user, nick: 'nickname'
+    user = build :user, nick: 'nickName123'
     expect(user).to be_valid
   end
 
@@ -57,7 +57,7 @@ describe User do
     user = build :user, facebook: 'http://www.facebook.com'
     expect(user).not_to be_valid
 
-    user = build :user, twitter: 'htpp://twitter.com'
+    user = build :user, twitter: 'http://twitter.com'
     expect(user).not_to be_valid
 
     user = build :user, linkedin: 'http://www.linkedin.com/in/'
@@ -66,7 +66,7 @@ describe User do
     user = build :user, facebook: 'http://www.facebook.com/username'
     expect(user).to be_valid
 
-    user = build :user, twitter: 'htpp://twitter.com/username'
+    user = build :user, twitter: 'http://twitter.com/username'
     expect(user).to be_valid
 
     user = build :user, linkedin: 'http://www.linkedin.com/in/username'
