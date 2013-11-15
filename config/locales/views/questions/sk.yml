@@ -13,3 +13,10 @@ sk:
       searching: 'Hľadám'
       no_matches_found: 'Nenájdený žiadny výsledok'
       placeholder: 'elasticsearch, linux-server, use-case'
+
+    index:
+      title: 'Zobrazenie nových otázok'
+      new: 'Nová otázka'
+      votes: 'hlasy'
+      answers: 'odpovede'
+      view: 'videnia'
