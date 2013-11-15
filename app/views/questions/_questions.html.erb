@@ -1,22 +1,50 @@
-
-  <% questions.each do |question| %>
-      <div style= "border-bottom-style:inset;border-bottom-width:1px;border-spacing:2px;">
-        <div >
-            <h3 ><%= link_to question.title %></h3>
+<% questions.each do |question| %>
+    <li>
+      <div class="float-left">
+        <div class="statistic">
+          <div class="stat-value">
+            <span> 15 </span>
+          </div>
+          <div>
+            <span><%= t('question.index.votes') %></span>
+          </div>
         </div>
-        <div >
+        <div class="statistic">
+          <div class="stat-value">
+            <span> 128 </span>
+          </div>
+          <div>
+            <span><%= t('question.index.answers') %></span>
+          </div>
+        </div>
+        <div class="statistic">
+          <div class="stat-value">
+            <span> 5 </span>
+          </div>
+          <div>
+            <span><%= t('question.index.view') %></span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <span class="name"><%= link_to question.title %></span>
+        </div>
+        <div>
           <div class="row">
-            <div class="col-md-9">
-                <a class="label label-success" style="margin: 3px"  href=#> <%= question.category.name %> </a>
-                <%question.tags do |tag| %>
-                  <a class="label label-info"  href=#> <%= tag.name %> </a>
-                 <% end %>
+            <div class="question-tags">
+              <span class="label label-success"><%= question.category.name %></span>
+              <% question.tags do |tag| %>
+                  <span class="label label-info"><%= tag.name %></span>
+              <% end %>
             </div>
-            <div class="col-md-3">
-                <span><%= time_ago_in_words(question.created_at) %> </span>
-                <a href=#> <%=  question.author.login %> </a>
+            <div class="question-time">
+              <span><%= time_ago_in_words(question.created_at) %></span>
+              <a><%= question.author.login %></a>
             </div>
           </div>
         </div>
       </div>
-  <% end %>
+      <div class="clear"/>
+    </li>
+<% end %>

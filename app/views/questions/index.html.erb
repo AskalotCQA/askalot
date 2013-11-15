@@ -5,13 +5,13 @@
     <section>
       <div class="page-header">
         <h1><%= t('question.index.title') %></h1>
-        <p><%= link_to t('question.index.new'), new_question_path, :class => "btn btn-success btn-lg", :class => "btn btn-success btn-lg" %></p>
+        <p><%= link_to t('question.index.new'), new_question_path, class: "btn btn-success btn-lg" %></p>
       </div>
-      <%= paginate @questions, :window => 3  %>
-      <div>
+      <%= paginate @questions %>
+      <ol class="questions">
         <%= render 'questions', questions: @questions %>
-      </div>
-      <%= paginate @questions, :window => 3  %>
+      </ol>
+      <%= paginate @questions %>
     </section>
   </div>
 </div>
