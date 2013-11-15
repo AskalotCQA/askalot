@@ -18,7 +18,7 @@ module TagHelper
 
     label = label.to_s.html_safe
     join  = options.delete(:join)
-    body  = [icon, label]
+    body  = [icon, ' ', label]
 
     body.reverse! if join == :append
     body.join.html_safe
