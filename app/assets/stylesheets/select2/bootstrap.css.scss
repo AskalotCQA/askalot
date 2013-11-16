@@ -330,7 +330,14 @@
   box-shadow: none;
 
   height: 20px;
-  padding: 1px 4px;
+  padding: 0px 4px;
+
+  div {
+    width: auto;
+    height: 18px;
+    margin-right: 16px;
+    line-height: 18px !important;
+  }
 }
 
 .select2-container-multi .select2-choices .select2-search-choice-focus {
@@ -343,37 +350,32 @@
   background:none;
 }
 
-.select2-search-choice div {
-  width: auto;
-  margin-right: 14px;
-}
-
 /**
  * Address Multi Select2's choice close-button vertical alignment.
  */
 
 .select2-search-choice-close {
+  @extend .fa;
+  @extend .fa-times;
+
   position: relative;
   display: block;
   float: right;
 
-  width: 16px;
-  height: 16px;
-  line-height: 16px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px !important;
 
-  top: -12px;
+  top: -18px;
   left: 0;
 
-  margin: 0 0 0 14px;
+  margin: 0 0 0 16px;
 
   font-size: $font-size-base;
   font-weight: normal !important;
   text-align: center;
 
   color: $input-color;
-
-  @extend .fa;
-  @extend .fa-times;
 
   &:hover, &:focus {
     color: $gray-dark;
