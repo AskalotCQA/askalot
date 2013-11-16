@@ -28,7 +28,7 @@
       </div>
       <div>
         <div>
-          <span class="name"><%= link_to question.title %></span>
+          <span class="name"><%= link_to question.title, question_path(question) %></span>
         </div>
         <div>
           <div class="row">
@@ -40,7 +40,7 @@
             </div>
             <div class="question-time">
               <span><%= time_ago_in_words(question.created_at) %></span>
-              <a><%= question.author.login %></a>
+              <a href="<%= user_path question.author.nick %>"><%= question.author.login %></a>
             </div>
           </div>
         </div>
