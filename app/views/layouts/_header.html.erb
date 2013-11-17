@@ -11,8 +11,8 @@
     </div>
     <div class="collapse navbar-collapse"><!-- TODO(zbell) use hidden-xs -->
       <ul class="nav navbar-nav">
-        <li><%= link_to t('question.index'), questions_path %></li>
-        <li><%= link_to t('user.index'), nil %></li>
+        <li><%= link_to t('question.navigation'), questions_path %></li>
+        <li><%= link_to t('user.navigation'), nil %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>

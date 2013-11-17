@@ -1,6 +1,6 @@
 sk:
   user:
-    index: 'Používatelia'
+    navigation: 'Používatelia'
 
     registration: 'Registrácia'
     confirmation: 'Potvrdenie registrácie'

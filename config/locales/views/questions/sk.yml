@@ -1,6 +1,6 @@
 sk:
   question:
-    index: 'Otázky'
+    navigation: 'Otázky'
 
     new:
       title: 'Nová otázka'
