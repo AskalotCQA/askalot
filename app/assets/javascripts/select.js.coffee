@@ -8,12 +8,12 @@ class window.Select extends Module
       "<span>#{I18n.t('question.tag.no_matches_found')}</span>"
     tokenizer: (input, selection, callback, options) ->
 # TODO(zbell) not sure if this is needed: molnar, contact me before any changes to this
-#      tokenizer = /,/
-#
-#      if tokenizer.test(input)
-#        value = input.replace(tokenizer, '')
-#
-#        callback(id: value, text: value)
+      tokenizer = /,/
+
+      if tokenizer.test(input)
+        value = input.replace(tokenizer, '')
+
+        return callback(id: value, text: value) if value.length > 0
 
       "#{input}".toLowerCase().replace(/[\s\,\;\`\!\@\#\$\%\^\&\*\(\)\_\+\-\=\[\]\'\\\.\/\{\}\:\"\|\<\>\?]+/gm, '-')
   roles:
