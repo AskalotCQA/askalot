@@ -20,8 +20,8 @@
 }
 
 .select2-results {
-  padding: 0px;
-  margin: 4px 0 0 0;
+  padding: $padding-base-vertical 0;
+  margin: 0;
 }
 
 /**
@@ -140,8 +140,8 @@
 }
 
 .select2-container-multi .select2-choices .select2-search-choice {
-  margin-top: 5px;
-  margin-bottom: 3px;
+  margin-top: $padding-base-vertical;
+  margin-bottom: $padding-base-vertical;
 }
 
 .select2-container-multi.input-sm .select2-choices .select2-search-choice,
@@ -184,40 +184,18 @@
 
 .select2-container .select2-choice .select2-arrow b,
 .select2-container .select2-choice div b {
-  background-position: 0 3px;
+  @extend .fa;
+  @extend .fa-caret-down;
+
+  line-height: 33px !important;
 }
 
 .select2-dropdown-open .select2-choice .select2-arrow b,
 .select2-dropdown-open .select2-choice div b {
-  background-position: -18px 3px;
-}
+  @extend .fa;
+  @extend .fa-caret-up;
 
-.select2-container.input-sm .select2-choice .select2-arrow b,
-.input-group-sm .select2-container .select2-choice .select2-arrow b,
-.select2-container.input-sm .select2-choice div b,
-.input-group-sm .select2-container .select2-choice div b {
-  background-position: 0 1px;
-}
-
-.select2-dropdown-open.input-sm .select2-choice .select2-arrow b,
-.input-group-sm .select2-dropdown-open .select2-choice .select2-arrow b,
-.select2-dropdown-open.input-sm .select2-choice div b,
-.input-group-sm .select2-dropdown-open .select2-choice div b {
-  background-position: -18px 1px;
-}
-
-.select2-container.input-lg .select2-choice .select2-arrow b,
-.input-group-lg .select2-container .select2-choice .select2-arrow b,
-.select2-container.input-lg .select2-choice div b,
-.input-group-lg .select2-container .select2-choice div b {
-  background-position: 0 9px;
-}
-
-.select2-dropdown-open.input-lg .select2-choice .select2-arrow b,
-.input-group-lg .select2-dropdown-open .select2-choice .select2-arrow b,
-.select2-dropdown-open.input-lg .select2-choice div b,
-.input-group-lg .select2-dropdown-open .select2-choice div b {
-  background-position: -18px 9px;
+  line-height: 33px !important;
 }
 
 /**
@@ -350,14 +328,26 @@
   @include reset-filter;
   -webkit-box-shadow: none;
   box-shadow: none;
+
+  height: 20px;
+  padding: 0px 4px;
+
+  div {
+    width: auto;
+    height: 18px;
+    margin-right: 16px;
+    line-height: 18px !important;
+  }
 }
 
 .select2-container-multi .select2-choices .select2-search-choice-focus {
-  background: darken($btn-default-bg, 8%);
-  border-color: darken($btn-default-border, 12%);
+  //background: darken($btn-default-bg, 8%);
+  //border-color: darken($btn-default-border, 12%);
   color: $btn-default-color;
   -webkit-box-shadow: none;
   box-shadow: none;
+
+  background:none;
 }
 
 /**
@@ -365,8 +355,32 @@
  */
 
 .select2-search-choice-close {
-  margin-top: -7px;
-  top: 50%;
+  @extend .fa;
+  @extend .fa-times;
+
+  position: relative;
+  display: block;
+  float: right;
+
+  width: 18px;
+  height: 18px;
+  line-height: 18px !important;
+
+  top: -18px;
+  left: 0;
+
+  margin: 0 0 0 16px;
+
+  font-size: $font-size-base;
+  font-weight: normal !important;
+  text-align: center;
+
+  color: $input-color;
+
+  &:hover, &:focus {
+    color: $gray-dark;
+    text-decoration: none;
+  }
 }
 
 /**
@@ -409,9 +423,34 @@
     background-color: $input-bg-disabled;
     border-color: $input-border;
     .select2-arrow,
+
     div {
       background-color: transparent;
       border-left: 1px solid transparent;
     }
+  }
+}
+
+.select2-search {
+  padding: 0px 5px;
+
+  input {
+    padding: $padding-base-vertical $padding-base-horizontal;
+  }
+}
+
+.select2-container .select2-choice abbr,
+.select2-container .select2-choice .select2-arrow b,
+.select2-search input,
+.select2-search input.select2-active,
+.select2-more-results.select2-active,
+.select2-container-multi .select2-choices .select2-search-field input.select2-active,
+.select2-search-choice-close {
+  background: none !important;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+  .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice .select2-arrow b {
+    background: none !important;
   }
 }

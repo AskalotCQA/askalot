@@ -1,5 +1,7 @@
 sk:
   question:
+    index: 'Otázky'
+
     new:
       title: 'Nová otázka'
       submit: 'Pridať'

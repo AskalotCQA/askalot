@@ -1,5 +1,7 @@
 sk:
   user:
+    index: 'Používatelia'
+
     registration: 'Registrácia'
     confirmation: 'Potvrdenie registrácie'
     session_start: 'Prihlásenie'

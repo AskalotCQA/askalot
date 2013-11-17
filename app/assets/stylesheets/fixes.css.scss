@@ -27,3 +27,9 @@ address, form, nav, p, dl, ol, ul, table,
   margin: ($line-height-computed * 2) 0 $line-height-computed;
   padding-bottom: ($line-height-computed / 2) - 1;
 }
+
+textarea {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: $input-height-base;
+}

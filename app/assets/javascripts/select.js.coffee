@@ -7,19 +7,20 @@ class window.Select extends Module
     formatNoMatches: ->
       "<span>#{I18n.t('question.tag.no_matches_found')}</span>"
     tokenizer: (input, selection, callback, options) ->
-      tokenizer = /,/
+# TODO(zbell) not sure if this is needed: molnar, contact me before any changes to this
+#      tokenizer = /,/
+#
+#      if tokenizer.test(input)
+#        value = input.replace(tokenizer, '')
+#
+#        callback(id: value, text: value)
 
-      if tokenizer.test(input)
-        value = input.replace(tokenizer, '')
-
-        callback(id: value, text: value)
-
-      "#{input}".replace(/[\s]+/, '-') if /[\s]+/.test(input)
+      "#{input}".toLowerCase().replace(/[\s\,\;\`\!\@\#\$\%\^\&\*\(\)\_\+\-\=\[\]\'\\\.\/\{\}\:\"\|\<\>\?]+/gm, '-')
   roles:
     tags:
       tags: true
       multiple: true
-      tokenSeparators: [',', ' ']
+      tokenSeparators: [' ', ',', ';']
       initSelection: (element, callback) ->
         values = $(element).val().split(',').map (e) -> { id: e, text: e }
 
