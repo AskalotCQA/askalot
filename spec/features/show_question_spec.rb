@@ -16,6 +16,7 @@ describe 'Show Question' do
 
     expect(page).to have_content('PostgreSQL setup')
     expect(page).to have_content(question.text)
+    expect(page).to have_content(question.category.name)
     expect(page).to have_content(question.author.nick)
 
     question.tags.pluck(:name).each { |tag| expect(page).to have_content(tag) }
