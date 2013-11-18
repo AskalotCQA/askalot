@@ -23,7 +23,7 @@ gem 'forgery'
 
 # stylesheets
 gem 'sass-rails', '~> 4.0.0'
-gem 'bootstrap-sass-rails', '~> 3.0.0.3'
+gem 'bootstrap-sass-rails', '~> 3.0.2.1'
 gem 'font-awesome-rails', '~> 4.0.3.0'
 
 # javascripts
