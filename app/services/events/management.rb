@@ -20,9 +20,6 @@ class Events::Management
       fail if data[:user]
     end
 
-    #TODO (zbell) rm
-    puts JSON.pretty_generate secure(data) if Rails.env.development?
-
     Event.create! data: secure(data)
   end
 
