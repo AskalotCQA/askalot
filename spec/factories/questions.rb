@@ -8,5 +8,9 @@ FactoryGirl.define do
 
     association :category
     association :author
+
+    trait :with_tags do
+      sequence(:tag_list) { |n| "tag_#{n}" }
+    end
   end
 end
