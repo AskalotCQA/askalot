@@ -1,34 +1,52 @@
-.questions{
+@import 'mixins';
+@import 'variables';
+
+// TODO(zbell) check this CSS -> .questions
+
+.questions {
   list-style-type: none;
   padding: 0px;
   margin: 0px;
-}
-.questions li
-{
-  padding: 11px;
-}
-.questions li + li
-{
-  border-top: 1px solid #EAEAEA;
+
+  li {
+    padding: 11px;
+  }
+
+  li + li {
+    border-top: 1px solid #EAEAEA;
+  }
+
+  .statistic, .question-tags {
+    float: left;
+    margin-right: 9px;
+    text-align: center
+  }
+
+  .question-time {
+    float: right;
+  }
+
+  .statistic .stat-value {
+    font-size: 26px;
+  }
+
+  .name {
+    font-size: 22px;
+  }
 }
 
-.questions .statistic, .question-tags
-{
-  float: left;
-  margin-right: 9px;
-  text-align: center
-}
+.question-voting {
+  text-align: center;
 
-.questions .question-time
-{
-  float: right;
-}
-.questions .statistic .stat-value
-{
-  font-size: 26px;
-}
+  a {
+    display: inline-block;
 
-.questions .name
-{
- font-size: 22px;
+    font-size: $font-size-h1;
+  }
+
+  span {
+    display: block;
+
+    font-size: $font-size-h2;
+  }
 }

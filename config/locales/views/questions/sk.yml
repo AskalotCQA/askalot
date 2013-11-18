@@ -19,6 +19,21 @@ sk:
     index:
       title: 'Zobrazenie nových otázok'
       new: 'Nová otázka'
-      votes: 'hlasy'
-      answers: 'odpovede'
-      view: 'videnia'
+
+    answers:
+      zero: 'žiadna odpoveď'
+      one: '1 odpoveď'
+      few: '%{count} odpovede'
+      other: '%{count} odpovedí'
+
+    views:
+      zero: 'žiadne videnia'
+      one: '1 videnie'
+      few: '%{count} videnia'
+      other: '%{count} videní'
+
+    votes:
+      zero: 'žiadne hlasy'
+      one: '1 hlas'
+      few: '%{count} hlasy'
+      other: '%{count} hlasov'
