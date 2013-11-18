@@ -3,6 +3,6 @@ sk:
     pagination:
       first: 'Prvá strana'
       last: 'Posledná strana'
-      previous: '<i class="icon-angle-left"></i>'
-      next: '<i class="icon-angle-right"></i>'
+      previous: '<i class="fa fa-angle-left"></i>'
+      next: '<i class="fa fa-angle-right"></i>'
       truncate: '&hellip;'
