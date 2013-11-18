@@ -13,9 +13,14 @@
 #= require jquery
 #= require jquery_ujs
 #= require twitter/bootstrap
+#
 #= require i18n
 #= require i18n/translations
+#
 #= require select2
 #= require select
+#
+#= require rails-timeago
+#= require locales/jquery.timeago.sk.js
 #
 #= require fixes
