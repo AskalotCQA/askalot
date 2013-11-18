@@ -4,6 +4,8 @@
       <a href="<%= user_path @author.login %>" data-placement="left" data-toggle="tooltip" title="<%= @author.nick %>">
         <%= gravatar_image_tag @author.email, size: 67, class: :'list-group-item img-responsive' %>
       </a>
+
+
     </section>
 
     <% if @author.flag_show_name && (@author.first || @author.last) then  %>
