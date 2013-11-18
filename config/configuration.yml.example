@@ -1,6 +1,12 @@
 defaults: &defaults
   devise:
     key: TODO
+    show:
+      registrations: true
+      passwords: true
+      confirmations: true
+      unlocks: true
+      omniauth: true
 
   mailer:
     username: TODO
