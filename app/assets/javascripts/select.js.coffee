@@ -7,7 +7,6 @@ class window.Select extends Module
     formatNoMatches: ->
       "<span>#{I18n.t('question.tag.no_matches_found')}</span>"
     tokenizer: (input, selection, callback, options) ->
-# TODO(zbell) not sure if this is needed: molnar, contact me before any changes to this
       tokenizer = /,/
 
       if tokenizer.test(input)
@@ -15,7 +14,9 @@ class window.Select extends Module
 
         return callback(id: value, text: value) if value.length > 0
 
-      "#{input}".toLowerCase().replace(/[\s\,\;\`\!\@\#\$\%\^\&\*\(\)\_\+\-\=\[\]\'\\\.\/\{\}\:\"\|\<\>\?]+/gm, '-')
+      result = "#{input}".toLowerCase()
+      result = result.replace(/[\s\,\;\`\!\@\#\$\%\^\&\*\(\)\_\+\-\=\[\]\'\\\.\/\{\}\:\"\|\<\>\?]+/gm, '-')
+      result = result.replace(/^-/, '')
   roles:
     tags:
       tags: true
