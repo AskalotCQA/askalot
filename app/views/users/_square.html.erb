@@ -1,0 +1,15 @@
+<div class="user-square">
+  <a class="user-avatar" href="<%= user_path user.nick %>" data-placement="left" data-toggle="tooltip" title="<%= user.nick %>">
+    <%= gravatar_image_tag user.gravatar_email, size: 96, class: :'img-circle' %>
+  </a>
+
+  <span>
+    <%= link_to_user user %>
+  </span>
+
+  <% if user.flag_show_name? && !user.name.blank? %>
+    <span>
+      <%= user.name %>
+    </span>
+  <% end %>
+</div>

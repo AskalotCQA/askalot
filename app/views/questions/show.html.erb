@@ -1,22 +1,11 @@
 <div class="row">
   <div class="col-md-2">
     <section>
-      <a href="<%= user_path @author.login %>" data-placement="left" data-toggle="tooltip" title="<%= @author.nick %>">
-        <%= gravatar_image_tag @author.email, size: 67, class: :'list-group-item img-responsive' %>
-      </a>
-
-
+      <%= render 'users/square', user: @author %>
     </section>
-
-    <% if @author.flag_show_name && (@author.first || @author.last) then  %>
-      <%= @author.first %>
-      <%= @author.last %>
-    <% else %>
-      <%= @author.nick %>
-    <% end %>
   </div>
 
-  <div class="col-md-10">
+  <div class="col-md-8">
     <section>
       <h1>
         <%= @question.title %>
@@ -29,47 +18,24 @@
       </p>
     </section>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <h2>Odpovede</h2>
-  </div>
-  <div class="col-md-2 ">
-    <a href="#" class="btn">Pridať odpoveď</a>
-  </div>
-</div>
-
-<div class="row">
   <div class="col-md-2">
-    <a href="<%= user_path @author.login %>" data-placement="left" data-toggle="tooltip" title="<%= @author.nick %>">
-      <%= gravatar_image_tag @author.email, size: 67, class: :'list-group-item img-responsive' %>
-    </a>
-    <span class="glyphicon glyphicon-chevron-up"></span>
-      926
-    <span class="glyphicon glyphicon-chevron-down"></span>
+    <section>
+      <%= render 'voting', question: @question %>
+    </section>
   </div>
+</div>
 
-  <div class="col-md-10">
+<div class="row">
+  <div class="col-md-offset-2 col-md-10">
+    <section>
+      <h3>
+        Odpovede
 
-    Careful: git reset --hard WILL DELETE YOUR WORKING DIRECTORY CHANGES
+        <small>123</small>
+      </h3>
 
-    Assuming you are sitting on that commit, then this command will wack it...
 
-    git reset --hard HEAD~1
-
-    The HEAD~1 means the commit before head.
-
-    Or, you could look at the output of git log, find the commit id of the commit you want to back up to, and then do this:
-
-    git reset --hard sha1-commit-id
-
-    If you already pushed it, you will need to do a force push to get rid of it...
-
-    git push origin HEAD --force
-
-    However, if others may have pulled it, then you would be better off starting a new branch. Because when they pull, it will just merge it into their work, and you will get it pushed back up again.
-
-    If you already pushed, it may be better to use git revert, to create a "mirror image" commit that will undo the changes. However, both commits will both be in the log.
+    </section>
   </div>
 </div>
