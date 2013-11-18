@@ -74,6 +74,12 @@ module TagHelper
     link_to body, '#', options.merge(title: title)
   end
 
+  def tooltip_time_tag(time, options = {})
+    options.merge! data toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover
+
+    timeago_tag time, options.merge(lang: I18n::locale)
+  end
+
   def close_link_to(url = nil, options = {})
     link_to icon_tag(:times), url || '#', options.merge(class: :close, :'aria-hidden' => true)
   end
