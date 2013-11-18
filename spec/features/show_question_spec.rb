@@ -1,21 +1,23 @@
 require 'spec_helper'
 
-describe 'Show Question' do
-  let(:question) { create :question, title: 'PostgreSQL setup' }
+describe 'Show Questions' do
+  let(:user) { create :user }
+  let(:category) { create :category }
+  let(:tag) { tag :tag }
+  let(:question) {create :question, author: user, category: category}
 
-  before :each do
-    login_as question.author
-  end
+  context 'with current user' do
+    before :each do
+      login_as user
+    end
+    it 'Show new questions' do
+      visit root_path
 
-  it 'shows new question' do
-    visit root_path
+     click_link 'Zobrazenie nových otázok'
 
-    click_link 'Otázky'
-
-    click_link 'PostgreSQL setup'
-
-    expect(page).to have_content('PostgreSQL setup')
-    expect(page).to have_content(question.text)
-    expect(page).to have_content(question.author.nick)
-  end
+      expect(page).to have_content(question.title)
+      expect(page).to have_content(question.author)
+      expect(page).to have_content(question.category.name)
+      end
+    end
 end
