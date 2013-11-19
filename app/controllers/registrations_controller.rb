@@ -14,6 +14,6 @@ class RegistrationsController < Devise::RegistrationsController
   private
 
   def set_default_tab
-    params[:tab] ||= 'user-profile'
+    params[:tab] ||= :'user-profile'
   end
 end
