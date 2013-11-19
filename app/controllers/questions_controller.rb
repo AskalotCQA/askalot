@@ -28,6 +28,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @author   = @question.author
     @labels   = @question.labels
+    @answers  = @question.answers
   end
 
   private

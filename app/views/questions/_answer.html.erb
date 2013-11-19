@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="col-md-2">
+    <section>
+      <%= render 'users/square', user: answer.author %>
+    </section>
+  </div>
+
+  <div class="col-md-8">
+    <section>
+      <h1>
+        <small><%= answer_creation_time answer %></small>
+      </h1>
+
+      <hr/>
+
+      <p>
+        <%= answer.text %>
+      </p>
+    </section>
+  </div>
+
+  <div class="col-md-2">
+    <section>
+      <%= render 'answers/voting', question: answer %>
+    </section>
+  </div>
+</div>
