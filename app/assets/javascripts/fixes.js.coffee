@@ -20,7 +20,7 @@ $(document).ready ->
       $('body').trigger(window.hashChangeEvent, hash)
 
     if location.hash != ''
-      hash = window.getHash()
+      hash     = window.getHash()
       selector = "a[href='#{hash}']"
 
       if $(selector).length > 0
