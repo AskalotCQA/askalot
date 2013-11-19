@@ -21,12 +21,12 @@ class Social
     def regexp(placeholder)
       s = placeholder.clone
 
-      s.gsub!(/\A(https?:\/\/)?(www.)?/, '')
+      s.gsub!(/\A(https?\:\/\/)?(www.)?/, '')
       s.gsub!(/[\.\/]/) { |c| '\\' + c }
       s.gsub!('userid', '(?<userid>[0-9]+)')
       s.gsub!('username', '(?<username>[a-zA-Z0-9\.\_\-]+)')
 
-      /\A(https?\:\/\/)?(www.)?#{s}\/?\z/
+      /\Ahttps?\:\/\/?(www.)?#{s}\/?\z/
     end
   end
 
