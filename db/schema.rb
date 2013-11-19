@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131115002122) do
+ActiveRecord::Schema.define(version: 20131119115825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,16 @@ ActiveRecord::Schema.define(version: 20131115002122) do
     t.string   "gravatar_email"
     t.boolean  "flag_show_name",         default: true, null: false
     t.boolean  "flag_show_email",        default: true, null: false
+    t.string   "bitbucket"
+    t.string   "flickr"
+    t.string   "foursquare"
+    t.string   "github"
+    t.string   "google-plus"
+    t.string   "instagram"
+    t.string   "pinterest"
+    t.string   "stack-overflow"
+    t.string   "tumblr"
+    t.string   "youtube"
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree
