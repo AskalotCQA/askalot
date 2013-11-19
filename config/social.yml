@@ -1,0 +1,92 @@
+defaults: &defaults
+  enabled:
+    - facebook
+    - twitter
+    - google_plus
+    - linkedin
+    - github
+    - bitbucket
+    - youtube
+    - tumblr
+    - pinterest
+    - instagram
+    - flickr
+    - foursquare
+    - stack_overflow
+
+  bitbucket:
+    icon: bitbucket
+    name: Bitbucket
+    placeholder: 'http://bitbucket.org/username'
+
+  facebook:
+    icon: facebook
+    name: Facebook
+    placeholder: 'http://facebook.com/username'
+
+  flickr:
+    icon: flickr
+    name: Flickr
+    placeholder: 'http://flickr.com/photos/username'
+
+  foursquare:
+    icon: foursquare
+    name: Foursquare
+    placeholder: 'http://foursquare.com/username'
+
+  github:
+    icon: github
+    name: GitHub
+    placeholder: 'http://github.com/username'
+
+  google_plus:
+    icon: google-plus
+    name: Google +
+    placeholder: 'http://plus.google.com/userid'
+
+  instagram:
+    icon: instagram
+    name: Instagram
+    placeholder: 'http://instagram.com/username'
+
+  linkedin:
+    icon: linkedin
+    name: LinkedIn
+    placeholder: 'http://linkedin.com/in/username'
+
+  pinterest:
+    icon: pinterest
+    name: Pinterest
+    placeholder: 'http://pinterest.com/username'
+
+  stack_overflow:
+    icon: stack-overflow
+    name: Stack Overflow
+    placeholder: 'http://stackoverflow.com/users/userid'
+
+  tumblr:
+    icon: tumblr
+    name: Tumblr
+    placeholder: 'http://username.tumblr.com'
+
+  twitter:
+    icon: twitter
+    name: Twitter
+    placeholder: 'http://twitter.com/username'
+
+  youtube:
+    icon: youtube-play
+    name: YouTube
+    placeholder: 'http://youtube.com/username'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+staging:
+  <<: *defaults
+
+production:
+  <<: *defaults
