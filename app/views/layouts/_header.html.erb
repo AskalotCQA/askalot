@@ -21,7 +21,7 @@
             <li><%= link_to t('user.edit.profile'), edit_user_registration_path(tab: :'user-profile') %></li>
             <li><%= link_to t('user.edit.social'),  edit_user_registration_path(tab: :'user-social') %></li>
             <li><%= link_to t('user.edit.privacy'), edit_user_registration_path(tab: :'user-privacy') %></li>
-            <li><%= link_to t('user.edit.account'), edit_user_registration_path(tab: :'user-acount') %></li>
+            <li><%= link_to t('user.edit.account'), edit_user_registration_path(tab: :'user-account') %></li>
             <li class="divider"></li>
             <li><%= link_to t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
           <% end %>

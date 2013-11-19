@@ -55,7 +55,7 @@ module TagHelper
   def tab_link_tag(title, tab, options = {})
     classes = Hash.new
 
-    classes.merge! class: :active if params[:tab].to_sym == tab
+    classes.merge! class: :active if params[:tab].to_sym == tab.to_sym
 
     content_tag :li, classes do
       link_to title, "##{tab}", options
@@ -64,7 +64,7 @@ module TagHelper
 
   def tab_content_tag(tab, options = {}, &block)
     options.merge! id: tab
-    options.merge! class: "tab-pane #{:active if params[:tab].to_sym == tab}"
+    options.merge! class: "tab-pane #{:active if params[:tab].to_sym == tab.to_sym}"
 
     content_tag :div, options, &block
   end
