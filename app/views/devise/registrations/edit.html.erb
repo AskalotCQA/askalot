@@ -3,10 +3,12 @@
 <div class="row">
   <div class="col-md-offset-1 col-md-3">
     <ul class="nav nav-pills nav-stacked tab-navigation">
-      <li class="active"><a href="#user-profile" data-toggle="pill"><%= t :'user.profile' %></a></li>
-      <li><a href="#user-social" data-toggle="pill"><%= t :'user.social' %></a></li>
-      <li><a href="#user-privacy" data-toggle="pill"><%= t :'user.privacy' %></a></li>
-      <li><a href="#user-account" data-toggle="pill"><%= t :'user.account' %></a></li>
+      <li class="active">
+        <%= link_to (t 'user.profile'), '#user-profile', data: { toggle: :pill } %>
+      </li>
+      <li><%= link_to (t 'user.social'), '#user-social', data: { toggle: :pill } %></li>
+      <li><%= link_to (t 'user.privacy'), '#user-privacy', data: { toggle: :pill } %></li>
+      <li><%= link_to (t 'user.account'), '#user-account', data: { toggle: :pill } %></li>
     </ul>
   </div>
   <div class="col-md-5">
@@ -29,3 +31,4 @@
     </div>
   </div>
 </div>
+
