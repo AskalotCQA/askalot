@@ -17,7 +17,7 @@ describe 'Add Question' do
       fill_in 'question_title', with: ''
       fill_in 'question_text',  with: ''
 
-      click_button 'Pridať'
+      click_button 'Opýtať sa'
 
       expect(page).to have_content('Nadpis – je povinná položka')
       expect(page).to have_content('Text – je povinná položka')
@@ -30,7 +30,7 @@ describe 'Add Question' do
       fill_in_select2 'question_tag_list', with: 'linux server'
       fill_in_select2 'question_tag_list', with: 'elasticsearch'
 
-      click_button 'Pridať'
+      click_button 'Opýtať sa'
 
       expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
 
