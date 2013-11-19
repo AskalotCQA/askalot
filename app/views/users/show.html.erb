@@ -9,24 +9,10 @@
           <%= mail_to @user.email, nil, encode: :hex %>
         </span>
 
-        <% unless @user.facebook.blank? %>
+        <% @user.urls.each do |network, url| %>
           <span class="list-group-item">
-            <%= icon_tag :facebook, fixed: true %>
-            <a class="facebook" href="<%= @user.facebook %>"><%= @user.facebook %></a>
-          </span>
-        <% end %>
-
-        <% unless  @user.twitter.blank? %>
-          <span class="list-group-item">
-            <%= icon_tag :twitter, fixed: true %>
-            <a class="twitter" href="<%= @user.twitter %>"><%= @user.twitter %></a>
-          </span>
-        <% end %>
-
-        <% unless  @user.linkedin.blank? %>
-          <span class="list-group-item">
-            <%= icon_tag :linkedin, fixed: true %>
-            <a class="twitter" href="<%= @user.linkedin %>"><%= @user.linkedin %></a>
+            <%= icon_tag network.icon, fixed: true %>
+            <a href="<%= url[:original] %>"><%= url[:shown] %></a>
           </span>
         <% end %>
       </div>
@@ -45,9 +31,9 @@
       <hr/>
 
       <% if current_user == @user %>
-            <span class="pull-right">
-              <%= link_to t('user.show.edit'), edit_user_registration_path %>
-            </span>
+        <span class="pull-right">
+          <%= link_to t('user.show.edit'), edit_user_registration_path %>
+        </span>
       <% end %>
 
       <% unless @user.about.blank? %>
@@ -57,6 +43,8 @@
           <%= @user.about %>
         </p>
       <% end %>
+
+      <div class="clearfix"></div>
     </section>
   </div>
 </div>
