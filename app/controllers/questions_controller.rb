@@ -2,7 +2,7 @@ class QuestionsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
-    @questions = Question.order(:created_at).page(params[:page]).per(10)
+    @questions = Question.order('created_at desc').page(params[:page]).per(10)
   end
 
   def new

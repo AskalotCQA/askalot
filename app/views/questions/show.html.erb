@@ -13,9 +13,7 @@
         <small><%= question_creation_time @question %></small>
       </h1>
 
-      <% if @labels.any? %>
-        <%= render 'labels', labels: @labels %>
-      <% end %>
+      <%= render 'labels', labels: @labels %>
     </section>
 
     <section>

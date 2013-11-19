@@ -29,6 +29,15 @@ section {
   }
 }
 
+.pagination-navigation {
+  display: block;
+  position: relatve;
+
+  .pagination {
+    display: inline-block;
+  }
+}
+
 .tab-content, .tab-navigation {
   padding-top: $navbar-height;
 }

@@ -17,22 +17,22 @@ sk:
       placeholder: 'elasticsearch, linux-server, use-case'
 
     index:
-      title: 'Zobrazenie nových otázok'
+      title: 'Nové otázky'
       new: 'Nová otázka'
 
-    answers:
+    answer:
       zero: 'žiadna odpoveď'
       one: '1 odpoveď'
       few: '%{count} odpovede'
       other: '%{count} odpovedí'
 
-    views:
+    view:
       zero: 'žiadne videnia'
       one: '1 videnie'
       few: '%{count} videnia'
       other: '%{count} videní'
 
-    votes:
+    vote:
       zero: 'žiadne hlasy'
       one: '1 hlas'
       few: '%{count} hlasy'

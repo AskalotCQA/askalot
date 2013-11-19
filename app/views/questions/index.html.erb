@@ -4,14 +4,16 @@
   <div class="col-md-12">
     <section>
       <div class="page-header">
-        <h1><%= t('question.index.title') %></h1>
-        <p><%= link_to t('question.index.new'), new_question_path, class: "btn btn-success btn-lg" %></p>
+        <h1>
+          <%= t 'question.index.title' %>
+
+          <%= icon_link_to :plus, t('question.new.feature'), new_question_path, id: :'new-question', class: 'btn btn-success pull-right' %>
+        </h1>
       </div>
-      <%= paginate @questions %>
-      <ol class="questions">
-        <%= render 'questions', questions: @questions %>
-      </ol>
-      <%= paginate @questions %>
     </section>
   </div>
 </div>
+
+<!-- TODO(zbell) add some navigation here: old / new q. etc. -->
+
+<%= render 'questions', questions: @questions %>
