@@ -15,24 +15,44 @@ class User < ActiveRecord::Base
 
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
   # TODO (smolnar) check uniqueness value select in db
-  validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
-  validates :nick, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/}, presence: true, uniqueness: { case_sensitive: false }
-  validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, allow_blank: true
-  validates :first, format: { with: /\A[A-Z][a-z]*\z/ }, allow_blank: true
-  validates :last, format: { with: /\A[A-Z][a-z]*\z/ }, allow_blank: true
-  validates :facebook, format: { with: /\A(https?:\/\/)?(www.)?facebook.com\/[A-Za-z._\-]+\z/ }, allow_blank: true
-  validates :twitter, format: { with: /\A(https?:\/\/)?(www.)?twitter.com\/[A-Za-z._\-]+\z/ }, allow_blank: true
-  validates :linkedin, format: { with: /\A(https?:\/\/)?(www.)?linkedin.com\/in\/[A-Za-z._\-]+\z/ }, allow_blank: true
 
-  def gravatar_email
-    (value = read_attribute :gravatar_email).blank? ? email : value
+  validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
+  validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
+
+  validates :email,          format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, presence: true, uniqueness: { case_sensitive: false }
+  validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, allow_blank: true
+
+  validates :first, format: { with: /\A[A-Z][a-z]*\z/ }, allow_blank: true
+  validates :last,  format: { with: /\A[A-Z][a-z]*\z/ }, allow_blank: true
+
+  Social.networks.each do |key, network|
+    validates key, format: { with: network.regexp }, allow_blank: true
   end
 
   def login=(value)
     write_attribute(:login, value.downcase)
 
     self.nick ||= login
+  end
+
+  def name
+    "#{first} #{middle} #{last}".squeeze(' ').strip
+  end
+
+  def can_destroy?
+    false
+  end
+
+  def gravatar_email
+    (value = read_attribute :gravatar_email).blank? ? email : value
+  end
+
+  def urls
+    Hash[Social.networks.map { |key, network| [network, url(key)] }.select { |data| !data.second.blank? }]
+  end
+
+  def url(key)
+    (value = read_attribute key).blank? ? nil : { original: value, shown: value.gsub(/\Ahttps?\:\/\//, '') }
   end
 
   def self.create_without_confirmation!(attributes)
@@ -50,14 +70,6 @@ class User < ActiveRecord::Base
     return where(conditions).first unless login
 
     where(conditions).where(["login = :value OR email = :value", { value: login.downcase }]).first
-  end
-
-  def name
-    "#{first} #{middle} #{last}".squeeze(' ')
-  end
-
-  def can_destroy?
-    false
   end
 
   protected

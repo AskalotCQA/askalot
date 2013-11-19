@@ -7,7 +7,6 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
-
   end
 
   def create
@@ -28,7 +27,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @author   = @question.author
     @labels   = @question.labels
-    @answers  = @question.answers
+    @answers  = @question.answers.build
   end
 
   private

@@ -18,10 +18,10 @@
         <% if user_signed_in? %>
           <li><%= link_to current_user.nick, user_path(current_user.nick) %></li>
           <%= navbar_dropdown_tag :'cog', nil, '#' do %>
-            <li><%= link_to t('user.edit.profile'), edit_user_registration_path %></li>
-            <li><%= link_to t('user.edit.social'), edit_user_registration_path %></li>
-            <li><%= link_to t('user.edit.privacy'), edit_user_registration_path %></li>
-            <li><%= link_to t('user.edit.account'), edit_user_registration_path %></li>
+            <li><%= link_to t('user.edit.profile'), edit_user_registration_path(tab: :'user-profile') %></li>
+            <li><%= link_to t('user.edit.social'),  edit_user_registration_path(tab: :'user-social') %></li>
+            <li><%= link_to t('user.edit.privacy'), edit_user_registration_path(tab: :'user-privacy') %></li>
+            <li><%= link_to t('user.edit.account'), edit_user_registration_path(tab: :'user-account') %></li>
             <li class="divider"></li>
             <li><%= link_to t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
           <% end %>
