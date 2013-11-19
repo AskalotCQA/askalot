@@ -49,3 +49,7 @@ sk:
       social: 'Sociálne siete'
       privacy: 'Správa súkromia'
       account: 'Nastavenia účtu'
+
+    show:
+      about: 'O mne'
+      edit: 'Úprava profilu'
