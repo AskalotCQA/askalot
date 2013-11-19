@@ -35,7 +35,7 @@ defaults: &defaults
     placeholder: 'http://foursquare.com/username'
 
   github:
-    icon: github
+    icon: github-alt
     name: GitHub
     placeholder: 'http://github.com/username'
 
