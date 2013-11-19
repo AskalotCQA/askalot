@@ -111,10 +111,10 @@ ActiveRecord::Schema.define(version: 20131119115825) do
     t.string   "flickr"
     t.string   "foursquare"
     t.string   "github"
-    t.string   "google-plus"
+    t.string   "google_plus"
     t.string   "instagram"
     t.string   "pinterest"
-    t.string   "stack-overflow"
+    t.string   "stack_overflow"
     t.string   "tumblr"
     t.string   "youtube"
   end
