@@ -1,0 +1,27 @@
+@import 'mixins';
+@import 'variables';
+
+#new-answer {
+  margin-top: 20px;
+}
+
+.answer-voting {
+  @include voting;
+}
+
+.answer-marking {
+  font-size: $font-size-h1;
+  text-align: center;
+
+  a {
+    color: $gray-light;
+
+    &:focus, &:hover {
+      color: $state-success-text;
+    }
+  }
+
+  span {
+    color: $state-success-text;
+  }
+}

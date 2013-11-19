@@ -13,14 +13,12 @@
         <small><%= question_creation_time @question %></small>
       </h1>
 
-      <hr/>
-
       <% if @labels.any? %>
         <%= render 'labels', labels: @labels %>
       <% end %>
+    </section>
 
-      <hr/>
-
+    <section>
       <p>
         <%= @question.text %>
       </p>
@@ -36,5 +34,4 @@
 
 <%= render 'questions/answers', answers: @answers %>
 
-<%= render 'answers/answer_form' %>
-
+<%= render 'answers/form', question: @question, answer: @answer %>

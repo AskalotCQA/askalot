@@ -1,0 +1,7 @@
+<div class="answer-marking">
+  <% if current_user == answer.question.author %>
+    <%= icon_link_to :check, nil, '#' %>
+  <% else %>
+    <span><%= icon_tag :check %></span>
+  <% end %>
+</div>

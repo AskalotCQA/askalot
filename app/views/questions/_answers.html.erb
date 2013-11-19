@@ -1,16 +1,25 @@
 <div class="row">
-  <div class="col-md-offset-2 col-md-10">
+  <div class="col-md-2">
+    <section class="text-center">
+      <%= icon_link_to :'plus', t('answer.new.feature'), '#new_answer', id: :'new-answer', class: 'btn btn-success' %>
+    </section>
+  </div>
+
+  <div class="col-md-8">
     <section>
       <h2>
-        <!-- TODO(zbell) add count -->
-        <%= t 'question.answers', count: @answers.size %>
+        <%= t 'question.answers', count: answers.size %>
       </h2>
-
-      <hr/>
     </section>
   </div>
 </div>
 
+<div class="row">
+  <div class="col-md-12">
+    <hr/>
+  </div>
+</div>
+
 <% answers.each do |answer| %>
-  <%= render 'questions/answer', answer:answer %>
+  <%= render 'questions/answer', answer: answer %>
 <% end %>

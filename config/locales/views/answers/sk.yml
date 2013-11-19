@@ -2,6 +2,7 @@ sk:
   answer:
     new:
       submit: 'Odpovedať'
+      feature: 'Pridať odpoveď'
 
     create:
       success: 'Vaša odpoveď bola úspešne pridaná.'

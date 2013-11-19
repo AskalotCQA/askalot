@@ -36,17 +36,5 @@
 }
 
 .question-voting {
-  text-align: center;
-
-  a {
-    display: inline-block;
-
-    font-size: $font-size-h1;
-  }
-
-  span {
-    display: block;
-
-    font-size: $font-size-h2;
-  }
+  @include voting;
 }

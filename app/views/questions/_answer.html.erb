@@ -1,27 +1,26 @@
 <div class="row">
   <div class="col-md-2">
-    <section>
-      <%= render 'users/square', user: answer.author %>
-    </section>
+    <%= render 'users/square', user: answer.author %>
   </div>
 
   <div class="col-md-8">
-    <section>
-      <h1>
-        <small><%= answer_creation_time answer %></small>
-      </h1>
+    <p class="text-lead">
+      <%= answer.text %>
+    </p>
 
-      <hr/>
-
-      <p>
-        <%= answer.text %>
-      </p>
-    </section>
+    <p class="text-muted">
+      <%= answer_creation_time answer %>
+    </p>
   </div>
 
   <div class="col-md-2">
-    <section>
-      <%= render 'answers/voting', question: answer %>
-    </section>
+    <%= render 'answers/voting',  answer: answer %>
+    <%= render 'answers/marking', answer: answer %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <hr/>
   </div>
 </div>

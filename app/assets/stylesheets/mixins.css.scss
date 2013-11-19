@@ -1,1 +1,17 @@
 @import "twitter/bootstrap/mixins";
+
+@mixin voting {
+  text-align: center;
+
+  a {
+    display: inline-block;
+
+    font-size: $font-size-h2;
+  }
+
+  span {
+    display: block;
+
+    font-size: $font-size-h2;
+  }
+}
