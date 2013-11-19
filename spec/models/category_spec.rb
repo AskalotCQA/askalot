@@ -18,4 +18,22 @@ describe Category do
 
     expect(category).not_to be_valid
   end
+
+  describe '#count' do
+    let(:category) { create :category }
+
+    context 'with no questions' do
+      it 'has zero count' do
+        expect(category.count).to be_zero
+      end
+    end
+
+    context 'with multiple questions' do
+      it 'has count more than zero' do
+        3.times { create :question, category: category }
+
+        expect(category.count).to eql(3)
+      end
+    end
+  end
 end
