@@ -10,6 +10,6 @@ class Question < ActiveRecord::Base
   validates :text,  presence: true
 
   def labels
-    [category] + tags.all
+    [category] + tag_counts_on(:tags)
   end
 end
