@@ -7,7 +7,7 @@ describe 'Add Answer' do
     login_as question.author
   end
 
-  it 'adds new answer to question' do
+  it 'adds new answer to question', js: true do
     visit root_path
 
     click_link 'Otázky'
@@ -15,12 +15,12 @@ describe 'Add Answer' do
 
     click_button 'Pridať odpoveď'
 
-    expect(page).to have_content('Text – je povinná položka')
+    expect(page).to have_content('Odpoveď – je povinná položka')
 
     fill_in 'answer_text', with: 'My neat solution'
 
     click_button 'Pridať odpoveď'
 
-    expect(page).to have_content('Odpoveď bola úspešne vložená.')
+    expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
   end
 end
