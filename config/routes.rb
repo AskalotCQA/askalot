@@ -7,7 +7,9 @@ NaRuby::Application.routes.draw do
     patch :profile, on: :collection, to: 'users#update_profile'
   end
 
-  resources :questions
+  resources :questions do
+    resources :answers
+  end
 
   resources :tags, only: [] do
     get :suggest, on: :collection

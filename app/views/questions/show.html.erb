@@ -22,7 +22,7 @@
 
   <div class="col-md-2">
     <section>
-      <%= render 'voting', question: @question %>
+      <%= render 'questions/voting', question: @question %>
     </section>
   </div>
 </div>
@@ -40,4 +40,4 @@
   </div>
 </div>
 
-
+<%= render 'answers/answer_form' %>
