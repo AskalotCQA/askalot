@@ -70,19 +70,19 @@ module TagHelper
   end
 
   def popover_tag(body, content, options = {})
-    options.merge! data: { toggle: :popover, content: content, html: true, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :click }
+    options.deep_merge! data: { toggle: :popover, content: content, html: true, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :click }
 
     link_to body, '#', options
   end
 
   def tooltip_tag(body, title, options = {})
-    options.merge! data: { toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover }
+    options.deep_merge! data: { toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover }
 
     link_to body, '#', options.merge(title: title)
   end
 
   def tooltip_time_tag(time, options = {})
-    options.merge! data: { toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover }
+    options.deep_merge! data: { toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover }
 
     timeago_tag time, options.merge(lang: I18n::locale)
   end
