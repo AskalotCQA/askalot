@@ -18,7 +18,11 @@ module Stuba
 
       begin
         Timeout.timeout(options[:timeout] || 3) do
-          entries = request.search base: treebase, filter: filter, return_result: true
+          # TODO (smolnar) resolve exception
+          begin
+            entries = request.search base: treebase, filter: filter, return_result: true
+          rescue
+          end
 
           Stuba::User.new(entries.first) if entries.present?
         end
