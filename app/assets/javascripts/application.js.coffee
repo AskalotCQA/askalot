@@ -17,6 +17,8 @@
 #= require i18n
 #= require i18n/translations
 #
+#= require_tree ./core
+#
 #= require select2
 #= require select
 #
