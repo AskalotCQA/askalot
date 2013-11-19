@@ -10,7 +10,7 @@ class AnswersController < ApplicationController
     @answer   = @question.answers.build(answer_params)
 
     if @answer.save
-      flash[:notice] = "Odpoveď bola úspešne vložená"
+      flash[:notice] = t('answer.create.success')
 
       redirect_to question_path(@question)
     else

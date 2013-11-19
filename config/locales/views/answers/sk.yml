@@ -1,0 +1,7 @@
+sk:
+  answer:
+    new:
+      submit: 'Pridať odpoveď'
+
+    create:
+      success: 'Vaša odpoveď bola úspešne pridaná.'
