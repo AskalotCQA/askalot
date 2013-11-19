@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <section>
+      <%= form_for [@question, @answer] do |t| %>
+          <div class="form-group">
+            <%= t.label :odpoved %>
+            <%= t.text_area :text, class: :'form-control', rows: 5 %>
+          </div>
+      <button type="submit" class="btn btn-primary btn-mg">Pridat odpoved</button>
+      <% end %>
+    </section>
+  </div>
+</div>
