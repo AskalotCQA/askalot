@@ -42,3 +42,24 @@ textarea {
 .pagination > .disabled > a:focus {
   cursor: default;
 }
+
+// navigation
+
+.nav-labels {
+  display: inline-block;
+  position: relative;
+
+  & > li {
+    display: inline-block;
+    float: left;
+
+    a {
+      display: inline;
+      padding: 0.2em 0.6em 0.3em;
+    }
+
+    & + li {
+      margin-left: 5px;
+    }
+  }
+}
