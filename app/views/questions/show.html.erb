@@ -7,7 +7,7 @@
     </section>
   </div>
 
-  <div class="col-md-10">
+  <div class="col-md-8">
     <section>
       <h1>
         <%= @question.title %>
@@ -20,4 +20,10 @@
       </p>
     </section>
   </div>
+  <div class="col-md-offset-2">
+  </div>
+</div>
+
+<%= render 'answers/answer_form', answer: @answer %>
+
 </div>
