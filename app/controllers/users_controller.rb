@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       flash_error_messages_for current_user, flash: flash
     end
 
-    redirect_to edit_user_registration_path
+    redirect_to edit_user_registration_path(tab: params[:tab])
   end
 
   private

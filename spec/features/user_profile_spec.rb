@@ -30,15 +30,11 @@ describe 'User Profile' do
 
       expect(page).to have_content('E-mail – nie je platná hodnota.')
 
-      click_link 'Účet'
-
       fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
 
       click_button 'Uložiť'
 
       expect(page).to have_content('Aktuálne heslo – je povinná položka')
-
-      click_link 'Účet'
 
       fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
       fill_in 'user_password', with: 'new password'
@@ -76,8 +72,6 @@ describe 'User Profile' do
       expect(page).to have_content('Priezvisko – nie je platná hodnota.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
-      click_link 'Profil'
-
       fill_in 'user_nick',  with: 'Nicky'
       fill_in 'user_first', with: 'Nick'
       fill_in 'user_last',  with: 'Nickmann'
@@ -110,8 +104,6 @@ describe 'User Profile' do
       expect(page).to have_content('Linkedin – nie je platná hodnota.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
-      click_link 'Sociálne siete'
-
       fill_in 'user_facebook', with: 'http://facebook.com/nicky.nickmann'
       fill_in 'user_twitter',  with: 'http://twitter.com/nnickmann'
       fill_in 'user_linkedin', with: 'http://linkedin.com/in/nick.nickmann.jr'
@@ -120,8 +112,6 @@ describe 'User Profile' do
 
       expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
       expect(page.current_path).to eql(edit_user_registration_path)
-
-      click_link 'Sociálne siete'
 
       expect(page).to have_field('user_facebook', with: 'http://facebook.com/nicky.nickmann')
       expect(page).to have_field('user_twitter',  with: 'http://twitter.com/nnickmann')
