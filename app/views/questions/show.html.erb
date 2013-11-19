@@ -1,9 +1,7 @@
 <div class="row">
   <div class="col-md-2">
     <section>
-      <a href="<%= user_path @author.login %>" data-placement="left" data-toggle="tooltip" title="<%= @author.nick %>">
-        <%= gravatar_image_tag @author.email, size: 67, class: :'list-group-item img-responsive' %>
-      </a>
+      <%= render 'users/square', user: @author %>
     </section>
   </div>
 
@@ -11,6 +9,7 @@
     <section>
       <h1>
         <%= @question.title %>
+        <small><%= question_creation_time @question %></small>
       </h1>
 
       <hr/>
@@ -20,10 +19,26 @@
       </p>
     </section>
   </div>
-  <div class="col-md-offset-2">
+
+  <div class="col-md-2">
+    <section>
+      <%= render 'voting', question: @question %>
+    </section>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-offset-2 col-md-10">
+    <section>
+      <h2>
+        <!-- TODO(zbell) add count -->
+        <%= t 'question.answers', count: 123 %>
+      </h2>
+
+      <hr/>
+    </section>
   </div>
 </div>
 
 <%= render 'answers/answer_form', answer: @answer %>
 
-</div>

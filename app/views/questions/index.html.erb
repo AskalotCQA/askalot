@@ -4,12 +4,14 @@
   <div class="col-md-12">
     <section>
       <div class="page-header">
-        <h1>Zobrazenie otázok</h1>
+        <h1><%= t('question.index.title') %></h1>
+        <p><%= link_to t('question.index.new'), new_question_path, class: "btn btn-success btn-lg" %></p>
       </div>
-
-      <%= render 'questions', questions: @questions %>
-
-      <p><%= link_to "New question", new_question_path %></p>
+      <%= paginate @questions %>
+      <ol class="questions">
+        <%= render 'questions', questions: @questions %>
+      </ol>
+      <%= paginate @questions %>
     </section>
   </div>
 </div>

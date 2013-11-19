@@ -12,14 +12,16 @@ class window.Select extends Module
       if tokenizer.test(input)
         value = input.replace(tokenizer, '')
 
-        callback(id: value, text: value)
+        return callback(id: value, text: value) if value.length > 0
 
-      "#{input}".replace(/[\s]+/, '-') if /[\s]+/.test(input)
+      result = "#{input}".toLowerCase()
+      result = result.replace(/[\s\,\;\`\!\@\#\$\%\^\&\*\(\)\_\+\-\=\[\]\'\\\.\/\{\}\:\"\|\<\>\?]+/gm, '-')
+      result = result.replace(/^-/, '')
   roles:
     tags:
       tags: true
       multiple: true
-      tokenSeparators: [',', ' ']
+      tokenSeparators: [' ', ',', ';']
       initSelection: (element, callback) ->
         values = $(element).val().split(',').map (e) -> { id: e, text: e }
 

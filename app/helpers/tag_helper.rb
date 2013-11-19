@@ -18,7 +18,7 @@ module TagHelper
 
     label = label.to_s.html_safe
     join  = options.delete(:join)
-    body  = [icon, label]
+    body  = [icon, ' ', label]
 
     body.reverse! if join == :append
     body.join.html_safe
@@ -72,6 +72,12 @@ module TagHelper
     options.merge! data toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover
 
     link_to body, '#', options.merge(title: title)
+  end
+
+  def tooltip_time_tag(time, options = {})
+    options.merge! data toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover
+
+    timeago_tag time, options.merge(lang: I18n::locale)
   end
 
   def close_link_to(url = nil, options = {})

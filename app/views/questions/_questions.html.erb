@@ -1,8 +1,51 @@
-<ol class="list-unstyled">
-  <% questions.each do |question| %>
+<% questions.each do |question| %>
     <li>
-      <h3><%= link_to question.title, question %></h3>
-      <p><%= question.text %></p>
+      <div class="statistic">
+        <div class="statistic">
+          <div class="stat-value">
+            <span> 15 </span>
+          </div>
+          <div>
+            <span><%= t('question.index.votes') %></span>
+          </div>
+        </div>
+        <div class="statistic">
+          <div class="stat-value">
+            <span> 128 </span>
+          </div>
+          <div>
+            <span><%= t('question.index.answers') %></span>
+          </div>
+        </div>
+        <div class="statistic">
+          <div class="stat-value">
+            <span> 5 </span>
+          </div>
+          <div>
+            <span><%= t('question.index.view') %></span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <span class="name"><%= link_to question.title, question_path(question) %></span>
+        </div>
+        <div>
+          <div class="row">
+            <div class="question-tags">
+              <span class="label label-success"><%= question.category.name %></span>
+              <% question.tags do |tag| %>
+                  <span class="label label-info"><%= tag.name %></span>
+              <% end %>
+            </div>
+            <div class="question-time">
+              <span><%= time_ago_in_words(question.created_at) %></span>
+              <a href="<%= user_path question.author.nick %>"><%= question.author.login %></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"/>
     </li>
-  <% end %>
-</ol>
+<% end %>
+

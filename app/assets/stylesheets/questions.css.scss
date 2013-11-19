@@ -1,0 +1,52 @@
+@import 'mixins';
+@import 'variables';
+
+// TODO(zbell) check this CSS -> .questions
+
+.questions {
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+
+  li {
+    padding: 11px;
+  }
+
+  li + li {
+    border-top: 1px solid #EAEAEA;
+  }
+
+  .statistic, .question-tags {
+    float: left;
+    margin-right: 9px;
+    text-align: center
+  }
+
+  .question-time {
+    float: right;
+  }
+
+  .statistic .stat-value {
+    font-size: 26px;
+  }
+
+  .name {
+    font-size: 22px;
+  }
+}
+
+.question-voting {
+  text-align: center;
+
+  a {
+    display: inline-block;
+
+    font-size: $font-size-h1;
+  }
+
+  span {
+    display: block;
+
+    font-size: $font-size-h2;
+  }
+}

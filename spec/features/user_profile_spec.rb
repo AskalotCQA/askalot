@@ -30,7 +30,7 @@ describe 'User Profile' do
 
       expect(page).to have_content('E-mail – nie je platná hodnota.')
 
-      click_link 'Nastavenia účtu'
+      click_link 'Účet'
 
       fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
 

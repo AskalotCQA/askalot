@@ -8,6 +8,13 @@ defaults: &defaults
 
   secret_token: TODO
 
+  show:
+    registrations: true
+    passwords: true
+    confirmations: true
+    unlocks: true
+    omniauth: true
+
 development:
   <<: *defaults
 

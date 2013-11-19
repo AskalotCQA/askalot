@@ -1,5 +1,7 @@
 sk:
   question:
+    navigation: 'Otázky'
+
     new:
       title: 'Nová otázka'
       submit: 'Pridať'
@@ -13,3 +15,25 @@ sk:
       searching: 'Hľadám'
       no_matches_found: 'Nenájdený žiadny výsledok'
       placeholder: 'elasticsearch, linux-server, use-case'
+
+    index:
+      title: 'Zobrazenie nových otázok'
+      new: 'Nová otázka'
+
+    answers:
+      zero: 'žiadna odpoveď'
+      one: '1 odpoveď'
+      few: '%{count} odpovede'
+      other: '%{count} odpovedí'
+
+    views:
+      zero: 'žiadne videnia'
+      one: '1 videnie'
+      few: '%{count} videnia'
+      other: '%{count} videní'
+
+    votes:
+      zero: 'žiadne hlasy'
+      one: '1 hlas'
+      few: '%{count} hlasy'
+      other: '%{count} hlasov'

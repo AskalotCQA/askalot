@@ -23,7 +23,7 @@ gem 'forgery'
 
 # stylesheets
 gem 'sass-rails', '~> 4.0.0'
-gem 'bootstrap-sass-rails', '~> 3.0.0.3'
+gem 'bootstrap-sass-rails', '~> 3.0.2.1'
 gem 'font-awesome-rails', '~> 4.0.3.0'
 
 # javascripts
@@ -31,6 +31,7 @@ gem 'therubyracer', platforms: :ruby
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
+gem 'rails-timeago', '~> 2.0'
 gem 'select2-rails', '~> 3.4.9'
 gem 'i18n-js'
 

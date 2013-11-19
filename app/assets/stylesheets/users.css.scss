@@ -1,0 +1,19 @@
+@import 'mixins';
+@import 'variables';
+
+.user-square {
+  margin: 20px 0;
+  text-align: center;
+
+  a.user-avatar {
+    display: inline-block;
+
+    width: 96px;
+
+    margin-bottom: 10px;
+  }
+
+  span {
+    display: block;
+  }
+}

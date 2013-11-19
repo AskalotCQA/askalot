@@ -1,5 +1,10 @@
 @import "twitter/bootstrap/variables";
 
+// disable default icons
+
+$icon-font-path: '/assets/';
+$icon-font-name: 'fontawesome-webfont';
+
 // jumbotron
 
 $jumbotron-bg: #081218;
