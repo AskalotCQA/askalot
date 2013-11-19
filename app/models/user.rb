@@ -10,6 +10,9 @@ class User < ActiveRecord::Base
 
          authentication_keys: [:login]
 
+  has_many :questions, foreign_key: :author_id
+  has_many :answers,   foreign_key: :author_id
+
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
   # TODO (smolnar) check uniqueness value select in db
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
