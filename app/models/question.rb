@@ -6,4 +6,8 @@ class Question < ActiveRecord::Base
 
   validates :title, presence: true
   validates :text,  presence: true
+
+  def labels
+    [category] + tags.all
+  end
 end

@@ -9,8 +9,15 @@
     <section>
       <h1>
         <%= @question.title %>
+        <br/>
         <small><%= question_creation_time @question %></small>
       </h1>
+
+      <hr/>
+
+      <% if @labels.any? %>
+        <%= render 'labels', labels: @labels %>
+      <% end %>
 
       <hr/>
 
@@ -39,5 +46,3 @@
     </section>
   </div>
 </div>
-
-
