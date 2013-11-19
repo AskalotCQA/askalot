@@ -100,6 +100,23 @@ module TagHelper
     icon_link_to icon == true ? :'external-link' : icon, body, url, options.merge(target: :_blank, join: :append)
   end
 
+  def tab_link_tag(title, tab, options)
+    item_options = Hash.new
+
+    item_options.merge! class: :active if params[:tab] == tab
+
+    content_tag :li, item_options do
+      link_to title, "##{tab}", options
+    end
+  end
+
+  def tab_content_tag(tab, options = {}, &block)
+    options.merge! id: tab
+    options.merge! class: "tab-pane #{:active if params[:tab] == tab}"
+
+    content_tag :div, options, &block
+  end
+
   private
 
   def data(options = {})
