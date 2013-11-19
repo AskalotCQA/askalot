@@ -4,7 +4,7 @@ sk:
 
     new:
       title: 'Nová otázka'
-      submit: 'Pridať'
+      submit: 'Opýtať sa'
       feature: 'Pridať otázku'
 
     create:
