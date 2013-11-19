@@ -15,14 +15,18 @@ class User < ActiveRecord::Base
 
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
   # TODO (smolnar) check uniqueness value select in db
+
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
-  validates :nick, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/}, presence: true, uniqueness: { case_sensitive: false }
+  validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
+
+  validates :email,          format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, allow_blank: true
+
   validates :first, format: { with: /\A[A-Z][a-z]*\z/ }, allow_blank: true
-  validates :last, format: { with: /\A[A-Z][a-z]*\z/ }, allow_blank: true
-  validates :facebook, format: { with: /\A(https?:\/\/)?(www.)?facebook.com\/[A-Za-z._\-]+\z/ }, allow_blank: true
-  validates :twitter, format: { with: /\A(https?:\/\/)?(www.)?twitter.com\/[A-Za-z._\-]+\z/ }, allow_blank: true
+  validates :last,  format: { with: /\A[A-Z][a-z]*\z/ }, allow_blank: true
+
+  validates :facebook, format: { with: /\A(https?:\/\/)?(www.)?facebook.com\/[A-Za-z._\-]+\z/ },     allow_blank: true
+  validates :twitter,  format: { with: /\A(https?:\/\/)?(www.)?twitter.com\/[A-Za-z._\-]+\z/ },      allow_blank: true
   validates :linkedin, format: { with: /\A(https?:\/\/)?(www.)?linkedin.com\/in\/[A-Za-z._\-]+\z/ }, allow_blank: true
 
   def gravatar_email
