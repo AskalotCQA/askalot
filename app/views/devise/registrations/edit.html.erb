@@ -3,31 +3,30 @@
 <div class="row">
   <div class="col-md-offset-1 col-md-3">
     <ul class="nav nav-pills nav-stacked tab-navigation">
-      <li class="active">
-        <%= link_to (t 'user.profile'), '#user-profile', data: { toggle: :pill } %>
-      </li>
-      <li><%= link_to (t 'user.social'),  '#user-social',  data: { toggle: :pill } %></li>
-      <li><%= link_to (t 'user.privacy'), '#user-privacy', data: { toggle: :pill } %></li>
-      <li><%= link_to (t 'user.account'), '#user-account', data: { toggle: :pill } %></li>
+      <%= tab_link_tag t('user.profile'), 'user-profile', data: { toggle: :pill } %>
+      <%= tab_link_tag t('user.social'),  'user-social',  data: { toggle: :pill } %>
+      <%= tab_link_tag t('user.privacy'), 'user-privacy', data: { toggle: :pill } %>
+      <%= tab_link_tag t('user.account'), 'user-account', data: { toggle: :pill } %>
     </ul>
   </div>
   <div class="col-md-5">
     <div class="tab-content">
-      <div class="tab-pane active" id="user-profile">
+
+      <%= tab_content_tag 'user-profile' do %>
         <%= render "edit_profile" %>
-      </div>
+      <% end %>
 
-      <div class="tab-pane" id="user-social">
+      <%= tab_content_tag 'user-social' do %>
         <%= render "edit_social" %>
-      </div>
+      <% end %>
 
-      <div class="tab-pane" id="user-privacy">
+      <%= tab_content_tag 'user-privacy' do %>
         <%= render "edit_privacy" %>
-      </div>
+      <% end %>
 
-      <div class="tab-pane" id="user-account">
+      <%= tab_content_tag 'user-account' do %>
         <%= render "edit_account" %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
