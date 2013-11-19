@@ -22,7 +22,7 @@
         <%= link_to question_title_preview(question), question_path(question) %>
       </h4>
 
-      <%= render 'labels', labels: question.labels %>
+      <%= render 'questions/labels', labels: question.labels %>
 
       <p>
         <%= question_text_preview question %>

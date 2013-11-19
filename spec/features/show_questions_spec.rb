@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe 'Show Questions' do
   let(:questions) { 10.times.map { create :question, :with_tags } }
-  let(:question) { questions.first }
-  let(:user) { questions.first.author }
+  let(:question) { questions.last }
+  let(:user) { questions.last.author }
 
   before :each do
     login_as user
@@ -14,11 +14,11 @@ describe 'Show Questions' do
 
     click_link 'Otázky'
 
-    list = all('ol.questions li')
+    list = all('.container > .row')
 
-    expect(list).to have(10).items
+    expect(list).to have(10 + 2).items
 
-    within list.first do
+    within list[1] do
       expect(page).to have_content(question.title)
       expect(page).to have_content(question.category.name)
 
