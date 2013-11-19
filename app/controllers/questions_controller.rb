@@ -27,7 +27,9 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @author   = @question.author
     @labels   = @question.labels
-    @answers  = @question.answers.build
+    @answers  = @question.answers.order('created_at desc')
+
+    @answer   = Answer.new question: @question
   end
 
   private
