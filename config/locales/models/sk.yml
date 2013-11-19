@@ -28,3 +28,6 @@ sk:
         text: 'Text'
         tag_list: 'Tagy'
         category_id: 'Kategória'
+
+      answer:
+        text: 'Odpoveď'
