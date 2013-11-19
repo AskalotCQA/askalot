@@ -45,7 +45,7 @@ module TagHelper
   def navbar_dropdown_tag(type, body, url, options = {}, &block)
     caret = options.delete(:caret)
     body  = icon_tag(caret, label: body, fixed:true, join: :append) if caret
-    link  = icon_link_to(type, body, url, class: :'dropdown-toggle', :'data-toggle' => :dropdown, fixed: true, join: options.delete(:join))
+    link  = icon_link_to(type, body, url, class: :'dropdown-toggle', data: { toggle: :dropdown }, fixed: true, join: options.delete(:join))
     list  = content_tag :ul, capture(&block), class: :'dropdown-menu'
     body  = (link << list).html_safe
 
@@ -53,11 +53,11 @@ module TagHelper
   end
 
   def tab_link_tag(title, tab, options = {})
-    data = Hash.new
+    classes = Hash.new
 
-    data.merge! class: :active if params[:tab].to_sym == tab
+    classes.merge! class: :active if params[:tab].to_sym == tab
 
-    content_tag :li, data do
+    content_tag :li, classes do
       link_to title, "##{tab}", options
     end
   end
@@ -70,19 +70,19 @@ module TagHelper
   end
 
   def popover_tag(body, content, options = {})
-    options.merge! data toggle: :popover, content: content, html: true, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :click
+    options.merge! data: { toggle: :popover, content: content, html: true, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :click }
 
     link_to body, '#', options
   end
 
   def tooltip_tag(body, title, options = {})
-    options.merge! data toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover
+    options.merge! data: { toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover }
 
     link_to body, '#', options.merge(title: title)
   end
 
   def tooltip_time_tag(time, options = {})
-    options.merge! data toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover
+    options.merge! data: { toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover }
 
     timeago_tag time, options.merge(lang: I18n::locale)
   end
