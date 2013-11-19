@@ -33,6 +33,9 @@ gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'rails-timeago', '~> 2.0'
 gem 'select2-rails', '~> 3.4.9'
+
+# internationalization
+gem 'rails-i18n', '~> 4.0.0'
 gem 'i18n-js'
 
 # pagination
