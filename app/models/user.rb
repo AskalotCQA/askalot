@@ -25,15 +25,8 @@ class User < ActiveRecord::Base
   validates :first, format: { with: /\A[A-Z][a-z]*\z/ }, allow_blank: true
   validates :last,  format: { with: /\A[A-Z][a-z]*\z/ }, allow_blank: true
 
-  Social.networks.each do |key, data|
-    base = data.placeholder.clone
-
-    base.gsub!(/\A(https?:\/\/)?(www.)?/, '')
-    base.gsub!(/[\.\/]/) { |s| '\\' + s }
-    base.gsub!('userid', '[0-9]+')
-    base.gsub!('username', '[a-zA-Z0-9\.\_\-]+')
-
-    validates key, format: { with: /\A(https?\:\/\/)?(www.)?#{base}\/?\z/ }, allow_blank: true
+  Social.networks.each do |key, network|
+    validates key, format: { with: network.regexp }, allow_blank: true
   end
 
   def gravatar_email

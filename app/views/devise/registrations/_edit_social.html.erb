@@ -1,6 +1,6 @@
 <%= form_for resource, as: :user, url: profile_users_path, html: { method: :patch } do |f| %>
-  <% Social.networks.each do |key, data| %>
-    <%= render 'social_network_input', form_field: f, key: key, data: data %>
+  <% Social.networks.each do |_, network| %>
+    <%= render 'social_network_input', form_field: f, network: network %>
   <% end %>
 
   <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
