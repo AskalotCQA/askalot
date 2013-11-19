@@ -4,6 +4,6 @@ class Category < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   def count
-    questions.count
+    questions.size
   end
 end
