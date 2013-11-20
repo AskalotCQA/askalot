@@ -16,9 +16,19 @@ sk:
 
         gravatar_email: 'Gravatar e-mail'
 
+        bitbucket: 'Bitbucket'
         facebook: 'Facebook'
+        flickr: 'Flickr'
+        foursquare: 'Foursquare'
+        github: 'GitHub'
+        google_plus: 'Google Plus'
+        instagram: 'Instagram'
+        linkedin: 'LinkedIn'
+        pinterest: 'Pinterest'
+        stack_overflow: 'Stack Overflow'
+        tumblr: 'Tumblr'
         twitter: 'Twitter'
-        linkedin: 'Linkedin'
+        youtube: 'YouTube'
 
         flag_show_name:  'Zobraziť meno ostatným používateľom'
         flag_show_email: 'Zobraziť email ostatným používateľom'
