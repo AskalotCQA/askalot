@@ -23,7 +23,7 @@
       <h1>
         <%= @user.nick %>
 
-        <% unless @user.name.blank? %>
+        <% if (@user == current_user || @user.flag_show_name?) && !@user.name.blank? %>
           <small><%= @user.name %></small>
         <% end %>
       </h1>
