@@ -6,8 +6,8 @@ class Question < ActiveRecord::Base
 
   acts_as_taggable
 
-  validates :title, presence: true
-  validates :text,  presence: true
+  validates :title, presence: true, length: { minimum: 2, maximum: 250 }
+  validates :text,  presence: true, length: { minimum: 2 }
 
   def labels
     [category] + tag_counts_on(:tags)
