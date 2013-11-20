@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119115825) do
+ActiveRecord::Schema.define(version: 20131120184915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,46 @@ ActiveRecord::Schema.define(version: 20131119115825) do
 
   add_index "events", ["created_at"], name: "index_events_on_created_at", using: :btree
 
+  create_table "favorites", force: true do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "question_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "favorites", ["question_id"], name: "index_favorites_on_question_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
+
+  create_table "followings", force: true do |t|
+    t.integer  "follower_id", null: false
+    t.integer  "followee_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "followings", ["followee_id"], name: "index_followings_on_followee_id", using: :btree
+  add_index "followings", ["follower_id"], name: "index_followings_on_follower_id", using: :btree
+
+  create_table "labelings", force: true do |t|
+    t.integer  "author_id",  null: false
+    t.integer  "answer_id",  null: false
+    t.integer  "label_id",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "labelings", ["answer_id"], name: "index_labelings_on_answer_id", using: :btree
+  add_index "labelings", ["author_id"], name: "index_labelings_on_author_id", using: :btree
+  add_index "labelings", ["label_id"], name: "index_labelings_on_label_id", using: :btree
+
+  create_table "labels", force: true do |t|
+    t.string   "value",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "labels", ["value"], name: "index_labels_on_value", using: :btree
+
   create_table "questions", force: true do |t|
     t.integer  "author_id",   null: false
     t.integer  "category_id", null: false
@@ -56,20 +96,19 @@ ActiveRecord::Schema.define(version: 20131119115825) do
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
 
   create_table "taggings", force: true do |t|
-    t.integer  "tag_id"
-    t.integer  "taggable_id"
-    t.string   "taggable_type"
-    t.integer  "tagger_id"
-    t.string   "tagger_type"
-    t.string   "context",       limit: 128
+    t.integer  "tag_id",                    null: false
+    t.integer  "taggable_id",               null: false
+    t.string   "taggable_type",             null: false
+    t.string   "context",       limit: 128, null: false
     t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
   add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
 
   create_table "tags", force: true do |t|
-    t.string "name"
+    t.string "name", null: false
   end
 
   create_table "users", force: true do |t|
@@ -131,5 +170,16 @@ ActiveRecord::Schema.define(version: 20131119115825) do
   add_index "users", ["nick"], name: "index_users_on_nick", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+
+  create_table "watchings", force: true do |t|
+    t.integer  "watcher_id",     null: false
+    t.integer  "watchable_id",   null: false
+    t.string   "watchable_type", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "watchings", ["watchable_id", "watchable_type"], name: "index_watchings_on_watchable_id_and_watchable_type", using: :btree
+  add_index "watchings", ["watcher_id"], name: "index_watchings_on_watcher_id", using: :btree
 
 end

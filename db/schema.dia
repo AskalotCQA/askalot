@@ -4589,7 +4589,7 @@
         <dia:real val="6.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#Favourites#</dia:string>
+        <dia:string>#Favorites#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
