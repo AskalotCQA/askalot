@@ -5,5 +5,7 @@ class Answer < ActiveRecord::Base
   has_many :labelings
   has_many :labels, through: :labelings
 
+  has_many :watchings, as: :watchable
+
   validates :text, presence: true
 end
