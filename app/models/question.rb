@@ -3,6 +3,8 @@ class Question < ActiveRecord::Base
   belongs_to :category
 
   has_many :answers
+  has_many :favorites
+  has_many :watchings, as: :watchable
 
   acts_as_taggable
 

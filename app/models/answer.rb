@@ -2,7 +2,8 @@ class Answer < ActiveRecord::Base
   belongs_to :author, class_name: :User
   belongs_to :question
 
-  acts_as_taggable_on :labels
+  has_many :labelings
+  has_many :labels, through: :labelings
 
-  validates :text,  presence: true
+  validates :text, presence: true
 end

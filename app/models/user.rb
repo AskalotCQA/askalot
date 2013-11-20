@@ -13,6 +13,18 @@ class User < ActiveRecord::Base
   has_many :questions, foreign_key: :author_id
   has_many :answers,   foreign_key: :author_id
 
+  has_many :favorites
+  has_many :favorited_questions, through: :favorites, class_name: :Question
+
+  has_many :followings
+  has_many :followers, through: :followings, class_name: :User, foreign_key: :follower_id
+  has_many :followees, through: :followings, class_name: :User, foreign_key: :followee_id
+
+  has_many :labelings
+  has_many :labels, through: :labelings, foreign_key: :author_id
+
+  has_many :watchings, foreign_key: :watcher_id
+
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
   # TODO (smolnar) check uniqueness value select in db
 
