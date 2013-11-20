@@ -44,3 +44,23 @@ h1 {
 .question-voting {
   @include voting;
 }
+
+.question-favouring {
+  font-size: $font-size-h1;
+  text-align: center;
+
+  a {
+    color: $gray-light;
+
+    &:focus, &:hover, &.favoured {
+      color: $brand-warning;
+    }
+  }
+
+  span {
+    display: block;
+
+    font-size: $font-size-h4;
+    color: $gray;
+  }
+}
