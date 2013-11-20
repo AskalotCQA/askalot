@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Label do
   it 'requires value' do
-    label = create :label, title: nil
+    label = build :label, value: nil
 
     expect(label).not_to be_valid
 
-    label = create :label, title: :label
+    label = build :label, value: :label
 
     expect(label).to be_valid
   end
