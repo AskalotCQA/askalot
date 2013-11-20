@@ -93,29 +93,49 @@ describe 'User Profile' do
 
       click_link 'Sociálne siete'
 
-      fill_in 'user_facebook', with: 'http://facebook.com/'
-      fill_in 'user_twitter',  with: 'http://twitter.com/'
-      fill_in 'user_linkedin', with: 'http://linkedin.com/in/'
+      fill_in 'user_facebook',       with: 'http://facebook.com/'
+      fill_in 'user_twitter',        with: 'http://twitter.com/'
+      fill_in 'user_linkedin',       with: 'http://linkedin.com/in/'
+      fill_in 'user_google_plus',    with: 'http://plus.google.com/xxx'
+      fill_in 'user_bitbucket',      with: 'http://bitbucket.org/'
+      fill_in 'user_github',         with: 'http://github.com/'
+      fill_in 'user_youtube',        with: 'http://youtube.com/'
+      fill_in 'user_stack_overflow', with: 'http://stackoverflow.com/users/xxx'
 
       click_button 'Uložiť'
 
       expect(page).to have_content('Facebook – nie je platná hodnota.')
       expect(page).to have_content('Twitter – nie je platná hodnota.')
-      expect(page).to have_content('Linkedin – nie je platná hodnota.')
+      expect(page).to have_content('LinkedIn – nie je platná hodnota.')
+      expect(page).to have_content('Google Plus – nie je platná hodnota.')
+      expect(page).to have_content('Bitbucket – nie je platná hodnota.')
+      expect(page).to have_content('GitHub – nie je platná hodnota.')
+      expect(page).to have_content('YouTube – nie je platná hodnota.')
+      expect(page).to have_content('Stack Overflow – nie je platná hodnota.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
-      fill_in 'user_facebook', with: 'http://facebook.com/nicky.nickmann'
-      fill_in 'user_twitter',  with: 'http://twitter.com/nnickmann'
-      fill_in 'user_linkedin', with: 'http://linkedin.com/in/nick.nickmann.jr'
+      fill_in 'user_facebook',       with: 'http://facebook.com/nicky.nickmann'
+      fill_in 'user_twitter',        with: 'http://twitter.com/nnickmann'
+      fill_in 'user_linkedin',       with: 'http://linkedin.com/in/nick.nickmann.jr'
+      fill_in 'user_google_plus',    with: 'http://plus.google.com/1234567890'
+      fill_in 'user_bitbucket',      with: 'http://bitbucket.org/nickynickmann'
+      fill_in 'user_github',         with: 'http://github.com/nickynickmann'
+      fill_in 'user_youtube',        with: 'http://youtube.com/nickynickmann'
+      fill_in 'user_stack_overflow', with: 'http://stackoverflow.com/users/1234567890'
 
       click_button 'Uložiť'
 
       expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
-      expect(page).to have_field('user_facebook', with: 'http://facebook.com/nicky.nickmann')
-      expect(page).to have_field('user_twitter',  with: 'http://twitter.com/nnickmann')
-      expect(page).to have_field('user_linkedin', with: 'http://linkedin.com/in/nick.nickmann.jr')
+      expect(page).to have_field('user_facebook',       with: 'http://facebook.com/nicky.nickmann')
+      expect(page).to have_field('user_twitter',        with: 'http://twitter.com/nnickmann')
+      expect(page).to have_field('user_linkedin',       with: 'http://linkedin.com/in/nick.nickmann.jr')
+      expect(page).to have_field('user_google_plus',    with: 'http://plus.google.com/1234567890')
+      expect(page).to have_field('user_bitbucket',      with: 'http://bitbucket.org/nickynickmann')
+      expect(page).to have_field('user_github',         with: 'http://github.com/nickynickmann')
+      expect(page).to have_field('user_youtube',        with: 'http://youtube.com/nickynickmann')
+      expect(page).to have_field('user_stack_overflow', with: 'http://stackoverflow.com/users/1234567890')
     end
   end
 
