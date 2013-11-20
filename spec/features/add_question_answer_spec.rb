@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe 'Add Question Answer' do
-  let!(:question) { create :question }
+  let!(:question) { create :question, :with_tags }
 
   before :each do
     login_as question.author
   end
 
-  it 'adds new answer to question', js: true do
+  it 'adds new answer to question' do
     visit root_path
 
     click_link 'Otázky'

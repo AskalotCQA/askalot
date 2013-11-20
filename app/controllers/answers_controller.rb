@@ -1,5 +1,4 @@
 class AnswersController < ApplicationController
-
   def index
     @answers = Answer.all
   end
@@ -7,6 +6,8 @@ class AnswersController < ApplicationController
   def create
     @question = Question.find params[:question_id]
     @author   = @question.author
+    @labels   = @question.labels
+    @answers  = @question.answers
     @answer   = @question.answers.build(answer_params)
 
     if @answer.save
