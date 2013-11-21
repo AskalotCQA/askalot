@@ -42,7 +42,7 @@ h1 {
 }
 
 .question-voting {
-  @include voting;
+  @include block-voting;
 }
 
 .question-favouring {
@@ -50,19 +50,11 @@ h1 {
   text-align: center;
 
   a {
-    color: $gray-light;
-
-    &:focus, &:hover {
-      color: $brand-warning;
-    }
+    @include action-coloring($gray-light, $brand-warning);
   }
 
   a.question-favoured {
-    color: $brand-warning;
-
-    &:focus, &:hover {
-      color: $gray-light;
-    }
+    @include action-coloring($brand-warning, $gray-light);
   }
 
   span {

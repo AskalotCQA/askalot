@@ -6,7 +6,7 @@
 }
 
 .answer-voting {
-  @include voting;
+  @include block-voting;
 }
 
 .answer-marking {
@@ -14,11 +14,7 @@
   text-align: center;
 
   a {
-    color: $gray-light;
-
-    &:focus, &:hover {
-      color: $state-success-text;
-    }
+    @include action-coloring($gray-light, $state-success-text);
   }
 
   span {

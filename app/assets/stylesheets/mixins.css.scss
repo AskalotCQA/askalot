@@ -1,6 +1,14 @@
 @import "twitter/bootstrap/mixins";
 
-@mixin voting {
+@mixin action-coloring($default, $other) {
+  color: $default;
+
+  &:active, &:focus, &:hover {
+    color: $other;
+  }
+}
+
+@mixin block-voting {
   text-align: center;
 
   a {
