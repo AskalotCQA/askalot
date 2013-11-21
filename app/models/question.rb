@@ -19,7 +19,7 @@ class Question < ActiveRecord::Base
   end
 
   def favoured_by?(favourer)
-    favourers.include? favourer
+    !!favourers.include?(favourer)
   end
 
   def favour_by!(user)
