@@ -1,2 +1,2 @@
 $(document).ready ->
-  $('.question-favouring').html("<%= escape_javascript render('questions/favorite', question: @question) %>")
+  $('.question-favouring').html("<%= escape_javascript render('questions/favouring', question: @question) %>")

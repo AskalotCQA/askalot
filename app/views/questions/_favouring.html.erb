@@ -1,0 +1,11 @@
+<div class="question-favouring">
+  <% if question.favoured_by? current_user %>
+    <%= icon_link_to :star, nil, favour_question_path, data: { remote: true }, id: :favour_question,   class: :favoured %>
+  <% else %>
+    <%= icon_link_to :'star-o', nil, favour_question_path, data: { remote: true }, id: :favour_question %>
+  <% end %>
+
+  <% if @question.favorites.size > 0 %>
+    <span><%= @question.favorites.size %></span>
+  <% end %>
+</div>
