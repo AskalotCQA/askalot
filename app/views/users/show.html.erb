@@ -6,10 +6,12 @@
       <div class="list-group">
         <%= gravatar_image_tag @user.gravatar_email, size: 263, class: :'list-group-item img-responsive' %>
 
-        <span class="list-group-item">
-          <%= icon_tag :'envelope-o', fixed: true %>
-          <%= mail_to @user.email, nil, encode: :hex %>
-        </span>
+        <% if @user == current_user || @user.flag_show_email? %>
+          <span class="list-group-item">
+            <%= icon_tag :'envelope-o', fixed: true %>
+            <%= mail_to @user.email, nil, encode: :hex %>
+          </span>
+        <% end %>
 
         <% @user.urls.each do |network, url| %>
           <span class="list-group-item">
