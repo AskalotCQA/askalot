@@ -37,3 +37,6 @@ sk:
       one: '1 hlas'
       few: '%{count} hlasy'
       other: '%{count} hlasov'
+
+    favour: 'Pridať medzi obľúbené'
+    unfavour: 'Odobrať z obľúbených'
