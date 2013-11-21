@@ -8,6 +8,7 @@ NaRuby::Application.routes.draw do
   end
 
   resources :questions do
+    get :favour, on: :member
     resources :answers
   end
 

@@ -5,6 +5,7 @@ class Question < ActiveRecord::Base
   has_many :answers
 
   has_many :favorites
+  has_many :favourers, through: :favorites, source: :user
 
   has_many :watchings, as: :watchable
 
@@ -15,5 +16,15 @@ class Question < ActiveRecord::Base
 
   def labels
     [category] + tag_counts_on(:tags)
+  end
+
+  def favoured_by?(favourer)
+    !!favourers.include?(favourer)
+  end
+
+  def favour_by!(user)
+    return Favorite.create! question: self, user: user unless favoured_by?(user)
+
+    Favorite.find_by(question_id: self.id, user_id: user.id).destroy
   end
 end

@@ -70,6 +70,7 @@ RSpec.configure do |config|
   config.include EmailHelper
   config.include Users::AuthenticationHelper, type: :feature
   config.include Select2Helper, type: :feature
+  config.include RemoteHelper, type: :feature
 
   config.before(:each) { reset_emails }
 
