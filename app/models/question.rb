@@ -15,7 +15,15 @@ class Question < ActiveRecord::Base
   validates :text,  presence: true, length: { minimum: 2 }
 
   def labels
-    [category] + Question.tag_counts_on(:tags)
+    [category] + tags_with_counts
+  end
+
+  def tags_with_counts
+    tags.each do |tag|
+      tag.count = Question.tagged_with(tag.name).count
+    end
+
+    tags
   end
 
   def favoured_by?(favourer)
