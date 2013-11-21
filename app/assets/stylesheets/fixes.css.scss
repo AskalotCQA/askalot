@@ -46,20 +46,18 @@ textarea {
 // navigation
 
 .nav-labels {
-  display: inline-block;
+  display: block;
   position: relative;
 
   & > li {
     display: inline-block;
     float: left;
+    margin-bottom: $padding-base-vertical;
+    margin-right: $padding-base-horizontal / 2;
 
     a {
       display: inline;
       padding: 0.2em 0.6em 0.3em;
-    }
-
-    & + li {
-      margin-left: 5px;
     }
   }
 }
