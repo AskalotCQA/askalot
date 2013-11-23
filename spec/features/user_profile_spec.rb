@@ -143,7 +143,7 @@ describe 'User Profile' do
     let(:user) { build :user, :as_ais }
 
     before :each do
-      ais_login_as user
+      login_as user
     end
 
     it 'disallows editing of first and last name', js: true do

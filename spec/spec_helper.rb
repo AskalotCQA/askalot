@@ -53,15 +53,6 @@ RSpec.configure do |config|
     c.syntax = :expect # Allow only usage of expect syntax
   end
 
-  # Devise through Warden Test Helpers
-  config.include Warden::Test::Helpers, type: :feature
-
-  Warden.test_mode!
-
-  config.before :each do
-    Warden.test_reset!
-  end
-
   # FactoryGirl
   config.include FactoryGirl::Syntax::Methods
 
