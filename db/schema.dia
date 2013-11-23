@@ -6986,7 +6986,7 @@
             <dia:string>#text#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#string #</dia:string>
+            <dia:string>#text #</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
