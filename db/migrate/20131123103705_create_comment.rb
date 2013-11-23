@@ -1,7 +1,7 @@
 class CreateComment < ActiveRecord::Migration
   def change
     create_table :comments do |t|
-      t.references :author_id,   null: false
+      t.references :author,   null: false
       t.references :commentable, null: false, polymorphic: true
 
       t.text :text, null: false
@@ -9,7 +9,7 @@ class CreateComment < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :comments, :author_id
+    add_index :comments, :author
     add_index :comments, [:commentable_id, :commentable_type]
   end
 end
