@@ -1,7 +1,7 @@
 module Users
   module AuthenticationHelper
     def login_as(user, options = {})
-      stub_ais_for(user) if options[:as] == :ais
+      stub_ais_for(user) if options[:with] == :ais
 
       visit new_user_session_path
 
