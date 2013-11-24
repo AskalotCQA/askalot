@@ -6314,7 +6314,7 @@
             <dia:string>#id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#integer#</dia:string>
+            <dia:string>#integer #</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6337,7 +6337,7 @@
             <dia:string>#voter_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#integer#</dia:string>
+            <dia:string>#integer #</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6357,10 +6357,10 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#elective_id#</dia:string>
+            <dia:string>#votable_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#integer#</dia:string>
+            <dia:string>#integer #</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6380,10 +6380,10 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#elective_type#</dia:string>
+            <dia:string>#votable_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#string#</dia:string>
+            <dia:string>#string #</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6429,7 +6429,7 @@
             <dia:string>#upvote#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#bool#</dia:string>
+            <dia:string>#boolean #</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -6620,7 +6620,7 @@
         <dia:point val="12.45,59.95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.4,59.9;19.175,64.9"/>
+        <dia:rectangle val="12.4,59.9;18.79,64.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6629,7 +6629,7 @@
         <dia:point val="12.45,59.95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.6749999999999998"/>
+        <dia:real val="6.2899999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.8999999999999995"/>
@@ -6646,7 +6646,7 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Electives:     
+            <dia:string>#Votables:     
 
   Questions
   Answers
