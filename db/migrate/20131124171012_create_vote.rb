@@ -10,6 +10,7 @@ class CreateVote < ActiveRecord::Migration
     end
 
     add_index :votes, :voter_id
-    add_index :votes, [:votable_id, :votable_type]
+    add_index :votes, [:votable_id, :votable_type, :upvote]
+    add_imdex :votes, :upvote
   end
 end
