@@ -11,6 +11,6 @@ class CreateVote < ActiveRecord::Migration
 
     add_index :votes, :voter_id
     add_index :votes, [:votable_id, :votable_type, :upvote]
-    add_imdex :votes, :upvote
+    add_index :votes, :upvote
   end
 end

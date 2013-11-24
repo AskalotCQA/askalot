@@ -183,7 +183,8 @@ ActiveRecord::Schema.define(version: 20131124171012) do
     t.datetime "updated_at"
   end
 
-  add_index "votes", ["votable_id", "votable_type"], name: "index_votes_on_votable_id_and_votable_type", using: :btree
+  add_index "votes", ["upvote"], name: "index_votes_on_upvote", using: :btree
+  add_index "votes", ["votable_id", "votable_type", "upvote"], name: "index_votes_on_votable_id_and_votable_type_and_upvote", using: :btree
   add_index "votes", ["voter_id"], name: "index_votes_on_voter_id", using: :btree
 
   create_table "watchings", force: true do |t|
