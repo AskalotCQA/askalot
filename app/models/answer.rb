@@ -7,5 +7,7 @@ class Answer < ActiveRecord::Base
 
   has_many :watchings, as: :watchable
 
+  has_many :votes, as: :votable
+
   validates :text, presence: true
 end

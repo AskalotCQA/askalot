@@ -9,6 +9,8 @@ class Question < ActiveRecord::Base
 
   has_many :watchings, as: :watchable
 
+  has_many :votes, as: :votable
+
   acts_as_taggable
 
   validates :title, presence: true, length: { minimum: 2, maximum: 250 }

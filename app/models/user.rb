@@ -26,6 +26,8 @@ class User < ActiveRecord::Base
 
   has_many :watchings, foreign_key: :watcher_id
 
+  has_many :votes, foreign_key: :voter_id
+
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
   # TODO (smolnar) check uniqueness value select in db
 
