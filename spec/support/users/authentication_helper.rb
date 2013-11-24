@@ -10,7 +10,7 @@ module Users
       visit new_user_session_path
 
       fill_in 'user_login', with: user.login
-      fill_in 'user_password', with: options[:password] || 'password'
+      fill_in 'user_password', with: user.password || options[:password] || 'password'
 
       click_button 'Prihlásiť'
 

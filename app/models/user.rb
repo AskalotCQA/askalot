@@ -35,8 +35,8 @@ class User < ActiveRecord::Base
   validates :email,          format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, allow_blank: true
 
-  validates :first, format: { with: /\A[A-Z][a-z]*\z/ }, allow_blank: true
-  validates :last,  format: { with: /\A[A-Z][a-z]*\z/ }, allow_blank: true
+  validates :first, format: { with: /\A\p{Lu}\p{Ll}*\z/u }, allow_blank: true
+  validates :last,  format: { with: /\A\p{Lu}\p{Ll}*\z/u }, allow_blank: true
 
   Social.networks.each do |key, network|
     validates key, format: { with: network.regexp }, allow_blank: true
