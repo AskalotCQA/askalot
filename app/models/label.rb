@@ -3,5 +3,5 @@ class Label < ActiveRecord::Base
 
   validates :value, presence: true
 
-  symbolize :value, in: [:best, :helful]
+  symbolize :value, in: [:best, :helpful]
 end
