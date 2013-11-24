@@ -3,7 +3,5 @@ class Label < ActiveRecord::Base
 
   validates :value, presence: true
 
-  # TODO (smolnar) consider options :in for managing allowed values
-  # TODO (zbell) USE :in !
-  symbolize :value
+  symbolize :value, in: [:best, :helful]
 end
