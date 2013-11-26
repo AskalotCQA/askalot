@@ -1,4 +1,2 @@
 $(document).ready ->
-  $('.question-favouring').html("<%= escape_javascript render('questions/favouring', question: @question) %>")
-
-  window.fixes()
+  $('.question-favouring').replaceWith("<%= escape_javascript render('questions/favouring', question: @question) %>")
