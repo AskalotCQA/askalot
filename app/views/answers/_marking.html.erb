@@ -2,6 +2,8 @@
   <% if current_user == answer.question.author %>
     <%= icon_link_to :check, nil, '#' %>
   <% else %>
-    <span><%= icon_tag :check %></span>
+    <% if answer.is_best_answer? %>
+      <span><%= icon_tag :check %></span>
+    <% end %>
   <% end %>
 </div>

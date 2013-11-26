@@ -10,4 +10,14 @@ class Answer < ActiveRecord::Base
   has_many :votes, as: :votable
 
   validates :text, presence: true
+
+  def is_best_answer?
+    label_list.include? 'best-answer' 
+  end
+
+  def set_best_answer
+    label_list.add('best-answer') if !is_checked?
+    save
+  end
 end
+
