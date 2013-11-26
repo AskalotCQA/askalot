@@ -9,6 +9,8 @@ class Answer < ActiveRecord::Base
 
   has_many :watchings, as: :watchable
 
+  has_many :comments, as: :commentable
+
   validates :text, presence: true
 
   scope :by,   lambda { |user| where author: user }
