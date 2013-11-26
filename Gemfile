@@ -65,7 +65,7 @@ group :development, :test do
   # testing
   gem 'rspec-rails', '~> 2.0'
   gem 'fuubar'
-  gem 'database_cleaner', '~> 0.9.1'
+  gem 'database_cleaner', '~> 1.2.0'
   gem 'factory_girl_rails'
   gem 'launchy'
   gem 'capybara', '~> 2.1.0'
