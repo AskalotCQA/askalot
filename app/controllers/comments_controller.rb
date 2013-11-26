@@ -1,13 +1,14 @@
 class CommentsController < ApplicationController
   def index
-    @comments = Comment.all
+    @commentable = find_commentable
+    @comments = @commentable.comments
   end
 
   def create
     @commentable = find_commentable
-    @question = Question.find params[:question_id]
-    @author   = @question.author
-    @comment   = @question.comments.build(comment_params)
+    @question    = Question.find params[:question_id]
+    @author      = @question.author
+    @comment     = @commentable.comments.build(comment_params)
 
     if comment.save
       flash[:notice] = t('comment.create.success')
@@ -32,5 +33,6 @@ class CommentsController < ApplicationController
         return $1.classify.constantize.find(value)
       end
     end
+    nil
   end
 end
