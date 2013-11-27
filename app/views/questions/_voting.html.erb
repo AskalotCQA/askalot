@@ -1,10 +1,18 @@
 <!-- TODO(zbell) fix content & links! -->
-<div class="question-voting">
-  <%= icon_link_to :'chevron-up', nil, '#' %>
+<div id="question-<%= @question.id %>-voting" class="question-voting">
+  <% if @question.upvoted_by?(current_user) %>
+    <%= icon_link_to :'chevron-up', nil, voteup_question_path, data: { remote: true } %>
+  <% else %>
+    <%= icon_link_to :'chevron-up', nil, voteup_question_path, data: { remote: true }, style: 'color: gray' %>
+  <% end %>
 
   <span>
-    123
+    <%= @question.num_votes %>
   </span>
 
-  <%= icon_link_to :'chevron-down', nil, '#' %>
+  <% if @question.downvoted_by?(current_user) %>
+    <%= icon_link_to :'chevron-down', nil, votedown_question_path, data: { remote: true } %>
+  <% else %>
+    <%= icon_link_to :'chevron-down', nil, votedown_question_path, data: { remote: true }, style: 'color: gray' %>
+  <% end %>
 </div>

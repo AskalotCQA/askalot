@@ -38,6 +38,18 @@ class QuestionsController < ApplicationController
     @question.toggle_favoring_by! current_user
   end
 
+  def voteup
+    @question = Question.find(params[:id])
+    @question.toggle_voteup_by!(current_user)
+    render :vote
+  end
+
+  def votedown
+    @question = Question.find(params[:id])
+    @question.toggle_votedown_by!(current_user)
+    render :vote
+  end
+
   private
 
   def question_params
