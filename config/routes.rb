@@ -7,16 +7,19 @@ NaRuby::Application.routes.draw do
     patch :profile, on: :collection, to: 'users#update_profile'
   end
 
+  match 'users/:nick', via: :get, to: 'users#show', as: :user
+
   resources :questions do
-    get :favour, on: :member
-    resources :answers
+    resources :answers do
+      get :label, on: :member
+    end
+
+    get :favor, on: :member
   end
 
   resources :tags, only: [] do
     get :suggest, on: :collection
   end
-
-  match 'users/:nick', via: :get, to: 'users#show', as: :user
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

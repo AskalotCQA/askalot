@@ -21,6 +21,12 @@ class AnswersController < ApplicationController
     end
   end
 
+  def label
+    @answer = Answer.find(params[:id])
+
+    @answer.label_by! current_user # TODO
+  end
+
   private
 
   def answer_params

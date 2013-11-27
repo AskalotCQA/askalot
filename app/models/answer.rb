@@ -11,13 +11,16 @@ class Answer < ActiveRecord::Base
 
   validates :text, presence: true
 
-  def is_best_answer?
-    label_list.include? 'best-answer' 
+  def labeled_by?(user, value)
+    labels.exists? labeling_author: user, value: value
   end
 
-  def set_best_answer
-    label_list.add('best-answer') if !is_checked?
-    save
+  def label_by!(user, value)
+    # TODO
+  end
+
+  def helpful?
+    labels.exists? value: :helpful
   end
 end
 

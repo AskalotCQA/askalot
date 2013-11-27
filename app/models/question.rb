@@ -5,7 +5,7 @@ class Question < ActiveRecord::Base
   has_many :answers
 
   has_many :favorites
-  has_many :favourers, through: :favorites, source: :user
+  has_many :favorers, through: :favorites, source: :user
 
   has_many :watchings, as: :watchable
 
@@ -28,12 +28,12 @@ class Question < ActiveRecord::Base
     tags
   end
 
-  def favoured_by?(favourer)
-    !!favourers.include?(favourer)
+  def favored_by?(favorer)
+    favorites.exists? user: favorer
   end
 
-  def favour_by!(user)
-    return Favorite.create! question: self, user: user unless favoured_by?(user)
+  def favor_by!(user)
+    return Favorite.create! question: self, user: user unless favored_by?(user)
 
     Favorite.find_by(question_id: self.id, user_id: user.id).destroy
   end
