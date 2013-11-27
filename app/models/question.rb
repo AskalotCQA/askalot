@@ -32,7 +32,7 @@ class Question < ActiveRecord::Base
     favorites.exists? user: favorer
   end
 
-  def favor_by!(user)
+  def toggle_favoring_by!(user)
     return Favorite.create! question: self, user: user unless favored_by?(user)
 
     Favorite.find_by(question_id: self.id, user_id: user.id).destroy

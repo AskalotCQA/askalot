@@ -35,7 +35,7 @@ class QuestionsController < ApplicationController
   def favor
     @question = Question.find(params[:id])
 
-    @question.favor_by! current_user
+    @question.toggle_favoring_by! current_user
   end
 
   private
