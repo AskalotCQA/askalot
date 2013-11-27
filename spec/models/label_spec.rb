@@ -6,7 +6,7 @@ describe Label do
 
     expect(label).not_to be_valid
 
-    label = build :label, value: :label
+    label = build :label, value: :helpful
 
     expect(label).to be_valid
   end

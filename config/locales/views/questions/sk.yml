@@ -38,5 +38,5 @@ sk:
       few: '%{count} hlasy'
       other: '%{count} hlasov'
 
-    favour: 'Pridať medzi obľúbené'
-    unfavour: 'Odobrať z obľúbených'
+    favor: 'Pridať medzi obľúbené'
+    unfavor: 'Odobrať z obľúbených'

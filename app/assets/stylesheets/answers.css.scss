@@ -9,15 +9,37 @@
   @include block-voting;
 }
 
-.answer-marking {
+.answer-labeling {
   font-size: $font-size-h1;
   text-align: center;
 
-  a {
-    @include action-coloring($gray-light, $state-success-text);
+  .answer-labeling-best {
+    a {
+     @include action-coloring($gray-light, $brand-success);
+    }
+
+    a.answer-labeled-best {
+     @include action-coloring($brand-success, $gray-light);
+    }
+
+    span {
+      color: $brand-success;
+    }
   }
 
-  span {
-    color: $state-success-text;
+  .answer-labeling-helpful {
+    a {
+      @include action-coloring($gray-light, $brand-warning);
+    }
+
+    a.answer-labeled-helpful {
+      @include action-coloring($brand-warning, $gray-light);
+    }
+  }
+
+  span.text-muted {
+    display: block;
+
+    font-size: $font-size-h4;
   }
 }

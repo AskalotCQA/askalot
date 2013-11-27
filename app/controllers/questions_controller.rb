@@ -32,10 +32,10 @@ class QuestionsController < ApplicationController
     @answer   = Answer.new question: @question
   end
 
-  def favour
+  def favor
     @question = Question.find(params[:id])
 
-    @question.favour_by! current_user
+    @question.toggle_favoring_by! current_user
   end
 
   private
