@@ -34,5 +34,8 @@ class Answer < ActiveRecord::Base
   def helpful?
     labels.exists? value: :helpful
   end
-end
 
+  def verified?
+    labels.exists? value: :verified
+  end
+end
