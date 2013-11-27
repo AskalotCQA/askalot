@@ -5,5 +5,5 @@ class Labeling < ActiveRecord::Base
 
   scope :by,   lambda { |user| where author: user }
   scope :for,  lambda { |answer| where answer: answer }
-  scope :with, lambda { |label| label.is_a?(Label) ? where(label: label): joins(:label).where(labels: { value: label }) }
+  scope :with, lambda { |label| label.is_a?(Label) ? where(label: label) : joins(:label).where(labels: { value: label }) }
 end
