@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
     @author   = @question.author
     @labels   = @question.labels
     @answers  = @question.answers
-    @answer   = @question.answers.build(answer_params)
+    @answer   = Answer.new(answer_params)
 
     if @answer.save
       flash[:notice] = t('answer.create.success')
@@ -30,6 +30,6 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:text).merge(author: current_user)
+    params.require(:answer).permit(:text).merge(question: @question, author: current_user)
   end
 end
