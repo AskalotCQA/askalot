@@ -21,6 +21,34 @@ describe Question do
     expect(question).to be_valid
   end
 
+  describe '.favored_by' do
+    it 'returns questions favored by user' do
+      user         = create :user
+      other_user = create :user
+
+      3.times do
+        question = create :question
+
+        question.toggle_favoring_by!(user)
+      end
+
+      2.times do
+        question = create :question
+
+        question.toggle_favoring_by!(other_user)
+      end
+
+      questions = Question.favored_by(user)
+
+      expect(questions.size).to eql(3)
+
+      questions.each do |question|
+        expect(question.favorers.size).to eql(1)
+        expect(question.favorers.first).to eql(user)
+      end
+    end
+  end
+
   describe '#labels' do
     context 'with no tag' do
       it 'contains only category' do
