@@ -11,6 +11,10 @@ class Answer < ActiveRecord::Base
 
   validates :text, presence: true
 
+  def labeled_with(value)
+    labelings.with value
+  end
+
   def labeled_by?(user, value)
     labels.where(labelings: { author: user }, value: value).any?
   end

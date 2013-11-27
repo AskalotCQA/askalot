@@ -1,2 +1,2 @@
 $(document).ready ->
-  $('#question-favoring-<%= @question.id %>').replaceWith("<%= escape_javascript render('questions/favoring', question: @question) %>")
+  $('#question-<%= @question.id %>-favoring').replaceWith("<%= escape_javascript render('questions/favoring', question: @question) %>")
