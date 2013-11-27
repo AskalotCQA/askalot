@@ -5,7 +5,7 @@
     <%= icon_link_to :'star-o', nil, favor_question_path(question), data: { remote: true }, id: :favor_question %>
   <% end %>
 
-  <% if @question.favorites.size > 0 %>
-    <span class="text-muted"><%= @question.favorites.size %></span>
+  <% if question.favorites.size > 0 %>
+    <span class="text-muted"><%= question.favorites.size %></span>
   <% end %>
 </div>
