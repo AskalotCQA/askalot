@@ -1,8 +1,8 @@
 <div class="question-favoring">
   <% if question.favored_by? current_user %>
-    <%= icon_link_to :star, nil, favor_question_path(question), title: t('question.unfavor'), data: { toggle: :tooltip, placement: :bottom, remote: true }, id: :favor_question, class: :'question-favored' %>
+    <%= icon_link_to :star, nil, favor_question_path(question), data: { remote: true }, id: :favor_question, class: :'question-favored' %>
   <% else %>
-    <%= icon_link_to :'star-o', nil, favor_question_path(question), title: t('question.favor'), data: { toggle: :tooltip, placement: :bottom, remote: true }, id: :favor_question %>
+    <%= icon_link_to :'star-o', nil, favor_question_path(question), data: { remote: true }, id: :favor_question %>
   <% end %>
 
   <% if @question.favorites.size > 0 %>
