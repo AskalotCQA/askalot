@@ -23,9 +23,9 @@ describe 'Favor Question' do
     end
   end
 
-  context 'when user already a favorer' do
+  context 'when user is already a favorer' do
     before :each do
-      question.favor_by! user
+      question.toggle_favoring_by! user
     end
 
     it 'unfavors the question', js: true do

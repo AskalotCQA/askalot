@@ -68,13 +68,13 @@ describe Question do
     end
   end
 
-  describe '#favor_by!' do
+  describe '#toggle_favoring_by!' do
     let(:user) { create :user }
     let(:question) { create :question }
 
     context 'when user is not a favorer' do
       it 'favors question' do
-        question.favor_by! user
+        question.toggle_favoring_by! user
 
         expect(question).to be_favored_by(user)
       end
@@ -82,8 +82,8 @@ describe Question do
 
     context 'when user is a favorer' do
       it 'removes question from user favorites' do
-        question.favor_by! user
-        question.favor_by! user
+        question.toggle_favoring_by! user
+        question.toggle_favoring_by! user
 
         expect(question).not_to be_favored_by(user)
       end
