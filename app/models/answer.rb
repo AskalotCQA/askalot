@@ -16,7 +16,7 @@ class Answer < ActiveRecord::Base
   end
 
   def toggle_labeling_by!(user, value)
-    return Labeling.create! author: user, answer: self, label: Label.first_or_create!(value: value) unless labeled_by?(user, value)
+    return Labeling.create! author: user, answer: self, label: Label.where(value: :helpful).first_or_create! unless labeled_by?(user, value)
 
     Labeling.where(author: user, answer: self).first.destroy
   end
