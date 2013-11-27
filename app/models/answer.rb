@@ -11,18 +11,20 @@ class Answer < ActiveRecord::Base
 
   validates :text, presence: true
 
-  def labeled_with(value)
-    labelings.with value
+  def labeled_with(label)
+    labelings.with label
   end
 
-  def labeled_by?(user, value)
-    labels.where(labelings: { author: user }, value: value).any?
+  def labeled_by?(user, label)
+    labelings.by(user).with(label).any?
   end
 
-  def toggle_labeling_by!(user, value)
-    return Labeling.create! author: user, answer: self, label: Label.where(value: :helpful).first_or_create! unless labeled_by?(user, value)
+  def toggle_labeling_by!(user, label)
+    label = Label.where(value: label).first_or_create! unless label.is_a? Label
 
-    Labeling.where(author: user, answer: self).first.destroy
+    return Labeling.create! author: user, answer: self, label: label unless labeled_by?(user, label)
+
+    Labeling.where(author: user, answer: self, label: label).first.destroy
   end
 
   def best?
