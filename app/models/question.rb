@@ -1,4 +1,6 @@
 class Question < ActiveRecord::Base
+  include Votable
+
   belongs_to :author, class_name: :User
   belongs_to :category
 
@@ -8,8 +10,6 @@ class Question < ActiveRecord::Base
   has_many :favorers, through: :favorites, source: :user
 
   has_many :watchings, as: :watchable
-
-  has_many :votes, as: :votable
 
   acts_as_taggable
 
@@ -38,49 +38,5 @@ class Question < ActiveRecord::Base
     return Favorite.create! user: user, question: self unless favored_by?(user)
 
     Favorite.where(user: user, question: self).first.destroy
-  end
-
-  def toggle_voteup_by!(voter)
-    if voted_by?(voter)
-      vote = votes.where(voter: voter).first
-      if vote.upvote
-        vote.destroy
-      else
-        vote.upvote = true
-        vote.save
-      end
-    else
-      votes.create!(voter: voter)
-    end
-  end
-
-  def toggle_votedown_by!(voter)
-    if voted_by?(voter)
-      vote = votes.where(voter: voter).first
-      if vote.upvote
-        vote.upvote = false
-        vote.save
-      else
-        vote.destroy
-      end
-    else
-      votes.create!(voter: voter, upvote: false)
-    end
-  end
-
-  def voted_by?(voter)
-    votes.exists?(voter: voter)
-  end
-
-  def upvoted_by?(voter)
-    votes.exists?(voter: voter, upvote: true)
-  end
-
-  def downvoted_by?(voter)
-    votes.exists?(voter: voter, upvote: false)
-  end
-
-  def num_votes
-    votes.where(upvote: true).count-votes.where(upvote: false).count
   end
 end
