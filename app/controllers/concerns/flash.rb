@@ -1,4 +1,6 @@
 module Concerns::Flash
+  extend ActiveSupport::Concern
+
   def flash_error_messages_for(resource, flash: flash.now, **options)
     messages = resource.errors.full_messages
 
