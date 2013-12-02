@@ -35,6 +35,18 @@ ActiveRecord::Schema.define(version: 20131127003041) do
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
 
+  create_table "comments", force: true do |t|
+    t.integer  "author_id",        null: false
+    t.integer  "commentable_id",   null: false
+    t.string   "commentable_type", null: false
+    t.text     "text",             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+
   create_table "events", force: true do |t|
     t.json     "data",       null: false
     t.datetime "created_at", null: false
