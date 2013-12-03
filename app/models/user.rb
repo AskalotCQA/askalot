@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
-  before_validation :default_values
+  before_validation :defaults
 
   # TODO (jharinek) consider https://github.com/ryanb/cancan/wiki/Separate-Role-Model
-  ROLES = %w[admin teacher student]
+  ROLES = [:admin, :teacher, :student]
 
   devise :database_authenticatable,
          :confirmable,
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   # TODO (smolnar) check uniqueness value select in db
 
   validates :role, presence: true
-  symbolize :role, in: [:admin, :teacher, :student] 
+  symbolize :role, in: ROLES 
 
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
@@ -101,7 +101,7 @@ class User < ActiveRecord::Base
     ais_login.nil? ? super : false
   end
 
-  def default_values
+  def defaults
     self.role ||= :student
   end
 end
