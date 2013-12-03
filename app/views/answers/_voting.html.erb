@@ -3,16 +3,16 @@
   <% if answer.upvoted_by?(current_user) %>
     <%= icon_link_to :'chevron-up', nil, voteup_answer_path(answer.id), data: { remote: true } %>
   <% else %>
-    <%= icon_link_to :'chevron-up', nil, voteup_answer_path(answer.id), data: { remote: true }, style: 'color: gray' %>
+    <%= icon_link_to :'chevron-up', nil, voteup_answer_path(answer.id), data: { remote: true }, class: 'text-muted' %>
   <% end %>
 
   <span>
-    <%= answer.num_votes %>
+    <%= answer.total_votes %>
   </span>
 
   <% if answer.downvoted_by?(current_user) %>
     <%= icon_link_to :'chevron-down', nil, votedown_answer_path(answer.id), data: { remote: true } %>
   <% else %>
-    <%= icon_link_to :'chevron-down', nil, votedown_answer_path(answer.id), data: { remote: true }, style: 'color: gray' %>
+    <%= icon_link_to :'chevron-down', nil, votedown_answer_path(answer.id), data: { remote: true }, class: 'text-muted' %>
   <% end %>
 </div>

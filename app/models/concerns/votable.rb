@@ -1,34 +1,16 @@
-module Votable extend ActiveSupport::Concern
+module Votable
+  extend ActiveSupport::Concern
+
   included do
     has_many :votes, as: :votable
   end
 
   def toggle_voteup_by!(voter)
-    if voted_by?(voter)
-      vote = votes.where(voter: voter).first
-      if vote.upvote
-        vote.destroy
-      else
-        vote.upvote = true
-        vote.save
-      end
-    else
-      votes.create!(voter: voter)
-    end
+    toggle_vote_by voter, true
   end
 
   def toggle_votedown_by!(voter)
-    if voted_by?(voter)
-      vote = votes.where(voter: voter).first
-      if vote.upvote
-        vote.upvote = false
-        vote.save
-      else
-        vote.destroy
-      end
-    else
-      votes.create!(voter: voter, upvote: false)
-    end
+    toggle_vote_by voter, false
   end
 
   def voted_by?(voter)
@@ -43,7 +25,23 @@ module Votable extend ActiveSupport::Concern
     votes.exists?(voter: voter, upvote: false)
   end
 
-  def num_votes
-    votes.where(upvote: true).count-votes.where(upvote: false).count
+  def total_votes
+    votes.where(upvote: true).size - votes.where(upvote: false).size
+  end
+
+  private
+
+  def toggle_vote_by(voter, upvote)
+    if(voted_by?(voter))
+      vote = votes.where(voter: voter).first
+      if vote.upvote^upvote
+        vote.upvote = upvote
+        vote.save
+      else
+        vote.destroy
+      end
+    else
+      votes.create!(voter: voter, upvote: upvote)
+    end
   end
 end
