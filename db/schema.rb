@@ -35,18 +35,6 @@ ActiveRecord::Schema.define(version: 20131202201143) do
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
 
-  create_table "comments", force: true do |t|
-    t.integer  "author_id",        null: false
-    t.integer  "commentable_id",   null: false
-    t.string   "commentable_type", null: false
-    t.text     "text",             null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
-  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
-
   create_table "events", force: true do |t|
     t.json     "data",       null: false
     t.datetime "created_at", null: false
@@ -174,7 +162,7 @@ ActiveRecord::Schema.define(version: 20131202201143) do
     t.string   "stack_overflow"
     t.string   "tumblr"
     t.string   "youtube"
-    t.string   "role"
+    t.string   "role",                                  null: false
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree
@@ -188,6 +176,7 @@ ActiveRecord::Schema.define(version: 20131202201143) do
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
   add_index "users", ["nick"], name: "index_users_on_nick", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["role"], name: "index_users_on_role", using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "votes", force: true do |t|
