@@ -70,8 +70,8 @@ class User < ActiveRecord::Base
     (value = read_attribute :gravatar_email).blank? ? email : value
   end
 
-  def role?(base_role)
-    ROLES.index(base_role.to_sym) <= ROLES.index(role)
+  def role?(base)
+    ROLES.index(base.to_sym) <= ROLES.index(role)
   end
 
   def urls
