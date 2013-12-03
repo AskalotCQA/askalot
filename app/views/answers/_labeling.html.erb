@@ -1,9 +1,12 @@
 <div id="answer-<%= answer.id %>-labeling" class="answer-labeling">
 
-  <!-- TODO(zbell) implement -->
   <div class="answer-labeling-best">
     <% if current_user == answer.question.author %>
-      <%= icon_link_to :check, nil, '#' %>
+      <% if answer.labeled_by? current_user, :best %>
+        <%= icon_link_to :check, nil, label_answer_path(answer, value: :best), data: { remote: true }, class: :'answer-labeled-best' %>
+      <% else %>
+        <%= icon_link_to :check, nil, label_answer_path(answer, value: :best), data: { remote: true } %>
+      <% end %>
     <% elsif answer.best? %>
       <span><%= icon_tag :check %></span>
     <% end %>
