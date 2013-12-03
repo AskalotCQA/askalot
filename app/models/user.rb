@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   before_validation :defaults
 
   # TODO (jharinek) consider https://github.com/ryanb/cancan/wiki/Separate-Role-Model
-  ROLES = [:admin, :teacher, :student]
+  ROLES = [:student, :teacher, :administrator]
 
   devise :database_authenticatable,
          :confirmable,
@@ -68,6 +68,10 @@ class User < ActiveRecord::Base
 
   def gravatar_email
     (value = read_attribute :gravatar_email).blank? ? email : value
+  end
+
+  def role?(base_role)
+    ROLES.index(base_role.to_sym) <= ROLES.index(role)
   end
 
   def urls
