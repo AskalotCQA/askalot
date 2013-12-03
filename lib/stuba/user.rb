@@ -33,7 +33,7 @@ module Stuba
     end
 
     def role
-      @role ||= @data[:employeetype].first
+      @role ||= @data[:employeetype].first.to_sym
     end
 
     def to_params
