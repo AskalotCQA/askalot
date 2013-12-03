@@ -41,6 +41,8 @@ class Answer < ActiveRecord::Base
     labels.exists? value: :verified
   end
 
+  private 
+
   def remove_label(user, label)
     question.answers.each { |a| Labeling.where(author: user, answer: a, label: label).first.destroy if a.labeled_by?(user, label) && a != self }
   end
