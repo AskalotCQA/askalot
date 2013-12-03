@@ -20,9 +20,9 @@ class Answer < ActiveRecord::Base
   end
 
   def toggle_labeling_by!(user, label)
-    remove_label user, label if label.to_sym == :best
-
     label = Label.where(value: label).first_or_create! unless label.is_a? Label
+
+    remove_label user, label if label.value == :best
 
     return Labeling.create! author: user, answer: self, label: label unless labeled_by?(user, label)
 
@@ -42,7 +42,6 @@ class Answer < ActiveRecord::Base
   end
 
   def remove_label(user, label)
-    label = Label.where(value: label).first_or_create! unless label.is_a? Label
     question.answers.each { |a| Labeling.where(author: user, answer: a, label: label).first.destroy if a.labeled_by?(user, label) && a != self }
   end
 end
