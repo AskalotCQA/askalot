@@ -37,7 +37,6 @@ class User < ActiveRecord::Base
   # TODO (smolnar) check uniqueness value select in db
 
   validates :role, presence: true
-  symbolize :role, in: ROLES 
 
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
@@ -51,6 +50,8 @@ class User < ActiveRecord::Base
   Social.networks.each do |key, network|
     validates key, format: { with: network.regexp }, allow_blank: true
   end
+
+  symbolize :role, in: ROLES
 
   def login=(value)
     write_attribute(:login, value.downcase)
