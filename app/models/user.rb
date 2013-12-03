@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  before_validation :default_values
+
+  # TODO (jharinek) consider https://github.com/ryanb/cancan/wiki/Separate-Role-Model
+  ROLES = %w[admin teacher student]
+
   devise :database_authenticatable,
          :confirmable,
          :lockable,
@@ -30,6 +35,9 @@ class User < ActiveRecord::Base
 
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
   # TODO (smolnar) check uniqueness value select in db
+
+  validates :role, presence: true
+  symbolize :role, in: [:admin, :teacher, :student] 
 
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
@@ -91,5 +99,9 @@ class User < ActiveRecord::Base
 
   def password_required?
     ais_login.nil? ? super : false
+  end
+
+  def default_values
+    self.role ||= :student
   end
 end
