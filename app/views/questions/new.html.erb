@@ -8,7 +8,7 @@
       <%= form_for @question do |f| %>
         <div class="form-group">
           <%= f.label :category_id %>
-          <%= f.collection_select :category_id, Category.all, :id, :name, {}, { class: :'form-control', :'data-as' => :select2 } %>
+          <%= f.collection_select :category_id, Category.all, :id, :name, {}, { class: :'form-control', data: { as: :select2 }} %>
         </div>
         <div class="form-group">
           <%= f.label :title %>
@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
           <%= f.label :tag_list %>
-          <%= f.text_field :tag_list, class: :'form-control', :'data-as' => :select2, :'data-role' => :tags, :'data-type' => :question, placeholder: t('question.tag.placeholder') %>
+          <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags, type: :question }, placeholder: t('question.tag.placeholder') %>
         </div>
 
         <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
