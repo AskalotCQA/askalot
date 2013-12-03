@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  include Voting
+
   def index
     @answers = Answer.all
   end

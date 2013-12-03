@@ -1,10 +1,18 @@
 <!-- TODO(poizl) fix content & links! -->
-<div class="answer-voting">
-  <%= icon_link_to :'chevron-up', nil, '#' %>
+<div class="answer-voting" id="answer-<%= answer.id %>-voting">
+  <% if answer.upvoted_by?(current_user) %>
+    <%= icon_link_to :'chevron-up', nil, voteup_answer_path(answer.id), data: { remote: true } %>
+  <% else %>
+    <%= icon_link_to :'chevron-up', nil, voteup_answer_path(answer.id), data: { remote: true }, style: 'color: gray' %>
+  <% end %>
 
   <span>
-    4
+    <%= answer.num_votes %>
   </span>
 
-  <%= icon_link_to :'chevron-down', nil, '#' %>
+  <% if answer.downvoted_by?(current_user) %>
+    <%= icon_link_to :'chevron-down', nil, votedown_answer_path(answer.id), data: { remote: true } %>
+  <% else %>
+    <%= icon_link_to :'chevron-down', nil, votedown_answer_path(answer.id), data: { remote: true }, style: 'color: gray' %>
+  <% end %>
 </div>

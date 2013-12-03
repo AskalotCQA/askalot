@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   before_filter :authenticate_user!
+  include Voting
 
   def index
     @questions = Question.order('created_at desc').page(params[:page]).per(10)
@@ -36,18 +37,6 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
 
     @question.toggle_favoring_by! current_user
-  end
-
-  def voteup
-    @question = Question.find(params[:id])
-    @question.toggle_voteup_by!(current_user)
-    render :vote
-  end
-
-  def votedown
-    @question = Question.find(params[:id])
-    @question.toggle_votedown_by!(current_user)
-    render :vote
   end
 
   private
