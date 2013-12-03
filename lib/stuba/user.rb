@@ -32,6 +32,10 @@ module Stuba
       @last ||= @data[:sn].first
     end
 
+    def role
+      @role ||= @data[:employeetype].first.to_sym
+    end
+
     def to_params
       {
         ais_uid: uid,
@@ -41,7 +45,8 @@ module Stuba
         name: name,
         first: first,
         middle: middle,
-        last: last
+        last: last,
+        role: role
       }
     end
   end

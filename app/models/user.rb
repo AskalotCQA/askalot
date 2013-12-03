@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  before_validation :defaults
+
+  # TODO (jharinek) consider https://github.com/ryanb/cancan/wiki/Separate-Role-Model
+  ROLES = [:student, :teacher, :administrator]
+
   devise :database_authenticatable,
          :confirmable,
          :lockable,
@@ -31,6 +36,9 @@ class User < ActiveRecord::Base
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
   # TODO (smolnar) check uniqueness value select in db
 
+  validates :role, presence: true
+  symbolize :role, in: ROLES 
+
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
 
@@ -62,6 +70,10 @@ class User < ActiveRecord::Base
     (value = read_attribute :gravatar_email).blank? ? email : value
   end
 
+  def role?(base)
+    ROLES.index(base.to_sym) <= ROLES.index(role)
+  end
+
   def urls
     Hash[Social.networks.map { |key, network| [network, url(key)] }.select { |data| !data.second.blank? }]
   end
@@ -91,5 +103,9 @@ class User < ActiveRecord::Base
 
   def password_required?
     ais_login.nil? ? super : false
+  end
+
+  def defaults
+    self.role ||= :student
   end
 end
