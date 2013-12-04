@@ -8,7 +8,8 @@ describe Stuba::User do
       cn: ['Bc. Janko Hrasko'],
       sn: ['Hrasko'],
       givenname: ['Janko'],
-      mail: ['xuser1@is.stuba.sk','xuser1@stuba.sk']
+      mail: ['xuser1@is.stuba.sk','xuser1@stuba.sk'],
+      employeetype: ['student']
     }
   }
 
@@ -22,6 +23,7 @@ describe Stuba::User do
     expect(user.middle).to eql(nil)
     expect(user.last).to eql('Hrasko')
     expect(user.email).to eql('xuser1@stuba.sk')
+    expect(user.role).to eql(:student)
   end
 
   describe '.to_params' do
@@ -36,7 +38,8 @@ describe Stuba::User do
         middle: nil,
         last: 'Hrasko',
         ais_login: 'xuser1',
-        ais_uid: '1234'
+        ais_uid: '1234',
+        role: :student
       })
     end
   end
