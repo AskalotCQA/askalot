@@ -11,7 +11,7 @@ module TagHelper
     classes = ['fa', "fa-#{type.to_s}"]
     classes << 'fa-fw' if options.delete(:fixed)
 
-    icon  = content_tag :i, nil, class: classes
+    icon  = content_tag :i, nil, class: classes, data: options[:data], title: options[:title]
     label = options.delete(:label)
 
     return icon if label.blank?
@@ -69,16 +69,24 @@ module TagHelper
     content_tag :div, options, &block
   end
 
-  def popover_tag(body, content, options = {})
-    options.deep_merge! data: { toggle: :popover, content: content, html: true, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :click }
+  def popover_attributes(content, options = {})
+    options.deep_merge data: { toggle: :popover, content: content, html: true, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :click }
+  end
 
-    link_to body, '#', options
+  def popover_tag(body, content, options = {})
+    link_to body, '#', popover_attributes(content, options)
+  end
+
+  def tooltip_attributes(title, options = {})
+    options.deep_merge title: title, data: { toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover }
   end
 
   def tooltip_tag(body, title, options = {})
-    options.deep_merge! data: { toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover }
+    link_to body, '#', tooltip_attributes(title, options)
+  end
 
-    link_to body, '#', options.merge(title: title)
+  def tooltip_icon_tag(type, title, options = {})
+    icon_tag type, tooltip_attributes(title, options)
   end
 
   def tooltip_time_tag(time, options = {})
