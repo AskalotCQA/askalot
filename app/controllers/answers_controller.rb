@@ -22,7 +22,20 @@ class AnswersController < ApplicationController
   end
 
   def label
-    @answer = Answer.find(params[:id])
+    @answer   = Answer.find(params[:id])
+    @answers  = [@answer]
+    @question = @answer.question
+
+    if params[:value].to_sym == :best
+      @question.answers.where.not(id: @answer.id).all.each do |answer|
+        labeling = answer.labelings.by(current_user).with(params[:value]).first
+
+        if labeling
+          @answers << answer
+          labeling.delete
+        end
+      end
+    end
 
     @answer.toggle_labeling_by! current_user, params[:value]
   end
