@@ -1,9 +1,13 @@
-<% questions.each do |question| %>
-  <%= render 'question', question: question %>
-<% end %>
+<section id="questions">
+  <ul class="list-unstyled">
+    <% questions.each do |question| %>
+      <%= render 'question', question: question %>
+    <% end %>
+  </ul>
 
-<div class="row">
-  <div class="col-md-12">
-    <%= paginate @questions %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= paginate @questions, data: :remote %>
+    </div>
   </div>
-</div>
+</section>

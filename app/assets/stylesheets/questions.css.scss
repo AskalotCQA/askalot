@@ -7,6 +7,14 @@ h1 {
   }
 }
 
+#questions {
+  & > ul > li + li {
+    border-top: 1px solid $gray-lighter;
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+}
+
 .question-metric {
   display: block;
   margin-bottom: $padding-base-vertical;

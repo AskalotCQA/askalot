@@ -37,6 +37,8 @@ class window.Select extends Module
           page: page - 1
         results: (data, page) ->
           data
+    filter:
+      createSearchChoice: (term, data) -> return if data.length = 0
 
   constructor: (options = {}) ->
     @selector = options.selector ?= '[data-as=select2]'
@@ -45,7 +47,7 @@ class window.Select extends Module
 
   bind: ->
     $(@selector).each (i, element) =>
-      role    = $(element).attr('data-role')
+      role   = $(element).attr('data-role')
       options = @.options_for role
 
       $(element).select2 options
@@ -53,7 +55,9 @@ class window.Select extends Module
   options_for: (role) ->
     options = @defaults
 
-    options = $.extend({}, options, @roles[role]) if role?
+    if role
+      for role in role.split(',')
+        options = $.extend({}, options, @roles[role])
 
     options
 

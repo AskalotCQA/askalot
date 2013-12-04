@@ -3,6 +3,8 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.order('created_at desc').page(params[:page]).per(10)
+
+    @questions = @questions.tagged_with params[:tags], any: true
   end
 
   def new
