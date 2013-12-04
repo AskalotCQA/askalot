@@ -13,8 +13,6 @@ module Users
       fill_in 'user_password', with: user.password || options[:password] || 'password'
 
       click_button 'Prihlásiť'
-
-      visit root_path
     end
 
     def stub_ais_for(user = nil, options = {})
