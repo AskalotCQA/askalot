@@ -12,7 +12,7 @@ sk:
 
     tag:
       new: 'nový'
-      searching: 'Hľadám'
+      searching: 'Hľadám…'
       no_matches_found: 'Nenájdený žiadny výsledok'
       placeholder: 'elasticsearch, linux-server, use-case'
 
