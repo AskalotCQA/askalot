@@ -26,15 +26,27 @@ class AnswersController < ApplicationController
     @answers  = [@answer]
     @question = @answer.question
 
-    if params[:value].to_sym == :best
+    case params[:value].to_sym
+    when :best
+      fail if current_user != @question.author
+
+      labeling = @answer.labelings.by(current_user).with(:helpful).first
+
+      labeling.delete if labeling
+
       @question.answers.where.not(id: @answer.id).all.each do |answer|
-        labeling = answer.labelings.by(current_user).with(params[:value]).first
+        labeling = answer.labelings.by(current_user).with(:best).first
 
         if labeling
           @answers << answer
           labeling.delete
         end
       end
+    when :helpful
+      fail if current_user != @question.author
+      fail if @answer.labelings.by(current_user).with(:best).exists?
+    else
+      fail
     end
 
     @answer.toggle_labeling_by! current_user, params[:value]

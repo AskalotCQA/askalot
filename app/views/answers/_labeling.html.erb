@@ -1,5 +1,4 @@
 <div id="answer-<%= answer.id %>-labeling" class="answer-labeling">
-
   <div class="answer-labeling-best">
     <% if current_user == answer.question.author %>
       <% if answer.labeled_by? current_user, :best %>
@@ -12,15 +11,19 @@
     <% end %>
   </div>
 
-  <div class="answer-labeling-helpful">
-    <% if answer.labeled_by? current_user, :helpful %>
-      <%= icon_link_to :'lightbulb-o', nil, label_answer_path(answer, value: :helpful), data: { remote: true }, class: :'answer-labeled-helpful' %>
-    <% else %>
-      <%= icon_link_to :'lightbulb-o', nil, label_answer_path(answer, value: :helpful), data: { remote: true } %>
-    <% end %>
+  <% unless answer.labelings.with(:best).exists? %>
+    <div class="answer-labeling-helpful">
+      <% if answer.labeled_by? current_user, :helpful %>
+        <%= icon_link_to :'lightbulb-o', nil, label_answer_path(answer, value: :helpful), data: { remote: true }, class: :'answer-labeled-helpful' %>
+      <% else %>
+        <%= icon_link_to :'lightbulb-o', nil, label_answer_path(answer, value: :helpful), data: { remote: true } %>
+      <% end %>
 
-    <% if answer.labeled_with(:helpful).size > 0 %>
-      <span class="text-muted"><%= answer.labeled_with(:helpful).size %></span>
-    <% end %>
-  </div>
+  <!-- TODO(zbell) rm
+      <% if answer.labeled_with(:helpful).size > 0 %>
+        <span class="text-muted"><%= answer.labeled_with(:helpful).size %></span>
+      <% end %>
+  -->
+    </div>
+  <% end %>
 </div>
