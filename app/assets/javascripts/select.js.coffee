@@ -26,31 +26,43 @@ class window.Select extends Module
         values = $(element).val().split(',').map (e) -> { id: e, text: e }
 
         callback(values)
+      formatSelection: (item) -> item.id
       createSearchChoice : (term, data) -> { id: term, text: "#{term} (#{I18n.t('question.tag.new')})" } if data.length == 0
       ajax:
         url: '/tags/suggest'
         dataType: 'json'
         data: (term, page) ->
           q: term
-          type: $(this).attr('data-type')
-          context: $(this).attr('context')
           page: page - 1
         results: (data, page) ->
           data
     filter:
-      createSearchChoice: (term, data) -> return if data.length = 0
+      createSearchChoice: (term, data) -> return if data.length == 0
 
   constructor: (options = {}) ->
     @selector = options.selector ?= '[data-as=select2]'
 
     @.bind()
 
+  each: (callback) ->
+    $(@selector).each (index, element) ->
+      callback(index, element)
+
   bind: ->
-    $(@selector).each (i, element) =>
-      role   = $(element).attr('data-role')
+    @.each (i, element) =>
+      role    = $(element).attr('data-role')
       options = @.options_for role
 
       $(element).select2 options
+
+  addItem: (item) ->
+    @.each (i, element) =>
+      items = $(element).select2('data')
+
+      items.push(item)
+
+      $(element).select2('data', items)
+      $(element).trigger('change')
 
   options_for: (role) ->
     options = @defaults
