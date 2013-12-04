@@ -24,6 +24,7 @@ FactoryGirl.define do
       sequence(:ais_uid)  { |n| n }
       sequence(:ais_login) { |n| "xuser#{n}" }
 
+      role                  :student
       password              nil
       password_confirmation nil
     end
