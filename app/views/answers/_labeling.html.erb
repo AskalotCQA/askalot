@@ -1,6 +1,6 @@
 <div id="answer-<%= answer.id %>-labeling" class="answer-labeling">
   <div class="answer-labeling-best">
-    <% if current_user == answer.question.author %>
+    <% if can? :edit, answer.question %>
       <% if answer.labeled_by? current_user, :best %>
         <%= icon_link_to :'check-circle', nil, label_answer_path(answer, value: :best), data: { remote: true }, class: :'answer-labeled-best' %>
       <% else %>
@@ -13,7 +13,7 @@
 
   <% unless answer.labelings.with(:best).exists? %>
     <div class="answer-labeling-helpful">
-      <% if current_user == answer.question.author %>
+      <% if can? :edit, answer.question %>
         <% if answer.labeled_by? current_user, :helpful %>
           <%= icon_link_to :'lightbulb-o', nil, label_answer_path(answer, value: :helpful), data: { remote: true }, class: :'answer-labeled-helpful' %>
         <% else %>
@@ -26,7 +26,7 @@
   <% end %>
 
   <div class="answer-labeling-verified">
-    <% if can? :verify, @answer %>
+    <% if can? :verify, answer %>
       <% if answer.labeled_by? current_user, :verified %>
         <%= icon_link_to :'thumbs-o-up', nil, label_answer_path(answer, value: :verified), data: { remote: true }, class: :'answer-labeled-verified' %>
       <% else %>
