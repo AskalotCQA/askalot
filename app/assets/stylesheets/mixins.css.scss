@@ -1,10 +1,24 @@
 @import "twitter/bootstrap/mixins";
 
-@mixin action-coloring($default, $other) {
-  color: $default;
+@mixin action-coloring($default-color, $action-color) {
+  color: $default-color;
 
   &:active, &:focus, &:hover {
-    color: $other;
+    color: $action-color;
+  }
+}
+
+@mixin block-labeling($action-class, $default-color, $action-color) {
+  a {
+    @include action-coloring($default-color, $action-color);
+  }
+
+  a.#{$action-class} {
+    @include action-coloring($action-color, $default-color);
+  }
+
+  span {
+    color: $action-color;
   }
 }
 

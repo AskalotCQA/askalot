@@ -14,27 +14,15 @@
   text-align: center;
 
   .answer-labeling-best {
-    a {
-     @include action-coloring($gray-light, $brand-success);
-    }
-
-    a.answer-labeled-best {
-     @include action-coloring($brand-success, $brand-danger);
-    }
-
-    span {
-      color: $brand-success;
-    }
+    @include block-labeling(answer-labeled-best, $gray-light, $brand-success);
   }
 
   .answer-labeling-helpful {
-    a {
-      @include action-coloring($gray-light, $brand-warning);
-    }
+    @include block-labeling(answer-labeled-helpful, $gray-light, $brand-warning);
+  }
 
-    a.answer-labeled-helpful {
-      @include action-coloring($brand-warning, $brand-danger);
-    }
+  .answer-labeling-verified {
+    @include block-labeling(answer-labeled-verified, $gray-light, $brand-info);
   }
 
   span.text-muted {
