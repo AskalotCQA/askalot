@@ -6,3 +6,12 @@ sk:
 
     create:
       success: 'Vaša odpoveď bola úspešne pridaná.'
+
+    label:
+      best: 'Označiť ako najlepšiu'
+      helpful: 'Označiť ako pomocnú'
+      verify: 'Označiť ako overenú'
+
+    best: 'Najlepšia'
+    helpful: 'Pomocná'
+    verified: 'Overená'
