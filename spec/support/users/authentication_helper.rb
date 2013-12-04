@@ -26,7 +26,8 @@ module Users
         cn: [],
         sn: [user.last],
         givenname: [user.first],
-        mail: [user.email]
+        mail: [user.email],
+        employeetype: [user.role]
       }
 
       Stuba::AIS.stub(:authenticate).with(user.login, options[:password] || 'password') do

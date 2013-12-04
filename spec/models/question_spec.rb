@@ -23,7 +23,7 @@ describe Question do
 
   describe '.favored_by' do
     it 'returns questions favored by user' do
-      user         = create :user
+      user       = create :user
       other_user = create :user
 
       3.times do
