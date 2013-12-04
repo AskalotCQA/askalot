@@ -14,6 +14,16 @@ FactoryGirl.define do
     last  'Nash'
     about 'Lorem ipsum'
 
+    role User::ROLES.first
+
+    trait :as_teacher do
+      role :teacher
+    end
+
+    trait :as_admin do
+      role :admin
+    end
+
     after :create do |user|
       user.confirm!
     end
@@ -24,7 +34,6 @@ FactoryGirl.define do
       sequence(:ais_uid)  { |n| n }
       sequence(:ais_login) { |n| "xuser#{n}" }
 
-      role                  :student
       password              nil
       password_confirmation nil
     end
