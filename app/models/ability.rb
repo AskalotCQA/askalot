@@ -2,6 +2,10 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    can :edit, [Question, Answer] do |resource|
+      resource.author == user
+    end
+
     can :change_name, User unless user.ais_login?
 
     # TODO (jharinek) define roles like this: 'can :action, Model'

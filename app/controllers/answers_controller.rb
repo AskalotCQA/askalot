@@ -28,11 +28,7 @@ class AnswersController < ApplicationController
 
     case params[:value].to_sym
     when :best
-      fail if current_user != @question.author
-
-      # TODO(zbell) consider: do not remove helpful label (just hide it from view), so it can be easily restored on best label switch
-      #labeling = @answer.labelings.by(current_user).with(:helpful).first
-      #labeling.delete if labeling
+      authorize! :edit, @answer
 
       @question.answers.where.not(id: @answer.id).all.each do |answer|
         labeling = answer.labelings.by(current_user).with(:best).first
@@ -43,10 +39,11 @@ class AnswersController < ApplicationController
         end
       end
     when :helpful
-      fail if current_user != @question.author
+      authorize! :edit, @answer
+
       fail if @answer.labelings.by(current_user).with(:best).exists?
     when :verified
-      fail if cannot? :verify, @answer
+      authorize! :verify, @answer
     else
       fail
     end
