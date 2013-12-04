@@ -30,9 +30,9 @@ class AnswersController < ApplicationController
     when :best
       fail if current_user != @question.author
 
-      labeling = @answer.labelings.by(current_user).with(:helpful).first
-
-      labeling.delete if labeling
+      # TODO(zbell) consider: do not remove helpful label (just hide it from view), so it can be easily restored on best label switch
+      #labeling = @answer.labelings.by(current_user).with(:helpful).first
+      #labeling.delete if labeling
 
       @question.answers.where.not(id: @answer.id).all.each do |answer|
         labeling = answer.labelings.by(current_user).with(:best).first
@@ -45,6 +45,8 @@ class AnswersController < ApplicationController
     when :helpful
       fail if current_user != @question.author
       fail if @answer.labelings.by(current_user).with(:best).exists?
+    when :verified
+      fail if cannot? :verify, @answer
     else
       fail
     end
