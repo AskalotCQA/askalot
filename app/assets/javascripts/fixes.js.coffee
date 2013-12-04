@@ -28,5 +28,6 @@ $(document).ready ->
       if $(selector).length > 0
         $(selector).tab('show')
 
+  # TODO (smolnar) resolve
   # fixTabs()
   fixes()

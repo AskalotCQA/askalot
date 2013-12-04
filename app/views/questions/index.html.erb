@@ -10,6 +10,11 @@
           <%= icon_link_to :plus, t('question.new.feature'), new_question_path, id: :'new-question', class: 'btn btn-success pull-right' %>
         </h1>
       </div>
+
+      <%= form_tag questions_path(tab: params[:tab]), method: :get, remote: true do %>
+        <%= text_field_tag :tags, params[:tags], id: :'question-filter', class: :'form-control', data: { as: :select2, role: [:tags, :filter].join(','), type: :question } %>
+      <% end %>
+
     </section>
   </div>
 </div>
