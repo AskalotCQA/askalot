@@ -1,2 +1,4 @@
 $(document).ready ->
-  $('#answer-<%= @answer.id %>-labeling').replaceWith("<%= escape_javascript render('answers/labeling', answer: @answer) %>")
+  <% @answers.each do |answer| %>
+    $('#answer-<%= answer.id %>-labeling').replaceWith("<%= escape_javascript render('answers/labeling', answer: answer) %>")
+  <% end %>
