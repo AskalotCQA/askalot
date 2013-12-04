@@ -32,9 +32,10 @@ module Votable
   private
 
   def toggle_vote_by(voter, upvote)
-    if(voted_by?(voter))
+    if voted_by? voter
       vote = votes.where(voter: voter).first
-      if vote.upvote ^ upvote
+
+      if vote.upvote != upvote
         vote.upvote = upvote
         vote.save
       else
