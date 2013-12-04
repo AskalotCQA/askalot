@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  before_validation :defaults
-
   # TODO (jharinek) consider https://github.com/ryanb/cancan/wiki/Separate-Role-Model
   ROLES = [:student, :teacher, :administrator]
 
@@ -104,9 +102,5 @@ class User < ActiveRecord::Base
 
   def password_required?
     ais_login.nil? ? super : false
-  end
-
-  def defaults
-    self.role ||= :student
   end
 end
