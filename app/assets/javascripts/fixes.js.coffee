@@ -5,8 +5,8 @@ $(document).ready ->
     typeof(value) != 'undefined'
 
   window.fixes = ->
-    $('[data-toggle="popover"]').popover()
-    $('[data-toggle="tooltip"]').tooltip()
+    $('[data-toggle="popover"]').popover(container: 'body')
+    $('[data-toggle="tooltip"]').tooltip(container: 'body')
     $('[data-toggle="tooltip"]').on 'show.bs.tooltip', -> $(this).removeAttr('title')
     $('a[href="#"]').click (event) ->
       event.preventDefault()
