@@ -4,15 +4,13 @@ class TagsController < ApplicationController
   # * use pagination
 
   def suggest
-    relation = ActsAsTaggableOn::Tagging.where(taggable_type: params[:type].camelcase, context: params[:context] || :tags)
-
-    tags = relation.joins(:tag).where('tags.name LIKE ?', "#{params[:q]}%").select('tags.name').limit(10).distinct
+    tags = Tag.where('tags.name LIKE ?', "#{params[:q]}%").limit(10)
 
     render json: {
-      results: tags.uniq.map { |e|
+      results: tags.map { |tag|
         {
-          id:    e.name,
-          text: "#{e.name} (#{relation.joins(:tag).where(:'tags.name' => e.name).count})"
+          id:    tag.name,
+          text: "#{tag.name} (#{tag.taggings.size})"
         }
       },
     }
