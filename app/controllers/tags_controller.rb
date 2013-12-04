@@ -1,4 +1,6 @@
 class TagsController < ApplicationController
+  before_action :authenticate_user!
+
   # TODO (smolnar)
   # * remove AR relation, use elasticsearch
   # * use pagination
