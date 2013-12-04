@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_filter :set_default_tab, only: :edit
+  before_action :set_default_tab, only: :edit
 
   def destroy
     fail

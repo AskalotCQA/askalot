@@ -1,10 +1,11 @@
 class QuestionsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
+  before_action :set_default_tab, only: :index
 
   def index
     @questions = Question.order('created_at desc').page(params[:page]).per(10)
 
-    @questions = @questions.tagged_with params[:tags], any: true
+    @questions = @questions.tagged_with params[:tags] if params[:tags].present?
   end
 
   def new
@@ -41,6 +42,11 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  # TODO (smolnar) use concern
+  def set_default_tab
+    params[:tab] ||= :'questions-new'
+  end
 
   def question_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list).merge(author: current_user)
