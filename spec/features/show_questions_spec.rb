@@ -14,11 +14,11 @@ describe 'Show Questions' do
 
     click_link 'Otázky'
 
-    list = all('.container > .row')
+    list = all('#questions > ul > li')
 
-    expect(list).to have(10 + 2).items
+    expect(list).to have(10).items
 
-    within list[1] do
+    within list[0] do
       expect(page).to have_content(question.title)
       expect(page).to have_content(question.category.name)
 

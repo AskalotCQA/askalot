@@ -19,6 +19,7 @@ sk:
     index:
       title: 'Nové otázky'
       new: 'Nová otázka'
+      no_results_found: 'Neboli nájdené žiadne otázky.'
 
     answer:
       zero: 'žiadna odpoveď'
