@@ -19,7 +19,7 @@
     }
 
     a.answer-labeled-best {
-     @include action-coloring($brand-success, $gray-light);
+     @include action-coloring($brand-success, $brand-danger);
     }
 
     span {
@@ -33,7 +33,7 @@
     }
 
     a.answer-labeled-helpful {
-      @include action-coloring($brand-warning, $gray-light);
+      @include action-coloring($brand-warning, $brand-danger);
     }
   }
 
