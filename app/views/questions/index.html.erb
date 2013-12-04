@@ -1,24 +1,32 @@
 <% provide :title, t('question.index.title') %>
 
-<div class="row">
-  <div class="col-md-12">
-    <section>
-      <div class="page-header">
-        <h1>
-          <%= t 'question.index.title' %>
+<section id="question-search">
+  <div class="row">
+    <div class="col-md-offset-6 col-md-6">
+      <%= form_tag questions_path, method: :get, remote: true, data: { state: true } do %>
+        <%= hidden_field_tag :tab, params[:tab] %>
+        <div class="input-group select2-bootstrap-append">
+          <%= text_field_tag :tags, params[:tags], id: :question_filter, class: :'form-control', placeholder: t('question.tag.placeholder'), data: { as: :select2, role: [:tags, :filter].join(','), type: :question } %>
+          <span class="input-group-btn">
+            <%# TODO (smolnar) add tooltip & clipboard %>
+            <button class="btn btn-default" type="button"><%= icon_tag :link %></button>
+          </span>
+        </div>
 
-          <%= icon_link_to :plus, t('question.new.feature'), new_question_path, id: :'new-question', class: 'btn btn-success pull-right' %>
-        </h1>
-      </div>
-
-      <%= form_tag questions_path(tab: params[:tab]), method: :get, remote: true do %>
-        <%= text_field_tag :tags, params[:tags], id: :'question-filter', class: :'form-control', data: { as: :select2, role: [:tags, :filter].join(','), type: :question } %>
       <% end %>
-
-    </section>
+    </div>
   </div>
-</div>
+</section>
 
+<section id="question-controls">
+  <%= icon_link_to :plus, t('question.new.feature'), new_question_path, id: :'new-question', class: 'btn btn-success pull-right' %>
+
+  <ul class="nav nav-tabs">
+    <%= tab_link_tag t('question.index.new'), :'questions-new' %>
+    <%= tab_link_tag t('question.index.favored'), :'questions-favored' %>
+    <%= tab_link_tag t('question.index.answered'), :'questions-answered' %>
+  </ul>
+</section>
 <!-- TODO(zbell) add some navigation here: old / new q. etc. -->
 
 <%= render 'questions', questions: @questions %>

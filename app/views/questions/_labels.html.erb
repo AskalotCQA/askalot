@@ -1,6 +1,8 @@
 <!-- TODO(zbell) fill content & links to tags -->
 <ul class="nav nav-labels">
   <% labels.each do |label| %>
-    <li><a class="label label-<%= label.is_a?(Category) ? :primary : :info %>" href="#"><%= label.name %> (<%= label.count %>)</a></li>
+    <li>
+      <%# TODO (smolnar) refactor %>
+      <%= link_to "#{label.name} (#{label.count})", '#', data: { id: label.name, text: "#{label.name} (#{label.count})" }, class: "label label-#{label.is_a?(Category) ? :primary : :info}" %>
   <% end %>
 </ul>

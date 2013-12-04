@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
           <%= f.label :tag_list %>
-          <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags, type: :question }, placeholder: t('question.tag.placeholder') %>
+          <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
         </div>
 
         <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
