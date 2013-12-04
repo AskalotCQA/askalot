@@ -1,0 +1,61 @@
+#= require hash
+#= require remote
+
+<<<<<<< HEAD
+$(document).ready ->
+  window.defined = (value) ->
+    typeof(value) != 'undefined'
+
+  window.fixes = ->
+    $('[data-toggle="popover"]').popover()
+    $('[data-toggle="tooltip"]').tooltip(container: 'body')
+    $('[data-toggle="tooltip"]').on 'show.bs.tooltip', -> $(this).removeAttr('title')
+
+    # TODO(zbell) refactor and fix properly
+    $('a[data-toggle="tooltip"]').on 'click', ->
+      $(this).tooltip(container: false, delay: { hide: 0 })
+      $(this).tooltip('destroy')
+
+    $('a[href="#"]').click (event) -> event.preventDefault()
+
+  window.fixTabs = ->
+    $('a[data-toggle="pill"]').click (e) -> e.preventDefault()
+
+    $('a[data-toggle="pill"]').on 'shown.bs.tab', (e) ->
+      e.preventDefault()
+||||||| merged common ancestors
+$(document).ready ->
+  window.defined = (value) ->
+    typeof(value) != 'undefined'
+
+  window.fixes = ->
+    $('[data-toggle="popover"]').popover(container: 'body')
+    $('[data-toggle="tooltip"]').tooltip(container: 'body')
+    $('[data-toggle="tooltip"]').on 'show.bs.tooltip', -> $(this).removeAttr('title')
+    $('a[href="#"]').click (event) ->
+      event.preventDefault()
+
+  window.fixTabs = ->
+    $('a[data-toggle="pill"]').click (e) -> e.preventDefault()
+
+    $('a[data-toggle="pill"]').on 'shown.bs.tab', (e) ->
+      e.preventDefault()
+=======
+window.defined = (value) ->
+  typeof(value) != 'undefined'
+>>>>>>> Refactor fixes
+
+window.fixes = ->
+  Remote.bindState()
+
+  $('[data-toggle="popover"]').popover(container: 'body')
+  $('[data-toggle="tooltip"]').tooltip(container: 'body')
+  $('[data-toggle="tooltip"]').on 'show.bs.tooltip', -> $(this).removeAttr('title')
+  $('a[href="#"]').click (event) ->
+    event.preventDefault()
+
+$(document).ready ->
+  fixes()
+
+  # TODO (smolnar) resolve automatic fixes callback for ajax requests
+  $(document).on 'ajax:success', '[data-remote=true]', -> fixes()
