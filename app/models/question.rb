@@ -18,6 +18,7 @@ class Question < ActiveRecord::Base
 
   # TODO (smolnar) resolve order for answers.created_at
   scope :answered,   lambda { joins(:answers).uniq }
+  # TODO (smolnar) create favored scope, order by favorites.size, created_at
   scope :favored_by, lambda { |user| joins(:favorites).where(favorites: { user: user }) }
 
   def labels
