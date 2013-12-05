@@ -24,6 +24,8 @@
 #= require rails-timeago
 #= require locales/jquery.timeago.sk.js
 #
+#= require form
+#
 #= require questions
 #
 #= require fixes

@@ -44,6 +44,8 @@ class window.Select extends Module
 
     @.bind()
 
+    $(@selector)
+
   each: (callback) ->
     $(@selector).each (index, element) ->
       callback(index, element)
@@ -51,12 +53,11 @@ class window.Select extends Module
   bind: ->
     @.each (i, element) =>
       role    = $(element).attr('data-role')
-      focus   = $(element).attr('autofocus')
       options = @.options_for role
 
       $(element).select2 options
 
-      $(element).select2 'focus' if focus
+      $(element).on 'change', -> $(this).select2('focus')
 
   addItem: (item) ->
     @.each (i, element) =>

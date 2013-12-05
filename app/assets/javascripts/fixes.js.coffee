@@ -19,8 +19,6 @@ window.fixes = ->
 
   $('a[href="#"]').click (event) -> event.preventDefault()
 
-  new Select()
-
 $(document).ready ->
   fixes()
 
