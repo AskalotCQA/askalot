@@ -51,12 +51,12 @@ class window.Select extends Module
   bind: ->
     @.each (i, element) =>
       role    = $(element).attr('data-role')
-      options = @.options_for role
       focus   = $(element).attr('autofocus')
+      options = @.options_for role
 
       $(element).select2 options
 
-      $(element).select2 'focus' if focus == 'true'
+      $(element).select2 'focus' if focus
 
   addItem: (item) ->
     @.each (i, element) =>

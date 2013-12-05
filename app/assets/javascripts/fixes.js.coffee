@@ -25,4 +25,4 @@ $(document).ready ->
   fixes()
 
   # TODO (smolnar) resolve automatic fixes callback for ajax requests
-  $(document).on 'ajax:success', '[data-remote=true]', -> fixes()
+  # $(document).on 'ajax:success', '[data-remote=true]', -> fixes()

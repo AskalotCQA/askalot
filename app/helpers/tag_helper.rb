@@ -58,7 +58,7 @@ module TagHelper
     classes.merge! class: :active if params[:tab].to_sym == tab.to_sym
 
     content_tag :li, classes do
-      link_to title, "#{path}##{tab}", options.deep_merge(data: { state: true })
+      link_to title, path, options.deep_merge(data: { target: "##{tab}", state: true })
     end
   end
 
