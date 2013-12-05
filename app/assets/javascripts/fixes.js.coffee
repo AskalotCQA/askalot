@@ -1,5 +1,6 @@
 #= require hash
 #= require remote
+#= require select
 
 window.defined = (value) ->
   typeof(value) != 'undefined'
@@ -12,6 +13,8 @@ window.fixes = ->
   $('[data-toggle="tooltip"]').on 'show.bs.tooltip', -> $(this).removeAttr('title')
   $('a[href="#"]').click (event) ->
     event.preventDefault()
+
+  new Select()
 
 $(document).ready ->
   fixes()
