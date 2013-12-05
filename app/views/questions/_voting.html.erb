@@ -3,7 +3,7 @@
   <% if question.upvoted_by?(current_user) %>
     <%= icon_link_to :'chevron-up', nil, voteup_question_path(question.id), data: { remote: true } %>
   <% else %>
-    <%= icon_link_to :'chevron-up', nil, voteup_question_path(question.id), data: { remote: true }, class: 'text-muted' %>
+    <%= icon_link_to :'chevron-up', nil, voteup_question_path(question.id), data: { remote: true }, class: :'text-muted' %>
   <% end %>
 
   <span>
@@ -13,6 +13,6 @@
   <% if question.downvoted_by?(current_user) %>
     <%= icon_link_to :'chevron-down', nil, votedown_question_path(question.id), data: { remote: true } %>
   <% else %>
-    <%= icon_link_to :'chevron-down', nil, votedown_question_path(question.id), data: { remote: true }, class: 'text-muted' %>
+    <%= icon_link_to :'chevron-down', nil, votedown_question_path(question.id), data: { remote: true }, class: :'text-muted' %>
   <% end %>
 </div>
