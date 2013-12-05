@@ -1,12 +1,6 @@
 @import 'mixins';
 @import 'variables';
 
-h1 {
-  #new-question {
-    margin: 3px 0;
-  }
-}
-
 #questions {
   & > ul > li + li {
     margin-top: 20px;
