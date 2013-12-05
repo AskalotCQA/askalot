@@ -4,6 +4,6 @@
     <li>
       <%# TODO (smolnar) refactor %>
       <%= link_to "#{label.name} (#{label.count})", '#', data: { id: label.name, text: "#{label.name} (#{label.count})" }, class: "label label-#{label.is_a?(Category) ? :primary : :info}" %>
-  <% end %>
     </li>
+  <% end %>
 </ul>
