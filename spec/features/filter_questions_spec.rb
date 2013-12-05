@@ -18,7 +18,7 @@ describe 'Filter Questions', js: true do
 
     click_link 'Otázky'
 
-    fill_in_select2 'question_filter', with: 'elasticsearch'
+    fill_in_select2 'question_tags', with: 'elasticsearch'
 
     list = all('#questions > ul > li')
     expect(list).to have(10).items
@@ -42,8 +42,8 @@ describe 'Filter Questions', js: true do
 
     click_link 'Otázky'
 
-    fill_in_select2 'question_filter', with: 'elasticsearch'
-    fill_in_select2 'question_filter', with: 'ruby'
+    fill_in_select2 'question_tags', with: 'elasticsearch'
+    fill_in_select2 'question_tags', with: 'ruby'
 
     list = all('#questions > ul > li')
     expect(list).to have(10).times
@@ -53,7 +53,7 @@ describe 'Filter Questions', js: true do
       expect(item).to have_content('ruby')
     end
 
-    fill_in_select2 'question_filter', with: 'linux'
+    fill_in_select2 'question_tags', with: 'linux'
 
     list = all('#questions > ul > li')
     expect(list).to have(0).times
