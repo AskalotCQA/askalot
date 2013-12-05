@@ -6,7 +6,7 @@ class TagsController < ApplicationController
   # * use pagination
 
   def suggest
-    tags = Tag.where('tags.name LIKE ?', "#{params[:q]}%").limit(10)
+    tags = Tag.where('tags.name LIKE ?', "#{params[:q]}%").limit(10).order(:name)
 
     render json: {
       results: tags.map { |tag|
