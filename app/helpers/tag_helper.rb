@@ -53,12 +53,15 @@ module TagHelper
   end
 
   def tab_link_tag(title, tab, path, options = {})
-    classes = Hash.new
+    classes  = Hash.new
+    defaults = { data: { toggle: :tab, state: true, target: "##{tab}" }}
+
+    options = defaults.deep_merge(options)
 
     classes.merge! class: :active if params[:tab].to_sym == tab.to_sym
 
     content_tag :li, classes do
-      link_to title, path, options.deep_merge(data: { target: "##{tab}", state: true })
+      link_to title, path, options
     end
   end
 

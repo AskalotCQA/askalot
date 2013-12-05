@@ -3,9 +3,9 @@
 
   <%# TODO (smolnar) dry %>
   <ul class="nav nav-tabs">
-    <%= tab_link_tag t('question.tab.new'), :'questions-new', questions_path(tab: :'questions-new', tags: params[:tags]), remote: true, data: { toggle: :tab } %>
-    <%= tab_link_tag t('question.tab.favored'), :'questions-favored', questions_path(tab: :'questions-favored', tags: params[:tags]), remote: true, data: { toggle: :tab } %>
-    <%= tab_link_tag t('question.tab.answered'), :'questions-answered', questions_path(tab: :'questions-answered', tags: params[:tags]), remote: true, data: { toggle: :tab } %>
+    <%= tab_link_tag t('question.tab.new'), :'questions-new', questions_path(params.merge(tab: :'questions-new')), remote: true %>
+    <%= tab_link_tag t('question.tab.favored'), :'questions-favored', questions_path(params.merge(tab: :'questions-favored')), remote: true %>
+    <%= tab_link_tag t('question.tab.answered'), :'questions-answered', questions_path(params.merge(tab: :'questions-answered')), remote: true %>
   </ul>
 </section>
 <!-- TODO(zbell) add some navigation here: old / new q. etc. -->
