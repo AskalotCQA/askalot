@@ -49,6 +49,22 @@ describe Question do
     end
   end
 
+  describe '.answered' do
+    let!(:questions) { 3.times.map { create :question, :with_answers } }
+
+    before :each do
+      10.times { create :question }
+    end
+
+    it 'returns questions having at least one answer' do
+      expect(Question.answered.count).to eql(3)
+
+      Question.answered.each do |question|
+        expect(questions).to include(question)
+      end
+    end
+  end
+
   describe '#labels' do
     context 'with no tag' do
       it 'contains only category' do

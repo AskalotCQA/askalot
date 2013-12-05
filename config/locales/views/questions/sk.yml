@@ -13,7 +13,7 @@ sk:
     tab:
       new: 'Nové'
       favored: 'Obľúbené'
-      answered: 'Odpovedné'
+      answered: 'Odpovedané'
 
     tag:
       new: 'nový'

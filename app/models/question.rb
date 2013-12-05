@@ -16,7 +16,7 @@ class Question < ActiveRecord::Base
   validates :title, presence: true, length: { minimum: 2, maximum: 250 }
   validates :text,  presence: true, length: { minimum: 2 }
 
-  scope :favored_by, lambda { |user| joins(:favorites).where(favorites: { user: user }) }
+  scope :favored_by, lambda { |user| joins(:favorites).where(favorites: { user: user }).order('favorites.created_at desc') }
   scope :answered,   lambda { joins(:answers).order('answers.created_at desc') }
 
   def labels
@@ -39,5 +39,7 @@ class Question < ActiveRecord::Base
     return Favorite.create! user: user, question: self unless favored_by?(user)
 
     Favorite.where(user: user, question: self).first.destroy
+
+    self
   end
 end
