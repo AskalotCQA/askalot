@@ -12,5 +12,11 @@ FactoryGirl.define do
     trait :with_tags do
       sequence(:tag_list) { |n| "tag_#{n}" }
     end
+
+    trait :with_answers do
+      after :create do |question|
+        3.times { create :answer, question: question }
+      end
+    end
   end
 end
