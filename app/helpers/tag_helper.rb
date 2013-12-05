@@ -52,13 +52,13 @@ module TagHelper
     navbar_li_tag body, url, options.merge(class: :dropdown)
   end
 
-  def tab_link_tag(title, tab, options = {})
+  def tab_link_tag(title, tab, path, options = {})
     classes = Hash.new
 
     classes.merge! class: :active if params[:tab].to_sym == tab.to_sym
 
     content_tag :li, classes do
-      link_to title, "##{tab}", options
+      link_to title, "#{path}##{tab}", options.deep_merge(data: { state: true })
     end
   end
 

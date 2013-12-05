@@ -10,6 +10,11 @@ sk:
     create:
       success: 'Vaša otázka bola úspešne pridaná.'
 
+    tab:
+      new: 'Nové'
+      favored: 'Obľúbené'
+      answered: 'Odpovedné'
+
     tag:
       new: 'nový'
       searching: 'Hľadám…'

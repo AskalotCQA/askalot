@@ -3,8 +3,14 @@ class QuestionsController < ApplicationController
   before_action :set_default_tab, only: :index
 
   def index
-    @questions = Question.order('created_at desc').page(params[:page]).per(10)
+    @questions = case params[:tab].to_sym
+                 when :'questions-new'      then Question.order('created_at desc')
+                 when :'questions-answered' then Question.answered
+                 when :'questions-favored'  then Question.favored_by current_user
+                 else fail
+                 end
 
+    @questions = @questions.page(params[:page]).per(10)
     @questions = @questions.tagged_with params[:tags] if params[:tags].present?
   end
 
