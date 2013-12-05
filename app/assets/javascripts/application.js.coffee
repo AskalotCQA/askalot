@@ -20,7 +20,6 @@
 #= require_tree ./core
 #
 #= require select2
-#= require select
 #
 #= require rails-timeago
 #= require locales/jquery.timeago.sk.js

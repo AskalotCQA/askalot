@@ -52,8 +52,11 @@ class window.Select extends Module
     @.each (i, element) =>
       role    = $(element).attr('data-role')
       options = @.options_for role
+      focus   = $(element).attr('autofocus')
 
       $(element).select2 options
+
+      $(element).select2 'focus' if focus == 'true'
 
   addItem: (item) ->
     @.each (i, element) =>
@@ -72,5 +75,3 @@ class window.Select extends Module
         options = $.extend({}, options, @roles[role])
 
     options
-
-new Select()
