@@ -17,6 +17,7 @@ class Question < ActiveRecord::Base
   validates :text,  presence: true, length: { minimum: 2 }
 
   scope :favored_by, lambda { |user| joins(:favorites).where(favorites: { user: user }) }
+  scope :answered,   lambda { joins(:answers).order('answers.created_at desc') }
 
   def labels
     [category] + tags_with_counts
