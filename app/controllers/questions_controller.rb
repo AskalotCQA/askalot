@@ -5,8 +5,8 @@ class QuestionsController < ApplicationController
   def index
     @questions = case params[:tab].to_sym
                  when :'questions-new'      then Question.order('created_at desc')
-                 when :'questions-answered' then Question.answered
-                 when :'questions-favored'  then Question.favored_by(current_user)
+                 when :'questions-answered' then Question.answered.order(updated_at: :desc)
+                 when :'questions-favored'  then Question.favored_by(current_user).order(:'favorites.created_at' => :desc)
                  else fail
                  end
 

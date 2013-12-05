@@ -17,8 +17,8 @@ class Question < ActiveRecord::Base
   validates :text,  presence: true, length: { minimum: 2 }
 
   # TODO (smolnar) resolve order for answers.created_at
-  scope :answered,   lambda { joins(:answers).order(updated_at: :desc).uniq }
-  scope :favored_by, lambda { |user| joins(:favorites).where(favorites: { user: user }).order('favorites.created_at desc') }
+  scope :answered,   lambda { joins(:answers).uniq }
+  scope :favored_by, lambda { |user| joins(:favorites).where(favorites: { user: user }) }
 
   def labels
     [category] + tags_with_counts
