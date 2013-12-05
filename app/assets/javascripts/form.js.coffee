@@ -5,4 +5,4 @@ class window.Form extends Module
     @selector = selector
     @form     = $(@selector)
 
-  set: (params) -> @form.find("[name=#{key}]").val(value) for key, value of params
+  setParams: (params) -> @form.find("[name=#{key}]").val(value) for key, value of params
