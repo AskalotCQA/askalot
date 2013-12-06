@@ -2,12 +2,11 @@
 
 <footer>
   <div class="container">
-    <!-- TODO(zbell) add links -->
-
     <ul class="list-inline text-center text-muted">
-      <li><%= external_link_to t('footer.about') %></li>
-      <li><%= external_link_to t('footer.documentation') %></li>
-      <li><%= external_link_to t('footer.authors') %></li>
+      <li><%= external_link_to t('footer.about'), url_to_site('#about') %></li>
+      <li><%= external_link_to t('footer.documentation'), url_to_site('#documents') %></li>
+      <li><%= external_link_to t('footer.authors'), url_to_site('#authors') %></li>
+      <li><%= external_link_to t('footer.contact'), url_to_site('#contact') %></li>
     </ul>
 
     <p class="text-center text-muted">

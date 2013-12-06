@@ -17,4 +17,8 @@ module ApplicationHelper
   def use_narrower_layout?
     devise_controller? && !current_page?(edit_user_registration_path) && !(params[:controller] == 'registrations' && params[:action] == 'update')
   end
+
+  def url_to_site(path = nil)
+    "http://labss2.fiit.stuba.sk/TeamProject/2013/team13is-si/#{path}"
+  end
 end
