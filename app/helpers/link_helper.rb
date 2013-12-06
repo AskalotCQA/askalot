@@ -21,7 +21,7 @@ module LinkHelper
     close_link_to nil, options.deep_merge(data: { dismiss: :modal })
   end
 
-  def external_link_to(body, url, options = {})
+  def external_link_to(body, url = nil, options = {})
     icon = options.delete(:icon)
 
     return link_to body, url, options.merge(target: :_blank) unless icon

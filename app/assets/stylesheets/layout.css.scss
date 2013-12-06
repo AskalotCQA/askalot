@@ -29,6 +29,8 @@ section {
   }
 }
 
+// helpers
+
 .pagination-navigation {
   display: block;
   position: relatve;
@@ -42,10 +44,16 @@ section {
   padding-top: $navbar-height;
 }
 
-// helpers
-
 .text-lead {
   margin-top: 20px;
+}
+
+.text-muted a {
+  color: darken($text-muted, 12.5%);
+
+  &:focus, &:hover {
+    color: darken($text-muted, 25%);
+  }
 }
 
 // header
@@ -66,7 +74,10 @@ header {
 // footer
 
 footer {
-  margin: 100px 0px;
+  margin: 100px 0;
+  padding: 50px 0;
+
+  background: $gray-lighter;
 }
 
 // profile
