@@ -1,18 +1,51 @@
 <div class="jumbotron">
   <div class="container">
     <div class="row">
-      <div class="col-md-10">
-        <h1>
-          na&#x042f;uby <span data-placement="top" data-toggle="tooltip" data-original-title="Community Question Answering">CQA</span> <%= icon_tag :'comments-o' %>
-        </h1>
+      <div class="col-md-12">
+        <div class="text-center">
+          <h1>
+            na&#x042f;uby
+          </h1>
+<!-- TODO (zbell) consider
+          <p class="text-lead">
+            Komunitný systém otázok a odpovedí ďalšej generácie
+          </p>
+-->
+        </div>
+      </div>
+    </div>
 
-        <p>
-          Webový komunitný systém otázok a odpovedí ďalšej generácie
-        </p>
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="list-inline text-center">
+          <li>
+            <%= icon_link_to :'question-circle', t('home.ask'), new_question_path, id: :'new-question', class: 'btn btn-primary btn-lg' %>
+          </li>
+          <li>
+            <% if Configuration.show.registrations? %>
+              <%= icon_link_to :rocket, t('home.sign_up'), new_user_registration_path, class: 'btn btn-success btn-lg' %>
+            <% else %>
+              <%= icon_link_to :rocket, t('home.sign_in'), new_user_session_path, class: 'btn btn-success btn-lg' %>
+            <% end %>
+          </li>
+         </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4">
+        <h2 class="text-center"><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new') %></h2>
+        <%= render 'questions', questions: @new %>
       </div>
 
-      <div class="col-md-2">
-        <%= icon_link_to :plus, t('question.new.feature'), new_question_path, id: :'new-question', class: 'btn btn-success btn-lg' %>
+      <div class="col-md-4">
+        <h2 class="text-center"><%= link_to t('home.featured.answered'), questions_path(tab: :'questions-answered') %></h2>
+        <%= render 'questions', questions: @answered %>
+      </div>
+
+      <div class="col-md-4">
+        <h2 class="text-center"><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored') %></h2>
+        <%= render 'questions', questions: @favored %>
       </div>
     </div>
   </div>

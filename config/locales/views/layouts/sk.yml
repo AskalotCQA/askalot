@@ -1,4 +1,14 @@
 sk:
+  home:
+    ask: 'Opýtať sa otázku'
+    sign_up: 'Vytvoriť si účet'
+    sign_in: 'Prihlásiť sa'
+
+    featured:
+      new: 'Nové otázky'
+      favored: 'Obľúbené otázky'
+      answered: 'Odpovedané otázky'
+
   footer:
     about: 'O projekte'
     authors: 'Autori'

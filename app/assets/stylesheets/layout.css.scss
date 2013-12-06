@@ -49,11 +49,7 @@ section {
 }
 
 .text-muted a {
-  color: darken($text-muted, 12.5%);
-
-  &:focus, &:hover {
-    color: darken($text-muted, 25%);
-  }
+  @include action-coloring(darken($text-muted, 12.5%), darken($text-muted, 25%));
 }
 
 // header
@@ -64,10 +60,50 @@ header {
 // jumbotron
 
 .jumbotron {
-  text-shadow: 0 0 16px $jumbotron-color;
+  h1 {
+    text-shadow: 0 0 128px $brand-info;
+  }
 
-  #new-question {
-    margin-top: 37.5px;
+// TODO (zbell) rm
+//  p {
+//    font-size: 30px;
+//    text-shadow: 0 0 96px $brand-info;
+//    color: rgba($jumbotron-color, .25);
+//  }
+
+  ul {
+    margin: 75px 0 !important;
+
+    .btn {
+      padding: $padding-large-vertical * 1.25 $padding-large-horizontal * 1.25;
+      font-size: $jumbotron-font-size * 1.25;
+      text-shadow: 0 0 128px $brand-info;
+    }
+  }
+
+  h2 {
+    text-shadow: 0 0 64px $brand-info;
+  }
+
+  a {
+    @include action-coloring(darken($jumbotron-color, 12.5%), $jumbotron-color);
+  }
+
+  ol {
+    li {
+      margin-bottom: 20px;
+      padding-top: 20px;
+      border-top: 1px solid rgba($jumbotron-color, .05);
+    }
+
+    a {
+      text-shadow: 0 0 48px $brand-info;
+    }
+
+    small {
+      display: block;
+      color: rgba($jumbotron-color, .25);
+    }
   }
 }
 

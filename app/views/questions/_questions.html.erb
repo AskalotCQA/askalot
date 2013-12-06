@@ -1,11 +1,11 @@
 <%# TODO (zbell) review sections %>
 <section id="questions">
   <% if questions.any? %>
-    <ul class="list-unstyled">
+    <ol class="list-unstyled">
       <% questions.each do |question| %>
         <%= render 'question', question: question %>
       <% end %>
-    </ul>
+    </ol>
   <% else %>
     <div class="row">
       <div class="col-md-12">

@@ -7,6 +7,8 @@ $icon-font-name: 'fontawesome-webfont';
 
 // jumbotron
 
+$jumbotron-padding: 100px;
 $jumbotron-bg: #081218;
 $jumbotron-color: #fff;
 $jumbotron-heading-color: #fff;
+$jumbotron-font-size: ceil($font-size-base * 1.25);
