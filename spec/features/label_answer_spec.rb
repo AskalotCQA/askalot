@@ -8,7 +8,7 @@ describe 'Label Answer' do
   let!(:question) { create :question, author: author }
   let!(:answer) { create :answer, question: question }
 
-  context 'when user is question author' do
+  context 'with question author' do
     before :each do
       login_as author
     end
@@ -76,7 +76,7 @@ describe 'Label Answer' do
     end
   end
 
-  context 'when user is not question author' do
+  context 'not with question author' do
     before :each do
       login_as user
     end
@@ -119,7 +119,7 @@ describe 'Label Answer' do
     end
   end
 
-  context 'when user is teacher' do
+  context 'with teacher' do
     before :each do
       login_as teacher
     end
