@@ -30,9 +30,9 @@ class AnswersController < ApplicationController
 
     case params[:value].to_sym
     when :best
-      authorize! :edit, @answer
+      authorize! :edit, @question
 
-      @question.answers.where.not(id: @answer.id).all.each do |answer|
+      @question.answers.where.not(id: @answer.id).each do |answer|
         labeling = answer.labelings.by(current_user).with(:best).first
 
         if labeling
@@ -41,7 +41,7 @@ class AnswersController < ApplicationController
         end
       end
     when :helpful
-      authorize! :edit, @answer
+      authorize! :edit, @question
 
       fail if @answer.labelings.by(current_user).with(:best).exists?
     when :verified

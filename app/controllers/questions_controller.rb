@@ -37,7 +37,6 @@ class QuestionsController < ApplicationController
     @author   = @question.author
     @labels   = @question.labels
     @answers  = @question.answers.order('created_at desc')
-
     @answer   = Answer.new question: @question
   end
 
