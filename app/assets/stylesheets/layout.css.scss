@@ -86,7 +86,7 @@ header {
   }
 
   a {
-    @include action-coloring(darken($jumbotron-color, 12.5%), $jumbotron-color);
+    @include action-coloring($jumbotron-color, $jumbotron-color);
   }
 
   ol {
