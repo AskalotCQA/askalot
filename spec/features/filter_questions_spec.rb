@@ -20,7 +20,7 @@ describe 'Filter Questions', js: true do
 
     fill_in_select2 'question_tags', with: 'elasticsearch'
 
-    list = all('#questions > ul > li')
+    list = all('#questions > ol > li')
     expect(list).to have(10).items
 
     list.each { |item| expect(item).to have_content('elasticsearch') }
@@ -31,7 +31,7 @@ describe 'Filter Questions', js: true do
       wait_for_remote
     end
 
-    list = all('#questions > ul > li')
+    list = all('#questions > ol > li')
     expect(list).to have(5).items
 
     list.each { |item| expect(item).to have_content('elasticsearch') }
@@ -45,7 +45,7 @@ describe 'Filter Questions', js: true do
     fill_in_select2 'question_tags', with: 'elasticsearch'
     fill_in_select2 'question_tags', with: 'ruby'
 
-    list = all('#questions > ul > li')
+    list = all('#questions > ol > li')
     expect(list).to have(10).times
 
     list.each do |item|
@@ -55,7 +55,7 @@ describe 'Filter Questions', js: true do
 
     fill_in_select2 'question_tags', with: 'linux'
 
-    list = all('#questions > ul > li')
+    list = all('#questions > ol > li')
     expect(list).to have(0).times
     expect(page).to have_content('Neboli nájdené žiadne otázky.')
   end
@@ -65,7 +65,7 @@ describe 'Filter Questions', js: true do
 
     click_link 'Otázky'
 
-    list = all('#questions > ul > li')
+    list = all('#questions > ol > li')
 
     within list[0] do
       click_link 'elasticsearch'
@@ -73,7 +73,7 @@ describe 'Filter Questions', js: true do
       wait_for_remote
     end
 
-    list = all('#questions > ul > li')
+    list = all('#questions > ol > li')
     expect(list).to have(10).items
 
     list.each { |item| expect(item).to have_content('elasticsearch') }
@@ -84,7 +84,7 @@ describe 'Filter Questions', js: true do
       wait_for_remote
     end
 
-    list = all('#questions > ul > li')
+    list = all('#questions > ol > li')
     expect(list).to have(10).items
 
     list.each do |item|

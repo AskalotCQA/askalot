@@ -11,12 +11,12 @@ describe 'Add Question' do
   it 'adds new question', js: true do
     visit root_path
 
-    click_link 'Pridať otázku'
+    click_link 'Opýtať sa otázku'
 
     fill_in 'question_title', with: ''
     fill_in 'question_text',  with: ''
 
-    click_button 'Opýtať sa'
+    click_button 'Opýtať'
 
     expect(page).to have_content('Nadpis – je povinná položka')
     expect(page).to have_content('Text – je povinná položka')
@@ -29,7 +29,7 @@ describe 'Add Question' do
     fill_in_select2 'question_tag_list', with: 'linux server'
     fill_in_select2 'question_tag_list', with: 'elasticsearch'
 
-    click_button 'Opýtať sa'
+    click_button 'Opýtať'
 
     expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
 

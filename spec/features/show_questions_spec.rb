@@ -27,7 +27,7 @@ describe 'Show Questions', js: true do
       wait_for_remote
     end
 
-    list = all('#questions > ul > li')
+    list = all('#questions > ol > li')
 
     expect(list).to have(10).items
 
@@ -52,7 +52,7 @@ describe 'Show Questions', js: true do
       wait_for_remote
     end
 
-    list = all('#questions > ul > li')
+    list = all('#questions > ol > li')
 
     expect(list).to have(4).items
 
@@ -82,7 +82,7 @@ describe 'Show Questions', js: true do
         wait_for_remote
       end
 
-      list = all('#questions > ul > li')
+      list = all('#questions > ol > li')
 
       expect(list).to have(3).items
 
