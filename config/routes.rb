@@ -18,11 +18,13 @@ NaRuby::Application.routes.draw do
     resources :answers
 
     get :favor, on: :member
+
     concerns :votable
   end
 
   resources :answers do
     get :label, on: :member
+
     concerns :votable
   end
 

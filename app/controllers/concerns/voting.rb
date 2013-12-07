@@ -11,15 +11,15 @@ module Voting
 
   private
 
+  def model
+    @model ||= controller_name.classify.constantize
+  end
+
   def vote(voteup)
-    @votable = controller_name.classify.constantize.find(params[:id])
+    @votable = model.find(params[:id])
 
-    if voteup
-      @votable.toggle_voteup_by!(current_user)
-    else
-      @votable.toggle_votedown_by!(current_user)
-    end
+    @votable.toggle_vote_by!(current_user, voteup)
 
-    render :vote
+    render 'vote', formats: :js
   end
 end
