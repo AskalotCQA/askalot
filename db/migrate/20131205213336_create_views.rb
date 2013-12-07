@@ -4,7 +4,7 @@ class CreateViews < ActiveRecord::Migration
       t.references :question, null: false
       t.references :user,     null: false
 
-      t.column :created_at, :datetime
+      t.datetime :created_at
     end
 
     add_index :views, :user_id
