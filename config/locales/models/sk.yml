@@ -1,4 +1,90 @@
 sk:
+  count:
+    answer:
+      zero: 'odpovedí'
+      one: 'odpoveď'
+      few: 'odpovede'
+      other: 'odpovedí'
+
+    author:
+      zero: 'autorov'
+      one: 'autor'
+      few: 'autori'
+      other: 'autorov'
+
+    comment:
+      zero: 'komentárov'
+      one: 'komentár'
+      few: 'komentáre'
+      other: 'komentárov'
+
+    favorite:
+      zero: 'obľúbení'
+      one: 'obľúbenie'
+      few: 'obľúbenia'
+      other: 'obľúbení'
+
+    question:
+      zero: 'otázok'
+      one: 'otázka'
+      few: 'otázky'
+      other: 'otázok'
+
+    view:
+      zero: 'zobrazení'
+      one: 'zobrazenie'
+      few: 'zobrazenia'
+      other: 'zobrazení'
+
+    vote:
+      zero: 'hlasov'
+      one: 'hlas'
+      few: 'hlasy'
+      other: 'hlasov'
+
+  count_x:
+    answer:
+      zero: 'žiadna odpoveď'
+      one: '1 odpoveď'
+      few: '%{count} odpovede'
+      other: '%{count} odpovedí'
+
+    author:
+      zero: 'žiaden autor'
+      one: '1 autor'
+      few: '%{count} autori'
+      other: '%{count} autorov'
+
+    comment:
+      zero: 'žiaden komentár'
+      one: '1 komentár'
+      few: '%{count} komentáre'
+      other: '%{count} komentárov'
+
+    favorite:
+      zero: 'žiadne obľúbenie'
+      one: '1 obľúbenie'
+      few: '%{count} obľúbenia'
+      other: '%{count} obľúbení'
+
+    question:
+      zero: 'žiadna otázka'
+      one: '1 otázka'
+      few: '%{count} otázky'
+      other: '%{count} otázok'
+
+    view:
+      zero: 'žiadne videnia'
+      one: '1 videnie'
+      few: '%{count} videnia'
+      other: '%{count} videní'
+
+    vote:
+      zero: 'žiadne hlasy'
+      one: '1 hlas'
+      few: '%{count} hlasy'
+      other: '%{count} hlasov'
+
   activerecord:
     attributes:
       user:

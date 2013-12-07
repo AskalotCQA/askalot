@@ -26,24 +26,6 @@ sk:
       new: 'Nová otázka'
       no_results_found: 'Neboli nájdené žiadne otázky.'
 
-    answer:
-      zero: 'žiadna odpoveď'
-      one: '1 odpoveď'
-      few: '%{count} odpovede'
-      other: '%{count} odpovedí'
-
-    view:
-      zero: 'žiadne videnia'
-      one: '1 videnie'
-      few: '%{count} videnia'
-      other: '%{count} videní'
-
-    vote:
-      zero: 'žiadne hlasy'
-      one: '1 hlas'
-      few: '%{count} hlasy'
-      other: '%{count} hlasov'
-
     favor: 'Pridať medzi obľúbené'
     unfavor: 'Odobrať z obľúbených'
 
