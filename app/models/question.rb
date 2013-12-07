@@ -11,6 +11,10 @@ class Question < ActiveRecord::Base
 
   has_many :watchings, as: :watchable
 
+  has_many :votes, as: :votable
+
+  has_many :views
+
   acts_as_taggable
 
   validates :title, presence: true, length: { minimum: 2, maximum: 250 }
@@ -42,5 +46,13 @@ class Question < ActiveRecord::Base
     Favorite.where(user: user, question: self).first.destroy
 
     self
+  end
+
+  def view_by!(user)
+    views.create!(user: user)
+  end
+
+  def distinct_views_count
+    View.where(question: self).distinct.count(:user_id)
   end
 end

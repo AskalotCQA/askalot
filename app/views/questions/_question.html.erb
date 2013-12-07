@@ -7,11 +7,15 @@
           <span class="question-metric"><%= t('question.index.votes') %></span>
         </div>
         <div class="col-md-4">
-          <span class="question-value">123</span>
+          <span class="question-value">
+            <%= question.answers.size %>
+          </span>
           <span class="question-metric"><%= t('question.index.answers') %></span>
         </div>
         <div class="col-md-4">
-          <span class="question-value">123</span>
+          <span class="question-value">
+            <%= question.distinct_views_count %>
+          </span>
           <span class="question-metric"><%= t('question.index.views') %></span>
         </div>
       </div>
