@@ -1,5 +1,7 @@
 sk:
   home:
+    headline: 'Komunitný systém otázok a odpovedí ďalšej generácie'
+
     ask: 'Opýtať sa otázku'
     sign_up: 'Vytvoriť si účet'
     sign_in: 'Prihlásiť sa'
