@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  include Voting
+
   before_action :authenticate_user!
   before_action :set_default_tab, only: :index
 

@@ -4,7 +4,7 @@ module GravatarHelper
     rating = options[:rating] || :g
     size   = options[:size]   || 80
 
-    "http://gravatar.com/avatar/#{hash}?r=#{rating}&s=#{size}"
+    "http://gravatar.com/avatar/#{hash}?r=#{rating}&s=#{size}&d=retro"
   end
 
   def gravatar_image_tag(email, options = {})

@@ -3,16 +3,22 @@
     <div class="col-md-3">
       <div class="row">
         <div class="col-md-4">
-          <span class="question-value">123</span>
-          <span class="question-metric"><%= t('question.index.votes') %></span>
+          <%= content_tag :span, class: [:'question-metric', question_votes_coloring(question)] do %>
+            <span class="question-value"><%= question.total_votes %></span>
+            <%= t('count.vote', count: question.total_votes) %>
+          <% end %>
         </div>
         <div class="col-md-4">
-          <span class="question-value">123</span>
-          <span class="question-metric"><%= t('question.index.answers') %></span>
+          <%= content_tag :span, class: [:'question-metric', question_answers_coloring(question)] do %>
+            <span class="question-value"><%= question.answers.size %></span>
+            <%= t('count.answer', count: question.answers.size) %>
+          <% end %>
         </div>
         <div class="col-md-4">
-          <span class="question-value">123</span>
-          <span class="question-metric"><%= t('question.index.views') %></span>
+          <%= content_tag :span, class: [:'question-metric', question_views_coloring(question)] do %>
+            <span class="question-value">123</span>
+            <%= t('count.view', count: 123) %>
+          <% end %>
         </div>
       </div>
     </div>

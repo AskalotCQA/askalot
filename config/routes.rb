@@ -9,14 +9,23 @@ NaRuby::Application.routes.draw do
 
   match 'users/:nick', via: :get, to: 'users#show', as: :user
 
+  concern :votable do
+    get :voteup, on: :member
+    get :votedown, on: :member
+  end
+
   resources :questions do
     resources :answers
 
     get :favor, on: :member
+
+    concerns :votable
   end
 
   resources :answers do
     get :label, on: :member
+
+    concerns :votable
   end
 
   resources :tags, only: [] do

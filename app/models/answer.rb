@@ -1,4 +1,6 @@
 class Answer < ActiveRecord::Base
+  include Votable
+
   belongs_to :author, class_name: :User
   belongs_to :question
 
@@ -7,9 +9,11 @@ class Answer < ActiveRecord::Base
 
   has_many :watchings, as: :watchable
 
-  has_many :votes, as: :votable
-
   validates :text, presence: true
+
+  scope :by,   lambda { |user| where author: user }
+  scope :for,  lambda { |question| where question: question }
+  scope :with, lambda { |label| joins(:labelings).merge(Labeling.with label) }
 
   def labeled_with(label)
     labelings.with label
