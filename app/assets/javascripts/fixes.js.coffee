@@ -6,6 +6,7 @@ window.defined = (value) ->
   typeof(value) != 'undefined'
 
 window.fixes = ->
+  Remote.setup()
   Remote.bindState()
 
   $('[data-toggle="popover"]').popover(container: 'body')
