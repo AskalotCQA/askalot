@@ -1,4 +1,6 @@
 class Answer < ActiveRecord::Base
+  include Votable
+
   belongs_to :author, class_name: :User
   belongs_to :question
 
@@ -6,8 +8,6 @@ class Answer < ActiveRecord::Base
   has_many :labels, through: :labelings
 
   has_many :watchings, as: :watchable
-
-  has_many :votes, as: :votable
 
   validates :text, presence: true
 

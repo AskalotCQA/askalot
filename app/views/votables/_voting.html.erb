@@ -1,0 +1,7 @@
+<div id="<%= model %>-<%= votable.id %>-voting" class="<%= model %>-voting">
+  <%= icon_link_to :'chevron-up', nil, send("voteup_#{model}_path", votable), data: { remote: true }, class: (votable.upvoted_by?(current_user) ? nil : :'text-muted') %>
+
+  <span><%= votable.total_votes %></span>
+
+  <%= icon_link_to :'chevron-down', nil, send("votedown_#{model}_path", votable), data: { remote: true }, class: (votable.downvoted_by?(current_user) ? nil : :'text-muted') %>
+</div>

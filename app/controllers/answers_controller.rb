@@ -1,4 +1,6 @@
 class AnswersController < ApplicationController
+  include Voting
+
   before_action :authenticate_user!
 
   def index
