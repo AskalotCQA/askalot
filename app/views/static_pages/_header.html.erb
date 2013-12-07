@@ -2,50 +2,56 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="text-center">
+        <div>
           <h1>
             na&#x042f;uby
           </h1>
-<!-- TODO (zbell) consider
           <p class="text-lead">
-            Komunitný systém otázok a odpovedí ďalšej generácie
+            <em>Komunitný systém otázok a odpovedí ďalšej generácie</em>
           </p>
--->
         </div>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-12">
-        <ul class="list-inline text-center">
+        <ul class="list-inline">
           <li>
             <%= icon_link_to :'question-circle', t('home.ask'), new_question_path, id: :'new-question', class: 'btn btn-primary btn-lg' %>
           </li>
-          <li>
-            <% if Configuration.show.registrations? %>
-              <%= icon_link_to :rocket, t('home.sign_up'), new_user_registration_path, class: 'btn btn-success btn-lg' %>
-            <% else %>
-              <%= icon_link_to :rocket, t('home.sign_in'), new_user_session_path, class: 'btn btn-success btn-lg' %>
-            <% end %>
-          </li>
+          <% unless current_user %>
+            <li>
+              <% if Configuration.show.registrations? %>
+                <%= icon_link_to :rocket, t('home.sign_up'), new_user_registration_path, class: 'btn btn-success btn-lg' %>
+              <% else %>
+                <%= icon_link_to :rocket, t('home.sign_in'), new_user_session_path, class: 'btn btn-success btn-lg' %>
+              <% end %>
+            </li>
+          <% end %>
          </ul>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-4">
-        <h2 class="text-center"><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new') %></h2>
-        <%= render 'questions', questions: @new %>
+        <div class="featured">
+          <h2><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new') %></h2>
+          <%= render 'questions', questions: @new %>
+        </div>
       </div>
 
       <div class="col-md-4">
-        <h2 class="text-center"><%= link_to t('home.featured.answered'), questions_path(tab: :'questions-answered') %></h2>
-        <%= render 'questions', questions: @answered %>
+        <div class="featured">
+          <h2><%= link_to t('home.featured.answered'), questions_path(tab: :'questions-answered') %></h2>
+          <%= render 'questions', questions: @answered %>
+        </div>
       </div>
 
       <div class="col-md-4">
-        <h2 class="text-center"><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored') %></h2>
-        <%= render 'questions', questions: @favored %>
+        <div class="featured">
+          <h2><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored') %></h2>
+          <%= render 'questions', questions: @favored %>
+        </div>
       </div>
     </div>
   </div>

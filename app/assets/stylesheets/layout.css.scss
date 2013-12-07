@@ -44,6 +44,10 @@ section {
   padding-top: $navbar-height;
 }
 
+.text-capital {
+  font-variant: small-caps;
+}
+
 .text-lead {
   margin-top: 20px;
 }
@@ -55,45 +59,67 @@ section {
 // header
 
 header {
+  .navbar-brand {
+    font-variant: small-caps;
+  }
 }
 
 // jumbotron
 
 .jumbotron {
   h1 {
+    margin: 20px 0;
+    font-variant: small-caps;
+    text-align: center;
     text-shadow: 0 0 128px $brand-info;
   }
 
-// TODO (zbell) rm
-//  p {
-//    font-size: 30px;
-//    text-shadow: 0 0 96px $brand-info;
-//    color: rgba($jumbotron-color, .25);
-//  }
+  p {
+    margin: 0 !important;
+    padding: 20px;
+    font-size: 22.5px;
+    text-align: center;
+    text-shadow: 0 0 96px $brand-info;
+    color: rgba($jumbotron-color, .25);
+  }
 
   ul {
-    margin: 75px 0 !important;
+    margin: 50px 0 !important;
+    text-align: center;
 
     .btn {
+      margin: 20px 0;
       padding: $padding-large-vertical * 1.25 $padding-large-horizontal * 1.25;
       font-size: $jumbotron-font-size * 1.25;
       text-shadow: 0 0 128px $brand-info;
     }
   }
 
-  h2 {
-    text-shadow: 0 0 64px $brand-info;
-  }
-
   a {
     @include action-coloring($jumbotron-color, $jumbotron-color);
   }
 
+  .featured {
+    margin: 50px 0;
+    padding: 0 20px;
+    border-radius: 20px;
+    background: rgba($jumbotron-color, .0125);
+    text-align: center;
+  }
+
+  h2 {
+    display: inline-block;
+    margin: 20px 0 !important;
+    text-shadow: 0 0 64px $brand-info;
+  }
+
   ol {
+    display: inline-block;
+
     li {
       margin-bottom: 20px;
       padding-top: 20px;
-      border-top: 1px solid rgba($jumbotron-color, .05);
+      border-top: 1px solid rgba($jumbotron-color, .025);
     }
 
     a {
@@ -110,10 +136,11 @@ header {
 // footer
 
 footer {
-  margin: 100px 0;
+  margin: 100px 0 0 0;
   padding: 50px 0;
 
   background: $gray-lighter;
+  text-align: center;
 }
 
 // profile
