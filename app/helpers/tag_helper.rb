@@ -49,7 +49,7 @@ module TagHelper
     list  = content_tag :ul, capture(&block), class: :'dropdown-menu'
     body  = (link << list).html_safe
 
-    navbar_li_tag body, url, options.merge(class: :dropdown)
+    navbar_li_tag body, url, options.merge(class: [:dropdown, options.delete(:class)])
   end
 
   def tab_link_tag(title, tab, path, options = {})
