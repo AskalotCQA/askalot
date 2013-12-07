@@ -1,18 +1,1 @@
-<!-- TODO(poizl) fix content & links! -->
-<div class="answer-voting" id="answer-<%= answer.id %>-voting">
-  <% if answer.upvoted_by?(current_user) %>
-    <%= icon_link_to :'chevron-up', nil, voteup_answer_path(answer.id), data: { remote: true } %>
-  <% else %>
-    <%= icon_link_to :'chevron-up', nil, voteup_answer_path(answer.id), data: { remote: true }, class: :'text-muted' %>
-  <% end %>
-
-  <span>
-    <%= answer.total_votes %>
-  </span>
-
-  <% if answer.downvoted_by?(current_user) %>
-    <%= icon_link_to :'chevron-down', nil, votedown_answer_path(answer.id), data: { remote: true } %>
-  <% else %>
-    <%= icon_link_to :'chevron-down', nil, votedown_answer_path(answer.id), data: { remote: true }, class: :'text-muted' %>
-  <% end %>
-</div>
+<%= render 'votables/voting', model: :answer, votable: answer %>

@@ -1,18 +1,1 @@
-<!-- TODO(zbell) fix content & links! -->
-<div id="question-<%= question.id %>-voting" class="question-voting">
-  <% if question.upvoted_by?(current_user) %>
-    <%= icon_link_to :'chevron-up', nil, voteup_question_path(question.id), data: { remote: true }, id: :'question-voteup' %>
-  <% else %>
-    <%= icon_link_to :'chevron-up', nil, voteup_question_path(question.id), data: { remote: true }, class: :'text-muted', id: :'question-voteup' %>
-  <% end %>
-
-  <span>
-    <%= question.total_votes %>
-  </span>
-
-  <% if question.downvoted_by?(current_user) %>
-    <%= icon_link_to :'chevron-down', nil, votedown_question_path(question.id), data: { remote: true }, id: :'question-votedown' %>
-  <% else %>
-    <%= icon_link_to :'chevron-down', nil, votedown_question_path(question.id), data: { remote: true }, class: :'text-muted', id: :'question-votedown' %>
-  <% end %>
-</div>
+<%= render 'votables/voting', model: :question, votable: question %>
