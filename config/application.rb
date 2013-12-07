@@ -26,5 +26,10 @@ module NaRuby
     config.i18n.default_locale = :sk
 
     config.i18n.load_path += Dir[Rails.root.join 'config', 'locales', '**', '*.{rb,yml}']
+
+    # Enforce available locales validation
+    config.i18n.enforce_available_locales = true
+    # TODO (smolnar) rm in future version of i18n, ref: http://stackoverflow.com/questions/20361428/rails-i18n-validation-deprecation-warning
+    I18n.config.enforce_available_locales = true
   end
 end
