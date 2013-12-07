@@ -6,18 +6,14 @@ module Votable
   end
 
   def toggle_vote_by!(voter, upvote)
-    if voted_by? voter
-      vote = votes.where(voter: voter).first
+    return votes.create! voter: voter, upvote: upvote unless voted_by? voter
 
-      if vote.upvote != upvote
-        vote.upvote = upvote
-        vote.save!
-      else
-        vote.destroy
-      end
-    else
-      votes.create!(voter: voter, upvote: upvote)
-    end
+    vote = votes.where(voter: voter).first
+
+    return vote.destroy if vote.upvote == upvote
+
+    vote.upvote = upvote
+    vote.save!
   end
 
   def toggle_voteup_by!(voter)
