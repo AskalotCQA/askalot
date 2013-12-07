@@ -19,37 +19,51 @@ describe 'Voteup question' do
     wait_for_remote
 
     expect(question).to be_upvoted_by(question.author)
+
+    within '#question-'+question.id.to_s+'-voting' do
+      expect(page).to have_content('1')
+    end
   end
 
-  it 'vote down', js: true do
-    visit root_path
+  context 'when question have voteup' do
+    before :each do
+      question.toggle_voteup_by! question.author
+    end
 
-    click_link 'Otázky'
+    it 'vote down', js: true do
+      visit root_path
 
-    click_link 'Voting in democracy'
+      click_link 'Otázky'
 
-    click_link 'question-votedown'
+      click_link 'Voting in democracy'
 
-    wait_for_remote
+      click_link 'question-votedown'
 
-    expect(question).to be_downvoted_by(question.author)
-  end
+      wait_for_remote
 
-  it 'cancel vote', js: true do
-    visit root_path
+      expect(question).to be_downvoted_by(question.author)
 
-    click_link 'Otázky'
+      within '#question-'+question.id.to_s+'-voting' do
+        expect(page).to have_content('-1')
+      end
+    end
 
-    click_link 'Voting in democracy'
+    it 'cancel vote', js: true do
+      visit root_path
 
-    click_link 'question-voteup'
+      click_link 'Otázky'
 
-    wait_for_remote
+      click_link 'Voting in democracy'
 
-    click_link 'question-voteup'
+      click_link 'question-voteup'
 
-    wait_for_remote
+      wait_for_remote
 
-    expect(question).not_to be_voted_by(question.author)
+      expect(question).not_to be_voted_by(question.author)
+
+      within '#question-'+question.id.to_s+'-voting' do
+        expect(page).to have_content('0')
+      end
+    end
   end
 end
