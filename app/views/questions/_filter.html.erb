@@ -1,9 +1,16 @@
 <section id="questions-filter">
   <div class="row">
-    <div class="col-md-offset-6 col-md-6">
+    <div class="col-md-2">
+      <%= icon_link_to :plus, t('question.new.feature'), new_question_path, class: 'btn btn-success' %>
+    </div>
+
+    <div class="col-md-offset-4 col-md-6">
       <%= form_tag questions_path, id: :filter_questions, method: :get, remote: true, data: { state: true } do %>
         <%= hidden_field_tag :tab, index_params[:tab] %>
-        <div class="input-group select2-bootstrap-append">
+        <div class="input-group select2-bootstrap-prepend select2-bootstrap-append">
+          <span class="input-group-addon">
+            <%= icon_tag :tags %>
+          </span>
           <%= text_field_tag :tags, index_params[:tags], id: :question_tags, class: :'form-control', placeholder: t('question.tag.placeholder'), data: { as: :select2, role: [:tags, :filter].join(',') } %>
           <span class="input-group-btn">
             <%# TODO (smolnar) add tooltip & clipboard %>

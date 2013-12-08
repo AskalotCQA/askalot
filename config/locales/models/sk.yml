@@ -117,7 +117,7 @@ sk:
         youtube: 'YouTube'
 
         flag_show_name:  'Zobraziť meno ostatným používateľom'
-        flag_show_email: 'Zobraziť email ostatným používateľom'
+        flag_show_email: 'Zobraziť e-mail ostatným používateľom'
 
       question:
         title: 'Nadpis'
