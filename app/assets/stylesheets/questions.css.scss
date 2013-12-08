@@ -14,6 +14,10 @@
   margin-bottom: $padding-base-vertical;
 
   text-align: center;
+
+  &:active, &:focus, &:hover {
+    text-decoration: none;
+  }
 }
 
 .question-value {

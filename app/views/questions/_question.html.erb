@@ -9,7 +9,7 @@
           <% end %>
         </div>
         <div class="col-md-4">
-          <%= content_tag :span, class: [:'question-metric', question_answers_coloring(question)] do %>
+          <%= link_to question_path(question, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
             <span class="question-value"><%= question.answers.size %></span>
             <%= t('count.answer', count: question.answers.size) %>
           <% end %>

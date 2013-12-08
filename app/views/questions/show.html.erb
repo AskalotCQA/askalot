@@ -8,7 +8,7 @@
   </div>
 
   <div class="col-md-8">
-    <section>
+    <section id="question-title">
       <h1>
         <%= @question.title %>
         <br/>
@@ -18,7 +18,7 @@
       <%= render 'questions/labels', labels: @labels %>
     </section>
 
-    <section>
+    <section id="question-content">
       <p>
         <%= @question.text %>
       </p>

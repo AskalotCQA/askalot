@@ -14,6 +14,7 @@ module QuestionsHelper
   def question_answers_coloring(question)
     return :'text-danger' unless question.answers.any?
     return :'text-success' if question.answers.with(:best).any?
+    return :'text-warning' if question.answers.with(:helpful).any?
 
     :'text-muted'
   end
