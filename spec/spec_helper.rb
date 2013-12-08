@@ -57,11 +57,12 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   # Include support
-  config.include FixtureHelper
   config.include EmailHelper
+  config.include FixtureHelper
+  config.include HistoryHelper,               type: :feature
+  config.include RemoteHelper,                type: :feature
+  config.include Select2Helper,               type: :feature
   config.include Users::AuthenticationHelper, type: :feature
-  config.include Select2Helper, type: :feature
-  config.include RemoteHelper, type: :feature
 
   config.before(:each) { reset_emails }
 

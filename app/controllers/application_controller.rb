@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   before_action :log_current_action
 
+  before_action :filter_params
+
   # TODO (smolnar) use locales for message, refactor
   rescue_from CanCan::AccessDenied do |exception|
     flash[:alert] = exception.message
@@ -22,5 +24,9 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit :login, :email, :password, :password_confirmation }
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit :email, :password, :password_confirmation, :current_password }
+  end
+
+  def filter_params
+    params.delete :_
   end
 end

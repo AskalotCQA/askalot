@@ -5,15 +5,15 @@ class QuestionsController < ApplicationController
   before_action :set_default_tab, only: :index
 
   def index
-    @questions = case index_params[:tab].to_sym
+    @questions = case params[:tab].to_sym
                  when :'questions-new'      then Question.order(created_at: :desc)
                  when :'questions-answered' then Question.answered.order(updated_at: :desc)
                  when :'questions-favored'  then Question.favored_by(current_user).order('favorites.created_at desc')
                  else fail
                  end
 
-    @questions = @questions.page(index_params[:page]).per(10)
-    @questions = @questions.tagged_with index_params[:tags] if index_params[:tags].present?
+    @questions = @questions.page(params[:page]).per(10)
+    @questions = @questions.tagged_with params[:tags] if params[:tags].present?
   end
 
   def new
@@ -49,12 +49,6 @@ class QuestionsController < ApplicationController
   end
 
   private
-
-  helper_method :index_params
-
-  def index_params
-    params.permit(:tags, :tab, :page)
-  end
 
   # TODO (smolnar) use concern
   def set_default_tab

@@ -2,12 +2,13 @@
 #= require remote
 #= require select
 
+Remote.bindState()
+
 window.defined = (value) ->
   typeof(value) != 'undefined'
 
 window.fixes = ->
-  Remote.setup()
-  Remote.bindState()
+  Remote.initialize()
 
   $('[data-toggle="popover"]').popover(container: 'body')
   $('[data-toggle="tooltip"]').tooltip(container: 'body')

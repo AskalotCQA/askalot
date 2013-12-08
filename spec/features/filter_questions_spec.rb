@@ -121,5 +121,33 @@ describe 'Filter Questions', js: true do
 
       list.each { |item| expect(item).to have_content('elasticsearch') }
     end
+
+    context 'when navigating in history' do
+      it 'correctly filters questions' do
+        visit root_path
+
+        click_link 'Otázky'
+
+        fill_in_select2 'question_tags', with: 'elasticsearch'
+
+        click_link 'Obľúbené'
+
+        within '#questions > ol' do
+          click_link questions.first.title
+        end
+
+        expect(current_path).to eql(question_path(questions.first))
+
+        navigate_back
+
+        list = all('#questions > ol > li')
+        expect(list).to have(3).items
+
+        navigate_back
+
+        list = all('#questions > ol > li')
+        expect(list).to have(10).items
+      end
+    end
   end
 end

@@ -67,13 +67,13 @@ module TagHelper
     classes.merge! class: :active if params[:tab].to_sym == tab.to_sym
 
     content_tag :li, classes do
-      block_given? ? yield : link_to(title, path, options)
+      block_given? ? yield(options) : link_to(title, path, options)
     end
   end
 
   def tab_link_tag_with_count(body, tab, path, count, options)
-    tab_link_tag(body, tab, path, options) do
-      link_to_with_count(body, path, count, options)
+    tab_link_tag(body, tab, path, options) do |defaults|
+      link_to_with_count(body, path, count, options.deep_merge(defaults))
     end
   end
 

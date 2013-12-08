@@ -1,22 +1,21 @@
 #= require core/module
 
-# TODO (smolnar) fix navigation back/forward by onpopstate event
+class window.Remote extends Module
+  @initialize: ->
+    $('[data-remote]').each (_, element) ->
+      $(element).attr('data-type', 'script') unless $(element).attr('data-type')
 
-$(document).ready ->
-  class window.Remote extends Module
-    @setup: ->
-      $('[data-remote]').each (_, element) ->
-        $(element).attr('data-type', 'script') unless $(element).attr('data-type')
+  @bindState: (callback) ->
+    window.onpopstate = (event) -> window.location = document.location if event.state?
 
-    @bindState: (callback) ->
-      $(document).on 'click submit', '[data-state=true]', (e) ->
-        element = $(this)
+    $(document).on 'click submit', '[data-state=true]', (e) ->
+      element = $(this)
 
-        if element.is 'form'
-          location = "#{element.attr('action')}?#{element.serialize()}"
-        else
-          location = element.attr 'href'
+      if element.is 'form'
+        location = "#{element.attr('action')}?#{element.serialize()}"
+      else
+        location = element.attr 'href'
 
-        callback?($(this))
+      callback?($(this))
 
-        window.history.pushState state: true, null, location
+      window.history.pushState state: true, null, location
