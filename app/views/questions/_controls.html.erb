@@ -1,7 +1,7 @@
 <section id="questions-controls">
   <ul class="nav nav-tabs">
     <%= tab_link_tag_with_count t('question.tab.new'), :'questions-new', questions_path(params.except(:page).merge tab: :'questions-new'), Question.count, remote: true %>
-    <%= tab_link_tag_with_count t('question.tab.favored'), :'questions-favored', questions_path(params.except(:page).merge tab: :'questions-favored'), Question.answered.size, remote: true %>
-    <%= tab_link_tag_with_count t('question.tab.answered'), :'questions-answered', questions_path(params.except(:page).merge tab: :'questions-answered'), Question.favored_by(current_user).size, remote: true %>
+    <%= tab_link_tag_with_count t('question.tab.favored'), :'questions-favored', questions_path(params.except(:page).merge tab: :'questions-favored'), Question.favored.size, remote: true %>
+    <%= tab_link_tag_with_count t('question.tab.answered'), :'questions-answered', questions_path(params.except(:page).merge tab: :'questions-answered'), Question.answered.size, remote: true %>
   </ul>
 </section>
