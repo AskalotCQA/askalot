@@ -48,7 +48,7 @@ class Question < ActiveRecord::Base
     self
   end
 
-  def distinct_views_count
+  def total_views
     View.where(question: self).distinct.count(:user_id)
   end
 end
