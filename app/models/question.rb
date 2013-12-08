@@ -48,10 +48,6 @@ class Question < ActiveRecord::Base
     self
   end
 
-  def view_by!(user)
-    views.create!(user: user)
-  end
-
   def distinct_views_count
     View.where(question: self).distinct.count(:user_id)
   end
