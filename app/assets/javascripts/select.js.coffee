@@ -1,6 +1,11 @@
 #= require core/module
 
 class window.Select extends Module
+  @of: (options = {}) ->
+    options.bind ?= false
+
+    new Select(options)
+
   defaults:
     formatSearching: ->
       "<span>#{I18n.t('question.tag.searching')}</span>"
@@ -42,7 +47,7 @@ class window.Select extends Module
   constructor: (options = {}) ->
     @selector = options.selector ?= '[data-as=select2]'
 
-    @.bind()
+    @.bind() if options.bind ?= true
 
     $(@selector)
 
