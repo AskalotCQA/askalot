@@ -2,8 +2,8 @@
   <%= icon_link_to :plus, t('question.new.feature'), new_question_path, id: :'new-question', class: 'btn btn-success pull-right' %>
 
   <ul class="nav nav-tabs">
-    <%= tab_link_tag t('question.tab.new'), :'questions-new', questions_path(index_params.merge tab: :'questions-new'), remote: true %>
-    <%= tab_link_tag t('question.tab.favored'), :'questions-favored', questions_path(index_params.merge tab: :'questions-favored'), remote: true %>
-    <%= tab_link_tag t('question.tab.answered'), :'questions-answered', questions_path(index_params.merge tab: :'questions-answered'), remote: true %>
+    <%= tab_link_tag_with_count t('question.tab.new'), :'questions-new', questions_path(index_params.merge tab: :'questions-new'), Question.count, remote: true %>
+    <%= tab_link_tag_with_count t('question.tab.favored'), :'questions-favored', questions_path(index_params.merge tab: :'questions-favored'), Question.answered.size, remote: true %>
+    <%= tab_link_tag_with_count t('question.tab.answered'), :'questions-answered', questions_path(index_params.merge tab: :'questions-answered'), Question.favored_by(current_user).size, remote: true %>
   </ul>
 </section>

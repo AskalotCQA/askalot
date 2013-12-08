@@ -52,7 +52,13 @@ module TagHelper
     navbar_li_tag body, url, options.merge(class: [:dropdown, options.delete(:class)])
   end
 
-  def tab_link_tag(title, tab, path, options = {})
+  def link_to_with_count(body, url, count, options = {})
+    count = content_tag :span, "&nbsp;(#{number_with_delimiter count})".html_safe, class: :'text-muted'
+
+    link_to body.concat(count).html_safe, url, options
+  end
+
+  def tab_link_tag(title, tab, path, options = {}, &block)
     classes  = Hash.new
     defaults = { data: { toggle: :tab, state: true, target: "##{tab}" }}
 
@@ -61,7 +67,13 @@ module TagHelper
     classes.merge! class: :active if params[:tab].to_sym == tab.to_sym
 
     content_tag :li, classes do
-      link_to title, path, options
+      block_given? ? yield : link_to(title, path, options)
+    end
+  end
+
+  def tab_link_tag_with_count(body, tab, path, count, options)
+    tab_link_tag(body, tab, path, options) do
+      link_to_with_count(body, path, count, options)
     end
   end
 
