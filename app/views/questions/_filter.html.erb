@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-md-offset-6 col-md-6">
       <%= form_tag questions_path, id: :filter_questions, method: :get, remote: true, data: { state: true } do %>
-        <%= hidden_field_tag :tab, params[:tab] %>
+        <%= hidden_field_tag :tab, index_params[:tab] %>
         <div class="input-group select2-bootstrap-append">
-          <%= text_field_tag :tags, params[:tags], id: :question_tags, class: :'form-control', placeholder: t('question.tag.placeholder'), data: { as: :select2, role: [:tags, :filter].join(',') } %>
+          <%= text_field_tag :tags, index_params[:tags], id: :question_tags, class: :'form-control', placeholder: t('question.tag.placeholder'), data: { as: :select2, role: [:tags, :filter].join(',') } %>
           <span class="input-group-btn">
             <%# TODO (smolnar) add tooltip & clipboard %>
             <button class="btn btn-default" type="button"><%= icon_tag :link %></button>

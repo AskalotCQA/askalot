@@ -92,4 +92,34 @@ describe 'Filter Questions', js: true do
       expect(item).to have_content('ruby')
     end
   end
+
+  context 'when changing tabs' do
+    let(:questions) { Question.tagged_with('elasticsearch').first(3) }
+
+    before :each do
+      questions.each { |q| q.toggle_favoring_by! user }
+    end
+
+    it 'persists question filter by tag' do
+      visit root_path
+
+      click_link 'Otázky'
+
+      fill_in_select2 'question_tags', with: 'elasticsearch'
+
+      list = all('#questions > ol > li')
+      expect(list).to have(10).items
+
+      list.each { |item| expect(item).to have_content('elasticsearch') }
+
+      click_link 'Obľúbené'
+
+      wait_for_remote
+
+      list = all('#questions > ol > li')
+      expect(list).to have(3).items
+
+      list.each { |item| expect(item).to have_content('elasticsearch') }
+    end
+  end
 end
