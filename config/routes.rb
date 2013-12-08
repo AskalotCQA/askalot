@@ -32,6 +32,9 @@ NaRuby::Application.routes.draw do
     get :suggest, on: :collection
   end
 
+  resources :statistics do
+  end
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
