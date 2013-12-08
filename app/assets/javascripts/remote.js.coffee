@@ -1,7 +1,13 @@
 #= require core/module
 
+# TODO (smolnar) fix navigation back/forward by onpopstate event
+
 $(document).ready ->
   class window.Remote extends Module
+    @setup: ->
+      $('[data-remote]').each (_, element) ->
+        $(element).attr('data-type', 'script') unless $(element).attr('data-type')
+
     @bindState: (callback) ->
       $(document).on 'click submit', '[data-state=true]', (e) ->
         element = $(this)
@@ -13,4 +19,4 @@ $(document).ready ->
 
         callback?($(this))
 
-        window.history.pushState {}, null, location
+        window.history.pushState state: true, null, location
