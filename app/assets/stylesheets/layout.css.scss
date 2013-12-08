@@ -52,7 +52,7 @@ section {
   margin-top: 20px;
 }
 
-.text-muted a {
+.text-muted a, a.text-muted {
   @include action-coloring(darken($text-muted, 12.5%), darken($text-muted, 25%));
 }
 
