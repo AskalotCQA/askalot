@@ -1,4 +1,5 @@
 class Question < ActiveRecord::Base
+  include Commentable
   include Votable
 
   belongs_to :author, class_name: :User
@@ -10,8 +11,6 @@ class Question < ActiveRecord::Base
   has_many :favorers, through: :favorites, source: :user
 
   has_many :watchings, as: :watchable
-
-  has_many :comments, as: :commentable
 
   acts_as_taggable
 

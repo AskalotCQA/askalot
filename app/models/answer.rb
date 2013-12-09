@@ -1,4 +1,5 @@
 class Answer < ActiveRecord::Base
+  include Commentable
   include Votable
 
   belongs_to :author, class_name: :User
@@ -8,8 +9,6 @@ class Answer < ActiveRecord::Base
   has_many :labels, through: :labelings
 
   has_many :watchings, as: :watchable
-
-  has_many :comments, as: :commentable
 
   validates :text, presence: true
 
