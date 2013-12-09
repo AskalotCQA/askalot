@@ -1,3 +1,6 @@
+# TODO (zbell) remove concern, refactor back into comments_controllers
+#
+
 module Commenting
   extend ActiveSupport::Concern
 

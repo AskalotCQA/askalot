@@ -1,3 +1,7 @@
+# TODO(zbell) leave, but refactor, see commenting concern
+
+
+
 class CommentsController < ApplicationController
   def index
     @commentable = find_commentable
