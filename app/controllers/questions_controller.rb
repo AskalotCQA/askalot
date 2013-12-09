@@ -13,7 +13,8 @@ class QuestionsController < ApplicationController
                  end
 
     @questions = @questions.page(params[:page]).per(10)
-    @questions = @questions.tagged_with params[:tags] if params[:tags].present?
+
+    @questions = filter_questions(@questions)
   end
 
   def new
@@ -49,6 +50,14 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  helper_method :filter_questions
+
+  def filter_questions(relation)
+    return relation unless params[:tags].present?
+
+    relation.tagged_with(params[:tags])
+  end
 
   # TODO (smolnar) use concern
   def set_default_tab
