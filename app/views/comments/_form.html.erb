@@ -1,0 +1,9 @@
+<!-- TODO(grznar) fix comment persistence on form submit -->
+<%= form_for [commentable, Comment.new] do |t| %>
+  <div class="form-group">
+    <%= t.label :text %>
+    <%= t.text_area :text, class: :'form-control', rows: 5 %>
+  </div>
+
+  <button type="submit" class="btn btn-primary"><%= t 'comment.new.submit' %></button>
+<% end %>
