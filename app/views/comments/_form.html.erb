@@ -1,8 +1,9 @@
 <!-- TODO(grznar) fix comment persistence on form submit -->
-<%= form_for [commentable, Comment.new] do |t| %>
+<!-- TODO(grznar) resolve duplicate ids generated in forms -->
+<%= form_for [commentable, Comment.new] do |f| %>
   <div class="form-group">
-    <%= t.label :text %>
-    <%= t.text_area :text, class: :'form-control', rows: 5 %>
+    <%= f.label :text %>
+    <%= f.text_area :text, class: :'form-control', rows: 1 %>
   </div>
 
   <button type="submit" class="btn btn-primary"><%= t 'comment.new.submit' %></button>
