@@ -1,5 +1,4 @@
 class QuestionsController < ApplicationController
-  include Commenting
   include Voting
 
   before_action :authenticate_user!

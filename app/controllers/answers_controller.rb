@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
     @author   = @question.author
     @labels   = @question.labels
     @answers  = @question.answers
-    @answer   = Answer.new(answer_params)
+    @answer   = Answer.new answer_params
 
     if @answer.save
       flash.now[:notice] = t('answer.create.success')
