@@ -1,27 +1,26 @@
 require 'spec_helper'
 
-describe 'Voteup question' do
+describe 'Voting Question' do
   let(:question) { create :question, :with_tags, title: 'Voting in democracy' }
+  let(:user) { create :user }
 
   before :each do
     login_as question.author
   end
 
-  it 'vote up', js: true do
-    visit root_path
+  context 'when does not have vote' do
+    it 'voteup', js: true do
+      visit question_path(question.id)
 
-    click_link 'Otázky'
+      click_link 'question-'+question.id.to_s+'-voteup'
 
-    click_link 'Voting in democracy'
+      wait_for_remote
 
-    click_link 'question-voteup'
+      expect(question).to be_upvoted_by(question.author)
 
-    wait_for_remote
-
-    expect(question).to be_upvoted_by(question.author)
-
-    within '#question-'+question.id.to_s+'-voting' do
-      expect(page).to have_content('1')
+      within '#question-'+question.id.to_s+'-voting' do
+        expect(page).to have_content('1')
+      end
     end
   end
 
@@ -31,13 +30,9 @@ describe 'Voteup question' do
     end
 
     it 'vote down', js: true do
-      visit root_path
+      visit question_path(question.id)
 
-      click_link 'Otázky'
-
-      click_link 'Voting in democracy'
-
-      click_link 'question-votedown'
+      click_link 'question-'+question.id.to_s+'-votedown'
 
       wait_for_remote
 
@@ -49,13 +44,9 @@ describe 'Voteup question' do
     end
 
     it 'cancel vote', js: true do
-      visit root_path
+      visit question_path(question.id)
 
-      click_link 'Otázky'
-
-      click_link 'Voting in democracy'
-
-      click_link 'question-voteup'
+      click_link 'question-'+question.id.to_s+'-voteup'
 
       wait_for_remote
 
@@ -63,6 +54,24 @@ describe 'Voteup question' do
 
       within '#question-'+question.id.to_s+'-voting' do
         expect(page).to have_content('0')
+      end
+    end
+  end
+
+  context 'when have vote from someone else' do
+    before :each do
+      question.toggle_voteup_by! user
+    end
+
+    it 'voteup', js: true do
+      visit question_path(question.id)
+
+      click_link 'question-'+question.id.to_s+'-voteup'
+
+      wait_for_remote
+
+      within '#question-'+question.id.to_s+'-voting' do
+        expect(page).to have_content('2')
       end
     end
   end

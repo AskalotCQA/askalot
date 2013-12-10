@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202201143) do
+ActiveRecord::Schema.define(version: 20131210012349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,9 +28,10 @@ ActiveRecord::Schema.define(version: 20131202201143) do
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tags",       default: [],              array: true
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
@@ -55,15 +56,15 @@ ActiveRecord::Schema.define(version: 20131202201143) do
   add_index "events", ["created_at"], name: "index_events_on_created_at", using: :btree
 
   create_table "favorites", force: true do |t|
-    t.integer  "user_id",     null: false
+    t.integer  "favorer_id",  null: false
     t.integer  "question_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "favorites", ["favorer_id", "question_id"], name: "index_favorites_on_unique_key", unique: true, using: :btree
+  add_index "favorites", ["favorer_id"], name: "index_favorites_on_favorer_id", using: :btree
   add_index "favorites", ["question_id"], name: "index_favorites_on_question_id", using: :btree
-  add_index "favorites", ["user_id", "question_id"], name: "index_favorites_on_unique_key", unique: true, using: :btree
-  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "followings", force: true do |t|
     t.integer  "follower_id", null: false
@@ -190,6 +191,15 @@ ActiveRecord::Schema.define(version: 20131202201143) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role"], name: "index_users_on_role", using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
+
+  create_table "views", force: true do |t|
+    t.integer  "question_id", null: false
+    t.integer  "viewer_id",   null: false
+    t.datetime "created_at"
+  end
+
+  add_index "views", ["question_id"], name: "index_views_on_question_id", using: :btree
+  add_index "views", ["viewer_id"], name: "index_views_on_viewer_id", using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "voter_id",                    null: false

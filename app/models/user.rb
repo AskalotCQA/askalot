@@ -27,9 +27,11 @@ class User < ActiveRecord::Base
   has_many :followers, through: :followings, class_name: :User, foreign_key: :follower_id
   has_many :followees, through: :followings, class_name: :User, foreign_key: :followee_id
 
-  has_many :watchings, foreign_key: :watcher_id
+  has_many :views, foreign_key: :viewer_id
 
   has_many :votes, foreign_key: :voter_id
+
+  has_many :watchings, foreign_key: :watcher_id
 
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
   # TODO (smolnar) check uniqueness value select in db

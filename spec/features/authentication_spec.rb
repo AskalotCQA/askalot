@@ -36,7 +36,9 @@ describe 'Authentication' do
       expect(page).to have_content('Úspešne prihlásený.')
       expect(page).to have_content(user.nick)
 
-      click_link 'Odhlásiť'
+      within :css, 'ul li .dropdown-menu' do
+        click_link 'Odhlásiť'
+      end
 
       expect(page).to have_content('Úspešne odhlásený.')
     end

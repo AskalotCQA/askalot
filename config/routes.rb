@@ -20,8 +20,8 @@ NaRuby::Application.routes.draw do
     get :votedown, on: :member
   end
 
-  resources :questions do
-    resources :answers
+  resources :questions, only: [:index, :new, :create, :show] do
+    resources :answers, only: [:create]
 
     get :favor, on: :member
 
@@ -29,7 +29,7 @@ NaRuby::Application.routes.draw do
     concerns :votable
   end
 
-  resources :answers do
+  resources :answers, only: [] do
     get :label, on: :member
 
     concerns :commetable
@@ -38,6 +38,9 @@ NaRuby::Application.routes.draw do
 
   resources :tags, only: [] do
     get :suggest, on: :collection
+  end
+
+  resources :statistics, only: [:index] do
   end
 
   # Example of regular route:

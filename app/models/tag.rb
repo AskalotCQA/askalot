@@ -1,7 +1,7 @@
 class Tag < ActsAsTaggableOn::Tag
-  before_save :normalize
+  include Watchable
 
-  has_many :watchings, as: :watchable
+  before_save :normalize
 
   def normalize
     self.name = name.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '')
