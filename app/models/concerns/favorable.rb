@@ -11,9 +11,9 @@ module Favorable
   end
 
   def toggle_favoring_by!(user)
-    return Favorite.create! favorer: user, question: self unless favored_by?(user)
+    return favorites.create! favorer: user unless favored_by?(user)
 
-    Favorite.where(favorer: user, question: self).first.destroy
+    favorites.where(favorer: user).first.destroy
 
     self
   end
