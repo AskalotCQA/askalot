@@ -99,12 +99,12 @@ describe Question do
 
   describe '#favored_by?' do
     it 'checks the valid favorer' do
-      user     = create :user
+      favorer  = create :user
       question = create :question
 
-      create :favorite, question: question, user: user
+      create :favorite, question: question, favorer: favorer
 
-      expect(question).to be_favored_by(user)
+      expect(question).to be_favored_by(favorer)
 
       another_user = create :user
 
