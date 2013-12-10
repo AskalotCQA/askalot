@@ -14,6 +14,7 @@ class Question < ActiveRecord::Base
   has_many :votes, as: :votable
 
   has_many :views
+  has_many :viewer, through: :views, source: :user
 
   acts_as_taggable
 
