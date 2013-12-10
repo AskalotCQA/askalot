@@ -1,0 +1,9 @@
+<!-- TODO (grznar) fix duplicite id's of div -->
+<a data-toggle="collapse" data-target="#comments" href="#">
+  <%= t 'comment.show.all' %>
+</a>
+<div id="comments" class="collapse in">
+  <% commentable.comments.each do |comment| %>
+    <%= render 'commentables/comment', comment: comment %>
+  <% end %>
+</div>
