@@ -23,6 +23,11 @@
         <%= @question.text %>
       </p>
     </section>
+
+    <section id="question-comments">
+      <%= render 'questions/comments', question: @question %>
+      <%= render 'comments/form', commentable: @question %>
+    </section>
   </div>
 
   <div class="col-md-2">

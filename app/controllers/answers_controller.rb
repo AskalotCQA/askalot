@@ -4,21 +4,19 @@ class AnswersController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @question = Question.find params[:question_id]
+    @question = Question.find(params[:question_id])
     @author   = @question.author
     @labels   = @question.labels
     @answers  = @question.answers
-    @answer   = Answer.new(answer_params)
+    @answer   = Answer.new answer_params
 
     if @answer.save
-      flash[:notice] = t('answer.create.success')
-
-      redirect_to question_path(@question)
+      flash.now[:notice] = t('answer.create.success')
     else
       flash_error_messages_for @answer
-
-      render 'questions/show'
     end
+
+    render 'questions/show'
   end
 
   def label

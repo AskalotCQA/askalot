@@ -9,6 +9,12 @@ NaRuby::Application.routes.draw do
 
   match 'users/:nick', via: :get, to: 'users#show', as: :user
 
+  concern :commetable do
+    resources :comments, only: [:create]
+
+    get :comment, on: :member
+  end
+
   concern :votable do
     get :voteup, on: :member
     get :votedown, on: :member
@@ -19,12 +25,14 @@ NaRuby::Application.routes.draw do
 
     get :favor, on: :member
 
+    concerns :commetable
     concerns :votable
   end
 
   resources :answers, only: [] do
     get :label, on: :member
 
+    concerns :commetable
     concerns :votable
   end
 

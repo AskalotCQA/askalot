@@ -127,3 +127,6 @@ sk:
 
       answer:
         text: 'Odpoveď'
+
+      comment:
+        text: 'Komentár'

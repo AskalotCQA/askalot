@@ -1,0 +1,10 @@
+sk:
+  comment:
+    new:
+      submit: 'Komentovať'
+
+    create:
+      success: 'Váš komentár bol úspešne pridaný.'
+
+    show:
+      all: 'Komentáre'

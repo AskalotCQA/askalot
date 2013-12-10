@@ -1,4 +1,5 @@
 class Question < ActiveRecord::Base
+  include Commentable
   include Favorable
   include Viewable
   include Votable
