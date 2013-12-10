@@ -14,7 +14,7 @@ class Ability
     end
 
     if user.role? :teacher
-      can :observe, nil
+      can :observe, :all
       can :verify, Answer
     end
 
