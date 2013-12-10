@@ -5,3 +5,6 @@ sk:
 
     create:
       success: 'Váš komentár bol úspešne pridaný.'
+
+    show:
+      all: 'Komentáre'
