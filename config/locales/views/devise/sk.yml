@@ -47,8 +47,8 @@ sk:
       updated: 'Úspešne ste aktualizovali Váš účet.'
 
     sessions:
-      signed_in: 'Úspešne prihlásený.'
-      signed_out: 'Úspešne odhlásený.'
+      signed_in: ''
+      signed_out: ''
 
     unlocks:
       send_instructions: 'O niekoľko minút Vám bude doručený e-mail s inštrukciami ako odomknúť Váš účet.'
