@@ -1,0 +1,7 @@
+@import 'mixins';
+@import 'variables';
+
+.table-bordered > thead > tr > th {
+  border-bottom-width: 0;
+  font-weight: normal;
+}

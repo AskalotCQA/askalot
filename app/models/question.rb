@@ -1,15 +1,13 @@
 class Question < ActiveRecord::Base
+  include Favorable
+  include Viewable
   include Votable
+  include Watchable
 
   belongs_to :author, class_name: :User
   belongs_to :category
 
   has_many :answers
-
-  has_many :favorites
-  has_many :favorers, through: :favorites, source: :user
-
-  has_many :watchings, as: :watchable
 
   acts_as_taggable
 
@@ -18,7 +16,7 @@ class Question < ActiveRecord::Base
 
   scope :answered,   lambda { joins(:answers).uniq }
   scope :favored,    lambda { joins(:favorites).uniq }
-  scope :favored_by, lambda { |user| joins(:favorites).where(favorites: { user: user }) }
+  scope :favored_by, lambda { |user| joins(:favorites).where(favorites: { favorer: user }) }
 
   def labels
     [category] + tags_with_counts
@@ -30,17 +28,5 @@ class Question < ActiveRecord::Base
     end
 
     tags
-  end
-
-  def favored_by?(favorer)
-    favorites.exists? user: favorer
-  end
-
-  def toggle_favoring_by!(user)
-    return Favorite.create! user: user, question: self unless favored_by?(user)
-
-    Favorite.where(user: user, question: self).first.destroy
-
-    self
   end
 end

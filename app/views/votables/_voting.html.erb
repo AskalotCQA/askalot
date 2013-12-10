@@ -1,7 +1,9 @@
 <div id="<%= model %>-<%= votable.id %>-voting" class="<%= model %>-voting">
-  <%= icon_link_to :'chevron-up', nil, send("voteup_#{model}_path", votable), data: { remote: true }, class: (votable.upvoted_by?(current_user) ? nil : :'text-muted') %>
+  <%= icon_link_to :'chevron-up', nil, send("voteup_#{model}_path", votable), data: { remote: true },
+      class: (votable.upvoted_by?(current_user) ? nil : :'text-muted'), id: model.to_s+'-'+votable.id.to_s+'-voteup' %>
 
   <span><%= votable.total_votes %></span>
 
-  <%= icon_link_to :'chevron-down', nil, send("votedown_#{model}_path", votable), data: { remote: true }, class: (votable.downvoted_by?(current_user) ? nil : :'text-muted') %>
+  <%= icon_link_to :'chevron-down', nil, send("votedown_#{model}_path", votable), data: { remote: true },
+      class: (votable.downvoted_by?(current_user) ? nil : :'text-muted'), id: model.to_s+'-'+votable.id.to_s+'-votedown' %>
 </div>

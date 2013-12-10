@@ -16,8 +16,8 @@
         </div>
         <div class="col-md-4">
           <%= content_tag :span, class: [:'question-metric', question_views_coloring(question)] do %>
-            <span class="question-value">123</span>
-            <%= t('count.view', count: 123) %>
+            <span class="question-value"><%= question.total_views %></span>
+            <%= t('count.view', count: question.total_views) %>
           <% end %>
         </div>
       </div>

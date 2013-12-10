@@ -41,6 +41,8 @@ class QuestionsController < ApplicationController
     @labels   = @question.labels
     @answers  = @question.answers.order('created_at desc')
     @answer   = Answer.new question: @question
+
+    @question.views.create! viewer: current_user
   end
 
   def favor

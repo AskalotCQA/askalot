@@ -3,12 +3,25 @@ module Votable
 
   included do
     has_many :votes, as: :votable
+    has_many :voters, through: :votes, source: :voter
   end
 
-  def toggle_vote_by!(voter, upvote)
-    return votes.create! voter: voter, upvote: upvote unless voted_by? voter
+  def voted_by?(user)
+    votes.exists?(voter: user)
+  end
 
-    vote = votes.where(voter: voter).first
+  def upvoted_by?(user)
+    votes.exists?(voter: user, upvote: true)
+  end
+
+  def downvoted_by?(user)
+    votes.exists?(voter: user, upvote: false)
+  end
+
+  def toggle_vote_by!(user, upvote)
+    return votes.create! voter: user, upvote: upvote unless voted_by? user
+
+    vote = votes.where(voter: user).first
 
     return vote.destroy if vote.upvote == upvote
 
@@ -16,24 +29,12 @@ module Votable
     vote.save!
   end
 
-  def toggle_voteup_by!(voter)
-    toggle_vote_by! voter, true
+  def toggle_voteup_by!(user)
+    toggle_vote_by! user, true
   end
 
-  def toggle_votedown_by!(voter)
-    toggle_vote_by! voter, false
-  end
-
-  def voted_by?(voter)
-    votes.exists?(voter: voter)
-  end
-
-  def upvoted_by?(voter)
-    votes.exists?(voter: voter, upvote: true)
-  end
-
-  def downvoted_by?(voter)
-    votes.exists?(voter: voter, upvote: false)
+  def toggle_votedown_by!(user)
+    toggle_vote_by! user, false
   end
 
   def total_votes
