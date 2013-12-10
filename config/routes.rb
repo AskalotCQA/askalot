@@ -14,15 +14,15 @@ NaRuby::Application.routes.draw do
     get :votedown, on: :member
   end
 
-  resources :questions do
-    resources :answers
+  resources :questions, only: [:index, :new, :create, :show] do
+    resources :answers, only: [:create]
 
     get :favor, on: :member
 
     concerns :votable
   end
 
-  resources :answers do
+  resources :answers, only: [] do
     get :label, on: :member
 
     concerns :votable
@@ -32,7 +32,7 @@ NaRuby::Application.routes.draw do
     get :suggest, on: :collection
   end
 
-  resources :statistics do
+  resources :statistics, only: [:index] do
   end
 
   # Example of regular route:
