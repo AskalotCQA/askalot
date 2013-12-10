@@ -1,6 +1,7 @@
 class Question < ActiveRecord::Base
   include Votable
-  before_save :add_tags
+  
+  before_save :add_category_tags
 
   belongs_to :author, class_name: :User
   belongs_to :category
@@ -45,7 +46,9 @@ class Question < ActiveRecord::Base
     self
   end
 
-  def add_tags
+  private
+
+  def add_category_tags
     self.tag_list += self.category.tags
   end
 end
