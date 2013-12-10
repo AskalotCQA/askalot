@@ -3,6 +3,7 @@ module Votable
 
   included do
     has_many :votes, as: :votable
+    has_many :voters, through: :votes, source: :voter
   end
 
   def toggle_vote_by!(voter, upvote)

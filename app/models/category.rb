@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
-  has_many :questions
+  include Watchable
 
-  has_many :watchings, as: :watchable
+  has_many :questions
 
   validates :name, presence: true, uniqueness: true
 

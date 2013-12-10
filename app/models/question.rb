@@ -1,20 +1,13 @@
 class Question < ActiveRecord::Base
+  include Favorable
+  include Viewable
   include Votable
+  include Watchable
 
   belongs_to :author, class_name: :User
   belongs_to :category
 
   has_many :answers
-
-  has_many :favorites
-  has_many :favorers, through: :favorites, source: :user
-
-  has_many :watchings, as: :watchable
-
-  has_many :votes, as: :votable
-
-  has_many :views
-  has_many :viewer, through: :views, source: :user
 
   acts_as_taggable
 
