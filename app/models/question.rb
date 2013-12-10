@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   include Votable
+  before_save :add_tags
 
   belongs_to :author, class_name: :User
   belongs_to :category
@@ -42,5 +43,9 @@ class Question < ActiveRecord::Base
     Favorite.where(user: user, question: self).first.destroy
 
     self
+  end
+
+  def add_tags
+    self.tag_list += self.category.tags
   end
 end
