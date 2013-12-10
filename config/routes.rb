@@ -10,7 +10,7 @@ NaRuby::Application.routes.draw do
   match 'users/:nick', via: :get, to: 'users#show', as: :user
 
   concern :commetable do
-    resources :comments
+    resources :comments, only: [:create]
 
     get :comment, on: :member
   end
