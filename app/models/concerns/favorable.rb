@@ -3,6 +3,6 @@ module Favorable
 
   included do
     has_many :favorites
-    has_many :favorers, through: :favorites, source: :user
+    has_many :favorers, through: :favorites, source: :favorer
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131205213336) do
+ActiveRecord::Schema.define(version: 20131210012349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,9 +28,10 @@ ActiveRecord::Schema.define(version: 20131205213336) do
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string   "name",       null: false
+    t.string   "name",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "tags",       default: [],              array: true
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
@@ -43,15 +44,15 @@ ActiveRecord::Schema.define(version: 20131205213336) do
   add_index "events", ["created_at"], name: "index_events_on_created_at", using: :btree
 
   create_table "favorites", force: true do |t|
-    t.integer  "user_id",     null: false
+    t.integer  "favorer_id",  null: false
     t.integer  "question_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "favorites", ["favorer_id", "question_id"], name: "index_favorites_on_unique_key", unique: true, using: :btree
+  add_index "favorites", ["favorer_id"], name: "index_favorites_on_favorer_id", using: :btree
   add_index "favorites", ["question_id"], name: "index_favorites_on_question_id", using: :btree
-  add_index "favorites", ["user_id", "question_id"], name: "index_favorites_on_unique_key", unique: true, using: :btree
-  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "followings", force: true do |t|
     t.integer  "follower_id", null: false
@@ -118,12 +119,12 @@ ActiveRecord::Schema.define(version: 20131205213336) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "login",                                 null: false
-    t.string   "email",                  default: "",   null: false
-    t.string   "encrypted_password",     default: "",   null: false
+    t.string   "login",                                      null: false
+    t.string   "email",                  default: "",        null: false
+    t.string   "encrypted_password",     default: "",        null: false
     t.string   "ais_uid"
     t.string   "ais_login"
-    t.string   "nick",                                  null: false
+    t.string   "nick",                                       null: false
     t.string   "name"
     t.string   "first"
     t.string   "middle"
@@ -136,13 +137,13 @@ ActiveRecord::Schema.define(version: 20131205213336) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",        default: 0,    null: false
+    t.integer  "failed_attempts",        default: 0,         null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,    null: false
+    t.integer  "sign_in_count",          default: 0,         null: false
     t.datetime "current_sign_in_at"
     t.string   "current_sign_in_ip"
     t.datetime "last_sign_in_at"
@@ -150,8 +151,8 @@ ActiveRecord::Schema.define(version: 20131205213336) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "gravatar_email"
-    t.boolean  "flag_show_name",         default: true, null: false
-    t.boolean  "flag_show_email",        default: true, null: false
+    t.boolean  "flag_show_name",         default: true,      null: false
+    t.boolean  "flag_show_email",        default: true,      null: false
     t.string   "bitbucket"
     t.string   "flickr"
     t.string   "foursquare"
@@ -162,7 +163,7 @@ ActiveRecord::Schema.define(version: 20131205213336) do
     t.string   "stack_overflow"
     t.string   "tumblr"
     t.string   "youtube"
-    t.string   "role",                                  null: false
+    t.string   "role",                   default: "student", null: false
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree
@@ -181,12 +182,12 @@ ActiveRecord::Schema.define(version: 20131205213336) do
 
   create_table "views", force: true do |t|
     t.integer  "question_id", null: false
-    t.integer  "user_id",     null: false
+    t.integer  "viewer_id",   null: false
     t.datetime "created_at"
   end
 
   add_index "views", ["question_id"], name: "index_views_on_question_id", using: :btree
-  add_index "views", ["user_id"], name: "index_views_on_user_id", using: :btree
+  add_index "views", ["viewer_id"], name: "index_views_on_viewer_id", using: :btree
 
   create_table "votes", force: true do |t|
     t.integer  "voter_id",                    null: false
