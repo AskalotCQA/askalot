@@ -3,21 +3,24 @@ class CommentsController < ApplicationController
 
   def create
     @commentable = find_commentable
-    @comment     = Comment.new(comment_params)
 
     @question = @commentable.is_a?(Question) ? @commentable : @commentable.question
     @author   = @question.author
     @labels   = @question.labels
     @answers  = @question.answers
-    @answer   = Answer.new question: @question
+
+    @answer  = Answer.new(question: @question)
+    @comment = Comment.new(comment_params)
 
     if @comment.save
-      flash.now[:notice] = t('comment.create.success')
+      flash[:notice] = t('comment.create.success')
+
+      redirect_to question_path(@question)
     else
       flash_error_messages_for @comment
-    end
 
-    render 'questions/show'
+      render 'questions/show'
+    end
   end
 
   private
