@@ -1,15 +1,7 @@
-<div class="row">
-  <div class="col-md-12">
-    <p>
-      <%= comment.text %>
-      –&nbsp;
-      <a class="user-avatar" href="<%= user_path comment.author %>"></a>
-      <span>
-        <%= link_to_user comment.author %>
-      </span>
-      <%= answer_creation_time comment %>
-    </p>
-
-    <hr style="border-top: dotted 1px;"/>
-  </div>
-</div>
+<li>
+  <p>
+    <%= comment.text %> &ndash;
+    <%= link_to_user comment.author %>
+    <%= comment_creation_time comment %>
+  </p>
+</li>
