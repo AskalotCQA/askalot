@@ -22,6 +22,25 @@
   }
 }
 
+@mixin block-listing {
+  margin: 5px 0;
+  padding-left: 0;
+  border-top: 1px dashed $gray-lighter;
+  border-bottom: 1px dashed $gray-lighter;
+
+  list-style-type: none;
+
+  li {
+    padding: $padding-base-vertical 0;
+  }
+
+  li + li {
+    border-top: 1px dashed $gray-lighter;
+  }
+
+  color: $text-muted;
+}
+
 @mixin block-voting {
   text-align: center;
 
