@@ -5,6 +5,8 @@ class Question < ActiveRecord::Base
   include Votable
   include Watchable
 
+  before_save :add_category_tags
+
   belongs_to :author, class_name: :User
   belongs_to :category
 
@@ -29,5 +31,11 @@ class Question < ActiveRecord::Base
     end
 
     tags
+  end
+
+  private
+
+  def add_category_tags
+    self.tag_list += self.category.tags
   end
 end

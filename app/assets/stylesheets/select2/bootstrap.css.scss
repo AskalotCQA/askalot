@@ -1,3 +1,5 @@
+// TODO(zbell) this shit needs to be fucking dropped
+
 // mixins
 
 @mixin bootstrap-input-defaults {
@@ -45,7 +47,7 @@
 
 .select2-results {
   margin: 0 0 $padding-base-vertical 0 !important;
-  padding: $padding-base-vertical 0 0 0;
+  padding: $padding-base-vertical 0 0 0 !important;
 
   border-top: 1px solid $input-border-focus;
 }
@@ -59,11 +61,26 @@
 .select2-container .select2-choices,
 .select2-container.select2-drop-above .select2-choices .select2-search-field input,
 .select2-container.select2-drop-above .select2-choice,
-.select2-container.select2-drop-above .select2-choices, {
+.select2-container.select2-drop-above .select2-choices {
   background: none;
   padding: 0;
 
   @include bootstrap-input-defaults;
+}
+
+.select2-container.select2-drop-above .select2-choice,
+.select2-container.select2-drop-above .select2-choices {
+  border-bottom: 1px solid $input-border-focus !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+
+  @include box-shadow(none !important);
+}
+
+.select2-container-multi .select2-choices {
+  min-height: 34px !important;
 }
 
 .select2-search {
@@ -79,7 +96,6 @@
 
 .select2-container .select2-choices .select2-search-field input {
   @include box-shadow(none);
-
 }
 
 // heights
