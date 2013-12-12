@@ -17,9 +17,6 @@ class User < ActiveRecord::Base
   has_many :answers,   foreign_key: :author_id
   has_many :comments,  foreign_key: :author_id
 
-  has_many :favorites
-  has_many :favored_questions, through: :favorites, class_name: :Question
-
   has_many :labelings
   has_many :labels, through: :labelings, foreign_key: :author_id
 
@@ -27,10 +24,9 @@ class User < ActiveRecord::Base
   has_many :followers, through: :followings, class_name: :User, foreign_key: :follower_id
   has_many :followees, through: :followings, class_name: :User, foreign_key: :followee_id
 
-  has_many :views, foreign_key: :viewer_id
-
-  has_many :votes, foreign_key: :voter_id
-
+  has_many :favorites, foreign_key: :favorer_id
+  has_many :views,     foreign_key: :viewer_id
+  has_many :votes,     foreign_key: :voter_id
   has_many :watchings, foreign_key: :watcher_id
 
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
