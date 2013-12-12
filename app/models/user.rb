@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   end
 
   def name
-    "#{first} #{middle} #{last}".squeeze(' ').strip
+    (value = "#{first} #{middle} #{last}".squeeze(' ').strip).blank? ? nil : value
   end
 
   def can_destroy?

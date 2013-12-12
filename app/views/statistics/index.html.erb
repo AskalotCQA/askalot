@@ -205,15 +205,13 @@
       <table class="table table-bordered table-condensed table-statistical">
         <thead>
           <tr class="active">
-            <th colspan="2">Používateľ</th>
+            <th colspan="2" rowspan="3" class="text-center">Používateľ</th>
+
             <th colspan="5">Otázky</th>
             <th colspan="6">Odpovede</th>
             <th colspan="2">Komentáre</th>
           </tr>
           <tr class="active">
-            <th rowspan="2">#</th>
-            <th rowspan="2">Meno</th>
-
             <th rowspan="2">Celkom</th>
             <th colspan="4">Používateľmi</th>
 
@@ -240,7 +238,7 @@
           <% @users.each_with_index do |user, i| %>
             <tr>
               <td><%= i + 1 %></td>
-              <%= statistical_cell(user) { |u| [link_to(user.name, user_path(user.nick)), u.role?(:teacher) ? :info : nil] } %>
+              <%= statistical_cell(user) { |u| [link_to(user.name || user.nick, user_path(user.nick)), u.role?(:teacher) ? :info : nil] } %>
 
               <%= statistical_cell user.questions.size %>
               <%= statistical_cell user.questions.viewed.size %>
