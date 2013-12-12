@@ -179,22 +179,6 @@
       </table>
     </section>
   </div>
-<!-- TODO(zbell) resolve
-  <div class="col-md-3">
-    <section>
-      <h3>Prehľad komentárov</h3>
-
-      <table class="table table-bordered table-condensed">
-        <tbody>
-          <tr>
-            <td>Komentáre</td>
-            <td><%= Comment.count %></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  </div>
--->
 </div>
 
 <div class="row">
@@ -209,7 +193,10 @@
 
             <th colspan="5">Otázky</th>
             <th colspan="6">Odpovede</th>
-            <th colspan="2">Komentáre</th>
+            <th colspan="1">Zobrazenia</th>
+            <th colspan="3">Hlasy</th>
+            <th colspan="3">Komentáre</th>
+            <th colspan="1">Obľúbenia</th>
           </tr>
           <tr class="active">
             <th rowspan="2">Celkom</th>
@@ -218,8 +205,17 @@
             <th rowspan="2">Celkom</th>
             <th colspan="5">Používateľmi</th>
 
-            <th rowspan="2">K otázkam</th>
-            <th rowspan="2">K odpovediam</th>
+            <th rowspan="2">Otázok</th>
+
+            <th rowspan="2">Celkom</th>
+            <th rowspan="2">Otázok</th>
+            <th rowspan="2">Odpovedí</th>
+
+            <th rowspan="2">Celkom</th>
+            <th rowspan="2">Otázok</th>
+            <th rowspan="2">Odpovedí</th>
+
+            <th rowspan="2">Otázok</th>
           </tr>
           <tr class="active">
             <th>Zobrazené</th>
@@ -253,8 +249,17 @@
               <%= statistical_cell user.answers.with(:helpful).size, positive: :warning %>
               <%= statistical_cell user.answers.with(:verified).size, positive: :info %>
 
+              <%= statistical_cell user.views.size %>
+
+              <%= statistical_cell user.votes.size %>
+              <%= statistical_cell user.votes.for(:question).size %>
+              <%= statistical_cell user.votes.for(:answer).size %>
+
+              <%= statistical_cell user.comments.size %>
               <%= statistical_cell user.comments.for(:question).size %>
               <%= statistical_cell user.comments.for(:answer).size %>
+
+              <%= statistical_cell user.favorites.size %>
             </tr>
           <% end %>
         </tbody>
