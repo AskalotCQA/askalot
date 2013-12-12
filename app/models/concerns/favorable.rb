@@ -4,6 +4,9 @@ module Favorable
   included do
     has_many :favorites
     has_many :favorers, through: :favorites, source: :favorer
+
+    scope :favored, lambda { joins(:favorites).uniq }
+    scope :favored_by, lambda { |user| favored.merge(Favorite.by user) }
   end
 
   def favored_by?(user)

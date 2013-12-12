@@ -14,11 +14,11 @@ class User < ActiveRecord::Base
          authentication_keys: [:login]
 
   has_many :questions, foreign_key: :author_id
+  has_many :answers,   foreign_key: :author_id
+  has_many :comments,  foreign_key: :author_id
 
   has_many :favorites
   has_many :favored_questions, through: :favorites, class_name: :Question
-
-  has_many :answers,   foreign_key: :author_id
 
   has_many :labelings
   has_many :labels, through: :labelings, foreign_key: :author_id

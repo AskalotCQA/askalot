@@ -3,5 +3,7 @@ module Commentable
 
   included do
     has_many :comments, as: :commentable
+
+    scope :commented, lambda { joins(:comments).uniq }
   end
 end

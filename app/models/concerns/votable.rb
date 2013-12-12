@@ -4,6 +4,8 @@ module Votable
   included do
     has_many :votes, as: :votable
     has_many :voters, through: :votes, source: :voter
+
+    scope :voted, lambda { joins(:votes).uniq }
   end
 
   def voted_by?(user)

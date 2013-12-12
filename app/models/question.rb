@@ -17,9 +17,7 @@ class Question < ActiveRecord::Base
   validates :title, presence: true, length: { minimum: 2, maximum: 250 }
   validates :text,  presence: true, length: { minimum: 2 }
 
-  scope :answered,   lambda { joins(:answers).uniq }
-  scope :favored,    lambda { joins(:favorites).uniq }
-  scope :favored_by, lambda { |user| joins(:favorites).where(favorites: { favorer: user }) }
+  scope :answered, lambda { joins(:answers).uniq }
 
   def labels
     [category] + tags_with_counts
