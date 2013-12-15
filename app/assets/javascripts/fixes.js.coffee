@@ -1,6 +1,7 @@
 #= require hash
 #= require remote
 #= require select
+#= require poll
 
 Remote.bindState()
 
@@ -9,7 +10,10 @@ window.defined = (value) ->
 
 window.fixes = ->
   Remote.initialize()
+  Poll.initialize()
 
+
+  $('[data-time-ago]').timeago()
   $('[data-toggle="popover"]').popover(container: 'body')
   $('[data-toggle="tooltip"]').tooltip(container: 'body')
   $('[data-toggle="tooltip"]').on 'show.bs.tooltip', -> $(this).removeAttr('title')
