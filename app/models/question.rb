@@ -12,6 +12,7 @@ class Question < ActiveRecord::Base
 
   has_many :answers
 
+  # TODO (smolnar) rm, add custom model, preserve order for relation
   acts_as_taggable
 
   validates :title, presence: true, length: { minimum: 2, maximum: 250 }

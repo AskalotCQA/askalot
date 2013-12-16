@@ -21,6 +21,14 @@ describe Question do
     expect(question).to be_valid
   end
 
+  it 'uses category tags' do
+    category = create :category, tags: ['dbms', 'elasticsearch']
+
+    question = create :question, category: category, tag_list: 'redis'
+
+    expect(question.tags.pluck(:name).sort).to eql(['dbms', 'elasticsearch', 'redis'])
+  end
+
   describe '.favored_by' do
     it 'returns questions favored by user' do
       user       = create :user
