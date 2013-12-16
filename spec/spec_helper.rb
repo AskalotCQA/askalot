@@ -13,6 +13,8 @@ require 'cancan/matchers'
 
 Capybara.default_selector = :css
 
+Capybara.javascript_driver = ENV['DRIVER'].to_sym if ENV['DRIVER']
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
