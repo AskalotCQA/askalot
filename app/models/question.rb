@@ -18,7 +18,8 @@ class Question < ActiveRecord::Base
   validates :title, presence: true, length: { minimum: 2, maximum: 250 }
   validates :text,  presence: true, length: { minimum: 2 }
 
-  scope :answered, lambda { joins(:answers).uniq }
+  scope :answered,    lambda { joins(:answers).uniq }
+  scope :by_category, lambda { |category| where(category_id: category.id) }
 
   def labels
     [category] + tags_with_counts

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 describe 'Filter Questions', js: true do
   let(:user) { create :user }
+  let(:category) { create :category, :with_tags }
 
   # TODO (smolnar) check url for serialized params
 
@@ -91,6 +92,46 @@ describe 'Filter Questions', js: true do
       expect(item).to have_content('elasticsearch')
       expect(item).to have_content('ruby')
     end
+  end
+
+  it 'filters questions by category tags' do
+    Question.order(created_at: :desc).first(5).each do |question|
+      question.update_attributes(category_id: category.id)
+    end
+
+    visit root_path
+
+    click_link 'Otázky'
+
+    list = all('#questions > ol > li')
+
+    within list[0] do
+      click_link category.name
+
+      wait_for_remote
+    end
+
+    list = all('#questions > ol > li')
+    expect(list).to have(5).items
+
+    list.each { |item| expect(item).to have_content(category.name) }
+
+    within list[0] do
+      click_link 'ruby'
+
+      wait_for_remote
+    end
+
+    list = all('#questions > ol > li')
+    expect(list).to have(5).items
+
+    list.each do |item|
+      expect(item).to have_content('elasticsearch')
+      expect(item).to have_content('ruby')
+
+      category.tags.each { |tag| expect(item).to have_content(tag) }
+    end
+
   end
 
   context 'when changing tabs' do
