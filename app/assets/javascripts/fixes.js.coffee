@@ -12,9 +12,11 @@ window.fixes = ->
   Remote.initialize()
   Poll.initialize()
 
+  $('.popover').remove()
   $('.tooltip').remove()
 
   $('[data-time-ago]').timeago()
+
   $('[data-toggle="popover"]').popover(container: 'body')
   $('[data-toggle="tooltip"]').tooltip(container: 'body')
   $('[data-toggle="tooltip"]').on 'show.bs.tooltip', -> $(this).removeAttr('title')
