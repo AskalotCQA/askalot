@@ -12,6 +12,7 @@ window.fixes = ->
   Remote.initialize()
   Poll.initialize()
 
+  $('.tooltip').remove()
 
   $('[data-time-ago]').timeago()
   $('[data-toggle="popover"]').popover(container: 'body')
