@@ -28,19 +28,20 @@ module QuestionsHelper
   end
 
   def question_label(label, options = {})
-    values, classes = question_label_of label
+    values, classes = question_label_attributes label
+    filter          = Array.wrap(params[:tags]) + values
 
-    filter = Array.wrap(params[:tags]) + values
-
-    options.merge! class: "label #{classes}"
-    options.deep_merge! data: { id: values.join(',') }
+    options.deep_merge! class: classes, data: { id: values.join(',') }
 
     # TODO (smolnar) using only tags as parameter is possibly dangerous, review
+    # TODO (zbell) why dangerous?
     link_to "#{label.name} (#{label.count})", questions_path(tags: filter), options
   end
 
-  def question_label_of(label)
-    return [label.name], :'label-info question-tag' unless label.is_a?(Category)
-    return label.tags, :'label-primary question-category'
+  private
+
+  def question_label_attributes(label)
+    return [label.name], [:label, :'label-info', :'question-tag'] unless label.is_a? Category
+    return label.tags.to_a, [:label, :'label-primary', :'question-category']
   end
 end
