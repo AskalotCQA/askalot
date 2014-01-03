@@ -15,7 +15,7 @@
         <small><%= question_creation_time @question %></small>
       </h1>
 
-      <%= render 'questions/labels', labels: @labels %>
+      <%= render 'questions/labels', labels: @question.labels %>
     </section>
 
     <section id="question-content">
