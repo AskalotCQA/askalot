@@ -30,10 +30,10 @@ module QuestionsHelper
   def question_label(label, options = {})
     values, classes = question_label_of label
 
-    filter = Array.wrap(params[:tags]) + values
+    filter = (Array.wrap(params[:tags]) + values).join(',')
 
     options.merge! class: "label #{classes}"
-    options.deep_merge! data: { id: values.join(',') }
+    options.deep_merge! data: { id: filter }
 
     # TODO (smolnar) using only tags as parameter is possibly dangerous, review
     link_to "#{label.name} (#{label.count})", questions_path(tags: filter), options
