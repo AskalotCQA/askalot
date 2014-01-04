@@ -6,6 +6,8 @@ module PageHelper
     URI.parse(current_url).query.split(/&/).each do |param|
       key, value = param.split('=')
 
+      value = URI.decode(value)
+
       if key =~ /\A.*\[\]\z/
         key = key.sub(/\[\]/, '').to_sym
 
