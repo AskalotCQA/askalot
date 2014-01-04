@@ -11,29 +11,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131102843) do
+ActiveRecord::Schema.define(version: 20131210012349) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: true do |t|
-    t.integer  "author_id",               null: false
-    t.integer  "question_id",             null: false
-    t.text     "text",                    null: false
+    t.integer  "author_id",   null: false
+    t.integer  "question_id", null: false
+    t.text     "text",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total", default: 0, null: false
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
-  add_index "answers", ["votes_total"], name: "index_answers_on_votes_total", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string   "name",                    null: false
+    t.string   "name",                                  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "tags",       default: [],              array: true
+    t.string   "tags",       default: ["fiit", "fiit"],              array: true
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
@@ -101,46 +99,44 @@ ActiveRecord::Schema.define(version: 20140131102843) do
   add_index "labels", ["value"], name: "index_labels_on_value", unique: true, using: :btree
 
   create_table "questions", force: true do |t|
-    t.integer  "author_id",                   null: false
-    t.integer  "category_id",                 null: false
-    t.string   "title",                       null: false
-    t.text     "text",                        null: false
+    t.integer  "author_id",   null: false
+    t.integer  "category_id", null: false
+    t.string   "title",       null: false
+    t.text     "text",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total", default: 0,     null: false
-    t.boolean  "anonymous",   default: false, null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
-  add_index "questions", ["votes_total"], name: "index_questions_on_votes_total", using: :btree
 
   create_table "taggings", force: true do |t|
-    t.integer  "tag_id",        null: false
-    t.integer  "taggable_id",   null: false
-    t.string   "taggable_type", null: false
+    t.integer  "tag_id",                    null: false
+    t.integer  "taggable_id",               null: false
+    t.string   "taggable_type",             null: false
+    t.string   "context",       limit: 128, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
   end
 
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type"], name: "index_taggings_on_tag_id_and_taggable_id_and_taggable_type", using: :btree
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type"], name: "index_taggings_on_taggable_id_and_taggable_type", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+  add_index "taggings", ["tagger_id", "tagger_type", "context"], name: "index_taggings_on_tagger_id_and_tagger_type_and_context", using: :btree
 
   create_table "tags", force: true do |t|
     t.string "name", null: false
   end
 
-  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
-
   create_table "users", force: true do |t|
-    t.string   "login",                                      null: false
-    t.string   "email",                  default: "",        null: false
-    t.string   "encrypted_password",     default: "",        null: false
+    t.string   "login",                                 null: false
+    t.string   "email",                  default: "",   null: false
+    t.string   "encrypted_password",     default: "",   null: false
     t.string   "ais_uid"
     t.string   "ais_login"
-    t.string   "nick",                                       null: false
+    t.string   "nick",                                  null: false
     t.string   "name"
     t.string   "first"
     t.string   "middle"
@@ -153,13 +149,13 @@ ActiveRecord::Schema.define(version: 20140131102843) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "failed_attempts",        default: 0,         null: false
+    t.integer  "failed_attempts",        default: 0,    null: false
     t.string   "unlock_token"
     t.datetime "locked_at"
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,         null: false
+    t.integer  "sign_in_count",          default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.string   "current_sign_in_ip"
     t.datetime "last_sign_in_at"
@@ -167,8 +163,8 @@ ActiveRecord::Schema.define(version: 20140131102843) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "gravatar_email"
-    t.boolean  "show_name",              default: true,      null: false
-    t.boolean  "show_email",             default: true,      null: false
+    t.boolean  "flag_show_name",         default: true, null: false
+    t.boolean  "flag_show_email",        default: true, null: false
     t.string   "bitbucket"
     t.string   "flickr"
     t.string   "foursquare"
@@ -179,7 +175,7 @@ ActiveRecord::Schema.define(version: 20140131102843) do
     t.string   "stack_overflow"
     t.string   "tumblr"
     t.string   "youtube"
-    t.string   "role",                   default: "student", null: false
+    t.string   "role",                                  null: false
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree
