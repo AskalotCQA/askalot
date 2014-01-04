@@ -43,7 +43,7 @@ describe 'Show Question' do
 
       # TODO (smolnar) consider another way of checking url params
       expect(current_path).to   eql(questions_path)
-      expect(current_params).to eql(tags: ['ruby'])
+      expect(current_params).to eql(tags: 'ruby')
 
       list = all('#questions > ol > li')
 
@@ -78,7 +78,7 @@ describe 'Show Question' do
 
       # TODO (smolnar) consider another way of checking url params
       expect(current_path).to   eql(questions_path)
-      expect(current_params).to eql(tags: ['elasticsearch', 'lucene'])
+      expect(current_params).to eql(tags: 'elasticsearch,lucene')
 
       list = all('#questions > ol > li')
 
