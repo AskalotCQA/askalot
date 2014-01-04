@@ -1,8 +1,7 @@
-<!-- TODO(zbell) fill content & links to tags -->
 <ul class="nav nav-labels">
   <% labels.each do |label| %>
     <li>
-      <%= link_to "#{label.name} (#{label.count})", '#', data: { id: label.is_a?(Category) ? label.tags.join(',') : label.name  }, class: "label label-#{label.is_a?(Category) ? :'primary question-category' : :'info question-tag' }" %>
+      <%= question_label label %>
     </li>
   <% end %>
 </ul>

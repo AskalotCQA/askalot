@@ -26,4 +26,23 @@ module QuestionsHelper
   def question_views_coloring(question)
     :'text-muted'
   end
+
+  def question_label(label, options = {})
+    values, classes = question_label_attributes label
+    filter          = (Array.wrap(params[:tags]) + values).join(',')
+
+    options.deep_merge! class: classes, data: { id: filter }
+
+    # TODO (smolnar) using only tags as parameter is possibly dangerous, review
+    # TODO (zbell) why dangerous?
+    # TODO (smolnar) omitting of other params, like page, tab and so on.
+    link_to "#{label.name} (#{label.count})", questions_path(tags: filter), options
+  end
+
+  private
+
+  def question_label_attributes(label)
+    return [label.name], [:label, :'label-info', :'question-tag'] unless label.is_a? Category
+    return label.tags.to_a, [:label, :'label-primary', :'question-category']
+  end
 end
