@@ -79,5 +79,14 @@ describe 'Question Polling', js: true do
     within '#questions-controls' do
       expect(page).to have_content('Aktualizovať automaticky')
     end
+
+    create :question, title: 'Another Elasticsearch problem'
+
+    wait_for_remote 6.seconds
+
+    list = all('#questions > ol > li')
+
+    expect(list).to have(2).items
+    expect(page).not_to have_content('Another Elasticsearch problem')
   end
 end
