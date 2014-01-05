@@ -20,7 +20,7 @@ describe 'Question Polling', js: true do
 
     create :question, title: 'Elasticsearch problem'
 
-    sleep 6
+    wait_for_remote 6.seconds
 
     list = all('#questions > ol > li')
     expect(list).to have(2).items
@@ -46,12 +46,47 @@ describe 'Question Polling', js: true do
 
     create :question, title: 'Elasticsearch problem', tag_list: 'elasticsearch'
 
-    sleep 6
+    wait_for_remote 6.seconds
 
     list = all('#questions > ol > li')
     expect(list).to have(2).items
 
     expect(page).to have_content('Elasticsearch problem')
     expect(page).to have_content('Aktualizované pred menej než minútou')
+  end
+
+  it 'stops automatic refreshing' do
+    visit root_path
+
+    click_link 'Otázky'
+
+    list = all('#questions > ol > li')
+    expect(list).to have(1).items
+
+    click_link 'Aktualizovať automaticky'
+
+    create :question, title: 'Elasticsearch problem'
+
+    wait_for_remote 6.seconds
+
+    list = all('#questions > ol > li')
+    expect(list).to have(2).items
+
+    expect(page).to have_content('Elasticsearch problem')
+
+    click_link 'Aktualizované pred menej než minútou'
+
+    within '#questions-controls' do
+      expect(page).to have_content('Aktualizovať automaticky')
+    end
+
+    create :question, title: 'Another Elasticsearch problem'
+
+    wait_for_remote 6.seconds
+
+    list = all('#questions > ol > li')
+
+    expect(list).to have(2).items
+    expect(page).not_to have_content('Another Elasticsearch problem')
   end
 end
