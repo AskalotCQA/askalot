@@ -8,7 +8,7 @@ describe 'Question Polling', js: true do
     login_as user
   end
 
-  it 'refreshes the list of questions each five seconds' do
+  it 'refreshes the list of questions every five seconds' do
     visit root_path
 
     click_link 'Otázky'
@@ -55,7 +55,7 @@ describe 'Question Polling', js: true do
     expect(page).to have_content('Aktualizované pred menej než minútou')
   end
 
-  it 'stops automatic refreshing' do
+  it 'stops refreshing' do
     visit root_path
 
     click_link 'Otázky'

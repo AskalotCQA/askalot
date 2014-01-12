@@ -137,6 +137,10 @@ describe 'User Profile' do
       expect(page).to have_field('user_youtube',        with: 'http://youtube.com/nickynickmann')
       expect(page).to have_field('user_stack_overflow', with: 'http://stackoverflow.com/users/1234567890')
     end
+
+    it 'edits user privacy', js: true do
+      pending
+    end
   end
 
   context 'with AIS user' do
@@ -164,10 +168,6 @@ describe 'User Profile' do
 
       expect(page).to have_field('user_nick',  with: 'Nicky')
       expect(page).to have_field('user_about', with: 'Lorem ipsum')
-    end
-
-    it 'edits user privacy', js: true do
-      pending
     end
   end
 end

@@ -16,11 +16,11 @@ FactoryGirl.define do
 
     role User::ROLES.first
 
-    trait :as_teacher do
+    factory :teacher, class: :User do
       role :teacher
     end
 
-    trait :as_admin do
+    factory :admin, class: :User do
       role :admin
     end
 
