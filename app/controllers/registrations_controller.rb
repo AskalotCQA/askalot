@@ -1,5 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
-  before_action :set_default_tab, only: :edit
+  include Tabbing
+
+  default_tab :'user-profile', only: :edit
 
   def destroy
     fail
@@ -9,11 +11,5 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(resource)
     edit_user_registration_path
-  end
-
-  private
-
-  def set_default_tab
-    params[:tab] ||= :'user-profile'
   end
 end

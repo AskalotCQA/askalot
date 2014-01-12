@@ -1,8 +1,10 @@
 class QuestionsController < ApplicationController
   include Voting
+  include Tabbing
 
   before_action :authenticate_user!
-  before_action :set_default_tab, only: :index
+
+  default_tab :'questions-new', only: :index
 
   def index
     @questions = case params[:tab].to_sym
@@ -60,11 +62,6 @@ class QuestionsController < ApplicationController
     return relation unless params[:tags].present?
 
     relation.tagged_with(params[:tags])
-  end
-
-  # TODO (smolnar) use concern
-  def set_default_tab
-    params[:tab] ||= :'questions-new'
   end
 
   def question_params

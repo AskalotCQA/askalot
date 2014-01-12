@@ -30,10 +30,10 @@ class User < ActiveRecord::Base
   has_many :watchings, foreign_key: :watcher_id
 
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
-  # TODO (smolnar) check uniqueness value select in db
 
   validates :role, presence: true
 
+  # TODO (smolnar) consult usage of functional indices ofr nick, login and email uniqueness checking
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
 
