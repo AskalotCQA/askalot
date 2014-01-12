@@ -41,7 +41,6 @@ describe 'Show Question' do
         click_link 'ruby (4)'
       end
 
-      # TODO (smolnar) consider another way of checking url params
       expect(current_path).to   eql(questions_path)
       expect(current_params).to eql(tags: 'ruby')
 
@@ -76,7 +75,6 @@ describe 'Show Question' do
         click_link 'Elasticsearch (4)'
       end
 
-      # TODO (smolnar) consider another way of checking url params
       expect(current_path).to   eql(questions_path)
       expect(current_params).to eql(tags: 'elasticsearch,lucene')
 
