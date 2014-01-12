@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
 
   validates :role, presence: true
 
-  # TODO (smolnar) consult usage of functional indices ofr nick, login and email uniqueness checking
+  # TODO (smolnar) consult usage of functional indices for nick, login and email uniqueness checking
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
 

@@ -4,8 +4,6 @@ describe 'Filter Questions', js: true do
   let(:user) { create :user }
   let(:category) { create :category, :with_tags }
 
-  # TODO (smolnar) check url for serialized params
-
   before :each do
     login_as user
 
