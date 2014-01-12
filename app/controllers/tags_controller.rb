@@ -2,8 +2,8 @@ class TagsController < ApplicationController
   before_action :authenticate_user!
 
   # TODO (smolnar)
-  # * remove AR relation, use elasticsearch
-  # * use pagination
+  # * use elasticsearch
+  # * consider pagination
 
   def suggest
     tags = Tag.where('tags.name LIKE ?', "#{params[:q]}%").limit(10).order(:name)
