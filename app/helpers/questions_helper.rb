@@ -29,13 +29,10 @@ module QuestionsHelper
 
   def question_label(label, options = {})
     values, classes = question_label_attributes label
-    filter          = (Array.wrap(params[:tags]) + values).join(',')
+    filter          = ((params[:tags] || '').split(',') + values).uniq.join(',')
 
     options.deep_merge! class: classes, data: { id: filter }
 
-    # TODO (smolnar) using only tags as parameter is possibly dangerous, review
-    # TODO (zbell) why dangerous?
-    # TODO (smolnar) omitting of other params, like page, tab and so on.
     link_to "#{label.name} (#{label.count})", questions_path(tags: filter), options
   end
 
