@@ -43,3 +43,6 @@ sk:
   activerecord:
     errors:
       <<: *errors
+
+  cancan:
+    access_denied: 'Nemáte právo na vykonanie tejto akcie.'
