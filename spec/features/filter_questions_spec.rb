@@ -24,6 +24,8 @@ describe 'Filter Questions', js: true do
     list = all('#questions > ol > li')
     expect(list).to have(10).items
 
+    expect(current_params).to include(tags: 'elasticsearch')
+
     list.each { |item| expect(item).to have_content('elasticsearch') }
 
     within '.pagination' do
@@ -34,6 +36,8 @@ describe 'Filter Questions', js: true do
 
     list = all('#questions > ol > li')
     expect(list).to have(5).items
+
+    expect(current_params).to include(tags: 'elasticsearch', page: '2')
 
     list.each { |item| expect(item).to have_content('elasticsearch') }
   end
@@ -49,6 +53,8 @@ describe 'Filter Questions', js: true do
     list = all('#questions > ol > li')
     expect(list).to have(10).times
 
+    expect(current_params).to include(tags: 'elasticsearch,ruby')
+
     list.each do |item|
       expect(item).to have_content('elasticsearch')
       expect(item).to have_content('ruby')
@@ -57,8 +63,11 @@ describe 'Filter Questions', js: true do
     fill_in_select2 'question_tags', with: 'linux'
 
     list = all('#questions > ol > li')
+
     expect(list).to have(0).times
     expect(page).to have_content('Neboli nájdené žiadne otázky.')
+
+    expect(current_params).to include(tags: 'elasticsearch,ruby,linux')
   end
 
   it 'filters questions by question tags' do
@@ -76,6 +85,7 @@ describe 'Filter Questions', js: true do
 
     list = all('#questions > ol > li')
     expect(list).to have(10).items
+    expect(current_params).to include(tags: 'elasticsearch')
 
     list.each { |item| expect(item).to have_content('elasticsearch') }
 
@@ -87,6 +97,8 @@ describe 'Filter Questions', js: true do
 
     list = all('#questions > ol > li')
     expect(list).to have(10).items
+
+    expect(current_params).to include(tags: 'elasticsearch,ruby')
 
     list.each do |item|
       expect(item).to have_content('elasticsearch')
@@ -114,6 +126,8 @@ describe 'Filter Questions', js: true do
     list = all('#questions > ol > li')
     expect(list).to have(5).items
 
+    expect(current_params).to include(tags: category.tags.join(','))
+
     list.each { |item| expect(item).to have_content(category.name) }
 
     within list[0] do
@@ -124,6 +138,8 @@ describe 'Filter Questions', js: true do
 
     list = all('#questions > ol > li')
     expect(list).to have(5).items
+
+    expect(current_params).to include(tags: (category.tags + ['ruby']).join(','))
 
     list.each do |item|
       expect(item).to have_content('elasticsearch')
@@ -159,6 +175,8 @@ describe 'Filter Questions', js: true do
 
       list = all('#questions > ol > li')
       expect(list).to have(3).items
+
+      expect(current_params).to include(tags: 'elasticsearch', tab: 'questions-favored')
 
       list.each { |item| expect(item).to have_content('elasticsearch') }
     end
