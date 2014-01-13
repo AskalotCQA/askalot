@@ -8,8 +8,6 @@ FactoryGirl.define do
     password              'password'
     password_confirmation 'password'
 
-    sequence(:nick) { |n| "jnash#{n}" }
-
     first 'John'
     last  'Nash'
     about 'Lorem ipsum'

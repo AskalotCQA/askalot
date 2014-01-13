@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
 
   # TODO (smolnar) consult usage of functional indices for nick, login and email uniqueness checking
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
-  validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
+  validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }, if: :login?
 
   validates :email,          format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, allow_blank: true
@@ -50,7 +50,7 @@ class User < ActiveRecord::Base
   symbolize :role, in: ROLES
 
   def login=(value)
-    write_attribute(:login, value.downcase)
+    write_attribute :login, value.to_s.downcase
 
     self.nick ||= login
   end
