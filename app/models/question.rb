@@ -15,8 +15,9 @@ class Question < ActiveRecord::Base
   # TODO (smolnar) rm, add custom model, preserve order for relation
   acts_as_taggable
 
-  validates :title, presence: true, length: { minimum: 2, maximum: 250 }
-  validates :text,  presence: true, length: { minimum: 2 }
+  validates :category_id, presence: true
+  validates :title,       presence: true, length: { minimum: 2, maximum: 250 }
+  validates :text,        presence: true, length: { minimum: 2 }
 
   scope :answered,    lambda { joins(:answers).uniq }
   scope :by_category, lambda { |category| where(category_id: category.id) }

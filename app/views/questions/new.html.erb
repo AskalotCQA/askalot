@@ -8,7 +8,7 @@
       <%= form_for @question do |f| %>
         <div class="form-group">
           <%= f.label :category_id %>
-          <%= f.collection_select :category_id, Category.all, :id, :name, {}, { class: :'form-control', data: { as: :select2 }} %>
+          <%= f.collection_select :category_id, Category.all, :id, :name, {include_blank: true}, { class: :'form-control', data: { as: :select2 }} %>
         </div>
         <div class="form-group">
           <%= f.label :title %>
