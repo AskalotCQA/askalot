@@ -1,7 +1,7 @@
 <section id="questions-controls">
   <div class="pull-right">
     <% if params[:poll].present? %>
-      <%= icon_link_to :refresh, t('question.poll.end', time: tooltip_time_tag(Time.now, placement: :right).html_safe), params.except(:poll), class: :'btn text-muted', data: { poll: true, remote: true, state: true, rel: questions_path(params) } %>
+      <%= icon_link_to :refresh, t('question.poll.end', time: tooltip_time_tag(Time.now).html_safe), params.except(:poll), class: :'btn text-muted', data: { poll: true, remote: true, state: true, rel: questions_path(params) } %>
     <% else  %>
       <%= icon_link_to :refresh, t('question.poll.start'), questions_path(params.merge poll: true), class: :'btn btn-default', data: { remote: true, state: true } %>
     <% end %>
