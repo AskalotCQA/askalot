@@ -70,5 +70,5 @@ RSpec.configure do |config|
   config.before(:each) { reset_emails }
 
   # Specify paths to use DatabaseCleaner for
-  DatabaseHelper.clean 'models', 'features', 'requests'
+  DatabaseHelper.clean :models, :features, :requests
 end
