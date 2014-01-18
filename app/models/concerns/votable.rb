@@ -29,6 +29,9 @@ module Votable
 
     vote.upvote = upvote
     vote.save!
+
+    self.votes_count = total_votes
+    self.save!
   end
 
   def toggle_voteup_by!(user)
