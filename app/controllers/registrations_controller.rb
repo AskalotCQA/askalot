@@ -9,6 +9,15 @@ class RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  # TODO(zbell) resolve
+  #def after_sign_up_path_for(resource)
+  #  questions_path
+  #end
+  #
+  #def after_inactive_sign_up_path_for(resource)
+  #  after_sign_up_path_for(resource)
+  #end
+
   def after_update_path_for(resource)
     edit_user_registration_path
   end
