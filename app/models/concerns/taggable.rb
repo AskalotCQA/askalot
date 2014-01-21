@@ -5,7 +5,7 @@ module Taggable
     has_many :taggings, as: :taggable
     has_many :tags, through: :taggings
 
-    scope :tagged_with, lambda { |values| joins(:tags).where tags: { name: Taggable::TagList.new(taggable, values).tags } }
+    scope :tagged_with, lambda { |values, options = {}| Scope.new(self).build(values, options) }
 
     after_save :generate_tags!
   end
@@ -34,6 +34,25 @@ module Taggable
         include Squire::Base
 
         config.extractor = TagList::Extractor
+      end
+    end
+  end
+
+  class Scope
+    attr_accessor :base
+
+    def initialize(base)
+      @base = base
+    end
+
+    def build(values, options = {})
+      tags     = Taggable::TagList.new(base.taggable, values).tags
+      relation = base.joins(:tags)
+
+      if options[:any]
+        relation.where tags: { name: tags }
+      else
+        relation.where tags.map { :"tags.name = ?" }.join(' AND '), *tags
       end
     end
   end
