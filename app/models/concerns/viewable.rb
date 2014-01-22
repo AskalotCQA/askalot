@@ -13,7 +13,7 @@ module Viewable
     views.exists? viewer: user
   end
 
-  def total_views
+  def views_total
     View.where(question: self).distinct.count(:viewer_id)
   end
 end
