@@ -10,9 +10,6 @@ class ForceMissingUniques < ActiveRecord::Migration
 
     add_index :labels, :value, unique: true
 
-    # TODO(zbell) consider
-    #add_index :taggings, [...], unique: true
-
     add_index :votes, [:voter_id, :votable_id, :votable_type], name: 'index_votes_on_unique_key', unique: true
 
     add_index :watchings, [:watcher_id, :watchable_id, :watchable_type], name: 'index_watchings_on_unique_key', unique: true
