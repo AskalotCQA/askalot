@@ -245,9 +245,9 @@
               <%= statistical_cell user.answers.size %>
               <%= statistical_cell user.answers.voted.size %>
               <%= statistical_cell user.answers.commented.size %>
-              <%= statistical_cell user.answers.with(:best).size, positive: :success %>
-              <%= statistical_cell user.answers.with(:helpful).size, positive: :warning %>
-              <%= statistical_cell user.answers.with(:verified).size, positive: :info %>
+              <%= statistical_cell user.answers.labeled_with(:best).size, positive: :success %>
+              <%= statistical_cell user.answers.labeled_with(:helpful).size, positive: :warning %>
+              <%= statistical_cell user.answers.labeled_with(:verified).size, positive: :info %>
 
               <%= statistical_cell user.views.size %>
 

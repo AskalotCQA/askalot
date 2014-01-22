@@ -13,7 +13,8 @@ class Answer < ActiveRecord::Base
 
   scope :by,   lambda { |user| where(author: user) }
   scope :for,  lambda { |question| where(question: question) }
-  scope :with, lambda { |label| joins(:labelings).merge(Labeling.with label) }
+
+  scope :labeled_with, lambda { |label| joins(:labelings).merge(Labeling.with label) }
 
   def labeled_with(label)
     labelings.with label
