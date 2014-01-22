@@ -4,6 +4,7 @@ class Question < ActiveRecord::Base
   include Viewable
   include Votable
   include Watchable
+  include Taggable
 
   before_save :add_category_tags
 
@@ -11,9 +12,6 @@ class Question < ActiveRecord::Base
   belongs_to :category
 
   has_many :answers
-
-  # TODO (smolnar) rm, add custom model, preserve order for relation
-  acts_as_taggable
 
   validates :title, presence: true, length: { minimum: 2, maximum: 250 }
   validates :text,  presence: true, length: { minimum: 2 }

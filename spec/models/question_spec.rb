@@ -1,6 +1,9 @@
 require 'spec_helper'
+require 'models/concerns/taggable_spec'
 
 describe Question do
+  it_behaves_like Taggable
+
   it 'requires title' do
     question = build :question, title: ''
 
