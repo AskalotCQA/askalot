@@ -52,7 +52,7 @@ module Taggable
       if options[:any]
         relation.where tags: { name: tags }
       else
-        relation.where tags.map { :"tags.name = ?" }.join(' AND '), *tags
+        relation.where tags.map { 'tags.name = ?' }.join(' AND '), *tags
       end
     end
   end
@@ -61,7 +61,7 @@ module Taggable
     include Enumerable
 
     attr_reader   :values
-    attr_accessor :base, :extractor # TODO (smolnar) consider renaming base to configuration
+    attr_accessor :base, :extractor
 
     def initialize(base, values = [])
       @base   = base
