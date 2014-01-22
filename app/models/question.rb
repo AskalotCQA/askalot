@@ -1,10 +1,10 @@
 class Question < ActiveRecord::Base
   include Commentable
   include Favorable
+  include Taggable
   include Viewable
   include Votable
   include Watchable
-  include Taggable
 
   before_save :add_category_tags
 
