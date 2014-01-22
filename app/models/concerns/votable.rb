@@ -21,17 +21,23 @@ module Votable
   end
 
   def toggle_vote_by!(user, upvote)
-    return votes.create! voter: user, upvote: upvote unless voted_by? user
+    unless voted_by? user
+      votes.create! voter: user, upvote: upvote
+      update_votes!
+      return
+    end
 
     vote = votes.where(voter: user).first
 
-    return vote.destroy if vote.upvote == upvote
+    if vote.upvote == upvote
+      vote.destroy
+      update_votes!
+      return
+    end
 
     vote.upvote = upvote
     vote.save!
-
-    self.votes_count = total_votes
-    self.save!
+    update_votes!
   end
 
   def toggle_voteup_by!(user)
@@ -42,7 +48,8 @@ module Votable
     toggle_vote_by! user, false
   end
 
-  def total_votes
-    votes.where(upvote: true).size - votes.where(upvote: false).size
+  def update_votes!
+    self.votes_total = votes.where(upvote: true).size - votes.where(upvote: false).size
+    self.save!
   end
 end
