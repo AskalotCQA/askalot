@@ -5,6 +5,7 @@ module Taggable
     has_many :taggings, as: :taggable
     has_many :tags, through: :taggings
 
+    # TODO(zbell) consider renaming this just to 'with'
     scope :tagged_with, lambda { |values, options = {}| Scope.new(self).build(values, options) }
 
     after_save :generate_tags!
