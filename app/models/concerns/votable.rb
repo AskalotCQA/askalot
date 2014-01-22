@@ -20,24 +20,26 @@ module Votable
     votes.exists?(voter: user, upvote: false)
   end
 
+  def update_votes_total!
+    self.votes_total = votes.where(upvote: true).size - votes.where(upvote: false).size
+    self.save!
+  end
+
   def toggle_vote_by!(user, upvote)
     unless voted_by? user
       votes.create! voter: user, upvote: upvote
-      update_votes!
-      return
+    else
+      vote = votes.where(voter: user).first
+
+      if vote.upvote == upvote
+        vote.destroy
+      else
+        vote.upvote = upvote
+        vote.save!
+      end
     end
 
-    vote = votes.where(voter: user).first
-
-    if vote.upvote == upvote
-      vote.destroy
-      update_votes!
-      return
-    end
-
-    vote.upvote = upvote
-    vote.save!
-    update_votes!
+    update_votes_total!
   end
 
   def toggle_voteup_by!(user)
@@ -46,10 +48,5 @@ module Votable
 
   def toggle_votedown_by!(user)
     toggle_vote_by! user, false
-  end
-
-  def update_votes!
-    self.votes_total = votes.where(upvote: true).size - votes.where(upvote: false).size
-    self.save!
   end
 end
