@@ -11,7 +11,7 @@ describe Tag do
     it 'correcly handles symbol' do
       tag = create :tag, name: :elasticsearch
 
-      expect(tag.name).to eql(:elasticsearch)
+      expect(tag.name).to eql('elasticsearch')
     end
   end
 end

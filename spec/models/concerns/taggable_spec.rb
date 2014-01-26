@@ -2,7 +2,8 @@ require 'spec_helper'
 
 shared_examples_for Taggable do
   let(:model) { described_class }
-  let(:model_name) { model.name.underscore.to_sym }
+  let(:factory) { model.name.underscore.to_sym }
+
 
   describe '#tag_list' do
     it 'assignes tags from string' do
@@ -25,9 +26,9 @@ shared_examples_for Taggable do
   describe '.tagged_with' do
     context 'with a tag name' do
       it 'searches records tagged by the tag' do
-        create model_name, tag_list: 'a, b'
+        create factory, tag_list: 'a, b'
 
-        4.times { create model_name, tag_list: 'a, b, c' }
+        4.times { create factory, tag_list: 'a, b, c' }
 
         records = model.tagged_with('c')
 
@@ -39,24 +40,27 @@ shared_examples_for Taggable do
 
     context 'with multiple tags' do
       it 'searches records tagged by those tags' do
-        create model_name, tag_list: 'a, b'
-        create model_name, tag_list: 'a, c'
-        create model_name, tag_list: 'a, c, d'
+        create factory, tag_list: 'a, b'
+        create factory, tag_list: 'a, c'
+        create factory, tag_list: 'a, c, d'
 
-        4.times { create model_name, tag_list: 'a, b, c' }
+        4.times { create factory, tag_list: 'a, b, c' }
 
         records = model.tagged_with('a, c')
 
-        expect(records.size).to eql(5)
+        expect(records.size).to eql(6)
 
-        records.each { |record| expect(record.tags.pluck(:name)).to include('c') }
+        records.each do |record|
+          expect(record.tags.pluck(:name)).to include('a')
+          expect(record.tags.pluck(:name)).to include('c')
+        end
       end
     end
   end
 
   context 'after saving' do
     it 'generates tags' do
-      record = build model_name
+      record = build factory
 
       record.tag_list = 'a, b, c'
 
@@ -129,13 +133,13 @@ describe Taggable::TagList::Extractor do
 
   describe '.extract' do
     it 'extracts tags from string' do
-      values = 'a, b, c'
+      values = 'a, b, c '
 
       expect(extractor.extract(values)).to eql(['a', 'b', 'c'])
     end
 
     it 'extract tags from array' do
-      values = ['a', :b, 'c']
+      values = ['a', :b, ' c']
 
       expect(extractor.extract(values)).to eql(['a', 'b', 'c'])
     end

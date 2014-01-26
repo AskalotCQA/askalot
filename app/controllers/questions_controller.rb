@@ -14,9 +14,9 @@ class QuestionsController < ApplicationController
                  else fail
                  end
 
-    @questions = @questions.page(params[:page]).per(10)
-
     @questions = filter_questions(@questions)
+    
+    @questions = @questions.page(params[:page]).per(10)
 
     set_polling
   end
