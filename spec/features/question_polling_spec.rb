@@ -16,6 +16,8 @@ describe 'Question Polling', js: true do
     list = all('#questions > ol > li')
     expect(list).to have(1).items
 
+    expect(last_event.data[:params]).not_to include(:poll)
+
     create :question, title: 'Elasticsearch problem'
 
     wait_for_remote 6.seconds
@@ -37,10 +39,14 @@ describe 'Question Polling', js: true do
     list = all('#questions > ol > li')
     expect(list).to have(1).items
 
+    expect(last_event.data[:params]).not_to include(:poll)
+
     fill_in_select2 'question_tags', with: 'elasticsearch'
 
     list = all('#questions > ol > li')
     expect(list).to have(1).items
+
+    expect(last_event.data[:params]).to include(poll: 'true')
 
     create :question, title: 'Elasticsearch problem', tag_list: 'elasticsearch'
 

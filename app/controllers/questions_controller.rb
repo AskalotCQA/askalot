@@ -3,7 +3,6 @@ class QuestionsController < ApplicationController
   include Tabbing
 
   before_action :authenticate_user!
-  before_action :set_polling, only: :index
 
   default_tab :'questions-new', only: :index
 
@@ -18,6 +17,8 @@ class QuestionsController < ApplicationController
     @questions = @questions.page(params[:page]).per(10)
 
     @questions = filter_questions(@questions)
+
+    set_polling
   end
 
   def new
