@@ -39,20 +39,31 @@ module Taggable
   end
 
   class Scope
-    attr_accessor :base
+    attr_accessor :relation
 
-    def initialize(base)
-      @base = base
+    def initialize(relation)
+      @relation = relation
     end
 
     def build(values, options = {})
-      tags     = Taggable::TagList.new(base.taggable, values).tags
-      relation = base.joins(:tags)
+      tags = Taggable::TagList.new(relation.taggable, values).tags
 
       if options[:any]
         relation.where tags: { name: tags }
       else
-        relation.where tags.map { :"tags.name = ?" }.join(' AND '), *tags
+        # TODO (smolnar) REFACTOR, resolve why reference to class is scoped!
+        ids   = []
+        scope = relation.base_class
+
+        tags.each do |name|
+          questions = scope.joins(:tags).where(tags: { name: name })
+
+          ids = ids.empty? ? questions.map(&:id) : ids & questions.map(&:id)
+
+          scope = scope.where(questions: { id: ids })
+        end
+
+        relation.where(questions: { id: ids })
       end
     end
   end
@@ -88,7 +99,7 @@ module Taggable
 
     class Extractor
       def self.extract(values)
-        (values.is_a?(Array) ? values.map(&:to_s) : values.split(/,/)).map(&:strip)
+        (values.is_a?(Array) ? values.map(&:to_s) : values.to_s.split(/,/)).map(&:strip)
       end
     end
   end
