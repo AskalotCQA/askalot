@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
   include Tabbing
 
   before_action :authenticate_user!
+  before_action :set_polling, only: :index
 
   default_tab :'questions-new', only: :index
 
@@ -66,5 +67,9 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list).merge(author: current_user)
+  end
+
+  def set_polling
+    params[:poll] ||= true
   end
 end

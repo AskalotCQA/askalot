@@ -8,15 +8,13 @@ describe 'Question Polling', js: true do
     login_as user
   end
 
-  it 'refreshes the list of questions every five seconds' do
+  it 'refreshes the list of questions by default' do
     visit root_path
 
     click_link 'Otázky'
 
     list = all('#questions > ol > li')
     expect(list).to have(1).items
-
-    click_link 'Aktualizovať automaticky'
 
     create :question, title: 'Elasticsearch problem'
 
@@ -27,6 +25,8 @@ describe 'Question Polling', js: true do
 
     expect(page).to have_content('Elasticsearch problem')
     expect(page).to have_content('Aktualizované pred menej než minútou')
+
+    expect(last_event.data[:params]).to include(poll: 'true')
   end
 
   it 'refreshes list of filtered questions' do
@@ -36,8 +36,6 @@ describe 'Question Polling', js: true do
 
     list = all('#questions > ol > li')
     expect(list).to have(1).items
-
-    click_link 'Aktualizovať automaticky'
 
     fill_in_select2 'question_tags', with: 'elasticsearch'
 
@@ -53,6 +51,8 @@ describe 'Question Polling', js: true do
 
     expect(page).to have_content('Elasticsearch problem')
     expect(page).to have_content('Aktualizované pred menej než minútou')
+
+    expect(last_event.data[:params]).to include(poll: 'true')
   end
 
   it 'stops refreshing' do
@@ -63,9 +63,9 @@ describe 'Question Polling', js: true do
     list = all('#questions > ol > li')
     expect(list).to have(1).items
 
-    click_link 'Aktualizovať automaticky'
-
     create :question, title: 'Elasticsearch problem'
+
+    expect(last_event.data[:params]).not_to include(:poll)
 
     wait_for_remote 6.seconds
 
@@ -88,5 +88,7 @@ describe 'Question Polling', js: true do
 
     expect(list).to have(2).items
     expect(page).not_to have_content('Another Elasticsearch problem')
+
+    expect(last_event.data[:params]).to include(poll: 'false')
   end
 end

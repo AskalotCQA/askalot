@@ -62,6 +62,7 @@ RSpec.configure do |config|
   config.include EmailHelper
   config.include FixtureHelper
   config.include HistoryHelper,               type: :feature
+  config.include Logging
   config.include PageHelper,                  type: :feature
   config.include RemoteHelper,                type: :feature
   config.include Select2Helper,               type: :feature
