@@ -92,22 +92,4 @@ describe 'Show Questions', js: true do
       end
     end
   end
-
-  context 'when polling' do
-    it 'refreshes list of questions' do
-      visit root_path
-
-      click_link 'Otázky'
-
-      within '#questions-controls' do
-        click_link 'Aktualizovať automaticky'
-      end
-
-      wait_for_remote 6.seconds
-
-      within '#questions-controls' do
-        expect(page).to have_content('Aktualizované')
-      end
-    end
-  end
 end

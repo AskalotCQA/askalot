@@ -8,6 +8,6 @@ class Tag < ActiveRecord::Base
   before_save :normalize
 
   def normalize
-    self.name = name.to_s.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '').to_sym
+    self.name = name.to_s.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '')
   end
 end

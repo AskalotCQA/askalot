@@ -97,7 +97,7 @@ module Taggable
 
     class Extractor
       def self.extract(values)
-        (values.is_a?(Array) ? values.map(&:to_s) : values.split(/,/)).map(&:strip)
+        (values.is_a?(Array) ? values.map(&:to_s) : values.to_s.split(/,/)).map(&:strip)
       end
     end
   end
