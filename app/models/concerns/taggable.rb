@@ -58,8 +58,7 @@ module Taggable
         tags.each do |name|
           questions = scope.joins(:tags).where(tags: { name: name })
 
-          ids = ids.empty? ? questions.map(&:id) : ids & questions.map(&:id)
-
+          ids   = ids.empty? ? questions.map(&:id) : ids & questions.map(&:id)
           scope = scope.where(questions: { id: ids })
         end
 
