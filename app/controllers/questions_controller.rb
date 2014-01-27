@@ -15,10 +15,10 @@ class QuestionsController < ApplicationController
                  end
 
     @questions = filter_questions(@questions)
-    
+
     @questions = @questions.page(params[:page]).per(10)
 
-    set_polling
+    initialize_polling
   end
 
   def new
@@ -60,6 +60,10 @@ class QuestionsController < ApplicationController
 
   helper_method :filter_questions
 
+  def initialize_polling
+    params[:poll] ||= true
+  end
+
   def filter_questions(relation)
     return relation unless params[:tags].present?
 
@@ -68,9 +72,5 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list).merge(author: current_user)
-  end
-
-  def set_polling
-    params[:poll] ||= true
   end
 end
