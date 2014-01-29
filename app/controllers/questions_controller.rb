@@ -1,20 +1,24 @@
 class QuestionsController < ApplicationController
   include Voting
+  include Tabbing
 
   before_action :authenticate_user!
-  before_action :set_default_tab, only: :index
+
+  default_tab :'questions-new', only: :index
 
   def index
     @questions = case params[:tab].to_sym
                  when :'questions-new'      then Question.order(created_at: :desc)
                  when :'questions-answered' then Question.answered.order(updated_at: :desc)
-                 when :'questions-favored'  then Question.favored_by(current_user).order('favorites.created_at desc')
+                 when :'questions-favored'  then Question.favored.order(updated_at: :desc)
                  else fail
                  end
 
+    @questions = filter_questions(@questions)
+
     @questions = @questions.page(params[:page]).per(10)
 
-    @questions = filter_questions(@questions)
+    initialize_polling
   end
 
   def new
@@ -40,7 +44,8 @@ class QuestionsController < ApplicationController
     @author   = @question.author
     @labels   = @question.labels
     @answers  = @question.answers.order('created_at desc')
-    @answer   = Answer.new question: @question
+
+    @answer = Answer.new(question: @question)
 
     @question.views.create! viewer: current_user
   end
@@ -53,17 +58,14 @@ class QuestionsController < ApplicationController
 
   private
 
-  helper_method :filter_questions
+  def initialize_polling
+    params[:poll] ||= true
+  end
 
   def filter_questions(relation)
     return relation unless params[:tags].present?
 
     relation.tagged_with(params[:tags])
-  end
-
-  # TODO (smolnar) use concern
-  def set_default_tab
-    params[:tab] ||= :'questions-new'
   end
 
   def question_params

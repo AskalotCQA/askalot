@@ -5,9 +5,11 @@ $(document).ready ->
     $(this).closest('form').submit()
 
   # TODO (smolnar) use better class of identification of tag in list
-  $(document).on 'click', '#questions .question-tag', ->
-    tag = { id: $(this).attr('data-id'), text: $(this).attr('data-text') }
+  $(document).on 'click', '#questions .question-tag, #questions .question-category', (e) ->
+    e.preventDefault()
+
+    items = $(this).attr('data-id').split(',')
 
     select = Select.of('#question_tag')
 
-    select.addItem tag
+    select.addItem id: item, text: item for item in items

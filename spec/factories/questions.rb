@@ -10,7 +10,7 @@ FactoryGirl.define do
     association :author
 
     trait :with_tags do
-      sequence(:tag_list) { |n| "tag_#{n}" }
+      sequence(:tag_list) { |n| "tag-#{n}" }
     end
 
     trait :with_answers do

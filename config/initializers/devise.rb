@@ -258,6 +258,5 @@ Devise.setup do |config|
 
   # Allow insecure token lookup for test environment in
   # order to easily use generated tokens
-  # TODO (smolnar) try to find another solution for accessing token in emails
   config.allow_insecure_token_lookup = true if Rails.env.test?
 end

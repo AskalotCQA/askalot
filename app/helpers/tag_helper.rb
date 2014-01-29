@@ -1,4 +1,8 @@
 module TagHelper
+  def identify(object, suffix = [])
+    ([object.class.name.downcase, object.id] + Array.wrap(suffix)).reject(&:blank?).join '-'
+  end
+
   def square_tag(type, body, options = {})
     content_tag :span, body, options.merge(class: "label label-#{type.to_s}")
   end

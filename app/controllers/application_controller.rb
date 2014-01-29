@@ -9,9 +9,8 @@ class ApplicationController < ActionController::Base
 
   before_action :log_current_action
 
-  # TODO (smolnar) use locales for message, refactor
   rescue_from CanCan::AccessDenied do |exception|
-    flash[:alert] = exception.message
+    flash[:alert] = t('cancan.access_denied')
 
     redirect_to root_path
   end

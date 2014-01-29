@@ -1,5 +1,3 @@
-<!-- TODO (smolnar) ul for answers -->
-
 <div class="row">
   <div class="col-md-offset-2 col-md-8">
     <section id="question-answers">
@@ -10,13 +8,23 @@
   </div>
   <div class="col-md-2">
     <section class="text-center">
-      <%= icon_link_to :plus, t('answer.new.feature'), '#new_answer', id: :'new-answer', class: 'btn btn-success' %>
+      <%= icon_link_to :plus, t('answer.new.action'), '#new_answer', id: :'new-answer', class: 'btn btn-success' %>
     </section>
   </div>
 </div>
 
 <hr/>
 
-<% answers.each do |answer| %>
-  <%= render 'questions/answer', answer: answer %>
+<% if answers.any? %>
+  <div class="row">
+    <div class="col-md-12">
+      <ol class="question-answers list-unstyled">
+        <% answers.each do |answer| %>
+          <%= render 'questions/answer', answer: answer %>
+        <% end %>
+      </ol>
+    </div>
+  </div>
+
+  <hr/>
 <% end %>

@@ -1,6 +1,8 @@
 class Question < ActiveRecord::Base
+  include Taggable
   include Commentable
   include Favorable
+  include Taggable
   include Viewable
   include Votable
   include Watchable
@@ -12,14 +14,11 @@ class Question < ActiveRecord::Base
 
   has_many :answers
 
-  acts_as_taggable
-
   validates :title, presence: true, length: { minimum: 2, maximum: 250 }
   validates :text,  presence: true, length: { minimum: 2 }
 
-  scope :answered,   lambda { joins(:answers).uniq }
-  scope :favored,    lambda { joins(:favorites).uniq }
-  scope :favored_by, lambda { |user| joins(:favorites).where(favorites: { favorer: user }) }
+  scope :answered, lambda { joins(:answers).uniq }
+  scope :by,       lambda { |user| where(author: user) }
 
   def labels
     [category] + tags_with_counts

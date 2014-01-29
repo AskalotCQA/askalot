@@ -13,9 +13,6 @@ gem 'devise', '~> 3.1.1'
 gem 'cancan', '~> 1.6.9'
 gem 'net-ldap'
 
-# plugins
-gem 'acts-as-taggable-on'
-
 # helpers
 gem 'jbuilder', '~> 1.2'
 gem 'actionview-encoded_mail_to'

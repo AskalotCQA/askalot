@@ -11,13 +11,59 @@
             <td>Používatelia</td>
             <td><%= User.count %>
           </tr>
-          <tr>
+        </tbody>
+        <tbody>
+          <tr class="active">
             <td>Otázok na používateľa</td>
             <td><%= number_with_precision Question.count.to_f / User.count %></td>
           </tr>
           <tr>
+            <td>Zobrazených otázok na používateľa</td>
+            <td><%= number_with_precision Question.viewed.count.to_f / User.count %></td>
+          </tr>
+          <tr>
+            <td>Hlasovaných otázok na používateľa</td>
+            <td><%= number_with_precision Question.voted.count.to_f / User.count %></td>
+          </tr>
+          <tr>
+            <td>Komentovaných otázok na používateľa</td>
+            <td><%= number_with_precision Question.commented.count.to_f / User.count %></td>
+          </tr>
+          <tr>
+            <td>Obľúbených otázok na používateľa</td>
+            <td><%= number_with_precision Question.favored.count.to_f / User.count %></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr class="active">
             <td>Odpovedí na používateľa</td>
             <td><%= number_with_precision Answer.count.to_f / User.count %></td>
+          </tr>
+          <tr>
+            <td>Hlasovaných odpovedí na používateľa</td>
+            <td><%= number_with_precision Answer.voted.count.to_f / User.count %></td>
+          </tr>
+          <tr>
+            <td>Komentovaných odpovedí na používateľa</td>
+            <td><%= number_with_precision Answer.commented.count.to_f / User.count %></td>
+          </tr>
+          <tr>
+            <td>Najlepších odpovedí na používateľa</td>
+            <td><%= number_with_precision Answer.with(:best).count.to_f / User.count %></td>
+          </tr>
+          <tr>
+            <td>Pomocných odpovedí na používateľa</td>
+            <td><%= number_with_precision Answer.with(:helpful).count.to_f / User.count %></td>
+          </tr>
+          <tr>
+            <td>Overených odpovedí na používateľa</td>
+            <td><%= number_with_precision Answer.with(:verified).count.to_f / User.count %></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr class="active">
+            <td>Komentárov na používateľa</td>
+            <td><%= number_with_precision Comment.count.to_f / User.count %></td>
           </tr>
         </tbody>
       </table>
@@ -34,11 +80,33 @@
             <td>Otázky</td>
             <td><%= Question.count %></td>
           </tr>
-          <tr>
+        </tbody>
+        <tbody>
+          <tr class="active">
             <td>Odpovedí na otázku</td>
             <td><%= number_with_precision Answer.count.to_f / Question.count %></td>
           </tr>
           <tr>
+            <td>Odpovedané otázky</td>
+            <td><%= Question.answered.count %></td>
+          </tr>
+          <tr>
+            <td>Neodpovedané otázky</td>
+            <td><%= Question.count - Question.answered.count %></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr>
+            <td>Zodpovedané otázky</td>
+            <td><%= Answer.with(:best).uniq.count(:question_id) %></td>
+          </tr>
+          <tr>
+            <td>Nezodpovedané otázky</td>
+            <td><%= Question.count - Answer.with(:best).uniq.count(:question_id) %></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr class="active">
             <td>Najlepších odpovedí na otázku</td>
             <td><%= number_with_precision Answer.with(:best).count.to_f / Question.count %></td>
           </tr>
@@ -49,6 +117,24 @@
           <tr>
             <td>Overených odpovedí na otázku</td>
             <td><%= number_with_precision Answer.with(:verified).count.to_f / Question.count %></td>
+          </tr>
+        </tbody>
+        <tbody>
+          <tr class="active">
+            <td>Zobrazení na otázku</td>
+            <td><%= number_with_precision View.count.to_f / Question.count %></td>
+          </tr>
+          <tr>
+            <td>Hlasov na otázku</td>
+            <td><%= number_with_precision Vote.for(:question).count.to_f / Question.count %></td>
+          </tr>
+          <tr>
+            <td>Komentárov na otázku</td>
+            <td><%= number_with_precision Comment.for(:question).count.to_f / Question.count %></td>
+          </tr>
+          <tr>
+            <td>Obľúbení na otázku</td>
+            <td><%= number_with_precision Favorite.count.to_f / Question.count %></td>
           </tr>
         </tbody>
       </table>
@@ -65,6 +151,8 @@
             <td>Odpovede</td>
             <td><%= Answer.count %></td>
           </tr>
+        </tbody>
+        <tbody>
           <tr>
             <td>Najlepšie odpovede</td>
             <td><%= Answer.with(:best).count %></td>
@@ -78,6 +166,16 @@
             <td><%= Answer.with(:verified).count %></td>
           </tr>
         </tbody>
+        <tbody>
+          <tr class="active">
+            <td>Hlasov na odpoveď</td>
+            <td><%= number_with_precision Vote.for(:answer).count.to_f / Answer.count %></td>
+          </tr>
+          <tr>
+            <td>Komentárov na odpoveď</td>
+            <td><%= number_with_precision Comment.for(:answer).count.to_f / Answer.count %></td>
+          </tr>
+        </tbody>
       </table>
     </section>
   </div>
@@ -86,37 +184,82 @@
 <div class="row">
   <div class="col-md-12">
     <section>
-      <h3>Používatelia</h3>
+      <h3>Podrobný prehľad používateľov</h3>
 
-      <table class="table table-bordered table-condensed">
+      <table class="table table-bordered table-condensed table-statistical">
         <thead>
-          <tr>
-            <th colspan="2">Používateľ</th>
-            <th colspan="2">Otázky</th>
-            <th colspan="4">Odpovede</th>
+          <tr class="active">
+            <th colspan="2" rowspan="3" class="text-center">Používateľ</th>
+
+            <th colspan="5">Otázky</th>
+            <th colspan="6">Odpovede</th>
+            <th colspan="1">Zobrazenia</th>
+            <th colspan="3">Hlasy</th>
+            <th colspan="3">Komentáre</th>
+            <th colspan="1">Obľúbenia</th>
           </tr>
-          <tr>
-            <th>Prezývka</th>
-            <th>Meno</th>
-            <th>Celkom</th>
+          <tr class="active">
+            <th rowspan="2">Celkom</th>
+            <th colspan="4">Používateľmi</th>
+
+            <th rowspan="2">Celkom</th>
+            <th colspan="5">Používateľmi</th>
+
+            <th rowspan="2">Otázok</th>
+
+            <th rowspan="2">Celkom</th>
+            <th rowspan="2">Otázok</th>
+            <th rowspan="2">Odpovedí</th>
+
+            <th rowspan="2">Celkom</th>
+            <th rowspan="2">Otázok</th>
+            <th rowspan="2">Odpovedí</th>
+
+            <th rowspan="2">Otázok</th>
+          </tr>
+          <tr class="active">
+            <th>Zobrazené</th>
+            <th>Hlasované</th>
+            <th>Komentované</th>
             <th>Obľúbené</th>
-            <th>Celkom</th>
+
+            <th>Hlasované</th>
+            <th>Komentované</th>
             <th>Najlepšie</th>
             <th>Pomocné</th>
             <th>Overené</th>
           </tr>
         </thead>
         <tbody>
-          <% @users.each do |user| %>
+          <% @users.each_with_index do |user, i| %>
             <tr>
-              <td><%= user.nick %></td>
-              <td><%= user.name %></td>
+              <td><%= i + 1 %></td>
+              <%= statistical_cell(user) { |u| [link_to(user.name || user.nick, user_path(user.nick)), u.role?(:teacher) ? :info : nil] } %>
+
               <%= statistical_cell user.questions.size %>
+              <%= statistical_cell user.questions.viewed.size %>
+              <%= statistical_cell user.questions.voted.size %>
+              <%= statistical_cell user.questions.commented.size %>
               <%= statistical_cell user.questions.favored.size %>
+
               <%= statistical_cell user.answers.size %>
-              <%= statistical_cell user.answers.with(:best).size, positive: :success %>
-              <%= statistical_cell user.answers.with(:helpful).size, positive: :warning %>
-              <%= statistical_cell user.answers.with(:verified).size, positive: :info %>
+              <%= statistical_cell user.answers.voted.size %>
+              <%= statistical_cell user.answers.commented.size %>
+              <%= statistical_cell user.answers.labeled_with(:best).size, positive: :success %>
+              <%= statistical_cell user.answers.labeled_with(:helpful).size, positive: :warning %>
+              <%= statistical_cell user.answers.labeled_with(:verified).size, positive: :info %>
+
+              <%= statistical_cell user.views.size %>
+
+              <%= statistical_cell user.votes.size %>
+              <%= statistical_cell user.votes.for(:question).size %>
+              <%= statistical_cell user.votes.for(:answer).size %>
+
+              <%= statistical_cell user.comments.size %>
+              <%= statistical_cell user.comments.for(:question).size %>
+              <%= statistical_cell user.comments.for(:answer).size %>
+
+              <%= statistical_cell user.favorites.size %>
             </tr>
           <% end %>
         </tbody>

@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe 'Filter Questions', js: true do
   let(:user) { create :user }
-
-  # TODO (smolnar) check url for serialized params
+  let(:category) { create :category, :with_tags }
 
   before :each do
     login_as user
@@ -23,6 +22,8 @@ describe 'Filter Questions', js: true do
     list = all('#questions > ol > li')
     expect(list).to have(10).items
 
+    expect(current_params).to include(tags: 'elasticsearch')
+
     list.each { |item| expect(item).to have_content('elasticsearch') }
 
     within '.pagination' do
@@ -33,6 +34,8 @@ describe 'Filter Questions', js: true do
 
     list = all('#questions > ol > li')
     expect(list).to have(5).items
+
+    expect(current_params).to include(tags: 'elasticsearch', page: '2')
 
     list.each { |item| expect(item).to have_content('elasticsearch') }
   end
@@ -48,6 +51,8 @@ describe 'Filter Questions', js: true do
     list = all('#questions > ol > li')
     expect(list).to have(10).times
 
+    expect(current_params).to include(tags: 'elasticsearch,ruby')
+
     list.each do |item|
       expect(item).to have_content('elasticsearch')
       expect(item).to have_content('ruby')
@@ -56,8 +61,11 @@ describe 'Filter Questions', js: true do
     fill_in_select2 'question_tags', with: 'linux'
 
     list = all('#questions > ol > li')
+
     expect(list).to have(0).times
     expect(page).to have_content('Neboli nájdené žiadne otázky.')
+
+    expect(current_params).to include(tags: 'elasticsearch,ruby,linux')
   end
 
   it 'filters questions by question tags' do
@@ -75,8 +83,50 @@ describe 'Filter Questions', js: true do
 
     list = all('#questions > ol > li')
     expect(list).to have(10).items
+    expect(current_params).to include(tags: 'elasticsearch')
 
     list.each { |item| expect(item).to have_content('elasticsearch') }
+
+    within list[0] do
+      click_link 'ruby'
+
+      wait_for_remote 1.second
+    end
+
+    list = all('#questions > ol > li')
+    expect(list).to have(10).items
+
+    expect(current_params).to include(tags: 'elasticsearch,ruby')
+
+    list.each do |item|
+      expect(item).to have_content('elasticsearch')
+      expect(item).to have_content('ruby')
+    end
+  end
+
+  it 'filters questions by category tags' do
+    Question.order(created_at: :desc).first(5).each do |question|
+      question.update_attributes(category_id: category.id)
+    end
+
+    visit root_path
+
+    click_link 'Otázky'
+
+    list = all('#questions > ol > li')
+
+    within list[0] do
+      click_link category.name
+
+      wait_for_remote
+    end
+
+    list = all('#questions > ol > li')
+    expect(list).to have(5).items
+
+    expect(current_params).to include(tags: category.tags.join(','))
+
+    list.each { |item| expect(item).to have_content(category.name) }
 
     within list[0] do
       click_link 'ruby'
@@ -85,12 +135,17 @@ describe 'Filter Questions', js: true do
     end
 
     list = all('#questions > ol > li')
-    expect(list).to have(10).items
+    expect(list).to have(5).items
+
+    expect(current_params).to include(tags: (category.tags + ['ruby']).join(','))
 
     list.each do |item|
       expect(item).to have_content('elasticsearch')
       expect(item).to have_content('ruby')
+
+      category.tags.each { |tag| expect(item).to have_content(tag) }
     end
+
   end
 
   context 'when changing tabs' do
@@ -118,6 +173,8 @@ describe 'Filter Questions', js: true do
 
       list = all('#questions > ol > li')
       expect(list).to have(3).items
+
+      expect(current_params).to include(tags: 'elasticsearch', tab: 'questions-favored')
 
       list.each { |item| expect(item).to have_content('elasticsearch') }
     end

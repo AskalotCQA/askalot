@@ -5,3 +5,14 @@
   border-bottom-width: 0;
   font-weight: normal;
 }
+
+.table-bordered > thead > tr:last-child {
+  border-bottom: 2px solid $table-border-color;
+}
+
+.table-statistical {
+  th, td {
+    vertical-align: middle !important;
+  }
+}
+

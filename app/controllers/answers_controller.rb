@@ -8,15 +8,18 @@ class AnswersController < ApplicationController
     @author   = @question.author
     @labels   = @question.labels
     @answers  = @question.answers
-    @answer   = Answer.new answer_params
+
+    @answer = Answer.new(answer_params)
 
     if @answer.save
-      flash.now[:notice] = t('answer.create.success')
+      flash[:notice] = t('answer.create.success')
+
+      redirect_to question_path(@question)
     else
       flash_error_messages_for @answer
-    end
 
-    render 'questions/show'
+      render 'questions/show'
+    end
   end
 
   def label

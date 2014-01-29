@@ -1,10 +1,15 @@
 <!-- TODO(grznar) fix comment persistence on form submit -->
-<!-- TODO(grznar) resolve duplicate ids generated in forms -->
-<%= form_for [commentable, Comment.new] do |f| %>
-  <div class="form-group">
-    <%= f.label :text %>
-    <%= f.text_area :text, class: :'form-control', rows: 1 %>
-  </div>
 
-  <button type="submit" class="btn btn-primary"><%= t 'comment.new.submit' %></button>
-<% end %>
+<a href="#" data-target="#<%= identify commentable, :comment %>" data-toggle="collapse">
+  <%= t('comment.new.action') %>
+</a>
+
+<div id="<%= identify commentable, :comment %>" class="collapse">
+  <%= form_for [commentable, Comment.new], html: { id: nil, class: :'new-comment' } do |f| %>
+    <div class="form-group">
+      <%= f.text_area :text, id: nil, class: :'form-control', rows: 2 %>
+    </div>
+
+    <button type="submit" class="btn btn-primary"><%= t 'comment.new.submit' %></button>
+  <% end %>
+</div>

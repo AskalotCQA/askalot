@@ -19,14 +19,22 @@ module DatabaseHelper
 end
 
 RSpec.configure do |config|
+  config.before(:all) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
   config.before(:each) do
     path = example.metadata[:file_path]
 
-    if DatabaseHelper.clean_path?(path)
-      DatabaseCleaner.strategy = :truncation
-
-      DatabaseCleaner.start
-    end
+    DatabaseCleaner.start if DatabaseHelper.clean_path?(path)
   end
 
   config.after(:each) do

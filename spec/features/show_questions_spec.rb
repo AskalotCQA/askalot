@@ -66,34 +66,30 @@ describe 'Show Questions', js: true do
     end
   end
 
-  context 'with current user' do
-    before :each do
-      favored_questions.each { |q| q.toggle_favoring_by! user }
+  it 'shows list of favored questions' do
+    favored_questions.each { |q| q.toggle_favoring_by! user }
+
+    visit root_path
+
+    click_link 'Otázky'
+
+    within '#questions-controls' do
+      click_link 'Obľúbené'
+
+      wait_for_remote
     end
 
-    it 'shows list of favored questions' do
-      visit root_path
+    list = all('#questions > ol > li')
 
-      click_link 'Otázky'
+    expect(list).to have(3).items
 
-      within '#questions-controls' do
-        click_link 'Obľúbené'
+    within list[0] do
+      expect(page).to have_content(favored_question.title)
+      expect(page).to have_content(favored_question.category.name)
 
-        wait_for_remote
+      favored_question.tags.pluck(:name).each do |tag|
+        expect(page).to have_content(tag)
       end
-
-      list = all('#questions > ol > li')
-
-      expect(list).to have(3).items
-
-      within list[0] do
-        expect(page).to have_content(favored_question.title)
-        expect(page).to have_content(favored_question.category.name)
-
-        favored_question.tags.pluck(:name).each do |tag|
-          expect(page).to have_content(tag)
-        end
-     end
     end
   end
 end

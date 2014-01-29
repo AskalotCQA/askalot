@@ -24,10 +24,6 @@ module Stuba
       @first ||= @data[:givenname].first
     end
 
-    def middle
-      # TODO (smolnar) find example of AIS middle name
-    end
-
     def last
       @last ||= @data[:sn].first
     end
@@ -44,7 +40,6 @@ module Stuba
         email: email,
         name: name,
         first: first,
-        middle: middle,
         last: last,
         role: role
       }

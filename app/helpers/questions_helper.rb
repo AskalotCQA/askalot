@@ -13,8 +13,8 @@ module QuestionsHelper
 
   def question_answers_coloring(question)
     return :'text-danger' unless question.answers.any?
-    return :'text-success' if question.answers.with(:best).any?
-    return :'text-warning' if question.answers.with(:helpful).any?
+    return :'text-success' if question.answers.labeled_with(:best).any?
+    return :'text-warning' if question.answers.labeled_with(:helpful).any?
 
     :'text-muted'
   end
@@ -25,5 +25,21 @@ module QuestionsHelper
 
   def question_views_coloring(question)
     :'text-muted'
+  end
+
+  def question_label(label, options = {})
+    values, classes = question_label_attributes label
+    filter          = ((params[:tags] || '').split(',') + values).uniq.join(',')
+
+    options.deep_merge! class: classes, data: { id: filter }
+
+    link_to "#{label.name} (#{label.count})", questions_path(tags: filter), options
+  end
+
+  private
+
+  def question_label_attributes(label)
+    return [label.name], [:label, :'label-info', :'question-tag'] unless label.is_a? Category
+    return label.tags.to_a, [:label, :'label-primary', :'question-category']
   end
 end

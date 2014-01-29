@@ -14,11 +14,8 @@ class User < ActiveRecord::Base
          authentication_keys: [:login]
 
   has_many :questions, foreign_key: :author_id
-
-  has_many :favorites
-  has_many :favored_questions, through: :favorites, class_name: :Question
-
   has_many :answers,   foreign_key: :author_id
+  has_many :comments,  foreign_key: :author_id
 
   has_many :labelings
   has_many :labels, through: :labelings, foreign_key: :author_id
@@ -27,19 +24,18 @@ class User < ActiveRecord::Base
   has_many :followers, through: :followings, class_name: :User, foreign_key: :follower_id
   has_many :followees, through: :followings, class_name: :User, foreign_key: :followee_id
 
-  has_many :views, foreign_key: :viewer_id
-
-  has_many :votes, foreign_key: :voter_id
-
+  has_many :favorites, foreign_key: :favorer_id
+  has_many :views,     foreign_key: :viewer_id
+  has_many :votes,     foreign_key: :voter_id
   has_many :watchings, foreign_key: :watcher_id
 
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
-  # TODO (smolnar) check uniqueness value select in db
 
   validates :role, presence: true
 
+  # TODO (smolnar) consult usage of functional indices for nick, login and email uniqueness checking
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
-  validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
+  validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }, if: :login?
 
   validates :email,          format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, allow_blank: true
@@ -54,13 +50,13 @@ class User < ActiveRecord::Base
   symbolize :role, in: ROLES
 
   def login=(value)
-    write_attribute(:login, value.downcase)
+    write_attribute :login, value.to_s.downcase
 
     self.nick ||= login
   end
 
   def name
-    "#{first} #{middle} #{last}".squeeze(' ').strip
+    (value = "#{first} #{middle} #{last}".squeeze(' ').strip).blank? ? nil : value
   end
 
   def can_destroy?

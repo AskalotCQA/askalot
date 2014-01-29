@@ -1,8 +1,8 @@
 sk:
   answer:
     new:
+      action: 'Pridať odpoveď'
       submit: 'Odpovedať'
-      feature: 'Pridať odpoveď'
 
     create:
       success: 'Vaša odpoveď bola úspešne pridaná.'

@@ -1,9 +1,13 @@
 @import 'mixins';
 @import 'variables';
 
+// general
+
 #new-answer {
   margin-top: 20px;
 }
+
+// member
 
 .answer-voting {
   @include block-voting;
@@ -30,4 +34,8 @@
 
     font-size: $font-size-h4;
   }
+}
+
+.answer-comments {
+  @include block-listing;
 }

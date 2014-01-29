@@ -33,15 +33,17 @@ describe 'Add Question' do
 
     expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
 
-    # TODO (smolnar) remove! use content expectations for checking attributes
-    # TODO (smolnar) consider checking of existing tag relation
     expect(Question).to have(1).record
 
-    question = Question.first
+    within '#question-title' do
+      expect(page).to have_content('Lorem ipsum title?')
+      expect(page).to have_content(category.name)
+      expect(page).to have_content('elasticsearch')
+      expect(page).to have_content('linux-server')
+    end
 
-    expect(question.title).to eql('Lorem ipsum title?')
-    expect(question.text).to eql('Lorem ipsum')
-    expect(question.category).to eql(category)
-    expect(question.tag_list.sort).to eql(['elasticsearch', 'linux-server'])
+    within '#question-content' do
+      expect(page).to have_content('Lorem ipsum')
+    end
   end
 end

@@ -7,5 +7,11 @@ describe Tag do
 
       expect(tag.name).to eql('my-tag')
     end
+
+    it 'correcly handles symbol' do
+      tag = create :tag, name: :elasticsearch
+
+      expect(tag.name).to eql('elasticsearch')
+    end
   end
 end

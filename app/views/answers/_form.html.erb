@@ -3,7 +3,6 @@
     <section>
       <%= form_for [question, answer] do |f| %>
         <div class="form-group">
-          <%= f.label :text %>
           <%= f.text_area :text, class: :'form-control', rows: 5 %>
         </div>
 

@@ -1,6 +1,9 @@
 require 'spec_helper'
+require 'models/concerns/taggable_spec'
 
 describe Question do
+  it_behaves_like Taggable
+
   it 'requires title' do
     question = build :question, title: ''
 
@@ -19,6 +22,14 @@ describe Question do
     question = build :question, text: 'Text'
 
     expect(question).to be_valid
+  end
+
+  it 'uses category tags' do
+    category = create :category, tags: ['dbms', 'elasticsearch']
+
+    question = create :question, category: category, tag_list: 'redis'
+
+    expect(question.tags.pluck(:name).sort).to eql(['dbms', 'elasticsearch', 'redis'])
   end
 
   describe '.favored_by' do
@@ -139,25 +150,25 @@ describe Question do
     let(:question) { create :question }
 
     context 'when question is not voted' do
-      it 'vote down' do
+      it 'votes down' do
         question.toggle_votedown_by! user
 
         expect(question).to be_downvoted_by(user)
       end
     end
 
-    context 'when question is voted' do
+    context 'when question is already voted' do
       before :each do
         question.toggle_votedown_by! user
       end
 
-      it 'vote up' do
+      it 'votes up' do
         question.toggle_voteup_by! user
 
         expect(question).to be_upvoted_by(user)
       end
 
-      it 'cancel vote' do
+      it 'cancels vote' do
         question.toggle_votedown_by! user
 
         expect(question).not_to be_voted_by(user)

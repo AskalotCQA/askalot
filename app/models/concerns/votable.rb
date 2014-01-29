@@ -4,6 +4,8 @@ module Votable
   included do
     has_many :votes, as: :votable
     has_many :voters, through: :votes, source: :voter
+
+    scope :voted, lambda { joins(:votes).uniq }
   end
 
   def voted_by?(user)
@@ -18,15 +20,26 @@ module Votable
     votes.exists?(voter: user, upvote: false)
   end
 
+  def update_votes_total!
+    self.votes_total = votes.where(upvote: true).size - votes.where(upvote: false).size
+    self.save!
+  end
+
   def toggle_vote_by!(user, upvote)
-    return votes.create! voter: user, upvote: upvote unless voted_by? user
+    unless voted_by? user
+      votes.create! voter: user, upvote: upvote
+    else
+      vote = votes.where(voter: user).first
 
-    vote = votes.where(voter: user).first
+      if vote.upvote == upvote
+        vote.destroy
+      else
+        vote.upvote = upvote
+        vote.save!
+      end
+    end
 
-    return vote.destroy if vote.upvote == upvote
-
-    vote.upvote = upvote
-    vote.save!
+    update_votes_total!
   end
 
   def toggle_voteup_by!(user)
@@ -35,9 +48,5 @@ module Votable
 
   def toggle_votedown_by!(user)
     toggle_vote_by! user, false
-  end
-
-  def total_votes
-    votes.where(upvote: true).size - votes.where(upvote: false).size
   end
 end

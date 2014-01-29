@@ -8,19 +8,17 @@ FactoryGirl.define do
     password              'password'
     password_confirmation 'password'
 
-    sequence(:nick) { |n| "jnash#{n}" }
-
     first 'John'
     last  'Nash'
     about 'Lorem ipsum'
 
     role User::ROLES.first
 
-    trait :as_teacher do
+    factory :teacher, class: :User do
       role :teacher
     end
 
-    trait :as_admin do
+    factory :admin, class: :User do
       role :admin
     end
 

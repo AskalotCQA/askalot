@@ -20,7 +20,6 @@ describe Stuba::User do
     expect(user.login).to eql('xuser1')
     expect(user.name).to eql('Bc. Janko Hrasko')
     expect(user.first).to eql('Janko')
-    expect(user.middle).to eql(nil)
     expect(user.last).to eql('Hrasko')
     expect(user.email).to eql('xuser1@stuba.sk')
     expect(user.role).to eql(:student)
@@ -35,7 +34,6 @@ describe Stuba::User do
         email: 'xuser1@stuba.sk',
         name: 'Bc. Janko Hrasko',
         first: 'Janko',
-        middle: nil,
         last: 'Hrasko',
         ais_login: 'xuser1',
         ais_uid: '1234',

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe 'Label Answer' do
+describe 'Label Answer', js: true do
   let(:user) { create :user }
   let(:author) { create :user }
-  let(:teacher) { create :user, :as_teacher }
+  let(:teacher) { create :teacher }
 
   let!(:question) { create :question, author: author }
   let!(:answer) { create :answer, question: question }
@@ -13,7 +13,7 @@ describe 'Label Answer' do
       login_as author
     end
 
-    it 'adds best label to answer', js: true do
+    it 'labels answers as best' do
       visit root_path
 
       click_link 'Otázky'
@@ -28,7 +28,7 @@ describe 'Label Answer' do
       expect(page).not_to have_css("#answer-#{answer.id}-labeling .answer-labeling-helpful a")
     end
 
-    it 'adds helpful label to answer', js: true do
+    it 'labels answer as helpful' do
       visit root_path
 
       click_link 'Otázky'
@@ -42,7 +42,7 @@ describe 'Label Answer' do
       expect(page).to have_css("#answer-#{answer.id}-labeling .answer-labeling-helpful a.answer-labeled-helpful")
     end
 
-    it 'removes best label from answer', js: true do
+    it 'removes best label from answer' do
       answer.toggle_labeling_by! author, :best
 
       visit root_path
@@ -59,7 +59,7 @@ describe 'Label Answer' do
       expect(page).to have_css("#answer-#{answer.id}-labeling .answer-labeling-helpful a")
     end
 
-    it 'removes best helpful from answer', js: true do
+    it 'removes helpful label from answer' do
       answer.toggle_labeling_by! author, :helpful
 
       visit root_path
@@ -76,12 +76,12 @@ describe 'Label Answer' do
     end
   end
 
-  context 'not with question author' do
+  context 'with another user' do
     before :each do
       login_as user
     end
 
-    it 'visits question with best and verified answer', js: true do
+    it 'visits question with best and verified answer' do
       answer.toggle_labeling_by! author,  :best
       answer.toggle_labeling_by! author,  :helpful
       answer.toggle_labeling_by! teacher, :verified
@@ -100,7 +100,7 @@ describe 'Label Answer' do
       expect(page).not_to have_css("#answer-#{answer.id}-labeling .answer-labeling-verified a")
     end
 
-    it 'visits question with helpful and verified answer', js: true do
+    it 'visits question with helpful and verified answer' do
       answer.toggle_labeling_by! author,  :helpful
       answer.toggle_labeling_by! teacher, :verified
 
@@ -124,7 +124,7 @@ describe 'Label Answer' do
       login_as teacher
     end
 
-    it 'adds verified label to answer', js: true do
+    it 'labels answer as verified' do
       visit root_path
 
       click_link 'Otázky'
@@ -138,7 +138,7 @@ describe 'Label Answer' do
       expect(page).to have_css("#answer-#{answer.id}-labeling .answer-labeling-verified a.answer-labeled-verified")
     end
 
-    it 'removes verified label from answer', js: true do
+    it 'removes verified label from answer' do
       answer.toggle_labeling_by! teacher, :verified
 
       visit root_path

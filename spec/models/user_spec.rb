@@ -76,6 +76,25 @@ describe User do
     expect(user).to be_valid
   end
 
+  context 'when login is set' do
+    it 'requires nick' do
+      user = build :user, login: 'peter'
+
+      expect(user).to      be_valid
+      expect(user.nick).to eql('peter')
+    end
+  end
+
+  context 'when login is not set' do
+    it 'does not require nick' do
+      user = build :user, login: nil
+
+      expect(user).not_to        be_valid
+      expect(user.errors).to     include(:login)
+      expect(user.errors).not_to include(:nick)
+    end
+  end
+
   context 'with AIS credentials' do
     it 'does not require password' do
       user = build :user, :as_ais
