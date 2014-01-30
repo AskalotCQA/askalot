@@ -16,6 +16,7 @@ class Question < ActiveRecord::Base
 
   validates :title, presence: true, length: { minimum: 2, maximum: 250 }
   validates :text,  presence: true, length: { minimum: 2 }
+  validates :anonymous, presence: true
 
   scope :answered, lambda { joins(:answers).uniq }
   scope :by,       lambda { |user| where(author: user) }
