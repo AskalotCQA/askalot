@@ -7,7 +7,9 @@ NaRuby::Application.routes.draw do
     patch :profile, on: :collection, to: 'users#update_profile'
   end
 
-  match 'users/:nick', via: :get, to: 'users#show', as: :user
+  get 'users/:nick', to: 'users#show', as: :user
+
+  get 'welcome', to: 'static_pages#welcome'
 
   concern :commetable do
     resources :comments, only: [:create]
