@@ -1,2 +1,17 @@
 @import 'mixins';
 @import 'variables';
+
+.error-title {
+  margin-top: 180px;
+
+  color: $brand-danger;
+}
+
+.error-description {
+  font-size: $font-size-h3;
+}
+
+.unicorn {
+  margin-top: 100px;
+}
+

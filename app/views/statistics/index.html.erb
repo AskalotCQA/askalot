@@ -49,15 +49,15 @@
           </tr>
           <tr>
             <td>Najlepších odpovedí na používateľa</td>
-            <td><%= number_with_precision Answer.with(:best).count.to_f / User.count %></td>
+            <td><%= number_with_precision Answer.labeled_with(:best).count.to_f / User.count %></td>
           </tr>
           <tr>
             <td>Pomocných odpovedí na používateľa</td>
-            <td><%= number_with_precision Answer.with(:helpful).count.to_f / User.count %></td>
+            <td><%= number_with_precision Answer.labeled_with(:helpful).count.to_f / User.count %></td>
           </tr>
           <tr>
             <td>Overených odpovedí na používateľa</td>
-            <td><%= number_with_precision Answer.with(:verified).count.to_f / User.count %></td>
+            <td><%= number_with_precision Answer.labeled_with(:verified).count.to_f / User.count %></td>
           </tr>
         </tbody>
         <tbody>
@@ -98,25 +98,25 @@
         <tbody>
           <tr>
             <td>Zodpovedané otázky</td>
-            <td><%= Answer.with(:best).uniq.count(:question_id) %></td>
+            <td><%= Answer.labeled_with(:best).uniq.count(:question_id) %></td>
           </tr>
           <tr>
             <td>Nezodpovedané otázky</td>
-            <td><%= Question.count - Answer.with(:best).uniq.count(:question_id) %></td>
+            <td><%= Question.count - Answer.labeled_with(:best).uniq.count(:question_id) %></td>
           </tr>
         </tbody>
         <tbody>
           <tr class="active">
             <td>Najlepších odpovedí na otázku</td>
-            <td><%= number_with_precision Answer.with(:best).count.to_f / Question.count %></td>
+            <td><%= number_with_precision Answer.labeled_with(:best).count.to_f / Question.count %></td>
           </tr>
           <tr>
             <td>Pomocných odpovedí na otázku</td>
-            <td><%= number_with_precision Answer.with(:helpful).count.to_f / Question.count %></td>
+            <td><%= number_with_precision Answer.labeled_with(:helpful).count.to_f / Question.count %></td>
           </tr>
           <tr>
             <td>Overených odpovedí na otázku</td>
-            <td><%= number_with_precision Answer.with(:verified).count.to_f / Question.count %></td>
+            <td><%= number_with_precision Answer.labeled_with(:verified).count.to_f / Question.count %></td>
           </tr>
         </tbody>
         <tbody>
@@ -155,15 +155,15 @@
         <tbody>
           <tr>
             <td>Najlepšie odpovede</td>
-            <td><%= Answer.with(:best).count %></td>
+            <td><%= Answer.labeled_with(:best).count %></td>
           </tr>
           <tr>
             <td>Pomocné odpovede</td>
-            <td><%= Answer.with(:helpful).count %></td>
+            <td><%= Answer.labeled_with(:helpful).count %></td>
           </tr>
           <tr>
             <td>Overené odpovede</td>
-            <td><%= Answer.with(:verified).count %></td>
+            <td><%= Answer.labeled_with(:verified).count %></td>
           </tr>
         </tbody>
         <tbody>

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     @user = User.find_by_nick params[:nick]
   end
 
-  def update_profile
+  def update
     if current_user.update_attributes(user_params)
       flash[:notice] = t 'devise.registrations.updated'
     else
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    attributes = [:nick, :about, :gravatar_email, :flag_show_name, :flag_show_email]
+    attributes = [:nick, :about, :gravatar_email, :show_name, :show_email]
 
     attributes += Social.networks.keys
     attributes += [:first, :last] if can? :change_name, current_user

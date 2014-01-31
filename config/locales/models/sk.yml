@@ -116,8 +116,8 @@ sk:
         twitter: 'Twitter'
         youtube: 'YouTube'
 
-        flag_show_name:  'Zobraziť meno ostatným používateľom'
-        flag_show_email: 'Zobraziť e-mail ostatným používateľom'
+        show_name:  'Zobraziť meno ostatným používateľom'
+        show_email: 'Zobraziť e-mail ostatným používateľom'
 
       question:
         title: 'Nadpis'

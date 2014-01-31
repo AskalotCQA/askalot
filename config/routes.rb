@@ -1,13 +1,18 @@
 NaRuby::Application.routes.draw do
   root 'static_pages#home'
 
-  devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }
+  get '/404', to: 'errors#show'
+  get '/500', to: 'errors#show'
+
+  devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }
 
   resources :users, only: [] do
-    patch :profile, on: :collection, to: 'users#update_profile'
+    patch :profile, on: :collection, to: 'users#update'
   end
 
-  match 'users/:nick', via: :get, to: 'users#show', as: :user
+  get 'users/:nick', to: 'users#show', as: :user
+
+  get 'welcome', to: 'static_pages#welcome'
 
   concern :commetable do
     resources :comments, only: [:create]

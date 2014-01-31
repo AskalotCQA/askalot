@@ -58,6 +58,8 @@ class QuestionsController < ApplicationController
 
   private
 
+  helper_method :filter_questions
+
   def initialize_polling
     params[:poll] ||= true
   end

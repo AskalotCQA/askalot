@@ -36,7 +36,17 @@ textarea {
   min-height: $input-height-base;
 }
 
+// buttons
+
+.btn.text-muted {
+  @include box-shadow(none);
+}
+
 // navigation
+
+.navbar-brand {
+  height: $navbar-height;
+}
 
 .nav-labels {
   display: block;
@@ -66,4 +76,4 @@ textarea {
 
 // tables
 
-@include table-row-variant('info', $state-info-bg, $state-info-border);
+@include table-row-variant('info', $state-info-bg);

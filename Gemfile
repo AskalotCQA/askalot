@@ -13,15 +13,9 @@ gem 'devise', '~> 3.1.1'
 gem 'cancan', '~> 1.6.9'
 gem 'net-ldap'
 
-# helpers
-gem 'jbuilder', '~> 1.2'
-gem 'actionview-encoded_mail_to'
-gem 'forgery'
-gem 'symbolize'
-
 # stylesheets
 gem 'sass-rails', '~> 4.0.0'
-gem 'bootstrap-sass-rails', '~> 3.0.2.1'
+gem 'bootstrap-sass', '~> 3.1.0'
 gem 'font-awesome-rails', '~> 4.0.3.0'
 
 # javascripts
@@ -39,6 +33,13 @@ gem 'i18n-js'
 # pagination
 gem 'kaminari',           '~> 0.14.1'
 gem 'kaminari-bootstrap', '~> 0.1.3'
+
+# utilities
+gem 'actionview-encoded_mail_to'
+gem 'forgery'
+gem 'jbuilder', '~> 1.2'
+gem 'murmurhash3'
+gem 'symbolize'
 
 # documentation
 group :doc do

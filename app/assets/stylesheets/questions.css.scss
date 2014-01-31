@@ -43,6 +43,11 @@
 .question-author {
   text-align: center;
 
+  a.user-avatar {
+    display: inline-block;
+    width: 64px;
+  }
+
   small {
     display: block;
     margin: $padding-base-vertical 0;

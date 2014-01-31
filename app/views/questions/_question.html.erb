@@ -41,7 +41,7 @@
       <div class="question-author">
         <small><%= link_to_user question.author %></small>
         <a class="user-avatar" href="<%= user_path question.author.nick %>">
-          <%= gravatar_image_tag question.author.gravatar_email, size: 64, class: :'img-circle' %>
+          <%= gravatar_image_tag question.author.gravatar_email, size: 64, class: :'img-circle img-responsive' %>
         </a>
         <small class="text-muted"><%= question_creation_time question, placement: :bottom %></small>
       </div>
