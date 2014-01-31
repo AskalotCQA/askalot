@@ -4,11 +4,10 @@ NaRuby::Application.routes.draw do
   get '/404', to: 'errors#show'
   get '/500', to: 'errors#show'
 
-  # TODO(zbell) devise maps to :users and user profiles are mapped to :users too, this disables users with names such as 'confirmation'
-  devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }
+  devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }
 
   resources :users, only: [] do
-    patch :profile, on: :collection, to: 'users#update_profile'
+    patch :profile, on: :collection, to: 'users#update'
   end
 
   get 'users/:nick', to: 'users#show', as: :user

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     @user = User.find_by_nick params[:nick]
   end
 
-  def update_profile
+  def update
     if current_user.update_attributes(user_params)
       flash[:notice] = t 'devise.registrations.updated'
     else
