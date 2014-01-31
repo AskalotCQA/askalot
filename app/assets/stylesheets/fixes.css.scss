@@ -36,6 +36,12 @@ textarea {
   min-height: $input-height-base;
 }
 
+// buttons
+
+.btn.text-muted {
+  @include box-shadow(none);
+}
+
 // navigation
 
 .nav-labels {
