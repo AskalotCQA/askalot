@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    attributes = [:nick, :about, :gravatar_email, :flag_show_name, :flag_show_email]
+    attributes = [:nick, :about, :gravatar_email, :show_name, :show_email]
 
     attributes += Social.networks.keys
     attributes += [:first, :last] if can? :change_name, current_user

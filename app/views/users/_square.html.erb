@@ -10,7 +10,7 @@
     <%= link_to_user user %>
   </span>
 
-  <% if user.flag_show_name? && !user.name.blank? %>
+  <% if user.show_name? && !user.name.blank? %>
     <span>
       <%= user.name %>
     </span>

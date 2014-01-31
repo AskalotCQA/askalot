@@ -905,7 +905,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#flag_show_name#</dia:string>
+            <dia:string>#show_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boolean#</dia:string>
@@ -928,7 +928,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#flag_show_email#</dia:string>
+            <dia:string>#show_email#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boolean#</dia:string>
