@@ -44,6 +44,10 @@ textarea {
 
 // navigation
 
+.navbar-brand {
+  height: $navbar-height;
+}
+
 .nav-labels {
   display: block;
   position: relative;
