@@ -1,6 +1,10 @@
 NaRuby::Application.routes.draw do
   root 'static_pages#home'
 
+  get '/404', to: 'errors#show'
+  get '/500', to: 'errors#show'
+
+  # TODO(zbell) devise maps to :users and user profiles are mapped to :users too, this disables users with names such as 'confirmation'
   devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }
 
   resources :users, only: [] do

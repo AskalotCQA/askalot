@@ -1,14 +1,18 @@
 sk:
-  exceptions:
-    not_found:
-      title: 'Stránka nenájdená'
-      description: 'Stránka, ktorú ste hľadali neexistuje.'
-    internal_server_error:
-      title: 'Kritická chyba'
-      description: 'Je nám ľúto, ale niečo sa pokazilo pri spracovaní vašej požiadavky.'
+  unicorn:
+    title: 'Jednorožec'
+    message: 'A preto sa veľmi rozzúril jednorožec!'
+
+  exception:
     bad_request:
       title: 'Chybná požiadavka'
       description: 'Server nerozumel vašej požiadavke. Mohla byť poškodená.'
+    internal_server_error:
+      title: 'Kritická chyba'
+      description: 'Je nám ľúto, ale niečo sa pokazilo pri spracovaní vašej požiadavky.'
+    not_found:
+      title: 'Stránka nenájdená'
+      description: 'Stránka, ktorú ste hľadali neexistuje.'
 
   errors: &errors
     format: '%{attribute} – %{message}.'

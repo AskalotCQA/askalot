@@ -1,2 +1,19 @@
 @import 'mixins';
 @import 'variables';
+
+.error-title {
+  margin-top: 120px;
+
+  small {
+    display: block;
+    margin: 10px 0px;
+  }
+}
+
+.error-description {
+}
+
+.unicorn {
+  margin-top: 80px;
+}
+
