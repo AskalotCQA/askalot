@@ -2,18 +2,16 @@
 @import 'variables';
 
 .error-title {
-  margin-top: 120px;
+  margin-top: 180px;
 
-  small {
-    display: block;
-    margin: 10px 0px;
-  }
+  color: $brand-danger;
 }
 
 .error-description {
+  font-size: $font-size-h3;
 }
 
 .unicorn {
-  margin-top: 80px;
+  margin-top: 100px;
 }
 
