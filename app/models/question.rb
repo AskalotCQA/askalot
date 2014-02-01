@@ -1,4 +1,5 @@
 class Question < ActiveRecord::Base
+  include Taggable
   include Commentable
   include Favorable
   include Taggable
