@@ -6,6 +6,7 @@ sk:
       title: 'Nová otázka'
       submit: 'Opýtať'
       feature: 'Pridať otázku'
+      anonymous: 'Opýtať sa anonymne'
 
     create:
       success: 'Vaša otázka bola úspešne pridaná.'
