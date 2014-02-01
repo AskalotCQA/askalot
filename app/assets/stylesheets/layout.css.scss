@@ -67,18 +67,19 @@ header {
 // jumbotron
 
 .jumbotron {
-  padding: 160px 0;
+  margin: 0;
+  padding: 120px 0 240px;
 
   h1 {
-    margin: 20px 0;
+    margin: 20px 0 0 0;
     font-variant: small-caps;
     text-align: center;
     text-shadow: 0 0 128px $brand-info;
   }
 
   p {
-    margin: 0 !important;
-    padding: 20px;
+    margin: 0 0 20px 0 !important;
+    padding: 10px;
     font-size: 22.5px;
     text-align: center;
     text-shadow: 0 0 96px $brand-info;
@@ -86,7 +87,7 @@ header {
   }
 
   ul {
-    margin: 50px 0 !important;
+    margin: 25px 0 !important;
     text-align: center;
 
     .btn {
@@ -103,20 +104,20 @@ header {
 
   .featured {
     margin: 50px 0;
-    padding: 0 20px;
+    padding: 5px 20px;
     border-radius: 20px;
-    background: rgba($jumbotron-color, .0125);
+    background: rgba($jumbotron-color, .02);
     text-align: center;
   }
 
   h2 {
-    display: inline-block;
+    display: block;
     margin: 20px 0 !important;
     text-shadow: 0 0 64px $brand-info;
   }
 
   ol {
-    display: inline-block;
+    display: block;
 
     li {
       margin-bottom: 20px;
@@ -128,9 +129,16 @@ header {
       text-shadow: 0 0 48px $brand-info;
     }
 
-    small {
-      display: block;
-      color: rgba($jumbotron-color, .25);
+    color: rgba($jumbotron-color, .25);
+  }
+
+  & + footer {
+    margin-top: -150px;
+
+    background: transparent;
+
+    a {
+      @include action-coloring(darken($text-muted, 12.5%), darken($text-muted, 12.5%));
     }
   }
 }

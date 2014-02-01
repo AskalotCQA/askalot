@@ -9,7 +9,7 @@ module Stuba
         auth: {
           method: :simple,
           username: "uid=#{username},ou=People,dc=stuba,dc=sk",
-        password: password
+          password: password
         }
       })
 

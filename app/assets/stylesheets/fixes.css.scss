@@ -3,6 +3,10 @@
 
 // general
 
+* {
+  outline: none !important;
+}
+
 address, form, nav, p, dl, ol, ul, table,
 .alert {
   &:last-child {

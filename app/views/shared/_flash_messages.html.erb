@@ -5,9 +5,7 @@
         <% flash.each do |type, messages| %>
           <% Array.wrap(messages).each do |message| %>
             <div class="alert alert-<%= flash_type_to_class type %> alert-dismissable">
-              <!-- TODO(zbell) consider, problem with section margin
               <%= close_link_to_alert %>
-              -->
               <%= message %>
             </div>
           <% end %>
