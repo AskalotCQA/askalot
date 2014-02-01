@@ -45,7 +45,8 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @author   = @question.author
     @labels   = @question.labels
-    @answers  = @question.answers.order('created_at desc')
+    @answers  = @question.ordered_answers
+    #@answers  = @question.answers.order('votes_total desc, created_at desc')
 
     @answer = Answer.new(question: @question)
 
