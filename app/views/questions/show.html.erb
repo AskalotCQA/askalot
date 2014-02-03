@@ -38,5 +38,7 @@
   </div>
 </div>
 
-<%= render 'questions/answers', answers: @answers %>
+<div id="answers">
+  <%= render 'questions/answers', answers: @answers %>
+</div>
 <%= render 'answers/form', question: @question, answer: @answer %>
