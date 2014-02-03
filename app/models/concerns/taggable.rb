@@ -94,6 +94,10 @@ module Taggable
       @tags = tags + extractor.extract(values)
     end
 
+    def to_s
+      tags.join(',')
+    end
+
     class Extractor
       def self.extract(values)
         (values.is_a?(Array) ? values.map(&:to_s) : values.to_s.split(/,/)).map(&:strip)
