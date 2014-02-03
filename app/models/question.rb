@@ -38,10 +38,10 @@ class Question < ActiveRecord::Base
     tags
   end
 
-  def ordered_answers
+  def answers_ordered
     best_answer = answers.labeled_with :best
 
-    return best_answer + answers.order('votes_total desc, created_at desc').where('id != ?', best_answer[0].id) if best_answer  
+    return best_answer + answers.order('votes_total desc, created_at desc').where('id != ?', best_answer[0].id) if !best_answer.empty?  
 
     answers.order('votes_total desc, created_at desc')
   end
