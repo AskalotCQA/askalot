@@ -8,7 +8,7 @@
       <%= form_for @question do |f| %>
         <div class="form-group">
           <%= f.label :category_id %>
-          <%= f.collection_select :category_id, Category.all, :id, :name, { include_blank: true }, { class: :'form-control', data: { as: :select2 }} %>
+          <%= f.category_collection_select :category_id %>
         </div>
         <div class="form-group">
           <%= f.label :title %>
@@ -20,7 +20,8 @@
         </div>
         <div class="form-group">
           <%= f.label :tag_list %>
-          <p class="category-tags">Pre otázku budú automaticky pridané tagy: <p>
+          <p>Pre otázku budú automaticky pridané tagy: </p>
+          <ul id="category-tags" class="nav nav-labels"></ul>
           <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
         </div>
 

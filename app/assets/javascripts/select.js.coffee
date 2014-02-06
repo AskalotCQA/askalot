@@ -1,10 +1,10 @@
 #= require core/module
 
 class window.Select extends Module
-  @of: (options = {}) ->
+  @of: (name, options = {}) ->
     options.bind ?= false
 
-    new Select(options)
+    new Select(name, options)
 
   defaults:
     formatSearching: ->
@@ -44,8 +44,8 @@ class window.Select extends Module
     filter:
       createSearchChoice: (term, data) -> return if data.length == 0
 
-  constructor: (options = {}) ->
-    @selector = options.selector ?= '[data-as=select2]'
+  constructor: (selector, options = {}) ->
+    @selector = selector ?= '[data-as=select2]'
 
     @.bind() if options.bind ?= true
 
@@ -63,6 +63,12 @@ class window.Select extends Module
       $(element).select2 options
 
       $(element).on 'change', -> $(this).select2('focus')
+
+  on: (event, callback) ->
+    $(@selector).on(event, callback)
+
+  attr: (name) ->
+    $(@selector).attr(name)
 
   addItem: (item) ->
     @.each (i, element) =>
