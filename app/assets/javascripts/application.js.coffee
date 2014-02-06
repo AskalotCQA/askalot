@@ -20,11 +20,13 @@
 #= require_tree ./core
 #
 #= require select2
+#= require jquery-tablesorter
 #
 #= require rails-timeago
 #= require locales/jquery.timeago.sk.js
 #
 #= require form
+#= require table
 #
 #= require questions
 #
