@@ -49,7 +49,7 @@ class window.Select extends Module
 
     @.bind() if options.bind ?= true
 
-    $(@selector)
+    @
 
   each: (callback) ->
     $(@selector).each (index, element) ->
