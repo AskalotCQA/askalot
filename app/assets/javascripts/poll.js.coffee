@@ -1,4 +1,4 @@
-#= require core/module
+#= require lib/module
 
 class window.Poll extends Module
   @initialize: ->

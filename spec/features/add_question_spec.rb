@@ -57,7 +57,7 @@ describe 'Add Question', js: true do
 
       click_link 'Opýtať sa otázku'
 
-      fill_in 'question_title', with: "Aint Westside tha best?"
+      fill_in 'question_title', with: "Ain't Westside tha best?"
       fill_in 'question_text',  with: "Y'll eastsiders: Talk to the hand, 'cos the face ain't listening."
 
       select2 'Westside Playground', from: 'question_category_id'

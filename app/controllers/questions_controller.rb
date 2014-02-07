@@ -23,12 +23,6 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
-
-    @tags = Category.all.inject({}) do |hash, category|
-      hash[category.name] = category.tags
-
-      hash
-    end
   end
 
   def create
