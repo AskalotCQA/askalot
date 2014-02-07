@@ -18,7 +18,6 @@ class Question < ActiveRecord::Base
   #validates :anonymous, presence: true #TODO(zbell) Rasto: uncomment this when tests do not fail because of it
 
   scope :answered, lambda { joins(:answers).uniq }
-  scope :unanswerd, lambda { joins(:answers).uniq }
   scope :by,       lambda { |user| where(author: user) }
 
   def labels
