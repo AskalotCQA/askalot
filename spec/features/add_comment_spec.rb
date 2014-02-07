@@ -8,7 +8,7 @@ describe 'Add Comment' do
     login_as user
   end
 
-  it 'adds new comment', js: true do
+  it 'adds new comment' do
     visit root_path
 
     click_link 'Otázky'
