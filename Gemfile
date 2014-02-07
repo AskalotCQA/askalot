@@ -68,6 +68,7 @@ group :development, :test do
   gem 'launchy'
   gem 'capybara', '~> 2.1.0'
   gem 'selenium-webdriver'
+  gem 'capybara-webkit'
   gem 'guard-rspec'
 
   # database

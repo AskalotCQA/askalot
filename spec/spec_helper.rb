@@ -13,7 +13,7 @@ require 'cancan/matchers'
 
 Capybara.default_selector = :css
 
-Capybara.javascript_driver = ENV['DRIVER'].to_sym if ENV['DRIVER']
+Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :selenium
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
