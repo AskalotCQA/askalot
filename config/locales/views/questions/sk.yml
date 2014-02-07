@@ -11,9 +11,11 @@ sk:
       success: 'Vaša otázka bola úspešne pridaná.'
 
     tab:
-      new: 'Nové'
+      new: 'Aktuálne'
       favored: 'Obľúbené'
       answered: 'Odpovedané'
+      solved: 'Vyriešené'
+      unanswered: 'Bez odpovede'
 
     tag:
       new: 'nový'
