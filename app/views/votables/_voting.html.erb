@@ -1,7 +1,7 @@
 <div id="<%= model %>-<%= votable.id %>-voting" class="<%= model %>-voting">
   <%= icon_link_to :'chevron-up', nil, send("voteup_#{model}_path", votable), data: { remote: true }, id: "#{model}-#{votable.id}-voteup", class: (votable.upvoted_by?(current_user) ? nil : :'text-muted') %>
-
-  <span><%= tooltip_tag(votable.votes_total," +" + "#{votable.votes.where(upvote: true).size}" + " -" + "#{votable.votes.where(upvote: false).size}", placement: :up) %></span>
-
+  <div>
+    <%= content_tag :span, votable.votes_total, tooltip_attributes("#{votable.votes.where(upvote: true).size} - #{votable.votes.where(upvote: false).size}", placement: :right) %>
+  </div>
   <%= icon_link_to :'chevron-down', nil, send("votedown_#{model}_path", votable), data: { remote: true }, id: "#{model}-#{votable.id}-votedown", class: (votable.downvoted_by?(current_user) ? nil : :'text-muted') %>
 </div>
