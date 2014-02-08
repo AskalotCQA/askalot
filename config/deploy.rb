@@ -59,16 +59,12 @@ namespace :db do
   end
 end
 
-# If you are using Passenger mod_rails uncomment this
 namespace :deploy do
-  task :start do
-  end
-
-  task :stop do
-  end
-
-  task :restart, roles: :app, except: { no_release: true } do
-    run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
+  [:start, :stop, :restart].each do |command|
+    desc "#{command} unicorn server"
+    task command, roles: :app, except: { no_release: true } do
+      run "/etc/init.d/unicorn-#{application} #{command}"
+    end
   end
 
   desc "Symlink shared"
