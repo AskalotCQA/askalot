@@ -1,6 +1,5 @@
 class TagsController < ApplicationController
-  # TODO (smolnar) enable
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   # TODO (smolnar)
   # * use elasticsearch
