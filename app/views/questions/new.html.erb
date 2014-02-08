@@ -22,6 +22,10 @@
           <%= f.label :tag_list %>
           <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
         </div>
+        <div class="checkbox">
+          <%= f.check_box :anonymous %>
+          <%= f.label :anonymous %>
+        </div>
 
         <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
       <% end %>

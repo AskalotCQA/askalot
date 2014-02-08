@@ -120,10 +120,11 @@ sk:
         show_email: 'Zobraziť e-mail ostatným používateľom'
 
       question:
+        category: 'Kategória'
         title: 'Nadpis'
         text: 'Text'
         tag_list: 'Tagy'
-        category_id: 'Kategória'
+        anonymous: 'Opýtať sa anonymne'
 
       answer:
         text: 'Odpoveď'

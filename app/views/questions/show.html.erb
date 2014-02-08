@@ -3,7 +3,7 @@
 <div class="row">
   <div class="col-md-2">
     <section>
-      <%= render 'users/square', user: @author %>
+      <%= render 'users/square', user: @question.anonymous ? :anonymous : @author %>
     </section>
   </div>
 

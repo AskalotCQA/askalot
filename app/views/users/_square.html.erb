@@ -1,16 +1,11 @@
 <div class="user-square">
-<!-- TODO(zbell) is tooltip neccessary?
-  <a class="user-avatar" href="<%= user_path user.nick %>" data-placement="left" data-toggle="tooltip" title="<%= user.nick %>">
--->
-  <a class="user-avatar" href="<%= user_path user.nick %>">
-    <%= gravatar_image_tag user.gravatar_email, size: 96, class: :'img-circle img-responsive' %>
-  </a>
+  <%= user_avatar_tag user, size: 96, class: :'img-circle img-responsive' %>
 
   <span>
     <%= link_to_user user %>
   </span>
 
-  <% if user.show_name? && !user.name.blank? %>
+  <% if user != :anonymous && user.show_name? && !user.name.blank? %>
     <span>
       <%= user.name %>
     </span>

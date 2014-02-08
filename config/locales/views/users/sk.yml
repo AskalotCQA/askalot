@@ -43,7 +43,6 @@ sk:
       title: 'Ďakujeme za registráciu'
       message: 'Pre ďalšie pokračovanie v práci so systémom je potrebné ešte rewgistráciu potvrdiť. E-mail s potvrdzovacím odkazom Vám bol zaslaný na adresu uvedenú pri registrácii.'
 
-
     profile: 'Profil'
     social: 'Sociálne siete'
     privacy: 'Súkromie'
@@ -58,3 +57,5 @@ sk:
     show:
       about: 'O mne'
       edit: 'Upraviť profil'
+
+    anonymous: 'Anonym'
