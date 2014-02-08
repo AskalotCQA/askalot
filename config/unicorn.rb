@@ -14,8 +14,7 @@ before_fork do |server, worker|
     Process.kill 'QUIT', Process.pid
   end
 
-  defined?(ActiveRecord::Base) and
-    ActiveRecord::Base.connection.disconnect!
+  ActiveRecord::Base.connection.disconnect! if defined?(ActiveRecord::Base)
 end
 
 after_fork do |server, worker|
@@ -23,6 +22,5 @@ after_fork do |server, worker|
     puts 'Unicorn worker intercepting TERM and doing nothing. Wait for master to send QUIT'
   end
 
-  defined?(ActiveRecord::Base) and
-    ActiveRecord::Base.establish_connection
+  ActiveRecord::Base.establish_connection if defined?(ActiveRecord::Base)
 end
