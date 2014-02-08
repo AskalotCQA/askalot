@@ -41,7 +41,8 @@
       <div class="question-author">
         <% if question.anonymous %>
           <small>Anonym</small>
-          <a class="user-avatar" href="">
+          <a class="user-avatar">
+            <%= gravatar_image_tag 'anonymous@askalot.fiit.stuba.sk', size: 64, class: :'img-circle img-responsive'%>
           </a>
         <% else %>
           <small><%= link_to_user question.author %></small>
