@@ -12,6 +12,7 @@ set :repository,     'git@github.com:pavolzbell/tp-1314-13.git'
 set :scm_passphrase, ''
 set :user,           'deploy'
 set :branch,         rails_env
+set :deploy_to,      "/home/deploy/projects/#{application}-#{rails_env}"
 
 set :use_sudo, false
 
