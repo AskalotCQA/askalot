@@ -63,7 +63,7 @@ namespace :deploy do
   [:start, :stop, :restart].each do |command|
     desc "#{command} unicorn server"
     task command, roles: :app, except: { no_release: true } do
-      run "/etc/init.d/unicorn-#{application} #{command}"
+      run "/etc/init.d/unicorn-#{application}-#{rails_env} #{command}"
     end
   end
 
