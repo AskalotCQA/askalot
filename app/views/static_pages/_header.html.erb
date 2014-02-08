@@ -2,14 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div>
-          <h1>
-            Askalot
-          </h1>
-          <p class="text-lead">
-            <em><%= t('home.headline') %></em>
-          </p>
-        </div>
+        <h1>Askalot</h1>
+        <p class="text-lead">
+          <em><%= t('home.headline') %></em>
+        </p>
       </div>
     </div>
 
@@ -27,31 +23,13 @@
                 <%= icon_link_to :rocket, t('home.sign_in'), new_user_session_path, class: 'btn btn-success btn-lg' %>
               <% end %>
             </li>
+          <% else %>
+            <li>
+              <!-- TODO(zbell) add link to random unanswered question here -->
+              <%= icon_link_to :comment, t('home.answer'), question_path(123), id: :'new-question', class: 'btn btn-success btn-lg' %>
+            </li>
           <% end %>
          </ul>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-4">
-        <div class="featured">
-          <h2><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new') %></h2>
-          <%= render 'questions', questions: @new %>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="featured">
-          <h2><%= link_to t('home.featured.answered'), questions_path(tab: :'questions-answered') %></h2>
-          <%= render 'questions', questions: @answered %>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="featured">
-          <h2><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored') %></h2>
-          <%= render 'questions', questions: @favored %>
-        </div>
       </div>
     </div>
   </div>
