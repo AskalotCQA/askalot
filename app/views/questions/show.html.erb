@@ -3,7 +3,11 @@
 <div class="row">
   <div class="col-md-2">
     <section>
-      <%= render 'users/square', user: @author %>
+      <% if @question.anonymous %>
+        <%= render 'users/square', user: nil %>
+      <% else %>
+        <%= render 'users/square', user: @author %>
+      <% end %>
     </section>
   </div>
 
