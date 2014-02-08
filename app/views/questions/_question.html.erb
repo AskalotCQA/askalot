@@ -39,17 +39,8 @@
 
     <div class="col-md-2">
       <div class="question-author">
-        <% if question.anonymous %>
-          <small>Anonym</small>
-          <a class="user-avatar">
-            <%= gravatar_image_tag 'anonymous@askalot.fiit.stuba.sk', size: 64, class: :'img-circle img-responsive'%>
-          </a>
-        <% else %>
-          <small><%= link_to_user question.author %></small>
-          <a class="user-avatar" href="<%= user_path question.author.nick %>">
-            <%= gravatar_image_tag question.author.gravatar_email, size: 64, class: :'img-circle img-responsive' %>
-          </a>
-        <% end %>
+        <small><%= link_to_user question.anonymous ? :anonymous : question.author %></small>
+        <%= user_avatar_tag question.anonymous ? :anonymous : question.author, size: 64, class: :'img-circle img-responsive' %>
         <small class="text-muted"><%= question_creation_time question, placement: :bottom %></small>
       </div>
     </div>
