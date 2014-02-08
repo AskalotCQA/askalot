@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
                  when :'questions-answered'   then Question.answered.order(created_at: :desc)
                  when :'questions-favored'    then Question.favored.order(created_at: :desc)
                  when :'questions-unanswered' then Question.unanswered
-                 when :'questions-solved'     then Question.order(created_at: :desc)
+                 when :'questions-solved'     then Question.solved.order(created_at: :desc)
                  else fail
                  end
 
