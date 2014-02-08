@@ -12,10 +12,10 @@ sk:
 
     tab:
       new: 'Aktuálne'
-      favored: 'Obľúbené'
+      unanswered: 'Bez odpovede'
       answered: 'Odpovedané'
       solved: 'Vyriešené'
-      unanswered: 'Bez odpovede'
+      favored: 'Obľúbené'
 
     tag:
       new: 'nový'
