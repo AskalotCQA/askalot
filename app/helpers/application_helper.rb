@@ -1,6 +1,6 @@
 module ApplicationHelper
   def default_title
-    'na&#x042f;uby'.html_safe
+    'Askalot'
   end
 
   def resolve_title(value)
