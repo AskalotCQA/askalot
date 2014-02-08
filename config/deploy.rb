@@ -11,9 +11,13 @@ set :scm,            :git
 set :repository,     'git@github.com:pavolzbell/tp-1314-13.git'
 set :scm_passphrase, ''
 set :user,           'deploy'
-set :branch,         rails_env
+set(:branch)         { rails_env }
+set(:deploy_to)      { "/home/deploy/projects/#{application}-#{rails_env}" }
 
 set :use_sudo, false
+
+set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
+set :rvm_autolibs_flag, "read-only"       # more info: rvm help autolibs
 
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
@@ -59,16 +63,12 @@ namespace :db do
   end
 end
 
-# If you are using Passenger mod_rails uncomment this
 namespace :deploy do
-  task :start do
-  end
-
-  task :stop do
-  end
-
-  task :restart, roles: :app, except: { no_release: true } do
-    run "#{try_sudo} touch #{File.join(current_path, 'tmp', 'restart.txt')}"
+  [:start, :stop, :restart, :upgrade].each do |command|
+    desc "#{command.to_s.capitalize} unicorn server"
+    task command, roles: :app, except: { no_release: true } do
+      run "/etc/init.d/unicorn-#{application}-#{rails_env} #{command}"
+    end
   end
 
   desc "Symlink shared"
