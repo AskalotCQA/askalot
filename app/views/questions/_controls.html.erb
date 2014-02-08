@@ -12,7 +12,7 @@
     <%= tab_link_tag_with_count t('question.tab.favored'), :'questions-favored', questions_path(params.except(:page).merge tab: :'questions-favored'), filter_questions(Question.favored).size, remote: true %>
     <%= tab_link_tag_with_count t('question.tab.answered'), :'questions-answered', questions_path(params.except(:page).merge tab: :'questions-answered'), filter_questions(Question.answered).size, remote: true %>
 
-    <%= tab_link_tag_with_count t('question.tab.solved'), :'questions-solved', questions_path(params.except(:page).merge tab: :'questions-solved'),'0', remote: true %>
+    <%= tab_link_tag_with_count t('question.tab.solved'), :'questions-solved', questions_path(params.except(:page).merge tab: :'questions-solved'),filter_questions(Question.solved).size, remote: true %>
     <%= tab_link_tag_with_count t('question.tab.unanswered'), :'questions-unanswered', questions_path(params.except(:page).merge tab: :'questions-unanswered'), filter_questions(Question.unanswered).size, remote: true %>
   </ul>
 </section>
