@@ -3,8 +3,15 @@ sk:
     headline: 'Komunitný systém otázok a odpovedí ďalšej generácie'
 
     ask: 'Opýtať sa otázku'
+    answer: 'Skúsiť odpovedať'
+
     sign_up: 'Vytvoriť si účet'
     sign_in: 'Prihlásiť sa'
+
+    step:
+      first: 'Pýtajte sa otázky'
+      second: 'Odpovedajte a diskutujte'
+      third: 'Vyberte najlepšie odpovede'
 
     featured:
       new: 'Nové otázky'

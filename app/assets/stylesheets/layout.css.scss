@@ -64,85 +64,6 @@ header {
   }
 }
 
-// jumbotron
-
-.jumbotron {
-  margin: 0;
-  padding: 120px 0 240px;
-
-  h1 {
-    margin: 20px 0 0 0;
-    font-variant: small-caps;
-    text-align: center;
-    text-shadow: 0 0 128px $brand-info;
-  }
-
-  p {
-    margin: 0 0 20px 0 !important;
-    padding: 10px;
-    font-size: 22.5px;
-    text-align: center;
-    text-shadow: 0 0 96px $brand-info;
-    color: rgba($jumbotron-color, .25);
-  }
-
-  ul {
-    margin: 25px 0 !important;
-    text-align: center;
-
-    .btn {
-      margin: 20px 0;
-      padding: $padding-large-vertical * 1.25 $padding-large-horizontal * 1.25;
-      font-size: $jumbotron-font-size * 1.25;
-      text-shadow: 0 0 128px $brand-info;
-    }
-  }
-
-  a {
-    @include action-coloring($jumbotron-color, $jumbotron-color);
-  }
-
-  .featured {
-    margin: 50px 0;
-    padding: 5px 20px;
-    border-radius: 20px;
-    background: rgba($jumbotron-color, .02);
-    text-align: center;
-  }
-
-  h2 {
-    display: block;
-    margin: 20px 0 !important;
-    text-shadow: 0 0 64px $brand-info;
-  }
-
-  ol {
-    display: block;
-
-    li {
-      margin-bottom: 20px;
-      padding-top: 20px;
-      border-top: 1px solid rgba($jumbotron-color, .025);
-    }
-
-    a {
-      text-shadow: 0 0 48px $brand-info;
-    }
-
-    color: rgba($jumbotron-color, .25);
-  }
-
-  & + footer {
-    margin-top: -150px;
-
-    background: transparent;
-
-    a {
-      @include action-coloring(darken($text-muted, 12.5%), darken($text-muted, 12.5%));
-    }
-  }
-}
-
 // footer
 
 footer {
@@ -153,9 +74,37 @@ footer {
   text-align: center;
 }
 
-// profile
+// jumbotron
 
-img.list-group-item {
-  border: none;
-  padding: 0;
+.jumbotron {
+  margin: 0;
+  padding: 120px 0;
+
+  h1 {
+    margin: 0;
+    font-variant: small-caps;
+    text-align: center;
+    text-shadow: 0 0 128px $brand-info;
+  }
+
+  p {
+    margin: 10px 0 30px 0 !important;
+    padding: 0;
+    font-size: 22.5px;
+    text-align: center;
+    text-shadow: 0 0 96px $brand-info;
+    color: rgba($jumbotron-color, .25);
+  }
+
+  ul {
+    margin: 0 !important;
+    text-align: center;
+
+    .btn {
+      margin: 20px 0;
+      padding: $padding-large-vertical * 1.25 $padding-large-horizontal * 1.25;
+      font-size: $jumbotron-font-size * 1.25;
+      text-shadow: 0 0 128px $brand-info;
+    }
+  }
 }

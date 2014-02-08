@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def use_container?
-    !current_page?(root_path)
+    true
   end
 
   def use_narrower_layout?
