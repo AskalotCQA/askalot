@@ -3,17 +3,8 @@
 
 .table[data-sortable="true"] {
   th {
-    position: relative;
-    padding: 8px;
-
-    padding-right: 18px + 8px;
+    padding-right: 22px;
     cursor: pointer;
-
-    a[data-toggle="tooltip"] {
-      position: relative;
-      display: inline-block;
-      float: left;
-    }
 
     span {
       position: relative;
