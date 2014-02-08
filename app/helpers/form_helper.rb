@@ -6,6 +6,7 @@ module FormHelper
       hash
     end
 
+    options.merge!           include_blank: true
     html_options.deep_merge! class: :'form-control', data: { as: :select2, values: tags }
 
     collection_select(id, collection, value, label, options, html_options)

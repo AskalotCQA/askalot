@@ -23,4 +23,5 @@ $(document).ready ->
 
     html += "<li class=\"label label-info\">#{tag}</li>" for tag in tags[value]
 
+    $('ul#category-tags').parent().removeClass('hidden')
     $('ul#category-tags').html(html)
