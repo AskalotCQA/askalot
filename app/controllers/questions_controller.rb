@@ -2,7 +2,8 @@ class QuestionsController < ApplicationController
   include Voting
   include Tabbing
 
-  before_action :authenticate_user!
+  # TODO (smolnar) enable for all
+  before_action :authenticate_user!, except: [:index]
 
   default_tab :'questions-new', only: :index
 

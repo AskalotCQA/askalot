@@ -75,8 +75,9 @@ group :development, :test do
   gem 'faker', '1.1.2'
 end
 
-group :development, :production do
+group :production do
   gem 'unicorn'
+  gem 'rack-timeout'
 end
 
 # Use ActiveModel has_secure_password
