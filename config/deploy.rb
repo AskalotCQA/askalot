@@ -60,12 +60,12 @@ namespace :db do
 end
 
 namespace :deploy do
-#  [:start, :stop, :restart].each do |command|
-    #desc "#{command} unicorn server"
-    #task command, roles: :app, except: { no_release: true } do
-      #run "/etc/init.d/unicorn-#{application}-#{rails_env} #{command}"
-    #end
-  #end
+  [:start, :stop, :restart].each do |command|
+    desc "#{command} unicorn server"
+    task command, roles: :app, except: { no_release: true } do
+      run "/etc/init.d/unicorn-#{application}-#{rails_env} #{command}"
+    end
+  end
 
   desc "Symlink shared"
   task :symlink_shared, roles: :app do
