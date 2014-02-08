@@ -64,18 +64,11 @@ namespace :db do
 end
 
 namespace :deploy do
-  [:start, :stop].each do |command|
+  [:start, :stop, :restart, :upgrade].each do |command|
     desc "#{command.to_s.capitalize} unicorn server"
     task command, roles: :app, except: { no_release: true } do
       run "/etc/init.d/unicorn-#{application}-#{rails_env} #{command}"
     end
-  end
-
-  # TODO (smolnar) resolve unicorn js assets error with paths
-  desc "Restart unicorn server"
-  task :restart, roles: :app, except: { no_release: true } do
-    run "/etc/init.d/unicorn-#{application}-#{rails_env} stop"
-    run "/etc/init.d/unicorn-#{application}-#{rails_env} start"
   end
 
   desc "Symlink shared"
