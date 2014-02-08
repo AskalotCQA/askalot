@@ -16,6 +16,9 @@ set(:deploy_to)      { "/home/deploy/projects/#{application}-#{rails_env}" }
 
 set :use_sudo, false
 
+set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
+set :rvm_autolibs_flag, "read-only"       # more info: rvm help autolibs
+
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1
 set :ssh_options, { forward_agent: true }
@@ -73,6 +76,9 @@ namespace :deploy do
     run "ln -nfs #{shared_path} #{release_path}/shared"
     run "for file in #{shared_path}/config/*.yml; do ln -nfs $file #{release_path}/config; done"
   end
+
+  before 'deploy:setup', 'rvm:install_rvm'
+  before 'deploy:setup', 'rvm:install_ruby'
 
   after 'deploy', 'deploy:cleanup'
   after 'deploy:update_code', 'deploy:symlink_shared', 'db:create_release', 'deploy:migrate'
