@@ -1,0 +1,41 @@
+@import 'variables';
+@import 'mixins';
+
+.table[data-sortable="true"] {
+  th {
+    padding-right: 22px;
+    cursor: pointer;
+
+    span {
+      position: relative;
+      display: inline-block;
+      float: right;
+
+      height: $font-size-base;
+      line-height: $font-size-base;
+
+      i {
+        position: absolute;
+        display: inline-block;
+
+        right: -22px;
+        top: 3px;
+
+        height: inherit;
+        width: 20px;
+        line-height: inherit;
+
+        text-align: center;
+
+        &:before {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  th[data-sorter="false"] {
+    padding-right: 8px;
+    cursor: default;
+  }
+}
