@@ -1,12 +1,12 @@
-root = Rails.root
+root = File.expand_path "#{File.dirname(__FILE__)}/.."
 
 worker_processes 8
 timeout          15
 preload_app      true
-listen           root.join('shared/.unicorn.sock'), backlog: 64
-pid              root.join('tmp/pids/unicorn.pid')
-stderr_path      root.join('log/unicorn.log')
-stdout_path      root.join('log/unicorn.log')
+listen           "#{root}/shared/.unicorn.sock", backlog: 64
+pid              "#{root}/tmp/pids/unicorn.pid"
+stderr_path      "#{root}/log/unicorn.log"
+stdout_path      "#{root}/log/unicorn.log"
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do
