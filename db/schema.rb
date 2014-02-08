@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131210012349) do
+ActiveRecord::Schema.define(version: 20140206190919) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20131210012349) do
     t.text     "text",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "imported_id"
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 20131210012349) do
     t.text     "text",             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "imported_id"
   end
 
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
@@ -105,6 +107,7 @@ ActiveRecord::Schema.define(version: 20131210012349) do
     t.text     "text",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "imported_id"
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
@@ -176,6 +179,7 @@ ActiveRecord::Schema.define(version: 20131210012349) do
     t.string   "tumblr"
     t.string   "youtube"
     t.string   "role",                   default: "student", null: false
+    t.integer  "imported_id"
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree

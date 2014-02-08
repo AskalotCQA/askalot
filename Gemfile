@@ -43,6 +43,10 @@ gem 'i18n-js'
 gem 'kaminari',           '~> 0.14.1'
 gem 'kaminari-bootstrap', '~> 0.1.3'
 
+# import
+gem 'nokogiri'
+gem 'activerecord-import', "~> 0.4.1"
+
 # documentation
 group :doc do
   gem 'sdoc', require: false
