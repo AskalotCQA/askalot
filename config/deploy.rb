@@ -77,9 +77,6 @@ namespace :deploy do
     run "for file in #{shared_path}/config/*.yml; do ln -nfs $file #{release_path}/config; done"
   end
 
-  before 'deploy:setup', 'rvm:install_rvm'
-  before 'deploy:setup', 'rvm:install_ruby'
-
   after 'deploy', 'deploy:cleanup'
   after 'deploy:update_code', 'deploy:symlink_shared', 'db:create_release', 'deploy:migrate'
 
