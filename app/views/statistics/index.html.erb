@@ -233,7 +233,7 @@
         <tbody>
           <% @users.each_with_index do |user, i| %>
             <tr>
-              <td><%= i + 1 %></td>
+              <td class="text-right"><%= i + 1 %></td>
               <%= statistical_cell(user) { |u| [link_to(user.name || user.nick, user_path(user.nick)), u.role?(:teacher) ? :info : nil] } %>
 
               <%= statistical_cell user.questions.size %>

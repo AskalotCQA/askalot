@@ -45,6 +45,12 @@ $(document).ready ->
       even:        ''
       odd:         ''
 
+  $.tablesorter.addWidget
+    id: 'numbering'
+    format: (table) ->
+      $('tr:visible', table.tBodies[0]).each (i) ->
+        $(this).find('td').eq(0).text(i + 1)
+
   $('table[data-sortable="true"]').tablesorter
     theme:         'bootstrap'
     tableClass:    'table'
@@ -58,7 +64,8 @@ $(document).ready ->
     cssProcessing: 'table-processing'
 
     headerTemplate: '{content} <span>{icon}</span>'
-    widgets: ['uitheme']
+    # TODO(molnar) refactor this to something like: widgets: [('numbering' if $(this).attr('data-numbering')), 'uitheme']
+    widgets: ['numbering', 'uitheme']
 
     sortLocaleCompare: true
     textExtraction: (node, table, column) -> $.trim($(node).attr('data-value') or $(node).text())
