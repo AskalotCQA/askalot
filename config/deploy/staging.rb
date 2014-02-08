@@ -9,4 +9,4 @@ set :branch,    'staging'
 
 role :db, domain, primary: true
 
-set :rvm_ruby_string, '2.0.0@tp-1314-13'
+set :rvm_ruby_string, "2.0.0@#{application}-#{rails_env}"
