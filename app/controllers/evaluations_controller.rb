@@ -32,5 +32,4 @@ class EvaluationsController < ApplicationController
   def evaluation_params
     params.require(:evaluation).permit(:value, :text).merge(evaluable: @evaluable, evaluator: current_user)
   end
-
 end
