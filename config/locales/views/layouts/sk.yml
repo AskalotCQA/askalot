@@ -22,5 +22,5 @@ sk:
     about: 'O projekte'
     authors: 'Autori'
     contact: 'Kontakt'
-    documentation: 'Dokumentácia'
-    repository: 'Zdrojový kód'
+    documents: 'Dokumentácia'
+    repositories: 'Zdrojový kód'
