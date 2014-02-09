@@ -19,6 +19,7 @@ class Question < ActiveRecord::Base
   validates :text,      presence: true, length: { minimum: 2 }
   #validates :anonymous, presence: true #TODO(zbell) Rasto: uncomment this when tests do not fail because of it
 
+  scope :random,     lambda { order('random()') }
   scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }
   scope :answered,   lambda { joins(:answers).uniq }
   scope :solved,     lambda { joins(:labels).uniq }
