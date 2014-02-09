@@ -1,8 +1,8 @@
 <% provide :title, @user.nick %>
 
-<div class="row">
-  <div class="col-md-offset-1 col-md-3">
-    <section>
+<section>
+  <div class="row">
+    <div class="col-md-offset-1 col-md-3">
       <div class="list-group">
         <%= gravatar_image_tag @user.gravatar_email, size: 263, class: :'list-group-item img-responsive' %>
 
@@ -20,10 +20,8 @@
           </span>
         <% end %>
       </div>
-    </section>
-  </div>
-  <div class="col-md-7">
-    <section>
+    </div>
+    <div class="col-md-7">
       <h1>
         <%= @user.nick %>
 
@@ -49,6 +47,6 @@
       <% end %>
 
       <div class="clearfix"></div>
-    </section>
+    </div>
   </div>
-</div>
+</section>
