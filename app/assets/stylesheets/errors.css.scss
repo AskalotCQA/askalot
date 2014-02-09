@@ -11,6 +11,24 @@
   font-size: $font-size-h3;
 }
 
+.doge {
+  position: relative;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+
+  div {
+    font-style: 'Comic Sans MS, Comic Sans, Chalkboard, Helvetica, Arial, sans-serif';
+    position: absolute;
+  }
+
+  & + footer {
+    margin: 0;
+  }
+}
+
 .unicorn {
   margin-top: 100px;
 }
