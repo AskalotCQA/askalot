@@ -30,4 +30,5 @@
 #
 #= require questions
 #
+#= require analytics
 #= require fixes

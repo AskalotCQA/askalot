@@ -97,6 +97,7 @@ GEM
       rspec (~> 2.0)
       rspec-instafail (~> 0.2.0)
       ruby-progressbar (~> 1.0)
+    garelic (0.2.1)
     guard (2.2.4)
       formatador (>= 0.2.4)
       listen (~> 2.1)
@@ -291,6 +292,7 @@ DEPENDENCIES
   font-awesome-rails (~> 4.0.3.0)
   forgery
   fuubar
+  garelic
   guard-rspec
   hirb
   i18n-js

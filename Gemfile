@@ -42,19 +42,21 @@ gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
 gem 'symbolize'
 
-# documentation
+# monitoring
+#gem 'airbrake'
+gem 'garelic'
+#gem 'newrelic_rpm'
+
 group :doc do
   gem 'sdoc', require: false
 end
 
-# development
 group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
   gem 'rvm-capistrano'
 end
 
-# development & test
 group :development, :test do
   # debugging
   gem 'pry'
@@ -80,15 +82,3 @@ group :production do
   gem 'unicorn'
   gem 'rack-timeout'
 end
-
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
