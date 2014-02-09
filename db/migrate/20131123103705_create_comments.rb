@@ -1,7 +1,7 @@
-class CreateComment < ActiveRecord::Migration
+class CreateComments < ActiveRecord::Migration
   def change
     create_table :comments do |t|
-      t.references :author,   null: false
+      t.references :author,      null: false
       t.references :commentable, null: false, polymorphic: true
 
       t.text :text, null: false
