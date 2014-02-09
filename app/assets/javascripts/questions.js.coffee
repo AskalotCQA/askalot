@@ -18,10 +18,10 @@ $(document).ready ->
   select.on 'change', (event) ->
     value = event.added.text
 
-    html = ""
+    html = ''
     tags = JSON.parse(select.attr('data-values'))
 
-    html += "<li class=\"label label-info\">#{tag}</li>" for tag in tags[value]
+    html += "<li><span class=\"label label-info\">#{tag}</span></li>" for tag in tags[value]
 
     $('ul#category-tags').parent().removeClass('hidden')
     $('ul#category-tags').html(html)
