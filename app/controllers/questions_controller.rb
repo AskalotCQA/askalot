@@ -9,9 +9,9 @@ class QuestionsController < ApplicationController
   def index
     @questions = case params[:tab].to_sym
                  when :'questions-new'        then Question.order(created_at: :desc)
-                 when :'questions-unanswered' then Question.unanswered.order(created_at: :desc)
-                 when :'questions-answered'   then Question.answered.order(created_at: :desc)
-                 when :'questions-solved'     then Question.solved.order(created_at: :desc)
+                 when :'questions-unanswered' then Question.unanswered.order(votes_total: :desc, created_at: :desc)
+                 when :'questions-answered'   then Question.answered.order(votes_total: :desc, created_at: :desc)
+                 when :'questions-solved'     then Question.solved.order(votes_total: :desc, created_at: :desc)
                  when :'questions-favored'    then Question.favored.order(created_at: :desc)
                  else fail
                  end
