@@ -3,8 +3,8 @@ class Answer < ActiveRecord::Base
   include Votable
   include Watchable
 
-  belongs_to :author, class_name: :User
-  belongs_to :question
+  belongs_to :author, class_name: :User, counter_cache: true
+  belongs_to :question, counter_cache: true
 
   has_many :labelings
   has_many :labels, through: :labelings

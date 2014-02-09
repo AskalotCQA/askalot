@@ -5,7 +5,7 @@ module Taggable
     has_many :taggings, as: :taggable
     has_many :tags, through: :taggings
 
-    scope :tagged_with, lambda { |values, options = {}| Scope.new(self).build(values, options)}
+    scope :tagged_with, lambda { |values, options = {}| Scope.new(self).build(values, options) }
 
     after_save :generate_tags!
   end

@@ -11,18 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131102843) do
+ActiveRecord::Schema.define(version: 20140209112906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: true do |t|
-    t.integer  "author_id",               null: false
-    t.integer  "question_id",             null: false
-    t.text     "text",                    null: false
+    t.integer  "author_id",                  null: false
+    t.integer  "question_id",                null: false
+    t.text     "text",                       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total", default: 0, null: false
+    t.integer  "votes_total",    default: 0, null: false
+    t.integer  "comments_count", default: 0, null: false
+    t.integer  "votes_count",    default: 0, null: false
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
@@ -30,10 +32,11 @@ ActiveRecord::Schema.define(version: 20140131102843) do
   add_index "answers", ["votes_total"], name: "index_answers_on_votes_total", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string   "name",                    null: false
+    t.string   "name",                         null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "tags",       default: [],              array: true
+    t.string   "tags",            default: [],              array: true
+    t.integer  "questions_count", default: 0,  null: false
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
@@ -49,6 +52,19 @@ ActiveRecord::Schema.define(version: 20140131102843) do
 
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+
+  create_table "evaluations", force: true do |t|
+    t.integer  "evaluator_id",   null: false
+    t.integer  "evaluable_id",   null: false
+    t.string   "evaluable_type", null: false
+    t.text     "text"
+    t.integer  "value",          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "evaluations", ["evaluable_id", "evaluable_type"], name: "index_evaluations_on_evaluable_id_and_evaluable_type", using: :btree
+  add_index "evaluations", ["evaluator_id"], name: "index_evaluations_on_evaluator_id", using: :btree
 
   create_table "events", force: true do |t|
     t.json     "data",       null: false
@@ -101,14 +117,19 @@ ActiveRecord::Schema.define(version: 20140131102843) do
   add_index "labels", ["value"], name: "index_labels_on_value", unique: true, using: :btree
 
   create_table "questions", force: true do |t|
-    t.integer  "author_id",                   null: false
-    t.integer  "category_id",                 null: false
-    t.string   "title",                       null: false
-    t.text     "text",                        null: false
+    t.integer  "author_id",                       null: false
+    t.integer  "category_id",                     null: false
+    t.string   "title",                           null: false
+    t.text     "text",                            null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total", default: 0,     null: false
-    t.boolean  "anonymous",   default: false, null: false
+    t.integer  "votes_total",     default: 0,     null: false
+    t.boolean  "anonymous",       default: false, null: false
+    t.integer  "answers_count",   default: 0,     null: false
+    t.integer  "comments_count",  default: 0,     null: false
+    t.integer  "favorites_count", default: 0,     null: false
+    t.integer  "views_count",     default: 0,     null: false
+    t.integer  "votes_count",     default: 0,     null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
@@ -180,6 +201,12 @@ ActiveRecord::Schema.define(version: 20140131102843) do
     t.string   "tumblr"
     t.string   "youtube"
     t.string   "role",                   default: "student", null: false
+    t.integer  "answers_count",          default: 0,         null: false
+    t.integer  "comments_count",         default: 0,         null: false
+    t.integer  "favorites_count",        default: 0,         null: false
+    t.integer  "questions_count",        default: 0,         null: false
+    t.integer  "views_count",            default: 0,         null: false
+    t.integer  "votes_count",            default: 0,         null: false
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree

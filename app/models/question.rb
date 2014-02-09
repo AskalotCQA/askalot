@@ -8,8 +8,8 @@ class Question < ActiveRecord::Base
 
   before_save :add_category_tags
 
-  belongs_to :author, class_name: :User
-  belongs_to :category
+  belongs_to :author, class_name: :User, counter_cache: true
+  belongs_to :category, counter_cache: true
 
   has_many :answers
   has_many :labels, through: :labelings, through: :answers
