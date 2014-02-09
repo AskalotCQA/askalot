@@ -3,9 +3,7 @@
 <section id="question">
   <div class="row">
     <div class="col-md-2">
-      <section>
-        <%= render 'users/square', user: @question.anonymous ? :anonymous : @author %>
-      </section>
+      <%= render 'users/square', user: @question.anonymous ? :anonymous : @author %>
     </div>
 
     <div class="col-md-8">
@@ -32,10 +30,8 @@
     </div>
 
     <div class="col-md-2">
-      <section>
-        <%= render 'questions/voting', question: @question %>
-        <%= render 'questions/favoring', question: @question %>
-      </section>
+      <%= render 'questions/voting', question: @question %>
+      <%= render 'questions/favoring', question: @question %>
     </div>
   </div>
 </section>
