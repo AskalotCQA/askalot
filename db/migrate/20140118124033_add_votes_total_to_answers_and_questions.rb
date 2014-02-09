@@ -1,4 +1,4 @@
-class AddVotesCountToAnswersAndQuestions < ActiveRecord::Migration
+class AddVotesTotalToAnswersAndQuestions < ActiveRecord::Migration
   def change
     add_column :answers,   :votes_total, :integer, null: false, default: 0
     add_column :questions, :votes_total, :integer, null: false, default: 0
