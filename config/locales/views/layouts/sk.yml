@@ -21,6 +21,6 @@ sk:
   footer:
     about: 'O projekte'
     authors: 'Autori'
-    documentation: 'Dokumentácia'
     contact: 'Kontakt'
-
+    documentation: 'Dokumentácia'
+    repository: 'Zdrojový kód'
