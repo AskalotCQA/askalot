@@ -6,4 +6,8 @@ module Evaluable
 
     scope :evaluated, lambda { joins(:evaluations).uniq }
   end
+
+  def evaluated_by?(user)
+    evaluations.exists?(evaluator: user)
+  end
 end
