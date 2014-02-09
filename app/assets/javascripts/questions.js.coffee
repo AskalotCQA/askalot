@@ -10,6 +10,18 @@ $(document).ready ->
 
     items = $(this).attr('data-id').split(',')
 
-    select = Select.of('#question_tag')
+    select = Select.of('#question_tags')
 
     select.addItem id: item, text: item for item in items
+
+  select = new Select.of('#question_category_id')
+  select.on 'change', (event) ->
+    value = event.added.text
+
+    html = ""
+    tags = JSON.parse(select.attr('data-values'))
+
+    html += "<li class=\"label label-info\">#{tag}</li>" for tag in tags[value]
+
+    $('ul#category-tags').parent().removeClass('hidden')
+    $('ul#category-tags').html(html)

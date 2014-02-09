@@ -17,7 +17,7 @@
 #= require i18n
 #= require i18n/translations
 #
-#= require_tree ./core
+#= require_tree ./lib
 #
 #= require select2
 #= require jquery-tablesorter

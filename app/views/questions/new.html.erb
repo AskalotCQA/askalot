@@ -8,7 +8,7 @@
       <%= form_for @question do |f| %>
         <div class="form-group">
           <%= f.label :category_id %>
-          <%= f.collection_select :category_id, Category.all, :id, :name, { include_blank: true }, { class: :'form-control', data: { as: :select2 }} %>
+          <%= f.category_collection_select :category_id %>
         </div>
         <div class="form-group">
           <%= f.label :title %>
@@ -21,6 +21,10 @@
         <div class="form-group">
           <%= f.label :tag_list %>
           <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
+          <div class="help-block hidden">
+            <p>K otázke budu automaticky pridané tagy: </p>
+            <ul id="category-tags" class="nav nav-labels"></ul>
+          </div>
         </div>
         <div class="checkbox">
           <%= f.check_box :anonymous %>
