@@ -22,6 +22,8 @@
           <%= yield %>
         <% end %>
       </div>
+    <% else %>
+      <%= yield %>
     <% end %>
     <%= render 'layouts/footer' %>
     <%= render 'shared/fixes' %>
