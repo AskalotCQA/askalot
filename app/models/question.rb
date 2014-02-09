@@ -30,9 +30,7 @@ class Question < ActiveRecord::Base
     best  = answers.labeled_with(:best).first
     other = answers.order(votes_total: :desc, created_at: :desc)
 
-    return other unless best
-
-    [best] + other.where('id != ?', best.id)
+    best ? [best] + other.where('id != ?', best.id) : other
   end
 
   def labels
@@ -40,11 +38,7 @@ class Question < ActiveRecord::Base
   end
 
   def tags_with_counts
-    tags.each do |tag|
-      tag.count = Question.tagged_with(tag.name).count
-    end
-
-    tags
+    tags.each { |tag| tag.count = Question.tagged_with(tag.name).count }
   end
 
   private
