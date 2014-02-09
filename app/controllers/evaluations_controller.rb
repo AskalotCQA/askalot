@@ -4,6 +4,8 @@ class EvaluationsController < ApplicationController
   def create
     @evaluable = find_evaluable
 
+    authorize! :evaluate, @evaluable
+
     @question = @evaluable.is_a?(Question) ? @evaluable : @evaluable.question
     @author   = @question.author
     @labels   = @question.labels

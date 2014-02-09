@@ -43,8 +43,6 @@ class AnswersController < ApplicationController
       authorize! :edit, @question
 
       fail if @answer.labelings.by(current_user).with(:best).exists?
-    when :verified
-      authorize! :verify, @answer
     else
       fail
     end
