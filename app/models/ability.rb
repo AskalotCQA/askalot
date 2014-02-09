@@ -15,7 +15,7 @@ class Ability
 
     if user.role? :teacher
       can :observe, :all
-      can :evaluate, Answer
+      can :evaluate, [Question, Answer]
     end
 
     if user.role? :administrator
