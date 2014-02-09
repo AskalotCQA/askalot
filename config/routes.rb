@@ -20,6 +20,12 @@ NaRuby::Application.routes.draw do
     get :comment, on: :member
   end
 
+  concern :evaluable do
+    resources :evaluations, only: [:create]
+
+    get :evaluation, on: :member
+  end
+
   concern :votable do
     get :voteup, on: :member
     get :votedown, on: :member
@@ -31,6 +37,7 @@ NaRuby::Application.routes.draw do
     get :favor, on: :member
 
     concerns :commetable
+    concerns :evaluable
     concerns :votable
   end
 
@@ -38,6 +45,7 @@ NaRuby::Application.routes.draw do
     get :label, on: :member
 
     concerns :commetable
+    concerns :evaluable
     concerns :votable
   end
 

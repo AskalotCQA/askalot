@@ -27,13 +27,8 @@
 
   <div class="answer-labeling-verified">
     <% if can? :verify, answer %>
-      <% if answer.labeled_by? current_user, :verified %>
-        <%= icon_link_to :'thumbs-o-up', nil, label_answer_path(answer, value: :verified), data: { remote: true }, class: :'answer-labeled-verified' %>
-      <% else %>
-        <%= icon_link_to :'thumbs-o-up', nil, label_answer_path(answer, value: :verified), tooltip_attributes(t('answer.label.verify'), placement: :right).deep_merge(data: { remote: true }) %>
-      <% end %>
-    <% elsif answer.verified? %>
-      <span><%= tooltip_icon_tag :'thumbs-o-up', t('answer.verified'), placement: :right %></span>
+      <%= render 'evaluations/form', evaluable: answer%>
     <% end %>
   </div>
+
 </div>
