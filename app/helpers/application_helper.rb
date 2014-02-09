@@ -15,7 +15,7 @@ module ApplicationHelper
   end
 
   def use_container?
-    params[:controller] != 'errors'
+    !controller.is_a?(ErrorsController)
   end
 
   def use_narrower_layout?
