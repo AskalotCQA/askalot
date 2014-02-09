@@ -1,5 +1,4 @@
 $(document).ready ->
-  <% @answers = @question.answers_ordered %>
-  $('#answers').replaceWith("<%= escape_javascript render('questions/answers', answers: @answers) %>")
+  $('#question-answers').replaceWith("<%= escape_javascript render('questions/answers', answers: @question.answers_ordered) %>")
 
   fixes()

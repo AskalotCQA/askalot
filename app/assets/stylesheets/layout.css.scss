@@ -20,14 +20,12 @@ body {
   margin-top: $navbar-height;
 }
 
-section {
-  &:first-child {
-    padding-top: $navbar-height;
-  }
+.container > section:first-child {
+  padding-top: $navbar-height;
+}
 
-  & + section {
-    padding-top: 0.5 * $navbar-height;
-  }
+section + section {
+  padding-top: 0.5 * $navbar-height;
 }
 
 // helpers

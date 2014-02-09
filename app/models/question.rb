@@ -26,6 +26,15 @@ class Question < ActiveRecord::Base
 
   scope :by, lambda { |user| where(author: user) }
 
+  def answers_ordered
+    best  = answers.labeled_with(:best).first
+    other = answers.order(votes_total: :desc, created_at: :desc)
+
+    return other unless best
+
+    [best] + other.where('id != ?', best.id)
+  end
+
   def labels
     [category] + tags_with_counts
   end
@@ -36,14 +45,6 @@ class Question < ActiveRecord::Base
     end
 
     tags
-  end
-
-  def answers_ordered
-    best_answer = answers.labeled_with :best
-
-    return best_answer + answers.order('votes_total desc, created_at desc').where('id != ?', best_answer[0].id) if !best_answer.empty?  
-
-    answers.order('votes_total desc, created_at desc')
   end
 
   private

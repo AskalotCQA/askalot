@@ -1,7 +1,7 @@
 <% if flash.any? %>
-  <div class="row">
-    <div class="col-md-12">
-      <section>
+  <section id="flash">
+    <div class="row">
+      <div class="col-md-12">
         <% flash.each do |type, messages| %>
           <% Array.wrap(messages).each do |message| %>
             <div class="alert alert-<%= flash_type_to_class type %> alert-dismissable">
@@ -10,7 +10,7 @@
             </div>
           <% end %>
         <% end %>
-      </section>
+      </div>
     </div>
-  </div>
+  </section>
 <% end %>

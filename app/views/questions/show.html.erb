@@ -1,44 +1,49 @@
 <% provide :title, @question.title %>
 
-<div class="row">
-  <div class="col-md-2">
-    <section>
-      <%= render 'users/square', user: @question.anonymous ? :anonymous : @author %>
-    </section>
+<section id="question">
+  <div class="row">
+    <div class="col-md-2">
+      <section>
+        <%= render 'users/square', user: @question.anonymous ? :anonymous : @author %>
+      </section>
+    </div>
+
+    <div class="col-md-8">
+      <section id="question-title">
+        <h1>
+          <%= @question.title %>
+          <br/>
+          <small><%= question_creation_time @question %></small>
+        </h1>
+
+        <%= render 'questions/labels', labels: @labels %>
+      </section>
+
+      <section id="question-content">
+        <p>
+          <%= @question.text %>
+        </p>
+      </section>
+
+      <section id="question-comments">
+        <%= render 'questions/comments', question: @question %>
+        <%= render 'comments/form', commentable: @question %>
+      </section>
+    </div>
+
+    <div class="col-md-2">
+      <section>
+        <%= render 'questions/voting', question: @question %>
+        <%= render 'questions/favoring', question: @question %>
+      </section>
+    </div>
   </div>
+</section>
 
-  <div class="col-md-8">
-    <section id="question-title">
-      <h1>
-        <%= @question.title %>
-        <br/>
-        <small><%= question_creation_time @question %></small>
-      </h1>
-
-      <%= render 'questions/labels', labels: @labels %>
-    </section>
-
-    <section id="question-content">
-      <p>
-        <%= @question.text %>
-      </p>
-    </section>
-
-    <section id="question-comments">
-      <%= render 'questions/comments', question: @question %>
-      <%= render 'comments/form', commentable: @question %>
-    </section>
-  </div>
-
-  <div class="col-md-2">
-    <section>
-      <%= render 'questions/voting', question: @question %>
-      <%= render 'questions/favoring', question: @question %>
-    </section>
-  </div>
-</div>
-
-<div id="answers">
+<section id="question-answers">
   <%= render 'questions/answers', answers: @answers %>
-</div>
-<%= render 'answers/form', question: @question, answer: @answer %>
+</section>
+
+<section id="question-new-answer">
+  <%= render 'answers/form', question: @question, answer: @answer %>
+</section>

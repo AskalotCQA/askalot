@@ -1,15 +1,13 @@
 <div class="row">
   <div class="col-md-offset-2 col-md-8">
-    <section id="question-answers">
-      <h2>
-        <%= t 'count_x.answer', count: answers.size %>
-      </h2>
-    </section>
+    <h2>
+      <%= t 'count_x.answer', count: answers.size %>
+    </h2>
   </div>
   <div class="col-md-2">
-    <section class="text-center">
+    <div class="text-center">
       <%= icon_link_to :plus, t('answer.new.action'), '#new_answer', id: :'new-answer', class: 'btn btn-success' %>
-    </section>
+    </div>
   </div>
 </div>
 
