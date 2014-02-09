@@ -24,11 +24,4 @@
       <% end %>
     </div>
   <% end %>
-
-  <div class="answer-labeling-verified">
-    <% if can? :verify, answer %>
-      <%= render 'evaluations/form', evaluable: answer%>
-    <% end %>
-  </div>
-
 </div>

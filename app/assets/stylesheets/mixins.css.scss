@@ -47,5 +47,18 @@
 
   a {
     display: inline-block;
+    cursor: pointer;
+  }
+}
+
+@mixin block-evaluating($class) {
+  @include block-voting;
+
+  a {
+    @include action-coloring($gray-light, $brand-warning);
+  }
+
+  a.#{$class}-evaluated {
+    @include action-coloring($brand-warning, $gray-light);
   }
 }

@@ -79,6 +79,10 @@
   }
 }
 
+.question-evaluating {
+  @include block-evaluating(question);
+}
+
 .question-answers {
   & > li + li {
     margin-top: 20px;

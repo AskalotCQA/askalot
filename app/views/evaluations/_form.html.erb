@@ -1,35 +1,46 @@
-<a data-toggle="modal" data-target="#<%= identify evaluable, :evaluation %>">
-  <i class="fa fa-trophy"></i>
-</a>
+<% if evaluable.evaluated_by? current_user %>
+  <a class="<%= model %>-evaluated" data-toggle="modal" data-target="#<%= identify evaluable, :evaluation %>">
+    <%= icon_tag :magic %>
+  </a>
+<% else %>
+  <a data-toggle="modal" data-target="#<%= identify evaluable, :evaluation %>">
+    <%= icon_tag :magic %>
+  </a>
+<% end %>
 
-<div id="<%= identify evaluable, :evaluation %>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-  <%= form_for [evaluable, Evaluation.new], html: {id: nil, class: :'new-evaluation'} do |f| %>
+<!-- TODO(zbell) mv & enable routing to be able to udate existing evaluations -->
+<%# evaluation = evaluable.evaluations.where(evaluator: current_user).first || Evaluation.new %>
+<% evaluation = Evaluation.new %>
+
+<div id="<%= identify evaluable, :evaluation %>" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
+  <%= form_for [evaluable, evaluation], html: {id: nil, class: :'new-evaluation'} do |f| %>
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="ModalLabel"><%= t 'evaluation.create.title' %></h4>
+          <%= close_link_to_modal %>
+          <h4 class="modal-title"><%= t 'evaluation.create.title' %></h4>
         </div>
         <div class="modal-body">
           <div class="form-group">
             <label class="radio-inline">
-              <%= f.radio_button :value, -2%> <%= t 'evaluation.create.degrees.worst' %>
+              <%= f.radio_button :value, -2 %> <%= t 'evaluation.create.degrees.worst' %>
             </label>
             <label class="radio-inline">
-              <%= f.radio_button :value, -1%> <%= t 'evaluation.create.degrees.bad' %>
+              <%= f.radio_button :value, -1 %> <%= t 'evaluation.create.degrees.bad' %>
             </label>
             <label class="radio-inline">
-              <%= f.radio_button :value,  0%> <%= t 'evaluation.create.degrees.ok' %>
+              <%= f.radio_button :value,  0 %> <%= t 'evaluation.create.degrees.ok' %>
             </label>
             <label class="radio-inline">
-              <%= f.radio_button :value,  1%> <%= t 'evaluation.create.degrees.good' %>
+              <%= f.radio_button :value, +1 %> <%= t 'evaluation.create.degrees.good' %>
             </label>
             <label class="radio-inline">
-              <%= f.radio_button :value,  2%> <%= t 'evaluation.create.degrees.best' %>
+              <%= f.radio_button :value, +2 %> <%= t 'evaluation.create.degrees.best' %>
             </label>
           </div>
           <div class="form-group">
-            <%= f.text_area :text, id: nil, class: :'form-control', rows: 3 %>
             <span class="help-block"><%= t 'evaluation.create.help' %></span>
+            <%= f.text_area :text, id: nil, class: :'form-control', rows: 3 %>
           </div>
         </div>
         <div class="modal-footer">

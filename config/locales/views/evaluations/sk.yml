@@ -1,11 +1,11 @@
 sk:
   evaluation:
     create:
-      title: 'Vloženie hodnotenia'
+      title: 'Ohodnotenie'
       success: 'Vaše hodnotenie bolo úspešne pridané.'
       cancel: 'Zrušiť'
       save: 'Ohodnotiť'
-      help: 'Poznámky k zadanému hodnoteniu'
+      help: 'Komentár k hodnoteniu'
 
       degrees:
         worst: 'Veľmi zle'

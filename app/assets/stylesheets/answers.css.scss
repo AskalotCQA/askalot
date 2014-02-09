@@ -36,6 +36,10 @@
   }
 }
 
+.answer-evaluating {
+  @include block-evaluating(answer);
+}
+
 .answer-comments {
   @include block-listing;
 }

@@ -1,5 +1,5 @@
-<div id="<%= identify evaluable, :evaluating %>" class="question-evaluating">
+<div id="<%= identify evaluable, :evaluating %>" class="<%= model %>-evaluating">
   <% if can? :evaluate, evaluable %>
-    <%= render 'evaluations/form', evaluable: evaluable %>
+    <%= render 'evaluations/form', model: model, evaluable: evaluable %>
   <% end %>
 </div>
