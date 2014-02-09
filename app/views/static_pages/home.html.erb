@@ -38,8 +38,8 @@
 
     <div class="col-md-4">
       <div class="featured">
-        <h2><%= link_to t('home.featured.answered'), questions_path(tab: :'questions-answered') %></h2>
-        <%= render 'questions', questions: @answered %>
+        <h2><%= link_to t('home.featured.solved'), questions_path(tab: :'questions-solved') %></h2>
+        <%= render 'questions', questions: @solved %>
       </div>
     </div>
 

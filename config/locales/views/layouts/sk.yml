@@ -15,8 +15,8 @@ sk:
 
     featured:
       new: 'Nové otázky'
+      solved: 'Vyriešené otázky'
       favored: 'Obľúbené otázky'
-      answered: 'Odpovedané otázky'
 
   footer:
     about: 'O projekte'
