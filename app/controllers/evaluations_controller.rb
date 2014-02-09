@@ -5,11 +5,11 @@ class EvaluationsController < ApplicationController
     @evaluable = find_evaluable
 
     @question = @evaluable.is_a?(Question) ? @evaluable : @evaluable.question
-    @author = @question.author
-    @labels = @question.labels
-    @answers = @question.answers
+    @author   = @question.author
+    @labels   = @question.labels
+    @answers  = @question.answers
 
-    @answer = Answer.new(question: @question)
+    @answer     = Answer.new(question: @question)
     @evaluation = Evaluation.new(evaluation_params)
 
     if @evaluation.save
