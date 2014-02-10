@@ -26,7 +26,7 @@ describe Slido::Scraper do
     stub_const('Scout::Downloader', downloader)
     stub_const('Slido::Wall::Parser', wall_parser)
     stub_const('Slido::Questions::Parser', questions_parser)
-    stub_const('Builder', builder)
+    stub_const('Core::Builder', builder)
 
     Slido::Scraper.run(category)
   end
