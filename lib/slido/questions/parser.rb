@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module Slido::Questions
   class Parser
     def self.parse(json)
