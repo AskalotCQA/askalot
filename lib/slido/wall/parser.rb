@@ -1,29 +1,3 @@
-<<<<<<< HEAD
-module Slido
-  module Wall
-    class Parser
-      def self.parse(html)
-        document = Nokogiri::HTML(html)
-        result   = OpenStruct.new
-
-        context = document.css('.wall-base #content script:first').text
-
-        _, json = *context.match(/event:\s+(?<json>.*}),\s+cols:/)
-
-        data = JSON.parse(json, symbolize_names: true)
-
-        result.uuid       = data[:event_id].to_i
-        result.identifier = data[:hash]
-        result.name       = data[:name]
-        result.starts_at  = Time.parse(data[:date_from])
-        result.ends_at    = Time.parse(data[:date_to])
-        result.url        = "#{Slido.base}/#{result.identifier}"
-
-        result
-      end
-=======
-require 'ostruct'
-
 module Slido::Wall
   class Parser
     def self.parse(html)
@@ -43,7 +17,6 @@ module Slido::Wall
       result.url       = "https://#{document.css('#wall .major span.link').text}"
 
       result
->>>>>>> Add Slido wall parser
     end
   end
 end
