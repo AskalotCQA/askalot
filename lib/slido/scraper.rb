@@ -17,14 +17,14 @@ module Slido
 
       attributes = event.to_h.merge(category_id: category.id)
 
-      event = Builder.create_slido_event_by(:uuid, attributes)
+      event = Core::Builder.create_slido_event_by(:uuid, attributes)
 
       event.update_attributes!(attributes)
 
       questions.each do |question|
         attributes = question.to_h.merge(category_id: category.id)
 
-        question = Builder.create_question_by(:slido_uuid, attributes)
+        question = Core::Builder.create_question_by(:slido_uuid, attributes)
 
         question.update_attributes!(attributes)
       end
