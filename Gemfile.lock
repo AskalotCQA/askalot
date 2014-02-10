@@ -1,3 +1,14 @@
+GIT
+  remote: git://github.com/smolnar/scout.git
+  revision: 8e6ada056a26d8a2a1ce29b061be846c64e4d6f3
+  branch: master
+  specs:
+    scout (0.3.0)
+      activesupport (~> 4.0.0)
+      curb (~> 0.8.4)
+      sidekiq (~> 2.15.2)
+      squire (>= 1.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -65,6 +76,8 @@ GEM
       execjs
     coffee-script-source (1.6.3)
     columnize (0.3.6)
+    connection_pool (1.2.0)
+    curb (0.8.5)
     database_cleaner (1.2.0)
     debugger (1.6.3)
       columnize (>= 0.3.1)
@@ -193,6 +206,9 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (3.0.7)
+    redis-namespace (1.4.1)
+      redis (~> 3.0.4)
     ref (1.0.5)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
@@ -230,6 +246,12 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0.0)
       websocket (~> 1.0.4)
+    sidekiq (2.15.2)
+      celluloid (>= 0.15.2)
+      connection_pool (>= 1.0.0)
+      json
+      redis (>= 3.0.4)
+      redis-namespace (>= 1.3.1)
     slop (3.4.7)
     sprockets (2.10.1)
       hike (~> 1.2)
@@ -299,6 +321,7 @@ DEPENDENCIES
   launchy
   murmurhash3
   net-ldap
+  nokogiri
   pg
   pry
   pry-debugger
@@ -309,6 +332,7 @@ DEPENDENCIES
   rspec-rails (~> 2.0)
   rvm-capistrano
   sass-rails (~> 4.0.0)
+  scout!
   sdoc
   select2-rails (~> 3.4.9)
   selenium-webdriver
