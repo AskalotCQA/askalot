@@ -17,10 +17,12 @@ class Question < ActiveRecord::Base
   validates :category,  presence: true
   validates :title,     presence: true, length: { minimum: 2, maximum: 250 }
   validates :text,      presence: true, length: { minimum: 2 }
-  #validates :anonymous, presence: true #TODO(zbell) Rasto: uncomment this when tests do not fail because of it
+  validates :anonymous, inclusion: { in: [true, false] }
 
   scope :answered, lambda { joins(:answers).uniq }
   scope :by,       lambda { |user| where(author: user) }
+
+  before_create :set_slido_author, if: :slido_uuid?
 
   def labels
     [category] + tags_with_counts
@@ -38,5 +40,9 @@ class Question < ActiveRecord::Base
 
   def add_category_tags
     self.tag_list += self.category.tags
+  end
+
+  def set_slido_author
+    self.author = User.find_by_login 'slido'
   end
 end
