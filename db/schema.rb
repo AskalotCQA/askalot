@@ -11,20 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140210161235) do
+=======
+ActiveRecord::Schema.define(version: 20140210085201) do
+>>>>>>> Add slido attributes
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "answers", force: true do |t|
-    t.integer  "author_id",                  null: false
-    t.integer  "question_id",                null: false
-    t.text     "text",                       null: false
+    t.integer  "author_id",               null: false
+    t.integer  "question_id",             null: false
+    t.text     "text",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total",    default: 0, null: false
-    t.integer  "comments_count", default: 0, null: false
-    t.integer  "votes_count",    default: 0, null: false
+    t.integer  "votes_total", default: 0, null: false
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
@@ -32,11 +34,15 @@ ActiveRecord::Schema.define(version: 20140210161235) do
   add_index "answers", ["votes_total"], name: "index_answers_on_votes_total", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string   "name",                         null: false
+    t.string   "name",                        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+<<<<<<< HEAD
     t.string   "tags",            default: [],              array: true
     t.integer  "questions_count", default: 0,  null: false
+=======
+    t.string   "tags",           default: [],              array: true
+>>>>>>> Add slido attributes
     t.string   "slido_username"
   end
 
@@ -54,19 +60,6 @@ ActiveRecord::Schema.define(version: 20140210161235) do
 
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
-
-  create_table "evaluations", force: true do |t|
-    t.integer  "evaluator_id",   null: false
-    t.integer  "evaluable_id",   null: false
-    t.string   "evaluable_type", null: false
-    t.text     "text"
-    t.integer  "value",          null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "evaluations", ["evaluable_id", "evaluable_type"], name: "index_evaluations_on_evaluable_id_and_evaluable_type", using: :btree
-  add_index "evaluations", ["evaluator_id"], name: "index_evaluations_on_evaluator_id", using: :btree
 
   create_table "events", force: true do |t|
     t.json     "data",       null: false
@@ -127,11 +120,14 @@ ActiveRecord::Schema.define(version: 20140210161235) do
     t.datetime "updated_at"
     t.integer  "votes_total",      default: 0,     null: false
     t.boolean  "anonymous",        default: false, null: false
+<<<<<<< HEAD
     t.integer  "answers_count",    default: 0,     null: false
     t.integer  "comments_count",   default: 0,     null: false
     t.integer  "favorites_count",  default: 0,     null: false
     t.integer  "views_count",      default: 0,     null: false
     t.integer  "votes_count",      default: 0,     null: false
+=======
+>>>>>>> Add slido attributes
     t.integer  "slido_uuid"
     t.integer  "slido_event_uuid"
   end
@@ -147,17 +143,26 @@ ActiveRecord::Schema.define(version: 20140210161235) do
     t.integer  "uuid",        null: false
     t.string   "identifier",  null: false
     t.string   "name",        null: false
+<<<<<<< HEAD
     t.string   "url",         null: false
     t.datetime "started_at",  null: false
     t.datetime "ended_at",    null: false
+=======
+    t.datetime "starts_at",   null: false
+    t.datetime "ends_at",     null: false
+    t.string   "url",         null: false
+>>>>>>> Add slido attributes
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "slido_events", ["category_id"], name: "index_slido_events_on_category_id", using: :btree
+<<<<<<< HEAD
   add_index "slido_events", ["ended_at"], name: "index_slido_events_on_ended_at", using: :btree
   add_index "slido_events", ["started_at"], name: "index_slido_events_on_started_at", using: :btree
   add_index "slido_events", ["uuid"], name: "index_slido_events_on_uuid", unique: true, using: :btree
+=======
+>>>>>>> Add slido attributes
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id",        null: false
@@ -223,12 +228,6 @@ ActiveRecord::Schema.define(version: 20140210161235) do
     t.string   "tumblr"
     t.string   "youtube"
     t.string   "role",                   default: "student", null: false
-    t.integer  "answers_count",          default: 0,         null: false
-    t.integer  "comments_count",         default: 0,         null: false
-    t.integer  "favorites_count",        default: 0,         null: false
-    t.integer  "questions_count",        default: 0,         null: false
-    t.integer  "views_count",            default: 0,         null: false
-    t.integer  "votes_count",            default: 0,         null: false
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree
