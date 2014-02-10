@@ -4,10 +4,15 @@ FactoryGirl.define do
   factory :question do
     sequence(:title) { |n| "Title #{n}" }
 
-    text 'Lorem ipsum'
+    text      'Lorem ipsum'
+    anonymous false
 
     association :category
     association :author
+
+    trait :anonymous do
+      anonymous true
+    end
 
     trait :with_tags do
       sequence(:tag_list) { |n| "tag-#{n}" }
@@ -17,6 +22,11 @@ FactoryGirl.define do
       after :create do |question|
         3.times { create :answer, question: question }
       end
+    end
+
+    trait :from_slido do
+      sequence(:slido_uuid)       { |n| n }
+      sequence(:slido_event_uuid) { |n| n + 2 }
     end
   end
 end
