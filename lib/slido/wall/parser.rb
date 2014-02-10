@@ -1,5 +1,3 @@
-require 'ostruct'
-
 module Slido::Wall
   class Parser
     def self.parse(html)
