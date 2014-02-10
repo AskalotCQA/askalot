@@ -5,6 +5,6 @@ class SlidoEvent < ActiveRecord::Base
   validates :identifier, presence: true
   validates :name,       presence: true
   validates :url,        presence: true
-  validates :started_at, presence: true
-  validates :ended_at,   presence: true
+  validates :starts_at,  presence: true
+  validates :ends_at,    presence: true
 end
