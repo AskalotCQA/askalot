@@ -9,7 +9,7 @@ module Core
         model_name = model_name.classify
         model      = model_name.constantize rescue nil
 
-        raise ArgumentError.new("Cannot find model '#{model_name}'.") unless model
+        raise ArgumentError.new("Cannot find model `#{model_name}`.") unless model
 
         keys       = args[0..-2]
         attributes = args.last
