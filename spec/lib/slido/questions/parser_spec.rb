@@ -12,7 +12,9 @@ describe Slido::Questions::Parser do
 
     question = questions.first
 
-    expect(question.title).to eql('What is the purpose of Life?')
-    expect(question.text).to  eql('What is the purpose of Life?')
+    expect(question.title).to             eql('What is the purpose of Life?')
+    expect(question.text).to              eql('What is the purpose of Life?')
+    expect(question.slido_event_uuid).to  eql(1257)
+    expect(question.slido_uuid).to        eql(15807)
   end
 end
