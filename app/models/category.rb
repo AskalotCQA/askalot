@@ -8,6 +8,6 @@ class Category < ActiveRecord::Base
   scope :with_slido, -> { where('slido_username is not null') }
 
   def count
-    questions.size
+    questions.reload.size
   end
 end
