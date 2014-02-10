@@ -35,6 +35,9 @@ gem 'i18n-js'
 gem 'kaminari',           '~> 0.14.1'
 gem 'kaminari-bootstrap', '~> 0.1.3'
 
+# scheduling
+gem 'whenever'
+
 # utilities
 gem 'actionview-encoded_mail_to'
 gem 'forgery'
@@ -49,16 +52,19 @@ gem 'scout', github: 'smolnar/scout', branch: :master
 gem 'garelic'
 #gem 'newrelic_rpm'
 
+# documentation
 group :doc do
   gem 'sdoc', require: false
 end
 
+# development
 group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
   gem 'rvm-capistrano'
 end
 
+# development & test
 group :development, :test do
   # debugging
   gem 'pry'
@@ -84,3 +90,15 @@ group :production do
   gem 'unicorn'
   gem 'rack-timeout'
 end
+
+# Use ActiveModel has_secure_password
+# gem 'bcrypt-ruby', '~> 3.0.0'
+
+# Use unicorn as the app server
+# gem 'unicorn'
+
+# Use Capistrano for deployment
+# gem 'capistrano', group: :development
+
+# Use debugger
+# gem 'debugger', group: [:development, :test]

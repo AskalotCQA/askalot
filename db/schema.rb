@@ -30,10 +30,11 @@ ActiveRecord::Schema.define(version: 20140210085201) do
   add_index "answers", ["votes_total"], name: "index_answers_on_votes_total", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string   "name",                    null: false
+    t.string   "name",                        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "tags",       default: [],              array: true
+    t.string   "tags",           default: [],              array: true
+    t.string   "slido_username"
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
@@ -101,14 +102,16 @@ ActiveRecord::Schema.define(version: 20140210085201) do
   add_index "labels", ["value"], name: "index_labels_on_value", unique: true, using: :btree
 
   create_table "questions", force: true do |t|
-    t.integer  "author_id",                   null: false
-    t.integer  "category_id",                 null: false
-    t.string   "title",                       null: false
-    t.text     "text",                        null: false
+    t.integer  "author_id",                        null: false
+    t.integer  "category_id",                      null: false
+    t.string   "title",                            null: false
+    t.text     "text",                             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total", default: 0,     null: false
-    t.boolean  "anonymous",   default: false, null: false
+    t.integer  "votes_total",      default: 0,     null: false
+    t.boolean  "anonymous",        default: false, null: false
+    t.integer  "slido_uuid"
+    t.integer  "slido_event_uuid"
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree

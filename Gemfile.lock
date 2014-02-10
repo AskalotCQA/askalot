@@ -67,6 +67,7 @@ GEM
       timers (~> 1.1.0)
     childprocess (0.3.9)
       ffi (~> 1.0, >= 1.0.11)
+    chronic (0.10.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -292,6 +293,9 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     websocket (1.0.7)
+    whenever (0.9.0)
+      activesupport (>= 2.3.4)
+      chronic (>= 0.6.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -346,3 +350,4 @@ DEPENDENCIES
   therubyracer
   uglifier (>= 1.3.0)
   unicorn
+  whenever
