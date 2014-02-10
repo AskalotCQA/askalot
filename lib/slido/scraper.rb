@@ -1,6 +1,8 @@
 module Slido
   class Scraper
-    def self.run(username, options = {})
+    def self.run(category, options = {})
+      username = category.slido_username
+
       uri = "#{Slido.base}/#{username}"
 
       response = Scout::Downloader.download(uri, with_response: true)
@@ -13,14 +15,18 @@ module Slido
       content = Scout::Downloader.download("#{uri}/wall")
       event   = Slido::Wall::Parser.parse(content)
 
-      category = Category.find_by slido_username: username
+      attributes = event.to_h.merge(category_id: category.id)
 
-      SlidoEvent.create!(event.to_h)
+      event = Builder.create_slido_event_by(:uuid, attributes)
+
+      event.update_attributes!(attributes)
 
       questions.each do |question|
         attributes = question.to_h.merge(category_id: category.id)
 
-        Question.create!(attributes)
+        question = Builder.create_question_by(:slido_uuid, attributes)
+
+        question.update_attributes!(attributes)
       end
     end
   end
