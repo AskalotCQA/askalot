@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131102843) do
+ActiveRecord::Schema.define(version: 20140210085201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,10 +30,11 @@ ActiveRecord::Schema.define(version: 20140131102843) do
   add_index "answers", ["votes_total"], name: "index_answers_on_votes_total", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string   "name",                    null: false
+    t.string   "name",                        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "tags",       default: [],              array: true
+    t.string   "tags",           default: [],              array: true
+    t.string   "slido_username"
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
@@ -101,20 +102,36 @@ ActiveRecord::Schema.define(version: 20140131102843) do
   add_index "labels", ["value"], name: "index_labels_on_value", unique: true, using: :btree
 
   create_table "questions", force: true do |t|
-    t.integer  "author_id",                   null: false
-    t.integer  "category_id",                 null: false
-    t.string   "title",                       null: false
-    t.text     "text",                        null: false
+    t.integer  "author_id",                        null: false
+    t.integer  "category_id",                      null: false
+    t.string   "title",                            null: false
+    t.text     "text",                             null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total", default: 0,     null: false
-    t.boolean  "anonymous",   default: false, null: false
+    t.integer  "votes_total",      default: 0,     null: false
+    t.boolean  "anonymous",        default: false, null: false
+    t.integer  "slido_uuid"
+    t.integer  "slido_event_uuid"
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
   add_index "questions", ["votes_total"], name: "index_questions_on_votes_total", using: :btree
+
+  create_table "slido_events", force: true do |t|
+    t.integer  "category_id", null: false
+    t.integer  "uuid",        null: false
+    t.string   "identifier",  null: false
+    t.string   "name",        null: false
+    t.datetime "starts_at",   null: false
+    t.datetime "ends_at",     null: false
+    t.string   "url",         null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "slido_events", ["category_id"], name: "index_slido_events_on_category_id", using: :btree
 
   create_table "taggings", force: true do |t|
     t.integer  "tag_id",        null: false
