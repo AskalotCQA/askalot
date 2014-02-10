@@ -34,6 +34,9 @@ gem 'i18n-js'
 gem 'kaminari',           '~> 0.14.1'
 gem 'kaminari-bootstrap', '~> 0.1.3'
 
+# scheduling
+gem 'whenever'
+
 # utilities
 gem 'actionview-encoded_mail_to'
 gem 'forgery'
