@@ -9,7 +9,11 @@ module Core
         model_name = model_name.classify
         model      = model_name.constantize rescue nil
 
+<<<<<<< HEAD
         raise ArgumentError.new("Cannot find model '#{model_name}'.") unless model
+=======
+        raise ArgumentError.new("Cannot find model `#{model_name}`.") unless model
+>>>>>>> Add core utilities
 
         conditions = args.first
 
