@@ -7,5 +7,9 @@ FactoryGirl.define do
     trait :with_tags do
       sequence(:tags) { |n| ["category-#{n}"] }
     end
+
+    trait :with_slido do
+      slido_username 'doge'
+    end
   end
 end

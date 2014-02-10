@@ -36,4 +36,17 @@ describe Category do
       end
     end
   end
+
+  describe '.with_slido' do
+    it 'finds only categories with slido username' do
+      create :category
+
+      question = create :category, :with_slido
+
+      questions = Category.with_slido
+
+      expect(questions.size).to eql(1)
+      expect(questions).to      include(question)
+    end
+  end
 end
