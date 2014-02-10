@@ -10,7 +10,7 @@ module Slido::Wall
 
       data = JSON.parse(json, symbolize_names: true)
 
-      result.uuid      = data[:event_id]
+      result.uuid      = data[:hash]
       result.name      = data[:name]
       result.starts_at = Time.parse(data[:date_from])
       result.ends_at   = Time.parse(data[:date_to])
