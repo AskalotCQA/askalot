@@ -22,7 +22,7 @@ describe 'Show Questions', js: true do
     click_link 'Otázky'
 
     within '#questions-controls' do
-      click_link 'Nové'
+      click_link 'Aktuálne'
 
       wait_for_remote
     end

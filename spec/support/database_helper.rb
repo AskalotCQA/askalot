@@ -35,6 +35,8 @@ RSpec.configure do |config|
     path = example.metadata[:file_path]
 
     DatabaseCleaner.start if DatabaseHelper.clean_path?(path)
+
+    load Rails.root.join('db/seeds.rb')
   end
 
   config.after(:each) do

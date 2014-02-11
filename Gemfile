@@ -35,28 +35,36 @@ gem 'i18n-js'
 gem 'kaminari',           '~> 0.14.1'
 gem 'kaminari-bootstrap', '~> 0.1.3'
 
+# scheduling
+gem 'whenever'
+
 # utilities
 gem 'actionview-encoded_mail_to'
 gem 'forgery'
 gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
 gem 'symbolize'
+gem 'nokogiri'
+gem 'scout', github: 'smolnar/scout', branch: :master
 
 # monitoring
 #gem 'airbrake'
 gem 'garelic'
 #gem 'newrelic_rpm'
 
+# documentation
 group :doc do
   gem 'sdoc', require: false
 end
 
+# development
 group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
   gem 'rvm-capistrano'
 end
 
+# development & test
 group :development, :test do
   # debugging
   gem 'pry'

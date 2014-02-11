@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+slido = User.find_or_initialize_by(login: 'slido')
+
+slido.update_attributes(
+  email:   'automaton@sli.do',
+  password: SecureRandom.hex,
+  first:    'Slido',
+  role:     :student
+)
