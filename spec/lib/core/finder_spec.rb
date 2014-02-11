@@ -19,7 +19,7 @@ describe Core::Finder do
 
   context 'when model does not exists' do
     it 'raises an error' do
-      expect { subject.find_bogus_model_by(name: 'Peter') }.to raise_error(ArgumentError, 'Cannot find model `BogusModel`.')
+      expect { subject.find_bogus_model_by(name: 'Peter') }.to raise_error(ArgumentError, 'Cannot find model \'BogusModel\'.')
     end
   end
 end
