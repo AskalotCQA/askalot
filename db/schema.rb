@@ -148,8 +148,8 @@ ActiveRecord::Schema.define(version: 20140210161235) do
     t.string   "identifier",  null: false
     t.string   "name",        null: false
     t.string   "url",         null: false
-    t.datetime "starts_at",   null: false
-    t.datetime "ends_at",     null: false
+    t.datetime "started_at",  null: false
+    t.datetime "ended_at",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
