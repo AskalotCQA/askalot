@@ -81,10 +81,9 @@ describe 'Label Answer', js: true do
       login_as user
     end
 
-    it 'visits question with best and verified answer' do
+    it 'visits question with best answer' do
       answer.toggle_labeling_by! author,  :best
       answer.toggle_labeling_by! author,  :helpful
-      answer.toggle_labeling_by! teacher, :verified
 
       visit root_path
 
@@ -93,16 +92,13 @@ describe 'Label Answer', js: true do
 
       expect(page).to have_css("#answer-#{answer.id}-labeling .answer-labeling-best span")
       expect(page).not_to have_css("#answer-#{answer.id}-labeling .answer-labeling-helpful span")
-      expect(page).to have_css("#answer-#{answer.id}-labeling .answer-labeling-verified span")
 
       expect(page).not_to have_css("#answer-#{answer.id}-labeling .answer-labeling-best a")
       expect(page).not_to have_css("#answer-#{answer.id}-labeling .answer-labeling-helpful a")
-      expect(page).not_to have_css("#answer-#{answer.id}-labeling .answer-labeling-verified a")
     end
 
-    it 'visits question with helpful and verified answer' do
+    it 'visits question with helpful answer' do
       answer.toggle_labeling_by! author,  :helpful
-      answer.toggle_labeling_by! teacher, :verified
 
       visit root_path
 
@@ -111,47 +107,9 @@ describe 'Label Answer', js: true do
 
       expect(page).not_to have_css("#answer-#{answer.id}-labeling .answer-labeling-best span")
       expect(page).to have_css("#answer-#{answer.id}-labeling .answer-labeling-helpful span")
-      expect(page).to have_css("#answer-#{answer.id}-labeling .answer-labeling-verified span")
 
       expect(page).not_to have_css("#answer-#{answer.id}-labeling .answer-labeling-best a")
       expect(page).not_to have_css("#answer-#{answer.id}-labeling .answer-labeling-helpful a")
-      expect(page).not_to have_css("#answer-#{answer.id}-labeling .answer-labeling-verified a")
-    end
-  end
-
-  context 'with teacher' do
-    before :each do
-      login_as teacher
-    end
-
-    it 'labels answer as verified' do
-      visit root_path
-
-      click_link 'Otázky'
-      click_link question.title
-
-      find("#answer-#{answer.id}-labeling .answer-labeling-verified a").click
-
-      wait_for_remote
-
-      expect(answer).to be_labeled_by(teacher, :verified)
-      expect(page).to have_css("#answer-#{answer.id}-labeling .answer-labeling-verified a.answer-labeled-verified")
-    end
-
-    it 'removes verified label from answer' do
-      answer.toggle_labeling_by! teacher, :verified
-
-      visit root_path
-
-      click_link 'Otázky'
-      click_link question.title
-
-      find("#answer-#{answer.id}-labeling .answer-labeling-verified a.answer-labeled-verified").click
-
-      wait_for_remote
-
-      expect(answer).not_to be_labeled_by(teacher, :verified)
-      expect(page).to have_css("#answer-#{answer.id}-labeling .answer-labeling-verified a:not(.answer-labeled-verified)")
     end
   end
 end
