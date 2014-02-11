@@ -11,12 +11,12 @@ module Slido
 
         data = JSON.parse(json, symbolize_names: true)
 
-        result.uuid       = data[:event_id].to_i
-        result.identifier = data[:hash]
-        result.name       = data[:name]
-        result.starts_at  = Time.parse(data[:date_from])
-        result.ends_at    = Time.parse(data[:date_to])
-        result.url        = "#{Slido.base}/#{result.identifier}"
+        result.uuid        = data[:event_id].to_i
+        result.identifier  = data[:hash]
+        result.name        = data[:name]
+        result.started_at  = Time.parse(data[:date_from])
+        result.ended_at    = Time.parse(data[:date_to])
+        result.url         = "#{Slido.base}/#{result.identifier}"
 
         result
       end
