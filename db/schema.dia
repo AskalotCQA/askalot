@@ -8716,7 +8716,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#starts_at#</dia:string>
+            <dia:string>#started_at#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#datetime#</dia:string>
@@ -8739,7 +8739,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#ends_at#</dia:string>
+            <dia:string>#ended_at#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#datetime#</dia:string>
