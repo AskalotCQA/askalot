@@ -9,7 +9,7 @@
 slido = User.find_or_initialize_by(login: 'slido')
 
 slido.update_attributes(
-  email:   'slido@sli.do',
+  email:   'automaton@sli.do',
   password: SecureRandom.hex,
   first:    'Slido',
   role:     :student
