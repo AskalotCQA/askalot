@@ -155,6 +155,8 @@ ActiveRecord::Schema.define(version: 20140210161235) do
   end
 
   add_index "slido_events", ["category_id"], name: "index_slido_events_on_category_id", using: :btree
+  add_index "slido_events", ["ended_at"], name: "index_slido_events_on_ended_at", using: :btree
+  add_index "slido_events", ["started_at"], name: "index_slido_events_on_started_at", using: :btree
   add_index "slido_events", ["uuid"], name: "index_slido_events_on_uuid", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
