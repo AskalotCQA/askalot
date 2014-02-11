@@ -11,5 +11,8 @@ class CreateSlidoEvents < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :slido_events, :started_at
+    add_index :slido_events, :ended_at
   end
 end
