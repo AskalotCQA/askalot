@@ -1,6 +1,109 @@
 <% provide :title, t('statistic.index.title') %>
 
 <section>
+  <%= form_tag statistics_path, class: :'form-horizontal', role: :form do %>
+    <div class="form-group">
+      <div class="col-md-4">
+        <div class="input-group select2-bootstrap-prepend">
+          <span class="input-group-addon">
+            <%= icon_tag :tags %>
+          </span>
+          <%= text_field_tag :tag_list, '', class: :'form-control', data: { as: :select2, role: :tags } %>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-default">Filtrovať</button>
+    </div>
+  <% end %>
+</section>
+
+<section>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Podrobný prehľad používateľov</h3>
+
+      <table class="table table-bordered table-condensed table-statistical" data-sortable="true">
+        <thead>
+          <tr class="active">
+            <th colspan="2" rowspan="3" class="text-center">Používateľ</th>
+
+            <th colspan="5" data-sorter="false">Otázky</th>
+            <th colspan="5" data-sorter="false">Odpovede</th>
+            <th colspan="1" data-sorter="false">Zobrazenia</th>
+            <th colspan="3" data-sorter="false">Hlasy</th>
+            <th colspan="3" data-sorter="false">Komentáre</th>
+            <th colspan="1" data-sorter="false">Obľúbenia</th>
+          </tr>
+          <tr class="active">
+            <th rowspan="2">Celkom</th>
+            <th colspan="4" data-sorter="false">Používateľmi</th>
+
+            <th rowspan="2">Celkom</th>
+            <th colspan="4" data-sorter="false">Používateľmi</th>
+
+            <th rowspan="2">Otázok</th>
+
+            <th rowspan="2">Celkom</th>
+            <th rowspan="2">Otázok</th>
+            <th rowspan="2">Odpovedí</th>
+
+            <th rowspan="2">Celkom</th>
+            <th rowspan="2">Otázok</th>
+            <th rowspan="2">Odpovedí</th>
+
+            <th rowspan="2">Otázok</th>
+          </tr>
+          <tr class="active">
+            <th>Zobrazené</th>
+            <th>Hlasované</th>
+            <th>Komentované</th>
+            <th>Obľúbené</th>
+
+            <th>Hlasované</th>
+            <th>Komentované</th>
+            <th>Najlepšie</th>
+            <th>Pomocné</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each_with_index do |user, i| %>
+            <tr>
+              <td class="text-right"><%= i + 1 %></td>
+              <%= statistical_cell(user) { |u| [link_to(user.name || user.nick, user_path(user.nick)), u.role?(:teacher) ? :info : nil] } %>
+
+              <%= statistical_cell user.questions.size %>
+              <%= statistical_cell user.questions.viewed.size %>
+              <%= statistical_cell user.questions.voted.size %>
+              <%= statistical_cell user.questions.commented.size %>
+              <%= statistical_cell user.questions.favored.size %>
+
+              <%= statistical_cell user.answers.size %>
+              <%= statistical_cell user.answers.voted.size %>
+              <%= statistical_cell user.answers.commented.size %>
+              <%= statistical_cell user.answers.labeled_with(:best).size, positive: :success %>
+              <%= statistical_cell user.answers.labeled_with(:helpful).size, positive: :warning %>
+
+              <%= statistical_cell user.views.size %>
+
+              <%= statistical_cell user.votes.size %>
+              <%= statistical_cell user.votes.for(:question).size %>
+              <%= statistical_cell user.votes.for(:answer).size %>
+
+              <%= statistical_cell user.comments.size %>
+              <%= statistical_cell user.comments.for(:question).size %>
+              <%= statistical_cell user.comments.for(:answer).size %>
+
+              <%= statistical_cell user.favorites.size %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!--
+
+<section>
   <div class="row">
     <div class="col-md-4">
       <h3>Prehľad používateľov</h3>
@@ -55,10 +158,6 @@
             <td>Pomocných odpovedí na používateľa</td>
             <td><%= number_with_precision Answer.labeled_with(:helpful).count.to_f / User.count %></td>
           </tr>
-          <tr>
-            <td>Overených odpovedí na používateľa</td>
-            <td><%= number_with_precision Answer.labeled_with(:verified).count.to_f / User.count %></td>
-          </tr>
         </tbody>
         <tbody>
           <tr class="active">
@@ -112,10 +211,6 @@
             <td>Pomocných odpovedí na otázku</td>
             <td><%= number_with_precision Answer.labeled_with(:helpful).count.to_f / Question.count %></td>
           </tr>
-          <tr>
-            <td>Overených odpovedí na otázku</td>
-            <td><%= number_with_precision Answer.labeled_with(:verified).count.to_f / Question.count %></td>
-          </tr>
         </tbody>
         <tbody>
           <tr class="active">
@@ -157,10 +252,6 @@
             <td>Pomocné odpovede</td>
             <td><%= Answer.labeled_with(:helpful).count %></td>
           </tr>
-          <tr>
-            <td>Overené odpovede</td>
-            <td><%= Answer.labeled_with(:verified).count %></td>
-          </tr>
         </tbody>
         <tbody>
           <tr class="active">
@@ -177,89 +268,4 @@
   </div>
 </section>
 
-<section>
-  <div class="row">
-    <div class="col-md-12">
-      <h3>Podrobný prehľad používateľov</h3>
-
-      <table class="table table-bordered table-condensed table-statistical" data-sortable="true">
-        <thead>
-          <tr class="active">
-            <th colspan="2" rowspan="3" class="text-center">Používateľ</th>
-
-            <th colspan="5" data-sorter="false">Otázky</th>
-            <th colspan="6" data-sorter="false">Odpovede</th>
-            <th colspan="1" data-sorter="false">Zobrazenia</th>
-            <th colspan="3" data-sorter="false">Hlasy</th>
-            <th colspan="3" data-sorter="false">Komentáre</th>
-            <th colspan="1" data-sorter="false">Obľúbenia</th>
-          </tr>
-          <tr class="active">
-            <th rowspan="2">Celkom</th>
-            <th colspan="4" data-sorter="false">Používateľmi</th>
-
-            <th rowspan="2">Celkom</th>
-            <th colspan="5" data-sorter="false">Používateľmi</th>
-
-            <th rowspan="2">Otázok</th>
-
-            <th rowspan="2">Celkom</th>
-            <th rowspan="2">Otázok</th>
-            <th rowspan="2">Odpovedí</th>
-
-            <th rowspan="2">Celkom</th>
-            <th rowspan="2">Otázok</th>
-            <th rowspan="2">Odpovedí</th>
-
-            <th rowspan="2">Otázok</th>
-          </tr>
-          <tr class="active">
-            <th>Zobrazené</th>
-            <th>Hlasované</th>
-            <th>Komentované</th>
-            <th>Obľúbené</th>
-
-            <th>Hlasované</th>
-            <th>Komentované</th>
-            <th>Najlepšie</th>
-            <th>Pomocné</th>
-            <th>Overené</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @users.each_with_index do |user, i| %>
-            <tr>
-              <td class="text-right"><%= i + 1 %></td>
-              <%= statistical_cell(user) { |u| [link_to(user.name || user.nick, user_path(user.nick)), u.role?(:teacher) ? :info : nil] } %>
-
-              <%= statistical_cell user.questions.size %>
-              <%= statistical_cell user.questions.viewed.size %>
-              <%= statistical_cell user.questions.voted.size %>
-              <%= statistical_cell user.questions.commented.size %>
-              <%= statistical_cell user.questions.favored.size %>
-
-              <%= statistical_cell user.answers.size %>
-              <%= statistical_cell user.answers.voted.size %>
-              <%= statistical_cell user.answers.commented.size %>
-              <%= statistical_cell user.answers.labeled_with(:best).size, positive: :success %>
-              <%= statistical_cell user.answers.labeled_with(:helpful).size, positive: :warning %>
-              <%= statistical_cell user.answers.labeled_with(:verified).size, positive: :info %>
-
-              <%= statistical_cell user.views.size %>
-
-              <%= statistical_cell user.votes.size %>
-              <%= statistical_cell user.votes.for(:question).size %>
-              <%= statistical_cell user.votes.for(:answer).size %>
-
-              <%= statistical_cell user.comments.size %>
-              <%= statistical_cell user.comments.for(:question).size %>
-              <%= statistical_cell user.comments.for(:answer).size %>
-
-              <%= statistical_cell user.favorites.size %>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+-->
