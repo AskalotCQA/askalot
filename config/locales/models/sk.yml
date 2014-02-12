@@ -94,6 +94,9 @@ sk:
         current_password: 'Aktuálne heslo'
         remember_me: 'Zapamätať'
 
+        confirmation_token: 'Potvrdzovací kľúč'
+        reset_password_token: 'Obnovovací kľúč'
+
         nick: 'Prezývka'
         first: 'Krstné meno'
         middle: 'Druhé meno'

@@ -9,10 +9,10 @@ class QuestionsController < ApplicationController
   def index
     @questions = case params[:tab].to_sym
                  when :'questions-new'        then Question.order(created_at: :desc)
-                 when :'questions-unanswered' then Question.unanswered#.order(votes_total: :desc, created_at: :desc) #TODO(zbell) order
+                 when :'questions-unanswered' then Question.unanswered.order(votes_total: :desc, created_at: :desc)
                  when :'questions-answered'   then Question.answered.order(votes_total: :desc, created_at: :desc)
                  when :'questions-solved'     then Question.solved.order(votes_total: :desc, created_at: :desc)
-                 when :'questions-favored'    then Question.favored.order(created_at: :desc) #TODO(zbell) order by favorites.count
+                 when :'questions-favored'    then Question.favored.order(favorites_count: :desc, created_at: :desc)
                  else fail
                  end
 
@@ -50,12 +50,14 @@ class QuestionsController < ApplicationController
     @answer = Answer.new(question: @question)
 
     @question.views.create! viewer: current_user
+    @question.views.reload
   end
 
   def favor
     @question = Question.find(params[:id])
 
     @question.toggle_favoring_by! current_user
+    @question.favorites.reload
   end
 
   private

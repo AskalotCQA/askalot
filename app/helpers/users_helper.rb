@@ -2,7 +2,7 @@ module UsersHelper
   def user_avatar_tag(user, options = {})
     if user == :anonymous
       return content_tag :span, class: :'user-avatar' do
-        gravatar_image_tag 'anonymous@askalot.fiit.stuba.sk', options
+        gravatar_image_tag 'anonymous@fiit.stuba.sk', options.merge(default: asset_url('anonymous.png'))
       end
     end
 
