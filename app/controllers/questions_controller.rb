@@ -50,12 +50,14 @@ class QuestionsController < ApplicationController
     @answer = Answer.new(question: @question)
 
     @question.views.create! viewer: current_user
+    @question.views.reload
   end
 
   def favor
     @question = Question.find(params[:id])
 
     @question.toggle_favoring_by! current_user
+    @question.favorites.reload
   end
 
   private
