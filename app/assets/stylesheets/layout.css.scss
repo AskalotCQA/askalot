@@ -28,6 +28,10 @@ section + section {
   padding-top: 0.5 * $navbar-height;
 }
 
+section#flash {
+  padding-bottom: 0.5 * $navbar-height;
+}
+
 // helpers
 
 .pagination-navigation {
