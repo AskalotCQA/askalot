@@ -8,11 +8,10 @@ $(document).ready ->
   $(document).on 'click', '#questions .question-tag, #questions .question-category', (e) ->
     e.preventDefault()
 
-    items = $(this).attr('data-id').split(',')
-
+    items  = $(this).attr('data-id').split(',')
     select = Select.of('#question_tags')
 
-    select.addItem id: item, text: item for item in items
+    select.addItems(items)
 
   select = new Select.of('#question_category_id')
   select.on 'change', (event) ->

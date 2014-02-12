@@ -71,10 +71,16 @@ class window.Select extends Module
     $(@selector).attr(name)
 
   addItem: (item) ->
+    @addItem [item]
+
+  addItems: (others) ->
     @.each (i, element) =>
       items = $(element).select2('data')
 
-      items.push(item)
+      for item in others
+        item = { id: item, text: item } unless typeof(item) == 'object'
+
+        items.push(item)
 
       $(element).select2('data', items)
       $(element).trigger('change')
