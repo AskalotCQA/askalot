@@ -1,7 +1,7 @@
 <% provide :title, t('statistic.index.title') %>
 
 <section>
-  <%= form_tag statistics_path, class: :'form-horizontal', role: :form do %>
+  <%= form_tag statistics_path, method: :get, class: :'form-horizontal', role: :form do %>
     <div class="form-group">
       <div class="col-md-4">
         <div class="input-group select2-bootstrap-prepend">
