@@ -40,7 +40,7 @@
     <div class="col-md-2">
       <div class="question-author">
         <small><%= link_to_user question.anonymous ? :anonymous : question.author %></small>
-        <%= user_avatar_tag question.anonymous ? :anonymous : question.author, size: 64, class: :'img-circle img-responsive' %>
+        <%= user_avatar_tag question.anonymous ? :anonymous : question.author, size: 64, class: :'img-circle img-responsive', default: asset_url('anonymous.png') %>
         <small class="text-muted"><%= question_creation_time question, placement: :bottom %></small>
       </div>
     </div>
