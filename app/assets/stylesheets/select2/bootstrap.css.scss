@@ -10,7 +10,7 @@
   background-color: $input-bg;
 
   @include reset-filter;
-  @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
+//  @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
 }
 
 @mixin validation-state-focus($color) {
@@ -22,9 +22,8 @@
   .select2-container-active .select2-choice,
   .select2-container-multi.select2-container-active .select2-choices {
     border-color: darken($color, 10%);
-    $shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten($color, 20%);
-
-    @include box-shadow($shadow);
+//    $shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 6px lighten($color, 20%);
+//    @include box-shadow($shadow);
   }
 
   &.select2-drop-active {
@@ -76,7 +75,7 @@
   border-bottom-left-radius: 4px !important;
   border-bottom-right-radius: 4px !important;
 
-  @include box-shadow(none !important);
+//  @include box-shadow(none !important);
 }
 
 .select2-container-multi .select2-choices {
@@ -94,9 +93,9 @@
   }
 }
 
-.select2-container .select2-choices .select2-search-field input {
-  @include box-shadow(none);
-}
+//.select2-container .select2-choices .select2-search-field input {
+//  @include box-shadow(none);
+//}
 
 // heights
 
@@ -181,9 +180,9 @@
 .select2-container-active .select2-choice,
 .select2-container-multi.select2-container-active .select2-choices {
   border-color: $input-border-focus;
-  outline: none;
-  $shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
-  @include box-shadow($shadow);
+//  outline: none;
+//  $shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+//  @include box-shadow($shadow);
   $transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
   @include transition($transition);
 }
@@ -199,21 +198,21 @@
 
 // groups
 
-.input-group.select2-bootstrap-prepend [class^="select2-choice"] {
-  @include border-left-radius(0 !important);
-}
-
-.input-group.select2-bootstrap-append [class^="select2-choice"] {
-  @include border-right-radius(0 !important);
-}
-
-.select2-dropdown-open [class^="select2-choice"] {
-  @include border-bottom-radius(0 !important);
-}
-
-.select2-dropdown-open.select2-drop-above [class^="select2-choice"] {
-  @include border-top-radius(0 !important);
-}
+//.input-group.select2-bootstrap-prepend [class^="select2-choice"] {
+//  @include border-left-radius(0 !important);
+//}
+//
+//.input-group.select2-bootstrap-append [class^="select2-choice"] {
+//  @include border-right-radius(0 !important);
+//}
+//
+//.select2-dropdown-open [class^="select2-choice"] {
+//  @include border-bottom-radius(0 !important);
+//}
+//
+//.select2-dropdown-open.select2-drop-above [class^="select2-choice"] {
+//  @include border-top-radius(0 !important);
+//}
 
 .select2-bootstrap-append,
 .select2-bootstrap-prepend {
@@ -238,8 +237,8 @@
   background: $btn-default-bg;
   border-color: $btn-default-border;
   @include reset-filter;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+//  -webkit-box-shadow: none;
+//  box-shadow: none;
 
   height: 20px;
   padding: 0px 4px;
@@ -256,8 +255,8 @@
   //background: darken($btn-default-bg, 8%);
   //border-color: darken($btn-default-border, 12%);
   color: $btn-default-color;
-  -webkit-box-shadow: none;
-  box-shadow: none;
+//  -webkit-box-shadow: none;
+//  box-shadow: none;
 
   background:none;
 }

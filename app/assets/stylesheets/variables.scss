@@ -12,3 +12,30 @@ $jumbotron-bg: lighten(#081218, 2.5%);
 $jumbotron-color: #fff;
 $jumbotron-heading-color: #fff;
 $jumbotron-font-size: ceil($font-size-base * 1.25);
+
+$border-radius-base: none !important;
+$border-radius-large: none !important;
+$border-radius-small: none !important;
+
+$alert-border-radius: $border-radius-base !important;
+$badge-border-radius: $border-radius-base !important;
+$input-border-radius: $border-radius-base !important;
+$list-group-border-radius: $border-radius-base !important;
+$nav-pills-border-radius: $border-radius-base !important;
+$navbar-border-radius: $border-radius-base !important;
+$pager-border-radius: $border-radius-base !important;
+$panel-border-radius: $border-radius-base !important;
+$thumbnail-border-radius: $border-radius-base !important;
+
+// TODO(zbell) mv to fixes
+
+input, select, textarea {
+  box-shadow: none !important;
+}
+
+.label.label-info {
+  @include border-top-radius(none !important);
+  @include border-right-radius(none !important);
+  @include border-bottom-radius(none !important);
+  @include border-left-radius(none !important);
+}
