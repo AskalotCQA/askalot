@@ -13,7 +13,6 @@ class Question < ActiveRecord::Base
   belongs_to :category, counter_cache: true
 
   has_many :answers
-  has_many :labels, through: :labelings, through: :answers
 
   validates :category,  presence: true
   validates :title,     presence: true, length: { minimum: 2, maximum: 250 }
@@ -21,9 +20,9 @@ class Question < ActiveRecord::Base
   validates :anonymous, inclusion: { in: [true, false] }
 
   scope :random,     lambda { select('questions.*, random()').order('random()') }
-  scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) } #TODO(zbell) fix this, orders in controller fails
+  scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }
   scope :answered,   lambda { joins(:answers).uniq }
-  scope :solved,     lambda { joins(:labels).uniq } #TODO(zbell) fix this
+  scope :solved,     lambda { joins(:answers).merge(Answer.labeled_with Label.where(value: :best).first).uniq }
 
   scope :by, lambda { |user| where(author: user) }
 
