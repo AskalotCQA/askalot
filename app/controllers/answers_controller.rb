@@ -5,21 +5,15 @@ class AnswersController < ApplicationController
 
   def create
     @question = Question.find(params[:question_id])
-    @author   = @question.author
-    @labels   = @question.labels
-    @answers  = @question.answers
-
-    @answer = Answer.new(answer_params)
+    @answer   = Answer.new(answer_params)
 
     if @answer.save
       flash[:notice] = t('answer.create.success')
-
-      redirect_to question_path(@question)
     else
       flash_error_messages_for @answer
-
-      render 'questions/show'
     end
+
+    redirect_to question_path(@question)
   end
 
   def label
