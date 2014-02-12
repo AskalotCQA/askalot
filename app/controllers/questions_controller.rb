@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = case params[:tab].to_sym
                  when :'questions-new'        then Question.order(created_at: :desc)
-                 when :'questions-unanswered' then Question.unanswered.order('questions.votes_total DESC', 'questions.created_at DESC' ) #TODO(zbell) order
+                 when :'questions-unanswered' then Question.unanswered.order(votes_total: :desc, created_at: :desc)
                  when :'questions-answered'   then Question.answered.order(votes_total: :desc, created_at: :desc)
                  when :'questions-solved'     then Question.solved.order(votes_total: :desc, created_at: :desc)
                  when :'questions-favored'    then Question.favored.order(favorites_count: :desc, created_at: :desc)
