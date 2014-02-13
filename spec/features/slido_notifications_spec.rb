@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'Slido Notifications' do
+  let(:category) { create :category }
   let(:user) { create :user }
 
   before :each do
@@ -8,14 +9,14 @@ describe 'Slido Notifications' do
   end
 
   it 'shows notifications about current slido events' do
-    create :slido_event, name: 'Westside Party #3', url: 'https://sli.do/ali.g/wp03'
+    create :slido_event, category: category, name: 'Westside Party #3', url: 'https://sli.do/ali.g/wp03'
 
     visit root_path
 
     click_link 'Otázky'
 
     within '#flash' do
-      expect(page).to have_content('Aktuálne prebieha Westside Party #3 https://sli.do/ali.g/wp03')
+      expect(page).to have_content('Aktuálne prebieha prednáška Westside Party #3, ak máte záujem spýtať sa otázku použite sli.do na adrese https://sli.do/ali.g/wp03.')
     end
   end
 
@@ -27,12 +28,12 @@ describe 'Slido Notifications' do
 
       expect(page).not_to have_css('#flash')
 
-      create :slido_event, name: 'Westside Party #3', url: 'https://sli.do/ali.g/wp03'
+      create :slido_event, category: category, name: 'Westside Party #3', url: 'https://sli.do/ali.g/wp03'
 
       wait_for_remote 6.seconds
 
       within '#flash' do
-        expect(page).to have_content('Aktuálne prebieha Westside Party #3 https://sli.do/ali.g/wp03')
+        expect(page).to have_content('Aktuálne prebieha prednáška Westside Party #3, ak máte záujem spýtať sa otázku použite sli.do na adrese https://sli.do/ali.g/wp03.')
       end
     end
   end
