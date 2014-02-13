@@ -1,0 +1,4 @@
+sk:
+  slido:
+    event:
+      message: 'Aktuálne prebieha prednáška %{name}, ak máte záujem spýtať sa otázku použite sli.do na adrese %{url}.'

@@ -1,6 +1,6 @@
 require 'rvm/capistrano'
 require 'bundler/capistrano'
-# require 'whenever/capistrano'
+require 'whenever/capistrano'
 
 set :stages, [:staging, :production]
 
@@ -24,8 +24,7 @@ set :git_enable_submodules, 1
 set :ssh_options, { forward_agent: true }
 
 # Whenever
-# TODO (smolnar) enable whenever when needed
-# set :whenever_command, "RAILS_ENV=#{rails_env} bundle exec whenever"
+set :whenever_command, "RAILS_ENV=#{rails_env} bundle exec whenever"
 
 default_run_options[:pty] = true
 
