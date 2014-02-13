@@ -23,6 +23,10 @@
         </p>
       </section>
 
+      <section id="question-evaluations">
+        <%= render 'questions/evaluations', question: @question %>
+      </section>
+
       <section id="question-comments">
         <%= render 'questions/comments', question: @question %>
         <%= render 'comments/form', commentable: @question %>
