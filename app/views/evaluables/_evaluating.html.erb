@@ -1,14 +1,8 @@
 <div id="<%= identify evaluable, :evaluating %>" class="<%= model %>-evaluating">
   <% if can? :evaluate, evaluable %>
-    <% if evaluable.evaluated_by? current_user %>
-      <a class="<%= model %>-evaluated" data-toggle="modal" data-target="#<%= identify evaluable, :evaluation %>">
-        <%= icon_tag :magic %>
-      </a>
-    <% else %>
-      <a data-toggle="modal" data-target="#<%= identify evaluable, :evaluation %>">
-        <%= icon_tag :magic %>
-      </a>
-    <% end %>
+    <a <%= "class=#{model}-evaluated" if evaluable.evaluated_by? current_user %> data-toggle="modal" data-target="#<%= identify evaluable, :evaluate %>">
+      <%= icon_tag :magic %>
+    </a>
   <% end %>
 </div>
 
