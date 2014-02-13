@@ -128,14 +128,15 @@ sk:
         pinterest: 'Pinterest'
         stack_overflow: 'Stack Overflow'
         tumblr: 'Tumblr'
+
         twitter: 'Twitter'
         youtube: 'YouTube'
-
         show_name:  'Zobraziť meno ostatným používateľom'
         show_email: 'Zobraziť e-mail ostatným používateľom'
 
       question:
         category: 'Kategória'
+        category_id: 'Kategória'
         title: 'Nadpis'
         text: 'Text'
         tag_list: 'Tagy'
