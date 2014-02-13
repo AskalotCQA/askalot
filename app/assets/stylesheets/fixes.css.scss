@@ -11,8 +11,8 @@
   border-radius: 0 !important;
 }
 
-.dropdown-menu,
-input, select, textarea {
+.btn, .dropdown-menu,
+button, input, select, textarea {
   box-shadow: none !important;
 }
 
@@ -47,12 +47,6 @@ textarea {
   min-width: 100%;
   max-width: 100%;
   min-height: $input-height-base;
-}
-
-// buttons
-
-.btn.text-muted {
-  @include box-shadow(none);
 }
 
 // navigation
