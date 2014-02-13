@@ -5,4 +5,10 @@ class Evaluation < ActiveRecord::Base
   validates :value, presence: true, inclusion: { in: -2..2 }
 
   scope :by, lambda { |user| where(evaluator: user) }
+
+  before_save :normalize
+
+  def normalize
+    self.text = nil if text.blank?
+  end
 end
