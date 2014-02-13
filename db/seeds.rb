@@ -17,3 +17,5 @@ slido.update_attributes(
   first:    'Slido',
   role:     :student
 )
+
+slido.save!
