@@ -4,13 +4,16 @@
 
 @mixin bootstrap-input-defaults {
   border-color: $input-border;
-  border-radius: $input-border-radius;
   color: $input-color;
   font-family: $font-family-base;
   background-color: $input-bg;
 
   @include reset-filter;
+
+  border-radius: 0 !important;
+
 //  @include box-shadow(inset 0 1px 1px rgba(0, 0, 0, 0.075));
+//  border-radius: $input-border-radius;
 }
 
 @mixin validation-state-focus($color) {

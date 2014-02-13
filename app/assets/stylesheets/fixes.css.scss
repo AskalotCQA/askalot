@@ -7,6 +7,15 @@
   outline: none !important;
 }
 
+.label {
+  border-radius: 0 !important;
+}
+
+.dropdown-menu,
+input, select, textarea {
+  box-shadow: none !important;
+}
+
 address, form, nav, p, dl, ol, ul, table,
 .alert {
   &:last-child {
