@@ -1,3 +1,5 @@
+# TODO (smolnar) use unique cookies
+
 module Slido
   class Scraper
     def self.run(category, options = {})

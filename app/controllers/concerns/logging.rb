@@ -1,6 +1,10 @@
 module Concerns::Logging
   extend ActiveSupport::Concern
 
+  included do
+    before_action :log_current_action
+  end
+
   def logger
     @logger ||= Events::Management.new
   end
