@@ -1,15 +1,20 @@
 sk:
   evaluation:
-    create:
+    new:
       title: 'Ohodnotenie'
-      success: 'Vaše hodnotenie bolo úspešne pridané.'
-      cancel: 'Zrušiť'
-      save: 'Ohodnotiť'
+      submit: 'Ohodnotiť'
       help: 'Komentár k hodnoteniu'
 
-      degrees:
-        worst: 'Veľmi zle'
-        bad: 'Zle'
-        ok: 'Ok'
-        good: 'Dobre'
-        best: 'Veľmi dobre'
+    create:
+      success: 'Vaše hodnotenie bolo úspešne pridané.'
+      cancel: 'Zrušiť'
+
+    update:
+      success: 'Vaše hodnotenie bolo úspešne aktualizované.'
+
+    degrees:
+      very_bad: 'Veľmi zle'
+      bad: 'Zle'
+      ok: 'Ok'
+      good: 'Dobre'
+      very_good: 'Veľmi dobre'
