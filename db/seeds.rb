@@ -9,7 +9,7 @@
 Label.first_or_create(value: :best)
 Label.first_or_create(value: :helpful)
 
-slido = User.first_or_initialize(login: 'slido')
+slido = User.find_or_initialize_by(login: 'slido')
 
 slido.update_attributes(
   email:   'automaton@sli.do',
@@ -17,3 +17,5 @@ slido.update_attributes(
   first:    'Slido',
   role:     :student
 )
+
+slido.save!
