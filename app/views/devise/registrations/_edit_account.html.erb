@@ -8,9 +8,10 @@
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div class="form-group">
-      <p class="help-block"><%= t('confirmation_pending', email: resource.unconfirmed_email) %></p>
+      <p class="help-block"><%= t('user.confirmation_pending', email: resource.unconfirmed_email) %></p>
     </div>
     <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
+    <hr/>
   <% end %>
 
   <div class="form-group">
@@ -30,11 +31,3 @@
 
   <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
 <% end %>
-
-<!-- TODO (zbell) use modal for confirmation + user must enter login on submit -->
-<!--
-<section>
-  <h2><%= t('user.account_deletion') %></h2>
-  <%= button_to t('user.delete_account'), registration_path(resource_name), class: :'btn btn-danger', data: { confirm: "Are you sure?" }, method: :delete %>
-</section>
--->
