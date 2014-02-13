@@ -1,7 +1,7 @@
 <% if evaluations.any? %>
-  <span class="text-muted">
+  <p class="text-muted">
     <%= t 'count.evaluation.one' %> <%= evaluation_icon_tag evaluable %>
-  </span>
+  </p>
 
   <% if evaluations.where.not(text: nil).any? %>
     <ol class="<%= model %>-evaluations">
