@@ -1,5 +1,17 @@
 <div id="<%= identify evaluable, :evaluating %>" class="<%= model %>-evaluating">
   <% if can? :evaluate, evaluable %>
-    <%= render 'evaluations/form', model: model, evaluable: evaluable %>
+    <% if evaluable.evaluated_by? current_user %>
+      <a class="<%= model %>-evaluated" data-toggle="modal" data-target="#<%= identify evaluable, :evaluation %>">
+        <%= icon_tag :magic %>
+      </a>
+    <% else %>
+      <a data-toggle="modal" data-target="#<%= identify evaluable, :evaluation %>">
+        <%= icon_tag :magic %>
+      </a>
+    <% end %>
   <% end %>
 </div>
+
+<% if can? :evaluate, evaluable %>
+  <%= render 'evaluations/form', model: model, evaluable: evaluable %>
+<% end %>

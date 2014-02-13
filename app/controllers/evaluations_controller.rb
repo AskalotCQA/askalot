@@ -6,23 +6,33 @@ class EvaluationsController < ApplicationController
 
     authorize! :evaluate, @evaluable
 
-    @question = @evaluable.is_a?(Question) ? @evaluable : @evaluable.question
-    @author   = @question.author
-    @labels   = @question.labels
-    @answers  = @question.answers
-
-    @answer     = Answer.new(question: @question)
+    @question   = @evaluable.is_a?(Question) ? @evaluable : @evaluable.question
     @evaluation = Evaluation.new(evaluation_params)
 
     if @evaluation.save
       flash[:notice] = t('evaluation.create.success')
-
-      redirect_to question_path(@question)
     else
       flash_error_messages_for @evaluation
-
-      render 'questions/show'
     end
+
+    redirect_to question_path(@question)
+  end
+
+  def update
+    @evaluable = find_evaluable
+
+    authorize! :evaluate, @evaluable
+
+    @question   = @evaluable.is_a?(Question) ? @evaluable : @evaluable.question
+    @evaluation = Evaluation.where(evaluable: @evaluable, evaluator: current_user).first
+
+    if @evaluation.update_attributes(evaluation_params)
+      flash[:notice] = t 'evaluation.update.success'
+    else
+      flash_error_messages_for @evaluation
+    end
+
+    redirect_to question_path(@question)
   end
 
   private

@@ -24,9 +24,11 @@
               <% end %>
             </li>
           <% else %>
-            <li>
-              <%= icon_link_to :comment, t('home.answer'), question_path(@question), id: :'new-question', class: 'btn btn-success btn-lg' %>
-            </li>
+            <% if @question %>
+              <li>
+                <%= icon_link_to :comment, t('home.answer'), question_path(@question), id: :'new-question', class: 'btn btn-success btn-lg' %>
+              </li>
+            <% end %>
           <% end %>
          </ul>
       </div>
