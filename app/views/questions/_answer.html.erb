@@ -15,9 +15,14 @@
 
       <br/>
 
-      <%= render 'answers/evaluations', answer: answer %>
-      <%= render 'answers/comments', answer: answer %>
-      <%= render 'comments/form', commentable: answer %>
+      <section id="question-evaluations">
+        <%= render 'answers/evaluations', answer: answer %>
+      </section>
+
+      <section id="question-comments">
+        <%= render 'answers/comments', answer: answer %>
+        <%= render 'comments/form', commentable: answer %>
+      </section>
     </div>
 
     <div class="col-md-2">
