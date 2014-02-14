@@ -18,8 +18,8 @@ FactoryGirl.define do
       role :teacher
     end
 
-    factory :admin, class: :User do
-      role :admin
+    factory :administrator, class: :User do
+      role :administrator
     end
 
     after :create do |user|
@@ -29,7 +29,7 @@ FactoryGirl.define do
     trait :as_ais do
       sequence(:login)     { |n| "xuser#{n}" }
       sequence(:email)     { |n| "xuser#{n}@stuba.sk" }
-      sequence(:ais_uid)  { |n| n }
+      sequence(:ais_uid)   { |n| n }
       sequence(:ais_login) { |n| "xuser#{n}" }
 
       password              nil
@@ -39,7 +39,7 @@ FactoryGirl.define do
     trait :unconfirmed do
       after :create do |user|
         user.confirmation_token = nil
-        user.confirmed_at = nil
+        user.confirmed_at       = nil
 
         user.save!
       end
