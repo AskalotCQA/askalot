@@ -5,6 +5,7 @@ sk:
     new:
       title: 'Nová otázka'
       submit: 'Opýtať'
+      submit_anonymously: 'Opýtať sa anonymne'
       feature: 'Pridať otázku'
 
     create:
