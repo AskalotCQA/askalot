@@ -1,6 +1,4 @@
-
-
-<div id="<%= identify evaluable, :evaluation %>" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
+<div id="<%= identify evaluable, :evaluate %>" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
   <%= form_for [evaluable, evaluable.evaluations.where(evaluator: current_user).first || Evaluation.new], html: {id: nil, class: :'new-evaluation'} do |f| %>
     <div class="modal-dialog">
       <div class="modal-content">
@@ -17,13 +15,13 @@
                 <%= f.radio_button :value, -1 %> <%= t 'evaluation.degrees.bad' %>
               </label>
               <label class="btn btn-warning">
-                <%= f.radio_button :value,  0 %> <%= t 'evaluation.degrees.ok' %>
+                <%= f.radio_button :value,  0 %> <%= t 'evaluation.degrees.good' %>
               </label>
               <label class="btn btn-success">
-                <%= f.radio_button :value, +1 %> <%= t 'evaluation.degrees.good' %>
+                <%= f.radio_button :value, +1 %> <%= t 'evaluation.degrees.very_good' %>
               </label>
               <label class="btn btn-success">
-                <%= f.radio_button :value, +2 %> <%= t 'evaluation.degrees.very_good' %>
+                <%= f.radio_button :value, +2 %> <%= t 'evaluation.degrees.excellently' %>
               </label>
             </div>
           </div>

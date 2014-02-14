@@ -62,7 +62,7 @@ describe 'Add Question', js: true do
 
       select2 'Westside Playground', from: 'question_category_id'
 
-      within '#category-tags' do
+      within '#question-category-tags' do
         expect(page).to have_content('westside')
         expect(page).to have_content('ali-gz')
       end

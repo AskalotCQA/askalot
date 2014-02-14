@@ -31,7 +31,8 @@ module QuestionsHelper
     values, classes = question_label_attributes label
     filter          = ((params[:tags] || '').split(',') + values).uniq.join(',')
 
-    options.deep_merge! class: classes, data: { id: filter }
+    options.merge!(class: classes)
+    options.deep_merge! class: classes, data: { id: filter } unless filter.blank?
 
     link_to "#{label.name} (#{label.count})", questions_path(tags: filter), options
   end

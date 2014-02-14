@@ -48,8 +48,14 @@ section#flash {
   padding-top: $navbar-height;
 }
 
+// text
+
 .text-capital {
   font-variant: small-caps;
+}
+
+.text-inverse {
+  color: #fff;
 }
 
 .text-lead {

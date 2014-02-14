@@ -22,5 +22,4 @@ $(document).ready ->
 
     html += "<li><span class=\"label label-info\">#{tag}</span></li>" for tag in tags[value]
 
-    $('ul#category-tags').parent().removeClass('hidden')
-    $('ul#category-tags').html(html)
+    $('ul#question-category-tags').html(html)
