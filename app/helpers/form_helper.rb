@@ -10,4 +10,8 @@ module FormHelper
 
     collection_select(id, collection, value, label, options, html_options)
   end
+
+  def reversed_check_box(method, options = {}, checked_value = '1', unchecked_value = '0')
+    check_box method, options, unchecked_value, checked_value
+  end
 end
