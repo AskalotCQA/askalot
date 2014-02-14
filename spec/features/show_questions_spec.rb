@@ -92,4 +92,12 @@ describe 'Show Questions', js: true do
       end
     end
   end
+
+  it 'shows list of unanswered questions' do
+    pending
+  end
+
+  it 'shows list of solved questions' do
+    pending
+  end
 end
