@@ -75,5 +75,24 @@ describe 'Add Question', js: true do
 
       expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
     end
+
+    context 'after realoading page' do
+      it 'shows automaticly assigned tags' do
+        visit root_path
+
+        click_link 'Opýtať sa otázku'
+
+        fill_in 'question_title', with: ""
+
+        select2 'Westside Playground', from: 'question_category_id'
+
+        click_button 'Opýtať'
+
+        within '#question-category-tags' do
+          expect(page).to have_content('westside')
+          expect(page).to have_content('ali-gz')
+        end
+      end
+    end
   end
 end
