@@ -13,12 +13,11 @@ sk:
       success: 'Vaše hodnotenie bolo úspešne aktualizované.'
 
     rank:
-      five:
-        very_bad: 'Veľmi zle'
-        bad: 'Zle'
-        neutral: 'Dobre'
-        good: 'Veľmi dobre'
-        very_good: 'Výborne'
+      very_bad: 'Veľmi zle'
+      bad: 'Zle'
+      neutral: 'Dobre'
+      good: 'Veľmi dobre'
+      very_good: 'Výborne'
 
       question:
         bad: 'Zlá otázka'
