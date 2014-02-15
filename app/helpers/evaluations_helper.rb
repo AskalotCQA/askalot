@@ -4,17 +4,18 @@ module EvaluationsHelper
 
   def evaluation_badge_tag(evaluable, options = {})
     data  = evaluation_data evaluable
-    title = translate "evaluation.rank.#{evaluable.class.to_s.downcase}.#{data[:rank]}"
+    title = evaluation_title evaluable, data[:rank]
 
-    content_tag :span, tooltip_attributes(title, options.merge(class: :'evaluated fa-stack', placement: :bottom)) do
+    content_tag :span, tooltip_attributes(title, options.merge(class: :'evaluated fa-stack').reverse_merge(placement: :bottom)) do
       icon_tag(:circle, class: [:'fa-stack-2x', data[:color]]) + icon_tag(data[:icon], class: [:'fa-stack-1x', :'text-inverse'])
     end
   end
 
   def evaluation_icon_tag(evaluable, options = {})
-    data = evaluation_data evaluable
+    data  = evaluation_data evaluable
+    title = evaluation_title evaluable, data[:rank]
 
-    icon_tag data[:icon], options.merge(class: data[:color])
+    tooltip_icon_tag data[:icon], title, options.merge(class: data[:color]).reverse_merge(placement: :right)
   end
 
   private
@@ -26,5 +27,9 @@ module EvaluationsHelper
     when +Boundary.. +Infinity then { color: :'evaluated-good',    icon: :'thumbs-o-up',   rank: :good }
     else fail
     end
+  end
+
+  def evaluation_title(evaluable, rank)
+    translate "evaluation.rank.#{evaluable.class.to_s.downcase}.#{rank}"
   end
 end
