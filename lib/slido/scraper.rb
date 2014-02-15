@@ -19,12 +19,13 @@ module Slido
 
       attributes = event.to_h.merge(category_id: category.id)
 
-      event = Core::Builder.create_slido_event_by(:uuid, attributes)
+      author = Core::Finder.find_user_by(login: :slido)
+      event  = Core::Builder.create_slido_event_by(:uuid, attributes)
 
       event.update_attributes!(attributes)
 
       questions.each do |question|
-        attributes = question.to_h.merge(category_id: category.id)
+        attributes = question.to_h.merge(category_id: category.id, author_id: author.id)
 
         question = Core::Builder.create_question_by(:slido_uuid, attributes)
 
