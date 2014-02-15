@@ -1,7 +1,7 @@
 @import 'mixins';
 @import 'variables';
 
-// collection
+// general
 
 #questions {
   & > ol > li + li {
@@ -10,6 +10,8 @@
     border-top: 1px solid $gray-lighter;
   }
 }
+
+// collection
 
 .question-metric {
   display: block;
