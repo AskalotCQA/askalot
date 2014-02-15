@@ -16,7 +16,6 @@ html {
 }
 
 body {
-  height: 100%;
   margin-top: $navbar-height;
 }
 
@@ -45,7 +44,7 @@ section#flash {
   padding-top: $navbar-height;
 }
 
-// helpers
+// text
 
 .text-capital {
   font-variant: small-caps;
