@@ -47,6 +47,10 @@ describe 'Add Question', js: true do
     end
   end
 
+  it 'adds new question anonymously' do
+    pending
+  end
+
   context 'when selecting category' do
     before :each do
       create :category, name: 'Westside Playground', tags: ['westside', 'ali-gz']
@@ -70,6 +74,25 @@ describe 'Add Question', js: true do
       click_button 'Opýtať'
 
       expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
+    end
+
+    context 'after realoading page' do
+      it 'shows automaticly assigned tags' do
+        visit root_path
+
+        click_link 'Opýtať sa otázku'
+
+        fill_in 'question_title', with: ""
+
+        select2 'Westside Playground', from: 'question_category_id'
+
+        click_button 'Opýtať'
+
+        within '#question-category-tags' do
+          expect(page).to have_content('westside')
+          expect(page).to have_content('ali-gz')
+        end
+      end
     end
   end
 end

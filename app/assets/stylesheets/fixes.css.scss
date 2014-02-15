@@ -36,6 +36,13 @@ address, form, nav, p, dl, ol, ul, table,
   }
 }
 
+// buttons
+
+.btn.btn-primitive,
+.btn.text-muted {
+  @include box-shadow(none);
+}
+
 // forms
 
 .form-title {
@@ -47,6 +54,12 @@ textarea {
   min-width: 100%;
   max-width: 100%;
   min-height: $input-height-base;
+}
+
+// icons
+
+.fa-blank {
+  display: none;
 }
 
 // navigation

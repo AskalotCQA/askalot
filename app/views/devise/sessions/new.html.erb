@@ -16,13 +16,17 @@
       <%= f.password_field :password, class: :'form-control' %>
     </div>
 
-    <% if devise_mapping.rememberable? %>
-      <div class="checkbox">
-        <%= f.check_box :remember_me %> <%= f.label :remember_me %>
-      </div>
-    <% end %>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-lg"><%= t('user.sign_in') %></button>
 
-    <button type="submit" class="btn btn-primary btn-lg"><%= t('user.sign_in') %></button>
+      <% if devise_mapping.rememberable? %>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primitive btn-sm">
+            <%= f.check_box :remember_me %> <%= User.human_attribute_name :remember_me %> <%= icon_tag :blank %>
+          </label>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </section>
 

@@ -12,9 +12,21 @@ sk:
     update:
       success: 'Vaše hodnotenie bolo úspešne aktualizované.'
 
-    degrees:
-      very_bad: 'Veľmi zle'
-      bad: 'Zle'
-      good: 'Dobre'
-      very_good: 'Veľmi dobre'
-      excellently: 'Výborne'
+    rank:
+      five:
+        very_bad: 'Veľmi zle'
+        bad: 'Zle'
+        neutral: 'Dobre'
+        good: 'Veľmi dobre'
+        very_good: 'Výborne'
+
+      question:
+        bad: 'Zlá otázka'
+        neutral: 'Dobrá otázka'
+        good: 'Výborná otázka'
+
+      answer:
+        bad: 'Zlá odpoveď'
+        neutral: 'Dobrá odpoveď'
+        good: 'Výborná odpoveď'
+

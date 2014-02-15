@@ -2,7 +2,8 @@
   <div class="form-group">
     <div class="btn-group" data-toggle="buttons">
       <label class="btn btn-default">
-        <%= f.reversed_check_box :show_name, checked: !resource.show_name %> <%= User.human_attribute_name :hide_name %>
+        <%= f.reversed_check_box :show_name, checked: !resource.show_name %>
+        <%= User.human_attribute_name :hide_name %> <%= icon_tag resource.show_name ? :blank : :check %>
       </label>
     </div>
   </div>
@@ -10,7 +11,8 @@
   <div class="form-group">
     <div class="btn-group" data-toggle="buttons">
       <label class="btn btn-default">
-        <%= f.reversed_check_box :show_email, checked: !resource.show_email %> <%= User.human_attribute_name :hide_email %>
+        <%= f.reversed_check_box :show_email, checked: !resource.show_email %>
+        <%= User.human_attribute_name :hide_email %> <%= icon_tag resource.show_email ? :blank : :check %>
       </label>
     </div>
   </div>

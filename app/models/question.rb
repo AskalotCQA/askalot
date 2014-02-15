@@ -33,8 +33,6 @@ class Question < ActiveRecord::Base
     best ? [best] + other.where('id != ?', best.id) : other
   end
 
-  before_create :set_slido_author, if: :slido_uuid?
-
   def labels
     [category] + tags_with_counts
   end
@@ -47,9 +45,5 @@ class Question < ActiveRecord::Base
 
   def add_category_tags
     self.tag_list += self.category.tags
-  end
-
-  def set_slido_author
-    self.author = User.find_by_login 'slido'
   end
 end
