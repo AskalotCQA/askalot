@@ -6,7 +6,7 @@ module EvaluationsHelper
     data  = evaluation_data evaluable
     title = evaluation_title evaluable, data[:rank]
 
-    content_tag :span, tooltip_attributes(title, options.merge(class: :'evaluated fa-stack').reverse_merge(placement: :bottom)) do
+    content_tag :span, tooltip_attributes(title, options.merge(class: :'evaluated fa-stack').reverse_merge(placement: :right)) do
       icon_tag(:circle, class: [:'fa-stack-2x', data[:color]]) + icon_tag(data[:icon], class: [:'fa-stack-1x', :'text-inverse'])
     end
   end

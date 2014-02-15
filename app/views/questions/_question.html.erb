@@ -26,8 +26,8 @@
     <div class="col-md-7">
       <div class="question-preview">
         <h4>
+          <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
           <%= link_to question_title_preview(question), question_path(question) %>
-          <%= evaluation_badge_tag question if question.evaluations.any? %>
         </h4>
 
         <%= render 'questions/labels', labels: question.labels %>
