@@ -1,5 +1,6 @@
 module EvaluationsHelper
   Infinity = 1.0 / 0.0
+  Boundary = 2.0 / 3.0
 
   def evaluation_badge_tag(evaluable, options = {})
     data = evaluation_data evaluable
@@ -19,10 +20,10 @@ module EvaluationsHelper
 
   def evaluation_data(evaluable)
     case evaluable.evaluations.average(:value).to_f
-      when  -Infinity...(-2.0 / 3) then { color: :'text-danger',  icon: :'thumbs-o-down' }
-      when (-2.0 / 3)...(+2.0 / 3) then { color: :'text-muted',   icon: :'hand-o-right' }
-      when (+2.0 / 3)..  +Infinity then { color: :'text-success', icon: :'thumbs-o-up' }
-      else fail
+    when -Infinity...-Boundary then { color: :'text-danger',  icon: :'thumbs-o-down' }
+    when -Boundary...+Boundary then { color: :'text-muted',   icon: :'hand-o-right' }
+    when +Boundary.. +Infinity then { color: :'text-success', icon: :'thumbs-o-up' }
+    else fail
     end
   end
 end
