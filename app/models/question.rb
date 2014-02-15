@@ -50,6 +50,6 @@ class Question < ActiveRecord::Base
   end
 
   def set_slido_author
-    self.author = User.find_by_login 'slido'
+    self.author = User.find_by login: 'slido'
   end
 end
