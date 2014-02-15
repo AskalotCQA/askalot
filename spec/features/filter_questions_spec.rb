@@ -90,7 +90,7 @@ describe 'Filter Questions', js: true do
     within list[0] do
       click_link 'ruby'
 
-      wait_for_remote 1.second
+      wait_for_remote
     end
 
     list = all('#questions > ol > li')
