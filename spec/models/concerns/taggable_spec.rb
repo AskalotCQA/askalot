@@ -4,7 +4,6 @@ shared_examples_for Taggable do
   let(:model) { described_class }
   let(:factory) { model.name.underscore.to_sym }
 
-
   describe '#tag_list' do
     it 'assignes tags from string' do
       record = model.new

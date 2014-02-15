@@ -20,19 +20,16 @@
         </div>
         <div class="form-group">
           <%= f.label :tag_list %>
+          <ul id="question-category-tags" class="list-unstyled list-inline"></ul>
           <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
-          <div class="help-block hidden">
-            <p>K otázke budú automaticky pridané tagy:</p>
-            <ul id="category-tags" class="list-unstyled list-inline"></ul>
-          </div>
-        </div>
-        <div class="checkbox">
-          <%= f.check_box :anonymous %>
-          <%= f.label :anonymous %>
         </div>
 
         <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
-      <% end %>
+
+        <div class="pull-right">
+          <button type="submit" class="btn btn-default" name="question[anonymous]" value="1"><%= t 'question.new.submit_anonymously' %></button>
+        </div>
+    <% end %>
     </section>
   </div>
 </div>
