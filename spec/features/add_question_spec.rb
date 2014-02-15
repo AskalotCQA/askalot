@@ -47,6 +47,10 @@ describe 'Add Question', js: true do
     end
   end
 
+  it 'adds new question anonymously' do
+    pending
+  end
+
   context 'when selecting category' do
     before :each do
       create :category, name: 'Westside Playground', tags: ['westside', 'ali-gz']
