@@ -48,9 +48,9 @@ gem 'nokogiri'
 gem 'scout', github: 'smolnar/scout', branch: :master
 
 # monitoring
-#gem 'airbrake'
 gem 'garelic'
-#gem 'newrelic_rpm'
+# gem 'airbrake'
+# gem 'newrelic_rpm'
 
 # documentation
 group :doc do
