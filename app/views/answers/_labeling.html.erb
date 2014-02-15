@@ -11,7 +11,7 @@
     <% end %>
   </div>
 
-  <% unless answer.labelings.with(:best).exists? %>
+<!--  <% unless answer.labelings.with(:best).exists? %>
     <div class="answer-labeling-helpful">
       <% if can? :edit, answer.question %>
         <% if answer.labeled_by? current_user, :helpful %>
@@ -23,5 +23,6 @@
         <span><%= tooltip_icon_tag :'lightbulb-o', t('answer.helpful'), placement: :right %></span>
       <% end %>
     </div>
+-->
   <% end %>
 </div>
