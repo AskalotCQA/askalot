@@ -1,7 +1,7 @@
 @import 'mixins';
 @import 'variables';
 
-// collection
+// general
 
 #questions {
   & > ol > li + li {
@@ -10,6 +10,8 @@
     border-top: 1px solid $gray-lighter;
   }
 }
+
+// collection
 
 .question-metric {
   display: block;
@@ -22,6 +24,10 @@
   }
 }
 
+a.question-metric.text-muted {
+  @include action-coloring($text-muted, darken($text-muted, 12.5%));
+}
+
 .question-value {
   display: block;
   margin-top: $padding-base-vertical;
@@ -31,6 +37,17 @@
 }
 
 .question-preview {
+  padding-left: $grid-gutter-width;
+
+  .evaluated {
+    position: absolute;
+
+    top: 0.15em;
+    left: ($grid-gutter-width / 2) - 5px;
+
+    font-size: 0.75em;
+  }
+
   h3, h4 {
     margin-top: $padding-base-vertical;
   }
@@ -57,7 +74,7 @@
 // member
 
 .question-voting {
-  @include block-voting;
+  @include block-iconing;
 }
 
 .question-favoring {

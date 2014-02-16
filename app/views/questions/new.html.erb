@@ -24,12 +24,16 @@
           <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
         </div>
 
-        <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
 
-        <div class="pull-right">
-          <button type="submit" class="btn btn-default" name="question[anonymous]" value="1"><%= t 'question.new.submit_anonymously' %></button>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primitive btn-sm">
+              <%= f.check_box :anonymous %> <%= Question.human_attribute_name :anonymous %> <%= icon_tag :blank %>
+            </label>
+          </div>
         </div>
-    <% end %>
+      <% end %>
     </section>
   </div>
 </div>

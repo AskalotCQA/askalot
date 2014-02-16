@@ -6,7 +6,7 @@ module Concerns::Slido
   end
 
   def flash_slido_events
-    events = SlidoEvent.where('? between started_at and ended_at', Time.now).load
+    events = SlidoEvent.where('? between started_at and ended_at', Time.now).order(:ended_at).load
 
     if events.any?
       flash.now[:info] = Array.wrap(flash.now[:info])

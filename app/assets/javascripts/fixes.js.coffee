@@ -22,6 +22,15 @@ window.fixes = ->
   $('[data-toggle="tooltip"]').tooltip(container: 'body')
   $('[data-toggle="tooltip"]').on 'show.bs.tooltip', -> $(this).removeAttr('title')
 
+  # TODO(zbell) refactor lol
+  $('[data-toggle="buttons"] label').on 'click', ->
+    icon = $(this).find('.fa')
+
+    if $(this).hasClass('active')
+      icon.removeClass('fa-check').addClass('fa-blank')
+    else
+      icon.removeClass('fa-blank').addClass('fa-check')
+
   # TODO(zbell) refactor and fix properly
   $('a[data-toggle="tooltip"]').on 'click', ->
     $(this).tooltip(container: false, delay: { hide: 0 })
