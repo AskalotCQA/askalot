@@ -17,7 +17,7 @@
           </li>
           <% unless current_user %>
             <li>
-              <% if Configuration.show.registrations? %>
+              <% if Configuration.enable.registrations? %>
                 <%= icon_link_to :rocket, t('home.sign_up'), new_user_registration_path, class: 'btn btn-success btn-lg' %>
               <% else %>
                 <%= icon_link_to :rocket, t('home.sign_in'), new_user_session_path, class: 'btn btn-success btn-lg' %>
