@@ -95,10 +95,4 @@ class User < ActiveRecord::Base
 
     where(conditions).where(["login = :value OR email = :value", { value: login.downcase }]).first
   end
-
-  protected
-
-  def password_required?
-    ais_login.nil? ? super : false
-  end
 end
