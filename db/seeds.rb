@@ -6,8 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Label.first_or_create(value: :best)
-Label.first_or_create(value: :helpful)
+Label.find_or_create_by! value: :best
+Label.find_or_create_by! value: :helpful
 
 slido = User.find_or_initialize_by(login: 'slido')
 
