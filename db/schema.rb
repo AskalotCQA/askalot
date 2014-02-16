@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140210161235) do
+ActiveRecord::Schema.define(version: 20140216125125) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,12 +32,13 @@ ActiveRecord::Schema.define(version: 20140210161235) do
   add_index "answers", ["votes_total"], name: "index_answers_on_votes_total", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string   "name",                         null: false
+    t.string   "name",                            null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "tags",            default: [],              array: true
-    t.integer  "questions_count", default: 0,  null: false
+    t.string   "tags",               default: [],              array: true
+    t.integer  "questions_count",    default: 0,  null: false
     t.string   "slido_username"
+    t.string   "slido_event_prefix"
   end
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
