@@ -61,7 +61,7 @@ namespace :db do
     run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake db:setup"
   end
 
-  desc "Run seeds"
+  desc "Run database seeds"
   task :seed do
     run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake db:seed"
   end
