@@ -169,5 +169,21 @@ describe 'User Profile' do
       expect(page).to have_field('user_nick',  with: 'Nicky')
       expect(page).to have_field('user_about', with: 'Lorem ipsum')
     end
+
+    it 'disallows editing of password', js: true do
+      visit edit_user_registration_path
+
+      click_link 'Profil'
+
+      expect(page).not_to have_field('user_password')
+      expect(page).not_to have_field('user_password_confirmation')
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
+      expect(page.current_path).to eql(edit_user_registration_path)
+
+      expect(user.password).to eql(nil)
+    end
   end
 end
