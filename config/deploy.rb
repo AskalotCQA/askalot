@@ -60,6 +60,11 @@ namespace :db do
   task :setup_release, roles: :db do
     run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake db:setup"
   end
+
+  desc "Run database seeds"
+  task :seed do
+    run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake db:seed"
+  end
 end
 
 namespace :deploy do
@@ -77,7 +82,7 @@ namespace :deploy do
   end
 
   after 'deploy', 'deploy:cleanup'
-  after 'deploy:update_code', 'deploy:symlink_shared', 'db:create_release', 'deploy:migrate'
+  after 'deploy:update_code', 'deploy:symlink_shared', 'db:create_release', 'deploy:migrate', 'db:seed'
 
   after 'deploy:update_code' do
     run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake assets:precompile"
