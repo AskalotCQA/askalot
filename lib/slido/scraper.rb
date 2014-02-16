@@ -28,7 +28,7 @@ module Slido
       questions.each do |question|
         attributes = question.to_h.merge(category_id: category.id, author_id: author.id)
 
-        question = Core::Builder.create_question_by(:slido_uuid, attributes)
+        question = Core::Builder.create_question_by(:slido_question_uuid, attributes)
 
         question.update_attributes!(attributes)
       end

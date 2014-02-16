@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140216125125) do
+ActiveRecord::Schema.define(version: 20140216132318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,26 +120,26 @@ ActiveRecord::Schema.define(version: 20140216125125) do
   add_index "labels", ["value"], name: "index_labels_on_value", unique: true, using: :btree
 
   create_table "questions", force: true do |t|
-    t.integer  "author_id",                        null: false
-    t.integer  "category_id",                      null: false
-    t.string   "title",                            null: false
-    t.text     "text",                             null: false
+    t.integer  "author_id",                           null: false
+    t.integer  "category_id",                         null: false
+    t.string   "title",                               null: false
+    t.text     "text",                                null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total",      default: 0,     null: false
-    t.boolean  "anonymous",        default: false, null: false
-    t.integer  "answers_count",    default: 0,     null: false
-    t.integer  "comments_count",   default: 0,     null: false
-    t.integer  "favorites_count",  default: 0,     null: false
-    t.integer  "views_count",      default: 0,     null: false
-    t.integer  "votes_count",      default: 0,     null: false
-    t.integer  "slido_uuid"
+    t.integer  "votes_total",         default: 0,     null: false
+    t.boolean  "anonymous",           default: false, null: false
+    t.integer  "answers_count",       default: 0,     null: false
+    t.integer  "comments_count",      default: 0,     null: false
+    t.integer  "favorites_count",     default: 0,     null: false
+    t.integer  "views_count",         default: 0,     null: false
+    t.integer  "votes_count",         default: 0,     null: false
+    t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
-  add_index "questions", ["slido_uuid"], name: "index_questions_on_slido_uuid", unique: true, using: :btree
+  add_index "questions", ["slido_question_uuid"], name: "index_questions_on_slido_question_uuid", unique: true, using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
   add_index "questions", ["votes_total"], name: "index_questions_on_votes_total", using: :btree
 
