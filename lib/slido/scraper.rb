@@ -12,9 +12,6 @@ module Slido
 
       uri = response.last_effective_url
 
-      content   = Scout::Downloader.download("#{uri}/questions/load", params)
-      questions = Slido::Questions::Parser.parse(content)
-
       content = Scout::Downloader.download("#{uri}/wall")
       event   = Slido::Wall::Parser.parse(content)
 
@@ -23,7 +20,12 @@ module Slido
       author = Core::Finder.find_user_by(login: :slido)
       event  = Core::Builder.create_slido_event_by(:uuid, attributes)
 
+      abort unless event.name.start_with? category.slido_event_prefix
+
       event.update_attributes!(attributes)
+
+      content   = Scout::Downloader.download("#{uri}/questions/load")
+      questions = Slido::Questions::Parser.parse(content)
 
       questions.each do |question|
         attributes = question.to_h.merge(category_id: category.id, author_id: author.id)
