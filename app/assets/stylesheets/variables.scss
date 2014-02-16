@@ -12,3 +12,10 @@ $jumbotron-bg: lighten(#081218, 2.5%);
 $jumbotron-color: #fff;
 $jumbotron-heading-color: #fff;
 $jumbotron-font-size: ceil($font-size-base * 1.25);
+
+// state text
+
+$state-success-text: $brand-success;
+$state-info-text: $brand-info;
+$state-warning-text: $brand-warning;
+$state-danger-text: $brand-danger;
