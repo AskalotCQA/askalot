@@ -1,5 +1,5 @@
 class Label < ActiveRecord::Base
-  has_many :labelings
+  has_many :labelings, dependent: :restrict_with_exception
 
   validates :value, presence: true
 

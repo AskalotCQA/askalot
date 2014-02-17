@@ -3,7 +3,7 @@ class Tag < ActiveRecord::Base
 
   attr_accessor :count
 
-  has_many :taggings
+  has_many :taggings, dependent: :restrict_with_exception
 
   before_save :normalize
 

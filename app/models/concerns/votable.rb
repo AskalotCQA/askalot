@@ -2,7 +2,7 @@ module Votable
   extend ActiveSupport::Concern
 
   included do
-    has_many :votes, as: :votable
+    has_many :votes, as: :votable, dependent: :destroy
     has_many :voters, through: :votes, source: :voter
 
     scope :voted, lambda { joins(:votes).uniq }
