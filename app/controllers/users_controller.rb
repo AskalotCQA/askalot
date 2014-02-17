@@ -20,10 +20,11 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    attributes = [:nick, :about, :gravatar_email, :show_name, :show_email]
+    attributes = [:email, :nick, :about, :gravatar_email, :show_name, :show_email]
 
     attributes += Social.networks.keys
     attributes += [:first, :last] if can? :change_name, current_user
+    attributes += [:password, :password_confirmation] if can? :change_password, current_user
 
     params.require(:user).permit(attributes)
   end

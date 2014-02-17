@@ -118,6 +118,10 @@ describe User do
       it 'disallows changing of last name' do
         expect(ability).not_to be_able_to(:change_name, user)
       end
+
+      it 'disallows changing of password' do
+        expect(ability).not_to be_able_to(:change_password, user)
+      end
     end
   end
 
