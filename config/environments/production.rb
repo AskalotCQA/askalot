@@ -88,8 +88,8 @@ NaRuby::Application.configure do
 
   config.middleware.use ExceptionNotification::Rack,
     email: {
-      email_prefix: "[TP][Error] ",
-      sender_address: %{"naRuby" <naruby@otvoreneprojekty.sk>},
+      email_prefix: '[tp][error] ',
+      sender_address: %{'naRuby' <naruby@otvoreneprojekty.sk>},
       exception_recipients: %w{askalot@fiit.stuba.sk}
   }
 end
