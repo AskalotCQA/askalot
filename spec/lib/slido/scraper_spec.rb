@@ -3,7 +3,6 @@ require 'spec_helper'
 describe Slido::Scraper do
   it 'scrapes slido questions with event' do
     cookies    = { cookie1: 1, cookie2: 2 }
-    config     = OpenStruct.new(base: 'https://www.sli.do', cookies: cookies)
 
     builder    = double(:builder)
     finder     = double(:finder)
@@ -28,7 +27,7 @@ describe Slido::Scraper do
     expect(builder).to          receive(:create_slido_event_by).with(:uuid, uuid: 123, identifier: 'woow', name: 'such event', category_id: 1).and_return(double.as_null_object)
     expect(builder).to          receive(:create_question_by).with(:slido_question_uuid, title: 'Wow?', category_id: 1, author_id: 2).and_return(double.as_null_object)
 
-    Slido.config = config
+    Slido.config.cookies = cookies
 
     stub_const('Scout::Downloader', downloader)
     stub_const('Slido::Wall::Parser', wall_parser)

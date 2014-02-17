@@ -14,8 +14,8 @@ module Slido
         result.uuid        = data[:event_id].to_i
         result.identifier  = data[:hash]
         result.name        = data[:name]
-        result.started_at  = Time.parse(data[:date_from])
-        result.ended_at    = Time.parse(data[:date_to])
+        result.started_at  = Time.parse(data[:date_from]) - 1.hour
+        result.ended_at    = Time.parse(data[:date_to]) - 1.hour
         result.url         = "#{Slido.config.base}/#{result.identifier}"
 
         result
