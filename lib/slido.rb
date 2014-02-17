@@ -2,9 +2,8 @@ require 'slido/questions/parser'
 require 'slido/wall/parser'
 require 'slido/scraper'
 
-# TODO (smolnar) use Squire, resolve why fails in stub_const
 module Slido
-  def self.base
-    'https://www.sli.do'
-  end
+  mattr_accessor :config
+
+  self.config ||= Configuration.slido
 end

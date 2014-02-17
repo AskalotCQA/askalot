@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_nick params[:nick]
+
+    raise ActiveRecord::RecordNotFound unless @user
   end
 
   def update
