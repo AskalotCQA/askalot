@@ -24,7 +24,7 @@ module Slido
 
       event.update_attributes!(attributes)
 
-      content   = Scout::Downloader.download("#{uri}/questions/load")
+      content   = Scout::Downloader.download("#{uri}/questions/load", params)
       questions = Slido::Questions::Parser.parse(content)
 
       questions.each do |question|

@@ -38,4 +38,10 @@ describe Slido::Scraper do
 
     Slido::Scraper.run(category)
   end
+
+  context 'when events does not start with valid prefix' do
+    it 'aborts scraping of the event' do
+      pending
+    end
+  end
 end
