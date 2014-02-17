@@ -15,12 +15,14 @@ module Slido
       content = Scout::Downloader.download("#{uri}/wall")
       event   = Slido::Wall::Parser.parse(content)
 
+      unless event.name.start_with? category.slido_event_prefix.to_s
+        raise ArgumentError.new("Current event #{event.name} does not match prefix #{category.slido_event_prefix}")
+      end
+
       attributes = event.to_h.merge(category_id: category.id)
 
       author = Core::Finder.find_user_by(login: :slido)
       event  = Core::Builder.create_slido_event_by(:uuid, attributes)
-
-      abort unless event.name.start_with? category.slido_event_prefix.to_s
 
       event.update_attributes!(attributes)
 

@@ -7,8 +7,9 @@ namespace :slido do
       # TODO (smolnar) refactor
       begin
         Slido::Scraper.run(category)
-      rescue
+      rescue Exception => e
         puts "Error pulling questions from #{category.slido_username}."
+        puts e
       end
     end
   end

@@ -9,8 +9,8 @@ describe Slido::Scraper do
     downloader = double(:dowloader)
     response   = double(:response, last_effective_url: 'https://www.sli.do/doge/woow')
 
+    event     = OpenStruct.new(uuid: 123, identifier: 'woow', name: 'such event')
     category  = double(:category, id: 1, slido_username: 'doge', slido_event_prefix: 'such')
-    event     = double(:event, to_h: { uuid: 123, identifier: 'woow', name: 'such event' })
     questions = [
       double(:question, to_h: { title: 'Wow?' })
     ]
@@ -40,7 +40,25 @@ describe Slido::Scraper do
 
   context 'when events does not start with valid prefix' do
     it 'aborts scraping of the event' do
-      pending
+      cookies    = { cookie1: 1, cookie2: 2 }
+
+      downloader = double(:dowloader)
+      response   = double(:response, last_effective_url: 'https://www.sli.do/doge/woow')
+
+      event       = OpenStruct.new(uuid: 123, identifier: 'woow', name: 'such event')
+      category    = double(:category, id: 1, slido_username: 'doge', slido_event_prefix: 'wow')
+      wall_parser = double(:wall_parser)
+
+      expect(downloader).to  receive(:download).with('https://www.sli.do/doge', cookies: cookies, with_response: true).and_return(response)
+      expect(downloader).to  receive(:download).with('https://www.sli.do/doge/woow/wall').and_return(:html)
+      expect(wall_parser).to receive(:parse).with(:html).and_return(event)
+
+      Slido.config.cookies = cookies
+
+      stub_const('Scout::Downloader', downloader)
+      stub_const('Slido::Wall::Parser', wall_parser)
+
+      expect { Slido::Scraper.run(category) }.to raise_error(ArgumentError, 'Current event such event does not match prefix wow')
     end
   end
 end
