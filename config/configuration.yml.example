@@ -8,7 +8,7 @@ defaults: &defaults
 
   secret_token: TODO
 
-  show:
+  enable:
     registrations: true
     passwords: true
     confirmations: true
