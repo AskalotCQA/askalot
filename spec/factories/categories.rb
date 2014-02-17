@@ -10,6 +10,7 @@ FactoryGirl.define do
 
     trait :with_slido do
       slido_username 'doge'
+      slido_event_prefix 'such'
     end
   end
 end

@@ -36,7 +36,7 @@ describe Core::Builder do
 
     context 'when model does not exists' do
       it 'raises an error' do
-        expect { subject.create_very_bogus_model_by(name: 'Bogus') }.to raise_error(ArgumentError, 'Cannot find model \'VeryBogusModel\'.')
+        expect { subject.create_very_bogus_model_by(name: 'Bogus') }.to raise_error(ArgumentError, 'Cannot find model \'VeryBogusModel\'')
       end
     end
   end

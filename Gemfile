@@ -6,7 +6,7 @@ gem 'rails', '4.0.2'
 gem 'pg'
 
 # configuration
-gem 'squire', '~> 1.2.6'
+gem 'squire', '~> 1.3.6'
 
 # authentification
 gem 'devise', '~> 3.1.1'
@@ -89,4 +89,5 @@ end
 group :production do
   gem 'unicorn'
   gem 'rack-timeout'
+  gem 'exception_notification'
 end

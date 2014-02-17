@@ -7,7 +7,7 @@
     <%= devise_error_messages! %>
 
     <div class="form-group">
-      <%= f.label :login %>
+      <%= f.label :login %> <%= content_tag(:em, "(#{t('user.ais_login_notice')})") unless Configuration.enable.registrations? %>
       <%= f.text_field :login, autofocus: true, class: :'form-control' %>
     </div>
 

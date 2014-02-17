@@ -59,6 +59,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   # Include support
+  config.include Devise::TestHelpers,         type: :controller
   config.include EmailHelper
   config.include FixtureHelper
   config.include HistoryHelper,               type: :feature
@@ -69,7 +70,4 @@ RSpec.configure do |config|
   config.include Users::AuthenticationHelper, type: :feature
 
   config.before(:each) { reset_emails }
-
-  # Specify paths to use DatabaseCleaner for
-  DatabaseHelper.clean :models, :features, :requests
 end

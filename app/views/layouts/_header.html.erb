@@ -31,7 +31,7 @@
           <li class="visible-xs"><%= link_to t('user.settings'), edit_user_registration_path %></li>
           <li class="visible-xs"><%= link_to t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
         <% else %>
-          <% if Configuration.show.registrations? %>
+          <% if Configuration.enable.registrations? %>
             <li><%= link_to t('user.sign_up'), new_user_registration_path %></li>
           <% end %>
           <li><%= link_to t('user.sign_in'), new_user_session_path %></li>

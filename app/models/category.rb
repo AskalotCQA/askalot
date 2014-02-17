@@ -1,7 +1,7 @@
 class Category < ActiveRecord::Base
   include Watchable
 
-  has_many :questions
+  has_many :questions, dependent: :restrict_with_exception
 
   validates :name, presence: true, uniqueness: true
 

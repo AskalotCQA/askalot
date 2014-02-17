@@ -3,6 +3,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by_nick params[:nick]
+
+    raise ActiveRecord::RecordNotFound unless @user
   end
 
   def update
@@ -18,10 +20,11 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    attributes = [:nick, :about, :gravatar_email, :show_name, :show_email]
+    attributes = [:email, :nick, :about, :gravatar_email, :show_name, :show_email]
 
     attributes += Social.networks.keys
     attributes += [:first, :last] if can? :change_name, current_user
+    attributes += [:password, :password_confirmation] if can? :change_password, current_user
 
     params.require(:user).permit(attributes)
   end

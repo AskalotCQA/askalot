@@ -37,6 +37,8 @@ sk:
     forgotten_password: 'Zabudli ste heslo?'
     locked_account: 'Zamknutý účet?'
 
+    ais_login_notice: 'použite prihlasovacie údaje z Akademického informačného systému'
+
     settings: 'Nastavenia'
 
     welcome:

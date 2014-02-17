@@ -13,21 +13,21 @@ class User < ActiveRecord::Base
 
          authentication_keys: [:login]
 
-  has_many :questions, foreign_key: :author_id
-  has_many :answers,   foreign_key: :author_id
-  has_many :comments,  foreign_key: :author_id
+  has_many :questions, foreign_key: :author_id, dependent: :destroy
+  has_many :answers,   foreign_key: :author_id, dependent: :destroy
+  has_many :comments,  foreign_key: :author_id, dependent: :destroy
 
-  has_many :labelings
+  has_many :labelings, dependent: :destroy
   has_many :labels, through: :labelings, foreign_key: :author_id
 
-  has_many :followings
+  has_many :followings, dependent: :destroy
   has_many :followers, through: :followings, class_name: :User, foreign_key: :follower_id
   has_many :followees, through: :followings, class_name: :User, foreign_key: :followee_id
 
-  has_many :favorites, foreign_key: :favorer_id
-  has_many :views,     foreign_key: :viewer_id
-  has_many :votes,     foreign_key: :voter_id
-  has_many :watchings, foreign_key: :watcher_id
+  has_many :favorites, foreign_key: :favorer_id, dependent: :destroy
+  has_many :views,     foreign_key: :viewer_id,  dependent: :destroy
+  has_many :votes,     foreign_key: :voter_id,   dependent: :destroy
+  has_many :watchings, foreign_key: :watcher_id, dependent: :destroy
 
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
 
@@ -99,6 +99,6 @@ class User < ActiveRecord::Base
   protected
 
   def password_required?
-    ais_login.nil? ? super : false
+    ais_login ? false : super
   end
 end
