@@ -89,4 +89,5 @@ end
 group :production do
   gem 'unicorn'
   gem 'rack-timeout'
+  gem 'exception_notification'
 end

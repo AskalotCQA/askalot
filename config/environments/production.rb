@@ -80,6 +80,16 @@ NaRuby::Application.configure do
 
   config.action_mailer.default_url_options = { host: 'askalot.fiit.stuba.sk' }
 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
+
+  config.middleware.use ExceptionNotification::Rack,
+    email: {
+      email_prefix: "[TP][Error] ",
+      sender_address: %{"naRuby" <naruby@otvoreneprojekty.sk>},
+      exception_recipients: %w{askalot@fiit.stuba.sk}
+  }
 end
