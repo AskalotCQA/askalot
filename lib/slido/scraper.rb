@@ -5,7 +5,7 @@ module Slido
     def self.run(category, options = {})
       username = category.slido_username
 
-      uri = "#{Slido.base}/#{username}"
+      uri = "#{Slido.config.base}/#{username}"
 
       response = Scout::Downloader.download(uri, with_response: true)
 

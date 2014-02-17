@@ -16,7 +16,7 @@ module Slido
         result.name        = data[:name]
         result.started_at  = Time.parse(data[:date_from])
         result.ended_at    = Time.parse(data[:date_to])
-        result.url         = "#{Slido.base}/#{result.identifier}"
+        result.url         = "#{Slido.config.base}/#{result.identifier}"
 
         result
       end
