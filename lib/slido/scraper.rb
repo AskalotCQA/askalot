@@ -16,7 +16,7 @@ module Slido
       event   = Slido::Wall::Parser.parse(content)
 
       unless event.name.start_with? category.slido_event_prefix.to_s
-        raise ArgumentError.new("Current event #{event.name} does not match prefix #{category.slido_event_prefix}")
+        raise "Current event #{event.name} does not match prefix #{category.slido_event_prefix}"
       end
 
       attributes = event.to_h.merge(category_id: category.id)
