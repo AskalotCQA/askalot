@@ -1,6 +1,10 @@
 # Askalot
 
-TODO
+Askalot is a CQA (Community Question and Answer) system of next generation.
+
+## Installation
+
+
 
 ## License
 
