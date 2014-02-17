@@ -1,5 +1,7 @@
 #= require lib/module
 
+# TODO (smolnar) add global variable for checking if any other related request is in progress
+
 class window.Poll extends Module
   @initialize: ->
     $(document).ready ->
