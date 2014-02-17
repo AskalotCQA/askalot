@@ -25,6 +25,7 @@ describe 'User Profile' do
       click_link 'Účet'
 
       fill_in 'user_email', with: 'nicky.nickmangmail.com'
+      fill_in 'user_current_password', with: user.password
 
       click_button 'Uložiť'
 
@@ -37,8 +38,6 @@ describe 'User Profile' do
       expect(page).to have_content('Aktuálne heslo – je povinná položka')
 
       fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
-      fill_in 'user_password', with: 'new password'
-      fill_in 'user_password_confirmation', with: 'new password'
       fill_in 'user_current_password', with: user.password
 
       click_button 'Uložiť'
