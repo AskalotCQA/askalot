@@ -3,9 +3,7 @@ require 'slido/wall/parser'
 require 'slido/scraper'
 
 module Slido
-  include Squire
+  mattr_accessor :config
 
-  config do |config|
-    config.base = 'https://www.sli.do'
-  end
+  self.config ||= Configuration.slido
 end

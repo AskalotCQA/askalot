@@ -15,6 +15,12 @@ defaults: &defaults
     unlocks: true
     omniauth: true
 
+  slido:
+    base: 'https://www.sli.do'
+    cookies:
+      PHPSESSID: TODO
+      SESSIDCHECK: TODO
+
 development:
   <<: *defaults
 
