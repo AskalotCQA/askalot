@@ -20,7 +20,7 @@ module Slido
       author = Core::Finder.find_user_by(login: :slido)
       event  = Core::Builder.create_slido_event_by(:uuid, attributes)
 
-      abort unless event.name.start_with? category.slido_event_prefix
+      abort unless event.name.start_with? category.slido_event_prefix.to_s
 
       event.update_attributes!(attributes)
 
