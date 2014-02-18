@@ -15,6 +15,9 @@ defaults: &defaults
     unlocks: true
     omniauth: true
 
+  poll:
+    default: 60
+
   slido:
     base: 'https://www.sli.do'
     cookies:
@@ -26,6 +29,9 @@ development:
 
 test:
   <<: *defaults
+
+  poll:
+    default: 1
 
 staging:
   <<: *defaults

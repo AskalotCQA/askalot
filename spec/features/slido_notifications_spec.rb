@@ -30,7 +30,7 @@ describe 'Slido Notifications' do
 
       create :slido_event, category: category, name: 'Westside Party #3', url: 'https://sli.do/ali.g/wp03'
 
-      wait_for_remote 6.seconds
+      wait_for_remote 2.seconds
 
       within '#flash' do
         expect(page).to have_content('Aktuálne prebieha prednáška Westside Party #3, ak máte záujem spýtať sa otázku použite sli.do na adrese https://sli.do/ali.g/wp03.')
