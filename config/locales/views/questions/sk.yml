@@ -33,6 +33,8 @@ sk:
       start: 'Aktualizovať automaticky'
       end: 'Aktualizované %{time}'
 
+    evaluate: 'Ohodnotiť'
+
     favor: 'Pridať medzi obľúbené'
     unfavor: 'Odobrať z obľúbených'
 
