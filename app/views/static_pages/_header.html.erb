@@ -17,16 +17,18 @@
           </li>
           <% unless current_user %>
             <li>
-              <% if Configuration.show.registrations? %>
+              <% if Configuration.enable.registrations? %>
                 <%= icon_link_to :rocket, t('home.sign_up'), new_user_registration_path, class: 'btn btn-success btn-lg' %>
               <% else %>
                 <%= icon_link_to :rocket, t('home.sign_in'), new_user_session_path, class: 'btn btn-success btn-lg' %>
               <% end %>
             </li>
           <% else %>
-            <li>
-              <%= icon_link_to :comment, t('home.answer'), question_path(@question), id: :'new-question', class: 'btn btn-success btn-lg' %>
-            </li>
+            <% if @question %>
+              <li>
+                <%= icon_link_to :comment, t('home.answer'), question_path(@question), id: :'new-question', class: 'btn btn-success btn-lg' %>
+              </li>
+            <% end %>
           <% end %>
          </ul>
       </div>

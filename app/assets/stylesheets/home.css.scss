@@ -1,6 +1,39 @@
 @import 'mixins';
 @import 'variables';
 
+.jumbotron {
+  margin: 0;
+  padding: 120px 0;
+
+  h1 {
+    margin: 0;
+    font-variant: small-caps;
+    text-align: center;
+    text-shadow: 0 0 128px $brand-info;
+  }
+
+  p {
+    margin: 10px 0 30px 0 !important;
+    padding: 0;
+    font-size: 22.5px;
+    text-align: center;
+    text-shadow: 0 0 96px $brand-info;
+    color: rgba($jumbotron-color, .25);
+  }
+
+  ul {
+    margin: 0 !important;
+    text-align: center;
+
+    .btn {
+      margin: 20px 0;
+      padding: $padding-large-vertical * 1.25 $padding-large-horizontal * 1.25;
+      font-size: $jumbotron-font-size * 1.25;
+      text-shadow: 0 0 128px $brand-info;
+    }
+  }
+}
+
 .step {
   color: $text-muted;
   text-align: center;

@@ -64,7 +64,7 @@ $(document).ready ->
     cssProcessing: 'table-processing'
 
     headerTemplate: '{content} <span>{icon}</span>'
-    # TODO(molnar) refactor this to something like: widgets: [('numbering' if $(this).attr('data-numbering')), 'uitheme']
+    # TODO (smolnar) refactor this to something like: widgets: [('numbering' if $(this).attr('data-numbering')), 'uitheme']
     widgets: ['numbering', 'uitheme']
 
     sortLocaleCompare: true

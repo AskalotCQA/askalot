@@ -12,7 +12,7 @@ class Question < ActiveRecord::Base
   belongs_to :author, class_name: :User, counter_cache: true
   belongs_to :category, counter_cache: true
 
-  has_many :answers
+  has_many :answers, dependent: :destroy
 
   validates :category,  presence: true
   validates :title,     presence: true, length: { minimum: 2, maximum: 250 }
@@ -22,7 +22,7 @@ class Question < ActiveRecord::Base
   scope :random,     lambda { select('questions.*, random()').order('random()') }
   scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }
   scope :answered,   lambda { joins(:answers).uniq }
-  scope :solved,     lambda { joins(:answers).merge(Answer.labeled_with Label.where(value: :best).first).uniq }
+  scope :solved,     lambda { joins(:answers).merge(Answer.labeled_with(Label.where(value: :best).first)).uniq }
 
   scope :by, lambda { |user| where(author: user) }
 
@@ -32,8 +32,6 @@ class Question < ActiveRecord::Base
 
     best ? [best] + other.where('id != ?', best.id) : other
   end
-
-  before_create :set_slido_author, if: :slido_uuid?
 
   def labels
     [category] + tags_with_counts
@@ -47,9 +45,5 @@ class Question < ActiveRecord::Base
 
   def add_category_tags
     self.tag_list += self.category.tags
-  end
-
-  def set_slido_author
-    self.author = User.find_by_login 'slido'
   end
 end

@@ -1,5 +1,7 @@
 @import "bootstrap/mixins";
 
+// general
+
 @mixin action-coloring($default-color, $action-color) {
   color: $default-color;
 
@@ -8,17 +10,13 @@
   }
 }
 
-@mixin block-labeling($action-class, $default-color, $action-color) {
+@mixin block-iconing {
+  font-size: $font-size-h2;
+  text-align: center;
+
   a {
-    @include action-coloring($default-color, $action-color);
-  }
-
-  a.#{$action-class} {
-    @include action-coloring($action-color, $default-color);
-  }
-
-  span {
-    color: $action-color;
+    display: inline-block;
+    cursor: pointer;
   }
 }
 
@@ -41,18 +39,24 @@
   color: $text-muted;
 }
 
-@mixin block-voting {
-  font-size: $font-size-h2;
-  text-align: center;
+// specific
 
+@mixin block-labeling($action-class, $default-color, $action-color) {
   a {
-    display: inline-block;
-    cursor: pointer;
+    @include action-coloring($default-color, $action-color);
+  }
+
+  a.#{$action-class} {
+    @include action-coloring($action-color, $default-color);
+  }
+
+  span {
+    color: $action-color;
   }
 }
 
 @mixin block-evaluating($class) {
-  @include block-voting;
+  @include block-iconing;
 
   a {
     @include action-coloring($gray-light, $brand-warning);

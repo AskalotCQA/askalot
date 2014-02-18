@@ -10,6 +10,7 @@
       <section id="question-title">
         <h1>
           <%= @question.title %>
+          <%= evaluation_badge_tag @question if @question.evaluations.any? %>
           <br/>
           <small><%= question_creation_time @question %></small>
         </h1>
@@ -21,6 +22,10 @@
         <p>
           <%= @question.text %>
         </p>
+      </section>
+
+      <section id="question-evaluations">
+        <%= render 'questions/evaluations', question: @question %>
       </section>
 
       <section id="question-comments">

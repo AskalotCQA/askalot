@@ -10,7 +10,7 @@
 // member
 
 .answer-voting {
-  @include block-voting;
+  @include block-iconing;
 }
 
 .answer-labeling {
@@ -41,5 +41,9 @@
 }
 
 .answer-comments {
+  @include block-listing;
+}
+
+.answer-evaluations {
   @include block-listing;
 }

@@ -2,7 +2,7 @@ module Favorable
   extend ActiveSupport::Concern
 
   included do
-    has_many :favorites
+    has_many :favorites, dependent: :destroy
     has_many :favorers, through: :favorites, source: :favorer
 
     scope :favored, lambda { joins(:favorites).uniq }

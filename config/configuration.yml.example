@@ -8,18 +8,30 @@ defaults: &defaults
 
   secret_token: TODO
 
-  show:
+  enable:
     registrations: true
     passwords: true
     confirmations: true
     unlocks: true
     omniauth: true
 
+  poll:
+    default: 60
+
+  slido:
+    base: 'https://www.sli.do'
+    cookies:
+      PHPSESSID: TODO
+      SESSIDCHECK: TODO
+
 development:
   <<: *defaults
 
 test:
   <<: *defaults
+
+  poll:
+    default: 1
 
 staging:
   <<: *defaults

@@ -21,7 +21,7 @@ NaRuby::Application.routes.draw do
   end
 
   concern :evaluable do
-    resources :evaluations, only: [:create]
+    resources :evaluations, only: [:create, :update]
 
     get :evaluation, on: :member
   end

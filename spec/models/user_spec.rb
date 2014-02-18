@@ -100,6 +100,7 @@ describe User do
       user = build :user, :as_ais
 
       expect(user).to be_valid
+      expect(user.password).to be_nil
       expect(user.encrypted_password).to be_empty
     end
   end
@@ -116,6 +117,10 @@ describe User do
 
       it 'disallows changing of last name' do
         expect(ability).not_to be_able_to(:change_name, user)
+      end
+
+      it 'disallows changing of password' do
+        expect(ability).not_to be_able_to(:change_password, user)
       end
     end
   end

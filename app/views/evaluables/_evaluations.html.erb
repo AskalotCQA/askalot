@@ -1,0 +1,13 @@
+<% if evaluations.any? %>
+  <p class="text-muted">
+    <%= t 'count.evaluation.one' %> <%= evaluation_icon_tag evaluable %>
+  </p>
+
+  <% if evaluations.where.not(text: nil).any? %>
+    <ol class="<%= model %>-evaluations">
+      <% evaluations.where.not(text: nil).each do |evaluation| %>
+        <%= render 'evaluables/evaluation', evaluation: evaluation %>
+      <% end %>
+    </ol>
+  <% end %>
+<% end %>

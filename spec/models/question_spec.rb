@@ -175,14 +175,4 @@ describe Question do
       end
     end
   end
-
-  context 'when question is from slido' do
-    it 'assigns slido user as author' do
-      author   = User.find_by login: :slido
-
-      question = create :question, :from_slido
-
-      expect(question.author).to eql(author)
-    end
-  end
 end

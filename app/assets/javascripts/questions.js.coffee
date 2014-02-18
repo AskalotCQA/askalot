@@ -1,8 +1,19 @@
+# TODO (smolnar) refactor to filter module
+onFilter = ->
+  $('#questions').find('a').click (e) -> e.preventDefault()
+  $('#questions').find('a').addClass('disabled')
+
+  $('#questions').fadeTo('slow', 0.25)
+
 $(document).ready ->
   new Select()
 
+  $(document).on 'click', '#questions-controls .nav a', -> onFilter()
+
   $(document).on 'change', '#question_tags', ->
     $(this).closest('form').submit()
+
+    onFilter()
 
   # TODO (smolnar) use better class of identification of tag in list
   $(document).on 'click', '#questions .question-tag, #questions .question-category', (e) ->
@@ -22,5 +33,4 @@ $(document).ready ->
 
     html += "<li><span class=\"label label-info\">#{tag}</span></li>" for tag in tags[value]
 
-    $('ul#category-tags').parent().removeClass('hidden')
-    $('ul#category-tags').html(html)
+    $('ul#question-category-tags').html(html)

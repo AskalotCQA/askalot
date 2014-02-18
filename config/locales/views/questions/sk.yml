@@ -5,10 +5,16 @@ sk:
     new:
       title: 'Nová otázka'
       submit: 'Opýtať'
+      submit_anonymously: 'Opýtať sa anonymne'
       feature: 'Pridať otázku'
 
     create:
       success: 'Vaša otázka bola úspešne pridaná.'
+
+    index:
+      title: 'Otázky'
+      new: 'Nová otázka'
+      no_results_found: 'Neboli nájdené žiadne otázky.'
 
     tab:
       new: 'Aktuálne'
@@ -23,14 +29,11 @@ sk:
       no_matches_found: 'Nenájdený žiadny výsledok'
       placeholder: 'napr. elasticsearch, linux-server, use-case'
 
-    index:
-      title: 'Nové otázky'
-      new: 'Nová otázka'
-      no_results_found: 'Neboli nájdené žiadne otázky.'
-
     poll:
       start: 'Aktualizovať automaticky'
       end: 'Aktualizované %{time}'
+
+    evaluate: 'Ohodnotiť'
 
     favor: 'Pridať medzi obľúbené'
     unfavor: 'Odobrať z obľúbených'

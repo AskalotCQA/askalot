@@ -18,6 +18,12 @@ sk:
       few: 'komentáre'
       other: 'komentárov'
 
+    evaluation:
+      zero: 'hodnotení'
+      one: 'hodnotenie'
+      few: 'hodnotení'
+      other: 'hodnotení'
+
     favorite:
       zero: 'obľúbení'
       one: 'obľúbenie'
@@ -60,6 +66,12 @@ sk:
       one: '1 komentár'
       few: '%{count} komentáre'
       other: '%{count} komentárov'
+
+    evaluation:
+      zero: 'žiadne hodnotenie'
+      one: '1 hodnotenie'
+      few: '%{count} hodnotení'
+      other: '%{count} hodnotení'
 
     favorite:
       zero: 'žiadne obľúbenie'
@@ -122,8 +134,12 @@ sk:
         show_name:  'Zobraziť meno ostatným používateľom'
         show_email: 'Zobraziť e-mail ostatným používateľom'
 
+        hide_name: 'Skryť meno ostatným používateľom'
+        hide_email: 'Skryť e-mail ostatným používateľom'
+
       question:
         category: 'Kategória'
+        category_id: 'Kategória'
         title: 'Nadpis'
         text: 'Text'
         tag_list: 'Tagy'
