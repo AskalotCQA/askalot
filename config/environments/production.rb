@@ -90,6 +90,6 @@ NaRuby::Application.configure do
     email: {
       email_prefix: '[tp][error] ',
       sender_address: %{'naRuby' <naruby@otvoreneprojekty.sk>},
-      exception_recipients: %w{askalot@fiit.stuba.sk}
+      exception_recipients: %w{tp-1314-13@googlegroups.com}
   }
 end
