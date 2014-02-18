@@ -12,7 +12,7 @@ class Question < ActiveRecord::Base
   belongs_to :author, class_name: :User, counter_cache: true
   belongs_to :category, counter_cache: true
 
-  has_many :answers
+  has_many :answers, dependent: :destroy
 
   validates :category,  presence: true
   validates :title,     presence: true, length: { minimum: 2, maximum: 250 }

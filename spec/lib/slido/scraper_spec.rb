@@ -58,7 +58,7 @@ describe Slido::Scraper do
       stub_const('Scout::Downloader', downloader)
       stub_const('Slido::Wall::Parser', wall_parser)
 
-      expect { Slido::Scraper.run(category) }.to raise_error(ArgumentError, 'Current event such event does not match prefix wow')
+      expect { Slido::Scraper.run(category) }.to raise_error(RuntimeError, 'Current event such event does not match prefix wow')
     end
   end
 end
