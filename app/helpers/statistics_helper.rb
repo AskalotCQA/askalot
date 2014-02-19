@@ -12,13 +12,13 @@ module StatisticsHelper
       classes << map[:negative] if value < 0
       classes << map[:zero]     if value.zero?
       classes << map[:positive] if value > 0
-      classes << "text-#{classes.last}" unless classes.last.to_s.start_with?('text')
+      classes << "text-#{classes.last}" unless classes.last.blank? || classes.last.to_s.start_with?('text')
       classes << :'text-right'
     else
       data = block.call(value, options)
 
       if data.is_a? Array
-        value, classes = *data
+        value, classes = data.first, Array.wrap(data.second)
       elsif data.is_a? Hash
         value, classes = data[:value], Array.wrap(data[:class])
       else
@@ -26,6 +26,6 @@ module StatisticsHelper
       end
     end
 
-    content_tag :td, value, options.merge(class: classes)
+    content_tag :td, value, options.merge(class: classes.reject(&:blank?))
   end
 end
