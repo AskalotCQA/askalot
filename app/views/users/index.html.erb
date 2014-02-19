@@ -5,5 +5,15 @@
   <%= tab_link_tag_with_count t('user.tab.all'), :'users-all', users_path(params.except(:page).merge tab: :'users-all'), filter_users(User).count, remote: true %>
 </ul>
 
-
+<table>
+    <% @users.in_groups_of(12, false) do |users_group| %>
+      <tr>
+        <% users_group.each do |user| %>
+            <td>
+                <%= render 'square', user: user %>
+            </td>
+        <% end %>
+      </tr>
+    <% end %>
+</table>
 
