@@ -14,20 +14,20 @@ class Question < ActiveRecord::Base
 
   has_many :answers, dependent: :destroy
 
-  validates :category,  presence: true
-  validates :title,     presence: true, length: { minimum: 2, maximum: 250 }
-  validates :text,      presence: true, length: { minimum: 2 }
+  validates :category, presence: true
+  validates :title, presence: true, length: { minimum: 2, maximum: 250 }
+  validates :text, presence: true, length: { minimum: 2 }
   validates :anonymous, inclusion: { in: [true, false] }
 
-  scope :random,     lambda { select('questions.*, random()').order('random()') }
+  scope :random, lambda { select('questions.*, random()').order('random()') }
   scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }
-  scope :answered,   lambda { joins(:answers).uniq }
-  scope :solved,     lambda { joins(:answers).merge(Answer.labeled_with(Label.where(value: :best).first)).uniq }
+  scope :answered, lambda { joins(:answers).uniq }
+  scope :solved, lambda { joins(:answers).merge(Answer.labeled_with(Label.where(value: :best).first)).uniq }
 
   scope :by, lambda { |user| where(author: user) }
 
   def answers_ordered
-    best  = answers.labeled_with(:best).first
+    best = answers.labeled_with(:best).first
     other = answers.order(votes_total: :desc, created_at: :desc)
 
     best ? [best] + other.where('id != ?', best.id) : other
