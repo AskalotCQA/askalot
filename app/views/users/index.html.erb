@@ -1,5 +1,5 @@
 <% provide(:title, 'All users') %>
-<h1>All users</h1>
+<h1><%= t('user.navigation') %></h1>
 
 <ul class="nav nav-tabs">
   <%= tab_link_tag_with_count t('user.tab.all'), :'users-all', users_path(params.except(:page).merge tab: :'users-all'), filter_users(User).count, remote: true %>
