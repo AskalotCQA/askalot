@@ -5,7 +5,7 @@ module GravatarHelper
     size    = options[:size]    || 80
     default = options[:default] || github_identicon_url(email_to_github_user email)
 
-    "http://gravatar.com/avatar/#{hash}?r=#{rating}&s=#{size}&d=#{default}"
+    "https://gravatar.com/avatar/#{hash}?r=#{rating}&s=#{size}&d=#{default}"
   end
 
   def gravatar_image_tag(email, options = {})
