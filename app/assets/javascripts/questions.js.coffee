@@ -8,7 +8,7 @@ onFilter = ->
 $(document).ready ->
   new Select()
 
-  $(document).on 'click', '#questions-controls .nav a', -> onFilter()
+  $(document).on 'click', '#questions-controls a', -> onFilter()
 
   $(document).on 'change', '#question_tags', ->
     $(this).closest('form').submit()
