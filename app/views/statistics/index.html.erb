@@ -88,23 +88,23 @@
                 <%= statistical_cell user.questions.where(id: @questions).commented.size %>
                 <%= statistical_cell user.questions.where(id: @questions).favored.size %>
 
-                <%= statistical_cell user.answers.size %>
-                <%= statistical_cell user.answers.voted.size %>
-                <%= statistical_cell user.answers.commented.size %>
-                <%= statistical_cell user.answers.labeled_with(:best).size, positive: :success %>
-                <%= statistical_cell user.answers.labeled_with(:helpful).size, positive: :warning %>
+                <%= statistical_cell join_question(user.answers, @questions).size %>
+                <%= statistical_cell join_question(user.answers.voted, @questions).size %>
+                <%= statistical_cell join_question(user.answers.commented, @questions).size %>
+                <%= statistical_cell join_question(user.answers.labeled_with(:best), @questions).size, positive: :success %>
+                <%= statistical_cell join_question(user.answers.labeled_with(:helpful), @questions).size, positive: :warning %>
 
-                <%= statistical_cell user.views.size %>
+                <%= statistical_cell join_question(user.views, @questions).size %>
 
-                <%= statistical_cell user.votes.size %>
-                <%= statistical_cell user.votes.for(:question).size %>
-                <%= statistical_cell user.votes.for(:answer).size %>
+                <%= statistical_cell join_questions(user.votes, :votable, @questions).size + join_questions_through_answers(user.votes, :votable, @questions).size %>
+                <%= statistical_cell join_questions(user.votes, :votable, @questions).size %>
+                <%= statistical_cell join_questions_through_answers(user.votes, :votable, @questions).size %>
 
-                <%= statistical_cell user.comments.size %>
-                <%= statistical_cell user.comments.for(:question).size %>
-                <%= statistical_cell user.comments.for(:answer).size %>
+                <%= statistical_cell join_questions(user.comments, :commentable, @questions).size + join_questions_through_answers(user.comments, :commentable, @questions).size %>
+                <%= statistical_cell join_questions(user.comments, :commentable, @questions).size %>
+                <%= statistical_cell join_questions_through_answers(user.comments, :commentable, @questions).size %>
 
-                <%= statistical_cell user.favorites.size %>
+                <%= statistical_cell join_question(user.favorites, @questions).size %>
               </tr>
             <% end %>
           </tbody>
