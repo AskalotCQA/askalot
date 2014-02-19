@@ -4,6 +4,8 @@ class Answer < ActiveRecord::Base
   include Votable
   include Watchable
 
+  after_save :slido_answered
+
   belongs_to :author, class_name: :User, counter_cache: true
   belongs_to :question, counter_cache: true
 
@@ -43,5 +45,14 @@ class Answer < ActiveRecord::Base
 
   def verified?
     labels.exists? value: :verified
+  end
+
+  private
+
+  def slido_answered
+    return unless author.role == :teacher
+    return unless question.author.login == 'slido'
+    return unless question.answers.count == 1
+    toggle_labeling_by! author, :best
   end
 end
