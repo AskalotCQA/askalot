@@ -82,11 +82,11 @@
                 <td class="text-right"><%= i + 1 %></td>
                 <%= statistical_cell(user) { |u| [link_to(user.name || user.nick, user_path(user.nick)), u.role?(:teacher) ? :info : nil] } %>
 
-                <%= statistical_cell user.questions.size %>
-                <%= statistical_cell user.questions.viewed.size %>
-                <%= statistical_cell user.questions.voted.size %>
-                <%= statistical_cell user.questions.commented.size %>
-                <%= statistical_cell user.questions.favored.size %>
+                <%= statistical_cell user.questions.where(id: @questions).size %>
+                <%= statistical_cell user.questions.where(id: @questions).viewed.size %>
+                <%= statistical_cell user.questions.where(id: @questions).voted.size %>
+                <%= statistical_cell user.questions.where(id: @questions).commented.size %>
+                <%= statistical_cell user.questions.where(id: @questions).favored.size %>
 
                 <%= statistical_cell user.answers.size %>
                 <%= statistical_cell user.answers.voted.size %>
