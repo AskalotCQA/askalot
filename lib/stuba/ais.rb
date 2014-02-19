@@ -3,15 +3,17 @@ require 'timeout'
 module Stuba
   class AIS
     def self.authenticate(username, password, options = {})
-      request = Stuba::LDAP.build({
+      request = Stuba::LDAP.build(
         host: 'ldap.stuba.sk',
-        port: 389,
+        port: 636,
+        base: 'ou=People,dc=stuba,dc=sk',
+        encryption: :simple_tls,
         auth: {
           method: :simple,
           username: "uid=#{username},ou=People,dc=stuba,dc=sk",
           password: password
         }
-      })
+      )
 
       treebase = 'dc=stuba,dc=sk'
       filter   = Stuba::LDAP.build_filter :eq, 'uid', username

@@ -7,7 +7,9 @@ describe Stuba::AIS do
     let(:options) do
       {
         host: 'ldap.stuba.sk',
-        port: 389,
+        port: 636,
+        base: 'ou=People,dc=stuba,dc=sk',
+        encryption: :simple_tls,
         auth: {
           method: :simple,
           username: 'uid=xuser1,ou=People,dc=stuba,dc=sk',
