@@ -12,9 +12,9 @@
       <div class="col-md-4">
         <div class="input-group" id="datepicker">
           <span class="input-group-addon"><%= icon_tag :calendar %></span>
-          <%= text_field_tag :from, params[:from], class: :'form-control' %>
+          <%= text_field_tag :from, params[:from], class: :'form-control', data: { as: :datepicker } %>
           <span class="input-group-addon"><%= icon_tag :'arrows-h' %></span>
-          <%= text_field_tag :to, params[:to], class: :'form-control' %>
+          <%= text_field_tag :to, params[:to], class: :'form-control', data: { as: :datepicker } %>
         </div>
       </div>
       <div class="col-md-4">
