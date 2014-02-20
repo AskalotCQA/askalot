@@ -14,19 +14,21 @@ class StatisticsController < ApplicationController
   private
 
   def filter_by_date
-    params[:from] = (DateTime.now.change(month: 9, day: 1) - 1.year).strftime '%-d.%-m.%Y' unless params[:from].present?
-    params[:to]   = (DateTime.now.strftime '%-d.%-m.%Y') unless params[:to].present?
+    @from = Date.parse params[:from] rescue (DateTime.now.change(month: 9, day: 1) - 1.year).to_date
+    @to   = Date.parse params[:to]   rescue DateTime.now.to_date
 
-    # TODO(zbell) add filtering
-    #@questions = @questions.where(created_at: ..)
+    @from, @to = @to, @from if @from > @to
+
+    params[:from] = @from.strftime '%-d.%-m.%Y'
+    params[:to]   = @to.strftime   '%-d.%-m.%Y'
+
+    @questions = @questions.where(created_at: @from..@to)
   end
 
   def filter_by_tags
-    return unless params[:tags].present?
+    @questions = @questions.tagged_with(params[:tags]) if params[:tags].present?
 
-    @questions = @questions.tagged_with(params[:tags])
-
-    users  = Question.tagged_with(params[:tags]).uniq.pluck(:author_id).to_set
+    users  = @questions.uniq.pluck(:author_id).to_set
     users += join_question(Answer, @questions).pluck(:author_id)
     users += join_questions(Comment, :commentable, @questions).uniq.pluck(:author_id)
     users += join_questions_through_answers(Comment, :commentable, @questions).pluck(:author_id)
