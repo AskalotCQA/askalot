@@ -14,8 +14,8 @@ class StatisticsController < ApplicationController
   private
 
   def filter_by_date
-    @from = Date.parse params[:from] rescue (DateTime.now.change(month: 9, day: 1) - 1.year).to_date
-    @to   = Date.parse params[:to]   rescue DateTime.now.to_date
+    @from = (Date.parse params[:from] rescue (DateTime.now.change(month: 9, day: 1) - 1.year).to_date)
+    @to   = (Date.parse params[:to]   rescue (DateTime.now).to_date)
 
     @from, @to = @to, @from if @from > @to
 
