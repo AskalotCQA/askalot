@@ -7,10 +7,19 @@ class StatisticsController < ApplicationController
     @questions = Question.all
     @users     = User.order(:name)
 
+    filter_by_date
     filter_by_tags
   end
 
   private
+
+  def filter_by_date
+    params[:from] = (DateTime.now.change(month: 9, day: 1) - 1.year).strftime '%-d.%-m.%Y' unless params[:from].present?
+    params[:to]   = (DateTime.now.strftime '%-d.%-m.%Y') unless params[:to].present?
+
+    # TODO(zbell) add filtering
+    #@questions = @questions.where(created_at: ..)
+  end
 
   def filter_by_tags
     return unless params[:tags].present?
