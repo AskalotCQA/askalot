@@ -7,6 +7,7 @@ require 'rspec/autorun'
 # Capybara
 require 'capybara/rspec'
 require 'capybara/rails'
+require 'capybara/poltergeist'
 
 # Cancan
 require 'cancan/matchers'

@@ -80,6 +80,7 @@ group :development, :test do
   gem 'capybara', '~> 2.1.0'
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
+  gem 'poltergeist'
   gem 'guard-rspec'
 
   # database
