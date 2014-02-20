@@ -1,3 +1,5 @@
+# NOTE(zbell) refactor to use only raw SQL if too slow
+
 class StatisticsController < ApplicationController
   before_action :authenticate_user!
 
