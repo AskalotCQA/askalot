@@ -2,6 +2,7 @@ module Core
   module Normalizer
     class Name
       def self.normalize(value)
+        value = value.to_s
         copy  = value.clone
         value = value.utf8
 

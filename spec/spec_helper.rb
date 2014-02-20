@@ -59,6 +59,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   # Include support
+  config.include AuthenticationHelper,        type: :feature
   config.include Devise::TestHelpers,         type: :controller
   config.include EmailHelper
   config.include FixtureHelper
@@ -67,7 +68,6 @@ RSpec.configure do |config|
   config.include PageHelper,                  type: :feature
   config.include RemoteHelper,                type: :feature
   config.include Select2Helper,               type: :feature
-  config.include Users::AuthenticationHelper, type: :feature
 
   config.before(:each) { reset_emails }
 end
