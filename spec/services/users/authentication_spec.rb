@@ -38,7 +38,7 @@ describe Users::Authentication do
         expect(service).to receive(:authenticate).with('user', 'password').and_return(service_user)
         expect(factory).to receive(:find_by).with(login: 'user')
         expect(factory).to receive(:create_without_confirmation!).with(attributes).and_return(user)
-        expect(user).to receive(:update_attributes!).with(attributes).and_return(true)
+        expect(user).to receive(:update_attributes!).with(attributes.except(:email)).and_return(true)
         expect(service_user).to receive(:to_params).and_return(attributes).twice
 
         subject.authenticate!
