@@ -22,6 +22,8 @@ describe 'Slido Notifications' do
 
   context 'when automaticly refreshing', js: true do
     it 'shows new notiticaitons about current events' do
+      Configuration.poll.true = 1
+
       visit root_path
 
       click_link 'Otázky'
@@ -35,6 +37,8 @@ describe 'Slido Notifications' do
       within '#flash' do
         expect(page).to have_content('Aktuálne prebieha prednáška Westside Party #3, ak máte záujem spýtať sa otázku použite sli.do na adrese https://sli.do/ali.g/wp03.')
       end
+
+      Configuration.poll.true = 60
     end
   end
 end
