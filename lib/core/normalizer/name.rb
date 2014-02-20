@@ -1,7 +1,9 @@
 module Core
   module Normalizer
-    class Name
-      def self.normalize(value)
+    module Name
+      extend self
+
+      def normalize(value)
         value = value.to_s
         copy  = value.clone
         value = value.utf8
@@ -13,12 +15,17 @@ module Core
         mixedcase = []
         flags     = []
 
-        value.split(/\s+/).each do |part|
-          key = person_name_map_key(part)
+        value.strip!
+        value.gsub!(/[\,\;\(\)]/, '')
+        value.gsub!(/(\.+\s*)+/, '. ')
+        value.gsub!(/\s*\-\s*/, '-')
 
-          if prefix = person_name_prefix_map[key]
+        value.split(/\s+/).each do |part|
+          key = map_key(part)
+
+          if prefix = prefix_map[key]
             prefixes << prefix
-          elsif suffix = person_name_suffix_map[key]
+          elsif suffix = suffix_map[key]
             suffixes << suffix
           else
             part = part.utf8.strip
@@ -31,8 +38,6 @@ module Core
                 additions << part
               end
             else
-              part = normalize_person_name(part)
-
               if part.upcase == part
                 uppercase << part.split(/\-/).map(&:titlecase).join(' - ')
               else
@@ -71,45 +76,41 @@ module Core
         }
       end
 
-      def self.person_name_prefix_map
-        @person_name_prefix_map ||= person_name_map_using ['abs. v. Å¡.',
-         'akad.', 'akad. arch.', 'akad. mal.', 'akad. soch.', 'arch.', 'Bc.',
-         'Bc. arch.', 'BcA.', 'B.Ed.', 'B.Sc.', 'Bw. (VWA)', 'doc.', 'Dr.',
-         'Dr hab.', 'Dr inÅ¾.', 'Dr. jur.', 'Dr.h.c.', 'Dr.ir.', 'Dr.phil.',
-         'Eng.', 'ICDr.', 'Ing.', 'Ing. arch.', 'JUC.', 'JUDr.', 'Kfm.',
-         'Kfm. (FH)', 'Lic.', 'Mag', 'Mag.', 'Mag. (FH)', 'Mag. iur',
-         'Magistra Artium', 'Mag.rer.nat.', 'MDDr.', 'MgA.', 'Mgr.',
-         'Mgr. art.', 'mgr inÅ¾.', 'Mgr. phil.', 'MMag.', 'Mr.sc.', 'MSDr.',
-         'MUc.', 'MUDr.', 'MVc.', 'MVDr.', 'PaedDr.', 'PharmDr.', 'PhDr.',
-         'PhMr.', 'prof.', 'prof. mpx. h.c.', 'prof.h.c.', 'RCDr.', 'RNDr.',
-         'RSDr.', 'ThDr.', 'ThLic.']
+      def prefix_map
+        @prefix_map ||= map_using ['abs. v. š.', 'akad.', 'akad. arch.',
+        'akad. mal.', 'akad. soch.', 'arch.', 'Bc.', 'Bc. arch.', 'BcA.',
+        'B.Ed.', 'B.Sc.', 'Bw. (VWA)', 'doc.', 'Dr.', 'Dr hab.', 'Dr inž.',
+        'Dr. jur.', 'Dr.h.c.', 'Dr.ir.', 'Dr.phil.', 'Eng.', 'ICDr.', 'Ing.',
+        'Ing. arch.', 'JUC.', 'JUDr.', 'Kfm.', 'Kfm. (FH)', 'Lic.', 'Mag',
+        'Mag.', 'Mag. (FH)', 'Mag. iur', 'Magistra Artium', 'Mag.rer.nat.',
+        'MDDr.', 'MgA.', 'Mgr.', 'Mgr. art.', 'mgr inž.', 'Mgr. phil.',
+        'MMag.', 'Mr.sc.', 'MSDr.', 'MUc.', 'MUDr.', 'MVc.', 'MVDr.',
+        'PaedDr.', 'PharmDr.', 'PhDr.', 'PhMr.', 'prof.', 'prof. mpx. h.c.',
+        'prof.h.c.', 'RCDr.', 'RNDr.', 'RSDr.', 'ThDr.', 'ThLic.']
       end
 
-      def self.person_name_suffix_map
-        @person_name_suffix_map ||= person_name_map_using ['ArtD.', 'BA',
-        'BA (Hons)', 'BBA', 'BBS', 'BBus', 'BBus (Hons)', 'BS', 'BSBA', 'BSc',
-        'Cert Mgmt', 'CPA', 'CSc.', 'DDr.', 'Dipl. Ing.', 'Dipl. Kfm.',
-        'Dipl.ECEIM', 'DiS.', 'DiS.art', 'Dr.', 'Dr.h.c.', 'DrSc.', 'DSc.',
-        'EMBA', 'E.M.M.', 'Eqm.', 'Litt.D.', 'LL.A.', 'LL.B.', 'LL.M.',
-        'M.A.', 'MAE', 'MAS', 'MBA', 'MBSc', 'M.C.L.', 'MEng.', 'MIM', 'MMBA',
-        'MPH', 'M.Phil.', 'MS', 'MSc', 'M.S.Ed.', 'Ph.D.', 'PhD.',
-        'prom. biol.', 'prom. ek.', 'prom. fil.', 'prom. filol.',
-        'prom. fyz.', 'prom. geog.', 'prom. geol.', 'prom. hist.',
-        'prom. chem.', 'prom. knih.', 'prom. logop.', 'prom. mat.',
-        'prom. nov.', 'prom. ped.', 'prom. pharm.', 'prom. prÃ¡v.',
-        'prom. psych.', 'prom. vet.', 'prom. zub.', 'ThD.']
+      def suffix_map
+        @suffix_map ||= map_using ['ArtD.', 'BA', 'BA (Hons)', 'BBA', 'BBS',
+        'BBus', 'BBus (Hons)', 'BS', 'BSBA', 'BSc', 'Cert Mgmt', 'CPA', 'CSc.',
+        'DDr.', 'Dipl. Ing.', 'Dipl. Kfm.', 'Dipl.ECEIM', 'DiS.', 'DiS.art',
+        'Dr.', 'Dr.h.c.', 'DrSc.', 'DSc.', 'EMBA', 'E.M.M.', 'Eqm.', 'Litt.D.',
+        'LL.A.', 'LL.B.', 'LL.M.', 'M.A.', 'MAE', 'MAS', 'MBA', 'MBSc',
+        'M.C.L.', 'MEng.', 'MIM', 'MMBA', 'MPH', 'M.Phil.', 'MS', 'MSc',
+        'M.S.Ed.', 'Ph.D.', 'PhD.', 'prom. biol.', 'prom. ek.', 'prom. fil.',
+        'prom. filol.', 'prom. fyz.', 'prom. geog.', 'prom. geol.',
+        'prom. hist.', 'prom. chem.', 'prom. knih.', 'prom. logop.',
+        'prom. mat.', 'prom. nov.', 'prom. ped.', 'prom. pharm.',
+        'prom. práv.', 'prom. psych.', 'prom. vet.', 'prom. zub.', 'ThD.']
       end
 
-      def self.person_name_map_using(values)
-        values.inject({}) { |m, v| m[person_name_map_key(v)] = v; m }
+      private
+
+      def map_using(values)
+        values.inject({}) { |m, v| m[map_key(v)] = v; m }
       end
 
-      def self.person_name_map_key(value)
+      def map_key(value)
         value.ascii.downcase.gsub(/[\s\.\,\;\-\(\)]/, '').to_sym
-      end
-
-      def self.normalize_person_name(value)
-        value.gsub(/[\,\;\(\)]/, '')
       end
     end
   end
