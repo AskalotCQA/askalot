@@ -5,7 +5,7 @@ describe Stuba::User do
     {
       uisid: ['1234'],
       uid: ['xuser1'],
-      cn: ['Bc. Janko Hrasko'],
+      cn: ['Bc. Janko Hraško'],
       sn: ['Hrasko'],
       givenname: ['Janko'],
       mail: ['xuser1@is.stuba.sk','xuser1@stuba.sk'],
@@ -32,7 +32,7 @@ describe Stuba::User do
       expect(user.to_params).to eql({
         login: 'xuser1',
         email: 'xuser1@stuba.sk',
-        name: 'Bc. Janko Hrasko',
+        name: 'Bc. Janko Hraško',
         first: 'Janko',
         last: 'Hrasko',
         ais_login: 'xuser1',

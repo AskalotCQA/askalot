@@ -17,7 +17,7 @@ module Stuba
     end
 
     def name
-      @name ||= @data[:cn].first
+      @name ||= Core::Normalizer::Name.normalize(@data[:cn].first)
     end
 
     def first
@@ -38,7 +38,6 @@ module Stuba
         ais_login: login,
         login: login,
         email: email,
-        name: name,
         first: first,
         last: last,
         role: role
