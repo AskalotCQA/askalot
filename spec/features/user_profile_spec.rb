@@ -146,7 +146,7 @@ describe 'User Profile' do
     let(:user) { build :user, :as_ais }
 
     before :each do
-      login_as user, with: :AIS
+      login_as user, with: :AIS, password: 'password'
     end
 
     it 'disallows editing of first and last name', js: true do
@@ -196,7 +196,7 @@ describe 'User Profile' do
 
       expect(page).to have_content('Aktuálne heslo – je povinná položka')
 
-      fill_in 'user_current_password', with: user.password
+      fill_in 'user_current_password', with: 'password'
 
       click_button 'Uložiť'
 
