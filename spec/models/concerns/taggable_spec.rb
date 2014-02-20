@@ -69,7 +69,7 @@ shared_examples_for Taggable do
     end
 
     context 'when tag list changes' do
-      it 'removed unused tagging relations' do
+      it 'removes unused tagging relations' do
         record = build factory
 
         record.tag_list = 'a, b, c'
