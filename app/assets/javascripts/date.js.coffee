@@ -1,6 +1,7 @@
 $(document).ready ->
   $('[data-as=datepicker]').datepicker
-    format: 'd.m.yyyy',
-    language: 'sk',
-    autoclose: true,
+    autoclose: true
+    format: 'd.m.yyyy'
+    language: 'sk'
     todayHighlight: true
+    weekStart: 1
