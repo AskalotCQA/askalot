@@ -21,11 +21,15 @@ module Stuba
     end
 
     def first
-      @first ||= @data[:givenname].first
+      name[:first]
+    end
+
+    def middle
+      name[:middle]
     end
 
     def last
-      @last ||= @data[:sn].first
+      name[:last]
     end
 
     def role
@@ -39,6 +43,7 @@ module Stuba
         login: login,
         email: email,
         first: first,
+        middle: middle,
         last: last,
         role: role
       }
