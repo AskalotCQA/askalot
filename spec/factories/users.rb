@@ -32,7 +32,7 @@ FactoryGirl.define do
       sequence(:ais_uid)   { |n| n }
       sequence(:ais_login) { |n| "xuser#{n}" }
 
-      password              nil
+      password              'password'
       password_confirmation nil
     end
 

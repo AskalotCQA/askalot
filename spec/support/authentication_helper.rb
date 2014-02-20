@@ -8,8 +8,6 @@ module AuthenticationHelper
     fill_in 'user_password', with: user.password || options[:password] || 'password'
 
     click_button 'Prihlásiť'
-
-    unstub_ais if options[:with] == :AIS
   end
 
   def stub_ais_for(user = nil, options = {})
@@ -25,12 +23,15 @@ module AuthenticationHelper
       employeetype: [user.role]
     }
 
+    Stuba::AIS.stub(:authenticate) { nil }
     Stuba::AIS.stub(:authenticate).with(user.login, options[:password] || 'password') do
       Stuba::User.new(data)
     end
   end
 
-  def unstub_ais
-    Stuba::AIS.stub(:authenticate) { nil }
+  RSpec.configure do |config|
+    config.after :each do
+      Stuba::AIS.stub(:authenticate) { nil }
+    end
   end
 end

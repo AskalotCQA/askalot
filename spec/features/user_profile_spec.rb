@@ -182,7 +182,25 @@ describe 'User Profile' do
       expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
-      expect(user.password).to eql(nil)
+      expect(User.find_by(login: user.login).encrypted_password).to be_empty
+    end
+
+    it 'requires current password for changing account information', js: true do
+      visit edit_user_registration_path
+
+      click_link 'Účet'
+
+      fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('Aktuálne heslo – je povinná položka')
+
+      fill_in 'user_current_password', with: user.password
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('Váš účet bol úspešne aktualizovaný ale potrebujeme overiť Vašu novú e-mailovú adresu.')
     end
   end
 end
