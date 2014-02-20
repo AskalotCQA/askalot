@@ -32,13 +32,14 @@ describe Users::Authentication do
           login: 'user',
           email: 'example@gmail.com',
           ais_uid: '1234',
-          ais_login: 'user'
+          ais_login: 'user',
+          role: :student
         }
 
         expect(service).to receive(:authenticate).with('user', 'password').and_return(service_user)
         expect(factory).to receive(:find_by).with(login: 'user')
         expect(factory).to receive(:create_without_confirmation!).with(attributes).and_return(user)
-        expect(user).to receive(:update_attributes!).with(attributes.except(:email)).and_return(true)
+        expect(user).to receive(:update_attributes!).with(attributes.except(:email, :role)).and_return(true)
         expect(service_user).to receive(:to_params).and_return(attributes).twice
 
         subject.authenticate!

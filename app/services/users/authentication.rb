@@ -17,7 +17,7 @@ class Users::Authentication
 
     create_user! unless @user
 
-    @user.update_attributes!(service_user.to_params.except(:email))
+    @user.update_attributes!(service_user.to_params.except(:email, :role))
 
     @user
   end

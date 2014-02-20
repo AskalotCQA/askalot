@@ -4,6 +4,14 @@ describe 'Question Polling', js: true do
   let(:user) { create :user }
   let!(:question) { create :question, tag_list: 'elasticsearch' }
 
+  before :all do
+    Configuration.poll.default = 1
+  end
+
+  after :all do
+    Configuration.poll.default = 60
+  end
+
   before :each do
     login_as user
   end
