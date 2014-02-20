@@ -5,9 +5,9 @@
   font-weight: normal;
 }
 
-.datepicker table > thead > tr > th.prev {
-  //@extend .fa, .fa-angle-left;
-}
+// TODO(zbell) somehow rm hard-coded arrows before global use of date picker
+//.datepicker table > thead > tr > th.prev {
+//}
 
 /*!
  * Datepicker for Bootstrap
@@ -143,7 +143,7 @@
 .datepicker table tr td.today.disabled,
 .datepicker table tr td.today.disabled:hover {
 //  background-color: #fde19a;
-  background-color: $state-warning-bg;
+  background-color: $gray-lighter;
 //  background-image: -moz-linear-gradient(top, #fdd49a, #fdf59a);
 //  background-image: -ms-linear-gradient(top, #fdd49a, #fdf59a);
 //  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fdd49a), to(#fdf59a));
@@ -507,7 +507,7 @@
   min-width: 160px;
   list-style: none;
   background-color: #ffffff;
-  border: 1px solid #ccc;
+//  border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
 //  -webkit-border-radius: 5px;
 //  -moz-border-radius: 5px;
@@ -522,7 +522,7 @@
   *border-bottom-width: 2px;
   color: #333333;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: $font-size-base;
   line-height: 20px;
 }
 .datepicker.dropdown-menu th,
