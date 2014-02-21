@@ -33,7 +33,7 @@ module ApplicationHelper
     document = Nokogiri::HTML(markdown)
 
     document.search('//pre').each do |pre|
-      pre.replace Pygments.highlight(pre.text.strip, lexer: pre[:lang])
+      pre.replace(Pygments.highlight(pre.text.strip, lexer: pre[:lang]))
     end
 
     document.to_s.html_safe
