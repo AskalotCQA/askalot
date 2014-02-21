@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140216132318) do
+ActiveRecord::Schema.define(version: 20140221164020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "answer_revisions", force: true do |t|
+    t.integer  "answer_id",  null: false
+    t.integer  "editor_id",  null: false
+    t.text     "text",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answer_revisions", ["answer_id"], name: "index_answer_revisions_on_answer_id", using: :btree
+  add_index "answer_revisions", ["editor_id"], name: "index_answer_revisions_on_editor_id", using: :btree
 
   create_table "answers", force: true do |t|
     t.integer  "author_id",                  null: false
@@ -43,6 +54,17 @@ ActiveRecord::Schema.define(version: 20140216132318) do
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
   add_index "categories", ["slido_username"], name: "index_categories_on_slido_username", using: :btree
+
+  create_table "comment_revisions", force: true do |t|
+    t.integer  "comment_id", null: false
+    t.integer  "editor_id",  null: false
+    t.text     "text",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comment_revisions", ["comment_id"], name: "index_comment_revisions_on_comment_id", using: :btree
+  add_index "comment_revisions", ["editor_id"], name: "index_comment_revisions_on_editor_id", using: :btree
 
   create_table "comments", force: true do |t|
     t.integer  "author_id",        null: false
@@ -118,6 +140,20 @@ ActiveRecord::Schema.define(version: 20140216132318) do
   end
 
   add_index "labels", ["value"], name: "index_labels_on_value", unique: true, using: :btree
+
+  create_table "question_revisions", force: true do |t|
+    t.integer  "question_id", null: false
+    t.integer  "editor_id",   null: false
+    t.string   "category",    null: false
+    t.string   "tags",                     array: true
+    t.string   "title",       null: false
+    t.text     "text",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "question_revisions", ["editor_id"], name: "index_question_revisions_on_editor_id", using: :btree
+  add_index "question_revisions", ["question_id"], name: "index_question_revisions_on_question_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.integer  "author_id",                           null: false
