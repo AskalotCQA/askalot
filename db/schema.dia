@@ -8966,7 +8966,7 @@
         <dia:real val="10.4"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#QuestionEdits#</dia:string>
+        <dia:string>#QuestionRevisions#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -9330,7 +9330,7 @@
         <dia:real val="8"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#AnswerEdits#</dia:string>
+        <dia:string>#AnswerRevisions#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
@@ -9613,19 +9613,19 @@
         <dia:point val="55.1502,43.5156"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="55.1002,43.4656;64.1702,51.5656"/>
+        <dia:rectangle val="55.1002,43.4656;64.2977,51.5656"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="55.1502,43.5156"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.9700000000000006"/>
+        <dia:real val="9.0975000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#CommentEdits#</dia:string>
+        <dia:string>#CommentRevisions#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
