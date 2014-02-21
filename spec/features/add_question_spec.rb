@@ -52,7 +52,7 @@ describe 'Add Question', js: true do
   end
 
   context 'when using markdown', js: true do
-    it 'renders text preview' do
+    it 'renders preview' do
       visit root_path
 
       click_link 'Opýtať sa otázku'
