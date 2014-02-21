@@ -1,8 +1,9 @@
 <div class="row">
   <div class="col-md-offset-2 col-md-8">
+    <h3 class="form-title"><%= Answer.human_attribute_name :text %></h3>
+
     <%= form_for [question, answer] do |f| %>
       <div class="form-group">
-        <%= f.label :text %>
         <%= markdown_editor_for answer do %>
           <%= f.text_area :text, class: :'form-control', rows: 5 %>
         <% end %>
