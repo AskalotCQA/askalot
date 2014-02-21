@@ -5,4 +5,4 @@ sk:
     documentation: 'Text je spracovaný pomocou %{link}'
 
     loading_preview: 'Načítavam náhľad…'
-    nothing_to_preview: 'Žiadny text dostupný pre náhľad.'
+    nothing_to_preview: 'Žiadny text pre náhľad.'
