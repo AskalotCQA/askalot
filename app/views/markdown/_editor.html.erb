@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-12">
+  <div class="col-md-4">
     <ul id="<%= id %>" class="nav nav-tabs markdown-tabs">
       <li class="active">
         <a class="markdown-text" href="#<%= id %>-text" data-toggle="tab"><%= t 'markdown.edit' %></a>
@@ -9,24 +9,18 @@
       </li>
     </ul>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-md-12">
-    <div id="<%= id %>-content" class="tab-content markdown-content">
-      <div id="<%= id %>-text" class="tab-pane active">
-        <%= content.call %>
-      </div>
-
-      <div id="<%= id %>-preview" class="tab-pane well well-sm"></div>
-    </div>
+  <div class="col-md-8">
+    <span class="markdown-help pull-right">
+      <%= t('markdown.documentation', link: external_link_to('GitHub Markdown', 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet')).html_safe %>
+    </span>
   </div>
 </div>
 
 <div class="row">
   <div class="col-md-12">
-    <span class="help-block pull-right">
-      Text je spracovaný pomocou <%= external_link_to 'Github Markdown', 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet', icon: true %>
-    </span>
+    <div id="<%= id %>-content" class="tab-content markdown-content">
+      <div id="<%= id %>-text" class="tab-pane active"><%= content.call %></div>
+      <div id="<%= id %>-preview" class="tab-pane"><div class="form-control"></div></div>
+    </div>
   </div>
 </div>

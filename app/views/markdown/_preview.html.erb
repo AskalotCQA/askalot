@@ -1,7 +1,5 @@
-<% if @text.empty? %>
-  <p class="text-muted">
-    <%= t 'markdown.nothing_to_preview' %>
-  </p>
+<% if text.empty? %>
+  <p class="text-muted"><%= t 'markdown.nothing_to_preview' %></p>
 <% else %>
-  <%= render_markdown(@text) %>
+  <%= render_markdown(text) %>
 <% end %>

@@ -13,10 +13,10 @@ class window.Markdown
     @id = id
 
   preview: ->
-    $("##{@id}-preview").html("<p class=\"text-muted\">#{I18n.t('markdown.loading_preview')}</p>")
+    $("##{@id}-preview .form-control").html("<p class=\"text-muted\">#{I18n.t('markdown.loading_preview')}</p>")
 
     @render (html) =>
-      $("##{@id}-preview").html(html)
+      $("##{@id}-preview .form-control").html(html)
 
   text: ->
     $("##{@id}-text textarea").val()
