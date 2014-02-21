@@ -1,0 +1,7 @@
+sk:
+  markdown:
+    edit: 'Text'
+    preview: 'Náhľad'
+
+    loading_preview: 'Načítavam náhľad …'
+    nothing_to_preview: 'Žiadny text dostupný pre náhľad.'
