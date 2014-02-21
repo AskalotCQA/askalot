@@ -50,6 +50,18 @@ address, form, nav, p, dl, ol, ul, table,
   padding-bottom: ($line-height-computed / 2) - 1;
 }
 
+.form-control + .input-group-addon {
+  border-left: none;
+}
+
+.input-group-addon {
+  border-right-width: 0;
+
+  &:last-child {
+    border-right-width: 1px;
+  }
+}
+
 textarea {
   min-width: 100%;
   max-width: 100%;

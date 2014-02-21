@@ -23,9 +23,10 @@ gem 'therubyracer', platforms: :ruby
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'rails-timeago', '~> 2.0'
+gem 'bootstrap-datepicker-rails', '~> 1.3.0'
 gem 'select2-rails', '~> 3.4.9'
 gem 'jquery-tablesorter', '~> 1.9.5'
+gem 'rails-timeago', '~> 2.0'
 
 # markdown
 gem 'github-markdown'

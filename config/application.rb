@@ -17,6 +17,9 @@ module NaRuby
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Set error field rendering function.
+    config.action_view.field_error_proc = lambda { |html, instance| html }
+
     # Set exceptions application, allows custom error handling.
     config.exceptions_app = self.routes
 

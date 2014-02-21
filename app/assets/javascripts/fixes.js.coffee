@@ -1,5 +1,6 @@
 #= require hash
 #= require remote
+#= require date
 #= require select
 #= require poll
 #= require markdown
