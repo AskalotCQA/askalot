@@ -1,7 +1,5 @@
 class MarkdownController < ApplicationController
   def preview
-    @text = params[:text]
-
-    render partial: 'preview'
+    render partial: 'preview', locals: { text: params[:text] }
   end
 end
