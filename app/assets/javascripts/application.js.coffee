@@ -19,9 +19,10 @@
 #
 #= require_tree ./lib
 #
+#= require bootstrap-datepicker/core
+#= require bootstrap-datepicker/locales/bootstrap-datepicker.sk.js
 #= require select2
 #= require jquery-tablesorter
-#
 #= require rails-timeago
 #= require locales/jquery.timeago.sk.js
 #

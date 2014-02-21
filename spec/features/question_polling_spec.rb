@@ -5,7 +5,13 @@ describe 'Question Polling', js: true do
   let!(:question) { create :question, tag_list: 'elasticsearch' }
 
   before :each do
+    Configuration.poll.default = 1
+
     login_as user
+  end
+
+  after :each do
+    Configuration.poll.default = 60
   end
 
   it 'refreshes the list of questions by default' do

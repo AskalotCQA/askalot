@@ -22,12 +22,10 @@
     <%= f.password_field :password_confirmation, autocomplete: :off, class: :'form-control', disabled: cannot?(:change_password, resource) %>
   </div>
 
-  <% unless resource.ais_login? %>
-    <div class="form-group">
-      <%= f.label :current_password %> <em>(<%= t('user.enter_current_password') %>)</em>
-      <%= f.password_field :current_password, autocomplete: :off, class: :'form-control' %>
-    </div>
-  <% end %>
+  <div class="form-group">
+    <%= f.label :current_password %> <em>(<%= t('user.enter_current_password') %>)</em>
+    <%= f.password_field :current_password, autocomplete: :off, class: :'form-control' %>
+  </div>
 
   <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
 <% end %>

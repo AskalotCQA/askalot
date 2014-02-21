@@ -22,6 +22,12 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update_resource(resource, params)
-    resource.ais_login? ? resource.update_without_password(params) : resource.update_with_password(params)
+    service = Users::Authentication.new Stuba::AIS, login: current_user.login, password: params[:current_password]
+
+    if service.authorized?
+      resource.update_without_password(params.except(:current_password))
+    else
+      resource.update_with_password(params)
+    end
   end
 end

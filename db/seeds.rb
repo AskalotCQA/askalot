@@ -12,10 +12,13 @@ Label.find_or_create_by! value: :helpful
 slido = User.find_or_initialize_by(login: 'slido')
 
 slido.update_attributes(
-  email:   'automaton@sli.do',
+  email: 'automaton@sli.do',
   password: SecureRandom.hex,
-  first:    'Slido',
-  role:     :student
+  first: 'Automaton',
+  last: 'Slido',
+  about: 'Automatizovaný robot, ktorý zbiera otázky zo systému sli.do',
+  show_email: false,
+  role: :student
 )
 
 slido.save!

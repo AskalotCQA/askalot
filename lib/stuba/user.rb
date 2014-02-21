@@ -17,15 +17,19 @@ module Stuba
     end
 
     def name
-      @name ||= @data[:cn].first
+      @name ||= Core::Normalizer::Name.normalize(@data[:cn].first)
     end
 
     def first
-      @first ||= @data[:givenname].first
+      name[:first]
+    end
+
+    def middle
+      name[:middle]
     end
 
     def last
-      @last ||= @data[:sn].first
+      name[:last]
     end
 
     def role
@@ -38,8 +42,8 @@ module Stuba
         ais_login: login,
         login: login,
         email: email,
-        name: name,
         first: first,
+        middle: middle,
         last: last,
         role: role
       }

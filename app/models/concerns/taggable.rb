@@ -26,6 +26,12 @@ module Taggable
 
       Tagging.find_or_create_by! tag_id: tag.id, taggable_id: self.id, taggable_type: self.class.base_class.name
     end
+
+    flush_tags!
+  end
+
+  def flush_tags!
+    taggings.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags).each(&:destroy)
   end
 
   module ClassMethods

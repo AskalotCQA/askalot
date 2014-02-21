@@ -65,7 +65,9 @@ class QuestionsController < ApplicationController
   helper_method :filter_questions
 
   def initialize_polling
-    params[:poll] ||= true
+    return @poll = params[:poll] = session[:poll] ||= true unless params[:poll]
+
+    @poll = session[:poll] = params[:poll] == 'true' ? true : false
   end
 
   def filter_questions(relation)
