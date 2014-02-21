@@ -27,6 +27,15 @@ module ApplicationHelper
   end
 
   def render_markdown(text, options = {})
-    GitHub::Markdown.render(text).html_safe
+    # TODO (smolnar) move to lib
+
+    markdown = GitHub::Markdown.render(text)
+    document = Nokogiri::HTML(markdown)
+
+    document.search('//pre').each do |pre|
+      pre.replace Pygments.highlight(pre.text.strip, lexer: pre[:lang])
+    end
+
+    document.to_s.html_safe
   end
 end

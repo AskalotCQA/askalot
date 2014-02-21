@@ -29,6 +29,7 @@ gem 'jquery-tablesorter', '~> 1.9.5'
 
 # markdown
 gem 'github-markdown'
+gem 'pygments.rb'
 
 # internationalization
 gem 'rails-i18n', '~> 4.0.0'
