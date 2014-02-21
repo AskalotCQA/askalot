@@ -10,12 +10,12 @@
 <div id="<%= id %>-content" class="tab-content markdown-content">
   <div id="<%= id %>-text" class="tab-pane active">
     <%= content.call %>
+
+    <span class="help-block pull-right">
+      Text je spracovaný pomocou <%= external_link_to 'Github Markdown', 'https://help.github.com/articles/github-flavored-markdown', icon: true %>
+    </span>
   </div>
 
   <div id="<%= id %>-preview" class="tab-pane well well-sm">
   </div>
-
-  <p class="help-block pull-right">
-    Text je spracovaný pomocou <%= external_link_to 'Github Markdown', 'https://help.github.com/articles/github-flavored-markdown', icon: true %>
-  </p>
 </div>
