@@ -1,0 +1,6 @@
+@import 'mixins';
+@import 'variables';
+
+.markdown-content {
+  padding-top: 0.25 * $navbar-height;
+}
