@@ -25,17 +25,4 @@ module ApplicationHelper
   def url_to_site(path = nil)
     "http://labss2.fiit.stuba.sk/TeamProject/2013/team13is-si/#{path}"
   end
-
-  def render_markdown(text, options = {})
-    # TODO (smolnar) move to lib
-
-    markdown = GitHub::Markdown.render(text)
-    document = Nokogiri::HTML(markdown)
-
-    document.search('//pre').each do |pre|
-      pre.replace(Pygments.highlight(pre.text.strip, lexer: pre[:lang]))
-    end
-
-    document.to_s.html_safe
-  end
 end
