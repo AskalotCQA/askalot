@@ -114,4 +114,10 @@ module TagHelper
 
     timeago_tag time, options.merge(lang: I18n::locale)
   end
+
+  def markdown_for(resource, &content)
+    id = "markdown-#{resource.class.name.underscore}-#{resource.new_record? ? :new : resource.id}"
+
+    render 'markdown/editor', id: id, content: content
+  end
 end

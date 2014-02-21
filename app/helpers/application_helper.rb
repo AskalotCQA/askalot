@@ -25,4 +25,8 @@ module ApplicationHelper
   def url_to_site(path = nil)
     "http://labss2.fiit.stuba.sk/TeamProject/2013/team13is-si/#{path}"
   end
+
+  def render_markdown(text, options = {})
+    GitHub::Markdown.render(text).html_safe
+  end
 end

@@ -27,6 +27,9 @@ gem 'rails-timeago', '~> 2.0'
 gem 'select2-rails', '~> 3.4.9'
 gem 'jquery-tablesorter', '~> 1.9.5'
 
+# markdown
+gem 'github-markdown'
+
 # internationalization
 gem 'rails-i18n', '~> 4.0.0'
 gem 'i18n-js'

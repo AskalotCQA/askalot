@@ -1,0 +1,21 @@
+<ul id="<%= id %>" class="nav nav-tabs markdown-tabs">
+  <li class="active">
+    <a class="markdown-text" href="#<%= id %>-text" data-toggle="tab"><%= t 'markdown.edit' %></a>
+  </li>
+  <li>
+    <a class="markdown-preview" href="#<%= id %>-preview" data-toggle="tab"><%= t 'markdown.preview' %></a>
+  </li>
+</ul>
+
+<div id="<%= id %>-content" class="tab-content markdown-content">
+  <div id="<%= id %>-text" class="tab-pane active">
+    <%= content.call %>
+  </div>
+
+  <div id="<%= id %>-preview" class="tab-pane well well-sm">
+  </div>
+
+  <p class="help-block pull-right">
+    Text je spracovaný pomocou <%= external_link_to 'Github Markdown', 'https://help.github.com/articles/github-flavored-markdown', icon: true %>
+  </p>
+</div>
