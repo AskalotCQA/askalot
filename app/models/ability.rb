@@ -17,7 +17,7 @@ class Ability
       other == user
     end
 
-    can :edit, [Question, Answer] do |resource|
+    can :label, [Question, Answer] do |resource|
       resource.author == user
     end
 
