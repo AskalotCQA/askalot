@@ -1,13 +1,5 @@
-@import 'mixins';
-@import 'variables';
+// GitHub Pygments.rb style, more at: https://github.com/richleland/pygments-css
 
-.markdown-content {
-  padding-top: 0.25 * $navbar-height;
-}
-
-// GitHub Pygments.rb style
-// more at: https://github.com/richleland/pygments-css
-// TODO (smolnar) try another styles
 .highlight {
   .hll { background-color: #f8f8f8; border: 1px solid #ccc; padding: 6px 10px; border-radius: 3px; }
   .c { color: #999988; font-style: italic; }
@@ -50,7 +42,7 @@
   .nt { color: navy; }
   .nv { color: teal; }
   .ow { font-weight: bold; }
-  .w { color: #bbbbbb; }
+  .w  { color: #bbbbbb; }
   .mf { color: #009999; }
   .mh { color: #009999; }
   .mi { color: #009999; }
@@ -71,6 +63,5 @@
   .vg { color: teal; }
   .vi { color: teal; }
   .il { color: #009999; }
-  .gc { color: #999; background-color: #EAF2F5; }
+  .gc { color: #999; background-color: #eaf2f5; }
 }
-
