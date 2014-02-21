@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
     @users = filter_users(@users)
 
-    #@users = @users.page(params[:page]).per(10)
+    @users = @users.page(params[:page]).per(30)
 
     #initialize_polling
 
