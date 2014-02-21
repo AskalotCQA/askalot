@@ -2,6 +2,7 @@
 #= require remote
 #= require select
 #= require poll
+#= require markdown
 
 Remote.bindState()
 
@@ -11,6 +12,7 @@ window.defined = (value) ->
 window.fixes = ->
   Remote.initialize()
   Poll.initialize()
+  Markdown.bind()
 
   $('.popover').remove()
   $('.tooltip').remove()
