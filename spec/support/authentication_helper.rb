@@ -23,14 +23,13 @@ module AuthenticationHelper
       employeetype: [user.role]
     }
 
-    Stuba::AIS.stub(:authenticate) { nil }
     Stuba::AIS.stub(:authenticate).with(user.login, options[:password] || 'password') do
       Stuba::User.new(data)
     end
   end
 
   RSpec.configure do |config|
-    config.before :each do
+    config.before :each, type: :feature do
       Stuba::AIS.stub(:authenticate) { nil }
     end
   end

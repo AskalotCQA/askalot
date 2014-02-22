@@ -5,13 +5,7 @@ describe 'Question Polling', js: true do
   let!(:question) { create :question, tag_list: 'elasticsearch' }
 
   before :each do
-    Configuration.poll.default = 1
-
     login_as user
-  end
-
-  after :each do
-    Configuration.poll.default = 60
   end
 
   it 'refreshes the list of questions by default' do
@@ -26,7 +20,7 @@ describe 'Question Polling', js: true do
 
     create :question, title: 'Elasticsearch problem'
 
-    wait_for_remote 2.seconds
+    wait_for_remote 6.seconds
 
     list = all('#questions > ol > li')
     expect(list).to have(2).items
@@ -45,8 +39,6 @@ describe 'Question Polling', js: true do
     list = all('#questions > ol > li')
     expect(list).to have(1).items
 
-    expect(last_event.data[:params]).not_to include(:poll)
-
     fill_in_select2 'question_tags', with: 'elasticsearch'
 
     list = all('#questions > ol > li')
@@ -56,7 +48,7 @@ describe 'Question Polling', js: true do
 
     create :question, title: 'Elasticsearch problem', tag_list: 'elasticsearch'
 
-    wait_for_remote 2.seconds
+    wait_for_remote 6.seconds
 
     list = all('#questions > ol > li')
     expect(list).to have(2).items
@@ -79,7 +71,7 @@ describe 'Question Polling', js: true do
 
     expect(last_event.data[:params]).not_to include(:poll)
 
-    wait_for_remote 2.seconds
+    wait_for_remote 6.seconds
 
     list = all('#questions > ol > li')
     expect(list).to have(2).items
@@ -94,13 +86,13 @@ describe 'Question Polling', js: true do
 
     create :question, title: 'Another Elasticsearch problem'
 
-    wait_for_remote 2.seconds
+    wait_for_remote 6.seconds
 
     list = all('#questions > ol > li')
 
     expect(list).to have(2).items
     expect(page).not_to have_content('Another Elasticsearch problem')
 
-    expect(last_event.data[:params]).not_to include(:poll)
+    expect(last_event.data[:params]).to include(poll: 'false')
   end
 end

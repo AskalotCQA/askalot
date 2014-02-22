@@ -9,5 +9,7 @@ module RemoteHelper
         active = page.evaluate_script('jQuery.active')
       end
     end
+
+    sleep 0.5
   end
 end

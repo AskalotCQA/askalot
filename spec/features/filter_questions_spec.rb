@@ -105,7 +105,7 @@ describe 'Filter Questions', js: true do
   end
 
   it 'filters questions by category tags' do
-    Question.order(created_at: :desc).first(5).each do |question|
+    Question.tagged_with(:ruby).order(created_at: :desc).first(5).each do |question|
       question.update_attributes(category_id: category.id)
     end
 
