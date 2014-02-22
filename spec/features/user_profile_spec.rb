@@ -136,6 +136,7 @@ describe 'User Profile' do
     it 'edits user privacy', js: true do
       click_link 'Súkromie'
 
+      # TODO (smolnar) create helper for label checkbox
       find('label', text: 'Skryť meno ostatným používateľom').click
       find('label', text: 'Skryť e-mail ostatným používateľom').click
 
