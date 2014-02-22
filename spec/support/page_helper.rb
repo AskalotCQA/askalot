@@ -5,7 +5,7 @@ module PageHelper
     query  = CGI.parse(uri.query)
 
     query.each do |key, value|
-      params[key.to_sym] = value.first
+      params[key.to_sym] = URI.decode(value.first)
     end
 
     params

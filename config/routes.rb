@@ -53,6 +53,10 @@ NaRuby::Application.routes.draw do
     get :suggest, on: :collection
   end
 
+  resources :markdown, only: [] do
+    post :preview, on: :collection
+  end
+
   get :statistics, to: 'statistics#index'
 
   # Example of regular route:

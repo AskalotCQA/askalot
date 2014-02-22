@@ -30,7 +30,7 @@ module AuthenticationHelper
   end
 
   RSpec.configure do |config|
-    config.after :each do
+    config.before :each do
       Stuba::AIS.stub(:authenticate) { nil }
     end
   end

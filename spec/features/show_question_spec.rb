@@ -22,6 +22,30 @@ describe 'Show Question' do
     question.tags.pluck(:name).each { |tag| expect(page).to have_content(tag) }
   end
 
+  context 'when using markdown' do
+    before :each do
+      question.update_attributes!(text: '# Lorem ipsum')
+    end
+
+    it 'processes markdown text' do
+      visit root_path
+
+      click_link 'Otázky'
+
+      click_link 'PostgreSQL setup'
+
+      expect(page).to have_content('PostgreSQL setup')
+      expect(page).to have_content(question.author.nick)
+
+      within '#question-content' do
+        expect(page).to have_css('h1', count: 1)
+        expect(page).to have_content('Lorem ipsum')
+      end
+
+      question.tags.pluck(:name).each { |tag| expect(page).to have_content(tag) }
+    end
+  end
+
   context 'when selecting a tag' do
     let(:question) { create :question, title: 'PostgreSQL indices', tag_list: 'ruby' }
 

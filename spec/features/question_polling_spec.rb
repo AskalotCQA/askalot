@@ -101,6 +101,6 @@ describe 'Question Polling', js: true do
     expect(list).to have(2).items
     expect(page).not_to have_content('Another Elasticsearch problem')
 
-    expect(last_event.data[:params]).to include(poll: 'false')
+    expect(last_event.data[:params]).not_to include(:poll)
   end
 end
