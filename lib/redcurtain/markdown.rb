@@ -17,7 +17,9 @@ module Redcurtain
       document = Nokogiri::HTML(markdown)
 
       document.search('//pre').each do |pre|
-        pre.replace(highlighter.highlight(pre.text.strip, language: pre[:lang].to_sym))
+        language = pre[:lang].try(:to_sym)
+
+        pre.replace(highlighter.highlight(pre.text.strip, language: language))
       end
 
       document
