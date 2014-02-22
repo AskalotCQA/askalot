@@ -6,15 +6,10 @@ module MarkdownHelper
   end
 
   def render_markdown(text, options = {})
-    # TODO (smolnar) move to lib
+    Redcurtain::Markdown.render(text)
+  end
 
-    markdown = GitHub::Markdown.render(text)
-    document = Nokogiri::HTML(markdown)
-
-    document.search('//pre').each do |pre|
-      pre.replace(Pygments.highlight(pre.text.strip, lexer: pre[:lang]))
-    end
-
-    document.to_s.html_safe
+  def markdown_to_text(text)
+    Redcurtain::Markdown.strip(text)
   end
 end
