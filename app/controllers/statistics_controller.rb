@@ -20,6 +20,7 @@ class StatisticsController < ApplicationController
     @to   = Date.parse(params[:to])   rescue (DateTime.now).to_date
 
     @from, @to = @to, @from if @from > @to
+    @from, @to = @from.at_beginning_of_day, @to.at_end_of_day
 
     params[:from] = @from.strftime '%-d.%-m.%Y'
     params[:to]   = @to.strftime   '%-d.%-m.%Y'
