@@ -12,8 +12,7 @@ require 'capybara/poltergeist'
 # Cancan
 require 'cancan/matchers'
 
-Capybara.default_selector = :css
-
+Capybara.default_selector  = :css
 Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :selenium
 
 # Requires supporting ruby files with custom matchers and macros, etc,
