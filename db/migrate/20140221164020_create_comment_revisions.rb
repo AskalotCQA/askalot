@@ -1,8 +1,8 @@
 class CreateCommentRevisions < ActiveRecord::Migration
   def change
     create_table :comment_revisions do |t|
-      t.references :comment,   null: false
-      t.references :editor,   null: false
+      t.references :comment, null: false
+      t.references :editor,  null: false
 
       t.text :text, null: false
 

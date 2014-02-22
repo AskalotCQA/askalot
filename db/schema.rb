@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 20140221164020) do
     t.integer  "question_id", null: false
     t.integer  "editor_id",   null: false
     t.string   "category",    null: false
-    t.string   "tags",                     array: true
+    t.string   "tags",        null: false, array: true
     t.string   "title",       null: false
     t.text     "text",        null: false
     t.datetime "created_at"

@@ -4,10 +4,10 @@ class CreateQuestionRevisions < ActiveRecord::Migration
       t.references :question, null: false
       t.references :editor,   null: false
 
-      t.string  :category,  null: false
-      t.string  :tags,      array: true
-      t.string  :title,     null: false
-      t.text    :text,      null: false
+      t.string :category, null: false
+      t.string :tags,     null: false, array: true
+      t.string :title,    null: false
+      t.text   :text,     null: false
 
       t.timestamps
     end
