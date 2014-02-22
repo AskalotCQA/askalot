@@ -10,6 +10,11 @@ module Redcurtain
       process(text).text
     end
 
+    def self.setup!
+      self.renderer    = Redcurtain::Renderer::GitHub
+      self.highlighter = Redcurtain::Highlighter::Pygments
+    end
+
     private
 
     def self.process(text)

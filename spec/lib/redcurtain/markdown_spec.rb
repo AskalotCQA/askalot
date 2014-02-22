@@ -3,6 +3,10 @@ require 'spec_helper'
 describe Redcurtain::Markdown do
   let(:markdown) { described_class }
 
+  after :each do
+    Redcurtain::Markdown.setup!
+  end
+
   describe '#render' do
     it 'renders markdown' do
       renderer    = double(:renderer)
