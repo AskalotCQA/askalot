@@ -20,7 +20,7 @@ describe 'Question Polling', js: true do
 
     create :question, title: 'Elasticsearch problem'
 
-    wait_for_remote 6.seconds
+    wait_for_questions_polling
 
     list = all('#questions > ol > li')
     expect(list).to have(2).items
@@ -48,7 +48,7 @@ describe 'Question Polling', js: true do
 
     create :question, title: 'Elasticsearch problem', tag_list: 'elasticsearch'
 
-    wait_for_remote 6.seconds
+    wait_for_questions_polling
 
     list = all('#questions > ol > li')
     expect(list).to have(2).items
@@ -71,7 +71,7 @@ describe 'Question Polling', js: true do
 
     expect(last_event.data[:params]).not_to include(:poll)
 
-    wait_for_remote 6.seconds
+    wait_for_questions_polling
 
     list = all('#questions > ol > li')
     expect(list).to have(2).items
@@ -86,7 +86,7 @@ describe 'Question Polling', js: true do
 
     create :question, title: 'Another Elasticsearch problem'
 
-    wait_for_remote 6.seconds
+    wait_for_questions_polling
 
     list = all('#questions > ol > li')
 
