@@ -64,7 +64,6 @@ RSpec.configure do |config|
   config.include Devise::TestHelpers,  type: :controller
   config.include EmailHelper
   config.include FixtureHelper
-  config.include HistoryHelper,        type: :feature
   config.include Logging
   config.include PageHelper,           type: :feature
   config.include PollingHelper,        type: :feature
