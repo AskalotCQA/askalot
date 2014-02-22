@@ -6,22 +6,11 @@ describe 'User Profile' do
   context 'with registered user' do
     before :each do
       login_as user
-    end
 
-    it 'shows user profile' do
-      visit root_path
-
-      click_link user.nick
-
-      expect(page).to have_content(user.nick)
-      expect(page).to have_content(user.email)
-      expect(page).to have_content("#{user.first} #{user.last}")
-      expect(page).to have_content(user.about)
+      visit edit_user_registration_path
     end
 
     it 'edits user account', js: true do
-      visit edit_user_registration_path
-
       click_link 'Účet'
 
       fill_in 'user_email', with: 'nicky.nickmangmail.com'
@@ -47,8 +36,6 @@ describe 'User Profile' do
     end
 
     it 'edits basic user profile', js: true do
-      visit edit_user_registration_path
-
       click_link 'Profil'
 
       fill_in 'user_nick', with: ''
@@ -88,8 +75,6 @@ describe 'User Profile' do
     end
 
     it 'edits user social links', js: true do
-      visit edit_user_registration_path
-
       click_link 'Sociálne siete'
 
       fill_in 'user_facebook',       with: 'http://facebook.com/'
@@ -137,8 +122,30 @@ describe 'User Profile' do
       expect(page).to have_field('user_stack_overflow', with: 'http://stackoverflow.com/users/1234567890')
     end
 
+    it 'shows user profile' do
+      visit root_path
+
+      click_link user.nick
+
+      expect(page).to have_content(user.nick)
+      expect(page).to have_content(user.email)
+      expect(page).to have_content("#{user.first} #{user.last}")
+      expect(page).to have_content(user.about)
+    end
+
     it 'edits user privacy', js: true do
-      pending
+      click_link 'Súkromie'
+
+      find('label', text: 'Skryť meno ostatným používateľom').click
+      find('label', text: 'Skryť e-mail ostatným používateľom').click
+
+      click_button 'Uložiť'
+
+      click_link user.nick
+
+      expect(page).not_to have_content(user.name)
+      expect(page).not_to have_content(user.email)
+      expect(page).to     have_link('Upraviť profil')
     end
   end
 
