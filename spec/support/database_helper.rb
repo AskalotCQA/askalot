@@ -19,10 +19,6 @@ module DatabaseHelper
 end
 
 RSpec.configure do |config|
-  config.before(:all) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
   end

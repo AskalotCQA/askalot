@@ -75,8 +75,8 @@ describe 'Filter Questions', js: true do
 
     list = all('#questions > ol > li')
 
-    within '#questions ol' do
-      click_link 'elasticsearch', match: :first
+    within list[0] do
+      click_link 'elasticsearch'
     end
 
     wait_for_remote
@@ -88,8 +88,8 @@ describe 'Filter Questions', js: true do
 
     expect(current_params).to include(tags: 'elasticsearch')
 
-    within '#questions ol' do
-      click_link 'ruby', match: :first
+    within list[0] do
+      click_link 'ruby'
     end
 
     wait_for_remote
@@ -116,8 +116,8 @@ describe 'Filter Questions', js: true do
 
     list = all('#questions > ol > li')
 
-    within '#questions ol' do
-      click_link category.name, match: :first
+    within list[0] do
+      click_link category.name
     end
 
     wait_for_remote
@@ -129,8 +129,8 @@ describe 'Filter Questions', js: true do
 
     expect(current_params).to include(tags: category.tags.join(','))
 
-    within '#questions ol' do
-      click_link 'ruby', match: :first
+    within list[0] do
+      click_link 'ruby'
     end
 
     wait_for_remote
