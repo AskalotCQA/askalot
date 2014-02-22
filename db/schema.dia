@@ -9078,10 +9078,10 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#editor_id#</dia:string>
+            <dia:string>#question_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#integer#</dia:string>
+            <dia:string>#integer #</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9101,10 +9101,10 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#question_id#</dia:string>
+            <dia:string>#editor_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#integer #</dia:string>
+            <dia:string>#integer#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9442,10 +9442,10 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#editor_id#</dia:string>
+            <dia:string>#answer_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#integer#</dia:string>
+            <dia:string>#integer #</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9465,10 +9465,10 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#answer_id#</dia:string>
+            <dia:string>#editor_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#integer #</dia:string>
+            <dia:string>#integer#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9737,10 +9737,10 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#editor_id#</dia:string>
+            <dia:string>#comment_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#integer#</dia:string>
+            <dia:string>#integer #</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -9760,10 +9760,10 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#comment_id#</dia:string>
+            <dia:string>#editor_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#integer #</dia:string>
+            <dia:string>#integer#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -10086,7 +10086,7 @@
         <dia:point val="35.8286,24.9935"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.9305,0.84439;36.4136,25.7935"/>
+        <dia:rectangle val="26.9305,0.04439;36.4136,25.7935"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10094,8 +10094,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="35.8286,24.9935"/>
         <dia:point val="35.8706,24.9935"/>
-        <dia:point val="35.8706,1.64439"/>
-        <dia:point val="26.9805,1.64439"/>
+        <dia:point val="35.8706,0.84439"/>
+        <dia:point val="26.9805,0.84439"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -10112,7 +10112,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="1" to="O41" connection="13"/>
+        <dia:connection handle="1" to="O41" connection="11"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O47">
@@ -10156,7 +10156,7 @@
         <dia:point val="36.93,24.9997"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="36.88,1.38051;46.4001,25.7997"/>
+        <dia:rectangle val="36.88,0.58051;46.4001,25.7997"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10164,8 +10164,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="36.93,24.9997"/>
         <dia:point val="36.9721,24.9997"/>
-        <dia:point val="36.9721,2.18051"/>
-        <dia:point val="46.3501,2.18051"/>
+        <dia:point val="36.9721,1.38051"/>
+        <dia:point val="46.3501,1.38051"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -10182,7 +10182,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="1" to="O42" connection="12"/>
+        <dia:connection handle="1" to="O42" connection="10"/>
       </dia:connections>
     </dia:object>
     <dia:object type="UML - Association" version="2" id="O48">
@@ -10294,17 +10294,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="55.1502,47.0156"/>
+        <dia:point val="55.1502,46.2156"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.46,40.9;55.2002,47.8156"/>
+        <dia:rectangle val="50.46,40.9;55.2002,47.0156"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="55.1502,47.0156"/>
-        <dia:point val="52.2633,47.0156"/>
+        <dia:point val="55.1502,46.2156"/>
+        <dia:point val="52.2633,46.2156"/>
         <dia:point val="52.2633,41.7"/>
         <dia:point val="50.51,41.7"/>
       </dia:attribute>
@@ -10323,7 +10323,7 @@
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O43" connection="12"/>
+        <dia:connection handle="0" to="O43" connection="10"/>
         <dia:connection handle="1" to="O27" connection="21"/>
       </dia:connections>
     </dia:object>
