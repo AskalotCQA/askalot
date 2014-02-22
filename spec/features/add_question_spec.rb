@@ -51,6 +51,26 @@ describe 'Add Question', js: true do
     pending
   end
 
+  context 'when using markdown', js: true do
+    it 'renders preview' do
+      visit root_path
+
+      click_link 'Opýtať sa otázku'
+
+      fill_in 'question_title', with: 'Lorem ipsum title?'
+      fill_in 'question_text',  with: '# Lorem ipsum'
+
+      click_link 'Náhľad'
+
+      wait_for_remote
+
+      within '.markdown-content' do
+        expect(page).to have_css('h1', count: 1)
+        expect(page).to have_content('Lorem ipsum')
+      end
+    end
+  end
+
   context 'when selecting category' do
     before :each do
       create :category, name: 'Westside Playground', tags: ['westside', 'ali-gz']

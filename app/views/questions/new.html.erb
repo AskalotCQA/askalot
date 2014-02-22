@@ -15,8 +15,9 @@
           <%= f.text_field :title, autofocus: true, class: :'form-control' %>
         </div>
         <div class="form-group">
-          <%= f.label :text %>
-          <%= f.text_area :text, class: :'form-control', rows: 5 %>
+          <%= markdown_editor_for @question do %>
+            <%= f.text_area :text, class: :'form-control', rows: 5 %>
+          <% end %>
         </div>
         <div class="form-group">
           <%= f.label :tag_list %>
