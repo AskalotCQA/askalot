@@ -60,6 +60,7 @@ RSpec.configure do |config|
 
   # Include support
   config.include AuthenticationHelper, type: :feature
+  config.include CapybaraHelpers,      type: :feature
   config.include Devise::TestHelpers,  type: :controller
   config.include EmailHelper
   config.include FixtureHelper
