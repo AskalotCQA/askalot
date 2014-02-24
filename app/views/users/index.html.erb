@@ -6,9 +6,9 @@
   <%= tab_link_tag_with_count t('user.tab.all'), :'users-all', users_path(params.except(:page).merge tab: :'users-all'), filter_users(User).count, remote: true %>
 </ul>
 
-<% @users.in_groups_of(6, false) do |user_group| %>
+<%= @users.each_slice(6) do |users| %>
   <div class="row">
-    <% user_group.each do |user| %>
+    <% users.each do |user| %>
       <div class="col-md-2">
         <%= render 'square', user: user %>
       </div>
