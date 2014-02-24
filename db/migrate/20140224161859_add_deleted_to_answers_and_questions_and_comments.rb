@@ -7,6 +7,5 @@ class AddDeletedToAnswersAndQuestionsAndComments < ActiveRecord::Migration
     add_index :answers,   :deleted
     add_index :questions, :deleted
     add_index :comments,  :deleted
-
   end
 end
