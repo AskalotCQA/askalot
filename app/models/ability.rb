@@ -2,6 +2,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    # TODO (jharinek) define roles like this: 'can :action, Model'
+    # TODO (jharinek) see: https://github.com/ryanb/cancan/wiki/Defining-Abilities
     # TODO (smolnar) arrange permission by resource they access
     can :change_name,     User unless user.ais_login?
     can :change_password, User unless user.ais_login?
@@ -18,12 +20,9 @@ class Ability
     end
 
     can :label, [Question, Answer] do |resource|
-      resource.author == user || (user.role?(:teacher) && resource.author == User.where("login='slido'")[0])
+      resource.author == user || (user.role?(:teacher) && resource.author == User.find_by(login: :slido))
     end
 
-    # TODO (jharinek) define roles like this: 'can :action, Model'
-    # TODO (jharinek) see: https://github.com/ryanb/cancan/wiki/Defining-Abilities
-    # TODO (jharinek) propose change ability 'edit' to e.g. 'label'
     if user.role? :student
     end
 
