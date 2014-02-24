@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Add Question Answer' do
-  context 'when question from student' do
+  context 'with question from student' do
     let!(:question) { create :question, :with_tags }
 
     before :each do
@@ -68,8 +68,8 @@ describe 'Add Question Answer' do
     end
   end
 
-  context 'when question from slido' do
-    let!(:question) { create :question, author: (User.find_by login: :slido) }
+  context 'with question from slido' do
+    let!(:question) { create :question, author: User.find_by(login: :slido) }
     let!(:answered_question) { create :question, :with_answers, author: (User.find_by login: :slido) }
     let!(:teacher) { create :teacher }
     let!(:student) { create :user }
