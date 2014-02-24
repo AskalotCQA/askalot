@@ -4,19 +4,13 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   default_tab :'users-all', only: :index
-
   def index
     @users = case params[:tab].to_sym
                when :'users-all'  then User.order(:nick)
                else fail
              end
-
     @users = filter_users(@users)
-
     @users = @users.page(params[:page]).per(30)
-
-    #initialize_polling
-
   end
 
   def show

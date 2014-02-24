@@ -1,17 +1,20 @@
 <% provide(:title, 'All users') %>
+
 <h1><%= t('user.navigation') %></h1>
 
 <ul class="nav nav-tabs">
   <%= tab_link_tag_with_count t('user.tab.all'), :'users-all', users_path(params.except(:page).merge tab: :'users-all'), filter_users(User).count, remote: true %>
 </ul>
 
-<div class="row">
-  <% @users.each do |user| %>
-      <div class="col-xs-7 col-sm-2">
+<% @users.in_groups_of(6, false) do |user_group| %>
+  <div class="row">
+    <% user_group.each do |user| %>
+      <div class="col-md-2">
         <%= render 'square', user: user %>
       </div>
-  <% end %>
-</div>
+    <% end %>
+   </div>
+<% end %>
 
 <div class="row">
   <div class="col-md-12">
