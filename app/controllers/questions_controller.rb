@@ -65,7 +65,11 @@ class QuestionsController < ApplicationController
   helper_method :filter_questions
 
   def initialize_polling
-    return @poll = params[:poll] = session[:poll] ||= true unless params[:poll]
+    unless params[:poll]
+      session[:poll] = Rails.env.development? ? false : true if session[:poll].nil?
+
+      return @poll = params[:poll] = session[:poll]
+    end
 
     @poll = session[:poll] = params[:poll] == 'true' ? true : false
   end
