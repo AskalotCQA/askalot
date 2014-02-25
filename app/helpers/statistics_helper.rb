@@ -1,4 +1,18 @@
 module StatisticsHelper
+  def average(relation, column)
+    relation.average(column).to_f
+  end
+
+  def median(relation, column)
+    return unless (size = relation.size).zero?
+
+    relation.order(column).offset((size - 1) / 2).limit(2 - (size % 2)).sum(column) / 2.0
+  end
+
+  def standard_deviation(relation, column)
+    ActiveRecord::Base.connection.select_value("SELECT stddev(#{column}) FROM #{relation.name.tableize}").to_f
+  end
+
   def statistical_cell(value, options = {}, &block)
     classes = Array.wrap options[:class]
 
