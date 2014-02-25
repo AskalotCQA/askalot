@@ -1,7 +1,9 @@
 module Slido
   module Wall
-    class Parser
-      def self.parse(html)
+    module Parser
+      extend self
+
+      def parse(html)
         document = Nokogiri::HTML(html)
         result   = OpenStruct.new
 
