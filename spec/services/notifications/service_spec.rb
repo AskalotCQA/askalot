@@ -31,4 +31,19 @@ describe Notifications::Service do
       expect(Notifications::Service.notifiers).to include(notifier)
     end
   end
+
+  describe '.unsubscribe' do
+    it 'unsubscribes a notifier' do
+      notifier = double(:notifier)
+      mailer   = double(:mailer)
+
+      Notifications::Service.subscribe(notifier)
+      Notifications::Service.subscribe(mailer)
+
+      Notifications::Service.unsubscribe(mailer)
+
+      expect(Notifications::Service.notifiers).to     include(notifier)
+      expect(Notifications::Service.notifiers).not_to include(mailer)
+    end
+  end
 end

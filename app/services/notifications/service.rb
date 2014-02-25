@@ -10,13 +10,17 @@ module Notifications
       notifiers << notifier
     end
 
+    def unsubscribe(notifier)
+      notifiers.delete(notifier)
+    end
+
     def unsubscribe_all
       @notifiers = []
     end
 
-    def notify(resource, initiator, event)
+    def notify(action, initiator, resource)
       notifiers.each do |notifier|
-        notifier.publish(resource, initiator, event)
+        notifier.publish(action, initiator, resource)
       end
     end
   end
