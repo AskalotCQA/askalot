@@ -34,11 +34,7 @@ class Question < ActiveRecord::Base
   end
 
   def labels
-    [category] + tags_with_counts
-  end
-
-  def tags_with_counts
-    tags.each { |tag| tag.count = Question.tagged_with(tag.name).count }
+    [category] + tags
   end
 
   private

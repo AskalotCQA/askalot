@@ -35,6 +35,15 @@ describe Category do
         expect(category.count).to eql(3)
       end
     end
+
+    context 'with deleted questions' do
+      it 'ommits deleted questions for count' do
+        4.times { create :question, category: category }
+        2.times { create :question, :deleted, category: category }
+
+        expect(category.count).to eql(4)
+      end
+    end
   end
 
   describe '.with_slido' do
