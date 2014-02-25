@@ -16,9 +16,9 @@ describe Notifications::Service do
       resource = double(:resource)
       user     = double(:user)
 
-      expect(notifier).to receive(:publish).with(resource, user, :event)
+      expect(notifier).to receive(:publish).with(:action, user, resource)
 
-      Notifications::Service.notify(resource, user, :event)
+      Notifications::Service.notify(:action, user, resource)
     end
   end
 
