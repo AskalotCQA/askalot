@@ -6,9 +6,9 @@ class Tag < ActiveRecord::Base
   before_save :normalize
 
   def count
-    @count ||= taggings.select do |tagging|
+    @count ||= taggings.select { |tagging|
       tagging.taggable.respond_to?(:deleted) ? !tagging.taggable.deleted : true
-    end.size
+    }.size
   end
 
   def normalize
