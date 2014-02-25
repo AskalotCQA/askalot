@@ -10,7 +10,7 @@ module StatisticsHelper
   end
 
   def standard_deviation(relation, column)
-    ActiveRecord::Base.connection.select_value("SELECT stddev(#{column}) FROM #{relation.name.tableize}").to_f
+    ActiveRecord::Base.connection.select_value(relation.select("stddev(#{column})").to_sql).to_f
   end
 
   def statistical_fraction(numeration, denomination)
