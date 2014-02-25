@@ -1,8 +1,10 @@
 # TODO (smolnar) use unique cookies
 
 module Slido
-  class Scraper
-    def self.run(category, options = {})
+  module Scraper
+    extend self
+
+    def run(category, options = {})
       username = category.slido_username
 
       uri    = "#{Slido.config.base}/#{username}"
