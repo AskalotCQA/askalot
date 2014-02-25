@@ -13,6 +13,11 @@ module StatisticsHelper
     ActiveRecord::Base.connection.select_value("SELECT stddev(#{column}) FROM #{relation.name.tableize}").to_f
   end
 
+  def statistical_fraction(numeration, denomination)
+    content_tag(:td, numeration.size, class: :'text-right') +
+    content_tag(:td, number_to_percentage(100 * numeration.size / denomination.size.to_f, precision: 2), class: :'text-right')
+  end
+
   def statistical_cell(value, options = {}, &block)
     classes = Array.wrap options[:class]
 
