@@ -32,7 +32,7 @@
 
       <hr/>
 
-      <% if can? :edit_profile, @user %>
+      <% if can? :edit, @user %>
         <span class="pull-right">
           <%= link_to t('user.show.edit'), edit_user_registration_path %>
         </span>
