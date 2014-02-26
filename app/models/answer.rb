@@ -1,6 +1,7 @@
 class Answer < ActiveRecord::Base
   include Commentable
   include Evaluable
+  include Notifiable
   include Votable
   include Watchable
 

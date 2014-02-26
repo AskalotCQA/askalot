@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140224161859) do
+ActiveRecord::Schema.define(version: 20140226112332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,14 @@ ActiveRecord::Schema.define(version: 20140224161859) do
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
   add_index "categories", ["slido_username"], name: "index_categories_on_slido_username", using: :btree
+
+  create_table "changelogs", force: true do |t|
+    t.text     "text",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "changelogs", ["created_at"], name: "index_changelogs_on_created_at", using: :btree
 
   create_table "comment_revisions", force: true do |t|
     t.integer  "comment_id", null: false
@@ -144,6 +152,24 @@ ActiveRecord::Schema.define(version: 20140224161859) do
   end
 
   add_index "labels", ["value"], name: "index_labels_on_value", unique: true, using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.integer  "recipient_id",                   null: false
+    t.integer  "initiator_id",                   null: false
+    t.integer  "notifiable_id",                  null: false
+    t.string   "notifiable_type",                null: false
+    t.string   "action",                         null: false
+    t.boolean  "unread",          default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "notifications", ["action"], name: "index_notifications_on_action", using: :btree
+  add_index "notifications", ["created_at"], name: "index_notifications_on_created_at", using: :btree
+  add_index "notifications", ["initiator_id"], name: "index_notifications_on_initiator_id", using: :btree
+  add_index "notifications", ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type", using: :btree
+  add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
+  add_index "notifications", ["unread"], name: "index_notifications_on_unread", using: :btree
 
   create_table "question_revisions", force: true do |t|
     t.integer  "question_id", null: false
