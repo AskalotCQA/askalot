@@ -69,10 +69,12 @@ describe 'Add Question Answer' do
   end
 
   context 'with question from slido' do
-    let!(:question) { create :question, author: User.find_by(login: :slido) }
-    let!(:answered_question) { create :question, :with_answers, author: (User.find_by login: :slido) }
     let!(:teacher) { create :teacher }
     let!(:student) { create :user }
+    let!(:question) { create :question, author: User.find_by(login: :slido) }
+    let!(:question_2) { create :question, author: User.find_by(login: :slido) }
+    let!(:answered_question) { create :question, :with_answers, author: User.find_by(login: :slido) }
+    let!(:answer) { create :answer, author: teacher, question: question_2 }
 
     it 'adds first answer to slido question by teacher' do
       login_as teacher
@@ -136,6 +138,21 @@ describe 'Add Question Answer' do
 
       expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
       expect(page).not_to have_css(".answer-labeling-best a.answer-labeled-best")
+    end
+
+    it "keeps best label after saving existing answer" do
+      login_as teacher
+
+      visit root_path
+
+      click_link 'Otázky'
+      click_link question_2.title
+
+      expect(page).to have_css(".answer-labeling-best a.answer-labeled-best")
+
+      answer.save
+
+      expect(page).to have_css(".answer-labeling-best a.answer-labeled-best")
     end
   end
 end
