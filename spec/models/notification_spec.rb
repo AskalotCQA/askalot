@@ -1,5 +1,5 @@
 require 'spec_helper'
 
 describe Notification do
-  pending "add some examples to (or delete) #{__FILE__}"
+  pending "add some examples to #{__FILE__}"
 end
