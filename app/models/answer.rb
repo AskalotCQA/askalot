@@ -5,7 +5,7 @@ class Answer < ActiveRecord::Base
   include Votable
   include Watchable
 
-  after_create :slido_answered
+  after_create :slido_label_with_best!
 
   belongs_to :author, class_name: :User, counter_cache: true
   belongs_to :question, counter_cache: true
@@ -52,10 +52,11 @@ class Answer < ActiveRecord::Base
 
   private
 
-  def slido_answered
+  def slido_label_with_best!
     return unless author.role == :teacher
-    return unless question.author.login == 'slido'
+    return unless question.author.login.to_sym == :slido
     return unless question.answers.count == 1
+
     toggle_labeling_by! author, :best
   end
 end
