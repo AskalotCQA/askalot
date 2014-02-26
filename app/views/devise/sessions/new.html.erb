@@ -22,7 +22,7 @@
       <% if devise_mapping.rememberable? %>
         <div class="btn-group" data-toggle="buttons">
           <label class="btn btn-primitive btn-sm">
-            <%= f.check_box :remember_me %> <%= User.human_attribute_name :remember_me %> <%= icon_tag :blank %>
+            <%= f.check_box :remember_me, checked: true %> <%= User.human_attribute_name :remember_me %> <%= icon_tag :check %>
           </label>
         </div>
       <% end %>
