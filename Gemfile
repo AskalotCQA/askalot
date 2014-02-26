@@ -82,10 +82,10 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.2.0'
   gem 'factory_girl_rails'
   gem 'launchy'
-  gem 'capybara', '~> 2.1.0'
+  gem 'capybara', '~> 2.2.1'
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
-  gem 'poltergeist'
+  gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
 
   # database

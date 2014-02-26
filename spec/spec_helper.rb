@@ -12,8 +12,7 @@ require 'capybara/poltergeist'
 # Cancan
 require 'cancan/matchers'
 
-Capybara.default_selector = :css
-
+Capybara.default_selector  = :css
 Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :selenium
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -61,10 +60,10 @@ RSpec.configure do |config|
 
   # Include support
   config.include AuthenticationHelper, type: :feature
+  config.include CapybaraHelpers,      type: :feature
   config.include Devise::TestHelpers,  type: :controller
   config.include EmailHelper
   config.include FixtureHelper
-  config.include HistoryHelper,        type: :feature
   config.include Logging
   config.include PageHelper,           type: :feature
   config.include PollingHelper,        type: :feature

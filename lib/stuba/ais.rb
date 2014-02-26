@@ -1,8 +1,10 @@
 require 'timeout'
 
 module Stuba
-  class AIS
-    def self.authenticate(username, password, options = {})
+  module AIS
+    extend self
+
+    def authenticate(username, password, options = {})
       request = Stuba::LDAP.build(
         host: 'ldap.stuba.sk',
         port: 636,

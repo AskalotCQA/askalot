@@ -14,6 +14,10 @@ FactoryGirl.define do
       anonymous true
     end
 
+    trait :deleted do
+      deleted true
+    end
+
     trait :with_tags do
       sequence(:tag_list) { |n| "tag-#{n}" }
     end

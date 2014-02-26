@@ -12,7 +12,7 @@ class TagsController < ApplicationController
       results: tags.map { |tag|
         {
           id:    tag.name,
-          text: "#{tag.name} (#{tag.taggings.size})"
+          text: "#{tag.name} (#{tag.count})"
         }
       },
     }
