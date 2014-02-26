@@ -1,16 +1,18 @@
 .markdown-tabs {
- border-bottom: none;
+  border-bottom: none;
 
- & > li > a {
-   color: $text-muted;
- }
+  & > li > a {
+    color: $text-muted;
+  }
 
- & > li.active > a,
- & > li.active > a:hover,
- & > li.active > a:focus {
-   border-color: $input-border !important;
-   border-bottom-color: #fff !important;
- }
+  & > li.active > a,
+  & > li.active > a:hover,
+  & > li.active > a:focus {
+    border-color: $input-border !important;
+    border-bottom-color: #fff !important;
+
+    color: $text-color;
+  }
 }
 
 .markdown-help {
