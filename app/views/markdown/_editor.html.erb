@@ -1,19 +1,21 @@
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-<%= help ? 4 : 12 %>">
     <ul id="<%= id %>" class="nav nav-tabs markdown-tabs">
       <li class="active">
-        <a class="markdown-text" href="#<%= id %>-text" data-toggle="tab"><%= t 'markdown.edit' %></a>
+        <a class="markdown-text" href="#<%= id %>-text" data-toggle="tab"><%= text ? text : t('markdown.text') %></a>
       </li>
       <li>
-        <a class="markdown-preview" href="#<%= id %>-preview" data-toggle="tab"><%= t 'markdown.preview' %></a>
+        <a class="markdown-preview" href="#<%= id %>-preview" data-toggle="tab"><%= t('markdown.preview') %></a>
       </li>
     </ul>
   </div>
-  <div class="col-md-8">
-    <span class="markdown-help pull-right">
-      <%= t('markdown.documentation', link: external_link_to('GitHub Markdown', 'http://guides.github.com/overviews/mastering-markdown')).html_safe %>
-    </span>
-  </div>
+  <% if help %>
+    <div class="col-md-8">
+      <span class="markdown-help pull-right">
+        <%= t('markdown.documentation', link: external_link_to('GitHub Markdown', 'http://guides.github.com/overviews/mastering-markdown')).html_safe %>
+      </span>
+    </div>
+  <% end %>
 </div>
 
 <div class="row">

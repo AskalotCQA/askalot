@@ -7,6 +7,8 @@ class AnswersController < ApplicationController
     @question = Question.find(params[:question_id])
     @answer   = Answer.new(answer_params)
 
+    authorize! :answer, @question
+
     if @answer.save
       flash[:notice] = t('answer.create.success')
     else

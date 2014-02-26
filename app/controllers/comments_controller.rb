@@ -6,6 +6,8 @@ class CommentsController < ApplicationController
     @question    = @commentable.is_a?(Question) ? @commentable : @commentable.question
     @comment     = Comment.new(comment_params)
 
+    authorize! :comment, @commentable
+
     if @comment.save
       flash[:notice] = t('comment.create.success')
     else

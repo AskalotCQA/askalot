@@ -24,8 +24,9 @@
   <br/>
 
   <div class="form-group">
-    <%= f.label :about %>
-    <%= f.text_area :about, class: :'form-control' %>
+    <%= markdown_editor_for resource, text: User.human_attribute_name(:about), help: false do %>
+      <%= f.text_area :about, class: :'form-control', rows: 5 %>
+    <% end %>
   </div>
 
   <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>

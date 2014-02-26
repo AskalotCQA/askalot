@@ -6,8 +6,9 @@ class StatisticsController < ApplicationController
   def index
     authorize! :observe, nil
 
-    @questions = Question.all
     @users     = User.order(:name)
+    @questions = Question.all
+    @answers   = Answer.all
 
     filter_by_date
     filter_by_tags
@@ -29,10 +30,10 @@ class StatisticsController < ApplicationController
   end
 
   def filter_by_tags
-    @questions = @questions.tagged_with(params[:tags]) if params[:tags].present?
+    @questions = @questions.tagged_with(params[:tags]).uniq if params[:tags].present?
+    @answers   = join_question(Answer, @questions).uniq
 
-    users  = @questions.uniq.pluck(:author_id).to_set
-    users += join_question(Answer, @questions).pluck(:author_id)
+    users  = (@questions.pluck(:author_id) + @answers.pluck(:author_id)).to_set
     users += join_questions(Comment, :commentable, @questions).uniq.pluck(:author_id)
     users += join_questions_through_answers(Comment, :commentable, @questions).pluck(:author_id)
     users += join_questions(Vote, :votable, @questions).uniq.pluck(:voter_id)
