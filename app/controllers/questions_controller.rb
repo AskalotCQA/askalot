@@ -30,6 +30,8 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
 
+    authorize! :ask, @question
+
     if @question.save
       flash[:notice] = t('question.create.success')
 
