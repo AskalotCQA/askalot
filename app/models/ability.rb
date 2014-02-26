@@ -28,12 +28,13 @@ class Ability
     if user.role? :teacher
       can :evaluate, [Question, Answer]
 
-      can    :observe, :all
-      cannot :vote,    :all
+      can :observe, :all
+
+      cannot :vote, :all
     end
 
     if user.role? :administrator
-      can :manage, :all
+      can :vote, :all
     end
   end
 end
