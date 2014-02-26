@@ -16,13 +16,13 @@ describe Stuba::User do
   it 'provides user information' do
     user = Stuba::User.new(data)
 
-    expect(user.uid).to eql('1234')
-    expect(user.login).to eql('xuser1')
-    expect(user.first).to eql('Janko')
+    expect(user.uid).to    eql('1234')
+    expect(user.login).to  eql('xuser1')
+    expect(user.first).to  eql('Janko')
     expect(user.middle).to be_nil
-    expect(user.last).to eql('Hraško')
-    expect(user.email).to eql('xuser1@stuba.sk')
-    expect(user.role).to eql(:student)
+    expect(user.last).to   eql('Hraško')
+    expect(user.email).to  eql('xuser1@stuba.sk')
+    expect(user.role).to   eql(:student)
   end
 
   context 'when user has middle name' do
