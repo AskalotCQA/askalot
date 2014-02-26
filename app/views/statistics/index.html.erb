@@ -58,7 +58,7 @@
           <%= render 'description_data', title: 'Pridané otázky', relation: @users, chain: :questions %>
         </tbody>
         <tbody>
-          <%= render 'description_data', title: 'Zobrazené otázky',   relation: @users, chain: [:questions, :viewed] %>
+          <%= render 'description_data', title: 'Zobrazené otázky',   relation: @users, chain: [:questions, :viewed_by_others] %>
           <%= render 'description_data', title: 'Hlasované otázky',   relation: @users, chain: [:questions, :voted] %>
           <%= render 'description_data', title: 'Komentované otázky', relation: @users, chain: [:questions, :commented] %>
           <%= render 'description_data', title: 'Obľúbené otázky',    relation: @users, chain: [:questions, :favored] %>
