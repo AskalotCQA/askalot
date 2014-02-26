@@ -16,21 +16,6 @@ module StatisticsHelper
     return mean, Math.sqrt(sum / (values.count - 1)).to_f
   end
 
-  # TODO(zbell) rm
-  #def average2(relation, column)
-  #  relation.average(column).to_f
-  #end
-  #
-  #def median2(relation, column)
-  #  return unless (size = relation.size).zero?
-  #
-  #  relation.order(column).offset((size - 1) / 2).limit(2 - (size % 2)).sum(column) / 2.0
-  #end
-  #
-  #def standard_deviation2(relation, column)
-  #  ActiveRecord::Base.connection.select_value(relation.select("stddev(#{column})").to_sql).to_f
-  #end
-
   def data_tag(value, options = {})
     classes = Array.wrap options[:class]
 
