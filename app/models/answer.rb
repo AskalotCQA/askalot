@@ -4,7 +4,7 @@ class Answer < ActiveRecord::Base
   include Votable
   include Watchable
 
-  after_save :slido_answered
+  after_create :slido_answered
 
   belongs_to :author, class_name: :User, counter_cache: true
   belongs_to :question, counter_cache: true
