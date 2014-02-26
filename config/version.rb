@@ -1,8 +1,8 @@
 module NaRuby
   module VERSION
-    MAJOR = 1
-    MINOR = 0
-    TINY  = 9
+    MAJOR =  1
+    MINOR =  0
+    TINY  = 10
 
     PRE = 'beta'
 
