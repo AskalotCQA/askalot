@@ -6,10 +6,10 @@ module MarkdownHelper
   end
 
   def render_markdown(text, options = {})
-    Redcurtain::Markdown.render(text)
+    Redcurtain::Markdown.render(text, options)
   end
 
-  def markdown_to_text(text, options = {})
-    Redcurtain::Markdown.strip(text)
+  def strip_markdown(text, options = {})
+    Redcurtain::Markdown.strip(text, options)
   end
 end
