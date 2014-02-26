@@ -6,9 +6,7 @@ module Redcurtain::Highlighter
       document = Nokogiri::HTML(content.to_s)
 
       document.search('//pre').each do |pre|
-        language = pre[:lang].try(:to_sym)
-
-        pre.replace ::Pygments.highlight(pre.text.strip, lexer: language)
+        pre.replace ::Pygments.highlight(pre.text.strip, lexer: pre[:lang])
       end
 
       document.to_s.html_safe
