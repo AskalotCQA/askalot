@@ -31,13 +31,14 @@ gem 'rails-timeago', '~> 2.0'
 # markdown
 gem 'github-markdown'
 gem 'pygments.rb'
+gem 'gemoji', '~> 1.5.0'
 
 # internationalization
 gem 'rails-i18n', '~> 4.0.0'
 gem 'i18n-js'
 
 # pagination
-gem 'kaminari',           '~> 0.14.1'
+gem 'kaminari', '~> 0.14.1'
 gem 'kaminari-bootstrap', '~> 0.1.3'
 
 # scheduling
