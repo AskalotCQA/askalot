@@ -55,8 +55,6 @@ gem 'symbolize'
 
 # monitoring
 gem 'garelic'
-# gem 'airbrake'
-# gem 'newrelic_rpm'
 
 # documentation
 group :doc do
