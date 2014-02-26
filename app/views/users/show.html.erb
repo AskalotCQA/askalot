@@ -42,7 +42,7 @@
         <h4><%= t 'user.show.about' %></h4>
 
         <p>
-          <%= @user.about %>
+          <%= render_markdown @user.about %>
         </p>
       <% end %>
 
