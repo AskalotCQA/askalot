@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140224161859) do
+ActiveRecord::Schema.define(version: 20140226112332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,14 @@ ActiveRecord::Schema.define(version: 20140224161859) do
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
   add_index "categories", ["slido_username"], name: "index_categories_on_slido_username", using: :btree
+
+  create_table "changelogs", force: true do |t|
+    t.text     "text",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "changelogs", ["created_at"], name: "index_changelogs_on_created_at", using: :btree
 
   create_table "comment_revisions", force: true do |t|
     t.integer  "comment_id", null: false
