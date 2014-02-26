@@ -17,6 +17,8 @@ class Answer < ActiveRecord::Base
 
   scope :labeled_with, lambda { |label| joins(:labelings).merge(Labeling.with label) }
 
+  Hash[Label.value_enum].values.each { |label| scope label, -> { labeled_with label }}
+
   def labeled_with(label)
     labelings.with label
   end
