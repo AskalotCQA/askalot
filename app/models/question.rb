@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
   include Commentable
   include Evaluable
   include Favorable
+  include Notifiable
   include Taggable
   include Viewable
   include Votable
