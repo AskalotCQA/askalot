@@ -54,8 +54,6 @@ gem 'scout', github: 'smolnar/scout', branch: :master
 
 # monitoring
 gem 'garelic'
-# gem 'airbrake'
-# gem 'newrelic_rpm'
 
 # documentation
 group :doc do
