@@ -1,22 +1,32 @@
 class window.Markdown
-  @url: '/markdown/preview'
+  url: '/markdown/preview'
 
   textcomplete:
     strategies:
       emoji:
-        lal: 1
+        match: /\B:([\-+\w]*)$/
+        search: (term, callback) ->
+          values = $.map Emoji.names, (icon) -> if icon.indexOf(term) == 0 then icon else null
 
+          callback(values)
+        template: (value) -> Handlebars.compile('<img class="gemoji" src="/images/gemoji/{{icon}}.png"></img>{{icon}}')(icon: value)
+        replace: (value)  -> ":#{value}:"
+        index: 1,
+        maxCount: 5
 
   @bind: ->
-    $('.markdown-preview').click (event) ->
-      id = $(this).closest('.markdown-tabs').attr('id')
+    $('.markdown-tabs').each ->
+      id = $(this).attr('id')
 
       markdown = new Markdown(id)
 
-      markdown.preview()
+      $(this).find('.markdown-preview').click (event) ->
+        markdown.preview()
 
   constructor: (id) ->
     @id = id
+
+    @bindTextcomplete()
 
   preview: ->
     content = Handlebars.compile('<p class="text-muted">{{translation}}</p>')(translation: I18n.t('markdown.loading_preview'))
@@ -33,11 +43,12 @@ class window.Markdown
     text = @text()
 
     $.ajax
-      url: Markdown.url
+      url:  @url
       type: 'POST'
       data:
         text: text
       success: (html) -> callback(html)
 
   bindTextcomplete: ->
-
+    for _, options of @textcomplete.strategies
+      $("##{@id}-text textarea").textcomplete(options)
