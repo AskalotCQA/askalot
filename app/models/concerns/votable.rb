@@ -13,33 +13,28 @@ module Votable
   end
 
   def upvoted_by?(user)
-    votes.exists?(voter: user, upvote: true)
+    votes.positive.exists?(voter: user)
   end
 
   def downvoted_by?(user)
-    votes.exists?(voter: user, upvote: false)
+    votes.negative.exists?(voter: user)
   end
 
-  def update_votes_total!
-    self.votes_total = votes.where(upvote: true).size - votes.where(upvote: false).size
-    self.save!
-  end
-
-  def toggle_vote_by!(user, upvote)
+  def toggle_vote_by!(user, positive)
     unless voted_by? user
-      votes.create! voter: user, upvote: upvote
+      votes.create! voter: user, positive: positive
     else
       vote = votes.where(voter: user).first
 
-      if vote.upvote == upvote
+      if vote.positive == positive
         vote.destroy
       else
-        vote.upvote = upvote
+        vote.positive = positive
         vote.save!
       end
     end
 
-    update_votes_total!
+    update_votes_caches!
   end
 
   def toggle_voteup_by!(user)
@@ -48,5 +43,17 @@ module Votable
 
   def toggle_votedown_by!(user)
     toggle_vote_by! user, false
+  end
+
+  private
+
+  def update_votes_caches!
+    positive = votes.positive.size
+    negative = votes.negative.size
+
+    self.votes_difference = positive - negative
+    self.votes_lb_wsci_bp = Ratain.lb_wsci_bp positive, positive + negative
+
+    self.save!
   end
 end

@@ -6,7 +6,7 @@ NaRuby::Application.routes.draw do
 
   devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }
 
-  resources :users, only: [] do
+  resources :users, only: [:index] do
     patch :profile, on: :collection, to: 'users#update'
   end
 

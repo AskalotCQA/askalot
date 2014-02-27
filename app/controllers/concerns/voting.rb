@@ -15,6 +15,8 @@ module Voting
     @model   = controller_name.classify.downcase.to_sym
     @votable = controller_name.classify.constantize.find(params[:id])
 
+    authorize! :vote, @votable
+
     @votable.toggle_vote_by!(current_user, voteup)
     @votable.votes.reload
 

@@ -10,6 +10,5 @@ describe Answer do
 
     expect(answer).to be_valid
   end
-
   # TODO(zbell) pridat testy pre toggle_labeling_by!
 end

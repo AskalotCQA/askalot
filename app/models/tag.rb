@@ -1,4 +1,5 @@
 class Tag < ActiveRecord::Base
+  include Notifiable
   include Watchable
 
   has_many :taggings, dependent: :restrict_with_exception
