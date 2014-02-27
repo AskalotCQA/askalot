@@ -18,7 +18,7 @@ describe Redcurtain::Markdown do
 
   describe '#render' do
     it 'checks renderer chaining' do
-      o = { a: { key: 0 }, b: { key: 1 }, c: { key: 2 } }
+      options = { a: { key: 0 }, b: { key: 1 }, c: { key: 2 } }
 
       a = double(:renderer, name: 'Renderer::A')
       b = double(:renderer, name: 'Renderer::B')
@@ -30,7 +30,7 @@ describe Redcurtain::Markdown do
       expect(b).to receive(:render).with('b', { key: 1 }).and_return('c')
       expect(c).to receive(:render).with('c', { key: 2 }).and_return('d')
 
-      expect(markdown.render('a', o)).to eql('d')
+      expect(markdown.render('a', options)).to eql('d')
     end
 
     it 'renders markdown' do

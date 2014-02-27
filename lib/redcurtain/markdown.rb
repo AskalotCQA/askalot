@@ -4,8 +4,8 @@ module Redcurtain
 
     attr_accessor :renderers
 
-    def setup!
-      @renderers = [
+    def renderers
+      @renderers ||= [
         Redcurtain::Renderer::Gemoji,
         Redcurtain::Renderer::GitHub,
         Redcurtain::Renderer::Pygments
