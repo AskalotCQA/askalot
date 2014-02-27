@@ -9,9 +9,7 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <li><%= link_to t('question.navigation'), questions_path %></li>
-<!-- TODO(zbell) enable when implemented
-        <li><%= link_to t('user.navigation'), nil %></li>
--->
+        <li><%= link_to t('user.navigation'), users_path %></li>
         <% if user_signed_in? && can?(:observe, :all) %>
           <li><%= link_to t('statistic.navigation'), statistics_path %></li>
         <% end %>

@@ -6,7 +6,7 @@ NaRuby::Application.routes.draw do
 
   devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }
 
-  resources :users, only: [] do
+  resources :users, only: [:index] do
     patch :profile, on: :collection, to: 'users#update'
   end
 
@@ -30,6 +30,8 @@ NaRuby::Application.routes.draw do
     get :voteup, on: :member
     get :votedown, on: :member
   end
+
+  resources :changelogs, only: [:index]
 
   resources :questions, only: [:index, :new, :create, :show] do
     resources :answers, only: [:create]

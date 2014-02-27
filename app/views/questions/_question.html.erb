@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-md-4">
           <%= content_tag :span, class: [:'question-metric', question_votes_coloring(question)] do %>
-            <span class="question-value"><%= question.votes_total %></span>
-            <%= t('count.vote', count: question.votes_total) %>
+            <span class="question-value"><%= question.votes_difference %></span>
+            <%= t('count.vote', count: question.votes_difference) %>
           <% end %>
         </div>
         <div class="col-md-4">

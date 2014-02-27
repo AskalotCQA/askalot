@@ -1,5 +1,18 @@
 class UsersController < ApplicationController
+  include Tabbing
+
   before_action :authenticate_user!
+
+  default_tab :'users-all', only: :index
+
+  def index
+    @users = case params[:tab].to_sym
+             when :'users-all' then User.order(:nick)
+             else fail
+             end
+
+    @users = @users.page(params[:page]).per(30)
+  end
 
   def show
     @user = User.find_by_nick params[:nick]

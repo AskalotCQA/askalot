@@ -1,3 +1,5 @@
 class Changelog < ActiveRecord::Base
-  validates :text, presence: true
+  validates :title,   presence: true
+  validates :text,    presence: true
+  validates :version, presence: true, uniqueness: true
 end

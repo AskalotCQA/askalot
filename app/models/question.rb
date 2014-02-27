@@ -16,7 +16,7 @@ class Question < ActiveRecord::Base
   has_many :answers, dependent: :destroy
 
   validates :category,  presence: true
-  validates :title,     presence: true, length: { minimum: 2, maximum: 250 }
+  validates :title,     presence: true, length: { minimum: 2, maximum: 140 }
   validates :text,      presence: true, length: { minimum: 2 }
   validates :anonymous, inclusion: { in: [true, false] }
 
@@ -29,7 +29,7 @@ class Question < ActiveRecord::Base
 
   def answers_ordered
     best  = answers.labeled_with(:best).first
-    other = answers.order(votes_total: :desc, created_at: :desc)
+    other = answers.order(votes_lb_wsci_bp: :desc, created_at: :desc)
 
     best ? [best] + other.where('id != ?', best.id) : other
   end

@@ -22,3 +22,7 @@
 every 5.minutes do
   rake 'slido:questions'
 end
+
+every 1.day do
+  rake 'backup:database'
+end

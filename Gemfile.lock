@@ -291,6 +291,7 @@ GEM
       sprockets (~> 2.8)
     squire (1.3.6)
       activesupport (>= 3.0.0)
+    statistics2 (0.54)
     symbolize (4.4.1)
       activemodel (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -377,6 +378,7 @@ DEPENDENCIES
   select2-rails (~> 3.4.9)
   selenium-webdriver
   squire (~> 1.3.6)
+  statistics2
   symbolize
   therubyracer
   uglifier (>= 1.3.0)
