@@ -31,6 +31,8 @@ NaRuby::Application.routes.draw do
     get :votedown, on: :member
   end
 
+  resources :changelogs, only: [:index]
+
   resources :questions, only: [:index, :new, :create, :show] do
     resources :answers, only: [:create]
 
