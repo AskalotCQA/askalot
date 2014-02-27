@@ -2,22 +2,14 @@ class AddTouchedAtToQuestions < ActiveRecord::Migration
   def change
     add_column :questions, :touched_at, :datetime, null: false, default: '2000-01-01 00:00:00'
 
-    Question.all.each do |question|
-      if question.answers.count == 0
-        question.touched_at = question.updated_at
-      else
-        question.answers.each do |answer|
-          question.touched_at = answer.updated_at if question.touched_at < answer.updated_at
-          answer.comments.each do |comment|
-            question.touched_at = comment.updated_at if question.touched_at < comment.updated_at
-          end
-        end
-      end
+    Question.find_each(batch_size: 2000) do |question|
+      dates = []
+      dates += [question.updated_at]
+      dates += question.answers.pluck(:updated_at)
+      question.answers.each { |a| dates += a.comments.pluck(:updated_at) }
+      dates += question.comments.pluck(:updated_at)
 
-      question.comments.each do |comment|
-        question.touched_at = comment.updated_at if question.touched_at < comment.updated_at
-      end
-
+      question.touched_at = dates.max
       question.save
     end
   end
