@@ -16,7 +16,7 @@ module Redcurtain
       options.symbolize_keys!
 
       renderers.inject(content) do |result, renderer|
-        renderer.render(result, options[renderer.name.to_s.split(/::/).last.downcase.to_sym])
+        renderer.render(result, options[renderer.name.to_s.split(/::/).last.downcase.to_sym] || {})
       end
     end
 

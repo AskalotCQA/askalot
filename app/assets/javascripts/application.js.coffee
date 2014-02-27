@@ -25,6 +25,7 @@
 #= require jquery-tablesorter
 #= require rails-timeago
 #= require locales/jquery.timeago.sk.js
+#= require jquery-textcomplete
 #
 #= require form
 #= require table
