@@ -107,6 +107,63 @@ describe User do
   describe 'Abilities' do
     let(:ability) { Ability.new(user) }
 
+    context 'when name is present' do
+      it 'allows showing user name' do
+        other = create :user, show_name: true
+
+        expect(ability).to be_able_to(:show_name, other)
+      end
+    end
+
+    context 'when user allowed showing her name' do
+      it 'allows showing user name' do
+        other = create :user, show_name: true
+
+        expect(ability).to be_able_to(:show_name, other)
+      end
+    end
+
+    context 'when user disallowed showing her name' do
+      it 'disallows showing user name' do
+        other = create :user, show_name: false
+
+        expect(ability).not_to be_able_to(:show_name, other)
+      end
+    end
+
+    context 'when user does not have name' do
+      it 'disallows showing user name' do
+        other = create :user, :without_name, show_name: true
+
+        expect(ability).not_to be_able_to(:show_name, other)
+      end
+    end
+
+    context 'when use allowed showing email' do
+      it 'allows showing of email' do
+        other = create :user, show_email: true
+
+        expect(ability).to be_able_to(:show_email, other)
+      end
+    end
+
+    context 'when use disallowed showing email' do
+      it 'disallows showing of email' do
+        other = create :user, show_email: false
+
+        expect(ability).not_to be_able_to(:show_email, other)
+      end
+    end
+
+    context 'with current user' do
+      it 'allows editing profile' do
+        other = create :user
+
+        expect(ability).to be_able_to(:edit, user)
+        expect(ability).not_to be_able_to(:edit, other)
+      end
+    end
+
     context 'with AIS credentials' do
       let(:user) { build :user, :as_ais }
 

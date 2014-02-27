@@ -9,9 +9,9 @@ class QuestionsController < ApplicationController
   def index
     @questions = case params[:tab].to_sym
                  when :'questions-new'        then Question.order(created_at: :desc)
-                 when :'questions-unanswered' then Question.unanswered.order('questions.votes_total desc, questions.created_at desc')
-                 when :'questions-answered'   then Question.answered.order(votes_total: :desc, created_at: :desc)
-                 when :'questions-solved'     then Question.solved.order(votes_total: :desc, created_at: :desc)
+                 when :'questions-unanswered' then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
+                 when :'questions-answered'   then Question.answered.order(votes_lb_wsci_bp: :desc, created_at: :desc)
+                 when :'questions-solved'     then Question.solved.order(votes_lb_wsci_bp: :desc, created_at: :desc)
                  when :'questions-favored'    then Question.favored.order(favorites_count: :desc, created_at: :desc)
                  else fail
                  end
@@ -29,6 +29,8 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
+
+    authorize! :ask, @question
 
     if @question.save
       flash[:notice] = t('question.create.success')
@@ -65,7 +67,11 @@ class QuestionsController < ApplicationController
   helper_method :filter_questions
 
   def initialize_polling
-    return @poll = params[:poll] = session[:poll] ||= true unless params[:poll]
+    unless params[:poll]
+      session[:poll] = Rails.env.development? ? false : true if session[:poll].nil?
+
+      return @poll = params[:poll] = session[:poll]
+    end
 
     @poll = session[:poll] = params[:poll] == 'true' ? true : false
   end

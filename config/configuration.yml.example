@@ -31,7 +31,7 @@ test:
   <<: *defaults
 
   poll:
-    default: 1
+    default: 5
 
 staging:
   <<: *defaults

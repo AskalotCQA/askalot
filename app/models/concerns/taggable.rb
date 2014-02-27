@@ -11,7 +11,7 @@ module Taggable
   end
 
   def tag_list
-    @tag_list ||= TagList.new(self.class.taggable)
+    @tag_list ||= TagList.new(self.class.taggable, tags.pluck(:name))
   end
 
   def tag_list=(values)

@@ -6,11 +6,28 @@ shared_examples_for Taggable do
 
   describe '#tag_list' do
     it 'assignes tags from string' do
-      record = model.new
+      record = build factory
 
       record.tag_list = 'a, b, c'
 
       expect(record.tag_list.tags).to eql(['a', 'b', 'c'])
+      expect(record.tags.pluck(:name)).to be_empty
+    end
+
+    it 'loads tag list with existing tags' do
+      record = build factory
+
+      record.tag_list = 'a, b'
+
+      record.save!
+
+      expect(record.tag_list.tags.sort).to     eql(['a', 'b'])
+      expect(record.tags.pluck(:name).sort).to eql(['a', 'b'])
+
+      record = model.find(record.id)
+
+      expect(record.tag_list.tags.sort).to     eql(['a', 'b'])
+      expect(record.tags.pluck(:name).sort).to eql(['a', 'b'])
     end
 
     context 'when no tags assigned' do

@@ -15,23 +15,23 @@ $jumbotron-font-size: ceil($font-size-base * 1.25);
 
 // border radius
 
-$border-radius-base: 0;
+$border-radius-base:  0;
 $border-radius-large: 0;
 $border-radius-small: 0;
 
-$alert-border-radius: $border-radius-base;
-$badge-border-radius: $border-radius-base;
-$input-border-radius: $border-radius-base;
+$alert-border-radius:      $border-radius-base;
+$badge-border-radius:      $border-radius-base;
+$input-border-radius:      $border-radius-base;
 $list-group-border-radius: $border-radius-base;
-$nav-pills-border-radius: $border-radius-base;
-$navbar-border-radius: $border-radius-base;
-$pager-border-radius: $border-radius-base;
-$panel-border-radius: $border-radius-base;
-$thumbnail-border-radius: $border-radius-base;
+$nav-pills-border-radius:  $border-radius-base;
+$navbar-border-radius:     $border-radius-base;
+$pager-border-radius:      $border-radius-base;
+$panel-border-radius:      $border-radius-base;
+$thumbnail-border-radius:  $border-radius-base;
 
 // state text
 
 $state-success-text: $brand-success;
-$state-info-text: $brand-info;
+$state-info-text:    $brand-info;
 $state-warning-text: $brand-warning;
-$state-danger-text: $brand-danger;
+$state-danger-text:  $brand-danger;

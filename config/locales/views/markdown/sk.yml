@@ -1,6 +1,6 @@
 sk:
   markdown:
-    edit: 'Text'
+    text: 'Text'
     preview: 'Náhľad'
     documentation: 'Text je spracovaný pomocou %{link}'
 

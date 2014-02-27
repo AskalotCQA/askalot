@@ -11,25 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140216132318) do
+ActiveRecord::Schema.define(version: 20140227104329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "answers", force: true do |t|
-    t.integer  "author_id",                  null: false
-    t.integer  "question_id",                null: false
-    t.text     "text",                       null: false
+  create_table "answer_revisions", force: true do |t|
+    t.integer  "answer_id",  null: false
+    t.integer  "editor_id",  null: false
+    t.text     "text",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total",    default: 0, null: false
-    t.integer  "comments_count", default: 0, null: false
-    t.integer  "votes_count",    default: 0, null: false
+  end
+
+  add_index "answer_revisions", ["answer_id"], name: "index_answer_revisions_on_answer_id", using: :btree
+  add_index "answer_revisions", ["editor_id"], name: "index_answer_revisions_on_editor_id", using: :btree
+
+  create_table "answers", force: true do |t|
+    t.integer  "author_id",                                                  null: false
+    t.integer  "question_id",                                                null: false
+    t.text     "text",                                                       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "votes_difference",                           default: 0,     null: false
+    t.integer  "comments_count",                             default: 0,     null: false
+    t.integer  "votes_count",                                default: 0,     null: false
+    t.boolean  "deleted",                                    default: false, null: false
+    t.decimal  "votes_lb_wsci_bp", precision: 13, scale: 12, default: 0.0,   null: false
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
+  add_index "answers", ["deleted"], name: "index_answers_on_deleted", using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
-  add_index "answers", ["votes_total"], name: "index_answers_on_votes_total", using: :btree
+  add_index "answers", ["votes_difference"], name: "index_answers_on_votes_difference", using: :btree
+  add_index "answers", ["votes_lb_wsci_bp"], name: "index_answers_on_votes_lb_wsci_bp", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name",                            null: false
@@ -44,17 +59,38 @@ ActiveRecord::Schema.define(version: 20140216132318) do
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
   add_index "categories", ["slido_username"], name: "index_categories_on_slido_username", using: :btree
 
-  create_table "comments", force: true do |t|
-    t.integer  "author_id",        null: false
-    t.integer  "commentable_id",   null: false
-    t.string   "commentable_type", null: false
-    t.text     "text",             null: false
+  create_table "changelogs", force: true do |t|
+    t.text     "text",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "changelogs", ["created_at"], name: "index_changelogs_on_created_at", using: :btree
+
+  create_table "comment_revisions", force: true do |t|
+    t.integer  "comment_id", null: false
+    t.integer  "editor_id",  null: false
+    t.text     "text",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comment_revisions", ["comment_id"], name: "index_comment_revisions_on_comment_id", using: :btree
+  add_index "comment_revisions", ["editor_id"], name: "index_comment_revisions_on_editor_id", using: :btree
+
+  create_table "comments", force: true do |t|
+    t.integer  "author_id",                        null: false
+    t.integer  "commentable_id",                   null: false
+    t.string   "commentable_type",                 null: false
+    t.text     "text",                             null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "deleted",          default: false, null: false
+  end
+
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["deleted"], name: "index_comments_on_deleted", using: :btree
 
   create_table "evaluations", force: true do |t|
     t.integer  "evaluator_id",   null: false
@@ -119,29 +155,65 @@ ActiveRecord::Schema.define(version: 20140216132318) do
 
   add_index "labels", ["value"], name: "index_labels_on_value", unique: true, using: :btree
 
-  create_table "questions", force: true do |t|
-    t.integer  "author_id",                           null: false
-    t.integer  "category_id",                         null: false
-    t.string   "title",                               null: false
-    t.text     "text",                                null: false
+  create_table "notifications", force: true do |t|
+    t.integer  "recipient_id",                   null: false
+    t.integer  "initiator_id",                   null: false
+    t.integer  "notifiable_id",                  null: false
+    t.string   "notifiable_type",                null: false
+    t.string   "action",                         null: false
+    t.boolean  "unread",          default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total",         default: 0,     null: false
-    t.boolean  "anonymous",           default: false, null: false
-    t.integer  "answers_count",       default: 0,     null: false
-    t.integer  "comments_count",      default: 0,     null: false
-    t.integer  "favorites_count",     default: 0,     null: false
-    t.integer  "views_count",         default: 0,     null: false
-    t.integer  "votes_count",         default: 0,     null: false
+  end
+
+  add_index "notifications", ["action"], name: "index_notifications_on_action", using: :btree
+  add_index "notifications", ["created_at"], name: "index_notifications_on_created_at", using: :btree
+  add_index "notifications", ["initiator_id"], name: "index_notifications_on_initiator_id", using: :btree
+  add_index "notifications", ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type", using: :btree
+  add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
+  add_index "notifications", ["unread"], name: "index_notifications_on_unread", using: :btree
+
+  create_table "question_revisions", force: true do |t|
+    t.integer  "question_id", null: false
+    t.integer  "editor_id",   null: false
+    t.string   "category",    null: false
+    t.string   "tags",        null: false, array: true
+    t.string   "title",       null: false
+    t.text     "text",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "question_revisions", ["editor_id"], name: "index_question_revisions_on_editor_id", using: :btree
+  add_index "question_revisions", ["question_id"], name: "index_question_revisions_on_question_id", using: :btree
+
+  create_table "questions", force: true do |t|
+    t.integer  "author_id",                                                     null: false
+    t.integer  "category_id",                                                   null: false
+    t.string   "title",                                                         null: false
+    t.text     "text",                                                          null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "votes_difference",                              default: 0,     null: false
+    t.boolean  "anonymous",                                     default: false, null: false
+    t.integer  "answers_count",                                 default: 0,     null: false
+    t.integer  "comments_count",                                default: 0,     null: false
+    t.integer  "favorites_count",                               default: 0,     null: false
+    t.integer  "views_count",                                   default: 0,     null: false
+    t.integer  "votes_count",                                   default: 0,     null: false
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
+    t.boolean  "deleted",                                       default: false, null: false
+    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
+  add_index "questions", ["deleted"], name: "index_questions_on_deleted", using: :btree
   add_index "questions", ["slido_question_uuid"], name: "index_questions_on_slido_question_uuid", unique: true, using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
-  add_index "questions", ["votes_total"], name: "index_questions_on_votes_total", using: :btree
+  add_index "questions", ["votes_difference"], name: "index_questions_on_votes_difference", using: :btree
+  add_index "questions", ["votes_lb_wsci_bp"], name: "index_questions_on_votes_lb_wsci_bp", using: :btree
 
   create_table "slido_events", force: true do |t|
     t.integer  "category_id", null: false
@@ -259,13 +331,13 @@ ActiveRecord::Schema.define(version: 20140216132318) do
     t.integer  "voter_id",                    null: false
     t.integer  "votable_id",                  null: false
     t.string   "votable_type",                null: false
-    t.boolean  "upvote",       default: true, null: false
+    t.boolean  "positive",     default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "votes", ["upvote"], name: "index_votes_on_upvote", using: :btree
-  add_index "votes", ["votable_id", "votable_type", "upvote"], name: "index_votes_on_votable_id_and_votable_type_and_upvote", using: :btree
+  add_index "votes", ["positive"], name: "index_votes_on_positive", using: :btree
+  add_index "votes", ["votable_id", "votable_type", "positive"], name: "index_votes_on_votable_id_and_votable_type_and_positive", using: :btree
   add_index "votes", ["voter_id", "votable_id", "votable_type"], name: "index_votes_on_unique_key", unique: true, using: :btree
   add_index "votes", ["voter_id"], name: "index_votes_on_voter_id", using: :btree
 

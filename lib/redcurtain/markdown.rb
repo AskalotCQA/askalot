@@ -1,6 +1,6 @@
 module Redcurtain
-  class Markdown
-    cattr_accessor :renderer, :highlighter
+  module Markdown
+    mattr_accessor :renderer, :highlighter
 
     def self.render(text)
       process(text).to_s.html_safe

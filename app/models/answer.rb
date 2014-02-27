@@ -1,8 +1,11 @@
 class Answer < ActiveRecord::Base
   include Commentable
   include Evaluable
+  include Notifiable
   include Votable
   include Watchable
+
+  after_create :slido_label_with_best!
 
   belongs_to :author, class_name: :User, counter_cache: true
   belongs_to :question, counter_cache: true
@@ -16,6 +19,8 @@ class Answer < ActiveRecord::Base
   scope :for, lambda { |question| where(question: question) }
 
   scope :labeled_with, lambda { |label| joins(:labelings).merge(Labeling.with label) }
+
+  Hash[Label.value_enum].values.each { |label| scope label, -> { labeled_with label }}
 
   def labeled_with(label)
     labelings.with label
@@ -43,5 +48,15 @@ class Answer < ActiveRecord::Base
 
   def verified?
     labels.exists? value: :verified
+  end
+
+  private
+
+  def slido_label_with_best!
+    return unless author.role == :teacher
+    return unless question.author.login.to_sym == :slido
+    return unless question.answers.count == 1
+
+    toggle_labeling_by! author, :best
   end
 end

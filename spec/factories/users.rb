@@ -12,6 +12,9 @@ FactoryGirl.define do
     last  'Nash'
     about 'Lorem ipsum'
 
+    show_email true
+    show_name  true
+
     role User::ROLES.first
 
     factory :teacher, class: :User do
@@ -34,6 +37,12 @@ FactoryGirl.define do
 
       password              nil
       password_confirmation nil
+    end
+
+    trait :without_name do
+      first  nil
+      middle nil
+      last   nil
     end
 
     trait :unconfirmed do

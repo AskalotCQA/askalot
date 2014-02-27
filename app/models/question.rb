@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
   include Commentable
   include Evaluable
   include Favorable
+  include Notifiable
   include Taggable
   include Viewable
   include Votable
@@ -27,18 +28,14 @@ class Question < ActiveRecord::Base
   scope :by, lambda { |user| where(author: user) }
 
   def answers_ordered
-    best = answers.labeled_with(:best).first
-    other = answers.order(votes_total: :desc, created_at: :desc)
+    best  = answers.labeled_with(:best).first
+    other = answers.order(votes_lb_wsci_bp: :desc, created_at: :desc)
 
     best ? [best] + other.where('id != ?', best.id) : other
   end
 
   def labels
-    [category] + tags_with_counts
-  end
-
-  def tags_with_counts
-    tags.each { |tag| tag.count = Question.tagged_with(tag.name).count }
+    [category] + tags
   end
 
   private

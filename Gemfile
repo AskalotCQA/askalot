@@ -48,9 +48,10 @@ gem 'actionview-encoded_mail_to'
 gem 'forgery'
 gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
-gem 'symbolize'
 gem 'nokogiri'
 gem 'scout', github: 'smolnar/scout', branch: :master
+gem 'statistics2'
+gem 'symbolize'
 
 # monitoring
 gem 'garelic'
@@ -82,10 +83,10 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.2.0'
   gem 'factory_girl_rails'
   gem 'launchy'
-  gem 'capybara', '~> 2.1.0'
+  gem 'capybara', '~> 2.2.1'
   gem 'selenium-webdriver'
   gem 'capybara-webkit'
-  gem 'poltergeist'
+  gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
 
   # database
