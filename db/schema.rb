@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140226112332) do
+ActiveRecord::Schema.define(version: 20140227095502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,21 +28,23 @@ ActiveRecord::Schema.define(version: 20140226112332) do
   add_index "answer_revisions", ["editor_id"], name: "index_answer_revisions_on_editor_id", using: :btree
 
   create_table "answers", force: true do |t|
-    t.integer  "author_id",                      null: false
-    t.integer  "question_id",                    null: false
-    t.text     "text",                           null: false
+    t.integer  "author_id",                                                  null: false
+    t.integer  "question_id",                                                null: false
+    t.text     "text",                                                       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total",    default: 0,     null: false
-    t.integer  "comments_count", default: 0,     null: false
-    t.integer  "votes_count",    default: 0,     null: false
-    t.boolean  "deleted",        default: false, null: false
+    t.integer  "votes_difference",                           default: 0,     null: false
+    t.integer  "comments_count",                             default: 0,     null: false
+    t.integer  "votes_count",                                default: 0,     null: false
+    t.boolean  "deleted",                                    default: false, null: false
+    t.decimal  "votes_lb_wsci_bp", precision: 13, scale: 12, default: 0.0,   null: false
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
   add_index "answers", ["deleted"], name: "index_answers_on_deleted", using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
-  add_index "answers", ["votes_total"], name: "index_answers_on_votes_total", using: :btree
+  add_index "answers", ["votes_difference"], name: "index_answers_on_votes_difference", using: :btree
+  add_index "answers", ["votes_lb_wsci_bp"], name: "index_answers_on_votes_lb_wsci_bp", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name",                            null: false
@@ -186,22 +188,23 @@ ActiveRecord::Schema.define(version: 20140226112332) do
   add_index "question_revisions", ["question_id"], name: "index_question_revisions_on_question_id", using: :btree
 
   create_table "questions", force: true do |t|
-    t.integer  "author_id",                           null: false
-    t.integer  "category_id",                         null: false
-    t.string   "title",                               null: false
-    t.text     "text",                                null: false
+    t.integer  "author_id",                                                     null: false
+    t.integer  "category_id",                                                   null: false
+    t.string   "title",                                                         null: false
+    t.text     "text",                                                          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_total",         default: 0,     null: false
-    t.boolean  "anonymous",           default: false, null: false
-    t.integer  "answers_count",       default: 0,     null: false
-    t.integer  "comments_count",      default: 0,     null: false
-    t.integer  "favorites_count",     default: 0,     null: false
-    t.integer  "views_count",         default: 0,     null: false
-    t.integer  "votes_count",         default: 0,     null: false
+    t.integer  "votes_difference",                              default: 0,     null: false
+    t.boolean  "anonymous",                                     default: false, null: false
+    t.integer  "answers_count",                                 default: 0,     null: false
+    t.integer  "comments_count",                                default: 0,     null: false
+    t.integer  "favorites_count",                               default: 0,     null: false
+    t.integer  "views_count",                                   default: 0,     null: false
+    t.integer  "votes_count",                                   default: 0,     null: false
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
-    t.boolean  "deleted",             default: false, null: false
+    t.boolean  "deleted",                                       default: false, null: false
+    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
@@ -209,7 +212,8 @@ ActiveRecord::Schema.define(version: 20140226112332) do
   add_index "questions", ["deleted"], name: "index_questions_on_deleted", using: :btree
   add_index "questions", ["slido_question_uuid"], name: "index_questions_on_slido_question_uuid", unique: true, using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
-  add_index "questions", ["votes_total"], name: "index_questions_on_votes_total", using: :btree
+  add_index "questions", ["votes_difference"], name: "index_questions_on_votes_difference", using: :btree
+  add_index "questions", ["votes_lb_wsci_bp"], name: "index_questions_on_votes_lb_wsci_bp", using: :btree
 
   create_table "slido_events", force: true do |t|
     t.integer  "category_id", null: false
