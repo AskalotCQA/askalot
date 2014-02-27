@@ -191,23 +191,24 @@ ActiveRecord::Schema.define(version: 20140227151446) do
   add_index "question_revisions", ["question_id"], name: "index_question_revisions_on_question_id", using: :btree
 
   create_table "questions", force: true do |t|
-    t.integer  "author_id",                                                     null: false
-    t.integer  "category_id",                                                   null: false
-    t.string   "title",                                                         null: false
-    t.text     "text",                                                          null: false
+    t.integer  "author_id",                                                                     null: false
+    t.integer  "category_id",                                                                   null: false
+    t.string   "title",                                                                         null: false
+    t.text     "text",                                                                          null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "votes_difference",                              default: 0,     null: false
-    t.boolean  "anonymous",                                     default: false, null: false
-    t.integer  "answers_count",                                 default: 0,     null: false
-    t.integer  "comments_count",                                default: 0,     null: false
-    t.integer  "favorites_count",                               default: 0,     null: false
-    t.integer  "views_count",                                   default: 0,     null: false
-    t.integer  "votes_count",                                   default: 0,     null: false
+    t.integer  "votes_difference",                              default: 0,                     null: false
+    t.boolean  "anonymous",                                     default: false,                 null: false
+    t.integer  "answers_count",                                 default: 0,                     null: false
+    t.integer  "comments_count",                                default: 0,                     null: false
+    t.integer  "favorites_count",                               default: 0,                     null: false
+    t.integer  "views_count",                                   default: 0,                     null: false
+    t.integer  "votes_count",                                   default: 0,                     null: false
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
-    t.boolean  "deleted",                                       default: false, null: false
-    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
+    t.boolean  "deleted",                                       default: false,                 null: false
+    t.datetime "touched_at",                                    default: '2000-01-01 00:00:00', null: false
+    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,                   null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
