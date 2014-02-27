@@ -1,5 +1,7 @@
-<% @changelogs.each do |changelog| %>
-    <p>
-      <%= changelog.text %>
-    </p>
-<% end %>
+<ol>
+  <% @changelogs.each do |changelog| %>
+    <li>
+      <p><%= changelog.text %></p>
+    </li>
+  <% end %>
+</ol>

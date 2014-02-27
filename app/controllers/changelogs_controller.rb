@@ -1,5 +1,5 @@
 class ChangelogsController < ApplicationController
   def index
-    @changelogs = Changelog.all
+    @changelogs = Changelog.order(created_at: :asc)
   end
 end
