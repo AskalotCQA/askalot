@@ -7435,7 +7435,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#upvote#</dia:string>
+            <dia:string>#positive#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boolean #</dia:string>

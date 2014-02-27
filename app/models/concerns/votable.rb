@@ -13,23 +13,23 @@ module Votable
   end
 
   def upvoted_by?(user)
-    votes.exists?(voter: user, upvote: true)
+    votes.positive.exists?(voter: user)
   end
 
   def downvoted_by?(user)
-    votes.exists?(voter: user, upvote: false)
+    votes.negative.exists?(voter: user)
   end
 
-  def toggle_vote_by!(user, upvote)
+  def toggle_vote_by!(user, positive)
     unless voted_by? user
-      votes.create! voter: user, upvote: upvote
+      votes.create! voter: user, positive: positive
     else
       vote = votes.where(voter: user).first
 
-      if vote.upvote == upvote
+      if vote.positive == positive
         vote.destroy
       else
-        vote.upvote = upvote
+        vote.positive = positive
         vote.save!
       end
     end
