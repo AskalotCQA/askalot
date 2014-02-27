@@ -1,4 +1,4 @@
-module Redcurtain::Highlighter
+module Redcurtain::Renderer
   module Pygments
     extend self
 
