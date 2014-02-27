@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def index
     @users = case params[:tab].to_sym
-             when :'users-all'  then User.order(:nick)
+             when :'users-all' then User.order(:nick)
              else fail
              end
 
