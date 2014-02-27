@@ -48,9 +48,10 @@ gem 'actionview-encoded_mail_to'
 gem 'forgery'
 gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
-gem 'symbolize'
 gem 'nokogiri'
 gem 'scout', github: 'smolnar/scout', branch: :master
+gem 'statistics2'
+gem 'symbolize'
 
 # monitoring
 gem 'garelic'
