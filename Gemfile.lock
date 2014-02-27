@@ -133,6 +133,11 @@ GEM
     guard-rspec (4.2.7)
       guard (~> 2.1)
       rspec (>= 2.14, < 4.0)
+    handlebars_assets (0.15)
+      execjs (>= 1.2.9)
+      multi_json
+      sprockets (>= 2.0.3)
+      tilt
     highline (1.6.20)
     hike (1.2.3)
     hirb (0.7.1)
@@ -354,6 +359,7 @@ DEPENDENCIES
   gemoji (~> 1.5.0)
   github-markdown
   guard-rspec
+  handlebars_assets
   hirb
   i18n-js
   jbuilder (~> 1.2)
