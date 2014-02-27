@@ -17,7 +17,6 @@ class QuestionsController < ApplicationController
                  end
 
     @questions = filter_questions(@questions)
-
     @questions = @questions.page(params[:page]).per(10)
 
     initialize_polling

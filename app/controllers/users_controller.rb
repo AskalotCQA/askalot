@@ -4,12 +4,13 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   default_tab :'users-all', only: :index
+
   def index
     @users = case params[:tab].to_sym
-               when :'users-all'  then User.order(:nick)
-               else fail
+             when :'users-all'  then User.order(:nick)
+             else fail
              end
-    @users = filter_users(@users)
+
     @users = @users.page(params[:page]).per(30)
   end
 
@@ -39,13 +40,5 @@ class UsersController < ApplicationController
     attributes += [:password, :password_confirmation] if can? :change_password, current_user
 
     params.require(:user).permit(attributes)
-  end
-
-  helper_method :filter_users
-
-  def filter_users(relation)
-    return relation unless params[:tags].present?
-
-    relation.tagged_with(params[:tags])
   end
 end
