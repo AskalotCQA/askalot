@@ -1,21 +1,16 @@
-# TODO(zbell) try to drop ActionView dependency
-
-require 'action_view/helpers/asset_tag_helper'
-require 'action_view/helpers/asset_url_helper'
-
 module Redcurtain::Renderer
   module Gemoji
-    include ActionView::Helpers::AssetTagHelper
-    include ActionView::Helpers::AssetUrlHelper
-
     extend self
 
     def render(content, options = {})
+      classes = Array.wrap(options[:class] || :gemoji)
+      path    = options[:path] || '/images/gemoji'
+
       content.to_s.gsub(/:[a-z0-9\+\-_]+:/) { |match|
         name = match[1..-2]
 
         if Emoji.names.include? name
-          image_tag(image_path("gemoji/#{name}.png"), class: :gemoji, alt: name)
+          "<img class=\"#{classes.join ' '}\" src=\"#{File.join path, "#{name}.png"}\" alt=\"#{name}\" />"
         else
           match
         end
