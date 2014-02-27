@@ -13,6 +13,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap
+#= require handlebars
 #
 #= require i18n
 #= require i18n/translations
@@ -27,6 +28,7 @@
 #= require locales/jquery.timeago.sk.js
 #= require jquery-textcomplete
 #
+#= require emoji
 #= require form
 #= require table
 #
