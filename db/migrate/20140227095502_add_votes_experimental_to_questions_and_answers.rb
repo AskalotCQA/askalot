@@ -8,7 +8,7 @@ class AddVotesExperimentalToQuestionsAndAnswers < ActiveRecord::Migration
 
     [Question, Answer].each do |model|
       model.find_each(batch_size: 2000) do |votable|
-        votable.votes_lb_wsci_bp = Ratain.lb_wsci_bp votable.votes.where(upvote: true).count, votable.votes.count
+        votable.votes_lb_wsci_bp = Ratain.lb_wsci_bp votable.votes.positive.count, votable.votes.count
 
         votable.save!
       end

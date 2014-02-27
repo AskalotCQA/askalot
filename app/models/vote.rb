@@ -4,4 +4,7 @@ class Vote < ActiveRecord::Base
 
   scope :by,  lambda { |user| where(voter: user) }
   scope :for, lambda { |model| where(votable_type: model.to_s.classify) }
+
+  scope :positive, lambda { where(upvote: true) }
+  scope :negative, lambda { where(upvote: false) }
 end
