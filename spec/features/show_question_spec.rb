@@ -62,7 +62,7 @@ describe 'Show Question' do
       click_link 'PostgreSQL indices'
 
       within '#question-title .nav-labels' do
-        click_link 'ruby (4)'
+        click_link 'ruby'
       end
 
       expect(current_path).to   eql(questions_path)
@@ -74,7 +74,7 @@ describe 'Show Question' do
 
       within '#questions > ol' do
         expect(page).to have_content('PostgreSQL indices')
-        expect(page).to have_content('ruby (4)')
+        expect(page).to have_content('ruby')
       end
     end
   end
@@ -96,7 +96,7 @@ describe 'Show Question' do
       click_link 'Elasticsearch config'
 
       within '#question-title .nav-labels' do
-        click_link 'Elasticsearch (4)'
+        click_link 'Elasticsearch'
       end
 
       expect(current_path).to   eql(questions_path)
@@ -108,10 +108,10 @@ describe 'Show Question' do
 
       within '#questions > ol' do
         expect(page).to have_content('Elasticsearch config')
-        expect(page).to have_content('Elasticsearch (4)')
+        expect(page).to have_content('Elasticsearch')
 
         category.tags.each do |tag|
-          expect(page).to have_content("#{tag} (#{Question.tagged_with(tag).count})")
+          expect(page).to have_content("#{tag}")
         end
       end
     end

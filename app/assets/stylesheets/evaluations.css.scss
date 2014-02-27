@@ -1,6 +1,14 @@
 @import 'mixins';
 @import 'variables';
 
+// general
+
+.new-evaluation {
+  label.btn.active {
+    text-decoration: underline;
+  }
+}
+
 .evaluated {
   font-size: 0.5em;
 }

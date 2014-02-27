@@ -22,22 +22,22 @@ describe 'Filter Questions', js: true do
     list = all('#questions > ol > li')
     expect(list).to have(10).items
 
-    expect(current_params).to include(tags: 'elasticsearch')
-
     list.each { |item| expect(item).to have_content('elasticsearch') }
+
+    expect(current_params).to include(tags: 'elasticsearch')
 
     within '.pagination' do
       click_link '2'
-
-      wait_for_remote
     end
+
+    wait_for_remote
 
     list = all('#questions > ol > li')
     expect(list).to have(5).items
 
-    expect(current_params).to include(tags: 'elasticsearch', page: '2')
-
     list.each { |item| expect(item).to have_content('elasticsearch') }
+
+    expect(current_params).to include(tags: 'elasticsearch', page: '2')
   end
 
   it 'filters questions by multiple tags' do
@@ -51,12 +51,12 @@ describe 'Filter Questions', js: true do
     list = all('#questions > ol > li')
     expect(list).to have(10).times
 
-    expect(current_params).to include(tags: 'elasticsearch,ruby')
-
     list.each do |item|
       expect(item).to have_content('elasticsearch')
       expect(item).to have_content('ruby')
     end
+
+    expect(current_params).to include(tags: 'elasticsearch,ruby')
 
     fill_in_select2 'question_tags', with: 'linux'
 
@@ -77,21 +77,22 @@ describe 'Filter Questions', js: true do
 
     within list[0] do
       click_link 'elasticsearch'
-
-      wait_for_remote
     end
+
+    wait_for_remote
 
     list = all('#questions > ol > li')
     expect(list).to have(10).items
-    expect(current_params).to include(tags: 'elasticsearch')
 
     list.each { |item| expect(item).to have_content('elasticsearch') }
 
+    expect(current_params).to include(tags: 'elasticsearch')
+
     within list[0] do
       click_link 'ruby'
-
-      wait_for_remote
     end
+
+    wait_for_remote
 
     list = all('#questions > ol > li')
     expect(list).to have(10).items
@@ -117,27 +118,25 @@ describe 'Filter Questions', js: true do
 
     within list[0] do
       click_link category.name
-
-      wait_for_remote
     end
+
+    wait_for_remote
 
     list = all('#questions > ol > li')
     expect(list).to have(5).items
-
-    expect(current_params).to include(tags: category.tags.join(','))
 
     list.each { |item| expect(item).to have_content(category.name) }
 
+    expect(current_params).to include(tags: category.tags.join(','))
+
     within list[0] do
       click_link 'ruby'
-
-      wait_for_remote
     end
+
+    wait_for_remote
 
     list = all('#questions > ol > li')
     expect(list).to have(5).items
-
-    expect(current_params).to include(tags: (category.tags + ['ruby']).join(','))
 
     list.each do |item|
       expect(item).to have_content('elasticsearch')
@@ -146,6 +145,7 @@ describe 'Filter Questions', js: true do
       category.tags.each { |tag| expect(item).to have_content(tag) }
     end
 
+    expect(current_params).to include(tags: (category.tags + ['ruby']).join(','))
   end
 
   context 'when changing tabs' do

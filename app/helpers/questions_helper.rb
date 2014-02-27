@@ -34,7 +34,7 @@ module QuestionsHelper
     options.merge!(class: classes)
     options.deep_merge! class: classes, data: { id: filter } unless filter.blank?
 
-    link_to "#{label.name} (#{label.count})", questions_path(tags: filter), options
+    link_to label.name, questions_path(tags: filter), options
   end
 
   private

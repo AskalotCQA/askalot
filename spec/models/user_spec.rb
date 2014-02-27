@@ -159,8 +159,8 @@ describe User do
       it 'allows editing profile' do
         other = create :user
 
-        expect(ability).to be_able_to(:edit_profile, user)
-        expect(ability).not_to be_able_to(:edit_profile, other)
+        expect(ability).to be_able_to(:edit, user)
+        expect(ability).not_to be_able_to(:edit, other)
       end
     end
 

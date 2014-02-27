@@ -19,10 +19,6 @@ module DatabaseHelper
 end
 
 RSpec.configure do |config|
-  config.before(:all) do
-    DatabaseCleaner.strategy = :truncation
-  end
-
   config.before(:each) do
     DatabaseCleaner.strategy = :transaction
   end
@@ -32,9 +28,9 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    DatabaseCleaner.start
-
     load Rails.root.join('db/seeds.rb')
+
+    DatabaseCleaner.start
   end
 
   config.after(:each) do

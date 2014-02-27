@@ -25,11 +25,12 @@
       <div class="col-md-12">
         <p class="help-block">
           <em>
-            Zobrazení používatelia sú autormi otázok, alebo odpovedí k otázkam,
-            alebo komentárov k odpovediam a samotným otázkam s vybranými tagmi.
+            Uvažovaní používatelia sú autormi otázok, alebo odpovedí k otázkam,
+            alebo komentárov k odpovediam a samotným otázkam s vybranými tagmi
+            počas daného obdobia.
             <br/>
-            Zobrazení sú taktiež tí používatelia, ktorí hlasovali za otázku
-            alebo odpoveď k otázke s vybranými tagmi.
+            Uvažovaní sú taktiež tí používatelia, ktorí hlasovali za otázku
+            alebo odpoveď k otázke s vybranými tagmi počas daného obdobia.
           </em>
         </p>
       </div>
@@ -39,7 +40,130 @@
 
 <section>
   <div class="row">
+    <div class="col-md-4">
+      <h3>Používatelia</h3>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'fraction_header', title: 'Celkovo', numeration: @users, denomination: @users %>
+        <tbody>
+          <%= render 'fraction_data', title: 'Bez položenej otázky',     numeration: @users.where(questions_count: 0), denomination: @users %>
+          <%= render 'fraction_data', title: 'Bez poskytnutej odpovede', numeration: @users.where(answers_count: 0),   denomination: @users %>
+          <%= render 'fraction_data', title: 'Bez komentára',            numeration: @users.where(comments_count: 0),  denomination: @users %>
+        </tbody>
+      </table>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'description_header', title: 'Otázky' %>
+        <tbody>
+          <%= render 'description_data', title: 'Pridané otázky', relation: @users, chain: :questions %>
+        </tbody>
+        <tbody>
+          <%= render 'description_data', title: 'Zobrazené otázky',   relation: @users, chain: [:questions, :viewed_by_others] %>
+          <%= render 'description_data', title: 'Hlasované otázky',   relation: @users, chain: [:questions, :voted] %>
+          <%= render 'description_data', title: 'Komentované otázky', relation: @users, chain: [:questions, :commented] %>
+          <%= render 'description_data', title: 'Obľúbené otázky',    relation: @users, chain: [:questions, :favored] %>
+        </tbody>
+        <tbody>
+          <%= render 'description_data', title: 'Neodpovedané otázky', relation: @users, chain: [:questions, :unanswered] %>
+          <%= render 'description_data', title: 'Odpovedané otázky',   relation: @users, chain: [:questions, :answered] %>
+          <%= render 'description_data', title: 'Vyriešené otázky',    relation: @users, chain: [:questions, :solved] %>
+        </tbody>
+      </table>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'description_header', title: 'Odpovede' %>
+        <tbody>
+          <%= render 'description_data', title: 'Pridané odpovede', relation: @users, chain: :answers %>
+        </tbody>
+        <tbody>
+          <%= render 'description_data', title: 'Hlasované odpovede',   relation: @users, chain: [:answers, :voted] %>
+          <%= render 'description_data', title: 'Komentované odpovede', relation: @users, chain: [:answers, :commented] %>
+        </tbody>
+        <tbody>
+          <%= render 'description_data', title: 'Vybrané najlepšie odpovede', relation: @users, chain: [:answers, :best] %>
+          <%= render 'description_data', title: 'Vybrané pomocné odpovede',   relation: @users, chain: [:answers, :helpful] %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <h3>Otázky</h3>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'fraction_header', title: 'Celkovo', numeration: @questions, denomination: @questions %>
+        <tbody>
+          <%= render 'fraction_data', title: 'Bez odpovede', numeration: @questions.unanswered, denomination: @questions %>
+          <%= render 'fraction_data', title: 'S odpoveďou',  numeration: @questions.answered,   denomination: @questions %>
+          <%= render 'fraction_data', title: 'Vyriešené',    numeration: @questions.solved,     denomination: @questions %>
+        </tbody>
+      </table>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'fraction_header', title: 'Hodnotené', numeration: @questions.evaluated, denomination: @questions %>
+        <tbody>
+          <%= render 'fraction_data', title: 'Veľmi zlé',   numeration: @questions.evaluated.where(evaluations: { value: -2 }), denomination: @questions %>
+          <%= render 'fraction_data', title: 'Zlé',         numeration: @questions.evaluated.where(evaluations: { value: -1 }), denomination: @questions %>
+          <%= render 'fraction_data', title: 'Dobré',       numeration: @questions.evaluated.where(evaluations: { value:  0 }), denomination: @questions %>
+          <%= render 'fraction_data', title: 'Veľmi dobré', numeration: @questions.evaluated.where(evaluations: { value: +1 }), denomination: @questions %>
+          <%= render 'fraction_data', title: 'Výborné',     numeration: @questions.evaluated.where(evaluations: { value: +2 }), denomination: @questions %>
+        </tbody>
+      </table>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'description_header', title: 'Väzby' %>
+        <tbody>
+          <%= render 'description_data', title: 'Odpovedí na otázku',            relation: @questions, chain: [:answers] %>
+          <%= render 'description_data', title: 'Najlepších odpovedí na otázku', relation: @questions, chain: [:answers, :best] %>
+          <%= render 'description_data', title: 'Pomocných odpovedí na otázku',  relation: @questions, chain: [:answers, :helpful] %>
+        </tbody>
+        <tbody>
+          <%= render 'description_data', title: 'Zobrazení na otázku',  relation: @questions, chain: [:views] %>
+          <%= render 'description_data', title: 'Hlasov na otázku',     relation: @questions, chain: [:votes] %>
+          <%= render 'description_data', title: 'Komentárov na otázku', relation: @questions, chain: [:comments] %>
+          <%= render 'description_data', title: 'Obľúbení na otázku',   relation: @questions, chain: [:favorites] %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <h3>Odpovede</h3>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'fraction_header', title: 'Celkovo', numeration: @answers, denomination: @answers %>
+        <tbody>
+          <%= render 'fraction_data', title: 'Najlepšie odpovede',  numeration: @answers.best,      denomination: @answers %>
+          <%= render 'fraction_data', title: 'Pomocné odpovede',    numeration: @answers.helpful,   denomination: @answers %>
+          <%= render 'fraction_data', title: 'Ohodnotené odpovede', numeration: @answers.evaluated, denomination: @answers %>
+        <tbody>
+      </table>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'fraction_header', title: 'Hodnotené', numeration: @answers.evaluated, denomination: @answers %>
+        <tbody>
+          <%= render 'fraction_data', title: 'Veľmi zlé',   numeration: @answers.evaluated.where(evaluations: { value: -2 }), denomination: @answers %>
+          <%= render 'fraction_data', title: 'Zlé',         numeration: @answers.evaluated.where(evaluations: { value: -1 }), denomination: @answers %>
+          <%= render 'fraction_data', title: 'Dobré',       numeration: @answers.evaluated.where(evaluations: { value:  0 }), denomination: @answers %>
+          <%= render 'fraction_data', title: 'Veľmi dobré', numeration: @answers.evaluated.where(evaluations: { value: +1 }), denomination: @answers %>
+          <%= render 'fraction_data', title: 'Výborné',     numeration: @answers.evaluated.where(evaluations: { value: +2 }), denomination: @answers %>
+        </tbody>
+      </table>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'description_header', title: 'Väzby' %>
+        <tbody>
+          <%= render 'description_data', title: 'Hlasov na odpoveď',     relation: @answers, chain: [:votes] %>
+          <%= render 'description_data', title: 'Komentárov na odpoveď', relation: @answers, chain: [:comments] %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="row">
     <div class="col-md-12">
+      <h3>Používatelia</h3>
+
       <% if @users.any? %>
         <table class="table table-bordered table-condensed table-statistical" data-sortable="true">
           <thead>
@@ -48,9 +172,9 @@
 
               <th colspan="5" data-sorter="false">Otázky</th>
               <th colspan="5" data-sorter="false">Odpovede</th>
-              <th colspan="1" data-sorter="false">Zobrazenia</th>
-              <th colspan="3" data-sorter="false">Hlasy</th>
               <th colspan="3" data-sorter="false">Komentáre</th>
+              <th colspan="3" data-sorter="false">Hlasy</th>
+              <th colspan="1" data-sorter="false">Zobrazenia</th>
               <th colspan="1" data-sorter="false">Obľúbenia</th>
             </tr>
             <tr class="active">
@@ -60,8 +184,6 @@
               <th rowspan="2">Celkom</th>
               <th colspan="4" data-sorter="false">Používateľmi</th>
 
-              <th rowspan="2">Otázok</th>
-
               <th rowspan="2">Celkom</th>
               <th rowspan="2">Otázok</th>
               <th rowspan="2">Odpovedí</th>
@@ -69,6 +191,8 @@
               <th rowspan="2">Celkom</th>
               <th rowspan="2">Otázok</th>
               <th rowspan="2">Odpovedí</th>
+
+              <th rowspan="2">Otázok</th>
 
               <th rowspan="2">Otázok</th>
             </tr>
@@ -88,31 +212,31 @@
             <% @users.each_with_index do |user, i| %>
               <tr>
                 <td class="text-right"><%= i + 1 %></td>
-                <%= statistical_cell(user) { |u| [link_to(u.name || u.nick, user_path(u.nick)), { administrator: :danger, teacher: :info }[u.role]] } %>
+                <%= data_tag(user) { |u| [link_to(u.name || u.nick, user_path(u.nick)), { administrator: :'text-muted', teacher: :info }[u.role]] } %>
 
-                <%= statistical_cell user.questions.where(id: @questions).size %>
-                <%= statistical_cell user.questions.where(id: @questions).viewed.size %>
-                <%= statistical_cell user.questions.where(id: @questions).voted.size %>
-                <%= statistical_cell user.questions.where(id: @questions).commented.size %>
-                <%= statistical_cell user.questions.where(id: @questions).favored.size %>
+                <%= data_tag user.questions.where(id: @questions).size %>
+                <%= data_tag user.questions.where(id: @questions).viewed.size %>
+                <%= data_tag user.questions.where(id: @questions).voted.size %>
+                <%= data_tag user.questions.where(id: @questions).commented.size %>
+                <%= data_tag user.questions.where(id: @questions).favored.size %>
 
-                <%= statistical_cell join_question(user.answers, @questions).size %>
-                <%= statistical_cell join_question(user.answers.voted, @questions).size %>
-                <%= statistical_cell join_question(user.answers.commented, @questions).size %>
-                <%= statistical_cell join_question(user.answers.labeled_with(:best), @questions).size, positive: :success %>
-                <%= statistical_cell join_question(user.answers.labeled_with(:helpful), @questions).size, positive: :warning %>
+                <%= data_tag join_question(user.answers, @questions).size %>
+                <%= data_tag join_question(user.answers.voted, @questions).size %>
+                <%= data_tag join_question(user.answers.commented, @questions).size %>
+                <%= data_tag join_question(user.answers.labeled_with(:best), @questions).size %>
+                <%= data_tag join_question(user.answers.labeled_with(:helpful), @questions).size %>
 
-                <%= statistical_cell join_question(user.views, @questions).size %>
+                <%= data_tag join_questions(user.comments, :commentable, @questions).size + join_questions_through_answers(user.comments, :commentable, @questions).size %>
+                <%= data_tag join_questions(user.comments, :commentable, @questions).size %>
+                <%= data_tag join_questions_through_answers(user.comments, :commentable, @questions).size %>
 
-                <%= statistical_cell join_questions(user.votes, :votable, @questions).size + join_questions_through_answers(user.votes, :votable, @questions).size %>
-                <%= statistical_cell join_questions(user.votes, :votable, @questions).size %>
-                <%= statistical_cell join_questions_through_answers(user.votes, :votable, @questions).size %>
+                <%= data_tag join_questions(user.votes, :votable, @questions).size + join_questions_through_answers(user.votes, :votable, @questions).size %>
+                <%= data_tag join_questions(user.votes, :votable, @questions).size %>
+                <%= data_tag join_questions_through_answers(user.votes, :votable, @questions).size %>
 
-                <%= statistical_cell join_questions(user.comments, :commentable, @questions).size + join_questions_through_answers(user.comments, :commentable, @questions).size %>
-                <%= statistical_cell join_questions(user.comments, :commentable, @questions).size %>
-                <%= statistical_cell join_questions_through_answers(user.comments, :commentable, @questions).size %>
+                <%= data_tag join_question(user.views, @questions).size %>
 
-                <%= statistical_cell join_question(user.favorites, @questions).size %>
+                <%= data_tag join_question(user.favorites, @questions).size %>
               </tr>
             <% end %>
           </tbody>
@@ -125,172 +249,3 @@
     </div>
   </div>
 </section>
-
-<!--
-
-<section>
-  <div class="row">
-    <div class="col-md-4">
-      <h3>Prehľad používateľov</h3>
-
-      <table class="table table-bordered table-condensed">
-        <tbody>
-          <tr>
-            <td>Používatelia</td>
-            <td><%= User.count %>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr class="active">
-            <td>Otázok na používateľa</td>
-            <td><%= number_with_precision Question.count.to_f / User.count %></td>
-          </tr>
-          <tr>
-            <td>Zobrazených otázok na používateľa</td>
-            <td><%= number_with_precision Question.viewed.count.to_f / User.count %></td>
-          </tr>
-          <tr>
-            <td>Hlasovaných otázok na používateľa</td>
-            <td><%= number_with_precision Question.voted.count.to_f / User.count %></td>
-          </tr>
-          <tr>
-            <td>Komentovaných otázok na používateľa</td>
-            <td><%= number_with_precision Question.commented.count.to_f / User.count %></td>
-          </tr>
-          <tr>
-            <td>Obľúbených otázok na používateľa</td>
-            <td><%= number_with_precision Question.favored.count.to_f / User.count %></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr class="active">
-            <td>Odpovedí na používateľa</td>
-            <td><%= number_with_precision Answer.count.to_f / User.count %></td>
-          </tr>
-          <tr>
-            <td>Hlasovaných odpovedí na používateľa</td>
-            <td><%= number_with_precision Answer.voted.count.to_f / User.count %></td>
-          </tr>
-          <tr>
-            <td>Komentovaných odpovedí na používateľa</td>
-            <td><%= number_with_precision Answer.commented.count.to_f / User.count %></td>
-          </tr>
-          <tr>
-            <td>Najlepších odpovedí na používateľa</td>
-            <td><%= number_with_precision Answer.labeled_with(:best).count.to_f / User.count %></td>
-          </tr>
-          <tr>
-            <td>Pomocných odpovedí na používateľa</td>
-            <td><%= number_with_precision Answer.labeled_with(:helpful).count.to_f / User.count %></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr class="active">
-            <td>Komentárov na používateľa</td>
-            <td><%= number_with_precision Comment.count.to_f / User.count %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="col-md-4">
-      <h3>Prehľad otázok</h3>
-
-      <table class="table table-bordered table-condensed">
-        <tbody>
-          <tr>
-            <td>Otázky</td>
-            <td><%= Question.count %></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr class="active">
-            <td>Odpovedí na otázku</td>
-            <td><%= number_with_precision Answer.count.to_f / Question.count %></td>
-          </tr>
-          <tr>
-            <td>Odpovedané otázky</td>
-            <td><%= Question.answered.count %></td>
-          </tr>
-          <tr>
-            <td>Neodpovedané otázky</td>
-            <td><%= Question.count - Question.answered.count %></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Zodpovedané otázky</td>
-            <td><%= Answer.labeled_with(:best).uniq.count(:question_id) %></td>
-          </tr>
-          <tr>
-            <td>Nezodpovedané otázky</td>
-            <td><%= Question.count - Answer.labeled_with(:best).uniq.count(:question_id) %></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr class="active">
-            <td>Najlepších odpovedí na otázku</td>
-            <td><%= number_with_precision Answer.labeled_with(:best).count.to_f / Question.count %></td>
-          </tr>
-          <tr>
-            <td>Pomocných odpovedí na otázku</td>
-            <td><%= number_with_precision Answer.labeled_with(:helpful).count.to_f / Question.count %></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr class="active">
-            <td>Zobrazení na otázku</td>
-            <td><%= number_with_precision View.count.to_f / Question.count %></td>
-          </tr>
-          <tr>
-            <td>Hlasov na otázku</td>
-            <td><%= number_with_precision Vote.for(:question).count.to_f / Question.count %></td>
-          </tr>
-          <tr>
-            <td>Komentárov na otázku</td>
-            <td><%= number_with_precision Comment.for(:question).count.to_f / Question.count %></td>
-          </tr>
-          <tr>
-            <td>Obľúbení na otázku</td>
-            <td><%= number_with_precision Favorite.count.to_f / Question.count %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="col-md-4">
-      <h3>Prehľad odpovedí</h3>
-
-      <table class="table table-bordered table-condensed">
-        <tbody>
-          <tr>
-            <td>Odpovede</td>
-            <td><%= Answer.count %></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr>
-            <td>Najlepšie odpovede</td>
-            <td><%= Answer.labeled_with(:best).count %></td>
-          </tr>
-          <tr>
-            <td>Pomocné odpovede</td>
-            <td><%= Answer.labeled_with(:helpful).count %></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr class="active">
-            <td>Hlasov na odpoveď</td>
-            <td><%= number_with_precision Vote.for(:answer).count.to_f / Answer.count %></td>
-          </tr>
-          <tr>
-            <td>Komentárov na odpoveď</td>
-            <td><%= number_with_precision Comment.for(:answer).count.to_f / Answer.count %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
--->

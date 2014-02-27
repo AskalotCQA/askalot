@@ -1,7 +1,9 @@
 module Slido
   module Questions
-    class Parser
-      def self.parse(json)
+    module Parser
+      extend self
+
+      def parse(json)
         data = JSON.parse(json, symbolize_names: true)
 
         data.map do |question|

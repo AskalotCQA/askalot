@@ -16,13 +16,13 @@ describe Stuba::User do
   it 'provides user information' do
     user = Stuba::User.new(data)
 
-    expect(user.uid).to eql('1234')
-    expect(user.login).to eql('xuser1')
-    expect(user.first).to eql('Janko')
+    expect(user.uid).to    eql('1234')
+    expect(user.login).to  eql('xuser1')
+    expect(user.first).to  eql('Janko')
     expect(user.middle).to be_nil
-    expect(user.last).to eql('Hraško')
-    expect(user.email).to eql('xuser1@stuba.sk')
-    expect(user.role).to eql(:student)
+    expect(user.last).to   eql('Hraško')
+    expect(user.email).to  eql('xuser1@stuba.sk')
+    expect(user.role).to   eql(:student)
   end
 
   context 'when user has middle name' do
@@ -41,13 +41,14 @@ describe Stuba::User do
     it 'parses middle name correctly' do
       user = Stuba::User.new(data)
 
-      expect(user.uid).to eql('1234')
-      expect(user.login).to eql('xuser1')
-      expect(user.first).to eql('Janko')
+      expect(user.uid).to    eql('1234')
+      expect(user.login).to  eql('xuser1')
+      expect(user.name).to   eql('Bc. Janko Johny Hraško')
+      expect(user.first).to  eql('Janko')
       expect(user.middle).to eql('Johny')
-      expect(user.last).to eql('Hraško')
-      expect(user.email).to eql('xuser1@stuba.sk')
-      expect(user.role).to eql(:student)
+      expect(user.last).to   eql('Hraško')
+      expect(user.email).to  eql('xuser1@stuba.sk')
+      expect(user.role).to   eql(:student)
     end
   end
 
@@ -58,6 +59,7 @@ describe Stuba::User do
       expect(user.to_params).to eql({
         login: 'xuser1',
         email: 'xuser1@stuba.sk',
+        name: 'Bc. Janko Hraško',
         first: 'Janko',
         middle: nil,
         last: 'Hraško',

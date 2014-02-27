@@ -24,10 +24,11 @@ class User < ActiveRecord::Base
   has_many :followers, through: :followings, class_name: :User, foreign_key: :follower_id
   has_many :followees, through: :followings, class_name: :User, foreign_key: :followee_id
 
-  has_many :favorites, foreign_key: :favorer_id, dependent: :destroy
-  has_many :views,     foreign_key: :viewer_id,  dependent: :destroy
-  has_many :votes,     foreign_key: :voter_id,   dependent: :destroy
-  has_many :watchings, foreign_key: :watcher_id, dependent: :destroy
+  has_many :favorites,     foreign_key: :favorer_id,   dependent: :destroy
+  has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
+  has_many :views,         foreign_key: :viewer_id,    dependent: :destroy
+  has_many :votes,         foreign_key: :voter_id,     dependent: :destroy
+  has_many :watchings,     foreign_key: :watcher_id,   dependent: :destroy
 
   # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
 
@@ -35,7 +36,7 @@ class User < ActiveRecord::Base
 
   # TODO (smolnar) consult usage of functional indices for nick, login and email uniqueness checking
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
-  validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }, if: :login?
+  validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 20 }, if: :login?
 
   validates :email,          format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, allow_blank: true

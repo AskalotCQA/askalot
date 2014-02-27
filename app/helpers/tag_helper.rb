@@ -76,7 +76,7 @@ module TagHelper
     end
   end
 
-  def tab_link_tag_with_count(body, tab, path, count, options)
+  def tab_link_tag_with_count(body, tab, path, count, options = {})
     tab_link_tag(body, tab, path, options) do |defaults|
       link_to_with_count(body, path, count, options.deep_merge(defaults))
     end
