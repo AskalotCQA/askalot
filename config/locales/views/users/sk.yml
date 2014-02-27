@@ -2,6 +2,12 @@ sk:
   user:
     navigation: 'Používatelia'
 
+    index:
+      title: 'Používatelia'
+
+    tab:
+      all: 'Všetci'
+
     registration: 'Registrácia'
     confirmation: 'Potvrdenie registrácie'
     session_start: 'Prihlásenie'
@@ -61,6 +67,3 @@ sk:
       edit: 'Upraviť profil'
 
     anonymous: 'Anonym'
-
-    tab:
-      all: 'Všetci'
