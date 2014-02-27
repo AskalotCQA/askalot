@@ -1,6 +1,7 @@
 module Ratain
   module Base
     # Lower bound of Wilson score confidence interval for a Bernoulli parameter
+    # See http://www.evanmiller.org/how-not-to-sort-by-average-rating.html
     def lb_wsci_bp(positive, total, confidence = 0.95)
       return 0 if total.zero?
 
