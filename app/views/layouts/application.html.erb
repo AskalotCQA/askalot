@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title><%= resolve_title yield :title %></title>
+    <title><%= resolve_title(yield :title) %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%= stylesheet_link_tag 'application', media: :all %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body<%= resolve_sidebar(yield :sidebar) %>>
     <%= render 'layouts/header' %>
     <% if use_container? %>
       <div class="container">

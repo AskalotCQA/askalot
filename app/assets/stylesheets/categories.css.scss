@@ -8,7 +8,7 @@
     margin-bottom: 20px !important;
   }
 
-  & + .category-group {
+  & + & {
     margin-top: 10px;
     padding-top: 20px;
     border-top: 1px solid $hr-border;
