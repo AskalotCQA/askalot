@@ -12,10 +12,6 @@ describe Redcurtain::Markdown do
     }
   end
 
-  after :each do
-    Redcurtain::Markdown.setup!
-  end
-
   describe '#render' do
     it 'checks renderer chaining' do
       options = { a: { key: 0 }, b: { key: 1 }, c: { key: 2 } }
@@ -37,7 +33,13 @@ describe Redcurtain::Markdown do
       text = "`code` :dog: ```ruby\ndoge.code```\nhello :unknown-doge:"
       html = "<p><code>code</code> <img class=\"doge-class\" src=\"/assets/dog.png\" alt=\"dog\"><code>ruby\ndoge.code</code>\nhello :unknown-doge:</p>"
 
-      expect(markdown.render(text, options)).to include(html)
+      markdown.renderers = [
+        Redcurtain::Renderer::Gemoji,
+        Redcurtain::Renderer::GitHub,
+        Redcurtain::Renderer::Pygments
+      ]
+
+      expect(markdown.render(text, options)).to eql(html)
     end
   end
 
@@ -46,7 +48,7 @@ describe Redcurtain::Markdown do
       html = "<p><code>code</code> <img class=\"doge-class\" src=\"/assets/dog.png\" alt=\"dog\"><code>ruby\ndoge.code</code>\nhello :unknown-doge:</p>"
       text = "code ruby\ndoge.code\nhello :unknown-doge:"
 
-      expect(markdown.strip(html, options)).to include(text)
+      expect(markdown.strip(html, options)).to eql(text)
     end
   end
 end
