@@ -8,6 +8,7 @@ class Question < ActiveRecord::Base
   include Viewable
   include Votable
   include Watchable
+  include Observable
 
   before_save :add_category_tags
 
