@@ -26,7 +26,7 @@ module MarkdownHelper
     nick = match.gsub(/@/, '')
     user = User.find_by(nick: nick)
 
-    link_to match, user if user
+    link_to match, user_path(user.nick) if user
   end
 
   def markdown_link_to_question(match, options = {})
