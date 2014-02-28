@@ -48,7 +48,22 @@ describe 'Add Question' do
   end
 
   it 'adds new question anonymously' do
-    pending
+    visit root_path
+
+    click_link 'Opýtať sa otázku'
+
+    fill_in 'question_title', with: 'Lorem ipsum title?'
+    fill_in 'question_text',  with: 'Lorem ipsum'
+
+    select2 category.name, from: 'question_category_id'
+
+    check 'Opýtať sa anonymne'
+
+    click_button 'Opýtať'
+
+    within '.user-square' do
+      expect(page).to have_content('Anonym')
+    end
   end
 
   context 'when using markdown' do
