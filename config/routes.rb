@@ -32,6 +32,7 @@ NaRuby::Application.routes.draw do
   end
 
   resources :categories, only: [:index]
+  resources :changelogs, only: [:index]
 
   resources :questions, only: [:index, :new, :create, :show] do
     resources :answers, only: [:create]
