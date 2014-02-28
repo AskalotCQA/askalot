@@ -14,7 +14,7 @@ describe Redcurtain::Renderer::Pygments do
 
       content = subject.render(html)
 
-      expect(content).to include('<pre>highlighted code</pre>')
+      expect(content).to eql('<pre>highlighted code</pre>')
     end
   end
 end
