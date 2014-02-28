@@ -8,16 +8,16 @@ module Redcurtain
       @renderers ||= [
         Redcurtain::Renderer::Gemoji,
         Redcurtain::Renderer::GitHub,
-        Redcurtain::Renderer::Pygments
+        Redcurtain::Renderer::Pygments,
       ]
     end
 
     def render(content, options = {})
       options.symbolize_keys!
 
-      renderers.inject(content) do |result, renderer|
+      renderers.inject(content) { |result, renderer|
         renderer.render(result, options[renderer.name.to_s.split(/::/).last.downcase.to_sym] || {})
-      end
+      }.html_safe
     end
 
     def strip(content, options = {})
