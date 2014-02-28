@@ -6,7 +6,7 @@ class EvaluationsController < ApplicationController
 
     authorize! :evaluate, @evaluable
 
-    @question   = @evaluable.is_a?(Question) ? @evaluable : @evaluable.question
+    @question   = @evaluable.to_question
     @evaluation = Evaluation.new(evaluation_params)
 
     if @evaluation.save
@@ -23,7 +23,7 @@ class EvaluationsController < ApplicationController
 
     authorize! :evaluate, @evaluable
 
-    @question   = @evaluable.is_a?(Question) ? @evaluable : @evaluable.question
+    @question   = @evaluable.to_question
     @evaluation = Evaluation.where(evaluable: @evaluable, evaluator: current_user).first
 
     if @evaluation.update_attributes(evaluation_params)

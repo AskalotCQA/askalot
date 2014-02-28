@@ -50,6 +50,10 @@ class Answer < ActiveRecord::Base
     labels.exists? value: :verified
   end
 
+  def to_question
+    self.question
+  end
+
   private
 
   def slido_label_with_best!
