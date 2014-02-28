@@ -4,6 +4,7 @@ class Answer < ActiveRecord::Base
   include Notifiable
   include Votable
   include Watchable
+  include Observable
 
   after_create :slido_label_with_best!
 
