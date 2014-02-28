@@ -9,6 +9,10 @@
 
 // member
 
+.answer-content {
+  margin: 10px 0;
+}
+
 .answer-voting {
   @include block-iconing;
 }
