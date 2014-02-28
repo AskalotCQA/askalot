@@ -7,7 +7,7 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: true
 
-  scope :with_slido, -> { where('slido_username is not null') }
+  scope :with_slido, -> { where.not(slido_username: nil) }
 
   def count
     questions.reload.size
