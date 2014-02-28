@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   def create
     @commentable = find_commentable
-    @question    = @commentable.is_a?(Question) ? @commentable : @commentable.question
+    @question    = @commentable.to_question
     @comment     = Comment.new(comment_params)
 
     authorize! :comment, @commentable
