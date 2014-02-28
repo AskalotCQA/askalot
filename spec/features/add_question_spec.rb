@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Add Question', js: true do
+describe 'Add Question' do
   let(:user) { create :user }
   let!(:category) { create :category }
 
@@ -8,7 +8,7 @@ describe 'Add Question', js: true do
     login_as user
   end
 
-  it 'adds new question' do
+  it 'adds new question', js: true do
     visit root_path
 
     click_link 'Opýtať sa otázku'
@@ -51,8 +51,8 @@ describe 'Add Question', js: true do
     pending
   end
 
-  context 'when using markdown', js: true do
-    it 'renders preview' do
+  context 'when using markdown' do
+    it 'renders preview', js: true do
       visit root_path
 
       click_link 'Opýtať sa otázku'
@@ -69,6 +69,40 @@ describe 'Add Question', js: true do
         expect(page).to have_content('Lorem ipsum')
       end
     end
+
+    it 'embeds emoji icons' do
+      visit root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select  category.name,    from: 'question_category_id'
+      fill_in 'question_title', with: 'Lorem ipsum?'
+      fill_in 'question_text',  with: ':poop:'
+
+      click_button 'Opýtať'
+
+      within '#question-content' do
+        expect(page).to have_css('img.gemoji[src="/images/gemoji/poop.png"]')
+      end
+    end
+
+    it 'embeds references to user' do
+      create :user, login: :smolnar
+
+      visit root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select  category.name,    from: 'question_category_id'
+      fill_in 'question_title', with: 'Lorem ipsum?'
+      fill_in 'question_text',  with: '@smolnar'
+
+      click_button 'Opýtať'
+
+      within '#question-content' do
+        expect(page).to have_link('@smolnar', href: '/users/smolnar')
+      end
+    end
   end
 
   context 'when selecting category' do
@@ -76,7 +110,7 @@ describe 'Add Question', js: true do
       create :category, name: 'Westside Playground', tags: ['westside', 'ali-gz']
     end
 
-    it 'shows automaticaly assigned tags' do
+    it 'shows automaticaly assigned tags', js: true do
       visit root_path
 
       click_link 'Opýtať sa otázku'
@@ -97,7 +131,7 @@ describe 'Add Question', js: true do
     end
 
     context 'after realoading page' do
-      it 'shows automaticly assigned tags' do
+      it 'shows automaticly assigned tags', js: true do
         visit root_path
 
         click_link 'Opýtať sa otázku'
