@@ -28,7 +28,7 @@
 #= require locales/jquery.timeago.sk.js
 #= require jquery-textcomplete
 #
-#= require emoji
+#= require gemoji
 #= require form
 #= require table
 #

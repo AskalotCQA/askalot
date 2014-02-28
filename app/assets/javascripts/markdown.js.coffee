@@ -6,12 +6,15 @@ class window.Markdown
       emoji:
         match: /\B:([\-+\w]*)$/
         search: (term, callback) ->
-          values = $.map Emoji.names, (icon) -> if icon.indexOf(term) == 0 then icon else null
+          values = $.map Gemoji.names, (icon) -> if icon.indexOf(term) == 0 then icon else null
 
           callback(values)
-        template: (value) -> Handlebars.compile('<img class="gemoji" src="/images/gemoji/{{icon}}.png"></img>{{icon}}')(icon: value)
+        template: (value) ->
+          Handlebars.compile('
+            <img class="gemoji" src="/images/gemoji/{{icon}}.png"></img>&nbsp;{{icon}}
+          ')(icon: value)
         replace: (value)  -> ":#{value}:"
-        index: 1,
+        index: 1
         maxCount: 5
 
   @bind: ->
