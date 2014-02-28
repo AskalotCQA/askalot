@@ -23,7 +23,7 @@ git commit -m "Bump version to $version"
 git tag "v$version"
 
 git checkout staging
-git merge branch
+git merge $branch
 
 git checkout master
 git merge staging
