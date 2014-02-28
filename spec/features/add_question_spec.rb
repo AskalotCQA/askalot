@@ -100,7 +100,25 @@ describe 'Add Question' do
       click_button 'Opýtať'
 
       within '#question-content' do
-        expect(page).to have_link('@smolnar', href: '/users/smolnar')
+        expect(page).to have_link('@smolnar', href: user_path(:smolnar))
+      end
+    end
+
+    it 'embeds references to user' do
+      question = create :question
+
+      visit root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select  category.name,    from: 'question_category_id'
+      fill_in 'question_title', with: 'Lorem ipsum?'
+      fill_in 'question_text',  with: "##{question.id}"
+
+      click_button 'Opýtať'
+
+      within '#question-content' do
+        expect(page).to have_link("##{question.id}", href: question_path(question))
       end
     end
   end
