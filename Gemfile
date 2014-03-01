@@ -31,7 +31,7 @@ gem 'jquery-textcomplete-rails', '~> 0.1.2'
 gem 'handlebars_assets'
 
 # markdown
-gem 'github-markdown'
+gem 'redcarpet'
 gem 'pygments.rb'
 gem 'gemoji', '~> 1.5.0'
 
