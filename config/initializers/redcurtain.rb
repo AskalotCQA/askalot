@@ -1,4 +1,4 @@
 Redcurtain::Markdown.renderers.unshift(*[
-  Redcurtain::Renderer::Linker.of(:user),
-  Redcurtain::Renderer::Linker.of(:question)
+  Redcurtain::Renderer::Linker.new(:user),
+  Redcurtain::Renderer::Linker.new(:question)
 ])

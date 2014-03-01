@@ -1,37 +1,22 @@
 module Redcurtain::Renderer
-  module Linker
-    extend self
+  class Linker
+    attr_accessor :name
 
-    def defaults
-      @defaults ||= { regex: /@\w+/ }
+    def initialize(name)
+      @name = name
     end
 
     def render(content, options)
-      options = defaults.merge(options)
       linker  = options[:linker]
-      regex   = options[:regex]
+      regex   = options[:regex] || /@\w+/
 
       unless linker
         raise ArgumentError.new("You need to provide a 'linker' option to translate content references")
       end
 
-      content.gsub(regex) do |match|
+      content.gsub(regex) { |match|
         linker.call(match) || match
-      end
-    end
-
-    def of(name)
-      Base.new(name)
-    end
-  end
-
-  class Base
-    include Linker
-
-    attr_accessor :name
-
-    def initialize(name)
-      @name = name
+      }.html_safe
     end
   end
 end
