@@ -1,63 +1,38 @@
+# TODO (smolnar) report try errors
+
 class window.Markdown
   url: '/markdown/preview'
 
   textcomplete:
     strategies:
       gemoji:
-        match: /\B:([\-+\w]*)$/
-        search: (term, callback) ->
+        match:    /(^|\s*):([\-+\w]*)$/
+        template: (value) -> templates['markdown/textcomplete/gemoji'](icon: value)
+        replace:  (value)  -> ":#{value}:"
+        index:    2
+        maxCount: 5
+        search:   (term, callback) ->
           values = $.map Gemoji.names, (icon) -> if icon.indexOf(term) == 0 then icon else null
 
-          callback(values)
-        template: (value) ->
-          Handlebars.compile('
-            <img class="gemoji" src="/images/gemoji/{{icon}}.png"></img>&nbsp;{{icon}}
-          ')(icon: value)
-        replace: (value)  -> ":#{value}:"
-        index: 1
-        maxCount: 5
-      users:
-        match: /(^|\s*)@(\w*)$/
-        search: (term, callback) ->
-          $.ajax
-            url: '/users/suggest'
-            dataType: 'json'
-            data:
-              q: term
-            success: (data) -> callback(data)
-        template: (value) ->
-          Handlebars.compile('
-            <img class="gemoji" src="{{user.gravatar}}"></img>&nbsp;{{user.nick}}
-          ')(user: value)
-        replace: (value) -> "@#{value.nick}"
-        index:    1
-        maxCount: 5
-      question:
-        match: /(^|\s*)#(\d*)$/
-        search: (term, callback) ->
-          $.ajax
-            url: '/questions/suggest'
-            dataType: 'json'
-            data:
-              q: term
-            success: (data) -> callback(data)
-        template: (value) ->
-          Handlebars.compile('
-            <div class="row">
-              <div class="col-md-8">
-                {{question.title}}
-              </div>
+          try callback(values)
 
-              <div class="col-md-4">
-                <p class="muted pull-right">
-                  {{question.author}}
-                </p>
-              </div>
-            </div>
-          ')(question: value)
-        replace: (value) -> "@#{value.}"
-        index:    1
+      users:
+        match:    /(^|\s*)@(\w*)$/
+        template: (value) -> templates['markdown/textcomplete/users'](user: value)
+        replace:  (value) -> "$1@#{value.nick}"
+        index:    2
         maxCount: 5
+        search:   (term, callback) ->
+          $.get '/users/suggest', q: term, (data) -> try callback(data)
+
+      questions:
+        match:    /(^|\s*)#(\w*)$/
+        template: (value) -> templates['markdown/textcomplete/questions'](question: value)
+        replace:  (value) -> "$1##{value.id}"
+        index:    2
+        maxCount: 5
+        search: (term, callback) ->
+          $.get '/questions/suggest', q: term, (data) -> try callback(data)
 
 
   @bind: ->
@@ -75,7 +50,7 @@ class window.Markdown
     @bindTextcomplete()
 
   preview: ->
-    content = Handlebars.compile('<p class="text-muted">{{translation}}</p>')(translation: I18n.t('markdown.loading_preview'))
+    content = templates['markdown/preview'](translation: I18n.t('markdown.loading_preview'))
 
     $("##{@id}-preview .form-control").html(content)
 
