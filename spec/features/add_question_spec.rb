@@ -104,7 +104,7 @@ describe 'Add Question' do
       end
     end
 
-    it 'embeds references to user' do
+    it 'embeds reference to user' do
       question = create :question
 
       visit root_path
@@ -121,6 +121,47 @@ describe 'Add Question' do
         expect(page).to have_link("##{question.id}", href: question_path(question))
       end
     end
+
+    context 'with link for question' do
+      it 'embeds reference to question' do
+        question = create :question
+
+        visit root_path
+
+        click_link 'Opýtať sa otázku'
+
+        select  category.name,    from: 'question_category_id'
+        fill_in 'question_title', with: 'Lorem ipsum?'
+        fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{question_path(question)}"
+
+        click_button 'Opýtať'
+
+        within '#question-content' do
+          expect(page).to have_link("##{question.id}", href: question_path(question))
+        end
+      end
+    end
+
+    context 'with link for user' do
+      it 'embeds reference to user' do
+        create :user, login: :smolnar
+
+        visit root_path
+
+        click_link 'Opýtať sa otázku'
+
+        select  category.name,    from: 'question_category_id'
+        fill_in 'question_title', with: 'Lorem ipsum?'
+        fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{user_path('smolnar')}"
+
+        click_button 'Opýtať'
+
+        within '#question-content' do
+          expect(page).to have_link("@smolnar", href: user_path('smolnar'))
+        end
+      end
+    end
+
   end
 
   context 'when selecting category' do
