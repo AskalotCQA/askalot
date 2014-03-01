@@ -21,16 +21,19 @@
     color: rgba($jumbotron-color, .25);
   }
 
-  ul {
-    margin: 0 !important;
-    text-align: center;
+  .btn {
+    margin: 5px 0;
+    padding: $padding-large-vertical * 1.25 $padding-large-horizontal * 1.35 $padding-large-vertical * 1.25 $padding-large-horizontal * 1.25;
+    font-size: $jumbotron-font-size * 1.25;
+    text-shadow: 0 0 128px $brand-info;
+  }
 
-    .btn {
-      margin: 20px 0;
-      padding: $padding-large-vertical * 1.25 $padding-large-horizontal * 1.25;
-      font-size: $jumbotron-font-size * 1.25;
-      text-shadow: 0 0 128px $brand-info;
-    }
+  .text-left .btn {
+    margin-left: -10px;
+  }
+
+  .text-right .btn {
+    margin-right: -10px;
   }
 }
 
