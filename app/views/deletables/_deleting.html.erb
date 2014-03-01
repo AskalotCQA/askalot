@@ -1,0 +1,18 @@
+<a data-toggle="modal" data-target="#<%= identify deletable, :delete %>">
+  <%= tooltip_icon_tag :'trash-o', t("#{model}.delete"), placement: :right %>
+</a>
+
+
+<div id="<%= identify deletable, :delete %>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= t 'deleting.modal.text' %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'deleting.modal.cancel' %></button>
+        <%= button_to_with_button_element t('deleting.modal.submit'), send("delete_#{model}_path", deletable), id: "#{model}-#{deletable.id}-delete", class: "btn btn-primary", method: :get%>
+      </div>
+    </div>
+  </div>
+</div>
