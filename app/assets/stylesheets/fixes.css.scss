@@ -16,6 +16,14 @@ button, input, select, textarea {
   box-shadow: none !important;
 }
 
+.dropdown-menu {
+  li.active {
+    .text-muted {
+      color: $component-active-color;
+    }
+  }
+}
+
 address, form, nav, p, dl, ol, ul, table,
 .alert {
   &:last-child {
