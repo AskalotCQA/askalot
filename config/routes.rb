@@ -8,6 +8,7 @@ NaRuby::Application.routes.draw do
 
   resources :users, only: [:index] do
     patch :profile, on: :collection, to: 'users#update'
+    get   :suggest, on: :collection
   end
 
   get 'users/:nick', to: 'users#show', as: :user
@@ -36,7 +37,8 @@ NaRuby::Application.routes.draw do
   resources :questions, only: [:index, :new, :create, :show] do
     resources :answers, only: [:create]
 
-    get :favor, on: :member
+    get :favor,   on: :member
+    get :suggest, on: :collection
 
     concerns :commetable
     concerns :evaluable
