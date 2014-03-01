@@ -6,11 +6,12 @@ module MarkdownHelper
   end
 
   def render_markdown(text, options = {})
-    options.merge! user: {
-      linker: lambda { |match| markdown_link_to_user(match) }
+    options.deep_merge! user: {
+      linker: lambda { |match| markdown_link_to_user(match) },
+      regex: /@\w+/
     }
 
-    options.merge! question: {
+    options.deep_merge! question: {
       linker: lambda { |match| markdown_link_to_question(match) },
       regex:  /#\w+/
     }
