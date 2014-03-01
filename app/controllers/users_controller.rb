@@ -33,7 +33,7 @@ class UsersController < ApplicationController
   def suggest
     @users = User.where('nick like ?', "#{params[:q]}%")
 
-    render json: @users.map { |user| { nick: user.nick, gravatar: GravatarHelper.gravatar_url(user.email) }}
+    render json: @users, root: false
   end
 
   private
