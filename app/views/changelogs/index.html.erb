@@ -15,26 +15,24 @@
   </div>
 
   <div class="col-xs-12 col-md-6" role="main">
-    <section>
-      <h1 class="page-header"><%= yield :title %></h1>
+    <h1 class="page-header"><%= yield :title %></h1>
 
-      <p class="lead"><%= t 'changelog.index.introduction' %></p>
+    <p class="lead"><%= t 'changelog.index.introduction' %></p>
 
-      <ol class="list-unstyled">
-        <% @changelogs.each do |changelog| %>
-          <li id="<%= changelog.identifier %>" class="changelog">
-            <h2>
-              <%= changelog.title %>
-              <br/>
-              <small>
-                <%= time_tag changelog.created_at.to_date, format: :default %> &middot;
-                <%= link_to changelog.version, url_to_repository("/releases/tag/v#{changelog.version}") %>
-              </small>
-            </h2>
-            <%= render_markdown changelog.text %>
-          </li>
-        <% end %>
-      </ol>
-    </section>
+    <ol class="list-unstyled">
+      <% @changelogs.each do |changelog| %>
+        <li id="<%= changelog.identifier %>" class="changelog">
+          <h2>
+            <%= changelog.title %>
+            <br/>
+            <small>
+              <%= time_tag changelog.created_at.to_date, format: :default %> &middot;
+              <%= link_to changelog.version, url_to_repository("/releases/tag/v#{changelog.version}") %>
+            </small>
+          </h2>
+          <%= render_markdown changelog.text %>
+        </li>
+      <% end %>
+    </ol>
   </div>
 </div>
