@@ -62,6 +62,12 @@ class QuestionsController < ApplicationController
     @question.favorites.reload
   end
 
+  def suggest
+    @questions = Question.where('title like ?', "#{params[:q]}%")
+
+    render json: @questions, root: false
+  end
+
   private
 
   helper_method :filter_questions

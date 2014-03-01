@@ -55,6 +55,7 @@ gem 'nokogiri'
 gem 'scout', github: 'smolnar/scout', branch: :master
 gem 'statistics2'
 gem 'symbolize'
+gem 'active_model_serializers'
 
 # monitoring
 gem 'garelic'
