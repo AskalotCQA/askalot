@@ -207,8 +207,8 @@ ActiveRecord::Schema.define(version: 20140227151446) do
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
     t.boolean  "deleted",                                       default: false,                 null: false
-    t.datetime "touched_at",                                    default: '2000-01-01 00:00:00', null: false
     t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,                   null: false
+    t.datetime "touched_at",                                    default: '2000-01-01 00:00:00', null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree

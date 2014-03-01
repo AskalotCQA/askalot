@@ -41,9 +41,7 @@
       <% unless @user.about.blank? %>
         <h4><%= t 'user.show.about' %></h4>
 
-        <p>
-          <%= render_markdown @user.about %>
-        </p>
+        <%= render_markdown @user.about %>
       <% end %>
 
       <div class="clearfix"></div>

@@ -6,7 +6,7 @@ module Concerns::Logging
   end
 
   def logger
-    @logger ||= Events::Management.new
+    @events_management ||= Events::Management.new
   end
 
   def log(data)

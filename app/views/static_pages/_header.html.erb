@@ -10,27 +10,37 @@
     </div>
 
     <div class="row">
-      <div class="col-md-12">
-        <ul class="list-inline">
-          <li>
-            <%= icon_link_to :'question-circle', t('home.ask'), new_question_path, id: :'new-question', class: 'btn btn-primary btn-lg' %>
-          </li>
+      <div class="col-md-6">
+        <div class="text-right">
+          <%= icon_link_to :'question-circle', t('home.ask'), new_question_path, class: 'btn btn-primary', fixed: true %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="text-left">
           <% unless current_user %>
-            <li>
-              <% if Configuration.enable.registrations? %>
-                <%= icon_link_to :rocket, t('home.sign_up'), new_user_registration_path, class: 'btn btn-success btn-lg' %>
-              <% else %>
-                <%= icon_link_to :rocket, t('home.sign_in'), new_user_session_path, class: 'btn btn-success btn-lg' %>
-              <% end %>
-            </li>
+            <% if Configuration.enable.registrations? %>
+              <%= icon_link_to :rocket, t('home.sign_up'), new_user_registration_path, class: 'btn btn-success', fixed: true %>
+            <% else %>
+              <%= icon_link_to :rocket, t('home.sign_in'), new_user_session_path, class: 'btn btn-success', fixed: true %>
+            <% end %>
           <% else %>
             <% if @question %>
-              <li>
-                <%= icon_link_to :comment, t('home.answer'), question_path(@question), id: :'new-question', class: 'btn btn-success btn-lg' %>
-              </li>
+              <%= icon_link_to :comment, t('home.answer'), question_path(@question), class: 'btn btn-success', fixed: true %>
             <% end %>
           <% end %>
-         </ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="text-right">
+          <%= icon_link_to :tasks, t('home.questions'), questions_path, class: 'btn btn-info', fixed: true %>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="text-left">
+          <%= icon_link_to :magic, t('home.changelogs'), changelogs_path, class: 'btn btn-warning', fixed: true %>
+        </div>
       </div>
     </div>
   </div>

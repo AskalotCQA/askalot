@@ -2,7 +2,7 @@ module NaRuby
   module VERSION
     MAJOR = 1
     MINOR = 0
-    PATCH = 12
+    PATCH = 14
 
     PRE = 'beta'
 
