@@ -19,6 +19,20 @@ class CommentsController < ApplicationController
     redirect_to question_path(@question)
   end
 
+  def update
+    @comment = Comment.find(params[:id])
+    @question = find_commentable.to_question
+    CommentRevision.create_by!(current_user, @comment)
+
+    if @comment.update_attributes(params.require(:comment).permit(:text))
+      flash[:notice] = t'comment.update.success'
+    else
+      flash_error_messages_for @comment
+    end
+
+    redirect_to question_path(@question)
+  end
+
   private
 
   def find_commentable

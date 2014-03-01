@@ -70,6 +70,18 @@ class QuestionsController < ApplicationController
     render json: @questions, root: false
   end
 
+  def update
+    @question = Question.find(params[:id])
+    QuestionRevision.create_by!(current_user, @question)
+    if @question.update_attributes(question_params.except(:anonymous, :author))
+      flash[:notice] = t'question.update.success'
+    else
+      flash_error_messages_for @question
+    end
+
+    redirect_to question_path(@question)
+  end
+
   private
 
   helper_method :filter_questions

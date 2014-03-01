@@ -47,6 +47,20 @@ class AnswersController < ApplicationController
     @answer.toggle_labeling_by! current_user, params[:value]
   end
 
+  def update
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+    AnswerRevision.create_by!(current_user, @answer)
+
+    if @answer.update_attributes(params.require(:answer).permit(:text))
+      flash[:notice] = t'answer.update.success'
+    else
+      flash_error_messages_for @answer
+    end
+
+    redirect_to question_path(@question)
+  end
+
   private
 
   def answer_params

@@ -23,3 +23,8 @@ sk:
     helpful: 'Pomocná'
 
     evaluate: 'Ohodnotiť'
+
+    update:
+      action: 'Upraviť odpoveď'
+      title: 'Upraviť odpoveď'
+      success: 'Vaša odpoveď bola úspešne aktualizovaná'

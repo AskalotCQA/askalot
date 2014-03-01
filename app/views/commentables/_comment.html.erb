@@ -2,4 +2,5 @@
   <%= render_markdown comment.text, redcarpet: { tags: [:autolink, :codespan, :emphasis, :link, :striketrough, :underline] } %>
   &ndash; <%= link_to_user comment.author %> <%= comment_creation_time comment %> &middot;
   <%= render 'comments/deleting', comment: comment %>
+  <%= render "comments/edit", commentable: commentable, comment: comment if comment.author==current_user %>
 </li>

@@ -7,6 +7,11 @@ sk:
     create:
       success: 'Váš komentár bol úspešne pridaný.'
 
+    update:
+      action: 'Upraviť komentár'
+      title: 'Upraviť komentár'
+      success: 'Váš komentár bol úspešne aktualizovaný'
+
     delete:
       title: 'Pozor!'
       action: 'Zmazať'
