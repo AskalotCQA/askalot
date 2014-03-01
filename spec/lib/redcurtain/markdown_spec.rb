@@ -35,7 +35,7 @@ describe Redcurtain::Markdown do
 
       markdown.renderers = [
         Redcurtain::Renderer::Gemoji,
-        Redcurtain::Renderer::GitHub,
+        Redcurtain::Renderer::Redcarpet,
         Redcurtain::Renderer::Pygments
       ]
 
