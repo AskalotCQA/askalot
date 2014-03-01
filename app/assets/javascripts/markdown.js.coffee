@@ -3,7 +3,7 @@ class window.Markdown
 
   textcomplete:
     strategies:
-      emoji:
+      gemoji:
         match: /\B:([\-+\w]*)$/
         search: (term, callback) ->
           values = $.map Gemoji.names, (icon) -> if icon.indexOf(term) == 0 then icon else null
@@ -16,6 +16,49 @@ class window.Markdown
         replace: (value)  -> ":#{value}:"
         index: 1
         maxCount: 5
+      users:
+        match: /(^|\s*)@(\w*)$/
+        search: (term, callback) ->
+          $.ajax
+            url: '/users/suggest'
+            dataType: 'json'
+            data:
+              q: term
+            success: (data) -> callback(data)
+        template: (value) ->
+          Handlebars.compile('
+            <img class="gemoji" src="{{user.gravatar}}"></img>&nbsp;{{user.nick}}
+          ')(user: value)
+        replace: (value) -> "@#{value.nick}"
+        index:    1
+        maxCount: 5
+      question:
+        match: /(^|\s*)#(\d*)$/
+        search: (term, callback) ->
+          $.ajax
+            url: '/questions/suggest'
+            dataType: 'json'
+            data:
+              q: term
+            success: (data) -> callback(data)
+        template: (value) ->
+          Handlebars.compile('
+            <div class="row">
+              <div class="col-md-8">
+                {{question.title}}
+              </div>
+
+              <div class="col-md-4">
+                <p class="muted pull-right">
+                  {{question.author}}
+                </p>
+              </div>
+            </div>
+          ')(question: value)
+        replace: (value) -> "@#{value.}"
+        index:    1
+        maxCount: 5
+
 
   @bind: ->
     $('.markdown-tabs').each ->
