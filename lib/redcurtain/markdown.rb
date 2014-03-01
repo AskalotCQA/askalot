@@ -7,7 +7,7 @@ module Redcurtain
     def renderers
       @renderers ||= [
         Redcurtain::Renderer::Gemoji,
-        Redcurtain::Renderer::GitHub,
+        Redcurtain::Renderer::Redcarpet,
         Redcurtain::Renderer::Pygments,
       ]
     end

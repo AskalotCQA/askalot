@@ -1,10 +1,10 @@
 require 'gemoji'
-require 'github/markdown'
+require 'redcarpet'
 require 'nokogiri'
 require 'pygments'
 
 require 'redcurtain/markdown'
 require 'redcurtain/renderer/gemoji'
-require 'redcurtain/renderer/github'
+require 'redcurtain/renderer/redcarpet'
 require 'redcurtain/renderer/pygments'
 require 'redcurtain/renderer/linker'
