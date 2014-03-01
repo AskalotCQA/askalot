@@ -3,5 +3,6 @@
     <%= comment.text %> &ndash;
     <%= link_to_user comment.author %>
     <%= comment_creation_time comment %>
+    <%= render 'commentables/deleting', comment: comment %>
   </p>
 </li>
