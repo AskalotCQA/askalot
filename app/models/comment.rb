@@ -4,6 +4,8 @@ class Comment < ActiveRecord::Base
 
   validates :text, presence: true
 
+  default_scope      lambda { where deleted: false }
+
   scope :by,  lambda { |user| where(author: user) }
   scope :for, lambda { |model| where(commentable_type: model.to_s.classify) }
 end
