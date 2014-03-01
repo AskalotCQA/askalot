@@ -9,7 +9,7 @@ module Slido
         data.map do |question|
           result = OpenStruct.new
 
-          result.title               = question[:text]
+          result.title               = title question[:text]
           result.text                = question[:text]
           result.slido_event_uuid    = question[:event_id].to_i
           result.slido_question_uuid = question[:event_question_id].to_i
@@ -17,6 +17,12 @@ module Slido
 
           result
         end
+      end
+
+      private
+
+      def title(value)
+        value.length > 140 ? (value[0..138] + '…')  : value
       end
     end
   end
