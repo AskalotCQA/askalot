@@ -13,7 +13,9 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap
-#= require handlebars
+#= require handlebars.runtime
+#= require_tree ./handlebars
+#= require_tree ./templates
 #
 #= require i18n
 #= require i18n/translations

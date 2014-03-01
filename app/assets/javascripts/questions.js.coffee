@@ -34,6 +34,6 @@ $(document).ready ->
     value = event.added.text
 
     tags = JSON.parse(select.attr('data-values'))
-    html = Handlebars.compile('{{#each tags}}<li><span class="label label-info">{{this}}</span></li>{{/each}}')(tags: tags[value])
+    html = templates['questions/category_tags'](tags: tags[value])
 
     $('ul#question-category-tags').html(html)

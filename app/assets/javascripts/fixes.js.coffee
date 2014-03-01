@@ -7,6 +7,9 @@
 
 Remote.bindState()
 
+# Shorthand for HandlebarsTemplates
+window.templates = HandlebarsTemplates
+
 window.defined = (value) ->
   typeof(value) != 'undefined'
 
