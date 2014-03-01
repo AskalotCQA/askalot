@@ -1,23 +1,6 @@
 @import 'mixins';
 @import 'variables';
 
-.sidebar {
-  margin-top: 20px;
-
-  .nav > li > a {
-    display: inline-block;
-
-    &:focus, &:hover {
-      background: transparent;
-      text-decoration: underline;
-    }
-  }
-
-  .nav li.active > a {
-    font-weight: bolder;
-  }
-}
-
 // collection
 
 .changelog {
