@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   include Commentable
+  include Deletable
   include Evaluable
   include Favorable
   include Notifiable
