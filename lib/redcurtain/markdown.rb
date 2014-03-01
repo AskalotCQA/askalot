@@ -15,9 +15,9 @@ module Redcurtain
     def render(content, options = {})
       options.symbolize_keys!
 
-      renderers.inject(content) { |result, renderer|
+      renderers.inject(content) do |result, renderer|
         renderer.render(result, options[renderer.name.to_s.split(/::/).last.downcase.to_sym] || {})
-      }.html_safe
+      end
     end
 
     def strip(content, options = {})

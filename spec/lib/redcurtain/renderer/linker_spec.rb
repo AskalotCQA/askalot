@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Redcurtain::Renderer::Linker do
-  subject { described_class }
+  subject { described_class.new(:linker) }
 
-  describe '.render' do
+  describe '#render' do
     let(:linker) { lambda { |nick| "/users/#{nick}" } }
 
     it 'requires linker' do
@@ -13,25 +13,19 @@ describe Redcurtain::Renderer::Linker do
     it 'replaces references by respecting links' do
       content = subject.render('Hey, @smolnar, look at this.', linker: linker)
 
-      expect(content).to eql('Hey, /users/smolnar, look at this.')
+      expect(content).to eql('Hey, /users/@smolnar, look at this.')
     end
 
     it 'replaces references with more complex names' do
       content = subject.render('Hey, @doge_weather, look at this.', linker: linker)
 
-      expect(content).to eql('Hey, /users/doge_weather, look at this.')
+      expect(content).to eql('Hey, /users/@doge_weather, look at this.')
     end
 
-    it 'replaces references with custom reference character' do
-      content = subject.render('Hey, -doge_weather, look at this.', linker: linker, reference: /-/)
-
-      expect(content).to eql('Hey, /users/doge_weather, look at this.')
-    end
-
-    it 'replaces references with custom reference regex' do
+    it 'replaces references with custom regex' do
       content = subject.render('Hey, -user-doge_weather, look at this.', linker: linker, reference: /-user-/, regex: /-user-\w+/)
 
-      expect(content).to eql('Hey, /users/doge_weather, look at this.')
+      expect(content).to eql('Hey, /users/-user-doge_weather, look at this.')
     end
 
     context 'when linker returns nil' do
