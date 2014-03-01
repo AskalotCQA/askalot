@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  include Deleting
   include Voting
 
   before_action :authenticate_user!
