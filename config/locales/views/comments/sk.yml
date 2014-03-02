@@ -6,3 +6,10 @@ sk:
 
     create:
       success: 'Váš komentár bol úspešne pridaný.'
+
+    delete:
+      action: 'Zmazať'
+      submit: 'Potvrdiť'
+      cancel: 'Zrušiť'
+      success: 'Komentár bol úspešne zmazaný.'
+      text: 'Naozaj chete zmazať komentár?'

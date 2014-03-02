@@ -11,6 +11,13 @@ sk:
     create:
       success: 'Vaša otázka bola úspešne pridaná.'
 
+    delete:
+      action: 'Zmazať'
+      submit: 'Potvrdiť'
+      cancel: 'Zrušiť'
+      success: 'Otázka bola úspešne zmazaná.'
+      text: 'Naozaj chete zmazať otázku?'
+
     index:
       title: 'Otázky'
       new: 'Nová otázka'
