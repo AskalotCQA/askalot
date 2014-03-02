@@ -49,7 +49,7 @@ describe 'Add Comment' do
       within '#question-comments' do
         click_link 'Pridať komentár'
 
-        fill_in 'comment[text]', with: '# Hey, @smolnar, check out [askalot](https://askalot.fiits.stuba.sk).'
+        fill_in 'comment[text]', with: '# Hey, @smolnar, check out [askalot](https://askalot.fiit.stuba.sk).'
 
         click_button 'Komentovať'
       end
@@ -57,8 +57,9 @@ describe 'Add Comment' do
       within '#question-comments' do
         expect(page).not_to have_css('h1')
         expect(page).to     have_content('Hey, @smolnar, check out askalot.')
-        expect(page).to     have_css('a', href: users_path(:smolnar), text: 'smolnar')
-        expect(page).to     have_css('a', href: 'https://askalot.fiit.stuba.sk', text: 'askalot')
+
+        expect(page).to     have_link('@smolnar', href: user_path(:smolnar))
+        expect(page).to     have_link('askalot',  href: 'https://askalot.fiit.stuba.sk')
       end
     end
   end
