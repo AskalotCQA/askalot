@@ -12,6 +12,10 @@ describe Redcurtain::Markdown do
     }
   end
 
+  after :each do
+    markdown.renderers = nil
+  end
+
   describe '#render' do
     it 'checks renderer chaining' do
       options = { a: { key: 0 }, b: { key: 1 }, c: { key: 2 } }
