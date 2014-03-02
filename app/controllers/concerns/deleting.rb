@@ -11,7 +11,11 @@ module Deleting
     @model   = controller_name.classify.downcase.to_sym
     @deletable = controller_name.classify.constantize.find(params[:id])
 
-    @deletable.delete_object!(@deletable)
+    if @deletable.delete_object!(@deletable)
+      flash[:notice] = t("#{@model}.delete.success")
+    else
+      flash_error_messages_for @deletable
+    end
 
     if @deletable.is_a?(Question)
       redirect_to questions_path
