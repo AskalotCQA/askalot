@@ -14,18 +14,52 @@ describe 'Add Comment' do
     click_link 'Otázky'
     click_link question.title
 
-    click_link 'Pridať komentár'
+    within '#question-comments' do
+      click_link 'Pridať komentár'
 
-    click_button 'Komentovať'
+      click_button 'Komentovať'
+    end
 
     expect(page).to have_content('Komentár – je povinná položka')
 
-    click_link 'Pridať komentár'
+    within '#question-comments' do
+      click_link 'Pridať komentár'
 
-    fill_in 'comment[text]', with: 'My comment'
+      fill_in 'comment[text]', with: 'My comment'
 
-    click_button 'Komentovať'
+      click_button 'Komentovať'
+    end
 
     expect(page).to have_content('Váš komentár bol úspešne pridaný.')
+
+    within '#question-comments' do
+      expect(page).to have_content('My comment')
+    end
+  end
+
+  context 'when using markdown' do
+    it 'renders only links and mentions' do
+      create :user, login: :smolnar
+
+      visit root_path
+
+      click_link 'Otázky'
+      click_link question.title
+
+      within '#question-comments' do
+        click_link 'Pridať komentár'
+
+        fill_in 'comment[text]', with: '# Hey, @smolnar, check out [askalot](https://askalot.fiits.stuba.sk).'
+
+        click_button 'Komentovať'
+      end
+
+      within '#question-comments' do
+        expect(page).not_to have_css('h1')
+        expect(page).to     have_content('Hey, @smolnar, check out askalot.')
+        expect(page).to     have_css('a', href: users_path(:smolnar), text: 'smolnar')
+        expect(page).to     have_css('a', href: 'https://askalot.fiit.stuba.sk', text: 'askalot')
+      end
+    end
   end
 end

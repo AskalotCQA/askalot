@@ -13,7 +13,8 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:notice] = t('comment.create.success')
     else
-      flash_error_messages_for @comment
+      # TODO (smolnar) resolve why named argument for flash is nil
+      flash_error_messages_for @comment, flash: flash
     end
 
     redirect_to question_path(@question)
