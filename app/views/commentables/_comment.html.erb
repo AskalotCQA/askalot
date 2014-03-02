@@ -1,6 +1,6 @@
 <li>
   <p>
-    <%= comment_markdown comment %> &ndash;
+    <%= comment_text comment %> &ndash;
     <%= link_to_user comment.author %>
     <%= comment_creation_time comment %>
     <%= render 'commentables/deleting', comment: comment %>
