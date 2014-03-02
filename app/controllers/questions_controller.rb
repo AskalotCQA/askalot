@@ -36,7 +36,7 @@ class QuestionsController < ApplicationController
 
       redirect_to question_path(@question)
     else
-      flash_error_messages_for @question, flash: flash.now
+      flash_error_messages_for @question, flash: flash
 
       render :new
     end
