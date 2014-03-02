@@ -1,5 +1,5 @@
 module Notifications
-  module Service
+  module Dispatcher
     extend self
 
     def notifiers
