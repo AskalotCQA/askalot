@@ -4,7 +4,7 @@ module ApplicationHelper
   end
 
   def resolve_sidebar(value)
-    ' data-spy="scroll" data-target="#sidebar"'.html_safe if value.present?
+    ' data-spy="scroll" data-target="#sidebar"'.html_safe if value
   end
 
   def resolve_title(value)
