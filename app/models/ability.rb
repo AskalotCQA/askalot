@@ -34,6 +34,10 @@ class Ability
       resource.author == user || (user.role?(:teacher) && resource.author == User.find_by(login: :slido))
     end
 
+    can(:edit, [Question, Answer, Comment]) { |resource| resource.author == user }
+    cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.exists? }
+    cannot(:edit, Answer) { |resource| resource.labelings.exists? }
+
     if user.role? :student
     end
 
@@ -49,6 +53,8 @@ class Ability
       can :delete, [Question, Answer, Comment]
 
       can :vote, :all
+
+      can :edit, :all
     end
   end
 end

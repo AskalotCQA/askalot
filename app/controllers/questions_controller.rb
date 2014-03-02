@@ -72,6 +72,9 @@ class QuestionsController < ApplicationController
 
   def update
     @question = Question.find(params[:id])
+
+    authorize! :edit, @question
+
     QuestionRevision.create_by!(current_user, @question)
     if @question.update_attributes(question_params.except(:anonymous, :author))
       flash[:notice] = t'question.update.success'

@@ -50,6 +50,9 @@ class AnswersController < ApplicationController
   def update
     @answer = Answer.find(params[:id])
     @question = @answer.question
+
+    authorize! :edit, @answer
+
     AnswerRevision.create_by!(current_user, @answer)
 
     if @answer.update_attributes(params.require(:answer).permit(:text))

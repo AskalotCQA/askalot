@@ -22,6 +22,9 @@ class CommentsController < ApplicationController
   def update
     @comment = Comment.find(params[:id])
     @question = find_commentable.to_question
+
+    authorize! :edit, @comment
+
     CommentRevision.create_by!(current_user, @comment)
 
     if @comment.update_attributes(params.require(:comment).permit(:text))

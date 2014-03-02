@@ -12,7 +12,7 @@
       <span class="answer-details">
         <%= answer_creation_time answer %> &middot;
         <%= render 'answers/deleting', answer: answer %>
-        <%= render "answers/edit", question: @question, answer: answer if answer.author==current_user %>
+        <%= render "answers/edit", question: @question, answer: answer if can? :edit, answer %>
       </span>
 
       <%= render 'answers/evaluations', answer: answer %>

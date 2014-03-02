@@ -24,7 +24,7 @@
         <div class="question-details">
           <%= question_creation_time @question %> &middot;
           <%= render 'questions/deleting', question: @question %>
-          <%= render "questions/edit", question:@question if @question.author==current_user %>
+          <%= render "questions/edit", question:@question if can? :edit, @question %>
         </div>
 
         <div id="question-evaluations">
