@@ -9,8 +9,6 @@ module Redcurtain::Renderer
     end
 
     class Factory < ::Redcarpet::Render::HTML
-      attr_accessor :options
-
       TAGS = [
         :block_code,
         :block_quote,
@@ -56,12 +54,10 @@ module Redcurtain::Renderer
           TAGS.each do |tag|
             next if options[:allowed_tags].include?(tag)
 
-            define_method tag do |*args|
-              case tag
-              when :paragraph, :header then "#{args.first}\n"
-              when :link               then args.third
-              else                          args.first
-              end
+            case tag
+            when :paragraph, :header then define_method(tag) { "#{args.first}\n"}
+            when :link               then define_method(tag) { args.third }
+            else                          define_method(tag) { args.first }
             end
           end
         end
