@@ -11,7 +11,7 @@ class UsersController < ApplicationController
              else fail
              end
 
-    @users = @users.page(params[:page]).per(30)
+    @users = @users.page(params[:page]).per(60)
   end
 
   def show
