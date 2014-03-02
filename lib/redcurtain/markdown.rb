@@ -21,7 +21,9 @@ module Redcurtain
     end
 
     def strip(content, options = {})
-      Nokogiri::XML(content).text.strip
+      renderer = ::Redcarpet::Render::StripDown.new
+
+      ::Redcarpet::Markdown.new(renderer, options).render(content).html_safe
     end
   end
 end

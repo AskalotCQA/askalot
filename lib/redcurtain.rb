@@ -1,5 +1,6 @@
 require 'gemoji'
 require 'redcarpet'
+require 'redcarpet/render_strip'
 require 'nokogiri'
 require 'pygments'
 

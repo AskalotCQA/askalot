@@ -15,4 +15,3 @@ class window.Module
 
     module.included?.apply(@)
     this
-

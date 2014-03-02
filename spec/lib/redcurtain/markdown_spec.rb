@@ -45,8 +45,8 @@ describe Redcurtain::Markdown do
 
   describe '#strip' do
     it 'renders plain text from markdown' do
-      html = "<p><code>code</code> <img class=\"doge-class\" src=\"/assets/dog.png\" alt=\"dog\"><code>ruby\ndoge.code</code>\nhello :unknown-doge:</p>"
-      text = "code ruby\ndoge.code\nhello :unknown-doge:"
+      html = "# Hello, [google](https://google.com)"
+      text = "Hello, google\n"
 
       expect(markdown.strip(html, options)).to eql(text)
     end
