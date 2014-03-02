@@ -7,7 +7,7 @@
 </section>
 
 <section id="users">
-  <%= @users.each_slice(6) do |users| %>
+  <% @users.each_slice(6) do |users| %>
     <div class="row">
       <% users.each do |user| %>
         <div class="col-md-2">

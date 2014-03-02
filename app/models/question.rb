@@ -38,6 +38,10 @@ class Question < ActiveRecord::Base
     [category] + tags
   end
 
+  def to_question
+    self
+  end
+
   private
 
   def add_category_tags

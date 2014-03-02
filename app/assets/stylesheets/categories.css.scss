@@ -1,0 +1,16 @@
+@import 'mixins';
+@import 'variables';
+
+// collection
+
+.category-group {
+  p {
+    margin-bottom: 20px !important;
+  }
+
+  & + & {
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid $hr-border;
+  }
+}
