@@ -27,6 +27,8 @@ class Question < ActiveRecord::Base
 
   scope :by, lambda { |user| where(author: user) }
 
+  scope :by_votes, lambda { order('') }
+
   def answers_ordered
     best  = answers.labeled_with(:best).first
     other = answers.by_votes.order(created_at: :desc)

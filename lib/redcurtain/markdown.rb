@@ -1,33 +1,29 @@
 module Redcurtain
   module Markdown
-    mattr_accessor :renderer, :highlighter
+    extend self
 
-    def self.render(text)
-      process(text).to_s.html_safe
+    attr_accessor :renderers
+
+    def renderers
+      @renderers ||= [
+        Redcurtain::Renderer::Gemoji,
+        Redcurtain::Renderer::Redcarpet,
+        Redcurtain::Renderer::Pygments,
+      ]
     end
 
-    def self.strip(text)
-      process(text).text
-    end
+    def render(content, options = {})
+      options.symbolize_keys!
 
-    def self.setup!
-      self.renderer    = Redcurtain::Renderer::GitHub
-      self.highlighter = Redcurtain::Highlighter::Pygments
-    end
-
-    private
-
-    def self.process(text)
-      markdown = renderer.render(text)
-      document = Nokogiri::HTML(markdown)
-
-      document.search('//pre').each do |pre|
-        language = pre[:lang].try(:to_sym)
-
-        pre.replace(highlighter.highlight(pre.text.strip, language: language))
+      renderers.inject(content) do |result, renderer|
+        renderer.render(result, options[renderer.name.to_s.split(/::/).last.downcase.to_sym] || {})
       end
+    end
 
-      document
+    def strip(content, options = {})
+      renderer = ::Redcarpet::Render::StripDown.new
+
+      ::Redcarpet::Markdown.new(renderer, options).render(content).html_safe
     end
   end
 end

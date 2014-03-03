@@ -1,0 +1,9 @@
+.textcomplete-wrapper {
+  .dropdown-menu > li.textcomplete-item > a {
+    padding: $padding-small-vertical $padding-small-horizontal;
+
+    img {
+      margin-right: $padding-small-horizontal / 2;
+    }
+  }
+}

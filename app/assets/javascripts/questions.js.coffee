@@ -8,6 +8,8 @@ onFilter = ->
 $(document).ready ->
   new Select()
 
+  ##
+  # Filter effect
   $(document).on 'click', '#questions-controls .nav-tabs a', -> onFilter()
 
   $(document).on 'change', '#question_tags', ->
@@ -15,7 +17,8 @@ $(document).ready ->
 
     onFilter()
 
-  # TODO (smolnar) use better class of identification of tag in list
+  ##
+  # Filtering by category and tags for Select2
   $(document).on 'click', '#questions .question-tag, #questions .question-category', (e) ->
     e.preventDefault()
 
@@ -24,13 +27,13 @@ $(document).ready ->
 
     select.addItems(items)
 
+  ##
+  # Callbacks for default category tags
   select = new Select.of('#question_category_id')
   select.on 'change', (event) ->
     value = event.added.text
 
-    html = ''
     tags = JSON.parse(select.attr('data-values'))
-
-    html += "<li><span class=\"label label-info\">#{tag}</span></li>" for tag in tags[value]
+    html = templates['questions/category_tags'](tags: tags[value])
 
     $('ul#question-category-tags').html(html)

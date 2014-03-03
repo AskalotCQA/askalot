@@ -43,6 +43,12 @@ address, form, nav, p, dl, ol, ul, table,
   @include box-shadow(none);
 }
 
+// dropdowns
+
+.dropdown-menu li.active .text-muted {
+  color: $component-active-color;
+}
+
 // forms
 
 .form-title {

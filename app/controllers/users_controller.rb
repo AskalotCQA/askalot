@@ -30,6 +30,12 @@ class UsersController < ApplicationController
     redirect_to edit_user_registration_path(tab: params[:tab])
   end
 
+  def suggest
+    @users = User.where('nick like ?', "#{params[:q]}%")
+
+    render json: @users, root: false
+  end
+
   private
 
   def user_params

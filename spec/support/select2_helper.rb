@@ -17,6 +17,8 @@ module Select2Helper
     end
 
     within '#select2-drop .select2-results' do
+      # TODO (smolnar) figure out xpath
+
       all('li.select2-result').each do |element|
         return element.click if element.text == value
       end

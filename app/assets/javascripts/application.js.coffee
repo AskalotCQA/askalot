@@ -13,6 +13,9 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap
+#= require handlebars.runtime
+#= require_tree ./handlebars
+#= require_tree ./templates
 #
 #= require i18n
 #= require i18n/translations
@@ -25,7 +28,9 @@
 #= require jquery-tablesorter
 #= require rails-timeago
 #= require locales/jquery.timeago.sk.js
+#= require jquery-textcomplete
 #
+#= require gemoji
 #= require form
 #= require table
 #

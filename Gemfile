@@ -27,17 +27,20 @@ gem 'bootstrap-datepicker-rails', '~> 1.3.0'
 gem 'select2-rails', '~> 3.4.9'
 gem 'jquery-tablesorter', '~> 1.9.5'
 gem 'rails-timeago', '~> 2.0'
+gem 'jquery-textcomplete-rails', '~> 0.1.2'
+gem 'handlebars_assets'
 
 # markdown
-gem 'github-markdown'
+gem 'redcarpet'
 gem 'pygments.rb'
+gem 'gemoji', '~> 1.5.0'
 
 # internationalization
 gem 'rails-i18n', '~> 4.0.0'
 gem 'i18n-js'
 
 # pagination
-gem 'kaminari',           '~> 0.14.1'
+gem 'kaminari', '~> 0.14.1'
 gem 'kaminari-bootstrap', '~> 0.1.3'
 
 # scheduling
@@ -45,6 +48,7 @@ gem 'whenever'
 
 # utilities
 gem 'actionview-encoded_mail_to'
+gem 'active_model_serializers'
 gem 'forgery'
 gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
@@ -55,8 +59,6 @@ gem 'symbolize'
 
 # monitoring
 gem 'garelic'
-# gem 'airbrake'
-# gem 'newrelic_rpm'
 
 # documentation
 group :doc do

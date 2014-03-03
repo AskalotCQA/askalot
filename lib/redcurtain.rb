@@ -1,8 +1,11 @@
+require 'gemoji'
+require 'redcarpet'
+require 'redcarpet/render_strip'
+require 'nokogiri'
 require 'pygments'
-require 'github/markdown'
 
 require 'redcurtain/markdown'
-require 'redcurtain/renderer/github'
-require 'redcurtain/highlighter/pygments'
-
-Redcurtain::Markdown.setup!
+require 'redcurtain/renderer/gemoji'
+require 'redcurtain/renderer/redcarpet'
+require 'redcurtain/renderer/pygments'
+require 'redcurtain/renderer/linker'
