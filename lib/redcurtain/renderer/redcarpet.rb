@@ -2,10 +2,16 @@ module Redcurtain::Renderer
   module Redcarpet
     extend self
 
+    attr_accessor :defaults
+
     def render(content, options = {})
       renderer = Factory.create(options)
 
       ::Redcarpet::Markdown.new(renderer, options).render(content).html_safe
+    end
+
+    def defaults
+      @defaults ||= { tags: Factory::TAGS.clone }
     end
 
     class Factory < ::Redcarpet::Render::HTML
@@ -47,11 +53,11 @@ module Redcurtain::Renderer
       def self.create(options = {})
         parent   = options[:renderer] || ::Redcarpet::Render::HTML
         renderer = Class.new(parent)
-        options  = { allowed_tags: TAGS }.merge(options)
+        options  = Redcurtain::Renderer::Redcarpet.defaults.deep_merge(options)
 
         renderer.instance_eval do
           TAGS.each do |tag|
-            next if options[:allowed_tags].include?(tag)
+            next if options[:tags].include?(tag)
 
             case tag
             when :paragraph, :header then define_method(tag) { |*args| "#{args.first}\n"}
@@ -60,6 +66,8 @@ module Redcurtain::Renderer
             end
           end
         end
+
+        options[:allowed_tags] = options.delete(:tags)
 
         renderer.new(options)
       end
