@@ -10,45 +10,44 @@ module Redcurtain::Renderer
 
     class Factory < ::Redcarpet::Render::HTML
       TAGS = [
+        :autolink,
         :block_code,
-        :block_quote,
         :block_html,
+        :block_quote,
+        :codespan,
+        :doc_footer,
+        :doc_header,
+        :double_emphasis,
+        :emphasis,
+        :entity,
+        :footnote_ref,
         :footnotes,
         :footnotes_def,
         :header,
+        :highlight,
         :hrule,
-        :list,
-        :list_item,
-        :paragraph,
-        :table,
-        :table_row,
-        :table_cell,
-        :autolink,
-        :codespan,
-        :double_emphasis,
-        :emphasis,
         :image,
         :linebreak,
         :link,
+        :list,
+        :list_item,
+        :normal_text,
+        :paragraph,
+        :quote,
         :raw_html,
-        :triple_emphasis,
         :striketrough,
         :superscript,
-        :underline,
-        :highlight,
-        :quote,
-        :footnote_ref,
-        :entity,
-        :normal_text,
-        :doc_header,
-        :doc_footer
+        :table,
+        :table_cell,
+        :table_row,
+        :triple_emphasis,
+        :underline
       ]
 
       def self.create(options = {})
         parent   = options[:renderer] || ::Redcarpet::Render::HTML
         renderer = Class.new(parent)
-
-        options = { allowed_tags: TAGS }.merge(options)
+        options  = { allowed_tags: TAGS }.merge(options)
 
         renderer.instance_eval do
           TAGS.each do |tag|
