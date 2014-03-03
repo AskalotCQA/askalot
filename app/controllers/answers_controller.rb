@@ -15,7 +15,7 @@ class AnswersController < ApplicationController
       flash[:notice] = t('answer.create.success')
 
       register_watching_for @answer.question
-      notify_watchers_about :'answer-on-question', on: @answer.question
+      notify_about :answer, @answer, on: @question
     else
       flash_error_messages_for @answer
     end

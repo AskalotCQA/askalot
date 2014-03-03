@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Redcurtain::Markdown do
-  let(:markdown) { described_class }
+  let(:markdown) { Class.new { include Redcurtain::Markdown }.new }
 
   let(:options) do
     {
