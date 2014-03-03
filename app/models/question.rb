@@ -21,8 +21,6 @@ class Question < ActiveRecord::Base
   validates :text,      presence: true, length: { minimum: 2 }
   validates :anonymous, inclusion: { in: [true, false] }
 
-  default_scope lambda { where(deleted: false) }
-
   scope :random,     lambda { select('questions.*, random()').order('random()') }
   scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }
   scope :answered,   lambda { joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq }

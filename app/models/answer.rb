@@ -16,8 +16,6 @@ class Answer < ActiveRecord::Base
 
   validates :text, presence: true
 
-  default_scope lambda { undeleted }
-
   scope :by,  lambda { |user| where(author: user) }
   scope :for, lambda { |question| where(question: question) }
 
