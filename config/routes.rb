@@ -25,10 +25,6 @@ NaRuby::Application.routes.draw do
     get :delete, on: :member
   end
 
-  resources :comments, only: [] do
-    concerns :deletable
-  end
-
   concern :evaluable do
     resources :evaluations, only: [:create, :update]
 
@@ -62,6 +58,10 @@ NaRuby::Application.routes.draw do
     concerns :deletable
     concerns :evaluable
     concerns :votable
+  end
+
+  resources :comments, only: [] do
+    concerns :deletable
   end
 
   resources :tags, only: [] do
