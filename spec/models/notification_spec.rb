@@ -6,7 +6,7 @@ describe Notification do
 
     expect(notification).not_to be_valid
 
-    notification.action = :'new-answer'
+    notification.action = :'add-answer'
 
     expect(notification).to be_valid
   end

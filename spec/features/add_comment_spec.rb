@@ -55,6 +55,32 @@ describe 'Add Comment' do
 
         expect(question).to be_watched_by(user)
       end
+
+      it 'notifies about new comment' do
+        create :watching, watcher: question.author, watchable: question
+
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        within '#question-comments' do
+          click_link 'Pridať komentár'
+
+          fill_in 'comment[text]', with: 'So wanna watch this!'
+
+          click_button 'Komentovať'
+        end
+
+        expect(notifications.size).to eql(1)
+
+        comment = Comment.find_by text: 'So wanna watch this!'
+
+        expect(last_notification.notifiable).to eql(comment)
+        expect(last_notification.recipient).to  eql(question.author)
+        expect(last_notification.initiator).to  eql(user)
+        expect(last_notification.action).to     eql(:'add-comment')
+      end
     end
   end
 
@@ -78,6 +104,33 @@ describe 'Add Comment' do
 
         expect(question).to be_watched_by(user)
       end
+
+      it 'notifies about new comment' do
+        create :watching, watcher: question.author, watchable: question
+
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        within "#answer-#{answer.id}" do
+          click_link 'Pridať komentár'
+
+          fill_in 'comment[text]', with: 'So wanna watch this!'
+
+          click_button 'Komentovať'
+        end
+
+        expect(notifications.size).to eql(1)
+
+        comment = Comment.find_by text: 'So wanna watch this!'
+
+        expect(last_notification.notifiable).to eql(comment)
+        expect(last_notification.recipient).to  eql(question.author)
+        expect(last_notification.initiator).to  eql(user)
+        expect(last_notification.action).to     eql(:'add-comment')
+      end
+
     end
   end
 

@@ -3,5 +3,5 @@ class Notification < ActiveRecord::Base
   belongs_to :initiator,  class_name: :User
   belongs_to :notifiable, polymorphic: true
 
-  symbolize :action, in: [:'new-answer']
+  symbolize :action, in: [:'add-answer', :'add-comment']
 end

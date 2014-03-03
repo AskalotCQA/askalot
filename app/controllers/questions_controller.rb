@@ -1,7 +1,8 @@
 class QuestionsController < ApplicationController
   include Voting
   include Tabbing
-  include Concerns::Watching
+  include Notifications::Watching
+  include Notifications::Notifying
 
   before_action :authenticate_user!
 

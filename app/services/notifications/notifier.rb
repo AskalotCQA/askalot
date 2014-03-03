@@ -9,7 +9,7 @@ module Notifications
       watchers = target.watchers - [initiator]
 
       watchers.each do |watcher|
-        factory.create(action: action, initiator: initiator, recipient: watcher, notifiable: resource)
+        factory.create!(action: action, initiator: initiator, recipient: watcher, notifiable: resource)
       end
     end
 

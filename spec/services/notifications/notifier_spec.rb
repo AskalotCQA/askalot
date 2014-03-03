@@ -11,8 +11,8 @@ describe Notifications::Notifier do
       resource = double(:resource, watchers: watchers)
       factory  = double(:factory)
 
-      expect(factory).to receive(:create).with(action: :edit, recipient: watchers.first,  initiator: :user, notifiable: resource)
-      expect(factory).to receive(:create).with(action: :edit, recipient: watchers.second, initiator: :user, notifiable: resource)
+      expect(factory).to receive(:create!).with(action: :edit, recipient: watchers.first,  initiator: :user, notifiable: resource)
+      expect(factory).to receive(:create!).with(action: :edit, recipient: watchers.second, initiator: :user, notifiable: resource)
 
       Notifications::Notifier.factory = factory
       Notifications::Notifier.publish(:edit, :user, resource)
@@ -24,7 +24,7 @@ describe Notifications::Notifier do
       target   = double(:target, watchers: [watcher])
       factory  = double(:factory)
 
-      expect(factory).to receive(:create).with(action: :edit, recipient: watcher, initiator: :user, notifiable: resource)
+      expect(factory).to receive(:create!).with(action: :edit, recipient: watcher, initiator: :user, notifiable: resource)
 
       Notifications::Notifier.factory = factory
       Notifications::Notifier.publish(:edit, :user, resource, on: target)

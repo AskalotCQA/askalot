@@ -100,7 +100,7 @@ describe 'Add Answer' do
 
         expect(last_notification.initiator).to  eql(user)
         expect(last_notification.recipient).to  eql(question.author)
-        expect(last_notification.action).to     eql(:'new-answer')
+        expect(last_notification.action).to     eql(:'add-answer')
         expect(last_notification.notifiable).to eql(answer)
       end
     end

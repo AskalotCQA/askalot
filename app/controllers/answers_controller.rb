@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   include Voting
-  include Concerns::Watching
-  include Concerns::Notifying
+  include Notifications::Watching
+  include Notifications::Notifying
 
   before_action :authenticate_user!
 
@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
     if @answer.save
       flash[:notice] = t('answer.create.success')
 
-      notify_about :'new-answer', @answer, on: @question
+      notify_about :'add-answer', @answer, on: @question
 
       register_watching_for @answer.question
     else
