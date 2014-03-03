@@ -1,11 +1,12 @@
 require 'spec_helper'
 
-describe 'Add Question Answer' do
+describe 'Add Answer' do
   context 'with question from student' do
+    let(:user)      { create :user }
     let!(:question) { create :question, :with_tags }
 
     before :each do
-      login_as question.author
+      login_as user
     end
 
     it 'adds new answer to question' do
@@ -64,6 +65,21 @@ describe 'Add Question Answer' do
           expect(page).to have_css('h1', count: 1)
           expect(page).to have_content('My neat solution')
         end
+      end
+    end
+
+    context 'with notifications' do
+      it 'registers answer author as watcher of question' do
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        fill_in 'answer_text', with: 'I soo wanna watch you!'
+
+        click_button 'Odpovedať'
+
+        expect(question).to be_watched_by(user)
       end
     end
   end

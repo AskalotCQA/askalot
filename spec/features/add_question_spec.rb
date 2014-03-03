@@ -161,7 +161,6 @@ describe 'Add Question' do
         end
       end
     end
-
   end
 
   context 'when selecting category' do
@@ -206,6 +205,24 @@ describe 'Add Question' do
           expect(page).to have_content('ali-gz')
         end
       end
+    end
+  end
+
+  context 'with notifications' do
+    it 'registers author as watcher' do
+      visit root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select  category.name,    from: 'question_category_id'
+      fill_in 'question_title', with: 'Am I a watcher?'
+      fill_in 'question_text',  with: 'I want to have notification for this question.'
+
+      click_button 'Opýtať'
+
+      question = Question.find_by(title: 'Am I a watcher?')
+
+      expect(question).to be_watched_by(user)
     end
   end
 end

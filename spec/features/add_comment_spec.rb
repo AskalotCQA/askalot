@@ -37,6 +37,50 @@ describe 'Add Comment' do
     end
   end
 
+  context 'for question' do
+    context 'with notifications' do
+      it 'registers commenter as watcher of question' do
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        within '#question-comments' do
+          click_link 'Pridať komentár'
+
+          fill_in 'comment[text]', with: 'So wanna watch this!'
+
+          click_button 'Komentovať'
+        end
+
+        expect(question).to be_watched_by(user)
+      end
+    end
+  end
+
+  context 'for answer' do
+    let!(:answer) { create :answer, question: question }
+
+    context 'with notifications' do
+      it 'registers commenter as watcher of the question' do
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        within "#answer-#{answer.id}" do
+          click_link 'Pridať komentár'
+
+          fill_in 'comment[text]', with: 'So wanna watch this!'
+
+          click_button 'Komentovať'
+        end
+
+        expect(question).to be_watched_by(user)
+      end
+    end
+  end
+
   context 'when using markdown' do
     it 'renders only links and mentions' do
       create :user, login: :smolnar
