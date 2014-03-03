@@ -99,7 +99,7 @@ describe 'Add Answer' do
     end
 
     context 'with notifications' do
-      it 'registers answer author as watcher of question' do
+      it 'registers answer author as watcher of her answer' do
         visit root_path
 
         click_link 'Otázky'
@@ -109,7 +109,9 @@ describe 'Add Answer' do
 
         click_button 'Odpovedať'
 
-        expect(question).to be_watched_by(user)
+        answer = Answer.last
+
+        expect(answer).to be_watched_by(user)
       end
 
       it 'notifies watchers about new answer' do
