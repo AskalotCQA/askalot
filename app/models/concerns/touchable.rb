@@ -18,6 +18,7 @@ module Touchable
 
   private
 
+  # TODO (jharinek) problem with new question
   def touch_touched_at
     question = self.to_question
 
