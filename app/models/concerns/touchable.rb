@@ -1,4 +1,4 @@
-module Observable
+module Touchable
   extend ActiveSupport::Concern
 
   included do
@@ -6,9 +6,10 @@ module Observable
   end
 
   def update_touched_at!
-    require 'pry'; binding.pry
     question = self.to_question
+
     question.touched_at = self.updated_at
+
     question.save!
   end
 end

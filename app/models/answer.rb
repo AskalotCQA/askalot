@@ -2,9 +2,9 @@ class Answer < ActiveRecord::Base
   include Commentable
   include Evaluable
   include Notifiable
+  include Touchable
   include Votable
   include Watchable
-  include Observable
 
   after_create :slido_label_with_best!
 

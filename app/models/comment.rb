@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-  include Observable
+  include Touchable
 
   belongs_to :author, class_name: :User, counter_cache: true
   belongs_to :commentable, polymorphic: true, counter_cache: true
