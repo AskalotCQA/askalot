@@ -20,7 +20,7 @@ module Redcurtain::Renderer
         if result
           spaces = match.match(/\A\s+/)
 
-          "#{spaces}#{result}"
+          "#{spaces}#{result.gsub(/\A\s+/, '')}"
         else
           match
         end

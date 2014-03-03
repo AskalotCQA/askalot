@@ -19,13 +19,13 @@ module MarkdownHelper
     Redcurtain::Markdown.render(text, options)
   end
 
-  def strip_markdown(text, options = {})
+  def render_stripdown(text, options = {})
     Redcurtain::Markdown.strip(text, options)
   end
 
   def markdown_link_to_user(match, options = {})
-    nick = match[/[A-Za-z0-9]+\z/] || match.gsub(/@/, '')
-    user = User.find_by(nick: nick)
+    id   = match[/\d+\z/] || match.gsub(/@/, '')
+    user = User.find_by(id: id)
 
     link_to "@#{nick}", user_path(user.nick) if user
   end
