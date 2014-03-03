@@ -2,7 +2,7 @@ module Deleting
   extend ActiveSupport::Concern
 
   def delete
-    @model   = controller_name.classify.downcase.to_sym
+    @model = controller_name.classify.downcase.to_sym
     @deletable = controller_name.classify.constantize.find(params[:id])
 
     if @deletable.mark_as_deleted!(@deletable)
