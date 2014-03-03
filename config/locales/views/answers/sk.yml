@@ -8,9 +8,10 @@ sk:
       success: 'Vaša odpoveď bola úspešne pridaná.'
 
     delete:
+      title: 'Pozor!'
       action: 'Zmazať'
-      submit: 'Potvrdiť'
-      cancel: 'Zrušiť'
+      submit: 'Zmazať'
+      cancel: 'Spať'
       success: 'Odpoveď bola úspešne zmazaná.'
       text: 'Naozaj chete zmazať odpoveď?'
 

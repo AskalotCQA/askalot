@@ -2,18 +2,21 @@
   <a href="#" class="text-muted" data-toggle="modal" data-target="#<%= identify deletable, :deleting %>" id="<%= "#{model}-#{deletable.id}-delete-modal" %>" >
     <%= tooltip_icon_tag :'trash-o', t("#{model}.delete.action"), placement: :right %>
   </a>
-<% end %>
 
-<div id="<%= identify deletable, :deleting %>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-body">
-        <%= t "#{model}.delete..text" %>
-      </div>
-      <div class="modal-footer">
-        <a href="#" class="btn btn-default" data-dismiss="modal"><%= t "#{model}.delete.cancel" %></a>
-        <a href="<%= send("delete_#{model}_path", deletable) %>" id="<%= "#{model}-#{deletable.id}-delete" %>" class="btn btn-primary"><%= t "#{model}.delete.submit" %></a>
+  <div id="<%= identify deletable, :deleting %>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title"><%= t "#{model}.delete.title" %></h3>
+        </div>
+        <div class="modal-body">
+          <%= t "#{model}.delete.text" %>
+        </div>
+        <div class="modal-footer">
+          <a href="#" class="btn btn-default" data-dismiss="modal"><%= t "#{model}.delete.cancel" %></a>
+          <a href="<%= send("delete_#{model}_path", deletable) %>" id="<%= "#{model}-#{deletable.id}-delete" %>" class="btn btn-danger"><%= t "#{model}.delete.submit" %></a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
