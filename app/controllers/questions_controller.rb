@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  include Deleting
   include Voting
   include Tabbing
 

@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   include Commentable
+  include Deletable
   include Evaluable
   include Favorable
   include Notifiable
@@ -19,6 +20,8 @@ class Question < ActiveRecord::Base
   validates :title,     presence: true, length: { minimum: 2, maximum: 140 }
   validates :text,      presence: true, length: { minimum: 2 }
   validates :anonymous, inclusion: { in: [true, false] }
+
+  default_scope lambda { where(deleted: false) }
 
   scope :random,     lambda { select('questions.*, random()').order('random()') }
   scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }

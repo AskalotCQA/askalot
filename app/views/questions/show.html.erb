@@ -19,7 +19,12 @@
       </section>
 
       <section id="question-content">
-        <%= render_markdown @question.text %>
+        <div class="col-md-11">
+          <%= render_markdown @question.text %>
+        </div>
+        <div class="col-md-1">
+          <%= render 'questions/deleting', question: @question %>
+        </div>
       </section>
 
       <section id="question-evaluations">

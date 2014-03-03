@@ -1,5 +1,6 @@
 class Answer < ActiveRecord::Base
   include Commentable
+  include Deletable
   include Evaluable
   include Notifiable
   include Votable
@@ -14,6 +15,8 @@ class Answer < ActiveRecord::Base
   has_many :labels, through: :labelings
 
   validates :text, presence: true
+
+  default_scope lambda { undeleted }
 
   scope :by,  lambda { |user| where(author: user) }
   scope :for, lambda { |question| where(question: question) }

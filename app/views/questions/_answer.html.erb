@@ -5,8 +5,13 @@
     </div>
 
     <div class="col-md-8">
-      <div class="answer-content">
-        <%= render_markdown answer.text %>
+      <div class="answer-content <%= "bg-warning" if answer.author.role?(:teacher) %>">
+        <div class="col-md-11">
+          <%= render_markdown answer.text %>
+        </div>
+        <div class="col-md-1">
+          <%= render 'answers/deleting', answer: answer %>
+        </div>
       </div>
 
       <p class="text-muted">
