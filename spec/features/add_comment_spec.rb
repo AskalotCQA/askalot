@@ -146,13 +146,13 @@ describe 'Add Comment' do
       within '#question-comments' do
         click_link 'Pridať komentár'
 
-        fill_in 'comment[text]', with: '# Hey, @smolnar, check out [askalot](https://askalot.fiit.stuba.sk).'
+        fill_in 'comment[text]', with: '> Hey, @smolnar, check out [askalot](https://askalot.fiit.stuba.sk).'
 
         click_button 'Komentovať'
       end
 
       within '#question-comments' do
-        expect(page).not_to have_css('h1')
+        expect(page).not_to have_css('blockquote')
         expect(page).to     have_content('Hey, @smolnar, check out askalot.')
 
         expect(page).to     have_link('@smolnar', href: user_path(:smolnar))
