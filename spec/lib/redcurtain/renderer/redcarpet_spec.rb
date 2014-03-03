@@ -6,13 +6,13 @@ module Redcurtain::Renderer::Redcarpet
       it 'creates renderer' do
         renderer = Factory.create
 
-        Factory::TAGS.each do |tag|
+        Redcurtain::Renderer::Redcarpet.defaults[:tags].each do |tag|
           expect(renderer).not_to respond_to(tag)
         end
       end
 
       it 'creates renderer with allowed tags' do
-        renderer = Factory.create(allowed_tags: Factory::TAGS - [:highlight])
+        renderer = Factory.create(tags: Factory::TAGS - [:highlight])
 
         expect(renderer).to respond_to(:highlight)
         expect(renderer.highlight('a')).to eql('a')
@@ -20,7 +20,7 @@ module Redcurtain::Renderer::Redcarpet
 
       context 'with irregular tags' do
         it 'handles striping tags correctly' do
-          renderer = Factory.create(allowed_tags: Factory::TAGS - [:link, :header])
+          renderer = Factory.create(tags: Factory::TAGS - [:link, :header])
 
           expect(renderer.header('a')).to eql("a\n")
 
