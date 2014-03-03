@@ -24,7 +24,7 @@ module MarkdownHelper
   end
 
   def markdown_link_to_user(match, options = {})
-    id   = match[/\w+\z/] || match.gsub(/@/, '')
+    id   = match[/\d+\z/] || match.gsub(/@/, '')
     user = User.find_by(id: id)
 
     link_to "@#{user.nick}", user_path(user.nick) if user
