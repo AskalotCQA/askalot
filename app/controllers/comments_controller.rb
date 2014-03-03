@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  include Markdown
   include Notifications::Notifying
   include Notifications::Watching
 
@@ -10,6 +11,10 @@ class CommentsController < ApplicationController
     @comment     = Comment.new(comment_params)
 
     authorize! :comment, @commentable
+
+    process_markdown_for @comment do |user|
+      notify_about :'mention-user', @comment, for: user
+    end
 
     if @comment.save
       flash[:notice] = t('comment.create.success')
