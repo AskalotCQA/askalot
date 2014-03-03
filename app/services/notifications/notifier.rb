@@ -5,11 +5,10 @@ module Notifications
     attr_accessor :factory
 
     def publish(action, initiator, resource, options = {})
-      target   = options[:on] || resource
-      watchers = target.watchers - [initiator]
+      recipients = Array.wrap(options[:for] || resource.watchers) - [initiator]
 
-      watchers.each do |watcher|
-        factory.create!(action: action, initiator: initiator, recipient: watcher, notifiable: resource)
+      recipients.each do |recipient|
+        factory.create!(action: action, initiator: initiator, recipient: recipient, notifiable: resource)
       end
     end
 

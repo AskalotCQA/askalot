@@ -18,16 +18,15 @@ describe Notifications::Notifier do
       Notifications::Notifier.publish(:edit, :user, resource)
     end
 
-    it 'provides custom target for notification' do
+    it 'provides custom recipients for notification' do
       watcher  = double(:watcher)
       resource = double(:resource)
-      target   = double(:target, watchers: [watcher])
       factory  = double(:factory)
 
       expect(factory).to receive(:create!).with(action: :edit, recipient: watcher, initiator: :user, notifiable: resource)
 
       Notifications::Notifier.factory = factory
-      Notifications::Notifier.publish(:edit, :user, resource, on: target)
+      Notifications::Notifier.publish(:edit, :user, resource, for: watcher)
     end
 
     context 'when initiator is watcher' do
