@@ -58,14 +58,14 @@ describe 'Add Question' do
       click_link 'Opýtať sa otázku'
 
       fill_in 'question_title', with: 'Lorem ipsum title?'
-      fill_in 'question_text',  with: '> Lorem ipsum'
+      fill_in 'question_text',  with: '# Lorem ipsum'
 
       click_link 'Náhľad'
 
       wait_for_remote
 
       within '.markdown-content' do
-        expect(page).to have_css('blockquote', count: 1)
+        expect(page).to have_css('h1', count: 1)
         expect(page).to have_content('Lorem ipsum')
       end
     end

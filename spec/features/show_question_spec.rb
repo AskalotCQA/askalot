@@ -24,7 +24,7 @@ describe 'Show Question' do
 
   context 'when using markdown' do
     before :each do
-      question.update_attributes!(text: '> Lorem ipsum')
+      question.update_attributes!(text: '# Lorem ipsum')
     end
 
     it 'processes markdown text' do
@@ -38,7 +38,7 @@ describe 'Show Question' do
       expect(page).to have_content(question.author.nick)
 
       within '#question-content' do
-        expect(page).to have_css('blockquote', count: 1)
+        expect(page).to have_css('h1', count: 1)
         expect(page).to have_content('Lorem ipsum')
       end
 
