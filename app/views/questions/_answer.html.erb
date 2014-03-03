@@ -5,8 +5,8 @@
     </div>
 
     <div class="col-md-8">
-      <div class="answer-content">
-        <div class="<%= answer.author.role?(:teacher) ? "col-md-11 bg-warning" : "col-md-11" %>">
+      <div class="answer-content <%= "bg-warning" if answer.author.role?(:teacher) %>">
+        <div class="col-md-11">
           <%= render_markdown answer.text %>
         </div>
         <div class="col-md-1">
@@ -21,7 +21,6 @@
       <br/>
 
       <%= render 'answers/evaluations', answer: answer %>
-      <%= render 'answers/deleting', answer: answer %>
       <%= render 'answers/comments', answer: answer %>
       <%= render 'comments/form', commentable: answer %>
     </div>
