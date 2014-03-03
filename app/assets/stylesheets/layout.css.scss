@@ -72,10 +72,11 @@ section#flash {
 // sidebar
 
 .sidebar {
-  margin-top: 35px;
+  margin-top: 40px;
 
   .nav > li > a {
     display: inline-block;
+    padding: $padding-base-vertical $padding-small-horizontal;
 
     &:focus, &:hover {
       background: transparent;
