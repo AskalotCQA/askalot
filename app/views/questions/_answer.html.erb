@@ -6,7 +6,7 @@
 
     <div class="col-md-8">
       <div class="answer-content">
-        <div class="col-md-11">
+        <div class="<%= answer.author.role?(:teacher) ? "col-md-11 bg-warning" : "col-md-11" %>">
           <%= render_markdown answer.text %>
         </div>
         <div class="col-md-1">
