@@ -1,27 +1,26 @@
 require 'spec_helper'
 
-describe 'Deleting QAC', js: true do
-  let!(:question) { create :question, :with_tags, title: 'Deleting question' }
-  let(:user) { create :user }
+describe 'Deleting', js: true do
+  let!(:question)     { create :question, :with_tags, title: 'Deleting question' }
+  let(:user)          { create :user }
   let(:administrator) { create :administrator }
-
 
   context 'when question has no comments and answers' do
     before :each do
       login_as question.author
     end
 
-    it 'deleting question', js: true do
+    it 'can delete question', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
       click_link "question-#{question.id}-delete-modal"
 
       within "#question-#{question.id}-deleting" do
-        click_link "question-#{question.id}-delete"
+        click_link 'Potvrdiť'
       end
 
       expect(page).to have_content('Otázka bola úspešne zmazaná.')
@@ -36,17 +35,17 @@ describe 'Deleting QAC', js: true do
     before :each do
       login_as answer.author
     end
-    it 'deleting answer', js: true do
+    it 'can delete answer', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
       click_link "answer-#{answer.id}-delete-modal"
 
       within "#answer-#{answer.id}-deleting" do
-        click_link "answer-#{answer.id}-delete"
+        click_link 'Potvrdiť'
       end
 
       expect(page).to have_content('Odpoveď bola úspešne zmazaná.')
@@ -64,17 +63,17 @@ describe 'Deleting QAC', js: true do
       login_as user
     end
 
-    it 'deleting answer comment', js: true do
+    it 'can delete answer comment', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
       click_link "comment-#{comment_answer.id}-delete-modal"
 
       within "#comment-#{comment_answer.id}-deleting" do
-        click_link "comment-#{comment_answer.id}-delete"
+        click_link 'Potvrdiť'
       end
 
       expect(page).to have_content('Komentár bol úspešne zmazaný.')
@@ -82,17 +81,17 @@ describe 'Deleting QAC', js: true do
       expect(page.current_path).to eql(question_path question)
     end
 
-    it 'deleting question comment', js: true do
+    it 'can delete question comment', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
       click_link "comment-#{comment_question.id}-delete-modal"
 
       within "#comment-#{comment_question.id}-deleting" do
-        click_link "comment-#{comment_question.id}-delete"
+        click_link 'Potvrdiť'
       end
 
       expect(page).to have_content('Komentár bol úspešne zmazaný.')
@@ -112,7 +111,7 @@ describe 'Deleting QAC', js: true do
     it 'does not delete the question', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
@@ -122,7 +121,7 @@ describe 'Deleting QAC', js: true do
     it 'does not delete the answer', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
@@ -132,7 +131,7 @@ describe 'Deleting QAC', js: true do
     it 'does not delete the comment', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
@@ -150,7 +149,7 @@ describe 'Deleting QAC', js: true do
     it 'does not delete the question', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
@@ -160,7 +159,7 @@ describe 'Deleting QAC', js: true do
     it 'does not delete the answer', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
@@ -170,7 +169,7 @@ describe 'Deleting QAC', js: true do
     it 'does not delete the comment', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
@@ -188,7 +187,7 @@ describe 'Deleting QAC', js: true do
     it 'does not delete the question', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
@@ -198,7 +197,7 @@ describe 'Deleting QAC', js: true do
     it 'does not delete the answer', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
@@ -208,7 +207,7 @@ describe 'Deleting QAC', js: true do
     it 'does not delete the comment', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
@@ -226,7 +225,7 @@ describe 'Deleting QAC', js: true do
     it 'can delete question', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
@@ -236,7 +235,7 @@ describe 'Deleting QAC', js: true do
     it 'can delete answer', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
@@ -246,7 +245,7 @@ describe 'Deleting QAC', js: true do
     it 'can delete comment', js: true do
       visit root_path
 
-      click_link "Otázky"
+      click_link 'Otázky'
 
       click_link question.title
 
