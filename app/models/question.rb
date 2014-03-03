@@ -29,7 +29,7 @@ class Question < ActiveRecord::Base
 
   def answers_ordered
     best  = answers.labeled_with(:best).first
-    other = answers.order(votes_lb_wsci_bp: :desc, created_at: :desc)
+    other = answers.by_votes.order(created_at: :desc)
 
     best ? [best] + other.where('id != ?', best.id) : other
   end
