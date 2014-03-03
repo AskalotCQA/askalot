@@ -77,7 +77,7 @@ class QuestionsController < ApplicationController
 
     QuestionRevision.create_revision_by!(current_user, @question)
     if @question.update_attributes(question_params.except(:anonymous, :author))
-      flash[:notice] = t'question.update.success'
+      flash[:notice] = t 'question.update.success'
     else
       flash_error_messages_for @question
     end

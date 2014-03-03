@@ -56,7 +56,7 @@ class AnswersController < ApplicationController
     AnswerRevision.create_revision_by!(current_user, @answer)
 
     if @answer.update_attributes(params.require(:answer).permit(:text))
-      flash[:notice] = t'answer.update.success'
+      flash[:notice] = t 'answer.update.success'
     else
       flash_error_messages_for @answer
     end
