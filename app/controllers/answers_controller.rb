@@ -21,7 +21,7 @@ class AnswersController < ApplicationController
 
       notify_about :'add-answer', @answer, for: @question.watchers
 
-      register_watching_for @answer.question
+      register_watching_for @answer
     else
       flash_error_messages_for @answer
     end

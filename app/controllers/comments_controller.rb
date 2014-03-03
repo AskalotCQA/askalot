@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
 
       register_watching_for @commentable.to_question
 
-      notify_about :'add-comment', @comment, for: @question.watchers
+      notify_about :'add-comment', @comment, for: @commentable.watchers
     else
       flash_error_messages_for @comment
     end

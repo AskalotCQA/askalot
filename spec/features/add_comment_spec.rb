@@ -105,8 +105,8 @@ describe 'Add Comment' do
         expect(question).to be_watched_by(user)
       end
 
-      it 'notifies user about new comment' do
-        create :watching, watcher: question.author, watchable: question
+      it 'notifies about new comment' do
+        create :watching, watcher: question.author, watchable: answer
 
         visit root_path
 
@@ -158,10 +158,14 @@ describe 'Add Comment' do
         expect(page).to     have_link('askalot',  href: 'https://askalot.fiit.stuba.sk')
       end
 
+      expect(notifications.size).to eql(1)
+
+      comment = Comment.last
+
       expect(last_notification.notifiable).to eql(comment)
       expect(last_notification.recipient).to  eql(other)
       expect(last_notification.initiator).to  eql(user)
-      expect(last_notification.action).to     eql(:'add-comment')
+      expect(last_notification.action).to     eql(:'mention-user')
     end
   end
 end
