@@ -1,6 +1,6 @@
 <li>
   <p>
-    <%= render_markdown comment.text, redcarpet: { allowed_tags: [:autolink, :codespan, :link], autolink: true } %>
+    <%= render_markdown comment.text, redcarpet: { tags: [:autolink, :codespan, :emphasis, :link, :striketrough, :underline] } %>
     &ndash; <%= link_to_user comment.author %> <%= comment_creation_time comment %>
   </p>
 </li>
