@@ -68,6 +68,7 @@ RSpec.configure do |config|
   config.include EmailHelper
   config.include FixtureHelper
   config.include Logging
+  config.include NotificationsHelper
   config.include PageHelper,           type: :feature
   config.include PollingHelper,        type: :feature
   config.include RemoteHelper,         type: :feature

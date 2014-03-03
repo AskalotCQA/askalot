@@ -15,7 +15,18 @@ describe Notifications::Notifier do
       expect(factory).to receive(:create).with(action: :edit, recipient: watchers.second, initiator: :user, notifiable: resource)
 
       Notifications::Notifier.factory = factory
-    Notifications::Notifier.publish(:edit, :user, resource)
+      Notifications::Notifier.publish(:edit, :user, resource)
+    end
+
+    context 'when initiator is watcher' do
+      it 'ommits notification for initiator' do
+        initiator = double(:initiator)
+        resource  = double(:resource, watchers: [initiator])
+        factory   = double(:factory)
+
+        Notifications::Notifier.factory = factory
+        Notifications::Notifier.publish(:edit, initiator, resource)
+      end
     end
   end
 end
