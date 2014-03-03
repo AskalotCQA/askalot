@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  include Concerns::Watching
+
   before_action :authenticate_user!
 
   def create
@@ -10,6 +12,8 @@ class CommentsController < ApplicationController
 
     if @comment.save
       flash[:notice] = t('comment.create.success')
+
+      register_watching_for @commentable.to_question
     else
       flash_error_messages_for @comment
     end

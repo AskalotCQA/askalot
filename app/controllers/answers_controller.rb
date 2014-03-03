@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
   include Voting
+  include Concerns::Watching
 
   before_action :authenticate_user!
 
@@ -11,6 +12,8 @@ class AnswersController < ApplicationController
 
     if @answer.save
       flash[:notice] = t('answer.create.success')
+
+      register_watching_for @answer.question
     else
       flash_error_messages_for @answer
     end

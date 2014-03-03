@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   include Voting
   include Tabbing
+  include Concerns::Watching
 
   before_action :authenticate_user!
 
@@ -33,6 +34,8 @@ class QuestionsController < ApplicationController
 
     if @question.save
       flash[:notice] = t('question.create.success')
+
+      register_watching_for @question
 
       redirect_to question_path(@question)
     else
