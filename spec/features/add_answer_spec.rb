@@ -83,7 +83,7 @@ describe 'Add Answer' do
       end
 
       it 'notifies watchers about new answer' do
-        create :watching, watchable: question, watcher: user
+        create :watching, watchable: question, watcher: question.author
 
         visit root_path
 
@@ -100,7 +100,7 @@ describe 'Add Answer' do
 
         expect(last_notification.initiator).to  eql(user)
         expect(last_notification.recipient).to  eql(question.author)
-        expect(last_notification.action).to     eql(:'answer-on-question')
+        expect(last_notification.action).to     eql(:'new-answer')
         expect(last_notification.notifiable).to eql(answer)
       end
     end
