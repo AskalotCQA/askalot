@@ -1,4 +1,4 @@
-module NaRuby
+module Askalot
   module VERSION
     MAJOR = 1
     MINOR = 0
