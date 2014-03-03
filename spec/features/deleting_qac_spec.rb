@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe 'Deleting QAC', js: true do
-let!(:question) { create :question, :with_tags, title: 'Deleting question' }
-let(:user) { create :user }
-let(:administrator) { create :administrator }
+  let!(:question) { create :question, :with_tags, title: 'Deleting question' }
+  let(:user) { create :user }
+  let(:administrator) { create :administrator }
 
 
-  context 'when question has no coments and answers' do
+  context 'when question has no comments and answers' do
     before :each do
       login_as question.author
     end
@@ -30,7 +30,7 @@ let(:administrator) { create :administrator }
     end
   end
 
-  context 'when question has answer and answer has no comments' do
+  context 'when question has answer without comments' do
     let!(:answer) { create :answer, question: question }
 
     before :each do
@@ -55,7 +55,7 @@ let(:administrator) { create :administrator }
     end
   end
 
-  context 'when question has answer and answer has comment' do
+  context 'when question has answer with comment' do
     let!(:answer) { create :answer, question: question }
     let!(:comment_answer) { create :comment, commentable: answer, author: user }
     let!(:comment_question) { create :comment, commentable: question, author: user }
@@ -63,6 +63,7 @@ let(:administrator) { create :administrator }
     before :each do
       login_as user
     end
+
     it 'deleting answer comment', js: true do
       visit root_path
 
@@ -100,14 +101,15 @@ let(:administrator) { create :administrator }
     end
   end
 
-  context 'when question has answer and answer has comment and user is question author and have not permission' do
+  context 'when question has answer with comments and and user is question author' do
     let!(:answer) { create :answer, question: question }
     let!(:comment) { create :comment, commentable: answer }
 
     before :each do
       login_as question.author
     end
-    it 'not delete question', js: true do
+
+    it 'does not delete the question', js: true do
       visit root_path
 
       click_link "Otázky"
@@ -117,7 +119,7 @@ let(:administrator) { create :administrator }
       expect(page).not_to have_css("#question-#{question.id}-delete-modal")
     end
 
-    it 'not delete answer', js: true do
+    it 'does not delete the answer', js: true do
       visit root_path
 
       click_link "Otázky"
@@ -127,7 +129,7 @@ let(:administrator) { create :administrator }
       expect(page).not_to have_css("#answer-#{answer.id}-delete-modal")
     end
 
-    it 'not delete comment', js: true do
+    it 'does not delete the comment', js: true do
       visit root_path
 
       click_link "Otázky"
@@ -138,14 +140,14 @@ let(:administrator) { create :administrator }
     end
   end
 
-  context 'when question has answer and answer has comment and user is answer author and have not permission' do
+  context 'when question has answer with comments and user is answer author' do
     let!(:answer) { create :answer, question: question }
     let!(:comment) { create :comment, commentable: answer }
 
     before :each do
       login_as answer.author
     end
-    it 'not delete question', js: true do
+    it 'does not delete the question', js: true do
       visit root_path
 
       click_link "Otázky"
@@ -155,7 +157,7 @@ let(:administrator) { create :administrator }
       expect(page).not_to have_css("#question-#{question.id}-delete-modal")
     end
 
-    it 'not delete answer', js: true do
+    it 'does not delete the answer', js: true do
       visit root_path
 
       click_link "Otázky"
@@ -165,7 +167,7 @@ let(:administrator) { create :administrator }
       expect(page).not_to have_css("#answer-#{answer.id}-delete-modal")
     end
 
-    it 'not delete comment', js: true do
+    it 'does not delete the comment', js: true do
       visit root_path
 
       click_link "Otázky"
@@ -176,14 +178,14 @@ let(:administrator) { create :administrator }
     end
   end
 
-  context 'when question has answer and answer has comment and user have not permission' do
+  context 'when question has answer with comments and user does not have permissions' do
     let!(:answer) { create :answer, question: question }
     let!(:comment) { create :comment, commentable: answer }
 
     before :each do
       login_as user
     end
-    it 'not delete question', js: true do
+    it 'does not delete the question', js: true do
       visit root_path
 
       click_link "Otázky"
@@ -193,7 +195,7 @@ let(:administrator) { create :administrator }
       expect(page).not_to have_css("#question-#{question.id}-delete-modal")
     end
 
-    it 'not delete answer', js: true do
+    it 'does not delete the answer', js: true do
       visit root_path
 
       click_link "Otázky"
@@ -203,7 +205,7 @@ let(:administrator) { create :administrator }
       expect(page).not_to have_css("#answer-#{answer.id}-delete-modal")
     end
 
-    it 'not delete comment', js: true do
+    it 'does not delete the comment', js: true do
       visit root_path
 
       click_link "Otázky"
@@ -214,7 +216,7 @@ let(:administrator) { create :administrator }
     end
   end
 
-  context 'when question has answer and answer has comment and user is administrator' do
+  context 'when question has answer with comments and user is administrator' do
     let!(:answer) { create :answer, question: question }
     let!(:comment) { create :comment, commentable: answer }
 
