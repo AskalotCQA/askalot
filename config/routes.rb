@@ -1,4 +1,4 @@
-NaRuby::Application.routes.draw do
+Askalot::Application.routes.draw do
   root 'static_pages#home'
 
   get '/404', to: 'errors#show'
