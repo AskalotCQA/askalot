@@ -8,7 +8,6 @@ module Markdown
       # TODO (smolnar) resolve why do end doesnt work
       linker.render text, regex: /(^|\s+)(@\w+)/, linker: lambda { |match|
         nick = match.gsub(/@/, '').strip
-
         user = User.find_by(nick: nick)
 
         callback.call(user)
