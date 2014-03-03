@@ -1,8 +1,9 @@
 class QuestionsController < ApplicationController
-  include Voting
-  include Tabbing
+  include Markdown
   include Notifications::Watching
   include Notifications::Notifying
+  include Voting
+  include Tabbing
 
   before_action :authenticate_user!
 
@@ -32,6 +33,12 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
 
     authorize! :ask, @question
+
+    process_markdown_for @question do |user|
+      require 'pry'; binding.pry
+
+      notify_about :'mention-user', @question, for: user
+    end
 
     if @question.save
       flash[:notice] = t('question.create.success')

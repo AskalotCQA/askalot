@@ -58,14 +58,14 @@ describe 'Add Question' do
       click_link 'Opýtať sa otázku'
 
       fill_in 'question_title', with: 'Lorem ipsum title?'
-      fill_in 'question_text',  with: '# Lorem ipsum'
+      fill_in 'question_text',  with: '> Lorem ipsum'
 
       click_link 'Náhľad'
 
       wait_for_remote
 
       within '.markdown-content' do
-        expect(page).to have_css('h1', count: 1)
+        expect(page).to have_css('blockquote', count: 1)
         expect(page).to have_content('Lorem ipsum')
       end
     end
@@ -87,7 +87,7 @@ describe 'Add Question' do
     end
 
     it 'embeds references to user' do
-      create :user, login: :smolnar
+      other = create :user, login: :smolnar
 
       visit root_path
 
@@ -102,6 +102,15 @@ describe 'Add Question' do
       within '#question-content' do
         expect(page).to have_link('@smolnar', href: user_path(:smolnar))
       end
+
+      expect(notifications.size).to eql(1)
+
+      question = Question.find_by title: 'Lorem ipsum?'
+
+      expect(last_notification.notifiable).to eql(question)
+      expect(last_notification.recipient).to  eql(other)
+      expect(last_notification.initiator).to  eql(user)
+      expect(last_notification.action).to     eql(:'mention-user')
     end
 
     it 'embeds reference to user' do
@@ -138,26 +147,6 @@ describe 'Add Question' do
 
         within '#question-content' do
           expect(page).to have_link("##{question.id}", href: question_path(question))
-        end
-      end
-    end
-
-    context 'with link for user' do
-      it 'embeds reference to user' do
-        create :user, login: :smolnar
-
-        visit root_path
-
-        click_link 'Opýtať sa otázku'
-
-        select  category.name,    from: 'question_category_id'
-        fill_in 'question_title', with: 'Lorem ipsum?'
-        fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{user_path('smolnar')}"
-
-        click_button 'Opýtať'
-
-        within '#question-content' do
-          expect(page).to have_link("@smolnar", href: user_path('smolnar'))
         end
       end
     end
