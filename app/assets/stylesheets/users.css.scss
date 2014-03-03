@@ -8,15 +8,20 @@
   overflow: hidden;
   text-align: center;
 
-  .user-avatar {
-    display: inline-block;
-    width: 96px;
-    margin-bottom: 10px;
-  }
-
   span {
     display: block;
   }
+}
+
+.user-avatar {
+  display: inline-block;
+  width: 96px;
+  margin-bottom: 10px;
+}
+
+.user-avatar-small {
+  height: 20px;
+  vertical-align: middle;
 }
 
 // profile

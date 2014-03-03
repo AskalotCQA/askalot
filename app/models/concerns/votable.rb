@@ -6,6 +6,8 @@ module Votable
     has_many :voters, through: :votes, source: :voter
 
     scope :voted, lambda { joins(:votes).uniq }
+
+    scope :by_votes, lambda { order(votes_lb_wsci_bp: :desc) }
   end
 
   def voted_by?(user)

@@ -12,9 +12,9 @@ class QuestionsController < ApplicationController
     @questions = case params[:tab].to_sym
                  when :'questions-new'        then Question.order(created_at: :desc)
                  when :'questions-unanswered' then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
-                 when :'questions-answered'   then Question.answered.order(votes_lb_wsci_bp: :desc, created_at: :desc)
-                 when :'questions-solved'     then Question.solved.order(votes_lb_wsci_bp: :desc, created_at: :desc)
-                 when :'questions-favored'    then Question.favored.order(favorites_count: :desc, created_at: :desc)
+                 when :'questions-answered'   then Question.answered.by_votes.order(created_at: :desc)
+                 when :'questions-solved'     then Question.solved.by_votes.order(created_at: :desc)
+                 when :'questions-favored'    then Question.favored.by_votes.order(created_at: :desc)
                  else fail
                  end
 
@@ -66,7 +66,7 @@ class QuestionsController < ApplicationController
   end
 
   def suggest
-    @questions = Question.where('title like ?', "#{params[:q]}%")
+    @questions = Question.where('id = ? or title like ?', params[:q].to_i, "#{params[:q]}%")
 
     render json: @questions, root: false
   end

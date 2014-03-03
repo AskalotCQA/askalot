@@ -1,7 +1,6 @@
 <li>
   <p>
-    <%= comment_text comment %> &ndash;
-    <%= link_to_user comment.author %>
-    <%= comment_creation_time comment %>
+    <%= render_markdown comment.text, redcarpet: { tags: [:autolink, :codespan, :emphasis, :link, :striketrough, :underline] } %>
+    &ndash; <%= link_to_user comment.author %> <%= comment_creation_time comment %>
   </p>
 </li>
