@@ -1,8 +1,8 @@
 <li>
   <p>
-    <%= comment_text comment %> &ndash;
-    <%= link_to_user comment.author %>
-    <%= comment_creation_time comment %>
+    <%= render_markdown comment.text, redcarpet: { allowed_tags: [:code, :link], autolink: true } %>
+    &ndash; <%= link_to_user comment.author %> <%= comment_creation_time comment %>
+
     <%= render 'commentables/deleting', comment: comment %>
-  </p>
+    </p>
 </li>
