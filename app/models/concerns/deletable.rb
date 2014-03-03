@@ -1,7 +1,7 @@
 module Deletable
   extend ActiveSupport::Concern
 
-  def delete_object!(deletion)
+  def mark_as_deleted!(deletion)
     deletion.deleted = true
     deletion.save!
   end
