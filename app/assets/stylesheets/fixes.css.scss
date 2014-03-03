@@ -16,14 +16,6 @@ button, input, select, textarea {
   box-shadow: none !important;
 }
 
-.dropdown-menu {
-  li.active {
-    .text-muted {
-      color: $component-active-color;
-    }
-  }
-}
-
 address, form, nav, p, dl, ol, ul, table,
 .alert {
   &:last-child {
@@ -49,6 +41,12 @@ address, form, nav, p, dl, ol, ul, table,
 .btn.btn-primitive,
 .btn.text-muted {
   @include box-shadow(none);
+}
+
+// dropdowns
+
+.dropdown-menu li.active .text-muted {
+  color: $component-active-color;
 }
 
 // forms
