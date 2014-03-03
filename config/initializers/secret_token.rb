@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-NaRuby::Application.config.secret_key_base = ::Configuration.secret_token
+Askalot::Application.config.secret_key_base = ::Configuration.secret_token
