@@ -1,5 +1,6 @@
 FactoryGirl.define do
   factory :notification do
-    # TODO(zbell) implement
+    association :recipient
+    association :initiator
   end
 end
