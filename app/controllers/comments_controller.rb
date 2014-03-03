@@ -20,12 +20,12 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = Comment.find(params[:id])
+    @comment  = Comment.find(params[:id])
     @question = find_commentable.to_question
 
     authorize! :edit, @comment
 
-    CommentRevision.create_by!(current_user, @comment)
+    CommentRevision.create_revision_by!(current_user, @comment)
 
     if @comment.update_attributes(params.require(:comment).permit(:text))
       flash[:notice] = t'comment.update.success'

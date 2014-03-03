@@ -11,6 +11,11 @@ sk:
     create:
       success: 'Vaša otázka bola úspešne pridaná.'
 
+    update:
+      success: 'Vaša otázka bola úspešne aktualizovaná'
+      title: 'Upraviť otázku'
+      action: 'Upraviť otázku'
+
     delete:
       title: 'Pozor!'
       action: 'Zmazať'
@@ -47,8 +52,3 @@ sk:
     unfavor: 'Odobrať z obľúbených'
 
     favored: 'Obľúbená'
-
-    update:
-      success: 'Vaša otázka bola úspešne aktualizovaná'
-      title: 'Upraviť otázku'
-      action: 'Upraviť otázku'

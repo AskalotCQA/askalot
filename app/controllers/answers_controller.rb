@@ -48,12 +48,12 @@ class AnswersController < ApplicationController
   end
 
   def update
-    @answer = Answer.find(params[:id])
+    @answer   = Answer.find(params[:id])
     @question = @answer.question
 
     authorize! :edit, @answer
 
-    AnswerRevision.create_by!(current_user, @answer)
+    AnswerRevision.create_revision_by!(current_user, @answer)
 
     if @answer.update_attributes(params.require(:answer).permit(:text))
       flash[:notice] = t'answer.update.success'

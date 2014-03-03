@@ -7,6 +7,11 @@ sk:
     create:
       success: 'Vaša odpoveď bola úspešne pridaná.'
 
+    update:
+      action: 'Upraviť odpoveď'
+      title: 'Upraviť odpoveď'
+      success: 'Vaša odpoveď bola úspešne aktualizovaná'
+
     delete:
       title: 'Pozor!'
       action: 'Zmazať'
@@ -23,8 +28,3 @@ sk:
     helpful: 'Pomocná'
 
     evaluate: 'Ohodnotiť'
-
-    update:
-      action: 'Upraviť odpoveď'
-      title: 'Upraviť odpoveď'
-      success: 'Vaša odpoveď bola úspešne aktualizovaná'
