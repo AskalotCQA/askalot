@@ -62,7 +62,7 @@ class QuestionsController < ApplicationController
   end
 
   def suggest
-    @questions = Question.where('title like ?', "#{params[:q]}%")
+    @questions = Question.where('id = ? or title like ?', params[:q].to_i, "#{params[:q]}%")
 
     render json: @questions, root: false
   end
