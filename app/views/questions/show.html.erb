@@ -13,7 +13,6 @@
           <%= evaluation_badge_tag @question if @question.evaluations.any? %>
           <br/>
           <small><%= question_creation_time @question %></small>
-          <%= render 'questions/deleting', question: @question %>
         </h1>
 
         <%= render 'questions/labels', labels: @labels %>
