@@ -18,9 +18,12 @@ class Answer < ActiveRecord::Base
   scope :by,  lambda { |user| where(author: user) }
   scope :for, lambda { |question| where(question: question) }
 
+  scope :labeled,   lambda { joins(:labelings) }
+  scope :unlabeled, lambda { includes(:labelings).where(labelings: { answer_id: nil }) }
+
   scope :labeled_with, lambda { |label| joins(:labelings).merge(Labeling.with label) }
 
-  Hash[Label.value_enum].values.each { |label| scope label, -> { labeled_with label }}
+  Hash[Label.value_enum].values.each { |label| scope label, -> { labeled_with label } }
 
   def labeled_with(label)
     labelings.with label
@@ -44,10 +47,6 @@ class Answer < ActiveRecord::Base
 
   def helpful?
     labels.exists? value: :helpful
-  end
-
-  def verified?
-    labels.exists? value: :verified
   end
 
   def to_question
