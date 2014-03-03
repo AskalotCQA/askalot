@@ -6,7 +6,7 @@ module Redcurtain::Renderer
       @name = name
     end
 
-    def render(content, options)
+    def render(content, options = {})
       linker  = options[:linker]
       regex   = options[:regex] || /(^|\s+)(@\w+)/
 
