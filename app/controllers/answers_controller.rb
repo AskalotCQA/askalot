@@ -1,7 +1,8 @@
 class AnswersController < ApplicationController
-  include Voting
+  include Markdown
   include Notifications::Watching
   include Notifications::Notifying
+  include Voting
 
   before_action :authenticate_user!
 
@@ -10,6 +11,10 @@ class AnswersController < ApplicationController
     @answer   = Answer.new(answer_params)
 
     authorize! :answer, @question
+
+    process_markdown_for @answer do |user|
+      notify_about :'mention-user', @answer, for: user
+    end
 
     if @answer.save
       flash[:notice] = t('answer.create.success')

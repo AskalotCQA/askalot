@@ -37,16 +37,17 @@ describe 'Add Answer' do
         click_link 'Otázky'
         click_link question.title
 
-        fill_in 'answer_text', with: '# My neat solution'
+        fill_in 'answer_text', with: '> My neat solution'
 
         click_link 'Náhľad'
 
         wait_for_remote
 
         within '.markdown-content' do
-          expect(page).to have_css('h1', count: 1)
+          expect(page).to have_css('blockquote', count: 1)
           expect(page).to have_content('My neat solution')
         end
+
       end
 
       it 'processes answer text' do
@@ -55,16 +56,45 @@ describe 'Add Answer' do
         click_link 'Otázky'
         click_link question.title
 
-        fill_in 'answer_text', with: '# My neat solution'
+        fill_in 'answer_text', with: '> My neat solution'
 
         click_button 'Odpovedať'
 
         expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
 
         within '#question-answers' do
-          expect(page).to have_css('h1', count: 1)
+          expect(page).to have_css('blockquote', count: 1)
           expect(page).to have_content('My neat solution')
         end
+      end
+
+      it 'embers reference to user and question' do
+        other = create :user, login: :smolnar
+
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        fill_in 'answer_text', with: "Hey, @smolnar, look at this ##{question.id}!"
+
+        click_button 'Odpovedať'
+
+        expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
+
+        within '#question-answers' do
+          expect(page).to have_link('@smolnar',        href: user_path(:smolnar))
+          expect(page).to have_link("##{question.id}", href: question_path(question))
+        end
+
+        expect(notifications.size).to eql(1)
+
+        answer = Answer.last
+
+        expect(last_notification.notifiable).to eql(answer)
+        expect(last_notification.recipient).to  eql(other)
+        expect(last_notification.initiator).to  eql(user)
+        expect(last_notification.action).to     eql(:'mention-user')
       end
     end
 
@@ -96,7 +126,7 @@ describe 'Add Answer' do
 
         expect(notifications.size).to eql(1)
 
-        answer = Answer.find_by text: 'Hey, look at this.'
+        answer = Answer.last
 
         expect(last_notification.initiator).to  eql(user)
         expect(last_notification.recipient).to  eql(question.author)

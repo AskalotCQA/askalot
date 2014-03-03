@@ -35,8 +35,6 @@ class QuestionsController < ApplicationController
     authorize! :ask, @question
 
     process_markdown_for @question do |user|
-      require 'pry'; binding.pry
-
       notify_about :'mention-user', @question, for: user
     end
 

@@ -74,7 +74,7 @@ describe 'Add Comment' do
 
         expect(notifications.size).to eql(1)
 
-        comment = Comment.find_by text: 'So wanna watch this!'
+        comment = Comment.last
 
         expect(last_notification.notifiable).to eql(comment)
         expect(last_notification.recipient).to  eql(question.author)
@@ -123,7 +123,7 @@ describe 'Add Comment' do
 
         expect(notifications.size).to eql(1)
 
-        comment = Comment.find_by text: 'So wanna watch this!'
+        comment = Comment.last
 
         expect(last_notification.notifiable).to eql(comment)
         expect(last_notification.recipient).to  eql(question.author)

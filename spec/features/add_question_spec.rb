@@ -105,7 +105,7 @@ describe 'Add Question' do
 
       expect(notifications.size).to eql(1)
 
-      question = Question.find_by title: 'Lorem ipsum?'
+      question = Question.last
 
       expect(last_notification.notifiable).to eql(question)
       expect(last_notification.recipient).to  eql(other)
@@ -113,7 +113,7 @@ describe 'Add Question' do
       expect(last_notification.action).to     eql(:'mention-user')
     end
 
-    it 'embeds reference to user' do
+    it 'embeds reference to question' do
       question = create :question
 
       visit root_path
@@ -204,12 +204,12 @@ describe 'Add Question' do
       click_link 'Opýtať sa otázku'
 
       select  category.name,    from: 'question_category_id'
-      fill_in 'question_title', with: 'Am I a watcher?'
+      fill_in 'question_title', with: 'Am I a watcher or stalker?'
       fill_in 'question_text',  with: 'I want to have notification for this question.'
 
       click_button 'Opýtať'
 
-      question = Question.find_by(title: 'Am I a watcher?')
+      question = Question.last
 
       expect(question).to be_watched_by(user)
     end
