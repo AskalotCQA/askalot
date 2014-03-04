@@ -72,6 +72,15 @@ a.question-metric.text-muted {
 
 // member
 
+#question-evaluations {
+  & > p {
+    margin-bottom: 10px;
+  }
+}
+
+#question-comments {
+}
+
 .question-content {
   margin-bottom: 10px;
 }
