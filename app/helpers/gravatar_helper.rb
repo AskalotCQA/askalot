@@ -11,7 +11,7 @@ module GravatarHelper
   def gravatar_image_tag(email, options = {})
     classes = options.delete(:class)
 
-    image_tag gravatar_url(email, options), alt: nil, class: classes
+    image_tag gravatar_url(email, options), alt: options[:alt], class: classes
   end
 
   def github_identicon_url(user)

@@ -15,13 +15,15 @@
 }
 
 .user-avatar {
-  display: inline-block;
-  width: 96px;
+  @include center-block;
+  @include square(96px);
+
   margin-bottom: 10px;
 }
 
 .user-avatar-small {
-  height: 20px;
+  @include square(20px);
+
   vertical-align: middle;
 }
 
