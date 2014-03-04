@@ -1,8 +1,10 @@
 require 'spec_helper'
 require 'models/concerns/taggable_spec'
+require 'models/concerns/touchable_spec'
 
 describe Question do
   it_behaves_like Taggable
+  it_behaves_like Touchable
 
   it 'requires title' do
     question = build :question, title: ''
@@ -174,5 +176,9 @@ describe Question do
         expect(question).not_to be_voted_by(user)
       end
     end
+  end
+
+  describe '#update_touched_at!' do
+
   end
 end
