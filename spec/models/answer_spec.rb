@@ -1,6 +1,9 @@
 require 'spec_helper'
+require 'models/concerns/touchable_spec'
 
 describe Answer do
+  it_behaves_like Touchable
+
   it 'requires text' do
     answer = build :answer, text: nil
 
