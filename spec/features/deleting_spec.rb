@@ -20,7 +20,7 @@ describe 'Deleting', js: true do
       click_link "question-#{question.id}-delete-modal"
 
       within "#question-#{question.id}-deleting" do
-        click_link 'Potvrdiť'
+        click_link 'Zmazať'
       end
 
       expect(page).to have_content('Otázka bola úspešne zmazaná.')
@@ -45,7 +45,7 @@ describe 'Deleting', js: true do
       click_link "answer-#{answer.id}-delete-modal"
 
       within "#answer-#{answer.id}-deleting" do
-        click_link 'Potvrdiť'
+        click_link 'Zmazať'
       end
 
       expect(page).to have_content('Odpoveď bola úspešne zmazaná.')
@@ -73,7 +73,7 @@ describe 'Deleting', js: true do
       click_link "comment-#{comment_answer.id}-delete-modal"
 
       within "#comment-#{comment_answer.id}-deleting" do
-        click_link 'Potvrdiť'
+        click_link 'Zmazať'
       end
 
       expect(page).to have_content('Komentár bol úspešne zmazaný.')
@@ -91,7 +91,7 @@ describe 'Deleting', js: true do
       click_link "comment-#{comment_question.id}-delete-modal"
 
       within "#comment-#{comment_question.id}-deleting" do
-        click_link 'Potvrdiť'
+        click_link 'Zmazať'
       end
 
       expect(page).to have_content('Komentár bol úspešne zmazaný.')
