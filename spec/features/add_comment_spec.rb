@@ -54,8 +54,6 @@ describe 'Add Comment' do
         click_button 'Komentovať'
       end
 
-      save_and_open_page
-
       within '#question-comments' do
         expect(page).not_to have_css('h1')
         expect(page).to     have_content('Hey, @smolnar, check out askalot and http://www.example.com')
