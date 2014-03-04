@@ -61,8 +61,7 @@ a.question-metric.text-muted {
   text-align: center;
 
   .user-avatar {
-    display: inline-block;
-    width: 64px;
+    @include square(64px);
   }
 
   small {

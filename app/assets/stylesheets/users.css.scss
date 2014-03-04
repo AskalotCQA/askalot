@@ -12,18 +12,23 @@
   span {
     display: block;
   }
+
+  .user-link {
+    margin-top: 10px;
+  }
 }
 
 .user-avatar {
   @include center-block;
   @include square(96px);
 
-  margin-bottom: 10px;
+  img {
+    display: inline;
+  }
 }
 
 .user-avatar-small {
-  @include square(20px);
-
+  width: 20px;
   vertical-align: middle;
 }
 
