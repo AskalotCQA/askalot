@@ -13,6 +13,8 @@ Redcurtain::Renderer::Redcarpet.defaults[:tags] &= [
   :block_quote,
   :codespan,
   :emphasis,
+  :header,
+  :hrule,
   :linebreak,
   :link,
   :list,
