@@ -9,25 +9,24 @@
     <div class="col-md-8">
       <section id="question-title">
         <h1>
-          <%= @question.title %>
+          <%= truncate @question.title, length: 140, separator: ' ' %>
           <%= evaluation_badge_tag @question if @question.evaluations.any? %>
-          <br/>
-          <small><%= question_creation_time @question %></small>
         </h1>
 
         <%= render 'questions/labels', labels: @labels %>
       </section>
 
-      <section id="question-content">
-        <%= render_markdown @question.text %>
-        <%= render 'questions/deleting', question: @question %>
-      </section>
+      <section id="question-data">
+        <div class="question-content">
+          <%= render_markdown @question.text %>
+        </div>
 
-      <section id="question-evaluations">
+        <div class="question-details">
+          <%= question_creation_time @question %> &middot;
+          <%= render 'questions/deleting', question: @question %>
+        </div>
+
         <%= render 'questions/evaluations', question: @question %>
-      </section>
-
-      <section id="question-comments">
         <%= render 'questions/comments', question: @question %>
         <%= render 'comments/form', commentable: @question %>
       </section>

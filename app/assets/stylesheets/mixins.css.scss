@@ -2,7 +2,7 @@
 
 // general
 
-@mixin action-coloring($default-color, $action-color) {
+@mixin color-variant($default-color, $action-color) {
   color: $default-color;
 
   &:active, &:focus, &:hover {
@@ -21,7 +21,7 @@
 }
 
 @mixin block-listing {
-  margin: 5px 0;
+  margin: 10px 0;
   padding-left: 0;
   border-top: 1px dashed $gray-lighter;
   border-bottom: 1px dashed $gray-lighter;
@@ -41,13 +41,21 @@
 
 // specific
 
+@mixin block-comments {
+  @include block-listing;
+
+  p {
+    display: inline;
+  }
+}
+
 @mixin block-labeling($action-class, $default-color, $action-color) {
   a {
-    @include action-coloring($default-color, $action-color);
+    @include color-variant($default-color, $action-color);
   }
 
   a.#{$action-class} {
-    @include action-coloring($action-color, $default-color);
+    @include color-variant($action-color, $default-color);
   }
 
   span {
@@ -59,10 +67,10 @@
   @include block-iconing;
 
   a {
-    @include action-coloring($gray-light, $brand-warning);
+    @include color-variant($gray-light, $brand-warning);
   }
 
   a.#{$class}-evaluated {
-    @include action-coloring($brand-warning, $gray-light);
+    @include color-variant($brand-warning, $gray-light);
   }
 }

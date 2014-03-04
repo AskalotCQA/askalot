@@ -80,6 +80,12 @@ textarea {
   display: none;
 }
 
+// modals
+
+.modal-dialog {
+  color: $text-color !important;
+}
+
 // navigation
 
 .navbar-brand {

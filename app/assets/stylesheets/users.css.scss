@@ -4,8 +4,9 @@
 // general
 
 .user-square {
+  @include text-overflow;
+
   margin: 20px 0;
-  overflow: hidden;
   text-align: center;
 
   span {
