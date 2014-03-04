@@ -26,9 +26,14 @@
           <%= render 'questions/deleting', question: @question %>
         </div>
 
-        <%= render 'questions/evaluations', question: @question %>
-        <%= render 'questions/comments', question: @question %>
-        <%= render 'comments/form', commentable: @question %>
+        <div id="question-evaluations">
+          <%= render 'questions/evaluations', question: @question %>
+        </div>
+
+        <div id="question-comments">
+          <%= render 'questions/comments', question: @question %>
+          <%= render 'comments/form', commentable: @question %>
+        </div>
       </section>
     </div>
 
