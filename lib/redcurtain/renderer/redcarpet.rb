@@ -5,6 +5,7 @@ module Redcurtain::Renderer
     attr_accessor :defaults
 
     def render(content, options = {})
+      options  = defaults.deep_merge(options)
       renderer = Factory.create(options)
 
       ::Redcarpet::Markdown.new(renderer, options).render(content).html_safe
@@ -53,7 +54,6 @@ module Redcurtain::Renderer
       def self.create(options = {})
         parent   = options[:renderer] || ::Redcarpet::Render::HTML
         renderer = Class.new(parent)
-        options  = Redcurtain::Renderer::Redcarpet.defaults.merge(options)
 
         renderer.instance_eval do
           TAGS.each do |tag|
@@ -66,8 +66,6 @@ module Redcurtain::Renderer
             end
           end
         end
-
-        options[:allowed_tags] = options.delete(:tags)
 
         renderer.new(options)
       end

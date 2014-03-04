@@ -54,13 +54,14 @@ describe 'Add Comment' do
         click_button 'Komentovať'
       end
 
+      save_and_open_page
+
       within '#question-comments' do
         expect(page).not_to have_css('h1')
         expect(page).to     have_content('Hey, @smolnar, check out askalot and http://www.example.com')
-
         expect(page).to     have_link('@smolnar', href: user_path(:smolnar))
         expect(page).to     have_link('askalot',  href: 'https://askalot.fiit.stuba.sk')
-        expect(page).to     have_link('askalot',  href: 'http://www.example.com')
+        expect(page).to     have_link('http://www.example.com',  href: 'http://www.example.com')
       end
     end
   end
