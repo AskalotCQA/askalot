@@ -8,7 +8,7 @@ require 'capistrano/ext/multistage'
 
 set :application,    'askalot'
 set :scm,            :git
-set :repository,     'git@github.com:pavolzbell/tp-1314-13.git'
+set :repository,     'git@github.com:pavolzbell/askalot.git'
 set :scm_passphrase, ''
 set :user,           'deploy'
 set(:branch)         { rails_env }
