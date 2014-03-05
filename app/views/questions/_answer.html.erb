@@ -13,6 +13,7 @@
         <%= answer_creation_time answer %> &middot;
         <%= render 'answers/deleting', answer: answer %>
         <%= render "answers/edit", question: @question, answer: answer if can? :edit, answer %>
+        <%= render 'editables/edited', editable: answer %>
       </span>
 
       <%= render 'answers/evaluations', answer: answer %>

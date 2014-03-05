@@ -1,5 +1,5 @@
-<a href="#" data-target="#question-<%= @question.id %>-edit" data-toggle="modal">
-  <%= t('question.update.action') %>
+<a href="#" data-target="#question-<%= @question.id %>-edit" data-toggle="modal" class="text-muted">
+  <%= tooltip_icon_tag :'edit', t('question.update.action'), placement: :right %>
 </a>
 
 <div class="modal fade" id="question-<%= @question.id %>-edit" role="dialog">
