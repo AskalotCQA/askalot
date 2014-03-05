@@ -4,9 +4,11 @@ sk:
 
     index:
       title: 'Používatelia'
+      none: 'V systéme niesú žiadny noví používatelia'
 
     tab:
       all: 'Všetci'
+      new: 'Nový'
 
     registration: 'Registrácia'
     confirmation: 'Potvrdenie registrácie'
