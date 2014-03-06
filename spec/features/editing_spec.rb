@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Editing', js: true do
-  let!(:question)     { create :question, :with_tags, title: 'Editing question' }
+  let!(:question)     { create :question, :with_tags, title: 'Elasticsearch prablem' }
   let(:user)          { create :user }
   let(:administrator) { create :administrator }
 
@@ -11,21 +11,33 @@ describe 'Editing', js: true do
     end
 
     it 'can edit question', js: true do
-      visit question_path question
+      visit root_path
+
+      click_link question.title
 
       click_link "question-#{question.id}-edit-modal"
 
       within "#question-#{question.id}-edit" do
-        fill_in 'question_title', with: 'Titulok otazky'
-        fill_in 'question_text', with: 'text otazky'
-        #fill_in_select2 'question_tag_list', with: 'prvy'
-        #fill_in_select2 'question_tag_list', with: 'druhy'
+        fill_in 'question_title', with: 'Elasticsearch problem'
+        fill_in 'question_text',  with: 'I have a problem with Elasticsearch Client in Ruby.'
 
-        click_link 'Uložiť'
+        fill_in_select2 'question_tag_list', with: 'elasticsearch'
+        fill_in_select2 'question_tag_list', with: 'ruby'
+
+        click_button 'Uložiť'
       end
 
-      expect(page).to have_content('Vaša otázka bola úspešne aktualizovaná ')
+      expect(page).to have_content('Vaša otázka bola úspešne aktualizovaná.')
+
+      within '#question-title' do
+        expect(page).to have_content('Elasticsearch problem')
+      end
+
+      within '#question-data' do
+        expect(page).to have_content('elasticseach')
+        expect(page).to have_content('ruby')
+        expect(page).to have_content('I have a problem with Elasticsearch Client in Ruby.')
+      end
     end
   end
-
 end
