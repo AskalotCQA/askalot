@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140227151446) do
+ActiveRecord::Schema.define(version: 20140305114254) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -306,6 +306,7 @@ ActiveRecord::Schema.define(version: 20140227151446) do
     t.integer  "questions_count",        default: 0,         null: false
     t.integer  "views_count",            default: 0,         null: false
     t.integer  "votes_count",            default: 0,         null: false
+    t.string   "remember_token"
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree

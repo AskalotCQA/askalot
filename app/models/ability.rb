@@ -6,6 +6,18 @@ class Ability
   def initialize(user)
     can(:edit, User) { |resource| resource == user }
 
+    can :delete, Answer do |resource|
+      resource.labels.empty? && resource.author == user && resource.comments.empty? && resource.evaluations.empty?
+    end
+
+    can :delete, Comment do |resource|
+      resource.author == user
+    end
+
+    can :delete, Question do |resource|
+      resource.answers.empty? && resource.author == user && resource.favorites.empty? && resource.comments.empty? && resource.evaluations.empty?
+    end
+
     can(:show_email, User) { |resource| resource.show_email? }
     can(:show_name,  User) { |resource| resource.show_name? && resource.name.present? }
 
@@ -34,6 +46,8 @@ class Ability
     end
 
     if user.role? :administrator
+      can :delete, [Question, Answer, Comment]
+
       can :vote, :all
     end
   end

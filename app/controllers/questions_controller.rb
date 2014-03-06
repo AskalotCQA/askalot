@@ -1,9 +1,10 @@
 class QuestionsController < ApplicationController
+  include Deleting
   include Markdown
   include Notifications::Watching
   include Notifications::Notifying
-  include Voting
   include Tabbing
+  include Voting
 
   before_action :authenticate_user!
 
@@ -47,6 +48,8 @@ class QuestionsController < ApplicationController
     else
       flash_error_messages_for @question, flash: flash.now
 
+      @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
+
       render :new
     end
   end
@@ -55,7 +58,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @author   = @question.author
     @labels   = @question.labels
-    @answers  = @question.answers_ordered
+    @answers  = @question.ordered_answers
 
     @answer = Answer.new(question: @question)
 

@@ -1,4 +1,6 @@
 class Comment < ActiveRecord::Base
+  include Deletable
+
   belongs_to :author, class_name: :User, counter_cache: true
   belongs_to :commentable, polymorphic: true, counter_cache: true
 

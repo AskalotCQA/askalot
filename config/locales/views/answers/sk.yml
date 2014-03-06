@@ -7,6 +7,14 @@ sk:
     create:
       success: 'Vaša odpoveď bola úspešne pridaná.'
 
+    delete:
+      title: 'Pozor!'
+      action: 'Zmazať'
+      submit: 'Zmazať'
+      cancel: 'Spať'
+      success: 'Odpoveď bola úspešne zmazaná.'
+      text: 'Naozaj chete zmazať odpoveď?'
+
     label:
       best: 'Označiť ako najlepšiu'
       helpful: 'Označiť ako pomocnú'

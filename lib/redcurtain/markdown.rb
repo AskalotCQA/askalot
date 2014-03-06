@@ -8,7 +8,7 @@ module Redcurtain
       @renderers ||= [
         Redcurtain::Renderer::Gemoji,
         Redcurtain::Renderer::Redcarpet,
-        Redcurtain::Renderer::Pygments,
+        Redcurtain::Renderer::Pygments
       ]
     end
 

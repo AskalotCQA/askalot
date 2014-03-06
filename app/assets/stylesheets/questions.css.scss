@@ -25,7 +25,7 @@
 }
 
 a.question-metric.text-muted {
-  @include action-coloring($text-muted, darken($text-muted, 12.5%));
+  @include color-variant($text-muted, darken($text-muted, 12.5%));
 }
 
 .question-value {
@@ -61,8 +61,7 @@ a.question-metric.text-muted {
   text-align: center;
 
   .user-avatar {
-    display: inline-block;
-    width: 64px;
+    @include square(64px);
   }
 
   small {
@@ -73,6 +72,26 @@ a.question-metric.text-muted {
 
 // member
 
+#question-evaluations {
+  & > p {
+    margin-bottom: 10px;
+  }
+}
+
+#question-comments {
+}
+
+.question-content {
+  margin-bottom: 10px;
+}
+
+.question-details {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  color: $text-muted;
+}
+
 .question-voting {
   @include block-iconing;
 }
@@ -82,11 +101,11 @@ a.question-metric.text-muted {
   text-align: center;
 
   a {
-    @include action-coloring($gray-light, $brand-warning);
+    @include color-variant($gray-light, $brand-warning);
   }
 
   a.question-favored {
-    @include action-coloring($brand-warning, $gray-light);
+    @include color-variant($brand-warning, $gray-light);
   }
 
   span {
@@ -108,8 +127,12 @@ a.question-metric.text-muted {
   }
 }
 
+.question-answer {
+  background-clip: content-box;
+}
+
 .question-comments {
-  @include block-listing;
+  @include block-comments;
 }
 
 .question-evaluations {

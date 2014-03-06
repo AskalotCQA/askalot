@@ -8,7 +8,7 @@ class Tag < ActiveRecord::Base
 
   def count
     @count ||= taggings.select { |tagging|
-      tagging.taggable.respond_to?(:deleted) ? !tagging.taggable.deleted : true
+      tagging.taggable ? true : false
     }.size
   end
 

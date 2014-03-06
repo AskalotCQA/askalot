@@ -1,4 +1,4 @@
-set :domain, '37.205.9.136'
+set :domain, 'askalot.fiit.stuba.sk'
 
 server domain, :app, :web, :db, primary: true
 

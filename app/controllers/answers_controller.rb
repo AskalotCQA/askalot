@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  include Deleting
   include Markdown
   include Notifications::Watching
   include Notifications::Notifying

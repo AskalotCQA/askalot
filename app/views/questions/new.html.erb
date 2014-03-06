@@ -21,7 +21,15 @@
         </div>
         <div class="form-group">
           <%= f.label :tag_list %>
-          <ul id="question-category-tags" class="list-unstyled list-inline"></ul>
+          <ul id="question-category-tags" class="list-unstyled list-inline">
+            <% if @category %>
+              <% @category.tags.each do |category| %>
+                <li>
+                  <span class="label label-info"><%= category %></span>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
           <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
         </div>
 
