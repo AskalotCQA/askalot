@@ -21,7 +21,7 @@
 }
 
 @mixin block-listing {
-  margin: 10px 0;
+  margin: 10px 0 !important;
   padding-left: 0;
   border-top: 1px dashed $gray-lighter;
   border-bottom: 1px dashed $gray-lighter;
