@@ -100,7 +100,7 @@ namespace :elasticsearch do
             ]
           }
         }
-      }.deep_symbolize_keys
+      }
 
       puts "Title: #{question.title}"
       puts "Text:  #{question.text.strip.gsub(/\s+\n/, ' ')}"
