@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe 'Deleting', js: true do
+describe 'Deleting' do
   let!(:question)     { create :question, :with_tags, title: 'Deleting question' }
   let(:user)          { create :user }
   let(:administrator) { create :administrator }
 
-  context 'when question has no comments and answers' do
+  context 'when question has no comments and answers', js: true do
     before :each do
       login_as question.author
     end
 
-    it 'can delete question', js: true do
+    it 'can delete question' do
       visit root_path
 
       click_link 'Otázky'
@@ -29,13 +29,13 @@ describe 'Deleting', js: true do
     end
   end
 
-  context 'when question has answer without comments' do
+  context 'when question has answer without comments', js: true do
     let!(:answer) { create :answer, question: question }
 
     before :each do
       login_as answer.author
     end
-    it 'can delete answer', js: true do
+    it 'can delete answer' do
       visit root_path
 
       click_link 'Otázky'
@@ -54,7 +54,7 @@ describe 'Deleting', js: true do
     end
   end
 
-  context 'when question has answer with comment' do
+  context 'when question has answer with comment', js: true do
     let!(:answer) { create :answer, question: question }
     let!(:comment_answer) { create :comment, commentable: answer, author: user }
     let!(:comment_question) { create :comment, commentable: question, author: user }
@@ -63,7 +63,7 @@ describe 'Deleting', js: true do
       login_as user
     end
 
-    it 'can delete answer comment', js: true do
+    it 'can delete answer comment' do
       visit root_path
 
       click_link 'Otázky'
@@ -81,7 +81,7 @@ describe 'Deleting', js: true do
       expect(page.current_path).to eql(question_path question)
     end
 
-    it 'can delete question comment', js: true do
+    it 'can delete question comment' do
       visit root_path
 
       click_link 'Otázky'
@@ -108,7 +108,7 @@ describe 'Deleting', js: true do
       login_as question.author
     end
 
-    it 'does not delete the question', js: true do
+    it 'does not delete the question' do
       visit root_path
 
       click_link 'Otázky'
@@ -118,7 +118,7 @@ describe 'Deleting', js: true do
       expect(page).not_to have_css("#question-#{question.id}-delete-modal")
     end
 
-    it 'does not delete the answer', js: true do
+    it 'does not delete the answer' do
       visit root_path
 
       click_link 'Otázky'
@@ -128,7 +128,7 @@ describe 'Deleting', js: true do
       expect(page).not_to have_css("#answer-#{answer.id}-delete-modal")
     end
 
-    it 'does not delete the comment', js: true do
+    it 'does not delete the comment' do
       visit root_path
 
       click_link 'Otázky'
@@ -146,7 +146,7 @@ describe 'Deleting', js: true do
     before :each do
       login_as answer.author
     end
-    it 'does not delete the question', js: true do
+    it 'does not delete the question' do
       visit root_path
 
       click_link 'Otázky'
@@ -156,7 +156,7 @@ describe 'Deleting', js: true do
       expect(page).not_to have_css("#question-#{question.id}-delete-modal")
     end
 
-    it 'does not delete the answer', js: true do
+    it 'does not delete the answer' do
       visit root_path
 
       click_link 'Otázky'
@@ -166,7 +166,7 @@ describe 'Deleting', js: true do
       expect(page).not_to have_css("#answer-#{answer.id}-delete-modal")
     end
 
-    it 'does not delete the comment', js: true do
+    it 'does not delete the comment' do
       visit root_path
 
       click_link 'Otázky'
@@ -184,7 +184,7 @@ describe 'Deleting', js: true do
     before :each do
       login_as user
     end
-    it 'does not delete the question', js: true do
+    it 'does not delete the question' do
       visit root_path
 
       click_link 'Otázky'
@@ -194,7 +194,7 @@ describe 'Deleting', js: true do
       expect(page).not_to have_css("#question-#{question.id}-delete-modal")
     end
 
-    it 'does not delete the answer', js: true do
+    it 'does not delete the answer' do
       visit root_path
 
       click_link 'Otázky'
@@ -204,7 +204,7 @@ describe 'Deleting', js: true do
       expect(page).not_to have_css("#answer-#{answer.id}-delete-modal")
     end
 
-    it 'does not delete the comment', js: true do
+    it 'does not delete the comment' do
       visit root_path
 
       click_link 'Otázky'
@@ -222,7 +222,7 @@ describe 'Deleting', js: true do
     before :each do
       login_as administrator
     end
-    it 'can delete question', js: true do
+    it 'can delete question' do
       visit root_path
 
       click_link 'Otázky'
@@ -232,7 +232,7 @@ describe 'Deleting', js: true do
       expect(page).to have_css("#question-#{question.id}-delete-modal")
     end
 
-    it 'can delete answer', js: true do
+    it 'can delete answer' do
       visit root_path
 
       click_link 'Otázky'
@@ -242,7 +242,7 @@ describe 'Deleting', js: true do
       expect(page).to have_css("#answer-#{answer.id}-delete-modal")
     end
 
-    it 'can delete comment', js: true do
+    it 'can delete comment' do
       visit root_path
 
       click_link 'Otázky'
