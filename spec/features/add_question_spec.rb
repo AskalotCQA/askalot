@@ -42,7 +42,7 @@ describe 'Add Question' do
       expect(page).to have_content('linux-server')
     end
 
-    within '#question-content' do
+    within '.question-content' do
       expect(page).to have_content('Lorem ipsum')
     end
   end
@@ -81,7 +81,7 @@ describe 'Add Question' do
 
       click_button 'Opýtať'
 
-      within '#question-content' do
+      within '.question-content' do
         expect(page).to have_css('img.gemoji[src="/images/gemoji/poop.png"]')
       end
     end
@@ -99,7 +99,7 @@ describe 'Add Question' do
 
       click_button 'Opýtať'
 
-      within '#question-content' do
+      within '.question-content' do
         expect(page).to have_link('@smolnar', href: user_path(:smolnar))
       end
 
@@ -126,7 +126,7 @@ describe 'Add Question' do
 
       click_button 'Opýtať'
 
-      within '#question-content' do
+      within '.question-content' do
         expect(page).to have_link("##{question.id}", href: question_path(question))
       end
     end
@@ -145,7 +145,7 @@ describe 'Add Question' do
 
         click_button 'Opýtať'
 
-        within '#question-content' do
+        within '.question-content' do
           expect(page).to have_link("##{question.id}", href: question_path(question))
         end
       end
