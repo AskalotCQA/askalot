@@ -60,6 +60,9 @@ gem 'symbolize'
 # monitoring
 gem 'garelic'
 
+# search
+gem 'elasticsearch'
+
 # documentation
 group :doc do
   gem 'sdoc', require: false
