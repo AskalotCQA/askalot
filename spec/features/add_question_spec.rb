@@ -55,13 +55,13 @@ describe 'Add Question' do
     fill_in 'question_title', with: 'Lorem ipsum title?'
     fill_in 'question_text',  with: 'Lorem ipsum'
 
-    select2 category.name, from: 'question_category_id'
+    select category.name, from: 'question_category_id'
 
     check 'Opýtať sa anonymne'
 
     click_button 'Opýtať'
 
-    within '.user-square' do
+    within '#question' do
       expect(page).to have_content('Anonym')
     end
   end
