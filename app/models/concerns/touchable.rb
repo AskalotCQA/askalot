@@ -21,6 +21,6 @@ module Touchable
   def touch_touched_at
     question = self.to_question
 
-    question == self && question.new_record? ? question.touch(:touched_at) : question.touched_at = DateTime.now
+    question == self && !question.new_record? ? question.touch(:touched_at) : question.touched_at = DateTime.now
   end
 end
