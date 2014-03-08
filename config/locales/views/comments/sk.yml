@@ -10,7 +10,7 @@ sk:
     update:
       action: 'Upraviť komentár'
       title: 'Upraviť komentár'
-      success: 'Váš komentár bol úspešne aktualizovaný'
+      success: 'Váš komentár bol úspešne aktualizovaný.'
 
     delete:
       title: 'Pozor!'

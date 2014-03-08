@@ -12,7 +12,7 @@ sk:
       success: 'Vaša otázka bola úspešne pridaná.'
 
     update:
-      success: 'Vaša otázka bola úspešne aktualizovaná'
+      success: 'Vaša otázka bola úspešne aktualizovaná.'
       title: 'Upraviť otázku'
       action: 'Upraviť otázku'
 

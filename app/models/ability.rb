@@ -54,7 +54,7 @@ class Ability
 
       can :vote, :all
 
-      can :edit, :all
+      can :edit, [Question, Answer, Comment]
     end
   end
 end
