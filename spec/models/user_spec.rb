@@ -16,15 +16,12 @@ describe User do
 
   it 'requires nick' do
     user = build :user, nick: ''
-    user.save!
     expect(user).not_to be_valid
 
     user = build :user, nick: 'bad-nick?'
-    user.save!
     expect(user).not_to be_valid
 
     user = build :user, nick: 'nickName123'
-    user.save!
     expect(user).to be_valid
   end
 
