@@ -3,10 +3,12 @@ class CommentRevision < ActiveRecord::Base
   belongs_to :editor, class_name: :User
 
   def self.create_revision_by!(editor, comment)
-    r = CommentRevision.new
-    r.comment = comment
-    r.editor = editor
-    r.text = comment.text
-    r.save!
+    revision         = CommentRevision.new
+
+    revision.comment = comment
+    revision.editor  = editor
+    revision.text    = comment.text
+
+    revision.save!
   end
 end

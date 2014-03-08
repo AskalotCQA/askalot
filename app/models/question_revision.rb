@@ -3,16 +3,19 @@ class QuestionRevision < ActiveRecord::Base
   belongs_to :editor, class_name: :User
 
   def self.create_revision_by!(editor, question)
-    r = QuestionRevision.new
-    r.category = question.category.name
-    r.tags = [question.category.name]
+    revision          = QuestionRevision.new
+
+    revision.category = question.category.name
+    revision.tags     = [question.category.name]
+    revision.editor   = editor
+    revision.title    = question.title
+    revision.text     = question.text
+    revision.question = question
+
     question.tags.each do |t|
-      r.tags.append(t.name)
+      revision.tags.append(t.name)
     end
-    r.editor = editor
-    r.title = question.title
-    r.text = question.text
-    r.question = question
-    r.save!
+
+    revision.save!
   end
 end

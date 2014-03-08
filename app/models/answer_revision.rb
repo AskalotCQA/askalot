@@ -3,11 +3,13 @@ class AnswerRevision < ActiveRecord::Base
   belongs_to :editor, class_name: :User
 
   def self.create_revision_by!(editor, answer)
-    r = AnswerRevision.new
-    r.editor = editor
-    r.answer = answer
-    r.text = answer.text
-    r.save!
+    revision        = AnswerRevision.new
+
+    revision.editor = editor
+    revision.answer = answer
+    revision.text   = answer.text
+
+    revision.save!
   end
 
 end
