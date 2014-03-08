@@ -1,4 +1,4 @@
-<li class="question-answer">
+<li id="answer-<%= answer.id %>" class="question-answer<%= ' bg-warning' if answer.author.role?(:teacher) %>">
   <div class="row">
     <div class="col-md-2">
       <%= render 'users/square', user: answer.author %>
@@ -9,11 +9,10 @@
         <%= render_markdown answer.text %>
       </div>
 
-      <p class="text-muted">
-        <%= answer_creation_time answer %>
-      </p>
-
-      <br/>
+      <span class="answer-details">
+        <%= answer_creation_time answer %> &middot;
+        <%= render 'answers/deleting', answer: answer %>
+      </span>
 
       <%= render 'answers/evaluations', answer: answer %>
       <%= render 'answers/comments', answer: answer %>

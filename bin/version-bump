@@ -1,6 +1,6 @@
 #! /bin/bash
 
-branch=1-0-beta
+branch=1-1-beta
 number=patch
 
 git checkout master
@@ -16,7 +16,7 @@ git merge staging
 
 ruby -e "p = './config/version.rb'; c = File.read(p); File.open(p, 'w') { |f| f.puts c.sub(/patch\s*=\s*(\d+)/i) { |m| \"#{'patch'.upcase} = #{\$1.to_i + 1}\" } }"
 
-version=`ruby -e "require './config/version.rb'; print NaRuby::VERSION::STRING"`
+version=`ruby -e "require './config/version.rb'; print Askalot::VERSION::STRING"`
 
 git add config/version.rb
 git commit -m "Bump version to $version"

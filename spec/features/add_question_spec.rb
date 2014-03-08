@@ -42,13 +42,28 @@ describe 'Add Question' do
       expect(page).to have_content('linux-server')
     end
 
-    within '#question-content' do
+    within '.question-content' do
       expect(page).to have_content('Lorem ipsum')
     end
   end
 
   it 'adds new question anonymously' do
-    pending
+    visit root_path
+
+    click_link 'Opýtať sa otázku'
+
+    fill_in 'question_title', with: 'Lorem ipsum title?'
+    fill_in 'question_text',  with: 'Lorem ipsum'
+
+    select category.name, from: 'question_category_id'
+
+    check 'Opýtať sa anonymne'
+
+    click_button 'Opýtať'
+
+    within '#question' do
+      expect(page).to have_content('Anonym')
+    end
   end
 
   context 'when using markdown' do
@@ -81,7 +96,7 @@ describe 'Add Question' do
 
       click_button 'Opýtať'
 
-      within '#question-content' do
+      within '.question-content' do
         expect(page).to have_css('img.gemoji[src="/images/gemoji/poop.png"]')
       end
     end
@@ -99,7 +114,7 @@ describe 'Add Question' do
 
       click_button 'Opýtať'
 
-      within '#question-content' do
+      within '.question-content' do
         expect(page).to have_link('@smolnar', href: user_path(:smolnar))
       end
     end
@@ -117,7 +132,7 @@ describe 'Add Question' do
 
       click_button 'Opýtať'
 
-      within '#question-content' do
+      within '.question-content' do
         expect(page).to have_link("##{question.id}", href: question_path(question))
       end
     end
@@ -136,7 +151,7 @@ describe 'Add Question' do
 
         click_button 'Opýtať'
 
-        within '#question-content' do
+        within '.question-content' do
           expect(page).to have_link("##{question.id}", href: question_path(question))
         end
       end
@@ -156,7 +171,7 @@ describe 'Add Question' do
 
         click_button 'Opýtať'
 
-        within '#question-content' do
+        within '.question-content' do
           expect(page).to have_link("@smolnar", href: user_path('smolnar'))
         end
       end

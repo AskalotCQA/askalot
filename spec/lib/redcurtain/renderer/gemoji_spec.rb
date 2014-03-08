@@ -27,5 +27,11 @@ describe Redcurtain::Renderer::Gemoji do
 
       expect(result.strip).to eql('<img class="gemoji" src="/assets/images/poop.png" alt="poop" />')
     end
+
+    it 'respects markdown codespan' do
+      result = subject.render('you can embed icons with ` :poop: `')
+
+      expect(result.strip).to eql('you can embed icons with ` :poop: `')
+    end
   end
 end

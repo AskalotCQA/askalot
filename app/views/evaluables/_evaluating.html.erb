@@ -1,6 +1,6 @@
 <div id="<%= identify evaluable, :evaluating %>" class="<%= model %>-evaluating">
   <% if can? :evaluate, evaluable %>
-    <a <%= "class=#{model}-evaluated" if evaluable.evaluated_by? current_user %> data-toggle="modal" data-target="#<%= identify evaluable, :evaluate %>">
+    <a href="#" <%= "class=#{model}-evaluated" if evaluable.evaluated_by? current_user %> data-toggle="modal" data-target="#<%= identify evaluable, :evaluate %>">
       <%= tooltip_icon_tag :magic, t("#{model}.evaluate"), placement: :right %>
     </a>
   <% end %>

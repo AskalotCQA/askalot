@@ -36,7 +36,7 @@ class window.Markdown
 
 
   @bind: ->
-    $('.markdown-tabs').each ->
+    $('[data-markdown]').each ->
       id = $(this).attr('id')
 
       markdown = new Markdown(id)

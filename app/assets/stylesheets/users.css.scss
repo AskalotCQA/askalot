@@ -4,23 +4,31 @@
 // general
 
 .user-square {
+  @include text-overflow;
+
   margin: 20px 0;
-  overflow: hidden;
   text-align: center;
 
   span {
     display: block;
   }
+
+  .user-link {
+    margin-top: 10px;
+  }
 }
 
 .user-avatar {
-  display: inline-block;
-  width: 96px;
-  margin-bottom: 10px;
+  @include center-block;
+  @include square(96px);
+
+  img {
+    display: inline;
+  }
 }
 
 .user-avatar-small {
-  height: 20px;
+  width: 20px;
   vertical-align: middle;
 }
 

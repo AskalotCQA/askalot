@@ -6,9 +6,9 @@ set :stages, [:staging, :production]
 
 require 'capistrano/ext/multistage'
 
-set :application,    'naruby'
+set :application,    'askalot'
 set :scm,            :git
-set :repository,     'git@github.com:pavolzbell/tp-1314-13.git'
+set :repository,     'git@github.com:pavolzbell/askalot.git'
 set :scm_passphrase, ''
 set :user,           'deploy'
 set(:branch)         { rails_env }
@@ -17,7 +17,7 @@ set(:deploy_to)      { "/home/deploy/projects/#{application}-#{rails_env}" }
 set :use_sudo, false
 
 set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment
-set :rvm_autolibs_flag, "read-only"       # more info: rvm help autolibs
+set :rvm_autolibs_flag, 'read-only'       # more info: rvm help autolibs
 
 set :deploy_via, :remote_cache
 set :git_enable_submodules, 1

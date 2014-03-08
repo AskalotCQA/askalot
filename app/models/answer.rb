@@ -1,5 +1,6 @@
 class Answer < ActiveRecord::Base
   include Commentable
+  include Deletable
   include Evaluable
   include Notifiable
   include Touchable

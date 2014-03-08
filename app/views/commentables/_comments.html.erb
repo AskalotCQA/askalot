@@ -4,7 +4,7 @@
   </p>
 
   <ol class="<%= model %>-comments">
-    <% comments.each do |comment| %>
+    <% comments.order(:created_at).each do |comment| %>
       <%= render 'commentables/comment', comment: comment %>
     <% end %>
   </ol>

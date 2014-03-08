@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  include Deleting
   include Voting
   include Tabbing
 
@@ -48,7 +49,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     @author   = @question.author
     @labels   = @question.labels
-    @answers  = @question.answers_ordered
+    @answers  = @question.ordered_answers
 
     @answer = Answer.new(question: @question)
 

@@ -1,13 +1,13 @@
 class SessionsController < Devise::SessionsController
+  include Devise::Controllers::Rememberable
+
   def create
     service = Users::Authentication.new Stuba::AIS, login_params
 
     if service.authorized?
       self.resource = service.authenticate!
 
-      if resource.remember_me.nil?
-        self.resource.remember_me = login_params[:remember_me]
-      end
+      self.resource.remember_me = login_params[:remember_me]
     else
       self.resource = warden.authenticate!(auth_options)
     end

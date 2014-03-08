@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   include Commentable
+  include Deletable
   include Evaluable
   include Favorable
   include Notifiable
@@ -23,14 +24,16 @@ class Question < ActiveRecord::Base
 
   scope :random,     lambda { select('questions.*, random()').order('random()') }
   scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }
-  scope :answered,   lambda { joins(:answers).uniq }
-  scope :solved,     lambda { joins(:answers).merge(Answer.labeled_with(Label.where(value: :best).first)).uniq }
+  scope :answered,   lambda { joins(:answers).uniq } #.where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq } # TODO(zbell) User.first.questions.answered fails
+  scope :solved,     lambda { joins(:answers).merge(best_answers).uniq }
 
   scope :by, lambda { |user| where(author: user) }
 
-  scope :by_votes, lambda { order('') }
+  def self.best_answers
+    Answer.labeled_with(Label.where(value: :best).first)
+  end
 
-  def answers_ordered
+  def ordered_answers
     best  = answers.labeled_with(:best).first
     other = answers.by_votes.order(created_at: :desc)
 

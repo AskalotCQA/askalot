@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  include Deleting
+
   before_action :authenticate_user!
 
   def create

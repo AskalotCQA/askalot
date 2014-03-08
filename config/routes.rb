@@ -1,4 +1,4 @@
-NaRuby::Application.routes.draw do
+Askalot::Application.routes.draw do
   root 'static_pages#home'
 
   get '/404', to: 'errors#show'
@@ -19,6 +19,10 @@ NaRuby::Application.routes.draw do
     resources :comments, only: [:create]
 
     get :comment, on: :member
+  end
+
+  concern :deletable do
+    get :delete, on: :member
   end
 
   concern :evaluable do
@@ -42,6 +46,7 @@ NaRuby::Application.routes.draw do
     get :suggest, on: :collection
 
     concerns :commetable
+    concerns :deletable
     concerns :evaluable
     concerns :votable
   end
@@ -50,8 +55,13 @@ NaRuby::Application.routes.draw do
     get :label, on: :member
 
     concerns :commetable
+    concerns :deletable
     concerns :evaluable
     concerns :votable
+  end
+
+  resources :comments, only: [] do
+    concerns :deletable
   end
 
   resources :tags, only: [] do
