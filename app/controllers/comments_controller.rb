@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 
     CommentRevision.create_revision_by!(current_user, @comment)
 
-    if @comment.update_attributes(params.require(:comment).permit(:text))
+    if @comment.update_attributes(update_params)
       flash[:notice] = t 'comment.update.success'
     else
       flash_error_messages_for @comment
@@ -44,5 +44,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:text).merge(commentable: @commentable, author: current_user)
+  end
+
+  def update_params
+    params.require(:comment).permit(:text)
   end
 end

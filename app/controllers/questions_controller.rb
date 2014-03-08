@@ -76,7 +76,7 @@ class QuestionsController < ApplicationController
     authorize! :edit, @question
 
     QuestionRevision.create_revision_by!(current_user, @question)
-    if @question.update_attributes(question_params.except(:anonymous, :author))
+    if @question.update_attributes(update_params)
       flash[:notice] = t 'question.update.success'
     else
       flash_error_messages_for @question
@@ -107,5 +107,9 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user)
+  end
+
+  def update_params
+    params.require(:question).permit(:title, :text, :category_id, :tag_list)
   end
 end
