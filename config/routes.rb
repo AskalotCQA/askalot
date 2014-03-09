@@ -38,6 +38,7 @@ Askalot::Application.routes.draw do
 
   resources :categories, only: [:index]
   resources :changelogs, only: [:index]
+  resources :tags,       only: [:index]
 
   resources :questions, only: [:index, :new, :create, :show] do
     resources :answers, only: [:create]

@@ -8,7 +8,7 @@ sk:
 
     tab:
       all: 'Všetci'
-      new: 'Nový'
+      new: 'Noví'
 
     registration: 'Registrácia'
     confirmation: 'Potvrdenie registrácie'
