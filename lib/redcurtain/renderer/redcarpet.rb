@@ -52,6 +52,7 @@ module Redcurtain::Renderer
       ]
 
       def self.create(options = {})
+        options  = Redcarpet.defaults.deep_merge(options)
         parent   = options[:renderer] || ::Redcarpet::Render::HTML
         renderer = Class.new(parent)
 
