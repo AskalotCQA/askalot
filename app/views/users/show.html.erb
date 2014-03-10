@@ -47,4 +47,11 @@
       <div class="clearfix"></div>
     </div>
   </div>
+
+  <section id="user-profile">
+    <ul class="nav nav-tabs">
+      <%= tab_link_tag_with_count t('user.tab.all'), :'user-questions', user_path(params.except(:page).merge tab: :'user-questions'), @user.questions.count %>
+    </ul>
+  </section>
+
 </section>
