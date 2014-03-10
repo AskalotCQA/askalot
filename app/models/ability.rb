@@ -18,6 +18,10 @@ class Ability
       resource.answers.empty? && resource.author == user && resource.favorites.empty? && resource.comments.empty? && resource.evaluations.empty?
     end
 
+    can :highlight, Answer do |resource|
+      resource.author.role?(:teacher) && !resource.author.role?(:administrator)
+    end
+
     can(:show_email, User) { |resource| resource.show_email? }
     can(:show_name,  User) { |resource| resource.show_name? && resource.name.present? }
 
