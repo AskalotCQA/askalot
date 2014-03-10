@@ -1,8 +1,17 @@
 class TagsController < ApplicationController
+  include Tabbing
+
   before_action :authenticate_user!
 
+  default_tab :'tags-all', only: :index
+
   def index
-    @tags = Tag.order(:name)
+    @tags = case params[:tab].to_sym
+            when :'tags-all'      then Tag.order(:name)
+            when :'tags-new'      then Tag.news
+            when :'tags-popular'  then Tag.popular
+            else fail
+            end
   end
 
   # TODO (smolnar)

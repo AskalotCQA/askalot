@@ -1,8 +1,13 @@
 <% provide(:title, t('tag.index.title')) %>
 
-<div class="row">
-  <div class="col-md-12">
-    <h1 class="page-header"><%= yield :title %></h1>
+
+
+<section id="tags-controls">
+  <ul class="nav nav-tabs">
+    <%= tab_link_tag_with_count t('tag.tab.all'), :'tags-all', tags_path(params.except(:page).merge tab: :'tags-all'), Tag.count %>
+    <%= tab_link_tag_with_count t('tag.tab.new'), :'tags-new', tags_path(params.except(:page).merge tab: :'tags-new'), Tag.count %>
+    <%= tab_link_tag_with_count t('tag.tab.popular'), :'tags-popular', tags_path(params.except(:page).merge tab: :'tags-popular'), Tag.count %>
+  </ul>
 
     <ul class="list-unstyled">
       <li class="category-group">
@@ -21,5 +26,4 @@
         <% end %>
       </li>
     </ul>
-  </div>
-</div>
+</section>

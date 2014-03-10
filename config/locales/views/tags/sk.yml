@@ -4,3 +4,8 @@ sk:
 
     index:
       title: 'Tagy'
+
+    tab:
+      all:      'Všetky'
+      new:      'Nové'
+      popular:  'Populárne'
