@@ -26,7 +26,7 @@ module Redcurtain::Renderer
         part.replace(content)
       end
 
-      document
+      document.at('body')
     end
   end
 end

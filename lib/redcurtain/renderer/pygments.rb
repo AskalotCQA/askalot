@@ -9,7 +9,7 @@ module Redcurtain::Renderer
         pre.replace ::Pygments.highlight(pre.text.strip, lexer: pre[:lang])
       end
 
-      document.at('body').inner_html.html_safe
+      document.at('body')
     end
   end
 end

@@ -4,7 +4,8 @@ module Redcurtain::Renderer
 
     attr_accessor :defaults
 
-    def render(content, options = {})
+    def render(content_or_document, options = {})
+      content  = content_or_document.to_s
       options  = defaults.deep_merge(options)
       renderer = Factory.create(options)
 
