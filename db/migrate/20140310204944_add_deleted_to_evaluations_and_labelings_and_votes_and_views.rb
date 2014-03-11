@@ -1,13 +1,12 @@
 class AddDeletedToVotesAndEvaluationsAndViews < ActiveRecord::Migration
   def change
-    add_column :evaluations, :deleted, :boolean, null: false, default: false
-    add_column :labelings,   :deleted, :boolean, null: false, default: false
-    add_column :views,       :deleted, :boolean, null: false, default: false
-    add_column :votes,       :deleted, :boolean, null: false, default: false
+    models = [:answer_revisions, :comment_revisions, :evaluations, :favorites,
+              :labelings, :question_revisions, :views, :votes]
 
-    add_index :evaluations, :deleted
-    add_index :labelings,   :deleted
-    add_index :views,       :deleted
-    add_index :votes,       :deleted
+    models.each do |model|
+      add_column model, :deleted, :boolean, null: false, default: false
+
+      add_index model, :deleted
+    end
   end
 end
