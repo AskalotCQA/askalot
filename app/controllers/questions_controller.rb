@@ -57,6 +57,22 @@ class QuestionsController < ApplicationController
     @question.views.reload
   end
 
+  def update
+    @question = Question.find(params[:id])
+
+    authorize! :edit, @question
+
+    QuestionRevision.create_revision_by!(current_user, @question)
+
+    if @question.update_attributes(update_params)
+      flash[:notice] = t 'question.update.success'
+    else
+      flash_error_messages_for @question
+    end
+
+    redirect_to question_path(@question)
+  end
+
   def favor
     @question = Question.find(params[:id])
 
@@ -68,21 +84,6 @@ class QuestionsController < ApplicationController
     @questions = Question.where('id = ? or title like ?', params[:q].to_i, "#{params[:q]}%")
 
     render json: @questions, root: false
-  end
-
-  def update
-    @question = Question.find(params[:id])
-
-    authorize! :edit, @question
-
-    QuestionRevision.create_revision_by!(current_user, @question)
-    if @question.update_attributes(update_params)
-      flash[:notice] = t 'question.update.success'
-    else
-      flash_error_messages_for @question
-    end
-
-    redirect_to question_path(@question)
   end
 
   private
