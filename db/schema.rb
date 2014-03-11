@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305114254) do
+ActiveRecord::Schema.define(version: 20140310223035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,8 @@ ActiveRecord::Schema.define(version: 20140305114254) do
     t.integer  "votes_count",                                default: 0,     null: false
     t.boolean  "deleted",                                    default: false, null: false
     t.decimal  "votes_lb_wsci_bp", precision: 13, scale: 12, default: 0.0,   null: false
+    t.datetime "edited_at"
+    t.integer  "editor_id"
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
@@ -89,6 +91,8 @@ ActiveRecord::Schema.define(version: 20140305114254) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "deleted",          default: false, null: false
+    t.datetime "edited_at"
+    t.integer  "editor_id"
   end
 
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
@@ -207,8 +211,10 @@ ActiveRecord::Schema.define(version: 20140305114254) do
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
     t.boolean  "deleted",                                       default: false,                 null: false
-    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,                   null: false
     t.datetime "touched_at",                                    default: '2000-01-01 00:00:00', null: false
+    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,                   null: false
+    t.datetime "edited_at"
+    t.integer  "editor_id"
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree

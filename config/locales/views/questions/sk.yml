@@ -9,10 +9,10 @@ sk:
       feature: 'Pridať otázku'
 
     create:
-      success: 'Vaša otázka bola úspešne pridaná.'
+      success: 'Otázka bola úspešne pridaná.'
 
     update:
-      success: 'Vaša otázka bola úspešne aktualizovaná.'
+      success: 'Otázka bola úspešne aktualizovaná.'
       title: 'Upraviť otázku'
       action: 'Upraviť otázku'
 

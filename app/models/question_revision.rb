@@ -13,5 +13,6 @@ class QuestionRevision < ActiveRecord::Base
     revision.question = question
 
     revision.save!
+    question.update_edited! revision
   end
 end

@@ -5,12 +5,12 @@ sk:
       submit: 'Odpovedať'
 
     create:
-      success: 'Vaša odpoveď bola úspešne pridaná.'
+      success: 'Odpoveď bola úspešne pridaná.'
 
     update:
       action: 'Upraviť odpoveď'
       title: 'Upraviť odpoveď'
-      success: 'Vaša odpoveď bola úspešne aktualizovaná.'
+      success: 'Odpoveď bola úspešne aktualizovaná.'
 
     delete:
       title: 'Pozor!'

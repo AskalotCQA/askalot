@@ -10,6 +10,6 @@ class AnswerRevision < ActiveRecord::Base
     revision.text   = answer.text
 
     revision.save!
+    answer.update_edited! revision
   end
-
 end

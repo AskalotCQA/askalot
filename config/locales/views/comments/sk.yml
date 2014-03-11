@@ -5,12 +5,12 @@ sk:
       submit: 'Komentovať'
 
     create:
-      success: 'Váš komentár bol úspešne pridaný.'
+      success: 'Komentár bol úspešne pridaný.'
 
     update:
       action: 'Upraviť komentár'
       title: 'Upraviť komentár'
-      success: 'Váš komentár bol úspešne aktualizovaný.'
+      success: 'Komentár bol úspešne aktualizovaný.'
 
     delete:
       title: 'Pozor!'

@@ -1,11 +1,13 @@
 module Editable
   extend ActiveSupport::Concern
 
-  def edited_at
-    revisions.last.created_at
+  included do
+    belongs_to :editor, class_name: :User
   end
 
-  def edited_by
-    revisions.last.editor
+  def update_edited!(revision)
+    self.editor = revision.editor
+    self.edited_at = revision.created_at
+    save!
   end
 end

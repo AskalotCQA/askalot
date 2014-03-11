@@ -10,5 +10,6 @@ class CommentRevision < ActiveRecord::Base
     revision.text    = comment.text
 
     revision.save!
+    comment.update_edited! revision
   end
 end

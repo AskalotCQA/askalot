@@ -1,6 +1,6 @@
-<% if editable.revisions.exists? %>
-  &middot;
+<% unless editable.editor.nil? %>
   <%= t('edit.by') %>
-  <%= link_to_user editable.edited_by %>
+  <%= link_to_user editable.editor %>
   <%= tooltip_time_tag editable.edited_at, format: :normal, placement: :right %>
+  &middot;
 <% end %>
