@@ -18,6 +18,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_nick params[:nick]
 
+    @favorites = Question.favorite_by(@user)
+
     raise ActiveRecord::RecordNotFound unless @user
   end
 

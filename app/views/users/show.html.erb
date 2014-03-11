@@ -51,7 +51,33 @@
   <section id="user-profile">
     <ul class="nav nav-tabs">
       <%= tab_link_tag_with_count t('user.tab.all'), :'user-questions', user_path(params.except(:page).merge tab: :'user-questions'), @user.questions.count %>
+      <%= tab_link_tag_with_count t('user.tab.all'), :'user-answers', user_path(params.except(:page).merge tab: :'user-answers'), @user.answers.count %>
+      <%= tab_link_tag_with_count t('user.tab.all'), :'user-favorites', user_path(params.except(:page).merge tab: :'user-favorites'), @favorites.count %>
     </ul>
   </section>
+
+  <div class="col-md-5">
+    <div class="tab-content">
+
+      <%= tab_content_tag :'user-questions' do %>
+        <% @user.questions.each do |question| %>
+          <p><%= question.title %></p>
+        <% end %>
+      <% end %>
+
+      <%= tab_content_tag :'user-answers' do %>
+          <% @user.answers.each do |answer| %>
+              <p><%= answer.text %></p>
+          <% end %>
+      <% end %>
+
+      <%= tab_content_tag :'user-favorites' do %>
+          <% @favorites.each do |favorite| %>
+              <p><%= favorite.title %></p>
+          <% end %>
+      <% end %>
+
+    </div>
+  </div>
 
 </section>
