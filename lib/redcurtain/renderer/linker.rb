@@ -32,7 +32,7 @@ module Redcurtain::Renderer
         part.replace(content)
       end
 
-      document.at('body')
+      document
     end
   end
 end
