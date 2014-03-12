@@ -25,11 +25,13 @@ class AnswersController < ApplicationController
 
     authorize! :edit, @answer
 
-    AnswerRevision.create_revision_by!(current_user, @answer)
+    @revision = AnswerRevision.create_revision!(current_user, @answer)
 
-    if @answer.update_attributes(update_params)
+    if @answer.update_attributes(update_params) && @answer.update_attributes_by_revision(@revision)
       flash[:notice] = t 'answer.update.success'
     else
+      @revision.destroy!
+
       flash_error_messages_for @answer
     end
 

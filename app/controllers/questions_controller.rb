@@ -62,11 +62,13 @@ class QuestionsController < ApplicationController
 
     authorize! :edit, @question
 
-    QuestionRevision.create_revision_by!(current_user, @question)
+    @revision = QuestionRevision.create_revision!(current_user, @question)
 
-    if @question.update_attributes(update_params)
+    if @question.update_attributes(update_params) && @question.update_attributes_by_revision(@revision)
       flash[:notice] = t 'question.update.success'
     else
+      @revision.destroy!
+
       flash_error_messages_for @question
     end
 

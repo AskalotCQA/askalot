@@ -25,11 +25,13 @@ class CommentsController < ApplicationController
 
     authorize! :edit, @comment
 
-    CommentRevision.create_revision_by!(current_user, @comment)
+    @revision = CommentRevision.create_revision!(current_user, @comment)
 
-    if @comment.update_attributes(update_params)
+    if @comment.update_attributes(update_params) && @comment.update_attributes_by_revision(@revision)
       flash[:notice] = t 'comment.update.success'
     else
+      @revision.destroy!
+
       flash_error_messages_for @comment
     end
 
