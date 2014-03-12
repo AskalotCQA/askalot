@@ -19,29 +19,48 @@ class AnswersController < ApplicationController
     redirect_to question_path(@question)
   end
 
+  def update
+    @answer   = Answer.find(params[:id])
+    @question = @answer.question
+
+    authorize! :edit, @answer
+
+    @revision = AnswerRevision.create_revision!(current_user, @answer)
+
+    if @answer.update_attributes(update_params) && @answer.update_attributes_by_revision(@revision)
+      flash[:notice] = t 'answer.update.success'
+    else
+      @revision.destroy!
+
+      flash_error_messages_for @answer
+    end
+
+    redirect_to question_path(@question)
+  end
+
   def label
     @answer   = Answer.find(params[:id])
     @answers  = [@answer]
     @question = @answer.question
 
     case params[:value].to_sym
-    when :best
-      authorize! :label, @question
+      when :best
+        authorize! :label, @question
 
-      @question.answers.where.not(id: @answer.id).each do |answer|
-        labeling = answer.labelings.by(current_user).with(:best).first
+        @question.answers.where.not(id: @answer.id).each do |answer|
+          labeling = answer.labelings.by(current_user).with(:best).first
 
-        if labeling
-          @answers << answer
-          labeling.delete
+          if labeling
+            @answers << answer
+            labeling.delete
+          end
         end
-      end
-    when :helpful
-      authorize! :label, @question
+      when :helpful
+        authorize! :label, @question
 
-      fail if @answer.labelings.by(current_user).with(:best).exists?
-    else
-      fail
+        fail if @answer.labelings.by(current_user).with(:best).exists?
+      else
+        fail
     end
 
     @answer.toggle_labeling_by! current_user, params[:value]
@@ -51,5 +70,9 @@ class AnswersController < ApplicationController
 
   def answer_params
     params.require(:answer).permit(:text).merge(question: @question, author: current_user)
+  end
+
+  def update_params
+    params.require(:answer).permit(:text)
   end
 end

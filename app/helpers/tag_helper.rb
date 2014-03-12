@@ -14,7 +14,7 @@ module TagHelper
   def icon_tag(type, options = {})
     classes = ['fa', "fa-#{type.to_s}"]
     classes << 'fa-fw' if options.delete(:fixed)
-    classes << options.delete(:class)
+    classes += Array.wrap(options.delete :class)
 
     icon  = content_tag :i, nil, class: classes, data: options[:data], title: options[:title]
     label = options.delete(:label)

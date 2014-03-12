@@ -1,13 +1,14 @@
 sk:
   evaluation:
     new:
+      action: 'Ohodnotiť'
       title: 'Ohodnotenie'
       submit: 'Ohodnotiť'
+      cancel: 'Zrušiť'
       help: 'Komentár k hodnoteniu'
 
     create:
       success: 'Vaše hodnotenie bolo úspešne pridané.'
-      cancel: 'Zrušiť'
 
     update:
       success: 'Vaše hodnotenie bolo úspešne aktualizované.'
