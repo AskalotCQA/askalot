@@ -207,8 +207,8 @@ ActiveRecord::Schema.define(version: 20140311225104) do
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
     t.boolean  "deleted",                                       default: false, null: false
-    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "touched_at",                                                    null: false
+    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
@@ -250,8 +250,8 @@ ActiveRecord::Schema.define(version: 20140311225104) do
 
   create_table "tags", force: true do |t|
     t.string   "name",       null: false
-    t.datetime "updated_at", null: false
     t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
