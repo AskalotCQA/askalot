@@ -1,11 +1,11 @@
 class Answer < ActiveRecord::Base
   include Commentable
   include Deletable
+  include Editable
   include Evaluable
   include Notifiable
   include Votable
   include Watchable
-  include Editable
 
   after_create :slido_label_with_best!
 
@@ -14,7 +14,8 @@ class Answer < ActiveRecord::Base
 
   has_many :labelings, dependent: :destroy
   has_many :labels, through: :labelings
-  has_many :revisions, class_name: :AnswerRevision
+
+  has_many :revisions, class_name: :AnswerRevision, dependent: :destroy
 
   validates :text, presence: true
 
