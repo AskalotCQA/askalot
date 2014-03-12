@@ -1,6 +1,8 @@
 module Editing
   extend ActiveSupport::Concern
 
+  include Notifications::Notifying
+
   def update
     @model    = controller_name.classify.downcase.to_sym
     @editable = controller_name.classify.constantize.find(params[:id])
@@ -13,6 +15,8 @@ module Editing
 
     if @editable.changed?
       if @editable.save && @editable.update_attributes_by_revision(@revision)
+        notify_about "update-#{@model}", @editable, for: @editable.watchers
+
         flash[:notice] = t "#{@model}.update.success"
       else
         @revision.destroy!
