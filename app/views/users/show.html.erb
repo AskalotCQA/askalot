@@ -50,8 +50,8 @@
 
   <section id="user-profile">
     <ul class="nav nav-tabs">
-      <%= tab_link_tag_with_count t('user.tab.all'), :'user-questions', user_path(params.except(:page).merge tab: :'user-questions'), @user.questions.count %>
-      <%= tab_link_tag_with_count t('user.tab.all'), :'user-answers', user_path(params.except(:page).merge tab: :'user-answers'), @user.answers.count %>
+      <%= tab_link_tag_with_count t('user.tab.all'), :'user-questions', user_path(params.except(:page).merge tab: :'user-questions'), @questions.count %>
+      <%= tab_link_tag_with_count t('user.tab.all'), :'user-answers', user_path(params.except(:page).merge tab: :'user-answers'), @answers.count %>
       <%= tab_link_tag_with_count t('user.tab.all'), :'user-favorites', user_path(params.except(:page).merge tab: :'user-favorites'), @favorites.count %>
     </ul>
   </section>
@@ -60,24 +60,44 @@
     <div class="tab-content">
 
       <%= tab_content_tag :'user-questions' do %>
-        <% @user.questions.each do |question| %>
+        <% @questions.each do |question| %>
           <p><%= question.title %></p>
         <% end %>
+
+          <div class="row">
+            <div class="col-md-12">
+              <%= paginate @questions, data: { state: true } %>
+            </div>
+          </div>
       <% end %>
 
       <%= tab_content_tag :'user-answers' do %>
-          <% @user.answers.each do |answer| %>
+          <% @answers.each do |answer| %>
               <p><%= answer.text %></p>
           <% end %>
+
+          <div class="row">
+            <div class="col-md-12">
+              <%= paginate @answers, data: { state: true } %>
+            </div>
+          </div>
       <% end %>
 
       <%= tab_content_tag :'user-favorites' do %>
           <% @favorites.each do |favorite| %>
               <p><%= favorite.title %></p>
           <% end %>
+
+          <div class="row">
+            <div class="col-md-12">
+              <%= paginate @favorites, data: { state: true } %>
+            </div>
+          </div>
       <% end %>
 
     </div>
   </div>
+
+
 
 </section>

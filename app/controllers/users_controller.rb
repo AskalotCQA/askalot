@@ -18,7 +18,13 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by_nick params[:nick]
 
+    @questions = @user.questions
+    @answers   = @user.answers
     @favorites = Question.favorite_by(@user)
+
+    @questions = @questions.page(params[:page]).per(10)
+    @answers   = @answers.page(params[:page]).per(10)
+    @favorites = @favorites.page(params[:page]).per(10)
 
     raise ActiveRecord::RecordNotFound unless @user
   end
