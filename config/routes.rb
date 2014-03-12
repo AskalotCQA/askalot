@@ -11,12 +11,14 @@ Askalot::Application.routes.draw do
     get   :suggest, on: :collection
   end
 
-  resources :notifications, only: [:index]
-  resources :changelogs,    only: [:index]
-
   get 'users/:nick', to: 'users#show', as: :user
 
-  get 'welcome', to: 'static_pages#welcome'
+  get :statistics, to: 'statistics#index'
+  get :welcome,    to: 'static_pages#welcome'
+
+  resources :changelogs,    only: [:index]
+  resources :notifications, only: [:index]
+  resources :watchings,     only: [:index]
 
   concern :commetable do
     resources :comments, only: [:create, :update]
@@ -39,7 +41,11 @@ Askalot::Application.routes.draw do
     get :votedown, on: :member
   end
 
-  resources :categories,    only: [:index]
+  resources :categories, only: [:index]
+
+  resources :tags, only: [] do
+    get :suggest, on: :collection
+  end
 
   resources :questions, only: [:index, :new, :create, :show, :update] do
     resources :answers, only: [:create, :update]
@@ -66,15 +72,9 @@ Askalot::Application.routes.draw do
     concerns :deletable
   end
 
-  resources :tags, only: [] do
-    get :suggest, on: :collection
-  end
-
   resources :markdown, only: [] do
     post :preview, on: :collection
   end
-
-  get :statistics, to: 'statistics#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
