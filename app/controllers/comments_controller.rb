@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   include Deleting
   include Markdown
+
   include Notifications::Notifying
   include Notifications::Watching
 

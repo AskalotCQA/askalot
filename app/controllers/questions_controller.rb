@@ -1,10 +1,11 @@
 class QuestionsController < ApplicationController
   include Deleting
   include Markdown
-  include Notifications::Watching
-  include Notifications::Notifying
   include Tabbing
   include Voting
+
+  include Notifications::Notifying
+  include Notifications::Watching
 
   before_action :authenticate_user!
 
