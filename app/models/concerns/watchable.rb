@@ -8,7 +8,7 @@ module Watchable
     scope :watched, lambda { joins(:watchings).uniq }
   end
 
-  def watched_by?(watcher)
-    watchers.where(id: watcher.id).exists?
+  def watched_by?(user)
+    views.exists? watcher: user
   end
 end
