@@ -31,6 +31,8 @@ class Question < ActiveRecord::Base
 
   scope :by, lambda { |user| where(author: user) }
 
+  self.updated_timestamp = [:updated_at, :touched_at]
+
   def self.best_answers
     Answer.labeled_with(Label.where(value: :best).first)
   end
