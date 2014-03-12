@@ -11,6 +11,9 @@ Askalot::Application.routes.draw do
     get   :suggest, on: :collection
   end
 
+  resources :notifications, only: [:index]
+  resources :changelogs,    only: [:index]
+
   get 'users/:nick', to: 'users#show', as: :user
 
   get 'welcome', to: 'static_pages#welcome'
@@ -36,8 +39,7 @@ Askalot::Application.routes.draw do
     get :votedown, on: :member
   end
 
-  resources :categories, only: [:index]
-  resources :changelogs, only: [:index]
+  resources :categories,    only: [:index]
 
   resources :questions, only: [:index, :new, :create, :show, :update] do
     resources :answers, only: [:create, :update]
