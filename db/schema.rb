@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140311225104) do
+ActiveRecord::Schema.define(version: 20140312105054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,10 +40,12 @@ ActiveRecord::Schema.define(version: 20140311225104) do
     t.decimal  "votes_lb_wsci_bp", precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
+    t.boolean  "edited",                                     default: false, null: false
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
   add_index "answers", ["deleted"], name: "index_answers_on_deleted", using: :btree
+  add_index "answers", ["edited"], name: "index_answers_on_edited", using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
   add_index "answers", ["votes_difference"], name: "index_answers_on_votes_difference", using: :btree
   add_index "answers", ["votes_lb_wsci_bp"], name: "index_answers_on_votes_lb_wsci_bp", using: :btree
@@ -93,11 +95,13 @@ ActiveRecord::Schema.define(version: 20140311225104) do
     t.boolean  "deleted",          default: false, null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
+    t.boolean  "edited",           default: false, null: false
   end
 
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
   add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
   add_index "comments", ["deleted"], name: "index_comments_on_deleted", using: :btree
+  add_index "comments", ["edited"], name: "index_comments_on_edited", using: :btree
 
   create_table "evaluations", force: true do |t|
     t.integer  "evaluator_id",   null: false
@@ -215,11 +219,13 @@ ActiveRecord::Schema.define(version: 20140311225104) do
     t.datetime "touched_at",                                                    null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
+    t.boolean  "edited",                                        default: false, null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
   add_index "questions", ["deleted"], name: "index_questions_on_deleted", using: :btree
+  add_index "questions", ["edited"], name: "index_questions_on_edited", using: :btree
   add_index "questions", ["slido_question_uuid"], name: "index_questions_on_slido_question_uuid", unique: true, using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
   add_index "questions", ["votes_difference"], name: "index_questions_on_votes_difference", using: :btree

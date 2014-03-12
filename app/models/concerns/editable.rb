@@ -4,22 +4,17 @@ module Editable
   included do
     belongs_to :editor, class_name: :User
 
-    scope :edited,   lambda { where.not(edited_at: nil) }
-    scope :unedited, lambda { where(edited_at: nil) }
+    scope :edited,   lambda { where(edited: true) }
+    scope :unedited, lambda { where(edited: false) }
   end
-
-  def edited
-    self.edited_at.present?
-  end
-
-  alias :edited? :edited
 
   def update_attributes_by_revision(revision)
     return false unless revision
 
+    self.edited    = true
     self.editor    = revision.editor
     self.edited_at = revision.created_at
 
-    self.save!
+    self.save
   end
 end

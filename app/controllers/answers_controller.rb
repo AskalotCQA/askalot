@@ -1,6 +1,11 @@
 class AnswersController < ApplicationController
   include Deleting
+  include Editing
+  include Markdown
   include Voting
+
+  include Notifications::Notifying
+  include Notifications::Watching
 
   before_action :authenticate_user!
 
@@ -10,28 +15,16 @@ class AnswersController < ApplicationController
 
     authorize! :answer, @question
 
-    if @answer.save
-      flash[:notice] = t('answer.create.success')
-    else
-      flash_error_messages_for @answer
+    process_markdown_for @answer do |user|
+      notify_about :'mention-user', @answer, for: user
     end
 
-    redirect_to question_path(@question)
-  end
+    if @answer.save
+      flash[:notice] = t('answer.create.success')
 
-  def update
-    @answer   = Answer.find(params[:id])
-    @question = @answer.question
-
-    authorize! :edit, @answer
-
-    @revision = AnswerRevision.create_revision!(current_user, @answer)
-
-    if @answer.update_attributes(update_params) && @answer.update_attributes_by_revision(@revision)
-      flash[:notice] = t 'answer.update.success'
+      notify_about :'create-answer', @answer, for: @question.watchers
+      register_watching_for @answer
     else
-      @revision.destroy!
-
       flash_error_messages_for @answer
     end
 

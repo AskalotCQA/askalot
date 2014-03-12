@@ -1,5 +1,10 @@
 class CommentsController < ApplicationController
   include Deleting
+  include Editing
+  include Markdown
+
+  include Notifications::Notifying
+  include Notifications::Watching
 
   before_action :authenticate_user!
 
@@ -10,28 +15,16 @@ class CommentsController < ApplicationController
 
     authorize! :comment, @commentable
 
-    if @comment.save
-      flash[:notice] = t('comment.create.success')
-    else
-      flash_error_messages_for @comment
+    process_markdown_for @comment do |user|
+      notify_about :'mention-user', @comment, for: user
     end
 
-    redirect_to question_path(@question)
-  end
+    if @comment.save
+      flash[:notice] = t('comment.create.success')
 
-  def update
-    @comment  = Comment.find(params[:id])
-    @question = find_commentable.to_question
-
-    authorize! :edit, @comment
-
-    @revision = CommentRevision.create_revision!(current_user, @comment)
-
-    if @comment.update_attributes(update_params) && @comment.update_attributes_by_revision(@revision)
-      flash[:notice] = t 'comment.update.success'
+      notify_about :'create-comment', @comment, for: @commentable.watchers
+      register_watching_for @commentable.to_question
     else
-      @revision.destroy!
-
       flash_error_messages_for @comment
     end
 

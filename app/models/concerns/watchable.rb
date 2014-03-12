@@ -7,4 +7,8 @@ module Watchable
 
     scope :watched, lambda { joins(:watchings).uniq }
   end
+
+  def watched_by?(user)
+    views.exists? watcher: user
+  end
 end

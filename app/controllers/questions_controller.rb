@@ -1,7 +1,12 @@
 class QuestionsController < ApplicationController
   include Deleting
+  include Editing
+  include Markdown
   include Voting
   include Tabbing
+
+  include Notifications::Notifying
+  include Notifications::Watching
 
   before_action :authenticate_user!
 
@@ -32,8 +37,15 @@ class QuestionsController < ApplicationController
 
     authorize! :ask, @question
 
+    process_markdown_for @question do |user|
+      notify_about :'mention-user', @question, for: user
+    end
+
     if @question.save
       flash[:notice] = t('question.create.success')
+
+      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.inject(Set.new).each { |watchers, tag| watchers + tag.watchers }
+      register_watching_for @question
 
       redirect_to question_path(@question)
     else
@@ -55,24 +67,6 @@ class QuestionsController < ApplicationController
 
     @question.views.create! viewer: current_user
     @question.views.reload
-  end
-
-  def update
-    @question = Question.find(params[:id])
-
-    authorize! :edit, @question
-
-    @revision = QuestionRevision.create_revision!(current_user, @question)
-
-    if @question.update_attributes(update_params) && @question.update_attributes_by_revision(@revision)
-      flash[:notice] = t 'question.update.success'
-    else
-      @revision.destroy!
-
-      flash_error_messages_for @question
-    end
-
-    redirect_to question_path(@question)
   end
 
   def favor

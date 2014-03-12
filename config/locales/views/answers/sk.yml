@@ -9,12 +9,13 @@ sk:
 
     edit:
       action: 'Upraviť'
-      title: 'Upraviť odpoveď'
+      title: 'Úprava odpovede'
       submit: 'Uložiť'
       cancel: 'Spať'
 
     update:
       success: 'Odpoveď bola úspešne aktualizovaná.'
+      unchanged: 'Odpoveď nebola zmenená.'
 
     delete:
       action: 'Zmazať'

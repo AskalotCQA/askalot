@@ -1,1 +1,17 @@
-&ndash; <%= render('editables/details', model: :comment, editable: comment).strip.downcase_first.html_safe %>
+&ndash;
+
+<% if comment.edited? %>
+  <%= t('comment.updated').downcase_first %>
+  <%= link_to_user comment.editor %>
+  <%= tooltip_time_tag comment.edited_at, format: :normal, placement: :right %>
+<% end %>
+
+<% if comment.editor != comment.author %>
+  <% if comment.edited? %>
+    <%= '&middot;'.html_safe %>
+    <%= t('comment.created').downcase_first %>
+  <% end %>
+
+  <%= link_to_user comment.author %>
+  <%= tooltip_time_tag comment.created_at, format: :normal, placement: :right %>
+<% end %>

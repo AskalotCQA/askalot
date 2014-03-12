@@ -27,3 +27,6 @@ Redcurtain::Renderer::Redcarpet.defaults[:tags] &= [
   :superscript,
   :underline
 ]
+
+#TODO(zbell) rm
+Redcurtain::Markdown.renderers = []

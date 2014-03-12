@@ -42,7 +42,7 @@
       <div class="question-author">
         <small><%= link_to_user question.anonymous ? :anonymous : question.author %></small>
         <%= user_avatar_tag question.anonymous ? :anonymous : question.author, size: 64, class: :'img-circle img-responsive' %>
-        <small class="text-muted"><%= question_time question, placement: :bottom %></small>
+        <small class="text-muted"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
       </div>
     </div>
   </div>

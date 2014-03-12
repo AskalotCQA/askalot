@@ -4,7 +4,7 @@ module QuestionsHelper
   end
 
   def question_text_preview(question, options = {})
-    truncate strip_markdown(question.text), length: 200, separator: ' '
+    truncate render_stripdown(question.text), length: 200, separator: ' '
   end
 
   def question_answers_coloring(question)

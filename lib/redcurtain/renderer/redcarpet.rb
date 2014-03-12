@@ -62,8 +62,8 @@ module Redcurtain::Renderer
             next if options[:tags].include?(tag)
 
             case tag
-            when :paragraph, :header then define_method(tag) { |*args| "#{args.first}\n"}
             when :link               then define_method(tag) { |*args| args.third }
+            when :paragraph, :header then define_method(tag) { |*args| "#{args.first}\n"}
             else                          define_method(tag) { |*args| args.first }
             end
           end
