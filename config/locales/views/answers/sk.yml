@@ -5,15 +5,24 @@ sk:
       submit: 'Odpovedať'
 
     create:
-      success: 'Vaša odpoveď bola úspešne pridaná.'
+      success: 'Odpoveď bola úspešne pridaná.'
+
+    edit:
+      action: 'Upraviť'
+      title: 'Upraviť odpoveď'
+      submit: 'Uložiť'
+      cancel: 'Spať'
+
+    update:
+      success: 'Odpoveď bola úspešne aktualizovaná.'
 
     delete:
-      title: 'Pozor!'
       action: 'Zmazať'
+      title: 'Pozor!'
+      text: 'Naozaj chete zmazať odpoveď?'
       submit: 'Zmazať'
       cancel: 'Spať'
       success: 'Odpoveď bola úspešne zmazaná.'
-      text: 'Naozaj chete zmazať odpoveď?'
 
     label:
       best: 'Označiť ako najlepšiu'
@@ -22,4 +31,5 @@ sk:
     best: 'Najlepšia'
     helpful: 'Pomocná'
 
-    evaluate: 'Ohodnotiť'
+    created: 'Pridal'
+    updated: 'Upravil'
