@@ -9,7 +9,7 @@ sk:
 
     edit:
       action: 'Upraviť'
-      title: 'Upraviť komentár'
+      title: 'Úprava komentára'
       submit: 'Uložiť'
       cancel: 'Spať'
 

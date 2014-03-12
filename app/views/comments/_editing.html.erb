@@ -1,6 +1,8 @@
 <% if can? :edit, comment %>
-  <a href="#" id="comment-<%= comment.id %>-edit-modal" class="text-muted" data-toggle="modal" data-target="#comment-<%= comment.id %>-editing">
-    <%= tooltip_icon_tag :edit, t('comment.edit.action'), placement: :right %>
+  &middot;
+
+  <a href="#" id="comment-<%= comment.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#comment-<%= comment.id %>-editing">
+    <%= tooltip_icon_tag :pencil, t('comment.edit.action'), placement: :right %>
   </a>
 
   <div id="comment-<%= comment.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -12,7 +14,9 @@
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <%= f.text_area :text, id: nil, class: :'form-control', rows: 5 %>
+              <%= markdown_editor_for comment do %>
+                <%= f.text_area :text, id: nil, class: :'form-control', rows: 5 %>
+              <% end %>
             </div>
           </div>
           <div class="modal-footer">
