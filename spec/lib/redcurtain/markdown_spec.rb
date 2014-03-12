@@ -42,7 +42,7 @@ describe Redcurtain::Markdown do
         Redcurtain::Renderer::Pygments
       ]
 
-      expect(markdown.render(text, options)).to include(html)
+      expect(markdown.render(text, options)).to eql(html)
     end
   end
 
