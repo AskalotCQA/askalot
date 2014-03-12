@@ -177,8 +177,4 @@ describe Question do
       end
     end
   end
-
-  describe '#update_touched_at!' do
-
-  end
 end
