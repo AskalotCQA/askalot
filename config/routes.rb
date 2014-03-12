@@ -16,7 +16,7 @@ Askalot::Application.routes.draw do
   get 'welcome', to: 'static_pages#welcome'
 
   concern :commetable do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :update]
 
     get :comment, on: :member
   end
@@ -39,8 +39,8 @@ Askalot::Application.routes.draw do
   resources :categories, only: [:index]
   resources :changelogs, only: [:index]
 
-  resources :questions, only: [:index, :new, :create, :show] do
-    resources :answers, only: [:create]
+  resources :questions, only: [:index, :new, :create, :show, :update] do
+    resources :answers, only: [:create, :update]
 
     get :favor,   on: :member
     get :suggest, on: :collection

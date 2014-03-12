@@ -8,8 +8,9 @@ module Deletable
     default_scope -> { undeleted }
   end
 
-  def mark_as_deleted!(deletion)
-    deletion.deleted = true
-    deletion.save!
+  def mark_as_deleted!
+    self.deleted = true
+
+    self.save!
   end
 end

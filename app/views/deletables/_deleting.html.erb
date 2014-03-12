@@ -1,5 +1,7 @@
 <% if can? :delete, deletable %>
-  <a href="#" id="<%= "#{model}-#{deletable.id}-delete-modal" %>" class="text-muted" data-toggle="modal" data-target="#<%= identify deletable, :deleting %>">
+  &middot;
+
+  <a href="#" id="<%= "#{model}-#{deletable.id}-delete-modal" %>" class="text-muted text-undecorated" data-toggle="modal" data-target="#<%= identify deletable, :deleting %>">
     <%= tooltip_icon_tag :'trash-o', t("#{model}.delete.action"), placement: :right %>
   </a>
 

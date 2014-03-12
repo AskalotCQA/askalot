@@ -28,11 +28,11 @@
 
   list-style-type: none;
 
-  li {
+  & > li {
     padding: $padding-base-vertical 0;
   }
 
-  li + li {
+  & > li + li {
     border-top: 1px dashed $gray-lighter;
   }
 

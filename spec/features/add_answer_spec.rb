@@ -1,11 +1,12 @@
 require 'spec_helper'
 
-describe 'Add Question Answer' do
+describe 'Add Answer' do
   context 'with question from student' do
+    let(:user)      { create :user }
     let!(:question) { create :question, :with_tags }
 
     before :each do
-      login_as question.author
+      login_as user
     end
 
     it 'adds new answer to question' do
@@ -46,6 +47,7 @@ describe 'Add Question Answer' do
           expect(page).to have_css('h1', count: 1)
           expect(page).to have_content('My neat solution')
         end
+
       end
 
       it 'processes answer text' do
@@ -64,6 +66,74 @@ describe 'Add Question Answer' do
           expect(page).to have_css('h1', count: 1)
           expect(page).to have_content('My neat solution')
         end
+      end
+
+      it 'embers reference to user and question' do
+        other = create :user, login: :smolnar
+
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        fill_in 'answer_text', with: "Hey, @smolnar, look at this ##{question.id}!"
+
+        click_button 'Odpovedať'
+
+        expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
+
+        within '#question-answers' do
+          expect(page).to have_link('@smolnar',        href: user_path(:smolnar))
+          expect(page).to have_link("##{question.id}", href: question_path(question))
+        end
+
+        expect(notifications.size).to eql(1)
+
+        answer = Answer.last
+
+        expect(last_notification.notifiable).to eql(answer)
+        expect(last_notification.recipient).to  eql(other)
+        expect(last_notification.initiator).to  eql(user)
+        expect(last_notification.action).to     eql(:'mention-user')
+      end
+    end
+
+    context 'with notifications' do
+      it 'registers answer author as watcher of her answer' do
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        fill_in 'answer_text', with: 'I soo wanna watch you!'
+
+        click_button 'Odpovedať'
+
+        answer = Answer.last
+
+        expect(answer).to be_watched_by(user)
+      end
+
+      it 'notifies watchers about new answer' do
+        create :watching, watchable: question, watcher: question.author
+
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        fill_in 'answer_text', with: 'Hey, look at this.'
+
+        click_button 'Odpovedať'
+
+        expect(notifications.size).to eql(1)
+
+        answer = Answer.last
+
+        expect(last_notification.initiator).to  eql(user)
+        expect(last_notification.recipient).to  eql(question.author)
+        expect(last_notification.action).to     eql(:'add-answer')
+        expect(last_notification.notifiable).to eql(answer)
       end
     end
   end

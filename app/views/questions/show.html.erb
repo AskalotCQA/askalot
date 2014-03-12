@@ -22,7 +22,8 @@
         </div>
 
         <div class="question-details">
-          <%= question_creation_time @question %> &middot;
+          <%= render 'questions/details', question: @question %>
+          <%= render 'questions/editing', question: @question %>
           <%= render 'questions/deleting', question: @question %>
         </div>
 

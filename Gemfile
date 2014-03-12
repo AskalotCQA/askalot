@@ -49,10 +49,11 @@ gem 'whenever'
 # utilities
 gem 'actionview-encoded_mail_to'
 gem 'active_model_serializers'
+gem 'activerecord-custom_timestamps'
 gem 'forgery'
 gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.6.1'
 gem 'scout', github: 'smolnar/scout', branch: :master
 gem 'statistics2'
 gem 'symbolize'
