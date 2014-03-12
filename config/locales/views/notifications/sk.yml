@@ -1,2 +1,12 @@
 sk:
   notification:
+    navigation: 'Notifikácie'
+
+    index:
+      title: 'Notifikácie'
+
+    tab:
+      all: 'Všetky'
+      unread: 'Neprečítané'
+
+    more: 'Zobraziť viac'

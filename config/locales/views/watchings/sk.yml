@@ -1,2 +1,7 @@
 sk:
   watching:
+    navigation: 'Sledovania'
+
+    index:
+      title: 'Sledovania'
+
