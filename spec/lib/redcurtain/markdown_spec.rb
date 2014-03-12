@@ -3,15 +3,6 @@ require 'spec_helper'
 describe Redcurtain::Markdown do
   let(:markdown) { Class.new { include Redcurtain::Markdown }.new }
 
-  let(:options) do
-    {
-      gemoji: {
-        class: 'doge-class',
-        path: '/assets'
-      }
-    }
-  end
-
   after :each do
     markdown.renderers = nil
   end
@@ -34,6 +25,14 @@ describe Redcurtain::Markdown do
     end
 
     it 'renders markdown' do
+      options = {
+        gemoji: {
+          class: 'doge-class',
+          path: '/assets',
+          title: false
+        }
+      }
+
       text = "`code` :dog: ```ruby\ndoge.code```\nhello :unknown-doge:"
       html = "<p><code>code</code> <img class=\"doge-class\" src=\"/assets/dog.png\" alt=\"dog\"><code>ruby\ndoge.code</code>\nhello :unknown-doge:</p>"
 
@@ -43,7 +42,7 @@ describe Redcurtain::Markdown do
         Redcurtain::Renderer::Pygments
       ]
 
-      expect(markdown.render(text, options)).to eql(html)
+      expect(markdown.render(text, options)).to include(html)
     end
   end
 
@@ -52,7 +51,7 @@ describe Redcurtain::Markdown do
       html = "# Hello, [google](https://google.com)"
       text = "Hello, google\n"
 
-      expect(markdown.strip(html, options)).to eql(text)
+      expect(markdown.strip(html)).to eql(text)
     end
   end
 end

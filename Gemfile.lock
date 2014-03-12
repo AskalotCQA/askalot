@@ -373,7 +373,7 @@ DEPENDENCIES
   launchy
   murmurhash3
   net-ldap
-  nokogiri
+  nokogiri (~> 1.6.1)
   pg
   poltergeist (~> 1.5.0)
   pry

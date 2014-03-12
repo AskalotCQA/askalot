@@ -1,8 +1,9 @@
 class QuestionsController < ApplicationController
   include Deleting
+  include Editing
   include Markdown
-  include Tabbing
   include Voting
+  include Tabbing
 
   include Notifications::Notifying
   include Notifications::Watching
@@ -22,7 +23,7 @@ class QuestionsController < ApplicationController
                  end
 
     @questions = filter_questions(@questions)
-    @questions = @questions.page(params[:page]).per(10)
+    @questions = @questions.page(params[:page]).per(20)
 
     initialize_polling
   end
@@ -103,5 +104,9 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user)
+  end
+
+  def update_params
+    params.require(:question).permit(:title, :text, :category_id, :tag_list)
   end
 end

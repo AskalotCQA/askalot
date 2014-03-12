@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   include Deleting
+  include Editing
   include Markdown
 
   include Notifications::Notifying
@@ -38,5 +39,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:text).merge(commentable: @commentable, author: current_user)
+  end
+
+  def update_params
+    params.require(:comment).permit(:text)
   end
 end

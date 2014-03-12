@@ -1,8 +1,8 @@
 require 'gemoji'
-require 'redcarpet'
-require 'redcarpet/render_strip'
 require 'nokogiri'
 require 'pygments'
+require 'redcarpet'
+require 'redcarpet/render_strip'
 
 require 'redcurtain/markdown'
 require 'redcurtain/renderer/gemoji'

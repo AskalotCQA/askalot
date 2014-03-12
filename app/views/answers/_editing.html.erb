@@ -1,0 +1,30 @@
+<% if can? :edit, answer %>
+  &middot;
+
+  <a href="#" id="answer-<%= answer.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#answer-<%= answer.id %>-editing">
+    <%= tooltip_icon_tag :edit, t('answer.edit.action'), placement: :right %>
+  </a>
+
+  <div id="answer-<%= answer.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <%= form_for [answer.question, answer] do |f| %>
+          <div class="modal-header">
+            <h3 class="modal-title"><%= t 'answer.edit.title' %></h3>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <%= markdown_editor_for answer do %>
+                <%= f.text_area :text, id: nil, class: :'form-control', rows: 5 %>
+              <% end %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'answer.edit.cancel' %></button>
+            <button type="submit" class="btn btn-primary"><%= t 'answer.edit.submit' %></button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>
