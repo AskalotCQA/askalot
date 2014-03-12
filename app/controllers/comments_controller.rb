@@ -21,9 +21,8 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:notice] = t('comment.create.success')
 
+      notify_about :'create-comment', @comment, for: @commentable.watchers
       register_watching_for @commentable.to_question
-
-      notify_about :'add-comment', @comment, for: @commentable.watchers
     else
       flash_error_messages_for @comment
     end
