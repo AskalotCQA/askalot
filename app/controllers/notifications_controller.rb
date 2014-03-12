@@ -1,4 +1,8 @@
 class NotificationsController < ApplicationController
+  include Tabbing
+
+  default_tab :unread, only: :index
+
   before_action :authenticate_user!
 
   def index

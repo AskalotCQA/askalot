@@ -8,9 +8,9 @@ class QuestionsController < ApplicationController
   include Notifications::Notifying
   include Notifications::Watching
 
-  before_action :authenticate_user!
-
   default_tab :'questions-new', only: :index
+
+  before_action :authenticate_user!
 
   def index
     @questions = case params[:tab].to_sym

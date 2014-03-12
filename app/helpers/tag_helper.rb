@@ -3,12 +3,12 @@ module TagHelper
     ([object.class.name.downcase, object.id] + Array.wrap(suffix)).reject(&:blank?).join '-'
   end
 
-  def square_tag(type, body, options = {})
-    content_tag :span, body, options.merge(class: "label label-#{type.to_s}")
+  def badge_tag(body, options = {})
+    content_tag :span, body, options.merge(class: [:badge] + Array.wrap(options.delete :class))
   end
 
-  def round_tag(type, body, options = {})
-    content_tag :span, body, options.merge(class: "badge badge-#{type.to_s}")
+  def square_tag(type, body, options = {})
+    content_tag :span, body, options.merge(class: "label label-#{type.to_s}")
   end
 
   def icon_tag(type, options = {})
@@ -64,7 +64,7 @@ module TagHelper
   end
 
   def link_to_with_count(body, url, count, options = {})
-    count = content_tag :span, "&nbsp;(#{number_with_delimiter count})".html_safe, class: :'text-muted'
+    count = content_tag :span, "&nbsp;(#{number_with_delimiter count})".html_safe, class: :'text-muted' if count.is_a? Integer
 
     link_to body.concat(count).html_safe, url, options
   end

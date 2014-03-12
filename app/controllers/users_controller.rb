@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   include Tabbing
 
-  before_action :authenticate_user!
-
   default_tab :'users-all', only: :index
+
+  before_action :authenticate_user!
 
   def index
     @users = case params[:tab].to_sym
