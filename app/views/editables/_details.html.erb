@@ -1,7 +1,7 @@
 <% if editable.edited? %>
   <%= t "#{model}.updated" %>
   <%= link_to_user editable.editor %>
-  <%= tooltip_time_tag editable.edited_at, format: :normal, placement: :right %>
+  <%= tooltip_time_tag editable.edited_at, format: :normal, placement: :top %>
 <% end %>
 
 <% if editable.editor != editable.author %>
@@ -11,5 +11,5 @@
 <% end %>
 
 <% if editable.editor != editable.author %>
-  <%= tooltip_time_tag editable.created_at, format: :normal, placement: :right %>
+  <%= tooltip_time_tag editable.created_at, format: :normal, placement: :top %>
 <% end %>
