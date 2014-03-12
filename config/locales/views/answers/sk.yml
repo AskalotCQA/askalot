@@ -7,18 +7,22 @@ sk:
     create:
       success: 'Odpoveď bola úspešne pridaná.'
 
-    update:
-      action: 'Upraviť odpoveď'
+    edit:
+      action: 'Upraviť'
       title: 'Upraviť odpoveď'
+      submit: 'Uložiť'
+      cancel: 'Spať'
+
+    update:
       success: 'Odpoveď bola úspešne aktualizovaná.'
 
     delete:
-      title: 'Pozor!'
       action: 'Zmazať'
+      title: 'Pozor!'
+      text: 'Naozaj chete zmazať odpoveď?'
       submit: 'Zmazať'
       cancel: 'Spať'
       success: 'Odpoveď bola úspešne zmazaná.'
-      text: 'Naozaj chete zmazať odpoveď?'
 
     label:
       best: 'Označiť ako najlepšiu'
@@ -27,4 +31,5 @@ sk:
     best: 'Najlepšia'
     helpful: 'Pomocná'
 
-    evaluate: 'Ohodnotiť'
+    created: 'Pridal'
+    updated: 'Upravil'

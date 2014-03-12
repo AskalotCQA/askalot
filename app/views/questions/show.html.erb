@@ -22,9 +22,8 @@
         </div>
 
         <div class="question-details">
-          <%= question_creation_time @question %> &middot;
-          <%= render 'editables/edited', editable: @question %>
-          <%= render 'questions/edit', question: @question if can? :edit, @question %>
+          <%= render 'questions/details', question: @question %>
+          <%= render 'questions/editing', question: @question %>
           <%= render 'questions/deleting', question: @question %>
         </div>
 

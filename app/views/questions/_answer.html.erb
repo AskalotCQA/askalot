@@ -10,9 +10,8 @@
       </div>
 
       <span class="answer-details">
-        <%= answer_creation_time answer %> &middot;
-        <%= render 'editables/edited', editable: answer %>
-        <%= render "answers/edit", question: @question, answer: answer if can? :edit, answer %>
+        <%= render 'answers/details', answer: answer %>
+        <%= render 'answers/editing', answer: answer %>
         <%= render 'answers/deleting', answer: answer %>
       </span>
 

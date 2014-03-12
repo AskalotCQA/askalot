@@ -2,6 +2,11 @@ sk:
   question:
     navigation: 'Otázky'
 
+    index:
+      title: 'Otázky'
+      new: 'Nová otázka'
+      no_results_found: 'Neboli nájdené žiadne otázky.'
+
     new:
       title: 'Nová otázka'
       submit: 'Opýtať'
@@ -11,23 +16,22 @@ sk:
     create:
       success: 'Otázka bola úspešne pridaná.'
 
+    edit:
+      action: 'Upraviť'
+      title: 'Upraviť otázku'
+      submit: 'Uložiť'
+      cancel: 'Spať'
+
     update:
       success: 'Otázka bola úspešne aktualizovaná.'
-      title: 'Upraviť otázku'
-      action: 'Upraviť otázku'
 
     delete:
-      title: 'Pozor!'
       action: 'Zmazať'
+      title: 'Pozor!'
+      text: 'Naozaj chete zmazať otázku?'
       submit: 'Zmazať'
       cancel: 'Spať'
       success: 'Otázka bola úspešne zmazaná.'
-      text: 'Naozaj chete zmazať otázku?'
-
-    index:
-      title: 'Otázky'
-      new: 'Nová otázka'
-      no_results_found: 'Neboli nájdené žiadne otázky.'
 
     tab:
       new: 'Aktuálne'
@@ -46,9 +50,9 @@ sk:
       start: 'Aktualizovať automaticky'
       end: 'Aktualizované %{time}'
 
-    evaluate: 'Ohodnotiť'
-
     favor: 'Pridať medzi obľúbené'
     unfavor: 'Odobrať z obľúbených'
 
+    created: 'Pridal'
+    updated: 'Upravil'
     favored: 'Obľúbená'
