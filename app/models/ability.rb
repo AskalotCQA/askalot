@@ -5,6 +5,10 @@ class Ability
 
   def initialize(user)
     can(:edit, User) { |resource| resource == user }
+    can(:edit, [Question, Answer, Comment]) { |resource| resource.author == user }
+
+    cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.exists? }
+    cannot(:edit, Answer) { |resource| resource.labelings.exists? }
 
     can :delete, Answer do |resource|
       resource.labels.empty? && resource.author == user && resource.comments.empty? && resource.evaluations.empty?
@@ -33,10 +37,6 @@ class Ability
     can :label, [Question, Answer] do |resource|
       resource.author == user || (user.role?(:teacher) && resource.author == User.find_by(login: :slido))
     end
-
-    can(:edit, [Question, Answer, Comment]) { |resource| resource.author == user }
-    cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.exists? }
-    cannot(:edit, Answer) { |resource| resource.labelings.exists? }
 
     if user.role? :student
     end
