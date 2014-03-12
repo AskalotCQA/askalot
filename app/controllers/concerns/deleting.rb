@@ -6,7 +6,7 @@ module Deleting
     @deletable = controller_name.classify.constantize.find(params[:id])
 
     if @deletable.mark_as_deleted!
-      flash[:notice] = t("#{@model}.delete.success")
+      flash[:notice] = t "#{@model}.delete.success"
     else
       flash_error_messages_for @deletable
     end

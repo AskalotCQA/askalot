@@ -15,6 +15,7 @@ sk:
 
     update:
       success: 'Komentár bol úspešne aktualizovaný.'
+      unchanged: 'Komentár nebol zmenený.'
 
     delete:
       action: 'Zmazať'

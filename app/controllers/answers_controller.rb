@@ -1,5 +1,6 @@
 class AnswersController < ApplicationController
   include Deleting
+  include Editing
   include Voting
 
   before_action :authenticate_user!
@@ -13,25 +14,6 @@ class AnswersController < ApplicationController
     if @answer.save
       flash[:notice] = t('answer.create.success')
     else
-      flash_error_messages_for @answer
-    end
-
-    redirect_to question_path(@question)
-  end
-
-  def update
-    @answer   = Answer.find(params[:id])
-    @question = @answer.question
-
-    authorize! :edit, @answer
-
-    @revision = AnswerRevision.create_revision!(current_user, @answer)
-
-    if @answer.update_attributes(update_params) && @answer.update_attributes_by_revision(@revision)
-      flash[:notice] = t 'answer.update.success'
-    else
-      @revision.destroy!
-
       flash_error_messages_for @answer
     end
 

@@ -15,6 +15,7 @@ sk:
 
     update:
       success: 'Odpoveď bola úspešne aktualizovaná.'
+      unchanged: 'Odpoveď nebola zmenená.'
 
     delete:
       action: 'Zmazať'

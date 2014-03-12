@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   include Deleting
+  include Editing
   include Voting
   include Tabbing
 
@@ -55,24 +56,6 @@ class QuestionsController < ApplicationController
 
     @question.views.create! viewer: current_user
     @question.views.reload
-  end
-
-  def update
-    @question = Question.find(params[:id])
-
-    authorize! :edit, @question
-
-    @revision = QuestionRevision.create_revision!(current_user, @question)
-
-    if @question.update_attributes(update_params) && @question.update_attributes_by_revision(@revision)
-      flash[:notice] = t 'question.update.success'
-    else
-      @revision.destroy!
-
-      flash_error_messages_for @question
-    end
-
-    redirect_to question_path(@question)
   end
 
   def favor

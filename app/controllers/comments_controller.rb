@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   include Deleting
+  include Editing
 
   before_action :authenticate_user!
 
@@ -13,25 +14,6 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:notice] = t('comment.create.success')
     else
-      flash_error_messages_for @comment
-    end
-
-    redirect_to question_path(@question)
-  end
-
-  def update
-    @comment  = Comment.find(params[:id])
-    @question = find_commentable.to_question
-
-    authorize! :edit, @comment
-
-    @revision = CommentRevision.create_revision!(current_user, @comment)
-
-    if @comment.update_attributes(update_params) && @comment.update_attributes_by_revision(@revision)
-      flash[:notice] = t 'comment.update.success'
-    else
-      @revision.destroy!
-
       flash_error_messages_for @comment
     end
 
