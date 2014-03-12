@@ -9,11 +9,11 @@
         <%= render_markdown answer.text %>
       </div>
 
-      <span class="answer-details">
+      <div class="answer-details">
         <%= render 'answers/details', answer: answer %>
         <%= render 'answers/editing', answer: answer %>
         <%= render 'answers/deleting', answer: answer %>
-      </span>
+      </div>
 
       <%= render 'answers/evaluations', answer: answer %>
       <%= render 'answers/comments', answer: answer %>
