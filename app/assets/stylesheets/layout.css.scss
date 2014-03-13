@@ -69,6 +69,10 @@ section#flash {
   @include color-variant(darken($text-muted, 12.5%), darken($text-muted, 25%));
 }
 
+.text-undecorated {
+  text-decoration: none !important;
+}
+
 // sidebar
 
 .sidebar {

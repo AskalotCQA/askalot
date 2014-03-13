@@ -1,5 +1,10 @@
 class CommentsController < ApplicationController
   include Deleting
+  include Editing
+  include Markdown
+
+  include Notifications::Notifying
+  include Notifications::Watching
 
   before_action :authenticate_user!
 
@@ -10,8 +15,15 @@ class CommentsController < ApplicationController
 
     authorize! :comment, @commentable
 
+    process_markdown_for @comment do |user|
+      notify_about :'mention-user', @comment, for: user
+    end
+
     if @comment.save
       flash[:notice] = t('comment.create.success')
+
+      notify_about :'create-comment', @comment, for: @commentable.watchers
+      register_watching_for @commentable.to_question
     else
       flash_error_messages_for @comment
     end
@@ -27,5 +39,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:text).merge(commentable: @commentable, author: current_user)
+  end
+
+  def update_params
+    params.require(:comment).permit(:text)
   end
 end

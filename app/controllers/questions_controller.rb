@@ -1,7 +1,12 @@
 class QuestionsController < ApplicationController
   include Deleting
+  include Editing
+  include Markdown
   include Voting
   include Tabbing
+
+  include Notifications::Notifying
+  include Notifications::Watching
 
   before_action :authenticate_user!
 
@@ -18,7 +23,7 @@ class QuestionsController < ApplicationController
                  end
 
     @questions = filter_questions(@questions)
-    @questions = @questions.page(params[:page]).per(10)
+    @questions = @questions.page(params[:page]).per(20)
 
     initialize_polling
   end
@@ -32,8 +37,15 @@ class QuestionsController < ApplicationController
 
     authorize! :ask, @question
 
+    process_markdown_for @question do |user|
+      notify_about :'mention-user', @question, for: user
+    end
+
     if @question.save
       flash[:notice] = t('question.create.success')
+
+      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.inject(Set.new) { |watchers, tag| watchers + tag.watchers }
+      register_watching_for @question
 
       redirect_to question_path(@question)
     else
@@ -92,5 +104,9 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user)
+  end
+
+  def update_params
+    params.require(:question).permit(:title, :text, :category_id, :tag_list)
   end
 end

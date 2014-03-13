@@ -11,27 +11,29 @@ describe Redcurtain::Renderer::Gemoji do
     end
 
     it 'renders emoji icons' do
-      result = subject.render(content)
+      result = subject.render(content, title: false)
 
-      expect(result.strip).to eql('<img class="gemoji" src="/images/gemoji/poop.png" alt="poop" />')
+      expect(result.to_s).to include('<img class="gemoji" src="/images/gemoji/poop.png" alt="poop"/>')
     end
 
     it 'renders emoji icons with custom classes' do
-      result = subject.render(content, class: [:class1, :class2])
+      result = subject.render(content, class: [:class1, :class2], title: false)
 
-      expect(result.strip).to eql('<img class="class1 class2" src="/images/gemoji/poop.png" alt="poop" />')
+      expect(result.to_s).to include('<img class="class1 class2" src="/images/gemoji/poop.png" alt="poop"/>')
     end
 
     it 'renders emoji icons with custom path' do
-      result = subject.render(content, path: '/assets/images/')
+      result = subject.render(content, path: '/assets/images/', title: false)
 
-      expect(result.strip).to eql('<img class="gemoji" src="/assets/images/poop.png" alt="poop" />')
+      expect(result.to_s).to include('<img class="gemoji" src="/assets/images/poop.png" alt="poop"/>')
     end
 
     it 'respects markdown codespan' do
-      result = subject.render('you can embed icons with ` :poop: `')
+      result = subject.render('you can embed icons with <pre> :poop: </pre>', title: false)
 
-      expect(result.strip).to eql('you can embed icons with ` :poop: `')
+      result = result.to_s.gsub(/\s+/, ' ')
+
+      expect(result.to_s).to include("<p>you can embed icons with </p> <pre> :poop: </pre>")
     end
   end
 end

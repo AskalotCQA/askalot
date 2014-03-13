@@ -1,5 +1,5 @@
 module Notifications
-  module Service
+  module Dispatcher
     extend self
 
     def notifiers
@@ -18,9 +18,9 @@ module Notifications
       @notifiers = []
     end
 
-    def notify(action, initiator, resource)
+    def notify(action, initiator, resource, options = {})
       notifiers.each do |notifier|
-        notifier.publish(action, initiator, resource)
+        notifier.publish(action, initiator, resource, options)
       end
     end
   end
