@@ -12,8 +12,8 @@ class Ability
     cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.any? }
     cannot(:edit, [Answer]) { |resource| resource.labelings.any? }
 
-    cannot(:delete, [Question]) { resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
-    cannot(:delete, [Answer]) { resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
+    cannot(:delete, [Question]) {|resource| resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
+    cannot(:delete, [Answer]) {|resource| resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
 
     can :highlight, Answer do |resource|
       resource.author.role?(:teacher) && !resource.author.role?(:administrator)
