@@ -9,7 +9,7 @@ module Deletable
 
     default_scope -> { undeleted }
 
-    after_save  :recursion_mark_as_deleted!
+    after_save  :mark_as_deleted_recursive!
 
     end
 
@@ -21,12 +21,14 @@ module Deletable
     self.save!
   end
 
-  def recursion_mark_as_deleted!
+  private
+
+  def mark_as_deleted_recursive!
     if self.deleted?
-      self.reflections.each do |key, target_child|
-        if can_delete target_child
-          self.send(key.to_s).each do |recursion_child|
-            recursion_child.mark_as_deleted! self.deletor
+      self.reflections.each do |key, target|
+        if can_delete target
+          self.send(key.to_s).each do |child|
+            child.mark_as_deleted_by! self.deletor
           end
         end
       end
