@@ -13,7 +13,7 @@ module Deletable
 
     end
 
-  def mark_as_deleted!(user)
+  def mark_as_deleted_by!(user)
     self.deleted    = true
     self.deletor    = user
     self.deleted_at = DateTime.now
