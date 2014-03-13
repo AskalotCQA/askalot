@@ -5,7 +5,6 @@ class Tag < ActiveRecord::Base
   has_many :taggings, dependent: :restrict_with_exception
 
   scope :popular, lambda { select(' tags.*, count(*) as a').joins(:taggings).group('tags.id').order('a DESC')}
-  scope :news,     lambda { joins(:taggings).group('tags.id, tags.name').maximum('taggings.created_at') }
 
   before_save :normalize
 

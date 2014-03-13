@@ -17,8 +17,7 @@
                 <div class="col-md-4">
                   <h4><%= link_to tag.name, questions_path(tags: tag.name) %></h4>
                   <p class="text-muted">
-                    <%= tag.count %>
-                    <span class="item-multiplier-x">×</span>
+                    <%= t('count.question', count: tag.count).upcase_first %> <%= tag.count %> &middot;
                   </p>
                 </div>
               <% end %>
