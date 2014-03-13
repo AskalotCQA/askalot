@@ -44,9 +44,7 @@ class QuestionsController < ApplicationController
     if @question.save
       flash[:notice] = t('question.create.success')
 
-      # TODO (smolnar) resolve Set is not a symbol error
-      # notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.inject(Set.new).each { |watchers, tag| watchers + tag.watchers }
-      notify_about :'create-question', @question, for: @question.category.watchers
+      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.inject(Set.new) { |watchers, tag| watchers + tag.watchers }
       register_watching_for @question
 
       redirect_to question_path(@question)
