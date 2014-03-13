@@ -4,9 +4,9 @@ class AddDeletorAndDeletedAt < ActiveRecord::Migration
               :labelings, :questions, :question_revisions, :taggings, :views, :votes]
 
     models.each do |model|
-      add_column model, :deleted_at, :timestamp, default: null
+      add_column model, :deleted_at, :timestamp
 
-      add_references model, :deletor, index: true
+      add_reference model, :deletor, null: true, index: true
     end
   end
 end
