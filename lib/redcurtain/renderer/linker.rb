@@ -10,13 +10,10 @@ module Redcurtain::Renderer
 
     def render(content_or_document, options = {})
       document = prepare_document(content_or_document)
+      linker   = options[:linker]
+      regex    = options[:regex] || /(^|\s+)(@\w+)/
 
-      linker  = options[:linker]
-      regex   = options[:regex] || /(^|\s+)(@\w+)/
-
-      unless linker
-        raise ArgumentError.new("You need to provide a 'linker' option to translate content references")
-      end
+      raise ArgumentError.new "You need to provide a 'linker' option to translate content references" unless linker
 
       document.at('body').search('*:not(pre)').each do |part|
         content = part.inner_html.gsub(regex) do |match|

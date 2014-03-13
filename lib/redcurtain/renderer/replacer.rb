@@ -1,26 +1,20 @@
 module Redcurtain::Renderer
   class Replacer
-    include Redcurtain::Renderer
-
     attr_accessor :name
 
     def initialize(name)
       @name = name
     end
 
-    def render(content, options = {})
-      replacer = options[:replacer]
-      regex    = options[:regex]
+    def render(content_or_document, options = {})
+      content     = content_or_document.to_s
+      regex       = options[:regex]
+      replacement = options[:replacement]
 
-      unless regex
-        raise ArgumentError.new("You need to provide a 'regex' option to match content")
-      end
+      raise ArgumentError.new "You need to provide a 'regex' option to match content" unless regex
+      raise ArgumentError.new "You need to provide a 'linker' which replaces content match" unless replacement
 
-      unless replacer
-        raise ArgumentError.new("You need to provide a 'linker' which replaces content match")
-      end
-
-      content.to_s.gsub(regex, &replacer)
+      content.to_s.gsub(regex, &replacement)
     end
   end
 end

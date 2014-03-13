@@ -8,12 +8,12 @@ module MarkdownHelper
   def render_markdown(text, options = {})
     options.deep_merge! :'user-link' => {
       regex: /http.*\/users\/\w+/,
-      replacer: lambda { |match| (user = User.find_by(nick: match[/\w+\z/])) ? "@#{user.id}" : match }
+      replacement: lambda { |match| (user = User.find_by(nick: match[/\w+\z/])) ? "@#{user.id}" : match }
     }
 
     options.deep_merge! :'question-link' => {
       regex: /http.*\/questions\/\d+/,
-      replacer: lambda { |match| "##{match[/\d+\z/]}" }
+      replacement: lambda { |match| "##{match[/\d+\z/]}" }
     }
 
     options.deep_merge! user: {

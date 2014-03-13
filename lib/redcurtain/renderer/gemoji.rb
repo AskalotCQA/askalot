@@ -1,7 +1,8 @@
 module Redcurtain::Renderer
   module Gemoji
     include Redcurtain::Renderer
-    extend  self
+
+    extend self
 
     def render(content_or_document, options = {})
       document = prepare_document(content_or_document)

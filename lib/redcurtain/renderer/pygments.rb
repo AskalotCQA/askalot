@@ -1,9 +1,11 @@
 module Redcurtain::Renderer
   module Pygments
+    include Redcurtain::Renderer
+
     extend self
 
     def render(content_or_document, options = {})
-      document = content_or_document.is_a?(Nokogiri::XML::Document) ? content_or_document : Nokogiri::XML(Nokogiri::HTML(content_or_document).to_s)
+      document = prepare_document(content_or_document)
 
       document.search('//pre').each do |pre|
         pre.replace ::Pygments.highlight(pre.text.strip, lexer: pre[:lang])

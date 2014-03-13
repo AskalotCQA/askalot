@@ -2,6 +2,8 @@ module Redcurtain
   module Renderer
     extend self
 
+    protected
+
     def prepare_document(content_or_document)
       return content_or_document if content_or_document.is_a?(Nokogiri::XML::Document)
 
