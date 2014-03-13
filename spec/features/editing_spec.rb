@@ -29,7 +29,7 @@ describe 'Editing', js: true do
         click_button 'Uložiť'
       end
 
-      expect(page).to have_content('Vaša otázka bola úspešne aktualizovaná.')
+      expect(page).to have_content('Otázka bola úspešne aktualizovaná.')
 
       within '#question-title' do
         expect(page).to have_content('Elasticsearch problem')
@@ -53,7 +53,7 @@ describe 'Editing', js: true do
         click_button 'Uložiť'
       end
 
-      expect(page).to have_content('Vaša odpoveď bola úspešne aktualizovaná.')
+      expect(page).to have_content('Odpoveď bola úspešne aktualizovaná.')
       expect(page).to have_content('I found solution already')
     end
 

@@ -23,7 +23,7 @@ describe 'Add Answer' do
 
       click_button 'Odpovedať'
 
-      expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
+      expect(page).to have_content('Odpoveď bola úspešne pridaná.')
 
       within '#question-answers' do
         expect(page).to have_content('My neat solution')
@@ -47,7 +47,6 @@ describe 'Add Answer' do
           expect(page).to have_css('h1', count: 1)
           expect(page).to have_content('My neat solution')
         end
-
       end
 
       it 'processes answer text' do
@@ -60,7 +59,7 @@ describe 'Add Answer' do
 
         click_button 'Odpovedať'
 
-        expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
+        expect(page).to have_content('Odpoveď bola úspešne pridaná.')
 
         within '#question-answers' do
           expect(page).to have_css('h1', count: 1)
@@ -80,7 +79,7 @@ describe 'Add Answer' do
 
         click_button 'Odpovedať'
 
-        expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
+        expect(page).to have_content('Odpoveď bola úspešne pridaná.')
 
         within '#question-answers' do
           expect(page).to have_link('@smolnar',        href: user_path(:smolnar))
@@ -158,7 +157,7 @@ describe 'Add Answer' do
 
       click_button 'Odpovedať'
 
-      expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
+      expect(page).to have_content('Odpoveď bola úspešne pridaná.')
       expect(page).to have_css(".answer-labeling-best a.answer-labeled-best")
     end
 
@@ -174,7 +173,7 @@ describe 'Add Answer' do
 
       click_button 'Odpovedať'
 
-      expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
+      expect(page).to have_content('Odpoveď bola úspešne pridaná.')
       expect(page).not_to have_css(".answer-labeling-best a.answer-labeled-best")
     end
 
@@ -190,7 +189,7 @@ describe 'Add Answer' do
 
       click_button 'Odpovedať'
 
-      expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
+      expect(page).to have_content('Odpoveď bola úspešne pridaná.')
       expect(page).not_to have_css(".answer-labeling-best a.answer-labeled-best")
     end
 
@@ -206,7 +205,7 @@ describe 'Add Answer' do
 
       click_button 'Odpovedať'
 
-      expect(page).to have_content('Vaša odpoveď bola úspešne pridaná.')
+      expect(page).to have_content('Odpoveď bola úspešne pridaná.')
       expect(page).not_to have_css(".answer-labeling-best a.answer-labeled-best")
     end
 
