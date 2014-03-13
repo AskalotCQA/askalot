@@ -6,17 +6,14 @@ class Ability
   def initialize(user)
     can(:edit, User) { |resource| resource == user }
 
-    can :delete, Answer do |resource|
-      resource.labels.empty? && resource.author == user && resource.comments.empty? && resource.evaluations.empty?
-    end
+    can(:edit,   [Question, Answer, Comment]) { |resource| resource.author == user }
+    can(:delete, [Question, Answer, Comment]) { |resource| resource.author == user }
 
-    can :delete, Comment do |resource|
-      resource.author == user
-    end
+    cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.any? }
+    cannot(:edit, [Answer]) { |resource| resource.labelings.any? }
 
-    can :delete, Question do |resource|
-      resource.answers.empty? && resource.author == user && resource.favorites.empty? && resource.comments.empty? && resource.evaluations.empty?
-    end
+    cannot(:delete, [Question]) { |resource| resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
+    cannot(:delete, [Answer]) { |resource| resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
 
     can(:show_email, User) { |resource| resource.show_email? }
     can(:show_name,  User) { |resource| resource.show_name? && resource.name.present? }
@@ -49,6 +46,8 @@ class Ability
       can :delete, [Question, Answer, Comment]
 
       can :vote, :all
+
+      can :edit, [Question, Answer, Comment]
     end
   end
 end

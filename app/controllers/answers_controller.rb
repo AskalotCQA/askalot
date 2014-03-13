@@ -1,6 +1,11 @@
 class AnswersController < ApplicationController
   include Deleting
+  include Editing
+  include Markdown
   include Voting
+
+  include Notifications::Notifying
+  include Notifications::Watching
 
   before_action :authenticate_user!
 
@@ -10,8 +15,15 @@ class AnswersController < ApplicationController
 
     authorize! :answer, @question
 
+    process_markdown_for @answer do |user|
+      notify_about :'mention-user', @answer, for: user
+    end
+
     if @answer.save
       flash[:notice] = t('answer.create.success')
+
+      notify_about :'create-answer', @answer, for: @question.watchers
+      register_watching_for @answer
     else
       flash_error_messages_for @answer
     end
@@ -25,23 +37,23 @@ class AnswersController < ApplicationController
     @question = @answer.question
 
     case params[:value].to_sym
-    when :best
-      authorize! :label, @question
+      when :best
+        authorize! :label, @question
 
-      @question.answers.where.not(id: @answer.id).each do |answer|
-        labeling = answer.labelings.by(current_user).with(:best).first
+        @question.answers.where.not(id: @answer.id).each do |answer|
+          labeling = answer.labelings.by(current_user).with(:best).first
 
-        if labeling
-          @answers << answer
-          labeling.delete
+          if labeling
+            @answers << answer
+            labeling.delete
+          end
         end
-      end
-    when :helpful
-      authorize! :label, @question
+      when :helpful
+        authorize! :label, @question
 
-      fail if @answer.labelings.by(current_user).with(:best).exists?
-    else
-      fail
+        fail if @answer.labelings.by(current_user).with(:best).exists?
+      else
+        fail
     end
 
     @answer.toggle_labeling_by! current_user, params[:value]
@@ -51,5 +63,9 @@ class AnswersController < ApplicationController
 
   def answer_params
     params.require(:answer).permit(:text).merge(question: @question, author: current_user)
+  end
+
+  def update_params
+    params.require(:answer).permit(:text)
   end
 end

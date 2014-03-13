@@ -37,9 +37,105 @@ describe 'Add Comment' do
     end
   end
 
+  context 'for question' do
+    context 'with notifications' do
+      it 'registers commenter as watcher of question' do
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        within '#question-comments' do
+          click_link 'Pridať komentár'
+
+          fill_in 'comment[text]', with: 'So wanna watch this!'
+
+          click_button 'Komentovať'
+        end
+
+        expect(question).to be_watched_by(user)
+      end
+
+      it 'notifies about new comment' do
+        create :watching, watcher: question.author, watchable: question
+
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        within '#question-comments' do
+          click_link 'Pridať komentár'
+
+          fill_in 'comment[text]', with: 'So wanna watch this!'
+
+          click_button 'Komentovať'
+        end
+
+        expect(notifications.size).to eql(1)
+
+        comment = Comment.last
+
+        expect(last_notification.notifiable).to eql(comment)
+        expect(last_notification.recipient).to  eql(question.author)
+        expect(last_notification.initiator).to  eql(user)
+        expect(last_notification.action).to     eql(:'add-comment')
+      end
+    end
+  end
+
+  context 'for answer' do
+    let!(:answer) { create :answer, question: question }
+
+    context 'with notifications' do
+      it 'registers commenter as watcher of the question' do
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        within "#answer-#{answer.id}" do
+          click_link 'Pridať komentár'
+
+          fill_in 'comment[text]', with: 'So wanna watch this!'
+
+          click_button 'Komentovať'
+        end
+
+        expect(question).to be_watched_by(user)
+      end
+
+      it 'notifies about new comment' do
+        create :watching, watcher: question.author, watchable: answer
+
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        within "#answer-#{answer.id}" do
+          click_link 'Pridať komentár'
+
+          fill_in 'comment[text]', with: 'So wanna watch this!'
+
+          click_button 'Komentovať'
+        end
+
+        expect(notifications.size).to eql(1)
+
+        comment = Comment.last
+
+        expect(last_notification.notifiable).to eql(comment)
+        expect(last_notification.recipient).to  eql(question.author)
+        expect(last_notification.initiator).to  eql(user)
+        expect(last_notification.action).to     eql(:'add-comment')
+      end
+    end
+  end
+
   context 'when using markdown' do
     it 'renders only links and mentions' do
-      create :user, login: :smolnar
+      other = create :user, login: :smolnar
 
       visit root_path
 
@@ -61,6 +157,15 @@ describe 'Add Comment' do
         expect(page).to     have_link('askalot',  href: 'https://askalot.fiit.stuba.sk')
         expect(page).to     have_link('http://www.example.com',  href: 'http://www.example.com')
       end
+
+      expect(notifications.size).to eql(1)
+
+      comment = Comment.last
+
+      expect(last_notification.notifiable).to eql(comment)
+      expect(last_notification.recipient).to  eql(other)
+      expect(last_notification.initiator).to  eql(user)
+      expect(last_notification.action).to     eql(:'mention-user')
     end
   end
 end

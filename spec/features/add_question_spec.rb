@@ -31,7 +31,7 @@ describe 'Add Question' do
 
     click_button 'Opýtať'
 
-    expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
+    expect(page).to have_content('Otázka bola úspešne pridaná.')
 
     expect(Question).to have(1).record
 
@@ -102,7 +102,7 @@ describe 'Add Question' do
     end
 
     it 'embeds references to user' do
-      create :user, login: :smolnar
+      other = create :user, login: :smolnar
 
       visit root_path
 
@@ -117,9 +117,18 @@ describe 'Add Question' do
       within '.question-content' do
         expect(page).to have_link('@smolnar', href: user_path(:smolnar))
       end
+
+      expect(notifications.size).to eql(1)
+
+      question = Question.last
+
+      expect(last_notification.notifiable).to eql(question)
+      expect(last_notification.recipient).to  eql(other)
+      expect(last_notification.initiator).to  eql(user)
+      expect(last_notification.action).to     eql(:'mention-user')
     end
 
-    it 'embeds reference to user' do
+    it 'embeds reference to question' do
       question = create :question
 
       visit root_path
@@ -159,7 +168,7 @@ describe 'Add Question' do
 
     context 'with link for user' do
       it 'embeds reference to user' do
-        create :user, login: :smolnar
+        user = create :user, login: :smolnar
 
         visit root_path
 
@@ -167,16 +176,15 @@ describe 'Add Question' do
 
         select  category.name,    from: 'question_category_id'
         fill_in 'question_title', with: 'Lorem ipsum?'
-        fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{user_path('smolnar')}"
+        fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{user_path(user.nick)}"
 
         click_button 'Opýtať'
 
         within '.question-content' do
-          expect(page).to have_link("@smolnar", href: user_path('smolnar'))
+          expect(page).to have_link("@#{user.nick}", href: user_path(user.nick))
         end
       end
     end
-
   end
 
   context 'when selecting category' do
@@ -201,7 +209,7 @@ describe 'Add Question' do
 
       click_button 'Opýtať'
 
-      expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
+      expect(page).to have_content('Otázka bola úspešne pridaná.')
     end
 
     context 'after realoading page' do
@@ -221,6 +229,24 @@ describe 'Add Question' do
           expect(page).to have_content('ali-gz')
         end
       end
+    end
+  end
+
+  context 'with notifications' do
+    it 'registers author as watcher' do
+      visit root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select  category.name,    from: 'question_category_id'
+      fill_in 'question_title', with: 'Am I a watcher or stalker?'
+      fill_in 'question_text',  with: 'I want to have notification for this question.'
+
+      click_button 'Opýtať'
+
+      question = Question.last
+
+      expect(question).to be_watched_by(user)
     end
   end
 end
