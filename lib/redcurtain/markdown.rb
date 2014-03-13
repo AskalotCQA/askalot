@@ -19,7 +19,9 @@ module Redcurtain
         renderer.render(result, options[renderer.name.to_s.split(/::/).last.downcase.to_sym] || {})
       end
 
-      document = document.is_a?(Nokogiri::XML::Document) ? document.at('body > *') : document
+      if document.is_a?(Nokogiri::XML::Document)
+        document = document.search('body > *').map(&:to_s).join
+      end
 
       document.to_s.html_safe
     end
