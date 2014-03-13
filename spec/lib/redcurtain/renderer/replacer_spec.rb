@@ -11,7 +11,7 @@ describe Redcurtain::Renderer::Replacer do
 
       result = subject.render(text, replacement: replacement, regex: /doge/)
 
-      expect(result.to_s).to include('such @doge, wow')
+      expect(result).to eql('such @doge, wow')
     end
   end
 end

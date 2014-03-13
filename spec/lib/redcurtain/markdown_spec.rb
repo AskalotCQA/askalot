@@ -34,7 +34,7 @@ describe Redcurtain::Markdown do
       }
 
       text = "`code` :dog: ```ruby\ndoge.code```\nhello :unknown-doge:"
-      html = "<p><code>code</code> <img class=\"doge-class\" src=\"/assets/dog.png\" alt=\"dog\"/> <code>ruby\ndoge.code</code>\nhello :unknown-doge:</p>"
+      html = "<p><code>code</code> <img class=\"doge-class\" src=\"/assets/dog.png\" alt=\"dog\"> <code>ruby\ndoge.code</code>\nhello :unknown-doge:</p>"
 
       markdown.renderers = [
         Redcurtain::Renderer::Redcarpet,

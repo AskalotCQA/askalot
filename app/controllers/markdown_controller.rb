@@ -1,5 +1,7 @@
 class MarkdownController < ApplicationController
   def preview
-    render partial: 'preview', locals: { text: params[:text] }
+    @text = Markdown::Processor.process(params[:text])
+
+    render partial: 'preview', locals: { text: @text }
   end
 end

@@ -4,14 +4,14 @@ module Redcurtain::Renderer
 
     extend self
 
-    def render(content_or_document, options = {})
-      document = prepare_document(content_or_document)
+    def render(content, options = {})
+      document = Nokogiri::XML(content)
 
-      document.search('//pre').each do |pre|
+      document.root.search('code').each do |pre|
         pre.replace ::Pygments.highlight(pre.text.strip, lexer: pre[:lang])
       end
 
-      document
+      document.inner_html.html_safe
     end
   end
 end

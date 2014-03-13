@@ -12,9 +12,9 @@ describe Redcurtain::Renderer::Pygments do
 
       stub_const('::Pygments', pygments)
 
-      content = subject.render(html).to_s
+      content = subject.render(html)
 
-      expect(content).to include('<pre>highlighted code</pre>')
+      expect(content).to eql('<pre>highlighted code</pre>')
     end
   end
 end
