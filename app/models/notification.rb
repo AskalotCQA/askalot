@@ -11,9 +11,9 @@ class Notification < ActiveRecord::Base
     :'create-answer',
     :'create-comment',
 
-    :'edit-question',
-    :'edit-answer',
-    :'edit-comment',
+    :'update-question',
+    :'update-answer',
+    :'update-comment',
 
     :'delete-question',
     :'delete-answer',

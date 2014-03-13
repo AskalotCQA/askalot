@@ -1,0 +1,12 @@
+<li>
+  <div class="row">
+    <div class="col-md-10">
+      <%= notification_icon_tag notification %>
+      <%= render "contents/#{notification.action.gsub(/-/, '_')}", notification: notification %>
+    </div>
+    <div class="col-md-2">
+      <%= user_avatar_tag(user, small: true) %>
+      <%= tooltip_time_tag notification.created_at, format: :normal, placement: :right %>
+    </div>
+  </div>
+</li>

@@ -1,12 +1,14 @@
 module UsersHelper
   def user_avatar_tag(user, options = {})
+    classes = "user-avatar#{'-small' if options.delete(:small)}"
+
     if user == :anonymous
-      return content_tag :span, class: :'user-avatar' do
+      return content_tag :span, class: classes do
         gravatar_image_tag 'anonymous@fiit.stuba.sk', options.merge(default: image_url('anonymous.png'), alt: :anonymous)
       end
     end
 
-    link_to user_path(user.nick), class: :'user-avatar' do
+    link_to user_path(user.nick), class: classes do
       gravatar_image_tag user.gravatar_email, options.merge(alt: user.nick)
     end
   end

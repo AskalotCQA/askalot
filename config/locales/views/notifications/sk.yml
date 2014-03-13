@@ -10,3 +10,5 @@ sk:
       unread: 'Neprečítané'
 
     more: 'Zobraziť viac'
+    none: 'Žiadne notifikácie.'
+    read: 'Všetky notifikácie prečítané, dobrá práca!'
