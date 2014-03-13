@@ -5,15 +5,14 @@ module Markdown
     def process(text, user, &callback)
       linker = Redcurtain::Renderer::Linker.new(:user)
 
-      # TODO (smolnar) resolve why do end doesnt work
-      linker.render text, regex: /(^|\s+)(@\w+)/, linker: lambda { |match|
+      linker.render(text, regex: /(^|\s+)(@\w+)/, linker: lambda { |match|
         nick = match.gsub(/@/, '').strip
         user = User.find_by(nick: nick)
 
         callback.call(user)
 
         "@#{user.id}"
-      }
+      }).text
     end
   end
 end

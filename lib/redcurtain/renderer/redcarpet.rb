@@ -13,7 +13,7 @@ module Redcurtain::Renderer
     end
 
     def defaults
-      @defaults ||= { tags: Factory::TAGS.clone }
+      @defaults ||= { tags: Factory::TAGS.clone, space_after_headers: true }
     end
 
     class Factory < ::Redcarpet::Render::HTML

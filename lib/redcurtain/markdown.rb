@@ -6,8 +6,8 @@ module Redcurtain
 
     def renderers
       @renderers ||= [
-        Redcurtain::Renderer::Gemoji,
         Redcurtain::Renderer::Redcarpet,
+        Redcurtain::Renderer::Gemoji,
         Redcurtain::Renderer::Pygments
       ]
     end
@@ -15,9 +15,15 @@ module Redcurtain
     def render(content_or_document, options = {})
       options.symbolize_keys!
 
-      renderers.inject(content_or_document) { |result, renderer|
+      document = renderers.inject(content_or_document) do |result, renderer|
         renderer.render(result, options[renderer.name.to_s.split(/::/).last.downcase.to_sym] || {})
-      }.to_s.html_safe
+      end
+
+      if document.is_a?(Nokogiri::XML::Document)
+        document = document.search('body > *').map(&:to_s).join
+      end
+
+      document.to_s.html_safe
     end
 
     def strip(content, options = {})

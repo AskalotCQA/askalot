@@ -12,8 +12,8 @@ class Ability
     cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.any? }
     cannot(:edit, [Answer]) { |resource| resource.labelings.any? }
 
-    cannot(:delete, [Question]) { resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
-    cannot(:delete, [Answer]) { resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
+    cannot(:delete, [Question]) { |resource| resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
+    cannot(:delete, [Answer]) { |resource| resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
 
     can(:show_email, User) { |resource| resource.show_email? }
     can(:show_name,  User) { |resource| resource.show_name? && resource.name.present? }

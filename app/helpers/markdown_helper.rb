@@ -6,6 +6,16 @@ module MarkdownHelper
   end
 
   def render_markdown(text, options = {})
+    options.deep_merge! :'user-link' => {
+      regex: /http.*\/users\/\w+/,
+      replacement: lambda { |match| (user = User.find_by(nick: match[/\w+\z/])) ? "@#{user.id}" : match }
+    }
+
+    options.deep_merge! :'question-link' => {
+      regex: /http.*\/questions\/\d+/,
+      replacement: lambda { |match| "##{match[/\d+\z/]}" }
+    }
+
     options.deep_merge! user: {
       linker: lambda { |match| markdown_link_to_user(match) },
       regex: /(^|\s)(@\d+)/
@@ -13,7 +23,7 @@ module MarkdownHelper
 
     options.deep_merge! question: {
       linker: lambda { |match| markdown_link_to_question(match) },
-      regex: /(^|\s)(#\d+|http.*\/questions\/[0-9_]+($|\s))/
+      regex: /(^|\s)(#\d+)/
     }
 
     Redcurtain::Markdown.render(text, options)
@@ -31,7 +41,7 @@ module MarkdownHelper
   end
 
   def markdown_link_to_question(match, options = {})
-    id       = match[/(\d+\z)/] || match.gsub(/#/, '')
+    id       = match[/\d+\z/] || match.gsub(/#/, '')
     question = Question.find_by(id: id)
 
     link_to "##{id}", question if question

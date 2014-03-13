@@ -42,7 +42,7 @@ class QuestionsController < ApplicationController
     end
 
     if @question.save
-      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.inject(Set.new).each { |watchers, tag| watchers + tag.watchers }
+      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.inject(Set.new) { |watchers, tag| watchers + tag.watchers }
       register_watching_for @question
 
       flash[:notice] = t('question.create.success')

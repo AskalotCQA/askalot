@@ -8,7 +8,7 @@ class window.Markdown
       gemoji:
         match:    /(^|\s*):([\-+\w]*)$/
         template: (value) -> templates['markdown/textcomplete/gemoji'](icon: value)
-        replace:  (value)  -> ":#{value}:"
+        replace:  (value)  -> "$1:#{value}: "
         index:    2
         maxCount: 5
         search:   (term, callback) ->
@@ -19,7 +19,7 @@ class window.Markdown
       users:
         match:    /(^|\s*)@(\w*)$/
         template: (value) -> templates['markdown/textcomplete/users'](user: value)
-        replace:  (value) -> "$1@#{value.nick}"
+        replace:  (value) -> "$1@#{value.nick} "
         index:    2
         maxCount: 5
         search:   (term, callback) ->
@@ -28,7 +28,7 @@ class window.Markdown
       questions:
         match:    /(^|\s*)#(\w*)$/
         template: (value) -> templates['markdown/textcomplete/questions'](question: value)
-        replace:  (value) -> "$1##{value.id}"
+        replace:  (value) -> "$1##{value.id} "
         index:    2
         maxCount: 5
         search: (term, callback) ->

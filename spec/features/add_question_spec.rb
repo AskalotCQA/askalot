@@ -31,7 +31,7 @@ describe 'Add Question' do
 
     click_button 'Opýtať'
 
-    expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
+    expect(page).to have_content('Otázka bola úspešne pridaná.')
 
     expect(Question).to have(1).record
 
@@ -165,6 +165,26 @@ describe 'Add Question' do
         end
       end
     end
+
+    context 'with link for user' do
+      it 'embeds reference to user' do
+        user = create :user, login: :smolnar
+
+        visit root_path
+
+        click_link 'Opýtať sa otázku'
+
+        select  category.name,    from: 'question_category_id'
+        fill_in 'question_title', with: 'Lorem ipsum?'
+        fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{user_path(user.nick)}"
+
+        click_button 'Opýtať'
+
+        within '.question-content' do
+          expect(page).to have_link("@#{user.nick}", href: user_path(user.nick))
+        end
+      end
+    end
   end
 
   context 'when selecting category' do
@@ -189,7 +209,7 @@ describe 'Add Question' do
 
       click_button 'Opýtať'
 
-      expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
+      expect(page).to have_content('Otázka bola úspešne pridaná.')
     end
 
     context 'after realoading page' do

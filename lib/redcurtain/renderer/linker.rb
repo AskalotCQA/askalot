@@ -1,5 +1,7 @@
 module Redcurtain::Renderer
   class Linker
+    include Redcurtain::Renderer
+
     attr_accessor :name
 
     def initialize(name)
@@ -7,17 +9,14 @@ module Redcurtain::Renderer
     end
 
     def render(content_or_document, options = {})
-      document = content_or_document.is_a?(Nokogiri::XML::Document) ? content_or_document : Nokogiri::XML(Nokogiri::HTML(content_or_document).to_s)
+      document = prepare_document(content_or_document)
+      linker   = options[:linker]
+      regex    = options[:regex] || /(^|\s+)(@\w+)/
 
-      linker  = options[:linker]
-      regex   = options[:regex] || /(^|\s+)(@\w+)/
-
-      unless linker
-        raise ArgumentError.new("You need to provide a 'linker' option to translate content references")
-      end
+      raise ArgumentError.new "You need to provide a 'linker' option to translate content references" unless linker
 
       document.at('body').search('*:not(pre)').each do |part|
-        content = part.to_s.gsub(regex) do |match|
+        content = part.inner_html.gsub(regex) do |match|
           result = linker.call(match)
 
           if result
@@ -29,10 +28,10 @@ module Redcurtain::Renderer
           end
         end
 
-        part.replace(content)
+        part.inner_html = content
       end
 
-      document.at('body')
+      document
     end
   end
 end

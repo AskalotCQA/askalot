@@ -1,17 +1,17 @@
 module Redcurtain::Renderer
   module Gemoji
+    include Redcurtain::Renderer
+
     extend self
 
     def render(content_or_document, options = {})
-      document = content_or_document.is_a?(Nokogiri::HTML::Document) ? content_or_document : Nokogiri::HTML(content_or_document)
-      document = Nokogiri::XML(document.to_s)
-
-      classes = Array.wrap(options[:class] || :gemoji)
-      path    = options[:path]  || '/images/gemoji'
-      title   = options[:title] == false ? nil : options[:title] || lambda { |name| name }
+      document = prepare_document(content_or_document)
+      classes  = Array.wrap(options[:class] || :gemoji)
+      path     = options[:path]  || '/images/gemoji'
+      title    = options[:title] == false ? nil : options[:title] || lambda { |name| name }
 
       document.at('body').search('*:not(pre)').each do |part|
-        content = part.to_s.gsub(/:[a-z0-9\+\-_]+:/) do |match|
+        content = part.inner_html.gsub(/:[a-z0-9\+\-_]+:/) do |match|
           name = match[1..-2]
 
           if Emoji.names.include? name
@@ -23,10 +23,10 @@ module Redcurtain::Renderer
           end
         end
 
-        part.replace(content)
+        part.inner_html = content
       end
 
-      document.at('body')
+      document
     end
   end
 end

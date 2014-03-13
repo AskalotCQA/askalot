@@ -1,7 +1,14 @@
+# Order of renders matters
+
 Redcurtain::Markdown.renderers.unshift(*[
+  Redcurtain::Renderer::Replacer.new(:'user-link'),
+  Redcurtain::Renderer::Replacer.new(:'question-link'),
+])
+
+Redcurtain::Markdown.renderers += [
   Redcurtain::Renderer::Linker.new(:user),
   Redcurtain::Renderer::Linker.new(:question)
-])
+]
 
 [:autolink, :no_images, :no_styles].each do |flag|
   Redcurtain::Renderer::Redcarpet.defaults[flag] = true
@@ -27,6 +34,3 @@ Redcurtain::Renderer::Redcarpet.defaults[:tags] &= [
   :superscript,
   :underline
 ]
-
-#TODO(zbell) rm
-Redcurtain::Markdown.renderers = []
