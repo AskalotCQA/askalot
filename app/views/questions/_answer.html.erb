@@ -1,4 +1,4 @@
-<li id="answer-<%= answer.id %>" class="question-answer<%= ' bg-warning' if can? :highlight, answer %>">
+<li id="answer-<%= answer.id %>" class="question-answer<%= ' bg-warning' if answer_highlighted? answer %>">
   <div class="row">
     <div class="col-md-2">
       <%= render 'users/square', user: answer.author %>

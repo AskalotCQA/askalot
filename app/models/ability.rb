@@ -15,10 +15,6 @@ class Ability
     cannot(:delete, [Question]) {|resource| resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
     cannot(:delete, [Answer]) {|resource| resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
 
-    can :highlight, Answer do |resource|
-      resource.author.role?(:teacher) && !resource.author.role?(:administrator)
-    end
-
     can(:show_email, User) { |resource| resource.show_email? }
     can(:show_name,  User) { |resource| resource.show_name? && resource.name.present? }
 
