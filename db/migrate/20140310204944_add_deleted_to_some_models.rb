@@ -1,4 +1,4 @@
-class AddDeletedToVotesAndEvaluationsAndViews < ActiveRecord::Migration
+class AddDeletedToSomeModels < ActiveRecord::Migration
   def change
     models = [
       :answer_revisions,

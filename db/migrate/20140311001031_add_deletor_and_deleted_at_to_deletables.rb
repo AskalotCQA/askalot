@@ -1,4 +1,4 @@
-class AddDeletorAndDeletedAt < ActiveRecord::Migration
+class AddDeletorAndDeletedAtToDeletables < ActiveRecord::Migration
   def change
     models = [
       :answers,
