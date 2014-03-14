@@ -6,19 +6,5 @@ class Notification < ActiveRecord::Base
   scope :read, lambda { where(unread: false) }
   scope :unread, lambda { where(unread: true) }
 
-  symbolize :action, in: [
-    :'create-question',
-    :'create-answer',
-    :'create-comment',
-
-    :'update-question',
-    :'update-answer',
-    :'update-comment',
-
-    :'delete-question',
-    :'delete-answer',
-    :'delete-comment',
-
-    :'mention-user'
-  ]
+  symbolize :action, in: [:create, :update, :delete, :mention]
 end
