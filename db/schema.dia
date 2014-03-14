@@ -11827,7 +11827,7 @@
         <dia:point val="-5,65"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-5.05,64.95;4.405,80.25"/>
+        <dia:rectangle val="-5.05,64.95;4.405,81.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-5,65"/>
@@ -11836,7 +11836,7 @@
         <dia:real val="9.3550000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="15.200000000000005"/>
+        <dia:real val="16.000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Notifications#</dia:string>
@@ -12158,6 +12158,29 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#read_at#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#datetime#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#updated_at#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -12326,16 +12349,16 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O51">
       <dia:attribute name="obj_pos">
-        <dia:point val="-4,76"/>
+        <dia:point val="-4,77"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-4.05,75.95;3.11,82.55"/>
+        <dia:rectangle val="-4.05,76.95;3.11,83.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-4,76"/>
+        <dia:point val="-4,77"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.0599999999999996"/>
@@ -12370,7 +12393,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-3.65,77.245"/>
+            <dia:point val="-3.65,78.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
