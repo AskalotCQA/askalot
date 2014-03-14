@@ -1,4 +1,6 @@
 class QuestionRevision < ActiveRecord::Base
+  include Deletable
+
   belongs_to :question
   belongs_to :editor, class_name: :User
 
