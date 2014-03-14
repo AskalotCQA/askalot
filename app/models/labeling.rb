@@ -1,4 +1,6 @@
 class Labeling < ActiveRecord::Base
+  include Deletable
+
   belongs_to :author, class_name: :User
   belongs_to :answer
   belongs_to :label
