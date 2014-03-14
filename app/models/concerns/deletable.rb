@@ -9,9 +9,8 @@ module Deletable
 
     default_scope -> { undeleted }
 
-    after_save  :mark_as_deleted_recursive!
-
-    end
+    after_save :mark_as_deleted_recursive!
+  end
 
   def mark_as_deleted_by!(user)
     self.deleted    = true
@@ -26,7 +25,7 @@ module Deletable
   def mark_as_deleted_recursive!
     if self.deleted?
       self.reflections.each do |key, target|
-        if can_delete target
+        if mark_as_deleted? target
           self.send(key.to_s).each do |child|
             child.mark_as_deleted_by! self.deletor
           end
@@ -35,7 +34,7 @@ module Deletable
     end
   end
 
-  def can_delete(model)
+  def mark_as_deleted?(model)
     model.options[:dependent] == :destroy && model.macro == :has_many && model.klass.column_names.include?('deleted')
   end
 end
