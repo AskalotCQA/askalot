@@ -49,6 +49,8 @@ class User < ActiveRecord::Base
 
   symbolize :role, in: ROLES
 
+  before_validation :unique_nick
+
   def login=(value)
     write_attribute :login, value.to_s.downcase
 
@@ -100,5 +102,15 @@ class User < ActiveRecord::Base
 
   def password_required?
     ais_login ? false : super
+  end
+
+  def unique_nick
+    i = 2
+    new_nick = self.nick
+    while i < 100
+      break unless User.where(nick: self.nick).where.not(id: self.id).exists?
+      self.nick = "#{new_nick}#{i}"
+      i += 1
+    end
   end
 end
