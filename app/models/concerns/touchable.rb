@@ -2,7 +2,7 @@ module Touchable
   extend ActiveSupport::Concern
 
   included do
-    after_save   :update_touched_at!
+    after_save :update_touched_at!
   end
 
   def update_touched_at!
