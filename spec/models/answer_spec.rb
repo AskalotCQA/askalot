@@ -1,7 +1,9 @@
 require 'spec_helper'
+require 'models/concerns/deletable_spec'
 require 'models/concerns/touchable_spec'
 
 describe Answer do
+  it_behaves_like Deletable
   it_behaves_like Touchable
 
   it 'requires text' do
