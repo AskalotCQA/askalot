@@ -17,6 +17,7 @@ shared_examples_for Editable do
       editable.update_attributes_by_revision revision
 
       expect(editable.editor).not_to eql(old_editor)
+      expect(editable.edited)
       expect(editable.edited_at).not_to eql(old_edited_at)
       expect(revision.persisted?)
     end
