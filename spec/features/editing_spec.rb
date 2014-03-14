@@ -19,7 +19,7 @@ describe 'Editing', js: true do
 
       click_link "question-#{question.id}-edit-modal"
 
-      within "#question-#{question.id}-edit" do
+      within "#question-#{question.id}-editing" do
         fill_in 'question_title', with: 'Elasticsearch problem'
         fill_in 'question_text',  with: 'I have a problem with Elasticsearch Client in Ruby.'
 
@@ -47,8 +47,8 @@ describe 'Editing', js: true do
 
       click_link "answer-#{answer_u.id}-edit-modal"
 
-      within "#answer-#{answer_u.id}-edit" do
-        fill_in 'answer_text', with: 'I found solution already'
+      within "#answer-#{answer_u.id}-editing" do
+        fill_in 'answer[text]', with: 'I found solution already'
 
         click_button 'Uložiť'
       end
@@ -62,13 +62,13 @@ describe 'Editing', js: true do
 
       click_link "comment-#{comment.id}-edit-modal"
 
-      within "#comment-#{comment.id}-edit" do
+      within "#comment-#{comment.id}-editing" do
         fill_in 'comment[text]', with: 'This is not good'
 
         click_button 'Uložiť'
       end
 
-      expect(page).to have_content('Váš komentár bol úspešne aktualizovaný.')
+      expect(page).to have_content('Komentár bol úspešne aktualizovaný.')
       expect(page).to have_content('This is not good')
     end
   end
