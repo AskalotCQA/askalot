@@ -3,7 +3,15 @@
 
 // general
 
+#questions-filter {
+  margin: $navbar-height 0 10px;
+}
+
 #questions {
+  & > ol {
+    margin-top: 20px;
+  }
+
   & > ol > li + li {
     margin-top: 20px;
     padding-top: 20px;
@@ -60,10 +68,6 @@ a.question-metric.text-muted {
 .question-author {
   text-align: center;
 
-  .user-avatar {
-    @include square(64px);
-  }
-
   small {
     display: block;
     margin: $padding-base-vertical 0;
@@ -72,6 +76,14 @@ a.question-metric.text-muted {
 
 // member
 
+#question {
+  margin-top: $navbar-height;
+}
+
+#question-answers {
+  margin-top: 20px;
+}
+
 #question-evaluations {
   & > p {
     margin-bottom: 10px;
@@ -79,6 +91,10 @@ a.question-metric.text-muted {
 }
 
 #question-comments {
+}
+
+#question-new-answer {
+  margin-top: 20px;
 }
 
 .question-content {

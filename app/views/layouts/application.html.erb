@@ -11,14 +11,16 @@
     <%= render 'layouts/header' %>
     <% if use_container? %>
       <div class="container">
-        <%= render 'shared/flash_messages' %>
         <% if use_narrower_layout? %>
           <div class="row">
+            <!-- TODO(zbell) refactor this: implement layout columns settings per controller action -->
             <div class="col-md-offset-3 col-md-6">
+              <%= render 'shared/flash_messages' %>
               <%= yield %>
             </div>
           </div>
         <% else %>
+          <%= render 'shared/flash_messages' %>
           <%= yield %>
         <% end %>
       </div>

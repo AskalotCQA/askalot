@@ -1,7 +1,7 @@
 <% provide :title, t('user.settings') %>
 
 <div class="row">
-  <div class="col-md-offset-1 col-md-3">
+  <div class="col-md-3">
     <ul class="nav nav-pills nav-stacked tab-navigation">
       <%= tab_link_tag t('user.profile'), :'user-profile', edit_user_registration_path(tab: :'user-profile'), data: { toggle: :pill } %>
       <%= tab_link_tag t('user.social'),  :'user-social',  edit_user_registration_path(tab: :'user-social'),  data: { toggle: :pill } %>
@@ -9,7 +9,7 @@
       <%= tab_link_tag t('user.account'), :'user-account', edit_user_registration_path(tab: :'user-account'), data: { toggle: :pill } %>
     </ul>
   </div>
-  <div class="col-md-5">
+  <div class="col-md-6">
     <div class="tab-content">
       <%= tab_content_tag :'user-profile' do %>
         <%= render 'edit_profile' %>

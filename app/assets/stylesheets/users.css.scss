@@ -27,14 +27,29 @@
   }
 }
 
-.user-avatar-small {
+.user-avatar-xs {
+  @include square(20px);
+}
+
+.user-avatar-sm {
+  @include square(64px);
+}
+
+.user-avatar-lg {
+  @include square(263px);
+}
+
+.user-avatar-icon {
   width: 20px;
   vertical-align: middle;
 }
 
 // profile
 
-img.list-group-item {
-  border: none;
-  padding: 0;
+.user-profile-avatar {
+  margin-top: $navbar-height;
+
+  .user-avatar {
+    display: inline;
+  }
 }

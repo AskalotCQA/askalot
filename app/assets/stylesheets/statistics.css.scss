@@ -1,6 +1,10 @@
 @import 'mixins';
 @import 'variables';
 
+.statistics-filter {
+  margin-top: $navbar-height;
+}
+
 .table-bordered > thead > tr > th {
   border-bottom-width: 0;
   font-weight: normal;

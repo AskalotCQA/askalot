@@ -16,14 +16,17 @@ button, input, select, textarea {
   box-shadow: none !important;
 }
 
-address, form, nav, p, dl, ol, ul, table,
-.alert {
+address, form, nav, p, dl, ol, ul, table {
   &:last-child {
     margin-bottom: 0;
   }
 }
 
 // alerts
+
+.alert:last-child {
+  margin-bottom: 0;
+}
 
 .alert-dismissable .close {
   top: 0px;
@@ -32,7 +35,7 @@ address, form, nav, p, dl, ol, ul, table,
   font-size: $font-size-base;
 
   i {
-    line-height: $line-height-computed + 1;
+    line-height: $line-height-computed + 1px;
   }
 }
 

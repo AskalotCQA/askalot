@@ -2,7 +2,7 @@
 @import 'variables';
 
 .jumbotron {
-  margin: 0;
+  margin: 0 0 $navbar-height;
   padding: 120px 0;
 
   h1 {
