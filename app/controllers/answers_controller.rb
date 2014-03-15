@@ -45,7 +45,9 @@ class AnswersController < ApplicationController
 
           if labeling
             @answers << answer
-            labeling.delete
+            labeling.destroy
+
+            notify_about :delete, labeling, for: answer.watchers
           end
         end
       when :helpful
@@ -56,7 +58,9 @@ class AnswersController < ApplicationController
         fail
     end
 
-    @answer.toggle_labeling_by! current_user, params[:value]
+    @labeling = @answer.toggle_labeling_by! current_user, params[:value]
+
+    notify_about notify_action_for(@labeling), @labeling, for: @answer.watchers
   end
 
   private

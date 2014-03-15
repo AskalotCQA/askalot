@@ -24,7 +24,7 @@ module Votable
 
   def toggle_vote_by!(user, positive)
     unless voted_by? user
-      votes.create! voter: user, positive: positive
+      vote = votes.create! voter: user, positive: positive
     else
       vote = votes.where(voter: user).first
 
@@ -37,6 +37,8 @@ module Votable
     end
 
     update_votes_caches!
+
+    vote
   end
 
   def toggle_voteup_by!(user)

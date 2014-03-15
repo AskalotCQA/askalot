@@ -65,15 +65,25 @@ class QuestionsController < ApplicationController
 
     @answer = Answer.new(question: @question)
 
-    @question.views.create! viewer: current_user
+    authorize! :view, @question
+
+    @view = @question.views.create! viewer: current_user
+
     @question.views.reload
+
+    notify_about :create, @view, for: @question.watchers
   end
 
   def favor
     @question = Question.find(params[:id])
 
-    @question.toggle_favoring_by! current_user
+    authorize! :favor, @question
+
+    @favorite = @question.toggle_favoring_by! current_user
+
     @question.favorites.reload
+
+    notify_about notify_action_for(@favorite), @favorite, for: @question.watchers
   end
 
   def suggest

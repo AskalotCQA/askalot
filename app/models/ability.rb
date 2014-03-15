@@ -23,6 +23,8 @@ class Ability
 
     can :ask,    Question
     can :answer, Question
+    can :favor,  Question
+    can :view,   Question
 
     can :comment, [Question, Answer]
     can :vote,    [Question, Answer]
