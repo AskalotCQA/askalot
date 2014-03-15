@@ -44,7 +44,7 @@ class QuestionsController < ApplicationController
         notify_about :'mention-user', @question, for: user
       end
 
-      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.inject(Set.new) { |watchers, tag| watchers + tag.watchers }
+      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.map(&:watchers).uniq
       register_watching_for @question
 
       redirect_to question_path(@question)
