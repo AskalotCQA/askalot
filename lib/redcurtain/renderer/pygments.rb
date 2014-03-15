@@ -5,10 +5,12 @@ module Redcurtain::Renderer
     extend self
 
     def render(content, options = {})
-      document = Nokogiri::XML("<html><body>#{content}</body></html>")
+      document = Nokogiri::HTML(content)
 
       document.search('//pre').each do |pre|
-        pre.replace ::Pygments.highlight(pre.text.strip, lexer: pre[:lang])
+        block = pre.css('code').first
+
+        pre.replace ::Pygments.highlight(pre.text.strip, lexer: block[:class])
       end
 
       document.at('body').inner_html.html_safe
