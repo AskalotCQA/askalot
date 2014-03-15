@@ -1,4 +1,4 @@
-# Order of renders matters
+# renderers order is significant
 
 Redcurtain::Markdown.renderers.unshift(*[
   Redcurtain::Renderer::Replacer.new(:'user-link'),
