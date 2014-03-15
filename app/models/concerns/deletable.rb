@@ -12,6 +12,7 @@ module Deletable
 
   def mark_as_deleted_by!(user)
     self.mark_as_deleted_recursive! user
+
     self.deleted    = true
     self.deletor    = user
     self.deleted_at = DateTime.now
@@ -20,13 +21,13 @@ module Deletable
   end
 
   def mark_as_deleted_recursive!(user)
-      self.reflections.each do |key, target|
-        if mark_as_deleted? target
-          self.send(key.to_s).each do |child|
-            child.mark_as_deleted_by! user
-          end
+    self.reflections.each do |key, target|
+      if mark_as_deleted? target
+        self.send(key.to_s).each do |child|
+          child.mark_as_deleted_by! user
         end
       end
+    end
   end
 
   def mark_as_deleted?(model)
