@@ -150,3 +150,8 @@ sk:
 
       comment:
         text: 'Komentár'
+
+      evaluation:
+        value: 'Hodnotenie'
+        text: 'Komentár'
+
