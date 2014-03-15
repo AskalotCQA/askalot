@@ -15,11 +15,11 @@ class CommentsController < ApplicationController
 
     authorize! :comment, @commentable
 
-    process_markdown_for @comment do |user|
-      notify_about :'mention-user', @comment, for: user
-    end
-
     if @comment.save
+      process_markdown_for @comment do |user|
+        notify_about :'mention-user', @comment, for: user
+      end
+
       notify_about :'create-comment', @comment, for: @commentable.watchers
       register_watching_for @commentable.to_question
 

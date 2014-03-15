@@ -37,12 +37,12 @@ class QuestionsController < ApplicationController
 
     authorize! :ask, @question
 
-    process_markdown_for @question do |user|
-      notify_about :'mention-user', @question, for: user
-    end
-
     if @question.save
-      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.inject(Set.new) { |watchers, tag| watchers + tag.watchers }
+      process_markdown_for @question do |user|
+        notify_about :'mention-user', @question, for: user
+      end
+
+      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.map(&:watchers).uniq
       register_watching_for @question
 
       flash[:notice] = t('question.create.success')

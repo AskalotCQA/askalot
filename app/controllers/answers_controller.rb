@@ -15,11 +15,11 @@ class AnswersController < ApplicationController
 
     authorize! :answer, @question
 
-    process_markdown_for @answer do |user|
-      notify_about :'mention-user', @answer, for: user
-    end
-
     if @answer.save
+      process_markdown_for @answer do |user|
+        notify_about :'mention-user', @answer, for: user
+      end
+
       notify_about :'create-answer', @answer, for: @question.watchers
       register_watching_for @answer
 

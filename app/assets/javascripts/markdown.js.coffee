@@ -8,7 +8,7 @@ class window.Markdown
       gemoji:
         match:    /(^|\s*):([\-+\w]*)$/
         template: (value) -> templates['markdown/textcomplete/gemoji'](icon: value)
-        replace:  (value)  -> "$1:#{value}: "
+        replace:  (value)  -> "$1:#{value}:"
         index:    2
         maxCount: 5
         search:   (term, callback) ->
