@@ -11,7 +11,7 @@ module FormHelper
     collection_select(id, collection, value, label, options, html_options)
   end
 
-  def form_messages(flash: self.flash, key: nil, resource: nil, context: { key: form_message_resource_key, partial: 'shared/form_messages' })
+  def form_messages(flash: self.flash, key: nil, resource: nil, context: form_messages_context)
     flash = flash[:form] || {}
     store = flash[key != nil ? key.to_s : :global].to_a
 
@@ -22,12 +22,12 @@ module FormHelper
     render context[:partial], store: store
   end
 
-  def form_messages_for(resource, options = {})
-    form_messages(resource: resource, **options)
+  def form_messages_context
+    { key: params[:tab].to_sym || :global, partial: 'shared/form_messages' }
   end
 
-  def form_message_resource_key
-    params[:tab].to_sym || :global
+  def form_messages_for(resource, options = {})
+    form_messages(resource: resource, **options)
   end
 
   def form_message_type_to_class(type)
