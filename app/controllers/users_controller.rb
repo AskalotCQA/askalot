@@ -7,24 +7,24 @@ class UsersController < ApplicationController
 
   def index
     @users = case params[:tab].to_sym
-             when :'users-all' then User.order(:nick)
-             else fail
+               when :'users-all' then User.order(:nick)
+               else fail
              end
 
     @users = @users.page(params[:page]).per(60)
   end
 
   def show
-    @user = User.find_by_nick params[:nick]
+    @user = User.where(nick: params[:nick]).first
 
     raise ActiveRecord::RecordNotFound unless @user
   end
 
   def update
     if current_user.update_attributes(user_params)
-      flash[:notice] = t 'devise.registrations.updated'
+      form_message :notice, t('devise.registrations.updated'), key: params[:tab]
     else
-      flash_error_messages_for current_user
+      form_error_messages_for current_user, key: params[:tab]
     end
 
     redirect_to edit_user_registration_path(tab: params[:tab])

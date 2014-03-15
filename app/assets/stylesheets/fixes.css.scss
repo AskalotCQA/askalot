@@ -54,6 +54,10 @@ address, form, nav, p, dl, ol, ul, table {
 
 // forms
 
+form .alert {
+  margin-bottom: 15px;
+}
+
 .form-title {
   margin: ($line-height-computed * 2) 0 $line-height-computed;
   padding-bottom: ($line-height-computed / 2) - 1;
@@ -61,6 +65,11 @@ address, form, nav, p, dl, ol, ul, table {
 
 .form-control + .input-group-addon {
   border-left: none;
+}
+
+.form-control[disabled],
+.form-control[readonly] {
+  cursor: default !important;
 }
 
 .input-group-addon {

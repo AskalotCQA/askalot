@@ -1,5 +1,5 @@
 module FlashHelper
-  def flash_type_to_class(type)
-    { alert: :danger, error: :danger, notice: :info }[type] || type
-  end
+  include FormHelper
+
+  alias :flash_type_to_class :form_message_type_to_class
 end

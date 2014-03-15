@@ -1,4 +1,6 @@
 <%= form_for resource, as: :user, url: profile_users_path(tab: :'user-social'), html: { method: :patch } do |f| %>
+  <%= form_messages_for resource, key: :'user-social' %>
+
   <% Social.networks.each do |_, network| %>
     <%= render 'social_network_input', form_field: f, network: network %>
   <% end %>

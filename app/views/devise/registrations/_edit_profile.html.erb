@@ -1,4 +1,6 @@
 <%= form_for resource, as: :user, url: profile_users_path(tab: :'user-profile'), html: { method: :patch } do |f| %>
+  <%= form_messages_for resource, key: :'user-profile' %>
+
   <div class="form-group">
     <%= f.label :nick %>
     <%= f.text_field :nick, class: :'form-control' %>
@@ -31,4 +33,3 @@
 
   <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
 <% end %>
-

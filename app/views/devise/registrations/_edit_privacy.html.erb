@@ -1,4 +1,6 @@
 <%= form_for resource, as: :user, url: profile_users_path(tab: :'user-privacy'), html: { method: :patch } do |f| %>
+  <%= form_messages_for resource, key: :'user-privacy' %>
+
   <div class="form-group">
     <div class="btn-group" data-toggle="buttons">
       <label class="btn btn-default">
