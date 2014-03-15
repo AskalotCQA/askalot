@@ -49,7 +49,7 @@ class User < ActiveRecord::Base
 
   symbolize :role, in: ROLES
 
-  before_validation :resolve_nick
+  before_validation :resolve_nick, on: :create
 
   def login=(value)
     write_attribute :login, value.to_s.downcase
@@ -105,11 +105,10 @@ class User < ActiveRecord::Base
   end
 
   def resolve_nick
-    new_nick = self.nick
+    nick = self.nick
     2.upto(100).each { |i|
       break unless User.where(nick: self.nick).where.not(id: self.id).exists?
-      self.nick = "#{new_nick}#{i}"
-      i += 1
+      self.nick = "#{nick}#{i}"
     }
   end
 end
