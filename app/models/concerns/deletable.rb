@@ -8,11 +8,10 @@ module Deletable
     scope :undeleted, lambda { where(deleted: false) }
 
     default_scope -> { undeleted }
-
-    after_save :mark_as_deleted_recursive!
   end
 
   def mark_as_deleted_by!(user)
+    self.mark_as_deleted_recursive! user
     self.deleted    = true
     self.deletor    = user
     self.deleted_at = DateTime.now
@@ -20,18 +19,14 @@ module Deletable
     self.save!
   end
 
-  private
-
-  def mark_as_deleted_recursive!
-    if self.deleted?
+  def mark_as_deleted_recursive!(user)
       self.reflections.each do |key, target|
         if mark_as_deleted? target
           self.send(key.to_s).each do |child|
-            child.mark_as_deleted_by! self.deletor
+            child.mark_as_deleted_by! user
           end
         end
       end
-    end
   end
 
   def mark_as_deleted?(model)
