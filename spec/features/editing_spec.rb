@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe 'Editing', js: true do
-  let(:user)          { create :user }
-  let(:teacher)       { create :teacher }
-  let!(:question)     { create :question, :with_tags, title: 'Elasticsearch prablem' }
-  let!(:answer_u)     { create :answer, question: question, author: question.author }
-  let!(:answer_t)     { create :answer, question: question, author: teacher }
-  let!(:comment)      { create :comment, commentable: question, author: question.author }
-  let(:administrator) { create :administrator }
+  let(:user)           { create :user }
+  let(:teacher)        { create :teacher }
+  let!(:question)      { create :question, :with_tags, title: 'Elasticsearch prablem' }
+  let!(:answer_user)   { create :answer, question: question, author: question.author }
+  let!(:answer_teacher){ create :answer, question: question, author: teacher }
+  let!(:comment)       { create :comment, commentable: question, author: question.author }
+  let(:administrator)  { create :administrator }
 
   context 'when question have no evaluation' do
     before :each do
@@ -45,9 +45,9 @@ describe 'Editing', js: true do
     it 'can edit answer', js: true do
       visit question_path question
 
-      click_link "answer-#{answer_u.id}-edit-modal"
+      click_link "answer-#{answer_user.id}-edit-modal"
 
-      within "#answer-#{answer_u.id}-editing" do
+      within "#answer-#{answer_user.id}-editing" do
         fill_in 'answer[text]', with: 'I found solution already'
 
         click_button 'Uložiť'
@@ -76,7 +76,7 @@ describe 'Editing', js: true do
   context 'when question or answer have evaluation' do
     before :each do
       Evaluation.create!(text: 'Good question', evaluator: teacher, evaluable: question, value:0)
-      Evaluation.create!(text: 'Good answer', evaluator: teacher, evaluable: answer_u, value:0)
+      Evaluation.create!(text: 'Good answer', evaluator: teacher, evaluable: answer_user, value:0)
     end
 
     it 'user cant edit', js: true do
@@ -84,7 +84,7 @@ describe 'Editing', js: true do
       visit question_path question
 
       expect(page).not_to have_css("#question-#{question.id}-edit-modal")
-      expect(page).not_to have_css("#answer-#{answer_u.id}-edit-modal")
+      expect(page).not_to have_css("#answer-#{answer_user.id}-edit-modal")
     end
 
     it 'administrator can edit', js: true do
@@ -93,7 +93,8 @@ describe 'Editing', js: true do
       visit question_path question
 
       expect(page).to have_css("#question-#{question.id}-edit-modal")
-      expect(page).to have_css("#answer-#{answer_u.id}-edit-modal")
+      expect(page).to have_css("#answer-#{answer_user.id}-edit-modal")
+      expect(page).to have_css("#answer-#{answer_teacher.id}-edit-modal")
       expect(page).to have_css("#comment-#{comment.id}-edit-modal")
     end
   end
@@ -107,7 +108,8 @@ describe 'Editing', js: true do
       visit question_path question
 
       expect(page).not_to have_css("#question-#{question.id}-edit-modal")
-      expect(page).not_to have_css("#answer-#{answer_u.id}-edit-modal")
+      expect(page).not_to have_css("#answer-#{answer_user.id}-edit-modal")
+      expect(page).to have_css("#answer-#{answer_teacher.id}-edit-modal")
       expect(page).not_to have_css("#comment-#{comment.id}-edit-modal")
     end
   end
