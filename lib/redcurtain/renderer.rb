@@ -5,7 +5,7 @@ module Redcurtain
     protected
 
     def search(content, regex, options = {}, &callback)
-      text = content.gsub(/([`]{1,3})[^`]+\1/) { |match| " " * match.length }
+      text = content.gsub(/([`]{1,3})[^`]+\1/) { |match| ' ' * match.length }
 
       text.scan(regex).each do |match|
         offset = 0
