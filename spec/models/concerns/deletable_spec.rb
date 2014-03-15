@@ -14,7 +14,7 @@ shared_examples_for Deletable do
       user = create :user
       now = DateTime.now.in_time_zone
 
-      resource.mark_as_deleted_by!(user)
+      resource.mark_as_deleted_by!(user, now)
 
       expect(resource.deleted).to eql(true)
       expect(resource.deletor).to eql(user)
@@ -30,7 +30,7 @@ shared_examples_for Deletable do
       user = create :user
       now = DateTime.now.in_time_zone
 
-      resource.mark_as_deleted_by!(user)
+      resource.mark_as_deleted_by!(user, now)
 
       expect(resource.deleted).to eql(true)
       expect(resource.deletor).to eql(user)

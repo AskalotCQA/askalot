@@ -10,21 +10,23 @@ module Deletable
     default_scope -> { undeleted }
   end
 
-  def mark_as_deleted_by!(user)
-    self.mark_as_deleted_recursive! user
+  def mark_as_deleted_by!(user, datetime)
+    self.transaction(requires_new: true) do
+      self.mark_as_deleted_recursive!(user, datetime)
 
-    self.deleted    = true
-    self.deletor    = user
-    self.deleted_at = DateTime.now
+      self.deleted = true
+      self.deletor = user
+      self.deleted_at = datetime
 
-    self.save!
+      self.save!
+    end
   end
 
-  def mark_as_deleted_recursive!(user)
+  def mark_as_deleted_recursive!(user, datetime)
     self.reflections.each do |key, target|
       if mark_as_deleted? target
         self.send(key.to_s).each do |child|
-          child.mark_as_deleted_by! user
+          child.mark_as_deleted_by!(user, datetime)
         end
       end
     end
