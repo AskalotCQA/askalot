@@ -91,6 +91,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
+  gem 'timecop'
 
   # database
   gem 'faker', '1.1.2'
