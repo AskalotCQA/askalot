@@ -5,6 +5,10 @@ shared_examples_for Deletable do
   let(:factory) { model.name.underscore.to_sym }
   let(:resource) { create factory }
 
+  before :each do
+    Timecop.freeze(Time.now)
+  end
+
   describe '.mark_as_deleted_by!' do
     it 'set deleted, deletor and deleted_at attribute' do
       user = create :user
