@@ -5,16 +5,16 @@ describe Redcurtain::Renderer::Pygments do
 
   describe '.render' do
     it 'highlights code in content' do
-      html     = '<pre lang="ruby">code</pre>'
+      html     = '<code lang="ruby">code</code>'
       pygments = double(:pygments)
 
-      expect(pygments).to receive(:highlight).with('code', lexer: 'ruby').and_return('<pre>highlighted code</pre>')
+      expect(pygments).to receive(:highlight).with('code', lexer: 'ruby').and_return('<code>highlighted code</code>')
 
       stub_const('::Pygments', pygments)
 
       content = subject.render(html)
 
-      expect(content).to eql('<pre>highlighted code</pre>')
+      expect(content).to eql('<code>highlighted code</code>')
     end
   end
 end

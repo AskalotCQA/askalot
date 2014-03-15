@@ -23,27 +23,6 @@ describe Redcurtain::Markdown do
 
       expect(markdown.render('a', options)).to eql('d')
     end
-
-    it 'renders markdown' do
-      options = {
-        gemoji: {
-          class: 'doge-class',
-          path: '/assets',
-          title: false
-        }
-      }
-
-      text = "`code` :dog: ```ruby\ndoge.code```\nhello :unknown-doge:"
-      html = "<p><code>code</code> <img class=\"doge-class\" src=\"/assets/dog.png\" alt=\"dog\"> <code>ruby\ndoge.code</code>\nhello :unknown-doge:</p>"
-
-      markdown.renderers = [
-        Redcurtain::Renderer::Redcarpet,
-        Redcurtain::Renderer::Gemoji,
-        Redcurtain::Renderer::Pygments
-      ]
-
-      expect(markdown.render(text, options)).to eql(html)
-    end
   end
 
   describe '#strip' do
