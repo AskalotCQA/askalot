@@ -8,13 +8,13 @@ module Concerns::Form
     store << [type, message]
   end
 
-  def form_error_message(message, flash: self.flash, key: nil)
-    form_message(:error, message, flash: flash, key: key)
+  def form_error_message(message, options = {})
+    form_message(:error, message, **options)
   end
 
-  def form_error_messages_for(resource, flash: self.flash, key: nil)
+  def form_error_messages_for(resource, options = {})
     resource.errors.full_messages.each do |message|
-      form_error_message(message) if message.present?
+      form_error_message(message, **options) if message.present?
     end
   end
 end

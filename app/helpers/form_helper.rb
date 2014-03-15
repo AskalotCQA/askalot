@@ -11,18 +11,23 @@ module FormHelper
     collection_select(id, collection, value, label, options, html_options)
   end
 
-  def form_messages(flash: self.flash, key: nil, resource: nil)
+  def form_messages(flash: self.flash, key: nil, resource: nil, context: { key: form_message_resource_key, partial: 'shared/form_messages' })
     flash = flash[:form] || {}
     store = flash[key != nil ? key.to_s : :global].to_a
 
-    resource.errors.full_messages.reject(&:blank?).each { |message| store << [:error, message] } if resource
+    if resource && key == context[:key]
+      resource.errors.full_messages.reject(&:blank?).each { |message| store << [:error, message] }
+    end
 
-    render 'shared/form_messages', store: store
+    render context[:partial], store: store
   end
 
-  #TODO key vs active keys ??
-  def form_messages_for(resource, flash: self.flash, key: nil)
-    form_messages resource: resource, flash: flash, key: key
+  def form_messages_for(resource, options = {})
+    form_messages(resource: resource, **options)
+  end
+
+  def form_message_resource_key
+    params[:tab].to_sym || :global
   end
 
   def form_message_type_to_class(type)
