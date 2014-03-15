@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def update
     if current_user.update_attributes(user_params)
-      form_message :notice, t('devise.registrations.updated'), key: params[:tab]
+      form_message :notice, t('user.update.success'), key: params[:tab]
     else
       form_error_messages_for current_user, key: params[:tab]
     end
