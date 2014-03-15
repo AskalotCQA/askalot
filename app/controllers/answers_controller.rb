@@ -19,10 +19,10 @@ class AnswersController < ApplicationController
       flash[:notice] = t('answer.create.success')
 
       process_markdown_for @answer do |user|
-        notify_about :'mention-user', @answer, for: user
+        notify_about :mention, @answer, for: user
       end
 
-      notify_about :'create-answer', @answer, for: @question.watchers
+      notify_about :create, @answer, for: @question.watchers
       register_watching_for @answer
     else
       flash_error_messages_for @answer
