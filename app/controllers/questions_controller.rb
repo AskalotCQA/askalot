@@ -42,7 +42,7 @@ class QuestionsController < ApplicationController
         notify_about :mention, @question, for: user
       end
 
-      notify_about :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten.uniq
+      notify_about :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten
       register_watching_for @question
 
       flash[:notice] = t('question.create.success')
