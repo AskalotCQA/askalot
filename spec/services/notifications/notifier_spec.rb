@@ -30,7 +30,7 @@ describe Notifications::Notifier do
     end
 
     context 'with duplicated recipient' do
-      it 'create only one notification' do
+      it 'creates only one notification' do
         watcher  = double(:watcher)
         resource = double(:resource)
         factory  = double(:factory)
