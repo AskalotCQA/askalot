@@ -25,10 +25,10 @@ class AnswersController < ApplicationController
 
       flash[:notice] = t('answer.create.success')
     else
-      flash_error_messages_for @answer
+      form_error_messages_for @answer
     end
 
-    redirect_to question_path(@question)
+    redirect_to question_path(@question, anchor: @answer.id ? nil : :answer)
   end
 
   def label

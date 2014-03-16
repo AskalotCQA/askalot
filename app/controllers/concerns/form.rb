@@ -3,7 +3,8 @@ module Concerns::Form
 
   def form_message(type, message, flash: self.flash, key: nil)
     flash = flash[:form] ||= {}
-    store = flash[key || :global] ||= []
+    key   = (key || :global).to_sym
+    store = flash[key] ||= []
 
     store << [type, message]
   end

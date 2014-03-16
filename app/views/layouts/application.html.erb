@@ -11,7 +11,7 @@
     <%= render 'layouts/header' %>
     <% if use_container? %>
       <div class="container">
-        <%= render 'shared/flash_messages' %>
+        <%= flash_messages %>
         <%= yield %>
       </div>
     <% else %>

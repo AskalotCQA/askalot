@@ -54,22 +54,17 @@ address, form, nav, p, dl, ol, ul, table {
 
 // forms
 
-form .alert {
-  margin-bottom: 15px;
-}
-
 .form-title {
   margin: ($line-height-computed * 2) 0 $line-height-computed;
-  padding-bottom: ($line-height-computed / 2) - 1;
+  padding-bottom: $line-height-computed / 2;
+}
+
+.form-alert {
+  margin-bottom: 15px;
 }
 
 .form-control + .input-group-addon {
   border-left: none;
-}
-
-.form-control[disabled],
-.form-control[readonly] {
-  cursor: default !important;
 }
 
 .input-group-addon {
@@ -107,14 +102,15 @@ textarea {
 .nav-labels {
   display: block;
   position: relative;
+  margin-bottom: 0 !important;
 
   & > li {
     display: inline-block;
     float: left;
-    margin-bottom: $padding-base-vertical;
+    margin-bottom: 10px;
     margin-right: $padding-base-horizontal / 2;
 
-    a {
+    & > a {
       display: inline;
       padding: 0.2em 0.6em 0.3em;
     }

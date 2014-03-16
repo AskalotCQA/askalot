@@ -13,17 +13,18 @@ module FormHelper
 
   def form_messages(flash: self.flash, key: nil, resource: nil, context: form_messages_context)
     flash = flash[:form] || {}
-    store = flash[key != nil ? key.to_s : :global].to_a
+    key   = (key || :global).to_sym
+    store = flash[key].to_a
 
-    if resource && key == context[:key]
+    if resource && key == context[:key].to_sym
       resource.errors.full_messages.reject(&:blank?).each { |message| store << [:error, message] }
     end
 
-    render context[:partial], store: store
+    render context[:partial], messages: store
   end
 
   def form_messages_context
-    { key: params[:tab].to_sym || :global, partial: 'shared/form_messages' }
+    { key: (params[:tab] || :global).to_sym, partial: 'shared/form_messages' }
   end
 
   def form_messages_for(resource, options = {})

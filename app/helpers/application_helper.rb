@@ -19,7 +19,7 @@ module ApplicationHelper
   end
 
   def use_container?
-    !controller.is_a?(ErrorsController)
+    [DeviseController, ErrorsController, StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
   end
 
   def url_to_site(path = nil)

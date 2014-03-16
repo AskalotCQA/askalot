@@ -18,7 +18,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    edit_user_registration_path
+    edit_user_registration_path(tab: :'user-account')
   end
 
   def update_resource(resource, params)

@@ -26,7 +26,7 @@ body {
   margin-top: $navbar-height + 1px;
 }
 
-#flash {
+#flash .alert:first-child {
   margin-top: $navbar-height;
 }
 

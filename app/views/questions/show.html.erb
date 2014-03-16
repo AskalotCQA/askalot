@@ -12,7 +12,6 @@
           <%= truncate @question.title, length: 140, separator: ' ' %>
           <%= evaluation_badge_tag @question if @question.evaluations.any? %>
         </h1>
-
         <%= render 'questions/labels', labels: @labels %>
       </div>
 
