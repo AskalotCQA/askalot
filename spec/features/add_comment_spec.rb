@@ -30,7 +30,7 @@ describe 'Add Comment' do
       click_button 'Komentovať'
     end
 
-    expect(page).to have_content('Váš komentár bol úspešne pridaný.')
+    expect(page).to have_content('Komentár bol úspešne pridaný.')
 
     within '#question-comments' do
       expect(page).to have_content('My comment')
@@ -79,7 +79,7 @@ describe 'Add Comment' do
         expect(last_notification.notifiable).to eql(comment)
         expect(last_notification.recipient).to  eql(question.author)
         expect(last_notification.initiator).to  eql(user)
-        expect(last_notification.action).to     eql(:'add-comment')
+        expect(last_notification.action).to     eql(:create)
       end
     end
   end
@@ -128,7 +128,7 @@ describe 'Add Comment' do
         expect(last_notification.notifiable).to eql(comment)
         expect(last_notification.recipient).to  eql(question.author)
         expect(last_notification.initiator).to  eql(user)
-        expect(last_notification.action).to     eql(:'add-comment')
+        expect(last_notification.action).to     eql(:create)
       end
     end
   end
@@ -165,7 +165,7 @@ describe 'Add Comment' do
       expect(last_notification.notifiable).to eql(comment)
       expect(last_notification.recipient).to  eql(other)
       expect(last_notification.initiator).to  eql(user)
-      expect(last_notification.action).to     eql(:'mention-user')
+      expect(last_notification.action).to     eql(:mention)
     end
   end
 end
