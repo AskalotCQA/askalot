@@ -10,7 +10,7 @@ module Deletable
     default_scope -> { undeleted }
   end
 
-  def mark_as_deleted_by!(user, datetime)
+  def mark_as_deleted_by!(user, datetime = DateTime.now.in_time_zone)
     self.transaction(requires_new: true) do
       self.mark_as_deleted_recursive!(user, datetime)
 
