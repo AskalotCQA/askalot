@@ -38,7 +38,6 @@ class User < ActiveRecord::Base
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 20 }, if: :login?
 
-  validates :email,          format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, allow_blank: true
 
   validates :first, format: { with: /\A\p{Lu}\p{Ll}*\z/u }, allow_blank: true
@@ -49,6 +48,8 @@ class User < ActiveRecord::Base
   end
 
   symbolize :role, in: ROLES
+
+  before_validation :resolve_nick, on: :create
 
   def login=(value)
     write_attribute :login, value.to_s.downcase
@@ -101,5 +102,13 @@ class User < ActiveRecord::Base
 
   def password_required?
     ais_login ? false : super
+  end
+
+  def resolve_nick
+    nick = self.nick
+    2.upto(100).each { |i|
+      break unless User.where(nick: self.nick).where.not(id: self.id).exists?
+      self.nick = "#{nick}#{i}"
+    }
   end
 end
