@@ -1,10 +1,10 @@
 module EmailHelper
-  def last_email
-    ActionMailer::Base.deliveries.last
-  end
-
   def emails
     ActionMailer::Base.deliveries
+  end
+
+  def last_email
+    emails.last
   end
 
   def reset_emails

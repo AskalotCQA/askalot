@@ -1,7 +1,12 @@
 class QuestionsController < ApplicationController
   include Deleting
+  include Editing
+  include Markdown
   include Voting
   include Tabbing
+
+  include Notifications::Notifying
+  include Notifications::Watching
 
   before_action :authenticate_user!
 
@@ -9,7 +14,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = case params[:tab].to_sym
-                 when :'questions-new'        then Question.order(created_at: :desc)
+                 when :'questions-new'        then Question.order(touched_at: :desc)
                  when :'questions-unanswered' then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
                  when :'questions-answered'   then Question.answered.by_votes.order(created_at: :desc)
                  when :'questions-solved'     then Question.solved.by_votes.order(created_at: :desc)
@@ -34,6 +39,13 @@ class QuestionsController < ApplicationController
 
     if @question.save
       flash[:notice] = t('question.create.success')
+
+      process_markdown_for @question do |user|
+        notify_about :'mention-user', @question, for: user
+      end
+
+      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.map(&:watchers).uniq
+      register_watching_for @question
 
       redirect_to question_path(@question)
     else
@@ -92,5 +104,9 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user)
+  end
+
+  def update_params
+    params.require(:question).permit(:title, :text, :category_id, :tag_list)
   end
 end

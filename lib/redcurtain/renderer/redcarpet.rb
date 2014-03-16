@@ -4,8 +4,7 @@ module Redcurtain::Renderer
 
     attr_accessor :defaults
 
-    def render(content_or_document, options = {})
-      content  = content_or_document.to_s
+    def render(content, options = {})
       options  = defaults.deep_merge(options)
       renderer = Factory.create(options)
 
@@ -13,7 +12,7 @@ module Redcurtain::Renderer
     end
 
     def defaults
-      @defaults ||= { tags: Factory::TAGS.clone }
+      @defaults ||= { tags: Factory::TAGS.clone, space_after_headers: true, fenced_code_blocks: true }
     end
 
     class Factory < ::Redcarpet::Render::HTML
@@ -62,8 +61,8 @@ module Redcurtain::Renderer
             next if options[:tags].include?(tag)
 
             case tag
-            when :paragraph, :header then define_method(tag) { |*args| "#{args.first}\n"}
             when :link               then define_method(tag) { |*args| args.third }
+            when :paragraph, :header then define_method(tag) { |*args| "#{args.first}\n"}
             else                          define_method(tag) { |*args| args.first }
             end
           end

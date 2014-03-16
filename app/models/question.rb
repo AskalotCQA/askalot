@@ -2,6 +2,7 @@ class Question < ActiveRecord::Base
   include Commentable
   include Deletable
   include Evaluable
+  include Editable
   include Favorable
   include Notifiable
   include Taggable
@@ -16,6 +17,8 @@ class Question < ActiveRecord::Base
 
   has_many :answers, dependent: :destroy
 
+  has_many :revisions, class_name: :QuestionRevision, dependent: :destroy
+
   validates :category,  presence: true
   validates :title,     presence: true, length: { minimum: 2, maximum: 140 }
   validates :text,      presence: true, length: { minimum: 2 }
@@ -28,6 +31,8 @@ class Question < ActiveRecord::Base
   scope :favorite_by, lambda { |user| joins(:favorites).where('favorites.favorer_id = ?', user) }
 
   scope :by, lambda { |user| where(author: user) }
+
+  self.updated_timestamp = [:updated_at, :touched_at]
 
   def self.best_answers
     Answer.labeled_with(Label.where(value: :best).first)

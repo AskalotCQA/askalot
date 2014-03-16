@@ -49,6 +49,7 @@ gem 'whenever'
 # utilities
 gem 'actionview-encoded_mail_to'
 gem 'active_model_serializers'
+gem 'activerecord-custom_timestamps'
 gem 'forgery'
 gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
@@ -90,6 +91,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
+  gem 'timecop'
 
   # database
   gem 'faker', '1.1.2'

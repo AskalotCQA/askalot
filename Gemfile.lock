@@ -33,6 +33,8 @@ GEM
       activerecord-deprecated_finders (~> 1.0.2)
       activesupport (= 4.0.3)
       arel (~> 4.0.0)
+    activerecord-custom_timestamps (0.2.0)
+      activerecord (>= 3.1, < 5)
     activerecord-deprecated_finders (1.0.3)
     activesupport (4.0.3)
       i18n (~> 0.6, >= 0.6.4)
@@ -313,6 +315,7 @@ GEM
     thread_safe (0.2.0)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
+    timecop (0.7.1)
     timers (1.1.0)
     treetop (1.4.15)
       polyglot
@@ -342,6 +345,7 @@ PLATFORMS
 DEPENDENCIES
   actionview-encoded_mail_to
   active_model_serializers
+  activerecord-custom_timestamps
   bootstrap-datepicker-rails (~> 1.3.0)
   bootstrap-sass (~> 3.1.0)
   cancan (~> 1.6.9)
@@ -395,6 +399,7 @@ DEPENDENCIES
   statistics2
   symbolize
   therubyracer
+  timecop
   uglifier (>= 1.3.0)
   unicorn
   whenever
