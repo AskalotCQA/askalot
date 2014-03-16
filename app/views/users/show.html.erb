@@ -61,13 +61,13 @@
     <%= tab_content_tag :'user-questions' do %>
         <ol class="list-unstyled">
           <% @questions.each do |question| %>
-            <%= render 'users/questions', question: question %>
+            <%= render 'users/question', question: question %>
           <% end %>
         </ol>
 
         <div class="row">
           <div class="col-md-12">
-            <%= paginate @questions, data: {state: true} %>
+            <%= paginate @questions, data: { state: true } %>
           </div>
         </div>
     <% end %>
@@ -81,7 +81,7 @@
 
         <div class="row">
           <div class="col-md-12">
-            <%= paginate @answers, data: {state: true} %>
+            <%= paginate @answers, data: { state: true } %>
           </div>
         </div>
     <% end %>
@@ -89,13 +89,13 @@
     <%= tab_content_tag :'user-favorites' do %>
         <ol class="list-unstyled">
           <% @favorites.each do |favorite| %>
-              <%= render 'users/questions', question: favorite %>
+              <%= render 'users/question', question: favorite %>
           <% end %>
         </ol>
 
         <div class="row">
           <div class="col-md-12">
-            <%= paginate @favorites, data: {state: true} %>
+            <%= paginate @favorites, data: { state: true } %>
           </div>
         </div>
     <% end %>
