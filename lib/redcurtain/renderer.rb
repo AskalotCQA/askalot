@@ -19,7 +19,6 @@ module Redcurtain
 
           offset += value.length + 1
         end
-
       end
 
       content

@@ -17,13 +17,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <% if user_signed_in? %>
-            <%= navbar_dropdown_tag current_user.notifications.unread.any? ? :'dot-circle-o' : :'circle-o', nil, '#', class: :'hidden-xs' do %>
-              <!-- TODO(zbell) -->
-              <li class="divider"></li>
-              <li><%= link_to t('notification.more'), notifications_path %></li>
-            <% end %>
-          <% end %>
+          <%= render 'shared/notifications', notifications: current_user.notifications.unread.order(created_at: :desc).limit(5) %>
           <li class="visible-xs"><%= link_to t('user.profile'), user_path(current_user.nick) %></li>
           <li class="hidden-xs"><%= link_to current_user.nick, user_path(current_user.nick) %></li>
           <%= navbar_dropdown_tag :cog, nil, '#', class: :'hidden-xs' do %>
