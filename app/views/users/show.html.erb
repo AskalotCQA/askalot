@@ -50,9 +50,9 @@
 
   <section id="user-profile">
     <ul class="nav nav-tabs">
-      <%= tab_link_tag_with_count t('user.tab.all'), :'user-questions', user_path(params.except(:page).merge tab: :'user-questions'), @questions.count %>
-      <%= tab_link_tag_with_count t('user.tab.all'), :'user-answers', user_path(params.except(:page).merge tab: :'user-answers'), @answers.count %>
-      <%= tab_link_tag_with_count t('user.tab.all'), :'user-favorites', user_path(params.except(:page).merge tab: :'user-favorites'), @favorites.count %>
+      <%= tab_link_tag_with_count t('user.tab.questions'), :'user-questions', user_path(params.except(:page).merge tab: :'user-questions'), @questions.count %>
+      <%= tab_link_tag_with_count t('user.tab.answers'), :'user-answers', user_path(params.except(:page).merge tab: :'user-answers'), @answers.count %>
+      <%= tab_link_tag_with_count t('user.tab.favorites'), :'user-favorites', user_path(params.except(:page).merge tab: :'user-favorites'), @favorites.count %>
     </ul>
   </section>
 

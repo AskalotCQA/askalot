@@ -7,6 +7,9 @@ sk:
 
     tab:
       all: 'Všetci'
+      questions: 'Otázky'
+      answers: 'Odpovede'
+      favorites: 'Obľúbené'
 
     registration: 'Registrácia'
     confirmation: 'Potvrdenie registrácie'
