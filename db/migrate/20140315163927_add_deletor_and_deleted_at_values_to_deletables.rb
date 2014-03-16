@@ -16,9 +16,9 @@ class AddDeletorAndDeletedAtValuesToDeletables < ActiveRecord::Migration
     ]
 
     models.each do |model|
-      model.where({deleted_at: nil, deleted: true}).find_all.each do |record|
-        record.deleted_at = record.updated_at
+      model.where(deleted: true, deleted_at: nil).find_each do |record|
         record.deletor_id = record.author_id
+        record.deleted_at = record.updated_at
 
         record.save!
       end
