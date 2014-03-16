@@ -105,10 +105,8 @@ class User < ActiveRecord::Base
   end
 
   def resolve_nick
-    nick = self.nick
-    2.upto(100).each { |i|
-      break unless User.where(nick: self.nick).where.not(id: self.id).exists?
-      self.nick = "#{nick}#{i}"
-    }
+    nick, k = self.nick, 1
+
+    self.nick = "#{nick}#{k += 1}" while User.where(nick: self.nick).where.not(id: self.id).exists?
   end
 end
