@@ -1,10 +1,12 @@
 require 'spec_helper'
 
+require 'models/concerns/editable_spec'
 require 'models/concerns/taggable_spec'
 require 'models/concerns/touchable_spec'
 require 'models/concerns/watchable_spec'
 
 describe Question do
+  it_behaves_like Editable
   it_behaves_like Taggable
   it_behaves_like Touchable
   it_behaves_like Watchable
