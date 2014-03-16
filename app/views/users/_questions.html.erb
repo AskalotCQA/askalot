@@ -44,7 +44,7 @@
 
     <div class="col-md-2">
       <div class="question-author">
-        <small class="text-muted"><%= question_creation_time question, placement: :bottom %></small>
+        <small class="text-muted"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
       </div>
     </div>
   </div>

@@ -73,9 +73,11 @@
     <% end %>
 
     <%= tab_content_tag :'user-answers' do %>
-        <% @answers.each do |answer| %>
-            <p><%= answer.text %></p>
-        <% end %>
+        <ol class="list-unstyled">
+          <% @answers.each do |answer| %>
+              <%= render 'users/answer', answer: answer %>
+          <% end %>
+        </ol>
 
         <div class="row">
           <div class="col-md-12">
