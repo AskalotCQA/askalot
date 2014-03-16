@@ -4,7 +4,7 @@ class Tag < ActiveRecord::Base
 
   has_many :taggings, dependent: :restrict_with_exception
 
-  scope :popular, lambda { select(' tags.*, count(*) as a').joins(:taggings).group('tags.id').order('a DESC')}
+  scope :popular, lambda { select('tags.*, count(*) as count_all').joins(:taggings).group('tags.id').order('count_all DESC')}
 
   before_save :normalize
 

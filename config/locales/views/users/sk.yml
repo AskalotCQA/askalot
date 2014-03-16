@@ -4,11 +4,11 @@ sk:
 
     index:
       title: 'Používatelia'
-      none: 'V systéme niesú žiadny noví používatelia'
+      no_results_found: 'V systéme nie sú žiadny noví používatelia.'
 
     tab:
       all: 'Všetci'
-      new: 'Noví'
+      recent: 'Noví'
 
     registration: 'Registrácia'
     confirmation: 'Potvrdenie registrácie'

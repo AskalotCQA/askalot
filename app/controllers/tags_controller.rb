@@ -8,7 +8,7 @@ class TagsController < ApplicationController
   def index
     @tags = case params[:tab].to_sym
             when :'tags-all'      then Tag.order(:name)
-            when :'tags-new'      then Tag.order(:created_at)
+            when :'tags-recent'      then Tag.order(:created_at)
             when :'tags-popular'  then Tag.popular
             else fail
             end

@@ -3,14 +3,12 @@
 <section id="users-controls">
   <ul class="nav nav-tabs">
     <%= tab_link_tag_with_count t('user.tab.all'), :'users-all', users_path(params.except(:page).merge tab: :'users-all'), User.count %>
-    <%= tab_link_tag_with_count t('user.tab.new'), :'users-new', users_path(params.except(:page).merge tab: :'users-new'), User.new.count %>
+    <%= tab_link_tag_with_count t('user.tab.recent'), :'users-recent', users_path(params.except(:page).merge tab: :'users-recent'), User.recent.count %>
   </ul>
 </section>
 
 <section id="users">
-  <% if @users.empty?  %>
-    <h4><%= t('user.index.none') %></h4>
-  <% else %>
+  <% if @users.any?  %>
     <% @users.each_slice(6) do |users| %>
       <div class="row">
         <% users.each do |user| %>
@@ -18,12 +16,20 @@
             <%= render 'square', user: user %>
           </div>
         <% end %>
-       </div>
+      </div>
     <% end %>
 
     <div class="row">
       <div class="col-md-12">
         <%= paginate @users, data: { state: true } %>
+      </div>
+    </div>
+  <% else %>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-warning">
+          <%= t('user.index.no_results_found') %>
+        </div>
       </div>
     </div>
   <% end %>
