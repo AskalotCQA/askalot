@@ -125,7 +125,7 @@ describe 'Add Question' do
       expect(last_notification.notifiable).to eql(question)
       expect(last_notification.recipient).to  eql(other)
       expect(last_notification.initiator).to  eql(user)
-      expect(last_notification.action).to     eql(:'mention-user')
+      expect(last_notification.action).to     eql(:mention)
     end
 
     it 'embeds reference to question' do
