@@ -28,7 +28,6 @@ class Question < ActiveRecord::Base
   scope :unanswered,  lambda { includes(:answers).where(answers: { question_id: nil }) }
   scope :answered,    lambda { joins(:answers).uniq } #.where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq } # TODO(zbell) User.first.questions.answered fails
   scope :solved,      lambda { joins(:answers).merge(best_answers).uniq }
-  scope :favorite_by, lambda { |user| joins(:favorites).where('favorites.favorer_id = ?', user) }
 
   scope :by, lambda { |user| where(author: user) }
 
