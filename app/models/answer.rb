@@ -4,6 +4,7 @@ class Answer < ActiveRecord::Base
   include Editable
   include Evaluable
   include Notifiable
+  include Touchable
   include Votable
   include Watchable
 

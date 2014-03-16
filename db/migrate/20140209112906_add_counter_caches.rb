@@ -46,7 +46,7 @@ class AddCounterCaches < ActiveRecord::Migration
 
     model.reset_column_information
 
-    model.find_each(batch_size: 2000) do |record|
+    model.find_each do |record|
       model.reset_counters record.id, association
     end
   end

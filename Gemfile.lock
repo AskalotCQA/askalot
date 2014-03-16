@@ -315,6 +315,7 @@ GEM
     thread_safe (0.2.0)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
+    timecop (0.7.1)
     timers (1.1.0)
     treetop (1.4.15)
       polyglot
@@ -398,6 +399,7 @@ DEPENDENCIES
   statistics2
   symbolize
   therubyracer
+  timecop
   uglifier (>= 1.3.0)
   unicorn
   whenever

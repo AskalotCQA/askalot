@@ -1,7 +1,7 @@
 module CapybaraHelpers
   def click_link(locator, options = {})
     begin
-      find(:link, locator, options).click 
+      find(:link, locator, options).click
     rescue Exception => e
       return page.evaluate_script("$(\"a:contains('#{locator}')\").click()") if example.metadata[:js]
 

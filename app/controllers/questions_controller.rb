@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = case params[:tab].to_sym
-                 when :'questions-new'        then Question.order(created_at: :desc)
+                 when :'questions-new'        then Question.order(touched_at: :desc)
                  when :'questions-unanswered' then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
                  when :'questions-answered'   then Question.answered.by_votes.order(created_at: :desc)
                  when :'questions-solved'     then Question.solved.by_votes.order(created_at: :desc)
@@ -37,14 +37,14 @@ class QuestionsController < ApplicationController
 
     authorize! :ask, @question
 
-    process_markdown_for @question do |user|
-      notify_about :'mention-user', @question, for: user
-    end
-
     if @question.save
       flash[:notice] = t('question.create.success')
 
-      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.inject(Set.new) { |watchers, tag| watchers + tag.watchers }
+      process_markdown_for @question do |user|
+        notify_about :'mention-user', @question, for: user
+      end
+
+      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.map(&:watchers).uniq
       register_watching_for @question
 
       redirect_to question_path(@question)

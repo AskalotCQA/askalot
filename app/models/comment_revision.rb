@@ -1,4 +1,6 @@
 class CommentRevision < ActiveRecord::Base
+  include Deletable
+
   belongs_to :comment
   belongs_to :editor, class_name: :User
 
