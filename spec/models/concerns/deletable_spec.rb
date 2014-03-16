@@ -9,6 +9,10 @@ shared_examples_for Deletable do
     Timecop.freeze(Time.now)
   end
 
+  after :each do
+    Timecop.return
+  end
+
   describe '.mark_as_deleted_by!' do
     it 'set deleted, deletor and deleted_at attribute' do
       user = create :user
