@@ -22,6 +22,8 @@ module Deletable
     end
   end
 
+  protected
+
   def mark_as_deleted_recursive!(user, datetime)
     self.reflections.each do |key, target|
       if mark_as_deleted? target
