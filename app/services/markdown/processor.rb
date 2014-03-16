@@ -9,9 +9,13 @@ module Markdown
         nick = match.gsub(/@/, '').strip
         user = User.find_by(nick: nick)
 
-        callback.call(user) if callback
+        if user
+          callback.call(user) if callback
 
-        "@#{user.id}"
+          "@#{user.id}"
+        else
+          match
+        end
       })
     end
   end
