@@ -43,7 +43,11 @@ module Deletable
   def decrement_counter_caches!
     self.reflections.each do |key, target|
       if target.macro == :belongs_to && target.options[:counter_cache] == true
-        self.send(key.to_s).class.decrement_counter((self.class.name.classify.downcase + "s_count").to_sym, self.send(key.to_s).id)
+        owner  = self.send(key.to_s)
+        column = target.counter_cache_column.to_sym
+
+        owner.class.decrement_counter(column, owner.id)
+        owner.decrement column
       end
     end
   end
