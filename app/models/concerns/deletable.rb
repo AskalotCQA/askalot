@@ -19,6 +19,8 @@ module Deletable
       self.deleted_at = datetime
 
       self.save!
+
+      self.decrement_counter_caches!
     end
   end
 
@@ -36,5 +38,13 @@ module Deletable
 
   def mark_as_deleted?(model)
     model.options[:dependent] == :destroy && model.macro == :has_many && model.klass.column_names.include?('deleted')
+  end
+
+  def decrement_counter_caches!
+    self.reflections.each do |key, target|
+      if target.macro == :belongs_to && target.options[:counter_cache] == true
+        self.send(key.to_s).class.decrement_counter((self.class.name.classify.downcase + "s_count").to_sym, self.send(key.to_s).id)
+      end
+    end
   end
 end
