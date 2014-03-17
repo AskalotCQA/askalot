@@ -29,7 +29,7 @@ describe 'Show Questions', js: true do
 
     list = all('#questions > ol > li')
 
-    expect(list).to have(10).items
+    expect(list).to have(17).items
 
     within list[0] do
       expect(page).to have_content(newest_question.title)

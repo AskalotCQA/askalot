@@ -1,21 +1,12 @@
 class Notification < ActiveRecord::Base
+  ACTIONS = [:create, :update, :delete, :mention]
+
   belongs_to :recipient, class_name: :User
   belongs_to :initiator, class_name: :User
   belongs_to :notifiable, polymorphic: true
 
-  symbolize :action, in: [
-    :'create-question',
-    :'create-answer',
-    :'create-comment',
+  scope :read,   lambda { where(unread: false) }
+  scope :unread, lambda { where(unread: true) }
 
-    :'edit-question',
-    :'edit-answer',
-    :'edit-comment',
-
-    :'delete-question',
-    :'delete-answer',
-    :'delete-comment',
-
-    :'mention-user'
-  ]
+  symbolize :action, in: ACTIONS
 end

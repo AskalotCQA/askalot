@@ -8,9 +8,9 @@ class QuestionsController < ApplicationController
   include Notifications::Notifying
   include Notifications::Watching
 
-  before_action :authenticate_user!
-
   default_tab :'questions-new', only: :index
+
+  before_action :authenticate_user!
 
   def index
     @questions = case params[:tab].to_sym
@@ -38,14 +38,14 @@ class QuestionsController < ApplicationController
     authorize! :ask, @question
 
     if @question.save
-      flash[:notice] = t('question.create.success')
-
       process_markdown_for @question do |user|
-        notify_about :'mention-user', @question, for: user
+        notify_about :mention, @question, for: user
       end
 
-      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.map(&:watchers).uniq
+      notify_about :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten
       register_watching_for @question
+
+      flash[:notice] = t('question.create.success')
 
       redirect_to question_path(@question)
     else

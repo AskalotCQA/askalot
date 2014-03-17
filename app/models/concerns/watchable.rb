@@ -9,6 +9,6 @@ module Watchable
   end
 
   def watched_by?(user)
-    views.exists? watcher: user
+    watchers.exists?(id: user.id)
   end
 end
