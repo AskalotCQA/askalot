@@ -58,7 +58,7 @@ shared_examples_for Deletable do
       resource.reload
 
       user = create :user
-      now = DateTime.now.in_time_zone
+      now  = DateTime.now.in_time_zone
 
       comment_for_deleting.mark_as_deleted_by!(user, now)
 
