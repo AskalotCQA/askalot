@@ -3,7 +3,11 @@ module FlashHelper
 
   alias :flash_message_type_to_class :form_message_type_to_class
 
-  def flash_messages(flash: self.flash)
+  def flash_messages(flash = self.flash)
+    render 'shared/flash_messages', messages: flash_to_messages(flash)
+  end
+
+  def flash_to_messages(flash = self.flash)
     messages = []
 
     flash.each do |type, value|
@@ -14,6 +18,6 @@ module FlashHelper
       end
     end
 
-    render 'shared/flash_messages', messages: messages
+    messages
   end
 end
