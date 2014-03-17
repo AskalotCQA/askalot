@@ -1,12 +1,10 @@
 <li>
   <div class="row">
     <div class="col-md-1">
-      <div class="row">
-        <%= content_tag :span, answer.votes_difference, tooltip_attributes("#{answer.votes.positive.size} - #{answer.votes.negative.size}", class: [:'question-metric', question_answers_coloring(answer.question)], placement: :right) do %>
-            <span class="question-value"><%= answer.votes_difference %></span>
-            <%= t('count.vote', count: answer.votes_difference) %>
-        <% end %>
-      </div>
+      <%= content_tag :span, answer.votes_difference, tooltip_attributes("#{answer.votes.positive.size} - #{answer.votes.negative.size}", class: [:'question-metric', question_answers_coloring(answer.question)], placement: :right) do %>
+        <span class="question-value"><%= answer.votes_difference %></span>
+        <%= t('count.vote', count: answer.votes_difference) %>
+      <% end %>
     </div>
 
     <div class="col-md-9">

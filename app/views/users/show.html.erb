@@ -50,55 +50,54 @@
 
   <section id="user-profile">
     <ul class="nav nav-tabs">
-      <%= tab_link_tag_with_count t('user.tab.questions'), :'user-questions', user_path(params.except(:page).merge tab: :'user-questions'), @questions.count %>
-      <%= tab_link_tag_with_count t('user.tab.answers'), :'user-answers', user_path(params.except(:page).merge tab: :'user-answers'), @answers.count %>
-      <%= tab_link_tag_with_count t('user.tab.favorites'), :'user-favorites', user_path(params.except(:page).merge tab: :'user-favorites'), @favorites.count %>
+      <%= tab_link_tag_with_count t('user.tab.questions'), :'user-questions', user_path(params.except(:page).merge tab: :'user-questions'), @questions.size %>
+      <%= tab_link_tag_with_count t('user.tab.answers'), :'user-answers', user_path(params.except(:page).merge tab: :'user-answers'), @answers.size %>
+      <%= tab_link_tag_with_count t('user.tab.favorites'), :'user-favorites', user_path(params.except(:page).merge tab: :'user-favorites'), @favorites.size %>
     </ul>
   </section>
 
   <div class="tab-content">
 
     <%= tab_content_tag :'user-questions' do %>
-        <ol class="list-unstyled">
-          <% @questions.each do |question| %>
-            <%= render 'users/question', question: question %>
-          <% end %>
-        </ol>
+      <ol class="list-unstyled">
+        <% @questions.each do |question| %>
+          <%= render 'users/question', question: question %>
+        <% end %>
+      </ol>
 
-        <div class="row">
-          <div class="col-md-12">
-            <%= paginate @questions, data: { state: true } %>
-          </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= paginate @questions, data: { state: true } %>
         </div>
+      </div>
     <% end %>
 
     <%= tab_content_tag :'user-answers' do %>
-        <ol class="list-unstyled">
-          <% @answers.each do |answer| %>
-              <%= render 'users/answer', answer: answer %>
-          <% end %>
-        </ol>
+      <ol class="list-unstyled">
+        <% @answers.each do |answer| %>
+          <%= render 'users/answer', answer: answer %>
+        <% end %>
+      </ol>
 
-        <div class="row">
-          <div class="col-md-12">
-            <%= paginate @answers, data: { state: true } %>
-          </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= paginate @answers, data: { state: true } %>
         </div>
+      </div>
     <% end %>
 
     <%= tab_content_tag :'user-favorites' do %>
-        <ol class="list-unstyled">
-          <% @favorites.each do |favorite| %>
-              <%= render 'users/question', question: favorite %>
-          <% end %>
-        </ol>
+      <ol class="list-unstyled">
+        <% @favorites.each do |favorite| %>
+          <%= render 'users/question', question: favorite %>
+        <% end %>
+      </ol>
 
-        <div class="row">
-          <div class="col-md-12">
-            <%= paginate @favorites, data: { state: true } %>
-          </div>
+      <div class="row">
+        <div class="col-md-12">
+          <%= paginate @favorites, data: { state: true } %>
         </div>
+      </div>
     <% end %>
-
   </div>
 </section>
