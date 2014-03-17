@@ -66,7 +66,7 @@ class QuestionsController < ApplicationController
     @answer = Answer.new(question: @question)
 
     @question.views.create! viewer: current_user
-    @question.views.reload
+    @question.increment :views_count
   end
 
   def favor
