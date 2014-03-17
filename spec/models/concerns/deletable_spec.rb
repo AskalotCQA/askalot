@@ -65,6 +65,5 @@ shared_examples_for Deletable do
       expect(resource.comments_count).to eql(10)
     end
   end
-
 end
 
