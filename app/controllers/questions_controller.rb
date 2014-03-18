@@ -63,18 +63,13 @@ class QuestionsController < ApplicationController
 
     @answer = Answer.new(question: @question)
 
-<<<<<<< HEAD
     authorize! :view, @question
 
     @view = @question.views.create! viewer: current_user
 
-    @question.views.reload
+    @question.increment :views_count
 
     notify_about :create, @view, for: @question.watchers
-=======
-    @question.views.create! viewer: current_user
-    @question.increment :views_count
->>>>>>> fc99225cfeb7dab71e1b26a977adce387388aed0
   end
 
   def favor
