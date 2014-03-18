@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
   has_many :answers,   foreign_key: :author_id, dependent: :destroy
   has_many :comments,  foreign_key: :author_id, dependent: :destroy
 
-  has_many :labelings, dependent: :destroy
-  has_many :labels, through: :labelings, foreign_key: :author_id
+  has_many :labelings, foreign_key: :author_id, dependent: :destroy
+  has_many :labels, through: :labelings
 
   has_many :followings, dependent: :destroy
   has_many :followers, through: :followings, class_name: :User, foreign_key: :follower_id
