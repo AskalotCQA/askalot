@@ -30,8 +30,6 @@ class User < ActiveRecord::Base
   has_many :votes,         foreign_key: :voter_id,     dependent: :destroy
   has_many :watchings,     foreign_key: :watcher_id,   dependent: :destroy
 
-  # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
-
   validates :role, presence: true
 
   # TODO (smolnar) consult usage of functional indices for nick, login and email uniqueness checking
