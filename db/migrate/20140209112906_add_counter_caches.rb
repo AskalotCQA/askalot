@@ -38,20 +38,4 @@ class AddCounterCaches < ActiveRecord::Migration
     remove_counter :users, :views
     remove_counter :users, :votes
   end
-
-  def self.add_counter(table, association)
-    add_column table, "#{association}_count", :integer, null: false, default: 0
-
-    model = table.to_s.classify.constantize
-
-    model.reset_column_information
-
-    model.find_each do |record|
-      model.reset_counters record.id, association
-    end
-  end
-
-  def self.remove_counter(table, association)
-    remove_column table, "#{association}_count"
-  end
 end

@@ -60,6 +60,7 @@ gem 'symbolize'
 
 # monitoring
 gem 'garelic'
+gem 'newrelic_rpm'
 
 # documentation
 group :doc do

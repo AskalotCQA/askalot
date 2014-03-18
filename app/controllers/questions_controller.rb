@@ -42,7 +42,7 @@ class QuestionsController < ApplicationController
         notify_about :mention, @question, for: user
       end
 
-      notify_about :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).uniq
+      notify_about :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten
       register_watching_for @question
 
       flash[:notice] = t('question.create.success')
@@ -63,6 +63,7 @@ class QuestionsController < ApplicationController
 
     @answer = Answer.new(question: @question)
 
+<<<<<<< HEAD
     authorize! :view, @question
 
     @view = @question.views.create! viewer: current_user
@@ -70,6 +71,10 @@ class QuestionsController < ApplicationController
     @question.views.reload
 
     notify_about :create, @view, for: @question.watchers
+=======
+    @question.views.create! viewer: current_user
+    @question.increment :views_count
+>>>>>>> fc99225cfeb7dab71e1b26a977adce387388aed0
   end
 
   def favor
