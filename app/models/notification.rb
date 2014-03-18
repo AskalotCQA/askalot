@@ -5,6 +5,11 @@ class Notification < ActiveRecord::Base
   belongs_to :initiator, class_name: :User
   belongs_to :notifiable, polymorphic: true
 
+  scope :for, lambda { |user| where(recipient: user) }
+  scope :by,  lambda { |user| where(initiator: user) }
+
+  scope :of, lambda { |resource| where(notifiable: resource) }
+
   scope :read,   lambda { where(unread: false) }
   scope :unread, lambda { where(unread: true) }
 
