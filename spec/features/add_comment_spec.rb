@@ -132,40 +132,4 @@ describe 'Add Comment' do
       end
     end
   end
-
-  context 'when using markdown' do
-    it 'renders only links and mentions' do
-      other = create :user, login: :smolnar
-
-      visit root_path
-
-      click_link 'Otázky'
-      click_link question.title
-
-      within '#question-comments' do
-        click_link 'Pridať komentár'
-
-        fill_in 'comment[text]', with: '# Hey, @smolnar, check out [askalot](https://askalot.fiit.stuba.sk) and http://www.example.com'
-
-        click_button 'Komentovať'
-      end
-
-      within '#question-comments' do
-        expect(page).not_to have_css('h1')
-        expect(page).to     have_content('Hey, @smolnar, check out askalot and http://www.example.com')
-        expect(page).to     have_link('@smolnar', href: user_path(:smolnar))
-        expect(page).to     have_link('askalot',  href: 'https://askalot.fiit.stuba.sk')
-        expect(page).to     have_link('http://www.example.com',  href: 'http://www.example.com')
-      end
-
-      expect(notifications.size).to eql(1)
-
-      comment = Comment.last
-
-      expect(last_notification.notifiable).to eql(comment)
-      expect(last_notification.recipient).to  eql(other)
-      expect(last_notification.initiator).to  eql(user)
-      expect(last_notification.action).to     eql(:mention)
-    end
-  end
 end
