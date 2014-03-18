@@ -1,4 +1,4 @@
-<li>
+<li id="comment-<%= comment.id %>">
   <%= render_markdown comment.text, redcarpet: { tags: [:autolink, :codespan, :emphasis, :link, :striketrough, :underline] } %>
   <%= render 'comments/details', comment: comment %>
   <%= render 'comments/editing', comment: comment %>
