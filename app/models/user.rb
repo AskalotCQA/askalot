@@ -51,6 +51,10 @@ class User < ActiveRecord::Base
 
   before_validation :resolve_nick, on: :create
 
+  scope :questions, lambda { joins(:questions) }
+  scope :answers,   lambda { joins(:answers) }
+  scope :favorites, lambda { joins(:favorites) }
+
   def login=(value)
     write_attribute :login, value.to_s.downcase
 
