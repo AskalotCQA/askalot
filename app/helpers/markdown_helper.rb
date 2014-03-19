@@ -5,6 +5,20 @@ module MarkdownHelper
     render 'markdown/editor', id: id, content: block, help: options[:help].nil? || options[:help], text: options[:text]
   end
 
+  def markdown_link_to_user(match, options = {})
+    id   = match[/\d+\z/] || match.gsub(/@/, '')
+    user = User.find_by(id: id)
+
+    link_to "@#{user.nick}", user_path(user.nick) if user
+  end
+
+  def markdown_link_to_question(match, options = {})
+    id       = match[/\d+\z/] || match.gsub(/#/, '')
+    question = Question.find_by(id: id)
+
+    link_to "##{id}", question if question
+  end
+
   def render_markdown(text, options = {})
     options.deep_merge! :'user-link' => {
       regex: /http.*\/users\/\w+/,
@@ -31,19 +45,5 @@ module MarkdownHelper
 
   def render_stripdown(text, options = {})
     Redcurtain::Markdown.strip(text, options)
-  end
-
-  def markdown_link_to_user(match, options = {})
-    id   = match[/\d+\z/] || match.gsub(/@/, '')
-    user = User.find_by(id: id)
-
-    link_to "@#{user.nick}", user_path(user.nick) if user
-  end
-
-  def markdown_link_to_question(match, options = {})
-    id       = match[/\d+\z/] || match.gsub(/#/, '')
-    question = Question.find_by(id: id)
-
-    link_to "##{id}", question if question
   end
 end

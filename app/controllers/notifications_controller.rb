@@ -6,6 +6,11 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @notifications = Notification.where(recipient: current_user).order(created_at: :desc).page(params[:page]).per(20)
+    count = 25
+
+    @notifications = Notification.where(recipient: current_user).order(created_at: :desc)
+
+    @unread = @notifications.unread.page(tab_page :unread).per(count)
+    @all    = @notifications.page(tab_page :all).per(count)
   end
 end

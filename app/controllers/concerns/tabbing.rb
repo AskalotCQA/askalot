@@ -8,4 +8,8 @@ module Tabbing
       end
     end
   end
+
+  def tab_page(tab, default = 1)
+    params[:tab].to_sym == tab.to_sym ? params[:page] : default
+  end
 end

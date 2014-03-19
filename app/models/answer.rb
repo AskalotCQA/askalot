@@ -11,7 +11,7 @@ class Answer < ActiveRecord::Base
   after_create :slido_label_with_best!
 
   belongs_to :author, class_name: :User, counter_cache: true
-  belongs_to :question, counter_cache: true
+  belongs_to :question, -> { deleted_or_not }, counter_cache: true
 
   has_many :labelings, dependent: :destroy
   has_many :labels, through: :labelings

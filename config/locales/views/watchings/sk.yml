@@ -5,11 +5,9 @@ sk:
     index:
       title: 'Sledovania'
 
-    question:
-      create: 'Sledovať otázku'
+    tab:
+      questions: 'Otázky'
+      categories: 'Kategórie'
+      tags: 'Tagy'
 
-    tag:
-      create: 'Sledovať tag'
-
-    category:
-      create: 'Sledovať kategóriu'
+    none: 'Žiadne sledovania.'

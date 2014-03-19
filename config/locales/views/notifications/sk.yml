@@ -6,9 +6,15 @@ sk:
       title: 'Notifikácie'
 
     tab:
-      all: 'Všetky'
       unread: 'Neprečítané'
+      all: 'Všetky'
 
     more: 'Zobraziť viac'
     none: 'Žiadne notifikácie.'
     read: 'Všetky notifikácie prečítané, dobrá práca!'
+
+    action:
+      create: 'Pridanie'
+      update: 'Upravenie'
+      delete: 'Zmazanie'
+      mention: 'Spomenutie'
