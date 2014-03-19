@@ -29,45 +29,6 @@ describe 'Add Answer' do
         expect(page).to have_content('My neat solution')
       end
     end
-
-    context 'with notifications' do
-      it 'registers answer author as watcher of her answer' do
-        visit root_path
-
-        click_link 'Otázky'
-        click_link question.title
-
-        fill_in 'answer_text', with: 'I soo wanna watch you!'
-
-        click_button 'Odpovedať'
-
-        answer = Answer.last
-
-        expect(answer).to be_watched_by(user)
-      end
-
-      it 'notifies watchers about new answer' do
-        create :watching, watchable: question, watcher: question.author
-
-        visit root_path
-
-        click_link 'Otázky'
-        click_link question.title
-
-        fill_in 'answer_text', with: 'Hey, look at this.'
-
-        click_button 'Odpovedať'
-
-        expect(notifications.size).to eql(1)
-
-        answer = Answer.last
-
-        expect(last_notification.initiator).to  eql(user)
-        expect(last_notification.recipient).to  eql(question.author)
-        expect(last_notification.action).to     eql(:create)
-        expect(last_notification.notifiable).to eql(answer)
-      end
-    end
   end
 
   context 'with question from slido' do
