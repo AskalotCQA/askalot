@@ -154,3 +154,7 @@ a.question-metric.text-muted {
 .question-evaluations {
   @include block-listing;
 }
+
+.question-watching {
+  @include block-iconing;
+}
