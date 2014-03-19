@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
         notify_about :mention, @comment, for: user
       end
 
-      notify_about :create, @comment, for: @commentable.watchers
+      notify_about :create, @comment, for: @commentable.to_question.watchers
       register_watching_for @commentable.to_question
 
       flash[:notice] = t('comment.create.success')
