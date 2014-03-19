@@ -77,7 +77,7 @@ describe 'Watching' do
 
   context 'with tag' do
     it 'registers watching for tag' do
-
+      pending
     end
   end
 
@@ -90,6 +90,8 @@ describe 'Watching' do
       click_link 'Kategórie'
 
       click_link "category-#{category.id}-watch"
+
+      wait_for_remote
 
       expect(category).to be_watched_by(user)
     end

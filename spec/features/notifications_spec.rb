@@ -4,47 +4,69 @@ describe 'Notifications' do
   let(:user)      { create :user }
   let!(:question) { create :question, :with_tags }
   let!(:category) { create :category }
+  let(:watcher)   { create :user }
+  let(:tag)       { create :tag }
 
   before :each do
     login_as user
   end
 
-  context 'with question' do
-    it 'registers author as watcher' do
+  context 'with category' do
+    it 'notifies watchers about new question' do
+      category.toggle_watching_by!(watcher)
+
       visit root_path
 
       click_link 'Opýtať sa otázku'
 
-      select  category.name,    from: 'question_category_id'
-      fill_in 'question_title', with: 'Am I a watcher or stalker?'
-      fill_in 'question_text',  with: 'I want to have notification for this question.'
+      select category.name, from: 'question_category_id'
+
+      fill_in 'question_title', with: 'Lorem ipsum?'
+      fill_in 'question_text',  with: 'Lorem ipsum'
 
       click_button 'Opýtať'
 
+      expect(notifications.size).to eql(1)
+
       question = Question.last
 
-      expect(question).to be_watched_by(user)
+      expect(last_notification.initiator).to  eql(user)
+      expect(last_notification.recipient).to  eql(watcher)
+      expect(last_notification.action).to     eql(:create)
+      expect(last_notification.notifiable).to eql(question)
+    end
+  end
+
+  context 'with tag' do
+    it 'notifies watchers about new question' do
+      tag.toggle_watching_by!(watcher)
+
+      visit root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select category.name, from: 'question_category_id'
+
+      fill_in 'question_title',    with: 'Lorem ipsum?'
+      fill_in 'question_text',     with: 'Lorem ipsum'
+      fill_in 'question_tag_list', with: tag.name
+
+      click_button 'Opýtať'
+
+      expect(notifications.size).to eql(1)
+
+      question = Question.last
+
+      expect(last_notification.initiator).to  eql(user)
+      expect(last_notification.recipient).to  eql(watcher)
+      expect(last_notification.action).to     eql(:create)
+      expect(last_notification.notifiable).to eql(question)
     end
   end
 
   context 'with answer' do
-    it 'registers answer author as watcher of her answer' do
-      visit root_path
-
-      click_link 'Otázky'
-      click_link question.title
-
-      fill_in 'answer_text', with: 'I soo wanna watch you!'
-
-      click_button 'Odpovedať'
-
-      answer = Answer.last
-
-      expect(answer).to be_watched_by(user)
-    end
-
     it 'notifies watchers about new answer' do
-      create :watching, watchable: question, watcher: question.author
+      question.toggle_watching_by!(question.author)
 
       visit root_path
 
@@ -69,7 +91,7 @@ describe 'Notifications' do
   context 'with comment' do
     context 'for question' do
       it 'notifies about new comment' do
-        create :watching, watcher: question.author, watchable: question
+        question.toggle_watching_by!(question.author)
 
         visit root_path
 
@@ -116,7 +138,7 @@ describe 'Notifications' do
       end
 
       it 'notifies about new comment' do
-        create :watching, watcher: question.author, watchable: answer
+        question.toggle_watching_by!(question.author)
 
         visit root_path
 
