@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'Favor Question' do
-  let(:user) { create :user }
+  let(:user)      { create :user }
   let!(:question) { create :question }
 
   before :each do
@@ -15,7 +15,7 @@ describe 'Favor Question' do
       click_link 'Otázky'
       click_link question.title
 
-      click_link 'favor_question'
+      click_link "question-#{question.id}-favor"
 
       wait_for_remote
 
@@ -34,7 +34,7 @@ describe 'Favor Question' do
       click_link 'Otázky'
       click_link question.title
 
-      click_link 'favor_question'
+      click_link "question-#{question.id}-favor"
 
       wait_for_remote
 
