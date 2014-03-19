@@ -27,11 +27,17 @@ describe 'Watching' do
       expect(question).to be_watched_by(user)
     end
 
-    it 'registers watching for question' do
+    it 'registers watching for question', js: true do
       visit root_path
 
       click_link 'Otázky'
       click_link question.title
+
+      click_link "question-#{question.id}-watch"
+
+      wait_for_remote
+
+      expect(question).to be_watched_by(user)
     end
   end
 
@@ -71,13 +77,21 @@ describe 'Watching' do
 
   context 'with tag' do
     it 'registers watching for tag' do
-      pending
+
     end
   end
 
   context 'with category' do
-    it 'registers watching for category' do
-      pending
+    let!(:category) { create :category }
+
+    it 'registers watching for category', js: true do
+      visit root_path
+
+      click_link 'Kategórie'
+
+      click_link "category-#{category.id}-watch"
+
+      expect(category).to be_watched_by(user)
     end
   end
 end
