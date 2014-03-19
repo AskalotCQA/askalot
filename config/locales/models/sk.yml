@@ -30,11 +30,23 @@ sk:
       few: 'obľúbenia'
       other: 'obľúbení'
 
+    notification:
+      zero: 'notifikácií'
+      one: 'notifikácia'
+      few: 'notifikácie'
+      other: 'notifikácií'
+
     question:
       zero: 'otázok'
       one: 'otázka'
       few: 'otázky'
       other: 'otázok'
+
+    user:
+      zero: 'používateľov'
+      one: 'používateľ'
+      few: 'používatelia'
+      other: 'používateľov'
 
     view:
       zero: 'zobrazení'
@@ -47,6 +59,12 @@ sk:
       one: 'hlas'
       few: 'hlasy'
       other: 'hlasov'
+
+    watching:
+      zero: 'sledovanií'
+      one: 'sledovanie'
+      few: 'sledovania'
+      other: 'sledovaní'
 
   count_x:
     answer:
@@ -79,11 +97,23 @@ sk:
       few: '%{count} obľúbenia'
       other: '%{count} obľúbení'
 
+    notification:
+      zero: 'žiadna notifikácia'
+      one: '1 notifikácia'
+      few: '%{count} notifikácie'
+      other: '%{count} notifikácií'
+
     question:
       zero: 'žiadna otázka'
       one: '1 otázka'
       few: '%{count} otázky'
       other: '%{count} otázok'
+
+    user:
+      zero: 'žiaden používateľ'
+      one: '1 používateľ'
+      few: '%{count} používatelia'
+      other: '%{count} používateľov'
 
     view:
       zero: 'žiadne videnia'
@@ -97,7 +127,25 @@ sk:
       few: '%{count} hlasy'
       other: '%{count} hlasov'
 
+    watching:
+      zero: 'žiadne sledovania'
+      one: '1 sledovanie'
+      few: '%{count} sledovania'
+      other: '%{count} sledovaní'
+
   activerecord:
+    models:
+     answer: 'Odpoveď'
+     comment: 'Komentár'
+     evaluation: 'Hodnotenie'
+     favorite: 'Obľúbenie'
+     question: 'Otázka'
+     notification: 'Notifikácia'
+     user: 'Používateľ'
+     view: 'Zobrazenie'
+     vote: 'Hlas'
+     watching: 'Sledovanie'
+
     attributes:
       user:
         email: 'E-mail'
