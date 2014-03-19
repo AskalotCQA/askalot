@@ -22,12 +22,9 @@ class UsersController < ApplicationController
     @answers   = @user.answers.order(created_at: :desc)
     @favorites = Question.favored_by(@user).order(created_at: :desc)
 
-    case params[:tab].to_sym
-      when :'user-questions' then @questions = @questions.page(params[:page]).per(10)
-      when :'user-answers'   then @answers   = @answers.page(params[:page]).per(10)
-      when :'user-favorites' then @favorites = @favorites.page(params[:page]).per(10)
-      else fail
-      end
+    @questions = @questions.page(params[:tab] == 'user-questions' ? params[:page] : 1).per(10)
+    @answers   = @answers.page(params[:tab] == 'user-answers' ? params[:page] : 1).per(10)
+    @favorites = @favorites.page(params[:tab] == 'user-favorites' ? params[:page] : 1).per(10)
 
     raise ActiveRecord::RecordNotFound unless @user
   end
