@@ -34,7 +34,6 @@
     <div class="col-md-6">
       <div class="question-preview">
         <h4>
-          <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
           <%= link_to question_title_preview(question), question_path(question) %>
         </h4>
 
