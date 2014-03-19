@@ -2,7 +2,7 @@
 
 <section>
   <div class="row">
-    <div class="col-md-offset-1 col-md-3">
+    <div class="col-md-3">
       <div class="list-group">
         <%= gravatar_image_tag @user.gravatar_email, size: 263, class: :'list-group-item img-responsive' %>
 
@@ -21,7 +21,7 @@
         <% end %>
       </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-9">
       <h1>
         <%= @user.nick %>
 
@@ -57,7 +57,7 @@
   <div class="tab-content">
 
     <%= tab_content_tag :'user-questions' do %>
-      <ol class="list-unstyled">
+      <ol class="list-unstyled user-profile-list">
         <% @questions.each do |question| %>
           <%= render 'users/question', question: question %>
         <% end %>
@@ -71,7 +71,7 @@
     <% end %>
 
     <%= tab_content_tag :'user-answers' do %>
-      <ol class="list-unstyled">
+      <ol class="list-unstyled user-profile-list">
         <% @answers.each do |answer| %>
           <%= render 'users/answer', answer: answer %>
         <% end %>
@@ -85,7 +85,7 @@
     <% end %>
 
     <%= tab_content_tag :'user-favorites' do %>
-      <ol class="list-unstyled">
+      <ol class="list-unstyled user-profile-list">
         <% @favorites.each do |favorite| %>
           <%= render 'users/question', question: favorite %>
         <% end %>

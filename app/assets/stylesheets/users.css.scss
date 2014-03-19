@@ -34,6 +34,12 @@
 
 // profile
 
+.user-profile-list {
+  & > li + li {
+  padding-top: 20px;
+  }
+}
+
 img.list-group-item {
   border: none;
   padding: 0;
