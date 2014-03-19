@@ -1,14 +1,20 @@
 class window.Hash
+  @callbacks: []
+
   @bind: ->
     $(document).ready ->
       $(window).on 'hashchange', ->
+        callback() for callback in Hash.callbacks
+
         Hash.normalizePosition()
 
   @on: (regex, callback) ->
-    if matches = window.location.hash.match(regex)
-      callback(matches)
+    another = ->
+      callback(matches) if matches = window.location.hash.match(regex)
 
-      Hash.normalizePosition()
+    another()
+
+    Hash.callbacks.push(another)
 
   @normalizePosition: ->
     $(document).ready ->
