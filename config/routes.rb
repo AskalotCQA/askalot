@@ -41,10 +41,18 @@ Askalot::Application.routes.draw do
     get :votedown, on: :member
   end
 
-  resources :categories, only: [:index]
+  concern :watchable do
+    get :watch, on: :member
+  end
+
+  resources :categories, only: [:index] do
+    concerns :watchable
+  end
 
   resources :tags, only: [] do
     get :suggest, on: :collection
+
+    concerns :watchable
   end
 
   resources :questions, only: [:index, :new, :create, :show, :update] do
@@ -57,6 +65,7 @@ Askalot::Application.routes.draw do
     concerns :deletable
     concerns :evaluable
     concerns :votable
+    concerns :watchable
   end
 
   resources :answers, only: [] do
