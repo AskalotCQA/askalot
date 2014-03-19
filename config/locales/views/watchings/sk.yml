@@ -11,3 +11,12 @@ sk:
       tags: 'Tagy'
 
     none: 'Žiadne sledovania.'
+
+    question:
+      create: 'Sledovať otázku'
+
+    tag:
+      create: 'Sledovať tag'
+
+    category:
+      create: 'Sledovať kategóriu'
