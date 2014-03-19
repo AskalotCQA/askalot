@@ -14,7 +14,8 @@
           <div class="col-md-4">
             <h4><%= link_to tag.name, questions_path(tags: tag.name) %></h4>
             <p class="text-muted">
-              <%= t('count.question', count: tag.count).upcase_first %> <%= tag.count %> &middot;
+              <%= t('count.question', count: Question.tagged_with(tag.name).size).upcase_first %> <%= Question.tagged_with(tag.name).size %> &middot;
+              <%= t('count.answer', count: Question.tagged_with(tag.name).answer_count.size).upcase_first %> <%= Question.tagged_with(tag.name).answer_count.size %>
             </p>
           </div>
         <% end %>
