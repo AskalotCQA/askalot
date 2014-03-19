@@ -4,6 +4,6 @@ module AnswersHelper
   end
 
   def link_to_answer(answer, options = {})
-    link_to_question answer.to_question, options.merge(anchor: "answer-#{answer.id}")
+    link_to_question answer.to_question, options.merge(anchor: "answer-#{answer.id}", deleted: answer.deleted?)
   end
 end
