@@ -55,7 +55,7 @@ class Answer < ActiveRecord::Base
   end
 
   def to_question
-    self.question
+    question
   end
 
   private
