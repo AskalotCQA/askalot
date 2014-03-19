@@ -6,10 +6,10 @@ sk:
       title: 'Sledovania'
 
     question:
-      create: 'Zaregistrovať sledovanie pre otázku'
+      create: 'Sledovať otázku'
 
     tag:
-      create: 'Zaregistrovať sledovanie pre tag'
+      create: 'Sledovať tag'
 
     category:
-      create: 'Zaregistrovať sledovanie pre kategóriu'
+      create: 'Sledovať kategóriu'
