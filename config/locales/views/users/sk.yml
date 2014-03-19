@@ -4,7 +4,7 @@ sk:
 
     index:
       title: 'Používatelia'
-      no_results_found: 'V systéme nie sú žiadny noví používatelia.'
+      no_results_found: 'Nenájdený žiadny používatelia.'
 
     tab:
       all: 'Všetci'

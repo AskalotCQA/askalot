@@ -35,7 +35,7 @@ sk:
       success: 'Otázka bola úspešne zmazaná.'
 
     tab:
-      new: 'Aktuálne'
+      recent: 'Aktuálne'
       unanswered: 'Bez odpovede'
       answered: 'Odpovedané'
       solved: 'Vyriešené'
