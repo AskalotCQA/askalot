@@ -21,7 +21,7 @@ class AnswersController < ApplicationController
       end
 
       notify_about :create, @answer, for: @question.watchers
-      register_watching_for @answer
+      register_watching_for @question
 
       flash[:notice] = t('answer.create.success')
     else

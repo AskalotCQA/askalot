@@ -103,7 +103,7 @@ describe 'Add Answer' do
       expect(page).not_to have_css(".answer-labeling-best a.answer-labeled-best")
     end
 
-    it "keeps best label after saving existing answer" do
+    it 'keeps best label after saving existing answer' do
       login_as teacher
 
       visit root_path
@@ -111,11 +111,11 @@ describe 'Add Answer' do
       click_link 'Otázky'
       click_link question_2.title
 
-      expect(page).to have_css(".answer-labeling-best a.answer-labeled-best")
+      expect(page).to have_css('.answer-labeling-best a.answer-labeled-best')
 
       answer.save
 
-      expect(page).to have_css(".answer-labeling-best a.answer-labeled-best")
+      expect(page).to have_css('.answer-labeling-best a.answer-labeled-best')
     end
   end
 end
