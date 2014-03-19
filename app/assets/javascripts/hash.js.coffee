@@ -1,8 +1,15 @@
-$(document).ready ->
-  window.hashChangeEvent = jQuery.Event("hash:change")
+class window.Hash
+  @bind: ->
+    $(document).ready ->
+      $(window).on 'hashchange', ->
+        Hash.normalizePosition()
 
-  window.getHash = ->
-    window.location.hash.replace("!/", "")
+  @on: (regex, callback) ->
+    if matches = window.location.hash.match(regex)
+      callback(matches)
 
-  $("html, body").on "hash:change", (e, hash) ->
-    window.location.hash = "!/#{hash.replace('#', '')}"
+      Hash.normalizePosition()
+
+  @normalizePosition: ->
+    $(document).ready ->
+      setTimeout (-> $(window).scrollTop($(window).scrollTop() - 51)), 100
