@@ -5,3 +5,9 @@ sk:
     index:
       title: 'Sledovania'
 
+    tab:
+      questions: 'Otázky'
+      categories: 'Kategórie'
+      tags: 'Tagy'
+
+    none: 'Žiadne sledovania.'

@@ -51,9 +51,14 @@ sk:
       start: 'Aktualizovať automaticky'
       end: 'Aktualizované %{time}'
 
+    details:
+      created: 'Pridal'
+      updated: 'Upravil'
+      deleted: 'Zmazal'
+
+    link_to_deleted_title: 'Otázka bola zmazaná'
+
     favor: 'Pridať medzi obľúbené'
     unfavor: 'Odobrať z obľúbených'
 
-    created: 'Pridal'
-    updated: 'Upravil'
     favored: 'Obľúbená'

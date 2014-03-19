@@ -29,8 +29,10 @@ sk:
       best: 'Označiť ako najlepšiu'
       helpful: 'Označiť ako pomocnú'
 
+    details:
+      created: 'Pridal'
+      updated: 'Upravil'
+      deleted: 'Zmazal'
+
     best: 'Najlepšia'
     helpful: 'Pomocná'
-
-    created: 'Pridal'
-    updated: 'Upravil'
