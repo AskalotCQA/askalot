@@ -6,7 +6,7 @@
           <%= content_tag :span, class: [:'question-metric', question_votes_coloring(question)] do %>
             <% if question.favorites.size > 0 %>
               <span class="question-value"><%= icon_tag :'star-o' %></span>
-                <%= question.favorites.size %>
+              <%= question.favorites.size %>
             <% end %>
           <% end %>
         </div>
