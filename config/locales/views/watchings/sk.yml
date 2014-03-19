@@ -5,3 +5,11 @@ sk:
     index:
       title: 'Sledovania'
 
+    question:
+      create: 'Zaregistrovať sledovanie pre otázku'
+
+    tag:
+      create: 'Zaregistrovať sledovanie pre tag'
+
+    category:
+      create: 'Zaregistrovať sledovanie pre kategóriu'
