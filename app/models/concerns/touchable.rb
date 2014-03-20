@@ -2,16 +2,15 @@ module Touchable
   extend ActiveSupport::Concern
 
   included do
-    after_save :update_touched_at!
+    after_save :update_touched_at! if self != Question
   end
 
   def update_touched_at!
-    question = self.to_question
+    return if self.is_a? Question
 
-    unless question == self
-      question.touched_at = self.updated_at
+    question            = self.to_question
+    question.touched_at = self.updated_at
 
-      question.save!
-    end
+    question.save!
   end
 end

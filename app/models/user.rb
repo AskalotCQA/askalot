@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
   has_many :answers,   foreign_key: :author_id, dependent: :destroy
   has_many :comments,  foreign_key: :author_id, dependent: :destroy
 
-  has_many :labelings, dependent: :destroy
-  has_many :labels, through: :labelings, foreign_key: :author_id
+  has_many :labelings, foreign_key: :author_id, dependent: :destroy
+  has_many :labels, through: :labelings
 
   has_many :followings, dependent: :destroy
   has_many :followers, through: :followings, class_name: :User, foreign_key: :follower_id
@@ -29,8 +29,6 @@ class User < ActiveRecord::Base
   has_many :views,         foreign_key: :viewer_id,    dependent: :destroy
   has_many :votes,         foreign_key: :voter_id,     dependent: :destroy
   has_many :watchings,     foreign_key: :watcher_id,   dependent: :destroy
-
-  # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
 
   validates :role, presence: true
 

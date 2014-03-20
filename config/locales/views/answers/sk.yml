@@ -24,13 +24,16 @@ sk:
       submit: 'Zmazať'
       cancel: 'Spať'
       success: 'Odpoveď bola úspešne zmazaná.'
+      failure: 'Odpoveď sa nepodarilo zmazať.'
 
     label:
       best: 'Označiť ako najlepšiu'
       helpful: 'Označiť ako pomocnú'
 
+    details:
+      created: 'Pridal'
+      updated: 'Upravil'
+      deleted: 'Zmazal'
+
     best: 'Najlepšia'
     helpful: 'Pomocná'
-
-    created: 'Pridal'
-    updated: 'Upravil'

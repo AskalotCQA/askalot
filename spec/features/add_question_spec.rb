@@ -110,22 +110,4 @@ describe 'Add Question' do
       end
     end
   end
-
-  context 'with notifications' do
-    it 'registers author as watcher' do
-      visit root_path
-
-      click_link 'Opýtať sa otázku'
-
-      select  category.name,    from: 'question_category_id'
-      fill_in 'question_title', with: 'Am I a watcher or stalker?'
-      fill_in 'question_text',  with: 'I want to have notification for this question.'
-
-      click_button 'Opýtať'
-
-      question = Question.last
-
-      expect(question).to be_watched_by(user)
-    end
-  end
 end

@@ -6,6 +6,7 @@ class Question < ActiveRecord::Base
   include Favorable
   include Notifiable
   include Taggable
+  include Touchable
   include Viewable
   include Votable
   include Watchable

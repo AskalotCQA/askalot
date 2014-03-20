@@ -1,0 +1,26 @@
+<%= form_messages key: tab %>
+
+<!--
+TODO(zbell) implement
+  <div class="text-right">
+    <%= link_to clean_notifications_path, class: 'btn btn-default' do %>
+  <%= icon_tag :check %>
+  <%= t 'notification.clean.submit' %>
+<% end %>
+  </div>
+
+-->
+
+<% if notifications.any? %>
+  <ol class="notifications list-unstyled">
+    <% notifications.each do |notification| %>
+      <%= render 'notification', notification: notification %>
+    <% end %>
+  </ol>
+
+  <%= paginate notifications, params: { tab: tab } %>
+<% else %>
+  <p class="alert alert-info">
+    <%= t notifications.size.zero? && notifications.size != notifications.unread.size ? 'notification.all_read' : 'notification.none' %>
+  </p>
+<% end %>

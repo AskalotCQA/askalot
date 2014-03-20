@@ -1,42 +1,40 @@
 <% provide :title, t('statistic.index.title') %>
 
-<section>
-  <%= form_tag statistics_path, method: :get, class: :'form-horizontal', role: :form do %>
-    <div class="form-group">
-      <div class="col-md-4">
-        <div class="input-group select2-bootstrap-prepend">
-          <span class="input-group-addon"><%= icon_tag :tags %></span>
-          <%= text_field_tag :tags, params[:tags], class: :'form-control', data: { as: :select2, role: :tags } %>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="input-group">
-          <span class="input-group-addon"><%= icon_tag :calendar %></span>
-          <%= text_field_tag :from, params[:from], class: :'form-control', data: { as: :datepicker } %>
-          <span class="input-group-addon"><%= icon_tag :'long-arrow-right' %></span>
-          <%= text_field_tag :to, params[:to], class: :'form-control', data: { as: :datepicker } %>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <button type="submit" class="btn btn-default">Filtrovať</button>
+<%= form_tag statistics_path, method: :get, class: :'form-horizontal statistics-filter', role: :form do %>
+  <div class="form-group">
+    <div class="col-md-4">
+      <div class="input-group select2-bootstrap-prepend">
+        <span class="input-group-addon"><%= icon_tag :tags %></span>
+        <%= text_field_tag :tags, params[:tags], class: :'form-control', data: { as: :select2, role: :tags } %>
       </div>
     </div>
-    <div class="form-group">
-      <div class="col-md-12">
-        <p class="help-block">
-          <em>
-            Uvažovaní používatelia sú autormi otázok, alebo odpovedí k otázkam,
-            alebo komentárov k odpovediam a samotným otázkam s vybranými tagmi
-            počas daného obdobia.
-            <br/>
-            Uvažovaní sú taktiež tí používatelia, ktorí hlasovali za otázku
-            alebo odpoveď k otázke s vybranými tagmi počas daného obdobia.
-          </em>
-        </p>
+    <div class="col-md-4">
+      <div class="input-group">
+        <span class="input-group-addon"><%= icon_tag :calendar %></span>
+        <%= text_field_tag :from, params[:from], class: :'form-control', data: { as: :datepicker } %>
+        <span class="input-group-addon"><%= icon_tag :'long-arrow-right' %></span>
+        <%= text_field_tag :to, params[:to], class: :'form-control', data: { as: :datepicker } %>
       </div>
     </div>
-  <% end %>
-</section>
+    <div class="col-md-4">
+      <button type="submit" class="btn btn-default">Filtrovať</button>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-12">
+      <p class="help-block">
+        <em>
+          Uvažovaní používatelia sú autormi otázok, alebo odpovedí k otázkam,
+          alebo komentárov k odpovediam a samotným otázkam s vybranými tagmi
+          počas daného obdobia.
+          <br/>
+          Uvažovaní sú taktiež tí používatelia, ktorí hlasovali za otázku
+          alebo odpoveď k otázke s vybranými tagmi počas daného obdobia.
+        </em>
+      </p>
+    </div>
+  </div>
+<% end %>
 
 <section>
   <div class="row">

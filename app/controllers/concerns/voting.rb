@@ -17,8 +17,11 @@ module Voting
 
     authorize! :vote, @votable
 
-    @votable.toggle_vote_by!(current_user, voteup)
+    @vote = @votable.toggle_vote_by!(current_user, voteup)
+
     @votable.votes.reload
+
+    notify_about notify_action_for(@vote), @vote, for: @votable.watchers
 
     render 'votables/vote', formats: :js
   end

@@ -1,0 +1,8 @@
+@import 'mixins';
+@import 'variables';
+
+// collection
+
+.notifications {
+  @include block-listing;
+}

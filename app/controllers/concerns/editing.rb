@@ -15,7 +15,7 @@ module Editing
 
     if @editable.changed?
       if @editable.save && @editable.update_attributes_by_revision(@revision)
-        notify_about :update, @editable, for: @editable.watchers
+        notify_about :update, @editable, for: @editable.to_question.watchers
 
         flash[:notice] = t "#{@model}.update.success"
       else
