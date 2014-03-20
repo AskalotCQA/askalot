@@ -2,7 +2,7 @@
 
 <section id="users-controls">
   <ul class="nav nav-tabs">
-    <%= tab_link_tag_with_count t('user.tab.all'), :'users-all', users_path(params.except(:page).merge tab: :'users-all'), User.count %>
+    <%= tab_link_tag_with_count t('user.tab.all'), :all, users_path(params.except(:page).merge tab: :all), User.count %>
   </ul>
 </section>
 

@@ -1,4 +1,4 @@
-<%= form_for resource, as: :user, url: profile_users_path(tab: :'user-profile'), html: { method: :patch } do |f| %>
+<%= form_for resource, as: :user, url: profile_users_path(tab: :profile), html: { method: :patch } do |f| %>
   <div class="form-group">
     <%= f.label :nick %>
     <%= f.text_field :nick, class: :'form-control' %>

@@ -1,7 +1,7 @@
 class RegistrationsController < Devise::RegistrationsController
   include Tabbing
 
-  default_tab :'user-profile', only: :edit
+  default_tab :profile, only: :edit
 
   def destroy
     fail
