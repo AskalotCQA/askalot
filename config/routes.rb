@@ -50,13 +50,15 @@ Askalot::Application.routes.draw do
     concerns :votable
   end
 
-  resources :answers, only: [] do
+  resources :answers, only: [:update, :destroy] do
     get :label, on: :member
 
     concerns :commetable
     concerns :evaluable
     concerns :votable
   end
+
+  resources :comments, only: [:update, :destroy]
 
   resources :changelogs, only: [:index]
 
@@ -69,5 +71,7 @@ Askalot::Application.routes.draw do
     get :read,  on: :member
   end
 
-  resources :watchings, only: [:index, :destroy]
+  resources :watchings, only: [:index, :destroy] do
+    delete :clean, on: :collection
+  end
 end
