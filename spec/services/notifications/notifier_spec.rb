@@ -29,7 +29,20 @@ describe Notifications::Notifier do
       Notifications::Notifier.publish(:edit, :user, resource, for: watcher)
     end
 
-    context 'when initiator is watcher' do
+    context 'with duplicated recipient' do
+      it 'creates only one notification' do
+        watcher  = double(:watcher)
+        resource = double(:resource)
+        factory  = double(:factory)
+
+        expect(factory).to receive(:create!).with(action: :edit, recipient: watcher, initiator: :user, notifiable: resource).once
+
+        Notifications::Notifier.factory = factory
+        Notifications::Notifier.publish(:edit, :user, resource, for: [watcher, watcher])
+      end
+    end
+
+    context 'when initiator is recipent' do
       it 'ommits notification for initiator' do
         initiator = double(:initiator)
         resource  = double(:resource, watchers: [initiator])

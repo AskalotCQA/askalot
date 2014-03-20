@@ -24,6 +24,9 @@ sk:
       submit: 'Zmazať'
       cancel: 'Spať'
       success: 'Komentár bol úspešne zmazaný.'
+      failure: 'Komentár sa nepodarilo zmazať.'
 
-    created: 'Pridal'
-    updated: 'Upravil'
+    details:
+      created: 'Pridal'
+      updated: 'Upravil'
+      deleted: 'Zmazal'

@@ -3,12 +3,12 @@ class UsersController < ApplicationController
 
   before_action :authenticate_user!
 
-  default_tab :'users-all', only: :index
-  default_tab :'user-questions', only: :show
+  default_tab :all, only: :index
+  default_tab :questions, only: :show
 
   def index
     @users = case params[:tab].to_sym
-             when :'users-all' then User.order(:nick)
+             when :all then User.order(:nick)
              else fail
              end
 
@@ -16,24 +16,24 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by_nick params[:nick]
+    @user = User.where(nick: params[:nick]).first
 
     @questions = @user.questions.where(anonymous: false).order(created_at: :desc)
     @answers   = @user.answers.order(created_at: :desc)
     @favorites = Question.favored_by(@user).order(created_at: :desc)
 
-    @questions = @questions.page(params[:tab] == 'user-questions' ? params[:page] : 1).per(10)
-    @answers   = @answers.page(params[:tab] == 'user-answers' ? params[:page] : 1).per(10)
-    @favorites = @favorites.page(params[:tab] == 'user-favorites' ? params[:page] : 1).per(10)
+    @questions = @questions.page(params[:tab] == :questions ? params[:page] : 1).per(10)
+    @answers   = @answers.page(params[:tab] == :answers ? params[:page] : 1).per(10)
+    @favorites = @favorites.page(params[:tab] == :favorites ? params[:page] : 1).per(10)
 
     raise ActiveRecord::RecordNotFound unless @user
   end
 
   def update
     if current_user.update_attributes(user_params)
-      flash[:notice] = t 'devise.registrations.updated'
+      form_message :notice, t('user.update.success'), key: params[:tab]
     else
-      flash_error_messages_for current_user
+      form_error_messages_for current_user, key: params[:tab]
     end
 
     redirect_to edit_user_registration_path(tab: params[:tab])

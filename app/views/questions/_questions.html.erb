@@ -1,4 +1,4 @@
-<section id="questions">
+<div id="questions" class="questions">
   <% if questions.any? %>
     <ol class="list-unstyled">
       <% questions.each do |question| %>
@@ -20,4 +20,4 @@
       <%= paginate questions, remote: true, data: { state: true } %>
     </div>
   </div>
-</section>
+</div>

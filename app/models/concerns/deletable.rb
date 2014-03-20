@@ -4,6 +4,9 @@ module Deletable
   included do
     belongs_to :deletor, class_name: :User
 
+    # TODO(zbell) rm when on rails 4.1.0 since belongs_to -> { unscoped / unscope(:where) } does not work in 4.0.x
+    scope :deleted_or_not, lambda { where(deleted: [true, false]) }
+
     scope :deleted,   lambda { where(deleted: true) }
     scope :undeleted, lambda { where(deleted: false) }
 
@@ -18,7 +21,11 @@ module Deletable
       self.deletor    = user
       self.deleted_at = datetime
 
+      deleted_changed = self.deleted_changed?
+
       self.save!
+      
+      self.decrement_counter_caches! if deleted_changed
     end
   end
 
@@ -36,5 +43,17 @@ module Deletable
 
   def mark_as_deleted?(model)
     model.options[:dependent] == :destroy && model.macro == :has_many && model.klass.column_names.include?('deleted')
+  end
+
+  def decrement_counter_caches!
+    self.reflections.each do |key, target|
+      if target.macro == :belongs_to && target.options[:counter_cache] == true
+        owner  = self.send(key.to_s)
+        column = target.counter_cache_column.to_sym
+
+        owner.class.decrement_counter(column, owner.id)
+        owner.decrement column
+      end
+    end
   end
 end

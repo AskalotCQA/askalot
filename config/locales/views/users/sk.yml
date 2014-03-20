@@ -59,14 +59,17 @@ sk:
     privacy: 'Súkromie'
     account: 'Účet'
 
+    show:
+      about: 'O mne'
+      edit: 'Upraviť profil'
+
     edit:
       profile: 'Úprava profilu'
       social: 'Sociálne siete'
       privacy: 'Správa súkromia'
       account: 'Nastavenia účtu'
 
-    show:
-      about: 'O mne'
-      edit: 'Upraviť profil'
+    update:
+      success: 'Úspešne ste aktualizovali Váš profil.'
 
     anonymous: 'Anonym'

@@ -1,25 +1,21 @@
 <% provide(:title, t('user.index.title')) %>
 
-<section id="users-controls">
-  <ul class="nav nav-tabs">
-    <%= tab_link_tag_with_count t('user.tab.all'), :'users-all', users_path(params.except(:page).merge tab: :'users-all'), User.count %>
-  </ul>
-</section>
+<ul class="nav nav-tabs tab-navigation">
+  <%= tab_link_tag_with_count t('user.tab.all'), :all, users_path(params.except(:page).merge tab: :all), User.count %>
+</ul>
 
-<section id="users">
-  <% @users.each_slice(6) do |users| %>
-    <div class="row">
-      <% users.each do |user| %>
-        <div class="col-md-2">
-          <%= render 'square', user: user %>
-        </div>
-      <% end %>
-     </div>
-  <% end %>
-
+<% @users.each_slice(6) do |users| %>
   <div class="row">
-    <div class="col-md-12">
-      <%= paginate @users, data: { state: true } %>
-    </div>
+    <% users.each do |user| %>
+      <div class="col-md-2">
+        <%= render 'square', user: user %>
+      </div>
+    <% end %>
+   </div>
+<% end %>
+
+<div class="row">
+  <div class="col-md-12">
+    <%= paginate @users %>
   </div>
-</section>
+</div>

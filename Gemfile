@@ -15,7 +15,7 @@ gem 'net-ldap'
 
 # stylesheets
 gem 'sass-rails', '~> 4.0.0'
-gem 'bootstrap-sass', '~> 3.1.0'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'font-awesome-rails', '~> 4.0.3.0'
 
 # javascripts
@@ -60,6 +60,7 @@ gem 'symbolize'
 
 # monitoring
 gem 'garelic'
+gem 'newrelic_rpm'
 
 # documentation
 group :doc do

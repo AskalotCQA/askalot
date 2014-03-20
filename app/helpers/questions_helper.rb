@@ -1,10 +1,10 @@
 module QuestionsHelper
   def question_title_preview(question, options = {})
-    truncate question.title, length: 120, separator: ' '
+    truncate html_escape(question.title), default_truncate_options.merge(length: 120).merge(options)
   end
 
   def question_text_preview(question, options = {})
-    truncate render_stripdown(question.text), length: 200, separator: ' '
+    truncate render_stripdown(question.text), default_truncate_options.merge(length: 200).merge(options)
   end
 
   def question_answers_coloring(question)
@@ -31,6 +31,17 @@ module QuestionsHelper
     options.deep_merge! class: classes, data: { id: filter } unless filter.blank?
 
     link_to label.name, questions_path(tags: filter), options
+  end
+
+  def link_to_question(question, options = {})
+    body = options.delete(:body) || question_title_preview(question, extract_truncate_options!(options))
+    path = question_path(question, anchor: options.delete(:anchor))
+
+    if question.deleted? || options.delete(:deleted)
+      return content_tag :span, body, tooltip_attributes(t('question.link_to_deleted_title'), placement: :bottom).merge(options)
+    end
+
+    link_to body, path, options
   end
 
   private

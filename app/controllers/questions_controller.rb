@@ -8,17 +8,17 @@ class QuestionsController < ApplicationController
   include Notifications::Notifying
   include Notifications::Watching
 
-  before_action :authenticate_user!
+  default_tab :new, only: :index
 
-  default_tab :'questions-new', only: :index
+  before_action :authenticate_user!
 
   def index
     @questions = case params[:tab].to_sym
-                 when :'questions-new'        then Question.order(touched_at: :desc)
-                 when :'questions-unanswered' then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
-                 when :'questions-answered'   then Question.answered.by_votes.order(created_at: :desc)
-                 when :'questions-solved'     then Question.solved.by_votes.order(created_at: :desc)
-                 when :'questions-favored'    then Question.favored.by_votes.order(created_at: :desc)
+                 when :new        then Question.order(touched_at: :desc)
+                 when :unanswered then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
+                 when :answered   then Question.answered.by_votes.order(created_at: :desc)
+                 when :solved     then Question.solved.by_votes.order(created_at: :desc)
+                 when :favored    then Question.favored.by_votes.order(created_at: :desc)
                  else fail
                  end
 
@@ -38,19 +38,18 @@ class QuestionsController < ApplicationController
     authorize! :ask, @question
 
     if @question.save
-      flash[:notice] = t('question.create.success')
-
       process_markdown_for @question do |user|
-        notify_about :'mention-user', @question, for: user
+        notify_about :mention, @question, for: user
       end
 
-      notify_about :'create-question', @question, for: @question.category.watchers + @question.tags.map(&:watchers).uniq
+      #TODO(zbell) do not notify about anonymous questions since user.nick is still exposed in notifications
+      notify_about :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten unless @question.anonymous
       register_watching_for @question
+
+      flash[:notice] = t('question.create.success')
 
       redirect_to question_path(@question)
     else
-      flash_error_messages_for @question, flash: flash.now
-
       @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
 
       render :new
@@ -65,15 +64,25 @@ class QuestionsController < ApplicationController
 
     @answer = Answer.new(question: @question)
 
-    @question.views.create! viewer: current_user
-    @question.views.reload
+    authorize! :view, @question
+
+    @view = @question.views.create! viewer: current_user
+
+    @question.increment :views_count
+
+    notify_about :create, @view, for: @question.watchers
   end
 
   def favor
     @question = Question.find(params[:id])
 
-    @question.toggle_favoring_by! current_user
+    authorize! :favor, @question
+
+    @favorite = @question.toggle_favoring_by! current_user
+
     @question.favorites.reload
+
+    notify_about notify_action_for(@favorite), @favorite, for: @question.watchers
   end
 
   def suggest

@@ -1,53 +1,59 @@
 <% provide :header, render(partial: 'header') %>
 
-<section>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="step">
-        <%= icon_tag :question %>
-        <h3><%= t('home.step.first') %></h3>
+<div class="container">
+  <section>
+    <%= flash_messages %>
+  </section>
+
+  <section>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="step">
+          <%= icon_tag :question %>
+          <h3><%= t('home.step.first') %></h3>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="step">
+          <%= icon_tag :'comments-o' %>
+          <h3><%= t('home.step.second') %></h3>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="step">
+          <%= icon_tag :check %>
+          <h3><%= t('home.step.third') %></h3>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="col-md-4">
-      <div class="step">
-        <%= icon_tag :'comments-o' %>
-        <h3><%= t('home.step.second') %></h3>
+  <hr/>
+
+  <section>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="featured">
+          <h2><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new') %></h2>
+          <%= render 'questions', questions: @new %>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="featured">
+          <h2><%= link_to t('home.featured.solved'), questions_path(tab: :'questions-solved') %></h2>
+          <%= render 'questions', questions: @solved %>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="featured">
+          <h2><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored') %></h2>
+          <%= render 'questions', questions: @favored %>
+        </div>
       </div>
     </div>
-
-    <div class="col-md-4">
-      <div class="step">
-        <%= icon_tag :check %>
-        <h3><%= t('home.step.third') %></h3>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr/>
-
-<section>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="featured">
-        <h2><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new') %></h2>
-        <%= render 'questions', questions: @new %>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="featured">
-        <h2><%= link_to t('home.featured.solved'), questions_path(tab: :'questions-solved') %></h2>
-        <%= render 'questions', questions: @solved %>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="featured">
-        <h2><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored') %></h2>
-        <%= render 'questions', questions: @favored %>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
+</div>

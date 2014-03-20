@@ -1,62 +1,62 @@
 <% provide :title, @user.nick %>
 
-<section>
-  <div class="row">
-    <div class="col-md-3">
-      <div class="list-group">
-        <%= gravatar_image_tag @user.gravatar_email, size: 263, class: :'list-group-item img-responsive' %>
-
-        <% if can? :show_email, @user %>
-          <span class="list-group-item">
-            <%= icon_tag :'envelope-o', fixed: true %>
-            <%= mail_to @user.email, nil, encode: :hex %>
-          </span>
-        <% end %>
-
-        <% @user.urls.each do |network, url| %>
-          <span class="list-group-item">
-            <%= icon_tag network.icon, fixed: true %>
-            <a href="<%= url[:original] %>"><%= url[:shown] %></a>
-          </span>
-        <% end %>
-      </div>
+<div class="row">
+  <div class="col-md-3">
+    <div class="user-profile-avatar">
+      <%= user_avatar_tag @user, image: { class: 'img-responsive', size: 263 }, url: gravatar_url(@user.gravatar_email, size: 400) %>
     </div>
-    <div class="col-md-9">
-      <h1>
-        <%= @user.nick %>
 
-        <% if can? :show_name, @user %>
-          <small><%= @user.name %></small>
-        <% end %>
-      </h1>
-
-      <hr/>
-
-      <% if can? :edit, @user %>
-        <span class="pull-right">
-          <%= link_to t('user.show.edit'), edit_user_registration_path %>
-        </span>
+    <ul class="list-group">
+      <% if can? :show_email, @user %>
+        <li class="list-group-item">
+          <%= icon_tag :'envelope-o', fixed: true %>
+          <%= mail_to @user.email, nil, encode: :hex %>
+        </li>
       <% end %>
 
-      <% unless @user.about.blank? %>
-        <h4><%= t 'user.show.about' %></h4>
-
-        <%= render_markdown @user.about %>
+      <% @user.urls.each do |network, url| %>
+        <li class="list-group-item">
+          <%= icon_tag network.icon, fixed: true %>
+          <a href="<%= url[:original] %>"><%= url[:shown] %></a>
+        </li>
       <% end %>
-
-      <div class="clearfix"></div>
-    </div>
+    </ul>
   </div>
+  <div class="col-md-9">
+    <h1 class="page-header">
+      <%= @user.nick %>
+
+      <% if can? :show_name, @user %>
+        <small><%= @user.name %></small>
+      <% end %>
+    </h1>
+
+    <% if can? :edit, @user %>
+      <span class="pull-right">
+        <%= link_to t('user.show.edit'), edit_user_registration_path %>
+      </span>
+    <% end %>
+
+    <% unless @user.about.blank? %>
+      <h4><%= t 'user.show.about' %></h4>
+
+      <%= render_markdown @user.about %>
+    <% end %>
+
+    <div class="clearfix"></div>
+  </div>
+</div>
+
 
   <ul class="nav nav-tabs">
-    <%= tab_link_tag_with_count t('user.tab.questions'), :'user-questions', user_path(params.except(:page).merge tab: :'user-questions'), User.questions.size %>
-    <%= tab_link_tag_with_count t('user.tab.answers'), :'user-answers', user_path(params.except(:page).merge tab: :'user-answers'), User.answers.size %>
-    <%= tab_link_tag_with_count t('user.tab.favorites'), :'user-favorites', user_path(params.except(:page).merge tab: :'user-favorites'), User.favorites.size %>
+    <%= tab_link_tag_with_count t('user.tab.questions'), :questions, user_path(params.except(:page).merge tab: :questions), User.questions.size %>
+    <%= tab_link_tag_with_count t('user.tab.answers'), :answers, user_path(params.except(:page).merge tab: :answers), User.answers.size %>
+    <%= tab_link_tag_with_count t('user.tab.favorites'), :favorites, user_path(params.except(:page).merge tab: :favorites), User.favorites.size %>
   </ul>
 
   <div class="tab-content">
 
-    <%= tab_content_tag :'user-questions' do %>
+    <%= tab_content_tag :questions do %>
       <ol class="list-unstyled user-profile-list">
         <% @questions.each do |question| %>
           <%= render 'users/question', question: question %>
@@ -65,12 +65,12 @@
 
       <div class="row">
         <div class="col-md-12">
-          <%= paginate @questions, params: { tab: 'user-questions' }, data: { state: true } %>
+          <%= paginate @questions, params: { tab: :questions }, data: { state: true } %>
         </div>
       </div>
     <% end %>
 
-    <%= tab_content_tag :'user-answers' do %>
+    <%= tab_content_tag :answers do %>
       <ol class="list-unstyled user-profile-list">
         <% @answers.each do |answer| %>
           <%= render 'users/answer', answer: answer %>
@@ -79,12 +79,12 @@
 
       <div class="row">
         <div class="col-md-12">
-          <%= paginate @answers, params: { tab: 'user-answers' }, data: { state: true } %>
+          <%= paginate @answers, params: { tab: :answers }, data: { state: true } %>
         </div>
       </div>
     <% end %>
 
-    <%= tab_content_tag :'user-favorites' do %>
+    <%= tab_content_tag :favorites do %>
       <ol class="list-unstyled user-profile-list">
         <% @favorites.each do |favorite| %>
           <%= render 'users/question', question: favorite %>
@@ -93,9 +93,9 @@
 
       <div class="row">
         <div class="col-md-12">
-          <%= paginate @favorites, params: { tab: 'user-favorites' }, data: { state: true } %>
+          <%= paginate @favorites, params: { tab: :favorites }, data: { state: true } %>
         </div>
       </div>
     <% end %>
   </div>
-</section>
+

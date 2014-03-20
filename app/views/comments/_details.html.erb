@@ -1,17 +1,17 @@
 &ndash;
 
 <% if comment.edited? %>
-  <%= t('comment.updated').downcase_first %>
+  <%= t('comment.details.updated').downcase_first %>
   <%= link_to_user comment.editor %>
-  <%= tooltip_time_tag comment.edited_at, format: :normal, placement: :right %>
+  <%= tooltip_time_tag comment.edited_at, format: :normal, placement: :top %>
 <% end %>
 
 <% if comment.editor != comment.author %>
   <% if comment.edited? %>
     <%= '&middot;'.html_safe %>
-    <%= t('comment.created').downcase_first %>
+    <%= t('comment.details.created').downcase_first %>
   <% end %>
 
   <%= link_to_user comment.author %>
-  <%= tooltip_time_tag comment.created_at, format: :normal, placement: :right %>
+  <%= tooltip_time_tag comment.created_at, format: :normal, placement: :top %>
 <% end %>

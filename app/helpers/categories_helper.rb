@@ -15,4 +15,8 @@ module CategoriesHelper
     groups[:mixed] = mixed
     groups
   end
+
+  def link_to_category(category, options = {})
+    link_to category.name, questions_path(tags: category.tags.join(','))
+  end
 end

@@ -16,14 +16,14 @@ class CommentsController < ApplicationController
     authorize! :comment, @commentable
 
     if @comment.save
-      flash[:notice] = t('comment.create.success')
-
       process_markdown_for @comment do |user|
-        notify_about :'mention-user', @comment, for: user
+        notify_about :mention, @comment, for: user
       end
 
-      notify_about :'create-comment', @comment, for: @commentable.watchers
-      register_watching_for @commentable.to_question
+      notify_about :create, @comment, for: @question.watchers
+      register_watching_for @question
+
+      flash[:notice] = t('comment.create.success')
     else
       flash_error_messages_for @comment
     end

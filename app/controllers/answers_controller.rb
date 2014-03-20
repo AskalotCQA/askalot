@@ -16,19 +16,19 @@ class AnswersController < ApplicationController
     authorize! :answer, @question
 
     if @answer.save
-      flash[:notice] = t('answer.create.success')
-
       process_markdown_for @answer do |user|
-        notify_about :'mention-user', @answer, for: user
+        notify_about :mention, @answer, for: user
       end
 
-      notify_about :'create-answer', @answer, for: @question.watchers
-      register_watching_for @answer
+      notify_about :create, @answer, for: @question.watchers
+      register_watching_for @question
+
+      flash[:notice] = t('answer.create.success')
     else
-      flash_error_messages_for @answer
+      form_error_messages_for @answer
     end
 
-    redirect_to question_path(@question)
+    redirect_to question_path(@question, anchor: @answer.id ? nil : :answer)
   end
 
   def label
@@ -45,7 +45,9 @@ class AnswersController < ApplicationController
 
           if labeling
             @answers << answer
-            labeling.delete
+            labeling.destroy
+
+            notify_about :delete, labeling, for: answer.watchers
           end
         end
       when :helpful
@@ -56,7 +58,9 @@ class AnswersController < ApplicationController
         fail
     end
 
-    @answer.toggle_labeling_by! current_user, params[:value]
+    @labeling = @answer.toggle_labeling_by! current_user, params[:value]
+
+    notify_about notify_action_for(@labeling), @labeling, for: @question.watchers
   end
 
   private

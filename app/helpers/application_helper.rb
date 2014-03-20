@@ -19,11 +19,7 @@ module ApplicationHelper
   end
 
   def use_container?
-    !controller.is_a?(ErrorsController)
-  end
-
-  def use_narrower_layout?
-    devise_controller? && !current_page?(edit_user_registration_path) && !(params[:controller] == 'registrations' && params[:action] == 'update')
+    [DeviseController, ErrorsController, StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
   end
 
   def url_to_site(path = nil)

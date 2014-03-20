@@ -21,6 +21,25 @@
 }
 
 @mixin block-listing {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+
+  & > li {
+    padding: $padding-large-vertical 0;
+  }
+
+  & > li + li {
+    border-top: 1px solid $gray-lighter;
+  }
+}
+
+@mixin nested-block-listing {
+  display: block;
+  position: relative;
   margin: 10px 0 !important;
   padding-left: 0;
   border-top: 1px dashed $gray-lighter;
@@ -42,7 +61,7 @@
 // specific
 
 @mixin block-comments {
-  @include block-listing;
+  @include nested-block-listing;
 
   p {
     display: inline;
@@ -73,4 +92,8 @@
   a.#{$class}-evaluated {
     @include color-variant($brand-warning, $gray-light);
   }
+}
+
+@mixin block-evaluations {
+  @include nested-block-listing;
 }

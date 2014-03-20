@@ -18,6 +18,10 @@ module EvaluationsHelper
     tooltip_icon_tag data[:icon], title, options.merge(class: data[:color]).reverse_merge(placement: :right)
   end
 
+  def link_to_evaluation(evaluation, options = {})
+    link_to_question evaluation.to_question, options.merge(anchor: "evaluation-#{evaluation.id}")
+  end
+
   private
 
   def evaluation_data(evaluable)

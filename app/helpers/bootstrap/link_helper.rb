@@ -1,14 +1,4 @@
-module LinkHelper
-  def icon_link_to(type, body, url = nil, options = {})
-    link_to icon_tag(type, label: body, fixed: options.delete(:fixed), join: options.delete(:join)), url, options
-  end
-
-  def icon_mail_to(type, body, url = nil, options = {})
-    url = body if url.blank?
-
-    mail_to url, icon_tag(type, label: body, fixed: options.delete(:fixed), join: options.delete(:join)), options
-  end
-
+module Bootstrap::LinkHelper
   def close_link_to(url = nil, options = {})
     link_to icon_tag(:times), url || '#', options.merge(class: :close, :'aria-hidden' => true )
   end
@@ -27,5 +17,11 @@ module LinkHelper
     return link_to body, url, options.merge(target: :_blank) unless icon
 
     icon_link_to icon == true ? :'external-link' : icon, body, url, options.merge(target: :_blank, join: :append)
+  end
+
+  def link_to_with_count(body, url, count, options = {})
+    count = content_tag :span, "&nbsp;(#{number_with_delimiter count})".html_safe, class: :'text-muted' if count.is_a? Integer
+
+    link_to body.concat(count).html_safe, url, options
   end
 end

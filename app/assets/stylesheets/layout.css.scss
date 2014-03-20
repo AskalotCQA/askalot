@@ -23,19 +23,15 @@ html {
 }
 
 body {
+  margin-top: $navbar-height + 1px;
+}
+
+.flash .alert:first-child {
   margin-top: $navbar-height;
 }
 
-.container > section:first-child {
-  padding-top: $navbar-height;
-}
-
-section + section {
-  padding-top: 0.5 * $navbar-height;
-}
-
-section#flash {
-  padding-bottom: 0.5 * $navbar-height;
+.page-header {
+  margin-top: $navbar-height;
 }
 
 .pagination-navigation {
@@ -49,6 +45,23 @@ section#flash {
 
 .tab-content, .tab-navigation {
   padding-top: $navbar-height;
+}
+
+// forms
+
+.form-title {
+  margin: $navbar-height 0 30px;
+  padding: 0;
+}
+
+.form-links {
+  margin-top: 30px;
+}
+
+// images
+
+.img-muted {
+  @include opacity(0.8)
 }
 
 // text
