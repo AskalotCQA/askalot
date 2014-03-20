@@ -14,11 +14,11 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = case params[:tab].to_sym
-                 when :'new'        then Question.order(touched_at: :desc)
-                 when :'unanswered' then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
-                 when :'answered'   then Question.answered.by_votes.order(created_at: :desc)
-                 when :'solved'     then Question.solved.by_votes.order(created_at: :desc)
-                 when :'favored'    then Question.favored.by_votes.order(created_at: :desc)
+                 when :new        then Question.order(touched_at: :desc)
+                 when :unanswered then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
+                 when :answered   then Question.answered.by_votes.order(created_at: :desc)
+                 when :solved     then Question.solved.by_votes.order(created_at: :desc)
+                 when :favored    then Question.favored.by_votes.order(created_at: :desc)
                  else fail
                  end
 

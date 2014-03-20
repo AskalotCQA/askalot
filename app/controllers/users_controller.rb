@@ -3,11 +3,11 @@ class UsersController < ApplicationController
 
   before_action :authenticate_user!
 
-  default_tab :'all', only: :index
+  default_tab :all, only: :index
 
   def index
     @users = case params[:tab].to_sym
-             when :'all' then User.order(:nick)
+             when :all then User.order(:nick)
              else fail
              end
 
