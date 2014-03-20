@@ -1,14 +1,14 @@
 class UsersController < ApplicationController
   include Tabbing
 
-  default_tab :'users-all', only: :index
+  default_tab :all, only: :index
 
   before_action :authenticate_user!
 
   def index
     @users = case params[:tab].to_sym
-             when :'users-all'    then User.order(:nick)
-             when :'users-recent' then User.recent.order(:created_at)
+             when :all    then User.order(:nick)
+             when :recent then User.recent.order(:created_at)
              else fail
              end
 
