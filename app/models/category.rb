@@ -1,5 +1,4 @@
 class Category < ActiveRecord::Base
-  include Notifiable
   include Watchable
 
   has_many :questions, dependent: :restrict_with_exception
