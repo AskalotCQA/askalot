@@ -41,7 +41,7 @@ Askalot::Application.routes.draw do
     concerns :watchable
   end
 
-  resources :tags, only: [] do
+  resources :tags, only: [:index] do
     get :suggest, on: :collection
 
     concerns :watchable

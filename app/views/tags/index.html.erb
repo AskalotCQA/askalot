@@ -1,0 +1,26 @@
+<% provide(:title, t('tag.index.title')) %>
+
+<section id="tags-controls">
+  <ul class="nav nav-tabs">
+    <%= tab_link_tag_with_count t('tag.tab.all'), :'tags-all', tags_path(params.except(:page).merge tab: :'tags-all'), Tag.count %>
+    <%= tab_link_tag_with_count t('tag.tab.recent'), :'tags-recent', tags_path(params.except(:page).merge tab: :'tags-recent'), Tag.recent.count %>
+    <%= tab_link_tag_with_count t('tag.tab.popular'), :'tags-popular', tags_path(params.except(:page).merge tab: :'tags-popular'), Tag.count %>
+  </ul>
+
+  <div class="tags-groups">
+    <% @tags.each_slice(3) do |tags| %>
+      <div class="row">
+        <% tags.each do |tag| %>
+          <div class="col-md-4">
+            <h4><%= link_to tag.name, questions_path(tags: tag.name) %></h4>
+            <p class="text-muted">
+              <%= t('count.question', count: Question.tagged_with(tag.name).size).upcase_first %> <%= Question.tagged_with(tag.name).size %> &middot;
+              <%= t('count.answer', count: Question.tagged_with(tag.name).answer_count.size).upcase_first %> <%= Question.tagged_with(tag.name).answer_count.size %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+</section>
