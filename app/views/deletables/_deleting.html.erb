@@ -15,8 +15,10 @@
           <%= t "#{model}.delete.text" %>
         </div>
         <div class="modal-footer">
-          <a href="#" class="btn btn-default" data-dismiss="modal"><%= t "#{model}.delete.cancel" %></a>
-          <a href="<%= send("delete_#{model}_path", deletable) %>" id="<%= "#{model}-#{deletable.id}-delete" %>" class="btn btn-danger"><%= t "#{model}.delete.submit" %></a>
+          <%= form_for deletable, method: :delete, html: { id: nil, class: nil } do %>
+            <a href="#" class="btn btn-default" data-dismiss="modal"><%= t "#{model}.delete.cancel" %></a>
+            <button id="<%= "#{model}-#{deletable.id}-delete" %>" class="btn btn-danger"><%= t "#{model}.delete.submit" %></button>
+          <% end %>
         </div>
       </div>
     </div>

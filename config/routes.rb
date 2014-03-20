@@ -16,18 +16,10 @@ Askalot::Application.routes.draw do
   get :statistics, to: 'statistics#index'
   get :welcome,    to: 'static_pages#welcome'
 
-  resources :changelogs,    only: [:index]
-  resources :notifications, only: [:index, :read, :clean]
-  resources :watchings,     only: [:index, :delete]
-
   concern :commetable do
-    resources :comments, only: [:create, :update]
+    resources :comments, only: [:create, :update, :destroy]
 
     get :comment, on: :member
-  end
-
-  concern :deletable do
-    get :delete, on: :member
   end
 
   concern :evaluable do
@@ -47,14 +39,13 @@ Askalot::Application.routes.draw do
     get :suggest, on: :collection
   end
 
-  resources :questions, only: [:index, :new, :create, :show, :update] do
-    resources :answers, only: [:create, :update]
+  resources :questions, only: [:index, :new, :create, :show, :update, :destroy] do
+    resources :answers, only: [:create, :update, :destroy]
 
     get :favor,   on: :member
     get :suggest, on: :collection
 
     concerns :commetable
-    concerns :deletable
     concerns :evaluable
     concerns :votable
   end
@@ -63,16 +54,20 @@ Askalot::Application.routes.draw do
     get :label, on: :member
 
     concerns :commetable
-    concerns :deletable
     concerns :evaluable
     concerns :votable
   end
 
-  resources :comments, only: [] do
-    concerns :deletable
-  end
+  resources :changelogs, only: [:index]
 
   resources :markdown, only: [] do
     post :preview, on: :collection
   end
+
+  resources :notifications, only: [:index] do
+    get :clean, on: :collection
+    get :read,  on: :member
+  end
+
+  resources :watchings, only: [:index, :destroy]
 end

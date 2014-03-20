@@ -3,7 +3,7 @@ module Deleting
 
   include Notifications::Notifying
 
-  def delete
+  def destroy
     @model     = controller_name.classify.downcase.to_sym
     @deletable = controller_name.classify.constantize.find(params[:id])
 
