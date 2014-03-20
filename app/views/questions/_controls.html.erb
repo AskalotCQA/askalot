@@ -8,10 +8,10 @@
   </div>
 
   <ul class="nav nav-tabs">
-    <%= tab_link_tag_with_count t('question.tab.new'), :'questions-new', questions_path(params.except(:page).merge tab: :'questions-new'), filter_questions(Question).count, remote: true %>
-    <%= tab_link_tag_with_count t('question.tab.unanswered'), :'questions-unanswered', questions_path(params.except(:page).merge tab: :'questions-unanswered'), filter_questions(Question.unanswered).size, remote: true %>
-    <%= tab_link_tag_with_count t('question.tab.answered'), :'questions-answered', questions_path(params.except(:page).merge tab: :'questions-answered'), filter_questions(Question.answered).size, remote: true %>
-    <%= tab_link_tag_with_count t('question.tab.solved'), :'questions-solved', questions_path(params.except(:page).merge tab: :'questions-solved'),filter_questions(Question.solved).size, remote: true %>
-    <%= tab_link_tag_with_count t('question.tab.favored'), :'questions-favored', questions_path(params.except(:page).merge tab: :'questions-favored'), filter_questions(Question.favored).size, remote: true %>
+    <%= tab_link_tag_with_count t('question.tab.new'), :new, questions_path(params.except(:page).merge tab: :new), filter_questions(Question).count, remote: true %>
+    <%= tab_link_tag_with_count t('question.tab.unanswered'), :unanswered, questions_path(params.except(:page).merge tab: :unanswered), filter_questions(Question.unanswered).size, remote: true %>
+    <%= tab_link_tag_with_count t('question.tab.answered'), :answered, questions_path(params.except(:page).merge tab: :answered), filter_questions(Question.answered).size, remote: true %>
+    <%= tab_link_tag_with_count t('question.tab.solved'), :solved, questions_path(params.except(:page).merge tab: :solved),filter_questions(Question.solved).size, remote: true %>
+    <%= tab_link_tag_with_count t('question.tab.favored'), :favored, questions_path(params.except(:page).merge tab: :favored), filter_questions(Question.favored).size, remote: true %>
   </ul>
 </div>

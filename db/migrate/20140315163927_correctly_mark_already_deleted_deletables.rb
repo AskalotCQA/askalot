@@ -1,4 +1,4 @@
-class AddDeletorAndDeletedAtValuesToDeletables < ActiveRecord::Migration
+class CorrectlyMarkAlreadyDeletedDeletables < ActiveRecord::Migration
   def change
     models = [
       Answer,
@@ -17,10 +17,7 @@ class AddDeletorAndDeletedAtValuesToDeletables < ActiveRecord::Migration
 
     models.each do |model|
       model.where(deleted: true, deleted_at: nil).find_each do |record|
-        record.deletor_id = record.author_id
-        record.deleted_at = record.updated_at
-
-        record.save!
+        record.mark_as_deleted_by! record.author, record.updated_at
       end
     end
   end

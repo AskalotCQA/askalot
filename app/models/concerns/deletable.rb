@@ -21,9 +21,11 @@ module Deletable
       self.deletor    = user
       self.deleted_at = datetime
 
-      self.save!
+      deleted_changed = self.deleted_changed?
 
-      self.decrement_counter_caches!
+      self.save!
+      
+      self.decrement_counter_caches! if deleted_changed
     end
   end
 
