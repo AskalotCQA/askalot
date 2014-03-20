@@ -8,7 +8,7 @@ class QuestionsController < ApplicationController
   include Notifications::Notifying
   include Notifications::Watching
 
-  default_tab :'new', only: :index
+  default_tab :new, only: :index
 
   before_action :authenticate_user!
 
