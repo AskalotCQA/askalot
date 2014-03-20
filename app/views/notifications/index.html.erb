@@ -1,21 +1,21 @@
 <% provide :title, t('notification.index.title') %>
 
+<ul class="nav nav-tabs tab-navigation">
+  <li class="active"><%= link_to t('notification.navigation'), notifications_path %></li>
+  <li><%= link_to t('watching.navigation'), watchings_path %></li>
+</ul>
+
 <div class="row">
   <div class="col-md-3">
     <ul class="nav nav-pills nav-stacked tab-navigation">
-      <%= tab_link_tag_with_count t('notification.tab.unread'), :unread, notifications_path(tab: :unread), badge_tag(@notifications.unread.size, class: :'pull-right'), data: { toggle: :pill } %>
-      <%= tab_link_tag_with_count t('notification.tab.all'), :all, notifications_path(tab: :all), badge_tag(@notifications.size, class: :'pull-right'), data: { toggle: :pill } %>
+      <%= tab_link_tag_with_count t('notification.tab.unread'), :unread, notifications_path(tab: :unread), badge_tag(Notification.for(current_user).unread.size, class: :'pull-right'), data: { toggle: :pill } %>
+      <%= tab_link_tag_with_count t('notification.tab.all'), :all, notifications_path(tab: :all), badge_tag(Notification.for(current_user).size, class: :'pull-right'), data: { toggle: :pill } %>
     </ul>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-9">
     <div class="tab-content">
-      <%= tab_content_tag :unread do %>
-        <%= render 'notifications', notifications: @notifications.unread %>
-      <% end %>
-
-      <%= tab_content_tag :all do %>
-        <%= render 'notifications', notifications: @notifications %>
-      <% end %>
+      <%= render_tab_content 'notifications', :unread, locals: { notifications: @unread } %>
+      <%= render_tab_content 'notifications', :all, locals: { notifications: @all } %>
     </div>
   </div>
 </div>

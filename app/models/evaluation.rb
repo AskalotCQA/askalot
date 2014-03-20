@@ -13,4 +13,8 @@ class Evaluation < ActiveRecord::Base
   def normalize
     self.text = nil if text.blank?
   end
+
+  def to_question
+    self.evaluable.to_question
+  end
 end

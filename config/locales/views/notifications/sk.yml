@@ -5,16 +5,93 @@ sk:
     index:
       title: 'Notifikácie'
 
+    read:
+      submit: 'Označiť ako prečítané'
+      success: 'Notifikácia bola označená ako prečítaná.'
+      failure: 'Notifikáciu sa nepodarilo označiť ako prečítanú.'
+
+    clean:
+      submit: 'Označiť všetky ako prečítané'
+      success: 'Notifikácie boli označené ako prečítané.'
+      failure: 'Notifikácie sa nepodarilo označiť ako prečítané.'
+
     tab:
       unread: 'Neprečítané'
       all: 'Všetky'
 
     more: 'Zobraziť viac'
     none: 'Žiadne notifikácie.'
-    read: 'Všetky notifikácie prečítané, dobrá práca!'
+
+    all_read: 'Všetky notifikácie prečítané, dobrá práca!'
+
+    unread_x:
+      zero: 'Žiadne neprečítané notifikácie'
+      one: '1 neprečítaná notifikácia'
+      few: '%{count} neprečítané notifikácie'
+      other: '%{count} neprečítaných notifikácií'
 
     action:
       create: 'Pridanie'
       update: 'Upravenie'
       delete: 'Zmazanie'
       mention: 'Spomenutie'
+
+    icon:
+      persistence: '%{action} %{resource}'
+      mention: 'Spomenutie v %{resource}'
+
+    content:
+      persistence:
+        answer: 'odpovede'
+        comment: 'komentára'
+        evaluation: 'hodnotenia'
+        favorite: 'obľúbenia'
+        labeling: 'označenia'
+        question: 'otázky'
+        view: 'zobrazenia'
+        vote: 'hlasu'
+
+      mention:
+        answer: 'odpovedi'
+        comment: 'komentári'
+        question: 'otázke'
+
+      answer:
+        create: 'Pridanie %{resource} k otázke %{question}'
+        update: 'Upravenie %{resource} k otázke %{question}'
+        delete: 'Zmazanie odpovede z otázky %{question}'
+        mention: 'Spomenutie v %{resource} k otázke %{question}'
+
+      comment:
+        answer:
+          create: 'Pridanie %{resource} k odpovedi v otázke %{question}'
+          update: 'Upravenie %{resource} k odpovedi v otázke %{question}'
+          delete: 'Zmazanie komentáru z odpovede v otázke %{question}'
+          mention: 'Spomenutie v %{resource} k %{question}'
+        question:
+          create: 'Pridanie %{resource} k otázke %{question}'
+          update: 'Upravenie %{resource} k otázke %{question}'
+          delete: 'Zmazanie komentára z otázky %{question}'
+          mention: 'Spomenutie v %{resource} k otázke %{question}'
+
+      evaluation:
+        answer:
+          create: 'Pridanie %{resource} k odpovedi v otázke %{question}'
+          update: 'Upravenie %{resource} k odpovedi v otázke %{question}'
+        question:
+          create: 'Pridanie %{resource} k otázke %{question}'
+          update: 'Upravenie %{resource} k otázke %{question}'
+
+      favorite:
+        create: 'Obľúbenie otázky %{question}'
+        delete: 'Zrušenie obľúbenia otázky %{question}'
+
+      labeling:
+        create: 'Označenie odpovede %{resource} k otázke %{question}'
+        delete: 'Zrušenie označenia %{resource} k otázke %{question}'
+
+      question:
+        create: 'Pridanie otázky %{question}'
+        update: 'Upravenie otázky %{question}'
+        delete: 'Zmazanie otázky %{question}'
+        mention: 'Spomenutie v otázke %{question}'

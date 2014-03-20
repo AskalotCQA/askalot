@@ -83,6 +83,14 @@ textarea {
 
 // icons
 
+.fa {
+  cursor: default !important;
+}
+
+a .fa {
+  cursor: pointer !important;
+}
+
 .fa-blank {
   display: none;
 }
@@ -114,6 +122,12 @@ textarea {
       display: inline;
       padding: 0.2em 0.6em 0.3em;
     }
+  }
+}
+
+.nav-pills {
+  .badge {
+    margin-top: 1px;
   }
 }
 

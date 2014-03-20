@@ -5659,7 +5659,7 @@
         <dia:point val="40,10"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="39.95,9.95;49.79,23.65"/>
+        <dia:rectangle val="39.95,9.95;49.79,22.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="40,10"/>
@@ -5668,7 +5668,7 @@
         <dia:real val="9.7400000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="13.600000000000003"/>
+        <dia:real val="12.800000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#Watchings#</dia:string>
@@ -5911,29 +5911,6 @@
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="3"/>
           </dia:attribute>
           <dia:attribute name="abstract">
             <dia:boolean val="false"/>
@@ -7061,7 +7038,7 @@
         <dia:point val="41,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.95,17.95;48.88,24.55"/>
+        <dia:rectangle val="40.95,17.95;48.88,23.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7073,7 +7050,7 @@
         <dia:real val="7.8299999999999992"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.5"/>
+        <dia:real val="5.7000000000000002"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -7089,9 +7066,8 @@
           <dia:attribute name="string">
             <dia:string>#Watchables:       
        
-  Questions 
-  Answers 
-  Categories 
+  Categories
+  Questions  
   Tags
  #</dia:string>
           </dia:attribute>
@@ -12352,7 +12328,7 @@
         <dia:point val="-4,77"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-4.05,76.95;2.725,85.95"/>
+        <dia:rectangle val="-4.05,76.95;2.725,86.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12364,7 +12340,7 @@
         <dia:real val="6.6749999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.9000000000000004"/>
+        <dia:real val="9.7000000000000011"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -12382,6 +12358,7 @@
 
   Answers
   Comments
+  Evaluations
   Favorites
   Labelings
   Questions

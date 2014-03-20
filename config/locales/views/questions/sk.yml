@@ -33,6 +33,7 @@ sk:
       submit: 'Zmazať'
       cancel: 'Spať'
       success: 'Otázka bola úspešne zmazaná.'
+      failure: 'Otázku sa nepodarilo zmazať.'
 
     tab:
       new: 'Aktuálne'

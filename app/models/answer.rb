@@ -6,7 +6,6 @@ class Answer < ActiveRecord::Base
   include Notifiable
   include Touchable
   include Votable
-  include Watchable
 
   after_create :slido_label_with_best!
 

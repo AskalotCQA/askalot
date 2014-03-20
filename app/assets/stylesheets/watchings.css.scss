@@ -1,2 +1,8 @@
 @import 'mixins';
 @import 'variables';
+
+// collection
+
+.watchings {
+  @include block-listing;
+}

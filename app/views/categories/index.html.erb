@@ -11,7 +11,7 @@
             <div class="row">
               <% categories.each do |category| %>
                 <div class="col-md-4">
-                  <h4><%= link_to category.name, questions_path(tags: category.tags.join(',')) %></h4>
+                  <h4><%= link_to_category category %></h4>
   <!-- TODO(zbell) consider
                   <ul class="list-inline">
                     <% category.tags.each do |tag| %>

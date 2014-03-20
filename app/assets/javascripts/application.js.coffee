@@ -33,8 +33,12 @@
 #= require gemoji
 #= require form
 #= require table
+#= require hash
+#= require helper
 #
 #= require questions
+#= require answers
+#= require comments
 #
 #= require analytics
 #= require fixes

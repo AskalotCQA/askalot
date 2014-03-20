@@ -26,7 +26,7 @@ module Bootstrap::TabHelper
   end
 
   def render_tab_content(partial, tab, options = {})
-    locals = options.delete(:locals)
+    locals = options.delete(:locals) || {}
 
     tab_content_tag tab, options do
       render partial.to_s, locals.merge(tab: tab)

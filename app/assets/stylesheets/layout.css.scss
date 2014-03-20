@@ -26,7 +26,7 @@ body {
   margin-top: $navbar-height + 1px;
 }
 
-#flash .alert:first-child {
+.flash .alert:first-child {
   margin-top: $navbar-height;
 }
 
@@ -56,6 +56,12 @@ body {
 
 .form-links {
   margin-top: 30px;
+}
+
+// images
+
+.img-muted {
+  @include opacity(0.8)
 }
 
 // text

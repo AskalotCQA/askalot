@@ -1,7 +1,7 @@
 <% provide(:title, t('user.index.title')) %>
 
 <ul class="nav nav-tabs tab-navigation">
-  <%= tab_link_tag_with_count t('user.tab.all'), :'users-all', users_path(params.except(:page).merge tab: :'users-all'), User.count %>
+  <%= tab_link_tag_with_count t('user.tab.all'), :all, users_path(params.except(:page).merge tab: :all), User.count %>
 </ul>
 
 <% @users.each_slice(6) do |users| %>
@@ -16,6 +16,6 @@
 
 <div class="row">
   <div class="col-md-12">
-    <%= paginate @users, data: { state: true } %>
+    <%= paginate @users %>
   </div>
 </div>

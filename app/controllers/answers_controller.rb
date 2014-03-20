@@ -60,7 +60,7 @@ class AnswersController < ApplicationController
 
     @labeling = @answer.toggle_labeling_by! current_user, params[:value]
 
-    notify_about notify_action_for(@labeling), @labeling, for: @answer.watchers
+    notify_about notify_action_for(@labeling), @labeling, for: @question.watchers
   end
 
   private

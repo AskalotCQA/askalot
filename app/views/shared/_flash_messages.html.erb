@@ -1,8 +1,9 @@
 <% if messages.any? %>
-  <div id="flash">
+  <div id="flash" class="flash">
     <% messages.each do |type, message| %>
       <div class="alert alert-<%= flash_message_type_to_class(type) %> alert-dismissable">
-        <%= close_link_to_alert %> <%= message.html_safe %>
+        <!-- TODO(zbell) consider <%= close_link_to_alert %> -->
+        <%= message.html_safe %>
       </div>
     <% end %>
   </div>
