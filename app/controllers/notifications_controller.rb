@@ -8,7 +8,7 @@ class NotificationsController < ApplicationController
   def index
     count = 25
 
-    @notifications = Notification.where(recipient: current_user).order(created_at: :desc)
+    @notifications = Notification.where(recipient: current_user).where.not(notifiable_type: [:view, :vote]).order(created_at: :desc)
 
     @unread = @notifications.unread.page(tab_page :unread).per(count)
     @all    = @notifications.page(tab_page :all).per(count)

@@ -8,7 +8,7 @@ module Deleting
     @deletable = controller_name.classify.constantize.find(params[:id])
 
     if @deletable.mark_as_deleted_by! current_user
-      notify_about :delete, @deletable, for: @deletable.watchers
+      notify_about :delete, @deletable, for: @deletable.to_question.watchers
 
       flash[:notice] = t "#{@model}.delete.success"
     else

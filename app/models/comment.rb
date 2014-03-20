@@ -2,7 +2,6 @@ class Comment < ActiveRecord::Base
   include Deletable
   include Editable
   include Touchable
-  include Watchable
 
   belongs_to :author, class_name: :User, counter_cache: true
   belongs_to :commentable, -> { deleted_or_not }, polymorphic: true, counter_cache: true
