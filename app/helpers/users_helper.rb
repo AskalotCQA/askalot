@@ -1,10 +1,11 @@
 module UsersHelper
   def user_avatar_tag(user, options = {})
     classes = [:'user-avatar'] + Array.wrap(options.delete :class)
-    image   = options[:image] || {}
+    image   = options.delete(:image) || {}
+    size    = options.delete(:size)
 
-    if options[:size]
-      classes << "user-avatar-#{options[:size]}"
+    if size
+      classes << "user-avatar-#{size}"
     else
       classes << case image[:size]
       when   0.. 20 then :'user-avatar-xs'
@@ -14,17 +15,16 @@ module UsersHelper
       end
     end
 
-    return content_tag :span, anonymous_gravatar_image_tag(image), class: classes if user == :anonymous
-
-    link_to options[:url] || user_path(user.nick), class: classes do
-      gravatar_image_tag user.gravatar_email, image.merge(alt: user.nick)
-    end
+    wrapped_user_image_tag user, image, options.merge(class: classes)
   end
 
-  def icon_link_to_user(user, options = {})
-    return content_tag :span, anonymous_gravatar_image_tag(image), options if user == :anonymous
+  def user_icon_tag(user, options = {})
+    image = options.delete(:image) || {}
 
-    link_to gravatar_image_tag(user.gravatar_email, class: 'user-avatar-icon', alt: user.nick), user_path(user.nick), options
+    image[:class] = [:'user-avatar-icon']
+    image[:class] = :'img-muted' if options.delete(:muted)
+
+    wrapped_user_image_tag user, image, options
   end
 
   def link_to_user(user, options = {})
@@ -37,5 +37,19 @@ module UsersHelper
 
   def anonymous_gravatar_image_tag(options = {})
     gravatar_image_tag 'anonymous@fiit.stuba.sk', options.merge(default: image_url('anonymous.png'), alt: :anonymous)
+  end
+
+  def wrapped_user_image_tag(user, image, options = {})
+    if user == :anonymous
+      tag = anonymous_gravatar_image_tag image
+    else
+      tag = gravatar_image_tag user.gravatar_email, image.merge(alt: user.nick)
+    end
+
+    url = options.delete(:url) || user_path(user.nick)
+
+    return content_tag :span, tag, options if options.delete(:link) == false || user == :anonymous
+
+    link_to tag, url, options
   end
 end
