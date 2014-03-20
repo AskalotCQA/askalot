@@ -49,9 +49,9 @@
 
 
   <ul class="nav nav-tabs">
-    <%= tab_link_tag_with_count t('user.tab.questions'), :questions, user_path(params.except(:page).merge tab: :questions), User.questions.size %>
-    <%= tab_link_tag_with_count t('user.tab.answers'), :answers, user_path(params.except(:page).merge tab: :answers), User.answers.size %>
-    <%= tab_link_tag_with_count t('user.tab.favorites'), :favorites, user_path(params.except(:page).merge tab: :favorites), User.favorites.size %>
+    <%= tab_link_tag_with_count t('user.tab.questions'), :questions, user_path(params.except(:page).merge tab: :questions), Question.by(current_user).size %>
+    <%= tab_link_tag_with_count t('user.tab.answers'), :answers, user_path(params.except(:page).merge tab: :answers), Answer.by(current_user).size %>
+    <%= tab_link_tag_with_count t('user.tab.favorites'), :favorites, user_path(params.except(:page).merge tab: :favorites), Favorite.by(current_user).size %>
   </ul>
 
   <div class="tab-content">

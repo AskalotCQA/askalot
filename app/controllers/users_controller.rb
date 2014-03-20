@@ -18,15 +18,15 @@ class UsersController < ApplicationController
   def show
     @user = User.where(nick: params[:nick]).first
 
+    raise ActiveRecord::RecordNotFound unless @user
+
     @questions = @user.questions.where(anonymous: false).order(created_at: :desc)
     @answers   = @user.answers.order(created_at: :desc)
     @favorites = Question.favored_by(@user).order(created_at: :desc)
 
-    @questions = @questions.page(params[:tab] == :questions ? params[:page] : 1).per(10)
-    @answers   = @answers.page(params[:tab] == :answers ? params[:page] : 1).per(10)
-    @favorites = @favorites.page(params[:tab] == :favorites ? params[:page] : 1).per(10)
-
-    raise ActiveRecord::RecordNotFound unless @user
+    @questions = @questions.page(tab_page :questions).per(10)
+    @answers   = @answers.page(tab_page :answers).per(10)
+    @favorites = @favorites.page(tab_page :favorites).per(10)
   end
 
   def update
