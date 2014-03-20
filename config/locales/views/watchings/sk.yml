@@ -6,9 +6,14 @@ sk:
       title: 'Sledovania'
 
     delete:
-      action: 'Nesledovať'
+      submit: 'Nesledovať'
       success: 'Sledovanie bolo zrušené.'
       failure: 'Sledovanie sa nepodarilo zrušiť.'
+
+    clean:
+      submit: 'Zrušiť všetky sledovania'
+      success: 'Sledovania boli zrušené.'
+      failure: 'Sledovania sa nepodarilo zrušiť.'
 
     tab:
       questions: 'Otázky'

@@ -1,4 +1,4 @@
-<div id="questions-controls">
+<div id="questions-controls" class="questions-controls">
   <div class="pull-right">
     <% if @poll %>
       <%= icon_link_to :refresh, t('question.poll.end', time: tooltip_time_tag(Time.now).html_safe), params.merge(poll: false), class: :'btn text-muted', data: { poll: Configuration.poll.default, remote: true, state: true, rel: questions_path(params) } %>

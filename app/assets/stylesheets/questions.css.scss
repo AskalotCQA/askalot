@@ -3,11 +3,14 @@
 
 // general
 
-#questions-filter {
+.questions-filter {
   margin: $navbar-height 0 10px;
 }
 
-#questions {
+.questions-controls {
+}
+
+.questions {
   & > ol {
     margin-top: 20px;
   }
@@ -90,13 +93,6 @@ a.question-metric.text-muted {
   }
 }
 
-#question-comments {
-}
-
-#question-new-answer {
-  margin-top: 20px;
-}
-
 .question-content {
   margin-bottom: 10px;
 }
@@ -152,5 +148,5 @@ a.question-metric.text-muted {
 }
 
 .question-evaluations {
-  @include block-listing;
+  @include block-evaluations;
 }

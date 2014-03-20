@@ -1,0 +1,13 @@
+<li id="watching-<%= watching.id %>">
+  <div class="row">
+    <div class="col-md-10">
+      <%= watchable_icon_tag watching.watchable, class: :'text-primary' %>
+      <%= link_to_watchable watching.watchable, length: 80 %>
+    </div>
+    <div class="col-md-2">
+      <%= form_for watching, method: :delete, html: { id: nil, class: :'pull-right' } do %>
+        <button class="btn btn-default btn-xs"><%= icon_tag :'eye-slash' %> <%= t 'watching.delete.submit' %></button>
+      <% end %>
+    </div>
+  </div>
+</li>
