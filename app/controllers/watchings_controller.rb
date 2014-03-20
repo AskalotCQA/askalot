@@ -14,4 +14,16 @@ class WatchingsController < ApplicationController
     @categories = @watchings.of(:category).page(tab_page :categories).per(count)
     @tags       = @watchings.of(:tag).page(tab_page :tags).per(count)
   end
+
+  def delete
+    @watching = Notification.find(params[:id])
+
+    if @watching.destroy
+      form_message :notice, t('watching.delete.success'), key: params[:tab]
+    else
+      form_error_message t('watching.delete.failure'), key: params[:tab]
+    end
+
+    redirect_to :back
+  end
 end

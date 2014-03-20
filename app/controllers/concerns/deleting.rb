@@ -12,7 +12,7 @@ module Deleting
 
       flash[:notice] = t "#{@model}.delete.success"
     else
-      flash_error_messages_for @deletable
+      flash[:error] = t "#{@model}.delete.failure"
     end
 
     if @deletable.is_a? Question
