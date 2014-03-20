@@ -1,11 +1,11 @@
 <div id="<%= model %>-<%= votable.id %>-voting" class="<%= model %>-voting">
   <% if can? :vote, votable %>
-    <%= icon_link_to :'chevron-up', nil, send("voteup_#{model}_path", votable), data: { remote: true }, id: "#{model}-#{votable.id}-voteup", class: (votable.upvoted_by?(current_user) ? nil : :'text-muted') %>
+    <%= icon_link_to :'chevron-up', nil, public_send("voteup_#{model}_path", votable), data: { remote: true }, id: "#{model}-#{votable.id}-voteup", class: (votable.upvoted_by?(current_user) ? nil : :'text-muted') %>
   <% end %>
   <div>
     <%= content_tag :span, votable.votes_difference, tooltip_attributes("#{votable.votes.positive.size} - #{votable.votes.negative.size}", placement: :right) %>
   </div>
   <% if can? :vote, votable %>
-    <%= icon_link_to :'chevron-down', nil, send("votedown_#{model}_path", votable), data: { remote: true }, id: "#{model}-#{votable.id}-votedown", class: (votable.downvoted_by?(current_user) ? nil : :'text-muted') %>
+    <%= icon_link_to :'chevron-down', nil, public_send("votedown_#{model}_path", votable), data: { remote: true }, id: "#{model}-#{votable.id}-votedown", class: (votable.downvoted_by?(current_user) ? nil : :'text-muted') %>
   <% end %>
 </div>
