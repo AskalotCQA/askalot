@@ -36,7 +36,7 @@ sk:
       failure: 'Otázku sa nepodarilo zmazať.'
 
     tab:
-      new: 'Aktuálne'
+      recent: 'Aktuálne'
       unanswered: 'Bez odpovede'
       answered: 'Odpovedané'
       solved: 'Vyriešené'

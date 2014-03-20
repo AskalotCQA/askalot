@@ -1,0 +1,11 @@
+sk:
+  tag:
+    navigation: 'Tagy'
+
+    index:
+      title: 'Tagy'
+
+    tab:
+      all:      'Všetky'
+      recent:   'Nové'
+      popular:  'Populárne'

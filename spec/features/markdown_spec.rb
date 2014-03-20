@@ -139,9 +139,9 @@ describe 'Markdown' do
 
         click_link 'Otázky'
 
-        click_link 'PostgreSQL setup'
+        click_link question.title
 
-        expect(page).to have_content('PostgreSQL setup')
+        expect(page).to have_content(question.title)
         expect(page).to have_content(question.author.nick)
 
         within '.question-content' do

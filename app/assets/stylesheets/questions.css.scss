@@ -11,9 +11,7 @@
 }
 
 .questions {
-  & > ol {
-    margin-top: 20px;
-  }
+  padding-top: 20px;
 
   & > ol > li + li {
     margin-top: 20px;
@@ -129,6 +127,10 @@ a.question-metric.text-muted {
 
 .question-evaluating {
   @include block-evaluating(question);
+}
+
+.question-watching {
+  @include block-iconing;
 }
 
 .question-answers {

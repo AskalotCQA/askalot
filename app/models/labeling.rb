@@ -1,5 +1,6 @@
 class Labeling < ActiveRecord::Base
   include Deletable
+  include Notifiable
 
   belongs_to :author, class_name: :User
   belongs_to :answer
