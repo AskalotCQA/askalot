@@ -6,8 +6,14 @@ sk:
       title: 'Notifikácie'
 
     read:
-      success: 'Notifikácia bola označená za prečítanú.'
-      failure: 'Notifikáciu sa nepodarilo označiť za prečítanú.'
+      action: 'Označiť ako prečítané'
+      success: 'Notifikácia bola označená ako prečítanú.'
+      failure: 'Notifikáciu sa nepodarilo označiť ako prečítanú.'
+
+    clean:
+      action: 'Označiť všetky ako prečítané'
+      success: 'Notifikácie boli označené ako prečítané.'
+      failure: 'Notifikácie sa nepodarilo označiť ako prečítané.'
 
     tab:
       unread: 'Neprečítané'

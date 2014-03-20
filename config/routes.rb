@@ -17,7 +17,7 @@ Askalot::Application.routes.draw do
   get :welcome,    to: 'static_pages#welcome'
 
   resources :changelogs,    only: [:index]
-  resources :notifications, only: [:index, :read]
+  resources :notifications, only: [:index, :read, :clean]
   resources :watchings,     only: [:index, :delete]
 
   concern :commetable do

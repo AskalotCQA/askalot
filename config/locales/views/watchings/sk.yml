@@ -6,6 +6,7 @@ sk:
       title: 'Sledovania'
 
     delete:
+      action: 'Nesledovať'
       success: 'Sledovanie bolo zrušené.'
       failure: 'Sledovanie sa nepodarilo zrušiť.'
 
