@@ -3,7 +3,7 @@
 <section id="tags-controls">
   <ul class="nav nav-tabs">
     <%= tab_link_tag_with_count t('tag.tab.all'), :'tags-all', tags_path(params.except(:page).merge tab: :'tags-all'), Tag.count %>
-    <%= tab_link_tag_with_count t('tag.tab.recent'), :'tags-recent', tags_path(params.except(:page).merge tab: :'tags-recent'), Tag.count %>
+    <%= tab_link_tag_with_count t('tag.tab.recent'), :'tags-recent', tags_path(params.except(:page).merge tab: :'tags-recent'), Tag.recent.count %>
     <%= tab_link_tag_with_count t('tag.tab.popular'), :'tags-popular', tags_path(params.except(:page).merge tab: :'tags-popular'), Tag.count %>
   </ul>
 
