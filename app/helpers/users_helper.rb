@@ -46,10 +46,10 @@ module UsersHelper
       tag = gravatar_image_tag user.gravatar_email, image.merge(alt: user.nick)
     end
 
-    url = options.delete(:url) || user_path(user.nick)
+    url = options.delete(:url)
 
     return content_tag :span, tag, options if options.delete(:link) == false || user == :anonymous
 
-    link_to tag, url, options
+    link_to tag, url || user_path(user.nick), options
   end
 end
