@@ -5,6 +5,10 @@ sk:
     index:
       title: 'Sledovania'
 
+    delete:
+      success: 'Sledovanie bolo zrušené.'
+      failure: 'Sledovanie sa nepodarilo zrušiť.'
+
     tab:
       questions: 'Otázky'
       categories: 'Kategórie'

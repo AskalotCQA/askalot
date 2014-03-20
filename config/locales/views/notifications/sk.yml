@@ -5,6 +5,10 @@ sk:
     index:
       title: 'Notifikácie'
 
+    read:
+      success: 'Notifikácia bola označená za prečítanú.'
+      failure: 'Notifikáciu sa nepodarilo označiť za prečítanú.'
+
     tab:
       unread: 'Neprečítané'
       all: 'Všetky'
@@ -18,3 +22,46 @@ sk:
       update: 'Upravenie'
       delete: 'Zmazanie'
       mention: 'Spomenutie'
+
+    content:
+      notifiable:
+        answer: 'odpovede'
+        comment: 'komentáru'
+        favorite: 'obľúbenia'
+        labeling: 'označenia'
+        question: 'otázky'
+        view: 'zobrazenia'
+        vote: 'hlasu'
+
+      answer:
+        create: 'Pridanie %{resource} k %{question}'
+        update: 'Upravenie %{resource} k %{question}'
+        delete: 'Zmazanie odpovede z %{question}'
+        mention: 'Spomenutie v %{resource} k %{question}'
+
+      comment:
+        answer:
+          create: 'Pridanie %{resource} k odpovedi v %{question}'
+          update: 'Upravenie %{resource} k odpovedi v %{question}'
+          delete: 'Zmazanie komentáru z odpovede v %{question}'
+          mention: 'Spomenutie v %{resource} k %{question}'
+
+        question:
+          create: 'Pridanie %{resource} k %{question}'
+          update: 'Upravenie %{resource} k %{question}'
+          delete: 'Zmazanie komentára z %{question}'
+          mention: 'Spomenutie v %{resource} k %{question}'
+
+      favorite:
+        create: 'Obľúbenie %{question}'
+        delete: 'Zrušenie obľúbenia %{question}'
+
+      labeling:
+        create: 'Označenie odpovede %{resource} k %{question}'
+        delete: 'Zrušenie označenia %{resource} k %{question}'
+
+      question:
+        create: 'Pridanie otázky %{question}'
+        update: 'Upravenie otázky %{question}'
+        delete: 'Zmazanie otázky %{question}'
+        mention: 'Spomenutie v %{question}'
