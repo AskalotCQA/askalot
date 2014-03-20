@@ -1,6 +1,9 @@
 require 'spec_helper'
+require 'models/concerns/watchable_spec'
 
 describe Category do
+  it_behaves_like Watchable
+
   it 'requires name' do
     category = build :category, name: ''
 

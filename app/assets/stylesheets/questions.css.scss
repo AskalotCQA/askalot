@@ -131,6 +131,10 @@ a.question-metric.text-muted {
   @include block-evaluating(question);
 }
 
+.question-watching {
+  @include block-iconing;
+}
+
 .question-answers {
   & > li + li {
     margin-top: 20px;

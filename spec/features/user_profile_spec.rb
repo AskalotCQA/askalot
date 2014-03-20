@@ -65,7 +65,7 @@ describe 'User Profile' do
 
       click_button 'Uložiť'
 
-      expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
+      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
       expect(page).to have_field('user_nick',  with: 'Nicky')
@@ -109,7 +109,7 @@ describe 'User Profile' do
 
       click_button 'Uložiť'
 
-      expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
+      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
       expect(page).to have_field('user_facebook',       with: 'http://facebook.com/nicky.nickmann')
@@ -170,7 +170,7 @@ describe 'User Profile' do
 
       click_button 'Uložiť'
 
-      expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
+      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
       expect(page).to have_field('user_nick',  with: 'Nicky')
@@ -187,7 +187,7 @@ describe 'User Profile' do
 
       click_button 'Uložiť'
 
-      expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
+      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
       expect(User.find_by(login: user.login).encrypted_password).to be_empty

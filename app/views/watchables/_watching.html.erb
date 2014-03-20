@@ -1,0 +1,7 @@
+<span id="<%= model %>-<%= watchable.id %>-watching" class="<%= model %>-watching">
+  <% if watchable.watched_by? current_user %>
+    <%= icon_link_to :'eye-slash', nil, public_send("watch_#{model}_path", watchable), data: { remote: true }, id: "#{model}-#{watchable.id}-watch" %>
+  <% else %>
+    <%= icon_link_to :'eye', nil, public_send("watch_#{model}_path", watchable), tooltip_attributes(t("watching.create.#{model}"), placement: :right).deep_merge(data: { remote: true }, id: "#{model}-#{watchable.id}-watch", class: :'text-muted') %>
+  <% end %>
+</span>

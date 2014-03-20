@@ -5,6 +5,11 @@ sk:
     index:
       title: 'Sledovania'
 
+    create:
+      category: 'Sledovať kategóriu'
+      question: 'Sledovať otázku'
+      tag: 'Sledovať tag'
+
     delete:
       submit: 'Nesledovať'
       success: 'Sledovanie bolo zrušené.'
