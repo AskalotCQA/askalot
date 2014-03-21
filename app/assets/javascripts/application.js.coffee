@@ -37,8 +37,6 @@
 #= require helper
 #
 #= require questions
-#= require answers
-#= require comments
 #
 #= require analytics
 #= require fixes
