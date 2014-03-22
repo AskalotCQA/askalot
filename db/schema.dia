@@ -12825,13 +12825,13 @@
         <dia:point val="-4.7625,48.675"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-4.8125,48.625;3.8725,60.725"/>
+        <dia:rectangle val="-4.8125,48.625;4.2575,60.725"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-4.7625,48.675"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="8.9700000000000006"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="12.000000000000002"/>
@@ -12952,7 +12952,7 @@
             <dia:string>#initiator_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#int#</dia:string>
+            <dia:string>#integer#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -12972,10 +12972,10 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#subject_id#</dia:string>
+            <dia:string>#resource_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#int#</dia:string>
+            <dia:string>#integer#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -12995,7 +12995,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#subject_type#</dia:string>
+            <dia:string>#resource_type#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#string#</dia:string>
@@ -13235,7 +13235,7 @@
         <dia:point val="-3.6125,57.075"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-3.6625,57.025;2.7275,62.825"/>
+        <dia:rectangle val="-3.6625,57.025;2.7275,64.425"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13247,7 +13247,7 @@
         <dia:real val="6.2899999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.7000000000000002"/>
+        <dia:real val="7.2999999999999998"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -13265,6 +13265,8 @@
 
   Answers
   Comments
+  Evaluations
+  Labelings
   Questions
      #</dia:string>
           </dia:attribute>
@@ -13324,16 +13326,16 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="3.8225,51.375"/>
+        <dia:point val="4.2075,51.375"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.7725,50.575;24.9999,61.575"/>
+        <dia:rectangle val="4.1575,50.575;24.9999,61.575"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="3.8225,51.375"/>
+        <dia:point val="4.2075,51.375"/>
         <dia:point val="6.7375,51.375"/>
         <dia:point val="6.7375,61.525"/>
         <dia:point val="23.9375,61.525"/>
