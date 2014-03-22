@@ -17,10 +17,10 @@ ActiveRecord::Schema.define(version: 20140321084147) do
   enable_extension "plpgsql"
 
   create_table "activities", force: true do |t|
-    t.integer  "initiator_id", null: false
-    t.integer  "subject_id",   null: false
-    t.string   "subject_type", null: false
-    t.string   "action",       null: false
+    t.integer  "initiator_id",  null: false
+    t.integer  "resource_id",   null: false
+    t.string   "resource_type", null: false
+    t.string   "action",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20140321084147) do
   add_index "activities", ["action"], name: "index_activities_on_action", using: :btree
   add_index "activities", ["created_at"], name: "index_activities_on_created_at", using: :btree
   add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
-  add_index "activities", ["subject_id", "subject_type"], name: "index_activities_on_subject_id_and_subject_type", using: :btree
+  add_index "activities", ["resource_id", "resource_type"], name: "index_activities_on_resource_id_and_resource_type", using: :btree
 
   create_table "answer_revisions", force: true do |t|
     t.integer  "answer_id",                  null: false
