@@ -1,5 +1,6 @@
 // collection
 
 .watchings {
+  @extend .list-unstyled;
   @include block-listing;
 }

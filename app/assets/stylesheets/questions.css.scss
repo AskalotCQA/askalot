@@ -129,6 +129,8 @@ a.question-metric.text-muted {
 }
 
 .question-answers {
+  @extend .list-unstyled;
+
   & > li + li {
     margin-top: 20px;
     padding-top: 20px;
