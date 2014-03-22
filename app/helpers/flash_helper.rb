@@ -3,13 +3,11 @@ module FlashHelper
 
   alias :flash_message_type_to_class :form_message_type_to_class
 
-  def flash_messages(flash = self.flash)
-    render 'shared/flash_messages', messages: flash_to_messages(flash)
+  def flash_messages(flash: self.flash)
+    render 'shared/flash_messages', messages: flash_to_messages(flash: flash)
   end
 
-  def flash_to_messages(flash = self.flash, options = {})
-    reject = Array.wrap(options[:reject]) << :form
-
+  def flash_to_messages(flash: self.flash, reject: [:form])
     messages = []
 
     flash.each do |type, value|

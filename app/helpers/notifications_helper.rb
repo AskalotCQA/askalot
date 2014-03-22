@@ -34,7 +34,7 @@ module NotificationsHelper
     when :question   then link_to_question resource, options
     when :view       then link_to_question resource.question, options
     when :vote       then link_to_question resource.votable.to_question, options
-    else fail resource
+    else fail
     end
   end
 
