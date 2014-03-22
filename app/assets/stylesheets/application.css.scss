@@ -1,26 +1,28 @@
 // List of initial requirements (order is significant).
-
+//
+//=require gemoji
+//=require markdown
+//=require select2
+//=require jquery-textcomplete
+//
 //=require_self
-
+//
 // List of imports (order is significant).
 
-@import 'bootstrap/variables';
 @import 'bootstrap/mixins';
+@import 'bootstrap/variables';
 
 @import 'mixins';
 @import 'variables';
 
 @import 'bootstrap';
-@import 'datepicker/bootstrap';
-@import 'gemoji/base';
-@import 'markdown/base';
-@import 'markdown/bootstrap';
-@import 'select2/base';
-@import 'select2/bootstrap';
-@import 'tablesorter/bootstrap';
-@import 'jquery-textcomplete';
-@import 'textcomplete/bootstrap';
 @import 'font-awesome';
+
+@import 'bootstrap/datepicker';
+@import 'bootstrap/markdown';
+@import 'bootstrap/multiselect';
+@import 'bootstrap/tablesorter';
+@import 'bootstrap/textcomplete';
 
 @import 'assets';
 @import 'errors';
