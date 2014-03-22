@@ -1,7 +1,7 @@
 <%= form_messages key: tab %>
 
 <% if watchings.any? %>
-  <ol class="watchings list-unstyled">
+  <ol class="watchings">
     <% watchings.each do |watching| %>
       <%= render 'watching', watching: watching %>
     <% end %>

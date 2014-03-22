@@ -2,100 +2,29 @@
 
 <div class="row">
   <div class="col-md-3">
-    <div class="user-profile-avatar">
-      <%= user_avatar_tag @user, image: { class: 'img-responsive', size: 263 }, url: gravatar_url(@user.gravatar_email, size: 400) %>
-    </div>
-
-    <ul class="list-group">
-      <% if can? :show_email, @user %>
-        <li class="list-group-item">
-          <%= icon_tag :'envelope-o', fixed: true %>
-          <%= mail_to @user.email, nil, encode: :hex %>
-        </li>
-      <% end %>
-
-      <% @user.urls.each do |network, url| %>
-        <li class="list-group-item">
-          <%= icon_tag network.icon, fixed: true %>
-          <a href="<%= url[:original] %>"><%= url[:shown] %></a>
-        </li>
-      <% end %>
-    </ul>
+    <%= render 'side', user: @user %>
   </div>
   <div class="col-md-9">
-    <h1 class="page-header">
-      <%= @user.nick %>
-
-      <% if can? :show_name, @user %>
-        <small><%= @user.name %></small>
+    <div class="tab-navigation">
+      <% if can? :edit, @user %>
+        <div class="pull-right">
+          <%= link_to t('user.show.edit'), edit_user_registration_path, class: 'btn btn-default' %>
+        </div>
       <% end %>
-    </h1>
 
-    <% if can? :edit, @user %>
-      <span class="pull-right">
-        <%= link_to t('user.show.edit'), edit_user_registration_path %>
-      </span>
-    <% end %>
+      <ul class="nav nav-tabs">
+        <%= tab_link_tag t('user.tab.profile'), :profile, user_path(params.except(:page).merge tab: :profile) %>
+        <%= tab_link_tag_with_count t('user.tab.questions'), :questions, user_path(params.except(:page).merge tab: :questions), @questions.unscope(:limit).size %>
+        <%= tab_link_tag_with_count t('user.tab.answers'), :answers, user_path(params.except(:page).merge tab: :answers), @answers.unscope(:limit).size %>
+        <%= tab_link_tag_with_count t('user.tab.favorites'), :favorites, user_path(params.except(:page).merge tab: :favorites), @favorites.unscope(:limit).size %>
+      </ul>
+    </div>
 
-    <% unless @user.about.blank? %>
-      <h4><%= t 'user.show.about' %></h4>
-
-      <%= render_markdown @user.about %>
-    <% end %>
-
-    <div class="clearfix"></div>
+    <div class="tab-content">
+      <%= render_tab_content 'profile', :profile, locals: { user: @user } %>
+      <%= render_tab_content 'questions', :questions, locals: { questions: @questions } %>
+      <%= render_tab_content 'answers', :answers, locals: { answers: @answers } %>
+      <%= render_tab_content 'questions', :favorites, locals: { questions: @favorites } %>
+    </div>
   </div>
 </div>
-
-
-  <ul class="nav nav-tabs">
-    <%= tab_link_tag_with_count t('user.tab.questions'), :questions, user_path(params.except(:page).merge tab: :questions), Question.by(current_user).size %>
-    <%= tab_link_tag_with_count t('user.tab.answers'), :answers, user_path(params.except(:page).merge tab: :answers), Answer.by(current_user).size %>
-    <%= tab_link_tag_with_count t('user.tab.favorites'), :favorites, user_path(params.except(:page).merge tab: :favorites), Favorite.by(current_user).size %>
-  </ul>
-
-  <div class="tab-content">
-
-    <%= tab_content_tag :questions do %>
-      <ol class="list-unstyled user-profile-list">
-        <% @questions.each do |question| %>
-          <%= render 'users/question', question: question %>
-        <% end %>
-      </ol>
-
-      <div class="row">
-        <div class="col-md-12">
-          <%= paginate @questions, params: { tab: :questions }, data: { state: true } %>
-        </div>
-      </div>
-    <% end %>
-
-    <%= tab_content_tag :answers do %>
-      <ol class="list-unstyled user-profile-list">
-        <% @answers.each do |answer| %>
-          <%= render 'users/answer', answer: answer %>
-        <% end %>
-      </ol>
-
-      <div class="row">
-        <div class="col-md-12">
-          <%= paginate @answers, params: { tab: :answers }, data: { state: true } %>
-        </div>
-      </div>
-    <% end %>
-
-    <%= tab_content_tag :favorites do %>
-      <ol class="list-unstyled user-profile-list">
-        <% @favorites.each do |favorite| %>
-          <%= render 'users/question', question: favorite %>
-        <% end %>
-      </ol>
-
-      <div class="row">
-        <div class="col-md-12">
-          <%= paginate @favorites, params: { tab: :favorites }, data: { state: true } %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-

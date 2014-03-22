@@ -44,6 +44,10 @@
   vertical-align: middle;
 }
 
+.user-questions, .user-answers {
+  @extend .list-unstyled;
+}
+
 // profile
 
 .user-profile-avatar {
@@ -63,8 +67,14 @@
   }
 }
 
-
-
 .user-profile-links {
   @extend .list-unstyled;
+  @include text-overflow;
+
+  padding-top: 10px;
+  border-top: 1px solid $list-group-border;
+
+  li {
+    padding: $padding-xs-vertical 0;
+  }
 }

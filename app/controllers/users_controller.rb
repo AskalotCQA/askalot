@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   default_tab :all, only: :index
-  default_tab :questions, only: :show
+  default_tab :profile, only: :show
 
   def index
     @users = case params[:tab].to_sym

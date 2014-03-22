@@ -5,7 +5,7 @@
     </h2>
   </div>
   <div class="col-md-2">
-    <div class="new-answer text-center">
+    <div class="new-answer">
       <%= icon_link_to :plus, t('answer.new.action'), '#answer', class: 'btn btn-success' %>
     </div>
   </div>
@@ -16,7 +16,7 @@
 <% if answers.any? %>
   <div class="row">
     <div class="col-md-12">
-      <ol class="question-answers list-unstyled">
+      <ol class="question-answers">
         <% answers.each do |answer| %>
           <%= render 'questions/answer', answer: answer %>
         <% end %>
