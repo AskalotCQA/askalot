@@ -8,8 +8,6 @@ module Concerns::Slido
   def flash_slido_events
     events = SlidoEvent.where('? between started_at and ended_at', Time.now).order(:ended_at).load
 
-    flash[:danger] = 'lalal'
-
     if events.any?
       flash.now[:slido] = []
 
