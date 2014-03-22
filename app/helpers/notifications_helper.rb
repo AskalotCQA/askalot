@@ -18,11 +18,8 @@ module NotificationsHelper
     else "notification.content.#{resource.class.name.downcase}.#{notification.action}"
     end
 
-    body = t("notification.content.#{notification.action == :mention ? :mention : :persistence}.#{resource.class.name.downcase}")
-
-    resource = link_to_notifiable resource, body: body
-    question = link_to_notifiable resource, length: 50
-    content  = t(content, resource: resource, question: question).html_safe
+    body    = t("notification.content.#{notification.action == :mention ? :mention : :persistence}.#{resource.class.name.downcase}")
+    content = t(content, resource: link_to_notifiable(resource, body: body), question: link_to_notifiable(resource, length: 50)).html_safe
 
     notification.unread ? content : content_tag(:span, content, class: :'text-muted')
   end
@@ -37,7 +34,7 @@ module NotificationsHelper
     when :question   then link_to_question resource, options
     when :view       then link_to_question resource.question, options
     when :vote       then link_to_question resource.votable.to_question, options
-    else fail
+    else fail resource
     end
   end
 

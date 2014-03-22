@@ -1,7 +1,7 @@
 // general
 
 .jumbotron {
-  margin: 0 0 $navbar-height;
+  margin: 0;
   padding: 120px 0;
 
   h1 {
@@ -37,6 +37,8 @@
 }
 
 .step {
+  margin-top: $navbar-height;
+
   color: $text-muted;
   text-align: center;
 
