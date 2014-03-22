@@ -1,6 +1,3 @@
-@import 'mixins';
-@import 'variables';
-
 // general
 
 .user-square {
@@ -49,16 +46,25 @@
 
 // profile
 
-.user-profile-list {
-  & > li + li {
-  padding-top: 20px;
-  }
-}
-
 .user-profile-avatar {
   margin-top: $navbar-height;
 
   .user-avatar {
     display: inline;
   }
+}
+
+.user-profile-title {
+  @include text-overflow;
+
+  small {
+    display: block;
+    margin-top: $padding-small-vertical;
+  }
+}
+
+
+
+.user-profile-links {
+  @extend .list-unstyled;
 }
