@@ -59,7 +59,6 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @author   = @question.author
     @labels   = @question.labels
     @answers  = @question.ordered_answers
 
