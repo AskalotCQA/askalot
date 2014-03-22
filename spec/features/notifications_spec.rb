@@ -30,10 +30,10 @@ describe 'Notifications' do
 
       question = Question.last
 
-      expect(last_notification.initiator).to  eql(user)
-      expect(last_notification.recipient).to  eql(watcher)
-      expect(last_notification.action).to     eql(:create)
-      expect(last_notification.notifiable).to eql(question)
+      expect(last_notification.initiator).to eql(user)
+      expect(last_notification.recipient).to eql(watcher)
+      expect(last_notification.action).to    eql(:create)
+      expect(last_notification.resource).to  eql(question)
     end
   end
 
@@ -57,10 +57,10 @@ describe 'Notifications' do
 
       question = Question.last
 
-      expect(last_notification.initiator).to  eql(user)
-      expect(last_notification.recipient).to  eql(watcher)
-      expect(last_notification.action).to     eql(:create)
-      expect(last_notification.notifiable).to eql(question)
+      expect(last_notification.initiator).to eql(user)
+      expect(last_notification.recipient).to eql(watcher)
+      expect(last_notification.action).to    eql(:create)
+      expect(last_notification.resource).to  eql(question)
     end
   end
 
@@ -81,10 +81,10 @@ describe 'Notifications' do
 
       answer = Answer.last
 
-      expect(last_notification.initiator).to  eql(user)
-      expect(last_notification.recipient).to  eql(question.author)
-      expect(last_notification.action).to     eql(:create)
-      expect(last_notification.notifiable).to eql(answer)
+      expect(last_notification.initiator).to eql(user)
+      expect(last_notification.recipient).to eql(question.author)
+      expect(last_notification.action).to    eql(:create)
+      expect(last_notification.resource).to  eql(answer)
     end
   end
 
@@ -110,10 +110,10 @@ describe 'Notifications' do
 
         comment = Comment.last
 
-        expect(last_notification.notifiable).to eql(comment)
-        expect(last_notification.recipient).to  eql(question.author)
-        expect(last_notification.initiator).to  eql(user)
-        expect(last_notification.action).to     eql(:create)
+        expect(last_notification.resource).to  eql(comment)
+        expect(last_notification.recipient).to eql(question.author)
+        expect(last_notification.initiator).to eql(user)
+        expect(last_notification.action).to    eql(:create)
       end
     end
 
@@ -157,10 +157,10 @@ describe 'Notifications' do
 
         comment = Comment.last
 
-        expect(last_notification.notifiable).to eql(comment)
-        expect(last_notification.recipient).to  eql(question.author)
-        expect(last_notification.initiator).to  eql(user)
-        expect(last_notification.action).to     eql(:create)
+        expect(last_notification.resource).to  eql(comment)
+        expect(last_notification.recipient).to eql(question.author)
+        expect(last_notification.initiator).to eql(user)
+        expect(last_notification.action).to    eql(:create)
       end
     end
   end

@@ -3,14 +3,14 @@ class Notification < ActiveRecord::Base
 
   belongs_to :recipient, class_name: :User
   belongs_to :initiator, class_name: :User
-  belongs_to :notifiable, polymorphic: true
+  belongs_to :resource, polymorphic: true
 
-  default_scope -> { where.not(notifiable_type: [View, Vote]) }
+  default_scope -> { where.not(resource_type: [View, Vote]) }
 
   scope :for, lambda { |user| where(recipient: user) }
   scope :by,  lambda { |user| where(initiator: user) }
 
-  scope :of, lambda { |resource| where(notifiable: resource) }
+  scope :of, lambda { |resource| where(resource: resource) }
 
   scope :read,   lambda { where(unread: false) }
   scope :unread, lambda { where(unread: true) }
