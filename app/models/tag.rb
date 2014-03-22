@@ -3,8 +3,8 @@ class Tag < ActiveRecord::Base
 
   has_many :taggings, dependent: :restrict_with_exception
 
-  scope :recent,  lambda { where('created_at >= ?', Time.now - 1.month ) }
-  scope :popular, lambda { select('tags.*, count(*) as c').joins(:taggings).group('tags.id').order('c desc')}
+  scope :recent,  lambda { where('created_at >= ?', Time.now - 1.month ).order(:name) }
+  scope :popular, lambda { select('tags.*, count(*) as c').joins(:taggings).group('tags.id').unscope(:order).order('c desc') }
 
   before_save :normalize
 
@@ -22,7 +22,8 @@ class Tag < ActiveRecord::Base
     self.name = name.to_s.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '')
   end
 
-  # TODO(zbell) rm
+  # TODO(zbell) rmend
+
   def questions
     Question.tagged_with(self.name)
   end

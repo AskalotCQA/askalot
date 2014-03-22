@@ -26,6 +26,7 @@ class Question < ActiveRecord::Base
   validates :anonymous, inclusion: { in: [true, false] }
 
   scope :random,     lambda { select('questions.*, random()').order('random()') }
+  scope :recent,     lambda { order(touched_at: :desc) }
   scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }
   scope :answered,   lambda { joins(:answers).uniq }
   scope :solved,     lambda { joins(:answers).merge(best_answers).uniq }

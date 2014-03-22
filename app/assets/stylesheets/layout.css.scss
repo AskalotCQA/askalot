@@ -34,6 +34,8 @@ body {
   margin-top: $navbar-height;
 }
 
+// navigation
+
 .pagination-navigation {
   display: block;
   position: relatve;
@@ -43,7 +45,11 @@ body {
   }
 }
 
-.tab-content, .tab-navigation {
+.tab-content {
+  padding-top: 20px;
+}
+
+.pill-content, .pill-navigation, .tab-navigation {
   padding-top: $navbar-height;
 }
 

@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <ul class="nav nav-pills nav-stacked tab-navigation">
+      <ul class="nav nav-pills nav-stacked pill-navigation">
         <%= tab_link_tag t('user.profile'), :profile, edit_user_registration_path(tab: :profile), data: { toggle: :pill } %>
         <%= tab_link_tag t('user.social'), :social, edit_user_registration_path(tab: :social), data: { toggle: :pill } %>
         <%= tab_link_tag t('user.privacy'), :privacy, edit_user_registration_path(tab: :privacy), data: { toggle: :pill } %>
@@ -11,7 +11,7 @@
       </ul>
     </div>
     <div class="col-md-6">
-      <div class="tab-content">
+      <div class="pill-content">
         <%= render_tab_content 'edit_profile', :profile %>
         <%= render_tab_content 'edit_social',  :social %>
         <%= render_tab_content 'edit_privacy', :privacy %>

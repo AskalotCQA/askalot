@@ -3,9 +3,13 @@
 
 // collection
 
-.tags-groups {
-  p {
-    margin-bottom: 20px !important;
-  }
+.tag-details {
+  margin-bottom: 20px;
+
+  color: $text-muted;
+}
+
+.tag-watching {
+  display: inline;
 }
 
