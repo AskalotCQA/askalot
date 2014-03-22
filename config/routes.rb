@@ -77,7 +77,9 @@ Askalot::Application.routes.draw do
 
   resources :notifications, only: [:index] do
     get :clean, on: :collection
-    get :read,  on: :member
+
+    get :read,   on: :member
+    get :unread, on: :member
   end
 
   resources :watchings, only: [:index, :destroy] do

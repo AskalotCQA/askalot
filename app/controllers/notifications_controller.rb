@@ -15,17 +15,11 @@ class NotificationsController < ApplicationController
   end
 
   def read
-    @notification = Notification.find(params[:id])
+    mark :read
+  end
 
-    @notification.unread = false
-
-    if @notification.save
-      form_message :notice, t('notification.read.success'), key: params[:tab]
-    else
-      form_error_message t('notification.read.failure'), key: params[:tab]
-    end
-
-    redirect_to :back
+  def unread
+    mark :unread
   end
 
   def clean
@@ -35,6 +29,22 @@ class NotificationsController < ApplicationController
       form_message :notice, t('notification.clean.success'), key: params[:tab]
     else
       form_error_message t('notification.clean.failure'), key: params[:tab]
+    end
+
+    redirect_to :back
+  end
+
+  private
+
+  def mark(status)
+    @notification = Notification.find(params[:id])
+
+    @notification.unread = (status == :read ? false : (status == :unread) ? true : fail)
+
+    if @notification.save
+      form_message :notice, t("notification.#{status}.success"), key: params[:tab]
+    else
+      form_error_message t("notification.#{status}.failure"), key: params[:tab]
     end
 
     redirect_to :back
