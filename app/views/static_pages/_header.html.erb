@@ -10,12 +10,12 @@
     </div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-xs-12 col-sm-6">
         <div class="text-right">
           <%= icon_link_to :'question-circle', t('home.ask'), new_question_path, class: 'btn btn-primary', fixed: true %>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-xs-12 col-sm-6">
         <div class="text-left">
           <% unless current_user %>
             <% if Configuration.enable.registrations? %>
@@ -32,12 +32,12 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-xs-12 col-sm-6">
         <div class="text-right">
           <%= icon_link_to :tasks, t('home.questions'), questions_path, class: 'btn btn-info', fixed: true %>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-xs-12 col-sm-6">
         <div class="text-left">
           <%= icon_link_to :magic, t('home.changelogs'), changelogs_path, class: 'btn btn-warning', fixed: true %>
         </div>
