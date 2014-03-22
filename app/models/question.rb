@@ -25,11 +25,13 @@ class Question < ActiveRecord::Base
   validates :text,      presence: true, length: { minimum: 2 }
   validates :anonymous, inclusion: { in: [true, false] }
 
-  scope :random,       lambda { select('questions.*, random()').order('random()') }
-  scope :unanswered,   lambda { includes(:answers).where(answers: { question_id: nil }) }
-  scope :answered,     lambda { joins(:answers).uniq } #.where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq } # TODO(zbell) User.first.questions.answered fails
-  scope :solved,       lambda { joins(:answers).merge(best_answers).uniq }
-  scope :answer_count, lambda { joins(:answers) }
+  scope :random,     lambda { select('questions.*, random()').order('random()') }
+  scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }
+  scope :answered,   lambda { joins(:answers).uniq }
+  scope :solved,     lambda { joins(:answers).merge(best_answers).uniq }
+
+  #TODO(zbell) propose removal of this
+  scope :answered_but_not_best, lambda { joins(:answers) } #.where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq } # TODO(zbell) User.first.questions.answered fails
 
   scope :by, lambda { |user| where(author: user) }
 
