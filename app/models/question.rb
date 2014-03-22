@@ -1,4 +1,5 @@
 class Question < ActiveRecord::Base
+  include Authorable
   include Commentable
   include Deletable
   include Evaluable
@@ -13,7 +14,6 @@ class Question < ActiveRecord::Base
 
   before_save :add_category_tags
 
-  belongs_to :author, class_name: :User, counter_cache: true
   belongs_to :category, counter_cache: true
 
   has_many :answers, dependent: :destroy
