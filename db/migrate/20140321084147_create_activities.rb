@@ -2,7 +2,7 @@ class CreateActivities < ActiveRecord::Migration
   def change
     create_table :activities do |t|
       t.references :initiator, null: false
-      t.references :resource,   null: false, polymorphic: true
+      t.references :resource,  null: false, polymorphic: true
 
       t.string :action, null: false
 
