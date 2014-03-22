@@ -21,7 +21,7 @@ module Voting
 
     @votable.votes.reload
 
-    notify_about notify_action_for(@vote), @vote, for: @votable.watchers
+    notify_about notify_action_for(@vote), @vote, for: @votable.to_question.watchers
 
     render 'votables/vote', formats: :js
   end
