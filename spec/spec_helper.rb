@@ -69,7 +69,6 @@ RSpec.configure do |config|
   config.include PageHelper,           type: :feature
   config.include PollingHelper,        type: :feature
   config.include RemoteHelper,         type: :feature
-  config.include Select2Helper,        type: :feature
   config.include TextcompleteHelper,   type: :feature
 
   config.before(:each) { reset_emails }
