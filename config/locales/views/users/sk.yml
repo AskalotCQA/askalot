@@ -65,6 +65,9 @@ sk:
     show:
       about: 'O mne'
       edit: 'Upraviť profil'
+      no_questions_found: 'Neboli nájdené žiadne otázky.'
+      no_answers_found: 'Neboli nájdené žiadne odpovede.'
+      no_favorites_found: 'Neboli nájdené žiadne obľúbené otázky.'
 
     edit:
       profile: 'Úprava profilu'

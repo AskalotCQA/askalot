@@ -57,11 +57,21 @@
   <div class="tab-content">
 
     <%= tab_content_tag :questions do %>
-      <ol class="list-unstyled user-profile-list">
-        <% @questions.each do |question| %>
-          <%= render 'users/question', question: question %>
-        <% end %>
-      </ol>
+      <% if @questions.any? %>
+        <ol class="list-unstyled user-profile-list">
+          <% @questions.each do |question| %>
+            <%= render 'users/question', question: question %>
+          <% end %>
+        </ol>
+      <% else %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-warning">
+              <%= t('user.show.no_questions_found') %>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
       <div class="row">
         <div class="col-md-12">
@@ -71,11 +81,21 @@
     <% end %>
 
     <%= tab_content_tag :answers do %>
-      <ol class="list-unstyled user-profile-list">
-        <% @answers.each do |answer| %>
-          <%= render 'users/answer', answer: answer %>
-        <% end %>
-      </ol>
+      <% if @answers.any? %>
+        <ol class="list-unstyled user-profile-list">
+          <% @answers.each do |answer| %>
+            <%= render 'users/answer', answer: answer %>
+          <% end %>
+        </ol>
+      <% else %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-warning">
+              <%= t('user.show.no_answers_found') %>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
       <div class="row">
         <div class="col-md-12">
@@ -85,11 +105,21 @@
     <% end %>
 
     <%= tab_content_tag :favorites do %>
-      <ol class="list-unstyled user-profile-list">
-        <% @favorites.each do |favorite| %>
-          <%= render 'users/question', question: favorite %>
-        <% end %>
-      </ol>
+      <% if @favorites.any? %>
+        <ol class="list-unstyled user-profile-list">
+          <% @favorites.each do |favorite| %>
+            <%= render 'users/question', question: favorite %>
+          <% end %>
+        </ol>
+      <% else %>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="alert alert-warning">
+              <%= t('user.show.no_favorites_found') %>
+            </div>
+          </div>
+        </div>
+      <% end %>
 
       <div class="row">
         <div class="col-md-12">
