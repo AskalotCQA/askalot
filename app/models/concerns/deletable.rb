@@ -24,7 +24,7 @@ module Deletable
       deleted_changed = self.deleted_changed?
 
       self.save!
-      
+
       self.decrement_counter_caches! if deleted_changed
     end
   end
@@ -51,8 +51,10 @@ module Deletable
         owner  = self.send(key.to_s)
         column = target.counter_cache_column.to_sym
 
-        owner.class.decrement_counter(column, owner.id)
-        owner.decrement column
+        if owner
+          owner.class.decrement_counter(column, owner.id)
+          owner.decrement column
+        end
       end
     end
   end
