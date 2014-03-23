@@ -1,9 +1,10 @@
 defaults: &defaults
-  enabled:
+  all:
     - facebook
     - twitter
     - google_plus
     - linkedin
+    - stack_overflow
     - github
     - bitbucket
     - youtube
@@ -12,7 +13,23 @@ defaults: &defaults
     - instagram
     - flickr
     - foursquare
+
+  enabled:
+    - facebook
+    - twitter
+    - google_plus
+    - linkedin
     - stack_overflow
+    - github
+    - bitbucket
+
+  hide:
+    - youtube
+    - tumblr
+    - pinterest
+    - instagram
+    - flickr
+    - foursquare
 
   bitbucket:
     icon: bitbucket
