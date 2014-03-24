@@ -69,6 +69,7 @@
             <div class="alert alert-warning">
               <%= t('user.show.no_questions_found') %>
             </div>
+            <%= icon_link_to :plus, t('question.new.feature'), new_question_path, class: 'btn btn-success' %>
           </div>
         </div>
       <% end %>
@@ -93,6 +94,7 @@
             <div class="alert alert-warning">
               <%= t('user.show.no_answers_found') %>
             </div>
+            <%= icon_link_to :comment, t('home.answer'), question_path(@random_question), class: 'btn btn-success', fixed: true %>
           </div>
         </div>
       <% end %>
@@ -117,6 +119,7 @@
             <div class="alert alert-warning">
               <%= t('user.show.no_favorites_found') %>
             </div>
+            <%= icon_link_to :plus, t('question.new.feature'), new_question_path, class: 'btn btn-success' %>
           </div>
         </div>
       <% end %>

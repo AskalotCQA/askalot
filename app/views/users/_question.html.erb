@@ -38,6 +38,7 @@
         </h4>
 
         <%= render 'questions/labels', labels: question.labels %>
+        <small class="text-muted"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
       </div>
     </div>
   </div>
