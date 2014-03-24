@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def index
     @users = case params[:tab].to_sym
-             when :recent then User.recent.order(:created_at)
+             when :recent then User.recent.order(created_at: :desc)
              else User.order(:nick)
              end
 
