@@ -29,6 +29,7 @@ gem 'jquery-tablesorter', '~> 1.9.5'
 gem 'rails-timeago', '~> 2.0'
 gem 'jquery-textcomplete-rails', '~> 0.1.2'
 gem 'handlebars_assets'
+gem 'jquery-ui-rails'
 
 # markdown
 gem 'redcarpet'
