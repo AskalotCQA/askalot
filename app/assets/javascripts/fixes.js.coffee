@@ -18,6 +18,7 @@ window.fixes = ->
   Remote.initialize()
   Poll.initialize()
   Markdown.bind()
+  Hash.bind()
 
   $('.popover').remove()
   $('.tooltip').remove()
