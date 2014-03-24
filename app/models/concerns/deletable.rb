@@ -24,7 +24,7 @@ module Deletable
       deleted_changed = self.deleted_changed?
 
       self.save!
-      
+
       self.decrement_counter_caches! if deleted_changed
     end
   end
