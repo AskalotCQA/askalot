@@ -1,6 +1,6 @@
 module NotificationsHelper
   def notifications
-    Notification.where(notifiable_type: [Question, Answer, Comment])
+    Notification.where(resource_type: [Question, Answer, Comment])
   end
 
   def last_notification

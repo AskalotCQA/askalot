@@ -1,3 +1,3 @@
 class window.Helper
   @highlight: (selector) ->
-    $(selector).addClass('bg-warning', 100, 'easeInOutQuad')
+    $(selector).addClass('highlight-content', 250, -> $(selector).removeClass('highlight-content', 4000))

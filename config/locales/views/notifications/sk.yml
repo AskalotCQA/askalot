@@ -10,14 +10,20 @@ sk:
       success: 'Notifikácia bola označená ako prečítaná.'
       failure: 'Notifikáciu sa nepodarilo označiť ako prečítanú.'
 
+    unread:
+      submit: 'Označiť ako neprečítané'
+      success: 'Notifikácia bola označená ako neprečítaná.'
+      failure: 'Notifikáciu sa nepodarilo označiť ako neprečítanú.'
+
     clean:
       submit: 'Označiť všetky ako prečítané'
       success: 'Notifikácie boli označené ako prečítané.'
       failure: 'Notifikácie sa nepodarilo označiť ako prečítané.'
 
     tab:
-      unread: 'Neprečítané'
       all: 'Všetky'
+      read: 'Prečítané'
+      unread: 'Neprečítané'
 
     more: 'Zobraziť viac'
     none: 'Žiadne notifikácie.'

@@ -1,8 +1,6 @@
-@import 'mixins';
-@import 'variables';
-
 // collection
 
 .watchings {
+  @extend .list-unstyled;
   @include block-listing;
 }

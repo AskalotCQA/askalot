@@ -12,7 +12,7 @@ TODO(zbell) implement
 -->
 
 <% if notifications.any? %>
-  <ol class="notifications list-unstyled">
+  <ol class="notifications">
     <% notifications.each do |notification| %>
       <%= render 'notification', notification: notification %>
     <% end %>

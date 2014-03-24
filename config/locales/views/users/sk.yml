@@ -10,6 +10,7 @@ sk:
       all: 'Všetci'
       recent: 'Noví'
 
+      profile: 'Profil'
       questions: 'Otázky'
       answers: 'Odpovede'
       favorites: 'Obľúbené'

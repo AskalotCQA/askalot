@@ -28,6 +28,10 @@ module UsersHelper
   end
 
   def link_to_user(user, options = {})
+    authorable = options.delete(:authorable)
+
+    user = (user == authorable.author ? authorable.author_or_anonymous : user) if authorable
+
     return content_tag :span, t('user.anonymous'), options if user == :anonymous
 
     link_to user.nick, user_path(user.nick), options

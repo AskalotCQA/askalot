@@ -1,3 +1,5 @@
+# TODO(zbell) drop polymorphic from taggable
+
 module Taggable
   extend ActiveSupport::Concern
 
@@ -20,6 +22,7 @@ module Taggable
 
   private
 
+  # TODO(zbell) rename -> create_tags
   def generate_tags!
     tag_list.each do |name|
       tag = Tag.find_or_create_by! name: name
@@ -30,6 +33,7 @@ module Taggable
     flush_tags!
   end
 
+  # TODO(zbell) rename -> update_tags
   def flush_tags!
     taggings.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags).each(&:destroy)
   end
@@ -57,7 +61,8 @@ module Taggable
       if options[:any]
         relation.where tags: { name: tags }
       else
-        # TODO (smolnar) REFACTOR, resolve why reference to class is scoped!
+        # TODO(smolnar) REFACTOR, resolve why reference to class is scoped!
+        # TODO(zbell) rm questions dependency
         ids   = []
         scope = relation.base_class
 
@@ -76,7 +81,8 @@ module Taggable
   class TagList
     include Enumerable
 
-    attr_reader   :values
+    attr_reader :values
+
     attr_accessor :base, :extractor
 
     def initialize(base, values = [])

@@ -9,10 +9,10 @@ module Concerns::Slido
     events = SlidoEvent.where('? between started_at and ended_at', Time.now).order(:ended_at).load
 
     if events.any?
-      flash.now[:info] = Array.wrap(flash.now[:info])
+      flash.now[:slido] = []
 
       events.each do |event|
-        flash.now[:info] << render_to_string(partial: 'slido/message', locals: { event: event })
+        flash.now[:slido] << render_to_string(partial: 'slido/message', locals: { event: event })
       end
     end
   end

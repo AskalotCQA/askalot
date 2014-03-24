@@ -1,6 +1,7 @@
 class ActiveRecord::Migration
   def self.add_counter(table, association)
     add_column table, "#{association}_count", :integer, null: false, default: 0
+
     reset_counter table, association
   end
 

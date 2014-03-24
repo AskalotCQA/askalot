@@ -1,17 +1,15 @@
 <% provide :title, title(@status, 'such error', 'very critical', 'amaze doge', 'wow') %>
 
-<% provide :header do %>
-  <div class="doge">
-    <img src="<%= asset_path('doge.jpg') %>" />
+<div class="doge">
+  <img src="<%= asset_path('doge.jpg') %>" />
 
-    <%# wow such code %>
-    <% socolors  = %w(green blue cyan magenta yellow chartreuse purple salmon lime tomato black) %>
-    <% muchwords = %w(much such so very) %>
-    <% suchwords = ['concern', 'code', 'critical', 'error', 'internet', 'programming', 'ruby', 'rails', 'syntax', 'system'] %>
-    <% dogefix   = ['amaze doge', 'much doge', 'plz no', 'so scare', 'so wow', 'very angry', 'what r you doing', 'why this happened', 'wow', 'you have encountered a doge'] %>
+  <%# wow such code %>
+  <% socolors  = %w(green blue cyan magenta yellow chartreuse purple salmon lime tomato black) %>
+  <% muchwords = %w(much such so very) %>
+  <% suchwords = ['concern', 'code', 'critical', 'error', 'internet', 'programming', 'ruby', 'rails', 'syntax', 'system'] %>
+  <% dogefix   = ['amaze doge', 'much doge', 'plz no', 'so scare', 'so wow', 'very angry', 'what r you doing', 'why this happened', 'wow', 'you have encountered a doge'] %>
 
-    <% ([@status] + (dogefix.shuffle[0..3] + muchwords.map { |soword| "#{soword} #{suchwords.delete suchwords.sample}" }).shuffle).each_with_index do |suchphrase, i| %>
-      <div style="color: <%= socolors.sample %>; font-size: <%= rand(i == 0 ? 100..125 : 25..50) %>px; top: <%= rand((8 * i)..(8 * (i + 1))) %>%; left: <%= rand(5..75) %>%;"><%= suchphrase %></div>
-    <% end %>
-  </div>
-<% end %>
+  <% ([@status] + (dogefix.shuffle[0..3] + muchwords.map { |soword| "#{soword} #{suchwords.delete suchwords.sample}" }).shuffle).each_with_index do |suchphrase, i| %>
+    <div style="color: <%= socolors.sample %>; font-size: <%= rand(i == 0 ? 100..125 : 25..50) %>px; top: <%= rand((8 * i)..(8 * (i + 1))) %>%; left: <%= rand(5..75) %>%;"><%= suchphrase %></div>
+  <% end %>
+</div>

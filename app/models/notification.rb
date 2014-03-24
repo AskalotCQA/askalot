@@ -3,14 +3,16 @@ class Notification < ActiveRecord::Base
 
   belongs_to :recipient, class_name: :User
   belongs_to :initiator, class_name: :User
-  belongs_to :notifiable, polymorphic: true
 
-  default_scope -> { where.not(notifiable_type: [:view, :vote]) }
+  #TODO(zbell) rm this shit when on rails 4.1.0, see deletable.rb
+  belongs_to :resource, -> { self.included_modules.include?(Deletable) ? self.deleted_or_not : self }, polymorphic: true
+
+  default_scope -> { where.not(resource_type: [View, Vote]) }
 
   scope :for, lambda { |user| where(recipient: user) }
   scope :by,  lambda { |user| where(initiator: user) }
 
-  scope :of, lambda { |resource| where(notifiable: resource) }
+  scope :of, lambda { |resource| where(resource: resource) }
 
   scope :read,   lambda { where(unread: false) }
   scope :unread, lambda { where(unread: true) }

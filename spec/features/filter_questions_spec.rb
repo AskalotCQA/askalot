@@ -173,7 +173,7 @@ describe 'Filter Questions', js: true do
       list = all('#questions > ol > li')
       expect(list).to have(3).items
 
-      expect(current_params).to include(tags: 'elasticsearch', tab: 'questions-favored')
+      expect(current_params).to include(tags: 'elasticsearch', tab: 'favored')
 
       list.each { |item| expect(item).to have_content('elasticsearch') }
     end

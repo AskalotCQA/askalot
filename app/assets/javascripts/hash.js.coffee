@@ -6,8 +6,6 @@ class window.Hash
       $(window).on 'hashchange', ->
         callback() for callback in Hash.callbacks
 
-        Hash.normalizePosition()
-
   @on: (regex, callback) ->
     another = ->
       callback(matches) if matches = window.location.hash.match(regex)
@@ -15,7 +13,3 @@ class window.Hash
     another()
 
     Hash.callbacks.push(another)
-
-  @normalizePosition: ->
-    $(document).ready ->
-      setTimeout (-> $(window).scrollTop($(window).scrollTop() - 51)), 100

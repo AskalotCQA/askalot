@@ -24,7 +24,7 @@ module CapybaraHelpers
     rescue Exception => e
       raise e unless example.metadata[:js]
 
-      Timeout.timeout(3) { page.evaluate_script("$(\"a:contains('#{locator}')\").click()") } rescue raise e
+      page.driver.browser.execute_script("$(\"a:contains('#{locator}')\")[0].click()") rescue raise e
     end
   end
 

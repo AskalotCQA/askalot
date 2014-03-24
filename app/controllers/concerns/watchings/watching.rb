@@ -1,4 +1,6 @@
 module Watchings::Watching
+  extend ActiveSupport::Concern
+
   def watch
     @model     = controller_name.classify.downcase.to_sym
     @watchable = controller_name.classify.constantize.find(params[:id])

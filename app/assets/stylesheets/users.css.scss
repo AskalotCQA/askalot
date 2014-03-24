@@ -1,6 +1,3 @@
-@import 'mixins';
-@import 'variables';
-
 // general
 
 .user-square {
@@ -47,18 +44,37 @@
   vertical-align: middle;
 }
 
-// profile
-
-.user-profile-list {
-  & > li + li {
-  padding-top: 20px;
-  }
+.user-questions, .user-answers {
+  @extend .list-unstyled;
 }
+
+// profile
 
 .user-profile-avatar {
   margin-top: $navbar-height;
 
   .user-avatar {
     display: inline;
+  }
+}
+
+.user-profile-title {
+  @include text-overflow;
+
+  small {
+    display: block;
+    margin-top: $padding-small-vertical;
+  }
+}
+
+.user-profile-links {
+  @extend .list-unstyled;
+  @include text-overflow;
+
+  padding-top: 10px;
+  border-top: 1px solid $list-group-border;
+
+  li {
+    padding: $padding-xs-vertical 0;
   }
 }

@@ -11,10 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317201604) do
+ActiveRecord::Schema.define(version: 20140322113048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: true do |t|
+    t.integer  "initiator_id",  null: false
+    t.integer  "resource_id",   null: false
+    t.string   "resource_type", null: false
+    t.string   "action",        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["action"], name: "index_activities_on_action", using: :btree
+  add_index "activities", ["created_at"], name: "index_activities_on_created_at", using: :btree
+  add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
+  add_index "activities", ["resource_id", "resource_type"], name: "index_activities_on_resource_id_and_resource_type", using: :btree
 
   create_table "answer_revisions", force: true do |t|
     t.integer  "answer_id",                  null: false
@@ -198,22 +212,22 @@ ActiveRecord::Schema.define(version: 20140317201604) do
   add_index "labels", ["value"], name: "index_labels_on_value", unique: true, using: :btree
 
   create_table "notifications", force: true do |t|
-    t.integer  "recipient_id",                   null: false
-    t.integer  "initiator_id",                   null: false
-    t.integer  "notifiable_id",                  null: false
-    t.string   "notifiable_type",                null: false
-    t.string   "action",                         null: false
-    t.boolean  "unread",          default: true, null: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "recipient_id",                 null: false
+    t.integer  "initiator_id",                 null: false
+    t.integer  "resource_id",                  null: false
+    t.string   "resource_type",                null: false
+    t.string   "action",                       null: false
+    t.boolean  "unread",        default: true, null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.datetime "read_at"
   end
 
   add_index "notifications", ["action"], name: "index_notifications_on_action", using: :btree
   add_index "notifications", ["created_at"], name: "index_notifications_on_created_at", using: :btree
   add_index "notifications", ["initiator_id"], name: "index_notifications_on_initiator_id", using: :btree
-  add_index "notifications", ["notifiable_id", "notifiable_type"], name: "index_notifications_on_notifiable_id_and_notifiable_type", using: :btree
   add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
+  add_index "notifications", ["resource_id", "resource_type"], name: "index_notifications_on_resource_id_and_resource_type", using: :btree
   add_index "notifications", ["unread"], name: "index_notifications_on_unread", using: :btree
 
   create_table "question_revisions", force: true do |t|
@@ -307,8 +321,8 @@ ActiveRecord::Schema.define(version: 20140317201604) do
 
   create_table "tags", force: true do |t|
     t.string   "name",       null: false
-    t.datetime "updated_at", null: false
     t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree

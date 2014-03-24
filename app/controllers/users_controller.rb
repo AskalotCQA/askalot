@@ -4,13 +4,12 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   default_tab :all, only: :index
-  default_tab :questions, only: :show
+  default_tab :profile, only: :show
 
   def index
     @users = case params[:tab].to_sym
-             when :all    then User.order(:nick)
-             when :recent then User.recent.order(:created_at)
-             else fail
+             when :recent then User.recent.order(created_at: :desc)
+             else User.order(:nick)
              end
 
     @users = @users.page(params[:page]).per(60)

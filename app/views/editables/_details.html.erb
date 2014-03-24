@@ -1,13 +1,13 @@
 <% if editable.edited? %>
   <%= t "#{model}.details.updated" %>
-  <%= link_to_user editable.editor %>
+  <%= link_to_user editable.editor, authorable: editable %>
   <%= tooltip_time_tag editable.edited_at, format: :normal, placement: :top %>
 <% end %>
 
 <% if editable.editor != editable.author %>
   <%= '&middot;'.html_safe if editable.edited? %>
   <%= t("#{model}.details.created").tap { |s| s.downcase_first! if editable.edited? } %>
-  <%= link_to_user editable.author %>
+  <%= link_to_user editable.author, authorable: editable %>
 <% end %>
 
 <% if editable.editor != editable.author %>

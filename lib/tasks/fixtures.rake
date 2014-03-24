@@ -23,13 +23,13 @@ namespace :fixtures do
       q = Question.create!(
         title: "Question ##{n}",
         text: Forgery(:lorem_ipsum).words(10),
-        author_id: User.first.id,
+        author_id: User.find(rand 1..5).id,
         category_id: Category.first.id,
         tag_list: Forgery(:lorem_ipsum).words(2).split(' ')
       )
       3.times do |n|
         Answer.create!(
-          author_id: User.last.id,
+          author_id: User.find(rand 6..10).id,
           question_id: q.id,
           text: Forgery(:lorem_ipsum).words(20),
         )

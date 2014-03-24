@@ -65,10 +65,10 @@ describe 'Markdown' do
 
       question = Question.last
 
-      expect(last_notification.notifiable).to eql(question)
-      expect(last_notification.recipient).to  eql(other)
-      expect(last_notification.initiator).to  eql(user)
-      expect(last_notification.action).to     eql(:mention)
+      expect(last_notification.resource).to  eql(question)
+      expect(last_notification.recipient).to eql(other)
+      expect(last_notification.initiator).to eql(user)
+      expect(last_notification.action).to    eql(:mention)
     end
 
     it 'embeds reference to question' do
@@ -214,10 +214,10 @@ describe 'Markdown' do
 
       answer = Answer.last
 
-      expect(last_notification.notifiable).to eql(answer)
-      expect(last_notification.recipient).to  eql(other)
-      expect(last_notification.initiator).to  eql(user)
-      expect(last_notification.action).to     eql(:mention)
+      expect(last_notification.resource).to  eql(answer)
+      expect(last_notification.recipient).to eql(other)
+      expect(last_notification.initiator).to eql(user)
+      expect(last_notification.action).to    eql(:mention)
     end
   end
 
@@ -250,10 +250,10 @@ describe 'Markdown' do
 
       comment = Comment.last
 
-      expect(last_notification.notifiable).to eql(comment)
-      expect(last_notification.recipient).to  eql(other)
-      expect(last_notification.initiator).to  eql(user)
-      expect(last_notification.action).to     eql(:mention)
+      expect(last_notification.resource).to  eql(comment)
+      expect(last_notification.recipient).to eql(other)
+      expect(last_notification.initiator).to eql(user)
+      expect(last_notification.action).to    eql(:mention)
     end
   end
 end
