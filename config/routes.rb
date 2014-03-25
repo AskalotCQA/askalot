@@ -16,6 +16,8 @@ Askalot::Application.routes.draw do
   get :statistics, to: 'statistics#index'
   get :welcome,    to: 'static_pages#welcome'
 
+  get :help, to: 'static_pages#help'
+
   concern :commetable do
     resources :comments, only: [:create, :update, :destroy]
 
