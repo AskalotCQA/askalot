@@ -1,8 +1,22 @@
-<ol class="user-questions">
-  <% questions.each do |question| %>
-    <%= render 'users/question', question: question %>
-  <% end %>
-</ol>
+<% if questions.any? %>
+  <ol class="user-questions">
+    <% questions.each do |question| %>
+      <%= render 'users/question', question: question %>
+    <% end %>
+  </ol>
+<% else %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-warning">
+        <%= t('user.show.no_questions_found') %>
+      </div>
+
+      <% if @user == current_user %>
+        <%= icon_link_to :plus, t('question.new.feature'), new_question_path, class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
 <div class="row">
   <div class="col-md-12">
