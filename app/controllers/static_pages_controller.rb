@@ -11,4 +11,8 @@ class StaticPagesController < ApplicationController
 
   def welcome
   end
+
+  def help
+    render "static_pages/sk/help/index"
+  end
 end
