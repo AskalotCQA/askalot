@@ -1,0 +1,12 @@
+sk:
+  help:
+    title: 'Help pre systém Askalot'
+
+    headings:
+      question-posing: 'Chcem sa opýtať otázku'
+      studying: 'Chcem sa naučiť niečo nové'
+      question-answering: 'Chcem odpovedať na otázky'
+      profile: 'Chcem si upraviť profil'
+      markdown: 'Chcem použiť Markdown'
+
+
