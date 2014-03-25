@@ -1,12 +1,24 @@
 <% provide(:sidebar, true) %>
-<% provide(:title, "Help pre systém") %>
+<% provide(:title, t('help.title')) %>
 
 <div class="row">
   <div class="col-md-offset-1 col-md-2 hidden-xs hidden-sm hidden-print">
     <%= sidebar_tag do %>
       <ul class="nav">
         <li>
-          <%= link_to "text", "#question-posing" %>
+          <%= link_to t('help.headings.question-posing'), "#question-posing" %>
+        </li>
+        <li>
+          <%= link_to t('help.headings.studying'), '#studying' %>
+        </li>
+        <li>
+          <%= link_to t('help.headings.question-answering'), '#question-answering' %>
+        </li>
+        <li>
+          <%= link_to t('help.headings.profile'), '#profile' %>
+        </li>
+        <li>
+          <%= link_to t('help.headings.markdown'), '#markdown' %>
         </li>
       </ul>
     <% end %>
@@ -14,27 +26,26 @@
 
   <div class="col-xs-12 col-md-6" role="main">
     <h1 class="page-header"><%= yield :title %>%</h1>
-
     <ol class="list-unstyled">
       <li id="question-posing" class="help">
-        <h2><%= question_posing_title %></h2>
-        <%= render question_posing %>
+        <h2><%= t('help.headings.question-posing') %></h2>
+        <%= render('static_pages/sk/help/question_posing').html_safe %>
       </li>
       <li id="studying" class="help">
-        <h2><%= studying_title %></h2>
-        <%= render studying %>
+        <h2><%= t('help.headings.studying') %></h2>
+        <%= render('static_pages/sk/help/studying').html_safe %>
       </li>
-      <li id="question-answering">
-        <h2><%= question_answering_title %></h2>
-        <%= render question_answering %>
+      <li id="question-answering" class="help">
+        <h2><%= t('help.headings.question-answering') %></h2>
+        <%= render('static_pages/sk/help/question_answering').html_safe %>
       </li>
       <li id="profile" class="help">
-        <h2><%= profile_title %></h2>
-        <%= render profile %>
+        <h2><%= t('help.headings.profile') %></h2>
+        <%= render('static_pages/sk/help/profile').html_safe %>
       </li>
       <li id="markdown" class="help">
-        <h2><%= markdown_title_title%></h2>
-        <%= render markdown %>
+        <h2><%= t('help.headings.markdown') %></h2>
+        <%= render('static_pages/sk/help/markdown').html_safe %>
       </li>
     </ol>
   </div>

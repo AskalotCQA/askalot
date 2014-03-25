@@ -1,9 +1,9 @@
 Vo svojom profile si môžeš nastaviť viacero vecí:
-## Profil
+### Profil
 Údaje o Tebe. Zmeň si prezývku, nastav si email na gravatar, napíš niečo o sebe, aby ostatní vedeli s kým majú tú česť. Využi pri tom #Markdown
-## Sociálne siete
+### Sociálne siete
 Nalinkuj profily z iných sociálnych sietí k svojmu Askalot účtu. Vyplň svoje obľúbené sociálne siete a pochváľ sa profilmi v nich.
-## Súkromie
+### Súkromie
 Nechceš aby ostatní videli Tvoje meno, alebo email? Skry si ich.
-## Účet
+### Účet
 Zmeň si email na svoj aktuálny, ktorý používaš.
