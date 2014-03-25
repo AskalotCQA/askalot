@@ -1,0 +1,41 @@
+<% provide(:sidebar, true) %>
+<% provide(:title, "Help pre systém") %>
+
+<div class="row">
+  <div class="col-md-offset-1 col-md-2 hidden-xs hidden-sm hidden-print">
+    <%= sidebar_tag do %>
+      <ul class="nav">
+        <li>
+          <%= link_to "text", "#question-posing" %>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+
+  <div class="col-xs-12 col-md-6" role="main">
+    <h1 class="page-header"><%= yield :title %>%</h1>
+
+    <ol class="list-unstyled">
+      <li id="question-posing" class="help">
+        <h2><%= question_posing_title %></h2>
+        <%= render question_posing %>
+      </li>
+      <li id="studying" class="help">
+        <h2><%= studying_title %></h2>
+        <%= render studying %>
+      </li>
+      <li id="question-answering">
+        <h2><%= question_answering_title %></h2>
+        <%= render question_answering %>
+      </li>
+      <li id="profile" class="help">
+        <h2><%= profile_title %></h2>
+        <%= render profile %>
+      </li>
+      <li id="markdown" class="help">
+        <h2><%= markdown_title_title%></h2>
+        <%= render markdown %>
+      </li>
+    </ol>
+  </div>
+</div>
