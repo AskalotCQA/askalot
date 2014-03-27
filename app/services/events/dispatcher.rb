@@ -15,7 +15,7 @@ module Events
     end
 
     def unsubscribe_all
-      @notifiers = []
+      @listeners = []
     end
 
     def dispatch(action, initiator, resource, options = {})
