@@ -1,7 +1,7 @@
 module Editing
   extend ActiveSupport::Concern
 
-  include Notifications::Notifying
+  include Events::Dispatching
 
   def update
     @model    = controller_name.classify.downcase.to_sym
@@ -16,7 +16,7 @@ module Editing
     if @editable.changed?
       if @editable.save && @editable.update_attributes_by_revision(@revision)
         #TODO(zbell) do not notify about anonymous questions since user.nick is still exposed in notifications
-        notify_about :update, @editable, for: @editable.to_question.watchers unless @editable.to_question.anonymous
+        dispatch_event :update, @editable, for: @editable.to_question.watchers unless @editable.to_question.anonymous
 
         flash[:notice] = t "#{@model}.update.success"
       else

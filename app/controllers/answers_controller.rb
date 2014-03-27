@@ -4,8 +4,8 @@ class AnswersController < ApplicationController
   include Markdown
   include Voting
 
-  include Notifications::Notifying
-  include Notifications::Watching
+  include Events::Dispatching
+  include Watchings::Registration
 
   before_action :authenticate_user!
 
@@ -17,10 +17,10 @@ class AnswersController < ApplicationController
 
     if @answer.save
       process_markdown_for @answer do |user|
-        notify_about :mention, @answer, for: user
+        dispatch_event :mention, @answer, for: user
       end
 
-      notify_about :create, @answer, for: @question.watchers
+      dispatch_event :create, @answer, for: @question.watchers
       register_watching_for @question
 
       flash[:notice] = t('answer.create.success')
@@ -47,7 +47,7 @@ class AnswersController < ApplicationController
             @answers << answer
             labeling.destroy
 
-            notify_about :delete, labeling, for: answer.watchers
+            dispatch_event :delete, labeling, for: answer.watchers
           end
         end
       when :helpful
@@ -60,7 +60,7 @@ class AnswersController < ApplicationController
 
     @labeling = @answer.toggle_labeling_by! current_user, params[:value]
 
-    notify_about notify_action_for(@labeling), @labeling, for: @question.watchers
+    dispatch_event dispatch_event_action_for(@labeling), @labeling, for: @question.watchers
   end
 
   private

@@ -3,8 +3,8 @@ class CommentsController < ApplicationController
   include Editing
   include Markdown
 
-  include Notifications::Notifying
-  include Notifications::Watching
+  include Events::Dispatching
+  include Watchings::Registration
 
   before_action :authenticate_user!
 
@@ -17,10 +17,10 @@ class CommentsController < ApplicationController
 
     if @comment.save
       process_markdown_for @comment do |user|
-        notify_about :mention, @comment, for: user
+        dispatch_event :mention, @comment, for: user
       end
 
-      notify_about :create, @comment, for: @question.watchers
+      dispatch_event :create, @comment, for: @question.watchers
       register_watching_for @question
 
       flash[:notice] = t('comment.create.success')
