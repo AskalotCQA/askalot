@@ -6,6 +6,7 @@ module StackOverflow
       def start_document
         puts '[Users] Start processing'
         @users = []
+        @count = 0
       end
 
       def end_document
@@ -24,7 +25,8 @@ module StackOverflow
             return
           end
 
-          puts '[Users] Processing user with ID: ' + user['Id']
+          @count += 1
+          puts '[Users] Processing ' + @count.to_s + '. user with ID: ' + user['Id']
 
           user = User.new(
             login: 'user_' + user['Id'],
@@ -33,13 +35,13 @@ module StackOverflow
             created_at: user['CreationDate'],
             updated_at: user['CreationDate'],
             last_sign_in_at: user['LastAccessDate'],
-            about: user['AboutMe'],
+            about: ActionView::Base.full_sanitizer.sanitize(user['AboutMe']),
             imported_id: user['Id']
           )
           user.skip_confirmation!
           @users << user
 
-          if @users.count > 1000
+          if @users.count >= 10000
             User.import @users, :validate => false, :timestamps => false
             @users = []
           end

@@ -1,9 +1,15 @@
 module StackOverflow
   class Processor
     class PostsDocument < Nokogiri::XML::SAX::Document
+      def initialize type
+        @type = type
+      end
+
       def start_document
         puts '[Posts] Start processing'
+        @questions = []
         @answers = []
+        @count = 0
       end
 
       def end_document
@@ -18,13 +24,14 @@ module StackOverflow
             post[attribute[0]] = attribute[1]
           end
 
-          puts '[Posts] Processing post with ID: ' + post['Id']
-
           # Question
-          if post['PostTypeId'] == '1'
+          if @type == :questions && post['PostTypeId'] == '1'
+            @count += 1
+            puts '[Posts] Processing ' + @count.to_s + '. question with ID: ' + post['Id']
+
             user = User.find_by_imported_id post['OwnerUserId']
 
-            question = Question.create!(
+            question = Question.new(
                 author_id: user.nil? ? 0 : user.id,
                 category_id: 1,
                 title: post['Title'],
@@ -34,11 +41,21 @@ module StackOverflow
                 tag_list: post['Tags'].gsub(/^</,'').gsub(/>$/,'').split(/></),
                 imported_id: post['Id']
             )
+
+            @questions << question
+
+            if @questions.count >= 1000
+              Question.import @questions, :validate => false, :timestamps => false
+              @questions = []
+            end
           end
 
 
           # Answer
-          if post['PostTypeId'] == '2'
+          if @type == :answers && post['PostTypeId'] == '2'
+            @count += 1
+            puts '[Posts] Processing ' + @count.to_s + '. answer with ID: ' + post['Id']
+
             user = User.find_by_imported_id post['OwnerUserId']
             question = Question.find_by_imported_id post['ParentId']
 
@@ -53,7 +70,7 @@ module StackOverflow
 
             @answers << answer
 
-            if @answers.count > 1000
+            if @answers.count >= 1000
               Answer.import @answers, :validate => false, :timestamps => false
               @answers = []
             end

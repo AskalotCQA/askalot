@@ -4,6 +4,7 @@ module StackOverflow
       def start_document
         puts '[Votes] Start processing'
         @votes = []
+        @count = 0
       end
 
       def end_document
@@ -18,7 +19,8 @@ module StackOverflow
             vote[attribute[0]] = attribute[1]
           end
 
-          puts '[Votes] Processing vote with ID: ' + vote['Id'] + ', type: ' + vote['VoteTypeId']
+          @count += 1
+          puts '[Votes] Processing ' + @count.to_s + '. vote with ID: ' + vote['Id'] + ', type: ' + vote['VoteTypeId']
 
           if vote['VoteTypeId'] == '1'
             answer = Answer.find_by_imported_id vote['PostId']
@@ -46,7 +48,7 @@ module StackOverflow
 
             @votes << vote
 
-            if @votes.count > 1000
+            if @votes.count >= 10000
               Vote.import @votes, :validate => false, :timestamps => false
               @votes = []
             end

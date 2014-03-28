@@ -4,6 +4,7 @@ module StackOverflow
       def start_document
         puts '[Comments] Start processing'
         @comments = []
+        @count = 0
       end
 
       def end_document
@@ -18,7 +19,8 @@ module StackOverflow
             comment[attribute[0]] = attribute[1]
           end
 
-          puts '[Comments] Processing comment with ID: ' + comment['Id']
+          @count += 1
+          puts '[Comments] Processing ' + @count.to_s + '. comment with ID: ' + comment['Id']
 
           user = User.find_by_imported_id comment['UserId']
           question = Question.find_by_imported_id comment['PostId']
@@ -36,7 +38,7 @@ module StackOverflow
 
           @comments << comment
 
-          if @comments.count > 1000
+          if @comments.count >= 10000
             Comment.import @comments, :validate => false, :timestamps => false
             @comments = []
           end
