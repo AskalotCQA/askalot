@@ -5,8 +5,8 @@ class QuestionsController < ApplicationController
   include Voting
   include Tabbing
 
-  include Notifications::Notifying
-  include Notifications::Watching
+  include Events::Dispatching
+  include Watchings::Registration
 
   include Watchings::Watching
 
@@ -40,11 +40,11 @@ class QuestionsController < ApplicationController
 
     if @question.save
       process_markdown_for @question do |user|
-        notify_about :mention, @question, for: user
+        dispatch_event :mention, @question, for: user
       end
 
       #TODO(zbell) do not notify about anonymous questions since user.nick is still exposed in notifications
-      notify_about :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten unless @question.anonymous
+      dispatch_event :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten unless @question.anonymous
       register_watching_for @question
 
       flash[:notice] = t('question.create.success')
@@ -70,7 +70,7 @@ class QuestionsController < ApplicationController
 
     @question.increment :views_count
 
-    notify_about :create, @view, for: @question.watchers
+    dispatch_event :create, @view, for: @question.watchers
   end
 
   def favor
@@ -82,7 +82,7 @@ class QuestionsController < ApplicationController
 
     @question.favorites.reload
 
-    notify_about notify_action_for(@favorite), @favorite, for: @question.watchers
+    dispatch_event dispatch_event_action_for(@favorite), @favorite, for: @question.watchers
   end
 
   def suggest

@@ -11,10 +11,10 @@ class EvaluationsController < ApplicationController
 
     if @evaluation.save
       process_markdown_for @evaluation do |user|
-        notify_about :mention, @evaluation, for: user
+        dispatch_event :mention, @evaluation, for: user
       end
 
-      notify_about :create, @evaluation, for: @question.watchers
+      dispatch_event :create, @evaluation, for: @question.watchers
       register_watching_for @question
 
       flash[:notice] = t('evaluation.create.success')
@@ -34,7 +34,7 @@ class EvaluationsController < ApplicationController
     @evaluation = Evaluation.where(evaluable: @evaluable, evaluator: current_user).first
 
     if @evaluation.update_attributes(evaluation_params)
-      notify_about :update, @evaluation, for: @question.watchers
+      dispatch_event :update, @evaluation, for: @question.watchers
 
       flash[:notice] = t 'evaluation.update.success'
     else

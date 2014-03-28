@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Notifications::Dispatcher do
-  let(:dispatcher) { Class.new { include Notifications::Dispatcher }.new }
+describe Events::Dispatcher do
+  let(:dispatcher) { Class.new { include Events::Dispatcher }.new }
   let(:notifier)   { double(:notifier) }
 
   describe '.notify' do
@@ -15,7 +15,7 @@ describe Notifications::Dispatcher do
 
       expect(notifier).to receive(:publish).with(:action, user, resource, {})
 
-      dispatcher.notify(:action, user, resource)
+      dispatcher.dispatch(:action, user, resource)
     end
   end
 
@@ -25,7 +25,7 @@ describe Notifications::Dispatcher do
 
       dispatcher.subscribe(notifier)
 
-      expect(dispatcher.notifiers).to include(notifier)
+      expect(dispatcher.listeners).to include(notifier)
     end
   end
 
@@ -39,8 +39,8 @@ describe Notifications::Dispatcher do
 
       dispatcher.unsubscribe(mailer)
 
-      expect(dispatcher.notifiers).to     include(notifier)
-      expect(dispatcher.notifiers).not_to include(mailer)
+      expect(dispatcher.listeners).to     include(notifier)
+      expect(dispatcher.listeners).not_to include(mailer)
     end
   end
 end

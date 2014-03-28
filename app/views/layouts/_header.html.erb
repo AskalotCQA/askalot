@@ -39,7 +39,7 @@
           <li><%= link_to t('user.sign_in'), new_user_session_path %></li>
         <% end %>
       </ul>
-      <div class="navbar-form navbar-right hidden-sm">
+      <div class="navbar-form navbar-right hidden-xs hidden-sm hidden-print">
         <%= icon_link_to :'question-circle', nil, new_question_path, tooltip_attributes(t('question.new.feature'), placement: :left).merge(class: 'btn btn-primary') %>
       </div>
     </div>

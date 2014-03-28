@@ -3,6 +3,7 @@
 #= require jquery
 #= require jquery_ujs
 #= require bootstrap
+#= require jquery.ui.effect.all
 #= require handlebars.runtime
 #= require_tree ./handlebars
 #= require_tree ./templates
@@ -27,6 +28,8 @@
 #= require helper
 #
 #= require questions
+#= require answers
+#= require comments
 #
 #= require analytics
 #= require fixes

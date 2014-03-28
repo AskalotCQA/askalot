@@ -17,23 +17,8 @@ body {
   margin-top: $navbar-height;
 }
 
-// navigation
-
-.pagination-navigation {
-  display: block;
-  position: relatve;
-
-  .pagination {
-    display: inline-block;
-  }
-}
-
-.tab-content {
-  padding-top: 20px;
-}
-
-.pill-content, .pill-navigation, .tab-navigation {
-  padding-top: $navbar-height;
+.highlight-content {
+  background-color: $brand-warning;
 }
 
 // forms
@@ -51,6 +36,25 @@ body {
 
 .img-muted {
   @include opacity(0.8)
+}
+
+// navigation
+
+.pagination-navigation {
+  display: block;
+  position: relatve;
+
+  .pagination {
+    display: inline-block;
+  }
+}
+
+.tab-content {
+  padding-top: 20px;
+}
+
+.pill-content, .pill-navigation, .tab-navigation {
+  padding-top: $navbar-height;
 }
 
 // text
