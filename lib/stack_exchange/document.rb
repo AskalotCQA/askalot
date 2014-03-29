@@ -30,11 +30,13 @@ module StackExchange
         record     = process_element(attributes)
 
         if record
-          @count += 1
-
           puts "[#{self.name}] Processed #{@count}th #{model.name} with ID: #{attributes[:Id]}"
 
-          import if @records.size > batch_size
+          @count += 1
+
+          @records << record
+
+          import if @records.size >= batch_size
         end
       end
     end
