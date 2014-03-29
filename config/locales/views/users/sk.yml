@@ -78,4 +78,7 @@ sk:
     update:
       success: 'Úspešne ste aktualizovali Váš profil.'
 
+    follow: 'Následovať'
+    unfollow: 'Nenásledovať'
+
     anonymous: 'Anonym'
