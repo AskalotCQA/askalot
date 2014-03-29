@@ -1,13 +1,11 @@
 <li>
   <div class="row">
     <div class="col-md-4">
-      <div class="row">
+      <div class="row user-profile-metrics">
         <div class="col-md-3">
           <%= content_tag :span, class: [:'question-metric', question_votes_coloring(question)] do %>
-            <% if question.favorites.size > 0 %>
-              <span class="question-value"><%= icon_tag :'star-o' %></span>
-              <%= question.favorites.size %>
-            <% end %>
+            <span class="question-value"><%= question.favorites.size %></span>
+            <%= t('count.favorite', count: question.favorites.size) %>
           <% end %>
         </div>
         <div class="col-md-3">
@@ -37,8 +35,8 @@
           <%= link_to question_title_preview(question), question_path(question) %>
         </h4>
 
-        <%= render 'questions/labels', labels: question.labels %>
-        <small class="text-muted"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
+        <%= render 'questions/labels', labels: question.labels %><small class="text-muted">
+        <%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
       </div>
     </div>
   </div>

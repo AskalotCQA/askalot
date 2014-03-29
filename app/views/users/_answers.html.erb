@@ -1,8 +1,22 @@
-<ol class="user-answers">
-  <% answers.each do |answer| %>
-    <%= render 'users/answer', answer: answer %>
-  <% end %>
-</ol>
+<% if answers.any? %>
+  <ol class="user-answers">
+    <% answers.each do |answer| %>
+      <%= render 'users/answer', answer: answer %>
+    <% end %>
+  </ol>
+<% else %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-warning">
+        <%= t('user.show.no_answers_found') %>
+      </div>
+
+      <% if @user == current_user %>
+        <%= icon_link_to :comment, t('home.answer'), question_path(@random_question), class: 'btn btn-success', fixed: true %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
 
 <div class="row">
   <div class="col-md-12">
