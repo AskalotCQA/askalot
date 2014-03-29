@@ -62,10 +62,7 @@ class Question < ActiveRecord::Base
   end
 
   def set_updated_timestamp
-    if self.changed.include? 'votes_difference'
-      Question.updated_timestamp = [:updated_at]
-    else
-      Question.updated_timestamp = [:updated_at, :touched_at]
-    end
+    self.changed.include?('votes_difference') ? timestamps = [:updated_at] : timestamps = [:updated_at, :touched_at]
+    Question.updated_timestamp = timestamps
   end
 end
