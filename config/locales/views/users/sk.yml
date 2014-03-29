@@ -78,7 +78,15 @@ sk:
     update:
       success: 'Úspešne ste aktualizovali Váš profil.'
 
-    follow: 'Následovať'
-    unfollow: 'Nenásledovať'
+    follow: 'Nasledovať'
+    unfollow: 'Nenasledovať'
+
+    followees:
+      title: 'Nasledovaný/í'
+      no_results_found: 'Nenasledujete žiadneho používateľa.'
+
+    followers:
+      title: 'Nasledovníci'
+      no_results_found: 'Nenasleduje vás žiadny používateľ'
 
     anonymous: 'Anonym'
