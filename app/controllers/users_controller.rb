@@ -39,6 +39,14 @@ class UsersController < ApplicationController
     redirect_to edit_user_registration_path(tab: params[:tab])
   end
 
+  def follow
+    @followee = User.find(params[:id])
+
+    current_user.toggle_following_by! @followee
+
+    render 'followables/follow', formats: :js
+  end
+
   def suggest
     @users = User.where('nick like ?', "#{params[:q]}%")
 
