@@ -13,6 +13,8 @@ Askalot::Application.routes.draw do
   end
 
   get 'users/:nick', to: 'users#show', as: :user
+  get 'users/:nick/followees', to: 'users#followees', as: :followees
+  get 'users/:nick/followers', to: 'users#followers', as: :followers
 
   get :statistics, to: 'statistics#index'
   get :welcome,    to: 'static_pages#welcome'
