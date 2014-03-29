@@ -1,0 +1,27 @@
+<li>
+  <div class="row">
+    <div class="col-md-1">
+      <%= content_tag :span, answer.votes_difference, tooltip_attributes("#{answer.votes.positive.size} - #{answer.votes.negative.size}", class: [:'question-metric', question_answers_coloring(answer.question)], placement: :right) do %>
+        <span class="question-value"><%= answer.votes_difference %></span>
+        <%= t('count.vote', count: answer.votes_difference) %>
+      <% end %>
+    </div>
+
+    <div class="col-md-9">
+      <div class="question-preview">
+        <h4>
+          <%= evaluation_badge_tag answer.question, placement: :bottom if answer.question.evaluations.any? %>
+          <%= link_to question_title_preview(answer.question), question_path(answer.question, anchor: "answer-#{answer.id}") %>
+        </h4>
+
+        <%= render 'questions/labels', labels: answer.question.labels %>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <div class="question-author">
+        <small class="text-muted"><%= tooltip_time_tag answer.created_at, format: :normal, placement: :bottom %></small>
+      </div>
+    </div>
+  </div>
+</li>

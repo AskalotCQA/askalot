@@ -1,6 +1,10 @@
 module ApplicationHelper
   def default_title
-    'na&#x042f;uby'.html_safe
+    'Askalot'
+  end
+
+  def resolve_sidebar(value)
+    ' data-spy="scroll" data-target="#sidebar"'.html_safe if value
   end
 
   def resolve_title(value)
@@ -14,11 +18,15 @@ module ApplicationHelper
     (values << default_title).map { |value| html_escape value }.join(' &middot; ').html_safe
   end
 
-  def use_narrower_layout?
-    devise_controller? && !current_page?(edit_user_registration_path) && !(params[:controller] == 'registrations' && params[:action] == 'update')
+  def use_container?
+    [DeviseController, ErrorsController, StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
   end
 
   def url_to_site(path = nil)
-    "http://labss2.fiit.stuba.sk/TeamProject/2013/team13is-si/#{path}"
+    File.join 'http://labss2.fiit.stuba.sk/TeamProject/2013/team13is-si/', path.to_s
+  end
+
+  def url_to_repository(path = nil)
+    File.join('https://github.com/teamnaruby/askalot/', path.to_s).sub(/\/\z/, '')
   end
 end

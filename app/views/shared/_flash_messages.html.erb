@@ -1,18 +1,10 @@
-<% if flash.any? %>
-  <div class="row">
-    <div class="col-md-12">
-      <section>
-        <% flash.each do |type, messages| %>
-          <% Array.wrap(messages).each do |message| %>
-            <div class="alert alert-<%= flash_type_to_class type %> alert-dismissable">
-              <!-- TODO(zbell) consider, problem with section margin
-              <%= close_link_to_alert %>
-              -->
-              <%= message %>
-            </div>
-          <% end %>
-        <% end %>
-      </section>
-    </div>
+<% if messages.any? %>
+  <div id="flash" class="flash">
+    <% messages.each do |type, message| %>
+      <div class="alert alert-<%= flash_message_type_to_class(type) %> alert-dismissable">
+        <!-- TODO(zbell) consider <%= close_link_to_alert %> -->
+        <%= message.html_safe %>
+      </div>
+    <% end %>
   </div>
 <% end %>

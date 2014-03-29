@@ -1,26 +1,34 @@
 class CommentsController < ApplicationController
+  include Deleting
+  include Editing
+  include Markdown
+
+  include Events::Dispatching
+  include Watchings::Registration
+
   before_action :authenticate_user!
 
   def create
     @commentable = find_commentable
+    @question    = @commentable.to_question
+    @comment     = Comment.new(comment_params)
 
-    @question = @commentable.is_a?(Question) ? @commentable : @commentable.question
-    @author   = @question.author
-    @labels   = @question.labels
-    @answers  = @question.answers
-
-    @answer  = Answer.new(question: @question)
-    @comment = Comment.new(comment_params)
+    authorize! :comment, @commentable
 
     if @comment.save
-      flash[:notice] = t('comment.create.success')
+      process_markdown_for @comment do |user|
+        dispatch_event :mention, @comment, for: user
+      end
 
-      redirect_to question_path(@question)
+      dispatch_event :create, @comment, for: @question.watchers
+      register_watching_for @question
+
+      flash[:notice] = t('comment.create.success')
     else
       flash_error_messages_for @comment
-
-      render 'questions/show'
     end
+
+    redirect_to question_path(@question)
   end
 
   private
@@ -31,5 +39,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:text).merge(commentable: @commentable, author: current_user)
+  end
+
+  def update_params
+    params.require(:comment).permit(:text)
   end
 end

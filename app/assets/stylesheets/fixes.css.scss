@@ -1,16 +1,29 @@
-@import 'mixins';
-@import 'variables';
-
 // general
 
-address, form, nav, p, dl, ol, ul, table,
-.alert {
+* {
+  outline: none !important;
+}
+
+.label {
+  border-radius: 0 !important;
+}
+
+.btn, .dropdown-menu, .modal-content,
+button, input, select, textarea {
+  box-shadow: none !important;
+}
+
+address, form, nav, p, dl, ol, ul, table {
   &:last-child {
     margin-bottom: 0;
   }
 }
 
 // alerts
+
+.alert:last-child {
+  margin-bottom: 0;
+}
 
 .alert-dismissable .close {
   top: 0px;
@@ -19,15 +32,44 @@ address, form, nav, p, dl, ol, ul, table,
   font-size: $font-size-base;
 
   i {
-    line-height: $line-height-computed + 1;
+    line-height: $line-height-computed + 1px;
   }
+}
+
+// buttons
+
+.btn.btn-primitive,
+.btn.text-muted {
+  @include box-shadow(none);
+}
+
+// dropdowns
+
+.dropdown-menu li.active .text-muted {
+  color: $component-active-color;
 }
 
 // forms
 
 .form-title {
   margin: ($line-height-computed * 2) 0 $line-height-computed;
-  padding-bottom: ($line-height-computed / 2) - 1;
+  padding-bottom: $line-height-computed / 2;
+}
+
+.form-alert {
+  margin-bottom: 15px;
+}
+
+.form-control + .input-group-addon {
+  border-left: none;
+}
+
+.input-group-addon {
+  border-right-width: 0;
+
+  &:last-child {
+    border-right-width: 1px;
+  }
 }
 
 textarea {
@@ -36,22 +78,53 @@ textarea {
   min-height: $input-height-base;
 }
 
+// icons
+
+.fa {
+  cursor: default !important;
+}
+
+a .fa {
+  cursor: pointer !important;
+}
+
+.fa-blank {
+  display: none;
+}
+
+// modals
+
+.modal-dialog {
+  color: $text-color !important;
+}
+
 // navigation
+
+.navbar-brand {
+  height: $navbar-height;
+}
 
 .nav-labels {
   display: block;
   position: relative;
+  margin-bottom: 0 !important;
 
   & > li {
     display: inline-block;
     float: left;
-    margin-bottom: $padding-base-vertical;
+    margin-bottom: 10px;
     margin-right: $padding-base-horizontal / 2;
 
-    a {
+    & > a {
       display: inline;
       padding: 0.2em 0.6em 0.3em;
     }
+  }
+}
+
+.nav-pills {
+  .badge {
+    margin-top: 1px;
   }
 }
 
@@ -66,4 +139,4 @@ textarea {
 
 // tables
 
-@include table-row-variant('info', $state-info-bg, $state-info-border);
+@include table-row-variant('info', $state-info-bg);

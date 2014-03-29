@@ -18,17 +18,35 @@ sk:
       few: 'komentáre'
       other: 'komentárov'
 
+    evaluation:
+      zero: 'hodnotení'
+      one: 'hodnotenie'
+      few: 'hodnotení'
+      other: 'hodnotení'
+
     favorite:
       zero: 'obľúbení'
       one: 'obľúbenie'
       few: 'obľúbenia'
       other: 'obľúbení'
 
+    notification:
+      zero: 'notifikácií'
+      one: 'notifikácia'
+      few: 'notifikácie'
+      other: 'notifikácií'
+
     question:
       zero: 'otázok'
       one: 'otázka'
       few: 'otázky'
       other: 'otázok'
+
+    user:
+      zero: 'používateľov'
+      one: 'používateľ'
+      few: 'používatelia'
+      other: 'používateľov'
 
     view:
       zero: 'zobrazení'
@@ -41,6 +59,12 @@ sk:
       one: 'hlas'
       few: 'hlasy'
       other: 'hlasov'
+
+    watching:
+      zero: 'sledovanií'
+      one: 'sledovanie'
+      few: 'sledovania'
+      other: 'sledovaní'
 
   count_x:
     answer:
@@ -61,17 +85,35 @@ sk:
       few: '%{count} komentáre'
       other: '%{count} komentárov'
 
+    evaluation:
+      zero: 'žiadne hodnotenie'
+      one: '1 hodnotenie'
+      few: '%{count} hodnotení'
+      other: '%{count} hodnotení'
+
     favorite:
       zero: 'žiadne obľúbenie'
       one: '1 obľúbenie'
       few: '%{count} obľúbenia'
       other: '%{count} obľúbení'
 
+    notification:
+      zero: 'žiadna notifikácia'
+      one: '1 notifikácia'
+      few: '%{count} notifikácie'
+      other: '%{count} notifikácií'
+
     question:
       zero: 'žiadna otázka'
       one: '1 otázka'
       few: '%{count} otázky'
       other: '%{count} otázok'
+
+    user:
+      zero: 'žiaden používateľ'
+      one: '1 používateľ'
+      few: '%{count} používatelia'
+      other: '%{count} používateľov'
 
     view:
       zero: 'žiadne videnia'
@@ -85,7 +127,25 @@ sk:
       few: '%{count} hlasy'
       other: '%{count} hlasov'
 
+    watching:
+      zero: 'žiadne sledovania'
+      one: '1 sledovanie'
+      few: '%{count} sledovania'
+      other: '%{count} sledovaní'
+
   activerecord:
+    models:
+     answer: 'Odpoveď'
+     comment: 'Komentár'
+     evaluation: 'Hodnotenie'
+     favorite: 'Obľúbenie'
+     question: 'Otázka'
+     notification: 'Notifikácia'
+     user: 'Používateľ'
+     view: 'Zobrazenie'
+     vote: 'Hlas'
+     watching: 'Sledovanie'
+
     attributes:
       user:
         email: 'E-mail'
@@ -93,6 +153,9 @@ sk:
         password_confirmation: 'Potvrdenie hesla'
         current_password: 'Aktuálne heslo'
         remember_me: 'Zapamätať'
+
+        confirmation_token: 'Potvrdzovací kľúč'
+        reset_password_token: 'Obnovovací kľúč'
 
         nick: 'Prezývka'
         first: 'Krstné meno'
@@ -116,17 +179,26 @@ sk:
         twitter: 'Twitter'
         youtube: 'YouTube'
 
-        flag_show_name:  'Zobraziť meno ostatným používateľom'
-        flag_show_email: 'Zobraziť e-mail ostatným používateľom'
+        show_name:  'Zobraziť meno ostatným používateľom'
+        show_email: 'Zobraziť e-mail ostatným používateľom'
+
+        hide_name: 'Skryť meno ostatným používateľom'
+        hide_email: 'Skryť e-mail ostatným používateľom'
 
       question:
+        category: 'Kategória'
+        category_id: 'Kategória'
         title: 'Nadpis'
         text: 'Text'
         tag_list: 'Tagy'
-        category_id: 'Kategória'
+        anonymous: 'Opýtať sa anonymne'
 
       answer:
         text: 'Odpoveď'
 
       comment:
+        text: 'Komentár'
+
+      evaluation:
+        value: 'Hodnotenie'
         text: 'Komentár'

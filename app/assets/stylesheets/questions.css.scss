@@ -1,15 +1,21 @@
-@import 'mixins';
-@import 'variables';
+// general
 
-// collection
+.questions-filter {
+  margin: $navbar-height 0 10px;
+}
 
-#questions {
+.questions-controls {
+}
+
+.questions {
   & > ol > li + li {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid $gray-lighter;
   }
 }
+
+// collection
 
 .question-metric {
   display: block;
@@ -22,6 +28,10 @@
   }
 }
 
+a.question-metric.text-muted {
+  @include color-variant($text-muted, darken($text-muted, 12.5%));
+}
+
 .question-value {
   display: block;
   margin-top: $padding-base-vertical;
@@ -31,6 +41,17 @@
 }
 
 .question-preview {
+  padding-left: $grid-gutter-width;
+
+  .evaluated {
+    position: absolute;
+
+    top: 0.15em;
+    left: ($grid-gutter-width / 2) - 5px;
+
+    font-size: 0.75em;
+  }
+
   h3, h4 {
     margin-top: $padding-base-vertical;
   }
@@ -51,8 +72,33 @@
 
 // member
 
+#question {
+  margin-top: $navbar-height;
+}
+
+#question-answers {
+  margin-top: 20px;
+}
+
+#question-evaluations {
+  & > p {
+    margin-bottom: 10px;
+  }
+}
+
+.question-content {
+  margin-bottom: 10px;
+}
+
+.question-details {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  color: $text-muted;
+}
+
 .question-voting {
-  @include block-voting;
+  @include block-iconing;
 }
 
 .question-favoring {
@@ -60,11 +106,11 @@
   text-align: center;
 
   a {
-    @include action-coloring($gray-light, $brand-warning);
+    @include color-variant($gray-light, $brand-warning);
   }
 
   a.question-favored {
-    @include action-coloring($brand-warning, $gray-light);
+    @include color-variant($brand-warning, $gray-light);
   }
 
   span {
@@ -74,7 +120,17 @@
   }
 }
 
+.question-evaluating {
+  @include block-evaluating(question);
+}
+
+.question-watching {
+  @include block-iconing;
+}
+
 .question-answers {
+  @extend .list-unstyled;
+
   & > li + li {
     margin-top: 20px;
     padding-top: 20px;
@@ -82,6 +138,14 @@
   }
 }
 
+.question-answer {
+  background-clip: content-box;
+}
+
 .question-comments {
-  @include block-listing;
+  @include block-comments;
+}
+
+.question-evaluations {
+  @include block-evaluations;
 }

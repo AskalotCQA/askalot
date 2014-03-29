@@ -1,12 +1,3 @@
-// imports (order is significant)
-
-@import 'mixins';
-@import 'variables';
-
-@import 'twitter/bootstrap';
-@import 'select2/bootstrap';
-@import 'font-awesome';
-
 // general
 
 html {
@@ -15,21 +6,39 @@ html {
 }
 
 body {
-  height: 100%;
+  margin-top: $navbar-height + 1px;
+}
+
+.flash .alert:first-child {
   margin-top: $navbar-height;
 }
 
-section {
-  &:first-child {
-    padding-top: $navbar-height;
-  }
-
-  & + section {
-    padding-top: 0.5 * $navbar-height;
-  }
+.page-header {
+  margin-top: $navbar-height;
 }
 
-// helpers
+.highlight-content {
+  background-color: $brand-warning;
+}
+
+// forms
+
+.form-title {
+  margin: $navbar-height 0 30px;
+  padding: 0;
+}
+
+.form-links {
+  margin-top: 30px;
+}
+
+// images
+
+.img-muted {
+  @include opacity(0.8)
+}
+
+// navigation
 
 .pagination-navigation {
   display: block;
@@ -40,12 +49,22 @@ section {
   }
 }
 
-.tab-content, .tab-navigation {
+.tab-content {
+  padding-top: 20px;
+}
+
+.pill-content, .pill-navigation, .tab-navigation {
   padding-top: $navbar-height;
 }
 
+// text
+
 .text-capital {
   font-variant: small-caps;
+}
+
+.text-inverse {
+  color: #fff;
 }
 
 .text-lead {
@@ -53,7 +72,31 @@ section {
 }
 
 .text-muted a, a.text-muted {
-  @include action-coloring(darken($text-muted, 12.5%), darken($text-muted, 25%));
+  @include color-variant(darken($text-muted, 12.5%), darken($text-muted, 25%));
+}
+
+.text-undecorated {
+  text-decoration: none !important;
+}
+
+// sidebar
+
+.sidebar {
+  margin-top: 40px;
+
+  .nav > li > a {
+    display: inline-block;
+    padding: $padding-base-vertical $padding-small-horizontal;
+
+    &:focus, &:hover {
+      background: transparent;
+      text-decoration: underline;
+    }
+  }
+
+  .nav li.active > a {
+    font-weight: bolder;
+  }
 }
 
 // header
@@ -61,77 +104,6 @@ section {
 header {
   .navbar-brand {
     font-variant: small-caps;
-  }
-}
-
-// jumbotron
-
-.jumbotron {
-  padding: 160px 0;
-
-  h1 {
-    margin: 20px 0;
-    font-variant: small-caps;
-    text-align: center;
-    text-shadow: 0 0 128px $brand-info;
-  }
-
-  p {
-    margin: 0 !important;
-    padding: 20px;
-    font-size: 22.5px;
-    text-align: center;
-    text-shadow: 0 0 96px $brand-info;
-    color: rgba($jumbotron-color, .25);
-  }
-
-  ul {
-    margin: 50px 0 !important;
-    text-align: center;
-
-    .btn {
-      margin: 20px 0;
-      padding: $padding-large-vertical * 1.25 $padding-large-horizontal * 1.25;
-      font-size: $jumbotron-font-size * 1.25;
-      text-shadow: 0 0 128px $brand-info;
-    }
-  }
-
-  a {
-    @include action-coloring($jumbotron-color, $jumbotron-color);
-  }
-
-  .featured {
-    margin: 50px 0;
-    padding: 0 20px;
-    border-radius: 20px;
-    background: rgba($jumbotron-color, .0125);
-    text-align: center;
-  }
-
-  h2 {
-    display: inline-block;
-    margin: 20px 0 !important;
-    text-shadow: 0 0 64px $brand-info;
-  }
-
-  ol {
-    display: inline-block;
-
-    li {
-      margin-bottom: 20px;
-      padding-top: 20px;
-      border-top: 1px solid rgba($jumbotron-color, .025);
-    }
-
-    a {
-      text-shadow: 0 0 48px $brand-info;
-    }
-
-    small {
-      display: block;
-      color: rgba($jumbotron-color, .25);
-    }
   }
 }
 
@@ -143,11 +115,4 @@ footer {
 
   background: $gray-lighter;
   text-align: center;
-}
-
-// profile
-
-img.list-group-item {
-  border: none;
-  padding: 0;
 }

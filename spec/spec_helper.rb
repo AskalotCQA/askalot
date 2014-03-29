@@ -1,5 +1,5 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= 'test'
+
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
@@ -7,11 +7,13 @@ require 'rspec/autorun'
 # Capybara
 require 'capybara/rspec'
 require 'capybara/rails'
+require 'capybara/poltergeist'
 
 # Cancan
 require 'cancan/matchers'
 
-Capybara.default_selector = :css
+Capybara.default_selector  = :css
+Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :selenium
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -57,15 +59,17 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   # Include support
+  config.include AuthenticationHelper, type: :feature
+  config.include CapybaraHelpers,      type: :feature
+  config.include Devise::TestHelpers,  type: :controller
   config.include EmailHelper
   config.include FixtureHelper
-  config.include HistoryHelper,               type: :feature
-  config.include RemoteHelper,                type: :feature
-  config.include Select2Helper,               type: :feature
-  config.include Users::AuthenticationHelper, type: :feature
+  config.include Logging
+  config.include NotificationsHelper
+  config.include PageHelper,           type: :feature
+  config.include PollingHelper,        type: :feature
+  config.include RemoteHelper,         type: :feature
+  config.include TextcompleteHelper,   type: :feature
 
   config.before(:each) { reset_emails }
-
-  # Specify paths to use DatabaseCleaner for
-  DatabaseHelper.clean 'models', 'features', 'requests'
 end

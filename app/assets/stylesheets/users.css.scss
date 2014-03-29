@@ -1,19 +1,80 @@
-@import 'mixins';
-@import 'variables';
+// general
 
 .user-square {
+  @include text-overflow;
+
   margin: 20px 0;
   text-align: center;
 
-  a.user-avatar {
-    display: inline-block;
-
-    width: 96px;
-
-    margin-bottom: 10px;
-  }
-
   span {
     display: block;
+  }
+
+  .user-link {
+    margin-top: 10px;
+  }
+}
+
+.user-avatar {
+  @include center-block;
+  @include square(96px);
+
+  img {
+    display: inline;
+  }
+
+  font-size: $font-size-small;
+  text-align: center;
+}
+
+.user-avatar-xs {
+  @include square(20px);
+}
+
+.user-avatar-sm {
+  @include square(64px);
+}
+
+.user-avatar-lg {
+  @include square(263px);
+}
+
+.user-avatar-icon {
+  width: 20px;
+  vertical-align: middle;
+}
+
+.user-questions, .user-answers {
+  @extend .list-unstyled;
+}
+
+// profile
+
+.user-profile-avatar {
+  margin-top: $navbar-height;
+
+  .user-avatar {
+    display: inline;
+  }
+}
+
+.user-profile-title {
+  @include text-overflow;
+
+  small {
+    display: block;
+    margin-top: $padding-small-vertical;
+  }
+}
+
+.user-profile-links {
+  @extend .list-unstyled;
+  @include text-overflow;
+
+  padding-top: 10px;
+  border-top: 1px solid $list-group-border;
+
+  li {
+    padding: $padding-xs-vertical 0;
   }
 }

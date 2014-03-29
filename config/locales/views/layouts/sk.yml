@@ -3,17 +3,26 @@ sk:
     headline: 'Komunitný systém otázok a odpovedí ďalšej generácie'
 
     ask: 'Opýtať sa otázku'
+    answer: 'Skúsiť odpovedať'
+    questions: 'Všetky položené otázky'
+    changelogs: 'Čo je nové v Askalote?'
+
     sign_up: 'Vytvoriť si účet'
     sign_in: 'Prihlásiť sa'
 
+    step:
+      first: 'Pýtajte sa otázky'
+      second: 'Odpovedajte a diskutujte'
+      third: 'Vyberte najlepšie odpovede'
+
     featured:
       new: 'Nové otázky'
+      solved: 'Vyriešené otázky'
       favored: 'Obľúbené otázky'
-      answered: 'Odpovedané otázky'
 
   footer:
     about: 'O projekte'
     authors: 'Autori'
-    documentation: 'Dokumentácia'
     contact: 'Kontakt'
-
+    documents: 'Dokumentácia'
+    repositories: 'Zdrojový kód'

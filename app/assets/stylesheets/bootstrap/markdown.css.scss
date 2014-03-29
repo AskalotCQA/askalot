@@ -1,0 +1,33 @@
+.markdown-tabs {
+  border-bottom: none;
+
+  & > li > a {
+    color: $text-muted;
+  }
+
+  & > li.active > a,
+  & > li.active > a:hover,
+  & > li.active > a:focus {
+    border-color: $input-border !important;
+    border-bottom-color: #fff !important;
+
+    color: $text-color;
+  }
+}
+
+.markdown-help {
+  margin: 0;
+  padding: 10px 15px;
+
+  color: $text-muted;
+}
+
+.markdown-content {
+  padding-top: 0 !important;
+
+  .form-control {
+    height: auto;
+
+    @include box-shadow(none);
+  }
+}

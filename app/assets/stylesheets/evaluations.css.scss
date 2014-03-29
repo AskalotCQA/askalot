@@ -1,0 +1,23 @@
+// general
+
+.new-evaluation {
+  label.btn.active {
+    text-decoration: underline;
+  }
+}
+
+.evaluated {
+  font-size: 0.5em;
+}
+
+.evaluated-bad {
+  color: $brand-danger;
+}
+
+.evaluated-neutral {
+  color: $text-muted;
+}
+
+.evaluated-good {
+  color: $brand-success;
+}

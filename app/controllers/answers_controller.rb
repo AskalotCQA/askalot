@@ -1,25 +1,34 @@
 class AnswersController < ApplicationController
+  include Deleting
+  include Editing
+  include Markdown
   include Voting
+
+  include Events::Dispatching
+  include Watchings::Registration
 
   before_action :authenticate_user!
 
   def create
     @question = Question.find(params[:question_id])
-    @author   = @question.author
-    @labels   = @question.labels
-    @answers  = @question.answers
+    @answer   = Answer.new(answer_params)
 
-    @answer = Answer.new(answer_params)
+    authorize! :answer, @question
 
     if @answer.save
+      process_markdown_for @answer do |user|
+        dispatch_event :mention, @answer, for: user
+      end
+
+      dispatch_event :create, @answer, for: @question.watchers
+      register_watching_for @question
+
       flash[:notice] = t('answer.create.success')
-
-      redirect_to question_path(@question)
     else
-      flash_error_messages_for @answer
-
-      render 'questions/show'
+      form_error_messages_for @answer
     end
+
+    redirect_to question_path(@question, anchor: @answer.id ? nil : :answer)
   end
 
   def label
@@ -28,33 +37,39 @@ class AnswersController < ApplicationController
     @question = @answer.question
 
     case params[:value].to_sym
-    when :best
-      authorize! :edit, @question
+      when :best
+        authorize! :label, @question
 
-      @question.answers.where.not(id: @answer.id).each do |answer|
-        labeling = answer.labelings.by(current_user).with(:best).first
+        @question.answers.where.not(id: @answer.id).each do |answer|
+          labeling = answer.labelings.by(current_user).with(:best).first
 
-        if labeling
-          @answers << answer
-          labeling.delete
+          if labeling
+            @answers << answer
+            labeling.destroy
+
+            dispatch_event :delete, labeling, for: answer.watchers
+          end
         end
-      end
-    when :helpful
-      authorize! :edit, @question
+      when :helpful
+        authorize! :label, @question
 
-      fail if @answer.labelings.by(current_user).with(:best).exists?
-    when :verified
-      authorize! :verify, @answer
-    else
-      fail
+        fail if @answer.labelings.by(current_user).with(:best).exists?
+      else
+        fail
     end
 
-    @answer.toggle_labeling_by! current_user, params[:value]
+    @labeling = @answer.toggle_labeling_by! current_user, params[:value]
+
+    dispatch_event dispatch_event_action_for(@labeling), @labeling, for: @question.watchers
   end
 
   private
 
   def answer_params
     params.require(:answer).permit(:text).merge(question: @question, author: current_user)
+  end
+
+  def update_params
+    params.require(:answer).permit(:text)
   end
 end

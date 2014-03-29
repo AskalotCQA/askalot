@@ -1,20 +1,21 @@
-<li>
+<li id="answer-<%= answer.id %>" class="question-answer<%= ' bg-warning' if answer_highlighted? answer %>">
   <div class="row">
     <div class="col-md-2">
       <%= render 'users/square', user: answer.author %>
     </div>
 
     <div class="col-md-8">
-      <p class="text-lead">
-        <%= answer.text %>
-      </p>
+      <div class="answer-content">
+        <%= render_markdown answer.text %>
+      </div>
 
-      <p class="text-muted">
-        <%= answer_creation_time answer %>
-      </p>
+      <div class="answer-details">
+        <%= render 'answers/details', answer: answer %>
+        <%= render 'answers/editing', answer: answer %>
+        <%= render 'answers/deleting', answer: answer %>
+      </div>
 
-      <br/>
-
+      <%= render 'answers/evaluations', answer: answer %>
       <%= render 'answers/comments', answer: answer %>
       <%= render 'comments/form', commentable: answer %>
     </div>
@@ -22,6 +23,7 @@
     <div class="col-md-2">
       <%= render 'answers/voting', answer: answer %>
       <%= render 'answers/labeling', answer: answer %>
+      <%= render 'answers/evaluating', answer: answer %>
     </div>
   </div>
 </li>

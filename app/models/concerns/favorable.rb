@@ -2,7 +2,7 @@ module Favorable
   extend ActiveSupport::Concern
 
   included do
-    has_many :favorites
+    has_many :favorites, dependent: :destroy
     has_many :favorers, through: :favorites, source: :favorer
 
     scope :favored, lambda { joins(:favorites).uniq }
@@ -16,8 +16,6 @@ module Favorable
   def toggle_favoring_by!(user)
     return favorites.create! favorer: user unless favored_by?(user)
 
-    favorites.where(favorer: user).first.destroy
-
-    self
+    favorites.where(favorer: user).first.destroy!
   end
 end

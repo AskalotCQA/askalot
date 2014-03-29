@@ -1,8 +1,8 @@
 <ol class="list-unstyled">
   <% questions.each do |question| %>
     <li>
-      <%= link_to truncate(question.title, length: 35, separator: ' '), question %>
-      <small><%= truncate(question.text, length: 80, separator: ' ') %></small>
+      <h4><%= link_to_question question, length: 35 %></h4>
+      <%= question_text_preview question, length: 80 %>
     </li>
   <% end %>
 </ol>

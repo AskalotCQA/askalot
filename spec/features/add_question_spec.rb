@@ -24,24 +24,90 @@ describe 'Add Question' do
     fill_in 'question_title', with: 'Lorem ipsum title?'
     fill_in 'question_text',  with: 'Lorem ipsum'
 
-    select category.name, from: 'question_category_id'
+    select2 category.name, from: 'question_category_id'
 
     fill_in_select2 'question_tag_list', with: 'linux server'
     fill_in_select2 'question_tag_list', with: 'elasticsearch'
 
     click_button 'Opýtať'
 
-    expect(page).to have_content('Vaša otázka bola úspešne pridaná.')
+    expect(page).to have_content('Otázka bola úspešne pridaná.')
 
-    # TODO (smolnar) remove! use content expectations for checking attributes
-    # TODO (smolnar) consider checking of existing tag relation
     expect(Question).to have(1).record
 
-    question = Question.first
+    within '#question-title' do
+      expect(page).to have_content('Lorem ipsum title?')
+      expect(page).to have_content(category.name)
+      expect(page).to have_content('elasticsearch')
+      expect(page).to have_content('linux-server')
+    end
 
-    expect(question.title).to eql('Lorem ipsum title?')
-    expect(question.text).to eql('Lorem ipsum')
-    expect(question.category).to eql(category)
-    expect(question.tag_list.sort).to eql(['elasticsearch', 'linux-server'])
+    within '.question-content' do
+      expect(page).to have_content('Lorem ipsum')
+    end
+  end
+
+  it 'adds new question anonymously' do
+    visit root_path
+
+    click_link 'Opýtať sa otázku'
+
+    fill_in 'question_title', with: 'Lorem ipsum title?'
+    fill_in 'question_text',  with: 'Lorem ipsum'
+
+    select category.name, from: 'question_category_id'
+
+    check 'Opýtať sa anonymne'
+
+    click_button 'Opýtať'
+
+    within '#question' do
+      expect(page).to have_content('Anonym')
+    end
+  end
+
+  context 'when selecting category' do
+    before :each do
+      create :category, name: 'Westside Playground', tags: ['westside', 'ali-gz']
+    end
+
+    it 'shows automaticaly assigned tags', js: true do
+      visit root_path
+
+      click_link 'Opýtať sa otázku'
+
+      fill_in 'question_title', with: "Ain't Westside tha best?"
+      fill_in 'question_text',  with: "Y'll eastsiders: Talk to the hand, 'cos the face ain't listening."
+
+      select2 'Westside Playground', from: 'question_category_id'
+
+      within '#question-category-tags' do
+        expect(page).to have_content('westside')
+        expect(page).to have_content('ali-gz')
+      end
+
+      click_button 'Opýtať'
+
+      expect(page).to have_content('Otázka bola úspešne pridaná.')
+    end
+
+    context 'after realoading page' do
+      it 'shows automaticly assigned tags', js: true do
+        visit root_path
+
+        click_link 'Opýtať sa otázku'
+
+        fill_in 'question_title', with: ""
+
+        select2 'Westside Playground', from: 'question_category_id'
+
+        click_button 'Opýtať'
+
+        within '#question-category-tags' do
+          expect(page).to have_content('westside')
+          expect(page).to have_content('ali-gz')
+        end
+      end
+    end
   end
 end

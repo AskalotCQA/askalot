@@ -1,2 +1,35 @@
-@import 'mixins';
-@import 'variables';
+// general
+
+.error-title {
+  margin-top: 180px;
+
+  color: $brand-danger;
+}
+
+.error-description {
+  font-size: $font-size-h3;
+}
+
+.doge {
+  position: relative;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+  }
+
+  div {
+    position: absolute;
+
+    font-style: 'Comic Sans MS, Comic Sans, Chalkboard, Helvetica, Arial, sans-serif';
+  }
+
+  & + footer {
+    margin: 0;
+  }
+}
+
+.unicorn {
+  margin-top: 100px;
+}
+

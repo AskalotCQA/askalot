@@ -2,29 +2,48 @@
 
 <div class="row">
   <div class="col-md-offset-3 col-md-6">
-    <section>
-      <h1 class="form-title"><%= t 'question.new.title' %></h1>
+    <h1 class="form-title"><%= t 'question.new.title' %></h1>
 
-      <%= form_for @question do |f| %>
-        <div class="form-group">
-          <%= f.label :category_id %>
-          <%= f.collection_select :category_id, Category.all, :id, :name, {}, { class: :'form-control', data: { as: :select2 }} %>
-        </div>
-        <div class="form-group">
-          <%= f.label :title %>
-          <%= f.text_field :title, autofocus: true, class: :'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= f.label :text %>
+    <%= form_for @question do |f| %>
+      <%= form_messages_for @question %>
+
+      <div class="form-group">
+        <%= f.label :category_id %>
+        <%= f.category_collection_select :category_id %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, autofocus: true, class: :'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= markdown_editor_for @question do %>
           <%= f.text_area :text, class: :'form-control', rows: 5 %>
-        </div>
-        <div class="form-group">
-          <%= f.label :tag_list %>
-          <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
-        </div>
+        <% end %>
+      </div>
 
-        <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
-      <% end %>
-    </section>
+      <div class="form-group">
+        <%= f.label :tag_list %>
+        <ul id="question-category-tags" class="category-tags nav nav-labels">
+          <% if @category %>
+            <% @category.tags.each do |category| %>
+              <li>
+                <span class="label label-info"><%= category %></span>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+        <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
+      </div>
+
+      <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
+
+      <div class="btn-group" data-toggle="buttons">
+        <label class="btn btn-primitive btn-sm">
+          <%= f.check_box :anonymous %> <%= Question.human_attribute_name :anonymous %> <%= icon_tag :blank %>
+        </label>
+      </div>
+    <% end %>
   </div>
 </div>

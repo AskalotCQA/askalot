@@ -1,16 +1,24 @@
-@import 'mixins';
-@import 'variables';
-
 // general
 
-#new-answer {
+.new-answer {
   margin-top: 20px;
 }
 
 // member
 
+.answer-content {
+  margin: 10px 0;
+}
+
+.answer-details {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  color: $text-muted;
+}
+
 .answer-voting {
-  @include block-voting;
+  @include block-iconing;
 }
 
 .answer-labeling {
@@ -36,6 +44,14 @@
   }
 }
 
+.answer-evaluating {
+  @include block-evaluating(answer);
+}
+
 .answer-comments {
-  @include block-listing;
+  @include block-comments;
+}
+
+.answer-evaluations {
+  @include block-evaluations;
 }

@@ -1,6 +1,6 @@
-@import "twitter/bootstrap/mixins";
+// general
 
-@mixin action-coloring($default-color, $action-color) {
+@mixin color-variant($default-color, $action-color) {
   color: $default-color;
 
   &:active, &:focus, &:hover {
@@ -8,13 +8,71 @@
   }
 }
 
+@mixin block-iconing {
+  font-size: $font-size-h2;
+  text-align: center;
+
+  a {
+    display: inline-block;
+    cursor: pointer;
+  }
+}
+
+@mixin block-listing {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+
+  list-style-type: none;
+
+  & > li {
+    padding: $padding-large-vertical 0;
+  }
+
+  & > li + li {
+    border-top: 1px solid $gray-lighter;
+  }
+}
+
+@mixin nested-block-listing {
+  display: block;
+  position: relative;
+  margin: 10px 0 !important;
+  padding-left: 0;
+  border-top: 1px dashed $gray-lighter;
+  border-bottom: 1px dashed $gray-lighter;
+
+  list-style-type: none;
+
+  & > li {
+    padding: $padding-base-vertical 0;
+  }
+
+  & > li + li {
+    border-top: 1px dashed $gray-lighter;
+  }
+
+  color: $text-muted;
+}
+
+// specific
+
+@mixin block-comments {
+  @include nested-block-listing;
+
+  p {
+    display: inline;
+  }
+}
+
 @mixin block-labeling($action-class, $default-color, $action-color) {
   a {
-    @include action-coloring($default-color, $action-color);
+    @include color-variant($default-color, $action-color);
   }
 
   a.#{$action-class} {
-    @include action-coloring($action-color, $default-color);
+    @include color-variant($action-color, $default-color);
   }
 
   span {
@@ -22,37 +80,18 @@
   }
 }
 
-@mixin block-listing {
-  margin: 5px 0;
-  padding-left: 0;
-  border-top: 1px dashed $gray-lighter;
-  border-bottom: 1px dashed $gray-lighter;
-
-  list-style-type: none;
-
-  li {
-    padding: $padding-base-vertical 0;
-  }
-
-  li + li {
-    border-top: 1px dashed $gray-lighter;
-  }
-
-  color: $text-muted;
-}
-
-@mixin block-voting {
-  text-align: center;
+@mixin block-evaluating($class) {
+  @include block-iconing;
 
   a {
-    display: inline-block;
-
-    font-size: $font-size-h2;
+    @include color-variant($gray-light, $brand-warning);
   }
 
-  span {
-    display: block;
-
-    font-size: $font-size-h2;
+  a.#{$class}-evaluated {
+    @include color-variant($brand-warning, $gray-light);
   }
+}
+
+@mixin block-evaluations {
+  @include nested-block-listing;
 }

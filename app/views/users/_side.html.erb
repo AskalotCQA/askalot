@@ -1,0 +1,26 @@
+<div class="user-profile-avatar">
+  <%= user_avatar_tag user, image: { class: 'img-responsive', size: 263 }, url: gravatar_url(user.gravatar_email, size: 400) %>
+</div>
+
+<h1 class="user-profile-title">
+  <%= user.nick %>
+  <% if can? :show_name, user %>
+    <small><%= user.name %></small>
+  <% end %>
+</h1>
+
+<ul class="user-profile-links">
+  <% if can? :show_email, user %>
+    <li>
+      <%= icon_tag :'envelope-o', fixed: true %>
+      <%= mail_to user.email, nil, encode: :hex %>
+    </li>
+  <% end %>
+
+  <% user.urls.each do |network, url| %>
+    <li>
+      <%= icon_tag network.icon, fixed: true %>
+      <a href="<%= url[:original] %>"><%= url[:shown] %></a>
+    </li>
+  <% end %>
+</ul>

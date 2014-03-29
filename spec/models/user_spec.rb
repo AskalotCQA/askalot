@@ -76,6 +76,25 @@ describe User do
     expect(user).to be_valid
   end
 
+  context 'when login is set' do
+    it 'requires nick' do
+      user = build :user, login: 'peter'
+
+      expect(user).to      be_valid
+      expect(user.nick).to eql('peter')
+    end
+  end
+
+  context 'when login is not set' do
+    it 'does not require nick' do
+      user = build :user, login: nil
+
+      expect(user).not_to        be_valid
+      expect(user.errors).to     include(:login)
+      expect(user.errors).not_to include(:nick)
+    end
+  end
+
   context 'with AIS credentials' do
     it 'does not require password' do
       user = build :user, :as_ais
@@ -88,6 +107,63 @@ describe User do
   describe 'Abilities' do
     let(:ability) { Ability.new(user) }
 
+    context 'when name is present' do
+      it 'allows showing user name' do
+        other = create :user, show_name: true
+
+        expect(ability).to be_able_to(:show_name, other)
+      end
+    end
+
+    context 'when user allowed showing her name' do
+      it 'allows showing user name' do
+        other = create :user, show_name: true
+
+        expect(ability).to be_able_to(:show_name, other)
+      end
+    end
+
+    context 'when user disallowed showing her name' do
+      it 'disallows showing user name' do
+        other = create :user, show_name: false
+
+        expect(ability).not_to be_able_to(:show_name, other)
+      end
+    end
+
+    context 'when user does not have name' do
+      it 'disallows showing user name' do
+        other = create :user, :without_name, show_name: true
+
+        expect(ability).not_to be_able_to(:show_name, other)
+      end
+    end
+
+    context 'when use allowed showing email' do
+      it 'allows showing of email' do
+        other = create :user, show_email: true
+
+        expect(ability).to be_able_to(:show_email, other)
+      end
+    end
+
+    context 'when use disallowed showing email' do
+      it 'disallows showing of email' do
+        other = create :user, show_email: false
+
+        expect(ability).not_to be_able_to(:show_email, other)
+      end
+    end
+
+    context 'with current user' do
+      it 'allows editing profile' do
+        other = create :user
+
+        expect(ability).to be_able_to(:edit, user)
+        expect(ability).not_to be_able_to(:edit, other)
+      end
+    end
+
     context 'with AIS credentials' do
       let(:user) { build :user, :as_ais }
 
@@ -97,6 +173,10 @@ describe User do
 
       it 'disallows changing of last name' do
         expect(ability).not_to be_able_to(:change_name, user)
+      end
+
+      it 'disallows changing of password' do
+        expect(ability).not_to be_able_to(:change_password, user)
       end
     end
   end

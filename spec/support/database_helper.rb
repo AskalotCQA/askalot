@@ -20,18 +20,20 @@ end
 
 RSpec.configure do |config|
   config.before(:each) do
-    path = example.metadata[:file_path]
+    DatabaseCleaner.strategy = :transaction
+  end
 
-    if DatabaseHelper.clean_path?(path)
-      DatabaseCleaner.strategy = :truncation
+  config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
+  end
 
-      DatabaseCleaner.start
-    end
+  config.before(:each) do
+    load Rails.root.join('db/seeds.rb')
+
+    DatabaseCleaner.start
   end
 
   config.after(:each) do
-    path = example.metadata[:file_path]
-
-    DatabaseCleaner.clean if DatabaseHelper.clean_path?(path)
+    DatabaseCleaner.clean
   end
 end

@@ -1,5 +1,8 @@
-@import 'mixins';
-@import 'variables';
+// general
+
+.statistics-filter {
+  margin-top: $navbar-height;
+}
 
 .table-bordered > thead > tr > th {
   border-bottom-width: 0;
@@ -13,6 +16,7 @@
 .table-statistical {
   th, td {
     vertical-align: middle !important;
+    white-space: nowrap;
   }
 }
 

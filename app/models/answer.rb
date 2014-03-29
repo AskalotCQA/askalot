@@ -1,19 +1,33 @@
 class Answer < ActiveRecord::Base
+  include Authorable
   include Commentable
+  include Deletable
+  include Editable
+  include Evaluable
+  include Notifiable
+  include Touchable
   include Votable
-  include Watchable
 
-  belongs_to :author, class_name: :User
-  belongs_to :question
+  after_create :slido_label_with_best!
 
-  has_many :labelings
+  belongs_to :question, -> { deleted_or_not }, counter_cache: true
+
+  has_many :labelings, dependent: :destroy
   has_many :labels, through: :labelings
+
+  has_many :revisions, class_name: :AnswerRevision, dependent: :destroy
 
   validates :text, presence: true
 
-  scope :by,   lambda { |user| where(author: user) }
-  scope :for,  lambda { |question| where(question: question) }
-  scope :with, lambda { |label| joins(:labelings).merge(Labeling.with label) }
+  scope :by,  lambda { |user| where(author: user) }
+  scope :for, lambda { |question| where(question: question) }
+
+  scope :labeled,   lambda { joins(:labelings) }
+  scope :unlabeled, lambda { includes(:labelings).where(labelings: { answer_id: nil }) }
+
+  scope :labeled_with, lambda { |label| joins(:labelings).merge(Labeling.with label) }
+
+  Hash[Label.value_enum].values.each { |label| scope label, -> { labeled_with label } }
 
   def labeled_with(label)
     labelings.with label
@@ -39,7 +53,17 @@ class Answer < ActiveRecord::Base
     labels.exists? value: :helpful
   end
 
-  def verified?
-    labels.exists? value: :verified
+  def to_question
+    self.question
+  end
+
+  private
+
+  def slido_label_with_best!
+    return unless author.role == :teacher
+    return unless question.author.login.to_sym == :slido
+    return unless question.answers.count == 1
+
+    toggle_labeling_by! author, :best
   end
 end

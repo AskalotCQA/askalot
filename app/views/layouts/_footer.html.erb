@@ -4,13 +4,15 @@
   <div class="container">
     <ul class="list-inline text-muted">
       <li><%= external_link_to t('footer.about'), url_to_site('#about') %></li>
-      <li><%= external_link_to t('footer.documentation'), url_to_site('#documents') %></li>
+      <li><%= external_link_to t('footer.documents'), url_to_site('#documents') %></li>
+      <li><%= external_link_to t('footer.repositories'), url_to_site('#repositories') %>
       <li><%= external_link_to t('footer.authors'), url_to_site('#authors') %></li>
       <li><%= external_link_to t('footer.contact'), url_to_site('#contact') %></li>
     </ul>
 
     <p class="text-muted">
-      Copyright 2013 <span class="text-capital">na&#x042f;uby</span>
+      Copyright <%= Time.now.year %> <span class="text-capital">na&#x042f;uby</span>
+      &middot; <%= Askalot::VERSION::STRING %>
     </p>
   </div>
 </footer>

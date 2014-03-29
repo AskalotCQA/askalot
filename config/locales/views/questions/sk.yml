@@ -2,29 +2,62 @@ sk:
   question:
     navigation: 'Otázky'
 
+    index:
+      title: 'Otázky'
+      new: 'Nová otázka'
+      no_results_found: 'Neboli nájdené žiadne otázky.'
+
     new:
       title: 'Nová otázka'
       submit: 'Opýtať'
+      submit_anonymously: 'Opýtať sa anonymne'
       feature: 'Pridať otázku'
 
     create:
-      success: 'Vaša otázka bola úspešne pridaná.'
+      success: 'Otázka bola úspešne pridaná.'
+
+    edit:
+      action: 'Upraviť'
+      title: 'Úprava otázky'
+      submit: 'Uložiť'
+      cancel: 'Spať'
+
+    update:
+      success: 'Otázka bola úspešne aktualizovaná.'
+      unchanged: 'Otázka nebola zmenená.'
+
+    delete:
+      action: 'Zmazať'
+      title: 'Pozor!'
+      text: 'Naozaj chete zmazať otázku?'
+      submit: 'Zmazať'
+      cancel: 'Spať'
+      success: 'Otázka bola úspešne zmazaná.'
+      failure: 'Otázku sa nepodarilo zmazať.'
 
     tab:
-      new: 'Nové'
-      favored: 'Obľúbené'
+      recent: 'Aktuálne'
+      unanswered: 'Bez odpovede'
       answered: 'Odpovedané'
+      solved: 'Vyriešené'
+      favored: 'Obľúbené'
 
     tag:
       new: 'nový'
       searching: 'Hľadám…'
       no_matches_found: 'Nenájdený žiadny výsledok'
-      placeholder: 'elasticsearch, linux-server, use-case'
+      placeholder: 'napr. elasticsearch, linux-server, use-case'
 
-    index:
-      title: 'Nové otázky'
-      new: 'Nová otázka'
-      no_results_found: 'Neboli nájdené žiadne otázky.'
+    poll:
+      start: 'Aktualizovať automaticky'
+      end: 'Aktualizované %{time}'
+
+    details:
+      created: 'Pridal'
+      updated: 'Upravil'
+      deleted: 'Zmazal'
+
+    link_to_deleted_title: 'Otázka bola zmazaná'
 
     favor: 'Pridať medzi obľúbené'
     unfavor: 'Odobrať z obľúbených'

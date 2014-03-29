@@ -1,5 +1,3 @@
-@import "twitter/bootstrap/variables";
-
 // disable default icons
 
 $icon-font-path: '/assets/';
@@ -8,7 +6,30 @@ $icon-font-name: 'fontawesome-webfont';
 // jumbotron
 
 $jumbotron-padding: 100px;
-$jumbotron-bg: #081218;
+$jumbotron-bg: lighten(#081218, 2.5%);
 $jumbotron-color: #fff;
 $jumbotron-heading-color: #fff;
 $jumbotron-font-size: ceil($font-size-base * 1.25);
+
+// border radius
+
+$border-radius-base:  0;
+$border-radius-large: 0;
+$border-radius-small: 0;
+
+$alert-border-radius:      $border-radius-base;
+$badge-border-radius:      $border-radius-base;
+$input-border-radius:      $border-radius-base;
+$list-group-border-radius: $border-radius-base;
+$nav-pills-border-radius:  $border-radius-base;
+$navbar-border-radius:     $border-radius-base;
+$pager-border-radius:      $border-radius-base;
+$panel-border-radius:      $border-radius-base;
+$thumbnail-border-radius:  $border-radius-base;
+
+// state text
+
+$state-success-text: $brand-success;
+$state-info-text:    $brand-info;
+$state-warning-text: $brand-warning;
+$state-danger-text:  $brand-danger;

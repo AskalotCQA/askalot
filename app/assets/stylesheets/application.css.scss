@@ -1,27 +1,46 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
- *
- * List of initial requirements (order is significant).
- *
- *= require_self
- *= require select2
- *
- *= require layout
- *= require assets
- *= require errors
- *
- *= require users
- *= require questions
- *= require answers
- *= require comments
- *= require statistics
- *
- *= require fixes
- */
+// List of initial requirements (order is significant).
+//
+//=require gemoji
+//=require markdown
+//=require select2
+//=require jquery-textcomplete
+//
+//=require_self
+//
+// List of imports (order is significant).
+
+@import 'bootstrap/mixins';
+@import 'bootstrap/variables';
+
+@import 'mixins';
+@import 'variables';
+
+@import 'bootstrap';
+@import 'font-awesome';
+
+@import 'bootstrap/datepicker';
+@import 'bootstrap/markdown';
+@import 'bootstrap/multiselect';
+@import 'bootstrap/tablesorter';
+@import 'bootstrap/textcomplete';
+
+@import 'assets';
+@import 'errors';
+
+@import 'layout';
+@import 'home';
+
+@import 'users';
+@import 'categories';
+@import 'tags';
+@import 'questions';
+@import 'answers';
+@import 'comments';
+@import 'evaluations';
+
+@import 'changelogs';
+@import 'notifications';
+@import 'statistics';
+@import 'watchings';
+
+@import 'fixes';

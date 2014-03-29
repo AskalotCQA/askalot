@@ -1,7 +1,7 @@
 <div id="answer-<%= answer.id %>-labeling" class="answer-labeling">
   <div class="answer-labeling-best">
-    <% if can? :edit, answer.question %>
-      <% if answer.labeled_by? current_user, :best %>
+    <% if can? :label, answer.question %>
+      <% if answer.best? %>
         <%= icon_link_to :'check-circle', nil, label_answer_path(answer, value: :best), data: { remote: true }, class: :'answer-labeled-best' %>
       <% else %>
         <%= icon_link_to :'check-circle', nil, label_answer_path(answer, value: :best), tooltip_attributes(t('answer.label.best'), placement: :right).deep_merge(data: { remote: true }) %>
@@ -11,9 +11,10 @@
     <% end %>
   </div>
 
-  <% unless answer.labelings.with(:best).exists? %>
+<!--
+ <% unless answer.labelings.with(:best).exists? %>
     <div class="answer-labeling-helpful">
-      <% if can? :edit, answer.question %>
+      <% if can? :label, answer.question %>
         <% if answer.labeled_by? current_user, :helpful %>
           <%= icon_link_to :'lightbulb-o', nil, label_answer_path(answer, value: :helpful), data: { remote: true }, class: :'answer-labeled-helpful' %>
         <% else %>
@@ -24,16 +25,5 @@
       <% end %>
     </div>
   <% end %>
-
-  <div class="answer-labeling-verified">
-    <% if can? :verify, answer %>
-      <% if answer.labeled_by? current_user, :verified %>
-        <%= icon_link_to :'thumbs-o-up', nil, label_answer_path(answer, value: :verified), data: { remote: true }, class: :'answer-labeled-verified' %>
-      <% else %>
-        <%= icon_link_to :'thumbs-o-up', nil, label_answer_path(answer, value: :verified), tooltip_attributes(t('answer.label.verify'), placement: :right).deep_merge(data: { remote: true }) %>
-      <% end %>
-    <% elsif answer.verified? %>
-      <span><%= tooltip_icon_tag :'thumbs-o-up', t('answer.verified'), placement: :right %></span>
-    <% end %>
-  </div>
+-->
 </div>

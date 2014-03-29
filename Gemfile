@@ -1,30 +1,21 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.3'
 
 # database
 gem 'pg'
 
 # configuration
-gem 'squire', '~> 1.2.6'
+gem 'squire', '~> 1.3.6'
 
 # authentification
 gem 'devise', '~> 3.1.1'
 gem 'cancan', '~> 1.6.9'
 gem 'net-ldap'
 
-# plugins
-gem 'acts-as-taggable-on'
-
-# helpers
-gem 'jbuilder', '~> 1.2'
-gem 'actionview-encoded_mail_to'
-gem 'forgery'
-gem 'symbolize'
-
 # stylesheets
 gem 'sass-rails', '~> 4.0.0'
-gem 'bootstrap-sass-rails', '~> 3.0.2.1'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'font-awesome-rails', '~> 4.0.3.0'
 
 # javascripts
@@ -32,20 +23,48 @@ gem 'therubyracer', platforms: :ruby
 gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'rails-timeago', '~> 2.0'
+gem 'bootstrap-datepicker-rails', '~> 1.3.0'
 gem 'select2-rails', '~> 3.4.9'
+gem 'jquery-tablesorter', '~> 1.9.5'
+gem 'rails-timeago', '~> 2.0'
+gem 'jquery-textcomplete-rails', '~> 0.1.2'
+gem 'handlebars_assets'
+gem 'jquery-ui-rails'
+
+# markdown
+gem 'redcarpet'
+gem 'pygments.rb'
+gem 'gemoji', '~> 1.5.0'
 
 # internationalization
 gem 'rails-i18n', '~> 4.0.0'
 gem 'i18n-js'
 
 # pagination
-gem 'kaminari',           '~> 0.14.1'
+gem 'kaminari', '~> 0.14.1'
 gem 'kaminari-bootstrap', '~> 0.1.3'
 
+# scheduling
+gem 'whenever'
+
+# utilities
+gem 'actionview-encoded_mail_to'
+gem 'active_model_serializers'
+gem 'activerecord-custom_timestamps'
+gem 'forgery'
+gem 'jbuilder', '~> 1.2'
+gem 'murmurhash3'
+gem 'nokogiri', '~> 1.6.1'
+gem 'scout', github: 'smolnar/scout', branch: :master
+gem 'statistics2'
+gem 'symbolize'
+
+# monitoring
+gem 'garelic'
+gem 'newrelic_rpm'
+
 # import
-gem 'nokogiri'
-gem 'activerecord-import', "~> 0.4.1"
+gem 'activerecord-import', '~> 0.4.1'
 
 # documentation
 group :doc do
@@ -72,22 +91,19 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.2.0'
   gem 'factory_girl_rails'
   gem 'launchy'
-  gem 'capybara', '~> 2.1.0'
+  gem 'capybara', '~> 2.2.1'
   gem 'selenium-webdriver'
+  gem 'capybara-webkit'
+  gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
+  gem 'timecop'
 
   # database
   gem 'faker', '1.1.2'
 end
 
-# Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Use Capistrano for deployment
-# gem 'capistrano', group: :development
-
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+group :production do
+  gem 'unicorn'
+  gem 'rack-timeout'
+  gem 'exception_notification'
+end

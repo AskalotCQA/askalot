@@ -13,35 +13,35 @@ class User < ActiveRecord::Base
 
          authentication_keys: [:login]
 
-  has_many :questions, foreign_key: :author_id
-  has_many :answers,   foreign_key: :author_id
-  has_many :comments,  foreign_key: :author_id
+  has_many :questions, foreign_key: :author_id, dependent: :destroy
+  has_many :answers,   foreign_key: :author_id, dependent: :destroy
+  has_many :comments,  foreign_key: :author_id, dependent: :destroy
 
-  has_many :labelings
-  has_many :labels, through: :labelings, foreign_key: :author_id
+  has_many :labelings, foreign_key: :author_id, dependent: :destroy
+  has_many :labels, through: :labelings
 
-  has_many :followings
+  has_many :followings, dependent: :destroy
   has_many :followers, through: :followings, class_name: :User, foreign_key: :follower_id
   has_many :followees, through: :followings, class_name: :User, foreign_key: :followee_id
 
-  has_many :favorites, foreign_key: :favorer_id
-  has_many :views,     foreign_key: :viewer_id
-  has_many :votes,     foreign_key: :voter_id
-  has_many :watchings, foreign_key: :watcher_id
-
-  # TODO (jharinek) gravatar_email - do not allow blank, but needs to be fixed
-  # TODO (smolnar) check uniqueness value select in db
+  has_many :favorites,     foreign_key: :favorer_id,   dependent: :destroy
+  has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
+  has_many :views,         foreign_key: :viewer_id,    dependent: :destroy
+  has_many :votes,         foreign_key: :voter_id,     dependent: :destroy
+  has_many :watchings,     foreign_key: :watcher_id,   dependent: :destroy
 
   validates :role, presence: true
 
+  # TODO (smolnar) consult usage of functional indices for nick, login and email uniqueness checking
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
-  validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
+  validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 20 }, if: :login?
 
-  validates :email,          format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, allow_blank: true
 
   validates :first, format: { with: /\A\p{Lu}\p{Ll}*\z/u }, allow_blank: true
   validates :last,  format: { with: /\A\p{Lu}\p{Ll}*\z/u }, allow_blank: true
+
+  scope :recent, lambda { where('created_at >= ?', Time.now - 1.month ) }
 
   Social.networks.each do |key, network|
     validates key, format: { with: network.regexp }, allow_blank: true
@@ -49,8 +49,10 @@ class User < ActiveRecord::Base
 
   symbolize :role, in: ROLES
 
+  before_validation :resolve_nick, on: :create
+
   def login=(value)
-    write_attribute(:login, value.downcase)
+    write_attribute :login, value.to_s.downcase
 
     self.nick ||= login
   end
@@ -99,6 +101,12 @@ class User < ActiveRecord::Base
   protected
 
   def password_required?
-    ais_login.nil? ? super : false
+    ais_login ? false : super
+  end
+
+  def resolve_nick
+    nick, k = self.nick, 1
+
+    self.nick = "#{nick}#{k += 1}" while User.where(nick: self.nick).where.not(id: self.id).exists?
   end
 end

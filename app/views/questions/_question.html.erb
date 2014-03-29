@@ -4,8 +4,8 @@
       <div class="row">
         <div class="col-md-4">
           <%= content_tag :span, class: [:'question-metric', question_votes_coloring(question)] do %>
-            <span class="question-value"><%= question.total_votes %></span>
-            <%= t('count.vote', count: question.total_votes) %>
+            <span class="question-value"><%= question.votes_difference %></span>
+            <%= t('count.vote', count: question.votes_difference) %>
           <% end %>
         </div>
         <div class="col-md-4">
@@ -16,8 +16,8 @@
         </div>
         <div class="col-md-4">
           <%= content_tag :span, class: [:'question-metric', question_views_coloring(question)] do %>
-            <span class="question-value"><%= question.total_views %></span>
-            <%= t('count.view', count: question.total_views) %>
+            <span class="question-value"><%= question.views_total %></span>
+            <%= t('count.view', count: question.views_total) %>
           <% end %>
         </div>
       </div>
@@ -26,7 +26,8 @@
     <div class="col-md-7">
       <div class="question-preview">
         <h4>
-          <%= link_to question_title_preview(question), question_path(question) %>
+          <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
+          <%= link_to_question question %>
         </h4>
 
         <%= render 'questions/labels', labels: question.labels %>
@@ -39,11 +40,9 @@
 
     <div class="col-md-2">
       <div class="question-author">
-        <small><%= link_to_user question.author %></small>
-        <a class="user-avatar" href="<%= user_path question.author.nick %>">
-          <%= gravatar_image_tag question.author.gravatar_email, size: 64, class: :'img-circle' %>
-        </a>
-        <small class="text-muted"><%= question_creation_time question, placement: :bottom %></small>
+        <small><%= link_to_user question.author_or_anonymous %></small>
+        <%= user_avatar_tag question.author_or_anonymous, image: { class: :'img-circle img-responsive', size: 64 } %>
+        <small class="text-muted"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
       </div>
     </div>
   </div>

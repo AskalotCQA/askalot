@@ -17,7 +17,7 @@ module StackOverflow
         puts '[Posts] End processing'
       end
 
-      def start_element name, attributes = []
+      def start_element(name, attributes = [])
         if name == 'row'
           post = Hash.new
           attributes.each do |attribute|
@@ -49,7 +49,6 @@ module StackOverflow
               @questions = []
             end
           end
-
 
           # Answer
           if @type == :answers && post['PostTypeId'] == '2'

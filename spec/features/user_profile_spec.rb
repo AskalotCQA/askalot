@@ -6,25 +6,15 @@ describe 'User Profile' do
   context 'with registered user' do
     before :each do
       login_as user
-    end
 
-    it 'shows user profile' do
-      visit root_path
-
-      click_link user.nick
-
-      expect(page).to have_content(user.nick)
-      expect(page).to have_content(user.email)
-      expect(page).to have_content("#{user.first} #{user.last}")
-      expect(page).to have_content(user.about)
+      visit edit_user_registration_path
     end
 
     it 'edits user account', js: true do
-      visit edit_user_registration_path
-
       click_link 'Účet'
 
       fill_in 'user_email', with: 'nicky.nickmangmail.com'
+      fill_in 'user_current_password', with: user.password
 
       click_button 'Uložiť'
 
@@ -37,8 +27,6 @@ describe 'User Profile' do
       expect(page).to have_content('Aktuálne heslo – je povinná položka')
 
       fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
-      fill_in 'user_password', with: 'new password'
-      fill_in 'user_password_confirmation', with: 'new password'
       fill_in 'user_current_password', with: user.password
 
       click_button 'Uložiť'
@@ -48,8 +36,6 @@ describe 'User Profile' do
     end
 
     it 'edits basic user profile', js: true do
-      visit edit_user_registration_path
-
       click_link 'Profil'
 
       fill_in 'user_nick', with: ''
@@ -79,7 +65,7 @@ describe 'User Profile' do
 
       click_button 'Uložiť'
 
-      expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
+      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
       expect(page).to have_field('user_nick',  with: 'Nicky')
@@ -89,8 +75,6 @@ describe 'User Profile' do
     end
 
     it 'edits user social links', js: true do
-      visit edit_user_registration_path
-
       click_link 'Sociálne siete'
 
       fill_in 'user_facebook',       with: 'http://facebook.com/'
@@ -125,7 +109,7 @@ describe 'User Profile' do
 
       click_button 'Uložiť'
 
-      expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
+      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
       expect(page).to have_field('user_facebook',       with: 'http://facebook.com/nicky.nickmann')
@@ -137,13 +121,40 @@ describe 'User Profile' do
       expect(page).to have_field('user_youtube',        with: 'http://youtube.com/nickynickmann')
       expect(page).to have_field('user_stack_overflow', with: 'http://stackoverflow.com/users/1234567890')
     end
+
+    it 'shows user profile' do
+      visit root_path
+
+      click_link user.nick
+
+      expect(page).to have_content(user.nick)
+      expect(page).to have_content(user.email)
+      expect(page).to have_content("#{user.first} #{user.last}")
+      expect(page).to have_content(user.about)
+    end
+
+    it 'edits user privacy', js: true do
+      click_link 'Súkromie'
+
+      # TODO (smolnar) create helper for label checkbox
+      find('label', text: 'Skryť meno ostatným používateľom').click
+      find('label', text: 'Skryť e-mail ostatným používateľom').click
+
+      click_button 'Uložiť'
+
+      click_link user.nick
+
+      expect(page).not_to have_content(user.name)
+      expect(page).not_to have_content(user.email)
+      expect(page).to     have_link('Upraviť profil')
+    end
   end
 
   context 'with AIS user' do
     let(:user) { build :user, :as_ais }
 
     before :each do
-      login_as user, with: :AIS
+      login_as user, with: :AIS, password: 'password'
     end
 
     it 'disallows editing of first and last name', js: true do
@@ -159,15 +170,45 @@ describe 'User Profile' do
 
       click_button 'Uložiť'
 
-      expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
+      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
       expect(page).to have_field('user_nick',  with: 'Nicky')
       expect(page).to have_field('user_about', with: 'Lorem ipsum')
     end
 
-    it 'edits user privacy', js: true do
-      pending
+    it 'disallows editing of password', js: true do
+      visit edit_user_registration_path
+
+      click_link 'Profil'
+
+      expect(page).not_to have_field('user_password')
+      expect(page).not_to have_field('user_password_confirmation')
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
+      expect(page.current_path).to eql(edit_user_registration_path)
+
+      expect(User.find_by(login: user.login).encrypted_password).to be_empty
+    end
+
+    it 'requires current password for changing account information', js: true do
+      visit edit_user_registration_path
+
+      click_link 'Účet'
+
+      fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('Aktuálne heslo – je povinná položka')
+
+      fill_in 'user_current_password', with: 'password'
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('Váš účet bol úspešne aktualizovaný ale potrebujeme overiť Vašu novú e-mailovú adresu.')
     end
   end
 end

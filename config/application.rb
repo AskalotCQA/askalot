@@ -1,4 +1,5 @@
 require File.expand_path('../boot', __FILE__)
+require File.expand_path('../version', __FILE__)
 
 # Pick the frameworks you want:
 require "active_record/railtie"
@@ -11,16 +12,21 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-module NaRuby
+module Askalot
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Set error field rendering function.
+    config.action_view.field_error_proc = lambda { |html, instance| html }
+
+    # Set exceptions application, allows custom error handling.
+    config.exceptions_app = self.routes
+
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
     config.time_zone = 'Bratislava'
-
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     config.i18n.default_locale = :sk
@@ -29,7 +35,7 @@ module NaRuby
 
     # Enforce available locales validation
     config.i18n.enforce_available_locales = true
-    # TODO (smolnar) rm in future version of i18n, ref: http://stackoverflow.com/questions/20361428/rails-i18n-validation-deprecation-warning
+
     I18n.config.enforce_available_locales = true
   end
 end

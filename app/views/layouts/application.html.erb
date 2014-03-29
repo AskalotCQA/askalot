@@ -1,30 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
     <meta charset="utf-8" />
-    <title><%= resolve_title yield :title %></title>
+    <title><%= resolve_title(yield :title) %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <%= stylesheet_link_tag 'application', media: :all %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body<%= resolve_sidebar(yield :sidebar) %>>
     <%= render 'layouts/header' %>
-    <div class="container">
-      <%= render 'shared/flash_messages' %>
-      <% if use_narrower_layout? %>
-        <div class="row">
-          <div class="col-md-offset-3 col-md-6">
-            <%= yield %>
-          </div>
-        </div>
-      <% else %>
+    <% if use_container? %>
+      <div class="container">
+        <%= flash_messages %>
         <%= yield %>
-      <% end %>
-    </div>
+      </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
     <%= render 'layouts/footer' %>
     <%= render 'shared/fixes' %>
     <%= render 'shared/locales' %>
     <%= javascript_include_tag 'application' %>
     <%= yield :scripts %>
+    <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? %>
   </body>
 </html>

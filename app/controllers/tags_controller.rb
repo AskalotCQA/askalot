@@ -1,9 +1,19 @@
 class TagsController < ApplicationController
+  include Tabbing
+
+  include Watchings::Watching
+
+  default_tab :all, only: :index
+
   before_action :authenticate_user!
 
+  def index
+    @tags = Tag.order(:name)
+  end
+
   # TODO (smolnar)
-  # * remove AR relation, use elasticsearch
-  # * use pagination
+  # * use elasticsearch
+  # * consider pagination
 
   def suggest
     tags = Tag.where('tags.name LIKE ?', "#{params[:q]}%").limit(10).order(:name)
@@ -12,7 +22,7 @@ class TagsController < ApplicationController
       results: tags.map { |tag|
         {
           id:    tag.name,
-          text: "#{tag.name} (#{tag.taggings.size})"
+          text: "#{tag.name} (#{tag.count})"
         }
       },
     }

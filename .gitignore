@@ -13,6 +13,7 @@ Gemfile.lock.tags
 
 config/configuration.yml
 config/database.yml
+config/newrelic.yml
 
 data/android_dump
 data/so_dump

@@ -12,7 +12,7 @@ module StackOverflow
         puts '[Comments] End processing'
       end
 
-      def start_element name, attributes = []
+      def start_element(name, attributes = [])
         if name == 'row'
           comment = Hash.new
           attributes.each do |attribute|

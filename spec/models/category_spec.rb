@@ -1,6 +1,9 @@
 require 'spec_helper'
+require 'models/concerns/watchable_spec'
 
 describe Category do
+  it_behaves_like Watchable
+
   it 'requires name' do
     category = build :category, name: ''
 
@@ -34,6 +37,28 @@ describe Category do
 
         expect(category.count).to eql(3)
       end
+    end
+
+    context 'with deleted questions' do
+      it 'ommits deleted questions for count' do
+        4.times { create :question, category: category }
+        2.times { create :question, :deleted, category: category }
+
+        expect(category.count).to eql(4)
+      end
+    end
+  end
+
+  describe '.with_slido' do
+    it 'finds only categories with slido username' do
+      create :category
+
+      question = create :category, :with_slido
+
+      questions = Category.with_slido
+
+      expect(questions.size).to eql(1)
+      expect(questions).to      include(question)
     end
   end
 end

@@ -5,4 +5,28 @@ sk:
       submit: 'Komentovať'
 
     create:
-      success: 'Váš komentár bol úspešne pridaný.'
+      success: 'Komentár bol úspešne pridaný.'
+
+    edit:
+      action: 'Upraviť'
+      title: 'Úprava komentára'
+      submit: 'Uložiť'
+      cancel: 'Spať'
+
+    update:
+      success: 'Komentár bol úspešne aktualizovaný.'
+      unchanged: 'Komentár nebol zmenený.'
+
+    delete:
+      action: 'Zmazať'
+      title: 'Pozor!'
+      text: 'Naozaj chete zmazať komentár?'
+      submit: 'Zmazať'
+      cancel: 'Spať'
+      success: 'Komentár bol úspešne zmazaný.'
+      failure: 'Komentár sa nepodarilo zmazať.'
+
+    details:
+      created: 'Pridal'
+      updated: 'Upravil'
+      deleted: 'Zmazal'

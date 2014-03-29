@@ -2,6 +2,19 @@ sk:
   user:
     navigation: 'Používatelia'
 
+    index:
+      title: 'Používatelia'
+      no_results_found: 'Nenájdený žiadny používatelia.'
+
+    tab:
+      all: 'Všetci'
+      recent: 'Noví'
+
+      profile: 'Profil'
+      questions: 'Otázky'
+      answers: 'Odpovede'
+      favorites: 'Obľúbené'
+
     registration: 'Registrácia'
     confirmation: 'Potvrdenie registrácie'
     session_start: 'Prihlásenie'
@@ -37,12 +50,22 @@ sk:
     forgotten_password: 'Zabudli ste heslo?'
     locked_account: 'Zamknutý účet?'
 
+    ais_login_notice: 'použite prihlasovacie údaje z Akademického informačného systému'
+
     settings: 'Nastavenia'
+
+    welcome:
+      title: 'Ďakujeme za registráciu'
+      message: 'Pre ďalšie pokračovanie v práci so systémom je potrebné ešte registráciu potvrdiť. E-mail s potvrdzovacím odkazom Vám bol zaslaný na adresu uvedenú pri registrácii.'
 
     profile: 'Profil'
     social: 'Sociálne siete'
     privacy: 'Súkromie'
     account: 'Účet'
+
+    show:
+      about: 'O mne'
+      edit: 'Upraviť profil'
 
     edit:
       profile: 'Úprava profilu'
@@ -50,6 +73,7 @@ sk:
       privacy: 'Správa súkromia'
       account: 'Nastavenia účtu'
 
-    show:
-      about: 'O mne'
-      edit: 'Upraviť profil'
+    update:
+      success: 'Úspešne ste aktualizovali Váš profil.'
+
+    anonymous: 'Anonym'

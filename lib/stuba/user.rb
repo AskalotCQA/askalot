@@ -17,23 +17,23 @@ module Stuba
     end
 
     def name
-      @name ||= @data[:cn].first
+      normalized_name[:value]
     end
 
     def first
-      @first ||= @data[:givenname].first
+      normalized_name[:first]
     end
 
     def middle
-      # TODO (smolnar) find example of AIS middle name
+      normalized_name[:middle]
     end
 
     def last
-      @last ||= @data[:sn].first
+      normalized_name[:last]
     end
 
     def role
-      @role ||= @data[:employeetype].first.to_sym
+      @role ||= ((value = @data[:employeetype].first.to_sym) == :staff ? :teacher : value)
     end
 
     def to_params
@@ -41,13 +41,19 @@ module Stuba
         ais_uid: uid,
         ais_login: login,
         login: login,
-        email: email,
         name: name,
+        email: email,
         first: first,
         middle: middle,
         last: last,
         role: role
       }
+    end
+
+    private
+
+    def normalized_name
+      @normalized_name ||= Core::Normalizer::Name.normalize(@data[:cn].first)
     end
   end
 end

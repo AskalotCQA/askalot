@@ -1,20 +1,32 @@
 class QuestionsController < ApplicationController
+  include Deleting
+  include Editing
+  include Markdown
   include Voting
+  include Tabbing
+
+  include Events::Dispatching
+  include Watchings::Registration
+
+  include Watchings::Watching
+
+  default_tab :recent, only: :index
 
   before_action :authenticate_user!
-  before_action :set_default_tab, only: :index
 
   def index
     @questions = case params[:tab].to_sym
-                 when :'questions-new'      then Question.order(created_at: :desc)
-                 when :'questions-answered' then Question.answered.order(updated_at: :desc)
-                 when :'questions-favored'  then Question.favored.order(favorites: { created_at: :desc })
-                 else fail
+                 when :unanswered then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
+                 when :answered   then Question.answered.by_votes.order(created_at: :desc)
+                 when :solved     then Question.solved.by_votes.order(created_at: :desc)
+                 when :favored    then Question.favored.by_votes.order(created_at: :desc)
+                 else Question.recent
                  end
 
-    @questions = @questions.page(params[:page]).per(10)
-
     @questions = filter_questions(@questions)
+    @questions = @questions.page(params[:page]).per(20)
+
+    initialize_polling
   end
 
   def new
@@ -24,12 +36,22 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
 
+    authorize! :ask, @question
+
     if @question.save
+      process_markdown_for @question do |user|
+        dispatch_event :mention, @question, for: user
+      end
+
+      #TODO(zbell) do not notify about anonymous questions since user.nick is still exposed in notifications
+      dispatch_event :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten unless @question.anonymous
+      register_watching_for @question
+
       flash[:notice] = t('question.create.success')
 
       redirect_to question_path(@question)
     else
-      flash_error_messages_for @question
+      @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
 
       render :new
     end
@@ -37,24 +59,51 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @author   = @question.author
     @labels   = @question.labels
-    @answers  = @question.answers.order('created_at desc')
+    @answers  = @question.ordered_answers
 
     @answer = Answer.new(question: @question)
 
-    @question.views.create! viewer: current_user
+    authorize! :view, @question
+
+    @view = @question.views.create! viewer: current_user
+
+    @question.increment :views_count
+
+    dispatch_event :create, @view, for: @question.watchers
   end
 
   def favor
     @question = Question.find(params[:id])
 
-    @question.toggle_favoring_by! current_user
+    authorize! :favor, @question
+
+    @favorite = @question.toggle_favoring_by! current_user
+
+    @question.favorites.reload
+
+    dispatch_event dispatch_event_action_for(@favorite), @favorite, for: @question.watchers
+  end
+
+  def suggest
+    @questions = Question.where('id = ? or title like ?', params[:q].to_i, "#{params[:q]}%")
+
+    render json: @questions, root: false
   end
 
   private
 
   helper_method :filter_questions
+
+  def initialize_polling
+    unless params[:poll]
+      session[:poll] = Rails.env.development? ? false : true if session[:poll].nil?
+
+      return @poll = params[:poll] = session[:poll]
+    end
+
+    @poll = session[:poll] = params[:poll] == 'true' ? true : false
+  end
 
   def filter_questions(relation)
     return relation unless params[:tags].present?
@@ -62,12 +111,11 @@ class QuestionsController < ApplicationController
     relation.tagged_with(params[:tags])
   end
 
-  # TODO (smolnar) use concern
-  def set_default_tab
-    params[:tab] ||= :'questions-new'
+  def question_params
+    params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user)
   end
 
-  def question_params
-    params.require(:question).permit(:title, :text, :category_id, :tag_list).merge(author: current_user)
+  def update_params
+    params.require(:question).permit(:title, :text, :category_id, :tag_list)
   end
 end

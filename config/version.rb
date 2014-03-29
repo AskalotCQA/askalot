@@ -1,11 +1,11 @@
-module NaRuby
+module Askalot
   module VERSION
     MAJOR = 1
-    MINOR = 0
-    TINY  = 0
+    MINOR = 2
+    PATCH = 0
 
-    PRE = 'alpha'
+    PRE = 'beta'
 
-    STRING = [MAJOR, MINOR, TINY, PRE].compact.join '.'
+    STRING = [MAJOR, MINOR, PATCH, PRE].compact.join '.'
   end
 end

@@ -1,0 +1,3 @@
+#! /bin/bash
+
+DRIVER=webkit bundle exec rspec $@

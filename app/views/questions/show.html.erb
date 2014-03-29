@@ -1,42 +1,55 @@
 <% provide :title, @question.title %>
 
-<div class="row">
-  <div class="col-md-2">
-    <section>
-      <%= render 'users/square', user: @author %>
-    </section>
-  </div>
+<div id="question">
+  <div class="row">
+    <div class="col-md-2">
+      <%= render 'users/square', user: @question.author_or_anonymous %>
+    </div>
 
-  <div class="col-md-8">
-    <section id="question-title">
-      <h1>
-        <%= @question.title %>
-        <br/>
-        <small><%= question_creation_time @question %></small>
-      </h1>
+    <div class="col-md-8">
+      <div id="question-title">
+        <h1>
+          <%= @question.title %>
+          <%= evaluation_badge_tag @question if @question.evaluations.any? %>
+        </h1>
+        <%= render 'questions/labels', labels: @labels %>
+      </div>
 
-      <%= render 'questions/labels', labels: @labels %>
-    </section>
+      <div id="question-data">
+        <div class="question-content">
+          <%= render_markdown @question.text %>
+        </div>
 
-    <section id="question-content">
-      <p>
-        <%= @question.text %>
-      </p>
-    </section>
+        <div class="question-details">
+          <%= render 'questions/details', question: @question %>
+          <%= render 'questions/editing', question: @question %>
+          <%= render 'questions/deleting', question: @question %>
+        </div>
 
-    <section id="question-comments">
-      <%= render 'questions/comments', question: @question %>
-      <%= render 'comments/form', commentable: @question %>
-    </section>
-  </div>
+        <div id="question-evaluations">
+          <%= render 'questions/evaluations', question: @question %>
+        </div>
 
-  <div class="col-md-2">
-    <section>
+        <div id="question-comments">
+          <%= render 'questions/comments', question: @question %>
+          <%= render 'comments/form', commentable: @question %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2">
       <%= render 'questions/voting', question: @question %>
       <%= render 'questions/favoring', question: @question %>
-    </section>
+      <%= render 'questions/watching', question: @question %>
+      <%= render 'questions/evaluating', question: @question %>
+    </div>
   </div>
 </div>
 
-<%= render 'questions/answers', answers: @answers %>
-<%= render 'answers/form', question: @question, answer: @answer %>
+<div id="question-answers">
+  <%= render 'questions/answers', answers: @answers %>
+</div>
+
+<div id="question-answer" class="new-answer">
+  <%= render 'answers/form', question: @question, answer: @answer %>
+</div>

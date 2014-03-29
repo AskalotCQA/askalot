@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: naruby_development
+  database: askalot_development
   pool: 5
   username: postgres
   password: postgres
@@ -9,7 +9,7 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: naruby_test
+  database: askalot_test
   pool: 5
   username: postgres
   password: postgres
@@ -17,7 +17,7 @@ test:
 staging:
   adapter: postgresql
   encoding: unicode
-  database: naruby_production
+  database: askalot_staging
   pool: 5
   username: postgres
   password: postgres
@@ -25,7 +25,7 @@ staging:
 production:
   adapter: postgresql
   encoding: unicode
-  database: naruby_production
+  database: askalot_production
   pool: 5
   username: postgres
   password: postgres

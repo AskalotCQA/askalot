@@ -1,0 +1,3 @@
+#! /bin/bash
+
+DRIVER=poltergeist bundle exec rspec $@

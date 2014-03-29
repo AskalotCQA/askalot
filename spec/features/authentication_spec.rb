@@ -1,5 +1,7 @@
 require 'spec_helper'
 
+# TODO (smolnar) resolve notice messages after signing in and signing out
+
 describe 'Authentication' do
   let(:user) { create :user, password: 'password' }
 
@@ -58,13 +60,11 @@ describe 'Authentication' do
       fill_in 'user_login', with: user.login
       fill_in 'user_password', with: 'password'
 
-      click_button 'Prihlásiť'
+      # expect(page).to have_content('Úspešne prihlásený.')
 
-      #expect(page).to have_content('Úspešne prihlásený.')
+      expect { click_button 'Prihlásiť' }.to change { User.count }.by(1)
+
       expect(page).to have_content(user.login)
-      #expect(page).to have_content(user.email)
-
-      expect(User).to have(1).record
     end
   end
 end
