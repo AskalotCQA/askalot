@@ -24,14 +24,13 @@ module StackOverflow
 
           if vote['VoteTypeId'] == '1'
             answer = Answer.find_by_imported_id vote['PostId']
-            answer.toggle_labeling_by! answer.question.author, :best  unless answer.nil? || answer.question.nil?
+            answer.toggle_labeling_by! answer.question.author, :best  unless answer.nil? || answer.question.nil? || answer.question.author.nil?
           end
 
           # CREATE UNIQUE INDEX index_votes_on_unique_key
           # ON votes
           # USING btree
           # (voter_id, votable_id, votable_type COLLATE pg_catalog."default");
-
 
           if vote['VoteTypeId'] == '2' || vote['VoteTypeId'] == '3'
             answer = Answer.find_by_imported_id vote['PostId']
