@@ -1,11 +1,13 @@
 <div class="user-square">
-  <%= user_avatar_tag user, image: { class: :'img-circle img-responsive', size: 96 } %>
+  <%= user_avatar_tag user, image: {class: :'img-circle img-responsive', size: 96} %>
 
   <span class="user-link">
     <%= link_to_user user %>
-    <div class="pull-right">
-      <%= render 'users/following', followee: user %>
-    </div>
+    <% if user != current_user %>
+      <div class="pull-right">
+        <%= render 'users/following', followee: user %>
+      </div>
+    <% end %>
   </span>
 
   <% if user != :anonymous && user.show_name? && !user.name.blank? %>
