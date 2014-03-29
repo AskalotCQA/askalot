@@ -47,6 +47,16 @@ class UsersController < ApplicationController
     render 'followables/follow', formats: :js
   end
 
+  def followees
+    @user = User.where(nick: params[:nick]).first
+    @followees = @user.followees
+  end
+
+  def followers
+    @user = User.where(nick: params[:nick]).first
+    @followers = @user.followers
+  end
+
   def suggest
     @users = User.where('nick like ?', "#{params[:q]}%")
 
