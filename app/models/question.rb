@@ -12,7 +12,7 @@ class Question < ActiveRecord::Base
   include Votable
   include Watchable
 
-  before_save :add_category_tags
+  before_save :add_category_tags, :set_updated_timestamp
 
   belongs_to :category, counter_cache: true
 
@@ -35,8 +35,6 @@ class Question < ActiveRecord::Base
   scope :answered_but_not_best, lambda { joins(:answers) } #.where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq } # TODO(zbell) User.first.questions.answered fails
 
   scope :by, lambda { |user| where(author: user) }
-
-  self.updated_timestamp = [:updated_at, :touched_at]
 
   def self.best_answers
     Answer.labeled_with(Label.where(value: :best).first)
@@ -61,5 +59,13 @@ class Question < ActiveRecord::Base
 
   def add_category_tags
     self.tag_list += self.category.tags
+  end
+
+  def set_updated_timestamp
+    if self.changed.include? 'votes_difference'
+      Question.updated_timestamp = [:updated_at]
+    else
+      Question.updated_timestamp = [:updated_at, :touched_at]
+    end
   end
 end
