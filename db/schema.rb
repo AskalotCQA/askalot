@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140322113048) do
+ActiveRecord::Schema.define(version: 20140329121310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,30 +47,30 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "answer_revisions", ["editor_id"], name: "index_answer_revisions_on_editor_id", using: :btree
 
   create_table "answers", force: true do |t|
-    t.integer  "author_id",                                                  null: false
-    t.integer  "question_id",                                                null: false
-    t.text     "text",                                                       null: false
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
-    t.integer  "votes_difference",                           default: 0,     null: false
-    t.integer  "imported_id"
-    t.integer  "comments_count",                             default: 0,     null: false
-    t.integer  "votes_count",                                default: 0,     null: false
-    t.boolean  "deleted",                                    default: false, null: false
-    t.decimal  "votes_lb_wsci_bp", precision: 13, scale: 12, default: 0.0,   null: false
+    t.integer  "author_id",                                                     null: false
+    t.integer  "question_id",                                                   null: false
+    t.text     "text",                                                          null: false
+    t.datetime "created_at",                                                    null: false
+    t.datetime "updated_at",                                                    null: false
+    t.integer  "votes_difference",                              default: 0,     null: false
+    t.integer  "stack_exchange_uuid"
+    t.integer  "comments_count",                                default: 0,     null: false
+    t.integer  "votes_count",                                   default: 0,     null: false
+    t.boolean  "deleted",                                       default: false, null: false
+    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
     t.datetime "deleted_at"
     t.integer  "deletor_id"
-    t.boolean  "edited",                                     default: false, null: false
+    t.boolean  "edited",                                        default: false, null: false
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
   add_index "answers", ["deleted"], name: "index_answers_on_deleted", using: :btree
   add_index "answers", ["deletor_id"], name: "index_answers_on_deletor_id", using: :btree
   add_index "answers", ["edited"], name: "index_answers_on_edited", using: :btree
-  add_index "answers", ["imported_id"], name: "index_answers_on_imported_id", using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
+  add_index "answers", ["stack_exchange_uuid"], name: "index_answers_on_stack_exchange_uuid", unique: true, using: :btree
   add_index "answers", ["votes_difference"], name: "index_answers_on_votes_difference", using: :btree
   add_index "answers", ["votes_lb_wsci_bp"], name: "index_answers_on_votes_lb_wsci_bp", using: :btree
 
@@ -115,19 +115,19 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "comment_revisions", ["editor_id"], name: "index_comment_revisions_on_editor_id", using: :btree
 
   create_table "comments", force: true do |t|
-    t.integer  "author_id",                        null: false
-    t.integer  "commentable_id",                   null: false
-    t.string   "commentable_type",                 null: false
-    t.text     "text",                             null: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.integer  "imported_id"
-    t.boolean  "deleted",          default: false, null: false
+    t.integer  "author_id",                           null: false
+    t.integer  "commentable_id",                      null: false
+    t.string   "commentable_type",                    null: false
+    t.text     "text",                                null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "stack_exchange_uuid"
+    t.boolean  "deleted",             default: false, null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
     t.datetime "deleted_at"
     t.integer  "deletor_id"
-    t.boolean  "edited",           default: false, null: false
+    t.boolean  "edited",              default: false, null: false
   end
 
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
@@ -135,7 +135,7 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "comments", ["deleted"], name: "index_comments_on_deleted", using: :btree
   add_index "comments", ["deletor_id"], name: "index_comments_on_deletor_id", using: :btree
   add_index "comments", ["edited"], name: "index_comments_on_edited", using: :btree
-  add_index "comments", ["imported_id"], name: "index_comments_on_imported_id", using: :btree
+  add_index "comments", ["stack_exchange_uuid"], name: "index_comments_on_stack_exchange_uuid", unique: true, using: :btree
 
   create_table "evaluations", force: true do |t|
     t.integer  "evaluator_id",                   null: false
@@ -254,30 +254,32 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "question_revisions", ["question_id"], name: "index_question_revisions_on_question_id", using: :btree
 
   create_table "questions", force: true do |t|
-    t.integer  "author_id",                                                     null: false
-    t.integer  "category_id",                                                   null: false
-    t.string   "title",                                                         null: false
-    t.text     "text",                                                          null: false
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
-    t.integer  "votes_difference",                              default: 0,     null: false
-    t.boolean  "anonymous",                                     default: false, null: false
-    t.integer  "imported_id"
-    t.integer  "answers_count",                                 default: 0,     null: false
-    t.integer  "comments_count",                                default: 0,     null: false
-    t.integer  "favorites_count",                               default: 0,     null: false
-    t.integer  "views_count",                                   default: 0,     null: false
-    t.integer  "votes_count",                                   default: 0,     null: false
+    t.integer  "author_id",                                                                null: false
+    t.integer  "category_id",                                                              null: false
+    t.string   "title",                                                                    null: false
+    t.text     "text",                                                                     null: false
+    t.datetime "created_at",                                                               null: false
+    t.datetime "updated_at",                                                               null: false
+    t.integer  "votes_difference",                                         default: 0,     null: false
+    t.boolean  "anonymous",                                                default: false, null: false
+    t.integer  "stack_exchange_uuid"
+    t.integer  "answers_count",                                            default: 0,     null: false
+    t.integer  "comments_count",                                           default: 0,     null: false
+    t.integer  "favorites_count",                                          default: 0,     null: false
+    t.integer  "views_count",                                              default: 0,     null: false
+    t.integer  "votes_count",                                              default: 0,     null: false
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
-    t.boolean  "deleted",                                       default: false, null: false
-    t.datetime "touched_at",                                                    null: false
-    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
+    t.boolean  "deleted",                                                  default: false, null: false
+    t.datetime "touched_at",                                                               null: false
+    t.decimal  "votes_lb_wsci_bp",               precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
     t.datetime "deleted_at"
     t.integer  "deletor_id"
-    t.boolean  "edited",                                        default: false, null: false
+    t.boolean  "edited",                                                   default: false, null: false
+    t.boolean  "stack_exchange_duplicate"
+    t.integer  "stack_exchange_questions_uuids",                                                        array: true
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
@@ -285,8 +287,8 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "questions", ["deleted"], name: "index_questions_on_deleted", using: :btree
   add_index "questions", ["deletor_id"], name: "index_questions_on_deletor_id", using: :btree
   add_index "questions", ["edited"], name: "index_questions_on_edited", using: :btree
-  add_index "questions", ["imported_id"], name: "index_questions_on_imported_id", using: :btree
   add_index "questions", ["slido_question_uuid"], name: "index_questions_on_slido_question_uuid", unique: true, using: :btree
+  add_index "questions", ["stack_exchange_uuid"], name: "index_questions_on_stack_exchange_uuid", unique: true, using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
   add_index "questions", ["votes_difference"], name: "index_questions_on_votes_difference", using: :btree
   add_index "questions", ["votes_lb_wsci_bp"], name: "index_questions_on_votes_lb_wsci_bp", using: :btree
@@ -379,7 +381,7 @@ ActiveRecord::Schema.define(version: 20140322113048) do
     t.string   "tumblr"
     t.string   "youtube"
     t.string   "role",                   default: "student", null: false
-    t.integer  "imported_id"
+    t.integer  "stack_exchange_uuid"
     t.integer  "answers_count",          default: 0,         null: false
     t.integer  "comments_count",         default: 0,         null: false
     t.integer  "favorites_count",        default: 0,         null: false
@@ -394,7 +396,6 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["first"], name: "index_users_on_first", using: :btree
-  add_index "users", ["imported_id"], name: "index_users_on_imported_id", using: :btree
   add_index "users", ["last"], name: "index_users_on_last", using: :btree
   add_index "users", ["login"], name: "index_users_on_login", unique: true, using: :btree
   add_index "users", ["middle"], name: "index_users_on_middle", using: :btree
@@ -402,6 +403,7 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "users", ["nick"], name: "index_users_on_nick", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   add_index "users", ["role"], name: "index_users_on_role", using: :btree
+  add_index "users", ["stack_exchange_uuid"], name: "index_users_on_stack_exchange_uuid", unique: true, using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "views", force: true do |t|
