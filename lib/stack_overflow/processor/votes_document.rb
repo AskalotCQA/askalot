@@ -41,7 +41,7 @@ module StackOverflow
                 voter_id: 0,
                 votable_id: question.nil? ? (answer.nil? ? 0 : answer.id) : question.id,
                 votable_type: question.nil? ? 'Answer' : 'Question',
-                upvote: vote['VoteTypeId'] == '2' ? true : false,
+                positive: vote['VoteTypeId'] == '2' ? true : false,
                 created_at: vote['CreationDate'],
                 updated_at: vote['CreationDate'],
             )
