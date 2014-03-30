@@ -6,7 +6,7 @@ module Touchable
   end
 
   def update_touched_at!
-    return if self.is_a? Question
+    return if (self.is_a? Question) || (self.changed.include? 'votes_difference')
 
     question            = self.to_question
     question.touched_at = self.updated_at
