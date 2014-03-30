@@ -1,7 +1,9 @@
 class Watching < ActiveRecord::Base
   belongs_to :watcher, class_name: :User
-  belongs_to :watchable, polymorphic: true
 
-  scope :by,  lambda { |user| where(watcher: user) }
-  scope :for, lambda { |model| where(watchable_type: model.to_s.classify) }
+  #TODO(zbell) rm this shit when on rails 4.1.0, see deletable.rb
+  belongs_to :watchable, -> { self.included_modules.include?(Deletable) ? self.deleted_or_not : self }, polymorphic: true
+
+  scope :by, lambda { |user| where(watcher: user) }
+  scope :of, lambda { |model| where(watchable_type: model.to_s.classify) }
 end

@@ -1,20 +1,24 @@
 class Question < ActiveRecord::Base
+  include Authorable
   include Commentable
   include Deletable
   include Evaluable
+  include Editable
   include Favorable
   include Notifiable
   include Taggable
+  include Touchable
   include Viewable
   include Votable
   include Watchable
 
-  before_save :add_category_tags
+  before_save :add_category_tags, :set_updated_timestamp
 
-  belongs_to :author, class_name: :User, counter_cache: true
   belongs_to :category, counter_cache: true
 
   has_many :answers, dependent: :destroy
+
+  has_many :revisions, class_name: :QuestionRevision, dependent: :destroy
 
   validates :category,  presence: true
   validates :title,     presence: true, length: { minimum: 2, maximum: 140 }
@@ -22,9 +26,13 @@ class Question < ActiveRecord::Base
   validates :anonymous, inclusion: { in: [true, false] }
 
   scope :random,     lambda { select('questions.*, random()').order('random()') }
+  scope :recent,     lambda { order(touched_at: :desc) }
   scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }
-  scope :answered,   lambda { joins(:answers).uniq } #.where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq } # TODO(zbell) User.first.questions.answered fails
+  scope :answered,   lambda { joins(:answers).uniq }
   scope :solved,     lambda { joins(:answers).merge(best_answers).uniq }
+
+  #TODO(zbell) propose removal of this
+  scope :answered_but_not_best, lambda { joins(:answers) } #.where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq } # TODO(zbell) User.first.questions.answered fails
 
   scope :by, lambda { |user| where(author: user) }
 
@@ -51,5 +59,10 @@ class Question < ActiveRecord::Base
 
   def add_category_tags
     self.tag_list += self.category.tags
+  end
+
+  def set_updated_timestamp
+    self.changed.include?('votes_difference') ? timestamps = [:updated_at] : timestamps = [:updated_at, :touched_at]
+    Question.updated_timestamp = timestamps
   end
 end

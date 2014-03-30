@@ -12,10 +12,10 @@ module Redcurtain
       ]
     end
 
-    def render(content, options = {})
+    def render(content_or_document, options = {})
       options.symbolize_keys!
 
-      renderers.inject(content) do |result, renderer|
+      renderers.inject(content_or_document) do |result, renderer|
         renderer.render(result, options[renderer.name.to_s.split(/::/).last.downcase.to_sym] || {})
       end
     end

@@ -1,5 +1,4 @@
-@import 'mixins';
-@import 'variables';
+// general
 
 .jumbotron {
   margin: 0;
@@ -35,9 +34,23 @@
   .text-right .btn {
     margin-right: -10px;
   }
+
+  @media (max-width: $screen-xs-max) {
+    .btn {
+      display: block;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+
+    .text-left, .text-right {
+      text-align: center !important;
+    }
+  }
 }
 
 .step {
+  margin-top: $navbar-height;
+
   color: $text-muted;
   text-align: center;
 

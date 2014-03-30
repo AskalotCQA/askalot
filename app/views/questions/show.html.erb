@@ -1,28 +1,28 @@
 <% provide :title, @question.title %>
 
-<section id="question">
+<div id="question">
   <div class="row">
     <div class="col-md-2">
-      <%= render 'users/square', user: @question.anonymous ? :anonymous : @author %>
+      <%= render 'users/square', user: @question.author_or_anonymous %>
     </div>
 
     <div class="col-md-8">
-      <section id="question-title">
+      <div id="question-title">
         <h1>
-          <%= truncate @question.title, length: 140, separator: ' ' %>
+          <%= @question.title %>
           <%= evaluation_badge_tag @question if @question.evaluations.any? %>
         </h1>
-
         <%= render 'questions/labels', labels: @labels %>
-      </section>
+      </div>
 
-      <section id="question-data">
+      <div id="question-data">
         <div class="question-content">
           <%= render_markdown @question.text %>
         </div>
 
         <div class="question-details">
-          <%= question_creation_time @question %> &middot;
+          <%= render 'questions/details', question: @question %>
+          <%= render 'questions/editing', question: @question %>
           <%= render 'questions/deleting', question: @question %>
         </div>
 
@@ -34,21 +34,22 @@
           <%= render 'questions/comments', question: @question %>
           <%= render 'comments/form', commentable: @question %>
         </div>
-      </section>
+      </div>
     </div>
 
     <div class="col-md-2">
       <%= render 'questions/voting', question: @question %>
       <%= render 'questions/favoring', question: @question %>
+      <%= render 'questions/watching', question: @question %>
       <%= render 'questions/evaluating', question: @question %>
     </div>
   </div>
-</section>
+</div>
 
-<section id="question-answers">
+<div id="question-answers">
   <%= render 'questions/answers', answers: @answers %>
-</section>
+</div>
 
-<section id="question-new-answer">
+<div id="question-answer" class="new-answer">
   <%= render 'answers/form', question: @question, answer: @answer %>
-</section>
+</div>

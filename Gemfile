@@ -15,7 +15,7 @@ gem 'net-ldap'
 
 # stylesheets
 gem 'sass-rails', '~> 4.0.0'
-gem 'bootstrap-sass', '~> 3.1.0'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'font-awesome-rails', '~> 4.0.3.0'
 
 # javascripts
@@ -29,6 +29,7 @@ gem 'jquery-tablesorter', '~> 1.9.5'
 gem 'rails-timeago', '~> 2.0'
 gem 'jquery-textcomplete-rails', '~> 0.1.2'
 gem 'handlebars_assets'
+gem 'jquery-ui-rails'
 
 # markdown
 gem 'redcarpet'
@@ -49,16 +50,18 @@ gem 'whenever'
 # utilities
 gem 'actionview-encoded_mail_to'
 gem 'active_model_serializers'
+gem 'activerecord-custom_timestamps'
 gem 'forgery'
 gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
-gem 'nokogiri'
+gem 'nokogiri', '~> 1.6.1'
 gem 'scout', github: 'smolnar/scout', branch: :master
 gem 'statistics2'
 gem 'symbolize'
 
 # monitoring
 gem 'garelic'
+gem 'newrelic_rpm'
 
 # search
 gem 'elasticsearch'
@@ -93,6 +96,7 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
+  gem 'timecop'
 
   # database
   gem 'faker', '1.1.2'

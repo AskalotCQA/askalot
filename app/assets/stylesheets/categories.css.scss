@@ -1,16 +1,25 @@
-@import 'mixins';
-@import 'variables';
+// general
+
+.category-tags {
+  margin-bottom: 6px;
+}
 
 // collection
 
 .category-group {
-  p {
-    margin-bottom: 20px !important;
-  }
-
   & + & {
     margin-top: 10px;
     padding-top: 20px;
     border-top: 1px solid $hr-border;
   }
+}
+
+.category-details {
+  margin-bottom: 20px;
+
+  color: $text-muted;
+}
+
+.category-watching {
+  display: inline;
 }

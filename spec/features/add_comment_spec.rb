@@ -30,36 +30,30 @@ describe 'Add Comment' do
       click_button 'Komentovať'
     end
 
-    expect(page).to have_content('Váš komentár bol úspešne pridaný.')
+    expect(page).to have_content('Komentár bol úspešne pridaný.')
 
     within '#question-comments' do
       expect(page).to have_content('My comment')
     end
   end
 
-  context 'when using markdown' do
-    it 'renders only links and mentions' do
-      create :user, login: :smolnar
+  context 'for question' do
+    context 'with notifications' do
+      it 'registers commenter as watcher of question' do
+        visit root_path
 
-      visit root_path
+        click_link 'Otázky'
+        click_link question.title
 
-      click_link 'Otázky'
-      click_link question.title
+        within '#question-comments' do
+          click_link 'Pridať komentár'
 
-      within '#question-comments' do
-        click_link 'Pridať komentár'
+          fill_in 'comment[text]', with: 'So wanna watch this!'
 
-        fill_in 'comment[text]', with: '# Hey, @smolnar, check out [askalot](https://askalot.fiit.stuba.sk) and http://www.example.com'
+          click_button 'Komentovať'
+        end
 
-        click_button 'Komentovať'
-      end
-
-      within '#question-comments' do
-        expect(page).not_to have_css('h1')
-        expect(page).to     have_content('Hey, @smolnar, check out askalot and http://www.example.com')
-        expect(page).to     have_link('@smolnar', href: user_path(:smolnar))
-        expect(page).to     have_link('askalot',  href: 'https://askalot.fiit.stuba.sk')
-        expect(page).to     have_link('http://www.example.com',  href: 'http://www.example.com')
+        expect(question).to be_watched_by(user)
       end
     end
   end

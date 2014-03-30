@@ -1,5 +1,10 @@
 class CommentsController < ApplicationController
   include Deleting
+  include Editing
+  include Markdown
+
+  include Events::Dispatching
+  include Watchings::Registration
 
   before_action :authenticate_user!
 
@@ -11,6 +16,13 @@ class CommentsController < ApplicationController
     authorize! :comment, @commentable
 
     if @comment.save
+      process_markdown_for @comment do |user|
+        dispatch_event :mention, @comment, for: user
+      end
+
+      dispatch_event :create, @comment, for: @question.watchers
+      register_watching_for @question
+
       flash[:notice] = t('comment.create.success')
     else
       flash_error_messages_for @comment
@@ -27,5 +39,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.require(:comment).permit(:text).merge(commentable: @commentable, author: current_user)
+  end
+
+  def update_params
+    params.require(:comment).permit(:text)
   end
 end

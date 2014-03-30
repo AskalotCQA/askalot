@@ -7,9 +7,9 @@ describe 'Filter Questions', js: true do
   before :each do
     login_as user
 
-    5.times  { create :question, tag_list: 'ruby,linux' }
-    5.times  { create :question, tag_list: 'elasticsearch' }
-    10.times { create :question, tag_list: 'elasticsearch,ruby' }
+    10.times { create :question, tag_list: 'ruby,linux' }
+    10.times { create :question, tag_list: 'elasticsearch' }
+    20.times { create :question, tag_list: 'elasticsearch,ruby' }
   end
 
   it 'filters questions by tag' do
@@ -20,7 +20,7 @@ describe 'Filter Questions', js: true do
     fill_in_select2 'question_tags', with: 'elasticsearch'
 
     list = all('#questions > ol > li')
-    expect(list).to have(10).items
+    expect(list).to have(20).items
 
     list.each { |item| expect(item).to have_content('elasticsearch') }
 
@@ -33,7 +33,7 @@ describe 'Filter Questions', js: true do
     wait_for_remote
 
     list = all('#questions > ol > li')
-    expect(list).to have(5).items
+    expect(list).to have(10).items
 
     list.each { |item| expect(item).to have_content('elasticsearch') }
 
@@ -49,7 +49,7 @@ describe 'Filter Questions', js: true do
     fill_in_select2 'question_tags', with: 'ruby'
 
     list = all('#questions > ol > li')
-    expect(list).to have(10).times
+    expect(list).to have(20).times
 
     list.each do |item|
       expect(item).to have_content('elasticsearch')
@@ -82,7 +82,7 @@ describe 'Filter Questions', js: true do
     wait_for_remote
 
     list = all('#questions > ol > li')
-    expect(list).to have(10).items
+    expect(list).to have(20).items
 
     list.each { |item| expect(item).to have_content('elasticsearch') }
 
@@ -95,7 +95,7 @@ describe 'Filter Questions', js: true do
     wait_for_remote
 
     list = all('#questions > ol > li')
-    expect(list).to have(10).items
+    expect(list).to have(20).items
 
     expect(current_params).to include(tags: 'elasticsearch,ruby')
 
@@ -139,7 +139,6 @@ describe 'Filter Questions', js: true do
     expect(list).to have(5).items
 
     list.each do |item|
-      expect(item).to have_content('elasticsearch')
       expect(item).to have_content('ruby')
 
       category.tags.each { |tag| expect(item).to have_content(tag) }
@@ -163,7 +162,7 @@ describe 'Filter Questions', js: true do
       fill_in_select2 'question_tags', with: 'elasticsearch'
 
       list = all('#questions > ol > li')
-      expect(list).to have(10).items
+      expect(list).to have(20).items
 
       list.each { |item| expect(item).to have_content('elasticsearch') }
 
@@ -174,7 +173,7 @@ describe 'Filter Questions', js: true do
       list = all('#questions > ol > li')
       expect(list).to have(3).items
 
-      expect(current_params).to include(tags: 'elasticsearch', tab: 'questions-favored')
+      expect(current_params).to include(tags: 'elasticsearch', tab: 'favored')
 
       list.each { |item| expect(item).to have_content('elasticsearch') }
     end
@@ -203,7 +202,7 @@ describe 'Filter Questions', js: true do
         navigate_back
 
         list = all('#questions > ol > li')
-        expect(list).to have(10).items
+        expect(list).to have(20).items
       end
     end
   end

@@ -13,16 +13,13 @@ Askalot::Application.routes.draw do
 
   get 'users/:nick', to: 'users#show', as: :user
 
-  get 'welcome', to: 'static_pages#welcome'
+  get :statistics, to: 'statistics#index'
+  get :welcome,    to: 'static_pages#welcome'
 
   concern :commetable do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :update, :destroy]
 
     get :comment, on: :member
-  end
-
-  concern :deletable do
-    get :delete, on: :member
   end
 
   concern :evaluable do
@@ -36,90 +33,56 @@ Askalot::Application.routes.draw do
     get :votedown, on: :member
   end
 
-  resources :categories, only: [:index]
-  resources :changelogs, only: [:index]
+  concern :watchable do
+    get :watch, on: :member
+  end
 
-  resources :questions, only: [:index, :new, :create, :show] do
-    resources :answers, only: [:create]
+  resources :categories, only: [:index] do
+    concerns :watchable
+  end
+
+  resources :tags, only: [:index] do
+    get :suggest, on: :collection
+
+    concerns :watchable
+  end
+
+  resources :questions, only: [:index, :new, :create, :show, :update, :destroy] do
+    resources :answers, only: [:create, :update, :destroy]
 
     get :favor,   on: :member
     get :suggest, on: :collection
 
     concerns :commetable
-    concerns :deletable
     concerns :evaluable
     concerns :votable
+    concerns :watchable
   end
 
-  resources :answers, only: [] do
+  resources :answers, only: [:update, :destroy] do
     get :label, on: :member
 
     concerns :commetable
-    concerns :deletable
     concerns :evaluable
     concerns :votable
   end
 
-  resources :comments, only: [] do
-    concerns :deletable
-  end
+  resources :comments, only: [:update, :destroy]
 
-  resources :tags, only: [] do
-    get :suggest, on: :collection
-  end
+  resources :changelogs, only: [:index]
 
   resources :markdown, only: [] do
     post :preview, on: :collection
   end
 
-  get :statistics, to: 'statistics#index'
+  resources :notifications, only: [:index] do
+    get :clean, on: :collection
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+    get :read,   on: :member
+    get :unread, on: :member
+  end
 
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+  resources :watchings, only: [:index, :destroy] do
+    delete :clean, on: :collection
+  end
 end

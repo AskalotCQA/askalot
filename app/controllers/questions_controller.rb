@@ -1,24 +1,30 @@
 class QuestionsController < ApplicationController
   include Deleting
+  include Editing
+  include Markdown
   include Voting
   include Tabbing
 
-  before_action :authenticate_user!
+  include Events::Dispatching
+  include Watchings::Registration
 
-  default_tab :'questions-new', only: :index
+  include Watchings::Watching
+
+  default_tab :recent, only: :index
+
+  before_action :authenticate_user!
 
   def index
     @questions = case params[:tab].to_sym
-                 when :'questions-new'        then Question.order(created_at: :desc)
-                 when :'questions-unanswered' then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
-                 when :'questions-answered'   then Question.answered.by_votes.order(created_at: :desc)
-                 when :'questions-solved'     then Question.solved.by_votes.order(created_at: :desc)
-                 when :'questions-favored'    then Question.favored.by_votes.order(created_at: :desc)
-                 else fail
+                 when :unanswered then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
+                 when :answered   then Question.answered.by_votes.order(created_at: :desc)
+                 when :solved     then Question.solved.by_votes.order(created_at: :desc)
+                 when :favored    then Question.favored.by_votes.order(created_at: :desc)
+                 else Question.recent
                  end
 
     @questions = filter_questions(@questions)
-    @questions = @questions.page(params[:page]).per(10)
+    @questions = @questions.page(params[:page]).per(20)
 
     initialize_polling
   end
@@ -33,12 +39,18 @@ class QuestionsController < ApplicationController
     authorize! :ask, @question
 
     if @question.save
+      process_markdown_for @question do |user|
+        dispatch_event :mention, @question, for: user
+      end
+
+      #TODO(zbell) do not notify about anonymous questions since user.nick is still exposed in notifications
+      dispatch_event :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten unless @question.anonymous
+      register_watching_for @question
+
       flash[:notice] = t('question.create.success')
 
       redirect_to question_path(@question)
     else
-      flash_error_messages_for @question, flash: flash.now
-
       @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
 
       render :new
@@ -47,21 +59,30 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @author   = @question.author
     @labels   = @question.labels
     @answers  = @question.ordered_answers
 
     @answer = Answer.new(question: @question)
 
-    @question.views.create! viewer: current_user
-    @question.views.reload
+    authorize! :view, @question
+
+    @view = @question.views.create! viewer: current_user
+
+    @question.increment :views_count
+
+    dispatch_event :create, @view, for: @question.watchers
   end
 
   def favor
     @question = Question.find(params[:id])
 
-    @question.toggle_favoring_by! current_user
+    authorize! :favor, @question
+
+    @favorite = @question.toggle_favoring_by! current_user
+
     @question.favorites.reload
+
+    dispatch_event dispatch_event_action_for(@favorite), @favorite, for: @question.watchers
   end
 
   def suggest
@@ -92,5 +113,9 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user)
+  end
+
+  def update_params
+    params.require(:question).permit(:title, :text, :category_id, :tag_list)
   end
 end

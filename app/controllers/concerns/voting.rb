@@ -17,8 +17,11 @@ module Voting
 
     authorize! :vote, @votable
 
-    @votable.toggle_vote_by!(current_user, voteup)
+    @vote = @votable.toggle_vote_by!(current_user, voteup)
+
     @votable.votes.reload
+
+    dispatch_event dispatch_event_action_for(@vote), @vote, for: @votable.to_question.watchers
 
     render 'votables/vote', formats: :js
   end

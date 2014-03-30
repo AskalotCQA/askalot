@@ -1,11 +1,12 @@
-<% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-  <div class="alert alert-info">
-    <%= t('user.confirmation_pending', email: resource.unconfirmed_email) %>
-  </div>
-<% end %>
+<%= form_for resource, as: resource_name, url: registration_path(resource_name, tab: tab), html: { method: :put } do |f| %>
+  <%= form_messages_for resource, key: tab %>
+  <%= render 'shared/form_messages', messages: flash_to_messages(reject: [:form, :slido]) %>
 
-<%= form_for resource, as: resource_name, url: registration_path(resource_name, tab: :'user-account'), html: { method: :put} do |f| %>
-  <%= devise_error_messages! %>
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div class="alert alert-info">
+      <%= t('user.confirmation_pending', email: resource.unconfirmed_email) %>
+    </div>
+  <% end %>
 
   <div class="form-group">
     <%= f.label :email %>

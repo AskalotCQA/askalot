@@ -1,5 +1,5 @@
-<section>
-  <ul class="list-unstyled">
+<div class="form-links">
+  <ul class="list-unstyled text-muted">
     <% if controller_name != 'sessions' %>
       <li><%= link_to t('user.sign_in'), new_session_path(resource_name) %></li>
     <% end %>
@@ -26,4 +26,4 @@
       <% end %>
     <% end %>
   </ul>
-</section>
+</div>

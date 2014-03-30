@@ -1,4 +1,7 @@
 class Favorite < ActiveRecord::Base
+  include Deletable
+  include Notifiable
+
   belongs_to :favorer, class_name: :User, counter_cache: true
   belongs_to :question, counter_cache: true
 

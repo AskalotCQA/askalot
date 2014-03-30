@@ -1,20 +1,3 @@
-// imports (order is significant)
-
-@import 'mixins';
-@import 'variables';
-
-@import 'bootstrap';
-@import 'datepicker/bootstrap';
-@import 'gemoji/base';
-@import 'markdown/base';
-@import 'markdown/bootstrap';
-@import 'select2/base';
-@import 'select2/bootstrap';
-@import 'tablesorter/bootstrap';
-@import 'jquery-textcomplete';
-@import 'textcomplete/bootstrap';
-@import 'font-awesome';
-
 // general
 
 html {
@@ -23,20 +6,39 @@ html {
 }
 
 body {
+  margin-top: $navbar-height + 1px;
+}
+
+.flash .alert:first-child {
   margin-top: $navbar-height;
 }
 
-.container > section:first-child {
-  padding-top: $navbar-height;
+.page-header {
+  margin-top: $navbar-height;
 }
 
-section + section {
-  padding-top: 0.5 * $navbar-height;
+.highlight-content {
+  background-color: $brand-warning;
 }
 
-section#flash {
-  padding-bottom: 0.5 * $navbar-height;
+// forms
+
+.form-title {
+  margin: $navbar-height 0 30px;
+  padding: 0;
 }
+
+.form-links {
+  margin-top: 30px;
+}
+
+// images
+
+.img-muted {
+  @include opacity(0.8)
+}
+
+// navigation
 
 .pagination-navigation {
   display: block;
@@ -47,7 +49,11 @@ section#flash {
   }
 }
 
-.tab-content, .tab-navigation {
+.tab-content {
+  padding-top: 20px;
+}
+
+.pill-content, .pill-navigation, .tab-navigation {
   padding-top: $navbar-height;
 }
 
@@ -67,6 +73,10 @@ section#flash {
 
 .text-muted a, a.text-muted {
   @include color-variant(darken($text-muted, 12.5%), darken($text-muted, 25%));
+}
+
+.text-undecorated {
+  text-decoration: none !important;
 }
 
 // sidebar

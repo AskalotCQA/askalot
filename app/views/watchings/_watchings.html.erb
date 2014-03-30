@@ -1,0 +1,15 @@
+<%= form_messages key: tab %>
+
+<% if watchings.any? %>
+  <ol class="watchings">
+    <% watchings.each do |watching| %>
+      <%= render 'watching', watching: watching %>
+    <% end %>
+  </ol>
+
+  <%= paginate watchings, params: { tab: tab } %>
+<% else %>
+  <p class="alert alert-info">
+    <%= t 'watching.none' %>
+  </p>
+<% end %>

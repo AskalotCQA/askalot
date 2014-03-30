@@ -33,6 +33,8 @@ GEM
       activerecord-deprecated_finders (~> 1.0.2)
       activesupport (= 4.0.3)
       arel (~> 4.0.0)
+    activerecord-custom_timestamps (0.2.0)
+      activerecord (>= 3.1, < 5)
     activerecord-deprecated_finders (1.0.3)
     activesupport (4.0.3)
       i18n (~> 0.6, >= 0.6.4)
@@ -167,6 +169,8 @@ GEM
       coffee-rails (>= 3.2.0)
       railties (>= 3.2.0)
       sass-rails (>= 3.2.0)
+    jquery-ui-rails (4.2.0)
+      railties (>= 3.2.16)
     json (1.8.1)
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
@@ -202,6 +206,7 @@ GEM
     net-ssh (2.8.0)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
+    newrelic_rpm (3.7.3.204)
     nio4r (1.0.0)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
@@ -324,6 +329,7 @@ GEM
     thread_safe (0.2.0)
       atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
+    timecop (0.7.1)
     timers (1.1.0)
     treetop (1.4.15)
       polyglot
@@ -353,8 +359,9 @@ PLATFORMS
 DEPENDENCIES
   actionview-encoded_mail_to
   active_model_serializers
+  activerecord-custom_timestamps
   bootstrap-datepicker-rails (~> 1.3.0)
-  bootstrap-sass (~> 3.1.0)
+  bootstrap-sass (~> 3.1.1)
   cancan (~> 1.6.9)
   capistrano (~> 2.15.5)
   capistrano-ext
@@ -380,12 +387,14 @@ DEPENDENCIES
   jquery-rails
   jquery-tablesorter (~> 1.9.5)
   jquery-textcomplete-rails (~> 0.1.2)
+  jquery-ui-rails
   kaminari (~> 0.14.1)
   kaminari-bootstrap (~> 0.1.3)
   launchy
   murmurhash3
   net-ldap
-  nokogiri
+  newrelic_rpm
+  nokogiri (~> 1.6.1)
   pg
   poltergeist (~> 1.5.0)
   pry
@@ -407,6 +416,7 @@ DEPENDENCIES
   statistics2
   symbolize
   therubyracer
+  timecop
   uglifier (>= 1.3.0)
   unicorn
   whenever

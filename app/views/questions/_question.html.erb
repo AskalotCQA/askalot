@@ -27,7 +27,7 @@
       <div class="question-preview">
         <h4>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
-          <%= link_to question_title_preview(question), question_path(question) %>
+          <%= link_to_question question %>
         </h4>
 
         <%= render 'questions/labels', labels: question.labels %>
@@ -40,9 +40,9 @@
 
     <div class="col-md-2">
       <div class="question-author">
-        <small><%= link_to_user question.anonymous ? :anonymous : question.author %></small>
-        <%= user_avatar_tag question.anonymous ? :anonymous : question.author, size: 64, class: :'img-circle img-responsive' %>
-        <small class="text-muted"><%= question_creation_time question, placement: :bottom %></small>
+        <small><%= link_to_user question.author_or_anonymous %></small>
+        <%= user_avatar_tag question.author_or_anonymous, image: { class: :'img-circle img-responsive', size: 64 } %>
+        <small class="text-muted"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
       </div>
     </div>
   </div>

@@ -1,0 +1,5 @@
+<% messages.each do |type, message| %>
+  <div class="form-alert alert alert-<%= form_message_type_to_class(type) %>">
+    <%= message.html_safe %>
+  </div>
+<% end %>

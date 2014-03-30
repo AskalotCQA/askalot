@@ -1,9 +1,6 @@
-@import 'mixins';
-@import 'variables';
-
 // general
 
-#new-answer {
+.new-answer {
   margin-top: 20px;
 }
 
@@ -56,5 +53,5 @@
 }
 
 .answer-evaluations {
-  @include block-listing;
+  @include block-evaluations;
 }

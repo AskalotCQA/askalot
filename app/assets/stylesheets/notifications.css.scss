@@ -1,0 +1,6 @@
+// collection
+
+.notifications {
+  @extend .list-unstyled;
+  @include block-listing;
+}

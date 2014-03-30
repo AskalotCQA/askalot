@@ -1,0 +1,21 @@
+<% if notifications.any? %>
+  <%= navbar_dropdown_tag :'dot-circle-o', nil, '#', class: :'hidden-xs' do %>
+    <li><%= link_to t('notification.unread_x', count: Notification.where(recipient: current_user).unread.size), notifications_path %></li>
+    <li class="divider"></li>
+    <% notifications.each do |notification| %>
+      <li>
+        <a href="<%= notifications_path(anchor: "notification-#{notification.id}") %>">
+          <%= notification_icon_tag notification %>
+          <span class="text-muted">&middot;</span>
+          <%= user_icon_tag notification.initiator, tooltip_attributes(notification.initiator.nick, placement: :bottom).merge(link: false) %>
+          <span class="text-muted">&middot;</span>
+          <%= tooltip_time_tag notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
+        </a>
+      </li>
+    <% end %>
+    <li class="divider"></li>
+    <li><%= link_to t('notification.more'), notifications_path %></li>
+  <% end %>
+<% else %>
+  <li class="hidden-xs"><%= link_to icon_tag(:'circle-o'), notifications_path %></li>
+<% end %>

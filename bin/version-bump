@@ -1,6 +1,6 @@
 #! /bin/bash
 
-branch=1-1-beta
+branch=beta
 number=patch
 
 git checkout master

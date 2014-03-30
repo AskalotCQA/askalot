@@ -1,4 +1,7 @@
 class Evaluation < ActiveRecord::Base
+  include Deletable
+  include Notifiable
+
   belongs_to :evaluator, class_name: :User
   belongs_to :evaluable, polymorphic: true
 
@@ -10,5 +13,9 @@ class Evaluation < ActiveRecord::Base
 
   def normalize
     self.text = nil if text.blank?
+  end
+
+  def to_question
+    self.evaluable.to_question
   end
 end

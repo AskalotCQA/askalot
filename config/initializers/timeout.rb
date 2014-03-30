@@ -1,2 +1,2 @@
 # TODO (smolnar) consider decreasing the value
-Rack::Timeout.timeout = 10 if Rails.env.production?
+Rack::Timeout.timeout = 60 if Rails.env.production?

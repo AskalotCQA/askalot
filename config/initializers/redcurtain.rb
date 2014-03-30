@@ -1,4 +1,8 @@
+# renderers order is significant
+
 Redcurtain::Markdown.renderers.unshift(*[
+  Redcurtain::Renderer::Replacer.new(:'user-link'),
+  Redcurtain::Renderer::Replacer.new(:'question-link'),
   Redcurtain::Renderer::Linker.new(:user),
   Redcurtain::Renderer::Linker.new(:question)
 ])
@@ -12,6 +16,7 @@ Redcurtain::Renderer::Redcarpet.defaults[:tags] &= [
   :block_code,
   :block_quote,
   :codespan,
+  :double_emphasis,
   :emphasis,
   :header,
   :hrule,

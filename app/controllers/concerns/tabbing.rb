@@ -2,16 +2,14 @@ module Tabbing
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def default_tab(value = nil, options = {})
-      return @default_tab unless value
-
-      @default_tab = value
-
-      before_action :set_default_tab, options
+    def default_tab(value, options = {})
+      before_action options do
+        params[:tab] ||= value
+      end
     end
   end
 
-  def set_default_tab
-    params[:tab] ||= self.class.default_tab
+  def tab_page(tab, default = 1)
+    params[:tab].to_sym == tab.to_sym ? params[:page] : default
   end
 end

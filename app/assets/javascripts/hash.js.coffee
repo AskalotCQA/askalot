@@ -1,8 +1,15 @@
-$(document).ready ->
-  window.hashChangeEvent = jQuery.Event("hash:change")
+class window.Hash
+  @callbacks: []
 
-  window.getHash = ->
-    window.location.hash.replace("!/", "")
+  @bind: ->
+    $(document).ready ->
+      $(window).on 'hashchange', ->
+        callback() for callback in Hash.callbacks
 
-  $("html, body").on "hash:change", (e, hash) ->
-    window.location.hash = "!/#{hash.replace('#', '')}"
+  @on: (regex, callback) ->
+    another = ->
+      callback(matches) if matches = window.location.hash.match(regex)
+
+    another()
+
+    Hash.callbacks.push(another)

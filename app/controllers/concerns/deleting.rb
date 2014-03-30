@@ -1,14 +1,19 @@
 module Deleting
   extend ActiveSupport::Concern
 
-  def delete
+  include Events::Dispatching
+
+  def destroy
     @model     = controller_name.classify.downcase.to_sym
     @deletable = controller_name.classify.constantize.find(params[:id])
 
-    if @deletable.mark_as_deleted!(@deletable)
-      flash[:notice] = t("#{@model}.delete.success")
+    if @deletable.mark_as_deleted_by! current_user
+      #TODO(zbell) do not notify about anonymous questions since user.nick is still exposed in notifications
+      dispatch_event :delete, @deletable, for: @deletable.to_question.watchers unless @deletable.to_question.anonymous
+
+      flash[:notice] = t "#{@model}.delete.success"
     else
-      flash_error_messages_for @deletable
+      flash[:error] = t "#{@model}.delete.failure"
     end
 
     if @deletable.is_a? Question

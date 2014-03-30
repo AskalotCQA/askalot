@@ -20,12 +20,16 @@ describe 'Deleting' do
       click_link "question-#{question.id}-delete-modal"
 
       within "#question-#{question.id}-deleting" do
-        click_link 'Zmazať'
+        click_button 'Zmazať'
       end
 
       expect(page).to have_content('Otázka bola úspešne zmazaná.')
 
       expect(page.current_path).to eql(questions_path)
+
+      question.reload
+
+      expect(question).to be_deleted
     end
   end
 
@@ -45,19 +49,23 @@ describe 'Deleting' do
       click_link "answer-#{answer.id}-delete-modal"
 
       within "#answer-#{answer.id}-deleting" do
-        click_link 'Zmazať'
+        click_button 'Zmazať'
       end
 
       expect(page).to have_content('Odpoveď bola úspešne zmazaná.')
 
       expect(page.current_path).to eql(question_path question)
+
+      answer.reload
+
+      expect(answer).to be_deleted
     end
   end
 
   context 'when question has answer with comment', js: true do
     let!(:answer) { create :answer, question: question }
-    let!(:comment_answer) { create :comment, commentable: answer, author: user }
-    let!(:comment_question) { create :comment, commentable: question, author: user }
+    let!(:answer_comment) { create :comment, commentable: answer, author: user }
+    let!(:question_comment) { create :comment, commentable: question, author: user }
 
     before :each do
       login_as user
@@ -70,15 +78,19 @@ describe 'Deleting' do
 
       click_link question.title
 
-      click_link "comment-#{comment_answer.id}-delete-modal"
+      click_link "comment-#{answer_comment.id}-delete-modal"
 
-      within "#comment-#{comment_answer.id}-deleting" do
-        click_link 'Zmazať'
+      within "#comment-#{answer_comment.id}-deleting" do
+        click_button 'Zmazať'
       end
 
       expect(page).to have_content('Komentár bol úspešne zmazaný.')
 
       expect(page.current_path).to eql(question_path question)
+
+      answer_comment.reload
+
+      expect(answer_comment).to be_deleted
     end
 
     it 'can delete question comment' do
@@ -88,10 +100,10 @@ describe 'Deleting' do
 
       click_link question.title
 
-      click_link "comment-#{comment_question.id}-delete-modal"
+      click_link "comment-#{question_comment.id}-delete-modal"
 
-      within "#comment-#{comment_question.id}-deleting" do
-        click_link 'Zmazať'
+      within "#comment-#{question_comment.id}-deleting" do
+        click_button 'Zmazať'
       end
 
       expect(page).to have_content('Komentár bol úspešne zmazaný.')

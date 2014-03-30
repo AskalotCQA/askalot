@@ -1,5 +1,5 @@
 module CommentsHelper
-  def comment_creation_time(comment, options = {})
-    tooltip_time_tag comment.created_at, options.merge(format: :normal, placement: :right)
+  def link_to_comment(comment, options = {})
+    link_to_question comment.to_question, options.merge(anchor: "comment-#{comment.id}", deleted: comment.deleted?)
   end
 end
