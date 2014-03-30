@@ -50,13 +50,17 @@ class UsersController < ApplicationController
   end
 
   def followees
-    @user = User.where(nick: params[:nick]).first
+    @user      = User.where(nick: params[:nick]).first
+    raise AR::NotFound unless @user
     @followees = @user.followees
+    @followees = @followees.page(params[:page]).per(20)
   end
 
   def followers
-    @user = User.where(nick: params[:nick]).first
+    @user      = User.where(nick: params[:nick]).first
+    raise AR::NotFound unless @user
     @followers = @user.followers
+    @followers = @followers.page(params[:page]).per(20)
   end
 
   def suggest
