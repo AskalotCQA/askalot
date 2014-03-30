@@ -215,4 +215,37 @@ describe User do
       end
     end
   end
+
+  describe "following" do
+    let(:other_user) { create :user }
+    before do
+      user.save
+      user.follow!(other_user)
+    end
+
+    it 'user follow othe user' do
+      expect(user.followees).to include(other_user)
+    end
+
+    describe "followee" do
+      it 'other user followed by user' do
+        expect(other_user.followers).to include(user)
+      end
+    end
+
+    describe "unfollow" do
+      before do
+        user.unfollow!(other_user)
+      end
+
+      it 'user dont follow other user' do
+        expect(user.followees).not_to include(other_user)
+      end
+
+      it 'other user is not followed by user' do
+        expect(other_user.followers).not_to include(user)
+      end
+    end
+
+  end
 end
