@@ -31,18 +31,13 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-8">
       <div class="question-preview">
         <h4>
           <%= link_to question_title_preview(question), question_path(question) %>
         </h4>
 
         <%= render 'questions/labels', labels: question.labels %>
-      </div>
-    </div>
-
-    <div class="col-md-2">
-      <div class="question-author">
         <small class="text-muted"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
       </div>
     </div>
