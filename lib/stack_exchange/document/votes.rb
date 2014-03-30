@@ -16,6 +16,9 @@ module StackExchange
           answer   = Answer.find_by(stack_exchange_uuid: vote[:PostId])
           question = Question.find_by(stack_exchange_uuid: vote[:PostId]) if answer.nil?
 
+          # TODO (smolnar) consider removing index on voter_id, votable_id, voteable_type or
+          # use random user who did not vote for resource yet.
+
           vote = Vote.new(
             voter_id:     0,
             votable_id:   question.nil? ? (answer.nil? ? 0 : answer.id) : question.id,
