@@ -33,7 +33,9 @@ module Probe
     def import(documents)
       # TODO (smolnar) Bulk
 
-      documents.each do |document|
+      method = documents.respond_to?(:find_each) ? :find_each : :each
+
+      documents.public_send(method) do |document|
         client.index(index: name, type: type, body: mapper.map(document))
       end
     end
