@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @answers   = @answers.page(tab_page :answers).per(10)
     @favorites = @favorites.page(tab_page :favorites).per(10)
 
-    @random_question = Question.unanswered.random.first || Question.random.first
+    @question = Question.unanswered.random.first || Question.random.first
   end
 
   def update

@@ -8,11 +8,11 @@
   <div class="row">
     <div class="col-md-12">
       <div class="alert alert-warning">
-        <%= t('user.show.no_answers_found') %>
+        <%= t('user.show.no_answers') %>
       </div>
 
       <% if @user == current_user %>
-        <%= icon_link_to :comment, t('home.answer'), question_path(@random_question), class: 'btn btn-success', fixed: true %>
+        <%= icon_link_to :comment, t('home.answer'), question_path(@question), class: 'btn btn-success', fixed: true %>
       <% end %>
     </div>
   </div>
