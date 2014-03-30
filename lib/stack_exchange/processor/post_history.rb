@@ -1,8 +1,8 @@
-module StackOverflow
+module StackExchange
   class Processor
-    class PostHistory < StackOverflow::Processor
+    class PostHistory < StackExchange::Processor
       def process(filepath, options = {})
-        parser = Nokogiri::XML::SAX::Parser.new(PostHistoryDocument.new)
+        parser = Nokogiri::XML::SAX::Parser.new(Document::PostHistory.new)
         parser.parse(File.open(filepath))
       end
     end

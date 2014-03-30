@@ -3,7 +3,7 @@ module StackExchange
     attr_accessor :model, :batch_size
 
     def name
-      self.class.name
+      self.class.name.split(/::/).last
     end
 
     def batch_size
@@ -30,7 +30,7 @@ module StackExchange
         record     = process_element(attributes)
 
         if record
-          puts "[#{self.name}] Processed #{@count}th #{model.name} with ID: #{attributes[:Id]}"
+          puts "[#{self.name}] Processed #{@count}th #{model.name.downcase} with UUID: #{attributes[:Id]}"
 
           @count += 1
 
@@ -44,7 +44,7 @@ module StackExchange
     private
 
     def import
-      model.import @records, validate: false, timestamps: true
+      model.import @records.select { |r| r.class == @model }, validate: false, timestamps: true
 
       @records = []
     end

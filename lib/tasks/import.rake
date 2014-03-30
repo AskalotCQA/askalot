@@ -44,11 +44,11 @@ namespace :import do
 
     desc "Import Stack Exchange data"
     task :all, [:url] => :environment do |_, args|
-      Rake::Task['import:stack_overflow:users'].invoke
-      Rake::Task['import:stack_overflow:posts'].invoke
-      Rake::Task['import:stack_overflow:comments'].invoke
-      Rake::Task['import:stack_overflow:votes'].invoke
-      Rake::Task['import:stack_overflow:post_history'].invoke
+      Rake::Task['import:stack_exchange:users'].invoke
+      Rake::Task['import:stack_exchange:posts'].invoke
+      Rake::Task['import:stack_exchange:comments'].invoke
+      Rake::Task['import:stack_exchange:votes'].invoke
+      Rake::Task['import:stack_exchange:post_history'].invoke
     end
   end
 end
