@@ -11,6 +11,7 @@ class Question < ActiveRecord::Base
   include Viewable
   include Votable
   include Watchable
+  include Search::Question
 
   before_save :add_category_tags, :set_updated_timestamp
 
