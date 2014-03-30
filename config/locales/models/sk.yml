@@ -38,7 +38,7 @@ sk:
 
     follower:
       zero: 'Nasledovateľov'
-      one: 'Nasledovateľov'
+      one: 'Nasledovateľ'
       few: 'Nasledovateľov'
       other: 'Nasledovateľov'
 
