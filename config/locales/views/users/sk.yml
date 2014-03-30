@@ -43,7 +43,7 @@ sk:
     new_password: 'Nové heslo'
     confirm_password: 'Potvrdenie hesla'
 
-    more_social: 'Ďalšie siete'
+    more_social: 'Viac'
 
     leave_current_password: 'ponechajte prázdne pokiaľ nechcete zmeniť'
     enter_current_password: 'pre potvrdenie potrebujeme Vaše aktuálne heslo'
@@ -85,7 +85,12 @@ sk:
     unfollow: 'Nenasledovať'
 
     followees:
-      title: 'Nasledovaný/í'
+      title:
+        zero: 'Nasledovaný'
+        one: 'Nasledovaný'
+        few: 'Nasledovaní'
+        other: 'Nasledovaní'
+
       no_results_found: 'Nenasledujete žiadneho používateľa.'
 
     followers:

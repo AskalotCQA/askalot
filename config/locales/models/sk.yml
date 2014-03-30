@@ -24,6 +24,12 @@ sk:
       few: 'hodnotení'
       other: 'hodnotení'
 
+    favorite:
+      zero: 'obľúbení'
+      one: 'obľúbenie'
+      few: 'obľúbenia'
+      other: 'obľúbení'
+
     followee:
       zero: 'Nasledovaných'
       one: 'Nasledovaný'
@@ -35,12 +41,6 @@ sk:
       one: 'Nasledovateľov'
       few: 'Nasledovateľov'
       other: 'Nasledovateľov'
-
-    favorite:
-      zero: 'obľúbení'
-      one: 'obľúbenie'
-      few: 'obľúbenia'
-      other: 'obľúbení'
 
     notification:
       zero: 'notifikácií'
