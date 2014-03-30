@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
   has_many :votes,         foreign_key: :voter_id,     dependent: :destroy
   has_many :watchings,     foreign_key: :watcher_id,   dependent: :destroy
 
+  has_many :role_assignments, dependent: :destroy
+  has_many :roles,      through: :role_assignments
+  has_many :categories, through: :role_assignments
+
   validates :role, presence: true
 
   # TODO (smolnar) consult usage of functional indices for nick, login and email uniqueness checking
