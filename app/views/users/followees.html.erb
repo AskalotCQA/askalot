@@ -1,4 +1,4 @@
-<% provide :title, t("user.followees.title") %>
+<% provide :title, t("user.followees.title", count: @user.followees.size) %>
 
 <%= render 'users/top', user: @user %>
 
