@@ -1,25 +1,26 @@
 <% if favorites.any? %>
-    <ol class="user-questions">
-      <% favorites.each do |favorite| %>
-          <%= render 'users/question', question: favorite %>
-      <% end %>
-    </ol>
-<% else %>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="alert alert-warning">
-          <%= t('user.show.no_favorites') %>
-        </div>
+  <ol class="user-questions">
+    <% favorites.each do |favorite| %>
+      <%= render 'users/question', question: favorite %>
+    <% end %>
+  </ol>
 
-        <% if @user == current_user %>
-            <%= icon_link_to :plus, t('question.new.feature'), new_question_path, class: 'btn btn-success' %>
-        <% end %>
-      </div>
+  <div class="row">
+    <div class="col-md-12">
+      <%= paginate favorites, params: { tab: :favorites } %>
     </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-warning">
+        <%= t('user.show.no_favorites') %>
+      </div>
+
+      <% if @user == current_user %>
+        <%= icon_link_to :plus, t('question.new.feature'), new_question_path, class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
 <% end %>
 
-<div class="row">
-  <div class="col-md-12">
-    <%= paginate favorites, params: { tab: :favorites } %>
-  </div>
-</div>

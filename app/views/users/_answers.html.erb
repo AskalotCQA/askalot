@@ -4,6 +4,12 @@
       <%= render 'users/answer', answer: answer %>
     <% end %>
   </ol>
+
+  <div class="row">
+    <div class="col-md-12">
+      <%= paginate answers, params: { tab: :answers } %>
+    </div>
+  </div>
 <% else %>
   <div class="row">
     <div class="col-md-12">
@@ -18,8 +24,3 @@
   </div>
 <% end %>
 
-<div class="row">
-  <div class="col-md-12">
-    <%= paginate answers, params: { tab: :answers } %>
-  </div>
-</div>
