@@ -1,8 +1,8 @@
 class CreateRoleAssignments < ActiveRecord::Migration
   def change
     create_table :role_assignments do |t|
-      t.references :user, null: false
-      t.references :role, null: false
+      t.references :user,     null: false
+      t.references :role,     null: false
       t.references :category, null: false
 
       t.timestamps
