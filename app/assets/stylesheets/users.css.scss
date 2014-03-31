@@ -46,6 +46,10 @@
 
 .user-questions, .user-answers {
   @extend .list-unstyled;
+
+  li {
+    margin-bottom: 20px;
+  }
 }
 
 // profile
@@ -76,5 +80,11 @@
 
   li {
     padding: $padding-xs-vertical 0;
+  }
+}
+
+.user-profile-metrics {
+  div {
+    padding-right: 0px;
   }
 }

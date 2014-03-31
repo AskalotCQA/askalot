@@ -1,11 +1,26 @@
-<ol class="user-answers">
-  <% answers.each do |answer| %>
-    <%= render 'users/answer', answer: answer %>
-  <% end %>
-</ol>
+<% if answers.any? %>
+  <ol class="user-answers">
+    <% answers.each do |answer| %>
+      <%= render 'users/answer', answer: answer %>
+    <% end %>
+  </ol>
 
-<div class="row">
-  <div class="col-md-12">
-    <%= paginate answers, params: { tab: :answers } %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= paginate answers, params: { tab: :answers } %>
+    </div>
   </div>
-</div>
+<% else %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="alert alert-warning">
+        <%= t('user.show.no_answers') %>
+      </div>
+
+      <% if @user == current_user %>
+        <%= icon_link_to :comment, t('home.answer'), question_path(@question), class: 'btn btn-success', fixed: true %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+

@@ -1,20 +1,20 @@
-<% if questions.any? %>
+<% if favorites.any? %>
   <ol class="user-questions">
-    <% questions.each do |question| %>
-      <%= render 'users/question', question: question %>
+    <% favorites.each do |favorite| %>
+      <%= render 'users/question', question: favorite %>
     <% end %>
   </ol>
 
   <div class="row">
     <div class="col-md-12">
-      <%= paginate questions, params: { tab: :questions } %>
+      <%= paginate favorites, params: { tab: :favorites } %>
     </div>
   </div>
 <% else %>
   <div class="row">
     <div class="col-md-12">
       <div class="alert alert-warning">
-        <%= t('user.show.no_questions') %>
+        <%= t('user.show.no_favorites') %>
       </div>
 
       <% if @user == current_user %>
@@ -23,3 +23,4 @@
     </div>
   </div>
 <% end %>
+
