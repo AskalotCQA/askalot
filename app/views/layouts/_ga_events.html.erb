@@ -1,0 +1,7 @@
+<% unless session[:events].nil? %>
+  <% session[:events].each do |event|%>
+    _gaq.push(['_trackEvent', '<%= event[:category]%>', '<%= event[:action]%>', '<%= event[:label]%>');
+  <% end %>
+<% end %>
+
+<% session[:events] = Array.new %>
