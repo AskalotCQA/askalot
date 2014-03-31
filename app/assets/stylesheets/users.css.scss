@@ -79,14 +79,10 @@
   }
 }
 
-.table-user-about {
-  th, td {
-    border-top: none !important;
-  }
+.intended-top {
+  padding-top: 20px;
 }
 
-.tr-intended-bottom {
-  th, td {
-    padding-bottom: 20px !important;
-  }
+.emphasized {
+  font-weight: bold;
 }

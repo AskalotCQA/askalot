@@ -1,31 +1,39 @@
 <div class="row">
   <div class="col-md-6">
-    <table class="table table-condensed table-user-about">
-      <tr>
-        <th><%= t('user.questions_count') %></th>
-        <td><%= @questions.unscope(:limit).size %></td>
-      </tr>
-      <tr>
-        <th><%= t('user.answers_count') %></th>
-        <td><%= @answers.unscope(:limit).size %></td>
-      </tr>
-      <tr class="tr-intended-bottom">
-        <th><%= t('user.comments_count') %></th>
-        <td><%= @comments.size %></td>
-      </tr>
+    <div class="row">
+      <div class="col-md-1"><%= @questions.unscope(:limit).size %></div>
+      <div class="col-md-11"><%= link_to t('count.question', count: @questions.unscope(:limit).size), user_path(params.except(:page).merge tab: :questions) %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-1"><%= @answers.unscope(:limit).size %></div>
+      <div class="col-md-11"><%= link_to t('count.answer', count: @answers.unscope(:limit).size), user_path(params.except(:page).merge tab: :answers) %></div>
+    </div>
+    <div class="row">
+      <div class="col-md-1"><%= @comments.unscope(:limit).size %></div>
+      <div class="col-md-11"><%= t('count.comment', count: @comments.unscope(:limit).size) %></div>
+    </div>
+    <div class="intended-top">
       <% if @user.current_sign_in_at %>
-          <tr>
-            <th><%= t('user.last_sign_in') %></th>
-            <td><%= tooltip_time_tag @user.current_sign_in_at, format: :normal, placement: :top %></td>
-          </tr>
+          <div class="row">
+            <div class="col-md-5">
+              <span class="emphasized"><%= t('user.last_sign_in') %></span>
+            </div>
+            <div class="col-md-7">
+              <%= tooltip_time_tag @user.current_sign_in_at, format: :normal, placement: :top %>
+            </div>
+          </div>
       <% end %>
-      <tr>
-        <th><%= t('user.registered_from') %></th>
-        <td><%= tooltip_time_tag @user.created_at, format: :normal, placement: :top %></td>
-      </tr>
-    </table>
+      <div class="row">
+        <div class="col-md-5">
+          <span class="emphasized"><%= t('user.registered_from') %></span>
+        </div>
+        <div class="col-md-7">
+          <%= tooltip_time_tag @user.created_at, format: :normal, placement: :top %>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <% unless user.about.blank? %>
-  <%= render_markdown user.about %>
+    <%= render_markdown user.about %>
 <% end %>
