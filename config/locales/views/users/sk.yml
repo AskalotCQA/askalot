@@ -66,10 +66,6 @@ sk:
     privacy: 'Súkromie'
     account: 'Účet'
 
-    questions_count: 'Počet otázok:'
-    answers_count: 'Počet odpovedí:'
-    comments_count: 'Počet komentárov:'
-
     show:
       about: 'O mne'
       edit: 'Upraviť profil'
