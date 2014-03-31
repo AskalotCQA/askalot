@@ -1,4 +1,6 @@
 $(document).ready ->
   $('[data-track]').click ->
     label = $(this).attr 'data-track'
-    _gaq.push ['_trackEvent', 'Actions', 'Click', label]
+    category = $(this).attr 'data-track-category'
+    action = $(this).attr 'data-track-action'
+    _gaq.push ['_trackEvent', category, action, label]
