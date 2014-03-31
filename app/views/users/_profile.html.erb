@@ -14,14 +14,14 @@
     </div>
     <div class="intended-top">
       <% if @user.current_sign_in_at %>
-          <div class="row">
-            <div class="col-md-5">
-              <span class="emphasized"><%= t('user.last_sign_in') %></span>
-            </div>
-            <div class="col-md-7">
-              <%= tooltip_time_tag @user.current_sign_in_at, format: :normal, placement: :top %>
-            </div>
+        <div class="row">
+          <div class="col-md-5">
+            <span class="emphasized"><%= t('user.last_sign_in') %></span>
           </div>
+          <div class="col-md-7">
+            <%= tooltip_time_tag @user.current_sign_in_at, format: :normal, placement: :top %>
+          </div>
+        </div>
       <% end %>
       <div class="row">
         <div class="col-md-5">
@@ -35,5 +35,5 @@
   </div>
 </div>
 <% unless user.about.blank? %>
-    <%= render_markdown user.about %>
+  <%= render_markdown user.about %>
 <% end %>
