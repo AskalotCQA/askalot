@@ -218,6 +218,7 @@ describe User do
 
   describe "following" do
     let(:other_user) { create :user }
+
     before do
       user.save
       user.follow!(other_user)

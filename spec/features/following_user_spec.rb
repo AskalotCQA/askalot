@@ -12,8 +12,8 @@ describe 'Following user' do
     end
   end
 
-  context 'following from profile page', js: true do
-    it 'set user is following other user', skip_before: true do
+  context 'when following from profile page', js: true do
+    it 'sets user as follower', skip_before: true do
       visit root_path
 
       click_link 'Používatelia'
@@ -26,7 +26,7 @@ describe 'Following user' do
       expect(user).to be_following(other_user)
     end
 
-    it 'set user is not following other user' do
+    it 'aborts user as follower' do
       visit root_path
 
       click_link 'Používatelia'
@@ -40,8 +40,8 @@ describe 'Following user' do
     end
   end
 
-  context 'following from users page', js: true do
-    it 'set user is following other user', skip_before: true do
+  context 'when following from users page', js: true do
+    it 'sets user as follower', skip_before: true do
       visit root_path
 
       click_link 'Používatelia'
@@ -53,7 +53,7 @@ describe 'Following user' do
       expect(user).to be_following(other_user)
     end
 
-    it 'set user is not following other user' do
+    it 'aborts user as follower' do
       visit root_path
 
       click_link 'Používatelia'
@@ -66,7 +66,7 @@ describe 'Following user' do
     end
   end
 
-  context 'check followees and followers list', js: true do
+  context 'when checking followees and followers list', js: true do
     it 'shows followers list' do
       visit root_path
 
@@ -78,7 +78,7 @@ describe 'Following user' do
       expect(page).to have_content(user.nick)
     end
 
-    it 'set user is not following other user' do
+    it 'shows followees list' do
       visit root_path
 
       click_link user.nick

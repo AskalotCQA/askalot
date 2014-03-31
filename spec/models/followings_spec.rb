@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Following do
-
   let(:follower) { create :user }
   let(:followee) { create :user }
   let(:following) { follower.followings.build(followee_id: followee.id) }
