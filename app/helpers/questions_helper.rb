@@ -15,6 +15,10 @@ module QuestionsHelper
     :'text-muted'
   end
 
+  def question_evaluations_coloring(question)
+    evaluation_data(question)[:color]
+  end
+
   def question_votes_coloring(question)
     :'text-muted'
   end
