@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140330180048) do
+ActiveRecord::Schema.define(version: 20140331225953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,21 +47,22 @@ ActiveRecord::Schema.define(version: 20140330180048) do
   add_index "answer_revisions", ["editor_id"], name: "index_answer_revisions_on_editor_id", using: :btree
 
   create_table "answers", force: true do |t|
-    t.integer  "author_id",                                                  null: false
-    t.integer  "question_id",                                                null: false
-    t.text     "text",                                                       null: false
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
-    t.integer  "votes_difference",                           default: 0,     null: false
-    t.integer  "comments_count",                             default: 0,     null: false
-    t.integer  "votes_count",                                default: 0,     null: false
-    t.boolean  "deleted",                                    default: false, null: false
-    t.decimal  "votes_lb_wsci_bp", precision: 13, scale: 12, default: 0.0,   null: false
+    t.integer  "author_id",                                                   null: false
+    t.integer  "question_id",                                                 null: false
+    t.text     "text",                                                        null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+    t.integer  "votes_difference",                            default: 0,     null: false
+    t.integer  "comments_count",                              default: 0,     null: false
+    t.integer  "votes_count",                                 default: 0,     null: false
+    t.boolean  "deleted",                                     default: false, null: false
+    t.decimal  "votes_lb_wsci_bp",  precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
-    t.boolean  "edited",                                     default: false, null: false
+    t.boolean  "edited",                                      default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.integer  "evaluations_count",                           default: 0,     null: false
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
@@ -285,6 +286,7 @@ ActiveRecord::Schema.define(version: 20140330180048) do
     t.boolean  "edited",                                        default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.integer  "evaluations_count",                             default: 0,     null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
