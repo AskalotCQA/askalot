@@ -37,7 +37,7 @@ class ActionView::Template::Handlers::Markdown
     @erb     ||= ActionView::Template.registered_template_handler :erb
     @options ||= { autolink: true, fenced_code_blocks: true, space_after_headers: true }
 
-    "Redcarpet::Markdown.new(Redcarpet::Render::HTML, #{@options.to_s}).render(begin;#{@erb.call template};end)"
+    "render_markdown(begin;#{@erb.call template};end)"
   end
 end
 
