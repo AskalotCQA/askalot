@@ -9,14 +9,16 @@
         <th><%= t('user.answers_count') %></th>
         <td><%= @answers.unscope(:limit).size %></td>
       </tr>
-      <tr>
+      <tr class="tr-intended-bottom">
         <th><%= t('user.comments_count') %></th>
         <td><%= @comments.size %></td>
       </tr>
-      <tr class="table-row-intended">
-        <th><%= t('user.last_sign_in') %></th>
-        <td><%= tooltip_time_tag @user.last_sign_in_at, format: :normal, placement: :top %></td>
-      </tr>
+      <% if @user.current_sign_in_at %>
+          <tr>
+            <th><%= t('user.last_sign_in') %></th>
+            <td><%= tooltip_time_tag @user.current_sign_in_at, format: :normal, placement: :top %></td>
+          </tr>
+      <% end %>
       <tr>
         <th><%= t('user.registered_from') %></th>
         <td><%= tooltip_time_tag @user.created_at, format: :normal, placement: :top %></td>
