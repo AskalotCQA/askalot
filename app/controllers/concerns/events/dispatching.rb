@@ -6,6 +6,6 @@ module Events::Dispatching
   end
 
   def dispatch_event_action_for(resource)
-    resource.destroyed? ? :deleted : (resource.changed? ? :update : :create)
+    resource.destroyed? ? :delete : (resource.changed? ? :update : :create)
   end
 end
