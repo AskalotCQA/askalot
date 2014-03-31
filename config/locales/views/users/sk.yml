@@ -66,9 +66,10 @@ sk:
     show:
       about: 'O mne'
       edit: 'Upraviť profil'
+
       no_questions: 'Používateľ sa zatiaľ neopýtal žiadnu otázku.'
       no_answers: 'Používateľ zatiaľ neodpovedal na žiadnu otázku.'
-      no_favorites: 'Používateľ zatiaľ nepridal žiadnu otázku medzi obľúbené.'
+      no_favorites: 'Používateľ si zatiaľ nepridal žiadnu otázku medzi obľúbené.'
 
     edit:
       profile: 'Úprava profilu'
