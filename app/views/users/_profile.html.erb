@@ -1,3 +1,29 @@
+<div class="row">
+  <div class="col-md-6">
+    <table class="table table-condensed table-user-about">
+      <tr>
+        <th><%= t('user.questions_count') %></th>
+        <td><%= @questions.unscope(:limit).size %></td>
+      </tr>
+      <tr>
+        <th><%= t('user.answers_count') %></th>
+        <td><%= @answers.unscope(:limit).size %></td>
+      </tr>
+      <tr>
+        <th><%= t('user.comments_count') %></th>
+        <td><%= @comments.size %></td>
+      </tr>
+      <tr class="table-row-intended">
+        <th><%= t('user.last_sign_in') %></th>
+        <td><%= tooltip_time_tag @user.last_sign_in_at, format: :normal, placement: :top %></td>
+      </tr>
+      <tr>
+        <th><%= t('user.registered_from') %></th>
+        <td><%= tooltip_time_tag @user.created_at, format: :normal, placement: :top %></td>
+      </tr>
+    </table>
+  </div>
+</div>
 <% unless user.about.blank? %>
   <%= render_markdown user.about %>
 <% end %>
