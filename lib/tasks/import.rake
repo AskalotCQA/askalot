@@ -11,35 +11,35 @@ namespace :import do
     task :users, [:url] => :environment do |_, args|
       processor = StackExchange::Processor::Users.new
 
-      processor.process('data/android_dump/Users.xml')
+      processor.process('tmp/data/android_dump/Users.xml')
     end
 
     desc "Import Stack Exchange posts"
     task :posts, [:url] => :environment do |_, args|
       processor = StackExchange::Processor::Posts.new
 
-      processor.process('data/android_dump/Posts.xml')
+      processor.process('tmp/data/android_dump/Posts.xml')
     end
 
     desc "Import Stack Exchange comments"
     task :comments, [:url] => :environment do |_, args|
       processor = StackExchange::Processor::Comments.new
 
-      processor.process('data/android_dump/Comments.xml')
+      processor.process('tmp/data/android_dump/Comments.xml')
     end
 
     desc "Import Stack Exchange votes"
     task :votes, [:url] => :environment do |_, args|
       processor = StackExchange::Processor::Votes.new
 
-      processor.process('data/android_dump/Votes.xml')
+      processor.process('tmp/data/android_dump/Votes.xml')
     end
 
     desc "Import Stack Exchange votes"
     task :post_history, [:url] => :environment do |_, args|
       processor = StackExchange::Processor::PostHistory.new
 
-      processor.process('data/android_dump/PostHistory.xml')
+      processor.process('tmp/data/android_dump/PostHistory.xml')
     end
 
     desc "Import Stack Exchange data"

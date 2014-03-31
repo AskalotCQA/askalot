@@ -17,7 +17,7 @@ module StackExchange
           created_at:          user[:CreationDate],
           updated_at:          user[:CreationDate],
           last_sign_in_at:     user[:LastAccessDate],
-          about:               ActionView::Base.full_sanitizer.sanitize(user[:AboutMe]),
+          about:               ActionView::Base.full_sanitizer.sanitize(user[:AboutMe]).to_s,
           stack_exchange_uuid: user[:Id]
         )
 

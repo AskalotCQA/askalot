@@ -14,7 +14,7 @@ module StackExchange
           author_id:           user.nil? ? 0 : user.id,
           commentable_id:      question.nil? ? (answer.nil? ? 0 : answer.id) : question.id,
           commentable_type:    question.nil? ? :Answer : :Question,
-          text:                ActionView::Base.full_sanitizer.sanitize(comment[:Text]),
+          text:                ActionView::Base.full_sanitizer.sanitize(comment[:Text]).to_s,
           created_at:          comment[:CreationDate],
           updated_at:          comment[:CreationDate],
           stack_exchange_uuid: comment[:Id]

@@ -31,7 +31,7 @@ module StackExchange
           answer = Answer.new(
             author_id:           user.nil? ? 0 : user.id,
             question_id:         question.nil? ? 0 : question.id,
-            text:                ActionView::Base.full_sanitizer.sanitize(post[:Text]),
+            text:                ActionView::Base.full_sanitizer.sanitize(post[:Text]).to_s,
             created_at:          post[:CreationDate],
             updated_at:          post[:CreationDate],
             stack_exchange_uuid: post[:Id]
