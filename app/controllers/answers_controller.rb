@@ -1,11 +1,11 @@
 class AnswersController < ApplicationController
-  include Deleting
-  include Editing
-  include Markdown
-  include Voting
+  include Deletables::Delete
+  include Editables::Update
+  include Votables::Vote
 
-  include Events::Dispatching
-  include Watchings::Registration
+  include Events::Dispatch
+  include Markdown::Process
+  include Watchings::Register
 
   before_action :authenticate_user!
 

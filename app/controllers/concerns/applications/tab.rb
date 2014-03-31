@@ -1,4 +1,4 @@
-module Tabbing
+module Applications::Tab
   extend ActiveSupport::Concern
 
   module ClassMethods
