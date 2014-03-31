@@ -78,3 +78,15 @@
     padding: $padding-xs-vertical 0;
   }
 }
+
+.table-user-about {
+  th, td {
+    border-top: none !important;
+  }
+}
+
+.table-row-intended {
+  th, td {
+    padding-top: 20px !important;
+  }
+}
