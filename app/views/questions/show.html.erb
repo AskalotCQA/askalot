@@ -9,7 +9,7 @@
     <div class="col-md-8">
       <div id="question-title">
         <h1>
-          <%= @question.title %>
+          <%= render_markdown @question.title %>
           <%= evaluation_badge_tag @question if @question.evaluations.any? %>
         </h1>
         <%= render 'questions/labels', labels: @labels %>

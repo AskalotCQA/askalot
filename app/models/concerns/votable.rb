@@ -7,7 +7,7 @@ module Votable
 
     scope :voted, lambda { joins(:votes).uniq }
 
-    scope :by_votes, lambda { order(votes_lb_wsci_bp: :desc) }
+    scope :by_votes, lambda { order(arel_table[:votes_lb_wsci_bp].desc, arel_table[:created_at].desc) }
   end
 
   def voted_by?(user)

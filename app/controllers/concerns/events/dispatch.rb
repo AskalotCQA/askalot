@@ -1,4 +1,4 @@
-module Events::Dispatching
+module Events::Dispatch
   extend ActiveSupport::Concern
 
   def dispatch_event(action, resource, initiator: current_user, **options)
@@ -6,6 +6,6 @@ module Events::Dispatching
   end
 
   def dispatch_event_action_for(resource)
-    resource.destroyed? ? :deleted : (resource.changed? ? :update : :create)
+    resource.destroyed? ? :delete : (resource.changed? ? :update : :create)
   end
 end

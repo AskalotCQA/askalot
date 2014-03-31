@@ -31,8 +31,7 @@ class Question < ActiveRecord::Base
   scope :answered,   lambda { joins(:answers).uniq }
   scope :solved,     lambda { joins(:answers).merge(best_answers).uniq }
 
-  #TODO(zbell) propose removal of this
-  scope :answered_but_not_best, lambda { joins(:answers) } #.where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq } # TODO(zbell) User.first.questions.answered fails
+  scope :answered_but_not_best, lambda { joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq }
 
   scope :by, lambda { |user| where(author: user) }
 

@@ -1,4 +1,4 @@
-module Watchings::Registration
+module Watchings::Register
   extend ActiveSupport::Concern
 
   def register_watching_for(resource, watcher: current_user, **options)

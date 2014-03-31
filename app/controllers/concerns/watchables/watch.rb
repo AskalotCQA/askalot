@@ -1,4 +1,4 @@
-module Watchings::Watching
+module Watchables::Watch
   extend ActiveSupport::Concern
 
   def watch

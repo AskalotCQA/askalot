@@ -1,6 +1,4 @@
 class WatchingsController < ApplicationController
-  include Tabbing
-
   default_tab :questions, only: [:index, :destroy, :clean]
 
   before_action :authenticate_user!

@@ -1,7 +1,7 @@
-module Deleting
+module Deletables::Delete
   extend ActiveSupport::Concern
 
-  include Events::Dispatching
+  include Events::Dispatch
 
   def destroy
     @model     = controller_name.classify.downcase.to_sym

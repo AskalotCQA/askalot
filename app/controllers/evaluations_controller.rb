@@ -1,4 +1,8 @@
 class EvaluationsController < ApplicationController
+  include Events::Dispatch
+  include Markdown::Process
+  include Watchings::Register
+
   before_action :authenticate_user!
 
   def create

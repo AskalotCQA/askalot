@@ -1,7 +1,7 @@
-module Editing
+module Editables::Update
   extend ActiveSupport::Concern
 
-  include Events::Dispatching
+  include Events::Dispatch
 
   def update
     @model    = controller_name.classify.downcase.to_sym

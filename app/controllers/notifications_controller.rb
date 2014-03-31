@@ -1,6 +1,4 @@
 class NotificationsController < ApplicationController
-  include Tabbing
-
   default_tab :unread, only: [:index, :read, :clean]
 
   before_action :authenticate_user!
