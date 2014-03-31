@@ -13606,7 +13606,7 @@
         <dia:real val="7.1999999999999993"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#RoleAssignments#</dia:string>
+        <dia:string>#Assignments#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
