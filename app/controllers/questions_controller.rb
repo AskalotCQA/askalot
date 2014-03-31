@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
   def index
     @questions = case params[:tab].to_sym
                  when :unanswered then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
-                 when :answered   then Question.answered.by_votes.order(created_at: :desc)
+                 when :answered   then Question.answered_but_not_best.by_votes.order(created_at: :desc)
                  when :solved     then Question.solved.by_votes.order(created_at: :desc)
                  when :favored    then Question.favored.by_votes.order(created_at: :desc)
                  else Question.recent
