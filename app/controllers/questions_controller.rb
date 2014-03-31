@@ -1,14 +1,12 @@
 class QuestionsController < ApplicationController
-  include Deleting
-  include Editing
-  include Markdown
-  include Voting
-  include Tabbing
+  include Deletables::Delete
+  include Editables::Update
+  include Votables::Vote
+  include Watchables::Watch
 
-  include Events::Dispatching
-  include Watchings::Registration
-
-  include Watchings::Watching
+  include Events::Dispatch
+  include Markdown::Process
+  include Watchings::Register
 
   default_tab :recent, only: :index
 

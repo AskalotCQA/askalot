@@ -1,4 +1,4 @@
-module Markdown
+module Markdown::Process
   extend ActiveSupport::Concern
 
   def process_markdown_for(resource, attribute: :text, **options, &callback)

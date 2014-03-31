@@ -1,4 +1,4 @@
-module Events::Dispatching
+module Events::Dispatch
   extend ActiveSupport::Concern
 
   def dispatch_event(action, resource, initiator: current_user, **options)

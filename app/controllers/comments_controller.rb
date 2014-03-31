@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
-  include Deleting
-  include Editing
-  include Markdown
+  include Deletables::Delete
+  include Editables::Update
 
-  include Events::Dispatching
-  include Watchings::Registration
+  include Events::Dispatch
+  include Markdown::Process
+  include Watchings::Register
 
   before_action :authenticate_user!
 

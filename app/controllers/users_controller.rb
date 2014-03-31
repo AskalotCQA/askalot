@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  include Tabbing
-
   before_action :authenticate_user!
 
   default_tab :all, only: :index
