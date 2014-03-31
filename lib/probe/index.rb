@@ -30,14 +30,18 @@ module Probe
       @mapper ||= Probe::Mapper.new
     end
 
-    def import(documents)
-      # TODO (smolnar) Bulk
+    def import(documents, with: :simple, **options)
+      importer = Probe::Import.of(with).new(self, documents, options)
 
-      method = documents.respond_to?(:find_each) ? :find_each : :each
+      importer.import
+    end
 
-      documents.public_send(method) do |document|
-        client.index(index: name, type: type, body: mapper.map(document))
-      end
+    def size
+      stats['_all']['primaries']['docs']['count']
+    end
+
+    def stats
+      client.indices.stats index: name, all: true
     end
   end
 end

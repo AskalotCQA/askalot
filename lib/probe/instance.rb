@@ -1,9 +1,7 @@
 module Probe
   module Instance
     def to_mapping
-      mapper = self.class.probe.mapper
-
-      mapper.map(self)
+      self.class.probe.index.mapper.map(self)
     end
   end
 end
