@@ -20,6 +20,15 @@ module Taggable
     @tag_list = TagList.new(self.class.taggable, values)
   end
 
+  def changed?
+    diff = false
+    tags.each do |tag|
+      diff |= tag_list.exclude? tag.name
+    end
+
+    super || tag_list.count!=tags.size || diff
+  end
+
   private
 
   # TODO(zbell) rename -> create_tags
