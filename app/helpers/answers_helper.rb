@@ -3,6 +3,10 @@ module AnswersHelper
       resource.author.role?(:teacher) && !resource.author.role?(:administrator)
   end
 
+  def answer_text_preview(answer, options = {})
+    preview_content answer.text, options.reverse_merge(length: 200)
+  end
+
   def answer_evaluations_coloring(answer)
     evaluation_data(answer)[:color]
   end
