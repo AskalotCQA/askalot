@@ -1,4 +1,4 @@
-module Concerns::Slido
+module Slido::Flash
   extend ActiveSupport::Concern
 
   included do

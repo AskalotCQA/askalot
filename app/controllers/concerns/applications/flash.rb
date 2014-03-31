@@ -1,4 +1,4 @@
-module Concerns::Flash
+module Applications::Flash
   extend ActiveSupport::Concern
 
   included do

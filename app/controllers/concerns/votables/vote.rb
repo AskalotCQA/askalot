@@ -1,4 +1,4 @@
-module Voting
+module Votables::Vote
   extend ActiveSupport::Concern
 
   def voteup

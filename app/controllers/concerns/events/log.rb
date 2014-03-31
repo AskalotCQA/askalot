@@ -1,4 +1,4 @@
-module Concerns::Log
+module Events::Log
   extend ActiveSupport::Concern
 
   included do

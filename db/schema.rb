@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140322113048) do
+ActiveRecord::Schema.define(version: 20140330180048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,18 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
   add_index "answers", ["votes_difference"], name: "index_answers_on_votes_difference", using: :btree
   add_index "answers", ["votes_lb_wsci_bp"], name: "index_answers_on_votes_lb_wsci_bp", using: :btree
+
+  create_table "assignments", force: true do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "category_id", null: false
+    t.integer  "role_id",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "assignments", ["category_id"], name: "index_assignments_on_category_id", using: :btree
+  add_index "assignments", ["role_id"], name: "index_assignments_on_role_id", using: :btree
+  add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name",                            null: false
@@ -285,6 +297,14 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "questions", ["votes_difference"], name: "index_questions_on_votes_difference", using: :btree
   add_index "questions", ["votes_lb_wsci_bp"], name: "index_questions_on_votes_lb_wsci_bp", using: :btree
 
+  create_table "roles", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
   create_table "slido_events", force: true do |t|
     t.integer  "category_id", null: false
     t.integer  "uuid",        null: false
@@ -321,8 +341,8 @@ ActiveRecord::Schema.define(version: 20140322113048) do
 
   create_table "tags", force: true do |t|
     t.string   "name",       null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "created_at", null: false
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
