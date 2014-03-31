@@ -2,7 +2,7 @@ module Markdown::Process
   extend ActiveSupport::Concern
 
   def process_markdown_for(resource, attribute: :text, **options, &callback)
-    text = resource.public_send(attribute).clone
+    text = (resource.public_send(attribute) || '').clone
 
     return if text.empty?
 
