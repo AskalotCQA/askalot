@@ -21,10 +21,12 @@ class UsersController < ApplicationController
     @answers   = @user.answers.order(created_at: :desc)
     @favorites = @user.favorites.order(created_at: :desc)
     @comments  = @user.comments.order(created_at: :desc)
+    @activities= @user.activities.order(created_at: :desc)
 
     @questions = @questions.page(tab_page :questions).per(10)
     @answers   = @answers.page(tab_page :answers).per(10)
     @favorites = @favorites.page(tab_page :favorites).per(10)
+    @activities= @activities.page(tab_page :activity).per(10)
 
     @question = Question.unanswered.random.first || Question.random.first
   end
