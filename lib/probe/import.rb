@@ -18,7 +18,7 @@ module Probe
     def each(&block)
       method = documents.respond_to?(:find_each) ? :find_each : :each
 
-      documents.public_send(method).each { |document| yield document }
+      documents.public_send(method) { |document| yield document }
     end
 
     def self.of(type)

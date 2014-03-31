@@ -34,6 +34,8 @@ module Probe
       importer = Probe::Import.of(with).new(self, documents, options)
 
       importer.import
+
+      flush
     end
 
     def size
@@ -42,6 +44,10 @@ module Probe
 
     def stats
       client.indices.stats index: name, all: true
+    end
+
+    def flush
+      client.indices.flush(index: name)
     end
   end
 end

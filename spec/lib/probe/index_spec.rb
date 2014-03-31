@@ -48,14 +48,17 @@ describe Probe::Index do
   end
 
   describe '#import' do
-    it 'imports documents' do
-      documents = [OpenStruct.new(title: 'Westside')]
+    let(:document) { Class.new(OpenStruct) { include Probe } }
 
+    it 'imports documents' do
+      documents = [document.new(id: 1, title: 'Westside')]
+
+      index.mapper.define id:    -> { id }
       index.mapper.define title: -> { title.downcase }
 
       index.import(documents)
 
-      # TODO (smolnar) check if indexed
+      expect(index.size).to eql(1)
     end
   end
 end
