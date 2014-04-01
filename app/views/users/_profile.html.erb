@@ -1,39 +1,13 @@
-<div class="row">
-  <div class="col-md-6">
-    <div class="row">
-      <div class="col-md-1"><%= @questions.unscope(:limit).size %></div>
-      <div class="col-md-11"><%= link_to t('count.question', count: @questions.unscope(:limit).size), user_path(params.except(:page).merge tab: :questions) %></div>
-    </div>
-    <div class="row">
-      <div class="col-md-1"><%= @answers.unscope(:limit).size %></div>
-      <div class="col-md-11"><%= link_to t('count.answer', count: @answers.unscope(:limit).size), user_path(params.except(:page).merge tab: :answers) %></div>
-    </div>
-    <div class="row">
-      <div class="col-md-1"><%= @comments.unscope(:limit).size %></div>
-      <div class="col-md-11"><%= t('count.comment', count: @comments.unscope(:limit).size) %></div>
-    </div>
-    <div class="intended-top">
-      <% if @user.current_sign_in_at %>
-        <div class="row">
-          <div class="col-md-5">
-            <span class="emphasized"><%= t('user.last_sign_in') %></span>
-          </div>
-          <div class="col-md-7">
-            <%= tooltip_time_tag @user.current_sign_in_at, format: :normal, placement: :top %>
-          </div>
-        </div>
-      <% end %>
-      <div class="row">
-        <div class="col-md-5">
-          <span class="emphasized"><%= t('user.registered_from') %></span>
-        </div>
-        <div class="col-md-7">
-          <%= tooltip_time_tag @user.created_at, format: :normal, placement: :top %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<p>
+  <%= t('user.registered_at') %>
+  <%= tooltip_time_tag user.created_at, format: :normal, placement: :bottom %><%= ',' if user.last_sign_in_at %>
+  <% if user.last_sign_in_at %>
+    <%= t('user.last_sign_in_at').downcase_first %> <%= tooltip_time_tag user.last_sign_in_at, format: :normal, placement: :bottom %>
+  <% end %>
+</p>
+
+<hr/>
+
 <% unless user.about.blank? %>
   <%= render_markdown user.about %>
 <% end %>
