@@ -9,10 +9,11 @@ Askalot::Application.routes.draw do
   resources :users, only: [:index] do
     patch :profile,  on: :collection, to: 'users#update'
     get   :suggest,  on: :collection
-    get   :follow,   on: :member
+
+    get :follow, on: :member
   end
 
-  get 'users/:nick', to: 'users#show', as: :user
+  get 'users/:nick',           to: 'users#show', as: :user
   get 'users/:nick/followees', to: 'users#followees', as: :followees
   get 'users/:nick/followers', to: 'users#followers', as: :followers
 
