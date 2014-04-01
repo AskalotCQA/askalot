@@ -13,12 +13,13 @@
 <% else %>
   <div class="row">
     <div class="col-md-12">
-      <div class="alert alert-warning">
-        <%= t('user.show.no_questions') %>
-      </div>
-
       <% if @user == current_user %>
-        <%= icon_link_to :plus, t('question.new.feature'), new_question_path, class: 'btn btn-success' %>
+        <span class="text-muted"><%= t('user.show.no_questions') %></span>
+        <%= icon_link_to :'question-circle', t('user.show.ask'), new_question_path, class: 'btn btn-success' %>
+      <% else %>
+        <div class="alert alert-info">
+          <%= t('user.show.other.no_questions') %>
+        </div>
       <% end %>
     </div>
   </div>

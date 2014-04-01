@@ -54,6 +54,11 @@ a.question-metric.text-muted {
 
   h3, h4 {
     margin-top: $padding-base-vertical;
+
+    small {
+      padding-top: $padding-small-vertical;
+      font-size: $font-size-small;
+    }
   }
 
   h3, h4, ul {

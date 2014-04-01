@@ -44,11 +44,13 @@
   vertical-align: middle;
 }
 
-.user-questions, .user-answers {
+.user-questions, .user-answers, .user-favorites {
   @extend .list-unstyled;
 
-  li {
-    margin-bottom: 20px;
+  & > li + li {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid $gray-lighter;
   }
 }
 
@@ -80,11 +82,5 @@
 
   li {
     padding: $padding-xs-vertical 0;
-  }
-}
-
-.user-profile-metrics {
-  div {
-    padding-right: 0px;
   }
 }

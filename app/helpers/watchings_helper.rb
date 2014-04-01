@@ -1,8 +1,15 @@
 module WatchingsHelper
   def watchable_icon_tag(watchable, options = {})
-    data = watchable_data watchable
+    data  = watchable_data watchable
+    color = watchable.is_a?(Deletable) && watchable.deleted ? :'text-muted' : :'text-primary'
 
-    icon_tag data[:icon], options.merge(fixed: true)
+    icon_tag data[:icon], options.merge(class: color, fixed: true)
+  end
+
+  def watchable_content(watchable, options = {})
+    options[:class] = Array.wrap(options[:class]) << :'text-muted' if watchable.is_a?(Deletable) && watchable.deleted
+
+    link_to_watchable watchable, options.reverse_merge(length: 80)
   end
 
   def link_to_watchable(watchable, options = {})

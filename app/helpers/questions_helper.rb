@@ -1,10 +1,10 @@
 module QuestionsHelper
   def question_title_preview(question, options = {})
-    truncate html_escape(render_markdown question.title), default_truncate_options.merge(length: 120).merge(options)
+    html_escape truncate(question.title, default_truncate_options.merge(length: 120).merge(options))
   end
 
   def question_text_preview(question, options = {})
-    truncate render_stripdown(render_markdown question.text), default_truncate_options.merge(length: 200).merge(options)
+    preview_content question.text, options.reverse_merge(length: 200)
   end
 
   def question_answers_coloring(question)
@@ -13,6 +13,10 @@ module QuestionsHelper
     return :'text-warning' if question.answers.helpful.any?
 
     :'text-muted'
+  end
+
+  def question_evaluations_coloring(question)
+    evaluation_data(question)[:color]
   end
 
   def question_votes_coloring(question)

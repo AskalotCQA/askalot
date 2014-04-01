@@ -1,0 +1,14 @@
+<div id="following-<%= user.id %>-count"  class="row">
+  <div class="col-md-6">
+    <%= link_to followees_path do %>
+      <span class="folowee-value"><%= user.followees.size %></span>
+      <%= t('count.followee', count: user.followees.size) %>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <%= link_to followers_path do %>
+      <span class="folower-value"><%= user.followers.size %></span>
+      <%= t('count.follower', count: user.followers.size) %>
+    <% end %>
+  </div>
+</div>

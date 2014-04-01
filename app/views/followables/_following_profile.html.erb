@@ -1,0 +1,13 @@
+<div id="profile-<%= followee.id %>-following" class="user-following">
+  <% if current_user.following? followee %>
+   <a href="<%= follow_user_path(followee) %>" id="<%= "user-#{followee.id}-follow"%>" class="btn btn-info" data-remote="true">
+     <i class="fa fa-chain-broken"></i>
+     <%= t('user.unfollow') %>
+   </a>
+  <% else %>
+   <a href="<%= follow_user_path(followee) %>" id="<%= "user-#{followee.id}-follow"%>" class="btn btn-info" data-remote="true">
+     <i class="fa fa-link"></i>
+      <%= t('user.follow') %>
+    </a>
+  <% end %>
+</div>
