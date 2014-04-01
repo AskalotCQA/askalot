@@ -1,20 +1,32 @@
 <li>
   <div class="row">
-    <div class="col-md-1">
-      <%= content_tag :span, answer.votes_difference, tooltip_attributes("#{answer.votes.positive.size} - #{answer.votes.negative.size}", class: [:'question-metric', question_answers_coloring(answer.question)], placement: :right) do %>
-        <span class="question-value"><%= answer.votes_difference %></span>
-        <%= t('count.vote', count: answer.votes_difference) %>
-      <% end %>
+    <div class="col-md-3">
+      <div class="row">
+        <div class="col-md-6">
+          <%= content_tag :span, class: [:'question-metric', answer_votes_coloring(answer)] do %>
+            <span class="question-value"><%= answer.votes_difference %></span>
+            <%= t('count.vote', count: answer.votes_difference) %>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <%= content_tag :span, class: [:'question-metric', answer_evaluations_coloring(answer)] do %>
+            <span class="question-value"><%= answer.evaluations.size %></span>
+            <%= t('count.evaluation', count: answer.evaluations.size) %>
+          <% end %>
+        </div>
+      </div>
     </div>
 
-    <div class="col-md-11">
+    <div class="col-md-8">
       <div class="question-preview">
         <h4>
-          <%= link_to question_title_preview(answer.question), question_path(answer.question, anchor: "answer-#{answer.id}") %>
+          <%= link_to_answer answer, length: 60 %>
+          <small class="pull-right"><%= tooltip_time_tag answer.created_at, format: :normal, placement: :bottom %></small>
         </h4>
 
-        <%= render 'questions/labels', labels: answer.question.labels %>
-        <small class="text-muted"><%= tooltip_time_tag answer.created_at, format: :normal, placement: :bottom %></small>
+        <div class="answer-content">
+          <%= answer_text_preview answer, length: 80 %>
+        </div>
       </div>
     </div>
   </div>

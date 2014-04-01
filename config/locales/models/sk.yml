@@ -21,7 +21,7 @@ sk:
     evaluation:
       zero: 'hodnotení'
       one: 'hodnotenie'
-      few: 'hodnotení'
+      few: 'hodnotenia'
       other: 'hodnotení'
 
     favorite:
@@ -29,6 +29,18 @@ sk:
       one: 'obľúbenie'
       few: 'obľúbenia'
       other: 'obľúbení'
+
+    followee:
+      zero: 'Nasledovaných'
+      one: 'Nasledovaný'
+      few: 'Nasledovaných'
+      other: 'Nasledovaných'
+
+    follower:
+      zero: 'Nasledovateľov'
+      one: 'Nasledovateľ'
+      few: 'Nasledovateľov'
+      other: 'Nasledovateľov'
 
     notification:
       zero: 'notifikácií'
@@ -88,7 +100,7 @@ sk:
     evaluation:
       zero: 'žiadne hodnotenie'
       one: '1 hodnotenie'
-      few: '%{count} hodnotení'
+      few: '%{count} hodnotenia'
       other: '%{count} hodnotení'
 
     favorite:

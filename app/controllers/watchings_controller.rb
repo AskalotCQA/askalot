@@ -6,7 +6,7 @@ class WatchingsController < ApplicationController
   def index
     count = 25
 
-    @watchings = Watching.where(watcher: current_user).order(created_at: :desc)
+    @watchings = Watching.by(current_user).order(created_at: :desc)
 
     @questions  = @watchings.of(:question).page(tab_page :questions).per(count)
     @categories = @watchings.of(:category).page(tab_page :categories).per(count)

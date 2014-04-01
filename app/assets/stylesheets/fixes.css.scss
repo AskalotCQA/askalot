@@ -43,6 +43,10 @@ address, form, nav, p, dl, ol, ul, table {
   @include box-shadow(none);
 }
 
+.btn-primitive {
+  color: $text-color;
+}
+
 // dropdowns
 
 .dropdown-menu li.active .text-muted {

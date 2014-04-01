@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-1">
+    <%= user_avatar_tag user, image: { class: :'img-square img-responsive', size: 64 } %>
+  </div>
+  <div class="col-md-11">
+    <h3><%= link_to_user user %>
+      <% if can? :show_name, user %>
+        <small><%= user.name %></small>
+      <% end %>
+    </h3>
+  </div>
+</div>

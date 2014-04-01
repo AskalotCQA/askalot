@@ -33,6 +33,9 @@ sk:
     confirmation_pending: 'Čaká sa na potvrdenie e-mailu %{email}.'
     signed_in_as: 'Prihlásený ako %{login}'
 
+    last_sign_in_at: 'Naposledy prihlásený dňa'
+    registered_at: 'Registrovaný dňa'
+
     confirm_registration: 'Poslať inštrukcie pre potvrdenie registrácie'
     change_password: 'Zmeniť'
     reset_password: 'Poslať inštrukcie pre obnovenie hesla'
@@ -42,6 +45,8 @@ sk:
 
     new_password: 'Nové heslo'
     confirm_password: 'Potvrdenie hesla'
+
+    more_social: 'Viac'
 
     leave_current_password: 'ponechajte prázdne pokiaľ nechcete zmeniť'
     enter_current_password: 'pre potvrdenie potrebujeme Vaše aktuálne heslo'
@@ -67,9 +72,18 @@ sk:
       about: 'O mne'
       edit: 'Upraviť profil'
 
-      no_questions: 'Používateľ sa zatiaľ neopýtal žiadnu otázku.'
-      no_answers: 'Používateľ zatiaľ neodpovedal na žiadnu otázku.'
-      no_favorites: 'Používateľ si zatiaľ nepridal žiadnu otázku medzi obľúbené.'
+      ask: 'Opýtajte sa'
+      answer: 'Skúste odpovedať'
+      browse: 'Prezrite si otázky'
+
+      no_questions: 'Zatiaľ ste sa neopýtali žiadnu otázku'
+      no_answers: 'Zatiaľ ste neodpovedali na žiadnu otázku'
+      no_favorites: 'Zatiaľ ste si nepridali žiadnu otázku medzi obľúbené'
+
+      other:
+        no_questions: 'Používateľ sa zatiaľ neopýtal žiadnu otázku.'
+        no_answers: 'Používateľ zatiaľ neodpovedal na žiadnu otázku.'
+        no_favorites: 'Používateľ si zatiaľ nepridal žiadnu otázku medzi obľúbené.'
 
     edit:
       profile: 'Úprava profilu'
@@ -79,5 +93,21 @@ sk:
 
     update:
       success: 'Úspešne ste aktualizovali Váš profil.'
+
+    follow: 'Nasledovať'
+    unfollow: 'Nenasledovať'
+
+    followees:
+      title:
+        zero: 'Nasledovaný'
+        one: 'Nasledovaný'
+        few: 'Nasledovaní'
+        other: 'Nasledovaní'
+
+      no_results_found: 'Nenasledujete žiadneho používateľa.'
+
+    followers:
+      title: 'Nasledovníci'
+      no_results_found: 'Nenasleduje vás žiadny používateľ'
 
     anonymous: 'Anonym'

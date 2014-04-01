@@ -14,13 +14,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.where(nick: params[:nick]).first
-
-    raise ActiveRecord::RecordNotFound unless @user
+    @user = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
 
     @questions = @user.questions.where(anonymous: false).order(created_at: :desc)
     @answers   = @user.answers.order(created_at: :desc)
     @favorites = Question.favored_by(@user).order(created_at: :desc)
+    @comments  = @user.comments
 
     @questions = @questions.page(tab_page :questions).per(10)
     @answers   = @answers.page(tab_page :answers).per(10)
@@ -37,6 +36,24 @@ class UsersController < ApplicationController
     end
 
     redirect_to edit_user_registration_path(tab: params[:tab])
+  end
+
+  def follow
+    @followee = User.find(params[:id])
+
+    current_user.toggle_following_by! @followee
+
+    render 'followables/follow', formats: :js
+  end
+
+  def followees
+    @user      = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
+    @followees = @user.followees.page(params[:page]).per(20)
+  end
+
+  def followers
+    @user      = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
+    @followers = @user.followers.page(params[:page]).per(20)
   end
 
   def suggest

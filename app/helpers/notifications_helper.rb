@@ -13,10 +13,10 @@ module NotificationsHelper
     resource = notification.resource
 
     content = case resource.class.name.downcase.to_sym
-    when :comment then "notification.content.#{resource.class.name.downcase}.#{resource.commentable.class.name.downcase}.#{notification.action}"
-    when :evaluation then "notification.content.#{resource.class.name.downcase}.#{resource.evaluable.class.name.downcase}.#{notification.action}"
-    else "notification.content.#{resource.class.name.downcase}.#{notification.action}"
-    end
+              when :comment then "notification.content.#{resource.class.name.downcase}.#{resource.commentable.class.name.downcase}.#{notification.action}"
+              when :evaluation then "notification.content.#{resource.class.name.downcase}.#{resource.evaluable.class.name.downcase}.#{notification.action}"
+              else "notification.content.#{resource.class.name.downcase}.#{notification.action}"
+              end
 
     body    = t("notification.content.#{notification.action == :mention ? :mention : :persistence}.#{resource.class.name.downcase}")
     content = t(content, resource: link_to_notifiable(resource, body: body), question: link_to_notifiable(resource, length: 50)).html_safe

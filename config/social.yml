@@ -4,6 +4,7 @@ defaults: &defaults
     - twitter
     - google_plus
     - linkedin
+    - stack_overflow
     - github
     - bitbucket
     - youtube
@@ -12,7 +13,15 @@ defaults: &defaults
     - instagram
     - flickr
     - foursquare
+
+  highlighted:
+    - facebook
+    - twitter
+    - google_plus
+    - linkedin
     - stack_overflow
+    - github
+    - bitbucket
 
   bitbucket:
     icon: bitbucket
