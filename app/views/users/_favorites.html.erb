@@ -14,7 +14,7 @@
   <div class="row">
     <div class="col-md-12">
       <% if @user == current_user %>
-        <%= t('user.show.no_favorites') %>
+        <span class="text-muted"><%= t('user.show.no_favorites') %></span>
         <%= icon_link_to :tasks, t('user.show.browse'), questions_path, class: 'btn btn-success' %>
       <% else %>
         <div class="alert alert-info">
