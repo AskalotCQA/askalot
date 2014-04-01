@@ -27,13 +27,13 @@
       <div class="question-preview">
         <h4>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
-          <%= link_to_question question %>
+          <%= link_to_question question, length: 120 %>
         </h4>
 
         <%= render 'questions/labels', labels: question.labels %>
 
         <div class="question-content">
-          <%= question_text_preview question %>
+          <%= question_text_preview question, length: 250 %>
         </div>
       </div>
     </div>
