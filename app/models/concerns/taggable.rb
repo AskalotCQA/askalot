@@ -21,12 +21,7 @@ module Taggable
   end
 
   def changed?
-    diff = false
-    tags.each do |tag|
-      diff |= tag_list.exclude? tag.name
-    end
-
-    super || tag_list.count!=tags.size || diff
+    super || tag_list.count!=tags.size || (tag_list.values-tags.map(&:name)).any?
   end
 
   private
