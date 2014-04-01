@@ -14,9 +14,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.where(nick: params[:nick]).first
-
-    raise ActiveRecord::RecordNotFound unless @user
+    @user = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
 
     @questions = @user.questions.where(anonymous: false).order(created_at: :desc)
     @answers   = @user.answers.order(created_at: :desc)
@@ -49,17 +47,13 @@ class UsersController < ApplicationController
   end
 
   def followees
-    @user      = User.where(nick: params[:nick]).first
-    raise AR::NotFound unless @user
-    @followees = @user.followees
-    @followees = @followees.page(params[:page]).per(20)
+    @user      = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
+    @followees = @user.followees.page(params[:page]).per(20)
   end
 
   def followers
-    @user      = User.where(nick: params[:nick]).first
-    raise AR::NotFound unless @user
-    @followers = @user.followers
-    @followers = @followers.page(params[:page]).per(20)
+    @user      = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
+    @followers = @user.followers.page(params[:page]).per(20)
   end
 
   def suggest
