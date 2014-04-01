@@ -16,6 +16,26 @@ class Social
       }]
     end
 
+    def networks_show
+      @networks_show ||= Hash[highlighted.map { |key|
+        network        = send(key)
+        network.key    = key
+        network.regexp = regexp(network.placeholder)
+
+        [key, network]
+      }]
+    end
+
+    def networks_hide
+      @networks_hide ||= Hash[(enabled-highlighted).map { |key|
+        network        = send(key)
+        network.key    = key
+        network.regexp = regexp(network.placeholder)
+
+        [key, network]
+      }]
+    end
+
     private
 
     def regexp(placeholder)
