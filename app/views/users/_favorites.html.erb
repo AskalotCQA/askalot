@@ -1,5 +1,5 @@
 <% if favorites.any? %>
-  <ol class="user-questions">
+  <ol class="user-favorites">
     <% favorites.each do |favorite| %>
       <%= render 'users/question', question: favorite %>
     <% end %>
@@ -13,14 +13,14 @@
 <% else %>
   <div class="row">
     <div class="col-md-12">
-      <div class="alert alert-warning">
-        <%= t('user.show.no_favorites') %>
-      </div>
-
       <% if @user == current_user %>
-        <%= icon_link_to :plus, t('question.new.feature'), new_question_path, class: 'btn btn-success' %>
+        <%= t('user.show.no_favorites') %>
+        <%= icon_link_to :tasks, t('user.show.browse'), questions_path, class: 'btn btn-success' %>
+      <% else %>
+        <div class="alert alert-info">
+          <%= t('user.show.other.no_favorites') %>
+        </div>
       <% end %>
     </div>
   </div>
 <% end %>
-

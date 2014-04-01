@@ -13,12 +13,13 @@
 <% else %>
   <div class="row">
     <div class="col-md-12">
-      <div class="alert alert-warning">
-        <%= t('user.show.no_answers') %>
-      </div>
-
       <% if @user == current_user %>
-        <%= icon_link_to :comment, t('home.answer'), question_path(@question), class: 'btn btn-success', fixed: true %>
+        <%= t('user.show.no_answers') %>
+        <%= icon_link_to :comment, t('user.show.answer'), question_path(@question), class: 'btn btn-success' %>
+      <% else %>
+        <div class="alert alert-info">
+          <%= t('user.show.other.no_answers') %>
+        </div>
       <% end %>
     </div>
   </div>
