@@ -33,6 +33,9 @@ sk:
     confirmation_pending: 'Čaká sa na potvrdenie e-mailu %{email}.'
     signed_in_as: 'Prihlásený ako %{login}'
 
+    last_sign_in: 'Posledné prihlásenie:'
+    registered_from: 'V Askalote od:'
+
     confirm_registration: 'Poslať inštrukcie pre potvrdenie registrácie'
     change_password: 'Zmeniť'
     reset_password: 'Poslať inštrukcie pre obnovenie hesla'
