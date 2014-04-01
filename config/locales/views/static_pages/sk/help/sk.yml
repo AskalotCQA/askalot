@@ -1,6 +1,8 @@
 sk:
   help:
-    title: 'Help pre systém Askalot'
+    title: 'Keď si nevieš dať rady v Askalote'
+
+    index: 'Pomoc'
 
     headings:
       question-posing: 'Chcem sa opýtať otázku'
