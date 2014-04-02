@@ -14,6 +14,7 @@ class Question
           number_of_replicas: 0
         },
 
+        # TODO (smolnar) stemming, stopwords
         analysis: {
           analyzer: {
             text: {
@@ -48,20 +49,52 @@ class Question
                   type: :integer
                 },
                 title: {
-                  type: :string,
-                  analyzer: :text
+                  type: :multi_field,
+                  fields: {
+                    title: {
+                      type: :string,
+                      analyzer: :text,
+                      store: :yes
+                    },
+                    untouched: {
+                      include_in_all: false,
+                      type: :string,
+                      index: :not_analyzed
+                    }
+                  }
                 },
                 text: {
-                  type: :string,
-                  analyzer: :text
+                  type: :multi_field,
+                  fields: {
+                    text: {
+                      type: :string,
+                      analyzer: :text,
+                      store: :yes
+                    },
+                    untouched: {
+                      include_in_all: false,
+                      type: :string,
+                      index: :not_analyzed
+                    }
+                  }
                 },
                 tags: {
-                  type: :string,
-                  analyzer: :tags
+                  type: :multi_field,
+                  fields: {
+                    tags: {
+                      type: :string,
+                      analyzer: :tags,
+                      store: :yes
+                    },
+                    untouched: {
+                      include_in_all: false,
+                      type: :string,
+                      index: :not_analyzed
+                    }
+                  }
                 }
               }
             }
-
           }
         }
       }
