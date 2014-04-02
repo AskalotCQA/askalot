@@ -8,8 +8,11 @@ module Probe
       @index ||= Probe::Index.new
     end
 
-    def search
+    def search(*args)
+      # TODO (smolnar) refactor
       @search ||= Probe::Search.new(index)
+
+      @search.search(*args)
     end
   end
 end

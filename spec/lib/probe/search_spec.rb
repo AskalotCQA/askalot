@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Probe::Search do
-  subject { probe.search }
+  subject { probe }
 
   let(:probe) { document.probe }
   let(:index) { probe.index }
