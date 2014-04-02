@@ -45,6 +45,6 @@ class NotificationsController < ApplicationController
       form_error_message t("notification.#{status}.failure"), key: params[:tab]
     end
 
-    redirect_to :back
+    redirect_to(params[:r] ? params[:r] : :back)
   end
 end
