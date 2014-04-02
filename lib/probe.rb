@@ -5,6 +5,8 @@ require 'probe/instance'
 require 'probe/import'
 require 'probe/import/simple'
 require 'probe/import/bulk'
+require 'probe/search/results'
+require 'probe/search'
 
 module Probe
   extend ActiveSupport::Concern

@@ -14,11 +14,15 @@ describe Probe::Index do
     index.mappings = {
       document: {
         properties: {
-          id: {
-            type: :integer
-          },
-          text: {
-            type: :string
+          doc: {
+            properties: {
+              id: {
+                type: :integer
+              },
+              text: {
+                type: :string
+              }
+            }
           }
         }
       }
@@ -49,6 +53,10 @@ describe Probe::Index do
 
   describe '#import' do
     let(:document) { Class.new(OpenStruct) { include Probe } }
+
+    before :each do
+      document.probe.index = index
+    end
 
     it 'imports documents' do
       documents = [document.new(id: 1, title: 'Westside')]

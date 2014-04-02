@@ -23,7 +23,7 @@ module Probe
     end
 
     def delete
-      client.indices.delete index: name
+      client.indices.delete index: name if exists?
     end
 
     def mapper
@@ -39,6 +39,7 @@ module Probe
     end
 
     def size
+      # TODO (smolnar) refactor
       stats['_all']['primaries']['docs']['count']
     end
 
