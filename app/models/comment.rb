@@ -2,7 +2,7 @@ class Comment < ActiveRecord::Base
   include Authorable
   include Deletable
   include Editable
-  include Notifiable
+  include Eventable
   include Touchable
 
   belongs_to :commentable, -> { deleted_or_not }, polymorphic: true, counter_cache: true

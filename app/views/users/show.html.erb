@@ -22,7 +22,8 @@
       <%= render_tab_content 'users/profile/questions', :questions, locals: { user: @user, questions: @questions } %>
       <%= render_tab_content 'users/profile/answers', :answers, locals: { user: @user, answers: @answers } %>
       <%= render_tab_content 'users/profile/favorites', :favorites, locals: { user: @user, favorites: @favorites } %>
-      <%= render_tab_content 'activities/activities', :activity, locals: { activities: @activities } %>
+      <%= render_tab_content 'activities/activities', :activity, locals: { user: @user, activities: @activities } %>
     </div>
   </div>
 </div>
+

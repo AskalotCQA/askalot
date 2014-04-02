@@ -22,3 +22,4 @@ module ActivitiesHelper
     content = t(content, resource: link_to_notifiable(resource, body: body), question: link_to_notifiable(resource, length: 50)).html_safe
   end
 end
+
