@@ -104,6 +104,10 @@
   }
 
   span {
+    color: $gray-light;
+  }
+
+  .question-favorites-value {
     display: block;
 
     font-size: $font-size-h4;
