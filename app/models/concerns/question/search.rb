@@ -36,6 +36,13 @@ class Question
               pattern: '-*(\w+)-*',
               group: 0
             }
+          },
+
+          filter: {
+            stop_en: {
+              type: :stop,
+              lang: :english
+            }
           }
         }
       }
@@ -54,10 +61,8 @@ class Question
                     title: {
                       type: :string,
                       analyzer: :text,
-                      store: :yes
                     },
                     untouched: {
-                      include_in_all: false,
                       type: :string,
                       index: :not_analyzed
                     }
@@ -69,10 +74,8 @@ class Question
                     text: {
                       type: :string,
                       analyzer: :text,
-                      store: :yes
                     },
                     untouched: {
-                      include_in_all: false,
                       type: :string,
                       index: :not_analyzed
                     }
@@ -84,10 +87,8 @@ class Question
                     tags: {
                       type: :string,
                       analyzer: :tags,
-                      store: :yes
                     },
                     untouched: {
-                      include_in_all: false,
                       type: :string,
                       index: :not_analyzed
                     }
