@@ -15,6 +15,9 @@ sk:
       answers: 'Odpovede'
       favorites: 'Obľúbené'
 
+      followees: 'Nasledovaní'
+      followers: 'Nasledovníci'
+
     registration: 'Registrácia'
     confirmation: 'Potvrdenie registrácie'
     session_start: 'Prihlásenie'
@@ -94,20 +97,19 @@ sk:
     update:
       success: 'Úspešne ste aktualizovali Váš profil.'
 
+    followings:
+      title: 'Nasledovania'
+
+      browse: 'Prezrite si používateľov'
+
+      no_followees: 'Zatiaľ nenasledujete žiadneho používateľa'
+      no_followers: 'Zatiaľ vás nenasledujú žiadni používatelia.'
+
+      other:
+        no_followees: 'Používateľ zatiaľ nenasleduje žiadnych používateľov.'
+        no_followers: 'Používateľa zatiaľ nenasledujú žiadni používatelia.'
+
     follow: 'Nasledovať'
     unfollow: 'Nenasledovať'
-
-    followees:
-      title:
-        zero: 'Nasledovaný'
-        one: 'Nasledovaný'
-        few: 'Nasledovaní'
-        other: 'Nasledovaní'
-
-      no_results_found: 'Nenasledujete žiadneho používateľa.'
-
-    followers:
-      title: 'Nasledovníci'
-      no_results_found: 'Nenasleduje vás žiadny používateľ'
 
     anonymous: 'Anonym'

@@ -1,0 +1,20 @@
+<% group_categories_by_prefix(categories).each do |_, group| %>
+  <div class="category-group">
+    <% group.each_slice(3) do |categories| %>
+      <div class="row">
+        <% categories.each do |category| %>
+          <div class="col-md-4">
+            <h4>
+              <%= link_to_category category %>
+            </h4>
+            <div class="category-details">
+              <%= t('count.question', count: category.questions.size).upcase_first %> <%= category.questions.size %> &middot;
+              <%= t('count.answer', count: category.answers.size).upcase_first %> <%= category.answers.size %> &middot;
+              <%= render 'watching', category: category %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

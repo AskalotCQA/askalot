@@ -3,11 +3,6 @@
 
   <span class="user-link">
     <%= link_to_user user %>
-    <% if user != current_user %>
-      <div class="pull-right">
-        <%= render 'users/following', followee: user %>
-      </div>
-    <% end %>
   </span>
 
   <% if user != :anonymous && user.show_name? && !user.name.blank? %>

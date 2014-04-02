@@ -18,26 +18,11 @@
 // collection
 
 .question-metric {
-  display: block;
-  margin-bottom: $padding-base-vertical;
-
-  text-align: center;
-
-  &:active, &:focus, &:hover {
-    text-decoration: none;
-  }
+  @include block-metric;
 }
 
-a.question-metric.text-muted {
-  @include color-variant($text-muted, darken($text-muted, 12.5%));
-}
-
-.question-value {
-  display: block;
-  margin-top: $padding-base-vertical;
-
-  font-size: $font-size-h3;
-  text-align: center;
+.question-metric-value {
+  @include block-metric-value;
 }
 
 .question-preview {

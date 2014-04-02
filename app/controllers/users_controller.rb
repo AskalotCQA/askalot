@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   default_tab :all, only: :index
   default_tab :profile, only: :show
+  default_tab :followers, only: :followings
 
   def index
     @users = case params[:tab].to_sym
@@ -29,6 +30,8 @@ class UsersController < ApplicationController
   end
 
   def update
+    authorize! :edit, current_user
+
     if current_user.update_attributes(user_params)
       form_message :notice, t('user.update.success'), key: params[:tab]
     else
@@ -41,19 +44,18 @@ class UsersController < ApplicationController
   def follow
     @followee = User.find(params[:id])
 
+    authorize! :follow, @followee
+
     current_user.toggle_following_by! @followee
 
-    render 'followables/follow', formats: :js
+    params[:profile] ? redirect_to(:back) : render('follow', formats: :js)
   end
 
-  def followees
-    @user      = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
-    @followees = @user.followees.page(params[:page]).per(20)
-  end
+  def followings
+    @user = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
 
-  def followers
-    @user      = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
-    @followers = @user.followers.page(params[:page]).per(20)
+    @followees = @user.followees.page(tab_page :followees).per(20)
+    @followers = @user.followers.page(tab_page :followers).per(20)
   end
 
   def suggest

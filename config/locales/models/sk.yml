@@ -31,16 +31,16 @@ sk:
       other: 'obľúbení'
 
     followee:
-      zero: 'Nasledovaných'
-      one: 'Nasledovaný'
-      few: 'Nasledovaných'
-      other: 'Nasledovaných'
+      zero: 'nasledovaných'
+      one: 'nasledovaný'
+      few: 'nasledovaný'
+      other: 'nasledovaných'
 
     follower:
-      zero: 'Nasledovateľov'
-      one: 'Nasledovateľ'
-      few: 'Nasledovateľov'
-      other: 'Nasledovateľov'
+      zero: 'nasledovníkov'
+      one: 'nasledovník'
+      few: 'nasledovníci'
+      other: 'nasledovníkov'
 
     notification:
       zero: 'notifikácií'
@@ -108,6 +108,18 @@ sk:
       one: '1 obľúbenie'
       few: '%{count} obľúbenia'
       other: '%{count} obľúbení'
+
+    followee:
+      zero: 'žiaden nasledovaný'
+      one: '1 nasledovaný'
+      few: '%{count} nasledovaný'
+      other: '%{count} nasledovaných'
+
+    follower:
+      zero: 'žiaden nasledovník'
+      one: 'jeden nasledovník'
+      few: '%{count} nasledovníci'
+      other: '%{count} nasledovníkov'
 
     notification:
       zero: 'žiadna notifikácia'

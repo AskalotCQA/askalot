@@ -4,6 +4,8 @@ module UsersHelper
     image   = options.delete(:image) || {}
     size    = options.delete(:size)
 
+    classes << :'user-avatar-inline' if options.delete(:inline)
+
     if size
       classes << "user-avatar-#{size}"
     else
