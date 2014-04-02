@@ -21,7 +21,7 @@ module Taggable
   end
 
   def changed?
-    super || tag_list.count!=tags.size || (tag_list.values-tags.map(&:name)).any?
+    super || (tag_list.values - tags.pluck(:name)).any?
   end
 
   private
