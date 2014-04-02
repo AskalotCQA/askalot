@@ -4,7 +4,7 @@
       <div class="row">
         <% users.each do |user| %>
           <div class="col-md-2">
-            <%= render 'square', user: user %>
+            <%= render 'square', user: user, following: true %>
           </div>
         <% end %>
       </div>
