@@ -6,7 +6,7 @@ class Activity < ActiveRecord::Base
   #TODO(poizl) rm this shit when on rails 4.1.0, see deletable.rb
   belongs_to :resource, -> { self.included_modules.include?(Deletable) ? self.deleted_or_not : self }, polymorphic: true
 
-  default_scope -> { where.not(resource_type: [View, Vote]) }
+  default_scope -> { where.not(resource_type: [View, Vote, Favorite]) }
 
   symbolize :action, in: ACTIONS
 end
