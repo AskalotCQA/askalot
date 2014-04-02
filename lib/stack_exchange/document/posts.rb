@@ -13,7 +13,7 @@ module StackExchange
             author_id:           user.nil? ? 0 : user.id,
             category_id:         Category.first.id,
             title:               post[:Title],
-            text:                post[:Body].html_safe,
+            text:                ActioView::Base.full_sanitizer.sanitize(post[:Text]).to_s,
             created_at:          post[:CreationDate],
             updated_at:          post[:CreationDate],
             tag_list:            post[:Tags].gsub(/^</,'').gsub(/>$/,'').split(/></),
