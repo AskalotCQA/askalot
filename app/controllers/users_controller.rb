@@ -19,8 +19,8 @@ class UsersController < ApplicationController
 
     @questions = @user.questions.where(anonymous: false).order(created_at: :desc)
     @answers   = @user.answers.order(created_at: :desc)
-    @favorites = Question.favored_by(@user).order(created_at: :desc)
-    @comments  = @user.comments
+    @favorites = @user.favorites.order(created_at: :desc)
+    @comments  = @user.comments.order(created_at: :desc)
 
     @questions = @questions.page(tab_page :questions).per(10)
     @answers   = @answers.page(tab_page :answers).per(10)
