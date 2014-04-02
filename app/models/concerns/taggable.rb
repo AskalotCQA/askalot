@@ -20,6 +20,10 @@ module Taggable
     @tag_list = TagList.new(self.class.taggable, values)
   end
 
+  def changed?
+    super || (tag_list.values - tags.pluck(:name)).any?
+  end
+
   private
 
   # TODO(zbell) rename -> create_tags
@@ -30,12 +34,15 @@ module Taggable
       Tagging.find_or_create_by! tag_id: tag.id, taggable_id: self.id, taggable_type: self.class.base_class.name
     end
 
+    taggings.each(&:destroy) if tag_list.empty?
+
     flush_tags!
   end
 
   # TODO(zbell) rename -> update_tags
   def flush_tags!
     taggings.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags).each(&:destroy)
+    reload
   end
 
   module ClassMethods
@@ -108,6 +115,10 @@ module Taggable
 
     def to_s
       tags.join(',')
+    end
+
+    def empty?
+      values.empty?
     end
 
     class Extractor
