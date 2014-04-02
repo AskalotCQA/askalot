@@ -21,12 +21,13 @@ module UsersHelper
   end
 
   def user_icon_tag(user, options = {})
-    image = options.delete(:image) || {}
+    classes = [:'user-avatar-icon'] + Array.wrap(options.delete :class)
+    image   = options.delete(:image) || {}
 
-    image[:class] = [:'user-avatar-icon']
+    image[:class] = [:'img-icon']
     image[:class] = :'img-muted' if options.delete(:muted)
 
-    wrapped_user_image_tag user, image, options
+    wrapped_user_image_tag user, image, options.merge(class: classes)
   end
 
   def link_to_user(user, options = {})

@@ -30,6 +30,13 @@ html {
 
 // images
 
+.img-icon {
+  @include square(20px);
+
+  display: block;
+  vertical-align: middle;
+}
+
 .img-muted {
   @include opacity(0.8)
 }

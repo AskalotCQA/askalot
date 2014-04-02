@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    count = 25
+    count = 20
 
     @notifications = Notification.for(current_user).order(created_at: :desc)
 

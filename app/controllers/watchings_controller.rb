@@ -4,7 +4,7 @@ class WatchingsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    count = 25
+    count = 20
 
     @watchings = Watching.by(current_user).order(created_at: :desc)
 
@@ -26,7 +26,7 @@ class WatchingsController < ApplicationController
   end
 
   def clean
-    @watchings = Watching.where(watcher: current_user, watchable_type: params[:type])
+    @watchings = Watching.where(watcher: current_user, watchable_type: params[:type].classify)
 
     if @watchings.destroy_all
       form_message :notice, t('watching.clean.success'), key: params[:tab]

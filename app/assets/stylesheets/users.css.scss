@@ -48,7 +48,9 @@
 }
 
 .user-avatar-icon {
-  width: 20px;
+  @include square(20px);
+
+  display: inline-block;
   vertical-align: middle;
 }
 

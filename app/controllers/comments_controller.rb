@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  include Deletables::Delete
+  include Deletables::Destroy
   include Editables::Update
 
   include Events::Dispatch
