@@ -5,10 +5,6 @@ html {
   overflow-y: scroll;
 }
 
-body {
-  margin-top: $navbar-height + 1px;
-}
-
 .flash .alert:first-child {
   margin-top: $navbar-height;
 }
@@ -102,6 +98,8 @@ body {
 // header
 
 header {
+  margin: 0 !important;
+
   .navbar-brand {
     font-variant: small-caps;
   }
