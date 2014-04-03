@@ -1,15 +1,13 @@
-# TODO(zbell) drop polymorphic from taggable
-
 module Taggable
   extend ActiveSupport::Concern
 
   included do
-    has_many :taggings, as: :taggable, dependent: :destroy
+    has_many :taggings, dependent: :destroy
     has_many :tags, through: :taggings
 
     scope :tagged_with, lambda { |values, options = {}| Scope.new(self).build(values, options) }
 
-    after_save :generate_tags!
+    after_save :create_tags!
   end
 
   def tag_list
@@ -26,22 +24,21 @@ module Taggable
 
   private
 
-  # TODO(zbell) rename -> create_tags
-  def generate_tags!
+  def create_tags!
     tag_list.each do |name|
       tag = Tag.find_or_create_by! name: name
 
-      Tagging.find_or_create_by! tag_id: tag.id, taggable_id: self.id, taggable_type: self.class.base_class.name
+      Tagging.find_or_create_by! tag: tag, question: self
     end
 
-    taggings.each(&:destroy) if tag_list.empty?
-
-    flush_tags!
+    update_tags!
   end
 
-  # TODO(zbell) rename -> update_tags
-  def flush_tags!
+  def update_tags!
+    return taggings.map(&:destroy) if tag_list.empty?
+
     taggings.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags).each(&:destroy)
+
     reload
   end
 
@@ -69,7 +66,6 @@ module Taggable
         relation.where tags: { name: tags }
       else
         # TODO(smolnar) REFACTOR, resolve why reference to class is scoped!
-        # TODO(zbell) rm questions dependency
         ids   = []
         scope = relation.base_class
 
@@ -89,16 +85,15 @@ module Taggable
     include Enumerable
 
     attr_reader :values
+    attr_accessor :config, :extractor
 
-    attr_accessor :base, :extractor
-
-    def initialize(base, values = [])
-      @base   = base
+    def initialize(config, values = [])
+      @config = config
       @values = values
     end
 
     def extractor
-      @extractor ||= base.extractor? ? base.extractor : TagList::Extractor
+      @extractor ||= config.extractor? ? config.extractor : TagList::Extractor
     end
 
     def each
