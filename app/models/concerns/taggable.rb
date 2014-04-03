@@ -11,11 +11,11 @@ module Taggable
   end
 
   def tag_list
-    @tag_list ||= TagList.new(self.class.taggable, tags.pluck(:name))
+    @tag_list ||= TagList.new(self.class.taggable.extractor, tags.pluck(:name))
   end
 
   def tag_list=(values)
-    @tag_list = TagList.new(self.class.taggable, values)
+    tag_list.values = values
   end
 
   def changed?
@@ -84,16 +84,11 @@ module Taggable
   class TagList
     include Enumerable
 
-    attr_reader :values
-    attr_accessor :config, :extractor
+    attr_accessor :config, :extractor, :values
 
-    def initialize(config, values = [])
-      @config = config
-      @values = values
-    end
-
-    def extractor
-      @extractor ||= config.extractor? ? config.extractor : TagList::Extractor
+    def initialize(extractor, values = [])
+      @extractor = extractor
+      @values    = values
     end
 
     def each
