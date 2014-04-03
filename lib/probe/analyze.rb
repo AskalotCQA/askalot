@@ -11,7 +11,7 @@ module Probe
     end
 
     def analyze(options)
-      result = client.indices.analyze({ index: index.name }.merge(options))
+      result = client.indices.analyze(options.reverse_merge(index: index.name))
 
       result['tokens'].map { |token| token['token'] }
     end

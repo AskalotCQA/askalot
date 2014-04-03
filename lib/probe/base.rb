@@ -10,12 +10,8 @@ module Probe
       instance.class.probe.index
     end
 
-    def mapper
-      index.mapper
-    end
-
     def to_mapping
-      mapper.map(instance)
+      index.mapper.map(instance)
     end
   end
 end

@@ -16,10 +16,10 @@ module Searchable
 
   module ClassMethods
     def search(query = {})
-      size = query.delete(:per_page) || 25
+      size = query.delete(:per_page) || 20
       from = (query.delete(:page) || 0) * size
 
-      results = probe.search({ from: from, size: size }.merge(query))
+      results = probe.search(query.revese_merge(from: from, size: size))
 
       results.map { |result| find(result.id) }
     end

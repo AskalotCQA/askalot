@@ -8,9 +8,9 @@ module Probe
               { action => { _index: index.name, _type: index.type, _id: document.id }},
               document_for_import(document)
             ]
-          end.flatten
+          end
 
-          client.bulk body: request
+          client.bulk body: request.flatten
         end
       end
     end

@@ -53,6 +53,7 @@ module Questions
             id: {
               type: :integer
             },
+
             title: {
               type: :multi_field,
               fields: {
@@ -66,6 +67,7 @@ module Questions
                 }
               }
             },
+
             text: {
               type: :multi_field,
               fields: {
@@ -79,6 +81,7 @@ module Questions
                 }
               }
             },
+
             tags: {
               type: :multi_field,
               fields: {
@@ -108,7 +111,7 @@ module Questions
 
     module ClassMethods
       def search_by(params)
-        search({
+        search(
           query: {
             query_string: {
               query: probe.sanitizer.sanitize_query(params[:q]),
@@ -116,7 +119,7 @@ module Questions
               fields: [:text, :title, :tags]
             }
           }
-        })
+        )
       end
     end
   end

@@ -1,7 +1,7 @@
 require 'probe/index'
 require 'probe/mapper'
 require 'probe/proxy'
-require 'probe/instance'
+require 'probe/base'
 require 'probe/import'
 require 'probe/import/simple'
 require 'probe/import/bulk'
@@ -14,7 +14,7 @@ module Probe
   extend ActiveSupport::Concern
 
   def probe
-    @probe ||= Probe::Instance.new(self)
+    @probe ||= Probe::Base.new(self)
   end
 
   def to_mapping
