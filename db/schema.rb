@@ -23,12 +23,15 @@ ActiveRecord::Schema.define(version: 20140408184444) do
     t.string   "action",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "created_on",    null: false
+    t.date     "updated_on",    null: false
   end
 
   add_index "activities", ["action"], name: "index_activities_on_action", using: :btree
   add_index "activities", ["created_at"], name: "index_activities_on_created_at", using: :btree
   add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
   add_index "activities", ["resource_id", "resource_type"], name: "index_activities_on_resource_id_and_resource_type", using: :btree
+  add_index "activities", ["updated_on", "updated_at"], name: "index_activities_on_updated_on_and_updated_at", using: :btree
 
   create_table "answer_revisions", force: true do |t|
     t.integer  "answer_id",                  null: false
@@ -188,10 +191,13 @@ ActiveRecord::Schema.define(version: 20140408184444) do
   add_index "favorites", ["question_id"], name: "index_favorites_on_question_id", using: :btree
 
   create_table "followings", force: true do |t|
-    t.integer  "follower_id", null: false
-    t.integer  "followee_id", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "follower_id",                 null: false
+    t.integer  "followee_id",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "deleted",     default: false, null: false
+    t.integer  "deletor_id"
+    t.datetime "deleted_at"
   end
 
   add_index "followings", ["followee_id"], name: "index_followings_on_followee_id", using: :btree
@@ -455,11 +461,14 @@ ActiveRecord::Schema.define(version: 20140408184444) do
   add_index "votes", ["voter_id"], name: "index_votes_on_voter_id", using: :btree
 
   create_table "watchings", force: true do |t|
-    t.integer  "watcher_id",     null: false
-    t.integer  "watchable_id",   null: false
-    t.string   "watchable_type", null: false
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.integer  "watcher_id",                     null: false
+    t.integer  "watchable_id",                   null: false
+    t.string   "watchable_type",                 null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.boolean  "deleted",        default: false, null: false
+    t.integer  "deletor_id"
+    t.datetime "deleted_at"
   end
 
   add_index "watchings", ["watchable_id", "watchable_type"], name: "index_watchings_on_watchable_id_and_watchable_type", using: :btree
