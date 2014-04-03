@@ -8,29 +8,31 @@ namespace :research do
 
       puts ({
         query: {
-          query_string: {
-            query: text,
-            default_operator: :or
+          more_like_this: {
+            like_text: text,
+            fields: [:title, :text, :tags],
+            min_term_freq: 1
           }
         },
         sort: {
           _script: {
             script: "
-              score = doc.score;
-              size  = _index.numDocs();
+              result = doc.score;
+              size   = _index.numDocs();
 
               foreach(term : terms) {
                 frequency       = _index['title'][term].tf() + _index['text'][term].tf() + _index['tags'][term].tf();
                 total_frequency = _index['title'][term].ttf() + _index['text'][term].ttf() + _index['tags'][term].ttf();
 
                 if (frequency > 0 && total_frequency > 0) {
-                  score += frequency * log(size / total_frequency);
+                  result += frequency * log((size / total_frequency) + 1);
                 }
               }
 
-              return score;
+              return result;
             ",
             type: :number,
+            order: :desc,
             params: {
               terms: terms,
             }
