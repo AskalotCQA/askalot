@@ -1,4 +1,6 @@
 class Watching < ActiveRecord::Base
+  include Notifiable
+
   belongs_to :watcher, class_name: :User
 
   #TODO(zbell) rm this shit when on rails 4.1.0, see deletable.rb
