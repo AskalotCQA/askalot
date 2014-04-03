@@ -4,27 +4,27 @@
       <div class="row">
         <div class="col-md-6">
           <%= content_tag :span, class: [:'question-metric', question_votes_coloring(question)] do %>
-            <span class="question-value"><%= question.favorites.size %></span>
+            <span class="question-metric-value"><%= question.favorites.size %></span>
             <%= t('count.favorite', count: question.favorites.size) %>
           <% end %>
         </div>
         <div class="col-md-6">
-          <%= link_to question_path(question, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
-            <span class="question-value"><%= question.answers.size %></span>
-            <%= t('count.answer', count: question.answers.size) %>
+          <%= content_tag :span, class: [:'question-metric', question_votes_coloring(question)] do %>
+            <span class="question-metric-value"><%= question.votes_difference %></span>
+            <%= t('count.vote', count: question.votes_difference) %>
           <% end %>
         </div>
       </div>
       <div class="row">
         <div class="col-md-6">
-          <%= content_tag :span, class: [:'question-metric', question_votes_coloring(question)] do %>
-            <span class="question-value"><%= question.votes_difference %></span>
-            <%= t('count.vote', count: question.votes_difference) %>
+          <%= link_to question_path(question, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
+            <span class="question-metric-value"><%= question.answers.size %></span>
+            <%= t('count.answer', count: question.answers.size) %>
           <% end %>
         </div>
         <div class="col-md-6">
           <%= content_tag :span, class: [:'question-metric', question_views_coloring(question)] do %>
-            <span class="question-value"><%= question.views_total %></span>
+            <span class="question-metric-value"><%= question.views_total %></span>
             <%= t('count.view', count: question.views_total) %>
           <% end %>
         </div>

@@ -1,9 +1,20 @@
 <% provide :title, t('notification.index.title') %>
 
-<ul class="nav nav-tabs tab-navigation">
-  <li class="active"><%= link_to t('notification.navigation'), notifications_path %></li>
-  <li><%= link_to t('watching.navigation'), watchings_path %></li>
-</ul>
+<div class="tab-navigation">
+  <% if @unread.any? %>
+    <div class="pull-right">
+      <%= link_to clean_notifications_path, class: 'btn btn-default' do %>
+        <%= icon_tag :check %>
+        <%= t 'notification.clean.submit' %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <ul class="nav nav-tabs">
+    <li class="active"><%= link_to t('notification.navigation'), notifications_path %></li>
+    <li><%= link_to t('watching.navigation'), watchings_path %></li>
+  </ul>
+</div>
 
 <div class="row">
   <div class="col-md-3">

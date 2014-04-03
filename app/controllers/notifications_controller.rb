@@ -4,7 +4,7 @@ class NotificationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    count = 25
+    count = 20
 
     @notifications = Notification.for(current_user).order(created_at: :desc)
 
@@ -45,6 +45,6 @@ class NotificationsController < ApplicationController
       form_error_message t("notification.#{status}.failure"), key: params[:tab]
     end
 
-    redirect_to :back
+    redirect_to(params[:r] ? params[:r] : :back)
   end
 end

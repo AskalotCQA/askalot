@@ -7,6 +7,8 @@
     <% end %>
   </ol>
 
+  <%= render 'clean', model: tab.to_s.singularize %>
+
   <%= paginate watchings, params: { tab: tab } %>
 <% else %>
   <p class="alert alert-info">

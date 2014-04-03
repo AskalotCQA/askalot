@@ -1,7 +1,9 @@
-<div id="user-<%= followee.id %>-following" class="user-following">
-  <% if current_user.following? followee %>
-    <%= icon_link_to :'chain-broken', nil, follow_user_path(followee), data: { remote: true }, id: :"user-#{followee.id}-follow", class: :'user-followed' %>
-  <% else %>
-    <%= icon_link_to :'link', nil, follow_user_path(followee), tooltip_attributes(t('user.follow'), placement: :right).deep_merge(data: { remote: true }, id: :"user-#{followee.id}-follow") %>
+<div id="<%= model %>-<%= followable.id %>-following" class="<%= model %>-following">
+  <% if can? :follow, followable %>
+    <% if current_user.following? followable %>
+      <%= icon_link_to :'chain-broken', nil, public_send("follow_#{model}_path", followable), id: identify(followable, :unfollow), class: "#{model}-followed", data: { remote: true } %>
+    <% else %>
+      <%= icon_link_to :'link', nil, public_send("follow_#{model}_path", followable), tooltip_attributes(t("#{model}.follow"), placement: :right).deep_merge(id: identify(followable, :follow), data: { remote: true }) %>
+    <% end %>
   <% end %>
 </div>

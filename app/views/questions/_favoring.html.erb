@@ -1,11 +1,1 @@
-<div id="question-<%= question.id %>-favoring" class="question-favoring">
-  <% if question.favored_by? current_user %>
-    <%= icon_link_to :star, nil, favor_question_path(question), data: { remote: true }, id: :"question-#{question.id}-favor", class: :'question-favored' %>
-  <% else %>
-    <%= icon_link_to :'star-o', nil, favor_question_path(question), tooltip_attributes(t('question.favor'), placement: :right).deep_merge(data: { remote: true }, id: :"question-#{question.id}-favor") %>
-  <% end %>
-
-  <% if question.favorites.size > 0 %>
-    <span class="text-muted"><%= question.favorites.size %></span>
-  <% end %>
-</div>
+<%= render 'favorables/favoring', model: :question, favorable: question %>

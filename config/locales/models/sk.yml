@@ -12,6 +12,12 @@ sk:
       few: 'autori'
       other: 'autorov'
 
+    category:
+      zero: 'kategórií'
+      one: 'kategória'
+      few: 'kategórie'
+      other: 'kategórií'
+
     comment:
       zero: 'komentárov'
       one: 'komentár'
@@ -31,16 +37,16 @@ sk:
       other: 'obľúbení'
 
     followee:
-      zero: 'Nasledovaných'
-      one: 'Nasledovaný'
-      few: 'Nasledovaných'
-      other: 'Nasledovaných'
+      zero: 'nasledovaných'
+      one: 'nasledovaný'
+      few: 'nasledovaný'
+      other: 'nasledovaných'
 
     follower:
-      zero: 'Nasledovateľov'
-      one: 'Nasledovateľ'
-      few: 'Nasledovateľov'
-      other: 'Nasledovateľov'
+      zero: 'nasledovníkov'
+      one: 'nasledovník'
+      few: 'nasledovníci'
+      other: 'nasledovníkov'
 
     notification:
       zero: 'notifikácií'
@@ -53,6 +59,12 @@ sk:
       one: 'otázka'
       few: 'otázky'
       other: 'otázok'
+
+    tag:
+      zero: 'tagov'
+      one: 'tag'
+      few: 'tagy'
+      other: 'tagov'
 
     user:
       zero: 'používateľov'
@@ -91,6 +103,12 @@ sk:
       few: '%{count} autori'
       other: '%{count} autorov'
 
+    category:
+      zero: 'žiadna kategória'
+      one: '1 kategória'
+      few: '%{count} kategórie'
+      other: '%{count} kategórií'
+
     comment:
       zero: 'žiaden komentár'
       one: '1 komentár'
@@ -109,6 +127,18 @@ sk:
       few: '%{count} obľúbenia'
       other: '%{count} obľúbení'
 
+    followee:
+      zero: 'žiaden nasledovaný'
+      one: '1 nasledovaný'
+      few: '%{count} nasledovaný'
+      other: '%{count} nasledovaných'
+
+    follower:
+      zero: 'žiaden nasledovník'
+      one: 'jeden nasledovník'
+      few: '%{count} nasledovníci'
+      other: '%{count} nasledovníkov'
+
     notification:
       zero: 'žiadna notifikácia'
       one: '1 notifikácia'
@@ -120,6 +150,12 @@ sk:
       one: '1 otázka'
       few: '%{count} otázky'
       other: '%{count} otázok'
+
+    tag:
+      zero: 'žiaden tag'
+      one: '1 tag'
+      few: '%{count} tagy'
+      other: '%{count} tagov'
 
     user:
       zero: 'žiaden používateľ'
@@ -147,16 +183,19 @@ sk:
 
   activerecord:
     models:
-     answer: 'Odpoveď'
-     comment: 'Komentár'
-     evaluation: 'Hodnotenie'
-     favorite: 'Obľúbenie'
-     question: 'Otázka'
-     notification: 'Notifikácia'
-     user: 'Používateľ'
-     view: 'Zobrazenie'
-     vote: 'Hlas'
-     watching: 'Sledovanie'
+      activity: 'Aktivita'
+      answer: 'Odpoveď'
+      category: 'Kategória'
+      comment: 'Komentár'
+      evaluation: 'Hodnotenie'
+      favorite: 'Obľúbenie'
+      question: 'Otázka'
+      notification: 'Notifikácia'
+      tag: 'Tag'
+      user: 'Používateľ'
+      view: 'Zobrazenie'
+      vote: 'Hlas'
+      watching: 'Sledovanie'
 
     attributes:
       user:

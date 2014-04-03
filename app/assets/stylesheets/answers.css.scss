@@ -4,6 +4,16 @@
   margin-top: 20px;
 }
 
+// collection
+
+.answer-metric {
+  @include block-metric;
+}
+
+.answer-metric-value {
+  @include block-metric-value;
+}
+
 // member
 
 .answer-content {
