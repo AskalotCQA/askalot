@@ -20,6 +20,8 @@ module Probe
       delete if exists?
 
       client.indices.create index: name, type: type, body: { settings: settings, mappings: mappings }
+
+      flush
     end
 
     def delete
