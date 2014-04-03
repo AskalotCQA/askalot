@@ -105,5 +105,19 @@ module Questions
 
       probe.index.create
     end
+
+    module ClassMethods
+      def search_by(params)
+        search({
+          query: {
+            query_string: {
+              query: probe.sanitizer.sanitize_query(params[:q]),
+              default_operator: :and,
+              fields: [:text, :title, :tags]
+            }
+          }
+        })
+      end
+    end
   end
 end

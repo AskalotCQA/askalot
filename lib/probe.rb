@@ -8,6 +8,7 @@ require 'probe/import/bulk'
 require 'probe/search/results'
 require 'probe/search'
 require 'probe/analyze'
+require 'probe/sanitizer'
 
 module Probe
   extend ActiveSupport::Concern

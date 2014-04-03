@@ -2,7 +2,7 @@ module Probe
   class Proxy
     include Squire
 
-    attr_accessor :index, :search
+    attr_accessor :index, :search, :analyze, :sanitizer
 
     def index
       @index ||= Probe::Index.new
@@ -18,6 +18,10 @@ module Probe
       @analyze ||= Probe::Analyze.new(index)
 
       @analyze.analyze(*args)
+    end
+
+    def sanitizer
+      @sanitizer ||= Probe::Sanitizer
     end
   end
 end
