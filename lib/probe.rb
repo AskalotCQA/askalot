@@ -12,8 +12,12 @@ require 'probe/analyze'
 module Probe
   extend ActiveSupport::Concern
 
-  included do
-    include Probe::Instance
+  def probe
+    @probe ||= Probe::Instance.new(self)
+  end
+
+  def to_mapping
+    probe.to_mapping
   end
 
   module ClassMethods

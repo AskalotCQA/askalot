@@ -14,16 +14,16 @@ describe Probe::Import::Bulk do
 
       expect(client).to receive(:bulk).with(body: [
         { index: { _index: 'test', _type: 'type', _id: 1 }},
-        { doc: { id: 1 }},
+        { id: 1 },
         { index: { _index: 'test', _type: 'type', _id: 2 }},
-        { doc: { id: 2 }}
+        { id: 2 }
       ])
 
       expect(client).to receive(:bulk).with(body: [
         { index: { _index: 'test', _type: 'type', _id: 3 }},
-        { doc: { id: 3 }},
+        { id: 3 },
         { index: { _index: 'test', _type: 'type', _id: 4 }},
-        { doc: { id: 4 }}
+        { id: 4 }
       ])
 
       Probe::Import::Bulk.new(index, documents, batch_size: 2).import
