@@ -1,5 +1,5 @@
 class Activity < ActiveRecord::Base
-  ACTIONS = [:create, :update]
+  ACTIONS = [:create, :update, :delete, :mention]
 
   belongs_to :initiator, class_name: :User
 
