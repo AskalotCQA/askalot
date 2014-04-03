@@ -14,7 +14,7 @@ module Favorable
   end
 
   def toggle_favoring_by!(user)
-    favoring = favorites.unscoped.find_or_create_by!(favorer: user)
+    favoring = favorites.unscoped.find_or_create_by!(favorer: user, question: self)
 
     if favoring.deleted? then
       favoring.unmark_as_deleted!
