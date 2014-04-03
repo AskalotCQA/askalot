@@ -9,10 +9,15 @@ module Probe
     end
 
     def search(*args)
-      # TODO (smolnar) refactor
       @search ||= Probe::Search.new(index)
 
       @search.search(*args)
+    end
+
+    def analyze(*args)
+      @analyze ||= Probe::Analyze.new(index)
+
+      @analyze.analyze(*args)
     end
   end
 end

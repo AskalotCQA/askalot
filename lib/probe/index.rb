@@ -19,7 +19,7 @@ module Probe
     def create
       delete if exists?
 
-      client.indices.create index: name, type: type, body: { settings: settings, mappings:  mappings }
+      client.indices.create index: name, type: type, body: { settings: settings, mappings: mappings }
     end
 
     def delete

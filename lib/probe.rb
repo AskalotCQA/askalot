@@ -7,6 +7,7 @@ require 'probe/import/simple'
 require 'probe/import/bulk'
 require 'probe/search/results'
 require 'probe/search'
+require 'probe/analyze'
 
 module Probe
   extend ActiveSupport::Concern

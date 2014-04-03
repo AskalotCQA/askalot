@@ -19,7 +19,7 @@ class Question
           analyzer: {
             text: {
               type: :custom,
-              tokenizer: :keyword,
+              tokenizer: :standard,
               filter: [:asciifolding, :lowercase, :trim]
             },
 
@@ -50,49 +50,45 @@ class Question
       probe.index.mappings = {
         question: {
           properties: {
-            doc: {
-              properties: {
-                id: {
-                  type: :integer
-                },
+            id: {
+              type: :integer
+            },
+            title: {
+              type: :multi_field,
+              fields: {
                 title: {
-                  type: :multi_field,
-                  fields: {
-                    title: {
-                      type: :string,
-                      analyzer: :text,
-                    },
-                    untouched: {
-                      type: :string,
-                      index: :not_analyzed
-                    }
-                  }
+                  type: :string,
+                  analyzer: :text,
                 },
+                untouched: {
+                  type: :string,
+                  index: :not_analyzed
+                }
+              }
+            },
+            text: {
+              type: :multi_field,
+              fields: {
                 text: {
-                  type: :multi_field,
-                  fields: {
-                    text: {
-                      type: :string,
-                      analyzer: :text,
-                    },
-                    untouched: {
-                      type: :string,
-                      index: :not_analyzed
-                    }
-                  }
+                  type: :string,
+                  analyzer: :text,
                 },
+                untouched: {
+                  type: :string,
+                  index: :not_analyzed
+                }
+              }
+            },
+            tags: {
+              type: :multi_field,
+              fields: {
                 tags: {
-                  type: :multi_field,
-                  fields: {
-                    tags: {
-                      type: :string,
-                      analyzer: :tags,
-                    },
-                    untouched: {
-                      type: :string,
-                      index: :not_analyzed
-                    }
-                  }
+                  type: :string,
+                  analyzer: :tags,
+                },
+                untouched: {
+                  type: :string,
+                  index: :not_analyzed
                 }
               }
             }
