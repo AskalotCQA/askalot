@@ -6,7 +6,7 @@ module Probe
           request = documents.map do |document|
             [
               { action => { _index: index.name, _type: index.type, _id: document.id }},
-              { index.type => document.to_mapping }
+              document.to_mapping
             ]
           end.flatten
 
