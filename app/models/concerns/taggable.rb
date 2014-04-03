@@ -84,7 +84,7 @@ module Taggable
   class TagList
     include Enumerable
 
-    attr_accessor :config, :extractor, :values
+    attr_accessor :extractor, :values
 
     def initialize(extractor, values = [])
       @extractor = extractor
