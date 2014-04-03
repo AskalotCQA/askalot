@@ -1,47 +1,44 @@
-# TODO(zbell) drop polymorphic from taggable
-
 module Taggable
   extend ActiveSupport::Concern
 
   included do
-    has_many :taggings, as: :taggable, dependent: :destroy
+    has_many :taggings, dependent: :destroy
     has_many :tags, through: :taggings
 
     scope :tagged_with, lambda { |values, options = {}| Scope.new(self).build(values, options) }
 
-    after_save :generate_tags!
+    after_save :create_tags!
   end
 
   def tag_list
-    @tag_list ||= TagList.new(self.class.taggable, tags.pluck(:name))
+    @tag_list ||= TagList.new(self.class.taggable.extractor, tags.pluck(:name))
   end
 
   def tag_list=(values)
-    @tag_list = TagList.new(self.class.taggable, values)
+    tag_list.values = values
   end
 
   def changed?
-    super || (tag_list.values - tags.pluck(:name)).any?
+    super || (tag_list.tags - tags.pluck(:name)).any?
   end
 
   private
 
-  # TODO(zbell) rename -> create_tags
-  def generate_tags!
+  def create_tags!
     tag_list.each do |name|
       tag = Tag.find_or_create_by! name: name
 
-      Tagging.find_or_create_by! tag_id: tag.id, taggable_id: self.id, taggable_type: self.class.base_class.name
+      Tagging.find_or_create_by! tag: tag, question: self
     end
 
-    taggings.each(&:destroy) if tag_list.empty?
-
-    flush_tags!
+    update_tags!
   end
 
-  # TODO(zbell) rename -> update_tags
-  def flush_tags!
+  def update_tags!
+    return taggings.map(&:destroy) if tag_list.empty?
+
     taggings.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags).each(&:destroy)
+
     reload
   end
 
@@ -63,13 +60,12 @@ module Taggable
     end
 
     def build(values, options = {})
-      tags = Taggable::TagList.new(relation.taggable, values).tags
+      tags = Taggable::TagList.new(relation.taggable.extractor, values).tags
 
       if options[:any]
         relation.where tags: { name: tags }
       else
-        # TODO(smolnar) REFACTOR, resolve why reference to class is scoped!
-        # TODO(zbell) rm questions dependency
+        # TODO(smolnar) REFACTOR, resolve why reference to class is scoped, propose another solution for AND search
         ids   = []
         scope = relation.base_class
 
@@ -88,17 +84,16 @@ module Taggable
   class TagList
     include Enumerable
 
-    attr_reader :values
+    attr_accessor :extractor, :values
 
-    attr_accessor :base, :extractor
-
-    def initialize(base, values = [])
-      @base   = base
-      @values = values
+    def initialize(extractor, values = [])
+      @extractor = extractor
+      @values    = values
     end
 
-    def extractor
-      @extractor ||= base.extractor? ? base.extractor : TagList::Extractor
+    def values=(values)
+      @values = values
+      @tags   = nil
     end
 
     def each
