@@ -19,13 +19,17 @@ module NotificationsHelper
               end
 
     body    = t("notification.content.#{notification.action == :mention ? :mention : :persistence}.#{resource.class.name.downcase}")
-    path    = lambda { |path| notification.unread ? read_notification_path(notification, params: { r: path }) : path }
-    content = t(content, resource: link_to_notifiable(resource, body: body, path: path), question: link_to_notifiable(resource, length: 50, path: path)).html_safe
+    content = t(content, resource: link_to_notification(notification, body: body), question: link_to_notification(notification, length: 50)).html_safe
 
     notification.unread ? content : content_tag(:span, content, class: :'text-muted')
   end
 
-  def link_to_notifiable(resource, options = {})
+  def link_to_notification(notification, options = {}, &block)
+    options[:body] = capture(&block) if block_given?
+    options[:path] = lambda { |path| notification.unread ? read_notification_path(notification, params: { r: path }) : path } if options.delete(:read) != false
+
+    resource = notification.resource
+
     case resource.class.name.downcase.to_sym
     when :answer     then link_to_answer resource, options
     when :comment    then link_to_comment resource, options

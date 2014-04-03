@@ -42,7 +42,10 @@ module QuestionsHelper
     path = question_path(question, anchor: options.delete(:anchor))
     path = options.delete(:path).call path if options[:path]
 
-    if question.deleted? || options.delete(:deleted)
+    if options.delete(:deleted) || question.deleted?
+      delete = options.delete(:delete)
+
+      return delete.call(body, path, options) if delete.is_a? Proc
       return content_tag :span, body, tooltip_attributes(t('question.link_to_deleted_title'), placement: :bottom).merge(options)
     end
 

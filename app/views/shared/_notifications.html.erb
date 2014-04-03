@@ -4,13 +4,13 @@
     <li class="divider"></li>
     <% notifications.each do |notification| %>
       <li>
-        <a href="<%= notifications_path(anchor: "notification-#{notification.id}") %>">
+        <%= link_to_notification(notification, delete: lambda { |body, _, _| link_to body, notifications_path(anchor: "notification-#{notification.id}") }) do %>
           <%= notification_icon_tag notification %>
           <span class="text-muted">&middot;</span>
           <%= user_icon_tag notification.initiator, tooltip_attributes(notification.initiator.nick, placement: :bottom).merge(link: false) %>
           <span class="text-muted">&middot;</span>
           <%= tooltip_time_tag notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
-        </a>
+        <% end %>
       </li>
     <% end %>
     <li class="divider"></li>
