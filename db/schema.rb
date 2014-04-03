@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403095606) do
+ActiveRecord::Schema.define(version: 20140403181644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -332,10 +332,14 @@ ActiveRecord::Schema.define(version: 20140403095606) do
     t.boolean  "deleted",     default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.integer  "author_id",                   null: false
   end
 
   add_index "taggings", ["deleted"], name: "index_taggings_on_deleted", using: :btree
   add_index "taggings", ["deletor_id"], name: "index_taggings_on_deletor_id", using: :btree
+  add_index "taggings", ["question_id"], name: "index_taggings_on_question_id", using: :btree
+  add_index "taggings", ["tag_id", "question_id", "author_id"], name: "index_taggings_on_tag_id_and_question_id_and_author_id", using: :btree
+  add_index "taggings", ["tag_id", "question_id"], name: "index_taggings_on_tag_id_and_question_id", using: :btree
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
 
   create_table "tags", force: true do |t|
