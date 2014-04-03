@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331225953) do
+ActiveRecord::Schema.define(version: 20140403095606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(version: 20140331225953) do
     t.decimal  "votes_lb_wsci_bp",  precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
-    t.boolean  "edited",                                      default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.boolean  "edited",                                      default: false, null: false
     t.integer  "evaluations_count",                           default: 0,     null: false
   end
 
@@ -135,9 +135,9 @@ ActiveRecord::Schema.define(version: 20140331225953) do
     t.boolean  "deleted",          default: false, null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
-    t.boolean  "edited",           default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.boolean  "edited",           default: false, null: false
   end
 
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
@@ -283,9 +283,9 @@ ActiveRecord::Schema.define(version: 20140331225953) do
     t.datetime "touched_at",                                                    null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
-    t.boolean  "edited",                                        default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.boolean  "edited",                                        default: false, null: false
     t.integer  "evaluations_count",                             default: 0,     null: false
   end
 
@@ -325,26 +325,23 @@ ActiveRecord::Schema.define(version: 20140331225953) do
   add_index "slido_events", ["uuid"], name: "index_slido_events_on_uuid", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
-    t.integer  "tag_id",                        null: false
-    t.integer  "taggable_id",                   null: false
-    t.string   "taggable_type",                 null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "deleted",       default: false, null: false
+    t.integer  "tag_id",                      null: false
+    t.integer  "question_id",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "deleted",     default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
   end
 
   add_index "taggings", ["deleted"], name: "index_taggings_on_deleted", using: :btree
   add_index "taggings", ["deletor_id"], name: "index_taggings_on_deletor_id", using: :btree
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type"], name: "index_taggings_on_tag_id_and_taggable_id_and_taggable_type", using: :btree
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type"], name: "index_taggings_on_taggable_id_and_taggable_type", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name",       null: false
-    t.datetime "updated_at", null: false
     t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
