@@ -28,7 +28,7 @@ module Taggable
     tag_list.each do |name|
       tag = Tag.find_or_create_by! name: name
 
-      Tagging.find_or_create_by! tag: tag, question: self, author: author
+      Tagging.find_or_create_by! author: author, question: self, tag: tag
     end
 
     update_tags!
