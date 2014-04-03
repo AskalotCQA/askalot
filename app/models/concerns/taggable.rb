@@ -19,7 +19,7 @@ module Taggable
   end
 
   def changed?
-    super || (tag_list.values - tags.pluck(:name)).any?
+    super || (tag_list.tags - tags.pluck(:name)).any?
   end
 
   private
@@ -60,12 +60,12 @@ module Taggable
     end
 
     def build(values, options = {})
-      tags = Taggable::TagList.new(relation.taggable, values).tags
+      tags = Taggable::TagList.new(relation.taggable.extractor, values).tags
 
       if options[:any]
         relation.where tags: { name: tags }
       else
-        # TODO(smolnar) REFACTOR, resolve why reference to class is scoped!
+        # TODO(smolnar) REFACTOR, resolve why reference to class is scoped, propose another solution for AND search
         ids   = []
         scope = relation.base_class
 
@@ -89,6 +89,11 @@ module Taggable
     def initialize(extractor, values = [])
       @extractor = extractor
       @values    = values
+    end
+
+    def values=(values)
+      @values = values
+      @tags   = nil
     end
 
     def each
