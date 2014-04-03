@@ -14,8 +14,14 @@ module Favorable
   end
 
   def toggle_favoring_by!(user)
-    return favorites.create! favorer: user unless favored_by?(user)
+    favoring = favorites.unscoped.find_or_create_by!(favorer: user)
 
-    favorites.where(favorer: user).first.destroy!
+    if favoring.deleted? then
+      favoring.unmark_as_deleted!
+    else
+      favoring.mark_as_deleted_by! user
+    end
+
+    favoring
   end
 end

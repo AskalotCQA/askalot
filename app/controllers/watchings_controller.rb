@@ -16,7 +16,9 @@ class WatchingsController < ApplicationController
   def destroy
     @watching = Watching.find(params[:id])
 
-    if @watching.destroy
+    @watching.mark_as_deleted_by! current_user
+
+    if @watching.deleted?
       form_message :notice, t('watching.delete.success'), key: params[:tab]
     else
       form_error_message t('watching.delete.failure'), key: params[:tab]
@@ -28,11 +30,9 @@ class WatchingsController < ApplicationController
   def clean
     @watchings = Watching.where(watcher: current_user, watchable_type: params[:type].classify)
 
-    if @watchings.destroy_all
-      form_message :notice, t('watching.clean.success'), key: params[:tab]
-    else
-      form_error_message t('watching.clean.failure'), key: params[:tab]
-    end
+    @watchings.each { |watching| watching.mark_as_deleted_by! current_user }
+
+    form_message :notice, t('watching.clean.success'), key: params[:tab]
 
     redirect_to :back
   end

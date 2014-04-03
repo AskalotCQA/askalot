@@ -27,6 +27,24 @@ module Deletable
 
       self.decrement_counter_caches! if deleted_changed
     end
+
+    self
+  end
+
+  def unmark_as_deleted!
+    self.transaction do
+      self.deleted = false
+      self.deletor = nil
+      self.deleted_at = nil
+
+      deleted_changed = self.deleted_changed?
+
+      self.save!
+
+      self.increment_counter_caches! if deleted_changed
+    end
+
+    self
   end
 
   protected
@@ -43,6 +61,20 @@ module Deletable
 
   def mark_as_deleted?(model)
     model.options[:dependent] == :destroy && model.macro == :has_many && model.klass.column_names.include?('deleted')
+  end
+
+  def increment_counter_caches!
+    self.reflections.each do |key, target|
+      if target.macro == :belongs_to && target.options[:counter_cache] == true
+        owner  = self.send(key.to_s)
+        column = target.counter_cache_column.to_sym
+
+        if owner
+          owner.class.increment_counter(column, owner.id)
+          owner.increment column
+        end
+      end
+    end
   end
 
   def decrement_counter_caches!

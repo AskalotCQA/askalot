@@ -22,6 +22,28 @@ class Answer < ActiveRecord::Base
 
   Hash[Label.value_enum].values.each { |label| scope label, -> { labeled_with label } }
 
+  def labeled_with(label)
+    labelings.with label
+  end
+
+  def labeled_by?(user, label)
+    labelings.by(user).with(label).any?
+  end
+
+  def toggle_labeling_by!(user, label)
+    label = Label.where(value: label).first_or_create! unless label.is_a? Label
+
+    labeling = Labeling.unscoped.find_or_create_by!(author: user, answer: self, label: label)
+
+    if labeling.deleted?
+      labeling.unmark_as_deleted!
+    else
+      labeling.mark_as_deleted_by! user
+    end
+
+    labeling
+  end
+
   def best?
     labels.exists? value: :best
   end
