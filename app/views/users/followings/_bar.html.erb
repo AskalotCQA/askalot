@@ -12,7 +12,7 @@
       </h1>
 
       <small class="text-muted">
-        <%= t('count_x.question', count: user.questions.size) %> &middot;
+        <%= t('count_x.question', count: user.questions.where(anonymous: false).size) %> &middot;
         <%= t('count_x.answer', count: user.answers.size) %> &middot;
         <%= t('count_x.comment', count: user.comments.size) %> &middot;
         <%= t('user.registered_at').downcase_first %> <%= time_tag user.created_at.to_date, format: :normal %>
