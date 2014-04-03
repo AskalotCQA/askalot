@@ -28,16 +28,18 @@ module Taggable
     tag_list.each do |name|
       tag = Tag.find_or_create_by! name: name
 
-      Tagging.find_or_create_by! tag: tag, question: self
+      Tagging.find_or_create_by! author: author, question: self, tag: tag
     end
 
     update_tags!
   end
 
   def update_tags!
-    return taggings.map(&:destroy) if tag_list.empty?
-
-    taggings.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags).each(&:destroy)
+    if tag_list.empty?
+      taggings.map(&:destroy)
+    else
+      taggings.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags).each(&:destroy)
+    end
 
     reload
   end

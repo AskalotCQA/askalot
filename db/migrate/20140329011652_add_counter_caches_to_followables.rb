@@ -1,10 +1,10 @@
 class AddCounterCachesToFollowables < ActiveRecord::Migration
-  def self.up
+  def up
     add_counter :users, :followers
     add_counter :users, :followees
   end
 
-  def self.down
+  def down
     remove_counter :users, :followers
     remove_counter :users, :followees
   end

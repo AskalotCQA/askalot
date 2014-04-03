@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140403095606) do
+ActiveRecord::Schema.define(version: 20140403190759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(version: 20140403095606) do
     t.decimal  "votes_lb_wsci_bp",  precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
+    t.boolean  "edited",                                      default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
-    t.boolean  "edited",                                      default: false, null: false
     t.integer  "evaluations_count",                           default: 0,     null: false
   end
 
@@ -135,9 +135,9 @@ ActiveRecord::Schema.define(version: 20140403095606) do
     t.boolean  "deleted",          default: false, null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
+    t.boolean  "edited",           default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
-    t.boolean  "edited",           default: false, null: false
   end
 
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
@@ -210,8 +210,8 @@ ActiveRecord::Schema.define(version: 20140403095606) do
   end
 
   add_index "labelings", ["answer_id"], name: "index_labelings_on_answer_id", using: :btree
-  add_index "labelings", ["author_id", "answer_id", "label_id"], name: "index_labelings_on_unique_key", unique: true, using: :btree
   add_index "labelings", ["author_id"], name: "index_labelings_on_author_id", using: :btree
+  add_index "labelings", ["deleted", "answer_id", "label_id", "author_id"], name: "index_labelings_on_unique_key", unique: true, using: :btree
   add_index "labelings", ["deleted"], name: "index_labelings_on_deleted", using: :btree
   add_index "labelings", ["deletor_id"], name: "index_labelings_on_deletor_id", using: :btree
   add_index "labelings", ["label_id"], name: "index_labelings_on_label_id", using: :btree
@@ -283,9 +283,9 @@ ActiveRecord::Schema.define(version: 20140403095606) do
     t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
+    t.boolean  "edited",                                        default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
-    t.boolean  "edited",                                        default: false, null: false
     t.integer  "evaluations_count",                             default: 0,     null: false
   end
 
@@ -332,16 +332,20 @@ ActiveRecord::Schema.define(version: 20140403095606) do
     t.boolean  "deleted",     default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.integer  "author_id",                   null: false
   end
 
+  add_index "taggings", ["author_id"], name: "index_taggings_on_author_id", using: :btree
+  add_index "taggings", ["deleted", "question_id", "tag_id", "author_id"], name: "index_taggings_on_unique_key", unique: true, using: :btree
   add_index "taggings", ["deleted"], name: "index_taggings_on_deleted", using: :btree
   add_index "taggings", ["deletor_id"], name: "index_taggings_on_deletor_id", using: :btree
+  add_index "taggings", ["question_id"], name: "index_taggings_on_question_id", using: :btree
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name",       null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "created_at", null: false
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
