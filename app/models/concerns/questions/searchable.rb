@@ -1,9 +1,9 @@
-class Question
-  module Search
+module Questions
+  module Searchable
     extend ActiveSupport::Concern
 
     included do
-      include Searchable
+      include ::Searchable
 
       probe.index.name = :"questions_#{Rails.env}"
       probe.index.type = :question
@@ -102,6 +102,8 @@ class Question
         text:  -> { text },
         tags:  -> { tags.map(&:name) }
       )
+
+      probe.index.create
     end
   end
 end
