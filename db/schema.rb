@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140331225953) do
+ActiveRecord::Schema.define(version: 20140403095606) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -325,21 +325,18 @@ ActiveRecord::Schema.define(version: 20140331225953) do
   add_index "slido_events", ["uuid"], name: "index_slido_events_on_uuid", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
-    t.integer  "tag_id",                        null: false
-    t.integer  "taggable_id",                   null: false
-    t.string   "taggable_type",                 null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "deleted",       default: false, null: false
+    t.integer  "tag_id",                      null: false
+    t.integer  "question_id",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "deleted",     default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
   end
 
   add_index "taggings", ["deleted"], name: "index_taggings_on_deleted", using: :btree
   add_index "taggings", ["deletor_id"], name: "index_taggings_on_deletor_id", using: :btree
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type"], name: "index_taggings_on_tag_id_and_taggable_id_and_taggable_type", using: :btree
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type"], name: "index_taggings_on_taggable_id_and_taggable_type", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name",       null: false

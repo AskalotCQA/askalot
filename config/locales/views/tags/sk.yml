@@ -6,6 +6,6 @@ sk:
       title: 'Tagy'
 
     tab:
-      all:      'Všetky'
-      recent:   'Nové'
-      popular:  'Populárne'
+      all: 'Všetky'
+      recent: 'Nové'
+      popular: 'Populárne'

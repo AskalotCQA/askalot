@@ -1,4 +1,4 @@
-module Deletables::Delete
+module Deletables::Destroy
   extend ActiveSupport::Concern
 
   include Events::Dispatch

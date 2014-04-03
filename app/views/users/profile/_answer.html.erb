@@ -3,21 +3,21 @@
     <div class="col-md-3">
       <div class="row">
         <div class="col-md-6">
-          <%= content_tag :span, class: [:'question-metric', answer_votes_coloring(answer)] do %>
-            <span class="question-value"><%= answer.votes_difference %></span>
+          <%= content_tag :span, class: [:'answer-metric', answer_votes_coloring(answer)] do %>
+            <span class="answer-metric-value"><%= answer.votes_difference %></span>
             <%= t('count.vote', count: answer.votes_difference) %>
           <% end %>
         </div>
         <div class="col-md-6">
-          <%= content_tag :span, class: [:'question-metric', answer_evaluations_coloring(answer)] do %>
-            <span class="question-value"><%= answer.evaluations.size %></span>
+          <%= content_tag :span, class: [:'answer-metric', answer_evaluations_coloring(answer)] do %>
+            <span class="answer-metric-value"><%= answer.evaluations.size %></span>
             <%= t('count.evaluation', count: answer.evaluations.size) %>
           <% end %>
         </div>
       </div>
     </div>
 
-    <div class="col-md-8">
+    <div class="col-md-9">
       <div class="question-preview">
         <h4>
           <%= link_to_answer answer, length: 60 %>

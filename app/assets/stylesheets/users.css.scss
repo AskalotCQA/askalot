@@ -13,6 +13,10 @@
   .user-link {
     margin-top: 10px;
   }
+
+  .user-following {
+    display: inline;
+  }
 }
 
 .user-avatar {
@@ -25,6 +29,10 @@
 
   font-size: $font-size-small;
   text-align: center;
+}
+
+.user-avatar-inline {
+  display: inline-block;
 }
 
 .user-avatar-xs {
@@ -40,7 +48,9 @@
 }
 
 .user-avatar-icon {
-  width: 20px;
+  @include square(20px);
+
+  display: inline-block;
   vertical-align: middle;
 }
 
@@ -64,6 +74,14 @@
   }
 }
 
+.user-profile-bar {
+  margin-top: $navbar-height;
+
+  h1 {
+    margin: 12.5px 0 0;
+  }
+}
+
 .user-profile-title {
   @include text-overflow;
 
@@ -73,14 +91,38 @@
   }
 }
 
-.user-profile-links {
+.user-profile-details {
   @extend .list-unstyled;
   @include text-overflow;
 
-  padding-top: 10px;
+  padding: 10px 0;
   border-top: 1px solid $list-group-border;
+  border-bottom: 1px solid $list-group-border;
 
   li {
     padding: $padding-xs-vertical 0;
   }
+}
+
+.user-profile-metrics {
+  div div {
+    padding: 0;
+  }
+}
+
+.user-metric {
+  @include block-metric;
+  @include color-variant($text-muted, $link-hover-color);
+
+  &:active, &:focus, &:hover {
+    .user-metric-value {
+      color: $link-hover-color !important;
+    }
+  }
+}
+
+.user-metric-value {
+  @include block-metric-value;
+
+  color: $text-color;
 }

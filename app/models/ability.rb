@@ -4,7 +4,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can(:edit, User) { |resource| resource == user }
+    can(:edit,   User) { |resource| resource == user }
+    can(:follow, User) { |resource| resource != user }
 
     can(:edit,   [Question, Answer, Comment]) { |resource| resource.author == user }
     can(:delete, [Question, Answer, Comment]) { |resource| resource.author == user }

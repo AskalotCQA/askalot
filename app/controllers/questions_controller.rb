@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  include Deletables::Delete
+  include Deletables::Destroy
   include Editables::Update
   include Votables::Vote
   include Watchables::Watch

@@ -4,3 +4,6 @@ sk:
 
     index:
       title: 'Kategórie'
+
+    tab:
+      all: 'Všetky'

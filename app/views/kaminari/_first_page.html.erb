@@ -1,3 +1,3 @@
 <li>
-  <%= link_to_unless current_page.first?, raw(t 'views.pagination.first'), url, remote: remote, data: defined?(data) ? data : {} %>
+  <%= link_to_unless current_page.first?, raw(t 'views.pagination.first'), url, remote: remote, data: local_assigns.has_key?(:data) ? data : {} %>
 </li>
