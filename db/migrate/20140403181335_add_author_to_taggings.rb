@@ -9,8 +9,5 @@ class AddAuthorToTaggings < ActiveRecord::Migration
     end
 
     change_column :taggings, :author_id, :integer, null: false
-
-    add_index :taggings, :author_id
-    add_index :taggings, [:tag_id, :question_id, :author_id] # TODO (smolnar) cannot create index on deletable
   end
 end
