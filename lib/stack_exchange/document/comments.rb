@@ -1,10 +1,6 @@
 module StackExchange
   class Document
     class Comments < StackExchange::Document
-      def initialize
-        @model = Comment
-      end
-
       def process_element(comment)
         user     = User.find_by(stack_exchange_uuid: comment[:UserId])
         question = Question.find_by(stack_exchange_uuid: comment[:PostId])

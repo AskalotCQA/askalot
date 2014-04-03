@@ -1,10 +1,6 @@
 module StackExchange
   class Document
     class Votes < StackExchange::Document
-      def initialize
-        @model = Vote
-      end
-
       def process_element(vote)
         if vote[:VoteTypeId] == '1'
           answer = Answer.find_by(stack_exchange_uuid: vote[:PostId])

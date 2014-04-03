@@ -1,10 +1,6 @@
 module StackExchange
   class Document
     class PostHistory < StackExchange::Document
-      def initialize
-        @model = Question
-      end
-
       def process_element(history)
         question = Question.find_by(stack_exchange_uuid: history[:PostId])
 

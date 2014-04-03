@@ -1,6 +1,6 @@
 module StackExchange
   class Document < Nokogiri::XML::SAX::Document
-    attr_accessor :model, :batch_size
+    attr_accessor :batch_size
 
     def name
       self.class.name.split(/::/).last
@@ -30,11 +30,11 @@ module StackExchange
         record     = process_element(attributes)
 
         if record
-          puts "[#{self.name}] Processed #{@count}th #{model.name.downcase} with UUID: #{attributes[:Id]}"
+          puts "[#{self.name}] Processed #{@count}th #{self.name.singularize.downcase} with UUID: #{attributes[:Id]}"
 
           @count += 1
 
-          @records << record
+          @records << record unless @records.include?(record)
 
           import if @records.size >= batch_size
         end
@@ -44,7 +44,15 @@ module StackExchange
     private
 
     def import
-      model.import @records.select { |r| r.class == @model }, validate: false, timestamps: true
+      models = @records.inject({}).each do |hash, record|
+        (hash[record.class] ||= Array.new) << record
+
+        hash
+      end
+
+      models.each do |model, records|
+        model.import records, validate: false, timestamps: false
+      end
 
       @records = []
     end
