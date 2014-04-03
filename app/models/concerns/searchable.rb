@@ -19,7 +19,7 @@ module Searchable
       size = query.delete(:per_page) || 20
       from = (query.delete(:page) || 0) * size
 
-      results = probe.search(query.revese_merge(from: from, size: size))
+      results = probe.search(query.reverse_merge(from: from, size: size))
 
       results.map { |result| find(result.id) }
     end
