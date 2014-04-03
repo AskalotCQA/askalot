@@ -35,9 +35,11 @@ module Taggable
   end
 
   def update_tags!
-    return taggings.map(&:destroy) if tag_list.empty?
-
-    taggings.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags).each(&:destroy)
+    if tag_list.empty?
+      taggings.map(&:destroy)
+    else
+      taggings.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags).each(&:destroy)
+    end
 
     reload
   end
