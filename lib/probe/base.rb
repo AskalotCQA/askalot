@@ -1,5 +1,5 @@
 module Probe
-  class Instance
+  class Base
     attr_reader :instance
 
     def initialize(instance)
