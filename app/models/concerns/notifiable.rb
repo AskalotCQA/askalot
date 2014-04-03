@@ -1,4 +1,4 @@
-module Eventable
+module Notifiable
   extend ActiveSupport::Concern
 
   included do

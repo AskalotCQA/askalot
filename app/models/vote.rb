@@ -1,6 +1,6 @@
 class Vote < ActiveRecord::Base
   include Deletable
-  include Eventable
+  include Notifiable
 
   belongs_to :voter, class_name: :User, counter_cache: true
   belongs_to :votable, polymorphic: true, counter_cache: true

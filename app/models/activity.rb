@@ -1,5 +1,5 @@
 class Activity < ActiveRecord::Base
-  ACTIONS = [:create, :update, :delete, :mention]
+  ACTIONS = [:create, :update]
 
   belongs_to :initiator, class_name: :User
 
@@ -10,4 +10,3 @@ class Activity < ActiveRecord::Base
 
   symbolize :action, in: ACTIONS
 end
-

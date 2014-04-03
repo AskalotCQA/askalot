@@ -1,6 +1,6 @@
 class Evaluation < ActiveRecord::Base
   include Deletable
-  include Eventable
+  include Notifiable
 
   belongs_to :evaluator, class_name: :User
   belongs_to :evaluable, polymorphic: true, counter_cache: true
