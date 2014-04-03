@@ -11,7 +11,7 @@ class Question < ActiveRecord::Base
   include Viewable
   include Votable
   include Watchable
-  include Question::Search
+  include Questions::Searchable
 
   before_save :add_category_tags
 

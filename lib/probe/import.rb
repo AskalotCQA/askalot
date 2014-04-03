@@ -21,6 +21,15 @@ module Probe
       documents.public_send(method) { |document| yield document }
     end
 
+    def document_for_import(document)
+      # TODO refactor
+      case action
+      when :index  then document.to_mapping
+      when :update then { index.type => document.to_mapping }
+      when :delete then {}
+      end
+    end
+
     def self.of(type)
       case type
       when :simple then Probe::Import::Simple

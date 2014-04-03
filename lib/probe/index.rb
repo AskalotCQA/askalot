@@ -31,7 +31,7 @@ module Probe
     end
 
     def import(documents, with: :simple, **options)
-      importer = Probe::Import.of(with).new(self, documents, options)
+      importer = Probe::Import.of(with).new(self, Array.wrap(documents), options)
 
       importer.import
 
