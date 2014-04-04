@@ -5,6 +5,7 @@ require 'models/concerns/deletable_spec'
 require 'models/concerns/taggable_spec'
 require 'models/concerns/touchable_spec'
 require 'models/concerns/watchable_spec'
+require 'models/concerns/questions/searchable_spec'
 
 describe Question do
   it_behaves_like Editable
@@ -12,6 +13,7 @@ describe Question do
   it_behaves_like Taggable
   it_behaves_like Touchable
   it_behaves_like Watchable
+  it_behaves_like Questions::Searchable
 
   it 'requires title' do
     question = build :question, title: ''
