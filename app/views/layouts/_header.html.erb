@@ -12,10 +12,10 @@
         <li><%= link_to t('category.navigation'), categories_path %></li>
         <li><%= link_to t('tag.navigation'), tags_path %></li>
         <li><%= link_to t('user.navigation'), users_path %></li>
-        <li><%= link_to t('help.index'), help_path %></li>
         <% if user_signed_in? && can?(:observe, :all) %>
           <li><%= link_to t('statistic.navigation'), statistics_path %></li>
         <% end %>
+        <li><%= link_to t('help.index'), help_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
