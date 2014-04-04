@@ -24,6 +24,8 @@ module Taggable
 
   private
 
+  #TODO(zbell) tagging author can be question author, deletor or editor; for now question author is always used
+
   def create_tags!
     tag_list.each do |name|
       tag = Tag.find_or_create_by! name: name
@@ -35,13 +37,12 @@ module Taggable
   end
 
   def update_tags!
-    if tag_list.empty?
-      taggings.map(&:destroy)
-    else
-      taggings.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags).each(&:destroy)
-    end
+    relation = taggings
+    relation = relation.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags) unless tag_list.empty?
 
-    reload
+    relation.each { |tagging| tagging.mark_as_deleted_by! author }
+
+    taggings.reload
   end
 
   module ClassMethods
@@ -67,7 +68,7 @@ module Taggable
       if options[:any]
         relation.where tags: { name: tags }
       else
-        # TODO(smolnar) REFACTOR, resolve why reference to class is scoped, propose another solution for AND search
+        # TODO(smolnar) refactor: resolve why reference to class is scoped, propose another solution for AND search
         ids   = []
         scope = relation.base_class
 
