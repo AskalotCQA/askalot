@@ -1,5 +1,5 @@
 class FixLabelingsAndTaggings < ActiveRecord::Migration
-  def change
+  def up
     remove_index :labelings, name: 'index_labelings_on_unique_key'
     remove_index :taggings,  name: 'index_taggings_on_unique_key'
 

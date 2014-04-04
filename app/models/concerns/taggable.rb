@@ -27,6 +27,8 @@ module Taggable
   #TODO(zbell) tagging author can be question author, deletor or editor; for now question author is always used
 
   def create_tags!
+    # TODO(zbell) add unmark_as_deleted here
+
     tag_list.each do |name|
       tag = Tag.find_or_create_by! name: name
 
