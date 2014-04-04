@@ -97,7 +97,19 @@ html {
     }
   }
 
-  .nav li.active > a {
+  .nav .nav {
+    display: none;
+  }
+
+  .nav .nav > li > a {
+    padding-left: 20px;
+  }
+
+  li.active > .nav {
+    display: block;
+  }
+
+  li.active > a {
     font-weight: bolder;
   }
 }
