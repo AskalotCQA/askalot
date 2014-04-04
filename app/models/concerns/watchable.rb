@@ -13,7 +13,7 @@ module Watchable
   end
 
   def toggle_watching_by!(user)
-    watching = watchings.unscoped.find_or_create_by!(watcher: user)
+    watching = watchings.unscoped.find_or_create_by!(watcher: user, watchable: self)
 
     if watching.deleted?
       watching.unmark_as_deleted!

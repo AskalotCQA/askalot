@@ -19,6 +19,27 @@ module ActivitiesHelper
               end
 
     body    = t("notification.content.#{activity.action == :mention ? :mention : :persistence}.#{resource.class.name.downcase}")
-    content = t(content, resource: link_to_notifiable(resource, body: body), question: link_to_notifiable(resource, length: 50)).html_safe
+    content = t(content, resource: link_to_activity(activity, body: body), question: link_to_activity(activity, length: 50)).html_safe
+  end
+
+  private
+
+  def link_to_activity(activity, options = {}, &block)
+    options[:body] = capture(&block) if block_given?
+    #options[:path] = lambda { |path| activity.unread ? read_notification_path(activity, params: { r: path }) : path } if options.delete(:read) != false
+
+    resource = activity.resource
+
+    case resource.class.name.downcase.to_sym
+      when :answer     then link_to_answer resource, options
+      when :comment    then link_to_comment resource, options
+      when :evaluation then link_to_evaluation resource, options
+      when :favorite   then link_to_question resource.question, options
+      when :labeling   then link_to_question resource.answer.question, options
+      when :question   then link_to_question resource, options
+      when :view       then link_to_question resource.question, options
+      when :vote       then link_to_question resource.votable.to_question, options
+      else fail
+    end
   end
 end
