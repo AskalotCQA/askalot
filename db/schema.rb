@@ -279,8 +279,8 @@ ActiveRecord::Schema.define(version: 20140403192541) do
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
     t.boolean  "deleted",                                       default: false, null: false
-    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "touched_at",                                                    null: false
+    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
     t.boolean  "edited",                                        default: false, null: false
