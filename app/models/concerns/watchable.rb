@@ -15,11 +15,7 @@ module Watchable
   def toggle_watching_by!(user)
     watching = watchings.unscoped.find_or_initialize_by(watcher: user, watchable: self)
 
-    if watching.deleted? || watching.new_record?
-      watching.unmark_as_deleted!
-    else
-      watching.mark_as_deleted_by! user
-    end
+    watching.toggle_deleted_by! user
 
     watching
   end

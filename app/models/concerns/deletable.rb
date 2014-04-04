@@ -47,6 +47,14 @@ module Deletable
     self
   end
 
+  def toggle_deleted_by!(user)
+    if self.deleted? || self.new_record?
+      unmark_as_deleted!
+    else
+      mark_as_deleted_by! user
+    end
+  end
+
   protected
 
   def mark_as_deleted_recursive!(user, datetime)

@@ -20,11 +20,7 @@ module Labelable
 
     labeling = Labeling.unscoped.find_or_initialize_by author: user, answer: self, label: label
 
-    if labeling.deleted? || labeling.new_record?
-      labeling.unmark_as_deleted!
-    else
-      #labeling.mark_as_deteted_by! user
-    end
+    labeling.toggle_deleted_by! user
 
     labeling
   end
