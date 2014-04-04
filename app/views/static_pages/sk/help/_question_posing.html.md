@@ -2,7 +2,6 @@ Ako sa čo najlepšie opýtať otázku, aby Ti bolo čo najrýchlejšie odpoveda
 ### Kategória
 Výber správnej kategórie dopomôže k zodpovedaniu Tvojej otázky. Kategórie slúžia na rámcové zaradenie otázok do okruhov, ktoré už môžu sledovať jednotlivý odborníci v daných oblastiach.
 
-
 <img src="<%= asset_path('screenshots/question-category.png') %>" />
 
 ### Ako vyplniť nadpis?
