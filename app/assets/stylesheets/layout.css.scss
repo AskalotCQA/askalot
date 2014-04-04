@@ -38,6 +38,10 @@ body {
   @include opacity(0.8)
 }
 
+img {
+  max-width: 100%;
+}
+
 // navigation
 
 .pagination-navigation {
@@ -77,12 +81,6 @@ body {
 
 .text-undecorated {
   text-decoration: none !important;
-}
-
-// images
-
-img {
-  max-width: 100%;
 }
 
 // sidebar
