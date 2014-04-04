@@ -49,8 +49,7 @@ class AnswersController < ApplicationController
             @answers << answer
             labeling.mark_as_deleted_by! current_user
 
-            #FIXME(poizl) preco uz nie je Answer watchable?
-            #dispatch_event :delete, labeling, for: answer.watchers
+            dispatch_event :delete, labeling, for: answer.to_question.watchers
           end
         end
       when :helpful
