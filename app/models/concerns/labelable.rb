@@ -18,8 +18,14 @@ module Labelable
   def toggle_labeling_by!(user, label)
     label = Label.where(value: label).first_or_create! unless label.is_a? Label
 
-    return Labeling.create! author: user, answer: self, label: label unless labeled_by?(user, label)
+    labeling = Labeling.unscoped.find_or_initialize_by author: user, answer: self, label: label
 
-    Labeling.where(author: user, answer: self, label: label).first.destroy
+    if labeling.deleted? || labeling.new_record?
+      labeling.unmark_as_deleted!
+    else
+      #labeling.mark_as_deteted_by! user
+    end
+
+    labeling
   end
 end

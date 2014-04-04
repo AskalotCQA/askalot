@@ -23,14 +23,14 @@ module Votable
   end
 
   def toggle_vote_by!(user, positive)
-    vote = Vote.unscoped.find_or_create_by! votable:self, voter: user
+    vote = Vote.unscoped.find_or_initialize_by votable:self, voter: user
 
-    if vote.positive == positive && !vote.deleted?
-      vote.mark_as_deleted_by! user
-    else
+    if vote.new_record? || vote.positive!=positive || vote.deleted?
       vote.positive = positive
       vote.unmark_as_deleted! if vote.deleted?
       vote.save!
+    else
+      vote.mark_as_deleted_by! user
     end
 
     update_votes_caches!
