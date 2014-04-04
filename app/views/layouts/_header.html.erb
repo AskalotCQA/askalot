@@ -15,7 +15,7 @@
         <% if user_signed_in? && can?(:observe, :all) %>
           <li><%= link_to t('statistic.navigation'), statistics_path %></li>
         <% end %>
-        <li><%= link_to t('help.index'), help_path %></li>
+        <li><%= link_to t('help.link'), help_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
@@ -28,7 +28,7 @@
             <li><%= link_to t('user.edit.privacy'), edit_user_registration_path(tab: :privacy) %></li>
             <li><%= link_to t('user.edit.account'), edit_user_registration_path(tab: :account) %></li>
             <li class="divider"></li>
-            <li><%= link_to t('help.index'), help_path %></li>
+            <li><%= link_to t('help.link'), help_path %></li>
             <li class="divider"></li>
             <li><%= link_to t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
           <% end %>
