@@ -1,0 +1,22 @@
+<div class="user-profile-bar">
+  <div class="row">
+    <div class="col-md-2">
+      <%= user_avatar_tag user, image: { class: :'img-circle img-responsive', size: 96 } %>
+    </div>
+    <div class="col-md-10">
+      <h1>
+        <%= link_to_user user %>
+        <% if can? :show_name, user %>
+          <small><%= user.name %></small>
+        <% end %>
+      </h1>
+
+      <small class="text-muted">
+        <%= t('count_x.question', count: user.questions.where(anonymous: false).size) %> &middot;
+        <%= t('count_x.answer', count: user.answers.size) %> &middot;
+        <%= t('count_x.comment', count: user.comments.size) %> &middot;
+        <%= t('user.registered_at').downcase_first %> <%= time_tag user.created_at.to_date, format: :normal %>
+      </small>
+    </div>
+  </div>
+</div>

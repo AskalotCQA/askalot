@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140322113048) do
+ActiveRecord::Schema.define(version: 20140403192541) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,21 +47,22 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "answer_revisions", ["editor_id"], name: "index_answer_revisions_on_editor_id", using: :btree
 
   create_table "answers", force: true do |t|
-    t.integer  "author_id",                                                  null: false
-    t.integer  "question_id",                                                null: false
-    t.text     "text",                                                       null: false
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
-    t.integer  "votes_difference",                           default: 0,     null: false
-    t.integer  "comments_count",                             default: 0,     null: false
-    t.integer  "votes_count",                                default: 0,     null: false
-    t.boolean  "deleted",                                    default: false, null: false
-    t.decimal  "votes_lb_wsci_bp", precision: 13, scale: 12, default: 0.0,   null: false
+    t.integer  "author_id",                                                   null: false
+    t.integer  "question_id",                                                 null: false
+    t.text     "text",                                                        null: false
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
+    t.integer  "votes_difference",                            default: 0,     null: false
+    t.integer  "comments_count",                              default: 0,     null: false
+    t.integer  "votes_count",                                 default: 0,     null: false
+    t.boolean  "deleted",                                     default: false, null: false
+    t.decimal  "votes_lb_wsci_bp",  precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
-    t.boolean  "edited",                                     default: false, null: false
+    t.boolean  "edited",                                      default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.integer  "evaluations_count",                           default: 0,     null: false
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
@@ -71,6 +72,18 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
   add_index "answers", ["votes_difference"], name: "index_answers_on_votes_difference", using: :btree
   add_index "answers", ["votes_lb_wsci_bp"], name: "index_answers_on_votes_lb_wsci_bp", using: :btree
+
+  create_table "assignments", force: true do |t|
+    t.integer  "user_id",     null: false
+    t.integer  "category_id", null: false
+    t.integer  "role_id",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "assignments", ["category_id"], name: "index_assignments_on_category_id", using: :btree
+  add_index "assignments", ["role_id"], name: "index_assignments_on_role_id", using: :btree
+  add_index "assignments", ["user_id"], name: "index_assignments_on_user_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "name",                            null: false
@@ -196,8 +209,8 @@ ActiveRecord::Schema.define(version: 20140322113048) do
     t.integer  "deletor_id"
   end
 
+  add_index "labelings", ["answer_id", "label_id", "author_id"], name: "index_labelings_on_unique_key", unique: true, using: :btree
   add_index "labelings", ["answer_id"], name: "index_labelings_on_answer_id", using: :btree
-  add_index "labelings", ["author_id", "answer_id", "label_id"], name: "index_labelings_on_unique_key", unique: true, using: :btree
   add_index "labelings", ["author_id"], name: "index_labelings_on_author_id", using: :btree
   add_index "labelings", ["deleted"], name: "index_labelings_on_deleted", using: :btree
   add_index "labelings", ["deletor_id"], name: "index_labelings_on_deletor_id", using: :btree
@@ -266,13 +279,14 @@ ActiveRecord::Schema.define(version: 20140322113048) do
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
     t.boolean  "deleted",                                       default: false, null: false
-    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "touched_at",                                                    null: false
+    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
     t.boolean  "edited",                                        default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.integer  "evaluations_count",                             default: 0,     null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
@@ -284,6 +298,14 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
   add_index "questions", ["votes_difference"], name: "index_questions_on_votes_difference", using: :btree
   add_index "questions", ["votes_lb_wsci_bp"], name: "index_questions_on_votes_lb_wsci_bp", using: :btree
+
+  create_table "roles", force: true do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "slido_events", force: true do |t|
     t.integer  "category_id", null: false
@@ -303,26 +325,27 @@ ActiveRecord::Schema.define(version: 20140322113048) do
   add_index "slido_events", ["uuid"], name: "index_slido_events_on_uuid", unique: true, using: :btree
 
   create_table "taggings", force: true do |t|
-    t.integer  "tag_id",                        null: false
-    t.integer  "taggable_id",                   null: false
-    t.string   "taggable_type",                 null: false
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "deleted",       default: false, null: false
+    t.integer  "tag_id",                      null: false
+    t.integer  "question_id",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "deleted",     default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.integer  "author_id",                   null: false
   end
 
+  add_index "taggings", ["author_id"], name: "index_taggings_on_author_id", using: :btree
   add_index "taggings", ["deleted"], name: "index_taggings_on_deleted", using: :btree
   add_index "taggings", ["deletor_id"], name: "index_taggings_on_deletor_id", using: :btree
-  add_index "taggings", ["tag_id", "taggable_id", "taggable_type"], name: "index_taggings_on_tag_id_and_taggable_id_and_taggable_type", using: :btree
+  add_index "taggings", ["question_id", "tag_id", "author_id"], name: "index_taggings_on_unique_key", unique: true, using: :btree
+  add_index "taggings", ["question_id"], name: "index_taggings_on_question_id", using: :btree
   add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
-  add_index "taggings", ["taggable_id", "taggable_type"], name: "index_taggings_on_taggable_id_and_taggable_type", using: :btree
 
   create_table "tags", force: true do |t|
     t.string   "name",       null: false
-    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "created_at", null: false
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
@@ -380,6 +403,8 @@ ActiveRecord::Schema.define(version: 20140322113048) do
     t.integer  "views_count",            default: 0,         null: false
     t.integer  "votes_count",            default: 0,         null: false
     t.string   "remember_token"
+    t.integer  "followers_count",        default: 0,         null: false
+    t.integer  "followees_count",        default: 0,         null: false
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree

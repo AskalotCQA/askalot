@@ -35,6 +35,30 @@
   }
 }
 
+@mixin block-metric {
+  display: block;
+  margin-bottom: $padding-base-vertical;
+
+  font-size: $metric-font-size;
+  text-align: center;
+
+  &:active, &:focus, &:hover {
+    text-decoration: none;
+  }
+
+  &.text-muted {
+    color: $text-muted;
+  }
+}
+
+@mixin block-metric-value {
+  display: block;
+  margin-top: $padding-base-vertical;
+
+  font-size: $metric-value-font-size;
+  text-align: center;
+}
+
 @mixin nested-block-listing {
   display: block;
   position: relative;

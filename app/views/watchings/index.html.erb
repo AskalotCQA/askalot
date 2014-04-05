@@ -1,13 +1,5 @@
 <% provide :title, t('watching.index.title') %>
 
-<!--
-TODO(zbell) implement
-<%= form_tag clean_watchings_path, method: :delete, class: :'pull-right' do %>
-  <button class="btn btn-default"><%= icon_tag :'eye-slash' %> <%= t 'watching.clean.submit' %></button>
-<% end %>
-
--->
-
 <ul class="nav nav-tabs tab-navigation">
   <li><%= link_to t('notification.navigation'), notifications_path %></li>
   <li class="active"><%= link_to t('watching.navigation'), watchings_path %></li>

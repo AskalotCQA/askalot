@@ -7,36 +7,28 @@ class Social
 
   module ClassMethods
     def networks
-      @networks ||= Hash[all.map { |key|
-        network        = send(key)
-        network.key    = key
-        network.regexp = regexp(network.placeholder)
-
-        [key, network]
-      }]
+      @networks ||= build enabled
     end
 
-    def networks_show
-      @networks_show ||= Hash[enabled.map { |key|
-        network        = send(key)
-        network.key    = key
-        network.regexp = regexp(network.placeholder)
-
-        [key, network]
-      }]
+    def highlighted_networks
+      @highlighted_networks ||= build highlighted
     end
 
-    def networks_hide
-      @networks_hide ||= Hash[hide.map { |key|
-        network        = send(key)
-        network.key    = key
-        network.regexp = regexp(network.placeholder)
-
-        [key, network]
-      }]
+    def suppressed_networks
+      @suppressed_networks ||= build enabled - highlighted
     end
 
     private
+
+    def build(networks)
+      Hash[networks.map { |key|
+        network        = send(key)
+        network.key    = key
+        network.regexp = regexp(network.placeholder)
+
+        [key, network]
+      }]
+    end
 
     def regexp(placeholder)
       s = placeholder.clone

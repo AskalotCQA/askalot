@@ -1,7 +1,5 @@
 class TagsController < ApplicationController
-  include Tabbing
-
-  include Watchings::Watching
+  include Watchables::Watch
 
   default_tab :all, only: :index
 

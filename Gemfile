@@ -63,6 +63,9 @@ gem 'symbolize'
 gem 'garelic'
 gem 'newrelic_rpm'
 
+# search
+gem 'elasticsearch'
+
 # documentation
 group :doc do
   gem 'sdoc', require: false

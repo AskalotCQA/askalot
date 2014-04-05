@@ -2,15 +2,11 @@
 
 <div class="row">
   <div class="col-md-3">
-    <%= render 'side', user: @user %>
+    <%= render 'users/profile/side', user: @user %>
   </div>
   <div class="col-md-9">
     <div class="tab-navigation">
-      <% if can? :edit, @user %>
-        <div class="pull-right">
-          <%= link_to t('user.show.edit'), edit_user_registration_path, class: 'btn btn-default' %>
-        </div>
-      <% end %>
+      <%= render 'users/actions', user: @user %>
 
       <ul class="nav nav-tabs">
         <%= tab_link_tag t('user.tab.profile'), :profile, user_path(params.except(:page).merge tab: :profile) %>
@@ -21,10 +17,10 @@
     </div>
 
     <div class="tab-content">
-      <%= render_tab_content 'profile', :profile, locals: { user: @user } %>
-      <%= render_tab_content 'questions', :questions, locals: { questions: @questions } %>
-      <%= render_tab_content 'answers', :answers, locals: { answers: @answers } %>
-      <%= render_tab_content 'questions', :favorites, locals: { questions: @favorites } %>
+      <%= render_tab_content 'users/profile/home', :profile, locals: { user: @user } %>
+      <%= render_tab_content 'users/profile/questions', :questions, locals: { user: @user, questions: @questions } %>
+      <%= render_tab_content 'users/profile/answers', :answers, locals: { user: @user, answers: @answers } %>
+      <%= render_tab_content 'users/profile/favorites', :favorites, locals: { user: @user, favorites: @favorites } %>
     </div>
   </div>
 </div>

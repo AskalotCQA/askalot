@@ -5,10 +5,6 @@ html {
   overflow-y: scroll;
 }
 
-body {
-  margin-top: $navbar-height + 1px;
-}
-
 .flash .alert:first-child {
   margin-top: $navbar-height;
 }
@@ -33,6 +29,13 @@ body {
 }
 
 // images
+
+.img-icon {
+  @include square(20px);
+
+  display: block;
+  vertical-align: middle;
+}
 
 .img-muted {
   @include opacity(0.8)
@@ -94,7 +97,19 @@ body {
     }
   }
 
-  .nav li.active > a {
+  .nav .nav {
+    display: none;
+  }
+
+  .nav .nav > li > a {
+    padding-left: 20px;
+  }
+
+  li.active > .nav {
+    display: block;
+  }
+
+  li.active > a {
     font-weight: bolder;
   }
 }
@@ -102,6 +117,8 @@ body {
 // header
 
 header {
+  margin: 0 !important;
+
   .navbar-brand {
     font-variant: small-caps;
   }

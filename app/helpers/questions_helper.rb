@@ -1,10 +1,10 @@
 module QuestionsHelper
   def question_title_preview(question, options = {})
-    truncate html_escape(question.title), default_truncate_options.merge(length: 120).merge(options)
+    html_escape truncate(question.title, default_truncate_options.merge(length: 120).merge(options))
   end
 
   def question_text_preview(question, options = {})
-    truncate render_stripdown(question.text), default_truncate_options.merge(length: 200).merge(options)
+    preview_content question.text, options.reverse_merge(length: 200)
   end
 
   def question_answers_coloring(question)
@@ -13,6 +13,10 @@ module QuestionsHelper
     return :'text-warning' if question.answers.helpful.any?
 
     :'text-muted'
+  end
+
+  def question_evaluations_coloring(question)
+    evaluation_data(question)[:color]
   end
 
   def question_votes_coloring(question)
@@ -36,8 +40,12 @@ module QuestionsHelper
   def link_to_question(question, options = {})
     body = options.delete(:body) || question_title_preview(question, extract_truncate_options!(options))
     path = question_path(question, anchor: options.delete(:anchor))
+    path = options.delete(:path).call path if options[:path]
 
-    if question.deleted? || options.delete(:deleted)
+    if options.delete(:deleted) || question.deleted?
+      delete = options.delete(:delete)
+
+      return delete.call(body, path, options) if delete.is_a? Proc
       return content_tag :span, body, tooltip_attributes(t('question.link_to_deleted_title'), placement: :bottom).merge(options)
     end
 

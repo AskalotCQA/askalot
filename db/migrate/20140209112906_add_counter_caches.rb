@@ -1,5 +1,5 @@
 class AddCounterCaches < ActiveRecord::Migration
-  def self.up
+  def up
     add_counter :answers, :comments
     add_counter :answers, :votes
 
@@ -19,7 +19,7 @@ class AddCounterCaches < ActiveRecord::Migration
     add_counter :users, :votes
   end
 
-  def self.down
+  def down
     remove_counter :answers, :comments
     remove_counter :answers, :votes
 
