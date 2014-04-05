@@ -40,7 +40,7 @@ module Taggable
 
   def update_tags!
     relation = taggings
-    relation = relation.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags) unless tag_list.empty?
+    relation = relation.includes(:tag).references(:tags).where.not(tags: { name: tag_list.tags }) unless tag_list.empty?
 
     relation.each { |tagging| tagging.mark_as_deleted_by! author }
 
