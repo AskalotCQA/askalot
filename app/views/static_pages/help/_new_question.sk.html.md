@@ -1,4 +1,5 @@
 # Ako napísať dobrú otázku?
+
 #### <%= t('activerecord.attributes.question.category') %>
 
 * Slúži na rámcové zaradenie otázok do okruhov.

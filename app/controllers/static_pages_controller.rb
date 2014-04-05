@@ -13,6 +13,5 @@ class StaticPagesController < ApplicationController
   end
 
   def help
-    render "static_pages/sk/help/index"
   end
 end
