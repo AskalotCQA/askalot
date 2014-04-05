@@ -1,8 +1,8 @@
-<%= form_messages key: :activity %>
+<%= form_messages key: :activities %>
 
 <ol class="notifications">
   <% activities.each do |activity| %>
     <%= render 'activities/activity', activity: activity %>
   <% end %>
 </ol>
-<%= paginate activities, params: { tab: :activity } %>
+<%= paginate activities, params: { tab: :activities } %>
