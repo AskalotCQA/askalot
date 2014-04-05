@@ -14,9 +14,8 @@ Askalot::Application.routes.draw do
   get 'users/:nick', to: 'users#show', as: :user
 
   get :statistics, to: 'statistics#index'
+  get :help,       to: 'static_pages#help'
   get :welcome,    to: 'static_pages#welcome'
-
-  get :help, to: 'static_pages#help'
 
   concern :commetable do
     resources :comments, only: [:create, :update, :destroy]
