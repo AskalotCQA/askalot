@@ -13,6 +13,10 @@
         <%= link_to read_notification_path(notification), tooltip_attributes(t('notification.read.submit'), placement: :bottom).merge(class: 'btn btn-default btn-xs pull-right') do %>
           <%= icon_tag :check %>
         <% end %>
+      <% else %>
+        <%= link_to unread_notification_path(notification), tooltip_attributes(t('notification.unread.submit'), placement: :bottom).merge(class: 'btn btn-primitive btn-xs pull-right text-muted') do %>
+          <%= icon_tag :check %>
+        <% end %>
       <% end %>
     </div>
   </div>

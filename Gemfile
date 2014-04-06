@@ -65,6 +65,9 @@ gem 'tf_idf'
 gem 'garelic'
 gem 'newrelic_rpm'
 
+# search
+gem 'elasticsearch'
+
 # import
 gem 'activerecord-import', '~> 0.4.1'
 

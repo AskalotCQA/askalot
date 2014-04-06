@@ -1,14 +1,12 @@
 class NotificationsController < ApplicationController
-  include Tabbing
-
   default_tab :unread, only: [:index, :read, :clean]
 
   before_action :authenticate_user!
 
   def index
-    count = 25
+    count = 20
 
-    @notifications = Notification.where(recipient: current_user).order(created_at: :desc)
+    @notifications = Notification.for(current_user).order(created_at: :desc)
 
     @unread = @notifications.unread.page(tab_page :unread).per(count)
     @all    = @notifications.page(tab_page :all).per(count)
@@ -47,6 +45,6 @@ class NotificationsController < ApplicationController
       form_error_message t("notification.#{status}.failure"), key: params[:tab]
     end
 
-    redirect_to :back
+    redirect_to(params[:r] ? params[:r] : :back)
   end
 end

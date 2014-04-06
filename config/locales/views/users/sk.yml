@@ -15,6 +15,9 @@ sk:
       answers: 'Odpovede'
       favorites: 'Obľúbené'
 
+      followees: 'Nasledovaní'
+      followers: 'Nasledovníci'
+
     registration: 'Registrácia'
     confirmation: 'Potvrdenie registrácie'
     session_start: 'Prihlásenie'
@@ -33,6 +36,9 @@ sk:
     confirmation_pending: 'Čaká sa na potvrdenie e-mailu %{email}.'
     signed_in_as: 'Prihlásený ako %{login}'
 
+    last_sign_in_at: 'Naposledy prihlásený'
+    registered_at: 'Registrovaný'
+
     confirm_registration: 'Poslať inštrukcie pre potvrdenie registrácie'
     change_password: 'Zmeniť'
     reset_password: 'Poslať inštrukcie pre obnovenie hesla'
@@ -42,6 +48,8 @@ sk:
 
     new_password: 'Nové heslo'
     confirm_password: 'Potvrdenie hesla'
+
+    more_social: 'Viac'
 
     leave_current_password: 'ponechajte prázdne pokiaľ nechcete zmeniť'
     enter_current_password: 'pre potvrdenie potrebujeme Vaše aktuálne heslo'
@@ -66,9 +74,19 @@ sk:
     show:
       about: 'O mne'
       edit: 'Upraviť profil'
-      no_questions_found: 'Neboli nájdené žiadne otázky.'
-      no_answers_found: 'Neboli nájdené žiadne odpovede.'
-      no_favorites_found: 'Neboli nájdené žiadne obľúbené otázky.'
+
+      ask: 'Opýtajte sa'
+      answer: 'Skúste odpovedať'
+      browse: 'Prezrite si otázky'
+
+      no_questions: 'Zatiaľ ste sa neopýtali žiadnu otázku'
+      no_answers: 'Zatiaľ ste neodpovedali na žiadnu otázku'
+      no_favorites: 'Zatiaľ ste si nepridali žiadnu otázku medzi obľúbené'
+
+      other:
+        no_questions: 'Používateľ sa zatiaľ neopýtal žiadnu otázku.'
+        no_answers: 'Používateľ zatiaľ neodpovedal na žiadnu otázku.'
+        no_favorites: 'Používateľ si zatiaľ nepridal žiadnu otázku medzi obľúbené.'
 
     edit:
       profile: 'Úprava profilu'
@@ -78,5 +96,20 @@ sk:
 
     update:
       success: 'Úspešne ste aktualizovali Váš profil.'
+
+    followings:
+      title: 'Nasledovania'
+
+      browse: 'Prezrite si používateľov'
+
+      no_followees: 'Zatiaľ nenasledujete žiadneho používateľa'
+      no_followers: 'Zatiaľ vás nenasledujú žiadni používatelia.'
+
+      other:
+        no_followees: 'Používateľ zatiaľ nenasleduje žiadnych používateľov.'
+        no_followers: 'Používateľa zatiaľ nenasledujú žiadni používatelia.'
+
+    follow: 'Nasledovať'
+    unfollow: 'Nenasledovať'
 
     anonymous: 'Anonym'

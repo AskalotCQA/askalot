@@ -4,6 +4,7 @@ class Answer < ActiveRecord::Base
   include Deletable
   include Editable
   include Evaluable
+  include Labelable
   include Notifiable
   include Touchable
   include Votable
@@ -12,9 +13,6 @@ class Answer < ActiveRecord::Base
 
   belongs_to :question, -> { deleted_or_not }, counter_cache: true
 
-  has_many :labelings, dependent: :destroy
-  has_many :labels, through: :labelings
-
   has_many :revisions, class_name: :AnswerRevision, dependent: :destroy
 
   validates :text, presence: true
@@ -22,28 +20,7 @@ class Answer < ActiveRecord::Base
   scope :by,  lambda { |user| where(author: user) }
   scope :for, lambda { |question| where(question: question) }
 
-  scope :labeled,   lambda { joins(:labelings) }
-  scope :unlabeled, lambda { includes(:labelings).where(labelings: { answer_id: nil }) }
-
-  scope :labeled_with, lambda { |label| joins(:labelings).merge(Labeling.with label) }
-
   Hash[Label.value_enum].values.each { |label| scope label, -> { labeled_with label } }
-
-  def labeled_with(label)
-    labelings.with label
-  end
-
-  def labeled_by?(user, label)
-    labelings.by(user).with(label).any?
-  end
-
-  def toggle_labeling_by!(user, label)
-    label = Label.where(value: label).first_or_create! unless label.is_a? Label
-
-    return Labeling.create! author: user, answer: self, label: label unless labeled_by?(user, label)
-
-    Labeling.where(author: user, answer: self, label: label).first.destroy
-  end
 
   def best?
     labels.exists? value: :best

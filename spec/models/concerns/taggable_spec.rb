@@ -37,6 +37,16 @@ shared_examples_for Taggable do
         expect(record.tag_list.tags).to be_empty
       end
     end
+
+    context 'when tag list changes' do
+      it 'changes record' do
+        record = create factory, tag_list: 'a, b, c'
+
+        record.tag_list = 'c, d'
+
+        expect(record).to be_changed
+      end
+    end
   end
 
   describe '.tagged_with' do
@@ -75,23 +85,15 @@ shared_examples_for Taggable do
   end
 
   context 'after saving' do
-    it 'generates tags' do
-      record = build factory
-
-      record.tag_list = 'a, b, c'
-
-      record.save!
+    it 'create tags' do
+      record = create factory, tag_list: 'a, b, c'
 
       expect(record.tags.order(:name).pluck(:name)).to eql(['a', 'b', 'c'])
     end
 
     context 'when tag list changes' do
       it 'removes unused tagging relations' do
-        record = build factory
-
-        record.tag_list = 'a, b, c'
-
-        record.save!
+        record = create factory, tag_list: 'a, b, c'
 
         expect(record.tags.order(:name).pluck(:name)).to eql(['a', 'b', 'c'])
 
@@ -100,6 +102,18 @@ shared_examples_for Taggable do
         record.save!
 
         expect(record.tags.order(:name).pluck(:name)).to eql(['a', 'b'])
+      end
+    end
+
+    context 'when tag list is empty' do
+      it 'removes all taggings' do
+        record = create factory, tag_list: 'a, b, c'
+
+        record.tag_list = nil
+
+        record.save!
+
+        expect(record.tags).to be_empty
       end
     end
   end
@@ -150,12 +164,9 @@ describe Taggable::TagList do
 
     context 'when using configuration' do
       it 'extract tags by custom extractor' do
-        base = double(:base, extractor: extractor)
-        list = Taggable::TagList.new(base, 'a b')
+        list = Taggable::TagList.new(extractor, 'a b')
 
-        expect(base).to receive(:extractor?).and_return(true)
         expect(extractor).to receive(:extract).with('a b').and_return(['a', 'b'])
-
         expect(list.tags).to eql(['a', 'b'])
       end
     end

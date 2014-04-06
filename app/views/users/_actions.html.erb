@@ -1,0 +1,7 @@
+<% if can? :edit, user %>
+  <div class="pull-right">
+    <%= link_to t('user.show.edit'), edit_user_registration_path, class: 'btn btn-default' %>
+  </div>
+<% end %>
+
+<%= render 'users/profile/following', user: user %>

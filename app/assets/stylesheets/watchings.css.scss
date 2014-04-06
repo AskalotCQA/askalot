@@ -4,3 +4,12 @@
   @extend .list-unstyled;
   @include block-listing;
 }
+
+.watchings-clean {
+  margin-bottom: 10px;
+  padding: 10px 0;
+
+  border-top: 1px solid $gray-lighter;
+
+  text-align: right;
+}

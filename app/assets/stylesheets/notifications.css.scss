@@ -3,4 +3,8 @@
 .notifications {
   @extend .list-unstyled;
   @include block-listing;
+
+  time {
+    vertical-align: middle;
+  }
 }
