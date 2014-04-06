@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protected
 
   # concerns order is significant
-  include Concerns::Analytics
+  include Applications::Analytics
   include Applications::Security
   include Applications::Flash
   include Applications::Form
