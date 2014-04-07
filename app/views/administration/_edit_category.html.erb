@@ -1,0 +1,35 @@
+<% provide :title, t('administration.category') %>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <h1 class="page-header"><%= yield :title %></h1>
+
+      <%= icon_link_to :plus, t('administration.new.category'), new_question_path, class: 'btn btn-success' %>
+
+
+    <ul class="list-unstyled">
+      <% group_categories_by_prefix(@categories).each do |_, group| %>
+          <li class="category-group">
+            <% group.each_slice(3) do |categories| %>
+                <div class="row">
+                  <% categories.each do |category| %>
+                      <div class="col-md-4">
+                        <h4>
+                          <%= link_to_category category %>
+                        </h4>
+                          <% category.tags.each do |tag| %>
+                                <span class="label label-info"> <%= tag %></span>
+                          <% end %>
+                        <div class="question-details">
+                          <%= render 'editing_category', category: category %>
+                        </div>
+                      </div>
+                  <% end %>
+                </div>
+            <% end %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

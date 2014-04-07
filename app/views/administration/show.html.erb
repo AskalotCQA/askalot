@@ -1,0 +1,18 @@
+<% provide :title, t('administration.settings') %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <ul class="nav nav-pills nav-stacked pill-navigation">
+        <%= tab_link_tag t('administration.changelog'), :changelog, administration_path(tab: :changelog), data: { toggle: :pill } %>
+        <%= tab_link_tag t('administration.category'), :category, administration_path(tab: :category), data: { toggle: :pill } %>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <div class="pill-content tab-content">
+        <%= render_tab_content 'new_changelog', :changelog %>
+        <%= render_tab_content 'edit_category', :category %>
+      </div>
+    </div>
+  </div>
+</div>

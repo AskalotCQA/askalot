@@ -13,8 +13,9 @@ Askalot::Application.routes.draw do
 
   get 'users/:nick', to: 'users#show', as: :user
 
-  get :statistics, to: 'statistics#index'
-  get :welcome,    to: 'static_pages#welcome'
+  get :administration, to: 'administration#show'
+  get :statistics,     to: 'statistics#index'
+  get :welcome,        to: 'static_pages#welcome'
 
   concern :commetable do
     resources :comments, only: [:create, :update, :destroy]
@@ -69,7 +70,7 @@ Askalot::Application.routes.draw do
 
   resources :comments, only: [:update, :destroy]
 
-  resources :changelogs, only: [:index]
+  resources :changelogs, only: [:index, :new, :create]
 
   resources :markdown, only: [] do
     post :preview, on: :collection
