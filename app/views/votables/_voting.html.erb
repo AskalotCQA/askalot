@@ -1,11 +1,9 @@
 <div id="<%= model %>-<%= votable.id %>-voting" class="<%= model %>-voting">
   <% if can? :vote, votable %>
-    <%= icon_link_to :'chevron-up', nil, public_send("voteup_#{model}_path", votable), id: "#{model}-#{votable.id}-voteup", class: (votable.upvoted_by?(current_user) ? nil : :'text-muted'), data: { remote: true } %>
+    <%= icon_link_to :'chevron-up', nil, public_send("voteup_#{model}_path", votable), id: "#{model}-#{votable.id}-voteup", class: (votable.upvoted_by?(current_user) ? "#{model}-voted" : nil), data: { remote: true } %>
   <% end %>
-  <div>
-    <%= content_tag :span, votable.votes_difference >= 0 ? votable.votes_difference : "#{votable.votes_difference}&nbsp;".html_safe, tooltip_attributes("#{votable.votes.positive.size} - #{votable.votes.negative.size}", placement: :right) %>
-  </div>
+  <%= content_tag :span, votable.votes_difference >= 0 ? votable.votes_difference : "#{votable.votes_difference}&nbsp;".html_safe, tooltip_attributes("#{votable.votes.positive.size} - #{votable.votes.negative.size}", placement: :right).merge(class: "#{model}-votes-value") %>
   <% if can? :vote, votable %>
-    <%= icon_link_to :'chevron-down', nil, public_send("votedown_#{model}_path", votable), id: "#{model}-#{votable.id}-votedown", class: (votable.downvoted_by?(current_user) ? nil : :'text-muted'), data: { remote: true } %>
+    <%= icon_link_to :'chevron-down', nil, public_send("votedown_#{model}_path", votable), id: "#{model}-#{votable.id}-votedown", class: (votable.downvoted_by?(current_user) ? "#{model}-voted" : nil), data: { remote: true } %>
   <% end %>
 </div>

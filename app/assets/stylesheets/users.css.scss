@@ -68,6 +68,9 @@
 
 .user-following {
   @include block-following(user);
+
+  display: inline;
+  font-size: inherit;
 }
 
 // profile
