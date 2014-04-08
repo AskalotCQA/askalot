@@ -27,8 +27,6 @@ module Taggable
   #TODO(zbell) tagging author can be question author, deletor or editor; for now question author is always used
 
   def create_tags!
-    # TODO(zbell) add unmark_as_deleted here
-
     tag_list.each do |name|
       tag = Tag.find_or_create_by! name: name
 
@@ -42,9 +40,11 @@ module Taggable
     relation = taggings
     relation = relation.includes(:tag).references(:tags).where.not(tags: { name: tag_list.tags }) unless tag_list.empty?
 
-    relation.each { |tagging| tagging.mark_as_deleted_by! author }
+    # TODO(zbell) consider: create & destroy vs mark_as_deleted & unmark_as_deleted
+    #relation.each { |tagging| tagging.mark_as_deleted_by! author }
+    relation.each { |tagging| tagging.destroy }
 
-    taggings.reload
+    reload
   end
 
   module ClassMethods
