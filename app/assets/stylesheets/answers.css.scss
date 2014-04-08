@@ -39,12 +39,6 @@
   .answer-labeling-helpful {
     @include block-labeling(answer-labeled-helpful, $gray-light, $brand-warning);
   }
-
-  span.text-muted {
-    display: block;
-
-    font-size: $font-size-h4;
-  }
 }
 
 .answer-evaluating {

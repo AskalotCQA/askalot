@@ -64,6 +64,12 @@
   }
 }
 
+// member
+
+.user-following {
+  @include block-following(user);
+}
+
 // profile
 
 .user-profile-avatar {

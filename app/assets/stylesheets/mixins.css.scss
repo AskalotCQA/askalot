@@ -142,6 +142,16 @@
   }
 }
 
+@mixin block-following($class) {
+  a {
+    @include color-variant($gray-light, $brand-primary);
+  }
+
+  a.#{$class}-followed {
+    @include color-variant($brand-primary, $gray-light);
+  }
+}
+
 @mixin block-voting($class) {
   @include block-iconing;
 }
@@ -161,4 +171,3 @@
     color: $gray-light;
   }
 }
-
