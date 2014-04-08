@@ -94,6 +94,8 @@
 .user-profile-title {
   @include text-overflow;
 
+  margin-top: 20px;
+
   small {
     display: block;
     margin-top: $padding-small-vertical;

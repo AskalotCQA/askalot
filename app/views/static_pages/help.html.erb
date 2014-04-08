@@ -1,52 +1,57 @@
 <% provide(:sidebar, true) %>
 <% provide(:title, t('help.title')) %>
 
-<div class="row">
-  <div class="col-md-offset-1 col-md-2 hidden-xs hidden-sm hidden-print">
-    <%= sidebar_tag do %>
-      <ul class="nav">
-        <li>
-          <%= link_to t('help.heading.question_posing'), "#question-posing" %>
-        </li>
-        <li>
-          <%= link_to t('help.heading.studying'), '#studying' %>
-        </li>
-        <li>
-          <%= link_to t('help.heading.question_answering'), '#question-answering' %>
-        </li>
-        <li>
-          <%= link_to t('help.heading.profile'), '#profile' %>
-        </li>
-        <li>
-          <%= link_to t('help.heading.markdown'), '#markdown' %>
-        </li>
-      </ul>
-    <% end %>
-  </div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-9" role="main">
+      <h1 class="page-header">
+        <%= yield :title %>
+      </h1>
 
-  <div class="col-xs-12 col-md-6" role="main">
-    <h1 class="page-header"><%= yield :title %></h1>
-    <ol class="list-unstyled">
-      <li id="question-posing" class="help">
-        <h2><%= t('help.heading.question_posing') %></h2>
-        <%= render 'static_pages/help/question_posing' %>
-      </li>
-      <li id="studying" class="help">
-        <h2><%= t('help.heading.studying') %></h2>
-        <%= render 'static_pages/help/studying' %>
-      </li>
-      <li id="question-answering" class="help">
-        <h2><%= t('help.heading.question_answering') %></h2>
-        <%= render 'static_pages/help/question_answering' %>
-      </li>
-      <li id="profile" class="help">
-        <h2><%= t('help.heading.profile') %></h2>
-        <%= render 'static_pages/help/profile' %>
-      </li>
-      <li id="markdown" class="help">
-        <h2><%= t('help.heading.markdown') %></h2>
-        <%= render 'static_pages/help/markdown' %>
-      </li>
-    </ol>
+      <ol class="list-unstyled">
+        <li id="question-posing" class="help">
+          <h2><%= t('help.heading.question_posing') %></h2>
+          <%= render 'static_pages/help/question_posing' %>
+        </li>
+        <li id="studying" class="help">
+          <h2><%= t('help.heading.studying') %></h2>
+          <%= render 'static_pages/help/studying' %>
+        </li>
+        <li id="question-answering" class="help">
+          <h2><%= t('help.heading.question_answering') %></h2>
+          <%= render 'static_pages/help/question_answering' %>
+        </li>
+        <li id="profile" class="help">
+          <h2><%= t('help.heading.profile') %></h2>
+          <%= render 'static_pages/help/profile' %>
+        </li>
+        <li id="markdown" class="help">
+          <h2><%= t('help.heading.markdown') %></h2>
+          <%= render 'static_pages/help/markdown' %>
+        </li>
+      </ol>
+    </div>
+
+    <div class="col-md-3 hidden-xs hidden-sm hidden-print">
+      <%= sidebar_tag do %>
+        <ul class="nav">
+          <li>
+            <%= link_to t('help.heading.question_posing'), "#question-posing" %>
+          </li>
+          <li>
+            <%= link_to t('help.heading.studying'), '#studying' %>
+          </li>
+          <li>
+            <%= link_to t('help.heading.question_answering'), '#question-answering' %>
+          </li>
+          <li>
+            <%= link_to t('help.heading.profile'), '#profile' %>
+          </li>
+          <li>
+            <%= link_to t('help.heading.markdown'), '#markdown' %>
+          </li>
+        </ul>
+      <% end %>
+    </div>
   </div>
 </div>

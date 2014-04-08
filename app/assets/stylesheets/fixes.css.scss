@@ -55,15 +55,6 @@ address, form, nav, p, dl, ol, ul, table {
 
 // forms
 
-.form-title {
-  margin: ($line-height-computed * 2) 0 $line-height-computed;
-  padding-bottom: $line-height-computed / 2;
-}
-
-.form-alert {
-  margin-bottom: 15px;
-}
-
 .form-control + .input-group-addon {
   border-left: none;
 }
