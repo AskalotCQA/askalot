@@ -88,24 +88,11 @@
 }
 
 .question-voting {
-  @include block-iconing;
+  @include block-voting(question);
 }
 
 .question-favoring {
-  font-size: $font-size-h1;
-  text-align: center;
-
-  a {
-    @include color-variant($gray-light, $brand-warning);
-  }
-
-  a.question-favored {
-    @include color-variant($brand-warning, $gray-light);
-  }
-
-  span {
-    color: $gray-light;
-  }
+  @include block-favoring(question);
 
   .question-favorites-value {
     display: block;
@@ -119,7 +106,7 @@
 }
 
 .question-watching {
-  @include block-iconing;
+  @include block-watching(question);
 }
 
 .question-answers {

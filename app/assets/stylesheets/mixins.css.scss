@@ -91,6 +91,10 @@
 }
 
 @mixin block-labeling($action-class, $default-color, $action-color) {
+  @include block-iconing;
+
+  font-size: $font-size-h1;
+
   a {
     @include color-variant($default-color, $action-color);
   }
@@ -119,3 +123,42 @@
 @mixin block-evaluations {
   @include nested-block-listing;
 }
+
+@mixin block-favoring($class) {
+  @include block-iconing;
+
+  font-size: $font-size-h1;
+
+  a {
+    @include color-variant($gray-light, $brand-warning);
+  }
+
+  a.#{$class}-favored {
+    @include color-variant($brand-warning, $gray-light);
+  }
+
+  span {
+    color: $gray-light;
+  }
+}
+
+@mixin block-voting($class) {
+  @include block-iconing;
+}
+
+@mixin block-watching($class) {
+  @include block-iconing;
+
+  a {
+    @include color-variant($gray-light, $brand-primary);
+  }
+
+  a.#{$class}-watched {
+    @include color-variant($brand-primary, $gray-light);
+  }
+
+  span {
+    color: $gray-light;
+  }
+}
+
