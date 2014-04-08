@@ -20,6 +20,7 @@
     <div class="col-md-9">
       <div class="question-preview">
         <h4>
+          <%= evaluation_badge_tag answer, placement: :bottom if answer.evaluations.any? %>
           <%= link_to_answer answer, length: 60 %>
           <small class="pull-right"><%= tooltip_time_tag answer.created_at, format: :normal, placement: :bottom %></small>
         </h4>
