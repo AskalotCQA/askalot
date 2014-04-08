@@ -145,9 +145,7 @@
 @mixin block-voting($class) {
   @include toggle-block-iconing(#{$class}-voted, $gray-light, $brand-primary);
 
-  span.#{$class}-votes-value {
-    display: block
-  ;
+  div.#{$class}-votes-value span {
     color: $text-color;
   }
 }
