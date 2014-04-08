@@ -5,8 +5,8 @@ sk:
     title: 'Keď si nevieš dať rady v Askalote'
 
     heading:
-      question_posing: 'Chcem sa opýtať otázku'
-      studying: 'Chcem sa naučiť niečo nové'
-      question_answering: 'Chcem odpovedať na otázky'
+      answer_question: 'Chcem odpovedať na otázky'
+      ask_question: 'Chcem sa opýtať otázku'
+      explore: 'Chcem sa naučiť niečo nové'
       profile: 'Chcem si upraviť profil'
       markdown: 'Chcem použiť Markdown'
