@@ -34,8 +34,7 @@ Redcurtain::Renderer::Redcarpet.defaults[:tags] &= [
 
 class ActionView::Template::Handlers::Markdown
   def call(template)
-    @erb     ||= ActionView::Template.registered_template_handler :erb
-    @options ||= { autolink: true, fenced_code_blocks: true, space_after_headers: true }
+    @erb ||= ActionView::Template.registered_template_handler :erb
 
     "render_markdown(begin;#{@erb.call template};end)"
   end
