@@ -23,6 +23,8 @@ window.fixes = ->
   $('.popover').remove()
   $('.tooltip').remove()
 
+  $('[data-spy="affix"]').affix(offset: { top: 52 })
+
   $('[data-time-ago]').timeago()
 
   $('[data-toggle="buttons"] [checked="checked"]').parent().addClass('active')

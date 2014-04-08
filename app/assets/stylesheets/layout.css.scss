@@ -101,7 +101,15 @@ h4, h5, h6 {
 // sidebar
 
 .sidebar {
-  margin-top: 40px;
+  padding-left: 20px;
+
+  &.affix-top {
+    margin-top: 20px;
+  }
+
+  &.affix {
+    top: 20px;
+  }
 
   .nav > li > a {
     display: inline-block;
