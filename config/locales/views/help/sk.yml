@@ -1,7 +1,8 @@
 sk:
   help:
-    title: 'Keď si nevieš dať rady v Askalote'
     navigation: 'Pomoc'
+
+    title: 'Keď si nevieš dať rady v Askalote'
 
     heading:
       question_posing: 'Chcem sa opýtať otázku'
@@ -9,5 +10,3 @@ sk:
       question_answering: 'Chcem odpovedať na otázky'
       profile: 'Chcem si upraviť profil'
       markdown: 'Chcem použiť Markdown'
-
-
