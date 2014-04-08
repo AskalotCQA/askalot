@@ -2,7 +2,7 @@ sk:
   markdown:
     text: 'Text'
     preview: 'Náhľad'
-    documentation: 'Text je spracovaný pomocou %{link}'
+    documentation: 'Spracované pomocou %{link}'
 
     loading_preview: 'Načítavam náhľad…'
     nothing_to_preview: 'Žiadny text pre náhľad.'
