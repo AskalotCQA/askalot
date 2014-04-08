@@ -1,6 +1,8 @@
 // general
 
 html {
+  @include selection(rgba($brand-primary, 0.25));
+
   height: 100%;
   overflow-y: scroll;
 }

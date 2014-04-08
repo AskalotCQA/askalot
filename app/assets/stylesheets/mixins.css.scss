@@ -80,6 +80,18 @@
   color: $text-muted;
 }
 
+@mixin selection($background) {
+  ::selection {
+    background: $background;
+    text-shadow: none;
+  }
+
+  ::-moz-selection {
+    background: $background;
+    text-shadow: none;
+  }
+}
+
 @mixin toggle-block-iconing($action-class, $default-color, $action-color, $helper-color: $gray-light) {
   @include block-iconing;
 
