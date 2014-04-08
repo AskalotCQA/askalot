@@ -1,5 +1,30 @@
-// collection
+// general
 
 .help {
   padding-top: 50px;
+}
+
+.help-image {
+  @extend .img-responsive;
+  @extend .img-thumbnail;
+}
+
+.help-side {
+  h1 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+  }
+
+  h5 {
+    margin: 0 0 5px;
+    font-weight: bold;
+  }
+
+  ul {
+    @extend .list-unstyled;
+
+    margin-bottom: 15px;
+  }
+
+  color: $text-muted;
 }

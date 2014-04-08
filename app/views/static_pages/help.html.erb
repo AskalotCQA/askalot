@@ -5,6 +5,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-9" role="main">
       <h1 class="page-header"><%= yield :title %></h1>
+      <p class="lead"><%= t('help.lead') %></p>
 
       <h2 id="ask-question" class="page-header"><%= t('help.heading.ask_question') %></h2>
       <%= render 'static_pages/help/ask_question' %>

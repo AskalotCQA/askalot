@@ -1,7 +1,7 @@
 ### Vyhľadanie tvojej oblasti
 
-Aby si ľahšie našiel otázky, ktoré sú relevatné k Tvojej oblasti, kde sa cítiš ako doma, môžeš použiť [vyhľadávanie](<%= help_path + "#studying"%>) otázok podľa tagov.
-Taktiež si môžeš [odfiltrovať](<%= help_path + "#studying"%>) ešte neodpovedané, alebo nevyriešené otázky.
+Aby si ľahšie našiel otázky, ktoré sú relevatné k Tvojej oblasti, kde sa cítiš ako doma, môžeš použiť [vyhľadávanie](<%= help_path anchor: :explore %>) otázok podľa tagov.
+Taktiež si môžeš [odfiltrovať](<%= help_path anchor: :explore %>) ešte neodpovedané, alebo nevyriešené otázky.
 
 ### Odpovedanie na otázku
 

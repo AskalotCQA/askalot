@@ -14,7 +14,7 @@
 
       <div class="form-group">
         <%= f.label :title %>
-        <%= f.text_field :title, autofocus: true, class: :'form-control' %>
+        <%= f.text_field :title, class: :'form-control' %>
       </div>
 
       <div class="form-group">
@@ -46,7 +46,10 @@
       </div>
     <% end %>
   </div>
-  <div class="col-md-offset-1 col-md-5">
-    <%= render 'static_pages/help/new_question' %>
+
+  <div class="col-md-6">
+    <div class="help-side">
+      <%= render 'static_pages/help/create_question' %>
+    </div>
   </div>
 </div>
