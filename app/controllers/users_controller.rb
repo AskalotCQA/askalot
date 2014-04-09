@@ -54,8 +54,8 @@ class UsersController < ApplicationController
   def followings
     @user = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
 
-    @followees = @user.followees.page(tab_page :followees).per(20)
-    @followers = @user.followers.page(tab_page :followers).per(20)
+    @followees = @user.followees.order(:nick).page(tab_page :followees).per(20)
+    @followers = @user.followers.order(:nick).page(tab_page :followers).per(20)
   end
 
   def suggest

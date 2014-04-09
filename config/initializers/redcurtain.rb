@@ -31,3 +31,13 @@ Redcurtain::Renderer::Redcarpet.defaults[:tags] &= [
   :superscript,
   :underline
 ]
+
+class ActionView::Template::Handlers::Markdown
+  def call(template)
+    @erb ||= ActionView::Template.registered_template_handler :erb
+
+    "render_markdown(begin;#{@erb.call template};end)"
+  end
+end
+
+ActionView::Template.register_template_handler :md, ActionView::Template::Handlers::Markdown.new

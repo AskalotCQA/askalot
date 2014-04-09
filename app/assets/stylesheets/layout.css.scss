@@ -1,6 +1,8 @@
 // general
 
 html {
+  @include selection(rgba($brand-primary, 0.25));
+
   height: 100%;
   overflow-y: scroll;
 }
@@ -10,7 +12,8 @@ html {
 }
 
 .page-header {
-  margin-top: $navbar-height;
+  margin-top: 30px;
+  padding-top: 20px;
 }
 
 .highlight-content {
@@ -20,8 +23,12 @@ html {
 // forms
 
 .form-title {
-  margin: $navbar-height 0 30px;
-  padding: 0;
+  margin: (2 * $line-height-computed) 0 $line-height-computed;
+  padding-bottom: $line-height-computed / 2;
+}
+
+.form-alert {
+  margin-bottom: 15px;
 }
 
 .form-links {
@@ -60,6 +67,18 @@ html {
   padding-top: $navbar-height;
 }
 
+// headings
+
+h1, h2, h3 {
+  margin-top: 2 * $line-height-computed;
+  margin-bottom: ($line-height-computed / 2);
+}
+
+h4, h5, h6 {
+  margin-top: $line-height-computed;
+  margin-bottom: ($line-height-computed / 2);
+}
+
 // text
 
 .text-capital {
@@ -85,7 +104,15 @@ html {
 // sidebar
 
 .sidebar {
-  margin-top: 40px;
+  padding-left: 20px;
+
+  &.affix-top {
+    margin-top: 20px;
+  }
+
+  &.affix {
+    top: 20px;
+  }
 
   .nav > li > a {
     display: inline-block;

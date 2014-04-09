@@ -28,8 +28,15 @@ module Bootstrap::BarHelper
   end
 
   def sidebar_tag(options = {}, &block)
-    classes = [:sidebar, :'affix-top'] + Array.wrap(options.delete :class)
+    classes = [:sidebar] + Array.wrap(options.delete :class)
+    offsets = options.delete(:offset) || {}
+    data    = { spy: :affix }
 
-    content_tag :div, capture(&block), options.deep_merge(id: options.delete(:id) || :sidebar, class: classes, role: :complementary, data: { spy: :affix })
+    classes << :'affix-top'
+
+    data[:'offset-top']    = offsets[:top]    if offsets[:top]
+    data[:'offset-bottom'] = offsets[:bottom] if offsets[:bottom]
+
+    content_tag :div, capture(&block), options.deep_merge(id: options.delete(:id) || :sidebar, class: classes, role: :complementary, data: data)
   end
 end

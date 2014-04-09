@@ -7,6 +7,9 @@
 }
 
 .tag-watching {
+  @include block-watching(tag);
+
   display: inline;
+  font-size: inherit;
 }
 
