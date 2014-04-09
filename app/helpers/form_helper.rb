@@ -32,7 +32,7 @@ module FormHelper
   end
 
   def form_message_type_to_class(type)
-    { alert: :danger, error: :danger, failure: :danger, notice: :info, slido: :info }[type] || type
+    { alert: :danger, error: :danger, failure: :danger, notice: :info, slido: :info }[type.to_sym] || type
   end
 
   def reversed_check_box(method, options = {}, checked_value = '1', unchecked_value = '0')
