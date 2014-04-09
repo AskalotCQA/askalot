@@ -6,10 +6,10 @@ module StackExchange
 
         Category.create!(name: 'Stack Overflow') if category.nil?
 
-        parser = Nokogiri::XML::SAX::Parser.new(Document::Posts.new(Question))
+        parser = Nokogiri::XML::SAX::Parser.new(Document::Posts.new)
         parser.parse(File.open(path))
 
-        parser = Nokogiri::XML::SAX::Parser.new(Document::Posts.new(Answer))
+        parser = Nokogiri::XML::SAX::Parser.new(Document::Posts.new)
         parser.parse(File.open(path))
       end
     end

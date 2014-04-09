@@ -44,7 +44,7 @@ module StackExchange
     private
 
     def import
-      models = @records.inject({}).each do |hash, record|
+      models = @records.inject(Hash.new()) do |hash, record|
         (hash[record.class] ||= Array.new) << record
 
         hash
