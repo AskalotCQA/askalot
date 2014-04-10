@@ -23,7 +23,7 @@ module Votable
   end
 
   def toggle_vote_by!(user, positive)
-    vote = Vote.unscoped.find_or_initialize_by votable:self, voter: user
+    vote = Vote.deleted_or_new votable:self, voter: user
 
     if vote.new_record? || vote.positive!=positive || vote.deleted?
       vote.positive = positive

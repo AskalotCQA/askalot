@@ -11,6 +11,11 @@ module Deletable
     scope :undeleted, lambda { where(deleted: false) }
 
     default_scope -> { undeleted }
+
+    def self.deleted_or_new(params)
+      #TODO(poizl) when at rails 4.1 refractor to unscope(:deleted)
+      self.unscoped.find_or_initialize_by(params)
+    end
   end
 
   def mark_as_deleted_by!(user, datetime = DateTime.now.in_time_zone)
