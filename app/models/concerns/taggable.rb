@@ -19,7 +19,7 @@ module Taggable
   end
 
   def changed?
-    super || (tag_list.tags - tags.pluck(:name)).any?
+    super || (tag_list.tags - tags.pluck(:name)).any? || (tags.pluck(:name) - tag_list.tags).any?
   end
 
   private
@@ -40,9 +40,7 @@ module Taggable
     relation = taggings
     relation = relation.includes(:tag).references(:tags).where.not(tags: { name: tag_list.tags }) unless tag_list.empty?
 
-    # TODO(zbell) consider: create & destroy vs mark_as_deleted & unmark_as_deleted
-    #relation.each { |tagging| tagging.mark_as_deleted_by! author }
-    relation.each { |tagging| tagging.destroy }
+    relation.each { |tagging| tagging.mark_as_deleted_by! author }
 
     reload
   end
