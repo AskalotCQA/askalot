@@ -16,6 +16,7 @@ module StackExchange
       @count      = 0
       @started_at = Time.now
       @records    = []
+      @callbacks  = []
     end
 
     def end_document
@@ -27,14 +28,19 @@ module StackExchange
     def start_element(name, attributes = [])
       if name == 'row'
         attributes = Hash[attributes].symbolize_keys
-        record     = process_element(attributes)
+        result     = process_element(attributes)
+
+        record, callbacks = result.is_a?(Array) ? [result.first] + result[1..-1] : [result] + []
 
         if record
           puts "[#{self.name}] Processed #{@count}th #{self.name.singularize.downcase} with UUID: #{attributes[:Id]}"
 
           @count += 1
 
-          @records << record unless @records.include?(record)
+          unless @records.include?(record)
+            @records << record
+            @callbacks += Array.wrap(callbacks)
+          end
 
           import if @records.size >= batch_size
         end
@@ -54,7 +60,10 @@ module StackExchange
         model.import records, validate: false, timestamps: false
       end
 
-      @records = []
+      @callbacks.map(&:call)
+
+      @records   = []
+      @callbacks = []
     end
   end
 end

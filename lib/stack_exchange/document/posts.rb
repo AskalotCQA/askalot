@@ -12,12 +12,21 @@ module StackExchange
             text:                ActionView::Base.full_sanitizer.sanitize(post[:Text]).to_s,
             created_at:          post[:CreationDate],
             updated_at:          post[:CreationDate],
-            tag_list:            post[:Tags].gsub(/^</,'').gsub(/>$/,'').split(/></).map { |t| t.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '') },
             touched_at:          post[:CreationDate],
             stack_exchange_uuid: post[:Id]
           )
 
-          question.save!(validate: false, timestamps: false)
+          tags = post[:Tags].gsub(/^</,'').gsub(/>$/,'').split(/></).map { |t| t.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '') }
+
+          return question, -> do
+            question = Question.find_by(stack_exchange_uuid: post[:Id])
+
+            tags.each do |name|
+              tag = Tag.find_or_create_by! name: name
+
+              Tagging.find_or_create_by! tag: tag, question: question, author: question.author
+            end
+          end
         end
 
         if post[:PostTypeId] == '2'
