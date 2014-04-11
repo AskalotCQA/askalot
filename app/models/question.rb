@@ -21,6 +21,8 @@ class Question < ActiveRecord::Base
 
   has_many :revisions, class_name: :QuestionRevision, dependent: :destroy
 
+  has_many :profiles, class_name: :'Question::Profile', dependent: :destroy
+
   validates :category,  presence: true
   validates :title,     presence: true, length: { minimum: 2, maximum: 140 }
   validates :text,      presence: true, length: { minimum: 2 }

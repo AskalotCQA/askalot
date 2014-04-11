@@ -4,5 +4,8 @@ class Question
 
     symbolize :property
     symbolize :source
+
+    scope :as,  lambda { |source| where(source: source) }
+    scope :for, lambda { |property| where(property: property) }
   end
 end
