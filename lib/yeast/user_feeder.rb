@@ -1,5 +1,5 @@
-module Profile
-  module QuestionFeeder
+module Yeast
+  module UserFeeder
     extend self
 
     def publish(action, initiator, resource, options = {})

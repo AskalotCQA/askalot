@@ -1,17 +1,17 @@
-require 'profile'
+require 'yeast'
 require_relative '../../app/services/events/dispatcher'
 
-
-namespace :profile do
+namespace :yeast do
   desc 'Prepare dispatcher'
   task feed: :environment do
     Events::Dispatcher.unsubscribe_all
 
-    Events::Dispatcher.subscribe Profile::QuestionFeeder
-    Events::Dispatcher.subscribe Profile::AnswerFeeder
-    Events::Dispatcher.subscribe Profile::UserFeeder
+    # TODO (smolnar) order: AF, QF, UF
+    Events::Dispatcher.subscribe Yeast::QuestionFeeder
+    Events::Dispatcher.subscribe Yeast::AnswerFeeder
+    Events::Dispatcher.subscribe Yeast::UserFeeder
 
-    # models    = [Question, Answer, Vote, View, Comment, Labeling] # TODO (smolnar) consider views
+    # TODO (smolnar) consider View
     models    = [Question, Answer, Vote, Comment, Labeling]
     resources = models.map { |model| model.order(:created_at).first(1000) }.flatten
 
