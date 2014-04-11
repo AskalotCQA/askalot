@@ -11,8 +11,10 @@ module Deletable
     scope :undeleted, lambda { where(deleted: false) }
 
     default_scope -> { undeleted }
+  end
 
-    def self.deleted_or_new(params)
+  module ClassMethods
+    def deleted_or_new(params)
       #TODO(poizl) when at rails 4.1 refractor to unscope(:deleted)
       self.unscoped.find_or_initialize_by(params)
     end
@@ -38,8 +40,8 @@ module Deletable
 
   def unmark_as_deleted!
     self.transaction do
-      self.deleted = false
-      self.deletor = nil
+      self.deleted    = false
+      self.deletor    = nil
       self.deleted_at = nil
 
       deleted_changed = self.deleted_changed?
