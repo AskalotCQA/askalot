@@ -21,11 +21,13 @@ module StackExchange
           return question, -> do
             question = Question.find_by(stack_exchange_uuid: post[:Id])
 
-            tags.each do |name|
+            taggings = tags.uniq.map do |name|
               tag = Tag.find_or_create_by! name: name
 
-              Tagging.find_or_create_by! tag: tag, question: question, author: question.author
+              Tagging.new tag: tag, question: question, author: question.author
             end
+
+            Tagging.import taggings, validate: false
           end
         end
 
