@@ -7,8 +7,8 @@ namespace :yeast do
     Events::Dispatcher.unsubscribe_all
 
     # TODO (smolnar) order: AF, QF, UF
-    Events::Dispatcher.subscribe Yeast::QuestionFeeder
     Events::Dispatcher.subscribe Yeast::AnswerFeeder
+    Events::Dispatcher.subscribe Yeast::QuestionFeeder
     Events::Dispatcher.subscribe Yeast::UserFeeder
 
     # TODO (smolnar) consider View
