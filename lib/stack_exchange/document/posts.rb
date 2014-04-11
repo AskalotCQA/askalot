@@ -12,7 +12,7 @@ module StackExchange
             text:                ActionView::Base.full_sanitizer.sanitize(post[:Text]).to_s,
             created_at:          post[:CreationDate],
             updated_at:          post[:CreationDate],
-            tag_list:            post[:Tags].gsub(/^</,'').gsub(/>$/,'').split(/></),
+            tag_list:            post[:Tags].gsub(/^</,'').gsub(/>$/,'').split(/></).map { |t| t.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '') },
             touched_at:          post[:CreationDate],
             stack_exchange_uuid: post[:Id]
           )
