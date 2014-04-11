@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140408184444) do
+ActiveRecord::Schema.define(version: 20140409144728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,18 @@ ActiveRecord::Schema.define(version: 20140408184444) do
   add_index "activities", ["created_at"], name: "index_activities_on_created_at", using: :btree
   add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
   add_index "activities", ["resource_id", "resource_type"], name: "index_activities_on_resource_id_and_resource_type", using: :btree
+
+  create_table "answer_profiles", force: true do |t|
+    t.integer  "answer_id",   null: false
+    t.string   "property"
+    t.float    "value"
+    t.float    "probability"
+    t.string   "source"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "answer_profiles", ["answer_id"], name: "index_answer_profiles_on_answer_id", using: :btree
 
   create_table "answer_revisions", force: true do |t|
     t.integer  "answer_id",                  null: false
@@ -53,7 +65,6 @@ ActiveRecord::Schema.define(version: 20140408184444) do
     t.datetime "created_at",                                                    null: false
     t.datetime "updated_at",                                                    null: false
     t.integer  "votes_difference",                              default: 0,     null: false
-    t.integer  "stack_exchange_uuid"
     t.integer  "comments_count",                                default: 0,     null: false
     t.integer  "votes_count",                                   default: 0,     null: false
     t.boolean  "deleted",                                       default: false, null: false
@@ -63,7 +74,7 @@ ActiveRecord::Schema.define(version: 20140408184444) do
     t.datetime "deleted_at"
     t.integer  "deletor_id"
     t.boolean  "edited",                                        default: false, null: false
-    t.integer  "evaluations_count",                             default: 0,     null: false
+    t.integer  "stack_exchange_uuid"
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
@@ -134,13 +145,13 @@ ActiveRecord::Schema.define(version: 20140408184444) do
     t.text     "text",                                null: false
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "stack_exchange_uuid"
     t.boolean  "deleted",             default: false, null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
     t.datetime "deleted_at"
     t.integer  "deletor_id"
     t.boolean  "edited",              default: false, null: false
+    t.integer  "stack_exchange_uuid"
   end
 
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
@@ -247,6 +258,18 @@ ActiveRecord::Schema.define(version: 20140408184444) do
   add_index "notifications", ["resource_id", "resource_type"], name: "index_notifications_on_resource_id_and_resource_type", using: :btree
   add_index "notifications", ["unread"], name: "index_notifications_on_unread", using: :btree
 
+  create_table "question_profiles", force: true do |t|
+    t.integer  "question_id", null: false
+    t.string   "property"
+    t.float    "value"
+    t.float    "probability"
+    t.string   "source"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "question_profiles", ["question_id"], name: "index_question_profiles_on_question_id", using: :btree
+
   create_table "question_revisions", force: true do |t|
     t.integer  "question_id",                 null: false
     t.integer  "editor_id",                   null: false
@@ -275,7 +298,6 @@ ActiveRecord::Schema.define(version: 20140408184444) do
     t.datetime "updated_at",                                                               null: false
     t.integer  "votes_difference",                                         default: 0,     null: false
     t.boolean  "anonymous",                                                default: false, null: false
-    t.integer  "stack_exchange_uuid"
     t.integer  "answers_count",                                            default: 0,     null: false
     t.integer  "comments_count",                                           default: 0,     null: false
     t.integer  "favorites_count",                                          default: 0,     null: false
@@ -284,16 +306,16 @@ ActiveRecord::Schema.define(version: 20140408184444) do
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
     t.boolean  "deleted",                                                  default: false, null: false
-    t.datetime "touched_at",                                                               null: false
     t.decimal  "votes_lb_wsci_bp",               precision: 13, scale: 12, default: 0.0,   null: false
+    t.datetime "touched_at",                                                               null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
     t.datetime "deleted_at"
     t.integer  "deletor_id"
     t.boolean  "edited",                                                   default: false, null: false
+    t.integer  "stack_exchange_uuid"
     t.boolean  "stack_exchange_duplicate"
     t.integer  "stack_exchange_questions_uuids",                                                        array: true
-    t.integer  "evaluations_count",                                        default: 0,     null: false
   end
 
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
@@ -358,6 +380,21 @@ ActiveRecord::Schema.define(version: 20140408184444) do
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
+  create_table "user_profiles", force: true do |t|
+    t.integer  "user_id",         null: false
+    t.integer  "targetable_id",   null: false
+    t.string   "targetable_type", null: false
+    t.string   "property"
+    t.float    "value"
+    t.float    "probability"
+    t.string   "source"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "user_profiles", ["targetable_id", "targetable_type"], name: "index_user_profiles_on_targetable_id_and_targetable_type", using: :btree
+  add_index "user_profiles", ["user_id"], name: "index_user_profiles_on_user_id", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "login",                                      null: false
     t.string   "email",                  default: "",        null: false
@@ -404,7 +441,6 @@ ActiveRecord::Schema.define(version: 20140408184444) do
     t.string   "tumblr"
     t.string   "youtube"
     t.string   "role",                   default: "student", null: false
-    t.integer  "stack_exchange_uuid"
     t.integer  "answers_count",          default: 0,         null: false
     t.integer  "comments_count",         default: 0,         null: false
     t.integer  "favorites_count",        default: 0,         null: false
@@ -412,6 +448,7 @@ ActiveRecord::Schema.define(version: 20140408184444) do
     t.integer  "views_count",            default: 0,         null: false
     t.integer  "votes_count",            default: 0,         null: false
     t.string   "remember_token"
+    t.integer  "stack_exchange_uuid"
     t.integer  "followers_count",        default: 0,         null: false
     t.integer  "followees_count",        default: 0,         null: false
   end

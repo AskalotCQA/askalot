@@ -3,9 +3,9 @@ class CreateQuestionProfile < ActiveRecord::Migration
     create_table :question_profiles do |t|
       t.references :question, null: false
 
-      t.string :attribute
-      t.float :value
-      t.float :probability
+      t.string :property
+      t.float  :value
+      t.float  :probability
       t.string :source
 
       t.datetime :created_at, null: false
