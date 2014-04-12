@@ -4,9 +4,6 @@ module Deletable
   included do
     belongs_to :deletor, class_name: :User
 
-    # TODO(zbell) rm when on rails 4.1.0 since belongs_to -> { unscoped / unscope(:where) } does not work in 4.0.x
-    scope :deleted_or_not, lambda { where(deleted: [true, false]) }
-
     scope :deleted,   lambda { where(deleted: true) }
     scope :undeleted, lambda { where(deleted: false) }
 

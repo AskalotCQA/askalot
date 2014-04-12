@@ -11,7 +11,7 @@ class Answer < ActiveRecord::Base
 
   after_create :slido_label_with_best!
 
-  belongs_to :question, -> { deleted_or_not }, counter_cache: true
+  belongs_to :question, -> { unscope where: :deleted }, counter_cache: true
 
   has_many :revisions, class_name: :AnswerRevision, dependent: :destroy
 
