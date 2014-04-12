@@ -1,0 +1,17 @@
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    new CalHeatMap().init({
+      itemSelector: "#user-<%= user.id %>-activities-calendar",
+      data: "http://kamisama.github.io/cal-heatmap/datas-years.json",
+      start: new Date(2000, 0),
+      domain: "year",
+      subDomain: "day",
+      range: 1,
+      cellSize: 11,
+      legend: [20, 40, 60, 80],
+      itemName: ["aktivita", "aktivity"]
+    });
+  </script>
+<% end %>
+
+<div id="user-<%= user.id %>-activities-calendar" class="user-activities-calendar"></div>

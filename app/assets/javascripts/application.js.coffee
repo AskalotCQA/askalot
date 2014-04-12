@@ -21,6 +21,9 @@
 #= require locales/jquery.timeago.sk.js
 #= require jquery-textcomplete
 #
+#= require d3
+#= require cal_heatmap_rails
+#
 #= require gemoji
 #= require form
 #= require table
