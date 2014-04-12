@@ -5,12 +5,12 @@ module Events::Log
     before_action :log_current_action
   end
 
-  def logger
+  def events_management
     @events_management ||= Events::Management.new
   end
 
   def log(data)
-    logger.log(data.merge snapshot: { request: request, params: params, user: current_user })
+    events_management.log(data.merge snapshot: { request: request, params: params, user: current_user })
   end
 
   def log_current_action
