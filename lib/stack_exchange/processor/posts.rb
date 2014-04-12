@@ -8,9 +8,6 @@ module StackExchange
 
         parser = Nokogiri::XML::SAX::Parser.new(Document::Posts.new)
         parser.parse(File.open(path))
-
-        parser = Nokogiri::XML::SAX::Parser.new(Document::Posts.new)
-        parser.parse(File.open(path))
       end
     end
   end
