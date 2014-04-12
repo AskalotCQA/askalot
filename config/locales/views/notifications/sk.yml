@@ -89,12 +89,12 @@ sk:
           update: 'Upravenie %{resource} k otázke %{question}'
 
       favorite:
-        create: 'Obľúbenie otázky %{question}'
+        create: 'Pridanie obľúbenia otázky %{question}'
         delete: 'Zrušenie obľúbenia otázky %{question}'
 
       labeling:
-        create: 'Označenie odpovede %{resource} k otázke %{question}'
-        delete: 'Zrušenie označenia %{resource} k otázke %{question}'
+        create: 'Pridanie %{resource} odpovede k otázke %{question}'
+        delete: 'Zrušenie %{resource} odpovede k otázke %{question}'
 
       question:
         create: 'Pridanie otázky %{question}'

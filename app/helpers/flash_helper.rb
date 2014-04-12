@@ -3,8 +3,11 @@ module FlashHelper
 
   alias :flash_message_type_to_class :form_message_type_to_class
 
-  def flash_messages(flash: self.flash)
-    render 'shared/flash_messages', messages: flash_to_messages(flash: flash)
+  def flash_messages(flash: self.flash, &block)
+    messages = flash_to_messages flash: flash
+    content  = render 'shared/flash_messages', messages: messages
+
+    block ? capture(content, &block) : content if messages.any?
   end
 
   def flash_to_messages(flash: self.flash, reject: [:form])

@@ -1,6 +1,6 @@
 class ErrorsController < ApplicationController
   def show
-    @exception = env['action_dispatch.exception']
+    @exception = env['action_dispatch.exception'] || Exception.new
     @message   = @exception.message
 
     class_name        = @exception.class.name
