@@ -1,9 +1,7 @@
 <% provide :header, render(partial: 'header') %>
 
 <div class="container">
-  <section>
-    <%= flash_messages %>
-  </section>
+  <%= flash_messages { |content| content_tag :section, content } %>
 
   <section>
     <div class="row">
