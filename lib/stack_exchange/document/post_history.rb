@@ -7,10 +7,11 @@ module StackExchange
         return unless question
 
         if ['1', '101'].include?(history[:Comment]) && history[:Text]
-          question.stack_exchange_duplicate       = true
-          question.stack_exchange_questions_uuids = JSON.parse(history[:Text], symbolize_names: true)[:OriginalQuestionIds]
+          ids = JSON.parse(history[:Text], symbolize_names: true)[:OriginalQuestionIds]
 
-          question.save!(validate: false, timestamps: false)
+          question.update_columns(stack_exchange_duplicate: true, stack_exchange_questions_uuids: ids)
+
+          question
         end
       end
     end
