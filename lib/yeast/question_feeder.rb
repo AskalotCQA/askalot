@@ -14,7 +14,7 @@ module Yeast
       if resource.class == Vote && resource.votable.class == Question
         question = resource.votable
 
-        profile = Question::Profile.find_or_create_by! question: question, property: :quality, source: :QE
+        profile = Question::Profile.find_by! question: question, property: :quality, source: :QE
 
         value = 1 / (1 + Math::E**-(resource.votable.votes.positive.size - resource.votable.votes.negative.size)) + (question.favorites.size * 0.1)
 
@@ -24,7 +24,7 @@ module Yeast
       if resource.class == Favorite
         question = resource.question
 
-        profile = Question::Profile.find_or_create_by! question: question, property: :quality, source: :QE
+        profile = Question::Profile.find_by! question: question, property: :quality, source: :QE
 
         profile.update_attributes!(value: profile.value + 0.1)
       end

@@ -14,7 +14,7 @@ module Yeast
       if resource.class == Vote && resource.votable.class == Answer
         answer = resource.votable
 
-        profile = Answer::Profile.find_or_create_by! answer: answer, property: :quality, source: :QE
+        profile = Answer::Profile.find_by! answer: answer, property: :quality, source: :QE
 
         value = 1 / (1 + Math::E**-(resource.votable.votes.positive.size - resource.votable.votes.negative.size)) + (answer.best? ? 0.5 : 0)
 
@@ -24,7 +24,7 @@ module Yeast
       if resource.class == Labeling
         answer = resource.answer
 
-        profile = Answer::Profile.find_or_create_by! answer: answer, property: :quality, source: :QE
+        profile = Answer::Profile.find_by! answer: answer, property: :quality, source: :QE
 
         value = profile.value + (answer.best? ? 0.5 : 0)
 

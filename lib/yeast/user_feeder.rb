@@ -9,7 +9,7 @@ module Yeast
 
       question = resource if resource.class == Question
       question = resource.votable if resource.class == Vote && resource.votable.class == Question
-      question = resource.quesiton if resource.class == Favorite
+      question = resource.question if resource.class == Favorite
 
       if resource.class == Question
         question.tags.each do |tag|
@@ -21,7 +21,7 @@ module Yeast
 
       if question
         question.tags.each do |tag|
-          profile = User::Profile.find_or_create_by! targetable: tag, user: question.author, property: :interest, source: :QE
+          profile = User::Profile.find_by! targetable: tag, user: question.author, property: :interest, source: :QE
 
           value = question.profiles.as(:QE).for(:quality).first.value + profile.value
 
