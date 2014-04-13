@@ -37,10 +37,8 @@ module StackExchange
 
           @count += 1
 
-          unless @records.include?(record)
-            @records << record
-            @callbacks += Array.wrap(callbacks)
-          end
+          @records << record if !@records.include?(record) && record.new_record?
+          @callbacks += Array.wrap(callbacks)
 
           import if @records.size >= batch_size
         end
