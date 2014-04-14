@@ -14621,7 +14621,7 @@
             <dia:string>#probability#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#float#</dia:string>
+            <dia:string>#decimal#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -14690,7 +14690,7 @@
             <dia:string>#value#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#float#</dia:string>
+            <dia:string>#decimal#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -15033,7 +15033,7 @@
             <dia:string>#probability#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#float#</dia:string>
+            <dia:string>#decimal#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -15102,7 +15102,7 @@
             <dia:string>#value#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#float#</dia:string>
+            <dia:string>#decimal#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -15493,7 +15493,7 @@
             <dia:string>#probability#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#float#</dia:string>
+            <dia:string>#decimal#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -15562,7 +15562,7 @@
             <dia:string>#value#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#float#</dia:string>
+            <dia:string>#decimal#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
