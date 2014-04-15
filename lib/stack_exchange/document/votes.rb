@@ -5,7 +5,25 @@ module StackExchange
         if vote[:VoteTypeId] == '1'
           answer = Answer.find_by(stack_exchange_uuid: vote[:PostId])
 
-          answer.toggle_labeling_by! answer.question.author, :best  unless answer.nil? || answer.question.nil? || answer.question.author.nil?
+          return if answer.nil? || answer.question.nil? || answer.question.author.nil?
+
+          return if Labeling.exists?(stack_exchange_uuid: vote[:Id])
+
+          author = answer.question.author
+          label  = Label.find_or_create_by!(value: :best)
+
+          if record = Labeling.find_by(answer: answer, author: author, label: label)
+            record.destroy!
+          else
+            return Labeling.create!(
+              answer:              answer,
+              author:              author,
+              label:               label,
+              created_at:          vote[:CreationDate],
+              updated_at:          vote[:CreationDate],
+              stack_exchange_uuid: vote[:Id]
+            )
+          end
         end
 
         if vote[:VoteTypeId] == '2' || vote[:VoteTypeId] == '3'
@@ -15,24 +33,49 @@ module StackExchange
           # TODO (smolnar) consider removing index on voter_id, votable_id, voteable_type or
           # use random user who did not vote for resource yet.
 
-          vote = Vote.new(
-            voter_id:     0,
-            votable_id:   question.nil? ? (answer.nil? ? 0 : answer.id) : question.id,
-            votable_type: question.nil? ? :Answer : :Question,
-            positive:     vote[:VoteTypeId] == '2' ? true : false,
-            created_at:   vote[:CreationDate],
-            updated_at:   vote[:CreationDate],
-          )
+          votable  = question.nil? ? answer : question
+          positive = vote[:VoteTypeId] == '2' ? true : false
 
-          return vote
+          return unless votable
+
+          return if Vote.exists?(stack_exchange_uuid: vote[:Id])
+
+          if record = Vote.find_by(voter_id: 0, votable: votable, positive: positive)
+            record.destroy!
+          else
+            return Vote.create!(
+              voter_id:            0,
+              votable:             votable,
+              positive:            positive,
+              created_at:          vote[:CreationDate],
+              updated_at:          vote[:CreationDate],
+              stack_exchange_uuid: vote[:Id]
+            )
+          end
         end
 
         if vote[:VoteTypeId] == '5'
           user     = User.find_by(stack_exchange_uuid: vote[:UserId])
           question = Question.find_by(stack_exchange_uuid: vote[:PostId])
 
-          question.toggle_favoring_by! user unless question.nil? || user.nil?
+          return if question.nil? || user.nil?
+
+          return if Favorite.exists?(stack_exchange_uuid: vote[:Id])
+
+          if record = Favorite.find_by(favorer: user, question: question)
+            record.destroy!
+          else
+            return Favorite.create!(
+              favorer:             user,
+              question:            question,
+              created_at:          vote[:CreationDate],
+              updated_at:          vote[:CreationDate],
+              stack_exchange_uuid: vote[:Id]
+            )
+          end
         end
+
+        return nil
       end
     end
   end

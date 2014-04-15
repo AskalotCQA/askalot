@@ -4,7 +4,7 @@ require_relative '../../app/services/events/dispatcher'
 namespace :yeast do
   desc 'Prepare dispatcher'
   task feed: :environment do
-    [Question, Answer, Comment].each do |model|
+    [Question, Answer, Comment, Labeling].each do |model|
       model.class_eval do
         alias :initiator :author
       end

@@ -5,18 +5,24 @@ module StackExchange
         if post[:PostTypeId] == '1'
           user = User.find_by(stack_exchange_uuid: post[:OwnerUserId])
 
+          return unless user
+
+          return if Question.exists?(stack_exchange_uuid: post[:Id])
+
           question = Question.new(
-            author_id:           user.nil? ? 0 : user.id,
-            category_id:         Category.first.id,
+            author:              user,
+            category:            Category.first,
             title:               post[:Title], # TODO (smolnar) make title only 145 characters long, restrictions on DB
-            text:                ActionView::Base.full_sanitizer.sanitize(post[:Text]).to_s,
+            text:                ActionView::Base.full_sanitizer.sanitize(post[:Body]).to_s,
             created_at:          post[:CreationDate],
             updated_at:          post[:CreationDate],
             touched_at:          post[:CreationDate],
             stack_exchange_uuid: post[:Id]
           )
 
-          tags = post[:Tags].gsub(/^</,'').gsub(/>$/,'').split(/></).map { |t| t.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '') }
+          tags = post[:Tags].gsub(/^</,'').gsub(/>$/,'').split(/></).map do |t|
+            t.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '')
+          end
 
           return question, -> do
             question = Question.find_by(stack_exchange_uuid: post[:Id])
@@ -35,10 +41,14 @@ module StackExchange
           user     = User.find_by(stack_exchange_uuid: post[:OwnerUserId])
           question = Question.find_by(stack_exchange_uuid: post[:ParentId])
 
+          return if user.nil? || question.nil?
+
+          return if Answer.exists?(stack_exchange_uuid: post[:Id])
+
           answer = Answer.new(
-            author_id:           user.nil? ? 0 : user.id,
-            question_id:         question.nil? ? 0 : question.id,
-            text:                ActionView::Base.full_sanitizer.sanitize(post[:Text]).to_s,
+            author:              user,
+            question:            question,
+            text:                ActionView::Base.full_sanitizer.sanitize(post[:Body]).to_s,
             created_at:          post[:CreationDate],
             updated_at:          post[:CreationDate],
             stack_exchange_uuid: post[:Id]

@@ -6,6 +6,8 @@ module StackExchange
       def process_element(user)
         return if user[:Id] == '-1'
 
+        return if User.exists?(stack_exchange_uuid: user[:Id])
+
         user = User.new(
           login:              'user_' + user[:Id],
           email:               SecureRandom.hex + '@stackexchange.com',

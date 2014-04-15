@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140409144728) do
+ActiveRecord::Schema.define(version: 20140414184427) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20140409144728) do
     t.datetime "deleted_at"
     t.integer  "deletor_id"
     t.boolean  "edited",                                        default: false, null: false
+    t.integer  "evaluations_count",                             default: 0,     null: false
     t.integer  "stack_exchange_uuid"
   end
 
@@ -187,13 +188,14 @@ ActiveRecord::Schema.define(version: 20140409144728) do
   add_index "events", ["created_at"], name: "index_events_on_created_at", using: :btree
 
   create_table "favorites", force: true do |t|
-    t.integer  "favorer_id",                  null: false
-    t.integer  "question_id",                 null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.boolean  "deleted",     default: false, null: false
+    t.integer  "favorer_id",                          null: false
+    t.integer  "question_id",                         null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "deleted",             default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.integer  "stack_exchange_uuid"
   end
 
   add_index "favorites", ["deleted"], name: "index_favorites_on_deleted", using: :btree
@@ -201,6 +203,7 @@ ActiveRecord::Schema.define(version: 20140409144728) do
   add_index "favorites", ["favorer_id", "question_id"], name: "index_favorites_on_unique_key", unique: true, using: :btree
   add_index "favorites", ["favorer_id"], name: "index_favorites_on_favorer_id", using: :btree
   add_index "favorites", ["question_id"], name: "index_favorites_on_question_id", using: :btree
+  add_index "favorites", ["stack_exchange_uuid"], name: "index_favorites_on_stack_exchange_uuid", unique: true, using: :btree
 
   create_table "followings", force: true do |t|
     t.integer  "follower_id", null: false
@@ -214,14 +217,15 @@ ActiveRecord::Schema.define(version: 20140409144728) do
   add_index "followings", ["follower_id"], name: "index_followings_on_follower_id", using: :btree
 
   create_table "labelings", force: true do |t|
-    t.integer  "author_id",                  null: false
-    t.integer  "answer_id",                  null: false
-    t.integer  "label_id",                   null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "deleted",    default: false, null: false
+    t.integer  "author_id",                           null: false
+    t.integer  "answer_id",                           null: false
+    t.integer  "label_id",                            null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "deleted",             default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.integer  "stack_exchange_uuid"
   end
 
   add_index "labelings", ["answer_id", "label_id", "author_id"], name: "index_labelings_on_unique_key", unique: true, using: :btree
@@ -230,6 +234,7 @@ ActiveRecord::Schema.define(version: 20140409144728) do
   add_index "labelings", ["deleted"], name: "index_labelings_on_deleted", using: :btree
   add_index "labelings", ["deletor_id"], name: "index_labelings_on_deletor_id", using: :btree
   add_index "labelings", ["label_id"], name: "index_labelings_on_label_id", using: :btree
+  add_index "labelings", ["stack_exchange_uuid"], name: "index_labelings_on_stack_exchange_uuid", unique: true, using: :btree
 
   create_table "labels", force: true do |t|
     t.string   "value",      null: false
@@ -313,6 +318,7 @@ ActiveRecord::Schema.define(version: 20140409144728) do
     t.datetime "deleted_at"
     t.integer  "deletor_id"
     t.boolean  "edited",                                                   default: false, null: false
+    t.integer  "evaluations_count",                                        default: 0,     null: false
     t.integer  "stack_exchange_uuid"
     t.boolean  "stack_exchange_duplicate"
     t.integer  "stack_exchange_questions_uuids",                                                        array: true
@@ -448,9 +454,9 @@ ActiveRecord::Schema.define(version: 20140409144728) do
     t.integer  "views_count",            default: 0,         null: false
     t.integer  "votes_count",            default: 0,         null: false
     t.string   "remember_token"
-    t.integer  "stack_exchange_uuid"
     t.integer  "followers_count",        default: 0,         null: false
     t.integer  "followees_count",        default: 0,         null: false
+    t.integer  "stack_exchange_uuid"
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree
@@ -483,20 +489,22 @@ ActiveRecord::Schema.define(version: 20140409144728) do
   add_index "views", ["viewer_id"], name: "index_views_on_viewer_id", using: :btree
 
   create_table "votes", force: true do |t|
-    t.integer  "voter_id",                     null: false
-    t.integer  "votable_id",                   null: false
-    t.string   "votable_type",                 null: false
-    t.boolean  "positive",     default: true,  null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.boolean  "deleted",      default: false, null: false
+    t.integer  "voter_id",                            null: false
+    t.integer  "votable_id",                          null: false
+    t.string   "votable_type",                        null: false
+    t.boolean  "positive",            default: true,  null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.boolean  "deleted",             default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.integer  "stack_exchange_uuid"
   end
 
   add_index "votes", ["deleted"], name: "index_votes_on_deleted", using: :btree
   add_index "votes", ["deletor_id"], name: "index_votes_on_deletor_id", using: :btree
   add_index "votes", ["positive"], name: "index_votes_on_positive", using: :btree
+  add_index "votes", ["stack_exchange_uuid"], name: "index_votes_on_stack_exchange_uuid", unique: true, using: :btree
   add_index "votes", ["votable_id", "votable_type", "positive"], name: "index_votes_on_votable_id_and_votable_type_and_positive", using: :btree
   add_index "votes", ["voter_id", "votable_id", "votable_type"], name: "index_votes_on_unique_key", unique: true, using: :btree
   add_index "votes", ["voter_id"], name: "index_votes_on_voter_id", using: :btree

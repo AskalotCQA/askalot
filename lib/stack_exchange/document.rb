@@ -33,7 +33,7 @@ module StackExchange
         record, callbacks = result.is_a?(Array) ? [result.first] + result[1..-1] : [result] + []
 
         if record
-          puts "[#{self.name}] Processed #{@count}th #{self.name.singularize.downcase} with UUID: #{attributes[:Id]}"
+          puts "[#{self.name}] Processed #{@count}th #{self.name.singularize.underscore} with UUID: #{attributes[:Id]}"
 
           @count += 1
 
