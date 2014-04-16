@@ -4,12 +4,15 @@
       itemSelector: "#user-<%= user.id %>-activities-calendar",
       data: "http://kamisama.github.io/cal-heatmap/datas-years.json",
       start: new Date(2000, 0),
-      domain: "year",
+      domain: "month",
       subDomain: "day",
-      range: 1,
+      range: 12,
       cellSize: 11,
       legend: [20, 40, 60, 80],
-      itemName: ["aktivita", "aktivity"]
+      legendCellSize: 11,
+      itemName: ["aktivita", "aktivity"],
+      domainGutter: 0,
+      domainLabelFormat: function(date) { return moment(date).format("MMM") }
     });
   </script>
 <% end %>

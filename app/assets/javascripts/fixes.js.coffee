@@ -20,6 +20,8 @@ window.fixes = ->
   Markdown.bind()
   Hash.bind()
 
+  moment.lang('sk')
+
   $('.popover').remove()
   $('.tooltip').remove()
 
