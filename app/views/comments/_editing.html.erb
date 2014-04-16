@@ -1,7 +1,7 @@
 <% if can? :edit, comment %>
   &middot;
 
-  <a href="#" id="comment-<%= comment.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#comment-<%= comment.id %>-editing">
+  <a href="#" id="comment-<%= comment.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#comment-<%= comment.id %>-editing" data-track-label="comment-<%= comment.id %>-edit-modal" data-track-category="Comment" data-track-action="Editing">
     <%= tooltip_icon_tag :edit, t('comment.edit.action'), placement: :top %>
   </a>
 
