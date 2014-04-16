@@ -80,6 +80,34 @@
   color: $text-muted;
 }
 
+@mixin selection($background) {
+  ::selection {
+    background: $background;
+    text-shadow: none;
+  }
+
+  ::-moz-selection {
+    background: $background;
+    text-shadow: none;
+  }
+}
+
+@mixin toggle-block-iconing($action-class, $default-color, $action-color, $helper-color: $gray-light) {
+  @include block-iconing;
+
+  a {
+    @include color-variant($default-color, $action-color);
+  }
+
+  a.#{$action-class} {
+    @include color-variant($action-color, $default-color);
+  }
+
+  span {
+    color: $helper-color;
+  }
+}
+
 // specific
 
 @mixin block-comments {
@@ -91,31 +119,37 @@
 }
 
 @mixin block-labeling($action-class, $default-color, $action-color) {
-  a {
-    @include color-variant($default-color, $action-color);
-  }
+  @include toggle-block-iconing($action-class, $default-color, $action-color, $action-color);
 
-  a.#{$action-class} {
-    @include color-variant($action-color, $default-color);
-  }
-
-  span {
-    color: $action-color;
-  }
+  font-size: $font-size-h1;
 }
 
 @mixin block-evaluating($class) {
-  @include block-iconing;
-
-  a {
-    @include color-variant($gray-light, $brand-warning);
-  }
-
-  a.#{$class}-evaluated {
-    @include color-variant($brand-warning, $gray-light);
-  }
+  @include toggle-block-iconing(#{$class}-evaluated, $gray-light, $brand-warning);
 }
 
 @mixin block-evaluations {
   @include nested-block-listing;
+}
+
+@mixin block-favoring($class) {
+  @include toggle-block-iconing(#{$class}-favored, $gray-light, $brand-warning);
+
+  font-size: $font-size-h1;
+}
+
+@mixin block-following($class) {
+  @include toggle-block-iconing(#{$class}-followed, $gray-light, $brand-primary);
+}
+
+@mixin block-voting($class) {
+  @include toggle-block-iconing(#{$class}-voted, $gray-light, $brand-primary);
+
+  div.#{$class}-votes-value span {
+    color: $text-color;
+  }
+}
+
+@mixin block-watching($class) {
+  @include toggle-block-iconing(#{$class}-watched, $gray-light, $brand-primary);
 }

@@ -8,6 +8,7 @@
       <li><%= external_link_to t('footer.repositories'), url_to_site('#repositories'), { :'data-track-label' => "Source-code-link", :'data-track-category' => "Footer", :'data-track-action' => "Click" } %>
       <li><%= external_link_to t('footer.authors'), url_to_site('#authors'), { :'data-track-label' => "Authors-link", :'data-track-category' => "Footer", :'data-track-action' => "Click" } %></li>
       <li><%= external_link_to t('footer.contact'), url_to_site('#contact'), { :'data-track-label' => "Contacts-link", :'data-track-category' => "Footer", :'data-track-action' => "Click" } %></li>
+      <li><%= link_to t('footer.help'), help_path %></li>    
     </ul>
 
     <p class="text-muted">

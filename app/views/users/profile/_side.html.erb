@@ -26,7 +26,7 @@
 
   <li>
     <%= icon_tag :'clock-o', fixed: true %> <%= t 'user.registered_at' %>
-    <%= time_tag user.created_at.to_date, format: :normal %>
+    <%= time_tag user.created_at.to_date, format: :short %>
   </li>
 </ul>
 

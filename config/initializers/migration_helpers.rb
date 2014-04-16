@@ -14,7 +14,7 @@ class ActiveRecord::Migration
 
     model.reset_column_information
 
-    model.find_each do |record|
+    model.unscoped.find_each do |record|
       model.reset_counters record.id, association
     end
   end

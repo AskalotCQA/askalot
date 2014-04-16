@@ -17,6 +17,7 @@ Askalot::Application.routes.draw do
   get 'users/:nick/followings', to: 'users#followings', as: :user_followings
 
   get :statistics, to: 'statistics#index'
+  get :help,       to: 'static_pages#help'
   get :welcome,    to: 'static_pages#welcome'
 
   concern :commetable do

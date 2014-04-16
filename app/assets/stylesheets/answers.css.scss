@@ -1,7 +1,7 @@
 // general
 
 .new-answer {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 // collection
@@ -28,29 +28,16 @@
 }
 
 .answer-voting {
-  @include block-iconing;
+  @include block-voting(answer);
 }
 
 .answer-labeling {
-  font-size: $font-size-h1;
-  text-align: center;
-
   .answer-labeling-best {
     @include block-labeling(answer-labeled-best, $gray-light, $brand-success);
   }
 
   .answer-labeling-helpful {
     @include block-labeling(answer-labeled-helpful, $gray-light, $brand-warning);
-  }
-
-  .answer-labeling-verified {
-    @include block-labeling(answer-labeled-verified, $gray-light, $brand-info);
-  }
-
-  span.text-muted {
-    display: block;
-
-    font-size: $font-size-h4;
   }
 }
 

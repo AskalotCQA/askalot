@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.3'
+gem 'rails', '4.1.0'
 
 # database
 gem 'pg'
@@ -14,9 +14,9 @@ gem 'cancan', '~> 1.6.9'
 gem 'net-ldap'
 
 # stylesheets
-gem 'sass-rails', '~> 4.0.0'
+gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.1.1'
-gem 'font-awesome-rails', '~> 4.0.3.0'
+gem 'font-awesome-rails', '~> 4.0.3'
 
 # javascripts
 gem 'therubyracer', platforms: :ruby
@@ -41,8 +41,8 @@ gem 'rails-i18n', '~> 4.0.0'
 gem 'i18n-js'
 
 # pagination
-gem 'kaminari', '~> 0.14.1'
-gem 'kaminari-bootstrap', '~> 0.1.3'
+gem 'kaminari', '~> 0.15.1'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 
 # scheduling
 gem 'whenever'

@@ -34,6 +34,7 @@
     <div class="col-md-9">
       <div class="question-preview">
         <h4>
+          <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
           <%= link_to_question question, length: 60 %>
           <small class="pull-right"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
         </h4>

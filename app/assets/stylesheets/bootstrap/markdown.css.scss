@@ -20,6 +20,11 @@
   padding: 10px 15px;
 
   color: $text-muted;
+
+  direction: rtl;
+  text-align: right;
+
+  @include text-overflow;
 }
 
 .markdown-content {
