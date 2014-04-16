@@ -1,7 +1,7 @@
 <div id="questions-filter" class="questions-filter">
   <div class="row">
     <div class="col-md-2">
-      <%= icon_link_to :plus, t('question.new.feature'), new_question_path, class: 'btn btn-success' %>
+      <%= icon_link_to :plus, t('question.new.feature'), new_question_path, { class: 'btn btn-success', :'data-track-label' => "New-question-green-button-question-path", :'data-track-category' => "Question", :'data-track-action' => "Creating"} %>
     </div>
 
     <div class="col-md-offset-4 col-md-6">
@@ -13,7 +13,7 @@
             <span class="input-group-addon">
               <%= icon_tag :tags %>
             </span>
-            <%= text_field_tag :tags, params[:tags], id: :question_tags, class: :'form-control', placeholder: t('question.tag.placeholder'), data: { as: :select2, role: [:tags, :filter].join(',') } %>
+            <%= text_field_tag :tags, params[:tags], id: :question_tags, class: :'form-control', :'data-track-label' => "Input-filter", :'data-track-category' => "Question", :'data-track-action' => "Filtering" , placeholder: t('question.tag.placeholder'), data: { as: :select2, role: [:tags, :filter].join(',') } %>
           </div>
         </div>
       <% end %>
