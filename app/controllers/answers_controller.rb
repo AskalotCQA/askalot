@@ -43,7 +43,7 @@ class AnswersController < ApplicationController
         label = Label.find_by(value: :best)
 
         @question.answers.where.not(id: @answer.id).each do |answer|
-          labeling = Labeling.find_by(answer: answer, author: current_user, label: label)
+          labeling = answer.labelings.by(current_user).with(:best).first
 
           if labeling
             @answers << answer

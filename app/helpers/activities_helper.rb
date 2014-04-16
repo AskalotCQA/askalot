@@ -26,7 +26,6 @@ module ActivitiesHelper
 
   def link_to_activity(activity, options = {}, &block)
     options[:body] = capture(&block) if block_given?
-    #options[:path] = lambda { |path| activity.unread ? read_notification_path(activity, params: { r: path }) : path } if options.delete(:read) != false
 
     resource = activity.resource
 

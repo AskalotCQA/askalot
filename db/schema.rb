@@ -29,10 +29,10 @@ ActiveRecord::Schema.define(version: 20140408184444) do
 
   add_index "activities", ["action"], name: "index_activities_on_action", using: :btree
   add_index "activities", ["created_at"], name: "index_activities_on_created_at", using: :btree
-  add_index "activities", ["created_on", "created_at"], name: "index_activities_on_created_on_and_created_at", using: :btree
+  add_index "activities", ["created_on"], name: "index_activities_on_created_on", using: :btree
   add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
   add_index "activities", ["resource_id", "resource_type"], name: "index_activities_on_resource_id_and_resource_type", using: :btree
-  add_index "activities", ["updated_on", "updated_at"], name: "index_activities_on_updated_on_and_updated_at", using: :btree
+  add_index "activities", ["updated_on"], name: "index_activities_on_updated_on", using: :btree
 
   create_table "answer_revisions", force: true do |t|
     t.integer  "answer_id",                  null: false
@@ -287,8 +287,8 @@ ActiveRecord::Schema.define(version: 20140408184444) do
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
     t.boolean  "deleted",                                       default: false, null: false
-    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "touched_at",                                                    null: false
+    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
     t.datetime "deleted_at"
