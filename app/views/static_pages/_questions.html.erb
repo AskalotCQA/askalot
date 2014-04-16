@@ -1,7 +1,7 @@
 <ol class="list-unstyled">
   <% questions.each do |question| %>
     <li>
-      <h4><%= link_to_question question, length: 35 %></h4>
+      <h4><%= link_to_question question, { length: 35, :'data-track-label' => "#{question}-link-landing-page", :'data-track-category' => "Question", :'data-track-action' => "Showing" } %></h4>
       <%= question_text_preview question, length: 80 %>
     </li>
   <% end %>
