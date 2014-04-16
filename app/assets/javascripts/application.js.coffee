@@ -19,6 +19,8 @@
 #= require jquery-tablesorter
 #= require rails-timeago
 #= require locales/jquery.timeago.sk.js
+#= require moment
+#= require moment/sk.js
 #= require jquery-textcomplete
 #
 #= require d3
