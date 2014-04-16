@@ -10,6 +10,7 @@ class StaticPagesController < ApplicationController
   end
 
   def help
+    authenticate_user!
   end
 
   def welcome

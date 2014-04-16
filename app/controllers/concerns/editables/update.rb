@@ -9,7 +9,7 @@ module Editables::Update
 
     authorize! :edit, @editable
 
-    @revision = "#{controller_name.classify}Revision".constantize.create_revision!(current_user, @editable)
+    @revision = "#{controller_name.classify}::Revision".constantize.create_revision!(current_user, @editable)
 
     @editable.assign_attributes(update_params)
 
