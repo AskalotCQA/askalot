@@ -12,8 +12,7 @@ module Deletable
 
   module ClassMethods
     def deleted_or_new(params)
-      #TODO(poizl) when at rails 4.1 refractor to unscope(:deleted)
-      self.unscoped.find_or_initialize_by(params)
+      self.unscope(where: :deleted).find_or_initialize_by(params)
     end
   end
 
