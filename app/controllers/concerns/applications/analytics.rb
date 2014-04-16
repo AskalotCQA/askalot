@@ -1,4 +1,4 @@
-module Concerns::Analytics
+module Applications::Analytics
   extend ActiveSupport::Concern
 
   protected
