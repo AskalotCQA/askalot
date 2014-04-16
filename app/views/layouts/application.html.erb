@@ -23,6 +23,5 @@
     <%= javascript_include_tag 'application' %>
     <%= yield :scripts %>
     <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? %>
-    <%= render "layouts/ga_events" if Rails.env.production? %>
   </body>
 </html>
