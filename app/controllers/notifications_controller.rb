@@ -1,5 +1,5 @@
 class NotificationsController < ApplicationController
-  default_tab :unread, only: [:index, :read, :clean]
+  default_tab :unread, only: [:index, :read, :unread, :clean]
 
   before_action :authenticate_user!
 
@@ -23,7 +23,7 @@ class NotificationsController < ApplicationController
   def clean
     @notifications = Notification.where(recipient: current_user).unread
 
-    if @notifications.update_all(unread: false)
+    if @notifications.update_all(unread: false, read_at: nil)
       form_message :notice, t('notification.clean.success'), key: params[:tab]
     else
       form_error_message t('notification.clean.failure'), key: params[:tab]
@@ -37,9 +37,7 @@ class NotificationsController < ApplicationController
   def mark(status)
     @notification = Notification.find(params[:id])
 
-    @notification.unread = (status == :read ? false : (status == :unread) ? true : fail)
-
-    if @notification.save
+    if @notification.public_send("mark_as_#{status}")
       form_message :notice, t("notification.#{status}.success"), key: params[:tab]
     else
       form_error_message t("notification.#{status}.failure"), key: params[:tab]
