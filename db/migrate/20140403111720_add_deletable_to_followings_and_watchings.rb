@@ -1,7 +1,7 @@
 class AddDeletableToFollowingsAndWatchings < ActiveRecord::Migration
   def up
     models = [:followings, :watchings]
-
+rails
     models.each do |model|
       add_column model, :deleted, :boolean, null: false, default: false
       add_reference model, :deletor, null: true, index: true
