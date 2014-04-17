@@ -24,11 +24,10 @@ module Deletable
       self.deletor    = user
       self.deleted_at = datetime
 
-      deleted_changed = self.deleted_changed?
-
-      self.save!
-
-      self.decrement_counter_caches! if deleted_changed
+      if self.deleted_changed?
+        self.save!
+        self.decrement_counter_caches!
+      end
     end
 
     self
@@ -40,18 +39,17 @@ module Deletable
       self.deletor    = nil
       self.deleted_at = nil
 
-      deleted_changed = self.deleted_changed?
-
-      self.save!
-
-      self.increment_counter_caches! if deleted_changed
+      if self.deleted_changed?
+        self.save!
+        self.increment_counter_caches!
+      end
     end
 
     self
   end
 
   def toggle_deleted_by!(user)
-    if self.deleted? || self.new_record?
+    if self.new_record? || self.deleted?
       unmark_as_deleted!
     else
       mark_as_deleted_by! user
@@ -59,6 +57,10 @@ module Deletable
   end
 
   protected
+
+  def mark_as_deleted?(model)
+    model.options[:dependent] == :destroy && model.macro == :has_many && model.klass.column_names.include?('deleted')
+  end
 
   def mark_as_deleted_recursive!(user, datetime)
     self.reflections.each do |key, target|
@@ -70,33 +72,23 @@ module Deletable
     end
   end
 
-  def mark_as_deleted?(model)
-    model.options[:dependent] == :destroy && model.macro == :has_many && model.klass.column_names.include?('deleted')
-  end
-
   def increment_counter_caches!
-    self.reflections.each do |key, target|
-      if target.macro == :belongs_to && target.options[:counter_cache] == true
-        owner  = self.send(key.to_s)
-        column = target.counter_cache_column.to_sym
-
-        if owner
-          owner.class.increment_counter(column, owner.id)
-          owner.increment column
-        end
-      end
-    end
+    update_counter_caches! :increment
   end
 
   def decrement_counter_caches!
+    update_counter_caches! :decrement
+  end
+
+  def update_counter_caches!(action)
     self.reflections.each do |key, target|
       if target.macro == :belongs_to && target.options[:counter_cache] == true
         owner  = self.send(key.to_s)
         column = target.counter_cache_column.to_sym
 
         if owner
-          owner.class.decrement_counter(column, owner.id)
-          owner.decrement column
+          owner.class.send("#{action}_counter", column, owner.id)
+          owner.send(action, column)
         end
       end
     end
