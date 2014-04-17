@@ -19,7 +19,7 @@ module EvaluationsHelper
   end
 
   def link_to_evaluation(evaluation, options = {})
-    link_to_question evaluation.to_question, options.merge(anchor: "evaluation-#{evaluation.id}", deleted: evaluation.deleted?)
+    link_to_resource evaluation, options.merge(anchor: "evaluation-#{evaluation.id}")
   end
 
   private
