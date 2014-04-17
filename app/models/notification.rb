@@ -1,12 +1,12 @@
 class Notification < ActiveRecord::Base
-  ACTIONS = [:create, :update, :delete, :mention]
+  ACTIONS = Activity::ACTIONS
 
   belongs_to :recipient, class_name: :User
   belongs_to :initiator, class_name: :User
 
   belongs_to :resource, -> { unscope where: :deleted }, polymorphic: true
 
-  default_scope -> { where(resource_type: [Answer, Comment, Evaluation, Favorite, Following, Labeling, Question, Watching]) }
+  default_scope -> { where(resource_type: [Answer, Comment, Evaluation, Favorite, Labeling, Question]) }
 
   scope :for, lambda { |user| where(recipient: user) }
   scope :by,  lambda { |user| where(initiator: user) }
