@@ -6,4 +6,8 @@ class Favorite < ActiveRecord::Base
   belongs_to :question, counter_cache: true
 
   scope :by, lambda { |user| where(favorer: user) }
+
+  def to_question
+    self.question
+  end
 end
