@@ -24,10 +24,11 @@ module Deletable
       self.deletor    = user
       self.deleted_at = datetime
 
-      if self.deleted_changed?
-        self.save!
-        self.decrement_counter_caches!
-      end
+      deleted_changed = self.deleted_changed?
+
+      self.save!
+
+      self.decrement_counter_caches! if deleted_changed
     end
 
     self
@@ -39,10 +40,11 @@ module Deletable
       self.deletor    = nil
       self.deleted_at = nil
 
-      if self.deleted_changed?
-        self.save!
-        self.increment_counter_caches!
-      end
+      deleted_changed = self.deleted_changed?
+
+      self.save!
+
+      self.increment_counter_caches! if deleted_changed
     end
 
     self
@@ -88,7 +90,7 @@ module Deletable
 
         if owner
           owner.class.send("#{action}_counter", column, owner.id)
-          owner.send(action, column)
+          owner.send(action.to_s, column)
         end
       end
     end
