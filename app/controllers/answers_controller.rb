@@ -49,7 +49,7 @@ class AnswersController < ApplicationController
             @answers << answer
             labeling.mark_as_deleted_by! current_user
 
-            dispatch_event :delete, labeling, for: answer.to_question.watchers
+            dispatch_event :delete, labeling, for: answer.question.watchers
           end
         end
       when :helpful

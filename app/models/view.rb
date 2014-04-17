@@ -6,4 +6,8 @@ class View < ActiveRecord::Base
   belongs_to :question, counter_cache: true
 
   scope :by, lambda { |user| where(viewer: user) }
+
+  def to_question
+    self.question
+  end
 end

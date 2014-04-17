@@ -18,9 +18,21 @@ class Notification < ActiveRecord::Base
 
   symbolize :action, in: ACTIONS
 
+  def read=(value)
+    self.unread = !value
+  end
+
   def read
     !self.unread
   end
 
   alias :read? :read
+
+  def mark_as_read
+    update unread: false, read_at: Time.now
+  end
+
+  def mark_as_unread
+    update unread: true, read_at: nil
+  end
 end
