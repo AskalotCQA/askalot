@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417162824) do
+ActiveRecord::Schema.define(version: 20140417212431) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -201,6 +201,7 @@ ActiveRecord::Schema.define(version: 20140417162824) do
     t.datetime "deleted_at"
   end
 
+  add_index "followings", ["deleted"], name: "index_followings_on_deleted", using: :btree
   add_index "followings", ["deletor_id"], name: "index_followings_on_deletor_id", using: :btree
   add_index "followings", ["followee_id"], name: "index_followings_on_followee_id", using: :btree
   add_index "followings", ["follower_id", "followee_id"], name: "index_followings_on_unique_key", unique: true, using: :btree
@@ -473,6 +474,7 @@ ActiveRecord::Schema.define(version: 20140417162824) do
     t.datetime "deleted_at"
   end
 
+  add_index "watchings", ["deleted"], name: "index_watchings_on_deleted", using: :btree
   add_index "watchings", ["deletor_id"], name: "index_watchings_on_deletor_id", using: :btree
   add_index "watchings", ["watchable_id", "watchable_type"], name: "index_watchings_on_watchable_id_and_watchable_type", using: :btree
   add_index "watchings", ["watcher_id", "watchable_id", "watchable_type"], name: "index_watchings_on_unique_key", unique: true, using: :btree
