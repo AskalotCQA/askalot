@@ -40,8 +40,6 @@ class AnswersController < ApplicationController
       when :best
         authorize! :label, @question
 
-        label = Label.find_by(value: :best)
-
         @question.answers.where.not(id: @answer.id).each do |answer|
           labeling = answer.labelings.by(current_user).with(:best).first
 
