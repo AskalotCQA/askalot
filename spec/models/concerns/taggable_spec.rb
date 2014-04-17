@@ -112,7 +112,6 @@ shared_examples_for Taggable do
         record.tag_list = nil
 
         record.save!
-        record.reload
 
         expect(record.tags).to be_empty
       end
