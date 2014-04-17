@@ -47,7 +47,7 @@ class AnswersController < ApplicationController
             @answers << answer
             labeling.destroy
 
-            dispatch_event :delete, labeling, for: answer.watchers
+            dispatch_event :delete, labeling, for: answer.question.watchers
           end
         end
       when :helpful
