@@ -26,7 +26,7 @@ module NotificationsHelper
 
   def link_to_notification(notification, options = {}, &block)
     options[:body] = capture(&block) if block_given?
-    options[:url]  = lambda { |url| notification.unread ? read_notification_path(notification, params: { r: url }) : url } if options.delete(:read) != false
+    options[:url]  = lambda { |url| notification.unread ? read_notification_path(notification, params: { r: url }) : url }
 
     resource = notification.resource
 
@@ -35,9 +35,9 @@ module NotificationsHelper
     when :answer     then link_to_answer resource, options
     when :comment    then link_to_comment resource, options
     when :evaluation then link_to_evaluation resource, options
-    when :favorite   then link_to_favorite resource.question, options
+    when :favorite   then link_to_favorite resource, options
     when :following  then fail
-    when :labeling   then link_to_labeling resource.answer.question, options
+    when :labeling   then link_to_labeling resource, options
     when :question   then link_to_question resource, options
     when :tagging    then fail
     when :view       then fail
