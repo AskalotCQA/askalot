@@ -30,3 +30,5 @@ sk:
       tags: 'Tagy'
 
     none: 'Žiadne sledovania.'
+
+    deleted: 'Sledovanie bolo zrušené'
