@@ -58,7 +58,7 @@ describe 'Following user' do
 
       click_link 'Používatelia'
 
-      click_link "user-#{other_user.id}-follow"
+      click_link "user-#{other_user.id}-unfollow"
 
       wait_for_remote
 
@@ -73,7 +73,7 @@ describe 'Following user' do
       click_link 'Používatelia'
       click_link other_user.nick
 
-      click_link 'Nasledovateľ'
+      click_link 'nasledovník'
 
       expect(page).to have_content(user.nick)
     end
@@ -83,7 +83,7 @@ describe 'Following user' do
 
       click_link user.nick
 
-      click_link "Nasledovaný"
+      click_link "nasledovaný"
 
       expect(page).to have_content(other_user.nick)
     end

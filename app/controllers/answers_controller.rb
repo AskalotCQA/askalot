@@ -40,16 +40,14 @@ class AnswersController < ApplicationController
       when :best
         authorize! :label, @question
 
-        label = Label.find_by(value: :best)
-
         @question.answers.where.not(id: @answer.id).each do |answer|
-          labeling = Labeling.find_by(answer: answer, author: current_user, label: label)
+          labeling = answer.labelings.by(current_user).with(:best).first
 
           if labeling
             @answers << answer
-            labeling.mark_as_deleted_by! current_user
+            labeling.destroy
 
-            dispatch_event :delete, labeling, for: answer.to_question.watchers
+            dispatch_event :delete, labeling, for: answer.question.watchers
           end
         end
       when :helpful

@@ -11,6 +11,7 @@ class Question < ActiveRecord::Base
   include Viewable
   include Votable
   include Watchable
+
   include Questions::Searchable
 
   before_save :add_category_tags
@@ -19,7 +20,7 @@ class Question < ActiveRecord::Base
 
   has_many :answers, dependent: :destroy
 
-  has_many :revisions, class_name: :QuestionRevision, dependent: :destroy
+  has_many :revisions, class_name: :'Question::Revision', dependent: :destroy
 
   validates :category,  presence: true
   validates :title,     presence: true, length: { minimum: 2, maximum: 140 }

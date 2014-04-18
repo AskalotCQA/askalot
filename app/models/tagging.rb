@@ -1,6 +1,6 @@
 class Tagging < ActiveRecord::Base
   include Deletable
-  include Notifiable
+  include Notifiable # TODO(zbell) enable + add event hook on CUD
 
   belongs_to :author, class_name: :User
   belongs_to :question
@@ -9,4 +9,8 @@ class Tagging < ActiveRecord::Base
   scope :by,   lambda { |user| where author: user }
   scope :for,  lambda { |answer| where question: answer }
   scope :with, lambda { |tag| tag.is_a?(Tag) ? where(tag: tag) : joins(:tag).where(tags: { name: tag }) }
+
+  def to_question
+    self.question
+  end
 end

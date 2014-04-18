@@ -19,26 +19,30 @@ module NotificationsHelper
               end
 
     body    = t("notification.content.#{notification.action == :mention ? :mention : :persistence}.#{resource.class.name.downcase}")
-    content = t(content, resource: link_to_notification(notification, body: body), question: link_to_notification(notification, length: 50)).html_safe
+    content = t(content, resource: link_to_notification(notification, body: body), question: link_to_notification(notification, deleted: resource.to_question.deleted?, length: 50)).html_safe
 
     notification.unread ? content : content_tag(:span, content, class: :'text-muted')
   end
 
   def link_to_notification(notification, options = {}, &block)
     options[:body] = capture(&block) if block_given?
-    options[:path] = lambda { |path| notification.unread ? read_notification_path(notification, params: { r: path }) : path } if options.delete(:read) != false
+    options[:url]  = lambda { |url| notification.unread ? read_notification_path(notification, params: { r: url }) : url }
 
     resource = notification.resource
 
+    # TODO(zbell) add specific link_to_* helpers for all cases
     case resource.class.name.downcase.to_sym
     when :answer     then link_to_answer resource, options
     when :comment    then link_to_comment resource, options
     when :evaluation then link_to_evaluation resource, options
-    when :favorite   then link_to_question resource.question, options
-    when :labeling   then link_to_question resource.answer.question, options
+    when :favorite   then link_to_favorite resource, options
+    when :following  then fail
+    when :labeling   then link_to_labeling resource, options
     when :question   then link_to_question resource, options
-    when :view       then link_to_question resource.question, options
-    when :vote       then link_to_question resource.votable.to_question, options
+    when :tagging    then fail
+    when :view       then fail
+    when :vote       then fail
+    when :watching   then fail
     else fail
     end
   end
@@ -60,10 +64,13 @@ module NotificationsHelper
     when :comment    then color[:resource], icon[:resource] = :'text-warning', :comments
     when :evaluation then color[:resource], icon[:resource] = :'text-warning', :magic
     when :favorite   then color[:resource], icon[:resource] = :'text-warning', :star
+    when :following  then color[:resource], icon[:resource] = :'text-info',    :link
     when :labeling   then color[:resource], icon[:resource] = :'text-success', :check
     when :question   then color[:resource], icon[:resource] = :'text-primary', :'question-circle'
+    when :tagging    then color[:resource], icon[:resource] = :'text-primary', :tag
     when :view       then color[:resource], icon[:resource] = :'text-muted',   :eye
     when :vote       then color[:resource], icon[:resource] = :'text-muted',   :sort
+    when :watching   then color[:resource], icon[:resource] = :'text-info',    :eye
     end
 
     { color: color, icon: icon }
