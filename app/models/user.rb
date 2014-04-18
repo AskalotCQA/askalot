@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :labelings, foreign_key: :author_id, dependent: :destroy
   has_many :labels, through: :labelings
 
+  has_many :activities,    foreign_key: :initiator_id, dependent: :destroy
   has_many :favorites,     foreign_key: :favorer_id,   dependent: :destroy
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
   has_many :views,         foreign_key: :viewer_id,    dependent: :destroy

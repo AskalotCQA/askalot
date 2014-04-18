@@ -1,0 +1,15 @@
+<%= form_messages key: :activities %>
+
+<% if activities.any? %>
+  <ol class="notifications">
+    <% activities.each do |activity| %>
+      <%= render 'activities/activity', activity: activity %>
+    <% end %>
+  </ol>
+
+  <%= paginate activities, params: { tab: :activities } %>
+<% else %>
+  <p class="alert alert-info">
+    <%= t 'activities.none'%>
+  </p>
+<% end %>
