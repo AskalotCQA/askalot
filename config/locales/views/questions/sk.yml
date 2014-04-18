@@ -57,9 +57,9 @@ sk:
       updated: 'Upravil'
       deleted: 'Zmazal'
 
-    link_to_deleted_title: 'Otázka bola zmazaná'
-
     favor: 'Pridať medzi obľúbené'
     unfavor: 'Odobrať z obľúbených'
 
     favored: 'Obľúbená'
+
+    deleted: 'Otázka bola zmazaná'
