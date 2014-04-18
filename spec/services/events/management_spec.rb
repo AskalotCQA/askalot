@@ -95,8 +95,8 @@ describe Events::Management do
       data  = { action: 'hello', snapshot: { request: request, params: params }}
       event = management.log data
 
-      expect(event.data[:params][:authenticity_token]).to eql :__SECURED__
-      expect(event.data[:params][:user][:password]).to eql :__SECURED__
+      expect(event.data[:params][:authenticity_token]).to eql :__SECURED__.to_s
+      expect(event.data[:params][:user][:password]).to eql :__SECURED__.to_s
     end
   end
 end
