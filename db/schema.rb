@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417162824) do
+ActiveRecord::Schema.define(version: 20140417213702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,10 +29,9 @@ ActiveRecord::Schema.define(version: 20140417162824) do
 
   add_index "activities", ["action"], name: "index_activities_on_action", using: :btree
   add_index "activities", ["created_at"], name: "index_activities_on_created_at", using: :btree
-  add_index "activities", ["created_on", "created_at"], name: "index_activities_on_created_on_and_created_at", using: :btree
+  add_index "activities", ["created_on"], name: "index_activities_on_created_on", using: :btree
   add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
   add_index "activities", ["resource_id", "resource_type"], name: "index_activities_on_resource_id_and_resource_type", using: :btree
-  add_index "activities", ["updated_on", "updated_at"], name: "index_activities_on_updated_on_and_updated_at", using: :btree
 
   create_table "answer_revisions", force: true do |t|
     t.integer  "answer_id",                  null: false
@@ -201,6 +200,7 @@ ActiveRecord::Schema.define(version: 20140417162824) do
     t.datetime "deleted_at"
   end
 
+  add_index "followings", ["deleted"], name: "index_followings_on_deleted", using: :btree
   add_index "followings", ["deletor_id"], name: "index_followings_on_deletor_id", using: :btree
   add_index "followings", ["followee_id"], name: "index_followings_on_followee_id", using: :btree
   add_index "followings", ["follower_id", "followee_id"], name: "index_followings_on_unique_key", unique: true, using: :btree
@@ -304,6 +304,7 @@ ActiveRecord::Schema.define(version: 20140417162824) do
   add_index "questions", ["edited"], name: "index_questions_on_edited", using: :btree
   add_index "questions", ["slido_question_uuid"], name: "index_questions_on_slido_question_uuid", unique: true, using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
+  add_index "questions", ["touched_at"], name: "index_questions_on_touched_at", using: :btree
   add_index "questions", ["votes_difference"], name: "index_questions_on_votes_difference", using: :btree
   add_index "questions", ["votes_lb_wsci_bp"], name: "index_questions_on_votes_lb_wsci_bp", using: :btree
 
@@ -473,6 +474,7 @@ ActiveRecord::Schema.define(version: 20140417162824) do
     t.datetime "deleted_at"
   end
 
+  add_index "watchings", ["deleted"], name: "index_watchings_on_deleted", using: :btree
   add_index "watchings", ["deletor_id"], name: "index_watchings_on_deletor_id", using: :btree
   add_index "watchings", ["watchable_id", "watchable_type"], name: "index_watchings_on_watchable_id_and_watchable_type", using: :btree
   add_index "watchings", ["watcher_id", "watchable_id", "watchable_type"], name: "index_watchings_on_unique_key", unique: true, using: :btree

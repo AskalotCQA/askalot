@@ -14,16 +14,14 @@ module Followable
   end
 
   def follow!(user)
-    followings.deleted_or_new(follower: self, followee: user).unmark_as_deleted!
+    followings.deleted_or_new(follower: self, followee: user).mark_as_undeleted!
   end
 
   def unfollow!(user)
-    followings.find_by(followee: user).mark_as_deleted_by! user
+    followings.where(follower: self, followee: user).first.mark_as_deleted_by! user
   end
 
   def toggle_following_by!(user)
-    return follow! user unless following?(user)
-
-    unfollow! user
+    following?(user) ? unfollow!(user) : follow!(user)
   end
 end

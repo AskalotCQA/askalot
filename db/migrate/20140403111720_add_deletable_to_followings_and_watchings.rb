@@ -1,5 +1,5 @@
 class AddDeletableToFollowingsAndWatchings < ActiveRecord::Migration
-  def change
+  def up
     models = [:followings, :watchings]
 
     models.each do |model|

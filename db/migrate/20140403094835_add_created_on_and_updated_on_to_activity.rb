@@ -14,13 +14,13 @@ class AddCreatedOnAndUpdatedOnToActivity < ActiveRecord::Migration
     change_column :activities, :created_on, :date, null: false
     change_column :activities, :updated_on, :date, null: false
 
-    add_index :activities, [:created_on, :created_at]
-    add_index :activities, [:updated_on, :updated_at]
+    add_index :activities, :created_on
+    add_index :activities, :updated_on
   end
 
   def down
-    remove_index :activities, [:updated_on, :updated_at]
-    remove_index :activities, [:created_on, :created_at]
+    remove_index :activities, :updated_on
+    remove_index :activities, :created_on
 
     remove_column :activities, :created_on
     remove_column :activities, :updated_on

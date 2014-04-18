@@ -14,10 +14,6 @@ module Favorable
   end
 
   def toggle_favoring_by!(user)
-    favoring = favorites.deleted_or_new(favorer: user, question: self)
-
-    favoring.toggle_deleted_by! user
-
-    favoring
+    favorites.deleted_or_new(favorer: user, question: self).toggle_deleted_by! user
   end
 end

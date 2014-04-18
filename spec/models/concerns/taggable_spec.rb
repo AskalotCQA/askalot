@@ -112,7 +112,6 @@ shared_examples_for Taggable do
         record.tag_list = nil
 
         record.save!
-        record.reload
 
         expect(record.tags).to be_empty
       end
@@ -125,12 +124,10 @@ describe Taggable::TagList do
 
   describe '#+' do
     it 'appends tags to list' do
-      list = Taggable::TagList.new(nil, 'a, b')
-
-      list.extractor = extractor
-
       expect(extractor).to receive(:extract).with('a, b').and_return(['a', 'b'])
       expect(extractor).to receive(:extract).with('c, d').and_return(['c', 'd'])
+
+      list = Taggable::TagList.new(extractor, 'a, b')
 
       expect(list.tags).to eql(['a', 'b'])
 
@@ -142,11 +139,9 @@ describe Taggable::TagList do
 
   describe '#each' do
     it 'iterates over tags' do
-      list = Taggable::TagList.new(nil, 'a, b')
-
-      list.extractor = extractor
-
       expect(extractor).to receive(:extract).with('a, b').and_return(['a', 'b'])
+
+      list = Taggable::TagList.new(extractor, 'a, b')
 
       list.each { |value| expect(['a', 'b']).to include(value) }
     end
@@ -154,22 +149,11 @@ describe Taggable::TagList do
 
   describe '#tags' do
     it 'extract tags' do
-      list = Taggable::TagList.new(nil, 'a, b')
-
-      list.extractor = extractor
-
       expect(extractor).to receive(:extract).with('a, b').and_return(['a', 'b'])
 
+      list = Taggable::TagList.new(extractor, 'a, b')
+
       expect(list.tags).to eql(['a', 'b'])
-    end
-
-    context 'when using configuration' do
-      it 'extract tags by custom extractor' do
-        list = Taggable::TagList.new(extractor, 'a b')
-
-        expect(extractor).to receive(:extract).with('a b').and_return(['a', 'b'])
-        expect(list.tags).to eql(['a', 'b'])
-      end
     end
   end
 end

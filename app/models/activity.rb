@@ -3,10 +3,9 @@ class Activity < ActiveRecord::Base
 
   belongs_to :initiator, class_name: :User
 
-  #TODO(poizl) rm this shit when on rails 4.1.0, see deletable.rb
-  belongs_to :resource, -> { self.included_modules.include?(Deletable) ? self.deleted_or_not : self }, polymorphic: true
+  belongs_to :resource, -> { unscope where: :deleted }, polymorphic: true
 
-  default_scope -> { where.not(resource_type: [View, Vote, Favorite]) }
+  default_scope -> { where(resource_type: [Answer, Comment, Evaluation, Question]) }
 
   symbolize :action, in: ACTIONS
 end
