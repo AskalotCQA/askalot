@@ -1,5 +1,5 @@
 class Watching < ActiveRecord::Base
-  #include Deletable # TODO enable
+  include Deletable
   include Notifiable
 
   belongs_to :watcher, class_name: :User
