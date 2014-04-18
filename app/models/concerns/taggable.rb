@@ -30,7 +30,7 @@ module Taggable
     tag_list.each do |name|
       tag = Tag.find_or_create_by! name: name
 
-      Tagging.deleted_or_new(author: author, question: self, tag: tag).unmark_as_deleted!
+      Tagging.deleted_or_new(author: author, question: self, tag: tag).mark_as_undeleted!
     end
 
     update_tags!

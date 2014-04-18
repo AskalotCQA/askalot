@@ -14,7 +14,7 @@ module Followable
   end
 
   def follow!(user)
-    followings.deleted_or_new(follower: self, followee: user).unmark_as_deleted!
+    followings.deleted_or_new(follower: self, followee: user).mark_as_undeleted!
   end
 
   def unfollow!(user)

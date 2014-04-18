@@ -28,7 +28,7 @@ module Votable
     if vote.new_record? || vote.deleted? || vote.positive != positive
       vote.positive = positive
 
-      vote.unmark_as_deleted! if vote.deleted?
+      vote.mark_as_undeleted! if vote.deleted?
       vote.save!
     else
       vote.mark_as_deleted_by! user

@@ -34,7 +34,7 @@ module Deletable
     self
   end
 
-  def unmark_as_deleted!
+  def mark_as_undeleted!
     self.transaction do
       self.deleted    = false
       self.deletor    = nil
@@ -52,7 +52,7 @@ module Deletable
 
   def toggle_deleted_by!(user)
     if self.new_record? || self.deleted?
-      unmark_as_deleted!
+      mark_as_undeleted!
     else
       mark_as_deleted_by! user
     end
