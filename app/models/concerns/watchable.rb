@@ -13,10 +13,6 @@ module Watchable
   end
 
   def toggle_watching_by!(user)
-    watching = watchings.deleted_or_new(watcher: user, watchable: self)
-
-    watching.toggle_deleted_by! user
-
-    watching
+    watchings.deleted_or_new(watcher: user, watchable: self).toggle_deleted_by! user
   end
 end

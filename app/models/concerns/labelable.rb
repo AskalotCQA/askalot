@@ -16,12 +16,6 @@ module Labelable
   end
 
   def toggle_labeling_by!(user, label)
-    label = Label.where(value: label).first_or_create! unless label.is_a? Label
-
-    labeling = Labeling.deleted_or_new author: user, answer: self, label: label
-
-    labeling.toggle_deleted_by! user
-
-    labeling
+    Labeling.with(label).deleted_or_new(author: user, answer: self).toggle_deleted_by! user
   end
 end

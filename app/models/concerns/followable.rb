@@ -18,12 +18,10 @@ module Followable
   end
 
   def unfollow!(user)
-    followings.find_by(followee: user).mark_as_deleted_by! user
+    followings.where(follower: self, followee: user).first.mark_as_deleted_by! user
   end
 
   def toggle_following_by!(user)
-    return follow! user unless following?(user)
-
-    unfollow! user
+    following?(user) ? unfollow!(user) : follow!(user)
   end
 end
