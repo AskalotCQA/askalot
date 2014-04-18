@@ -12,7 +12,7 @@ module ResourcesHelper
       body ||= question_title_preview(question, body_options)
       path ||= question_path(question, url_options)
 
-      url = url.call(path) if url.is_a? Proc
+      url = url.is_a?(Proc) ? url.call(path) : path
     end
 
     if resource.is_a? Deletable
