@@ -1,7 +1,8 @@
 module NotificationsHelper
   def notification_icon_tag(notification, options = {})
     data    = notification_data notification
-    color   = notification.unread ? data[:color][:action] : :'text-muted'
+    mute    = options.delete(:mute) || lambda { |n| !n.unread }
+    color   = !mute.call(notification) ? data[:color][:action] : :'text-muted'
     type    = notification.action == :mention ? :mention : :persistence
     title   = t "notification.icon.#{type}", action: t("notification.action.#{notification.action}"), resource: t("notification.content.#{type}.#{notification.resource.class.name.downcase}")
     options = options.merge(tooltip_attributes title, placement: :bottom)
@@ -11,6 +12,7 @@ module NotificationsHelper
 
   def notification_content(notification, options = {})
     resource = notification.resource
+    mute     = options.delete(:mute) || lambda { |n| !n.unread }
 
     content = case resource.class.name.downcase.to_sym
               when :comment then "notification.content.#{resource.class.name.downcase}.#{resource.commentable.class.name.downcase}.#{notification.action}"
@@ -18,15 +20,18 @@ module NotificationsHelper
               else "notification.content.#{resource.class.name.downcase}.#{notification.action}"
               end
 
-    body    = t("notification.content.#{notification.action == :mention ? :mention : :persistence}.#{resource.class.name.downcase}")
-    content = t(content, resource: link_to_notification(notification, body: body), question: link_to_notification(notification, deleted: resource.to_question.deleted?, length: 50)).html_safe
+    resource_body = t("notification.content.#{notification.action == :mention ? :mention : :persistence}.#{resource.class.name.downcase}")
+    resource_link = link_to_notification(notification, options.merge(body: resource_body))
+    question_link = link_to_notification(notification, options.merge(deleted: resource.to_question.deleted?, length: 50))
 
-    notification.unread ? content : content_tag(:span, content, class: :'text-muted')
+    content = t(content, resource: resource_link, question: question_link).html_safe
+
+    !mute.call(notification) ? content : content_tag(:span, content, class: :'text-muted')
   end
 
   def link_to_notification(notification, options = {}, &block)
     options[:body] = capture(&block) if block_given?
-    options[:url]  = lambda { |url| notification.unread ? read_notification_path(notification, params: { r: url }) : url }
+    options[:url]  = lambda { |url| notification.unread ? read_notification_path(notification, params: { r: url }) : url } unless options[:url]
 
     resource = notification.resource
 
