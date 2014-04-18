@@ -11,13 +11,13 @@ module Votables::Vote
 
   private
 
-  def vote(voteup)
+  def vote(positive)
     @model   = controller_name.classify.downcase.to_sym
     @votable = controller_name.classify.constantize.find(params[:id])
 
     authorize! :vote, @votable
 
-    @vote = @votable.toggle_vote_by!(current_user, voteup)
+    @vote = @votable.toggle_vote_by!(current_user, positive)
 
     @votable.votes.reload
 
