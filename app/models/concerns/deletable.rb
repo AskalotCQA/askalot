@@ -4,7 +4,7 @@ module Deletable
   included do
     belongs_to :deletor, class_name: :User
 
-    scope :deleted,   lambda { where(deleted: true) }
+    scope :deleted,   lambda { unscope(where: :deleted).where(deleted: true) }
     scope :undeleted, lambda { where(deleted: false) }
 
     default_scope -> { undeleted }
