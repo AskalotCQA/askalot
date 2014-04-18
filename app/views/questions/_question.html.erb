@@ -9,7 +9,7 @@
           <% end %>
         </div>
         <div class="col-md-4">
-          <%= link_to question_path(question, anchor: :'question-answers'), { class: [:'question-metric', question_answers_coloring(question)], :'data-track-label' => "#{question.id}-question-answers", :'data-track-category' => "Question-Answers", :'data-track-action' => "Showing" } do %>
+          <%= link_to question_path(question, anchor: :'question-answers'), analytics_attributes("answer", "show", "#{question.id}-question-answers").merge(class: [:'question-metric', question_answers_coloring(question)]) do %>
             <span class="question-metric-value"><%= question.answers.size %></span>
             <%= t('count.answer', count: question.answers.size) %>
           <% end %>
@@ -27,7 +27,7 @@
       <div class="question-preview">
         <h4>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
-          <%= link_to_question question, { length: 120, :'data-track-label' => "#{question.id}-question", :'data-track-category' => "Question", :'data-track-action' => "Showing"} %>
+          <%= link_to_question question, analytics_attributes("question", "show-form", "#{question.id}-question").merge(length: 120) %>
         </h4>
 
         <%= render 'questions/labels', labels: question.labels %>

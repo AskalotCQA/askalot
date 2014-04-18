@@ -34,21 +34,21 @@
     <div class="row">
       <div class="col-md-4">
         <div class="featured">
-          <h2><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new'), { :'data-track-label' => "New-question-button", :'data-track-category' => "Question-list", :'data-track-action' => "Showing" } %></h2>
+          <h2><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new'), analytics_attributes("question", "show-list", "new-questions-button") %></h2>
           <%= render 'questions', questions: @new %>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="featured">
-          <h2><%= link_to t('home.featured.solved'), questions_path(tab: :'questions-solved'), { :'data-track-label' => "Solved-question-button", :'data-track-category' => "Question-list", :'data-track-action' => "Showing" } %></h2>
+          <h2><%= link_to t('home.featured.solved'), questions_path(tab: :'questions-solved'), analytics_attributes("question", "show-list", "solved-questions-button") %></h2>
           <%= render 'questions', questions: @solved %>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="featured">
-          <h2><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored'), { :'data-track-label' => "Favored-question-button", :'data-track-category' => "Question-list", :'data-track-action' => "Showing" } %></h2>
+          <h2><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored'), analytics_attributes("question", "show-list", "favored-questions-button") %></h2>
           <%= render 'questions', questions: @favored %>
         </div>
       </div>

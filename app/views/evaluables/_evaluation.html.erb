@@ -1,6 +1,6 @@
 <li id="evaluation-<%= evaluation.id %>">
   <p>
     <%= evaluation.text %> &ndash;
-    <%= link_to_user evaluation.evaluator, {:'data-track-label' => "evaluation-user-#{evaluation.evaluator.name}-link", :'data-track-category' => "User", :'data-track-action' => "Showing"} %>
+    <%= link_to_user evaluation.evaluator, analytics_attributes("user", "show", "evaluation-user-#{evaluation.evaluator.name}-link") %>
   </p>
 </li>
