@@ -13,6 +13,7 @@ describe Question do
   it_behaves_like Taggable
   it_behaves_like Touchable
   it_behaves_like Watchable
+
   it_behaves_like Questions::Searchable
 
   it 'requires title' do

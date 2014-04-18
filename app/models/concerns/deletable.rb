@@ -16,15 +16,15 @@ module Deletable
     end
   end
 
-  def mark_as_deleted_by!(user, datetime = DateTime.now.in_time_zone)
+  def mark_as_deleted_by!(user, time = DateTime.now.in_time_zone)
     self.transaction(requires_new: true) do
-      self.mark_as_deleted_recursive!(user, datetime)
+      self.mark_as_deleted_recursive!(user, time)
 
-      self.deleted    = true
-      self.deletor    = user
-      self.deleted_at = datetime
+      self.deleted = true
 
       deleted_changed = self.deleted_changed?
+
+      self.deletor, self.deleted_at = user, time if deleted_changed
 
       self.save!
 
@@ -36,11 +36,11 @@ module Deletable
 
   def mark_as_undeleted!
     self.transaction do
-      self.deleted    = false
-      self.deletor    = nil
-      self.deleted_at = nil
+      self.deleted = false
 
       deleted_changed = self.deleted_changed?
+
+      self.deletor, self.deleted_at = nil, nil if deleted_changed
 
       self.save!
 
