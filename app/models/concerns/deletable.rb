@@ -20,15 +20,17 @@ module Deletable
     self.transaction(requires_new: true) do
       self.mark_as_deleted_recursive!(user, datetime)
 
-      self.deleted    = true
-      self.deletor    = user
-      self.deleted_at = datetime
+      self.deleted = true
 
-      deleted_changed = self.deleted_changed?
+      if self.deleted_changed?
 
-      self.save!
+        self.deletor    = user
+        self.deleted_at = datetime
 
-      self.decrement_counter_caches! if deleted_changed
+        self.save!
+
+        self.decrement_counter_caches!
+      end
     end
 
     self
