@@ -16,12 +16,12 @@ class WatchingsController < ApplicationController
   def destroy
     @watching = Watching.find(params[:id])
 
-    @watching.mark_as_deleted_by! current_user
-
-    if @watching.deleted?
-      form_message :notice, t('watching.delete.success'), key: params[:tab]
-    else
+    begin
+      @watching.mark_as_deleted_by! current_user
+    rescue
       form_error_message t('watching.delete.failure'), key: params[:tab]
+    else
+      form_message :notice, t('watching.delete.success'), key: params[:tab]
     end
 
     redirect_to :back
