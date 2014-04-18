@@ -1,7 +1,7 @@
 <div id="questions-filter" class="questions-filter">
   <div class="row">
     <div class="col-md-2">
-      <%= icon_link_to :plus, t('question.new.feature'), new_question_path, analytics_attributes("question", "submit-form", "new-question-green-button-question-path").merge(class: 'btn btn-success') %>
+      <%= icon_link_to :plus, t('question.new.feature'), new_question_path, analytics_attributes(:question, :'submit-form', :'new-question-green-button-question-path').merge(class: 'btn btn-success') %>
     </div>
 
     <div class="col-md-offset-4 col-md-6">

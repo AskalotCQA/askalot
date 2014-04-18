@@ -8,10 +8,10 @@
   </div>
 
   <ul class="nav nav-tabs">
-    <%= tab_link_tag_with_count t('question.tab.recent'), :recent, questions_path(params.except(:page).merge tab: :recent), filter_questions(Question).count, analytics_attributes("question", "change-list", "recent-question-tab").merge(remote: true) %>
-    <%= tab_link_tag_with_count t('question.tab.unanswered'), :unanswered, questions_path(params.except(:page).merge tab: :unanswered), filter_questions(Question.unanswered).size, analytics_attributes("question", "change-list", "unanswered-question-tab").merge(remote: true) %>
-    <%= tab_link_tag_with_count t('question.tab.answered'), :answered, questions_path(params.except(:page).merge tab: :answered), filter_questions(Question.answered_but_not_best).size, analytics_attributes("question", "change-list", "answered-question-tab").merge(remote: true) %>
-    <%= tab_link_tag_with_count t('question.tab.solved'), :solved, questions_path(params.except(:page).merge tab: :solved),filter_questions(Question.solved).size, analytics_attributes("question", "change-list", "solved-question-tab").merge(remote: true) %>
-    <%= tab_link_tag_with_count t('question.tab.favored'), :favored, questions_path(params.except(:page).merge tab: :favored), filter_questions(Question.favored).size, analytics_attributes("question", "change-list", "favored-question-tab").merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.recent'), :recent, questions_path(params.except(:page).merge tab: :recent), filter_questions(Question).count, analytics_attributes(:question, :'change-list', :'recent-question-tab').merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.unanswered'), :unanswered, questions_path(params.except(:page).merge tab: :unanswered), filter_questions(Question.unanswered).size, analytics_attributes(:question, :'change-list', :'unanswered-question-tab').merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.answered'), :answered, questions_path(params.except(:page).merge tab: :answered), filter_questions(Question.answered_but_not_best).size, analytics_attributes(:question, :'change-list', :'answered-question-tab').merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.solved'), :solved, questions_path(params.except(:page).merge tab: :solved),filter_questions(Question.solved).size, analytics_attributes(:question, :'change-list', :'solved-question-tab').merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.favored'), :favored, questions_path(params.except(:page).merge tab: :favored), filter_questions(Question.favored).size, analytics_attributes(:question, :'change-list', :'favored-question-tab').merge(remote: true) %>
   </ul>
 </div>

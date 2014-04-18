@@ -1,7 +1,7 @@
 <ol class="list-unstyled">
   <% questions.each do |question| %>
     <li>
-      <h4><%= link_to_question question, analytics_attributes("question", "show-form", "#{question}-link-landing-page").merge(length: 35) %></h4>
+      <h4><%= link_to_question question, analytics_attributes(:question, :'show-form', "#{question}-link-landing-page").merge(length: 35) %></h4>
       <%= question_text_preview question, length: 80 %>
     </li>
   <% end %>

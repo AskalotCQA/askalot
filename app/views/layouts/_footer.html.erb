@@ -3,12 +3,12 @@
 <footer>
   <div class="container">
     <ul class="list-inline text-muted">
-      <li><%= external_link_to t('footer.about'), url_to_site('#about'), analytics_attributes("about-project", "click") %></li>
-      <li><%= external_link_to t('footer.documents'), url_to_site('#documents'), analytics_attributes("documentation", "click") %></li>
-      <li><%= external_link_to t('footer.repositories'), url_to_site('#repositories'), analytics_attributes("source-code", "click") %>
-      <li><%= external_link_to t('footer.authors'), url_to_site('#authors'), analytics_attributes("authors", "click") %></li>
-      <li><%= external_link_to t('footer.contact'), url_to_site('#contact'), analytics_attributes("contacts", "click") %></li>
-      <li><%= link_to t('footer.help'), help_path, analytics_attributes("help", "show", "help-footer-link") %></li>
+      <li><%= external_link_to t('footer.about'), url_to_site('#about'), analytics_attributes(:'about-project', :click) %></li>
+      <li><%= external_link_to t('footer.documents'), url_to_site('#documents'), analytics_attributes(:documentation, :click) %></li>
+      <li><%= external_link_to t('footer.repositories'), url_to_site('#repositories'), analytics_attributes(:'source-code', :click) %>
+      <li><%= external_link_to t('footer.authors'), url_to_site('#authors'), analytics_attributes(:authors, :click) %></li>
+      <li><%= external_link_to t('footer.contact'), url_to_site('#contact'), analytics_attributes(:contacts, :click) %></li>
+      <li><%= link_to t('footer.help'), help_path, analytics_attributes(:help, :show, :'help-footer-link') %></li>
     </ul>
 
     <p class="text-muted">

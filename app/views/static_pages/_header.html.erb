@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-xs-12 col-sm-6">
         <div class="text-right">
-          <%= icon_link_to :'question-circle', t('home.ask'), new_question_path, analytics_attributes("question", "submit-form", "ask-question-big-button-landing-page").merge(class: 'btn btn-primary', fixed: true) %>
+          <%= icon_link_to :'question-circle', t('home.ask'), new_question_path, analytics_attributes(:question, :'submit-form', :'ask-question-big-button-landing-page').merge(class: 'btn btn-primary', fixed: true) %>
         </div>
       </div>
       <div class="col-xs-12 col-sm-6">
@@ -25,7 +25,7 @@
             <% end %>
           <% else %>
             <% if @question %>
-              <%= icon_link_to :comment, t('home.answer'), question_path(@question), analytics_attributes("question", "show-form", "try-answer-question-button").merge(class: 'btn btn-success', fixed: true) %>
+              <%= icon_link_to :comment, t('home.answer'), question_path(@question), analytics_attributes(:question, :'show-form', :'try-answer-question-button').merge(class: 'btn btn-success', fixed: true) %>
             <% end %>
           <% end %>
         </div>
@@ -34,12 +34,12 @@
     <div class="row">
       <div class="col-xs-12 col-sm-6">
         <div class="text-right">
-          <%= icon_link_to :tasks, t('home.questions'), questions_path, analytics_attributes("question", "show-list", "questions-path-button-landing-page").merge(class: 'btn btn-info', fixed: true) %>
+          <%= icon_link_to :tasks, t('home.questions'), questions_path, analytics_attributes(:question, :'show-list', :'questions-path-button-landing-page').merge(class: 'btn btn-info', fixed: true) %>
         </div>
       </div>
       <div class="col-xs-12 col-sm-6">
         <div class="text-left">
-          <%= icon_link_to :magic, t('home.changelogs'), changelogs_path, analytics_attributes("changelog", "show", "changelog-button").merge(class: 'btn btn-warning', fixed: true) %>
+          <%= icon_link_to :magic, t('home.changelogs'), changelogs_path, analytics_attributes(:changelog, :show, :'changelog-button').merge(class: 'btn btn-warning', fixed: true) %>
         </div>
       </div>
     </div>
