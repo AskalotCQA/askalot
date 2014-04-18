@@ -36,17 +36,20 @@ shared_examples_for Deletable do
 
       resource.mark_as_deleted_by!(user, now)
 
+      comment.reload
+      evaluation.reload
+
       expect(resource.deleted).to eql(true)
       expect(resource.deletor).to eql(user)
-      expect(resource.deleted_at.to_s).to eql(now.to_s)
+      expect(resource.deleted_at).to eql(resource.deleted_at)
 
-      expect(resource.comments.first.deleted).to eql(true)
-      expect(resource.comments.first.deletor).to eql(user)
-      expect(resource.comments.first.deleted_at.to_s).to eql(now.to_s)
+      expect(comment.deleted).to eql(true)
+      expect(comment.deletor).to eql(user)
+      expect(comment.deleted_at).to eql(resource.deleted_at)
 
-      expect(resource.evaluations.first.deleted).to eql(true)
-      expect(resource.evaluations.first.deletor).to eql(user)
-      expect(resource.evaluations.first.deleted_at.to_s).to eql(now.to_s)
+      expect(evaluation.deleted).to eql(true)
+      expect(evaluation.deletor).to eql(user)
+      expect(evaluation.deleted_at).to eql(resource.deleted_at)
     end
   end
 

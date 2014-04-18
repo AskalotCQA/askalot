@@ -13,8 +13,6 @@ module Watchable
   end
 
   def toggle_watching_by!(user)
-    return watchings.create! watcher: user unless watched_by?(user)
-
-    watchings.where(watcher: user).first.destroy!
+    watchings.deleted_or_new(watcher: user, watchable: self).toggle_deleted_by! user
   end
 end
