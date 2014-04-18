@@ -19,7 +19,7 @@ module Taggable
   end
 
   def changed?
-    super || (tag_list.tags - tags.pluck(:name)).any?
+    super || (Set.new(tag_list.tags) + tags.pluck(:name)).size != tag_list.size
   end
 
   private
@@ -30,7 +30,7 @@ module Taggable
     tag_list.each do |name|
       tag = Tag.find_or_create_by! name: name
 
-      Tagging.find_or_create_by! author: author, question: self, tag: tag
+      Tagging.deleted_or_new(author: author, question: self, tag: tag).unmark_as_deleted!
     end
 
     update_tags!
@@ -40,9 +40,7 @@ module Taggable
     relation = taggings
     relation = relation.includes(:tag).references(:tags).where.not(tags: { name: tag_list.tags }) unless tag_list.empty?
 
-    # TODO(zbell) consider: create & destroy vs mark_as_deleted & unmark_as_deleted
-    #relation.each { |tagging| tagging.mark_as_deleted_by! author }
-    relation.each { |tagging| tagging.destroy }
+    relation.each { |tagging| tagging.mark_as_deleted_by! author }
 
     reload
   end
@@ -89,42 +87,52 @@ module Taggable
   class TagList
     include Enumerable
 
-    attr_accessor :extractor, :values
+    attr_reader :extractor
 
-    def initialize(extractor, values = [])
+    def initialize(extractor = TagList::Extractor, values = [])
       @extractor = extractor
-      @values    = values
-    end
 
-    def values=(values)
-      @values = values
-      @tags   = nil
-    end
-
-    def each
-      tags.each { |value| yield value }
+      self.values = values
     end
 
     def tags
-      @tags ||= extractor.extract(values)
+      @tags ||= []
+    end
+
+    def values=(values)
+      @tags = extract(values)
     end
 
     def +(values)
-      @tags = tags + extractor.extract(values)
+      @tags += extract(values)
+    end
+
+    def each
+      tags.each { |name| yield name }
+    end
+
+    def empty?
+      tags.empty?
+    end
+
+    def size
+      tags.size
     end
 
     def to_s
       tags.join(',')
     end
 
-    def empty?
-      values.empty?
-    end
-
     class Extractor
       def self.extract(values)
         (values.is_a?(Array) ? values.map(&:to_s) : values.to_s.split(/,/)).map(&:strip)
       end
+    end
+
+    private
+
+    def extract(values)
+      extractor.extract(values).uniq
     end
   end
 end

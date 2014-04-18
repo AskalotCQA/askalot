@@ -2,14 +2,14 @@ class CorrectlyMarkAlreadyDeletedDeletables < ActiveRecord::Migration
   def change
     models = [
       Answer,
-      AnswerRevision,
+      Answer::Revision,
       Comment,
-      CommentRevision,
+      Comment::Revision,
       Evaluation,
       Favorite,
       Labeling,
       Question,
-      QuestionRevision,
+      Question::Revision,
       Tagging,
       View,
       Vote

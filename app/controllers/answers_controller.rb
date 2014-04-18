@@ -45,7 +45,7 @@ class AnswersController < ApplicationController
 
         if labeling
           @answers << answer
-          labeling.destroy
+          labeling.mark_as_deleted_by! current_user
 
           dispatch_event :delete, labeling, for: answer.question.watchers
         end
