@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140417213702) do
+ActiveRecord::Schema.define(version: 20140418210243) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20140417213702) do
   add_index "activities", ["created_on"], name: "index_activities_on_created_on", using: :btree
   add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
   add_index "activities", ["resource_id", "resource_type"], name: "index_activities_on_resource_id_and_resource_type", using: :btree
+  add_index "activities", ["resource_type"], name: "index_activities_on_resource_type", using: :btree
 
   create_table "answer_revisions", force: true do |t|
     t.integer  "answer_id",                  null: false
@@ -249,6 +250,7 @@ ActiveRecord::Schema.define(version: 20140417213702) do
   add_index "notifications", ["initiator_id"], name: "index_notifications_on_initiator_id", using: :btree
   add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
   add_index "notifications", ["resource_id", "resource_type"], name: "index_notifications_on_resource_id_and_resource_type", using: :btree
+  add_index "notifications", ["resource_type"], name: "index_notifications_on_resource_type", using: :btree
   add_index "notifications", ["unread"], name: "index_notifications_on_unread", using: :btree
 
   create_table "question_revisions", force: true do |t|
