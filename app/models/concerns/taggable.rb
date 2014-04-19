@@ -7,7 +7,7 @@ module Taggable
 
     scope :tagged_with, lambda { |values, options = {}| Scope.new(self).build(values, options) }
 
-    after_save :create_tags!
+    after_save :resolve_tags!, if: :tags_changed?
   end
 
   def tag_list
@@ -19,31 +19,44 @@ module Taggable
   end
 
   def changed?
-    size = (Set.new(tag_list.tags) + tags.pluck(:name)).size
-    super || size != tag_list.size || size != tags.size
+    super || tags_changed?
   end
 
   private
 
-  #TODO(zbell) tagging author can be question author, deletor or editor; for now question author is always used
-
-  def create_tags!
-    tag_list.each do |name|
-      tag = Tag.find_or_create_by! name: name
-
-      Tagging.deleted_or_new(author: author, question: self, tag: tag).mark_as_undeleted!
-    end
-
-    update_tags!
+  def tags_changed?
+    Set.new(tag_list.tags) != Set.new(tags.pluck :name)
   end
 
-  def update_tags!
+  def resolve_tags!
+    create_tags!
+    delete_tags!
+
+    reload
+  end
+
+  #TODO(zbell) author or editor can create tagging; for now question author is always used
+
+  def create_tags!
+    (tag_list.tags - tags.pluck(:name)).each do |name|
+      tag     = Tag.find_or_create_by!(name: name)
+      tagging = Tagging.deleted_or_new(author: author, question: self, tag: tag).mark_as_undeleted!
+
+      self.class.taggable.dispatcher.dispatch :create, author, tagging, for: watchers
+    end
+  end
+
+  #TODO(zbell) deletor or editor can delete tagging; for now author is always used
+
+  def delete_tags!
     relation = taggings
     relation = relation.includes(:tag).references(:tags).where.not(tags: { name: tag_list.tags }) unless tag_list.empty?
 
-    relation.each { |tagging| tagging.mark_as_deleted_by! author }
+    relation.each do |tagging|
+      tagging.mark_as_deleted_by! author
 
-    reload
+      self.class.taggable.dispatcher.dispatch :delete, author, tagging, for: watchers
+    end
   end
 
   module ClassMethods
@@ -51,7 +64,8 @@ module Taggable
       @taggable ||= Class.new do
         include Squire::Base
 
-        config.extractor = TagList::Extractor
+        config.dispatcher = Events::Dispatcher
+        config.extractor  = Tags::Extractor
       end
     end
   end
@@ -85,6 +99,7 @@ module Taggable
     end
   end
 
+  # TODO (zbell) should TagList extend Set?
   class TagList
     include Enumerable
 
@@ -122,12 +137,6 @@ module Taggable
 
     def to_s
       tags.join(',')
-    end
-
-    class Extractor
-      def self.extract(values)
-        (values.is_a?(Array) ? values.map(&:to_s) : values.to_s.split(/,/)).map(&:strip)
-      end
     end
 
     private
