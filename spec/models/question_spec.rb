@@ -54,12 +54,19 @@ describe Question do
     end
 
     it 'does not have any undeleted taggings' do
-      category = create :category, tags: ['dbms', 'elasticsearch']
-      question = create :question, category: category, tag_list: 'redis'
+      category = create :category, tags: ['nosql', 'elasticsearch']
+      question = create :question, category: category
 
       question.mark_as_deleted_by! question.author
 
-      expect(question.taggings.deleted.count).to eql(3)
+      expect(question.taggings.deleted.count).to eql(2)
+      expect(question.taggings.undeleted.count).to eql(0)
+
+      question = create :question, category: category, tag_list: 'redis, cassandra'
+
+      question.mark_as_deleted_by! question.author
+
+      expect(question.taggings.deleted.count).to eql(4)
       expect(question.taggings.undeleted.count).to eql(0)
     end
   end

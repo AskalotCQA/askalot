@@ -36,6 +36,8 @@ module Taggable
   end
 
   def create_tags!
+    return if deleted?
+
     user = editor || author
 
     (tag_list.tags - tags.pluck(:name)).each do |name|
