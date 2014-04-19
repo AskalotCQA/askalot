@@ -19,7 +19,8 @@ module Taggable
   end
 
   def changed?
-    super || (Set.new(tag_list.tags) + tags.pluck(:name)).size != tag_list.size
+    size = (Set.new(tag_list.tags) + tags.pluck(:name)).size
+    super || size != tag_list.size || size != tags.size
   end
 
   private
