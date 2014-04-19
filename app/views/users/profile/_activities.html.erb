@@ -1,4 +1,4 @@
-<% if !activities.any? %>
+<% if activities.any? %>
   <ol class="activities">
     <% activities.each do |activity| %>
       <%= render 'users/profile/activity', activity: activity %>
