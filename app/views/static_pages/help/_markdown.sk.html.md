@@ -1,4 +1,4 @@
-V systéme je možnosť použiť Markdown v texte otázok, odpovedí aj komentárov. Implementácia je kompatibilná s [GitHub Markdown](http://guides.github.com/overviews/mastering-markdown) (pozri pre viac informácií ako formátovať text). Markdown pre komentáre je menšia množina značiek, je možné napr. pridávať tagy pre linky a tag pre zdrojový kód v jednom riadku.
+V systéme je možnosť použiť Markdown v texte otázok, odpovedí aj komentárov. Implementácia je kompatibilná s [GitHub Markdown](https://guides.github.com/features/mastering-markdown) (pozri pre viac informácií ako formátovať text). Markdown pre komentáre je menšia množina značiek, je možné napr. pridávať tagy pre linky a tag pre zdrojový kód v jednom riadku.
 
 ### Linkovanie otázok
 
