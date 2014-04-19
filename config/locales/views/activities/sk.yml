@@ -1,3 +1,9 @@
 sk:
   activities:
-    none: 'Žiadna aktivita'
+    navigation: 'Aktivita'
+
+    index:
+      title: 'Aktivita'
+
+    more: 'Zobraziť viac'
+    none: 'Žiadna aktivita.'

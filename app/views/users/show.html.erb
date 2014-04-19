@@ -13,7 +13,7 @@
         <%= tab_link_tag_with_count t('user.tab.questions'), :questions, user_path(params.except(:page).merge tab: :questions), @questions.unscope(:limit).size %>
         <%= tab_link_tag_with_count t('user.tab.answers'), :answers, user_path(params.except(:page).merge tab: :answers), @answers.unscope(:limit).size %>
         <%= tab_link_tag_with_count t('user.tab.favorites'), :favorites, user_path(params.except(:page).merge tab: :favorites), @favorites.unscope(:limit).size %>
-        <%= tab_link_tag_with_count t('user.tab.activities'), :activities, user_path(params.except(:page).merge tab: :activity), @activities.unscope(:limit).size %>
+        <%= tab_link_tag_with_count t('user.tab.activities'), :activities, user_path(params.except(:page).merge tab: :activities), @activities.unscope(:limit).size %>
       </ul>
     </div>
 
@@ -22,7 +22,7 @@
       <%= render_tab_content 'users/profile/questions', :questions, locals: { user: @user, questions: @questions } %>
       <%= render_tab_content 'users/profile/answers', :answers, locals: { user: @user, answers: @answers } %>
       <%= render_tab_content 'users/profile/favorites', :favorites, locals: { user: @user, favorites: @favorites } %>
-      <%= render_tab_content 'activities/activities', :activities, locals: { user: @user, activities: @activities } %>
+      <%= render_tab_content 'users/profile/activities', :activities, locals: { user: @user, activities: @activities } %>
     </div>
   </div>
 </div>
