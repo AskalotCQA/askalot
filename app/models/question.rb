@@ -14,7 +14,7 @@ class Question < ActiveRecord::Base
 
   include Questions::Searchable
 
-  before_save :add_category_tags
+  before_save { self.tag_list += self.category.tags }
 
   belongs_to :category, counter_cache: true
 
@@ -56,11 +56,5 @@ class Question < ActiveRecord::Base
 
   def to_question
     self
-  end
-
-  private
-
-  def add_category_tags
-    self.tag_list += self.category.tags
   end
 end

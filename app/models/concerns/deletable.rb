@@ -5,7 +5,7 @@ module Deletable
     belongs_to :deletor, class_name: :User
 
     scope :deleted,   lambda { unscope(where: :deleted).where(deleted: true) }
-    scope :undeleted, lambda { where(deleted: false) }
+    scope :undeleted, lambda { unscope(where: :deleted).where(deleted: false) }
 
     default_scope -> { undeleted }
   end
@@ -64,11 +64,11 @@ module Deletable
     model.options[:dependent] == :destroy && model.macro == :has_many && model.klass.column_names.include?('deleted')
   end
 
-  def mark_as_deleted_recursive!(user, datetime)
+  def mark_as_deleted_recursive!(user, time)
     self.reflections.each do |key, target|
       if mark_as_deleted? target
         self.send(key.to_s).each do |child|
-          child.mark_as_deleted_by!(user, datetime)
+          child.mark_as_deleted_by!(user, time)
         end
       end
     end
