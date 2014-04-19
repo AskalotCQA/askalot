@@ -10,4 +10,4 @@ V Markdown textoch je možné odkazovať sa na iných používateľov. Po napís
 
 ### Gemoji ikony
 
-V Markdown textoch je možné pridávať aj veselé ikony Gemoji. Po napísaní `:` sa zobrazí ponuka Gemojis, vyhľadávaj v nich je podľa názvu (napr. `:beer:` :beer: ). Pre kompletný zoznam Gemojis pozri [Emoji cheat sheet](http://www.emoji-cheat-sheet.com).
+V Markdown textoch je možné pridávať aj veselé ikony Gemoji. Po napísaní `:` sa zobrazí ponuka Gemojis, vyhľadávaj v nich je podľa názvu (napr. `:beer:` :beer:). Pre kompletný zoznam Gemojis pozri [Emoji cheat sheet](http://www.emoji-cheat-sheet.com).
