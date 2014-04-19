@@ -35,27 +35,27 @@ module Taggable
     reload
   end
 
-  #TODO(zbell) author or editor can create tagging; for now question author is always used
-
   def create_tags!
+    user = editor || author
+
     (tag_list.tags - tags.pluck(:name)).each do |name|
       tag     = Tag.find_or_create_by!(name: name)
-      tagging = Tagging.deleted_or_new(author: author, question: self, tag: tag).mark_as_undeleted!
+      tagging = Tagging.deleted_or_new(author: user, question: self, tag: tag).mark_as_undeleted!
 
-      self.class.taggable.dispatcher.dispatch :create, author, tagging, for: watchers
+      self.class.taggable.dispatcher.dispatch :create, user, tagging, for: watchers
     end
   end
 
-  #TODO(zbell) deletor or editor can delete tagging; for now author is always used
-
   def delete_tags!
+    user = deletor || editor || author
+
     relation = taggings
     relation = relation.includes(:tag).references(:tags).where.not(tags: { name: tag_list.tags }) unless tag_list.empty?
 
     relation.each do |tagging|
-      tagging.mark_as_deleted_by! author
+      tagging.mark_as_deleted_by! user
 
-      self.class.taggable.dispatcher.dispatch :delete, author, tagging, for: watchers
+      self.class.taggable.dispatcher.dispatch :delete, user, tagging, for: watchers
     end
   end
 
