@@ -52,5 +52,7 @@ class Ability
 
       can :edit, [Question, Answer, Comment]
     end
+
+    can(:teach, Category) { |resource| user.assignment?(:teacher, resource) }
   end
 end

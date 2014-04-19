@@ -76,6 +76,10 @@ class User < ActiveRecord::Base
     ROLES.index(base.to_sym) <= ROLES.index(role)
   end
 
+  def assignment?(base, category)
+    assignments.any? { |a| a.role.name.to_sym == base.to_sym && a.category_id == category.id }
+  end
+
   def urls
     Hash[Social.networks.map { |key, network| [network, url(key)] }.select { |data| !data.second.blank? }]
   end
