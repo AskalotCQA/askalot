@@ -5,7 +5,7 @@
       <%= notification_content notification %>
     </div>
     <div class="col-md-3">
-      <%= user_icon_tag notification.initiator, tooltip_attributes(notification.initiator.nick, placement: :bottom).deep_merge(image: { muted: notification.read }) %>
+      <%= user_icon_tag notification.user_or_anonymous, tooltip_attributes(user_nick notification.user_or_anonymous, placement: :bottom).deep_merge(image: { muted: notification.read }) %>
       <%= tooltip_time_tag notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
     </div>
     <div class="col-md-1">

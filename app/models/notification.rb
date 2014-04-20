@@ -1,4 +1,6 @@
 class Notification < ActiveRecord::Base
+  include Anonymous
+
   ACTIONS = Activity::ACTIONS
 
   belongs_to :recipient, class_name: :User
@@ -15,6 +17,8 @@ class Notification < ActiveRecord::Base
 
   scope :read,   lambda { unscope(where: :unread).where(unread: false) }
   scope :unread, lambda { unscope(where: :unread).where(unread: true) }
+
+  scope :private_notifications, -> { unscope where: :anonymous }
 
   symbolize :action, in: ACTIONS
 

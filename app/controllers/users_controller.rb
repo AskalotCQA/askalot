@@ -21,12 +21,12 @@ class UsersController < ApplicationController
     @answers    = @user.answers.order(created_at: :desc)
     @favorites  = @user.favorites.order(created_at: :desc)
     @comments   = @user.comments.order(created_at: :desc)
-    @activities = @user.activities.order(created_at: :desc)
+    @activities = current_user == @user ? @user.activities.private_activities : @user.activities
 
     @questions  = @questions.page(tab_page :questions).per(10)
     @answers    = @answers.page(tab_page :answers).per(10)
     @favorites  = @favorites.page(tab_page :favorites).per(10)
-    @activities = @activities.page(tab_page :activities).per(20)
+    @activities = @activities.order(created_at: :desc).page(tab_page :activities).per(20)
 
     @question = Question.unanswered.random.first || Question.random.first
   end

@@ -40,6 +40,10 @@ module UsersHelper
     link_to user.nick, user_path(user.nick), options
   end
 
+  def user_nick(user, options = {})
+    user == :anonymous ? t('user.anonymous') : user.nick
+  end
+
   private
 
   def anonymous_gravatar_image_tag(options = {})

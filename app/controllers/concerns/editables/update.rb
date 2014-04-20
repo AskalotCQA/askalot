@@ -19,8 +19,7 @@ module Editables::Update
           dispatch_event :mention, @editable, for: user
         end
 
-        #TODO(zbell) do not notify about anonymous questions since user.nick is still exposed in notifications
-        dispatch_event :update, @editable, for: @editable.to_question.watchers unless @editable.to_question.anonymous
+        dispatch_event :update, @editable, { for: @editable.to_question.watchers, anonymous: @editable.to_question.anonymous }
 
         flash[:notice] = t "#{@model}.update.success"
       else
