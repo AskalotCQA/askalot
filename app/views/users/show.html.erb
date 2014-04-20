@@ -10,9 +10,9 @@
 
       <ul class="nav nav-tabs">
         <%= tab_link_tag t('user.tab.profile'), :profile, user_path(params.except(:page).merge tab: :profile) %>
-        <%= tab_link_tag_with_count t('user.tab.questions'), :questions, user_path(params.except(:page).merge tab: :questions), @questions.unscope(:limit).size %>
-        <%= tab_link_tag_with_count t('user.tab.answers'), :answers, user_path(params.except(:page).merge tab: :answers), @answers.unscope(:limit).size %>
-        <%= tab_link_tag_with_count t('user.tab.favorites'), :favorites, user_path(params.except(:page).merge tab: :favorites), @favorites.unscope(:limit).size %>
+        <%= tab_link_tag_with_count t('user.tab.questions'), :questions, user_path(params.except(:page).merge tab: :questions), @questions.unscope(:limit, :offset).size %>
+        <%= tab_link_tag_with_count t('user.tab.answers'), :answers, user_path(params.except(:page).merge tab: :answers), @answers.unscope(:limit, :offset).size %>
+        <%= tab_link_tag_with_count t('user.tab.favorites'), :favorites, user_path(params.except(:page).merge tab: :favorites), @favorites.unscope(:limit, :offset).size %>
         <%= tab_link_tag t('user.tab.activities'), :activities, user_path(params.except(:page).merge tab: :activities) %>
       </ul>
     </div>
