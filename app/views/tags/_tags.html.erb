@@ -3,7 +3,7 @@
     <% tags.each do |tag| %>
       <div class="col-md-4">
         <h4>
-          <%= link_to_tag tag, analytics_attributes(:tag, :show, "#{tag}-link-tags-path") %>
+          <%= link_to_tag tag, analytics_attributes(:tag, :click, tag.name) %>
         </h4>
         <div class="tag-details">
           <%= t('count.question', count: tag.questions.size).upcase_first %> <%= tag.questions.size %> &middot;

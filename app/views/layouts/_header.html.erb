@@ -8,14 +8,14 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to t('question.navigation'), questions_path, analytics_attributes(:question, :'show-list', :'questions-path-navbar-link') %></li>
-        <li><%= link_to t('category.navigation'), categories_path, analytics_attributes(:category, :'show-list', :'categories-path-navbar-link') %></li>
-        <li><%= link_to t('tag.navigation'), tags_path, analytics_attributes(:tag, :'show-list', :'tags-path-navbar-link') %></li>
-        <li><%= link_to t('user.navigation'), users_path, analytics_attributes(:user, :'show-list', :'users-path-navbar-link') %></li>
+        <li><%= link_to t('question.navigation'), questions_path %></li>
+        <li><%= link_to t('category.navigation'), categories_path %></li>
+        <li><%= link_to t('tag.navigation'), tags_path %></li>
+        <li><%= link_to t('user.navigation'), users_path %></li>
         <% if user_signed_in? && can?(:observe, :all) %>
           <li><%= link_to t('statistic.navigation'), statistics_path %></li>
         <% end %>
-        <li><%= link_to t('help.navigation'), help_path, analytics_attributes(:help, :show, :'help-navbar-link') %></li>
+        <li><%= link_to t('help.navigation'), help_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
@@ -43,7 +43,7 @@
         <% end %>
       </ul>
       <div class="navbar-form navbar-right hidden-xs hidden-sm hidden-print">
-        <%= icon_link_to :'question-circle', nil, new_question_path, analytics_attributes(:question, :'submit-form', :'ask-question-blue-button-navbar').deep_merge(tooltip_attributes(t('question.new.feature'), placement: :left).merge(class: 'btn btn-primary')) %>
+        <%= icon_link_to :'question-circle', nil, new_question_path, analytics_attributes(:question, :'open-new-form', :navigation).deep_merge(tooltip_attributes(t('question.new.feature'), placement: :left).merge(class: 'btn btn-primary')) %>
       </div>
     </div>
   </div>
