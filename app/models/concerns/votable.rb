@@ -23,17 +23,15 @@ module Votable
   end
 
   def toggle_vote_by!(user, positive)
-    unless voted_by? user
-      vote = votes.create! voter: user, positive: positive
-    else
-      vote = votes.where(voter: user).first
+    vote = Vote.deleted_or_new votable: self, voter: user
 
-      if vote.positive == positive
-        vote.destroy
-      else
-        vote.positive = positive
-        vote.save!
-      end
+    if vote.new_record? || vote.deleted? || vote.positive != positive
+      vote.positive = positive
+
+      vote.mark_as_undeleted! if vote.deleted?
+      vote.save!
+    else
+      vote.mark_as_deleted_by! user
     end
 
     update_votes_caches!

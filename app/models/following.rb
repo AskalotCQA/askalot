@@ -1,5 +1,5 @@
 class Following < ActiveRecord::Base
-  #include Deletable #TODO enable
+  include Deletable
   include Notifiable
 
   belongs_to :follower, class_name: :User, counter_cache: :followees_count

@@ -16,9 +16,8 @@ class AddDeletorAndDeletedAtToDeletables < ActiveRecord::Migration
     ]
 
     models.each do |model|
-      add_column model, :deleted_at, :timestamp
-
       add_reference model, :deletor, null: true, index: true
+      add_column model, :deleted_at, :timestamp
     end
   end
 end

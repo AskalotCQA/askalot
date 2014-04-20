@@ -5,17 +5,13 @@
     <% end %>
   </ol>
 
-  <div class="row">
-    <div class="col-md-12">
-      <%= paginate answers, params: { tab: :answers } %>
-    </div>
-  </div>
+  <%= paginate answers, params: { tab: :answers } %>
 <% else %>
   <div class="row">
     <div class="col-md-12">
       <% if user == current_user %>
         <span class="text-muted"><%= t('user.show.no_answers') %></span>
-        <%= icon_link_to :comment, t('user.show.answer'), question_path(@question), class: 'btn btn-success' %>
+        <%= icon_link_to :comment, t('user.show.answer'), question_path(@question), class: 'btn btn-success' if @question %>
       <% else %>
         <div class="alert alert-info">
           <%= t('user.show.other.no_answers') %>
@@ -24,4 +20,3 @@
     </div>
   </div>
 <% end %>
-

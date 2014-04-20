@@ -83,7 +83,7 @@ describe 'Following user' do
 
       click_link user.nick
 
-      click_link "nasledovaný"
+      click_link 'nasledovaný'
 
       expect(page).to have_content(other_user.nick)
     end
