@@ -7,7 +7,7 @@ module Taggable
 
     scope :tagged_with, lambda { |values, options = {}| Scope.new(self).build(values, options) }
 
-    after_save :create_tags!
+    after_save :resolve_tags!, if: :tags_changed?
   end
 
   def tag_list
@@ -19,32 +19,46 @@ module Taggable
   end
 
   def changed?
-    super || (tag_list.tags - tags.pluck(:name)).any?
+    super || tags_changed?
   end
 
   private
 
-  #TODO(zbell) tagging author can be question author, deletor or editor; for now question author is always used
-
-  def create_tags!
-    tag_list.each do |name|
-      tag = Tag.find_or_create_by! name: name
-
-      Tagging.find_or_create_by! author: author, question: self, tag: tag
-    end
-
-    update_tags!
+  def tags_changed?
+    Set.new(tag_list.tags) != Set.new(tags.pluck :name)
   end
 
-  def update_tags!
+  def resolve_tags!
+    create_tags!
+    delete_tags!
+
+    reload
+  end
+
+  def create_tags!
+    return if deleted?
+
+    user = editor || author
+
+    (tag_list.tags - tags.pluck(:name)).each do |name|
+      tag     = Tag.find_or_create_by!(name: name)
+      tagging = Tagging.deleted_or_new(author: user, question: self, tag: tag).mark_as_undeleted!
+
+      self.class.taggable.dispatcher.dispatch :create, user, tagging, for: watchers
+    end
+  end
+
+  def delete_tags!
+    user = deletor || editor || author
+
     relation = taggings
     relation = relation.includes(:tag).references(:tags).where.not(tags: { name: tag_list.tags }) unless tag_list.empty?
 
-    # TODO(zbell) consider: create & destroy vs mark_as_deleted & unmark_as_deleted
-    #relation.each { |tagging| tagging.mark_as_deleted_by! author }
-    relation.each { |tagging| tagging.destroy }
+    relation.each do |tagging|
+      tagging.mark_as_deleted_by! user
 
-    reload
+      self.class.taggable.dispatcher.dispatch :delete, user, tagging, for: watchers
+    end
   end
 
   module ClassMethods
@@ -52,7 +66,8 @@ module Taggable
       @taggable ||= Class.new do
         include Squire::Base
 
-        config.extractor = TagList::Extractor
+        config.dispatcher = Events::Dispatcher
+        config.extractor  = Tags::Extractor
       end
     end
   end
@@ -86,45 +101,50 @@ module Taggable
     end
   end
 
+  # TODO (zbell) should TagList extend Set?
   class TagList
     include Enumerable
 
-    attr_accessor :extractor, :values
+    attr_reader :extractor
 
-    def initialize(extractor, values = [])
+    def initialize(extractor = TagList::Extractor, values = [])
       @extractor = extractor
-      @values    = values
-    end
 
-    def values=(values)
-      @values = values
-      @tags   = nil
-    end
-
-    def each
-      tags.each { |value| yield value }
+      self.values = values
     end
 
     def tags
-      @tags ||= extractor.extract(values)
+      @tags ||= []
+    end
+
+    def values=(values)
+      @tags = extract(values)
     end
 
     def +(values)
-      @tags = tags + extractor.extract(values)
+      @tags += extract(values)
+    end
+
+    def each
+      tags.each { |name| yield name }
+    end
+
+    def empty?
+      tags.empty?
+    end
+
+    def size
+      tags.size
     end
 
     def to_s
       tags.join(',')
     end
 
-    def empty?
-      values.empty?
-    end
+    private
 
-    class Extractor
-      def self.extract(values)
-        (values.is_a?(Array) ? values.map(&:to_s) : values.to_s.split(/,/)).map(&:strip)
-      end
+    def extract(values)
+      extractor.extract(values).uniq
     end
   end
 end

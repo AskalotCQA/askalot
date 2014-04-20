@@ -1,10 +1,8 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :question do
     sequence(:title) { |n| "Title #{n}" }
 
-    text      'Lorem ipsum'
+    text 'Lorem ipsum'
     anonymous false
 
     association :category
@@ -16,6 +14,8 @@ FactoryGirl.define do
 
     trait :deleted do
       deleted true
+      deletor { self.author }
+      deleted_at DateTime.now.in_time_zone
     end
 
     trait :with_tags do
@@ -29,7 +29,7 @@ FactoryGirl.define do
     end
 
     trait :from_slido do
-      sequence(:slido_question_uuid)       { |n| n }
+      sequence(:slido_question_uuid) { |n| n }
       sequence(:slido_event_uuid) { |n| n + 2 }
     end
   end

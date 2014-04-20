@@ -9,12 +9,12 @@ module Editables::Update
 
     authorize! :edit, @editable
 
-    @revision = "#{controller_name.classify}Revision".constantize.create_revision!(current_user, @editable)
+    @revision = "#{controller_name.classify}::Revision".constantize.create_revision!(current_user, @editable)
 
     @editable.assign_attributes(update_params)
 
     if @editable.changed?
-      if @editable.save && @editable.update_attributes_by_revision(@revision)
+      if @editable.update_attributes_by_revision(@revision)
         process_markdown_for @editable do |user|
           dispatch_event :mention, @editable, for: user
         end

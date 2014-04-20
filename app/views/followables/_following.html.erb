@@ -1,9 +1,9 @@
 <div id="<%= model %>-<%= followable.id %>-following" class="<%= model %>-following">
   <% if can? :follow, followable %>
     <% if current_user.following? followable %>
-      <%= icon_link_to :'chain-broken', nil, public_send("follow_#{model}_path", followable), id: identify(followable, :unfollow), class: "#{model}-followed", data: { remote: true } %>
+      <%= icon_link_to :unlink, nil, public_send("follow_#{model}_path", followable), id: identify(followable, :unfollow), class: "#{model}-followed", data: { remote: true } %>
     <% else %>
-      <%= icon_link_to :'link', nil, public_send("follow_#{model}_path", followable), tooltip_attributes(t("#{model}.follow"), placement: :right).deep_merge(id: identify(followable, :follow), data: { remote: true }) %>
+      <%= icon_link_to :link, nil, public_send("follow_#{model}_path", followable), tooltip_attributes(t("#{model}.follow"), placement: :right).deep_merge(id: identify(followable, :follow), data: { remote: true }) %>
     <% end %>
   <% end %>
 </div>

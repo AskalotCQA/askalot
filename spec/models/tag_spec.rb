@@ -41,7 +41,7 @@ describe Tag do
 
         expect(tag.count).to eql(questions.count)
 
-        questions.first.update_attributes(deleted: true)
+        questions.first.mark_as_deleted_by! questions.first.author
 
         tag = Tag.find_by name: 'doge'
 

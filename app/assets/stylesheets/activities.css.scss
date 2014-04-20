@@ -1,0 +1,18 @@
+// collection
+
+.activities {
+  @extend .list-unstyled;
+  @include block-listing;
+
+  time {
+    vertical-align: middle;
+  }
+}
+
+.activities-note {
+  margin-bottom: 0px;
+  padding: 10px 0;
+  border-top: 1px solid $gray-lighter;
+
+  text-align: right;
+}

@@ -7,7 +7,7 @@ class Comment < ActiveRecord::Base
 
   belongs_to :commentable, -> { unscope where: :deleted }, polymorphic: true, counter_cache: true
 
-  has_many :revisions, class_name: :CommentRevision, dependent: :destroy
+  has_many :revisions, class_name: :'Comment::Revision', dependent: :destroy
 
   validates :text, presence: true
 

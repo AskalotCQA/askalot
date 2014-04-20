@@ -14,6 +14,7 @@ sk:
       questions: 'Otázky'
       answers: 'Odpovede'
       favorites: 'Obľúbené'
+      activities: 'Aktivita'
 
       followees: 'Nasledovaní'
       followers: 'Nasledovníci'
@@ -75,18 +76,21 @@ sk:
       about: 'O mne'
       edit: 'Upraviť profil'
 
-      ask: 'Opýtajte sa'
+      ask: 'Opýtajte sa otázku'
       answer: 'Skúste odpovedať'
       browse: 'Prezrite si otázky'
+      or: 'alebo'
 
       no_questions: 'Zatiaľ ste sa neopýtali žiadnu otázku'
       no_answers: 'Zatiaľ ste neodpovedali na žiadnu otázku'
       no_favorites: 'Zatiaľ ste si nepridali žiadnu otázku medzi obľúbené'
+      no_activity: 'Zatiaľ nemáte žiadnu verejnú aktivitu'
 
       other:
         no_questions: 'Používateľ sa zatiaľ neopýtal žiadnu otázku.'
         no_answers: 'Používateľ zatiaľ neodpovedal na žiadnu otázku.'
         no_favorites: 'Používateľ si zatiaľ nepridal žiadnu otázku medzi obľúbené.'
+        no_activity: 'Používateľ zatiaľ nemá žiadnu verejnú aktivitu.'
 
     edit:
       profile: 'Úprava profilu'

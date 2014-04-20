@@ -35,14 +35,17 @@
 @import 'users';
 @import 'categories';
 @import 'tags';
+
 @import 'questions';
 @import 'answers';
 @import 'comments';
 @import 'evaluations';
 
-@import 'changelogs';
+@import 'activities';
 @import 'notifications';
-@import 'statistics';
 @import 'watchings';
+
+@import 'changelogs';
+@import 'statistics';
 
 @import 'fixes';

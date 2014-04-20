@@ -17,14 +17,16 @@ class UsersController < ApplicationController
   def show
     @user = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
 
-    @questions = @user.questions.where(anonymous: false).order(created_at: :desc)
-    @answers   = @user.answers.order(created_at: :desc)
-    @favorites = @user.favorites.order(created_at: :desc)
-    @comments  = @user.comments.order(created_at: :desc)
+    @questions  = @user.questions.where(anonymous: false).order(created_at: :desc)
+    @answers    = @user.answers.order(created_at: :desc)
+    @favorites  = @user.favorites.order(created_at: :desc)
+    @comments   = @user.comments.order(created_at: :desc)
+    @activities = @user.activities.order(created_at: :desc)
 
-    @questions = @questions.page(tab_page :questions).per(10)
-    @answers   = @answers.page(tab_page :answers).per(10)
-    @favorites = @favorites.page(tab_page :favorites).per(10)
+    @questions  = @questions.page(tab_page :questions).per(10)
+    @answers    = @answers.page(tab_page :answers).per(10)
+    @favorites  = @favorites.page(tab_page :favorites).per(10)
+    @activities = @activities.page(tab_page :activities).per(20)
 
     @question = Question.unanswered.random.first || Question.random.first
   end

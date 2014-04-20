@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
   def create
     @commentable = find_commentable
     @question    = @commentable.to_question
-    @comment     = Comment.new(comment_params)
+    @comment     = Comment.new(create_params)
 
     authorize! :comment, @commentable
 
@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
     [:question_id, :answer_id].each { |id| return id.to_s[0..-4].classify.constantize.find(params[id]) if params[id] }
   end
 
-  def comment_params
+  def create_params
     params.require(:comment).permit(:text).merge(commentable: @commentable, author: current_user)
   end
 
