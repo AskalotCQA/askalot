@@ -5,6 +5,8 @@
     <% end %>
   </ol>
 
+  <p class="activities-note"><small class="text-muted"><%= t('activity.note') %></small></p>
+
   <%= paginate activities, params: { tab: :activities } %>
 <% else %>
   <div class="row">

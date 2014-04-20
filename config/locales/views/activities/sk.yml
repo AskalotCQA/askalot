@@ -7,6 +7,7 @@ sk:
 
     more: 'Zobraziť viac'
     none: 'Žiadna aktivita.'
+    note: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení.'
 
     action:
       create: 'Pridanie'

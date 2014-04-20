@@ -1,11 +1,5 @@
 <li>
-  <div class="row">
-    <div class="col-md-9">
-      <%= activity_icon_tag activity %>
-      <%= activity_content activity %>
-    </div>
-    <div class="col-md-3">
-      <%= tooltip_time_tag activity.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
-    </div>
-  </div>
+  <%= activity_icon_tag activity %>
+  <%= activity_content activity %>
+  <small class="pull-right"><%= tooltip_time_tag activity.created_at, class: :'text-muted', format: :normal, placement: :bottom %></small>
 </li>
