@@ -2,8 +2,8 @@
   <script type="text/javascript">
     new CalHeatMap().init({
       itemSelector: "#user-<%= user.id %>-activities-calendar",
-      data: "http://kamisama.github.io/cal-heatmap/datas-years.json",
-      start: new Date(2000, 0),
+      data: "<%= user_activities_path(user, format: :json) %>",
+      start: new Date(<%= Time.now.year - 1 %>, <%= Time.now.month %>),
       domain: "month",
       subDomain: "day",
       range: 12,
