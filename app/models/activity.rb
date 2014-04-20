@@ -7,5 +7,7 @@ class Activity < ActiveRecord::Base
 
   default_scope -> { where(resource_type: [Answer, Comment, Evaluation, Question]) }
 
+  scope :of, lambda { |user| where(initiator: user) }
+
   symbolize :action, in: ACTIONS
 end
