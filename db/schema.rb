@@ -11,23 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140420093029) do
+ActiveRecord::Schema.define(version: 20140419150139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: true do |t|
-    t.integer  "initiator_id",  null: false
-    t.integer  "resource_id",   null: false
-    t.string   "resource_type", null: false
-    t.string   "action",        null: false
-    t.date     "created_on",    null: false
-    t.date     "updated_on",    null: false
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "initiator_id",                  null: false
+    t.integer  "resource_id",                   null: false
+    t.string   "resource_type",                 null: false
+    t.string   "action",                        null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.date     "created_on",                    null: false
+    t.date     "updated_on",                    null: false
+    t.boolean  "anonymous",     default: false, null: false
   end
 
   add_index "activities", ["action"], name: "index_activities_on_action", using: :btree
+  add_index "activities", ["created_at"], name: "index_activities_on_created_at", using: :btree
   add_index "activities", ["created_on"], name: "index_activities_on_created_on", using: :btree
   add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
   add_index "activities", ["resource_id", "resource_type"], name: "index_activities_on_resource_id_and_resource_type", using: :btree
@@ -233,15 +235,16 @@ ActiveRecord::Schema.define(version: 20140420093029) do
   add_index "labels", ["value"], name: "index_labels_on_value", unique: true, using: :btree
 
   create_table "notifications", force: true do |t|
-    t.integer  "recipient_id",                 null: false
-    t.integer  "initiator_id",                 null: false
-    t.integer  "resource_id",                  null: false
-    t.string   "resource_type",                null: false
-    t.string   "action",                       null: false
-    t.boolean  "unread",        default: true, null: false
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.integer  "recipient_id",                  null: false
+    t.integer  "initiator_id",                  null: false
+    t.integer  "resource_id",                   null: false
+    t.string   "resource_type",                 null: false
+    t.string   "action",                        null: false
+    t.boolean  "unread",        default: true,  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.datetime "read_at"
+    t.boolean  "anonymous",     default: false, null: false
   end
 
   add_index "notifications", ["action"], name: "index_notifications_on_action", using: :btree
@@ -288,8 +291,8 @@ ActiveRecord::Schema.define(version: 20140420093029) do
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
     t.boolean  "deleted",                                       default: false, null: false
-    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "touched_at",                                                    null: false
+    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
     t.datetime "deleted_at"
