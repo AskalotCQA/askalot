@@ -6,6 +6,8 @@ $(document).ready ->
     if $(this).attr 'data-track-label'
       label = $(this).attr 'data-track-label'
     else
-       $(this).attr 'id' ? label = $(this).attr 'id' : label = nil
+      label = $(this).attr 'id' ? $(this).attr 'id' : nil
+
+    alert(label)
 
     _gaq.push ['_trackEvent', category, action, label]
