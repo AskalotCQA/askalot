@@ -19,9 +19,9 @@
         <div class="text-left">
           <% unless current_user %>
             <% if Configuration.enable.registrations? %>
-              <%= icon_link_to :rocket, t('home.sign_up'), new_user_registration_path, class: 'btn btn-success', fixed: true %>
+              <%= icon_link_to :rocket, t('home.sign_up'), new_user_registration_path, analytics_attributes(:user, :registration, :'registration-user-button').merge(class: 'btn btn-success', fixed: true) %>
             <% else %>
-              <%= icon_link_to :rocket, t('home.sign_in'), new_user_session_path, class: 'btn btn-success', fixed: true %>
+              <%= icon_link_to :rocket, t('home.sign_in'), new_user_session_path, analytics_attributes(:user, :'sign-in', :'sign-in-user-button').merge(class: 'btn btn-success', fixed: true) %>
             <% end %>
           <% else %>
             <% if @question %>
