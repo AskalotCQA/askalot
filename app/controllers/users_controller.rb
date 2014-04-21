@@ -79,6 +79,6 @@ class UsersController < ApplicationController
   end
 
   def user_questions(user)
-    user == current_user ? @user.questions : @user.questions.where(anonymous: false)
+    user == current_user ? user.questions : user.questions.where(anonymous: false)
   end
 end

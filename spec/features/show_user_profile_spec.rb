@@ -1,16 +1,16 @@
 require 'spec_helper'
 
-describe 'View user profile' do
+describe 'Show user profile' do
   let!(:author) { create :user }
   let!(:user)   { create :user }
   let!(:question) { create :question, :anonymous, author: author }
 
-  context 'logged in as anonymous question author' do
+  context 'when logged in as anonymous question author' do
     before :each do
       login_as author
     end
 
-    it 'can see own anonymous question' do
+    it 'shows anonymous question' do
       visit user_path(author.nick)
 
       list = all('#questions > ol > li')
@@ -19,12 +19,12 @@ describe 'View user profile' do
     end
   end
 
-  context 'logged in as not anonymous question author' do
+  context 'when not logged in as anonymous question author' do
     before :each do
       login_as user
     end
 
-    it 'can not see other user anonymous question' do
+    it 'does not show anonymous question' do
       visit user_path(author.nick)
 
       list = all('#questions > ol > li')
