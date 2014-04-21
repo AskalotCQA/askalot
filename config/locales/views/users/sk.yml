@@ -119,7 +119,7 @@ sk:
     activity:
       calendar:
         title: 'Aktivita'
-        note: 'Zobrazená miera aktivity zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení. Ďalej zhhŕňa hlasovania za otázky a odpovede, označenia správnych odpovedí, obľúbenia, sledovania, tagovania a zobrazenia otázok, nasledovania používateľov a spomenutia používateľov v texte.'
+        note: 'Zobrazená miera aktivity zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení. Ďalej zahŕňa hlasovania za otázky a odpovede, označenia správnych odpovedí, obľúbenia, sledovania, tagovania a zobrazenia otázok, nasledovania používateľov a spomenutia používateľov v texte.'
 
         item:
           singular: 'aktivita'
