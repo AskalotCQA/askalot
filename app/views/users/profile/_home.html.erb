@@ -7,4 +7,11 @@
 
 <% unless user.about.blank? %>
   <%= render_markdown user.about %>
+  <hr/>
 <% end %>
+
+<h4 class="text-muted"><%= t 'user.activity.calendar.title' %></h4>
+
+<%= render 'activities/calendar', user: user %>
+
+<p><small class="text-muted"><%= t 'user.activity.calendar.note' %></small></p>

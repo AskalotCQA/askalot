@@ -44,6 +44,8 @@ class User < ActiveRecord::Base
   validates :first, format: { with: /\A\p{Lu}\p{Ll}*\z/u }, allow_blank: true
   validates :last,  format: { with: /\A\p{Lu}\p{Ll}*\z/u }, allow_blank: true
 
+  scope :by, lambda { |args| where(args).first || raise(ActiveRecord::RecordNotFound) }
+
   scope :recent, lambda { where('created_at >= ?', Time.now - 1.month ) }
 
   Social.networks.each do |key, network|

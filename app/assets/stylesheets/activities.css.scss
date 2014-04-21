@@ -16,3 +16,86 @@
 
   text-align: right;
 }
+
+// graph
+
+.graph {
+  @include clearfix;
+
+  display: block;
+  overflow: hidden;
+
+  font-family: $font-family-base;
+}
+
+.graph-label {
+  fill: $text-muted;
+
+  font-size: $font-size-small !important;
+  text-transform: capitalize;
+}
+
+.graph-rect {
+  @include background-fill(#eee);
+}
+
+.graph-subdomain-group rect {
+  &:active, &:focus, &:hover {
+    stroke: none;
+    stroke-width: none;
+  }
+}
+
+.qi { @include background-fill(#eee) }
+.q0 { @include background-fill(#eee) }
+.q1 { @include background-fill(#d6e685) }
+.q2 { @include background-fill(#8cc665) }
+.q3 { @include background-fill(#44a340) }
+.q4 { @include background-fill(#1e6823) }
+
+.ch-tooltip {
+  display: none;
+  position: absolute;
+  box-sizing: border-box;
+
+  width: 200px;
+  line-height: 1.4;
+
+  margin: 34px 0 0 9px;
+  padding: 3px 8px;
+
+  background: $tooltip-bg;
+  color: $tooltip-color;
+
+  font-size: $font-size-small;
+  text-align: center;
+
+  border-radius: $border-radius-base;
+  box-shadow: none !important;
+
+  z-index: $zindex-tooltip;
+
+  &:first-letter {
+    text-transform: capitalize;
+  }
+
+  &::after {
+    display: block;
+    position: absolute;
+
+    content: '';
+
+    width: 0;
+    height: 0;
+
+    left: 50%;
+    bottom: -$tooltip-arrow-width;
+
+    margin-left: -$tooltip-arrow-width;
+    padding: 0;
+
+    border-width: $tooltip-arrow-width $tooltip-arrow-width 0;
+    border-bottom-color: $tooltip-arrow-color !important;
+    border-style: solid;
+  }
+}
