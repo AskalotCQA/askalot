@@ -43,8 +43,13 @@ class UsersController < ApplicationController
   end
 
   def activities
+    from = Date.parse(params[:from]) rescue (Time.now - 1.year).to_date
+    to   = Date.parse(params[:to])   rescue (Time.now).to_date
+
+    from, to = to, from if from > to
+
     @user = User.by(nick: params[:nick])
-    @data = Activity.data(@user)
+    @data = Activity.data(@user, from: from, to: to)
 
     render json: @data
   end
