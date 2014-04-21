@@ -12,6 +12,7 @@ sk:
 
       profile: 'Profil'
       questions: 'Otázky'
+      anonymous_questions: 'Anonymné otázky'
       answers: 'Odpovede'
       favorites: 'Obľúbené'
       activities: 'Aktivita'
