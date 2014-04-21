@@ -7,7 +7,5 @@ class Activity < ActiveRecord::Base
 
   default_scope -> { where.not(action: :mention).where(resource_type: [Answer, Comment, Evaluation, Question], anonymous: false) }
 
-  scope :private_activities, -> { unscope where: :anonymous }
-
   symbolize :action, in: ACTIONS
 end

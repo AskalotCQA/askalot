@@ -30,6 +30,10 @@ module UsersHelper
     wrapped_user_image_tag user, image, options.merge(class: classes)
   end
 
+  def user_nick(user, options = {})
+    user == :anonymous ? t('user.anonymous') : user.nick
+  end
+
   def link_to_user(user, options = {})
     authorable = options.delete(:authorable)
 
@@ -38,10 +42,6 @@ module UsersHelper
     return content_tag :span, t('user.anonymous'), options if user == :anonymous
 
     link_to user.nick, user_path(user.nick), options
-  end
-
-  def user_nick(user, options = {})
-    user == :anonymous ? t('user.anonymous') : user.nick
   end
 
   private

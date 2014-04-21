@@ -54,6 +54,10 @@ class User < ActiveRecord::Base
 
   before_validation :resolve_nick, on: :create
 
+  def activities_for(user)
+    user == self ? activities.unscope(where: :anonymous) : activities
+  end
+
   def login=(value)
     write_attribute :login, value.to_s.downcase
 

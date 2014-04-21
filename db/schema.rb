@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140420093029) do
+ActiveRecord::Schema.define(version: 20140421091947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140420093029) do
   end
 
   add_index "activities", ["action"], name: "index_activities_on_action", using: :btree
+  add_index "activities", ["anonymous"], name: "index_activities_on_anonymous", using: :btree
   add_index "activities", ["created_at"], name: "index_activities_on_created_at", using: :btree
   add_index "activities", ["created_on"], name: "index_activities_on_created_on", using: :btree
   add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
@@ -248,6 +249,7 @@ ActiveRecord::Schema.define(version: 20140420093029) do
   end
 
   add_index "notifications", ["action"], name: "index_notifications_on_action", using: :btree
+  add_index "notifications", ["anonymous"], name: "index_notifications_on_anonymous", using: :btree
   add_index "notifications", ["created_at"], name: "index_notifications_on_created_at", using: :btree
   add_index "notifications", ["initiator_id"], name: "index_notifications_on_initiator_id", using: :btree
   add_index "notifications", ["recipient_id"], name: "index_notifications_on_recipient_id", using: :btree
@@ -301,6 +303,7 @@ ActiveRecord::Schema.define(version: 20140420093029) do
     t.integer  "evaluations_count",                             default: 0,     null: false
   end
 
+  add_index "questions", ["anonymous"], name: "index_questions_on_anonymous", using: :btree
   add_index "questions", ["author_id"], name: "index_questions_on_author_id", using: :btree
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
   add_index "questions", ["deleted"], name: "index_questions_on_deleted", using: :btree

@@ -19,7 +19,6 @@ module Events
     end
 
     def dispatch(action, initiator, resource, options = {})
-      options[:anonymous] = false if options[:anonymous] == nil
 
       listeners.each do |listener|
         listener.publish(action, initiator, resource, options)

@@ -8,7 +8,7 @@ module Notifications
       recipients = (Array.wrap(options[:for] || resource.watchers) - [initiator]).uniq
 
       recipients.each do |recipient|
-        factory.create!(action: action, initiator: initiator, recipient: recipient, resource: resource, anonymous: options[:anonymous])
+        factory.create!(action: action, initiator: initiator, recipient: recipient, resource: resource, anonymous: !!options[:anonymous])
       end
     end
 

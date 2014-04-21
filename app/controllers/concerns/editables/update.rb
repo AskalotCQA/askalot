@@ -19,7 +19,7 @@ module Editables::Update
           dispatch_event :mention, @editable, for: user
         end
 
-        dispatch_event :update, @editable, { for: @editable.to_question.watchers, anonymous: @editable.to_question.anonymous }
+        dispatch_event :update, @editable, for: @editable.to_question.watchers, anonymous: @editable.to_question.anonymous
 
         flash[:notice] = t "#{@model}.update.success"
       else
