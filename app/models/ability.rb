@@ -34,25 +34,15 @@ class Ability
       resource.author == user || (user.role?(:teacher) && resource.author == User.find_by(login: :slido))
     end
 
-    if user.role? :student
-    end
-
     if user.role? :teacher
-      can :evaluate, [Question, Answer]
-
-      can :observe, :all
-
-      cannot :vote, :all
+      can(:observe, :all)
     end
 
-    if user.role? :administrator
-      can :delete, [Question, Answer, Comment]
+    can(:evaluate, [Question, Answer]) { |resource| user.assignment?(:teacher, resource.to_question.category) }
+    cannot(:vote, :all)                { |resource| user.assignment?(:teacher, resource.to_question.category) }
 
-      can :vote, :all
-
-      can :edit, [Question, Answer, Comment]
-    end
-
-    can(:teach, Category) { |resource| user.assignment?(:teacher, resource) }
+    can(:delete, [Question, Answer, Comment]) { |resource| user.assignment?(:administrator, resource.to_question.category) }
+    can(:vote, :all)                          { |resource| user.assignment?(:administrator, resource.to_question.category) }
+    can(:edit, [Question, Answer, Comment])   { |resource| user.assignment?(:administrator, resource.to_question.category) }
   end
 end

@@ -1,4 +1,4 @@
-<% if can? :teach, question.category %>
+<% if can? :edit, question %>
   &middot;
 
   <a href="#" id="question-<%= question.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#question-<%= question.id %>-editing">
