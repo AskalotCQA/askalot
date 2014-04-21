@@ -1,0 +1,16 @@
+<% if questions.any? %>
+    <ol class="user-questions">
+      <% questions.each do |question| %>
+          <%= render 'users/profile/question', question: question %>
+      <% end %>
+    </ol>
+
+    <%= paginate questions, params: { tab: :anonymous_questions } %>
+<% else %>
+    <div class="row">
+      <div class="col-md-12">
+        <span class="text-muted"><%= t('user.show.no_questions') %></span>
+        <%= icon_link_to :'question-circle', t('user.show.ask'), new_question_path, class: 'btn btn-success' %>
+      </div>
+    </div>
+<% end %>

@@ -17,16 +17,18 @@ class UsersController < ApplicationController
   def show
     @user = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
 
-    @questions  = user_questions(@user).order(created_at: :desc)
-    @answers    = @user.answers.order(created_at: :desc)
-    @favorites  = @user.favorites.order(created_at: :desc)
-    @comments   = @user.comments.order(created_at: :desc)
-    @activities = @user.activities.order(created_at: :desc)
+    @questions           = @user.questions.where(anonymous: false).order(created_at: :desc)
+    @anonymous_questions = @user.questions.where(anonymous: true).order(created_at: :desc)
+    @answers             = @user.answers.order(created_at: :desc)
+    @favorites           = @user.favorites.order(created_at: :desc)
+    @comments            = @user.comments.order(created_at: :desc)
+    @activities          = @user.activities.order(created_at: :desc)
 
-    @questions  = @questions.page(tab_page :questions).per(10)
-    @answers    = @answers.page(tab_page :answers).per(10)
-    @favorites  = @favorites.page(tab_page :favorites).per(10)
-    @activities = @activities.page(tab_page :activities).per(20)
+    @questions           = @questions.page(tab_page :questions).per(10)
+    @anonymous_questions = @anonymous_questions.page(tab_page :anonymous_questions).per(10)
+    @answers             = @answers.page(tab_page :answers).per(10)
+    @favorites           = @favorites.page(tab_page :favorites).per(10)
+    @activities          = @activities.page(tab_page :activities).per(20)
 
     @question = Question.unanswered.random.first || Question.random.first
   end
@@ -76,9 +78,5 @@ class UsersController < ApplicationController
     attributes += [:password, :password_confirmation] if can? :change_password, current_user
 
     params.require(:user).permit(attributes)
-  end
-
-  def user_questions(user)
-    user == current_user ? user.questions : user.questions.where(anonymous: false)
   end
 end
