@@ -1,0 +1,19 @@
+<% if activities.any? %>
+  <ol class="activities">
+    <% activities.each do |activity| %>
+      <%= render 'activity', activity: activity %>
+    <% end %>
+  </ol>
+
+  <%= paginate activities, params: { tab: tab } %>
+<% else %>
+  <div class="alert alert-info">
+    <% if current_user.followees.any? %>
+      <%= t('activity.none') %>
+    <% else %>
+      <%= t('user.followings.no_followees') %>
+    <% end %>
+  </div>
+<% end %>
+
+

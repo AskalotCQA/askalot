@@ -1,6 +1,8 @@
 sk:
   activity:
     navigation: 'Aktivita'
+    global: 'Všetci'
+    follow: 'Nasledovaný'
 
     index:
       title: 'Aktivita'

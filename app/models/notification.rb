@@ -1,5 +1,5 @@
 class Notification < ActiveRecord::Base
-  include Anonymous
+  include Initiable
 
   ACTIONS = Activity::ACTIONS
 
@@ -17,8 +17,6 @@ class Notification < ActiveRecord::Base
 
   scope :read,   lambda { unscope(where: :unread).where(unread: false) }
   scope :unread, lambda { unscope(where: :unread).where(unread: true) }
-
-  scope :private_notifications, -> { unscope where: :anonymous }
 
   symbolize :action, in: ACTIONS
 

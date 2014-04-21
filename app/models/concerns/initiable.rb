@@ -1,8 +1,8 @@
-module Anonymous
+module Initiable
   extend ActiveSupport::Concern
 
   included do
-    def user_or_anonymous
+    def initiator_or_anonymous
       self.anonymous? ? :anonymous : self.initiator
     end
   end
