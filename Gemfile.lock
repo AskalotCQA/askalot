@@ -54,7 +54,7 @@ GEM
     bootstrap-sass (3.1.1.1)
       sass (~> 3.2)
     builder (3.2.2)
-    cal_heatmap_rails (0.0.3)
+    cal-heatmap-rails (0.0.1)
     cancan (1.6.10)
     capistrano (2.15.5)
       highline
@@ -371,14 +371,14 @@ DEPENDENCIES
   activerecord-custom_timestamps
   bootstrap-datepicker-rails (~> 1.3.0)
   bootstrap-sass (~> 3.1.1)
-  cal_heatmap_rails
+  cal-heatmap-rails (~> 0.0.1)
   cancan (~> 1.6.9)
   capistrano (~> 2.15.5)
   capistrano-ext
   capybara (~> 2.2.1)
   capybara-webkit
   coffee-rails (~> 4.0.0)
-  d3_rails
+  d3_rails (~> 3.4.6)
   database_cleaner (~> 1.2.0)
   devise (~> 3.1.1)
   elasticsearch

@@ -24,7 +24,7 @@
 #= require jquery-textcomplete
 #
 #= require d3
-#= require cal_heatmap_rails
+#= require cal-heatmap
 #
 #= require gemoji
 #= require form

@@ -31,8 +31,8 @@ gem 'momentjs-rails'
 gem 'jquery-textcomplete-rails', '~> 0.1.2'
 gem 'handlebars_assets'
 gem 'jquery-ui-rails'
-gem 'd3_rails'
-gem 'cal_heatmap_rails'
+gem 'd3_rails', '~> 3.4.6'
+gem 'cal-heatmap-rails', '~> 0.0.1'
 
 # markdown
 gem 'redcarpet'
