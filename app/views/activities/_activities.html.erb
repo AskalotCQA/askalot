@@ -8,7 +8,7 @@
   <%= paginate activities, params: { tab: tab } %>
 <% else %>
   <div class="alert alert-info">
-    <% if current_user.followees.any? %>
+    <% if current_user.followees.any? || tab == :global %>
       <%= t('activity.none') %>
     <% else %>
       <%= t('user.followings.no_followees') %>

@@ -11,7 +11,6 @@ class Activity < ActiveRecord::Base
 
   symbolize :action, in: ACTIONS
 
-  def self.global
-    Activity.all.unscope(where: :anonymous)
-  end
+  scope :global, -> { unscope(where: :anonymous) }
+  scope :by_followees_of, lambda { |user| where(initiator: user.followees.pluck(:followee_id)) }
 end
