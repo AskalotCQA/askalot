@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def show
     @user = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
 
-    @questions  = @user.questions.where(anonymous: false).order(created_at: :desc)
+    @questions  = user_questions(@user).order(created_at: :desc)
     @answers    = @user.answers.order(created_at: :desc)
     @favorites  = @user.favorites.order(created_at: :desc)
     @comments   = @user.comments.order(created_at: :desc)
@@ -76,5 +76,9 @@ class UsersController < ApplicationController
     attributes += [:password, :password_confirmation] if can? :change_password, current_user
 
     params.require(:user).permit(attributes)
+  end
+
+  def user_questions(user)
+    user == current_user ? @user.questions : @user.questions.where(anonymous: false)
   end
 end
