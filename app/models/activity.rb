@@ -10,4 +10,10 @@ class Activity < ActiveRecord::Base
   scope :of, lambda { |user| where(initiator: user) }
 
   symbolize :action, in: ACTIONS
+
+  def self.data(user)
+    data = unscope(:where).of(user).where('created_on >= ?', Time.now - 1.year).group(:created_on).count
+
+    data.inject({}) { |result, (date, count)| result.tap { result[date.to_time.to_i] = count }}
+  end
 end

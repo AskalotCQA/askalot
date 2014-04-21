@@ -44,8 +44,7 @@ class UsersController < ApplicationController
 
   def activities
     @user = User.by(nick: params[:nick])
-    @data = Activity.of(@user).where('created_on >= ?', Time.now - 1.year).group(:created_on).count
-    @data = @data.inject({}) { |result, (date, count)| result[date.to_time.to_i] = count; result }
+    @data = Activity.data(@user)
 
     render json: @data
   end
