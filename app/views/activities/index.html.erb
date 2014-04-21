@@ -2,14 +2,12 @@
 
 <div class="tab-navigation">
   <ul class="nav nav-tabs">
-    <%= tab_link_tag t('activity.global'), :global, activities_path(params.except(:page).merge tag: :global) %>
-    <%= tab_link_tag t('activity.follow'), :follow, activities_path(params.except(:page).merge tag: :follow) %>
+    <%= tab_link_tag t('activity.tab.global'), :global, activities_path(params.except(:page).merge tag: :global) %>
+    <%= tab_link_tag t('activity.tab.followees'), :followees, activities_path(params.except(:page).merge tag: :followees) %>
   </ul>
 </div>
 
 <div class="tab-content">
   <%= render_tab_content 'activities', :global, locals: { activities: @activities_global, tab: :global } %>
-  <%= render_tab_content 'activities', :follow, locals: { activities: @activities_follow, tab: :follow } %>
+  <%= render_tab_content 'activities', :followees, locals: { activities: @activities_followees, tab: :followees } %>
 </ul>
-
-<p class="activities-note"><small class="text-muted"><%= t('activity.note') %></small></p>
