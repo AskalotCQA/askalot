@@ -35,7 +35,7 @@ class Ability
     end
 
     if user.role? :teacher
-      can(:observe, :all)
+      can :observe, :all
     end
 
     can(:evaluate, [Question, Answer]) { |resource| user.assignment?(:teacher, resource.to_question.category) }
