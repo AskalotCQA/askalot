@@ -13,9 +13,7 @@ describe 'Show user profile' do
     it 'shows anonymous question' do
       visit user_path(author.nick)
 
-      list = all('#questions > ol > li')
-
-      expect(list).to have(1).items
+      expect(page).to have_content('Anonymné otázky')
     end
   end
 
@@ -27,9 +25,7 @@ describe 'Show user profile' do
     it 'does not show anonymous question' do
       visit user_path(author.nick)
 
-      list = all('#questions > ol > li')
-
-      expect(list).to have(0).items
+      expect(page).not_to have_content('Anonymné otázky')
     end
   end
 end
