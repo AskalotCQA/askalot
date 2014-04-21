@@ -1,18 +1,29 @@
 <% content_for :scripts do %>
   <script type="text/javascript">
     new CalHeatMap().init({
-      itemSelector: "#user-<%= user.id %>-activities-calendar",
-      data: "<%= user_activities_path(user.nick, format: :json) %>",
+      itemSelector: '#user-<%= user.id %>-activities-calendar',
+      data: '<%= user_activities_path(user.nick, format: :json) %>',
       start: new Date(<%= Time.now.year - 1 %>, <%= Time.now.month %>),
-      domain: "month",
-      subDomain: "day",
+      weekStartOnMonday: true,
+      domain: 'month',
+      subDomain: 'day',
       range: 12,
+      cellPadding: 2,
       cellSize: 11,
-      legend: [20, 40, 60, 80],
-      legendCellSize: 11,
-      itemName: ["aktivita", "aktivity"],
       domainGutter: 0,
-      domainLabelFormat: function(date) { return moment(date).format("MMM") }
+      domainMargin: [0, 0, 0, 0],
+      label: { position: 'top' },
+      itemName: ['aktivita', 'aktivity'],
+      domainLabelFormat: function(date) { return moment(date).format('MMM') },
+      subDomainDateFormat: function(date) { return moment(date).format('dddd, Do MMMM YYYY') },
+      subDomainTitleFormat: { filled: '{date}' },
+      tooltip: true,
+      legend: [5, 10, 15],
+      legendCellPadding: 2,
+      legendCellSize: 11,
+      legendHorizontalPosition: 'left',
+      legendMargin: [15, 0, 0, 0],
+      legendTitleFormat: { lower: 'menej ako {min}', inner: 'medzi {down} a {up}', upper: 'viac ako {max}' }
     });
   </script>
 <% end %>
