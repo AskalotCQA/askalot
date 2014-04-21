@@ -3,6 +3,7 @@ module BootstrapHelper
   include Bootstrap::IconHelper
   include Bootstrap::LabelHelper
   include Bootstrap::LinkHelper
+  include Bootstrap::PillHelper
   include Bootstrap::PopoverHelper
   include Bootstrap::TabHelper
   include Bootstrap::TooltipHelper

@@ -7,12 +7,12 @@
       <ul class="nav">
         <% group_changelogs_by_latest(@changelogs).each do |latest, changelogs| %>
           <li>
-            <%= link_to latest.version, "##{latest.identifier}" %>
+            <%= link_to latest.version, "##{latest.identifier}", analytics_attributes(:changelogs, :scroll, latest.identifier) %>
             <% if changelogs.any? %>
               <ul class="nav">
                 <% changelogs.each do |changelog| %>
                   <li>
-                    <%= link_to changelog.version, "##{changelog.identifier}" %>
+                    <%= link_to changelog.version, "##{changelog.identifier}", analytics_attributes(:changelogs, :scroll, changelog.identifier) %>
                   </li>
                 <% end %>
               </ul>

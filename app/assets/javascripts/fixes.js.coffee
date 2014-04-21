@@ -19,6 +19,7 @@ window.fixes = ->
   Poll.initialize()
   Markdown.bind()
   Hash.bind()
+  Analytics.bind()
 
   moment.lang('sk')
 

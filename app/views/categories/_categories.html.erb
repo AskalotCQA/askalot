@@ -5,7 +5,7 @@
         <% categories.each do |category| %>
           <div class="col-md-4">
             <h4>
-              <%= link_to_category category %>
+              <%= link_to_category category, analytics_attributes(:category, :click, category.name) %>
             </h4>
             <div class="category-details">
               <%= t('count.question', count: category.questions.size).upcase_first %> <%= category.questions.size %> &middot;
