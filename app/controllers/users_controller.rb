@@ -15,12 +15,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
+    @user = User.by(nick: params[:nick])
 
     @questions  = @user.questions.where(anonymous: false).order(created_at: :desc)
     @answers    = @user.answers.order(created_at: :desc)
     @favorites  = @user.favorites.order(created_at: :desc)
-    @comments   = @user.comments.order(created_at: :desc)
     @activities = @user.activities.order(created_at: :desc)
 
     @questions  = @questions.page(tab_page :questions).per(10)
@@ -43,6 +42,25 @@ class UsersController < ApplicationController
     redirect_to edit_user_registration_path(tab: params[:tab])
   end
 
+  def activities
+    from = Date.parse(params[:from]) rescue (Time.now - 1.year).to_date
+    to   = Date.parse(params[:to])   rescue (Time.now).to_date
+
+    from, to = to, from if from > to
+
+    @user = User.by(nick: params[:nick])
+    @data = Activity.data(@user, from: from, to: to)
+
+    render json: @data
+  end
+
+  def followings
+    @user = User.by(nick: params[:nick])
+
+    @followees = @user.followees.order(:nick).page(tab_page :followees).per(20)
+    @followers = @user.followers.order(:nick).page(tab_page :followers).per(20)
+  end
+
   def follow
     @followee = User.find(params[:id])
 
@@ -51,13 +69,6 @@ class UsersController < ApplicationController
     current_user.toggle_following_by! @followee
 
     params[:profile] ? redirect_to(:back) : render('follow', formats: :js)
-  end
-
-  def followings
-    @user = User.where(nick: params[:nick]).first || raise(ActiveRecord::RecordNotFound)
-
-    @followees = @user.followees.order(:nick).page(tab_page :followees).per(20)
-    @followers = @user.followers.order(:nick).page(tab_page :followers).per(20)
   end
 
   def suggest

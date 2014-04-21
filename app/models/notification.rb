@@ -11,8 +11,6 @@ class Notification < ActiveRecord::Base
   scope :for, lambda { |user| where(recipient: user) }
   scope :by,  lambda { |user| where(initiator: user) }
 
-  scope :of, lambda { |resource| where(resource: resource) }
-
   scope :read,   lambda { unscope(where: :unread).where(unread: false) }
   scope :unread, lambda { unscope(where: :unread).where(unread: true) }
 

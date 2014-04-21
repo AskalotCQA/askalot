@@ -8,6 +8,11 @@
   }
 }
 
+@mixin background-fill($color) {
+  background-color: $color;
+  fill: $color;
+}
+
 @mixin block-iconing {
   font-size: $font-size-h2;
   text-align: center;
