@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @answers    = @user.answers.order(created_at: :desc)
     @favorites  = @user.favorites.order(created_at: :desc)
     @comments   = @user.comments.order(created_at: :desc)
-    @activities = @user.activities_for(current_user).order(created_at: :desc)
+    @activities = @user.activities_seen_by(current_user).order(created_at: :desc)
 
     @questions  = @questions.page(tab_page :questions).per(10)
     @answers    = @answers.page(tab_page :answers).per(10)
