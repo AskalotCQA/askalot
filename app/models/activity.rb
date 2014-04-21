@@ -11,8 +11,10 @@ class Activity < ActiveRecord::Base
 
   symbolize :action, in: ACTIONS
 
-  def self.data(user)
-    data = unscope(:where).of(user).where('created_on >= ?', Time.now - 1.year).group(:created_on).count
+  def self.data(user, period: nil, from: nil, to: nil, time: Time.now)
+    period ||= (from || time - 1.year)..(to || time)
+
+    data = unscope(:where).of(user).where(created_on: period).group(:created_on).count
 
     data.inject({}) { |result, (date, count)| result.tap { result[date.to_time.to_i] = count }}
   end
