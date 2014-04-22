@@ -1,0 +1,25 @@
+<div class="watchings-clean">
+  <a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#clean-<%= model %>">
+    <%= icon_tag :'eye-slash' %> <%= t 'watching.clean.action', model: t("count.#{model}.other") %>
+  </a>
+</div>
+
+<div id="clean-<%= model %>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title"><%= t 'watching.clean.title' %></h3>
+      </div>
+      <div class="modal-body">
+        <%= t 'watching.clean.text', model: t("count.#{model}.other") %>
+      </div>
+      <div class="modal-footer">
+        <%= form_tag clean_watchings_path, method: :delete, class: :'pull-right' do %>
+          <%= hidden_field_tag :type, model, id: nil %>
+          <a href="#" class="btn btn-default" data-dismiss="modal"><%= t "watching.clean.cancel" %></a>
+          <button class="btn btn-danger"><%= t 'watching.clean.submit' %></button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

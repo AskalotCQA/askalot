@@ -12,13 +12,15 @@ class Question < ActiveRecord::Base
   include Votable
   include Watchable
 
-  before_save :add_category_tags
+  include Questions::Searchable
+
+  before_save { self.tag_list += self.category.tags }
 
   belongs_to :category, counter_cache: true
 
   has_many :answers, dependent: :destroy
 
-  has_many :revisions, class_name: :QuestionRevision, dependent: :destroy
+  has_many :revisions, class_name: :'Question::Revision', dependent: :destroy
 
   validates :category,  presence: true
   validates :title,     presence: true, length: { minimum: 2, maximum: 140 }
@@ -31,8 +33,7 @@ class Question < ActiveRecord::Base
   scope :answered,   lambda { joins(:answers).uniq }
   scope :solved,     lambda { joins(:answers).merge(best_answers).uniq }
 
-  #TODO(zbell) propose removal of this
-  scope :answered_but_not_best, lambda { joins(:answers) } #.where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq } # TODO(zbell) User.first.questions.answered fails
+  scope :answered_but_not_best, lambda { joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq }
 
   scope :by, lambda { |user| where(author: user) }
 
@@ -55,11 +56,5 @@ class Question < ActiveRecord::Base
 
   def to_question
     self
-  end
-
-  private
-
-  def add_category_tags
-    self.tag_list += self.category.tags
   end
 end

@@ -1,0 +1,15 @@
+<div id="<%= model %>-<%= favorable.id %>-favoring" class="<%= model %>-favoring">
+  <% if can? :favor, favorable %>
+    <% if favorable.favored_by? current_user %>
+      <%= icon_link_to :star, nil, public_send("favor_#{model}_path", favorable), id: :"#{model}-#{favorable.id}-favor", class: "#{model}-favored", data: { remote: true } %>
+    <% else %>
+      <%= icon_link_to :'star-o', nil, public_send("favor_#{model}_path", favorable), tooltip_attributes(t("#{model}.favor"), placement: :right).deep_merge(id: :"#{model}-#{favorable.id}-favor", data: { remote: true }) %>
+    <% end %>
+  <% else %>
+    <span><%= icon_tag :'star-o' %></span>
+  <% end %>
+
+  <% if favorable.favorites.size > 0 %>
+    <span class="<%= model %>-favorites-value"><%= favorable.favorites.size %></span>
+  <% end %>
+</div>

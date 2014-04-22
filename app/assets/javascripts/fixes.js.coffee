@@ -19,9 +19,14 @@ window.fixes = ->
   Poll.initialize()
   Markdown.bind()
   Hash.bind()
+  Analytics.bind()
+
+  moment.lang('sk')
 
   $('.popover').remove()
   $('.tooltip').remove()
+
+  $('[data-spy="affix"]').affix(offset: { top: 52 })
 
   $('[data-time-ago]').timeago()
 

@@ -1,41 +1,64 @@
-# TODO(zbell) drop polymorphic from taggable
-
 module Taggable
   extend ActiveSupport::Concern
 
   included do
-    has_many :taggings, as: :taggable, dependent: :destroy
+    has_many :taggings, dependent: :destroy
     has_many :tags, through: :taggings
 
     scope :tagged_with, lambda { |values, options = {}| Scope.new(self).build(values, options) }
 
-    after_save :generate_tags!
+    after_save :resolve_tags!, if: :tags_changed?
   end
 
   def tag_list
-    @tag_list ||= TagList.new(self.class.taggable, tags.pluck(:name))
+    @tag_list ||= TagList.new(self.class.taggable.extractor, tags.pluck(:name))
   end
 
   def tag_list=(values)
-    @tag_list = TagList.new(self.class.taggable, values)
+    tag_list.values = values
+  end
+
+  def changed?
+    super || tags_changed?
   end
 
   private
 
-  # TODO(zbell) rename -> create_tags
-  def generate_tags!
-    tag_list.each do |name|
-      tag = Tag.find_or_create_by! name: name
-
-      Tagging.find_or_create_by! tag_id: tag.id, taggable_id: self.id, taggable_type: self.class.base_class.name
-    end
-
-    flush_tags!
+  def tags_changed?
+    Set.new(tag_list.tags) != Set.new(tags.pluck :name)
   end
 
-  # TODO(zbell) rename -> update_tags
-  def flush_tags!
-    taggings.includes(:tag).references(:tags).where('tags.name not in (?)', tag_list.tags).each(&:destroy)
+  def resolve_tags!
+    create_tags!
+    delete_tags!
+
+    reload
+  end
+
+  def create_tags!
+    return if deleted?
+
+    user = editor || author
+
+    (tag_list.tags - tags.pluck(:name)).each do |name|
+      tag     = Tag.find_or_create_by!(name: name)
+      tagging = Tagging.deleted_or_new(author: user, question: self, tag: tag).mark_as_undeleted!
+
+      self.class.taggable.dispatcher.dispatch :create, user, tagging, for: watchers
+    end
+  end
+
+  def delete_tags!
+    user = deletor || editor || author
+
+    relation = taggings
+    relation = relation.includes(:tag).references(:tags).where.not(tags: { name: tag_list.tags }) unless tag_list.empty?
+
+    relation.each do |tagging|
+      tagging.mark_as_deleted_by! user
+
+      self.class.taggable.dispatcher.dispatch :delete, user, tagging, for: watchers
+    end
   end
 
   module ClassMethods
@@ -43,7 +66,8 @@ module Taggable
       @taggable ||= Class.new do
         include Squire::Base
 
-        config.extractor = TagList::Extractor
+        config.dispatcher = Events::Dispatcher
+        config.extractor  = Tags::Extractor
       end
     end
   end
@@ -56,13 +80,12 @@ module Taggable
     end
 
     def build(values, options = {})
-      tags = Taggable::TagList.new(relation.taggable, values).tags
+      tags = Taggable::TagList.new(relation.taggable.extractor, values).tags
 
       if options[:any]
         relation.where tags: { name: tags }
       else
-        # TODO(smolnar) REFACTOR, resolve why reference to class is scoped!
-        # TODO(zbell) rm questions dependency
+        # TODO(smolnar) refactor: resolve why reference to class is scoped, propose another solution for AND search
         ids   = []
         scope = relation.base_class
 
@@ -78,42 +101,50 @@ module Taggable
     end
   end
 
+  # TODO (zbell) should TagList extend Set?
   class TagList
     include Enumerable
 
-    attr_reader :values
+    attr_reader :extractor
 
-    attr_accessor :base, :extractor
+    def initialize(extractor = TagList::Extractor, values = [])
+      @extractor = extractor
 
-    def initialize(base, values = [])
-      @base   = base
-      @values = values
-    end
-
-    def extractor
-      @extractor ||= base.extractor? ? base.extractor : TagList::Extractor
-    end
-
-    def each
-      tags.each { |value| yield value }
+      self.values = values
     end
 
     def tags
-      @tags ||= extractor.extract(values)
+      @tags ||= []
+    end
+
+    def values=(values)
+      @tags = extract(values)
     end
 
     def +(values)
-      @tags = tags + extractor.extract(values)
+      @tags += extract(values)
+    end
+
+    def each
+      tags.each { |name| yield name }
+    end
+
+    def empty?
+      tags.empty?
+    end
+
+    def size
+      tags.size
     end
 
     def to_s
       tags.join(',')
     end
 
-    class Extractor
-      def self.extract(values)
-        (values.is_a?(Array) ? values.map(&:to_s) : values.to_s.split(/,/)).map(&:strip)
-      end
+    private
+
+    def extract(values)
+      extractor.extract(values).uniq
     end
   end
 end

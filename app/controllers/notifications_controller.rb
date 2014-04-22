@@ -1,14 +1,12 @@
 class NotificationsController < ApplicationController
-  include Tabbing
-
-  default_tab :unread, only: [:index, :read, :clean]
+  default_tab :unread, only: [:index, :read, :unread, :clean]
 
   before_action :authenticate_user!
 
   def index
-    count = 25
+    count = 20
 
-    @notifications = Notification.where(recipient: current_user).order(created_at: :desc)
+    @notifications = Notification.for(current_user).order(created_at: :desc)
 
     @unread = @notifications.unread.page(tab_page :unread).per(count)
     @all    = @notifications.page(tab_page :all).per(count)
@@ -25,7 +23,7 @@ class NotificationsController < ApplicationController
   def clean
     @notifications = Notification.where(recipient: current_user).unread
 
-    if @notifications.update_all(unread: false)
+    if @notifications.update_all(unread: false, read_at: nil)
       form_message :notice, t('notification.clean.success'), key: params[:tab]
     else
       form_error_message t('notification.clean.failure'), key: params[:tab]
@@ -39,14 +37,12 @@ class NotificationsController < ApplicationController
   def mark(status)
     @notification = Notification.find(params[:id])
 
-    @notification.unread = (status == :read ? false : (status == :unread) ? true : fail)
-
-    if @notification.save
+    if @notification.public_send("mark_as_#{status}")
       form_message :notice, t("notification.#{status}.success"), key: params[:tab]
     else
       form_error_message t("notification.#{status}.failure"), key: params[:tab]
     end
 
-    redirect_to :back
+    redirect_to(params[:r] ? params[:r] : :back)
   end
 end

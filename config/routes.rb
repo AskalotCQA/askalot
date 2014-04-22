@@ -7,14 +7,21 @@ Askalot::Application.routes.draw do
   devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }
 
   resources :users, only: [:index] do
-    patch :profile, on: :collection, to: 'users#update'
-    get   :suggest, on: :collection
+    patch :profile,  on: :collection, to: 'users#update'
+    get   :suggest,  on: :collection
+
+    get :follow, on: :member
   end
 
-  get 'users/:nick', to: 'users#show', as: :user
+  get 'users/:nick',            to: 'users#show',       as: :user
+  get 'users/:nick/activities', to: 'users#activities', as: :user_activities
+  get 'users/:nick/followings', to: 'users#followings', as: :user_followings
 
-  get :statistics,     to: 'statistics#index'
-  get :welcome,        to: 'static_pages#welcome'
+
+  get :statistics, to: 'statistics#index'
+  get :help,       to: 'static_pages#help'
+  get :welcome,    to: 'static_pages#welcome'
+
 
   concern :commetable do
     resources :comments, only: [:create, :update, :destroy]

@@ -9,6 +9,10 @@ class StaticPagesController < ApplicationController
     @question = Question.unanswered.random.first || Question.random.first
   end
 
+  def help
+    authenticate_user!
+  end
+
   def welcome
   end
 end

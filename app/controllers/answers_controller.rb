@@ -1,17 +1,17 @@
 class AnswersController < ApplicationController
-  include Deleting
-  include Editing
-  include Markdown
-  include Voting
+  include Deletables::Destroy
+  include Editables::Update
+  include Votables::Vote
 
-  include Events::Dispatching
-  include Watchings::Registration
+  include Events::Dispatch
+  include Markdown::Process
+  include Watchings::Register
 
   before_action :authenticate_user!
 
   def create
     @question = Question.find(params[:question_id])
-    @answer   = Answer.new(answer_params)
+    @answer   = Answer.new(create_params)
 
     authorize! :answer, @question
 
@@ -37,25 +37,25 @@ class AnswersController < ApplicationController
     @question = @answer.question
 
     case params[:value].to_sym
-      when :best
-        authorize! :label, @question
+    when :best
+      authorize! :label, @question
 
-        @question.answers.where.not(id: @answer.id).each do |answer|
-          labeling = answer.labelings.by(current_user).with(:best).first
+      @question.answers.where.not(id: @answer.id).each do |answer|
+        labeling = answer.labelings.by(current_user).with(:best).first
 
-          if labeling
-            @answers << answer
-            labeling.destroy
+        if labeling
+          @answers << answer
+          labeling.mark_as_deleted_by! current_user
 
-            dispatch_event :delete, labeling, for: answer.watchers
-          end
+          dispatch_event :delete, labeling, for: answer.question.watchers
         end
-      when :helpful
-        authorize! :label, @question
+      end
+    when :helpful
+      authorize! :label, @question
 
-        fail if @answer.labelings.by(current_user).with(:best).exists?
-      else
-        fail
+      fail if @answer.labelings.by(current_user).with(:best).exists?
+    else
+      fail
     end
 
     @labeling = @answer.toggle_labeling_by! current_user, params[:value]
@@ -65,7 +65,7 @@ class AnswersController < ApplicationController
 
   private
 
-  def answer_params
+  def create_params
     params.require(:answer).permit(:text).merge(question: @question, author: current_user)
   end
 

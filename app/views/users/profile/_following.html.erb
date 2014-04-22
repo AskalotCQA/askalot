@@ -1,0 +1,11 @@
+<% if can? :follow, user %>
+  <div id="user-profile-following" class="pull-right">
+    <a href="<%= follow_user_path(user, params: { profile: true }) %>" class="btn btn-<%= current_user.following?(user) ? :default : :info %>">
+      <% if current_user.following? user %>
+        <%= icon_tag :unlink %> <%= t('user.unfollow') %>
+      <% else %>
+        <%= icon_tag :link %> <%= t('user.follow') %>
+      <% end %>
+    </a>
+  </div>
+<% end %>

@@ -1,30 +1,9 @@
 <% provide(:title, t('category.index.title')) %>
 
-<div class="row">
-  <div class="col-md-12">
-    <h1 class="page-header"><%= yield :title %></h1>
+<ul class="nav nav-tabs tab-navigation">
+  <%= tab_link_tag_with_count t('category.tab.all'), :all, categories_path(params.except(:page).merge tab: :all), @categories.count, analytics_attributes(:categories, :switch, :all) %>
+</ul>
 
-    <ul class="list-unstyled">
-      <% group_categories_by_prefix(@categories).each do |_, group| %>
-        <li class="category-group">
-          <% group.each_slice(3) do |categories| %>
-            <div class="row">
-              <% categories.each do |category| %>
-                <div class="col-md-4">
-                  <h4>
-                    <%= link_to_category category %>
-                  </h4>
-                  <div class="category-details">
-                    <%= t('count.question', count: category.questions.size).upcase_first %> <%= category.questions.size %> &middot;
-                    <%= t('count.answer', count: category.answers.size).upcase_first %> <%= category.answers.size %> &middot;
-                    <%= render 'watching', category: category %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
-  </div>
+<div class="tab-content">
+  <%= render_tab_content 'categories', :all, locals: { categories: @categories } %>
 </div>

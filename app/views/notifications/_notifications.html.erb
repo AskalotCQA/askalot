@@ -1,16 +1,5 @@
 <%= form_messages key: tab %>
 
-<!--
-TODO(zbell) implement
-  <div class="text-right">
-    <%= link_to clean_notifications_path, class: 'btn btn-default' do %>
-  <%= icon_tag :check %>
-  <%= t 'notification.clean.submit' %>
-<% end %>
-  </div>
-
--->
-
 <% if notifications.any? %>
   <ol class="notifications">
     <% notifications.each do |notification| %>

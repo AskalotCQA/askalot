@@ -5,9 +5,18 @@
   <div class="col-md-offset-1 col-md-2 hidden-xs hidden-sm hidden-print">
     <%= sidebar_tag do %>
       <ul class="nav">
-        <% @changelogs.each do |changelog| %>
+        <% group_changelogs_by_latest(@changelogs).each do |latest, changelogs| %>
           <li>
-            <%= link_to changelog.version, "##{changelog.identifier}" %>
+            <%= link_to latest.version, "##{latest.identifier}", analytics_attributes(:changelogs, :scroll, latest.identifier) %>
+            <% if changelogs.any? %>
+              <ul class="nav">
+                <% changelogs.each do |changelog| %>
+                  <li>
+                    <%= link_to changelog.version, "##{changelog.identifier}", analytics_attributes(:changelogs, :scroll, changelog.identifier) %>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
           </li>
         <% end %>
       </ul>

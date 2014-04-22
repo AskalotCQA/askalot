@@ -1,4 +1,4 @@
-<header id="header-navbar" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<header id="header-navbar" class="navbar navbar-inverse" role="navigation">
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -15,10 +15,14 @@
         <% if user_signed_in? && can?(:observe, :all) %>
           <li><%= link_to t('statistic.navigation'), statistics_path %></li>
         <% end %>
+<<<<<<< HEAD
         <% if user_signed_in? && can?(:observe, :all) %>
             <li><%= link_to t('admin.navigation'), admin_dashboard_index_path %></li>
         <% end %>
 
+=======
+        <li><%= link_to t('help.navigation'), help_path %></li>
+>>>>>>> beta
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
@@ -30,6 +34,8 @@
             <li><%= link_to t('user.edit.social'),  edit_user_registration_path(tab: :social) %></li>
             <li><%= link_to t('user.edit.privacy'), edit_user_registration_path(tab: :privacy) %></li>
             <li><%= link_to t('user.edit.account'), edit_user_registration_path(tab: :account) %></li>
+            <li class="divider"></li>
+            <li><%= link_to t('help.navigation'), help_path %></li>
             <li class="divider"></li>
             <li><%= link_to t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
           <% end %>
@@ -44,7 +50,7 @@
         <% end %>
       </ul>
       <div class="navbar-form navbar-right hidden-xs hidden-sm hidden-print">
-        <%= icon_link_to :'question-circle', nil, new_question_path, tooltip_attributes(t('question.new.feature'), placement: :left).merge(class: 'btn btn-primary') %>
+        <%= icon_link_to :'question-circle', nil, new_question_path, analytics_attributes(:question, :'open-new-form', :navigation).deep_merge(tooltip_attributes(t('question.new.feature'), placement: :left).merge(class: 'btn btn-primary')) %>
       </div>
     </div>
   </div>

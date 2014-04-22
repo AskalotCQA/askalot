@@ -1,12 +1,10 @@
 // general
 
 html {
+  @include selection(rgba($brand-primary, 0.25));
+
   height: 100%;
   overflow-y: scroll;
-}
-
-body {
-  margin-top: $navbar-height + 1px;
 }
 
 .flash .alert:first-child {
@@ -14,7 +12,8 @@ body {
 }
 
 .page-header {
-  margin-top: $navbar-height;
+  margin-top: 30px;
+  padding-top: 20px;
 }
 
 .highlight-content {
@@ -24,8 +23,12 @@ body {
 // forms
 
 .form-title {
-  margin: $navbar-height 0 30px;
-  padding: 0;
+  margin: (2 * $line-height-computed) 0 $line-height-computed;
+  padding-bottom: $line-height-computed / 2;
+}
+
+.form-alert {
+  margin-bottom: 15px;
 }
 
 .form-links {
@@ -33,6 +36,13 @@ body {
 }
 
 // images
+
+.img-icon {
+  @include square(20px);
+
+  display: block;
+  vertical-align: middle;
+}
 
 .img-muted {
   @include opacity(0.8)
@@ -55,6 +65,18 @@ body {
 
 .pill-content, .pill-navigation, .tab-navigation {
   padding-top: $navbar-height;
+}
+
+// headings
+
+h1, h2, h3 {
+  margin-top: 2 * $line-height-computed;
+  margin-bottom: ($line-height-computed / 2);
+}
+
+h4, h5, h6 {
+  margin-top: $line-height-computed;
+  margin-bottom: ($line-height-computed / 2);
 }
 
 // text
@@ -82,7 +104,15 @@ body {
 // sidebar
 
 .sidebar {
-  margin-top: 40px;
+  padding-left: 20px;
+
+  &.affix-top {
+    margin-top: 20px;
+  }
+
+  &.affix {
+    top: 20px;
+  }
 
   .nav > li > a {
     display: inline-block;
@@ -94,7 +124,19 @@ body {
     }
   }
 
-  .nav li.active > a {
+  .nav .nav {
+    display: none;
+  }
+
+  .nav .nav > li > a {
+    padding-left: 20px;
+  }
+
+  li.active > .nav {
+    display: block;
+  }
+
+  li.active > a {
     font-weight: bolder;
   }
 }
@@ -102,6 +144,8 @@ body {
 // header
 
 header {
+  margin: 0 !important;
+
   .navbar-brand {
     font-variant: small-caps;
   }

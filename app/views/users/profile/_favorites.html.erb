@@ -1,0 +1,22 @@
+<% if favorites.any? %>
+  <ol class="user-favorites">
+    <% favorites.each do |favorite| %>
+      <%= render 'users/profile/favorite', favorite: favorite %>
+    <% end %>
+  </ol>
+
+  <%= paginate favorites, params: { tab: :favorites } %>
+<% else %>
+  <div class="row">
+    <div class="col-md-12">
+      <% if user == current_user %>
+        <span class="text-muted"><%= t('user.show.no_favorites') %></span>
+        <%= icon_link_to :tasks, t('user.show.browse'), questions_path(params: { tab: :favored }), class: 'btn btn-success' %>
+      <% else %>
+        <div class="alert alert-info">
+          <%= t('user.show.other.no_favorites') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

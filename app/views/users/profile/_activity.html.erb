@@ -1,0 +1,5 @@
+<li>
+  <%= activity_icon_tag activity %>
+  <%= activity_content activity %>
+  <small class="pull-right"><%= tooltip_time_tag activity.created_at, class: :'text-muted', format: :normal, placement: :bottom %></small>
+</li>

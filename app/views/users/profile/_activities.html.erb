@@ -1,0 +1,28 @@
+<% if activities.any? %>
+  <ol class="activities">
+    <% activities.each do |activity| %>
+      <%= render 'users/profile/activity', activity: activity %>
+    <% end %>
+  </ol>
+
+  <p class="activities-note"><small class="text-muted"><%= t('activity.note') %></small></p>
+
+  <%= paginate activities, params: { tab: :activities } %>
+<% else %>
+  <div class="row">
+    <div class="col-md-12">
+      <% if user == current_user %>
+        <span class="text-muted"><%= t('user.show.no_activity') %></span>
+        <%= icon_link_to :'question-circle', t('user.show.ask'), new_question_path, class: 'btn btn-success' %>
+        <% if @question %>
+          <span class="text-muted"><%= t('user.show.or') %></span>
+          <%= icon_link_to :comment, t('user.show.answer'), question_path(@question), class: 'btn btn-success' %>
+        <% end %>
+      <% else %>
+        <div class="alert alert-info">
+          <%= t('user.show.other.no_activity') %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>

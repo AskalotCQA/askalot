@@ -16,7 +16,11 @@ sk:
       failure: 'Sledovanie sa nepodarilo zrušiť.'
 
     clean:
+      action: 'Zrušiť všetky sledovania %{model}'
+      title: 'Pozor!'
+      text: 'Naozaj chete zrušiť všetky sledovania %{model}?'
       submit: 'Zrušiť všetky sledovania'
+      cancel: 'Spať'
       success: 'Sledovania boli zrušené.'
       failure: 'Sledovania sa nepodarilo zrušiť.'
 
@@ -26,3 +30,5 @@ sk:
       tags: 'Tagy'
 
     none: 'Žiadne sledovania.'
+
+    deleted: 'Sledovanie bolo zrušené'

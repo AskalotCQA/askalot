@@ -1,14 +1,12 @@
 class QuestionsController < ApplicationController
-  include Deleting
-  include Editing
-  include Markdown
-  include Voting
-  include Tabbing
+  include Deletables::Destroy
+  include Editables::Update
+  include Votables::Vote
+  include Watchables::Watch
 
-  include Events::Dispatching
-  include Watchings::Registration
-
-  include Watchings::Watching
+  include Events::Dispatch
+  include Markdown::Process
+  include Watchings::Register
 
   default_tab :recent, only: :index
 
@@ -16,10 +14,10 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = case params[:tab].to_sym
-                 when :unanswered then Question.unanswered.order('questions.votes_lb_wsci_bp desc, questions.created_at desc')
-                 when :answered   then Question.answered.by_votes.order(created_at: :desc)
-                 when :solved     then Question.solved.by_votes.order(created_at: :desc)
-                 when :favored    then Question.favored.by_votes.order(created_at: :desc)
+                 when :unanswered then Question.unanswered.by_votes
+                 when :answered   then Question.answered_but_not_best.by_votes
+                 when :solved     then Question.solved.by_votes
+                 when :favored    then Question.favored.by_votes
                  else Question.recent
                  end
 
@@ -34,7 +32,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = Question.new(create_params)
 
     authorize! :ask, @question
 
@@ -59,14 +57,13 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @labels   = @question.labels
-    @answers  = @question.ordered_answers
-
-    @answer = Answer.new(question: @question)
 
     authorize! :view, @question
 
-    @view = @question.views.create! viewer: current_user
+    @labels  = @question.labels
+    @answers = @question.ordered_answers
+    @answer  = Answer.new(question: @question)
+    @view    = @question.views.create! viewer: current_user
 
     @question.increment :views_count
 
@@ -111,7 +108,7 @@ class QuestionsController < ApplicationController
     relation.tagged_with(params[:tags])
   end
 
-  def question_params
+  def create_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user)
   end
 

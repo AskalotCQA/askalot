@@ -4,10 +4,10 @@
   <div class="row">
     <div class="col-md-3">
       <ul class="nav nav-pills nav-stacked pill-navigation">
-        <%= tab_link_tag t('user.profile'), :profile, edit_user_registration_path(tab: :profile), data: { toggle: :pill } %>
-        <%= tab_link_tag t('user.social'), :social, edit_user_registration_path(tab: :social), data: { toggle: :pill } %>
-        <%= tab_link_tag t('user.privacy'), :privacy, edit_user_registration_path(tab: :privacy), data: { toggle: :pill } %>
-        <%= tab_link_tag t('user.account'), :account, edit_user_registration_path(tab: :account), data: { toggle: :pill } %>
+        <%= pill_link_tag t('user.profile'), :profile, edit_user_registration_path(tab: :profile), analytics_attributes(:account, :switch, :profile) %>
+        <%= pill_link_tag t('user.social'),  :social,  edit_user_registration_path(tab: :social),  analytics_attributes(:account, :switch, :social) %>
+        <%= pill_link_tag t('user.privacy'), :privacy, edit_user_registration_path(tab: :privacy), analytics_attributes(:account, :switch, :privacy) %>
+        <%= pill_link_tag t('user.account'), :account, edit_user_registration_path(tab: :account), analytics_attributes(:account, :switch, :account) %>
       </ul>
     </div>
     <div class="col-md-6">

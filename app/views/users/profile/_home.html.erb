@@ -1,0 +1,17 @@
+<p>
+  <%= t('user.registered_at') %> <%= tooltip_time_tag user.created_at, format: :short, placement: :bottom %>,
+  <%= t('user.last_sign_in_at').downcase_first %> <%= tooltip_time_tag user.current_sign_in_at || user.last_sign_in_at, format: :short, placement: :bottom %>
+</p>
+
+<hr/>
+
+<% unless user.about.blank? %>
+  <%= render_markdown user.about %>
+  <hr/>
+<% end %>
+
+<h4 class="text-muted"><%= t 'user.activity.calendar.title' %></h4>
+
+<%= render 'activities/calendar', user: user %>
+
+<p><small class="text-muted"><%= t 'user.activity.calendar.note' %></small></p>

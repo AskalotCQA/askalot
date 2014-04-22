@@ -1,9 +1,7 @@
-<% provide :header, render(partial: 'header') %>
+<% provide :header, render(partial: 'static_pages/home/header') %>
 
 <div class="container">
-  <section>
-    <%= flash_messages %>
-  </section>
+  <%= flash_messages { |content| content_tag :section, content } %>
 
   <section>
     <div class="row">
@@ -36,21 +34,21 @@
     <div class="row">
       <div class="col-md-4">
         <div class="featured">
-          <h2><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new') %></h2>
+          <h2><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new'), analytics_attributes(:questions, :list, [:new, :home]) %></h2>
           <%= render 'questions', questions: @new %>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="featured">
-          <h2><%= link_to t('home.featured.solved'), questions_path(tab: :'questions-solved') %></h2>
+          <h2><%= link_to t('home.featured.solved'), questions_path(tab: :'questions-solved'), analytics_attributes(:questions, :list, [:solved, :home]) %></h2>
           <%= render 'questions', questions: @solved %>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="featured">
-          <h2><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored') %></h2>
+          <h2><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored'), analytics_attributes(:questions, :list, [:favored, :home]) %></h2>
           <%= render 'questions', questions: @favored %>
         </div>
       </div>
