@@ -10,13 +10,14 @@ class ChangelogsController < ApplicationController
   def create
     @changelog = Changelog.new(changelog_params)
     if @changelog.save
+      redirect_to changelogs_path
     else
-      render 'new'
+      redirect_to admin_dashboard_index_path(tab: params[:tab])
     end
   end
 
   def changelog_params
-    params.require(:changelog).permit(:title, :text)
+    params.require(:changelog).permit(:version, :title, :text)
   end
 
 end

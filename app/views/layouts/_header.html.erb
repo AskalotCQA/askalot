@@ -16,8 +16,9 @@
           <li><%= link_to t('statistic.navigation'), statistics_path %></li>
         <% end %>
         <% if user_signed_in? && can?(:observe, :all) %>
-            <li><%= link_to t('administration.navigation'), administration_path %></li>
+            <li><%= link_to t('admin.navigation'), admin_dashboard_index_path %></li>
         <% end %>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>

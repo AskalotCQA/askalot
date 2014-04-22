@@ -13,7 +13,6 @@ Askalot::Application.routes.draw do
 
   get 'users/:nick', to: 'users#show', as: :user
 
-  get :administration, to: 'administration#show'
   get :statistics,     to: 'statistics#index'
   get :welcome,        to: 'static_pages#welcome'
 
@@ -38,7 +37,7 @@ Askalot::Application.routes.draw do
     get :watch, on: :member
   end
 
-  resources :categories, only: [:index] do
+  resources :categories, only: [:index, :new, :create, :update] do
     concerns :watchable
   end
 
@@ -85,5 +84,12 @@ Askalot::Application.routes.draw do
 
   resources :watchings, only: [:index, :destroy] do
     delete :clean, on: :collection
+  end
+
+  namespace "admin" do
+    root :to => 'admin#index'
+    resources :changelogs, only: [:new, :create]
+    resources :categories, only: [:new, :create, :update]
+    resources :dashboard,  only: [:index]
   end
 end

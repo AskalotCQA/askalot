@@ -1,15 +1,13 @@
-class AdministrationController < ApplicationController
+class Admin::DashboardController < ApplicationController
   before_action :authenticate_user!
   include Tabbing
   include Editing
 
-  default_tab :changelog, only: :show
+  default_tab :changelog, only: :index
 
-  def show
+  def index
     @categories = Category.order(:name)
-  end
-
-  def new_changelog
+    @category = Category.new
     @changelog = Changelog.new
   end
 
