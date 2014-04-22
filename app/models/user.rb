@@ -73,11 +73,11 @@ class User < ActiveRecord::Base
   end
 
   def role?(base)
-    assignments.any? { |a| ROLES.index(base.to_sym) <= ROLES.index(a.role.name.to_sym) }
+    assignments.any? { |assignment| ROLES.index(base.to_sym) <= ROLES.index(assignment.role.name.to_sym) }
   end
 
   def assignment?(role, category)
-    assignments.any? { |a| a.role.name.to_sym == role.to_sym && a.category_id == category.id }
+    assignments.any? { |assignment| assignment.role.name.to_sym == role.to_sym && assignment.category_id == category.id }
   end
 
   def urls
