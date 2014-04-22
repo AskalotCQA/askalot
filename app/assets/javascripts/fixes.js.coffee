@@ -51,6 +51,9 @@ window.fixes = ->
 
   $('a[href="#"]').click (event) -> event.preventDefault()
 
+  $('a[data-scroll]').click (event) ->
+    $('html, body').animate(scrollTop: $($(this).attr('data-scroll')).offset().top, 400)
+
 $(document).ready ->
   fixes()
 
