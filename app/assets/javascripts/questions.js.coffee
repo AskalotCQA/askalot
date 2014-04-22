@@ -10,6 +10,8 @@ $(document).ready ->
 
     Effects.fadeOnFilter('#questions')
 
+  $(document).on 'click', '#questions ul li.page a', -> Effects.fadeOnFilter('#questions')
+
   ##
   # Filtering by category and tags for Select2
   $(document).on 'click', '#questions .question-tag, #questions .question-category', (e) ->
