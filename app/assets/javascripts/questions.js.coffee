@@ -1,21 +1,16 @@
-# TODO (smolnar) refactor to filter module
-onFilter = ->
-  $('#questions').find('a').click (e) -> e.preventDefault()
-  $('#questions').find('a').addClass('disabled')
-
-  $('#questions').fadeTo('slow', 0.25)
-
 $(document).ready ->
   new Select()
 
   ##
   # Filter effect
-  $(document).on 'click', '#questions-controls .nav-tabs a', -> onFilter()
+  $(document).on 'click', '#questions-controls .nav-tabs a', -> Effects.fadeOnFilter('#questions')
 
   $(document).on 'change', '#question_tags', ->
     $(this).closest('form').submit()
 
-    onFilter()
+    Effects.fadeOnFilter('#questions')
+
+  $(document).on 'click', '#questions ul li.page a', -> Effects.fadeOnFilter('#questions')
 
   ##
   # Filtering by category and tags for Select2
