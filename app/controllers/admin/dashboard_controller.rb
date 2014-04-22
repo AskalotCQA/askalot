@@ -1,7 +1,6 @@
 class Admin::DashboardController < ApplicationController
   before_action :authenticate_user!
-  include Tabbing
-  include Editing
+  include Editables::Update
 
   default_tab :changelog, only: :index
 

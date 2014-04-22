@@ -15,14 +15,11 @@
         <% if user_signed_in? && can?(:observe, :all) %>
           <li><%= link_to t('statistic.navigation'), statistics_path %></li>
         <% end %>
-<<<<<<< HEAD
         <% if user_signed_in? && can?(:observe, :all) %>
             <li><%= link_to t('admin.navigation'), admin_dashboard_index_path %></li>
         <% end %>
-
-=======
         <li><%= link_to t('help.navigation'), help_path %></li>
->>>>>>> beta
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
