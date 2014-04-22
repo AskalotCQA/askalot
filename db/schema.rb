@@ -21,13 +21,14 @@ ActiveRecord::Schema.define(version: 20140420093029) do
     t.integer  "resource_id",   null: false
     t.string   "resource_type", null: false
     t.string   "action",        null: false
-    t.date     "created_on",    null: false
-    t.date     "updated_on",    null: false
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.date     "created_on",    null: false
+    t.date     "updated_on",    null: false
   end
 
   add_index "activities", ["action"], name: "index_activities_on_action", using: :btree
+  add_index "activities", ["created_at"], name: "index_activities_on_created_at", using: :btree
   add_index "activities", ["created_on"], name: "index_activities_on_created_on", using: :btree
   add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
   add_index "activities", ["resource_id", "resource_type"], name: "index_activities_on_resource_id_and_resource_type", using: :btree
