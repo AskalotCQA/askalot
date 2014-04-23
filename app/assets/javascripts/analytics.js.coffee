@@ -1,7 +1,7 @@
 class window.Analytics
   @bind: ->
-    $('[data-track-category]').each ->
-      $(this).click ->
+    $(document).ready ->
+      $('[data-track-category]').click ->
         category = $(this).attr 'data-track-category'
         action   = $(this).attr 'data-track-action'
 
