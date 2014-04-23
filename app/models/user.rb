@@ -57,6 +57,11 @@ class User < ActiveRecord::Base
 
   before_validation :resolve_nick, on: :create
 
+  #TODO (poizl) rename to something better
+  def activities_seen_by(user)
+    user == self ? activities.unscope(where: :anonymous) : activities
+  end
+
   def login=(value)
     write_attribute :login, value.to_s.downcase
 

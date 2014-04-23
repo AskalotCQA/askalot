@@ -21,7 +21,7 @@ class UsersController < ApplicationController
     @anonymous  = @user.questions.where(anonymous: true).order(created_at: :desc)
     @answers    = @user.answers.order(created_at: :desc)
     @favorites  = @user.favorites.order(created_at: :desc)
-    @activities = @user.activities.order(created_at: :desc)
+    @activities = @user.activities_seen_by(current_user).order(created_at: :desc)
 
     @questions  = @questions.page(tab_page :questions).per(10)
     @anonymous  = @anonymous.page(tab_page :anonymous).per(10)

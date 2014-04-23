@@ -2,12 +2,20 @@ sk:
   activity:
     navigation: 'Aktivita'
 
+    tab:
+      global: 'Všetkých'
+      followees: 'Nasledovaných'
+
     index:
       title: 'Aktivita'
 
     more: 'Zobraziť viac'
     none: 'Žiadna aktivita.'
-    note: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení.'
+
+    note:
+      profile: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení.'
+      global: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení všetkými používateľmi.'
+      followees: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení používateľmi, ktorých nasledujete.'
 
     action:
       create: 'Pridanie'

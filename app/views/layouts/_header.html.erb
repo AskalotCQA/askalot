@@ -12,6 +12,7 @@
         <li><%= link_to t('category.navigation'), categories_path %></li>
         <li><%= link_to t('tag.navigation'), tags_path %></li>
         <li><%= link_to t('user.navigation'), users_path %></li>
+        <li><%= link_to t('activity.navigation'), activities_path %></li>
         <% if user_signed_in? && can?(:observe, :all) %>
           <li><%= link_to t('statistic.navigation'), statistics_path %></li>
         <% end %>

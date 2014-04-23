@@ -1,0 +1,13 @@
+<% provide(:title, t('activity.index.title')) %>
+
+<div class="tab-navigation">
+  <ul class="nav nav-tabs">
+    <%= tab_link_tag t('activity.tab.global'), :global, activities_path(params.except(:page).merge tag: :global), analytics_attributes(:activity, :switch, :global) %>
+    <%= tab_link_tag t('activity.tab.followees'), :followees, activities_path(params.except(:page).merge tag: :followees), analytics_attributes(:activity, :switch, :followees) %>
+  </ul>
+</div>
+
+<div class="tab-content">
+  <%= render_tab_content 'activities', :global, locals: { activities: @global, tab: :global } %>
+  <%= render_tab_content 'activities', :followees, locals: { activities: @followees, tab: :followees } %>
+</ul>

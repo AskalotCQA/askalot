@@ -1,4 +1,6 @@
 class Notification < ActiveRecord::Base
+  include Initiable
+
   ACTIONS = Activity::ACTIONS
 
   belongs_to :recipient, class_name: :User

@@ -90,4 +90,6 @@ Askalot::Application.routes.draw do
   resources :watchings, only: [:index, :destroy] do
     delete :clean, on: :collection
   end
+
+  resources :activities, only: [:index]
 end
