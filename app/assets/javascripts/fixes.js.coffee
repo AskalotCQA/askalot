@@ -47,7 +47,7 @@ window.fixes = ->
     $(this).tooltip(container: false, delay: { hide: 0 })
     $(this).tooltip('destroy')
 
-  $('[data-toggle="collapse"][data-collapse-close]').click -> $(this).hide()
+  $('[data-toggle="collapse"][data-collapse-after="hide"]').click -> $(this).hide()
 
   $('a[href="#"]').click (event) -> event.preventDefault()
 
