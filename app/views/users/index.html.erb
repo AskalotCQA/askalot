@@ -1,8 +1,8 @@
 <% provide(:title, t('user.index.title')) %>
 
 <ul id="users-tabs" class="nav nav-tabs tab-navigation">
-  <%= tab_link_tag_with_count t('user.tab.all'), :all, users_path(params.except(:page).merge tab: :all), User.count, analytics_attributes(:users, :switch, :all).merge(remote: true, data: { :'remote-fade' => '#users' }) %>
-  <%= tab_link_tag_with_count t('user.tab.recent'), :recent, users_path(params.except(:page).merge tab: :recent), User.recent.count, analytics_attributes(:users, :switch, :recent).merge(remote: true, data: { :'remote-fade' => '#users' }) %>
+  <%= tab_link_tag_with_count t('user.tab.all'), :all, users_path(params.except(:page).merge tab: :all), User.count, analytics_attributes(:users, :switch, :all).merge(remote: true, data: { fade: '#users' }) %>
+  <%= tab_link_tag_with_count t('user.tab.recent'), :recent, users_path(params.except(:page).merge tab: :recent), User.recent.count, analytics_attributes(:users, :switch, :recent).merge(remote: true, data: { fade: '#users' }) %>
 </ul>
 
 <%= render 'users', users: @users %>

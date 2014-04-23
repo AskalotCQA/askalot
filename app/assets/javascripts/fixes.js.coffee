@@ -54,8 +54,8 @@ window.fixes = ->
   $('a[data-scroll]').click (event) ->
     $('html, body').animate(scrollTop: $($(this).attr('data-scroll')).offset().top, 400)
 
-  $('a[data-remote-fade]').click ->
-    Effects.fadeOnFilter($(this).attr('data-remote-fade'))
+  $('a[data-fade]').click ->
+    Effects.fadeOnFilter($(this).attr('data-fade'))
 
 $(document).ready ->
   fixes()
