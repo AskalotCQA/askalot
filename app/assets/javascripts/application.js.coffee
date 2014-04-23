@@ -36,6 +36,7 @@
 #= require questions
 #= require answers
 #= require comments
+#= require users
 #
 #= require analytics
 #= require fixes
