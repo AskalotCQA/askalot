@@ -18,8 +18,8 @@ module ApplicationHelper
     (values << default_title).map { |value| html_escape value }.join(' &middot; ').html_safe
   end
 
-  def use_container?
-    [DeviseController, ErrorsController, StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
+  def canonical_url
+    "http://#{request.host}#{request.fullpath}"
   end
 
   def url_to_site(path = nil)
@@ -32,5 +32,9 @@ module ApplicationHelper
 
   def url_to_repository(path = nil)
     url_to_organization "askalot/#{path}"
+  end
+
+  def use_container?
+    [DeviseController, ErrorsController, StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
   end
 end
