@@ -26,7 +26,11 @@ module ApplicationHelper
     File.join 'http://labss2.fiit.stuba.sk/TeamProject/2013/team13is-si/', path.to_s
   end
 
+  def url_to_organization(path = nil)
+    File.join('https://github.com/teamnaruby/', path.to_s).sub(/\/\z/, '')
+  end
+
   def url_to_repository(path = nil)
-    File.join('https://github.com/teamnaruby/askalot/', path.to_s).sub(/\/\z/, '')
+    url_to_organization "askalot/#{path}"
   end
 end

@@ -15,7 +15,7 @@
             <br/>
             <small>
               <%= time_tag changelog.created_at.to_date, format: :default %> &middot;
-              <%= link_to changelog.version, url_to_repository("/releases/tag/v#{changelog.version}") %>
+              <%= link_to changelog.version, url_to_repository("releases/tag/v#{changelog.version}") %>
             </small>
           </h2>
           <%= render_markdown changelog.text %>
