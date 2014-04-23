@@ -5,15 +5,12 @@
     <% end %>
   </ol>
 
+  <p class="activities-note"><small class="text-muted"><%= t("activity.note.#{tab.to_s}") %></small></p>
+
   <%= paginate activities, params: { tab: tab } %>
 <% else %>
   <div class="alert alert-info">
-    <% if current_user.followees.any? || tab == :global %>
-      <%= t('activity.none') %>
-    <% else %>
-      <%= t('user.followings.no_followees') %>
-    <% end %>
+    <%= t('activity.none.global') %>
+    <%= t('activity.none.followees') if tab.to_sym == :followees && current_user.followees.none? %>
   </div>
 <% end %>
-
-<p class="activities-note"><small class="text-muted"><%= t("activity.note.#{tab.to_s}") %></small></p>

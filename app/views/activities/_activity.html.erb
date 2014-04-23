@@ -5,7 +5,7 @@
       <%= activity_content activity %>
     </div>
     <div class="col-md-3">
-      <%= user_icon_tag activity.initiator_or_anonymous, tooltip_attributes(user_nick activity.initiator_or_anonymous, placement: :bottom) %>
+      <%= user_icon_tag activity.initiator_or_anonymous, tooltip_attributes(user_nick(activity.initiator_or_anonymous), placement: :bottom) %>
       <%= tooltip_time_tag activity.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
     </div>
   </div>
