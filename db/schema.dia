@@ -9308,7 +9308,7 @@
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#evaluator_id#</dia:string>
+            <dia:string>#author_id#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#integer#</dia:string>

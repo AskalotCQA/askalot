@@ -8,6 +8,6 @@ module Evaluable
   end
 
   def evaluated_by?(user)
-    evaluations.exists?(evaluator: user)
+    evaluations.exists?(author: user)
   end
 end

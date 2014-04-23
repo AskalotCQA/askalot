@@ -15,9 +15,10 @@ class User < ActiveRecord::Base
 
          authentication_keys: [:login]
 
-  has_many :questions, foreign_key: :author_id, dependent: :destroy
-  has_many :answers,   foreign_key: :author_id, dependent: :destroy
-  has_many :comments,  foreign_key: :author_id, dependent: :destroy
+  has_many :questions,   foreign_key: :author_id, dependent: :destroy
+  has_many :answers,     foreign_key: :author_id, dependent: :destroy
+  has_many :comments,    foreign_key: :author_id, dependent: :destroy
+  has_many :evaluations, foreign_key: :author_id, dependent: :destroy
 
   has_many :labelings, foreign_key: :author_id, dependent: :destroy
   has_many :labels, through: :labelings

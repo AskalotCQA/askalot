@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140420093029) do
+ActiveRecord::Schema.define(version: 20140423082147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,7 +151,7 @@ ActiveRecord::Schema.define(version: 20140420093029) do
   add_index "comments", ["edited"], name: "index_comments_on_edited", using: :btree
 
   create_table "evaluations", force: true do |t|
-    t.integer  "evaluator_id",                   null: false
+    t.integer  "author_id",                      null: false
     t.integer  "evaluable_id",                   null: false
     t.string   "evaluable_type",                 null: false
     t.text     "text"
@@ -163,10 +163,10 @@ ActiveRecord::Schema.define(version: 20140420093029) do
     t.datetime "deleted_at"
   end
 
+  add_index "evaluations", ["author_id"], name: "index_evaluations_on_author_id", using: :btree
   add_index "evaluations", ["deleted"], name: "index_evaluations_on_deleted", using: :btree
   add_index "evaluations", ["deletor_id"], name: "index_evaluations_on_deletor_id", using: :btree
   add_index "evaluations", ["evaluable_id", "evaluable_type"], name: "index_evaluations_on_evaluable_id_and_evaluable_type", using: :btree
-  add_index "evaluations", ["evaluator_id"], name: "index_evaluations_on_evaluator_id", using: :btree
 
   create_table "events", force: true do |t|
     t.json     "data",       null: false
