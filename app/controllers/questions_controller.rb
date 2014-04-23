@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.new(question_params)
+    @question = Question.new(create_params)
 
     authorize! :ask, @question
 
@@ -41,8 +41,7 @@ class QuestionsController < ApplicationController
         dispatch_event :mention, @question, for: user
       end
 
-      #TODO(zbell) do not notify about anonymous questions since user.nick is still exposed in notifications
-      dispatch_event :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten unless @question.anonymous
+      dispatch_event :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
       register_watching_for @question
 
       flash[:notice] = t('question.create.success')
@@ -57,14 +56,13 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
-    @labels   = @question.labels
-    @answers  = @question.ordered_answers
-
-    @answer = Answer.new(question: @question)
 
     authorize! :view, @question
 
-    @view = @question.views.create! viewer: current_user
+    @labels  = @question.labels
+    @answers = @question.ordered_answers
+    @answer  = Answer.new(question: @question)
+    @view    = @question.views.create! viewer: current_user
 
     @question.increment :views_count
 
@@ -109,7 +107,7 @@ class QuestionsController < ApplicationController
     relation.tagged_with(params[:tags])
   end
 
-  def question_params
+  def create_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user)
   end
 

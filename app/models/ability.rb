@@ -16,8 +16,9 @@ class Ability
     cannot(:delete, [Question]) { |resource| resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
     cannot(:delete, [Answer]) { |resource| resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
 
-    can(:show_email, User) { |resource| resource.show_email? }
-    can(:show_name,  User) { |resource| resource.show_name? && resource.name.present? }
+    can(:show_anonymous, User) { |resource| resource == user }
+    can(:show_email, User)     { |resource| resource.show_email? }
+    can(:show_name,  User)     { |resource| resource.show_name? && resource.name.present? }
 
     can :change_name,     User unless user.ais_login?
     can :change_password, User unless user.ais_login?

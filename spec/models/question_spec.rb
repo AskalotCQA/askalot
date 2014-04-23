@@ -13,6 +13,7 @@ describe Question do
   it_behaves_like Taggable
   it_behaves_like Touchable
   it_behaves_like Watchable
+
   it_behaves_like Questions::Searchable
 
   it 'requires title' do
@@ -37,10 +38,37 @@ describe Question do
 
   it 'uses category tags' do
     category = create :category, tags: ['dbms', 'elasticsearch']
-
     question = create :question, category: category, tag_list: 'redis'
 
     expect(question.tags.pluck(:name).sort).to eql(['dbms', 'elasticsearch', 'redis'])
+  end
+
+  context 'deleted' do
+    it 'does not have any undeleted answers' do
+      question = create :question, :with_answers
+
+      question.mark_as_deleted_by! question.author
+
+      expect(question.answers.deleted.count).to eql(3)
+      expect(question.answers.undeleted.count).to eql(0)
+    end
+
+    it 'does not have any undeleted taggings' do
+      category = create :category, tags: ['nosql', 'elasticsearch']
+      question = create :question, category: category
+
+      question.mark_as_deleted_by! question.author
+
+      expect(question.taggings.deleted.count).to eql(2)
+      expect(question.taggings.undeleted.count).to eql(0)
+
+      question = create :question, category: category, tag_list: 'redis, cassandra'
+
+      question.mark_as_deleted_by! question.author
+
+      expect(question.taggings.deleted.count).to eql(4)
+      expect(question.taggings.undeleted.count).to eql(0)
+    end
   end
 
   describe '.favored_by' do

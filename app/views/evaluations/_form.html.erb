@@ -1,5 +1,5 @@
 <div id="<%= identify evaluable, :evaluate %>" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
-  <%= form_for [evaluable, evaluable.evaluations.where(evaluator: current_user).first || Evaluation.new], html: {id: nil, class: :'new-evaluation'} do |f| %>
+  <%= form_for [evaluable, evaluable.evaluations.where(author: current_user).first || Evaluation.new], html: {id: nil, class: :'new-evaluation'} do |f| %>
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

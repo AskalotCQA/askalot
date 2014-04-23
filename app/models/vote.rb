@@ -10,4 +10,8 @@ class Vote < ActiveRecord::Base
 
   scope :positive, lambda { where(positive: true) }
   scope :negative, lambda { where(positive: false) }
+
+  def to_question
+    self.votable.to_question
+  end
 end

@@ -1,5 +1,5 @@
 module Bootstrap::TabHelper
-  def tab_link_tag(title, tab, path, options = {}, &block)
+  def tab_link_tag(title, tab, path, options = {})
     classes  = Hash.new
     defaults = { data: { toggle: :tab, state: true, target: "##{tab}" }}
 

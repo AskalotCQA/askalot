@@ -1,0 +1,16 @@
+<% if activities.any? %>
+  <ol class="activities">
+    <% activities.each do |activity| %>
+      <%= render 'activity', activity: activity %>
+    <% end %>
+  </ol>
+
+  <p class="activities-note"><small class="text-muted"><%= t("activity.note.#{tab.to_s}") %></small></p>
+
+  <%= paginate activities, params: { tab: tab } %>
+<% else %>
+  <div class="alert alert-info">
+    <%= t('activity.none.global') %>
+    <%= t('activity.none.followees') if tab.to_sym == :followees && current_user.followees.none? %>
+  </div>
+<% end %>

@@ -28,34 +28,24 @@ module QuestionsHelper
   end
 
   def question_label(label, options = {})
-    values, classes = question_label_attributes label
-    filter          = ((params[:tags] || '').split(',') + values).uniq.join(',')
+    model, tags, classes = question_label_attributes label
+
+    filter = ((params[:tags] || '').split(',') + tags).uniq.join(',')
 
     options.merge!(class: classes)
     options.deep_merge! class: classes, data: { id: filter } unless filter.blank?
 
-    link_to label.name, questions_path(tags: filter), options
+    link_to label.name, questions_path(tags: filter), analytics_attributes(model, :click, label.name).deep_merge(options)
   end
 
   def link_to_question(question, options = {})
-    body = options.delete(:body) || question_title_preview(question, extract_truncate_options!(options))
-    path = question_path(question, anchor: options.delete(:anchor))
-    path = options.delete(:path).call path if options[:path]
-
-    if options.delete(:deleted) || question.deleted?
-      delete = options.delete(:delete)
-
-      return delete.call(body, path, options) if delete.is_a? Proc
-      return content_tag :span, body, tooltip_attributes(t('question.link_to_deleted_title'), placement: :bottom).merge(options)
-    end
-
-    link_to body, path, options
+    link_to_resource question, options
   end
 
   private
 
   def question_label_attributes(label)
-    return [label.name], [:label, :'label-info', :'question-tag'] unless label.is_a? Category
-    return label.tags.to_a, [:label, :'label-primary', :'question-category']
+    return :tag, [label.name], [:label, :'label-info', :'question-tag'] unless label.is_a? Category
+    return :category, label.tags.to_a, [:label, :'label-primary', :'question-category']
   end
 end

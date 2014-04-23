@@ -9,7 +9,7 @@ shared_examples_for Editable do
     it 'updates attributes by revision' do
       editable = build factory
 
-      revision = "#{model.name}Revision".constantize.create_revision!(editor, editable)
+      revision = "#{model.name}::Revision".constantize.create_revision!(editor, editable)
 
       old_editor = editable.editor
       old_edited_at = editable.edited_at

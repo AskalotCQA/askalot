@@ -30,3 +30,5 @@ sk:
       created: 'Pridal'
       updated: 'Upravil'
       deleted: 'Zmazal'
+
+    deleted: 'Komentár bol zmazaný'

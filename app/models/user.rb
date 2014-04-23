@@ -15,13 +15,15 @@ class User < ActiveRecord::Base
 
          authentication_keys: [:login]
 
-  has_many :questions, foreign_key: :author_id, dependent: :destroy
-  has_many :answers,   foreign_key: :author_id, dependent: :destroy
-  has_many :comments,  foreign_key: :author_id, dependent: :destroy
+  has_many :questions,   foreign_key: :author_id, dependent: :destroy
+  has_many :answers,     foreign_key: :author_id, dependent: :destroy
+  has_many :comments,    foreign_key: :author_id, dependent: :destroy
+  has_many :evaluations, foreign_key: :author_id, dependent: :destroy
 
   has_many :labelings, foreign_key: :author_id, dependent: :destroy
   has_many :labels, through: :labelings
 
+  has_many :activities,    foreign_key: :initiator_id, dependent: :destroy
   has_many :favorites,     foreign_key: :favorer_id,   dependent: :destroy
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
   has_many :views,         foreign_key: :viewer_id,    dependent: :destroy
@@ -45,6 +47,8 @@ class User < ActiveRecord::Base
   validates :first, format: { with: /\A\p{Lu}\p{Ll}*\z/u }, allow_blank: true
   validates :last,  format: { with: /\A\p{Lu}\p{Ll}*\z/u }, allow_blank: true
 
+  scope :by, lambda { |args| where(args).first || raise(ActiveRecord::RecordNotFound) }
+
   scope :recent, lambda { where('created_at >= ?', Time.now - 1.month ) }
 
   Social.networks.each do |key, network|
@@ -54,6 +58,11 @@ class User < ActiveRecord::Base
   symbolize :role, in: ROLES
 
   before_validation :resolve_nick, on: :create
+
+  #TODO (poizl) rename to something better
+  def activities_seen_by(user)
+    user == self ? activities.unscope(where: :anonymous) : activities
+  end
 
   def login=(value)
     write_attribute :login, value.to_s.downcase

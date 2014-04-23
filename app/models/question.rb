@@ -11,15 +11,16 @@ class Question < ActiveRecord::Base
   include Viewable
   include Votable
   include Watchable
+
   include Questions::Searchable
 
-  before_save :add_category_tags
+  before_save { self.tag_list += self.category.tags }
 
   belongs_to :category, counter_cache: true
 
   has_many :answers, dependent: :destroy
 
-  has_many :revisions, class_name: :QuestionRevision, dependent: :destroy
+  has_many :revisions, class_name: :'Question::Revision', dependent: :destroy
 
   has_many :profiles, class_name: :'Question::Profile', dependent: :destroy
 
@@ -57,11 +58,5 @@ class Question < ActiveRecord::Base
 
   def to_question
     self
-  end
-
-  private
-
-  def add_category_tags
-    self.tag_list += self.category.tags
   end
 end
