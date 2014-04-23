@@ -6,7 +6,7 @@
       <% end %>
     </ol>
 
-    <%= paginate questions, remote: true, data: { state: true, scroll: 'body', :'remote-fade' => '#questions' } %>
+    <%= paginate questions, remote: true, data: { state: true, scroll: 'body', fade: '#questions' } %>
   <% else %>
     <div class="row">
       <div class="col-md-12">
