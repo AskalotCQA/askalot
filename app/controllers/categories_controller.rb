@@ -1,7 +1,5 @@
 class CategoriesController < ApplicationController
   include Watchables::Watch
-  include Watchings::Watching
-  include Editing
 
   default_tab :all, only: :index
 

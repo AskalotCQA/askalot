@@ -1,0 +1,7 @@
+sk:
+  admin:
+    navigation: 'Administrácia'
+    changelog:  'Changelog'
+    category:
+      tab:      'Kategótrie'
+      add:       'Pridať kategóriu'
