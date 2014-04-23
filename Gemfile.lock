@@ -38,6 +38,8 @@ GEM
       arel (~> 5.0.0)
     activerecord-custom_timestamps (0.2.0)
       activerecord (>= 3.1, < 5)
+    activerecord-import (0.4.1)
+      activerecord (>= 3.0)
     activesupport (4.1.0)
       i18n (~> 0.6, >= 0.6.9)
       json (~> 1.7, >= 1.7.7)
@@ -185,6 +187,8 @@ GEM
     kgio (2.9.2)
     launchy (2.4.2)
       addressable (~> 2.3)
+    lda-ruby (0.3.8)
+      shoulda
     libv8 (3.16.14.3)
     listen (2.7.1)
       celluloid (>= 0.15.2)
@@ -309,6 +313,12 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0)
       websocket (~> 1.0.4)
+    shoulda (3.5.0)
+      shoulda-context (~> 1.0, >= 1.0.1)
+      shoulda-matchers (>= 1.4.1, < 3.0)
+    shoulda-context (1.2.1)
+    shoulda-matchers (2.5.0)
+      activesupport (>= 3.0.0)
     sidekiq (2.15.2)
       celluloid (>= 0.15.2)
       connection_pool (>= 1.0.0)
@@ -331,6 +341,7 @@ GEM
     symbolize (4.4.1)
       activemodel (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    tf_idf (0.0.2)
     therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
@@ -369,6 +380,7 @@ DEPENDENCIES
   actionview-encoded_mail_to
   active_model_serializers
   activerecord-custom_timestamps
+  activerecord-import (~> 0.4.1)
   bootstrap-datepicker-rails (~> 1.3.0)
   bootstrap-sass (~> 3.1.1)
   cal-heatmap-rails (~> 0.0.1)
@@ -402,6 +414,7 @@ DEPENDENCIES
   kaminari (~> 0.15.1)
   kaminari-bootstrap (~> 3.0.1)
   launchy
+  lda-ruby
   momentjs-rails
   murmurhash3
   net-ldap
@@ -427,6 +440,7 @@ DEPENDENCIES
   squire (~> 1.3.6)
   statistics2
   symbolize
+  tf_idf
   therubyracer
   timecop
   uglifier (>= 1.3.0)
