@@ -19,7 +19,6 @@ module Events
     end
 
     def dispatch(action, initiator, resource, options = {})
-
       listeners.each do |listener|
         listener.publish(action, initiator, resource, options)
       end
