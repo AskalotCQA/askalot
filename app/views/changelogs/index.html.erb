@@ -2,28 +2,7 @@
 <% provide(:title, t('changelog.index.title')) %>
 
 <div class="row">
-  <div class="col-md-offset-1 col-md-2 hidden-xs hidden-sm hidden-print">
-    <%= sidebar_tag do %>
-      <ul class="nav">
-        <% group_changelogs_by_latest(@changelogs).each do |latest, changelogs| %>
-          <li>
-            <%= link_to latest.version, "##{latest.identifier}", analytics_attributes(:changelogs, :scroll, latest.identifier) %>
-            <% if changelogs.any? %>
-              <ul class="nav">
-                <% changelogs.each do |changelog| %>
-                  <li>
-                    <%= link_to changelog.version, "##{changelog.identifier}", analytics_attributes(:changelogs, :scroll, changelog.identifier) %>
-                  </li>
-                <% end %>
-              </ul>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
-
-  <div class="col-xs-12 col-md-6" role="main">
+  <div class="col-xs-12 col-md-9" role="main">
     <h1 class="page-header"><%= yield :title %></h1>
 
     <p class="lead"><%= t 'changelog.index.introduction' %></p>
@@ -43,5 +22,26 @@
         </li>
       <% end %>
     </ol>
+  </div>
+
+  <div class="col-md-3 hidden-xs hidden-sm hidden-print">
+    <%= sidebar_tag do %>
+      <ul class="nav">
+        <% group_changelogs_by_latest(@changelogs).each do |latest, changelogs| %>
+          <li>
+            <%= link_to latest.version, "##{latest.identifier}", analytics_attributes(:changelogs, :scroll, latest.identifier) %>
+            <% if changelogs.any? %>
+              <ul class="nav">
+                <% changelogs.each do |changelog| %>
+                  <li>
+                    <%= link_to changelog.version, "##{changelog.identifier}", analytics_attributes(:changelogs, :scroll, changelog.identifier) %>
+                  </li>
+                <% end %>
+              </ul>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
 </div>
