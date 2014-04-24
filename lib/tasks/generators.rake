@@ -1,9 +1,9 @@
 require_relative '../../app/services/events/dispatcher'
 
 namespace :generators do
-  desc 'Prepare dispatcher'
-  task activties: :environment do
-    [Question, Answer, Comment, Labeling, Evaluation].each do |model|
+  desc 'Generate activities'
+  task activities: :environment do
+    [Question, Answer, Comment, Labeling, Evaluation, Tagging].each do |model|
       model.class_eval do
         alias :initiator :author
       end
@@ -32,7 +32,7 @@ namespace :generators do
     Events::Dispatcher.unsubscribe_all
     Events::Dispatcher.subscribe Activities::Feeder
 
-    models = [Answer, Comment, Evaluation, Favorite, Following, Labeling, Question, View, Vote, Watching]
+    models = [Answer, Comment, Evaluation, Favorite, Following, Labeling, Question, Tagging, View, Vote, Watching]
     date   = Question.order(:created_at).first.created_at
 
     until date > Time.now
