@@ -2,7 +2,29 @@
 <% provide(:title, t('changelog.index.title')) %>
 
 <div class="row">
-  <div class="col-md-offset-1 col-md-2 hidden-xs hidden-sm hidden-print">
+  <div class="col-xs-12 col-md-9" role="main">
+    <h1 class="page-header"><%= yield :title %></h1>
+
+    <p class="lead"><%= t 'changelog.index.introduction' %></p>
+
+    <ol class="list-unstyled">
+      <% @changelogs.each do |changelog| %>
+        <li id="<%= changelog.identifier %>" class="changelog">
+          <h2>
+            <%= changelog.title %>
+            <br/>
+            <small>
+              <%= time_tag changelog.created_at.to_date, format: :default %> &middot;
+              <%= link_to changelog.version, url_to_repository("releases/tag/v#{changelog.version}") %>
+            </small>
+          </h2>
+          <%= render_markdown changelog.text %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+
+  <div class="col-md-3 hidden-xs hidden-sm hidden-print">
     <%= sidebar_tag do %>
       <ul class="nav">
         <% group_changelogs_by_latest(@changelogs).each do |latest, changelogs| %>
@@ -21,27 +43,5 @@
         <% end %>
       </ul>
     <% end %>
-  </div>
-
-  <div class="col-xs-12 col-md-6" role="main">
-    <h1 class="page-header"><%= yield :title %></h1>
-
-    <p class="lead"><%= t 'changelog.index.introduction' %></p>
-
-    <ol class="list-unstyled">
-      <% @changelogs.each do |changelog| %>
-        <li id="<%= changelog.identifier %>" class="changelog">
-          <h2>
-            <%= changelog.title %>
-            <br/>
-            <small>
-              <%= time_tag changelog.created_at.to_date, format: :default %> &middot;
-              <%= link_to changelog.version, url_to_repository("/releases/tag/v#{changelog.version}") %>
-            </small>
-          </h2>
-          <%= render_markdown changelog.text %>
-        </li>
-      <% end %>
-    </ol>
   </div>
 </div>

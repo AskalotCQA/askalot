@@ -1,4 +1,10 @@
 sk:
+  head:
+    authors: 'Rastislav Dobšovič, Marek Grznár, Jozef Harinek, Samuel Molnár, Peter Páleník, Dušan Poizl, Ivan Srba, Pavol Zbell'
+    description: 'Komunitný systém otázok a odpovedí ďalšej generácie.'
+    keywords: 'CQA, FIIT, STU, otázka, odpoveď, komunita'
+    content: 'Komunitný systém otázok a odpovedí ďalšej generácie pre študentov Fakulty informatiky a informačných technológií Slovenskej technickej univerzity v Bratislave.'
+
   home:
     headline: 'Komunitný systém otázok a odpovedí ďalšej generácie'
 

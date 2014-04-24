@@ -18,15 +18,23 @@ module ApplicationHelper
     (values << default_title).map { |value| html_escape value }.join(' &middot; ').html_safe
   end
 
-  def use_container?
-    [DeviseController, ErrorsController, StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
+  def canonical_url
+    "http://#{request.host}#{request.fullpath}"
   end
 
   def url_to_site(path = nil)
     File.join 'http://labss2.fiit.stuba.sk/TeamProject/2013/team13is-si/', path.to_s
   end
 
+  def url_to_organization(path = nil)
+    File.join('https://github.com/teamnaruby/', path.to_s).sub(/\/\z/, '')
+  end
+
   def url_to_repository(path = nil)
-    File.join('https://github.com/teamnaruby/askalot/', path.to_s).sub(/\/\z/, '')
+    url_to_organization "askalot/#{path}"
+  end
+
+  def use_container?
+    [DeviseController, ErrorsController, StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
   end
 end

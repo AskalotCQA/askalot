@@ -5,7 +5,9 @@
     <% end %>
   </ol>
 
-  <p class="activities-note"><small class="text-muted"><%= t("activity.note.#{tab.to_s}") %></small></p>
+  <div class="activities-note">
+    <small class="text-muted"><%= t("activity.note.#{tab.to_s}") %></small>
+  </div>
 
   <%= paginate activities, params: { tab: tab } %>
 <% else %>
