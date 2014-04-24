@@ -52,5 +52,9 @@ namespace :generators do
 
       date = date + 1.month
     end
+
+    Activity.find_each do |activity|
+      activity.update_attributes!(anonymous: true) if activity.resource.class == Question && activity.resource.anonymous == true
+    end
   end
 end
