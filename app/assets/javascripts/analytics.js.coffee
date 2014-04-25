@@ -10,4 +10,4 @@ class window.Analytics
         else
           label = $(this).attr 'id' ? $(this).attr 'id' : nil
 
-        _gaq.push ['_trackEvent', category, action, label]
+        _gaq?.push ['_trackEvent', category, action, label]
