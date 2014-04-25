@@ -17,6 +17,8 @@
 // member
 
 .answer-content {
+  @include markdown-content;
+
   margin: 10px 0;
 }
 

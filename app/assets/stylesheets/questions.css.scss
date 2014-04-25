@@ -89,6 +89,8 @@
 }
 
 .question-content {
+  @include markdown-content;
+
   margin-bottom: 10px;
 }
 

@@ -137,6 +137,10 @@
   color: $text-color;
 }
 
+.user-profile-about {
+  @include markdown-content;
+}
+
 // profile - bar
 
 .user-profile-bar {

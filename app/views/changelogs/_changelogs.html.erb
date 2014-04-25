@@ -1,0 +1,21 @@
+<ol class="list-unstyled">
+  <% changelogs.each do |changelog| %>
+    <li id="<%= changelog.identifier %>" class="changelog">
+      <h2>
+        <% if changelog.title? %>
+          <%= changelog.title %>
+          <br/>
+        <% end %>
+        <small>
+          <%= time_tag changelog.created_at.to_date, format: :default %> &middot;
+          <%= link_to changelog.version, url_to_repository("releases/tag/v#{changelog.version}") %>
+        </small>
+      </h2>
+      <% if changelog.text? %>
+        <div class="changelog-content">
+          <%= render_markdown changelog.text %>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+</ol>
