@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-xs-<%= help ? 6 : 12 %>">
+  <div class="col-xs-<%= help ? 5 : 12 %>">
     <ul id="<%= id %>" class="nav nav-tabs markdown-tabs" data-markdown="true">
       <li class="active">
         <a class="markdown-text" href="#<%= id %>-text" data-toggle="tab" data-track-category="markdown" data-track-action="text"><%= text ? text : t('markdown.text') %></a>
@@ -10,7 +10,7 @@
     </ul>
   </div>
   <% if help %>
-    <div class="col-xs-6">
+    <div class="col-xs-7">
       <div class="markdown-help">
         <%= t('markdown.documentation', link: link_to('Markdown', help_path(anchor: :markdown), analytics_attributes(:markdown, :help))).html_safe %>
       </div>

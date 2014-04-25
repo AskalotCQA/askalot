@@ -11,7 +11,7 @@
 }
 
 @media (max-width: $screen-sm-max) {
-  .nav-tabs {
+  .nav-tabs:not(.markdown-tabs) {
     display: block;
     width: 100%;
 
