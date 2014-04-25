@@ -1,10 +1,11 @@
 // general
 
-html {
+body {
   @include selection(rgba($brand-primary, 0.25));
 
+  min-width: $screen-xs-min;
   height: 100%;
-  overflow-y: scroll;
+  overflow: scroll;
 }
 
 .flash .alert:first-child {
@@ -57,7 +58,7 @@ html {
 
   text-align: center;
 
-  & > ul {
+  > ul {
     @extend .list-unstyled;
     float: left;
     left: -50%;
@@ -177,6 +178,8 @@ header {
 // footer
 
 footer {
+  @include clearfix;
+
   margin: 100px 0 0 0;
   padding: 50px 0;
   overflow-x: hidden;

@@ -1,9 +1,9 @@
 <div class="user-profile-bar">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-xs-12 col-sm-offset-1 col-sm-2 col-md-offset-0 col-md-2">
       <%= user_avatar_tag user, image: { class: :'img-circle img-responsive', size: 96 } %>
     </div>
-    <div class="col-md-10">
+    <div class="col-xs-12 col-sm-9 col-md-10">
       <h1>
         <%= link_to_user user %>
         <% if can? :show_name, user %>
@@ -11,10 +11,10 @@
         <% end %>
       </h1>
 
-      <small class="text-muted">
-        <%= t('count_x.question', count: user.questions.where(anonymous: false).size) %> &middot;
-        <%= t('count_x.answer', count: user.answers.size) %> &middot;
-        <%= t('count_x.comment', count: user.comments.size) %> &middot;
+      <small class="user-profile-bar-details">
+        <%= t('count_x.question', count: user.questions.where(anonymous: false).size) %> <span>&middot;</span>
+        <%= t('count_x.answer', count: user.answers.size) %> <span>&middot;</span>
+        <%= t('count_x.comment', count: user.comments.size) %> <span>&middot;</span>
         <%= t('user.registered_at').downcase_first %> <%= time_tag user.created_at.to_date, format: :normal %>
       </small>
     </div>

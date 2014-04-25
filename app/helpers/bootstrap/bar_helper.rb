@@ -11,7 +11,7 @@ module Bootstrap::BarHelper
 
   def navbar_li_tag(body = nil, options = {}, &block)
     classes = Array.wrap options.delete(:class)
-    classes << :active if request.fullpath == options.delete(:url)
+    classes << :active if request.fullpath.split('?').first == options.delete(:url).split('?').first
 
     content_tag :li, body || capture(&block), options.merge(class: classes.blank? ? nil : classes)
   end
