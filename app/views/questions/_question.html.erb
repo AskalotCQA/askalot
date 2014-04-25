@@ -41,7 +41,7 @@
     <div class="col-xs-4 col-sm-2">
       <div class="question-author">
         <small><%= link_to_user question.author_or_anonymous %></small>
-        <%= user_avatar_tag question.author_or_anonymous, image: { class: :'img-circle img-responsive', size: 64 } %>
+        <%= user_avatar_tag question.author_or_anonymous, image: { class: :'img-circle img-responsive', size: 64 }, class: :'hidden-xs' %>
         <small class="text-muted"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
       </div>
     </div>

@@ -51,10 +51,18 @@
   }
 }
 
+// answers
+
+@media (max-width: $screen-md-max) {
+  .new-answer {
+    text-align: right;
+  }
+}
+
 // questions
 
 @media (max-width: $screen-sm-max) {
-  .questions-filter {
+  .questions-filter, #question {
     margin-top: 20px;
   }
 
