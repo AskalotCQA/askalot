@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
+  include Searchables::Search
+
   default_tab :all, only: :index
   default_tab :profile, only: :show
   default_tab :followers, only: :followings
@@ -11,6 +13,7 @@ class UsersController < ApplicationController
              else User.order(:nick)
              end
 
+    @users = search(@users)
     @users = @users.page(params[:page]).per(60)
   end
 
