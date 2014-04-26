@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+  include Searchables::Search
   include Watchables::Watch
 
   default_tab :all, only: :index
@@ -7,6 +8,8 @@ class TagsController < ApplicationController
 
   def index
     @tags = Tag.order(:name)
+
+    @tags = search(@tags)
   end
 
   # TODO (smolnar)
