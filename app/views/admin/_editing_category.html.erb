@@ -1,33 +1,33 @@
-    &middot;
+&middot;
 
-    <a href="#" id="category-<%= category.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#category-<%= category.id %>-editing">
-      <%= tooltip_icon_tag :edit, t('question.edit.action'), placement: :top %>
-    </a>
+<a href="#" id="category-<%= category.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#category-<%= category.id %>-editing">
+  <%= tooltip_icon_tag :edit, t('question.edit.action'), placement: :top %>
+</a>
 
 
-    <div id="category-<%= category.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <%= form_for category do |f| %>
-              <div class="modal-header">
-                <div class="form-group">
-                  <%= f.label :name %>
-                  <%= f.text_field :name, class: :'form-control', rows: 1 %>
-                </div>
+<div id="category-<%= category.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for category do |f| %>
+        <div class="modal-header">
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: :'form-control', rows: 1 %>
+          </div>
 
-                <div class="form-group">
-                  <%= f.label :tags %>
-                  <%= f.text_field :tags, class: :'form-control' %>
-                </div>
+          <div class="form-group">
+            <%= f.label :tags %>
+            <%= f.text_field :tags, class: :'form-control' %>
+          </div>
 
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'question.edit.cancel' %></button>
-                  <button type="submit" class="btn btn-primary"><%= t 'question.edit.submit' %></button>
-                </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'question.edit.cancel' %></button>
+            <button type="submit" class="btn btn-primary"><%= t 'question.edit.submit' %></button>
+          </div>
 
-              </div>
-          <% end %>
         </div>
-      </div>
+      <% end %>
     </div>
+  </div>
+</div>
 
