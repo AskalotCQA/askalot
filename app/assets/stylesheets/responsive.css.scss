@@ -1,3 +1,13 @@
+// modals
+
+@media (max-width: $screen-xs-min - 1) {
+  .modal-dialog {
+    margin: 10px 0;
+    border-left: none;
+    border-right: none;
+  }
+}
+
 // tabs
 
 @media (max-width: $screen-sm-max) {
