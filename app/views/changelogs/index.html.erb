@@ -18,7 +18,7 @@
             <%= link_to latest.version, "##{latest.identifier}", analytics_attributes(:changelogs, :scroll, latest.identifier) %>
             <% if changelogs.any? %>
               <ul class="nav">
-                <% changelogs.each do |changelog| %>
+                <% changelogs.select(&:title).each do |changelog| %>
                   <li>
                     <%= link_to changelog.version, "##{changelog.identifier}", analytics_attributes(:changelogs, :scroll, changelog.identifier) %>
                   </li>
