@@ -1,11 +1,17 @@
 class Activity < ActiveRecord::Base
+  include Initiable
+
   ACTIONS = [:create, :update, :delete, :mention]
 
   belongs_to :initiator, class_name: :User
 
   belongs_to :resource, -> { unscope where: :deleted }, polymorphic: true
 
-  default_scope -> { where.not(action: :mention).where(resource_type: [Answer, Comment, Evaluation, Question]) }
+  default_scope -> { where.not(action: :mention).where(resource_type: [Answer, Comment, Evaluation, Question], anonymous: false) }
+
+  scope :global, -> { unscope(where: :anonymous) }
+
+  scope :by_followees_of, lambda { |user| where(initiator: user.followees.pluck(:followee_id)) }
 
   scope :of, lambda { |user| where(initiator: user) }
 

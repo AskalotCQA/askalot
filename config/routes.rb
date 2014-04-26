@@ -99,4 +99,6 @@ Askalot::Application.routes.draw do
     resources :categories, only: [:new, :create, :update]
     resources :dashboard,  only: [:index]
   end
+
+  resources :activities, only: [:index]
 end

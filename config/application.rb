@@ -33,9 +33,6 @@ module Askalot
 
     config.i18n.load_path += Dir[Rails.root.join 'config', 'locales', '**', '*.{rb,yml}']
 
-    # Enforce available locales validation
-    config.i18n.enforce_available_locales = true
-
-    I18n.config.enforce_available_locales = true
+    config.i18n.available_locales = [:en, :sk]
   end
 end

@@ -1,10 +1,10 @@
 <li id="watching-<%= watching.id %>">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-xs-10">
       <%= watchable_icon_tag watching.watchable %>
       <%= watchable_content watching.watchable %>
     </div>
-    <div class="col-md-2">
+    <div class="col-xs-2">
       <%= form_for watching, method: :delete, html: { id: nil, class: :'pull-right' } do %>
         <button class="btn btn-default btn-xs"><%= icon_tag :'eye-slash' %> <%= t 'watching.delete.submit' %></button>
       <% end %>

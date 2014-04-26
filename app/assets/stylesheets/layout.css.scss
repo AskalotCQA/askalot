@@ -1,10 +1,11 @@
 // general
 
-html {
+body {
   @include selection(rgba($brand-primary, 0.25));
 
+  min-width: $screen-xs-min;
   height: 100%;
-  overflow-y: scroll;
+  overflow: scroll;
 }
 
 .flash .alert:first-child {
@@ -46,6 +47,29 @@ html {
 
 .img-muted {
   @include opacity(0.8)
+}
+
+// lists
+
+.list-center {
+  float: left;
+  left: 50%;
+  position: relative;
+
+  text-align: center;
+
+  > ul {
+    @extend .list-unstyled;
+    float: left;
+    left: -50%;
+    position: relative;
+
+    margin: 0;
+
+    & > li {
+      float: left;
+    }
+  }
 }
 
 // navigation
@@ -154,9 +178,36 @@ header {
 // footer
 
 footer {
+  @include clearfix;
+
   margin: 100px 0 0 0;
   padding: 50px 0;
+  overflow-x: hidden;
 
   background: $gray-lighter;
+  color: $text-muted;
   text-align: center;
+
+  a {
+    @include color-variant($text-muted, $text-muted);
+  }
+
+  li a, li span {
+    margin: 0 $padding-xs-horizontal;
+  }
+
+  li:after {
+    content: '·';
+  }
+
+  li:last-child:after {
+    content: '';
+  }
+
+  hr {
+    @include clearfix;
+
+    margin: 25px 0 0 0;
+    border: none;
+  }
 }

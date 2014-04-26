@@ -6,3 +6,7 @@
     padding-top: 30px;
   }
 }
+
+.changelog-content {
+  @include markdown-content;
+}

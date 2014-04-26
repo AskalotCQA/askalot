@@ -1,0 +1,17 @@
+<% provide(:title, t('activity.index.title')) %>
+
+<div class="tab-navigation">
+  <div class="pull-right">
+    <%= link_to t('changelog.navigation'), changelogs_path, class: 'btn btn-link' %>
+  </div>
+
+  <ul class="nav nav-tabs">
+    <%= tab_link_tag t('activity.tab.global'), :global, activities_path(params.except(:page).merge tab: :global), analytics_attributes(:activity, :switch, :global) %>
+    <%= tab_link_tag t('activity.tab.followees'), :followees, activities_path(params.except(:page).merge tab: :followees), analytics_attributes(:activity, :switch, :followees) %>
+  </ul>
+</div>
+
+<div class="tab-content">
+  <%= render_tab_content 'activities', :global, locals: { activities: @global, tab: :global } %>
+  <%= render_tab_content 'activities', :followees, locals: { activities: @followees, tab: :followees } %>
+</div>

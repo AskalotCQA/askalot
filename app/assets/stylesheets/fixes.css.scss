@@ -104,13 +104,13 @@ a .fa {
   position: relative;
   margin-bottom: 0 !important;
 
-  & > li {
+  > li {
     display: inline-block;
     float: left;
     margin-bottom: 10px;
     margin-right: $padding-base-horizontal / 2;
 
-    & > a {
+    > a {
       display: inline;
       padding: 0.2em 0.6em 0.3em;
     }

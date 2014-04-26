@@ -4,6 +4,14 @@
   margin-top: 15px;
 }
 
-.wrap-comment {
+.wrap-new-comment {
   margin-bottom: 10px;
+}
+
+// member
+
+.comment-content {
+  @include markdown-content;
+
+  display: inline;
 }

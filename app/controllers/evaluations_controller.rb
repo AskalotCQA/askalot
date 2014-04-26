@@ -35,7 +35,7 @@ class EvaluationsController < ApplicationController
     authorize! :evaluate, @evaluable
 
     @question   = @evaluable.to_question
-    @evaluation = Evaluation.where(evaluable: @evaluable, evaluator: current_user).first
+    @evaluation = Evaluation.where(evaluable: @evaluable, author: current_user).first
 
     if @evaluation.update_attributes(evaluation_params)
       dispatch_event :update, @evaluation, for: @question.watchers
@@ -55,6 +55,6 @@ class EvaluationsController < ApplicationController
   end
 
   def evaluation_params
-    params.require(:evaluation).permit(:value, :text).merge(evaluable: @evaluable, evaluator: current_user)
+    params.require(:evaluation).permit(:value, :text).merge(evaluable: @evaluable, author: current_user)
   end
 end

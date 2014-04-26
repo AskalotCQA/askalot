@@ -1,7 +1,7 @@
 class window.Analytics
   @bind: ->
-    $('[data-track-category]').each ->
-      $(this).click ->
+    $(document).ready ->
+      $('[data-track-category]').click ->
         category = $(this).attr 'data-track-category'
         action   = $(this).attr 'data-track-action'
 
@@ -10,4 +10,4 @@ class window.Analytics
         else
           label = $(this).attr 'id' ? $(this).attr 'id' : nil
 
-        _gaq.push ['_trackEvent', category, action, label]
+        _gaq?.push ['_trackEvent', category, action, label]

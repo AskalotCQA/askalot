@@ -18,7 +18,7 @@ sk:
     clean:
       action: 'Zrušiť všetky sledovania %{model}'
       title: 'Pozor!'
-      text: 'Naozaj chete zrušiť všetky sledovania %{model}?'
+      text: 'Naozaj chcete zrušiť všetky sledovania %{model}?'
       submit: 'Zrušiť všetky sledovania'
       cancel: 'Spať'
       success: 'Sledovania boli zrušené.'
