@@ -1,0 +1,9 @@
+
+  <%= form_tag tags_path, id: :filter_tags, method: :get, remote: true, data: { state: true } do %>
+    <div class="form-group">
+      <div class="input-group select2-bootstrap-prepend">
+        <%= text_field_tag :q, params[:q], id: :filter_tag, class: :'form-control' %>
+      </div>
+    </div>
+  <% end %>
+
