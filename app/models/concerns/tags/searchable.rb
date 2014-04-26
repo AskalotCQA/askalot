@@ -5,7 +5,7 @@ module Tags
     included do
       include ::Searchable
 
-      probe.index.name = :"tag_#{Rails.env}"
+      probe.index.name = :"tags_#{Rails.env}"
       probe.index.type = :tag
 
       probe.index.settings = {
@@ -65,6 +65,10 @@ module Tags
                   index: :not_analyzed
                 }
               }
+            },
+
+            created_at: {
+              type: :date
             }
           }
         }
@@ -72,7 +76,8 @@ module Tags
 
       probe.index.mapper.define(
         id:    -> { id },
-        name: -> { name }
+        name: -> { name },
+        created_at: -> { created_at }
       )
 
       probe.index.create
@@ -80,7 +85,7 @@ module Tags
 
     module ClassMethods
       def search_by(params)
-        search(
+        query = {
           query: {
             query_string: {
               query: probe.sanitizer.sanitize_query("#{params[:q]}*"),
@@ -88,9 +93,31 @@ module Tags
               fields: [:name]
             }
           }
-        )
+        }
+
+        if params[:recent]
+          query.deep_merge!(
+            query: {
+              filtered: {
+                filter: {
+                  range: {
+                    created_at: {
+                      from: 1.month.ago,
+                      to: Time.now
+                    }
+                  }
+                }
+              },
+
+              sort: {
+                created_at: { order: :desc }
+              }
+            }
+          )
+        end
+
+        search(query)
       end
     end
   end
 end
-
