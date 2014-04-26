@@ -11,6 +11,7 @@
         <%= navbar_link_tag t('question.navigation'), questions_path %>
         <%= navbar_link_tag t('category.navigation'), categories_path %>
         <%= navbar_link_tag t('tag.navigation'), tags_path %>
+        <%= navbar_link_tag t('admin.navigation'), admin_dashboard_index_path %>
         <%= navbar_link_tag t('user.navigation'), users_path %>
         <%= navbar_link_tag t('activity.navigation'), activities_path, class: :'hidden-sm' %>
         <%= navbar_link_tag t('statistic.navigation'), statistics_path, class: :'hidden-sm' if user_signed_in? && can?(:observe, :all) %>
@@ -20,9 +21,6 @@
           <%= content_tag :li, link_to(t('statistic.navigation'), statistics_path) if user_signed_in? && can?(:observe, :all) %>
           <li class="divider"></li>
           <%= content_tag :li, link_to(t('help.navigation'), help_path) %>
-        <% end %>
-        <% if user_signed_in? && can?(:observe, :all) %>
-            <li><%= link_to t('admin.navigation'), admin_dashboard_index_path %></li>
         <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
