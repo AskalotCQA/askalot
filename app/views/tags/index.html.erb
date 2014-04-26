@@ -1,5 +1,7 @@
 <% provide(:title, t('tag.index.title')) %>
 
+<%= render 'tags/searching' %>
+
 <ul class="nav nav-tabs tab-navigation">
   <%= tab_link_tag_with_count t('tag.tab.all'), :all, tags_path(params.except(:page).merge tab: :all), @tags.count, analytics_attributes(:tags, :switch, :all) %>
   <%= tab_link_tag_with_count t('tag.tab.recent'), :recent, tags_path(params.except(:page).merge tab: :recent), @tags.recent.count, analytics_attributes(:tags, :switch, :recent) %>
