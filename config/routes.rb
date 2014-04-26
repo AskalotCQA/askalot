@@ -76,7 +76,7 @@ Askalot::Application.routes.draw do
 
   resources :comments, only: [:update, :destroy]
 
-  resources :changelogs, only: [:index, :new, :create]
+  resources :changelogs, only: [:index, :new, :create, :update]
 
   resources :markdown, only: [] do
     post :preview, on: :collection
@@ -95,7 +95,7 @@ Askalot::Application.routes.draw do
 
   namespace "admin" do
     root :to => 'admin#index'
-    resources :changelogs, only: [:new, :create]
+    resources :changelogs, only: [:new, :create, :update]
     resources :categories, only: [:new, :create, :update]
     resources :dashboard,  only: [:index]
   end

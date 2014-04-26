@@ -7,7 +7,7 @@
 
         <div class="form-group">
           <%= f.label :name %>
-          <%= f.text_area :name, class: :'form-control', rows: 1 %>
+          <%= f.text_field :name, class: :'form-control', rows: 1 %>
         </div>
 
         <div class="form-group">
@@ -24,30 +24,26 @@
   <div class="col-md-12">
 
     <ul class="list-unstyled">
-      <% group_categories_by_prefix(@categories).each do |_, group| %>
-          <li class="category-group">
-            <% group.each_slice(3) do |categories| %>
-                <div class="row">
-                  <% categories.each do |category| %>
-                      <div class="col-md-4">
-                        <h4>
-                          <%= link_to_category category %>
-                        </h4>
-                        <div class="question-details">
-                          <%= render 'admin/editing_category', category: category %>
-                        </div>
-                        <% if category %>
-                            <% category.tags.each do |category_tag| %>
-                                <li>
-                                  <span class="label label-info"><%= category_tag %></span>
-                                </li>
-                            <% end %>
-                        <% end %>
-                      </div>
+      <% @categories.each do |category| %>
+          <div class="row">
+            <div class="col-md-4">
+
+                <%= link_to_category category %>
+
+            </div>
+            <div class="col-md-4">
+              <% if category %>
+                  <% category.tags.each do |category_tag| %>
+                        <span class="label label-info"><%= category_tag %></span>
                   <% end %>
-                </div>
-            <% end %>
-          </li>
+              <% end %>
+            </div>
+            <div class="col-md-4">
+              <div class="question-details">
+                <%= render 'admin/editing_category', category: category %>
+              </div>
+            </div>
+          </div>
       <% end %>
     </ul>
   </div>
