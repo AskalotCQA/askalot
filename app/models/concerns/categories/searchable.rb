@@ -5,8 +5,8 @@ module Categories
     included do
       include ::Searchable
 
-      probe.index.name = :"categories_#{Rails.env}"
-      probe.index.type = :categories
+      probe.index.name = :"category_#{Rails.env}"
+      probe.index.type = :category
 
       probe.index.settings = {
         index: {
@@ -48,7 +48,7 @@ module Categories
       }
 
       probe.index.mappings = {
-        categories: {
+        category: {
           properties: {
             id: {
               type: :integer
@@ -56,7 +56,7 @@ module Categories
             name: {
               type: :multi_field,
               fields: {
-                text: {
+                name: {
                   type: :string,
                   analyzer: :text,
                 },
@@ -83,7 +83,7 @@ module Categories
         search(
           query: {
             query_string: {
-              query: probe.sanitizer.sanitize_query(params[:q]),
+              query: probe.sanitizer.sanitize_query("#{params[:q]}*"),
               default_operator: :and,
               fields: [:name]
             }

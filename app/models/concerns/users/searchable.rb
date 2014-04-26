@@ -5,8 +5,8 @@ module Users
     included do
       include ::Searchable
 
-      probe.index.name = :"users_#{Rails.env}"
-      probe.index.type = :users
+      probe.index.name = :"user_#{Rails.env}"
+      probe.index.type = :user
 
       probe.index.settings = {
         index: {
@@ -48,15 +48,15 @@ module Users
       }
 
       probe.index.mappings = {
-        users: {
+        user: {
           properties: {
             id: {
               type: :integer
             },
-            name: {
+            nick: {
               type: :multi_field,
               fields: {
-                text: {
+                nick: {
                   type: :string,
                   analyzer: :text,
                 },
@@ -72,7 +72,7 @@ module Users
 
       probe.index.mapper.define(
         id:    -> { id },
-        name: -> { name }
+        nick: -> { name }
       )
 
       probe.index.create
@@ -83,9 +83,9 @@ module Users
         search(
           query: {
             query_string: {
-              query: probe.sanitizer.sanitize_query(params[:q]),
+              query: probe.sanitizer.sanitize_query("#{params[:q]}*"),
               default_operator: :and,
-              fields: [:name]
+              fields: [:nick]
             }
           }
         )

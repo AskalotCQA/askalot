@@ -5,8 +5,8 @@ module Tags
     included do
       include ::Searchable
 
-      probe.index.name = :"tags_#{Rails.env}"
-      probe.index.type = :tags
+      probe.index.name = :"tag_#{Rails.env}"
+      probe.index.type = :tag
 
       probe.index.settings = {
         index: {
@@ -46,9 +46,9 @@ module Tags
           }
         }
       }
-s
+
       probe.index.mappings = {
-        tags: {
+        tag: {
           properties: {
             id: {
               type: :integer
@@ -56,7 +56,7 @@ s
             name: {
               type: :multi_field,
               fields: {
-                text: {
+                name: {
                   type: :string,
                   analyzer: :text,
                 },
@@ -83,7 +83,7 @@ s
         search(
           query: {
             query_string: {
-              query: probe.sanitizer.sanitize_query(params[:q]),
+              query: probe.sanitizer.sanitize_query("#{params[:q]}*"),
               default_operator: :and,
               fields: [:name]
             }
