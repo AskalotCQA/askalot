@@ -95,8 +95,6 @@ Askalot::Application.routes.draw do
 
   namespace "admin" do
     root :to => 'admin#index'
-    resources :changelogs, only: [:new, :create, :update]
-    resources :categories, only: [:new, :create, :update]
     resources :dashboard,  only: [:index]
   end
 

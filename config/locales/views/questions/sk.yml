@@ -20,7 +20,7 @@ sk:
       action: 'Upraviť'
       title: 'Úprava otázky'
       submit: 'Uložiť'
-      cancel: 'Spať'
+      cancel: 'Späť'
 
     update:
       success: 'Otázka bola úspešne aktualizovaná.'
@@ -31,7 +31,7 @@ sk:
       title: 'Pozor!'
       text: 'Naozaj chcete zmazať otázku?'
       submit: 'Zmazať'
-      cancel: 'Spať'
+      cancel: 'Späť'
       success: 'Otázka bola úspešne zmazaná.'
       failure: 'Otázku sa nepodarilo zmazať.'
 
