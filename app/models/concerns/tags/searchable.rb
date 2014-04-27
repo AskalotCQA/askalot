@@ -70,6 +70,7 @@ module Tags
             created_at: {
               type: :date
             },
+
             count: {
               type: :integer
             }
@@ -100,7 +101,6 @@ module Tags
         }
 
         if params[:tab] == "recent"
-          binding.pry
           query.deep_merge!(
             query: {
               filtered: {
@@ -114,20 +114,17 @@ module Tags
                 }
               },
 
-              sort: {
-                created_at: { order: :desc }
-              }
+            },
+            sort: {
+              created_at: { order: :desc }
             }
           )
         end
 
         if params[:tab] == "popular"
-          binding.pry
           query.deep_merge!(
-            query: {
-              sort: {
-                count: { order: :desc }
-              }
+            sort: {
+              count: { order: :desc }
             }
           )
         end
