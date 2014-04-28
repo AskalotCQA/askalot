@@ -26,9 +26,9 @@
 @import 'bootstrap/textcomplete';
 
 @import 'assets';
+@import 'layout';
 @import 'errors';
 
-@import 'layout';
 @import 'home';
 @import 'help';
 
@@ -48,4 +48,5 @@
 @import 'changelogs';
 @import 'statistics';
 
+@import 'responsive';
 @import 'fixes';

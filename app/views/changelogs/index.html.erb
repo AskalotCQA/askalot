@@ -7,23 +7,7 @@
 
     <p class="lead"><%= t 'changelog.index.introduction' %></p>
 
-    <ol class="list-unstyled">
-      <% @changelogs.each do |changelog| %>
-        <li id="<%= changelog.identifier %>" class="changelog">
-          <h2>
-            <% if changelog.title? %>
-              <%= changelog.title %>
-              <br/>
-            <% end %>
-            <small>
-              <%= time_tag changelog.created_at.to_date, format: :default %> &middot;
-              <%= link_to changelog.version, url_to_repository("releases/tag/v#{changelog.version}") %>
-            </small>
-          </h2>
-          <%= render_markdown changelog.text if changelog.text? %>
-        </li>
-      <% end %>
-    </ol>
+    <%= render 'changelogs/changelogs', changelogs: @changelogs %>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm hidden-print">
@@ -34,7 +18,7 @@
             <%= link_to latest.version, "##{latest.identifier}", analytics_attributes(:changelogs, :scroll, latest.identifier) %>
             <% if changelogs.any? %>
               <ul class="nav">
-                <% changelogs.each do |changelog| %>
+                <% changelogs.select(&:title).each do |changelog| %>
                   <li>
                     <%= link_to changelog.version, "##{changelog.identifier}", analytics_attributes(:changelogs, :scroll, changelog.identifier) %>
                   </li>

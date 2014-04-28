@@ -36,15 +36,13 @@
             <li class="divider"></li>
             <li><%= link_to t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
           <% end %>
-          <li class="visible-xs"><%= link_to t('user.profile'), user_path(current_user.nick) %></li>
-          <li class="visible-xs"><%= link_to t('notification.navigation'), notifications_path %></li>
-          <li class="visible-xs"><%= link_to t('user.settings'), edit_user_registration_path %></li>
-          <li class="visible-xs"><%= link_to t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
+          <%= navbar_link_tag t('user.profile'), user_path(current_user.nick), class: :'visible-xs' %>
+          <%= navbar_link_tag t('notification.navigation'), notifications_path, class: :'visible-xs' %>
+          <%= navbar_link_tag t('user.settings'), edit_user_registration_path, class: :'visible-xs' %>
+          <%= navbar_link_tag t('user.sign_out'), destroy_user_session_path, method: :delete, class: :'visible-xs' %>
         <% else %>
-          <% if Configuration.enable.registrations? %>
-            <li><%= link_to t('user.sign_up'), new_user_registration_path %></li>
-          <% end %>
-          <li><%= link_to t('user.sign_in'), new_user_session_path %></li>
+          <%= navbar_link_tag t('user.sign_up'), new_user_registration_path if Configuration.enable.registrations? %>
+          <%= navbar_link_tag t('user.sign_in'), new_user_session_path %>
         <% end %>
       </ul>
       <div class="navbar-form navbar-right hidden-xs hidden-sm hidden-print">

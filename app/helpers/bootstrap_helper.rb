@@ -7,6 +7,7 @@ module BootstrapHelper
   include Bootstrap::PopoverHelper
   include Bootstrap::TabHelper
   include Bootstrap::TooltipHelper
+  include Bootstrap::UtilityHelper
 
   def identify(object, suffix = [])
     ([object.class.name.downcase, object.id] + Array.wrap(suffix)).reject(&:blank?).join '-'

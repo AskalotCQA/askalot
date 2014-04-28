@@ -11,7 +11,7 @@
 
   <%= paginate watchings, params: { tab: tab } %>
 <% else %>
-  <p class="alert alert-info">
+  <div class="alert alert-info">
     <%= t 'watching.none' %>
-  </p>
+  </div>
 <% end %>
