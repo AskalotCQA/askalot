@@ -8,4 +8,7 @@ class GenerateActivitiesFromNotifications < ActiveRecord::Migration
       activity.save!
     end
   end
+
+  def down
+  end
 end
