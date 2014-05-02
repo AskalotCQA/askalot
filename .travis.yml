@@ -2,6 +2,7 @@ language: ruby
 rvm:
   - 2.0.0
 bundler_args: --without development
+env: DRIVER=poltergeist
 before_script:
   - psql -c 'create database askalot_test;' -U postgres
   - gem install bundler
