@@ -11,7 +11,9 @@ before_script:
   - rake db:schema:load
 
 addons:
-  postgresql: "9.3"
-
+  postgresql: '9.3'
+  code_climate:
+    repo_token:
+      secure: HyRVFkNdt443xYbORBdaOHq+jMyUiZSZtAkkNb55EOfA/G91vsjnOwrxd6EEN13SHSx06dn2Wmh98dzx5xRjb/+xqRrpdj5NrNRGMfjJ0bgDa51Wuz+UlDCyL0J6+niqgnOVpmdoTEa4c1IJFnMxE/bh2i3siyZMUKszo9Rtpd4=
 services:
   - elasticsearch
