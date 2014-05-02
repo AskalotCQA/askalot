@@ -1,0 +1,15 @@
+language: ruby
+rvm:
+  - 2.0.0
+bundler_args: --without development
+before_script:
+  - psql -c 'create database askalot_test;' -U postgres
+  - gem install bundler
+  - "cp config/database.example.yml config/database.yml"
+  - rake db:schema:load
+
+addons:
+  postgresql: "9.3"
+
+services:
+  - elasticsearch

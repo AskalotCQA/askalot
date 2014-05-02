@@ -105,6 +105,9 @@ group :development, :test do
   gem 'faker', '1.1.2'
 end
 
+# test
+gem 'codeclimate-test-reporter', group: :test, require: nil
+
 group :production do
   gem 'unicorn'
   gem 'rack-timeout'
