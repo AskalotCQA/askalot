@@ -14,6 +14,6 @@ addons:
   postgresql: '9.3'
   code_climate:
     repo_token:
-      secure: HyRVFkNdt443xYbORBdaOHq+jMyUiZSZtAkkNb55EOfA/G91vsjnOwrxd6EEN13SHSx06dn2Wmh98dzx5xRjb/+xqRrpdj5NrNRGMfjJ0bgDa51Wuz+UlDCyL0J6+niqgnOVpmdoTEa4c1IJFnMxE/bh2i3siyZMUKszo9Rtpd4=
+      secure: mFWo5T9J2dcyET4vnqBX1yhiCvkTuJPFzHgiIN87MzrUrcxTkN6xFQDjngDQ/mT4tRpZFZgdl0JNmZCxlDsLXD6b4JvsDB38aIRUGo3OhttITI3f3OXXVIomV/JE8jXOvLZ/qXmt7es7pyrip3yKuyvXwUnaYKbk1lWqrHqnzPA=
 services:
   - elasticsearch
