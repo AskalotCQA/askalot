@@ -41,7 +41,7 @@ gem 'gemoji', '~> 1.5.0'
 
 # internationalization
 gem 'rails-i18n', '~> 4.0.0'
-gem 'i18n-js'
+gem 'i18n-js', '~> 2.1.2'
 
 # pagination
 gem 'kaminari', '~> 0.15.1'
@@ -63,6 +63,7 @@ gem 'statistics2'
 gem 'symbolize'
 gem 'lda-ruby'
 gem 'tf_idf'
+gem 'timecop'
 
 # monitoring
 gem 'garelic'
@@ -70,9 +71,6 @@ gem 'newrelic_rpm'
 
 # search
 gem 'elasticsearch'
-
-# import
-gem 'activerecord-import', '~> 0.4.1'
 
 # documentation
 group :doc do
@@ -104,7 +102,6 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
-  gem 'timecop'
 
   # database
   gem 'faker', '1.1.2'

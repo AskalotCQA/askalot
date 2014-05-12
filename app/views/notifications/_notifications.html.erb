@@ -9,7 +9,7 @@
 
   <%= paginate notifications, params: { tab: tab } %>
 <% else %>
-  <p class="alert alert-info">
+  <div class="alert alert-info">
     <%= t notifications.size.zero? && notifications.size != notifications.unread.size ? 'notification.all_read' : 'notification.none' %>
-  </p>
+  </div>
 <% end %>

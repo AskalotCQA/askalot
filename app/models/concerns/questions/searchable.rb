@@ -94,7 +94,7 @@ module Questions
                   index: :not_analyzed
                 }
               }
-            }
+            },
           }
         }
       }

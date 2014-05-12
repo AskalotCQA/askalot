@@ -20,7 +20,7 @@ sk:
     delete:
       action: 'Zmazať'
       title: 'Pozor!'
-      text: 'Naozaj chete zmazať odpoveď?'
+      text: 'Naozaj chcete zmazať odpoveď?'
       submit: 'Zmazať'
       cancel: 'Spať'
       success: 'Odpoveď bola úspešne zmazaná.'

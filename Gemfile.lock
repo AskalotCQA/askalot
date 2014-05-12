@@ -405,7 +405,7 @@ DEPENDENCIES
   guard-rspec
   handlebars_assets
   hirb
-  i18n-js
+  i18n-js (~> 2.1.2)
   jbuilder (~> 1.2)
   jquery-rails
   jquery-tablesorter (~> 1.9.5)

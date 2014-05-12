@@ -1,27 +1,17 @@
 <div id="users" class="users tab-content">
   <% if users.any? %>
-    <% users.each_slice(6) do |users| %>
-      <div class="row">
-        <% users.each do |user| %>
-          <div class="col-md-2">
-            <%= render 'square', user: user, following: true %>
-          </div>
-        <% end %>
-      </div>
-    <% end %>
-
     <div class="row">
-      <div class="col-md-12">
-        <%= paginate users, remote: true, data: { state: true, scroll: 'body', fade: '#users' } %>
-      </div>
-    </div>
-  <% else %>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="alert alert-warning">
-          <%= t('user.index.no_results_found') %>
+      <% users.each do |user| %>
+        <div class="col-xs-6 col-sm-4 col-md-2">
+          <%= render 'square', user: user, following: true %>
         </div>
-      </div>
+      <% end %>
+    </div>
+
+    <%= paginate users, remote: true, data: { state: true, scroll: 'body', fade: '#users' } %>
+  <% else %>
+    <div class="alert alert-warning">
+      <%= t('user.index.no_results_found') %>
     </div>
   <% end %>
 </div>

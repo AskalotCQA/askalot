@@ -1,12 +1,15 @@
-<p>
+<div>
   <%= t('user.registered_at') %> <%= tooltip_time_tag user.created_at, format: :short, placement: :bottom %>,
   <%= t('user.last_sign_in_at').downcase_first %> <%= tooltip_time_tag user.current_sign_in_at || user.last_sign_in_at, format: :short, placement: :bottom %>
-</p>
+</div>
 
 <hr/>
 
 <% unless user.about.blank? %>
-  <%= render_markdown user.about %>
+  <div class="user-profile-about">
+    <%= render_markdown user.about %>
+  </div>
+
   <hr/>
 <% end %>
 
@@ -14,4 +17,4 @@
 
 <%= render 'activities/calendar', user: user %>
 
-<p><small class="text-muted"><%= t 'user.activity.calendar.note' %></small></p>
+<small class="text-muted"><%= t 'user.activity.calendar.note' %></small>

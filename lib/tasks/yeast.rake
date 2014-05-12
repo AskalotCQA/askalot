@@ -24,6 +24,7 @@ namespace :yeast do
     Events::Dispatcher.subscribe Yeast::AnswerFeeder
     Events::Dispatcher.subscribe Yeast::QuestionFeeder
     Events::Dispatcher.subscribe Yeast::UserFeeder
+    Events::Dispatcher.subscribe Yeast::EvaluationFeeder
 
     # TODO (smolnar) consider View
     models = [Question, Answer, Vote, Comment, Labeling]
