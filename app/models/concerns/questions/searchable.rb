@@ -95,6 +95,10 @@ module Questions
                 }
               }
             },
+
+            created_at: {
+              type: :date
+            }
           }
         }
       }
