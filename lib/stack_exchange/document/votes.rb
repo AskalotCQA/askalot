@@ -13,18 +13,16 @@ module StackExchange
           label  = Label.find_or_create_by!(value: :best)
           date   = Time.parse(vote[:CreationDate]) > answer.created_at ? vote[:CreationDate] : answer.created_at + 1.minute
 
-          if record = Labeling.find_by(answer: answer, author: author, label: label)
-            record.destroy!
-          else
-            return Labeling.create!(
-              answer:              answer,
-              author:              author,
-              label:               label,
-              created_at:          date,
-              updated_at:          date,
-              stack_exchange_uuid: vote[:Id]
-            )
-          end
+          return if Labeling.exists?(answer: answer, author: author, label: label)
+
+          return Labeling.create!(
+            answer:              answer,
+            author:              author,
+            label:               label,
+            created_at:          date,
+            updated_at:          date,
+            stack_exchange_uuid: vote[:Id]
+          )
         end
 
         if vote[:VoteTypeId] == '2' || vote[:VoteTypeId] == '3'
@@ -42,19 +40,16 @@ module StackExchange
           date = Time.parse(vote[:CreationDate]) > votable.created_at ? vote[:CreationDate] : votable.created_at + 1.minute
 
           return if Vote.exists?(stack_exchange_uuid: vote[:Id])
+          return if Vote.exists?(voter_id: 0, votable: votable, positive: positive)
 
-          if record = Vote.find_by(voter_id: 0, votable: votable, positive: positive)
-            record.destroy!
-          else
-            return Vote.create!(
-              voter_id:            0,
-              votable:             votable,
-              positive:            positive,
-              created_at:          date,
-              updated_at:          date,
-              stack_exchange_uuid: vote[:Id]
-            )
-          end
+          return Vote.create!(
+            voter_id:            0,
+            votable:             votable,
+            positive:            positive,
+            created_at:          date,
+            updated_at:          date,
+            stack_exchange_uuid: vote[:Id]
+          )
         end
 
         if vote[:VoteTypeId] == '5'
@@ -64,20 +59,17 @@ module StackExchange
           return if question.nil? || user.nil?
 
           return if Favorite.exists?(stack_exchange_uuid: vote[:Id])
+          return if Favotite.exists?(favorer: user, question: question)
 
           date = Time.parse(vote[:CreationDate]) > question.created_at ? vote[:CreationDate] : question.created_at + 1.minute
 
-          if record = Favorite.find_by(favorer: user, question: question)
-            record.destroy!
-          else
-            return Favorite.create!(
-              favorer:             user,
-              question:            question,
-              created_at:          date,
-              updated_at:          date,
-              stack_exchange_uuid: vote[:Id]
-            )
-          end
+          return Favorite.create!(
+            favorer:             user,
+            question:            question,
+            created_at:          date,
+            updated_at:          date,
+            stack_exchange_uuid: vote[:Id]
+          )
         end
 
         return nil

@@ -16,7 +16,7 @@ module Yeast
 
         profile = Answer::Profile.find_by! answer: answer, property: :quality, source: :QE
 
-        value = 1 / (1 + Math::E**-(resource.votable.votes.positive.size - resource.votable.votes.negative.size)) + (answer.best? ? 0.5 : 0)
+        value = 1 / (1 + Math::E**-(answer.votes.positive.size - answer.votes.negative.size)) + (answer.best? ? 0.5 : 0)
 
         profile.update_attributes!(value: value)
       end

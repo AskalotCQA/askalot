@@ -17,9 +17,9 @@ module Yeast
         return unless resource.stack_exchange_duplicate
 
         question  = resource
-        text      = [question.title, question.text, question.tags].join(' ')
+        text      = [question.title, question.text, question.tags.pluck(:name)].flatten.join(' ')
         terms     = Question.probe.analyze(text: text, analyzer: :text)
-        tags      = question.author.profiles.where(property: :interest).map { |p| { name: p.targetable.name, value: p.value } }
+        tags      = question.author.profiles.where(property: :interest).order(:value).limit(10).map { |p| { name: p.targetable.name, value: p.value } }
         results   = Question.search(
           query: {
             more_like_this: {
@@ -40,6 +40,14 @@ module Yeast
 
                 if (frequency > 0 && total_frequency > 0) {
                   result += frequency * log((size / total_frequency) + 1);
+                }
+              }
+
+              foreach(tag : tags) {
+                name = tag['name'];
+
+                if (_index['tags'][name].tf() > 0) {
+                  result += tag['value'];
                 }
               }
 
