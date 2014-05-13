@@ -2,6 +2,9 @@ sk:
   question:
     navigation: 'Otázky'
 
+    fulltext:
+      placeholder: 'Hľadať'
+
     index:
       title: 'Otázky'
       new: 'Nová otázka'
