@@ -64,13 +64,9 @@ ActiveRecord::Schema.define(version: 20140429003614) do
     t.decimal  "votes_lb_wsci_bp",  precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
-    t.boolean  "edited",                                      default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
-<<<<<<< HEAD
-=======
     t.boolean  "edited",                                      default: false, null: false
->>>>>>> beta
     t.integer  "evaluations_count",                           default: 0,     null: false
   end
 
@@ -144,13 +140,9 @@ ActiveRecord::Schema.define(version: 20140429003614) do
     t.boolean  "deleted",          default: false, null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
-    t.boolean  "edited",           default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
-<<<<<<< HEAD
-=======
     t.boolean  "edited",           default: false, null: false
->>>>>>> beta
   end
 
   add_index "comments", ["author_id"], name: "index_comments_on_author_id", using: :btree
@@ -300,22 +292,13 @@ ActiveRecord::Schema.define(version: 20140429003614) do
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
     t.boolean  "deleted",                                       default: false, null: false
-<<<<<<< HEAD
-    t.datetime "touched_at",                                                    null: false
-    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
-=======
     t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "touched_at",                                                    null: false
->>>>>>> beta
     t.datetime "edited_at"
     t.integer  "editor_id"
-    t.boolean  "edited",                                        default: false, null: false
     t.datetime "deleted_at"
     t.integer  "deletor_id"
-<<<<<<< HEAD
-=======
     t.boolean  "edited",                                        default: false, null: false
->>>>>>> beta
     t.integer  "evaluations_count",                             default: 0,     null: false
   end
 
@@ -434,14 +417,9 @@ ActiveRecord::Schema.define(version: 20140429003614) do
     t.integer  "views_count",            default: 0,    null: false
     t.integer  "votes_count",            default: 0,    null: false
     t.string   "remember_token"
-<<<<<<< HEAD
     t.integer  "followers_count",        default: 0,    null: false
     t.integer  "followees_count",        default: 0,    null: false
-=======
-    t.integer  "followers_count",        default: 0,         null: false
-    t.integer  "followees_count",        default: 0,         null: false
-    t.integer  "evaluations_count",      default: 0,         null: false
->>>>>>> 1de3e480a1264055cc0ea4339f1a438368a271d6
+    t.integer  "evaluations_count",      default: 0,    null: false
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree
@@ -455,10 +433,7 @@ ActiveRecord::Schema.define(version: 20140429003614) do
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
   add_index "users", ["nick"], name: "index_users_on_nick", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-<<<<<<< HEAD
-=======
   add_index "users", ["role"], name: "index_users_on_role", using: :btree
->>>>>>> beta
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "views", force: true do |t|
