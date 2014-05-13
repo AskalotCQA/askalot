@@ -13,7 +13,11 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @questions = case params[:tab].to_sym
+    #binding.pry
+    if params[:q]
+      @questions = Question.search_by(q: params[:q], page: params[:page] || 0, per_page: 20)
+    else
+      @questions = case params[:tab].to_sym
                  when :unanswered then Question.unanswered.by_votes
                  when :answered   then Question.answered_but_not_best.by_votes
                  when :solved     then Question.solved.by_votes
@@ -21,8 +25,10 @@ class QuestionsController < ApplicationController
                  else Question.recent
                  end
 
-    @questions = filter_questions(@questions)
-    @questions = @questions.page(params[:page]).per(20)
+      @questions = filter_questions(@questions)
+      @questions = @questions.page(params[:page]).per(20)
+    end
+
 
     initialize_polling
   end
