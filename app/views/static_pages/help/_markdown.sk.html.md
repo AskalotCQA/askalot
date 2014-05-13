@@ -1,4 +1,4 @@
-V systéme je možnosť použiť Markdown v texte otázok, odpovedí aj komentárov. Implementácia je kompatibilná s [GitHub Markdown](http://guides.github.com/overviews/mastering-markdown) (pozri pre viac informácií ako formátovať text). Markdown pre komentáre je menšia množina značiek, je možné napr. pridávať tagy pre linky a tag pre zdrojový kód v jednom riadku.
+V systéme je možnosť použiť Markdown v texte otázok, odpovedí aj komentárov. Implementácia je kompatibilná s [GitHub Markdown](https://guides.github.com/features/mastering-markdown) (pozri pre viac informácií ako formátovať text). Markdown pre komentáre je menšia množina značiek, je možné napr. pridávať tagy pre linky a tag pre zdrojový kód v jednom riadku.
 
 ### Linkovanie otázok
 
@@ -10,4 +10,4 @@ V Markdown textoch je možné odkazovať sa na iných používateľov. Po napís
 
 ### Gemoji ikony
 
-V Markdown textoch je možné pridávať aj veselé ikony Gemoji. Po napísaní `:` sa zobrazí ponuka Gemojis, vyhľadávaj v nich je podľa názvu (napr. `:beer:` :beer: ). Pre kompletný zoznam Gemojis pozri [Emoji cheat sheet](http://www.emoji-cheat-sheet.com).
+V Markdown textoch je možné pridávať aj veselé ikony Gemoji. Po napísaní `:` sa zobrazí ponuka Gemojis, vyhľadávaj v nich je podľa názvu (napr. `:beer:` :beer:). Pre kompletný zoznam Gemojis pozri [Emoji cheat sheet](http://www.emoji-cheat-sheet.com).

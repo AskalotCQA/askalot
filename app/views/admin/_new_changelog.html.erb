@@ -1,0 +1,46 @@
+<% provide :title, t('admin.changelog.tab') %>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @changelog do |f| %>
+      <%= form_messages_for @changelog %>
+
+      <div class="form-group">
+        <%= f.label :version %>
+        <%= f.text_field :version, class: :'form-control', rows: 1 %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: :'form-control', rows: 1 %>
+      </div>
+
+      <div class="form-group">
+        <%= markdown_editor_for @changelog do %>
+          <%= f.text_area :text, class: :'form-control', rows: 5 %>
+        <% end %>
+      </div>
+
+      <button type="submit" class="btn btn-success btn-lg"><%= t('changelog.admin.add') %></button>
+    <% end %>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12 col-md-6" role="main">
+
+    <ol class="list-unstyled">
+      <% @changelogs.each do |changelog| %>
+        <li id="<%= changelog.identifier %>" class="changelog">
+          <h4>
+            <%= changelog.title %>
+             <div class="question-details">
+              <%= render 'admin/edit_changelog', changelog: changelog %>
+            </div>
+          </h4>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+</div>

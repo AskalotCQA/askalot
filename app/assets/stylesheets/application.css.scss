@@ -1,5 +1,6 @@
 // List of initial requirements (order is significant).
 //
+//=require cal-heatmap
 //=require gemoji
 //=require markdown
 //=require select2
@@ -25,23 +26,27 @@
 @import 'bootstrap/textcomplete';
 
 @import 'assets';
+@import 'layout';
 @import 'errors';
 
-@import 'layout';
 @import 'home';
 @import 'help';
 
 @import 'users';
 @import 'categories';
 @import 'tags';
+
 @import 'questions';
 @import 'answers';
 @import 'comments';
 @import 'evaluations';
 
-@import 'changelogs';
+@import 'activities';
 @import 'notifications';
-@import 'statistics';
 @import 'watchings';
 
+@import 'changelogs';
+@import 'statistics';
+
+@import 'responsive';
 @import 'fixes';

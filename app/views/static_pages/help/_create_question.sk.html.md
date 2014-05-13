@@ -23,4 +23,4 @@
 - Ak existuje tag ktorý chceš pridať, vyber ho a nevymýšľaj nový.
 - Správne tagy sú také, ktoré čo najlepšie dopĺňajú kontext otázky.
 
-[Potrebujem pomoc so systémom Askalot](<%= help_path %>)
+[Potrebujem pomôcť s Askalotom](<%= help_path %>)

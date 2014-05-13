@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Events::Dispatcher do
   let(:dispatcher) { Class.new { include Events::Dispatcher }.new }
-  let(:notifier)   { double(:notifier) }
+  let(:notifier) { double(:notifier) }
 
-  describe '.notify' do
+  describe '.dispatch' do
     before :each do
       dispatcher.subscribe(notifier)
     end

@@ -1,6 +1,6 @@
 class Tagging < ActiveRecord::Base
   include Deletable
-  include Notifiable # TODO(zbell) enable + add event hook on CUD
+  include Notifiable
 
   belongs_to :author, class_name: :User
   belongs_to :question

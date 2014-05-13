@@ -1,0 +1,18 @@
+sk:
+  admin:
+    navigation: 'Administrácia'
+    changelog:
+      tab: 'Changelog'
+      add: 'Pridať'
+      edit:
+        action: 'Upraviť'
+        cancel: 'Zrušiť'
+        submit: 'Uložiť'
+
+    category:
+      tab: 'Kategótrie'
+      add: 'Pridať kategóriu'
+      edit:
+        action: 'Upraviť'
+        cancel: 'Zrušiť'
+        submit: 'Uložiť'

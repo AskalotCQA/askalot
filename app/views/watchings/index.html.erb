@@ -8,9 +8,9 @@
 <div class="row">
   <div class="col-md-3">
     <ul class="nav nav-pills nav-stacked pill-navigation">
-      <%= tab_link_tag_with_count t('watching.tab.questions'), :questions, watchings_path(tab: :questions), badge_tag(Watching.of(:question).by(current_user).size, class: :'pull-right'), data: { toggle: :pill } %>
-      <%= tab_link_tag_with_count t('watching.tab.categories'), :categories, watchings_path(tab: :categories), badge_tag(Watching.of(:category).by(current_user).size, class: :'pull-right'), data: { toggle: :pill } %>
-      <%= tab_link_tag_with_count t('watching.tab.tags'), :tags, watchings_path(tab: :tags), badge_tag(Watching.of(:tag).by(current_user).size, class: :'pull-right'), data: { toggle: :pill } %>
+      <%= pill_link_tag_with_count t('watching.tab.questions'), :questions, watchings_path(tab: :questions), badge_tag(Watching.of(:question).by(current_user).size, class: :'pull-right'), analytics_attributes(:watchings, :switch, :questions) %>
+      <%= pill_link_tag_with_count t('watching.tab.categories'), :categories, watchings_path(tab: :categories), badge_tag(Watching.of(:category).by(current_user).size, class: :'pull-right'), analytics_attributes(:watchings, :switch, :categories) %>
+      <%= pill_link_tag_with_count t('watching.tab.tags'), :tags, watchings_path(tab: :tags), badge_tag(Watching.of(:tag).by(current_user).size, class: :'pull-right'), analytics_attributes(:watchings, :switch, :tags) %>
     </ul>
   </div>
   <div class="col-md-9">

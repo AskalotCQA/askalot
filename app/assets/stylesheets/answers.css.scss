@@ -2,6 +2,12 @@
 
 .new-answer {
   margin-top: 40px;
+
+  text-align: center;
+}
+
+.new-answer-form {
+  margin-top: 40px;
 }
 
 // collection
@@ -17,6 +23,8 @@
 // member
 
 .answer-content {
+  @include markdown-content;
+
   margin: 10px 0;
 }
 

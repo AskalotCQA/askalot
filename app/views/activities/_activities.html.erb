@@ -1,15 +1,18 @@
-<%= form_messages key: :activities %>
-
 <% if activities.any? %>
-  <ol class="notifications">
+  <ol class="activities">
     <% activities.each do |activity| %>
-      <%= render 'activities/activity', activity: activity %>
+      <%= render 'activity', activity: activity %>
     <% end %>
   </ol>
 
-  <%= paginate activities, params: { tab: :activities } %>
+  <div class="activities-note">
+    <small class="text-muted"><%= t("activity.note.#{tab.to_s}") %></small>
+  </div>
+
+  <%= paginate activities, params: { tab: tab } %>
 <% else %>
-  <p class="alert alert-info">
-    <%= t 'activities.none'%>
-  </p>
+  <div class="alert alert-info">
+    <%= t('activity.none.global') %>
+    <%= t('activity.none.followees') if tab.to_sym == :followees && current_user.followees.none? %>
+  </div>
 <% end %>

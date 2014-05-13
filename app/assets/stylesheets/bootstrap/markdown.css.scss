@@ -1,13 +1,34 @@
+@mixin markdown-content {
+  blockquote {
+    margin-bottom: 10px;
+
+    font-size: $font-size-base;
+  }
+
+  ul { list-style-type: disc }
+  ol, ul { > li > ul { list-style-type: circle }}
+  ol, ul { > li { > ol, > ul { > li > ul { list-style-type: square }}}}
+
+  ol, ul {
+    margin-bottom: 10px;
+    padding-left: 30px;
+  }
+
+  li > p:last-of-type {
+    margin: 0;
+  }
+}
+
 .markdown-tabs {
   border-bottom: none;
 
-  & > li > a {
+  > li > a {
     color: $text-muted;
   }
 
-  & > li.active > a,
-  & > li.active > a:hover,
-  & > li.active > a:focus {
+  > li.active > a,
+  > li.active > a:hover,
+  > li.active > a:focus {
     border-color: $input-border !important;
     border-bottom-color: #fff !important;
 
@@ -17,7 +38,7 @@
 
 .markdown-help {
   margin: 0;
-  padding: 10px 15px;
+  padding: 10px 15px 10px 0;
 
   color: $text-muted;
 
@@ -27,7 +48,9 @@
   @include text-overflow;
 }
 
-.markdown-content {
+.markdown-panes {
+  @include markdown-content;
+
   padding-top: 0 !important;
 
   .form-control {

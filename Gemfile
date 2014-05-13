@@ -27,9 +27,12 @@ gem 'bootstrap-datepicker-rails', '~> 1.3.0'
 gem 'select2-rails', '~> 3.4.9'
 gem 'jquery-tablesorter', '~> 1.9.5'
 gem 'rails-timeago', '~> 2.0'
+gem 'momentjs-rails'
 gem 'jquery-textcomplete-rails', '~> 0.1.2'
 gem 'handlebars_assets'
 gem 'jquery-ui-rails'
+gem 'd3_rails', '~> 3.4.6'
+gem 'cal-heatmap-rails', '~> 0.0.1'
 
 # markdown
 gem 'redcarpet'
@@ -38,7 +41,7 @@ gem 'gemoji', '~> 1.5.0'
 
 # internationalization
 gem 'rails-i18n', '~> 4.0.0'
-gem 'i18n-js'
+gem 'i18n-js', '~> 2.1.2'
 
 # pagination
 gem 'kaminari', '~> 0.15.1'
@@ -58,6 +61,7 @@ gem 'nokogiri', '~> 1.6.1'
 gem 'scout', github: 'smolnar/scout', branch: :master
 gem 'statistics2'
 gem 'symbolize'
+gem 'timecop'
 
 # monitoring
 gem 'garelic'
@@ -96,7 +100,6 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
-  gem 'timecop'
 
   # database
   gem 'faker', '1.1.2'
