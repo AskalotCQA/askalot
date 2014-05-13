@@ -5,22 +5,14 @@
     <% end %>
   </ol>
 
-  <div class="row">
-    <div class="col-md-12">
-      <%= paginate questions, params: { tab: :questions } %>
-    </div>
-  </div>
+  <%= paginate questions, params: { tab: :questions } %>
 <% else %>
-  <div class="row">
-    <div class="col-md-12">
-      <% if user == current_user %>
-        <span class="text-muted"><%= t('user.show.no_questions') %></span>
-        <%= icon_link_to :'question-circle', t('user.show.ask'), new_question_path, class: 'btn btn-success' %>
-      <% else %>
-        <div class="alert alert-info">
-          <%= t('user.show.other.no_questions') %>
-        </div>
-      <% end %>
+  <% if user == current_user %>
+    <span class="text-muted"><%= t('user.show.no_questions') %></span>
+    <%= icon_link_to :'question-circle', t('user.show.ask'), new_question_path, class: 'btn btn-success' %>
+  <% else %>
+    <div class="alert alert-info">
+      <%= t('user.show.other.no_questions') %>
     </div>
-  </div>
+  <% end %>
 <% end %>

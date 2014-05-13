@@ -8,4 +8,7 @@ class AddDeletableToFollowingsAndWatchings < ActiveRecord::Migration
       add_column model, :deleted_at, :timestamp
     end
   end
+
+  def down
+  end
 end

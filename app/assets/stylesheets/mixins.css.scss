@@ -8,6 +8,11 @@
   }
 }
 
+@mixin background-fill($color) {
+  background-color: $color;
+  fill: $color;
+}
+
 @mixin block-iconing {
   font-size: $font-size-h2;
   text-align: center;
@@ -26,11 +31,11 @@
 
   list-style-type: none;
 
-  & > li {
+  > li {
     padding: $padding-large-vertical 0;
   }
 
-  & > li + li {
+  > li + li {
     border-top: 1px solid $gray-lighter;
   }
 }
@@ -69,11 +74,11 @@
 
   list-style-type: none;
 
-  & > li {
+  > li {
     padding: $padding-base-vertical 0;
   }
 
-  & > li + li {
+  > li + li {
     border-top: 1px dashed $gray-lighter;
   }
 

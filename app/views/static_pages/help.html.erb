@@ -27,19 +27,19 @@
       <%= sidebar_tag do %>
         <ul class="nav">
           <li>
-            <%= link_to t('help.heading.ask_question'), "#ask-question" %>
+            <%= link_to t('help.heading.ask_question'), "#ask-question", analytics_attributes(:help, :scroll, :'ask-question') %>
           </li>
           <li>
-            <%= link_to t('help.heading.explore'), '#explore' %>
+            <%= link_to t('help.heading.explore'), '#explore', analytics_attributes(:help, :scroll, :'explore') %>
           </li>
           <li>
-            <%= link_to t('help.heading.answer_question'), '#answer-question' %>
+            <%= link_to t('help.heading.answer_question'), '#answer-question', analytics_attributes(:help, :scroll, :'answer-question') %>
           </li>
           <li>
-            <%= link_to t('help.heading.profile'), '#profile' %>
+            <%= link_to t('help.heading.profile'), '#profile', analytics_attributes(:help, :scroll, :'profile') %>
           </li>
           <li>
-            <%= link_to t('help.heading.markdown'), '#markdown' %>
+            <%= link_to t('help.heading.markdown'), '#markdown',  analytics_attributes(:help, :scroll, :'markdown') %>
           </li>
         </ul>
       <% end %>

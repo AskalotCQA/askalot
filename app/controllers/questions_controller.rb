@@ -41,8 +41,7 @@ class QuestionsController < ApplicationController
         dispatch_event :mention, @question, for: user
       end
 
-      #TODO(zbell) do not notify about anonymous questions since user.nick is still exposed in notifications
-      dispatch_event :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten unless @question.anonymous
+      dispatch_event :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
       register_watching_for @question
 
       flash[:notice] = t('question.create.success')

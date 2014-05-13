@@ -4,4 +4,7 @@ class FixReadAtInNotifications < ActiveRecord::Migration
       notification.update_attributes! read_at: notification.updated_at
     end
   end
+
+  def down
+  end
 end

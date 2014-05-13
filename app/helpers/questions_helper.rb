@@ -28,13 +28,14 @@ module QuestionsHelper
   end
 
   def question_label(label, options = {})
-    values, classes = question_label_attributes label
-    filter          = ((params[:tags] || '').split(',') + values).uniq.join(',')
+    model, tags, classes = question_label_attributes label
+
+    filter = ((params[:tags] || '').split(',') + tags).uniq.join(',')
 
     options.merge!(class: classes)
     options.deep_merge! class: classes, data: { id: filter } unless filter.blank?
 
-    link_to label.name, questions_path(tags: filter), options
+    link_to label.name, questions_path(tags: filter), analytics_attributes(model, :click, label.name).deep_merge(options)
   end
 
   def link_to_question(question, options = {})
@@ -44,7 +45,7 @@ module QuestionsHelper
   private
 
   def question_label_attributes(label)
-    return [label.name], [:label, :'label-info', :'question-tag'] unless label.is_a? Category
-    return label.tags.to_a, [:label, :'label-primary', :'question-category']
+    return :tag, [label.name], [:label, :'label-info', :'question-tag'] unless label.is_a? Category
+    return :category, label.tags.to_a, [:label, :'label-primary', :'question-category']
   end
 end

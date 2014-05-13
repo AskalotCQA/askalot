@@ -19,6 +19,9 @@ window.fixes = ->
   Poll.initialize()
   Markdown.bind()
   Hash.bind()
+  Analytics.bind()
+
+  moment.lang('sk')
 
   $('.popover').remove()
   $('.tooltip').remove()
@@ -44,7 +47,15 @@ window.fixes = ->
     $(this).tooltip(container: false, delay: { hide: 0 })
     $(this).tooltip('destroy')
 
+  $('[data-toggle="collapse"][data-collapse-after="hide"]').click -> $(this).hide()
+
   $('a[href="#"]').click (event) -> event.preventDefault()
+
+  $('a[data-scroll]').click (event) ->
+    $('html, body').animate(scrollTop: $($(this).attr('data-scroll')).offset().top, 400)
+
+  $('a[data-fade]').click ->
+    Effects.fadeOnFilter($(this).attr('data-fade'))
 
 $(document).ready ->
   fixes()

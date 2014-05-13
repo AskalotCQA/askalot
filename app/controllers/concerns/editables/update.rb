@@ -14,13 +14,12 @@ module Editables::Update
     @editable.assign_attributes(update_params)
 
     if @editable.changed?
-      if @editable.save && @editable.update_attributes_by_revision(@revision)
+      if @editable.update_attributes_by_revision(@revision)
         process_markdown_for @editable do |user|
           dispatch_event :mention, @editable, for: user
         end
 
-        #TODO(zbell) do not notify about anonymous questions since user.nick is still exposed in notifications
-        dispatch_event :update, @editable, for: @editable.to_question.watchers unless @editable.to_question.anonymous
+        dispatch_event :update, @editable, for: @editable.to_question.watchers, anonymous: @editable.to_question.anonymous
 
         flash[:notice] = t "#{@model}.update.success"
       else

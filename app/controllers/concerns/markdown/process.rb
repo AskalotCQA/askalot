@@ -17,7 +17,7 @@ module Markdown::Process
     resource.save!
   end
 
-  def unprocess_markdown_for(resource, attribute: :text, **options)
+  def unprocess_markdown_for(resource, attribute: :text, **options, &callback)
     text = resource.public_send(attribute).clone
 
     return if text.empty?

@@ -1,0 +1,31 @@
+<% content_for :scripts do %>
+  <script type="text/javascript">
+    new CalHeatMap().init({
+      itemSelector: '#user-<%= user.id %>-activities-calendar',
+      data: '<%= user_activities_path(user.nick, format: :json) %>',
+      start: new Date(<%= Time.now.year - 1 %>, <%= Time.now.month %>),
+      weekStartOnMonday: true,
+      domain: 'month',
+      subDomain: 'day',
+      range: 12,
+      cellPadding: 2,
+      cellSize: 11,
+      domainGutter: 0,
+      domainMargin: [0, 0, 0, 0],
+      label: { position: 'top' },
+      itemName: ['<%= t 'user.activity.calendar.item.singular' %>', '<%= t 'user.activity.calendar.item.plural' %>'],
+      domainLabelFormat: function(date) { return moment(date).format('MMM') },
+      subDomainDateFormat: function(date) { return moment(date).format('dddd, Do MMMM YYYY') },
+      subDomainTitleFormat: { filled: '{date}' },
+      tooltip: true,
+      legend: [5, 10, 15],
+      legendCellPadding: 2,
+      legendCellSize: 11,
+      legendHorizontalPosition: 'left',
+      legendMargin: [15, 0, 0, 0],
+      legendTitleFormat: { lower: '<%= t 'user.activity.calendar.legend.lower' %>', inner: '<%= t 'user.activity.calendar.legend.inner' %>', upper: '<%= t 'user.activity.calendar.legend.upper' %>' }
+    });
+  </script>
+<% end %>
+
+<div id="user-<%= user.id %>-activities-calendar" class="user-activities-calendar"></div>

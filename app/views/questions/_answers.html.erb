@@ -1,12 +1,12 @@
 <div class="row">
-  <div class="col-md-offset-2 col-md-8">
+  <div class="col-xs-7 col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-7 col-lg-8">
     <h2>
       <%= t 'count_x.answer', count: answers.size %>
     </h2>
   </div>
-  <div class="col-md-2">
-    <div class="new-answer text-center">
-      <%= icon_link_to :plus, t('answer.new.action'), '#answer', class: 'btn btn-success' %>
+  <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2">
+    <div class="new-answer">
+      <%= icon_link_to :plus, t('answer.new.action'), '#answer', analytics_attributes(:answer, :'scroll-to-new-form').merge(class: 'btn btn-success') %>
     </div>
   </div>
 </div>
@@ -14,15 +14,11 @@
 <hr/>
 
 <% if answers.any? %>
-  <div class="row">
-    <div class="col-md-12">
-      <ol class="question-answers">
-        <% answers.each do |answer| %>
-          <%= render 'questions/answer', answer: answer %>
-        <% end %>
-      </ol>
-    </div>
-  </div>
+  <ol class="question-answers">
+    <% answers.each do |answer| %>
+      <%= render 'questions/answer', answer: answer %>
+    <% end %>
+  </ol>
 
   <hr/>
 <% end %>

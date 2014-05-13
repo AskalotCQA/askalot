@@ -1,9 +1,17 @@
 class Changelog < ActiveRecord::Base
-  validates :title,   presence: true
-  validates :text,    presence: true
+  include Comparable
+
   validates :version, presence: true, uniqueness: true
+
+  def <=>(changelog)
+    -(self.to_version <=> changelog.to_version)
+  end
 
   def identifier
     @identifier ||= version.gsub(/\./, '-')
+  end
+
+  def to_version
+    @version ||= Gem::Version.create self.version
   end
 end

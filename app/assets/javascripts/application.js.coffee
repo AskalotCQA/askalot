@@ -19,13 +19,19 @@
 #= require jquery-tablesorter
 #= require rails-timeago
 #= require locales/jquery.timeago.sk.js
+#= require moment
+#= require moment/sk.js
 #= require jquery-textcomplete
+#
+#= require d3
+#= require cal-heatmap
 #
 #= require gemoji
 #= require form
 #= require table
 #= require hash
 #= require helper
+#= require effects
 #
 #= require questions
 #= require answers

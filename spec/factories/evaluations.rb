@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :evaluation do
-    association :evaluator
+    association :author
 
     text 'Lorem ipsum'
     value 0

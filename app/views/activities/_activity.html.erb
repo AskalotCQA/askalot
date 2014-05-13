@@ -1,13 +1,12 @@
-<li id="activity-<%= activity.id %>">
+<li>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-xs-9">
       <%= activity_icon_tag activity %>
       <%= activity_content activity %>
     </div>
-    <div class="col-md-4">
-      <%= user_icon_tag activity.initiator, tooltip_attributes(activity.initiator.nick, placement: :bottom) %>
+    <div class="col-xs-3">
+      <%= user_icon_tag activity.initiator_or_anonymous, tooltip_attributes(user_nick(activity.initiator_or_anonymous), placement: :bottom) %>
       <%= tooltip_time_tag activity.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
     </div>
   </div>
 </li>
-
