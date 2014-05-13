@@ -65,10 +65,6 @@ gem 'lda-ruby'
 gem 'tf_idf'
 gem 'timecop'
 
-# monitoring
-gem 'garelic'
-gem 'newrelic_rpm'
-
 # search
 gem 'elasticsearch'
 
@@ -82,6 +78,8 @@ group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
   gem 'rvm-capistrano'
+
+  gem 'activerecord-import'
 end
 
 # development & test
@@ -111,4 +109,8 @@ group :production do
   gem 'unicorn'
   gem 'rack-timeout'
   gem 'exception_notification'
+
+  # monitoring
+  gem 'garelic'
+  gem 'newrelic_rpm'
 end
