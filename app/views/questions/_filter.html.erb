@@ -11,9 +11,21 @@
         <div class="form-group">
           <div class="input-group select2-bootstrap-prepend">
             <span class="input-group-addon">
-              <%= icon_tag :tags %>
+              <%= icon_link_to :tags, url='' %>
             </span>
             <%= text_field_tag :tags, params[:tags], id: :question_tags, class: :'form-control', placeholder: t('question.tag.placeholder'), data: { as: :select2, role: [:tags, :filter].join(',') } %>
+          </div>
+        </div>
+      <% end %>
+      <%= form_tag questions_path, id: :fulltext_search, method: :get, remote: true, data: { state: true } do %>
+        <%= hidden_field_tag :tab, params[:tab] %>
+        <%= hidden_field_tag :poll, params[:poll] %>
+        <div class="form-group">
+          <div class="input-group select2-bootstrap-prepend">
+            <span class="input-group-addon">
+              <%= icon_link_to :search, '' %>
+            </span>
+            <%= text_field_tag :q, params[:q], id: :fulltext, class: :'form-control', placeholder: t('question.fulltext.placeholder') %>
           </div>
         </div>
       <% end %>
