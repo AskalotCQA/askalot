@@ -24,6 +24,10 @@ defaults: &defaults
       PHPSESSID: TODO
       SESSIDCHECK: TODO
 
+  url:
+    organization: TODO
+    site: TODO
+
 development:
   <<: *defaults
 

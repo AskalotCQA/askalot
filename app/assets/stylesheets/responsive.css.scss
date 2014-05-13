@@ -1,3 +1,13 @@
+// modals
+
+@media (max-width: $screen-xs-min - 1) {
+  .modal-dialog {
+    margin: 10px 0;
+    border-left: none;
+    border-right: none;
+  }
+}
+
 // tabs
 
 @media (max-width: $screen-sm-max) {
@@ -8,9 +18,7 @@
   .tab-navigation > .pull-right {
     margin-bottom: 20px;
   }
-}
 
-@media (max-width: $screen-sm-max) {
   .nav-tabs:not(.markdown-tabs) {
     display: block;
     width: 100%;
@@ -61,13 +69,16 @@
 
 // questions
 
+@media (max-width: $screen-md-max) {
+  .questions-controls > .pull-right {
+    float: none !important;
+    margin-bottom: 20px;
+  }
+}
+
 @media (max-width: $screen-sm-max) {
   .questions-filter, #question {
     margin-top: 20px;
-  }
-
-  .questions-controls > .pull-right {
-    margin-bottom: 20px;
   }
 }
 

@@ -17,7 +17,7 @@ module Probe
     end
 
     def create
-      delete if exists?
+      return if exists?
 
       client.indices.create index: name, type: type, body: { settings: settings, mappings: mappings }
 
