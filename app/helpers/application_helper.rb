@@ -23,11 +23,11 @@ module ApplicationHelper
   end
 
   def url_to_site(path = nil)
-    File.join 'https://teamnaruby.github.io/', path.to_s
+    File.join(Configuration.url.site, path.to_s)
   end
 
   def url_to_organization(path = nil)
-    File.join('https://github.com/teamnaruby/', path.to_s).sub(/\/\z/, '')
+    File.join(Configuration.url.organization, path.to_s).sub(/\/\z/, '')
   end
 
   def url_to_repository(path = nil)
