@@ -19,11 +19,11 @@ module ApplicationHelper
   end
 
   def canonical_url
-    "http://#{request.host}#{request.fullpath}"
+    "https://#{request.host}#{request.fullpath}"
   end
 
   def url_to_site(path = nil)
-    File.join 'http://labss2.fiit.stuba.sk/TeamProject/2013/team13is-si/', path.to_s
+    File.join 'https://teamnaruby.github.io/', path.to_s
   end
 
   def url_to_organization(path = nil)
