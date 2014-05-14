@@ -2,6 +2,7 @@ module Searchable
   extend ActiveSupport::Concern
 
   included do
+    include Orderable
     include Probe
 
     after_save do
@@ -21,7 +22,7 @@ module Searchable
 
       results = probe.search(query.reverse_merge(from: from, size: size))
 
-      results.map { |result| find(result.id) }
+      self.order_by(id: results.map(&:id))
     end
   end
 end
