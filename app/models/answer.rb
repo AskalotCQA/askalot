@@ -13,6 +13,7 @@ class Answer < ActiveRecord::Base
 
   belongs_to :question, -> { unscope where: :deleted }, counter_cache: true
 
+  has_many :profiles,  class_name: :'Answer::Profile',  dependent: :destroy
   has_many :revisions, class_name: :'Answer::Revision', dependent: :destroy
 
   validates :text, presence: true

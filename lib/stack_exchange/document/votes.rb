@@ -40,7 +40,6 @@ module StackExchange
           date = Time.parse(vote[:CreationDate]) > votable.created_at ? vote[:CreationDate] : votable.created_at + 1.minute
 
           return if Vote.exists?(stack_exchange_uuid: vote[:Id])
-          return if Vote.exists?(voter_id: 0, votable: votable, positive: positive)
 
           return Vote.create!(
             voter_id:            0,
