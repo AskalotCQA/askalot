@@ -23,7 +23,7 @@ module Searchable
       results = probe.search(query.reverse_merge(from: from, size: total, fields: [:id]))
       ids     = results.map(&:id)
 
-      self.where(questions: { id: ids }).order_by(:'questions.id' => ids).limit(size)
+      self.where(questions: { id: ids }).order_by(:'questions.id' => ids)
     end
   end
 end
