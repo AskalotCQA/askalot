@@ -7,7 +7,7 @@ class Activity < ActiveRecord::Base
 
   belongs_to :resource, -> { unscope where: :deleted }, polymorphic: true
 
-  default_scope -> { where.not(action: :mention).where(resource_type: [Answer, Comment, Evaluation, Question], anonymous: false) }
+  default_scope -> { where.not(action: :mention).where(resource_type: [Answer, Comment, Evaluation, Labeling, Question], anonymous: false) }
 
   scope :global, -> { unscope(where: :anonymous) }
 
