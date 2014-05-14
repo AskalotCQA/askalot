@@ -59,7 +59,7 @@ module StackExchange
           return if question.nil? || user.nil?
 
           return if Favorite.exists?(stack_exchange_uuid: vote[:Id])
-          return if Favotite.exists?(favorer: user, question: question)
+          return if Favorite.exists?(favorer: user, question: question)
 
           date = Time.parse(vote[:CreationDate]) > question.created_at ? vote[:CreationDate] : question.created_at + 1.minute
 
