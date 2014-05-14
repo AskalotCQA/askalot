@@ -5,7 +5,7 @@ module Orderable
     scope :order_by, lambda { |params|
       # TODO use nonumeric data
       # TODO allow other attributes
-      raise ArgumentError.new("Currently, only 'id' attribute is allowed.") if params.keys.map(&:to_sym) != [:id]
+      raise ArgumentError.new("Currently, only numeric data are allowed.") unless params.values.flatten.map(&:class).uniq == [Fixnum]
 
       params.inject(self) do |relation, (attribute, values)|
         array     = values.map { |value| value.to_i }.join(',')
