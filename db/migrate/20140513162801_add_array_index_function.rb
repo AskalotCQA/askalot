@@ -14,6 +14,6 @@ class AddArrayIndexFunction < ActiveRecord::Migration
   end
 
   def down
-    execute 'DROP FUNCTION array_idx'
+    execute 'DROP FUNCTION array_idx(anyarray, anyelement)'
   end
 end
