@@ -18,9 +18,9 @@ sk:
       followees: 'Zatiaľ nenasledujete žiadneho používateľa.'
 
     note:
-      global: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení všetkými používateľmi.'
-      followees: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení používateľmi, ktorých nasledujete.'
-      profile: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení.'
+      global: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí a ich označení, komentárov a hodnotení všetkými používateľmi.'
+      followees: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí a ich označení, komentárov a hodnotení používateľmi, ktorých nasledujete.'
+      profile: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí a ich označení, komentárov a hodnotení.'
 
     action:
       create: 'Pridanie'

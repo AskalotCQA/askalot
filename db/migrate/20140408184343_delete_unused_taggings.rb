@@ -10,4 +10,7 @@ class DeleteUnusedTaggings < ActiveRecord::Migration
       end
     end
   end
+
+  def down
+  end
 end

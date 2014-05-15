@@ -84,7 +84,7 @@ module Deletable
 
   def update_counter_caches!(action)
     self.reflections.each do |key, target|
-      if target.macro == :belongs_to && target.options[:counter_cache] == true
+      if target.macro == :belongs_to && target.options[:counter_cache]
         owner  = self.send(key.to_s)
         column = target.counter_cache_column.to_sym
 

@@ -57,7 +57,6 @@ class User < ActiveRecord::Base
 
   before_validation :resolve_nick, on: :create
 
-  #TODO (poizl) rename to something better
   def activities_seen_by(user)
     user == self ? activities.unscope(where: :anonymous) : activities
   end
