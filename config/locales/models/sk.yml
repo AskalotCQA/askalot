@@ -253,3 +253,11 @@ sk:
       evaluation:
         value: 'Hodnotenie'
         text: 'Komentár'
+
+      category:
+        name: 'Názov'
+        tags: 'Tagy'
+
+      changelog:
+        version: 'Verzia'
+        title: 'Názov'

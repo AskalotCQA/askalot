@@ -12,7 +12,7 @@
 
       <div class="form-group">
         <%= f.label :tags %>
-        <%= f.text_field :tags, class: :'form-control' %>
+        <%= f.text_field :tags, class: :'form-control', data: { as: :select2, role: :tags } %>
       </div>
 
       <button type="submit" class="btn btn-success btn-lg"><%= t('admin.category.add') %></button>
