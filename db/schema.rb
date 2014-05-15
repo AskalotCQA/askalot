@@ -21,15 +21,16 @@ ActiveRecord::Schema.define(version: 20140429003614) do
     t.integer  "resource_id",                   null: false
     t.string   "resource_type",                 null: false
     t.string   "action",                        null: false
-    t.date     "created_on",                    null: false
-    t.date     "updated_on",                    null: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.date     "created_on",                    null: false
+    t.date     "updated_on",                    null: false
     t.boolean  "anonymous",     default: false, null: false
   end
 
   add_index "activities", ["action"], name: "index_activities_on_action", using: :btree
   add_index "activities", ["anonymous"], name: "index_activities_on_anonymous", using: :btree
+  add_index "activities", ["created_at"], name: "index_activities_on_created_at", using: :btree
   add_index "activities", ["created_on"], name: "index_activities_on_created_on", using: :btree
   add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
   add_index "activities", ["resource_id", "resource_type"], name: "index_activities_on_resource_id_and_resource_type", using: :btree
@@ -320,8 +321,6 @@ ActiveRecord::Schema.define(version: 20140429003614) do
     t.datetime "updated_at"
   end
 
-  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
-
   create_table "slido_events", force: true do |t|
     t.integer  "category_id", null: false
     t.integer  "uuid",        null: false
@@ -433,7 +432,6 @@ ActiveRecord::Schema.define(version: 20140429003614) do
   add_index "users", ["name"], name: "index_users_on_name", using: :btree
   add_index "users", ["nick"], name: "index_users_on_nick", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["role"], name: "index_users_on_role", using: :btree
   add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "views", force: true do |t|
