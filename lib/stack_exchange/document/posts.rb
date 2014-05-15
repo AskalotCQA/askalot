@@ -1,8 +1,12 @@
 module StackExchange
   class Document
     class Posts < StackExchange::Document
+      def initialize(type)
+        @type = type
+      end
+
       def process_element(post, options = {})
-        if post[:PostTypeId] == '1'
+        if @type == :question && post[:PostTypeId] == '1'
           user = User.find_by(stack_exchange_uuid: post[:OwnerUserId])
 
           return unless user
@@ -37,7 +41,7 @@ module StackExchange
           end
         end
 
-        if post[:PostTypeId] == '2'
+        if @type == :answer && post[:PostTypeId] == '2'
           user     = User.find_by(stack_exchange_uuid: post[:OwnerUserId])
           question = Question.find_by(stack_exchange_uuid: post[:ParentId])
 

@@ -15,7 +15,7 @@ namespace :yeast do
   end
 
   desc 'Evaluate detecion'
-  task feed: :environment do
+  task evaluate: :environment do
     Events::Dispatcher.unsubscribe_all
     Events::Dispatcher.subscribe Yeast::EvaluationFeeder
 
