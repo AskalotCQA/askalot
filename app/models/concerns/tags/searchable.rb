@@ -93,14 +93,14 @@ module Tags
         query = {
           query: {
             query_string: {
-              query: probe.sanitizer.sanitize_query("#{params[:q]}*"),
+              query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
               default_operator: :and,
               fields: [:name]
             }
           }
         }
 
-        if params[:tab] == "recent"
+        if params[:recent]
           query.deep_merge!(
             query: {
               filtered: {
@@ -121,7 +121,7 @@ module Tags
           )
         end
 
-        if params[:tab] == "popular"
+        if params[:popular]
           query.deep_merge!(
             sort: {
               count: { order: :desc }

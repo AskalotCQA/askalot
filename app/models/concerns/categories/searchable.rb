@@ -83,7 +83,7 @@ module Categories
         search(
           query: {
             query_string: {
-              query: probe.sanitizer.sanitize_query("#{params[:q]}*"),
+              query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
               default_operator: :and,
               fields: [:name]
             }
