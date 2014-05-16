@@ -90,7 +90,7 @@ module Tags
 
     module ClassMethods
       def search_by(params)
-        query = {
+        search(
           query: {
             query_string: {
               query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
@@ -98,38 +98,7 @@ module Tags
               fields: [:name]
             }
           }
-        }
-
-        if params[:recent]
-          query.deep_merge!(
-            query: {
-              filtered: {
-                filter: {
-                  range: {
-                    created_at: {
-                      from: 1.month.ago,
-                      to: Time.now
-                    }
-                  }
-                }
-              },
-
-            },
-            sort: {
-              created_at: { order: :desc }
-            }
-          )
-        end
-
-        if params[:popular]
-          query.deep_merge!(
-            sort: {
-              count: { order: :desc }
-            }
-          )
-        end
-
-        search(query)
+        )
       end
     end
   end
