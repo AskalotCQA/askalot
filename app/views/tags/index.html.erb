@@ -3,7 +3,7 @@
 <%= render 'tags/searching', target: controller_name %>
 
 <ul class="nav nav-tabs tab-navigation">
-  <% unless params[:q].present? %>
+  <% if params[:q].present? %>
     <%= tab_link_tag_with_count t('tag.tab.results'), :results, tags_path(params.slice(:q, :page)), @tags.count, analytics_attributes(:tags, :switch, :all) %>
   <% else %>
     <%= tab_link_tag_with_count t('tag.tab.all'), :all, tags_path(params.except(:page).merge tab: :all), @tags.count, analytics_attributes(:tags, :switch, :all) %>
@@ -13,7 +13,7 @@
  </ul>
 
 <div class="tab-content">
-  <% unless params[:q].present? %>
+  <% if params[:q].present? %>
     <%= render_tab_content 'tags', :results, locals: { tags: @tags } %>
   <% else %>
     <%= render_tab_content 'tags', :all, locals: { tags: @tags } %>
