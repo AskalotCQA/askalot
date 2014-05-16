@@ -4,6 +4,26 @@
     <meta charset="utf-8" />
     <title><%= resolve_title(yield :title) %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="<%= t 'head.description' %>" />
+    <meta name="keywords" content="<%= t 'head.keywords' %>" />
+    <meta name="author" content="<%= t 'head.authors' %>" />
+    <meta property="og:title" content="<%= resolve_title(yield :title) %>" />
+    <meta property="og:description" content="<%= t 'head.content' %>" />
+    <meta property="og:image" content="<%= image_path 'icons/icon.png' %>" />
+    <meta property="og:url" content="<%= canonical_url %>" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="<%= resolve_title(yield :title) %>" />
+    <meta name="twitter:description" content="<%= t 'head.content' %>" />
+    <meta name="twitter:image" content="<%= image_path 'icons/icon.png' %>" />
+    <meta name="twitter:url" content="<%= canonical_url %>" />
+    <meta itemprop="name" content="<%= resolve_title(yield :title) %>" />
+    <meta itemprop="description" content="<%= t 'head.content' %>" />
+    <meta itemprop="image" content="<%= image_path 'icons/icon.png' %>" />
+    <link rel="apple-touch-icon" href="<%= image_path 'icons/touchicon.png' %>" />
+    <link rel="icon" href="<%= image_path 'icons/favicon.png' %>" />
+    <!--[if IE]><link rel="shortcut icon" href="<%= image_path 'icons/favicon.ico' %>" /><![endif]-->
+    <meta name="msapplication-TileColor" content="#fff" />
+    <meta name="msapplication-TileImage" content="<%= image_path 'icons/tileicon.png' %>" />
     <%= stylesheet_link_tag 'application', media: :all %>
     <%= csrf_meta_tags %>
   </head>

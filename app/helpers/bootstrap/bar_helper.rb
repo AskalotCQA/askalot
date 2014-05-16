@@ -6,18 +6,18 @@ module Bootstrap::BarHelper
     list  = content_tag :ul, capture(&block), class: :'dropdown-menu'
     body  = (link << list).html_safe
 
-    navbar_li_tag body, url, options.merge(class: [:dropdown, options.delete(:class)])
+    navbar_li_tag body, options.merge(class: [:dropdown, options.delete(:class)], url: url)
   end
 
-  def navbar_li_tag(body, url, options = {})
+  def navbar_li_tag(body = nil, options = {}, &block)
     classes = Array.wrap options.delete(:class)
-    classes << :active if request.fullpath.start_with? url
+    classes << :active if request.fullpath.split('?').first == options.delete(:url).split('?').first
 
-    content_tag :li, body, options.merge(class: classes.blank? ? nil : classes)
+    content_tag :li, body || capture(&block), options.merge(class: classes.blank? ? nil : classes)
   end
 
-  def navbar_link_tag(type, body, url, options = {})
-    navbar_li_tag icon_link_to(type, body, url, fixed: true), url, options
+  def navbar_link_tag(body, url, options = {})
+    navbar_li_tag link_to(body, url), options.merge(url: url)
   end
 
   def navbar_logo_tag(title, options = {})

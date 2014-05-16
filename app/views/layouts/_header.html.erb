@@ -8,21 +8,25 @@
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><%= link_to t('question.navigation'), questions_path %></li>
-        <li><%= link_to t('category.navigation'), categories_path %></li>
-        <li><%= link_to t('tag.navigation'), tags_path %></li>
-        <li><%= link_to t('user.navigation'), users_path %></li>
-        <% if user_signed_in? && can?(:observe, :all) %>
-          <li><%= link_to t('statistic.navigation'), statistics_path %></li>
+        <%= navbar_link_tag t('question.navigation'), questions_path %>
+        <%= navbar_link_tag t('category.navigation'), categories_path %>
+        <%= navbar_link_tag t('tag.navigation'), tags_path %>
+        <%= navbar_link_tag t('user.navigation'), users_path %>
+        <%= navbar_link_tag t('activity.navigation'), activities_path, class: :'hidden-sm' %>
+        <%= navbar_link_tag t('statistic.navigation'), statistics_path, class: :'hidden-sm' if user_signed_in? && can?(:observe, :all) %>
+        <%= navbar_link_tag t('help.navigation'), help_path, class: :'hidden-sm' %>
+        <%= navbar_dropdown_tag :'caret-down', nil, '#', class: :'visible-sm' do %>
+          <%= content_tag :li, link_to(t('activity.navigation'), activities_path) %>
+          <%= content_tag :li, link_to(t('statistic.navigation'), statistics_path) if user_signed_in? && can?(:observe, :all) %>
+          <li class="divider"></li>
+          <%= content_tag :li, link_to(t('help.navigation'), help_path) %>
         <% end %>
-        <li><%= link_to t('help.navigation'), help_path %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <%= render 'shared/notifications', notifications: current_user.notifications.unread.order(created_at: :desc).limit(5) %>
-          <li class="visible-xs"><%= link_to t('user.profile'), user_path(current_user.nick) %></li>
           <li class="hidden-xs"><%= link_to current_user.nick, user_path(current_user.nick) %></li>
-          <%= navbar_dropdown_tag :'cog', nil, '#', class: :'hidden-xs' do %>
+          <%= navbar_dropdown_tag :cog, nil, '#', class: :'hidden-xs' do %>
             <li><%= link_to t('user.edit.profile'), edit_user_registration_path(tab: :profile) %></li>
             <li><%= link_to t('user.edit.social'),  edit_user_registration_path(tab: :social) %></li>
             <li><%= link_to t('user.edit.privacy'), edit_user_registration_path(tab: :privacy) %></li>
@@ -32,18 +36,17 @@
             <li class="divider"></li>
             <li><%= link_to t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
           <% end %>
-          <li class="visible-xs"><%= link_to t('notification.navigation'), notifications_path %></li>
-          <li class="visible-xs"><%= link_to t('user.settings'), edit_user_registration_path %></li>
-          <li class="visible-xs"><%= link_to t('user.sign_out'), destroy_user_session_path, method: :delete %></li>
+          <%= navbar_link_tag t('user.profile'), user_path(current_user.nick), class: :'visible-xs' %>
+          <%= navbar_link_tag t('notification.navigation'), notifications_path, class: :'visible-xs' %>
+          <%= navbar_link_tag t('user.settings'), edit_user_registration_path, class: :'visible-xs' %>
+          <%= navbar_link_tag t('user.sign_out'), destroy_user_session_path, method: :delete, class: :'visible-xs' %>
         <% else %>
-          <% if Configuration.enable.registrations? %>
-            <li><%= link_to t('user.sign_up'), new_user_registration_path %></li>
-          <% end %>
-          <li><%= link_to t('user.sign_in'), new_user_session_path %></li>
+          <%= navbar_link_tag t('user.sign_up'), new_user_registration_path if Configuration.enable.registrations? %>
+          <%= navbar_link_tag t('user.sign_in'), new_user_session_path %>
         <% end %>
       </ul>
       <div class="navbar-form navbar-right hidden-xs hidden-sm hidden-print">
-        <%= icon_link_to :'question-circle', nil, new_question_path, analytics_attributes(:question, :'open-new-form', :navigation).deep_merge(tooltip_attributes(t('question.new.feature'), placement: :left).merge(class: 'btn btn-primary')) %>
+        <%= icon_link_to :'question-circle', nil, new_question_path, analytics_attributes(:question, :'open-new-form', :navigation).deep_merge(tooltip_attributes(t('question.new.feature'), placement: :left).merge(class: 'btn btn-primary new-question')) %>
       </div>
     </div>
   </div>

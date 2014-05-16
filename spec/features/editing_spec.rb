@@ -75,8 +75,8 @@ describe 'Editing', js: true do
 
   context 'when question or answer have evaluation' do
     before :each do
-      Evaluation.create!(text: 'Good question', evaluator: teacher, evaluable: question, value:0)
-      Evaluation.create!(text: 'Good answer', evaluator: teacher, evaluable: answer_user, value:0)
+      Evaluation.create!(text: 'Good question', author: teacher, evaluable: question, value:0)
+      Evaluation.create!(text: 'Good answer', author: teacher, evaluable: answer_user, value:0)
     end
 
     it 'user cant edit', js: true do

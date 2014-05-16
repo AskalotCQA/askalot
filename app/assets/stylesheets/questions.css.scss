@@ -1,14 +1,22 @@
 // general
 
+.new-question {
+  margin-right: 15px;
+}
+
 .questions-filter {
-  margin: $navbar-height 0 10px;
+  margin: $navbar-height 0 0;
+
+  a.btn, .form-group {
+    margin-bottom: 20px;
+  }
 }
 
 .questions-controls {
 }
 
 .questions {
-  & > ol > li + li {
+  > ol > li + li {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid $gray-lighter;
@@ -71,7 +79,7 @@
 }
 
 #question-evaluations {
-  & > p {
+  > p {
     margin-bottom: 10px;
   }
 }
@@ -81,6 +89,8 @@
 }
 
 .question-content {
+  @include markdown-content;
+
   margin-bottom: 10px;
 }
 
@@ -116,7 +126,7 @@
 .question-answers {
   @extend .list-unstyled;
 
-  & > li + li {
+  > li + li {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid $gray-lighter;

@@ -31,6 +31,7 @@
 #= require table
 #= require hash
 #= require helper
+#= require effects
 #
 #= require questions
 #= require answers

@@ -1,23 +1,6 @@
 <li>
   <div class="row">
-    <div class="col-md-3">
-      <div class="row">
-        <div class="col-md-6">
-          <%= content_tag :span, class: [:'answer-metric', answer_votes_coloring(answer)] do %>
-            <span class="answer-metric-value"><%= answer.votes_difference %></span>
-            <%= t('count.vote', count: answer.votes_difference) %>
-          <% end %>
-        </div>
-        <div class="col-md-6">
-          <%= content_tag :span, class: [:'answer-metric', answer_evaluations_coloring(answer)] do %>
-            <span class="answer-metric-value"><%= answer.evaluations.size %></span>
-            <%= t('count.evaluation', count: answer.evaluations.size) %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-9">
+    <div class="col-xs-12 col-sm-push-3 col-sm-9">
       <div class="question-preview">
         <h4>
           <%= evaluation_badge_tag answer, placement: :bottom if answer.evaluations.any? %>
@@ -27,6 +10,23 @@
 
         <div class="answer-content">
           <%= answer_text_preview answer, length: 80 %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-pull-9 col-sm-3">
+      <div class="row">
+        <div class="col-xs-3 col-sm-6">
+          <%= content_tag :span, class: [:'answer-metric', answer_evaluations_coloring(answer)] do %>
+            <span class="answer-metric-value"><%= answer.evaluations.size %></span>
+            <%= t('count.evaluation', count: answer.evaluations.size) %>
+          <% end %>
+        </div>
+        <div class="col-xs-3 col-sm-6">
+          <%= content_tag :span, class: [:'answer-metric', answer_votes_coloring(answer)] do %>
+            <span class="answer-metric-value"><%= votes_difference(answer) %></span>
+            <%= t('count.vote', count: answer.votes_difference) %>
+          <% end %>
         </div>
       </div>
     </div>

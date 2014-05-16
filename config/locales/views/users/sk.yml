@@ -12,6 +12,7 @@ sk:
 
       profile: 'Profil'
       questions: 'Otázky'
+      anonymous: 'Anonymné otázky'
       answers: 'Odpovede'
       favorites: 'Obľúbené'
       activities: 'Aktivita'
@@ -65,7 +66,7 @@ sk:
 
     welcome:
       title: 'Ďakujeme za registráciu'
-      message: 'Pre ďalšie pokračovanie v práci so systémom je potrebné ešte registráciu potvrdiť. E-mail s potvrdzovacím odkazom Vám bol zaslaný na adresu uvedenú pri registrácii.'
+      message: 'Pre ďalšie pokračovanie v práci so systémom je potrebné registráciu potvrdiť.'
 
     profile: 'Profil'
     social: 'Sociálne siete'

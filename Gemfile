@@ -41,7 +41,7 @@ gem 'gemoji', '~> 1.5.0'
 
 # internationalization
 gem 'rails-i18n', '~> 4.0.0'
-gem 'i18n-js'
+gem 'i18n-js', '~> 2.1.2'
 
 # pagination
 gem 'kaminari', '~> 0.15.1'
@@ -61,6 +61,7 @@ gem 'nokogiri', '~> 1.6.1'
 gem 'scout', github: 'smolnar/scout', branch: :master
 gem 'statistics2'
 gem 'symbolize'
+gem 'timecop'
 
 # monitoring
 gem 'garelic'
@@ -99,7 +100,6 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
-  gem 'timecop'
 
   # database
   gem 'faker', '1.1.2'

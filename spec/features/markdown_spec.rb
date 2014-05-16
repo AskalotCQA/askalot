@@ -22,7 +22,7 @@ describe 'Markdown' do
 
       wait_for_remote
 
-      within '.markdown-content' do
+      within '.markdown-panes' do
         expect(page).to have_css('h1', count: 1)
         expect(page).to have_content('Lorem ipsum')
       end
@@ -167,7 +167,7 @@ describe 'Markdown' do
 
       wait_for_remote
 
-      within '.markdown-content' do
+      within '.markdown-panes' do
         expect(page).to have_css('h1', count: 1)
         expect(page).to have_content('My neat solution')
       end
