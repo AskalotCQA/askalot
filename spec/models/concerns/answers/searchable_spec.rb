@@ -12,29 +12,19 @@ shared_examples_for Answers::Searchable do
       author   = create :user
       answers = []
 
-      answers << create(:answer, question: question, author: author, text: 'First')
-      answers << create(:answer, question: question, author: author, text: 'First and second')
-      answers << create(:answer, question: question, author: author, text: 'First, second and third')
+      answers << create(:answer, question: question, author: author, text: 'One')
+      answers << create(:answer, question: question, author: author, text: 'One, two')
+      answers << create(:answer, question: question, author: author, text: 'One, two, three')
 
-      results = Answer.search_by(q: 'third')
+      results = Answer.search_by(q: 'three')
 
       expect(results.size).to eql(1)
       expect(results.first).to eql(answers.last)
 
-      results = Answer.search_by(q: 'First')
+      results = Answer.search_by(q: 'One')
 
       expect(results.size).to eql(3)
       expect(results.sort).to eql(answers.sort)
-    end
-
-    it 'paginates results' do
-      results = Answer.search_by(q: 'Lorem')
-
-      expect(results.size).to eql(10)
-
-      results = Answer.search_by(q: 'Lorem', page: 0, per_page: 5)
-
-      expect(results.size).to eql(5)
     end
   end
 end

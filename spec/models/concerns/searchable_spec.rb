@@ -20,12 +20,6 @@ shared_examples_for Searchable do
 
       expect(results.sort).to eql(records)
     end
-
-    it 'paginates records' do
-      results = model.search(page: 0, per_page: 5)
-
-      expect(results.size).to eql(5)
-    end
   end
 
   describe 'after save' do
