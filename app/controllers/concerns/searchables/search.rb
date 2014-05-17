@@ -1,7 +1,7 @@
 module Searchables::Search
   extend ActiveSupport::Concern
 
-  def search(relation)
+  def search(relation, options = {})
     return relation unless search_params[:q].present?
     @model = controller_name.classify.constantize
 

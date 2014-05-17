@@ -14,7 +14,7 @@ class UsersController < ApplicationController
              end
 
     @users = search(@users)
-    @users = @users.page(params[:page]).per(60)
+    @users = @users.page(params[:page]).per(60) unless params[:q]
   end
 
   def show

@@ -19,9 +19,14 @@ module Searchable
       size = query.delete(:per_page) || 20
       from = (query.delete(:page) || 0) * size
 
+      model   = self
       results = probe.search(query.reverse_merge(from: from, size: size))
 
-      results.map { |result| find(result.id) }
+      results.loader = lambda do |results|
+        results.map { |result| model.find(result.id) }
+      end
+
+      results
     end
   end
 end
