@@ -1,10 +1,14 @@
 <% provide(:title, t('user.index.title')) %>
 
-<%= render 'users/searching' %>
+<%= render 'users/searching', target: controller_name %>
 
-<ul class="nav nav-tabs tab-navigation">
-  <%= tab_link_tag_with_count t('user.tab.all'), :all, users_path(params.except(:page).merge tab: :all), User.count, analytics_attributes(:users, :switch, :all).merge(remote: true) %>
-  <%= tab_link_tag_with_count t('user.tab.recent'), :recent, users_path(params.except(:page).merge tab: :recent), User.recent.count, analytics_attributes(:users, :switch, :recent).merge(remote: true) %>
+<ul id="users-tabs" class="nav nav-tabs tab-navigation">
+  <% if params[:q].present? %>
+    <%= tab_link_tag_with_count t('user.tab.recent'), :results, tags_path(params.slice(:q, :page)), @users.count, analytics_attributes(:users, :search, :results).merge(remote: true, data: { fade: '#users' }) %>
+  <% else %>
+    <%= tab_link_tag_with_count t('user.tab.all'), :all, users_path(params.except(:page).merge tab: :all), User.count, analytics_attributes(:users, :switch, :all).merge(remote: true, data: { fade: '#users' }) %>
+    <%= tab_link_tag_with_count t('user.tab.recent'), :recent, users_path(params.except(:page).merge tab: :recent), User.recent.count, analytics_attributes(:users, :switch, :recent).merge(remote: true, data: { fade: '#users' }) %>
+  <% end %>
 </ul>
 
 <%= render 'users', users: @users %>
