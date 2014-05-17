@@ -65,10 +65,6 @@ module Users
                   index: :not_analyzed
                 }
               }
-            },
-
-            created_at: {
-              type: :date
             }
           }
         }
@@ -76,8 +72,7 @@ module Users
 
       probe.index.mapper.define(
         id:    -> { id },
-        nick: -> { name },
-        created_at: -> { created_at },
+        nick: -> { nick }
       )
 
       probe.index.create
@@ -85,38 +80,15 @@ module Users
 
     module ClassMethods
       def search_by(params)
-        query = {
+        search(
           query: {
             query_string: {
               query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
               default_operator: :and,
-              fields: [:name]
+              fields: [:nick]
             }
           }
-        }
-
-        if params[:recent]
-          query.deep_merge!(
-            query: {
-              filtered: {
-                filter: {
-                  range: {
-                    created_at: {
-                      from: 1.month.ago,
-                      to: Time.now
-                    }
-                  }
-                }
-              },
-
-            },
-            sort: {
-              created_at: { order: :desc }
-            }
-          )
-        end
-
-        search(query)
+        )
       end
     end
   end
