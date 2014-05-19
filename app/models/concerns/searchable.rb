@@ -17,6 +17,8 @@ module Searchable
 
   module ClassMethods
     def search(query = {})
+      # TODO resolve paginating and do not fetch all records at once
+
       total    = self.count
       results  = probe.search(query.reverse_merge(size: total, fields: [:id]))
       ids      = results.map(&:id)
