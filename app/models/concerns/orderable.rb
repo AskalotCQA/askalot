@@ -8,6 +8,7 @@ module Orderable
       types = params.values.flatten.map(&:class).uniq
 
       raise ArgumentError.new("Currently, only numeric data are allowed.") unless types.empty? || types == [Fixnum]
+
       params.inject(self) do |relation, (attribute, values)|
         next if values.empty?
 
