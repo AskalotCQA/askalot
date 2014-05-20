@@ -16,6 +16,7 @@ class CategoriesController < ApplicationController
       redirect_to administration_dashboard_index_path(tab: 'category')
       flash[:notice] = t('category.create.success')
     else
+      form_error_messages_for @category
       redirect_to administration_dashboard_index_path(tab: 'category')
     end
   end
@@ -27,9 +28,11 @@ class CategoriesController < ApplicationController
   def update
     @category = Category.find(params[:id])
     if @category.update_attributes(category_params)
-      redirect_to administration_dashboard_index_path(tab: params[:tab])
+      flash[:notice] = t('category.update.success')
+      redirect_to administration_dashboard_index_path(tab: 'category')
     else
-      redirect_to administration_dashboard_index_path(tab: params[:tab])
+      form_error_messages_for @category
+      redirect_to administration_dashboard_index_path(tab: 'category')
     end
   end
 end
