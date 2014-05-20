@@ -1,4 +1,4 @@
-class Admin::DashboardController < ApplicationController
+class Administration::DashboardController < ApplicationController
   before_action :authenticate_user!
   include Editables::Update
 

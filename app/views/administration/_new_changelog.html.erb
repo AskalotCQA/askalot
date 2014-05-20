@@ -1,4 +1,4 @@
-<% provide :title, t('admin.changelog.tab') %>
+<% provide :title, t('administration.changelog.tab') %>
 
 <div class="row">
   <div class="span6 offset3">
@@ -21,7 +21,7 @@
         <% end %>
       </div>
 
-      <button type="submit" class="btn btn-success btn-lg"><%= t('admin.changelog.add') %></button>
+      <button type="submit" class="btn btn-success btn-lg"><%= t('administration.changelog.add') %></button>
     <% end %>
   </div>
 </div>
@@ -37,7 +37,7 @@
             <%= changelog.title %>
             <%= changelog.version %>
              <div class="question-details">
-              <%= render 'admin/edit_changelog', changelog: changelog %>
+              <%= render 'administration/edit_changelog', changelog: changelog %>
             </div>
           </h4>
         </li>

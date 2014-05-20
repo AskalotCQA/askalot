@@ -93,8 +93,8 @@ Askalot::Application.routes.draw do
     delete :clean, on: :collection
   end
 
-  namespace "admin" do
-    root :to => 'admin#index'
+  namespace "administration" do
+    root :to => 'administration#index'
     resources :dashboard,  only: [:index]
   end
 

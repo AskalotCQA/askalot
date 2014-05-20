@@ -7,3 +7,6 @@ sk:
 
     tab:
       all: 'Všetky'
+
+    create:
+      success: 'Pridanie kategórie bolo úspešné'

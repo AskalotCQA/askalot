@@ -14,7 +14,7 @@
         <%= navbar_link_tag t('user.navigation'), users_path %>
         <%= navbar_link_tag t('activity.navigation'), activities_path, class: :'hidden-sm' %>
         <%= navbar_link_tag t('statistic.navigation'), statistics_path, class: :'hidden-sm' if user_signed_in? && can?(:observe, :all) %>
-        <%= navbar_link_tag t('admin.navigation'), admin_dashboard_index_path, class: :'hidden-sm' if user_signed_in? && can?(:observe, :all) %>
+        <%= navbar_link_tag t('admin.navigation'), administration_dashboard_index_path, class: :'hidden-sm' if user_signed_in? && can?(:observe, :all) %>
         <%= navbar_link_tag t('help.navigation'), help_path, class: :'hidden-sm' %>
         <%= navbar_dropdown_tag :'caret-down', nil, '#', class: :'visible-sm' do %>
           <%= content_tag :li, link_to(t('activity.navigation'), activities_path) %>
