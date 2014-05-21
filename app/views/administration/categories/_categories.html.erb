@@ -1,0 +1,29 @@
+
+<div class="row">
+  <div class="col-md-12">
+
+    <ul class="list-unstyled">
+      <% categories.each do |category| %>
+        <div class="row">
+          <div class="col-md-4">
+            <%= link_to_category category %>
+          </div>
+
+          <div class="col-md-4">
+            <% if category %>
+              <% category.tags.each do |category_tag| %>
+                <span class="label label-info"><%= category_tag %></span>
+              <% end %>
+            <% end %>
+          </div>
+
+          <div class="col-md-4">
+            <div class="question-details">
+              <%#= render 'administration/categories/editing', category: category %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </ul>
+  </div>
+</div>
