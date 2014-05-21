@@ -4,6 +4,8 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    # TODO(zbell) refactor to use only actions :read, :create, :update and :destroy on models
+
     can(:edit,   User) { |resource| resource == user }
     can(:follow, User) { |resource| resource != user }
 

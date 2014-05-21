@@ -4,14 +4,14 @@
   <div class="row">
     <div class="col-md-3">
       <ul class="nav nav-pills nav-stacked pill-navigation">
-        <%= tab_link_tag t('administration.changelog.tab'), :changelog, administration_dashboard_index_path(tab: :changelog), data: { toggle: :pill } %>
-        <%= tab_link_tag t('administration.category.tab'), :category, administration_dashboard_index_path(tab: :category), data: { toggle: :pill } %>
+        <%= tab_link_tag t('administration.tab.categories'), :categories, administration_dashboard_index_path(tab: :categories), data: { toggle: :pill } %>
+        <%= tab_link_tag t('administration.tab.changelogs'), :changelogs, administration_dashboard_index_path(tab: :changelogs), data: { toggle: :pill } %>
       </ul>
     </div>
     <div class="col-md-6">
       <div class="pill-content tab-content">
-        <%= render_tab_content 'administration/new_changelog', :changelog %>
-        <%= render_tab_content 'administration/new_category',  :category %>
+        <%= render_tab_content 'administration/new_category',  :categories %>
+        <%= render_tab_content 'administration/new_changelog', :changelogs %>
       </div>
     </div>
   </div>
