@@ -32,6 +32,7 @@
 #= require hash
 #= require helper
 #= require effects
+#= require filter
 #
 #= require questions
 #= require answers
