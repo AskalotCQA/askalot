@@ -5,9 +5,13 @@ module Orderable
     scope :order_by, lambda { |params|
       # TODO use nonumeric data
       # TODO allow other attributes
-      raise ArgumentError.new("Currently, only 'id' attribute is allowed.") if params.keys.map(&:to_sym) != [:id]
+      types = params.values.flatten.map(&:class).uniq
+
+      raise ArgumentError.new("Currently, only numeric data are allowed.") unless types.empty? || types == [Fixnum]
 
       params.inject(self) do |relation, (attribute, values)|
+        next if values.empty?
+
         array     = values.map { |value| value.to_i }.join(',')
         attribute = attribute.to_s.gsub(/[^a-zA-Z0-9\.\_]/, '')
 

@@ -8,7 +8,19 @@ module Probe
       def initialize(response)
         @response = response
         @hits     = response['hits']
-        @results  = @hits['hits'].map { |hit| OpenStruct.new(hit['_source']) }
+        @results  = @hits['hits'].map do |hit|
+          if hit['_source']
+            data = hit['_source']
+          else
+            data = hit['fields'].inject(Hash.new) do |hash, (key, value)|
+              hash[key] = value.size > 1 ? value : value.first
+
+              hash
+            end
+          end
+
+          OpenStruct.new(data)
+        end
       end
 
       def each

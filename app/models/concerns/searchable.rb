@@ -17,12 +17,13 @@ module Searchable
 
   module ClassMethods
     def search(query = {})
-      size = query.delete(:per_page) || 20
-      from = (query.delete(:page) || 0) * size
+      # TODO resolve paginating and do not fetch all records at once
 
-      results = probe.search(query.reverse_merge(from: from, size: size))
+      total    = self.count
+      results  = probe.search(query.reverse_merge(size: total, fields: [:id]))
+      ids      = results.map(&:id)
 
-      self.order_by(id: results.map(&:id))
+      self.where(questions: { id: ids }).order_by(id: ids)
     end
   end
 end

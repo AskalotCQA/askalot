@@ -16,7 +16,9 @@ describe Question do
   it_behaves_like Touchable
   it_behaves_like Watchable
 
-  it_behaves_like Questions::Searchable
+  it_behaves_like Questions::Searchable do
+    let(:attribute) { :text }
+  end
 
   it 'requires title' do
     question = build :question, title: ''

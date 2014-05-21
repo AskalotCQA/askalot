@@ -2,7 +2,7 @@ class AddArrayIndexFunction < ActiveRecord::Migration
   def up
     execute <<-EOF
       CREATE OR REPLACE FUNCTION array_idx(anyarray, anyelement)
-        RETURNS int AS 
+        RETURNS int AS
       $$
         SELECT i FROM (
           SELECT generate_series(array_lower($1,1),array_upper($1,1))
@@ -14,6 +14,6 @@ class AddArrayIndexFunction < ActiveRecord::Migration
   end
 
   def down
-    execute 'DROP FUNCTION array_idx'
+    execute 'DROP FUNCTION array_idx(anyarray, anyelement)'
   end
 end
