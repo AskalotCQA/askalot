@@ -7,7 +7,7 @@ class Administration::DashboardController < ApplicationController
     authorize! :administrate, nil
 
     @categories = Category.order(:name)
-    @changelogs = Changelog.order(version: :desc)
+    @changelogs = Changelog.all.sort
 
     @category  = Category.new
     @changelog = Changelog.new

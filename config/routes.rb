@@ -42,7 +42,7 @@ Askalot::Application.routes.draw do
     get :watch, on: :member
   end
 
-  resources :categories, only: [:index, :new, :create, :update] do
+  resources :categories, only: [:index, :create, :update] do
     concerns :watchable
   end
 
@@ -97,5 +97,5 @@ Askalot::Application.routes.draw do
     resources :dashboard, only: [:index]
   end
 
-  resources :changelogs, only: [:index, :new, :create, :update]
+  resources :changelogs, only: [:index, :create, :update]
 end

@@ -49,11 +49,8 @@ class Ability
     if user.role? :administrator
       can :administrate
 
-      can :delete, [Question, Answer, Comment]
       can :edit,   [Question, Answer, Comment]
-
-      can :delete, [Category, Changelog]
-      can :edit,   [Category, Changelog]
+      can :delete, [Question, Answer, Comment]
 
       can :vote, :all
     end
