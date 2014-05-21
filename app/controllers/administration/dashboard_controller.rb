@@ -1,6 +1,4 @@
 class Administration::DashboardController < AdministrationController
-  before_action :authenticate_user!
-
   default_tab :categories, only: :index
 
   def index

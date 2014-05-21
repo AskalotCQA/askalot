@@ -1,10 +1,7 @@
 class Administration::CategoriesController < AdministrationController
-  before_action :authenticate_user!
   authorize_resource
 
   def create
-    authorize! :administrate, nil
-
     @category = Category.new(category_params)
 
     if @category.save
@@ -13,12 +10,10 @@ class Administration::CategoriesController < AdministrationController
       form_error_messages_for @category
     end
 
-    redirect_to administration_dashboard_index_path(tab: 'category')
+    redirect_to administration_root_path(tab: 'category')
   end
 
   def update
-    authorize! :administrate, nil
-
     @category = Category.find(params[:id])
 
     if @category.update_attributes(category_params)
@@ -27,7 +22,7 @@ class Administration::CategoriesController < AdministrationController
       form_error_messages_for @category
     end
 
-    redirect_to administration_dashboard_index_path(tab: 'category')
+    redirect_to administration_root_path(tab: 'category')
   end
 
   private

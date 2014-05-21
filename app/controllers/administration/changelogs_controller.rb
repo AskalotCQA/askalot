@@ -1,10 +1,7 @@
 class Administration::ChangelogsController < AdministrationController
-  before_action :authenticate_user!
   authorize_resource
 
   def create
-    authorize! :administrate, nil
-
     @changelog = Changelog.new(changelog_params)
 
     if @changelog.save
@@ -13,12 +10,10 @@ class Administration::ChangelogsController < AdministrationController
       form_error_messages_for @changelog
     end
 
-    redirect_to administration_dashboard_index_path(tab: params[:tab])
+    redirect_to administration_root_path(tab: params[:tab])
   end
 
   def update
-    authorize! :administrate, nil
-
     @changelog = Changelog.find(params[:id])
 
     if @changelog.update_attributes(changelog_params)
@@ -27,7 +22,7 @@ class Administration::ChangelogsController < AdministrationController
       form_error_messages_for @changelog
     end
 
-    redirect_to administration_dashboard_index_path(tab: params[:tab])
+    redirect_to administration_root_path(tab: params[:tab])
   end
 
   private

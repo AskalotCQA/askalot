@@ -49,7 +49,7 @@ class Ability
     end
 
     if user.role? :administrator
-      can :administrate
+      can :administrate, :all
 
       can :edit,   [Question, Answer, Comment]
       can :delete, [Question, Answer, Comment]
