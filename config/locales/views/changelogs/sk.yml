@@ -6,8 +6,9 @@ sk:
       title: 'Čo je nové v Askalote?'
       introduction: 'História pridanej funkcionality a zlepšení systému.'
 
-    update:
-      success: 'Aktualizovanie changelogu bolo úspešné'
-
     create:
-      success: 'Changelog bol úspešne pridaný'
+      success: 'Protokol zmien bol úspešne pridaný.'
+
+    update:
+      success: 'Protokol zmien bol úspešne aktualizovaný.'
+

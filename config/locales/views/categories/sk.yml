@@ -8,8 +8,8 @@ sk:
     tab:
       all: 'Všetky'
 
-    update:
-      success: 'Aktualizovanie kategórie bolo úspešné'
-
     create:
-      success: 'Pridanie kategórie bolo úspešné'
+      success: 'Kategória bola úspešne pridaná.'
+
+    update:
+      success: 'Kategória bola úspešne aktualizovaný.'
