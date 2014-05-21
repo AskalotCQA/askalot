@@ -1,5 +1,6 @@
-class Administration::ChangelogsController < ApplicationController
+class Administration::ChangelogsController < AdministrationController
   before_action :authenticate_user!
+  authorize_resource
 
   def create
     authorize! :administrate, nil
@@ -12,7 +13,7 @@ class Administration::ChangelogsController < ApplicationController
       form_error_messages_for @changelog
     end
 
-    redirect_to administration_dashboard_index_path(tab: params[:tab]  )
+    redirect_to administration_dashboard_index_path(tab: params[:tab])
   end
 
   def update
@@ -26,12 +27,12 @@ class Administration::ChangelogsController < ApplicationController
       form_error_messages_for @changelog
     end
 
-    redirect_to administration_dashboard_index_path(tab: params[:tab]  )
+    redirect_to administration_dashboard_index_path(tab: params[:tab])
   end
 
   private
 
   def changelog_params
-    params.require(:changelog).permit(:version, :title, :text  )
+    params.require(:changelog).permit(:version, :title, :text)
   end
 end

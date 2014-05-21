@@ -8,11 +8,11 @@
         <%= tab_link_tag t('administration.tab.changelogs'), :changelogs, administration_dashboard_index_path(tab: :changelogs), data: { toggle: :pill } %>
       </ul>
     </div>
-    <div class="col-md-6">
-      <div class="pill-content tab-content">
-        <%= render_tab_content 'administration/new_category',  :categories %>
-        <%= render_tab_content 'administration/new_changelog', :changelogs %>
-      </div>
-    </div>
+<div class="col-md-6">
+  <div class="pill-content tab-content">
+    <%= render_tab_content 'administration/categories/new_category',  :categories %>
+    <%= render_tab_content 'administration/changelogs/new_changelog', :changelogs %>
   </div>
+</div>
+</div>
 </div>
