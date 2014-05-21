@@ -1,14 +1,15 @@
 class Administration::DashboardController < ApplicationController
   before_action :authenticate_user!
-  include Editables::Update
 
-  default_tab :changelog, only: :index
+  default_tab :categories, only: :index
 
   def index
-    @changelogs = Changelog.order(version: :desc)
+    authorize! :administrate, nil
+
     @categories = Category.order(:name)
-    @category = Category.new
+    @changelogs = Changelog.order(version: :desc)
+
+    @category  = Category.new
     @changelog = Changelog.new
   end
-
 end
