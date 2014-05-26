@@ -7,8 +7,11 @@ sk:
       changelogs: 'Protokoly zmien'
 
     changelog:
-      tab: 'Protokoly zmien'
       add: 'Pridať protokol zmien'
+      delete:
+        action: 'Zmazať protokol zmien'
+        text: 'Naozaj chcete zmazať tento protokol zmien?'
+      tab: 'Protokoly zmien'
 
       edit:
         action: 'Upraviť'

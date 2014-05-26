@@ -13,6 +13,12 @@ class Administration::CategoriesController < AdministrationController
     redirect_to administration_root_path(tab: 'category')
   end
 
+  def destroy
+    Category.find(params[:id]).destroy
+    flash[:notice] = t('category.delete.success')
+    redirect_to administration_root_path(tab: 'Category')
+  end
+
   def update
     @category = Category.find(params[:id])
 
