@@ -58,12 +58,4 @@ class Question < ActiveRecord::Base
   def to_question
     self
   end
-
-  def self.fulltext(query)
-    questions = Question.search_by(q: query)
-    #answers   = Answer.search_by(q: query)
-    #comments  = Comment.search_by(q: query)
-
-    questions
-  end
 end
