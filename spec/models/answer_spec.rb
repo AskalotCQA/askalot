@@ -3,7 +3,6 @@ require 'spec_helper'
 require 'models/concerns/editable_spec'
 require 'models/concerns/deletable_spec'
 require 'models/concerns/touchable_spec'
-require 'models/concerns/answers/searchable_spec'
 
 describe Answer do
   #it_behaves_like Editable
