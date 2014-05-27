@@ -76,8 +76,6 @@ module Answers
     module ClassMethods
       def search_by(params)
         search(
-          page: params[:page],
-          per_page: params[:per_page],
           query: {
             query_string: {
               query: probe.sanitizer.sanitize_query(params[:q]),
