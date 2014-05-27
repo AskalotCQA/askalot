@@ -14,7 +14,8 @@ class QuestionsController < ApplicationController
 
   def index
     if params[:q]
-      @questions = Question.fulltext(params[:q])
+      @questions = Question.search_by(q: params[:q])
+      @fulltext_count = @questions.count
     else
       @questions = case params[:tab].to_sym
                    when :unanswered then Question.unanswered.by_votes
@@ -23,9 +24,10 @@ class QuestionsController < ApplicationController
                    when :favored    then Question.favored.by_votes
                    else Question.recent
                    end
+
+      @questions = filter_questions(@questions)
     end
 
-    @questions = filter_questions(@questions)
     @questions = @questions.page(params[:page]).per(20)
 
     initialize_polling
