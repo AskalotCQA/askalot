@@ -5,8 +5,6 @@ class Comment < ActiveRecord::Base
   include Notifiable
   include Touchable
 
-  include Comments::Searchable
-
   belongs_to :commentable, -> { unscope where: :deleted }, polymorphic: true, counter_cache: true
 
   has_many :revisions, class_name: :'Comment::Revision', dependent: :destroy

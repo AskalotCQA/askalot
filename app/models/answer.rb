@@ -9,8 +9,6 @@ class Answer < ActiveRecord::Base
   include Touchable
   include Votable
 
-  include Answers::Searchable
-
   after_create :slido_label_with_best!
 
   belongs_to :question, -> { unscope where: :deleted }, counter_cache: true
