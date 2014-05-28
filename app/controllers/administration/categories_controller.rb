@@ -10,13 +10,7 @@ class Administration::CategoriesController < AdministrationController
       form_error_messages_for @category
     end
 
-    redirect_to administration_root_path(tab: 'category')
-  end
-
-  def destroy
-    Category.find(params[:id]).destroy
-    flash[:notice] = t('category.delete.success')
-    redirect_to administration_root_path(tab: 'Category')
+    redirect_to administration_root_path(tab: params[:tab])
   end
 
   def update
@@ -28,7 +22,7 @@ class Administration::CategoriesController < AdministrationController
       form_error_messages_for @category
     end
 
-    redirect_to administration_root_path(tab: 'category')
+    redirect_to administration_root_path(tab: params[:tab])
   end
 
   private

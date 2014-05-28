@@ -4,7 +4,8 @@ class Administration::ChangelogsController < AdministrationController
   def destroy
     Changelog.find(params[:id]).destroy
     flash[:notice] = t('changelog.delete.success')
-    redirect_to administration_root_path(tab: 'Changelog')
+
+    redirect_to administration_root_path(tab: params[:tab])
   end
 
   def create
