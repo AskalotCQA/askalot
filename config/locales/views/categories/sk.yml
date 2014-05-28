@@ -13,3 +13,7 @@ sk:
 
     update:
       success: 'Kategória bola úspešne aktualizovaná.'
+
+    delete:
+      success: 'Kategória bola úspešne zmazaná.'
+      failure: 'Kategóriu sa nepodarilo zmazať.'
