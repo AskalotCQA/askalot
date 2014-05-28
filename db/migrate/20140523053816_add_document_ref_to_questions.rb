@@ -1,7 +1,5 @@
 class AddDocumentRefToQuestions < ActiveRecord::Migration
   def change
-    add_reference :questions, :document
+    add_reference :questions, :document, null: true, index: true
   end
-
-  add_index :questions, :document_id
 end
