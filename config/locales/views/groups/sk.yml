@@ -1,0 +1,12 @@
+sk:
+  group:
+    create:
+      success: 'Skupina bola úspešne vytvorená'
+
+    new:
+      title: 'Nová skupina'
+      submit: 'Vytvoriť'
+
+    index:
+      title: 'Skupiny'
+      no_results_found: 'Neboli nájdené žiadne skupiny'
