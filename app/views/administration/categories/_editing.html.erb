@@ -1,12 +1,11 @@
 <a href="#" id="category-<%= category.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#category-<%= category.id %>-editing">
-  <%= tooltip_icon_tag :edit, t('admin.category.edit.action'), placement: :top %>
+  <%= tooltip_icon_tag :edit, t('administration.category.edit.action'), placement: :top %>
 </a>
-
 
 <div id="category-<%= category.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= form_for category do |f| %>
+      <%= form_for category, url: administration_category_path(category) do |f| %>
         <div class="modal-header">
           <div class="form-group">
             <%= f.label :name %>
@@ -15,7 +14,7 @@
 
           <div class="form-group">
             <%= f.label :tags %>
-            <%= f.text_field :tags, class: :'form-control' %>
+            <%= f.text_field :tags,  :value => category.tags.join(','), class: :'form-control', data: { as: :select2, role: :tags } %>
           </div>
 
           <div class="modal-footer">

@@ -1,0 +1,16 @@
+<% provide :title, t('administration.navigation') %>
+
+<div class="row">
+  <div class="col-md-3">
+    <ul class="nav nav-pills nav-stacked pill-navigation">
+      <%= tab_link_tag t('administration.tab.categories'), :categories, administration_root_path(tab: :categories), data: { toggle: :pill } %>
+      <%= tab_link_tag t('administration.tab.changelogs'), :changelogs, administration_root_path(tab: :changelogs), data: { toggle: :pill } %>
+    </ul>
+  </div>
+  <div class="col-md-9">
+    <div class="pill-content tab-content">
+      <%= render_tab_content 'categories', :categories, locals: { categories: @categories } %>
+      <%= render_tab_content 'changelogs', :changelogs, locals: { changelogs: @changelogs } %>
+    </div>
+  </div>
+</div>

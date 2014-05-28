@@ -17,11 +17,9 @@ Askalot::Application.routes.draw do
   get 'users/:nick/activities', to: 'users#activities', as: :user_activities
   get 'users/:nick/followings', to: 'users#followings', as: :user_followings
 
-
   get :statistics, to: 'statistics#index'
   get :help,       to: 'static_pages#help'
   get :welcome,    to: 'static_pages#welcome'
-
 
   concern :commetable do
     resources :comments, only: [:create, :update, :destroy]
@@ -44,7 +42,7 @@ Askalot::Application.routes.draw do
     get :watch, on: :member
   end
 
-  resources :categories, only: [:index, :new, :create, :update] do
+  resources :categories do
     concerns :watchable
   end
 
@@ -76,11 +74,11 @@ Askalot::Application.routes.draw do
 
   resources :comments, only: [:update, :destroy]
 
-  resources :changelogs, only: [:index, :new, :create, :update]
-
   resources :markdown, only: [] do
     post :preview, on: :collection
   end
+
+  resources :activities, only: [:index]
 
   resources :notifications, only: [:index] do
     get :clean, on: :collection
@@ -93,10 +91,12 @@ Askalot::Application.routes.draw do
     delete :clean, on: :collection
   end
 
-  namespace "admin" do
-    root :to => 'admin#index'
-    resources :dashboard,  only: [:index]
+  namespace :administration do
+    root 'dashboard#index'
+
+    resources :changelogs, only: [:create, :update]
+    resources :categories, only: [:create, :update]
   end
 
-  resources :activities, only: [:index]
+  resources :changelogs
 end
