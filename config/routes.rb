@@ -42,6 +42,10 @@ Askalot::Application.routes.draw do
     get :watch, on: :member
   end
 
+  resources :groups, only: [:index, :new, :create, :show, :update, :destroy]
+
+  resources :documents, only: [:new, :create, :update]
+
   resources :categories, only: [:index] do
     concerns :watchable
   end
