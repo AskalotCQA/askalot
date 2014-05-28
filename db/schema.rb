@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140429003614) do
+ActiveRecord::Schema.define(version: 20140523061344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,15 +21,16 @@ ActiveRecord::Schema.define(version: 20140429003614) do
     t.integer  "resource_id",                   null: false
     t.string   "resource_type",                 null: false
     t.string   "action",                        null: false
-    t.date     "created_on",                    null: false
-    t.date     "updated_on",                    null: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.date     "created_on",                    null: false
+    t.date     "updated_on",                    null: false
     t.boolean  "anonymous",     default: false, null: false
   end
 
   add_index "activities", ["action"], name: "index_activities_on_action", using: :btree
   add_index "activities", ["anonymous"], name: "index_activities_on_anonymous", using: :btree
+  add_index "activities", ["created_at"], name: "index_activities_on_created_at", using: :btree
   add_index "activities", ["created_on"], name: "index_activities_on_created_on", using: :btree
   add_index "activities", ["initiator_id"], name: "index_activities_on_initiator_id", using: :btree
   add_index "activities", ["resource_id", "resource_type"], name: "index_activities_on_resource_id_and_resource_type", using: :btree
@@ -68,11 +69,13 @@ ActiveRecord::Schema.define(version: 20140429003614) do
     t.integer  "deletor_id"
     t.boolean  "edited",                                      default: false, null: false
     t.integer  "evaluations_count",                           default: 0,     null: false
+    t.integer  "document_id"
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
   add_index "answers", ["deleted"], name: "index_answers_on_deleted", using: :btree
   add_index "answers", ["deletor_id"], name: "index_answers_on_deletor_id", using: :btree
+  add_index "answers", ["document_id"], name: "index_answers_on_document_id", using: :btree
   add_index "answers", ["edited"], name: "index_answers_on_edited", using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
   add_index "answers", ["votes_difference"], name: "index_answers_on_votes_difference", using: :btree
@@ -151,6 +154,18 @@ ActiveRecord::Schema.define(version: 20140429003614) do
   add_index "comments", ["deletor_id"], name: "index_comments_on_deletor_id", using: :btree
   add_index "comments", ["edited"], name: "index_comments_on_edited", using: :btree
 
+  create_table "documents", force: true do |t|
+    t.integer  "group_id",      null: false
+    t.string   "title",         null: false
+    t.string   "document_type"
+    t.string   "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "documents", ["group_id"], name: "index_documents_on_group_id", using: :btree
+  add_index "documents", ["title"], name: "index_documents_on_title", using: :btree
+
   create_table "evaluations", force: true do |t|
     t.integer  "author_id",                      null: false
     t.integer  "evaluable_id",                   null: false
@@ -207,6 +222,22 @@ ActiveRecord::Schema.define(version: 20140429003614) do
   add_index "followings", ["followee_id"], name: "index_followings_on_followee_id", using: :btree
   add_index "followings", ["follower_id", "followee_id"], name: "index_followings_on_unique_key", unique: true, using: :btree
   add_index "followings", ["follower_id"], name: "index_followings_on_follower_id", using: :btree
+
+  create_table "groups", force: true do |t|
+    t.integer  "owner_id",                           null: false
+    t.string   "title",           default: "",       null: false
+    t.string   "description"
+    t.string   "visibility",      default: "public", null: false
+    t.boolean  "deleted",         default: false,    null: false
+    t.integer  "deletor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "documents_count", default: 0,        null: false
+  end
+
+  add_index "groups", ["deletor_id"], name: "index_groups_on_deletor_id", using: :btree
+  add_index "groups", ["owner_id"], name: "index_groups_on_owner_id", using: :btree
+  add_index "groups", ["title"], name: "index_groups_on_title", using: :btree
 
   create_table "labelings", force: true do |t|
     t.integer  "author_id",                  null: false
@@ -300,6 +331,7 @@ ActiveRecord::Schema.define(version: 20140429003614) do
     t.integer  "deletor_id"
     t.boolean  "edited",                                        default: false, null: false
     t.integer  "evaluations_count",                             default: 0,     null: false
+    t.integer  "document_id"
   end
 
   add_index "questions", ["anonymous"], name: "index_questions_on_anonymous", using: :btree
@@ -307,6 +339,7 @@ ActiveRecord::Schema.define(version: 20140429003614) do
   add_index "questions", ["category_id"], name: "index_questions_on_category_id", using: :btree
   add_index "questions", ["deleted"], name: "index_questions_on_deleted", using: :btree
   add_index "questions", ["deletor_id"], name: "index_questions_on_deletor_id", using: :btree
+  add_index "questions", ["document_id"], name: "index_questions_on_document_id", using: :btree
   add_index "questions", ["edited"], name: "index_questions_on_edited", using: :btree
   add_index "questions", ["slido_question_uuid"], name: "index_questions_on_slido_question_uuid", unique: true, using: :btree
   add_index "questions", ["title"], name: "index_questions_on_title", using: :btree
