@@ -94,8 +94,8 @@ Askalot::Application.routes.draw do
   namespace :administration do
     root 'dashboard#index'
 
-    resources :changelogs, only: [:create, :update]
-    resources :categories, only: [:create, :update]
+    resources :changelogs, only: [:create, :update, :destroy]
+    resources :categories, only: [:create, :update, :destroy]
   end
 
   resources :changelogs

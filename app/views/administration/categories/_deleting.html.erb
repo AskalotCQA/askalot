@@ -1,0 +1,24 @@
+&middot;
+
+<a href="#" id="category-<%= category.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#category-<%= category.id %>-deleting">
+  <%= tooltip_icon_tag :'trash-o', t("administration.category.delete.action"), placement: :top %>
+</a>
+
+<div id="category-<%= category.id %>-deleting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title"><%= t "category.delete.name" %></h3>
+      </div>
+      <div class="modal-body">
+        <%= t "category.delete.tags" %>
+      </div>
+      <div class="modal-footer">
+        <%= form_for category, method: :delete, html: { id: nil, class: nil }, url: administration_category_path(category) do %>
+          <a href="#" class="btn btn-default" data-dismiss="modal"><%= t "category.delete.cancel" %></a>
+          <button id="<%= "category-delete" %>" class="btn btn-danger"><%= t "category.delete.submit" %></button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
