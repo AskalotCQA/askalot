@@ -22,4 +22,7 @@ class FixLabelingsAndTaggings < ActiveRecord::Migration
     add_index :labelings, [:answer_id, :label_id, :author_id], name: 'index_labelings_on_unique_key', unique: true
     add_index :taggings,  [:question_id, :tag_id, :author_id], name: 'index_taggings_on_unique_key',  unique: true
   end
+
+  def down
+  end
 end

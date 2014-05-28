@@ -7,3 +7,9 @@ sk:
 
     tab:
       all: 'Všetky'
+
+    create:
+      success: 'Kategória bola úspešne pridaná.'
+
+    update:
+      success: 'Kategória bola úspešne aktualizovaná.'

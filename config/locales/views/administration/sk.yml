@@ -1,17 +1,24 @@
 sk:
-  admin:
+  administration:
     navigation: 'Administrácia'
+
+    tab:
+      categories: 'Kategórie'
+      changelogs: 'Protokoly zmien'
+
     changelog:
-      tab: 'Changelog'
-      add: 'Pridať'
+      tab: 'Protokoly zmien'
+      add: 'Pridať protokol zmien'
+
       edit:
         action: 'Upraviť'
         cancel: 'Zrušiť'
         submit: 'Uložiť'
 
     category:
-      tab: 'Kategótrie'
+      tab: 'Kategórie'
       add: 'Pridať kategóriu'
+
       edit:
         action: 'Upraviť'
         cancel: 'Zrušiť'

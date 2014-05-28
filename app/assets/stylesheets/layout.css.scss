@@ -5,7 +5,7 @@ body {
 
   min-width: $screen-xs-min;
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .flash .alert:first-child {
@@ -77,6 +77,8 @@ body {
 .pagination-navigation {
   display: block;
   position: relatve;
+
+  text-align: center;
 
   .pagination {
     display: inline-block;

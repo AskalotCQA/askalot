@@ -4,4 +4,7 @@ class RemoveUndeletedTaggingsFromDeletedQuestions < ActiveRecord::Migration
       question.taggings.undeleted.destroy_all
     end
   end
+
+  def down
+  end
 end

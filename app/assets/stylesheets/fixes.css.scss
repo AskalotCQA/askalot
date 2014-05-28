@@ -90,8 +90,14 @@ a .fa {
 // modals
 
 .modal-dialog {
+  min-width: $screen-xs-min - 20px;
+
   color: $text-color !important;
 }
+
+.modal-sm { min-width: min($modal-sm - 20px, $screen-xs-min - 20px) }
+.modal-md { min-width: min($modal-md - 20px, $screen-xs-min - 20px) }
+.modal-lg { min-width: min($modal-lg - 20px, $screen-xs-min - 20px) }
 
 // navigation
 
