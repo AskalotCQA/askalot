@@ -7,6 +7,9 @@
     <div class="modal-content">
       <%= form_for category, url: administration_category_path(category) do |f| %>
         <div class="modal-header">
+          <h3 class="modal-title"><%= t 'administration.category.edit.title' %></h3>
+        </div>
+        <div class="modal-body">
           <div class="form-group">
             <%= f.label :name %>
             <%= f.text_field :name, class: :'form-control' %>
@@ -16,12 +19,10 @@
             <%= f.label :tags %>
             <%= f.text_field :tags,  :value => category.tags.join(','), class: :'form-control', data: { as: :select2, role: :tags } %>
           </div>
-
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'category.edit.cancel' %></button>
-            <button type="submit" class="btn btn-primary"><%= t 'category.edit.submit' %></button>
-          </div>
-
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'administration.category.edit.cancel' %></button>
+          <button type="submit" class="btn btn-primary"><%= t 'administration.category.edit.submit' %></button>
         </div>
       <% end %>
     </div>

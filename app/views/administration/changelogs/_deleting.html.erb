@@ -1,22 +1,22 @@
-&middot;
+<span class="text-muted">&middot;</span>
 
 <a href="#" id="changelog-<%= changelog.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#changelog-<%= changelog.id %>-deleting">
-  <%= tooltip_icon_tag :'trash-o', t("administration.changelog.delete.action"), placement: :top %>
+  <%= tooltip_icon_tag :'trash-o', t('administration.changelog.delete.action'), placement: :top %>
 </a>
 
 <div id="changelog-<%= changelog.id %>-deleting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-sm">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title"><%= t "administration.changelog.delete.action" %></h3>
+        <h3 class="modal-title"><%= t 'administration.changelog.delete.title' %></h3>
       </div>
       <div class="modal-body">
-        <%= t "administration.changelog.delete.text" %>
+        <%= t 'administration.changelog.delete.text' %>
       </div>
       <div class="modal-footer">
         <%= form_for changelog, method: :delete, html: { id: nil, class: nil }, url: administration_changelog_path(changelog) do %>
-          <a href="#" class="btn btn-default" data-dismiss="modal"><%= t "administration.changelog.delete.cancel" %></a>
-          <button id="<%= "changelog-delete" %>" class="btn btn-danger"><%= t "administration.changelog.delete.submit" %></button>
+          <a href="#" class="btn btn-default" data-dismiss="modal"><%= t 'administration.changelog.delete.cancel' %></a>
+          <button id="<%= "changelog-delete" %>" class="btn btn-danger"><%= t 'administration.changelog.delete.submit' %></button>
         <% end %>
       </div>
     </div>

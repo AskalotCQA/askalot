@@ -1,5 +1,3 @@
-&middot;
-
 <a href="#" id="changelog-<%= changelog.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#changelog-<%= changelog.id %>-editing">
   <%= tooltip_icon_tag :edit, t('administration.category.edit.action'), placement: :top %>
 </a>
@@ -9,6 +7,9 @@
     <div class="modal-content">
       <%= form_for changelog, url: administration_changelog_path(changelog) do |f| %>
         <div class="modal-header">
+          <h3 class="modal-title"><%= t 'administration.changelog.edit.title' %></h3>
+        </div>
+        <div class="modal-body">
           <div class="form-group">
             <%= f.label :version %>
             <%= f.text_field :version, class: :'form-control' %>
@@ -25,10 +26,9 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'changelog.edit.cancel' %></button>
-            <button type="submit" class="btn btn-primary"><%= t 'changelog.edit.submit' %></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'administration.changelog.edit.cancel' %></button>
+            <button type="submit" class="btn btn-primary"><%= t 'administration.changelog.edit.submit' %></button>
           </div>
-
         </div>
       <% end %>
     </div>
