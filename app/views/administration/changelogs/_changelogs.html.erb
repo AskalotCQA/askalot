@@ -1,4 +1,6 @@
-<%= render 'administration/changelogs/form', changelog: @changelog %>
+<%= form_messages key: tab %>
+
+<%= render 'administration/changelogs/form', changelog: @changelog, tab: tab %>
 
 <ol class="administration-changelogs">
   <% changelogs.each do |changelog| %>
@@ -14,8 +16,8 @@
 
         <div class="col-xs-2">
           <div class="pull-right">
-            <%= render 'administration/changelogs/editing', changelog: changelog %>
-            <%= render 'administration/changelogs/deleting', changelog: changelog %>
+            <%= render 'administration/changelogs/editing', changelog: changelog, tab: tab %>
+            <%= render 'administration/changelogs/deleting', changelog: changelog, tab: tab %>
           </div>
         </div>
       </div>

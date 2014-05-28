@@ -5,7 +5,7 @@
 <div id="changelog-<%= changelog.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= form_for changelog, url: administration_changelog_path(changelog) do |f| %>
+      <%= form_for changelog, url: administration_changelog_path(changelog, tab: tab) do |f| %>
         <div class="modal-header">
           <h3 class="modal-title"><%= t 'administration.changelog.edit.title' %></h3>
         </div>
