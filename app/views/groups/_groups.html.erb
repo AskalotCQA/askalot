@@ -1,0 +1,18 @@
+<div id="groups" class="row">
+  <% if groups.any? %>
+    <% groups.each do |group| %>
+      <div class="col-md-4">
+        <h4>
+          <%= link_to group.title, show_group_path(group), analytics_attributes(:group, :click, group.title) %>
+        </h4>
+        <div class="group-details">
+          Details
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="alert alert-warning">
+      <%= t('group.index.no_results_found') %>
+    </div>
+  <%end %>
+</div>
