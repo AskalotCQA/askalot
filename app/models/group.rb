@@ -1,10 +1,13 @@
 class Group < ActiveRecord::Base
+  include Deletable
+
   VISIBILITIES=[:public, :student_only]
 
   has_many :documents
 
-  validates :title, presence: true
+  belongs_to :owner, class_name: :User
 
+  validates :title,      presence: true
   validates :visibility, presence: true
 
   symbolize :visibility, in: VISIBILITIES
