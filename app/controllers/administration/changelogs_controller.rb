@@ -1,6 +1,13 @@
 class Administration::ChangelogsController < AdministrationController
   authorize_resource
 
+  def destroy
+    Changelog.find(params[:id]).destroy
+    flash[:notice] = t('changelog.delete.success')
+
+    redirect_to administration_root_path(tab: params[:tab])
+  end
+
   def create
     @changelog = Changelog.new(changelog_params)
 
