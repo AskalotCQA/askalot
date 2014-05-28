@@ -5,7 +5,7 @@ class Administration::CategoriesController < AdministrationController
     @category = Category.new(category_params)
 
     if @category.save
-      flash[:notice] = t('category.create.success')
+      flash[:notice] = t 'category.create.success'
     else
       form_error_messages_for @category
     end
@@ -17,7 +17,7 @@ class Administration::CategoriesController < AdministrationController
     @category = Category.find(params[:id])
 
     if @category.update_attributes(category_params)
-      flash[:notice] = t('category.update.success')
+      flash[:notice] = t 'category.update.success'
     else
       form_error_messages_for @category
     end
