@@ -5,9 +5,9 @@ class Administration::ChangelogsController < AdministrationController
     @changelog = Changelog.new(changelog_params)
 
     if @changelog.save
-      flash[:notice] = t 'changelog.create.success'
+      form_message :notice, t('changelog.create.success'), key: params[:tab]
     else
-      form_error_messages_for @changelog
+      form_error_messages_for @changelog, key: params[:tab]
     end
 
     redirect_to administration_root_path(tab: params[:tab])
@@ -17,9 +17,9 @@ class Administration::ChangelogsController < AdministrationController
     @changelog = Changelog.find(params[:id])
 
     if @changelog.update_attributes(changelog_params)
-      flash[:notice] = t 'changelog.update.success'
+      form_message :notice, t('changelog.update.success'), key: params[:tab]
     else
-      form_error_messages_for @changelog
+      form_error_messages_for @changelog, key: params[:tab]
     end
 
     redirect_to administration_root_path(tab: params[:tab])
@@ -29,9 +29,9 @@ class Administration::ChangelogsController < AdministrationController
     @changelog = Changelog.find(params[:id])
 
     if @changelog.destroy
-      flash[:notice] = t 'changelog.delete.success'
+      form_message :notice, t('changelog.update.success'), key: params[:tab]
     else
-      flash[:error] = t 'changelog.delete.failure'
+      form_error_message t('changelog.update.success'), key: params[:tab]
     end
 
     redirect_to administration_root_path(tab: params[:tab])

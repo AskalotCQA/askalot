@@ -5,9 +5,9 @@ class Administration::CategoriesController < AdministrationController
     @category = Category.new(category_params)
 
     if @category.save
-      flash[:notice] = t 'category.create.success'
+      form_message :notice, t('category.create.success'), key: params[:tab]
     else
-      form_error_messages_for @category
+      form_error_messages_for @category, key: params[:tab]
     end
 
     redirect_to administration_root_path(tab: params[:tab])
@@ -17,9 +17,9 @@ class Administration::CategoriesController < AdministrationController
     @category = Category.find(params[:id])
 
     if @category.update_attributes(category_params)
-      flash[:notice] = t 'category.update.success'
+      form_message :notice, t('category.update.success'), key: params[:tab]
     else
-      form_error_messages_for @category
+      form_error_messages_for @category, key: params[:tab]
     end
 
     redirect_to administration_root_path(tab: params[:tab])

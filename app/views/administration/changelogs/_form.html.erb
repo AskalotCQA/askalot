@@ -1,5 +1,5 @@
 <%= form_for @changelog, url: administration_changelogs_path(@changelog, tab: tab) do |f| %>
-  <%= form_messages_for @changelog %>
+  <%= form_messages_for @changelog, key: tab %>
 
   <div class="form-group">
     <%= f.label :version %>
