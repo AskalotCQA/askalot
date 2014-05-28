@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for @changelog do |f| %>
+    <%= form_for @changelog, url: administration_changelogs_path(@changelog) do |f| %>
       <%= form_messages_for @changelog %>
 
       <div class="form-group">

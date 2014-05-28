@@ -7,6 +7,7 @@ sk:
       changelogs: 'Protokoly zmien'
 
     changelog:
+      tab: 'Protokoly zmien'
       add: 'Pridať protokol zmien'
 
       edit:
@@ -15,6 +16,7 @@ sk:
         submit: 'Uložiť'
 
     category:
+      tab: 'Kategórie'
       add: 'Pridať kategóriu'
 
       edit:

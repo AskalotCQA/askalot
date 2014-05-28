@@ -12,4 +12,4 @@ sk:
       success: 'Kategória bola úspešne pridaná.'
 
     update:
-      success: 'Kategória bola úspešne aktualizovaný.'
+      success: 'Kategória bola úspešne aktualizovaná.'

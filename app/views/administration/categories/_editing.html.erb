@@ -5,7 +5,7 @@
 <div id="category-<%= category.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= form_for category do |f| %>
+      <%= form_for category, url: administration_category_path(category) do |f| %>
         <div class="modal-header">
           <div class="form-group">
             <%= f.label :name %>
@@ -14,7 +14,7 @@
 
           <div class="form-group">
             <%= f.label :tags %>
-            <%= f.text_field :tags, class: :'form-control', data: { as: :select2, role: :tags } %>
+            <%= f.text_field :tags,  :value => category.tags.join(','), class: :'form-control', data: { as: :select2, role: :tags } %>
           </div>
 
           <div class="modal-footer">

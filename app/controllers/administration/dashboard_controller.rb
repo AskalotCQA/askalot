@@ -8,7 +8,7 @@ class Administration::DashboardController < AdministrationController
     @changelogs = Changelog.all.sort
 
     #TODO consider!
-    #@category  = Category.new
-    #@changelog = Changelog.new
+    @category  = Category.new
+    @changelog = Changelog.new
   end
 end
