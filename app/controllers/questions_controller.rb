@@ -14,8 +14,8 @@ class QuestionsController < ApplicationController
 
   def index
     if params[:q]
-      @questions      = Question.search_by(q: params[:q])
-      @fulltext_count = @questions.count
+      @questions       = Question.search_by(q: params[:q])
+      @questions_count = @questions.count
     else
       @questions = case params[:tab].to_sym
                    when :unanswered then Question.unanswered.by_votes

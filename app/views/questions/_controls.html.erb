@@ -9,7 +9,7 @@
 
   <% if params[:q].present? %>
     <ul class="nav nav-tabs">
-      <%= tab_link_tag_with_count t('question.tab.all'), :recent, questions_path(params.except(:page).merge tab: :recent), @fulltext_count, analytics_attributes(:questions, :switch, :recent).merge(remote: true) %>
+      <%= tab_link_tag_with_count t('question.tab.all'), :recent, questions_path(params.except(:page).merge tab: :recent), @questions_count, analytics_attributes(:questions, :switch, :recent).merge(remote: true) %>
     </ul>
   <% else %>
     <ul class="nav nav-tabs">
