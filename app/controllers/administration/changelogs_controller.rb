@@ -1,16 +1,16 @@
-class Administration::ChangelogsController < AdministrationController
+class Administration::ChangelogsController < Administration::DashboardController
   authorize_resource
 
   def create
     @changelog = Changelog.new(changelog_params)
 
     if @changelog.save
-      form_message :notice, t('changelog.create.success'), key: params[:tab]
+      form_message :notice, t('changelog.create.success'), flash: flash.now, key: params[:tab]
     else
-      form_error_messages_for @changelog, key: params[:tab]
+      form_error_messages_for @changelog, flash: flash.now, key: params[:tab]
     end
 
-    redirect_to administration_root_path(tab: params[:tab])
+    render_dashboard
   end
 
   def update

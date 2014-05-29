@@ -1,4 +1,4 @@
-class Administration::CategoriesController < AdministrationController
+class Administration::CategoriesController < Administration::DashboardController
   authorize_resource
 
   def create
