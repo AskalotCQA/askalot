@@ -3,7 +3,7 @@ sk:
     navigation: 'Otázky'
 
     fulltext:
-      placeholder: 'Hľadať'
+      placeholder: 'napr. NoSQL databázy, návrhové vzory, ...'
 
     index:
       title: 'Otázky'
