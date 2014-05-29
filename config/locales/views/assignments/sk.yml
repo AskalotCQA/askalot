@@ -1,0 +1,7 @@
+sk:
+  assignment:
+    create:
+      success: 'Používateľovi bola rola úspešne priradená.'
+
+    update:
+      success: 'Rola používateľa bola úspešne aktualizovaná.'

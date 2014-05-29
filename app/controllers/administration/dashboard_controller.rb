@@ -10,5 +10,7 @@ class Administration::DashboardController < AdministrationController
     #TODO consider!
     @category  = Category.new
     @changelog = Changelog.new
+
+    @assignment = Assignment.new
   end
 end

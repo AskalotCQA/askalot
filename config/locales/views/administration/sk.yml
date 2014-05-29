@@ -20,6 +20,12 @@ sk:
         cancel: 'Zrušiť'
         submit: 'Uložiť'
 
+    assignment:
+      new:
+        action: 'Pridať rolu používateľovi'
+        cancel: 'Zrušiť'
+        submit: 'Priradiť'
+
     category:
       add: 'Pridať kategóriu'
 
