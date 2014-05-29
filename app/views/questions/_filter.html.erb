@@ -11,7 +11,12 @@
           <%= hidden_field_tag :poll, params[:poll] %>
            <div class="form-group">
             <div class="input-group select2-bootstrap-prepend">
-              <%= render 'filter_controls' %>
+              <span class="input-group-addon fulltext-button">
+                <%= icon_link_to :search, '', '#', class: 'button-inactive' %>
+              </span>
+              <span class="input-group-addon filter-button">
+                <%= icon_link_to :tags, '', '#', class: 'button-active' %>
+              </span>
               <%= text_field_tag :tags, params[:tags], id: :question_tags, class: :'form-control', placeholder: t('question.tag.placeholder'), data: { as: :select2, role: [:tags, :filter].join(',') } %>
             </div>
           </div>
@@ -24,7 +29,12 @@
           <%= hidden_field_tag :poll, params[:poll] %>
           <div class="form-group">
             <div class="input-group select2-bootstrap-prepend">
-              <%= render 'filter_controls' %>
+              <span class="input-group-addon fulltext-button">
+                <%= icon_link_to :search, '', '#', class: 'button-active' %>
+              </span>
+              <span class="input-group-addon filter-button">
+                <%= icon_link_to :tags, '', '#', class: 'button-inactive' %>
+              </span>
               <%= text_field_tag :q, params[:q], id: :fulltext, class: :'form-control', placeholder: t('question.fulltext.placeholder') %>
             </div>
           </div>
