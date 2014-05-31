@@ -6,7 +6,7 @@
 
   <div class="form-group">
     <%= f.label :tags %>
-    <%= f.text_field :tags, class: :'form-control', data: { as: :select2, role: :tags } %>
+    <%= f.text_field :tags, :value => category.tags.join(','), class: :'form-control', data: { as: :select2, role: :tags } %>
   </div>
 
   <button type="submit" class="btn btn-success"><%= t('administration.category.create.action') %></button>
