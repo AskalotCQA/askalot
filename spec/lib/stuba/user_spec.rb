@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Stuba::User do
-  let(:data) {
+  let(:student_data) {
     {
       uisid: ['1234'],
       uid: ['xuser1'],
@@ -12,9 +12,32 @@ describe Stuba::User do
       employeetype: ['student']
     }
   }
+  let(:teacher_data) {
+    {
+      uisid: ['2234'],
+      uid: ['xuser2'],
+      cn: ['Bc. Janko Hraško'],
+      sn: ['Hrasko'],
+      givenname: ['Janko'],
+      mail: ['xuser2@is.stuba.sk','xuser2@stuba.sk'],
+      employeetype: ['staff']
+    }
+  }
+
+  let(:researcher_data) {
+    {
+      uisid: ['3234'],
+      uid: ['xuser3'],
+      cn: ['Bc. Janko Hraško'],
+      sn: ['Hrasko'],
+      givenname: ['Janko'],
+      mail: ['xuser3@is.stuba.sk','xuser3@stuba.sk'],
+      employeetype: ['researcher']
+    }
+  }
 
   it 'provides user information' do
-    user = Stuba::User.new(data)
+    user = Stuba::User.new(student_data)
 
     expect(user.uid).to    eql('1234')
     expect(user.login).to  eql('xuser1')
@@ -23,6 +46,16 @@ describe Stuba::User do
     expect(user.last).to   eql('Hraško')
     expect(user.email).to  eql('xuser1@stuba.sk')
     expect(user.role).to   eql(:student)
+  end
+
+  it 'assigns correct role' do
+    student    = Stuba::User.new(student_data)
+    teacher    = Stuba::User.new(teacher_data)
+    researcher = Stuba::User.new(researcher_data)
+
+    expect(student.role).to    eql(:student)
+    expect(teacher.role).to    eql(:teacher)
+    expect(researcher.role).to eql(:student)
   end
 
   context 'when user has middle name' do
@@ -54,7 +87,7 @@ describe Stuba::User do
 
   describe '.to_params' do
     it 'converts user to params' do
-      user = Stuba::User.new(data)
+      user = Stuba::User.new(student_data)
 
       expect(user.to_params).to eql({
         login: 'xuser1',
