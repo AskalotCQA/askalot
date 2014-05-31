@@ -20,7 +20,7 @@ class Administration::ChangelogsController < Administration::DashboardController
     if @changelog.update_attributes(changelog_params)
       form_message :notice, t('changelog.update.success'), key: params[:tab]
     else
-      form_error_messages_for @changelog, flash: flash.now, key: params[:tab]
+      form_error_messages_for @changelog, key: params[:tab]
     end
 
     redirect_to administration_root_path(tab: params[:tab])
