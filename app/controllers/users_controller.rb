@@ -13,7 +13,6 @@ class UsersController < ApplicationController
              else User.order(:nick)
              end
 
-    @users = search(@users)
     @users = @users.page(params[:page]).per(60) unless params[:q]
   end
 

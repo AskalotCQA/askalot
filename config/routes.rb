@@ -11,6 +11,7 @@ Askalot::Application.routes.draw do
     get   :suggest,  on: :collection
 
     get :follow, on: :member
+    get :search, on: :collection
   end
 
   get 'users/:nick',            to: 'users#show',       as: :user
