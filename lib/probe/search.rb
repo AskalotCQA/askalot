@@ -11,7 +11,9 @@ module Probe
     end
 
     def search(query = {})
-      Search::Results.new(query) { client.search index: index.name, body: query }
+      query.reverse_merge(from: 0, size: 25)
+
+      Results.new(query) { client.search index: index.name, body: query }
     end
   end
 end

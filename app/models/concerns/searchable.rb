@@ -3,9 +3,9 @@ module Searchable
 
   included do
     include Probe
+    include Orderable
 
     after_save do
-      # TODO (smolnar) consider update
       self.class.probe.index.import(self)
     end
 
@@ -16,14 +16,16 @@ module Searchable
 
   module ClassMethods
     def search(query = {})
-      size = query.delete(:per_page) || 20
-      from = (query.delete(:page) || 0) * size
-
+      page    = query.delete(:page) || 0
+      size    = query.delete(:per_page) || 30
+      from    = (page <= 0 ? 0 : page - 1) * size
       model   = self
       results = probe.search(query.reverse_merge(from: from, size: size))
 
-      results.loader = lambda do |results|
-        results.map { |result| model.find(result.id) }
+      results.loader = lambda do |sources|
+        ids = sources.map(&:id)
+
+        model.where(id: ids).order_by(id: ids)
       end
 
       results
