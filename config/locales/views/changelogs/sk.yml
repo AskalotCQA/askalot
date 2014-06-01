@@ -9,9 +9,9 @@ sk:
     create:
       success: 'Protokol zmien bol úspešne pridaný.'
 
-    delete:
-      success: 'Protokol zmien bol úspešne odobraný.'
-
     update:
       success: 'Protokol zmien bol úspešne aktualizovaný.'
 
+    delete:
+      success: 'Protokol zmien bol úspešne zmazaný.'
+      failure: 'Protokol zmien sa nepodarilo zmazať.'

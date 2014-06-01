@@ -7,23 +7,28 @@ sk:
       changelogs: 'Protokoly zmien'
 
     changelog:
-      add: 'Pridať protokol zmien'
+      create:
+        action: 'Pridať protokol zmien'
+
+      edit:
+        action: 'Upraviť'
+        title: 'Upraviť protokol zmien'
+        submit: 'Uložiť'
+        cancel: 'Zrušiť'
 
       delete:
         action: 'Zmazať protokol zmien'
-        cancel: 'Zrušiť'
-        submit: 'Zmazať'
+        title: 'Pozor!'
         text: 'Naozaj chcete zmazať tento protokol zmien?'
-
-      edit:
-        action: 'Upraviť'
+        submit: 'Zmazať'
         cancel: 'Zrušiť'
-        submit: 'Uložiť'
 
     category:
-      add: 'Pridať kategóriu'
+      create:
+        action: 'Pridať kategóriu'
 
       edit:
         action: 'Upraviť'
+        title: 'Upraviť kategóriu'
         cancel: 'Zrušiť'
         submit: 'Uložiť'

@@ -1,32 +1,27 @@
-<div class="form-group">
-  <%= render 'administration/categories/form', category: @category %>
-</div>
+<%= form_messages key: tab %>
 
-<div class="row">
-  <div class="col-md-12">
+<%= render 'administration/categories/form', category: @category, tab: tab %>
 
-    <ul class="list-unstyled">
-      <% categories.each do |category| %>
-        <div class="row">
-          <div class="col-md-4">
-            <%= link_to_category category %>
-          </div>
+<ol class="administration-categories">
+  <% categories.each do |category| %>
+    <li>
+      <div class="row">
+        <div class="col-xs-5">
+          <%= link_to_category category %>
+        </div>
 
-          <div class="col-md-4">
-            <% if category %>
-              <% category.tags.each do |category_tag| %>
-                <span class="label label-info"><%= category_tag %></span>
-              <% end %>
-            <% end %>
-          </div>
+        <div class="col-xs-5">
+          <% category.tags.each do |tag| %>
+            <span class="label label-inverse"><%= tag %></span>
+          <% end %>
+        </div>
 
-          <div class="col-md-4">
-            <div class="question-details">
-              <%= render 'administration/categories/editing', category: category %>
-            </div>
+        <div class="col-xs-2">
+          <div class="pull-right">
+            <%= render 'administration/categories/editing', category: category, tab: tab %>
           </div>
         </div>
-      <% end %>
-    </ul>
-  </div>
-</div>
+      </div>
+    </li>
+  <% end %>
+</ol>

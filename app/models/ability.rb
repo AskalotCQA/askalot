@@ -47,6 +47,10 @@ class Ability
       can :edit,   [Question, Answer, Comment]
       can :delete, [Question, Answer, Comment]
 
+      can :create,  [Category, Changelog]
+      can :update,  [Category, Changelog]
+      can :destroy, [Category, Changelog]
+
       can :vote, :all
     end
   end
