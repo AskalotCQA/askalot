@@ -71,7 +71,7 @@ module Categories
       }
 
       probe.index.mapper.define(
-        id:    -> { id },
+        id:   -> { id },
         name: -> { name }
       )
 

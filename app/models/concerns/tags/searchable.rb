@@ -79,10 +79,10 @@ module Tags
       }
 
       probe.index.mapper.define(
-        id:    -> { id },
-        name: -> { name },
+        id:         -> { id },
+        name:       -> { name },
         created_at: -> { created_at },
-        count: -> { taggings.count }
+        count:      -> { taggings.count }
       )
 
       probe.index.create

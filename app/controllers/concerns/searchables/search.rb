@@ -13,5 +13,3 @@ module Searchables::Search
     params.permit(:q, :page)
   end
 end
-
-

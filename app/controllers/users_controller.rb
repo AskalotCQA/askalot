@@ -13,7 +13,7 @@ class UsersController < ApplicationController
              else User.order(:nick)
              end
 
-    @users = @users.page(params[:page]).per(60) unless params[:q]
+    @users = @users.page(params[:page]).per(60)
   end
 
   def show
