@@ -4,6 +4,9 @@ describe 'Search Users' do
   let!(:user) { create :user, login: 'smolnar' }
 
   before :each do
+    User.probe.index.delete
+    User.probe.index.create
+
     login_as user
 
     create :user, login: 'kyle'
