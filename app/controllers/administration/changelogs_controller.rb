@@ -6,12 +6,13 @@ class Administration::ChangelogsController < Administration::DashboardController
 
     if @changelog.save
       form_message :notice, t('changelog.create.success'), key: params[:tab]
+
       redirect_to administration_root_path(tab: params[:tab])
     else
       form_error_messages_for @changelog, flash: flash.now, key: params[:tab]
+      
       render_dashboard
     end
-
   end
 
   def update
