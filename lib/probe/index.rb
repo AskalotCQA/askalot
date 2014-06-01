@@ -9,7 +9,7 @@ module Probe
     end
 
     def client
-      @client ||= Elasticsearch::Client.new
+      @client ||= Elasticsearch::Client.new(log: true)
     end
 
     def exists?

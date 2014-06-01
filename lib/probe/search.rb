@@ -11,9 +11,7 @@ module Probe
     end
 
     def search(query = {})
-      results = client.search index: index.name, body: query
-
-      Search::Results.new(results)
+      Search::Results.new(query) { client.search index: index.name, body: query }
     end
   end
 end

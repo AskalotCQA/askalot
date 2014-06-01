@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include Followable
+  include Users::Searchable
 
   # TODO (jharinek) consider https://github.com/ryanb/cancan/wiki/Separate-Role-Model
   ROLES = [:student, :teacher, :administrator]
@@ -57,7 +58,6 @@ class User < ActiveRecord::Base
 
   before_validation :resolve_nick, on: :create
 
-  #TODO (poizl) rename to something better
   def activities_seen_by(user)
     user == self ? activities.unscope(where: :anonymous) : activities
   end

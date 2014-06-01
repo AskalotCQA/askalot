@@ -2,7 +2,6 @@ module Searchable
   extend ActiveSupport::Concern
 
   included do
-    include Orderable
     include Probe
 
     after_save do
@@ -17,13 +16,17 @@ module Searchable
 
   module ClassMethods
     def search(query = {})
-      # TODO resolve paginating and do not fetch all records at once
+      size = query.delete(:per_page) || 20
+      from = (query.delete(:page) || 0) * size
 
-      total    = self.count
-      results  = probe.search(query.reverse_merge(size: total, fields: [:id]))
-      ids      = results.map(&:id)
+      model   = self
+      results = probe.search(query.reverse_merge(from: from, size: size))
 
-      self.where(questions: { id: ids }).order_by(id: ids)
+      results.loader = lambda do |results|
+        results.map { |result| model.find(result.id) }
+      end
+
+      results
     end
   end
 end
