@@ -1,0 +1,26 @@
+<%= form_messages key: tab %>
+
+<%= render 'administration/changelogs/form', changelog: @changelog, tab: tab %>
+
+<ol class="administration-changelogs">
+  <% changelogs.each do |changelog| %>
+    <li>
+      <div class="row">
+        <div class="col-xs-3">
+          <%= link_to changelog.version, url_to_repository("releases/tag/v#{changelog.version}") %>
+        </div>
+
+        <div class="col-xs-7">
+          <%= changelog.title %>
+        </div>
+
+        <div class="col-xs-2">
+          <div class="pull-right">
+            <%= render 'administration/changelogs/editing', changelog: changelog, tab: tab %>
+            <%= render 'administration/changelogs/deleting', changelog: changelog, tab: tab %>
+          </div>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ol>

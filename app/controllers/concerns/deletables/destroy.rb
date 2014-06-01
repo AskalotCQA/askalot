@@ -7,6 +7,8 @@ module Deletables::Destroy
     @model     = controller_name.classify.downcase.to_sym
     @deletable = controller_name.classify.constantize.find(params[:id])
 
+    authorize! :delete, @deletable
+
     if @deletable.mark_as_deleted_by! current_user
       dispatch_event :delete, @deletable, for: @deletable.to_question.watchers, anonymous: (@deletable.is_a?(Question) && @deletable.anonymous)
 
