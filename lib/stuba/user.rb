@@ -33,7 +33,7 @@ module Stuba
     end
 
     def role
-      @role ||= ((value = @data[:employeetype].first.to_sym) == :staff ? :teacher : value)
+      @role ||= ((value = @data[:employeetype].first.to_sym) == :staff ? :teacher : :student)
     end
 
     def to_params

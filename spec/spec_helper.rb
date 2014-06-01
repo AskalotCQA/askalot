@@ -15,6 +15,10 @@ require 'cancan/matchers'
 Capybara.default_selector  = :css
 Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :selenium
 
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, js_errors: false)
+end
+
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }

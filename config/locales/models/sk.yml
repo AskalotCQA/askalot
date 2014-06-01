@@ -186,6 +186,7 @@ sk:
       activity: 'Aktivita'
       answer: 'Odpoveď'
       category: 'Kategória'
+      changelog: 'Protokol zmien'
       comment: 'Komentár'
       evaluation: 'Hodnotenie'
       favorite: 'Obľúbenie'
@@ -198,6 +199,33 @@ sk:
       watching: 'Sledovanie'
 
     attributes:
+      answer:
+        text: 'Odpoveď'
+
+      category:
+        name: 'Názov'
+        tags: 'Tagy'
+
+      changelog:
+        text: 'Text'
+        title: 'Názov'
+        version: 'Verzia'
+
+      comment:
+        text: 'Komentár'
+
+      evaluation:
+        text: 'Komentár'
+        value: 'Hodnotenie'
+
+      question:
+        anonymous: 'Opýtať sa anonymne'
+        category: 'Kategória'
+        category_id: 'Kategória'
+        tag_list: 'Tagy'
+        text: 'Text'
+        title: 'Nadpis'
+
       user:
         email: 'E-mail'
         password: 'Heslo'
@@ -235,21 +263,3 @@ sk:
 
         hide_name: 'Skryť meno ostatným používateľom'
         hide_email: 'Skryť e-mail ostatným používateľom'
-
-      question:
-        category: 'Kategória'
-        category_id: 'Kategória'
-        title: 'Nadpis'
-        text: 'Text'
-        tag_list: 'Tagy'
-        anonymous: 'Opýtať sa anonymne'
-
-      answer:
-        text: 'Odpoveď'
-
-      comment:
-        text: 'Komentár'
-
-      evaluation:
-        value: 'Hodnotenie'
-        text: 'Komentár'
