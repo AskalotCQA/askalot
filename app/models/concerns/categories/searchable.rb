@@ -5,7 +5,7 @@ module Categories
     included do
       include ::Searchable
 
-      probe.index.name = :"category_#{Rails.env}"
+      probe.index.name = :"categories_#{Rails.env}"
       probe.index.type = :category
 
       probe.index.settings = {
@@ -14,7 +14,6 @@ module Categories
           number_of_replicas: 0
         },
 
-        # TODO (smolnar) stemming, stopwords
         analysis: {
           analyzer: {
             text: {
@@ -53,6 +52,7 @@ module Categories
             id: {
               type: :integer
             },
+
             name: {
               type: :multi_field,
               fields: {

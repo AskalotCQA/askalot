@@ -5,7 +5,7 @@ module Users
     included do
       include ::Searchable
 
-      probe.index.name = :"user_#{Rails.env}"
+      probe.index.name = :"users_#{Rails.env}"
       probe.index.type = :user
 
       probe.index.settings = {
@@ -14,7 +14,6 @@ module Users
           number_of_replicas: 0
         },
 
-        # TODO (smolnar) stemming, stopwords
         analysis: {
           analyzer: {
             text: {
@@ -53,6 +52,7 @@ module Users
             id: {
               type: :integer
             },
+
             nick: {
               type: :multi_field,
               fields: {
@@ -71,7 +71,7 @@ module Users
       }
 
       probe.index.mapper.define(
-        id:    -> { id },
+        id:   -> { id },
         nick: -> { nick }
       )
 
@@ -87,7 +87,8 @@ module Users
               default_operator: :and,
               fields: [:nick]
             }
-          }
+          },
+          page: params[:page].to_i
         )
       end
     end

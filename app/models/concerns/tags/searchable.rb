@@ -14,7 +14,6 @@ module Tags
           number_of_replicas: 0
         },
 
-        # TODO (smolnar) stemming, stopwords
         analysis: {
           analyzer: {
             text: {
@@ -53,6 +52,7 @@ module Tags
             id: {
               type: :integer
             },
+
             name: {
               type: :multi_field,
               fields: {
