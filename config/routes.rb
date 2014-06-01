@@ -42,7 +42,7 @@ Askalot::Application.routes.draw do
     get :watch, on: :member
   end
 
-  resources :categories, only: [:index] do
+  resources :categories do
     concerns :watchable
   end
 
@@ -74,11 +74,11 @@ Askalot::Application.routes.draw do
 
   resources :comments, only: [:update, :destroy]
 
-  resources :changelogs, only: [:index]
-
   resources :markdown, only: [] do
     post :preview, on: :collection
   end
+
+  resources :activities, only: [:index]
 
   resources :notifications, only: [:index] do
     get :clean, on: :collection
@@ -91,5 +91,12 @@ Askalot::Application.routes.draw do
     delete :clean, on: :collection
   end
 
-  resources :activities, only: [:index]
+  namespace :administration do
+    root 'dashboard#index'
+
+    resources :changelogs, only: [:create, :update, :destroy]
+    resources :categories, only: [:create, :update, :destroy]
+  end
+
+  resources :changelogs
 end

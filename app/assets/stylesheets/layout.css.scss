@@ -49,6 +49,13 @@ body {
   @include opacity(0.8)
 }
 
+// labels
+
+.label-inverse {
+  background: $gray-lighter;
+  color: $gray;
+}
+
 // lists
 
 .list-center {
