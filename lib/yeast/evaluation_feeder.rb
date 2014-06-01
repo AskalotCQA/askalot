@@ -21,20 +21,26 @@ module Yeast
         return unless resource.stack_exchange_duplicate
 
         question = resource
-        text     = [question.title, question.text, question.tags.pluck(:name)].flatten.join(' ')
+        text     = [question.tags.pluck(:name)].flatten.join(' ')
         terms    = Question.probe.analyze(text: text, analyzer: :text) rescue nil
 
         return unless terms
+
         tags      = question.author.profiles.where(property: :interest).order(:value).limit(10).map { |p| { name: p.targetable.name, value: p.value } }
         query     = {
           query: {
-            more_like_this: {
-              like_text: text,
-              fields: [:title, :text, :tags],
-              min_term_freq: 1
+            bool: {
+              should: [],
+              minimum_should_match: 2
             }
-          },
+          }
+        }
 
+        terms.each do |term|
+          query[:query][:bool][:should] << { term: { tags: term }}
+        end
+
+        query.deep_merge!({
           sort: {
             _script: {
               script: "
@@ -49,6 +55,8 @@ module Yeast
                   result += frequency * log((size / total_frequency) + 1);
                 }
               }
+
+              return result;
 
               foreach(tag : tags) {
                 name = tag['name'];
@@ -71,9 +79,9 @@ module Yeast
 
           from: 0,
           size: 20
-        }
+        })
 
-        retrieved_documents = results = Question.search(query) rescue []
+        retrieved_documents = results = Question.search(query)
         relevant_documents  = Question.where(stack_exchange_uuid: question.stack_exchange_questions_uuids)
 
         return unless retrieved_documents.size > 0

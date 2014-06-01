@@ -27,6 +27,8 @@ module StackExchange
 
     def start_element(name, attributes = [])
       if name == 'row'
+        # TODO filter by creation date
+
         attributes = Hash[attributes].symbolize_keys
         result     = process_element(attributes)
 
