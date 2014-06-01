@@ -7,18 +7,21 @@ sk:
       changelogs: 'Protokoly zmien'
 
     changelog:
-      add: 'Pridať protokol zmien'
-
-      delete:
-        action: 'Zmazať protokol zmien'
-        cancel: 'Zrušiť'
-        submit: 'Zmazať'
-        text: 'Naozaj chcete zmazať tento protokol zmien?'
+      create:
+        action: 'Pridať protokol zmien'
 
       edit:
         action: 'Upraviť'
-        cancel: 'Zrušiť'
+        title: 'Upraviť protokol zmien'
         submit: 'Uložiť'
+        cancel: 'Zrušiť'
+
+      delete:
+        action: 'Zmazať protokol zmien'
+        title: 'Pozor!'
+        text: 'Naozaj chcete zmazať tento protokol zmien?'
+        submit: 'Zmazať'
+        cancel: 'Zrušiť'
 
     assignment:
       new:
@@ -27,9 +30,11 @@ sk:
         submit: 'Priradiť'
 
     category:
-      add: 'Pridať kategóriu'
+      create:
+        action: 'Pridať kategóriu'
 
       edit:
         action: 'Upraviť'
+        title: 'Upraviť kategóriu'
         cancel: 'Zrušiť'
         submit: 'Uložiť'

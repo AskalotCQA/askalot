@@ -1,24 +1,26 @@
-<div class="form-group">
-  <%= render 'administration/changelogs/form', changelog: @changelog %>
-</div>
+<%= form_messages key: tab %>
 
-<div class="row">
+<%= render 'administration/changelogs/form', changelog: @changelog, tab: tab %>
 
-  <div class="col-xs-12 col-md-6" role="main">
+<ol class="administration-changelogs">
+  <% changelogs.each do |changelog| %>
+    <li>
+      <div class="row">
+        <div class="col-xs-3">
+          <%= link_to changelog.version, url_to_repository("releases/tag/v#{changelog.version}") %>
+        </div>
 
-    <ol class="list-unstyled">
-      <% changelogs.each do |changelog| %>
-        <li id="<%= changelog.identifier %>" class="changelog">
-          <h4>
-            <%= changelog.title %>
-            <%= changelog.version %>
-            <div class="question-details">
-              <%= render 'administration/changelogs/editing', changelog: changelog %>
-              <%= render 'administration/changelogs/deleting', changelog: changelog %>
-            </div>
-          </h4>
-        </li>
-      <% end %>
-    </ol>
-  </div>
-</div>
+        <div class="col-xs-7">
+          <%= changelog.title %>
+        </div>
+
+        <div class="col-xs-2">
+          <div class="pull-right">
+            <%= render 'administration/changelogs/editing', changelog: changelog, tab: tab %>
+            <%= render 'administration/changelogs/deleting', changelog: changelog, tab: tab %>
+          </div>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ol>
