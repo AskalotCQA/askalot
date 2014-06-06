@@ -1,3 +1,10 @@
 <% provide :title, t('group.index.title') %>
 
-<%= render 'groups', @groups %>
+
+<ul class="nav nav-tabs tab-navigation">
+  <%= tab_link_tag t('group.tab.all'), :all, groups_path(params.except(:page).merge tab: :all), analytics_attributes(:groups, :switch, :all) %>
+</ul>
+
+<ul class="tab-content">
+  <%= render_tab_content 'groups', :all, locals: { groups: @groups } %>
+</ul>
