@@ -7,3 +7,13 @@ sk:
 
     tab:
       all: 'Všetky'
+
+    create:
+      success: 'Kategória bola úspešne pridaná.'
+
+    update:
+      success: 'Kategória bola úspešne aktualizovaná.'
+
+    delete:
+      success: 'Kategória bola úspešne zmazaná.'
+      failure: 'Kategóriu sa nepodarilo zmazať.'

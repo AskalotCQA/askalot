@@ -38,7 +38,7 @@ describe 'Authentication' do
       #expect(page).to have_content('Úspešne prihlásený.')
       expect(page).to have_content(user.nick)
 
-      within :css, 'ul li .dropdown-menu' do
+      within :css, '.navbar-right li .dropdown-menu' do
         click_link 'Odhlásiť'
       end
 
@@ -60,7 +60,7 @@ describe 'Authentication' do
       fill_in 'user_login', with: user.login
       fill_in 'user_password', with: 'password'
 
-      # expect(page).to have_content('Úspešne prihlásený.')
+      #expect(page).to have_content('Úspešne prihlásený.')
 
       expect { click_button 'Prihlásiť' }.to change { User.count }.by(1)
 

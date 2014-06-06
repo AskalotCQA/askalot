@@ -19,7 +19,7 @@
       <div class="row">
         <div class="col-xs-4 col-sm-12 col-md-4">
           <%= content_tag :span, class: [:'question-metric', question_votes_coloring(question)] do %>
-            <span class="question-metric-value"><%= question.votes_difference %></span>
+            <span class="question-metric-value"><%= votes_difference(question) %></span>
             <%= t('count.vote', count: question.votes_difference) %>
           <% end %>
         </div>

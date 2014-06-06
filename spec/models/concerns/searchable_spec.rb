@@ -5,6 +5,7 @@ shared_examples_for Searchable do
   let(:factory) { model.name.underscore.to_sym }
 
   before :each do
+    model.probe.index.delete
     model.probe.index.create
   end
 
