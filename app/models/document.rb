@@ -3,6 +3,8 @@ class Document < ActiveRecord::Base
 
   belongs_to :group, counter_cache: true
 
+  has_many :questions
+
   validates :title,         presence: true, length: { maximum: 200 }
   validates :document_type, presence: true
 
