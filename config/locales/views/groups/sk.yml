@@ -10,3 +10,6 @@ sk:
     index:
       title: 'Skupiny'
       no_results_found: 'Neboli nájdené žiadne skupiny'
+
+    tab:
+      all: 'Všetky'
