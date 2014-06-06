@@ -15,4 +15,8 @@ class Category < ActiveRecord::Base
   def count
     questions.reload.size
   end
+
+  def tags=(values)
+    write_attribute(:tags, Tags::Extractor.extract(values))
+  end
 end

@@ -32,7 +32,7 @@ class window.Select extends Module
 
         callback(values)
       formatSelection: (item) -> item.id
-      createSearchChoice : (term, data) -> { id: term, text: "#{term} (#{I18n.t('question.tag.new')})" } if data.length == 0
+      createSearchChoice : (term, data) -> { id: term, text: "#{term} (#{I18n.t('question.tag.new')})" }
       ajax:
         url: '/tags/suggest'
         dataType: 'json'
