@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  include Searchables::Search
   include Watchables::Watch
 
   default_tab :all, only: :index
@@ -8,5 +9,7 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.order(:name)
     @tags       = Tag.order(:name)
+
+    @categories = search(@categories)
   end
 end
