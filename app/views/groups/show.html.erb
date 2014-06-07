@@ -1,20 +1,19 @@
-<% provide(:sidebar, true) %>
 <% provide :title, @group.title %>
 
-
 <div class="row">
-  <div class="col-xs-12 col-md-9" role="main">
+  <div class="col-md-6">
+
     <div class="row">
       <h1 class="page-header"><%= @group.title %></h1>
-
       <p class="lead"><%= @group.description %></p>
     </div>
+
     <div class="row">
-      <div class="col-xs-12 col-sm-2">
+      <div class="col-md-offset-9 col-md-3">
         <%= icon_link_to :plus, t('document.new.feature'), new_document_path, analytics_attributes(:documents, :'open-new-form', :list).merge(class: 'btn btn-success') %>
       </div>
-
     </div>
+
     <div class="row">
       <div class="panel-group" id="accordion">
         <% @documents.each do |document| %>
@@ -24,11 +23,7 @@
     </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm hidden-print">
-    <ul class="nav">
-      <li>
-        <%= link_to 'Clenovia skupiny', '#' %>
-      </li>
-    </ul>
+  <div class="col-md-6">
+    <%= render 'documents/new_question', question: @question %>
   </div>
 </div>
