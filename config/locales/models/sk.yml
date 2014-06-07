@@ -24,6 +24,12 @@ sk:
       few: 'komentáre'
       other: 'komentárov'
 
+    document:
+      zero: 'dokumentov'
+      one: 'dokument'
+      few: 'dokumenty'
+      other: 'dokumentov'
+
     evaluation:
       zero: 'hodnotení'
       one: 'hodnotenie'
@@ -47,6 +53,12 @@ sk:
       one: 'nasledovník'
       few: 'nasledovníci'
       other: 'nasledovníkov'
+
+    group:
+      zero: 'skupín'
+      one: 'skupina'
+      few: 'skupiny'
+      other: 'skupín'
 
     notification:
       zero: 'notifikácií'
