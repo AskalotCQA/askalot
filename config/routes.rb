@@ -34,6 +34,10 @@ Askalot::Application.routes.draw do
     get :evaluation, on: :member
   end
 
+  concern :searchable do
+    get :search, on: :collection
+  end
+
   concern :votable do
     get :voteup, on: :member
     get :votedown, on: :member
@@ -61,6 +65,7 @@ Askalot::Application.routes.draw do
 
     concerns :commetable
     concerns :evaluable
+    concerns :searchable
     concerns :votable
     concerns :watchable
   end
