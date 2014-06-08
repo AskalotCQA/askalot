@@ -2,6 +2,8 @@ module StackExchange
   class Document
     class Posts < StackExchange::Document
       def initialize(type)
+        super()
+
         @type = type
       end
 
