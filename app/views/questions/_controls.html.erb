@@ -1,23 +1,17 @@
 <div id="questions-controls" class="questions-controls">
   <div class="pull-right">
     <% if @poll %>
-      <%= icon_link_to :refresh, t('question.poll.end', time: tooltip_time_tag(Time.now).html_safe), params.merge(poll: false), class: 'btn text-muted', data: { poll: Configuration.poll.default, remote: true, state: true, rel: questions_path(params) } %>
+        <%= icon_link_to :refresh, t('question.poll.end', time: tooltip_time_tag(Time.now).html_safe), params.merge(poll: false), class: 'btn text-muted', data: {poll: Configuration.poll.default, remote: true, state: true, rel: questions_path(params)} %>
     <% else %>
-      <%= icon_link_to :refresh, t('question.poll.start'), questions_path(params.merge poll: true), class: 'btn btn-default', data: { remote: true, state: true } %>
+        <%= icon_link_to :refresh, t('question.poll.start'), questions_path(params.merge poll: true), class: 'btn btn-default', data: {remote: true, state: true} %>
     <% end %>
   </div>
 
-  <% if params[:q].present? %>
-    <ul class="nav nav-tabs">
-      <%= tab_link_tag_with_count t('question.tab.all'), :recent, questions_path(params.except(:page).merge tab: :recent), @questions_count, analytics_attributes(:questions, :switch, :recent).merge(remote: true) %>
-    </ul>
-  <% else %>
-    <ul class="nav nav-tabs">
-      <%= tab_link_tag_with_count t('question.tab.recent'), :recent, questions_path(params.except(:page).merge tab: :recent), filter_questions(Question).count, analytics_attributes(:questions, :switch, :recent).merge(remote: true) %>
-      <%= tab_link_tag_with_count t('question.tab.unanswered'), :unanswered, questions_path(params.except(:page).merge tab: :unanswered), filter_questions(Question.unanswered).size, analytics_attributes(:questions, :switch, :unanswered).merge(remote: true) %>
-      <%= tab_link_tag_with_count t('question.tab.answered'), :answered, questions_path(params.except(:page).merge tab: :answered), filter_questions(Question.answered_but_not_best).size, analytics_attributes(:questions, :switch, :answered).merge(remote: true) %>
-      <%= tab_link_tag_with_count t('question.tab.solved'), :solved, questions_path(params.except(:page).merge tab: :solved), filter_questions(Question.solved).size, analytics_attributes(:questions, :switch, :solved).merge(remote: true) %>
-      <%= tab_link_tag_with_count t('question.tab.favored'), :favored, questions_path(params.except(:page).merge tab: :favored), filter_questions(Question.favored).size, analytics_attributes(:questions, :switch, :favored).merge(remote: true) %>
-    </ul>
-  <% end %>
+  <ul class="nav nav-tabs">
+    <%= tab_link_tag_with_count t('question.tab.recent'), :recent, questions_path(params.except(:page).merge tab: :recent), filter_questions(Question).count, analytics_attributes(:questions, :switch, :recent).merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.unanswered'), :unanswered, questions_path(params.except(:page).merge tab: :unanswered), filter_questions(Question.unanswered).size, analytics_attributes(:questions, :switch, :unanswered).merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.answered'), :answered, questions_path(params.except(:page).merge tab: :answered), filter_questions(Question.answered_but_not_best).size, analytics_attributes(:questions, :switch, :answered).merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.solved'), :solved, questions_path(params.except(:page).merge tab: :solved), filter_questions(Question.solved).size, analytics_attributes(:questions, :switch, :solved).merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.favored'), :favored, questions_path(params.except(:page).merge tab: :favored), filter_questions(Question.favored).size, analytics_attributes(:questions, :switch, :favored).merge(remote: true) %>
+  </ul>
 </div>
