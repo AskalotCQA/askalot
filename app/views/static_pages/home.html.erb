@@ -35,21 +35,21 @@
       <div class="col-md-4">
         <div class="featured">
           <h2><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new'), analytics_attributes(:questions, :list, [:new, :home]) %></h2>
-          <%= render 'questions', questions: @new %>
+          <%= render 'questions', questions: @new, remote: true %>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="featured">
           <h2><%= link_to t('home.featured.solved'), questions_path(tab: :'questions-solved'), analytics_attributes(:questions, :list, [:solved, :home]) %></h2>
-          <%= render 'questions', questions: @solved %>
+          <%= render 'questions', questions: @solved, remote: true %>
         </div>
       </div>
 
       <div class="col-md-4">
         <div class="featured">
           <h2><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored'), analytics_attributes(:questions, :list, [:favored, :home]) %></h2>
-          <%= render 'questions', questions: @favored %>
+          <%= render 'questions', questions: @favored, remote: true %>
         </div>
       </div>
     </div>
