@@ -26,7 +26,7 @@ shared_examples_for Searchable do
     end
 
     it 'paginates records' do
-      results = model.search.page(1).per(5)
+      results = model.search(page: 1, per_page: 5)
 
       expect(results.size).to eql(5)
     end

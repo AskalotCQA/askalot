@@ -2,11 +2,10 @@ module Searchable
   extend ActiveSupport::Concern
 
   included do
-    include Orderable
     include Probe
+    include Orderable
 
     after_save do
-      # TODO (smolnar) consider update
       self.class.probe.index.import(self)
     end
 
@@ -17,13 +16,19 @@ module Searchable
 
   module ClassMethods
     def search(query = {})
-      # TODO resolve paginating and do not fetch all records at once
+      page    = query.delete(:page) || 0
+      size    = query.delete(:per_page) || 30
+      from    = (page <= 0 ? 0 : page - 1) * size
+      model   = self
+      results = probe.search(query.reverse_merge(from: from, size: size))
 
-      total    = self.count
-      results  = probe.search(query.reverse_merge(size: total, fields: [:id]))
-      ids      = results.map(&:id)
+      results.loader = lambda do |sources|
+        ids = sources.map(&:id)
 
-      self.where(questions: { id: ids }).order_by(id: ids)
+        model.where(id: ids).order_by(id: ids)
+      end
+
+      results
     end
   end
 end

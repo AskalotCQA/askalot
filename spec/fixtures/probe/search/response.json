@@ -1,0 +1,39 @@
+{
+  "took":3,
+  "timed_out":false,
+  "_shards":{
+    "total":1,
+    "successful":1,
+    "failed":0
+  },
+  "hits":{
+    "total":50,
+    "max_score":1.0,
+    "hits":[
+      {
+      "_index":"questions_development",
+      "_type":"question",
+      "_id":"1",
+      "_score":1.0,
+      "_source":{
+        "id":11411,
+        "title":"Question #1",
+        "text":"Lorem ipsum",
+        "tags":["elasticsearch"]
+      }
+    },
+    {
+      "_index":"questions_development",
+      "_type":"question",
+      "_id":"2",
+      "_score":1.0,
+      "_source":{
+        "id":2,
+        "title":"Question #2",
+        "text":"Lorem ipsum",
+        "tags":["applications"]
+      }
+    }
+    ]
+  }
+}

@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
 
+  include Searchables::Search
+
   default_tab :all, only: :index
   default_tab :profile, only: :show
   default_tab :followers, only: :followings
