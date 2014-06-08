@@ -12,4 +12,12 @@ require 'stack_exchange/processor/post_history'
 require 'stack_exchange/document/post_history'
 
 module StackExchange
+  include Squire
+end
+
+StackExchange.config do |config|
+  config.document do |document|
+    document.from = nil
+    document.to   = nil
+  end
 end

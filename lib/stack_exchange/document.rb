@@ -1,6 +1,11 @@
 module StackExchange
   class Document < Nokogiri::XML::SAX::Document
-    attr_accessor :batch_size
+    attr_accessor :batch_size, :from, :to
+
+    def initialize
+      @from = StackExchange.config.document.from
+      @to   = StackExchange.config.document.to
+    end
 
     def name
       self.class.name.split(/::/).last
@@ -27,10 +32,12 @@ module StackExchange
 
     def start_element(name, attributes = [])
       if name == 'row'
-        # TODO filter by creation date
-
         attributes = Hash[attributes].symbolize_keys
-        result     = process_element(attributes)
+
+        return if from && Time.parse(attributes[:CreationDate]) < from
+        return if to && Time.parse(attributes[:CreationDate]) > to
+
+        result = process_element(attributes)
 
         record, callbacks = result.is_a?(Array) ? [result.first] + result[1..-1] : [result] + []
 

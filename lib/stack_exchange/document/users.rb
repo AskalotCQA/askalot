@@ -3,6 +3,14 @@ require 'securerandom'
 module StackExchange
   class Document
     class Users < StackExchange::Document
+      def from
+        nil
+      end
+
+      def to
+        nil
+      end
+
       def process_element(user)
         return if user[:Id] == '-1'
 

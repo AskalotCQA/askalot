@@ -7,7 +7,7 @@ module StackExchange
 
       def process_element(post, options = {})
         if @type == :question && post[:PostTypeId] == '1'
-          user = User.find_by(stack_exchange_uuid: post[:OwnerUserId])
+          user = User.find_by(stack_exchange_uuid: post[:OwnerUserId]) || User.first
 
           return unless user
 

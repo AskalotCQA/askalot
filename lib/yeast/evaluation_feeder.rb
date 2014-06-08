@@ -36,15 +36,17 @@ module Yeast
               should: [],
               minimum_should_match: 2
             }
-          }
+          },
+
+          from: 0,
+          size: 10
         }
 
         terms.each do |term|
           query[:query][:bool][:should] << { term: { tags: term }}
         end
 
-        query.deep_merge!(strategy.call(question, terms))
-        query.merge!(from: 0, size: 10)
+        query.merge!(strategy.call(question, terms))
 
         retrieved_documents = results = Question.search(query)
         relevant_documents  = Question.where(stack_exchange_uuid: question.stack_exchange_questions_uuids)

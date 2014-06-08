@@ -96,6 +96,10 @@ module Questions
               }
             },
 
+            topics: {
+              type: :float
+            },
+
             created_at: {
               type: :date
             }
@@ -104,10 +108,11 @@ module Questions
       }
 
       probe.index.mapper.define(
-        id:    -> { id },
-        title: -> { title },
-        text:  -> { text },
-        tags:  -> { tags.map(&:name) }
+        id:     -> { id },
+        title:  -> { title },
+        text:   -> { text },
+        tags:   -> { tags.map(&:name) },
+        topics: -> { profiles.where(source: :LDA).order(:property).pluck(:value) }
       )
 
       probe.index.create

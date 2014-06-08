@@ -20,23 +20,6 @@ def cosine_similarity(a, b)
   result
 end
 
-Lda::Lda.class_eval do
-  def compute_topic_document_probability
-    outp = Array.new
-
-    @corpus.documents.each_with_index do |doc, idx|
-      tops = [0.0] * self.num_topics
-      self.phi[idx].each_with_index do |word_dist, word_idx|
-        word_dist.each_with_index do |top_prob, top_idx|
-          tops[top_idx] += top_prob
-        end
-      end
-      outp << tops
-    end
-
-    outp
-  end
-end
 
 namespace :test do
   desc 'Task description'

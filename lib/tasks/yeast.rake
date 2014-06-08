@@ -14,14 +14,6 @@ namespace :yeast do
     Yeast.run
   end
 
-  desc 'Evaluate detecion'
-  task evaluate: :environment do
-    Events::Dispatcher.unsubscribe_all
-    Events::Dispatcher.subscribe Yeast::EvaluationFeeder
-
-    Yeast.run
-  end
-
   namespace :evaluate do
     desc 'Evaluate with TF-IDF'
     task tf_ifd: :environment do
@@ -102,6 +94,63 @@ namespace :yeast do
                 }
             }
           }
+        }
+      }
+
+      Yeast.run
+    end
+
+    desc 'Evaluate with LDA'
+    task lda: :environment do
+      Events::Dispatcher.unsubscribe_all
+      Events::Dispatcher.subscribe Yeast::EvaluationFeeder
+
+      Yeast::EvaluationFeeder.strategy = ->(question, terms) {
+        topics = question.profiles.where(source: :LDA).order(:property).pluck(:value)
+
+        {
+          query: { match_all: {} },
+          sort: {
+            _script: {
+              script: "
+              result = doc.score;
+
+              cosine_similarity = def (first, second) {
+                i = 0;
+                scalar_product = 0.0;
+
+                for(i=0; i < first.size(); i++) {
+                  scalar_product += first[i] * second[i];
+                }
+
+                first_magnitude  = 0.0;
+                second_magnitude = 0.0;
+
+                for(element : first) {
+                  first_magnitude += element * element;
+                }
+
+                for(element : second) {
+                  second_magnitude += element * element;
+                }
+
+                return scalar_product / (sqrt(first_magnitude) * sqrt(second_magnitude));
+              };
+
+              result = cosine_similarity(topics, doc['topics'].values);
+
+              return result;
+              ",
+                type: :number,
+                order: :desc,
+                params: {
+                  terms: terms,
+                  topics: topics
+                }
+            }
+          },
+
+          size: 20
         }
       }
 
