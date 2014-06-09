@@ -1,4 +1,4 @@
-# TODO (jharinek) see: https://github.com/ryanb/cancan/wiki/Defining-Abilities
+# see: https://github.com/ryanb/cancan/wiki/Defining-Abilities
 
 class Ability
   include CanCan::Ability
@@ -33,6 +33,7 @@ class Ability
     can :comment, [Question, Answer]
     can :vote,    [Question, Answer]
 
+    # TODO(zbell) refactor: depends on category + role (not role only)
     can :label, [Question, Answer] do |resource|
       resource.author == user || (user.role?(:teacher) && resource.author == User.find_by(login: :slido))
     end
@@ -41,11 +42,11 @@ class Ability
     end
 
     if user.role? :teacher
-      can :evaluate, [Question, Answer]
+      can :evaluate, [Question, Answer] # TODO(zbell) refactor: depends on category + role (not role only)
 
       can :observe, :all
 
-      cannot :vote, :all
+      cannot :vote, :all # TODO(zbell) refactor: depends on category + role (not role only)
     end
 
     if user.role? :administrator
