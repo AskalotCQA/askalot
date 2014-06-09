@@ -1,15 +1,27 @@
 class Administration::AssignmentsController < Administration::DashboardController
   authorize_resource
 
-  # TODO (zbell) refactor
-
   def create
-    @assignment = Assignment.new(assignment_params)
+    @assignment = assignment.new(assignment_params)
 
     if @assignment.save
-      flash[:notice] = t('assignment.create.success')
+      form_message :notice, t('assignment.create.success'), key: params[:tab]
+
+      redirect_to administration_root_path(tab: params[:tab])
     else
-      form_error_messages_for @assignment
+      form_error_messages_for @assignment, flash: flash.now, key: params[:tab]
+
+      render_dashboard
+    end
+  end
+
+  def destroy
+    @assignment = assignment.find(params[:id])
+
+    if @assignment.destroy
+      form_message :notice, t('assignment.update.success'), key: params[:tab]
+    else
+      form_error_message t('assignment.update.success'), key: params[:tab]
     end
 
     redirect_to administration_root_path(tab: params[:tab])
