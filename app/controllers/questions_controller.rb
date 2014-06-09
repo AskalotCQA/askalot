@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   include Deletables::Destroy
   include Editables::Update
+  include Searchables::Search
   include Votables::Vote
   include Watchables::Watch
 
@@ -13,21 +14,20 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if params[:q]
-      @questions       = Question.search_by(q: params[:q])
-      @questions_count = @questions.count
-    else
-      @questions = case params[:tab].to_sym
-                   when :unanswered then Question.unanswered.by_votes
-                   when :answered   then Question.answered_but_not_best.by_votes
-                   when :solved     then Question.solved.by_votes
-                   when :favored    then Question.favored.by_votes
-                   else Question.recent
-                   end
+    @questions = case params[:tab].to_sym
+                   when :unanswered then
+                     Question.unanswered.by_votes
+                   when :answered then
+                     Question.answered_but_not_best.by_votes
+                   when :solved then
+                     Question.solved.by_votes
+                   when :favored then
+                     Question.favored.by_votes
+                   else
+                     Question.recent
+                 end
 
-      @questions = filter_questions(@questions)
-    end
-
+    @questions = filter_questions(@questions)
     @questions = @questions.page(params[:page]).per(20)
 
     initialize_polling
