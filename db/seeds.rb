@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Role.find_or_create_by! name: :student
+Role.find_or_create_by! name: :teacher
+Role.find_or_create_by! name: :administrator
+
 Label.find_or_create_by! value: :best
 Label.find_or_create_by! value: :helpful
 
@@ -17,8 +21,7 @@ slido.update_attributes(
   first: 'Automaton',
   last: 'Slido',
   about: 'Automatizovaný robot, ktorý zbiera otázky zo systému sli.do',
-  show_email: false,
-  role: :student
+  show_email: false
 )
 
 slido.save!
