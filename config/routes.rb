@@ -35,7 +35,7 @@ Askalot::Application.routes.draw do
   end
 
   concern :votable do
-    get :voteup, on: :member
+    get :voteup,   on: :member
     get :votedown, on: :member
   end
 
@@ -51,7 +51,7 @@ Askalot::Application.routes.draw do
 
   resources :tags, only: [:index] do
     get :suggest, on: :collection
-    get :search, on: :collection
+    get :search,  on: :collection
 
     concerns :watchable
   end

@@ -20,7 +20,7 @@ class TagsController < ApplicationController
     render json: {
       results: tags.map { |tag|
         {
-          id: tag.name,
+          id:   tag.name,
           text: "#{tag.name} (#{tag.count})"
         }
       },
