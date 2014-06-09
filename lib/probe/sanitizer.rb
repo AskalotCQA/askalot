@@ -4,7 +4,7 @@ module Probe
 
     def sanitize_query(query)
       # TODO (smolnar) implement
-      query
+      query.gsub(/[^a-z0-9?_]/i, "")
     end
   end
 end
