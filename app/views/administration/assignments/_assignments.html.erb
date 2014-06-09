@@ -1,0 +1,29 @@
+<%= form_messages key: tab %>
+
+<%= render 'administration/assignments/form', assignment: @assignment, tab: tab %>
+
+<ol class="administration-assignments">
+  <% assignments.each do |assignment| %>
+    <li>
+      <div class="row">
+        <div class="col-xs-4">
+          <%= link_to_category assignment.category %>
+        </div>
+
+        <div class="col-xs-4">
+          <%= link_to_user assignment.user %>
+        </div>
+
+        <div class="col-xs-2">
+          <%= assignment.role.name %>
+        </div>
+
+        <div class="col-xs-2">
+          <div class="pull-right">
+            <%= render 'administration/assignments/deleting', assignment: assignment, tab: tab %>
+          </div>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ol>

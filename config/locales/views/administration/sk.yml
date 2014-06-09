@@ -3,6 +3,7 @@ sk:
     navigation: 'Administrácia'
 
     tab:
+      assignments: 'Roly používateľov'
       categories: 'Kategórie'
       changelogs: 'Protokoly zmien'
 
