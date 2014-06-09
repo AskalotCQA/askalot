@@ -6,6 +6,7 @@ class Question < ActiveRecord::Base
   include Editable
   include Favorable
   include Notifiable
+  include Orderable
   include Taggable
   include Touchable
   include Viewable

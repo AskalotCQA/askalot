@@ -6,6 +6,9 @@ sk:
       title: 'Používatelia'
       no_results_found: 'Nenájdený žiadny používatelia.'
 
+    search:
+      title: 'Vyhľadávanie používateľov'
+
     tab:
       all: 'Všetci'
       recent: 'Noví'

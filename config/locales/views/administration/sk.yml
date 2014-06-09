@@ -17,7 +17,7 @@ sk:
         cancel: 'Zrušiť'
 
       delete:
-        action: 'Zmazať protokol zmien'
+        action: 'Zmazať'
         title: 'Pozor!'
         text: 'Naozaj chcete zmazať tento protokol zmien?'
         submit: 'Zmazať'

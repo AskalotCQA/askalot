@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include Followable
+  include Users::Searchable
 
   # TODO (jharinek) consider https://github.com/ryanb/cancan/wiki/Separate-Role-Model
   ROLES = [:student, :teacher, :administrator]

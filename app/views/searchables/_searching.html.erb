@@ -1,0 +1,9 @@
+<%= form_tag eval("search_#{target}_path"), id: :filter_tags, method: :get do %>
+  <%= hidden_field_tag :tab, :results %>
+  <div class="form-group">
+    <div class="input-group select2-bootstrap-prepend">
+      <%= text_field_tag :q, params[:q], id: :filter_tag, class: :'form-control' %>
+      <%= submit_tag t('searchables.searching.submit') %>
+    </div>
+  </div>
+<% end %>

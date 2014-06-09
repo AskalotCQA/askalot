@@ -10,8 +10,7 @@ module Deletables::Destroy
     authorize! :delete, @deletable
 
     if @deletable.mark_as_deleted_by! current_user
-      #TODO(zbell) do not notify about anonymous questions since user.nick is still exposed in notifications
-      dispatch_event :delete, @deletable, for: @deletable.to_question.watchers unless @deletable.to_question.anonymous
+      dispatch_event :delete, @deletable, for: @deletable.to_question.watchers, anonymous: (@deletable.is_a?(Question) && @deletable.anonymous)
 
       flash[:notice] = t "#{@model}.delete.success"
     else
