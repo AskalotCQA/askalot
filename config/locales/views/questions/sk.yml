@@ -38,6 +38,9 @@ sk:
       success: 'Otázka bola úspešne zmazaná.'
       failure: 'Otázku sa nepodarilo zmazať.'
 
+    search:
+      title: 'Vyhľadávanie v otázkach'
+
     tab:
       recent: 'Aktuálne'
       unanswered: 'Bez odpovede'
