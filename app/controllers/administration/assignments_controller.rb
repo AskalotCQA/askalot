@@ -1,4 +1,5 @@
-class Administration::AssignmentsController < AdministrationController
+class Administration::AssignmentsController < Administration::DashboardController
+  authorize_resource
 
   def create
     @assignment = Assignment.new(assignment_params)
