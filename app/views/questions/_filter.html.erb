@@ -25,7 +25,6 @@
 
       <div class="collapse" id="fulltext-search">
         <%= form_tag search_questions_path, id: :fulltext_search, method: :get do %>
-          <%= hidden_field_tag :tab, params[:tab] %>
           <%= hidden_field_tag :poll, params[:poll] %>
           <div class="form-group">
             <div class="input-group select2-bootstrap-prepend">

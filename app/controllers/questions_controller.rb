@@ -9,7 +9,8 @@ class QuestionsController < ApplicationController
   include Markdown::Process
   include Watchings::Register
 
-  default_tab :recent, only: :index
+  default_tab :recent,  only: :index
+  default_tab :results, only: :search
 
   before_action :authenticate_user!
 
