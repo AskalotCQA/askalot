@@ -3,17 +3,9 @@
 <%= render 'categories/searching', target: controller_name %>
 
 <ul class="nav nav-tabs tab-navigation">
-  <% if params[:q].present? %>
-    <%= tab_link_tag_with_count t('category.tab.results'), :results, categories_path(params.slice(:q, :page)), @categories.count, analytics_attributes(:categories, :search, :results) %>
-  <% else %>
-    <%= tab_link_tag_with_count t('category.tab.all'), :all, categories_path(params.except(:page).merge tab: :all), @categories.count, analytics_attributes(:categories, :switch, :all) %>
-  <% end %>
+  <%= tab_link_tag_with_count t('category.tab.all'), :all, categories_path(params.except(:page).merge tab: :all), @categories.count, analytics_attributes(:categories, :switch, :all) %>
 </ul>
 
 <div class="tab-content">
-  <% if params[:q].present? %>
-    <%= render_tab_content 'categories', :results, locals: { categories: @categories } %>
-  <% else %>
-    <%= render_tab_content 'categories', :all, locals: { categories: @categories } %>
-  <% end %>
+  <%= render_tab_content 'categories', :all, locals: {categories: @categories} %>
 </div>
