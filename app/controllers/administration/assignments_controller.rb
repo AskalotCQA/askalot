@@ -1,6 +1,8 @@
 class Administration::AssignmentsController < Administration::DashboardController
   authorize_resource
 
+  # TODO (zbell) refactor
+
   def create
     @assignment = Assignment.new(assignment_params)
 
@@ -16,6 +18,6 @@ class Administration::AssignmentsController < Administration::DashboardControlle
   private
 
   def assignment_params
-    params.require(:assignment).permit(:user_id, :category_id, :role_id)
+    params.require(:assignments).permit(:user_id, :category_id, :role_id)
   end
 end

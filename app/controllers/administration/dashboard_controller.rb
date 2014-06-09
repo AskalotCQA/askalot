@@ -10,13 +10,13 @@ class Administration::DashboardController < AdministrationController
   def render_dashboard
     authorize! :administrate, nil
 
-    @categories = Category.order(:name)
-    @changelogs = Changelog.all.sort
-
-    @category  ||= Category.new
-    @changelog ||= Changelog.new
+    @assignments = Assignment.includes(:user, :category, :role).order('categories.name', 'users.nick')
+    @categories  = Category.order(:name)
+    @changelogs  = Changelog.all.sort
 
     @assignment ||= Assignment.new
+    @category   ||= Category.new
+    @changelog  ||= Changelog.new
 
     render 'administration/dashboard/index'
   end
