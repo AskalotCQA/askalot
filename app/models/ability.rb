@@ -37,8 +37,15 @@ class Ability
       resource.author == user || (user.role?(:teacher) && resource.author == User.find_by(login: :slido))
     end
 
+    if user.role? :student
+    end
+
     if user.role? :teacher
+      can :evaluate, [Question, Answer]
+
       can :observe, :all
+
+      cannot :vote, :all
     end
 
     if user.role? :administrator
