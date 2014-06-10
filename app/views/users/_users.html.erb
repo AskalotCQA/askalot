@@ -9,7 +9,7 @@
     </div>
 
     <% if remote %>
-      <%= paginate users, remote: remote, data: { state: true, scroll: :body, fade: '#users' } %>
+      <%= paginate users, remote: true, data: { state: true, scroll: :body, fade: '#users' } %>
     <% else %>
       <%= paginate users %>
     <% end %>

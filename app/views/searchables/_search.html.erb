@@ -1,9 +1,10 @@
-<%= form_tag eval("search_#{target}_path"), method: :get do %>
-  <%= hidden_field_tag :tab, :results %>
-  <div class="form-group">
-    <div class="input-group select2-bootstrap-prepend">
+<div id="search" class="search">
+  <%= form_tag public_send("search_#{target}_path"), method: :get do %>
+    <div class="input-group">
       <%= text_field_tag :q, params[:q], class: :'form-control' %>
-      <%= submit_tag :TODO %>
+      <span class="input-group-btn">
+        <%= button_tag icon_tag(:search), name: nil, id: :'search-submit', class: 'btn btn-default' %>
+      </span>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

@@ -20,14 +20,14 @@ describe 'Search Tags' do
     click_link 'Tagy'
 
     fill_in 'q', with: 'r'
-    click_button 'Hľadať'
+    click_button 'search-submit'
 
     expect(page).to     have_content('rails')
     expect(page).to     have_content('ruby')
     expect(page).not_to have_content('linux')
 
     fill_in 'q', with: 'ux'
-    click_button 'Hľadať'
+    click_button 'search-submit'
 
     expect(page).to have_content('linux')
   end

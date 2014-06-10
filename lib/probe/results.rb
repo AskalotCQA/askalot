@@ -6,7 +6,8 @@ module Probe
 
     attr_reader :query, :response, :hits, :results
 
-    alias :size :count
+    alias :length :count
+    alias :size   :count
 
     def initialize(query, &search)
       @query  = query

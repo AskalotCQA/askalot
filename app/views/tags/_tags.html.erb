@@ -1,4 +1,4 @@
-<% if tags.any? %>
+<% unless tags.length.zero? %>
   <div class="row">
     <% tags.each do |tag| %>
       <div class="col-sm-6 col-md-4">
