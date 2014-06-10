@@ -38,7 +38,7 @@ module Yeast
         end
       end
 
-      date = date + 1.month
+      date = date + 1.day
     end
   end
 end
