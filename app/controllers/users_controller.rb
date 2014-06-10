@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   include Searchables::Search
 
   default_tab :all, only: :index
+  default_tab :results, only: :search
   default_tab :profile, only: :show
   default_tab :followers, only: :followings
 
