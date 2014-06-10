@@ -3,7 +3,7 @@
     <div class="input-group">
       <%= text_field_tag :q, params[:q], class: :'form-control' %>
       <span class="input-group-btn">
-        <%= button_tag icon_tag(:search), name: nil, class: 'btn btn-default' %>
+        <%= button_tag icon_tag(:search), name: nil, id: :'search-submit', class: 'btn btn-default' %>
       </span>
     </div>
   <% end %>

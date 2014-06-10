@@ -19,7 +19,7 @@ describe 'Search Users' do
     click_link 'Používatelia'
 
     fill_in 'q', with: 'k'
-    click_button 'Hľadať'
+    click_button 'search-submit'
 
     within '#users' do
       expect(page).to     have_content('kyle')
@@ -28,7 +28,7 @@ describe 'Search Users' do
     end
 
     fill_in 'q', with: 'sm'
-    click_button 'Hľadať'
+    click_button 'search-submit'
 
     within '#users' do
       expect(page).to have_content('smolnar')
@@ -43,7 +43,7 @@ describe 'Search Users' do
     click_link 'Používatelia'
 
     fill_in 'q', with: 'user_'
-    click_button 'Hľadať'
+    click_button 'search-submit'
 
     within '#users' do
       users.first(30).each do |user|
