@@ -105,7 +105,7 @@ group :development, :test do
   gem 'faker', '1.1.2'
 end
 
-group :production do
+group :demo, :staging, :production do
   gem 'unicorn'
   gem 'rack-timeout'
   gem 'exception_notification'

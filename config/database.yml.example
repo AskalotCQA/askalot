@@ -22,6 +22,14 @@ staging:
   username: postgres
   password: postgres
 
+demo:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_demo
+  pool: 5
+  username: postgres
+  password: postgres
+
 production:
   adapter: postgresql
   encoding: unicode

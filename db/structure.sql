@@ -54,10 +54,10 @@ CREATE TABLE activities (
     resource_id integer NOT NULL,
     resource_type character varying(255) NOT NULL,
     action character varying(255) NOT NULL,
-    created_on date NOT NULL,
-    updated_on date NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
+    created_on date NOT NULL,
+    updated_on date NOT NULL,
     anonymous boolean DEFAULT false NOT NULL
 );
 
@@ -138,8 +138,7 @@ CREATE TABLE answers (
     deleted_at timestamp without time zone,
     deletor_id integer,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    document_id integer
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -340,40 +339,6 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
--- Name: documents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE documents (
-    id integer NOT NULL,
-    group_id integer NOT NULL,
-    title character varying(255) NOT NULL,
-    document_type character varying(255),
-    content character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: documents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE documents_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE documents_id_seq OWNED BY documents.id;
-
-
---
 -- Name: evaluations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -509,43 +474,6 @@ CREATE SEQUENCE followings_id_seq
 --
 
 ALTER SEQUENCE followings_id_seq OWNED BY followings.id;
-
-
---
--- Name: groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE groups (
-    id integer NOT NULL,
-    owner_id integer NOT NULL,
-    title character varying(255) DEFAULT ''::character varying NOT NULL,
-    description character varying(255),
-    visibility character varying(255) DEFAULT 'public'::character varying NOT NULL,
-    deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    documents_count integer DEFAULT 0 NOT NULL
-);
-
-
---
--- Name: groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE groups_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
 
 
 --
@@ -721,8 +649,7 @@ CREATE TABLE questions (
     deleted_at timestamp without time zone,
     deletor_id integer,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    document_id integer
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -939,6 +866,7 @@ CREATE TABLE users (
     stack_overflow character varying(255),
     tumblr character varying(255),
     youtube character varying(255),
+    role character varying(255) DEFAULT 'student'::character varying NOT NULL,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -948,8 +876,7 @@ CREATE TABLE users (
     remember_token character varying(255),
     followers_count integer DEFAULT 0 NOT NULL,
     followees_count integer DEFAULT 0 NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    role character varying
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1139,13 +1066,6 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY documents ALTER COLUMN id SET DEFAULT nextval('documents_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY evaluations ALTER COLUMN id SET DEFAULT nextval('evaluations_id_seq'::regclass);
 
 
@@ -1168,13 +1088,6 @@ ALTER TABLE ONLY favorites ALTER COLUMN id SET DEFAULT nextval('favorites_id_seq
 --
 
 ALTER TABLE ONLY followings ALTER COLUMN id SET DEFAULT nextval('followings_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::regclass);
 
 
 --
@@ -1333,14 +1246,6 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY documents
-    ADD CONSTRAINT documents_pkey PRIMARY KEY (id);
-
-
---
 -- Name: evaluations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1370,14 +1275,6 @@ ALTER TABLE ONLY favorites
 
 ALTER TABLE ONLY followings
     ADD CONSTRAINT followings_pkey PRIMARY KEY (id);
-
-
---
--- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY groups
-    ADD CONSTRAINT groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -1499,6 +1396,13 @@ CREATE INDEX index_activities_on_anonymous ON activities USING btree (anonymous)
 
 
 --
+-- Name: index_activities_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_created_at ON activities USING btree (created_at);
+
+
+--
 -- Name: index_activities_on_created_on; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1573,13 +1477,6 @@ CREATE INDEX index_answers_on_deleted ON answers USING btree (deleted);
 --
 
 CREATE INDEX index_answers_on_deletor_id ON answers USING btree (deletor_id);
-
-
---
--- Name: index_answers_on_document_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_answers_on_document_id ON answers USING btree (document_id);
 
 
 --
@@ -1723,20 +1620,6 @@ CREATE INDEX index_comments_on_edited ON comments USING btree (edited);
 
 
 --
--- Name: index_documents_on_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_documents_on_group_id ON documents USING btree (group_id);
-
-
---
--- Name: index_documents_on_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_documents_on_title ON documents USING btree (title);
-
-
---
 -- Name: index_evaluations_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1839,27 +1722,6 @@ CREATE INDEX index_followings_on_follower_id ON followings USING btree (follower
 --
 
 CREATE UNIQUE INDEX index_followings_on_unique_key ON followings USING btree (follower_id, followee_id);
-
-
---
--- Name: index_groups_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_groups_on_deletor_id ON groups USING btree (deletor_id);
-
-
---
--- Name: index_groups_on_owner_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_groups_on_owner_id ON groups USING btree (owner_id);
-
-
---
--- Name: index_groups_on_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_groups_on_title ON groups USING btree (title);
 
 
 --
@@ -2028,13 +1890,6 @@ CREATE INDEX index_questions_on_deleted ON questions USING btree (deleted);
 --
 
 CREATE INDEX index_questions_on_deletor_id ON questions USING btree (deletor_id);
-
-
---
--- Name: index_questions_on_document_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_questions_on_document_id ON questions USING btree (document_id);
 
 
 --
@@ -2238,6 +2093,13 @@ CREATE UNIQUE INDEX index_users_on_nick ON users USING btree (nick);
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
+
+
+--
+-- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_role ON users USING btree (role);
 
 
 --
@@ -2553,8 +2415,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140420093029');
 
 INSERT INTO schema_migrations (version) VALUES ('20140421091947');
 
-INSERT INTO schema_migrations (version) VALUES ('20140422093803');
-
 INSERT INTO schema_migrations (version) VALUES ('20140423082147');
 
 INSERT INTO schema_migrations (version) VALUES ('20140423123809');
@@ -2565,12 +2425,3 @@ INSERT INTO schema_migrations (version) VALUES ('20140429003614');
 
 INSERT INTO schema_migrations (version) VALUES ('20140513162801');
 
-INSERT INTO schema_migrations (version) VALUES ('20140523053735');
-
-INSERT INTO schema_migrations (version) VALUES ('20140523053753');
-
-INSERT INTO schema_migrations (version) VALUES ('20140523053804');
-
-INSERT INTO schema_migrations (version) VALUES ('20140523053816');
-
-INSERT INTO schema_migrations (version) VALUES ('20140523061344');
