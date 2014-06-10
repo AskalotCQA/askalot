@@ -6,6 +6,11 @@ sk:
       title: 'Otázky'
       new: 'Nová otázka'
 
+    search:
+      title: 'Vyhľadávanie v otázkach'
+      submit: 'Vyhľadať'
+      placeholder: 'napr. NoSQL databázy, návrhové vzory, …'
+
     new:
       title: 'Nová otázka'
       submit: 'Opýtať'
@@ -41,10 +46,12 @@ sk:
       solved: 'Vyriešené'
       favored: 'Obľúbené'
 
+      results: 'Výsledky'
+
     tag:
       new: 'nový'
       searching: 'Hľadám…'
-      no_matches_found: 'Nenájdený žiadny výsledok'
+      no_matches: 'Nenájdený žiadny výsledok'
       placeholder: 'napr. elasticsearch, linux-server, use-case'
 
     poll:

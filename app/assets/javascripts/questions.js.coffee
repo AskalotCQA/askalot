@@ -30,3 +30,16 @@ $(document).ready ->
     html = templates['questions/category_tags'](tags: tags[value])
 
     $('ul#question-category-tags').html(html)
+
+  ##
+  # Filter form
+  $('.fulltext-switch').click (event) ->
+    event.preventDefault()
+    $('#fulltext-search').show()
+    $('#tag-search').hide()
+
+  $('.tag-switch').click (event) ->
+    event.preventDefault()
+    $('#fulltext-search').hide()
+    $('#tag-search').show()
+

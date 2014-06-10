@@ -27,6 +27,18 @@ module Questions
               type: :custom,
               tokenizer: :tag,
               filter: [:asciifolding]
+            },
+
+            answers: {
+              type: :custom,
+              tokenizer: :standard,
+              filter: [:asciifolding, :lowercase, :trim]
+            },
+
+            comments: {
+              type: :custom,
+              tokenizer: :standard,
+              filter: [:asciifolding, :lowercase, :trim]
             }
           },
 
@@ -94,16 +106,46 @@ module Questions
                   index: :not_analyzed
                 }
               }
+            },
+
+            answers: {
+              type: :multi_field,
+              fields: {
+                answers: {
+                  type: :string,
+                  analyzer: :answers,
+                },
+                untouched: {
+                  type: :string,
+                  index: :not_analyzed
+                }
+              }
+            },
+
+            comments: {
+              type: :multi_field,
+              fileds: {
+                comments: {
+                  type: :string,
+                  analyzer: :comments,
+                },
+                untouched: {
+                  type: :string,
+                  index: :not_analyzed
+                }
+              }
             }
           }
         }
       }
 
       probe.index.mapper.define(
-        id:    -> { id },
-        title: -> { title },
-        text:  -> { text },
-        tags:  -> { tags.map(&:name) }
+        id:      ->  { id },
+        title:   ->  { title },
+        text:    ->  { text },
+        tags:    ->  { tags.map(&:name) },
+        answers: ->  { answers.map(&:text) },
+        comments: -> { comments.map(&:text) + answers.map { |answer| answer.comments.map(&:text) } }
       )
 
       probe.index.create
@@ -114,9 +156,9 @@ module Questions
         search(
           query: {
             query_string: {
-              query: probe.sanitizer.sanitize_query(params[:q]),
+              query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
               default_operator: :and,
-              fields: [:text, :title, :tags]
+              fields: [:text, :title, :tags, :answers, :comments]
             }
           }
         )

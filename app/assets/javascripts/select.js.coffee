@@ -10,7 +10,7 @@ class window.Select extends Module
     formatSearching: ->
       "<span>#{I18n.t('question.tag.searching')}</span>"
     formatNoMatches: ->
-      "<span>#{I18n.t('question.tag.no_matches_found')}</span>"
+      "<span>#{I18n.t('question.tag.no_matches')}</span>"
     tokenizer: (input, selection, callback, options) ->
       tokenizer = /,/
 

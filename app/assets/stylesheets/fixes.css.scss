@@ -59,7 +59,7 @@ address, form, nav, p, dl, ol, ul, table {
   border-left: none;
 }
 
-.input-group-addon {
+.input-group-addon, .input-group-btn {
   border-right-width: 0;
 
   &:last-child {

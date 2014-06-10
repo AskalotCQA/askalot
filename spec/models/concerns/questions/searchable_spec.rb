@@ -5,6 +5,8 @@ shared_examples_for Questions::Searchable do
   it_behaves_like Searchable
 
   describe '.search' do
+    let!(:questions) { 10.times.map { |record| create :question } }
+
     it 'searches questions by fulltext query' do
       questions = []
 

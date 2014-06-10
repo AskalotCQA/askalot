@@ -6,7 +6,11 @@
       <% end %>
     </ol>
 
-    <%= paginate questions, remote: true, data: { state: true, scroll: :body, fade: '#questions' } %>
+    <% if remote %>
+      <%= paginate questions, remote: true, data: { state: true, scroll: :body, fade: '#questions' } %>
+    <% else %>
+      <%= paginate questions %>
+    <% end %>
   <% else %>
     <div class="alert alert-warning">
       <%= t('question.no_records') %>
