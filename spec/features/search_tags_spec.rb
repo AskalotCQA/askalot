@@ -26,7 +26,6 @@ describe 'Search Tags' do
     expect(page).to     have_content('ruby')
     expect(page).not_to have_content('linux')
 
-
     fill_in 'q', with: 'ux'
     click_button 'Hľadať'
 

@@ -50,8 +50,8 @@ Askalot::Application.routes.draw do
   end
 
   resources :tags, only: [:index] do
-    get :suggest, on: :collection
     get :search,  on: :collection
+    get :suggest, on: :collection
 
     concerns :watchable
   end
