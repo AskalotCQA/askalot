@@ -25,6 +25,21 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = public, pg_catalog;
 
+--
+-- Name: array_idx(anyarray, anyelement); Type: FUNCTION; Schema: public; Owner: -
+--
+
+CREATE FUNCTION array_idx(anyarray, anyelement) RETURNS integer
+    LANGUAGE sql IMMUTABLE
+    AS $_$
+        SELECT i FROM (
+          SELECT generate_series(array_lower($1,1),array_upper($1,1))
+        ) g(i)
+        WHERE $1[i] = $2
+        LIMIT 1;
+      $_$;
+
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -39,8 +54,11 @@ CREATE TABLE activities (
     resource_id integer NOT NULL,
     resource_type character varying(255) NOT NULL,
     action character varying(255) NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    created_on date NOT NULL,
+    updated_on date NOT NULL,
+    anonymous boolean DEFAULT false NOT NULL
 );
 
 
@@ -217,11 +235,11 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 CREATE TABLE changelogs (
     id integer NOT NULL,
-    text text NOT NULL,
+    text text,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     title character varying(255),
-    version character varying(255)
+    version character varying(255) NOT NULL
 );
 
 
@@ -326,7 +344,7 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 CREATE TABLE evaluations (
     id integer NOT NULL,
-    evaluator_id integer NOT NULL,
+    author_id integer NOT NULL,
     evaluable_id integer NOT NULL,
     evaluable_type character varying(255) NOT NULL,
     text text,
@@ -432,7 +450,10 @@ CREATE TABLE followings (
     follower_id integer NOT NULL,
     followee_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -536,7 +557,8 @@ CREATE TABLE notifications (
     unread boolean DEFAULT true NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    read_at timestamp without time zone
+    read_at timestamp without time zone,
+    anonymous boolean DEFAULT false NOT NULL
 );
 
 
@@ -853,7 +875,8 @@ CREATE TABLE users (
     votes_count integer DEFAULT 0 NOT NULL,
     remember_token character varying(255),
     followers_count integer DEFAULT 0 NOT NULL,
-    followees_count integer DEFAULT 0 NOT NULL
+    followees_count integer DEFAULT 0 NOT NULL,
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -957,7 +980,10 @@ CREATE TABLE watchings (
     watchable_id integer NOT NULL,
     watchable_type character varying(255) NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -1363,10 +1389,24 @@ CREATE INDEX index_activities_on_action ON activities USING btree (action);
 
 
 --
+-- Name: index_activities_on_anonymous; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_anonymous ON activities USING btree (anonymous);
+
+
+--
 -- Name: index_activities_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_activities_on_created_at ON activities USING btree (created_at);
+
+
+--
+-- Name: index_activities_on_created_on; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_created_on ON activities USING btree (created_on);
 
 
 --
@@ -1381,6 +1421,13 @@ CREATE INDEX index_activities_on_initiator_id ON activities USING btree (initiat
 --
 
 CREATE INDEX index_activities_on_resource_id_and_resource_type ON activities USING btree (resource_id, resource_type);
+
+
+--
+-- Name: index_activities_on_resource_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_resource_type ON activities USING btree (resource_type);
 
 
 --
@@ -1573,6 +1620,13 @@ CREATE INDEX index_comments_on_edited ON comments USING btree (edited);
 
 
 --
+-- Name: index_evaluations_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_evaluations_on_author_id ON evaluations USING btree (author_id);
+
+
+--
 -- Name: index_evaluations_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1591,13 +1645,6 @@ CREATE INDEX index_evaluations_on_deletor_id ON evaluations USING btree (deletor
 --
 
 CREATE INDEX index_evaluations_on_evaluable_id_and_evaluable_type ON evaluations USING btree (evaluable_id, evaluable_type);
-
-
---
--- Name: index_evaluations_on_evaluator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_evaluations_on_evaluator_id ON evaluations USING btree (evaluator_id);
 
 
 --
@@ -1640,6 +1687,20 @@ CREATE INDEX index_favorites_on_question_id ON favorites USING btree (question_i
 --
 
 CREATE UNIQUE INDEX index_favorites_on_unique_key ON favorites USING btree (favorer_id, question_id);
+
+
+--
+-- Name: index_followings_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_followings_on_deleted ON followings USING btree (deleted);
+
+
+--
+-- Name: index_followings_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_followings_on_deletor_id ON followings USING btree (deletor_id);
 
 
 --
@@ -1720,6 +1781,13 @@ CREATE INDEX index_notifications_on_action ON notifications USING btree (action)
 
 
 --
+-- Name: index_notifications_on_anonymous; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notifications_on_anonymous ON notifications USING btree (anonymous);
+
+
+--
 -- Name: index_notifications_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1745,6 +1813,13 @@ CREATE INDEX index_notifications_on_recipient_id ON notifications USING btree (r
 --
 
 CREATE INDEX index_notifications_on_resource_id_and_resource_type ON notifications USING btree (resource_id, resource_type);
+
+
+--
+-- Name: index_notifications_on_resource_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_notifications_on_resource_type ON notifications USING btree (resource_type);
 
 
 --
@@ -1780,6 +1855,13 @@ CREATE INDEX index_question_revisions_on_editor_id ON question_revisions USING b
 --
 
 CREATE INDEX index_question_revisions_on_question_id ON question_revisions USING btree (question_id);
+
+
+--
+-- Name: index_questions_on_anonymous; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_questions_on_anonymous ON questions USING btree (anonymous);
 
 
 --
@@ -1829,6 +1911,13 @@ CREATE UNIQUE INDEX index_questions_on_slido_question_uuid ON questions USING bt
 --
 
 CREATE INDEX index_questions_on_title ON questions USING btree (title);
+
+
+--
+-- Name: index_questions_on_touched_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_questions_on_touched_at ON questions USING btree (touched_at);
 
 
 --
@@ -2091,6 +2180,20 @@ CREATE INDEX index_votes_on_voter_id ON votes USING btree (voter_id);
 
 
 --
+-- Name: index_watchings_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_watchings_on_deleted ON watchings USING btree (deleted);
+
+
+--
+-- Name: index_watchings_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_watchings_on_deletor_id ON watchings USING btree (deletor_id);
+
+
+--
 -- Name: index_watchings_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2274,7 +2377,11 @@ INSERT INTO schema_migrations (version) VALUES ('20140330180048');
 
 INSERT INTO schema_migrations (version) VALUES ('20140331225953');
 
+INSERT INTO schema_migrations (version) VALUES ('20140403094835');
+
 INSERT INTO schema_migrations (version) VALUES ('20140403095606');
+
+INSERT INTO schema_migrations (version) VALUES ('20140403111720');
 
 INSERT INTO schema_migrations (version) VALUES ('20140403181644');
 
@@ -2287,4 +2394,34 @@ INSERT INTO schema_migrations (version) VALUES ('20140403192541');
 INSERT INTO schema_migrations (version) VALUES ('20140408184343');
 
 INSERT INTO schema_migrations (version) VALUES ('20140408184444');
+
+INSERT INTO schema_migrations (version) VALUES ('20140417162824');
+
+INSERT INTO schema_migrations (version) VALUES ('20140417212431');
+
+INSERT INTO schema_migrations (version) VALUES ('20140417213144');
+
+INSERT INTO schema_migrations (version) VALUES ('20140417213702');
+
+INSERT INTO schema_migrations (version) VALUES ('20140418210243');
+
+INSERT INTO schema_migrations (version) VALUES ('20140419150139');
+
+INSERT INTO schema_migrations (version) VALUES ('20140419205433');
+
+INSERT INTO schema_migrations (version) VALUES ('20140420091223');
+
+INSERT INTO schema_migrations (version) VALUES ('20140420093029');
+
+INSERT INTO schema_migrations (version) VALUES ('20140421091947');
+
+INSERT INTO schema_migrations (version) VALUES ('20140423082147');
+
+INSERT INTO schema_migrations (version) VALUES ('20140423123809');
+
+INSERT INTO schema_migrations (version) VALUES ('20140424163620');
+
+INSERT INTO schema_migrations (version) VALUES ('20140429003614');
+
+INSERT INTO schema_migrations (version) VALUES ('20140513162801');
 
