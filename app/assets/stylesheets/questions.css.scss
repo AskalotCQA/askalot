@@ -7,8 +7,41 @@
 .questions-filter {
   margin: $navbar-height 0 0;
 
-  a.btn, .form-group {
+  .btn, .form-group {
     margin-bottom: 20px;
+  }
+
+  .input-group-btn {
+    .btn.active {
+      color: $link-color;
+      background: none;
+    }
+
+    .btn.inactive {
+      color: $text-muted;
+    }
+
+    &.fulltext-switch, &.tag-switch {
+      .btn, .btn:active, .btn:focus, .btn:hover {
+        border-color: $input-border;
+      }
+    }
+
+    &.tag-switch .btn {
+      border-right: none;
+    }
+  }
+
+  #fulltext-search {
+    display: none;
+
+    #fulltext {
+      border-right: none;
+    }
+
+    #fulltext-search-submit {
+      margin-left: 0;
+    }
   }
 }
 
