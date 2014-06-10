@@ -24,7 +24,7 @@ module Yeast
     date   = Question.order(:created_at).first.created_at
 
     until date > Time.now
-      resources = models.map { |model| model.where('created_at >= ? AND created_at < ?', date, date + 1.month) }.flatten.compact
+      resources = models.map { |model| model.where('created_at >= ? AND created_at < ?', date, date + 1.day) }.flatten.compact
 
       resources.sort_by!(&:created_at)
 
