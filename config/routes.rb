@@ -1,19 +1,4 @@
 Askalot::Application.routes.draw do
-  root 'static_pages#home'
-
-  get '/404', to: 'errors#show'
-  get '/500', to: 'errors#show'
-
-  devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }
-
-  get 'users/:nick',            to: 'users#show',       as: :user
-  get 'users/:nick/activities', to: 'users#activities', as: :user_activities
-  get 'users/:nick/followings', to: 'users#followings', as: :user_followings
-
-  get :statistics, to: 'statistics#index'
-  get :help,       to: 'static_pages#help'
-  get :welcome,    to: 'static_pages#welcome'
-
   concern :commetable do
     resources :comments, only: [:create, :update, :destroy]
 
@@ -39,6 +24,13 @@ Askalot::Application.routes.draw do
     get :watch, on: :member
   end
 
+  root 'static_pages#home'
+
+  get '/404', to: 'errors#show'
+  get '/500', to: 'errors#show'
+
+  devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }
+
   resources :users, only: [:index] do
     patch :profile,  on: :collection, to: 'users#update'
     get   :suggest,  on: :collection
@@ -47,6 +39,14 @@ Askalot::Application.routes.draw do
 
     concerns :searchable
   end
+
+  get 'users/:nick',            to: 'users#show',       as: :user
+  get 'users/:nick/activities', to: 'users#activities', as: :user_activities
+  get 'users/:nick/followings', to: 'users#followings', as: :user_followings
+
+  get :statistics, to: 'statistics#index'
+  get :help,       to: 'static_pages#help'
+  get :welcome,    to: 'static_pages#welcome'
 
   resources :categories do
     concerns :searchable
