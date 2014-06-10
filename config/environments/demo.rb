@@ -86,8 +86,6 @@ Askalot::Application.configure do
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
 
-  ActionController::Base.relative_url_root = '/demo'
-
   config.middleware.use ExceptionNotification::Rack,
     email: {
       email_prefix: '[tp][error] ',
