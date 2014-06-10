@@ -7,7 +7,7 @@
     </ol>
 
     <% if remote %>
-      <%= paginate questions, remote: true, data: {state: true, scroll: 'body', fade: '#questions'} %>
+      <%= paginate questions, remote: true, data: {state: true, scroll: :body, fade: '#questions'} %>
     <% else %>
       <%= paginate questions %>
     <% end %>
