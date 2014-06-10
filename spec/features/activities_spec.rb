@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Acitivities' do
+describe 'Activities' do
   let(:user)      { create :user }
   let!(:question) { create :question, :with_tags, author: user }
   let!(:category) { create :category }
@@ -9,8 +9,8 @@ describe 'Acitivities' do
     login_as user
   end
 
-  context 'create activity' do
-    it 'when asking question', js: true do
+  context 'when asking question' do
+    it 'creates an activity' do
       visit root_path
 
       click_link 'Opýtať sa otázku'
@@ -29,47 +29,50 @@ describe 'Acitivities' do
       expect(activity.initiator).to eql(user)
     end
 
-    it 'when answering', js: true do
-      visit root_path
+    context 'when answering' do
+      it 'creates an activity' do
+        visit root_path
 
-      click_link 'Otázky'
-      click_link question.title
+        click_link 'Otázky'
+        click_link question.title
 
-      fill_in 'answer_text', with: 'Hey, look at this.'
+        fill_in 'answer_text', with: 'Hey, look at this.'
 
-      click_button 'Odpovedať'
+        click_button 'Odpovedať'
 
-      activity = user.activities.last
+        activity = user.activities.last
 
-      expect(activity.resource).to  eql(Answer.last)
-      expect(activity.action).to    eql(:create)
-      expect(activity.initiator).to eql(user)
+        expect(activity.resource).to  eql(Answer.last)
+        expect(activity.action).to    eql(:create)
+        expect(activity.initiator).to eql(user)
+      end
     end
 
-    it 'when editing question', js: true do
-      visit root_path
+    context 'when editing question' do
+      it 'creates an activity' do
+        visit root_path
 
-      click_link 'Otázky'
-      click_link question.title
+        click_link 'Otázky'
+        click_link question.title
 
-      click_link "question-#{question.id}-edit-modal"
+        click_link "question-#{question.id}-edit-modal"
 
-      within "#question-#{question.id}-editing" do
-        fill_in 'question_title', with: 'Elasticsearch problem'
-        fill_in 'question_text',  with: 'I have a problem with Elasticsearch Client in Ruby.'
+        within "#question-#{question.id}-editing" do
+          fill_in 'question_title', with: 'Elasticsearch problem'
+          fill_in 'question_text',  with: 'I have a problem with Elasticsearch Client in Ruby.'
 
-        fill_in_select2 'question_tag_list', with: 'elasticsearch'
-        fill_in_select2 'question_tag_list', with: 'ruby'
+          fill_in_select2 'question_tag_list', with: 'elasticsearch'
+          fill_in_select2 'question_tag_list', with: 'ruby'
 
-        click_button 'Uložiť'
+          click_button 'Uložiť'
+        end
+
+        activity = user.activities.last
+
+        expect(activity.resource).to  eql(question)
+        expect(activity.action).to    eql(:update)
+        expect(activity.initiator).to eql(user)
       end
-
-      activity = user.activities.last
-
-      expect(activity.resource).to  eql(question)
-      expect(activity.action).to    eql(:update)
-      expect(activity.initiator).to eql(user)
     end
   end
 end
-
