@@ -10,3 +10,6 @@ sk:
       recent: 'Nové'
       popular: 'Populárne'
       results: 'Výsledky'
+
+    search:
+          title: 'Vyhľadávanie tagov'

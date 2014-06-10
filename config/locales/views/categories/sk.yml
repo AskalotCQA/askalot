@@ -5,6 +5,9 @@ sk:
     index:
       title: 'Kategórie'
 
+    search:
+      title: 'Vyhľadávanie kategórií'
+
     tab:
       all: 'Všetky'
 

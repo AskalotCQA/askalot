@@ -9,7 +9,5 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.order(:name)
     @tags       = Tag.order(:name)
-
-    @categories = search(@categories)
   end
 end

@@ -3,21 +3,13 @@
 <%= render 'tags/searching', target: controller_name %>
 
 <ul class="nav nav-tabs tab-navigation">
-  <% if params[:q].present? %>
-    <%= tab_link_tag_with_count t('tag.tab.results'), :results, tags_path(params.slice(:q, :page)), @tags.count, analytics_attributes(:tags, :search, :results) %>
-  <% else %>
-    <%= tab_link_tag_with_count t('tag.tab.all'), :all, tags_path(params.except(:page).merge tab: :all), @tags.count, analytics_attributes(:tags, :switch, :all) %>
-    <%= tab_link_tag_with_count t('tag.tab.recent'), :recent, tags_path(params.except(:page).merge tab: :recent), @tags.recent.count, analytics_attributes(:tags, :switch, :recent) %>
-    <%= tab_link_tag_with_count t('tag.tab.popular'), :popular, tags_path(params.except(:page).merge tab: :popular), @tags.popular.load.size, analytics_attributes(:tags, :switch, :popular) %>
-  <% end %>
- </ul>
+  <%= tab_link_tag_with_count t('tag.tab.all'), :all, tags_path(params.except(:page).merge tab: :all), @tags.count, analytics_attributes(:tags, :switch, :all) %>
+  <%= tab_link_tag_with_count t('tag.tab.recent'), :recent, tags_path(params.except(:page).merge tab: :recent), @tags.recent.count, analytics_attributes(:tags, :switch, :recent) %>
+  <%= tab_link_tag_with_count t('tag.tab.popular'), :popular, tags_path(params.except(:page).merge tab: :popular), @tags.popular.load.size, analytics_attributes(:tags, :switch, :popular) %>
+</ul>
 
 <div class="tab-content">
-  <% if params[:q].present? %>
-    <%= render_tab_content 'tags', :results, locals: { tags: @tags } %>
-  <% else %>
-    <%= render_tab_content 'tags', :all, locals: { tags: @tags } %>
-    <%= render_tab_content 'tags', :recent, locals: { tags: @tags.recent } %>
-    <%= render_tab_content 'tags', :popular, locals: { tags: @tags.popular } %>
-  <% end %>
+  <%= render_tab_content 'tags', :all, locals: { tags: @tags } %>
+  <%= render_tab_content 'tags', :recent, locals: { tags: @tags.recent } %>
+  <%= render_tab_content 'tags', :popular, locals: { tags: @tags.popular } %>
 </div>
