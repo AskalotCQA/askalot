@@ -9,7 +9,7 @@ describe 'Voting Question', js: true do
   end
 
   context 'when question has no votes' do
-    it 'votes up', js: true do
+    it 'votes up' do
       visit question_path(question.id)
 
       click_link "question-#{question.id}-voteup"
