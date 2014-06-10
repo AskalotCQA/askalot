@@ -54,10 +54,10 @@ CREATE TABLE activities (
     resource_id integer NOT NULL,
     resource_type character varying(255) NOT NULL,
     action character varying(255) NOT NULL,
-    created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL,
     created_on date NOT NULL,
     updated_on date NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     anonymous boolean DEFAULT false NOT NULL
 );
 
@@ -939,7 +939,6 @@ CREATE TABLE users (
     stack_overflow character varying(255),
     tumblr character varying(255),
     youtube character varying(255),
-    role character varying(255) DEFAULT 'student'::character varying NOT NULL,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -949,7 +948,8 @@ CREATE TABLE users (
     remember_token character varying(255),
     followers_count integer DEFAULT 0 NOT NULL,
     followees_count integer DEFAULT 0 NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    role character varying
 );
 
 
@@ -1496,13 +1496,6 @@ CREATE INDEX index_activities_on_action ON activities USING btree (action);
 --
 
 CREATE INDEX index_activities_on_anonymous ON activities USING btree (anonymous);
-
-
---
--- Name: index_activities_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_activities_on_created_at ON activities USING btree (created_at);
 
 
 --
@@ -2248,13 +2241,6 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 
 
 --
--- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_users_on_role ON users USING btree (role);
-
-
---
 -- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2566,6 +2552,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140420091223');
 INSERT INTO schema_migrations (version) VALUES ('20140420093029');
 
 INSERT INTO schema_migrations (version) VALUES ('20140421091947');
+
+INSERT INTO schema_migrations (version) VALUES ('20140422093803');
 
 INSERT INTO schema_migrations (version) VALUES ('20140423082147');
 

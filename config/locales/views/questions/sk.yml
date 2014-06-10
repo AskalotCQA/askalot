@@ -8,7 +8,6 @@ sk:
     index:
       title: 'Otázky'
       new: 'Nová otázka'
-      no_results_found: 'Neboli nájdené žiadne otázky.'
 
     new:
       title: 'Nová otázka'
@@ -70,3 +69,5 @@ sk:
     favored: 'Obľúbená'
 
     deleted: 'Otázka bola zmazaná'
+
+    no_records: 'Neboli nájdené žiadne otázky.'

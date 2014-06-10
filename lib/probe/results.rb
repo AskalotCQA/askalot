@@ -2,8 +2,9 @@ module Probe
   class Results
     include Enumerable
 
-    attr_reader   :query, :response, :hits, :results
     attr_accessor :loader
+
+    attr_reader :query, :response, :hits, :results
 
     alias :size :count
 

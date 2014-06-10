@@ -9,13 +9,13 @@
     </div>
 
     <% if remote %>
-      <%= paginate users, remote: remote, data: { state: true, scroll: 'body', fade: '#users' } %>
+      <%= paginate users, remote: remote, data: { state: true, scroll: :body, fade: '#users' } %>
     <% else %>
       <%= paginate users %>
     <% end %>
   <% else %>
     <div class="alert alert-warning">
-      <%= t('user.index.no_results_found') %>
+      <%= t('user.no_records') %>
     </div>
   <% end %>
 </div>
