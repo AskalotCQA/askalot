@@ -54,10 +54,10 @@ CREATE TABLE activities (
     resource_id integer NOT NULL,
     resource_type character varying(255) NOT NULL,
     action character varying(255) NOT NULL,
-    created_on date NOT NULL,
-    updated_on date NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
+    created_on date NOT NULL,
+    updated_on date NOT NULL,
     anonymous boolean DEFAULT false NOT NULL
 );
 
@@ -82,6 +82,41 @@ ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
 
 
 --
+-- Name: answer_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE answer_profiles (
+    id integer NOT NULL,
+    answer_id integer NOT NULL,
+    property character varying(255),
+    value double precision,
+    probability double precision,
+    source character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: answer_profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE answer_profiles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: answer_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE answer_profiles_id_seq OWNED BY answer_profiles.id;
+
+
+--
 -- Name: answer_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -93,8 +128,8 @@ CREATE TABLE answer_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -129,17 +164,17 @@ CREATE TABLE answers (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
+    stack_exchange_uuid integer,
     comments_count integer DEFAULT 0 NOT NULL,
     votes_count integer DEFAULT 0 NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    document_id integer
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -275,8 +310,8 @@ CREATE TABLE comment_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -311,11 +346,12 @@ CREATE TABLE comments (
     text text NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
+    stack_exchange_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL
 );
 
@@ -340,40 +376,6 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
--- Name: documents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE documents (
-    id integer NOT NULL,
-    group_id integer NOT NULL,
-    title character varying(255) NOT NULL,
-    document_type character varying(255),
-    content character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: documents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE documents_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE documents_id_seq OWNED BY documents.id;
-
-
---
 -- Name: evaluations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -387,8 +389,8 @@ CREATE TABLE evaluations (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -452,8 +454,9 @@ CREATE TABLE favorites (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer,
     deleted_at timestamp without time zone,
-    deletor_id integer
+    stack_exchange_uuid integer
 );
 
 
@@ -512,43 +515,6 @@ ALTER SEQUENCE followings_id_seq OWNED BY followings.id;
 
 
 --
--- Name: groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE groups (
-    id integer NOT NULL,
-    owner_id integer NOT NULL,
-    title character varying(255) DEFAULT ''::character varying NOT NULL,
-    description character varying(255),
-    visibility character varying(255) DEFAULT 'public'::character varying NOT NULL,
-    deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    documents_count integer DEFAULT 0 NOT NULL
-);
-
-
---
--- Name: groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE groups_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
-
-
---
 -- Name: labelings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -560,8 +526,9 @@ CREATE TABLE labelings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer,
     deleted_at timestamp without time zone,
-    deletor_id integer
+    stack_exchange_uuid integer
 );
 
 
@@ -654,6 +621,41 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 
 --
+-- Name: question_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE question_profiles (
+    id integer NOT NULL,
+    question_id integer NOT NULL,
+    property character varying(255),
+    value double precision,
+    probability double precision,
+    source character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: question_profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE question_profiles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: question_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE question_profiles_id_seq OWNED BY question_profiles.id;
+
+
+--
 -- Name: question_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -668,8 +670,8 @@ CREATE TABLE question_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -706,6 +708,7 @@ CREATE TABLE questions (
     updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
     anonymous boolean DEFAULT false NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -714,15 +717,16 @@ CREATE TABLE questions (
     slido_question_uuid integer,
     slido_event_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
-    votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     touched_at timestamp without time zone NOT NULL,
+    votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    document_id integer
+    stack_exchange_duplicate boolean,
+    stack_exchange_questions_uuids integer[],
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -833,8 +837,8 @@ CREATE TABLE taggings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     author_id integer NOT NULL
 );
 
@@ -890,6 +894,43 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 
 --
+-- Name: user_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE user_profiles (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    targetable_id integer NOT NULL,
+    targetable_type character varying(255) NOT NULL,
+    property character varying(255),
+    value double precision,
+    probability double precision,
+    source character varying(255),
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+--
+-- Name: user_profiles_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE user_profiles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: user_profiles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE user_profiles_id_seq OWNED BY user_profiles.id;
+
+
+--
 -- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -939,6 +980,8 @@ CREATE TABLE users (
     stack_overflow character varying(255),
     tumblr character varying(255),
     youtube character varying(255),
+    role character varying(255) DEFAULT 'student'::character varying NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -948,8 +991,7 @@ CREATE TABLE users (
     remember_token character varying(255),
     followers_count integer DEFAULT 0 NOT NULL,
     followees_count integer DEFAULT 0 NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    role character varying
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -982,8 +1024,8 @@ CREATE TABLE views (
     viewer_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -1019,8 +1061,9 @@ CREATE TABLE votes (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer,
     deleted_at timestamp without time zone,
-    deletor_id integer
+    stack_exchange_uuid integer
 );
 
 
@@ -1090,6 +1133,13 @@ ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY answer_profiles ALTER COLUMN id SET DEFAULT nextval('answer_profiles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY answer_revisions ALTER COLUMN id SET DEFAULT nextval('answer_revisions_id_seq'::regclass);
 
 
@@ -1139,13 +1189,6 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY documents ALTER COLUMN id SET DEFAULT nextval('documents_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY evaluations ALTER COLUMN id SET DEFAULT nextval('evaluations_id_seq'::regclass);
 
 
@@ -1174,13 +1217,6 @@ ALTER TABLE ONLY followings ALTER COLUMN id SET DEFAULT nextval('followings_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY labelings ALTER COLUMN id SET DEFAULT nextval('labelings_id_seq'::regclass);
 
 
@@ -1196,6 +1232,13 @@ ALTER TABLE ONLY labels ALTER COLUMN id SET DEFAULT nextval('labels_id_seq'::reg
 --
 
 ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY question_profiles ALTER COLUMN id SET DEFAULT nextval('question_profiles_id_seq'::regclass);
 
 
 --
@@ -1244,6 +1287,13 @@ ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclas
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY user_profiles ALTER COLUMN id SET DEFAULT nextval('user_profiles_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
@@ -1274,6 +1324,14 @@ ALTER TABLE ONLY watchings ALTER COLUMN id SET DEFAULT nextval('watchings_id_seq
 
 ALTER TABLE ONLY activities
     ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: answer_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY answer_profiles
+    ADD CONSTRAINT answer_profiles_pkey PRIMARY KEY (id);
 
 
 --
@@ -1333,14 +1391,6 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY documents
-    ADD CONSTRAINT documents_pkey PRIMARY KEY (id);
-
-
---
 -- Name: evaluations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1373,14 +1423,6 @@ ALTER TABLE ONLY followings
 
 
 --
--- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY groups
-    ADD CONSTRAINT groups_pkey PRIMARY KEY (id);
-
-
---
 -- Name: labelings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1402,6 +1444,14 @@ ALTER TABLE ONLY labels
 
 ALTER TABLE ONLY notifications
     ADD CONSTRAINT notifications_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: question_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY question_profiles
+    ADD CONSTRAINT question_profiles_pkey PRIMARY KEY (id);
 
 
 --
@@ -1453,6 +1503,14 @@ ALTER TABLE ONLY tags
 
 
 --
+-- Name: user_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY user_profiles
+    ADD CONSTRAINT user_profiles_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1499,6 +1557,13 @@ CREATE INDEX index_activities_on_anonymous ON activities USING btree (anonymous)
 
 
 --
+-- Name: index_activities_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_activities_on_created_at ON activities USING btree (created_at);
+
+
+--
 -- Name: index_activities_on_created_on; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1524,6 +1589,13 @@ CREATE INDEX index_activities_on_resource_id_and_resource_type ON activities USI
 --
 
 CREATE INDEX index_activities_on_resource_type ON activities USING btree (resource_type);
+
+
+--
+-- Name: index_answer_profiles_on_answer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_answer_profiles_on_answer_id ON answer_profiles USING btree (answer_id);
 
 
 --
@@ -1576,13 +1648,6 @@ CREATE INDEX index_answers_on_deletor_id ON answers USING btree (deletor_id);
 
 
 --
--- Name: index_answers_on_document_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_answers_on_document_id ON answers USING btree (document_id);
-
-
---
 -- Name: index_answers_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1594,6 +1659,13 @@ CREATE INDEX index_answers_on_edited ON answers USING btree (edited);
 --
 
 CREATE INDEX index_answers_on_question_id ON answers USING btree (question_id);
+
+
+--
+-- Name: index_answers_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_answers_on_stack_exchange_uuid ON answers USING btree (stack_exchange_uuid);
 
 
 --
@@ -1723,17 +1795,10 @@ CREATE INDEX index_comments_on_edited ON comments USING btree (edited);
 
 
 --
--- Name: index_documents_on_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_documents_on_group_id ON documents USING btree (group_id);
-
-
---
--- Name: index_documents_on_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_documents_on_title ON documents USING btree (title);
+CREATE UNIQUE INDEX index_comments_on_stack_exchange_uuid ON comments USING btree (stack_exchange_uuid);
 
 
 --
@@ -1800,6 +1865,13 @@ CREATE INDEX index_favorites_on_question_id ON favorites USING btree (question_i
 
 
 --
+-- Name: index_favorites_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_favorites_on_stack_exchange_uuid ON favorites USING btree (stack_exchange_uuid);
+
+
+--
 -- Name: index_favorites_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1842,27 +1914,6 @@ CREATE UNIQUE INDEX index_followings_on_unique_key ON followings USING btree (fo
 
 
 --
--- Name: index_groups_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_groups_on_deletor_id ON groups USING btree (deletor_id);
-
-
---
--- Name: index_groups_on_owner_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_groups_on_owner_id ON groups USING btree (owner_id);
-
-
---
--- Name: index_groups_on_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_groups_on_title ON groups USING btree (title);
-
-
---
 -- Name: index_labelings_on_answer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1895,6 +1946,13 @@ CREATE INDEX index_labelings_on_deletor_id ON labelings USING btree (deletor_id)
 --
 
 CREATE INDEX index_labelings_on_label_id ON labelings USING btree (label_id);
+
+
+--
+-- Name: index_labelings_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_labelings_on_stack_exchange_uuid ON labelings USING btree (stack_exchange_uuid);
 
 
 --
@@ -1968,6 +2026,13 @@ CREATE INDEX index_notifications_on_unread ON notifications USING btree (unread)
 
 
 --
+-- Name: index_question_profiles_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_question_profiles_on_question_id ON question_profiles USING btree (question_id);
+
+
+--
 -- Name: index_question_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2031,13 +2096,6 @@ CREATE INDEX index_questions_on_deletor_id ON questions USING btree (deletor_id)
 
 
 --
--- Name: index_questions_on_document_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_questions_on_document_id ON questions USING btree (document_id);
-
-
---
 -- Name: index_questions_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2049,6 +2107,13 @@ CREATE INDEX index_questions_on_edited ON questions USING btree (edited);
 --
 
 CREATE UNIQUE INDEX index_questions_on_slido_question_uuid ON questions USING btree (slido_question_uuid);
+
+
+--
+-- Name: index_questions_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_questions_on_stack_exchange_uuid ON questions USING btree (stack_exchange_uuid);
 
 
 --
@@ -2164,6 +2229,20 @@ CREATE UNIQUE INDEX index_tags_on_name ON tags USING btree (name);
 
 
 --
+-- Name: index_user_profiles_on_targetable_id_and_targetable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_profiles_on_targetable_id_and_targetable_type ON user_profiles USING btree (targetable_id, targetable_type);
+
+
+--
+-- Name: index_user_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_user_profiles_on_user_id ON user_profiles USING btree (user_id);
+
+
+--
 -- Name: index_users_on_ais_login; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2241,6 +2320,20 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 
 
 --
+-- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_role ON users USING btree (role);
+
+
+--
+-- Name: index_users_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_stack_exchange_uuid ON users USING btree (stack_exchange_uuid);
+
+
+--
 -- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2297,10 +2390,10 @@ CREATE INDEX index_votes_on_positive ON votes USING btree (positive);
 
 
 --
--- Name: index_votes_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_votes_on_unique_key ON votes USING btree (voter_id, votable_id, votable_type);
+CREATE UNIQUE INDEX index_votes_on_stack_exchange_uuid ON votes USING btree (stack_exchange_uuid);
 
 
 --
@@ -2443,6 +2536,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140130105541');
 
 INSERT INTO schema_migrations (version) VALUES ('20140131102843');
 
+INSERT INTO schema_migrations (version) VALUES ('20140206190919');
+
 INSERT INTO schema_migrations (version) VALUES ('20140208172456');
 
 INSERT INTO schema_migrations (version) VALUES ('20140209112906');
@@ -2509,6 +2604,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140322113048');
 
 INSERT INTO schema_migrations (version) VALUES ('20140329011652');
 
+INSERT INTO schema_migrations (version) VALUES ('20140329121310');
+
 INSERT INTO schema_migrations (version) VALUES ('20140330175530');
 
 INSERT INTO schema_migrations (version) VALUES ('20140330180048');
@@ -2533,6 +2630,14 @@ INSERT INTO schema_migrations (version) VALUES ('20140408184343');
 
 INSERT INTO schema_migrations (version) VALUES ('20140408184444');
 
+INSERT INTO schema_migrations (version) VALUES ('20140409143851');
+
+INSERT INTO schema_migrations (version) VALUES ('20140409144529');
+
+INSERT INTO schema_migrations (version) VALUES ('20140409144728');
+
+INSERT INTO schema_migrations (version) VALUES ('20140414184427');
+
 INSERT INTO schema_migrations (version) VALUES ('20140417162824');
 
 INSERT INTO schema_migrations (version) VALUES ('20140417212431');
@@ -2553,8 +2658,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140420093029');
 
 INSERT INTO schema_migrations (version) VALUES ('20140421091947');
 
-INSERT INTO schema_migrations (version) VALUES ('20140422093803');
-
 INSERT INTO schema_migrations (version) VALUES ('20140423082147');
 
 INSERT INTO schema_migrations (version) VALUES ('20140423123809');
@@ -2565,12 +2668,3 @@ INSERT INTO schema_migrations (version) VALUES ('20140429003614');
 
 INSERT INTO schema_migrations (version) VALUES ('20140513162801');
 
-INSERT INTO schema_migrations (version) VALUES ('20140523053735');
-
-INSERT INTO schema_migrations (version) VALUES ('20140523053753');
-
-INSERT INTO schema_migrations (version) VALUES ('20140523053804');
-
-INSERT INTO schema_migrations (version) VALUES ('20140523053816');
-
-INSERT INTO schema_migrations (version) VALUES ('20140523061344');

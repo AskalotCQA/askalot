@@ -1,5 +1,5 @@
 <li id="comment-<%= comment.id %>">
-  <span class="comment-content"><%= render_markdown comment.text, redcarpet: { tags: [:autolink, :codespan, :emphasis, :link, :striketrough, :underline] } %></span>
+  <div class="comment-content"><%= render_markdown comment.text, redcarpet: { tags: [:autolink, :codespan, :emphasis, :link, :striketrough, :underline] } %></div>
   <%= render 'comments/details', comment: comment %>
   <%= render 'comments/editing', comment: comment %>
   <%= render 'comments/deleting', comment: comment %>
