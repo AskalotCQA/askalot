@@ -25,7 +25,7 @@ staging:
 demo:
   adapter: postgresql
   encoding: unicode
-  database: askalot_production
+  database: askalot_demo
   pool: 5
   username: postgres
   password: postgres
