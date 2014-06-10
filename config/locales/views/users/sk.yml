@@ -4,7 +4,6 @@ sk:
 
     index:
       title: 'Používatelia'
-      no_results_found: 'Nenájdený žiadny používatelia.'
 
     search:
       title: 'Vyhľadávanie používateľov'
@@ -12,6 +11,8 @@ sk:
     tab:
       all: 'Všetci'
       recent: 'Noví'
+
+      results: 'Výsledky'
 
       profile: 'Profil'
       questions: 'Otázky'
@@ -135,3 +136,5 @@ sk:
           upper: 'viac ako {max}'
 
     anonymous: 'Anonym'
+
+    no_records: 'Neboli nájdení žiadni používatelia.'

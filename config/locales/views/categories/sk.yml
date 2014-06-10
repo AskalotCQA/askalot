@@ -11,6 +11,8 @@ sk:
     tab:
       all: 'Všetky'
 
+      results: 'Výsledky'
+
     create:
       success: 'Kategória bola úspešne pridaná.'
 
@@ -20,3 +22,5 @@ sk:
     delete:
       success: 'Kategória bola úspešne zmazaná.'
       failure: 'Kategóriu sa nepodarilo zmazať.'
+
+    no_records: 'Neboli nájdené žiadne kategórie.'

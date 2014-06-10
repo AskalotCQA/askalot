@@ -6,10 +6,10 @@
       <% end %>
     </ol>
 
-    <%= paginate questions, remote: true, data: { state: true, scroll: 'body', fade: '#questions' } %>
+    <%= paginate questions, remote: true, data: { state: true, scroll: :body, fade: '#questions' } %>
   <% else %>
     <div class="alert alert-warning">
-      <%= t('question.index.no_results_found') %>
+      <%= t('question.no_records') %>
     </div>
   <% end %>
 </div>

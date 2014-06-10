@@ -12,4 +12,7 @@ sk:
       all: 'Všetky'
       recent: 'Nové'
       popular: 'Populárne'
+
       results: 'Výsledky'
+
+    no_records: 'Neboli nájdené žiadne tagy.'

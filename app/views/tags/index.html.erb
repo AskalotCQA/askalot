@@ -1,6 +1,6 @@
 <% provide(:title, t('tag.index.title')) %>
 
-<%= render 'tags/searching', target: controller_name %>
+<%= render 'searchables/search', target: controller_name %>
 
 <ul class="nav nav-tabs tab-navigation">
   <%= tab_link_tag_with_count t('tag.tab.all'), :all, tags_path(params.except(:page).merge tab: :all), @tags.count, analytics_attributes(:tags, :switch, :all) %>
