@@ -3,5 +3,5 @@
 require ::File.expand_path('../config/environment',  __FILE__)
 
 map ActionController::Base.config.relative_url_root || '/' do
-  run FooApp::Application
+  run Rails.application
 end
