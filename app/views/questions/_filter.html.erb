@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-6">
-      <div class="collapse" id="filtered-search">
+      <div id="filtered-search">
         <%= form_tag questions_path, id: :filter_questions, method: :get, remote: true, data: { state: true } do %>
           <%= hidden_field_tag :tab, params[:tab] %>
           <%= hidden_field_tag :poll, params[:poll] %>
@@ -23,7 +23,7 @@
         <% end %>
       </div>
 
-      <div class="collapse" id="fulltext-search">
+      <div id="fulltext-search">
         <%= form_tag search_questions_path, id: :fulltext_search, method: :get do %>
           <%= hidden_field_tag :poll, params[:poll] %>
           <div class="form-group">

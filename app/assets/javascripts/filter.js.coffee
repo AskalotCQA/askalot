@@ -1,13 +1,12 @@
 $(document).ready ->
-  $('.collapse').collapse({ toggle: false })
-  $('#filtered-search').collapse('show')
+  $('#fulltext-search').hide()
 
   $('.filter-button').click (event) ->
     event.preventDefault()
-    $('#filtered-search').collapse('show')
-    $('#fulltext-search').collapse('hide')
+    $('#filtered-search').show()
+    $('#fulltext-search').hide()
 
   $('.fulltext-button').click (event) ->
     event.preventDefault()
-    $('#fulltext-search').collapse('show')
-    $('#filtered-search').collapse('hide')
+    $('#filtered-search').hide()
+    $('#fulltext-search').show()
