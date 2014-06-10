@@ -16,11 +16,11 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = case params[:tab].to_sym
-                   when :unanswered then Question.unanswered.by_votes
-                   when :answered   then Question.answered_but_not_best.by_votes
-                   when :solved     then Question.solved.by_votes
-                   when :favored    then Question.favored.by_votes
-                   else Question.recent
+                 when :unanswered then Question.unanswered.by_votes
+                 when :answered   then Question.answered_but_not_best.by_votes
+                 when :solved     then Question.solved.by_votes
+                 when :favored    then Question.favored.by_votes
+                 else Question.recent
                  end
 
     @questions = filter_questions(@questions)
