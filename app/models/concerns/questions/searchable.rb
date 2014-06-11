@@ -140,12 +140,13 @@ module Questions
       }
 
       probe.index.mapper.define(
-        id:      ->  { id },
-        title:   ->  { title },
-        text:    ->  { text },
-        tags:    ->  { tags.map(&:name) },
-        answers: ->  { answers.map(&:text) },
-        comments: -> { comments.map(&:text) + answers.map { |answer| answer.comments.map(&:text) } }
+        id:         ->  { id },
+        title:      ->  { title },
+        text:       ->  { text },
+        tags:       ->  { tags.map(&:name) },
+        answers:    ->  { answers.map(&:text) },
+        comments:    -> { comments.map(&:text) + answers.map { |answer| answer.comments.map(&:text) } },
+        evaluations: -> { evaluations.map(&:text) + answers.map { |answer| answer.evaluations.map(&:text) } }
       )
 
       probe.index.create
