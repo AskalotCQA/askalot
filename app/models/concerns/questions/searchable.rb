@@ -140,12 +140,13 @@ module Questions
       }
 
       probe.index.mapper.define(
-        id:      ->  { id },
-        title:   ->  { title },
-        text:    ->  { text },
-        tags:    ->  { tags.map(&:name) },
-        answers: ->  { answers.map(&:text) },
-        comments: -> { comments.map(&:text) + answers.map { |answer| answer.comments.map(&:text) } }
+        id:         ->  { id },
+        title:      ->  { title },
+        text:       ->  { text },
+        tags:       ->  { tags.map(&:name) },
+        answers:    ->  { answers.map(&:text) },
+        comments:    -> { comments.map(&:text) + answers.map { |answer| answer.comments.map(&:text) } },
+        evaluations: -> { evaluations.map(&:text) + answers.map { |answer| answer.evaluations.map(&:text) } }
       )
 
       probe.index.create
@@ -158,7 +159,7 @@ module Questions
             query_string: {
               query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
               default_operator: :and,
-              fields: [:text, :title, :tags, :answers, :comments]
+              fields: [:title, :text, :tags, :answers, :comments, :evaluations]
             }
           }
         )

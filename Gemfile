@@ -105,8 +105,12 @@ group :development, :test do
   gem 'faker', '1.1.2'
 end
 
+# demo, staging & production
 group :demo, :staging, :production do
   gem 'unicorn'
   gem 'rack-timeout'
   gem 'exception_notification'
 end
+
+# TODO(zbell) resolve
+gem 'codeclimate-test-reporter', group: :test, require: nil
