@@ -3,13 +3,9 @@ module RemoteHelper
     sleep time if time
 
     Timeout.timeout(10) do
-      active = page.evaluate_script('jQuery.active')
-
-      until active == 0
-        active = page.evaluate_script('jQuery.active')
-      end
+      sleep 0.1 until page.evaluate_script('jQuery.active') == 0
     end
 
-    sleep 0.5
+    sleep 1
   end
 end

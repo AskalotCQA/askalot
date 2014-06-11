@@ -19,8 +19,6 @@ describe 'Deleting' do
 
       click_link "question-#{question.id}-delete-modal"
 
-      wait_for_modal
-
       within "#question-#{question.id}-deleting" do
         click_button 'Zmazať'
       end
@@ -50,8 +48,6 @@ describe 'Deleting' do
       click_link question.title
 
       click_link "answer-#{answer.id}-delete-modal"
-
-      wait_for_modal
 
       within "#answer-#{answer.id}-deleting" do
         click_button 'Zmazať'
@@ -85,8 +81,6 @@ describe 'Deleting' do
 
       click_link "comment-#{answer_comment.id}-delete-modal"
 
-      wait_for_modal
-
       within "#comment-#{answer_comment.id}-deleting" do
         click_button 'Zmazať'
       end
@@ -108,8 +102,6 @@ describe 'Deleting' do
       click_link question.title
 
       click_link "comment-#{question_comment.id}-delete-modal"
-
-      wait_for_modal
 
       within "#comment-#{question_comment.id}-deleting" do
         click_button 'Zmazať'
