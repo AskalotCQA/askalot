@@ -70,9 +70,6 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    capybara-webkit (1.1.0)
-      capybara (~> 2.0, >= 2.0.2)
-      json
     celluloid (0.15.2)
       timers (~> 1.1.0)
     celluloid-io (0.15.0)
@@ -384,7 +381,6 @@ DEPENDENCIES
   capistrano (~> 2.15.5)
   capistrano-ext
   capybara (~> 2.2.1)
-  capybara-webkit
   codeclimate-test-reporter
   coffee-rails (~> 4.0.0)
   d3_rails (~> 3.4.6)

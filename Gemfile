@@ -97,7 +97,6 @@ group :development, :test do
   gem 'launchy'
   gem 'capybara', '~> 2.2.1'
   gem 'selenium-webdriver'
-  gem 'capybara-webkit'
   gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
 
