@@ -159,7 +159,7 @@ module Questions
             query_string: {
               query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
               default_operator: :and,
-              fields: [:text, :title, :tags, :answers, :comments]
+              fields: [:title, :text, :tags, :answers, :comments, :evaluations]
             }
           }
         )
