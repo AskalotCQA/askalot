@@ -15,7 +15,7 @@
     </div>
 
     <div class="row">
-      <div class="panel-group" id="accordion">
+      <div class="documents-group" id="documents">
         <% @documents.each do |document| %>
             <%= render 'documents/document', document: document %>
         <% end %>
@@ -24,6 +24,6 @@
   </div>
 
   <div class="col-md-6">
-    <%= render 'documents/new_question', question: @question %>
+
   </div>
 </div>

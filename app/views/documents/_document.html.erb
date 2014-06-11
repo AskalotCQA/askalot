@@ -1,20 +1,8 @@
-<div class="panel panel-default">
-  <div class="panel panel-heading">
-    <h4 class="panel-title">
-      <a data-toggle="collapse" data-parent="#accordion" href="#document-<%= document.id %>">
+<div class="well">
+    <h4 class="document-title">
         <%= document.title %>
-      </a>
     </h4>
     <div class="document-content">
       <%= render_markdown document.content %>
     </div>
-  </div>
-
-  <div id="document-<%= document.id %>" class="panel-collapse collapse">
-    <div class="panel-body">
-      <% document.questions.each do |question| %>
-        <%= render 'questions/question', question: question %>
-      <% end %>
-    </div>
-  </div>
 </div>
