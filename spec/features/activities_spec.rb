@@ -48,7 +48,7 @@ describe 'Activities' do
       end
     end
 
-    context 'when editing question' do
+    context 'when editing question', js: true do
       it 'creates an activity' do
         visit root_path
 
