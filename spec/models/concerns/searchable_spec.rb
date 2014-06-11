@@ -6,16 +6,9 @@ shared_examples_for Searchable do
   let(:records) { 10.times.map { |record| create factory } }
 
   before :each do
-    model.probe.index.delete
-    model.probe.index.create
-
-    records
-
-    model.probe.index.flush
-  end
-
-  after :each do
-    model.probe.index.delete
+    model.probe.index.reload do
+      records
+    end
   end
 
   describe '.search' do

@@ -4,8 +4,8 @@ describe 'Search Categories' do
   let!(:user) { create :user }
 
   before :each do
-    Category.probe.index.delete
-    Category.probe.index.create
+    Category.autoimport = true
+    Category.probe.index.reload
 
     login_as user
 

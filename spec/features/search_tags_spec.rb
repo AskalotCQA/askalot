@@ -4,8 +4,8 @@ describe 'Search Tags' do
   let!(:user) { create :user }
 
   before :each do
-    Tag.probe.index.delete
-    Tag.probe.index.create
+    Tag.autoimport = true
+    Tag.probe.index.reload
 
     login_as user
 

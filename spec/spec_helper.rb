@@ -77,4 +77,8 @@ RSpec.configure do |config|
   config.include TextcompleteHelper,   type: :feature
 
   config.before(:each) { reset_emails }
+
+  config.before(:each) do
+    [Category, Question, Tag, User].each { |model| model.autoimport = false }
+  end
 end
