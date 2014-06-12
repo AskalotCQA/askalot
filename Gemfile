@@ -102,6 +102,9 @@ group :development, :test do
 
   # database
   gem 'faker', '1.1.2'
+
+  # code metrics
+  gem 'simplecov', require: false
 end
 
 # demo, staging & production
