@@ -22,10 +22,10 @@ require 'capybara/poltergeist'
 require 'cancan/matchers'
 
 Capybara.default_selector  = :css
-Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :selenium
+Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :poltergeist
 
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, js_errors: false)
+  Capybara::Poltergeist::Driver.new(app, window_size: [1600, 1200], inspector: true)
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -52,6 +52,9 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = false
+
+  # Fail after first fail
+  config.fail_fast = true
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
@@ -88,5 +91,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     [Category, Question, Tag, User].each { |model| model.autoimport = false }
+
+    Configuration.poll.default = 60
   end
 end

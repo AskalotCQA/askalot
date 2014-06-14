@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Filter Questions', js: true do
   let(:user) { create :user }
-  let(:category) { create :category, :with_tags }
+  let!(:category) { create :category, :with_tags }
 
   before :each do
     login_as user
@@ -75,6 +75,7 @@ describe 'Filter Questions', js: true do
   it 'filters questions by question tags' do
     visit root_path
 
+    click_link 'Otázky'
     click_link 'Otázky'
 
     list = all('#questions > ol > li')
