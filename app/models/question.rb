@@ -34,7 +34,7 @@ class Question < ActiveRecord::Base
   scope :answered,   lambda { joins(:answers).uniq }
   scope :solved,     lambda { joins(:answers).merge(best_answers).references(:labelings).uniq }
 
-  scope :answered_but_not_best, lambda { joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).uniq.select('questions.id')).uniq }
+  scope :answered_but_not_best, lambda { joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).references(:labeling).uniq.select('questions.id')).uniq }
 
   scope :by, lambda { |user| where(author: user) }
 
