@@ -7,9 +7,13 @@ describe 'Filter Questions', js: true do
   before :each do
     login_as user
 
-    10.times { create :question, tag_list: 'ruby,linux' }
-    10.times { create :question, tag_list: 'elasticsearch' }
-    20.times { create :question, tag_list: 'elasticsearch,ruby' }
+    Tag.autoimport = true
+
+    Tag.probe.index.reload do
+      10.times { create :question, tag_list: 'ruby,linux' }
+      10.times { create :question, tag_list: 'elasticsearch' }
+      20.times { create :question, tag_list: 'elasticsearch,ruby' }
+    end
   end
 
   it 'filters questions by tag' do
