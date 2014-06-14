@@ -24,6 +24,25 @@ describe TagsController do
       tags = assigns(:tags)
 
       expect(tags.map(&:name).sort).to eql(['test', 'testing'])
+
+      json = {
+        results: [
+          { id: 'test', text: 'test (0)' },
+          { id: 'testing', text: 'testing (0)' }
+        ]
+      }.to_json
+
+      expect(response.body).to eql(json)
+    end
+
+    it 'suggest only 10 tags'  do
+      20.times { |n| create :tag, name: "tag ##{n}" }
+
+      get :suggest, q: 'tag', format: :json
+
+      tags = assigns(:tags)
+
+      expect(tags.size).to eql(10)
     end
   end
 end

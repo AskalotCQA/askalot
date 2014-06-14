@@ -16,10 +16,10 @@ class TagsController < ApplicationController
   # * consider pagination
 
   def suggest
-    tags = Tag.where('tags.name LIKE ?', "#{params[:q]}%").limit(10).order(:name)
+    @tags = Tag.search_by(q: params[:q]).first(10)
 
     render json: {
-      results: tags.map { |tag|
+      results: @tags.map { |tag|
         {
           id:   tag.name,
           text: "#{tag.name} (#{tag.count})"
