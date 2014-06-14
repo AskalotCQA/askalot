@@ -19,12 +19,14 @@ module Yeast
       alias :initiator :viewer
     end
 
+    interval = 1.hour
+
     # TODO (smolnar) consider View
     models = [Question, Answer, Vote, Comment, Labeling]
     date   = Question.order(:created_at).first.created_at
 
     until date > Time.now
-      resources = models.map { |model| model.where('created_at >= ? AND created_at < ?', date, date + 1.day) }.flatten.compact
+      resources = models.map { |model| model.where('created_at >= ? AND created_at < ?', date, date + interval) }.flatten.compact
 
       resources.sort_by!(&:created_at)
 
@@ -38,7 +40,7 @@ module Yeast
         end
       end
 
-      date = date + 1.day
+      date = date + interval
     end
   end
 end
