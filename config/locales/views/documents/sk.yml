@@ -1,4 +1,10 @@
 sk:
   document:
     new:
+      title: 'Nový dokument'
       feature: 'Nový dokument'
+      submit: 'Vytvoriť dokument'
+      cancel: 'Zrušiť'
+
+    create:
+      success: 'Dokument bol úspešne pridaný'

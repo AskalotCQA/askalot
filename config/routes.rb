@@ -17,6 +17,8 @@ Askalot::Application.routes.draw do
   get 'users/:nick/activities', to: 'users#activities', as: :user_activities
   get 'users/:nick/followings', to: 'users#followings', as: :user_followings
 
+  post 'groups/:id/documents', to: 'documents#create', as: :group_documents
+
   get :statistics, to: 'statistics#index'
   get :help,       to: 'static_pages#help'
   get :welcome,    to: 'static_pages#welcome'
