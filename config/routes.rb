@@ -104,5 +104,11 @@ Askalot::Application.routes.draw do
     resources :categories, only: [:create, :update, :destroy]
   end
 
+  namespace :documents do
+    resources :questions, only: [:create, :update, :destroy]
+    resources :answers,   only: [:create, :update, :destroy]
+    resources :comments,  only: [:create, :update, :destroy]
+  end
+
   resources :changelogs
 end
