@@ -1,4 +1,4 @@
-class AnswersController < ApplicationController
+class Documents::AnswersController < ApplicationController
   include Deletables::Destroy
   include Editables::Update
   include Votables::Vote
@@ -28,8 +28,7 @@ class AnswersController < ApplicationController
       form_error_messages_for @answer
     end
 
-    #TODO CHange
-    redirect_to question_path(@question, anchor: @answer.id ? nil : :answer)
+    redirect_to group_path(Group.find(params[:group_id]))
   end
 
   def label

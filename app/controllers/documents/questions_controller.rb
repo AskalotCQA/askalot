@@ -1,4 +1,4 @@
-class Groups::QuestionsController < ApplicationController
+class Documents::QuestionsController < ApplicationController
   include Deletables::Destroy
   include Editables::Update
   include Votables::Vote
@@ -11,6 +11,7 @@ class Groups::QuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    # TODO load questions for document
     @questions = case params[:tab].to_sym
                    when :unanswered then Question.unanswered.by_votes
                    when :answered   then Question.answered_but_not_best.by_votes
@@ -27,6 +28,7 @@ class Groups::QuestionsController < ApplicationController
   end
 
   def create
+    binding.pry
     @question = Question.new(create_params)
 
     authorize! :ask, @question
@@ -40,15 +42,12 @@ class Groups::QuestionsController < ApplicationController
       register_watching_for @question
 
       flash[:notice] = t('question.create.success')
-
-      # TODO Change link
-      redirect_to question_path(@question)
     else
-      @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
-
-      # TODO Change link
-      render :new
+      flash_error_messages_for @question
     end
+
+    # TODO (jharinek) consider change in redirect
+    redirect_to group_path(Group.find(params[:group_id]))
   end
 
   def show

@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class Documents::CommentsController < ApplicationController
   include Deletables::Destroy
   include Editables::Update
 
@@ -28,8 +28,7 @@ class CommentsController < ApplicationController
       flash_error_messages_for @comment
     end
 
-    # TODO  Change
-    redirect_to question_path(@question)
+    redirect_to group_path(Group.find(params[:group_id]))
   end
 
   private
