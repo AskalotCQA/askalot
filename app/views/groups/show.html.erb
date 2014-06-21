@@ -1,29 +1,20 @@
 <% provide :title, @group.title %>
 
+<h1 class="page-header"><%= @group.title %></h1>
+<p class="lead"><%= @group.description %></p>
+
+<%= render 'documents/new' %>
+
 <div class="row">
   <div class="col-md-6">
-
-    <div class="row">
-      <h1 class="page-header"><%= @group.title %></h1>
-      <p class="lead"><%= @group.description %></p>
-    </div>
-
-    <div class="row">
-      <div class="col-md-offset-9 col-md-3">
-        <%= render 'documents/new' %>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="documents-group" id="documents">
-        <% @documents.each do |document| %>
-            <%= render 'documents/document', document: document %>
-        <% end %>
-      </div>
+    <div class="documents-group" id="documents">
+      <% @documents.each do |document| %>
+          <%= render 'documents/document', document: document %>
+      <% end %>
     </div>
   </div>
 
   <div class="col-md-6">
-    <%= render 'documents/questions/new' %>
+    <%= render 'documents/questions/show', question: @question %>
   </div>
 </div>
