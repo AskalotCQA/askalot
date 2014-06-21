@@ -10,7 +10,7 @@
 
     <div class="row">
       <div class="col-md-offset-9 col-md-3">
-        <%= icon_link_to :plus, t('document.new.feature'), new_document_path, analytics_attributes(:documents, :'open-new-form', :list).merge(class: 'btn btn-success') %>
+        <%= render 'documents/new' %>
       </div>
     </div>
 
@@ -24,6 +24,6 @@
   </div>
 
   <div class="col-md-6">
-
+    <%= render 'documents/questions/new' %>
   </div>
 </div>
