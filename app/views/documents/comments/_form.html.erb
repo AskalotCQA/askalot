@@ -4,7 +4,10 @@
   </a>
 
   <div id="<%= identify commentable, :comment %>" class="collapse" data-markdown="true">
-    <%= form_for [commentable, Comment.new], html: { id: nil, class: :'new-comment' } do |f| %>
+    <%= form_for [commentable, Comment.new], url: documents_comments_path, html: { id: nil, class: :'new-comment' } do |f| %>
+
+        <%= hidden_field_tag :question_id, @question.id %>
+        <%= hidden_field_tag :group_id, @group.id %>
 
         <div id="<%= identify commentable, :comment %>-text" class="form-group">
           <%= f.text_area :text, id: nil, class: :'form-control', rows: 2 %>

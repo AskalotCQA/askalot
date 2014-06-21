@@ -1,7 +1,9 @@
 <h3 class="form-title"><%= t 'question.new.title' %></h3>
 
-<%= form_for @question do |f| %>
+<%= form_for @question, url: documents_questions_path do |f| %>
     <%= form_messages_for @question %>
+
+    <%= hidden_field_tag :group_id, @group.id %>
 
     <div class="form-group">
       <%= f.label :title %>
