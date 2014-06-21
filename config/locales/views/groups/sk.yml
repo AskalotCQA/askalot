@@ -1,5 +1,7 @@
 sk:
   group:
+    navigation: 'Skupiny'
+
     create:
       success: 'Skupina bola úspešne vytvorená'
 
