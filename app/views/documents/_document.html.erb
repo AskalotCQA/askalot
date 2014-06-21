@@ -1,8 +1,17 @@
 <div class="well">
-    <h4 class="document-title">
-        <%= document.title %>
-    </h4>
-    <div class="document-content">
-      <%= render_markdown document.content %>
+  <h4 class="document-header">
+    <%= link_to document.title, '' %>
+  </h4>
+
+  <div class="document-body">
+    <%= render_markdown document.content %>
+  </div>
+  <div class="row">
+    <div class="col-md-offset-7 col-md-5 document-footer">
+      <%= t('count.question', count: document.questions.size).upcase_first %> <%= document.questions.size %>
+      <a href="#" id="question-new-button" class="btn btn-sm btn-default">
+        <%= icon_tag :plus, label: t('question.new.title') %>
+      </a>
     </div>
+  </div>
 </div>
