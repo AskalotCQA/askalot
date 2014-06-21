@@ -1,0 +1,25 @@
+<li id="answer-<%= answer.id %>" class="question-answer<%= ' bg-warning' if answer_highlighted? answer %>">
+  <div class="row">
+    <div class="col-xs-9 col-sm-10 col-md-10">
+      <div class="answer-content">
+        <%= render_markdown answer.text %>
+      </div>
+
+      <div class="answer-details">
+        <%= render 'answers/details', answer: answer %>
+        <%= render 'documents/answers/editing', answer: answer %>
+        <%= render 'answers/deleting', answer: answer %>
+      </div>
+
+      <%= render 'answers/evaluations', answer: answer %>
+      <%= render 'answers/comments', answer: answer %>
+      <%= render 'documents/comments/form', commentable: answer %>
+    </div>
+
+    <div class="col-xs-3 col-sm-2">
+      <%= render 'answers/voting', answer: answer %>
+      <%= render 'answers/labeling', answer: answer %>
+      <%= render 'answers/evaluating', answer: answer %>
+    </div>
+  </div>
+</li>
