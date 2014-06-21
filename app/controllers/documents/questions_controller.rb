@@ -8,8 +8,6 @@ class Groups::QuestionsController < ApplicationController
   include Markdown::Process
   include Watchings::Register
 
-  default_tab :recent, only: :index
-
   before_action :authenticate_user!
 
   def index
@@ -21,10 +19,7 @@ class Groups::QuestionsController < ApplicationController
                    else Question.recent
                  end
 
-    @questions = filter_questions(@questions)
     @questions = @questions.page(params[:page]).per(20)
-
-    initialize_polling
   end
 
   def new
@@ -32,7 +27,6 @@ class Groups::QuestionsController < ApplicationController
   end
 
   def create
-    binding.pry
     @question = Question.new(create_params)
 
     authorize! :ask, @question
@@ -47,10 +41,12 @@ class Groups::QuestionsController < ApplicationController
 
       flash[:notice] = t('question.create.success')
 
+      # TODO Change link
       redirect_to question_path(@question)
     else
       @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
 
+      # TODO Change link
       render :new
     end
   end
@@ -89,25 +85,6 @@ class Groups::QuestionsController < ApplicationController
   end
 
   private
-
-  helper_method :filter_questions
-
-  def initialize_polling
-    unless params[:poll]
-      session[:poll] = Rails.env.development? ? false : true if session[:poll].nil?
-
-      return @poll = params[:poll] = session[:poll]
-    end
-
-    @poll = session[:poll] = params[:poll] == 'true' ? true : false
-  end
-
-  def filter_questions(relation)
-    return relation unless params[:tags].present?
-
-    relation.tagged_with(params[:tags])
-  end
-
   def create_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user)
   end
