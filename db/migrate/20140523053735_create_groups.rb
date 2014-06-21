@@ -1,6 +1,6 @@
 class CreateGroups < ActiveRecord::Migration
   def change
-    create_table :groups do |t|
+    create_table :documents do |t|
       t.references :owner, null: false
 
       t.string :title, null: false, default: ''
@@ -14,8 +14,8 @@ class CreateGroups < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :groups, :title
-    add_index :groups, :owner_id
-    add_index :groups, :deletor_id
+    add_index :documents, :title
+    add_index :documents, :owner_id
+    add_index :documents, :deletor_id
   end
 end
