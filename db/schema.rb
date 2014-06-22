@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140523061344) do
+ActiveRecord::Schema.define(version: 20140621220517) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -308,7 +308,7 @@ ActiveRecord::Schema.define(version: 20140523061344) do
 
   create_table "questions", force: true do |t|
     t.integer  "author_id",                                                     null: false
-    t.integer  "category_id",                                                   null: false
+    t.integer  "category_id"
     t.string   "title",                                                         null: false
     t.text     "text",                                                          null: false
     t.datetime "created_at",                                                    null: false
