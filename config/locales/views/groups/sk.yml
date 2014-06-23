@@ -8,6 +8,7 @@ sk:
     new:
       title: 'Nová skupina'
       submit: 'Vytvoriť'
+      cancel: 'Zrušiť'
 
     index:
       title: 'Skupiny'

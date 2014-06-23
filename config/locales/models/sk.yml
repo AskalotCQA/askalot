@@ -200,8 +200,10 @@ sk:
       category: 'Kategória'
       changelog: 'Protokol zmien'
       comment: 'Komentár'
+      document: 'Dokument'
       evaluation: 'Hodnotenie'
       favorite: 'Obľúbenie'
+      group: 'Skupina'
       question: 'Otázka'
       notification: 'Notifikácia'
       tag: 'Tag'
@@ -226,9 +228,17 @@ sk:
       comment:
         text: 'Komentár'
 
+      document:
+        title: 'Názov'
+        text: 'Text'
+
       evaluation:
         text: 'Komentár'
         value: 'Hodnotenie'
+
+      group:
+        title: 'Názov'
+        description: 'Popis skupiny'
 
       question:
         anonymous: 'Opýtať sa anonymne'
