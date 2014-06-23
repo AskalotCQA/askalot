@@ -28,7 +28,7 @@ class Documents::AnswersController < ApplicationController
       form_error_messages_for @answer
     end
 
-    redirect_to group_path(Group.find(params[:group_id]))
+    redirect_to documents_question_path(id: @question.id, document_id: @question.document.id)
   end
 
   def label

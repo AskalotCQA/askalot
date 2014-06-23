@@ -22,6 +22,14 @@ class GroupsController < ApplicationController
   def show
     @group     = Group.find(params[:id])
     @documents = @group.documents
+    @question  = Question.new
+    @labels  = @question.labels
+    @answers = @question.ordered_answers
+    @answer  = Answer.new(question: @question)
+    @document= Document.new
+    @questions = Question.recent
+
+    @questions = @questions.page(params[:page]).per(20)
   end
 
   def index

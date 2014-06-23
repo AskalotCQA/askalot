@@ -11,25 +11,21 @@ class Documents::QuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # TODO load questions for document
-    @questions = case params[:tab].to_sym
-                   when :unanswered then Question.unanswered.by_votes
-                   when :answered   then Question.answered_but_not_best.by_votes
-                   when :solved     then Question.solved.by_votes
-                   when :favored    then Question.favored.by_votes
-                   else Question.recent
-                 end
+    @document  = Document.find(params[:document_id])
+    @questions = @document.questions
 
     @questions = @questions.page(params[:page]).per(20)
   end
 
   def new
     @question = Question.new
+    @document = Document.find(params[:document_id])
+    @group    = Group.find(params[:group_id])
   end
 
   def create
     @question = Question.new(create_params)
-    binding.pry
+    @document = Document.find(params[:document_id])
 
     authorize! :ask, @question
 
@@ -46,12 +42,13 @@ class Documents::QuestionsController < ApplicationController
       flash_error_messages_for @question
     end
 
-    # TODO (jharinek) consider change in redirect
-    redirect_to group_path(Group.find(params[:group_id]))
+    redirect_to documents_questions_path(document_id: params[:document_id])
   end
 
   def show
     @question = Question.find(params[:id])
+    @document = Document.find(params[:document_id])
+    @group    = @document.group
 
     authorize! :view, @question
 
