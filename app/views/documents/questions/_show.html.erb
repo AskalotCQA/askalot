@@ -1,48 +1,53 @@
-<div id="document-question">
-  <div class="row">
-    <div class="col-xs-9 col-sm-7 col-md-10">
-      <div id="question-title">
-        <h3 class="question-title">
-          <%= @question.title %>
-          <%= evaluation_badge_tag @question if @question.evaluations.any? %>
-        </h3>
-        <%= render 'questions/labels', labels: @labels %>
+<div id="document-content">
+  <a href="<%= documents_questions_path(document_id: @document.id) %>" data-remote="true" class="btn btn-sm btn-default">
+    <%= icon_tag :list, label: 'Zoznam otázok' %>
+  </a>
+  <div id="document-question">
+    <div class="row">
+      <div class="col-xs-9 col-sm-7 col-md-10">
+        <div id="question-title">
+          <h3 class="question-title">
+            <%= @question.title %>
+            <%= evaluation_badge_tag @question if @question.evaluations.any? %>
+          </h3>
+          <%= render 'questions/labels', labels: @labels %>
+        </div>
+
+        <div id="question-data">
+          <div class="question-content">
+            <%= render_markdown @question.text %>
+          </div>
+
+          <div class="question-details">
+            <%= render 'questions/details', question: @question %>
+            <%= render 'documents/questions/editing', question: @question %>
+            <%= render 'questions/deleting', question: @question %>
+          </div>
+
+          <div id="question-evaluations">
+            <%= render 'questions/evaluations', question: @question %>
+          </div>
+
+          <div id="question-comments">
+            <%= render 'questions/comments', question: @question %>
+            <%= render 'documents/comments/form', commentable: @question %>
+          </div>
+        </div>
       </div>
 
-      <div id="question-data">
-        <div class="question-content">
-          <%= render_markdown @question.text %>
-        </div>
-
-        <div class="question-details">
-          <%= render 'questions/details', question: @question %>
-          <%= render 'documents/questions/editing', question: @question %>
-          <%= render 'questions/deleting', question: @question %>
-        </div>
-
-        <div id="question-evaluations">
-          <%= render 'questions/evaluations', question: @question %>
-        </div>
-
-        <div id="question-comments">
-          <%= render 'questions/comments', question: @question %>
-          <%= render 'documents/comments/form', commentable: @question %>
-        </div>
+      <div class="col-xs-3 col-sm-2">
+        <%= render 'questions/voting', question: @question %>
+        <%= render 'questions/watching', question: @question %>
+        <%= render 'questions/evaluating', question: @question %>
       </div>
-    </div>
-
-    <div class="col-xs-3 col-sm-2">
-      <%= render 'questions/voting', question: @question %>
-      <%= render 'questions/watching', question: @question %>
-      <%= render 'questions/evaluating', question: @question %>
     </div>
   </div>
-</div>
 
-<div id="question-answers">
-  <%= render 'documents/questions/answers', answers: @answers %>
-</div>
+  <div id="question-answers">
+    <%= render 'documents/questions/answers', answers: @answers %>
+  </div>
 
-<div id="question-answer" class="new-answer-form">
-  <%= render 'documents/answers/form', question: @question, answer: @answer %>
+  <div id="question-answer" class="new-answer-form">
+    <%= render 'documents/answers/form', question: @question, answer: @answer %>
+  </div>
 </div>

@@ -1,5 +1,8 @@
 <% provide :title, t('group.index.title') %>
 
+<div class="pull-right">
+  <%= render 'form' %>
+</div>
 
 <ul class="nav nav-tabs tab-navigation">
   <%= tab_link_tag t('group.tab.all'), :all, groups_path(params.except(:page).merge tab: :all), analytics_attributes(:groups, :switch, :all) %>
