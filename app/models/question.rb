@@ -54,7 +54,7 @@ class Question < ActiveRecord::Base
   end
 
   def labels
-    [category] + tags
+    category ? [category] + tags : tags
   end
 
   def to_question
@@ -63,7 +63,6 @@ class Question < ActiveRecord::Base
 
   private
   def blank_category?
-    binding.pry
     category.blank?
   end
 
