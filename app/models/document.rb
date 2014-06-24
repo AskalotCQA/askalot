@@ -1,4 +1,7 @@
 class Document < ActiveRecord::Base
+  include Deletable
+  include Editable
+
   TYPES=[:chunk, :question]
 
   belongs_to :group, counter_cache: true
