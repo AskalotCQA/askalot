@@ -1,4 +1,7 @@
 class DocumentsController < ApplicationController
+  include Deletables::Destroy
+  include Editables::Update
+
   include Markdown::Process
 
   def create
