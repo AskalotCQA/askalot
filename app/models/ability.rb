@@ -9,8 +9,8 @@ class Ability
     can(:edit,   User) { |resource| resource == user }
     can(:follow, User) { |resource| resource != user }
 
-    can(:edit,   [Question, Answer, Comment]) { |resource| resource.author == user }
-    can(:delete, [Question, Answer, Comment]) { |resource| resource.author == user }
+    can(:edit,   [Question, Answer, Comment, Document]) { |resource| resource.author == user }
+    can(:delete, [Question, Answer, Comment, Document]) { |resource| resource.author == user }
 
     cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.any? }
     cannot(:edit, [Answer]) { |resource| resource.labelings.any? }
@@ -51,8 +51,8 @@ class Ability
     if user.role? :administrator
       can :administrate, :all
 
-      can :edit,   [Question, Answer, Comment]
-      can :delete, [Question, Answer, Comment]
+      can :edit,   [Question, Answer, Comment, Document]
+      can :delete, [Question, Answer, Comment, Document]
 
       can :create,  [Category, Changelog]
       can :update,  [Category, Changelog]
