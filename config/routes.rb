@@ -46,7 +46,7 @@ Askalot::Application.routes.draw do
 
   resources :groups, only: [:index, :new, :create, :show, :update, :destroy]
 
-  resources :documents, only: [:new, :create, :update]
+  resources :documents, only: [:new, :create, :update, :destroy]
 
   resources :categories do
     concerns :watchable
