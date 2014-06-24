@@ -7,8 +7,5 @@
       </ol>
 
       <%= paginate questions, params: { tab: :questions } %>
-  <% else %>
-      <span class="text-muted"><%= t('user.show.no_questions') %></span>
-      <%= icon_link_to :'question-circle', t('user.show.ask'), new_question_path, class: 'btn btn-success' %>
   <% end %>
 </div>
