@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624063442) do
+ActiveRecord::Schema.define(version: 20140624065642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,14 +155,18 @@ ActiveRecord::Schema.define(version: 20140624063442) do
   add_index "comments", ["edited"], name: "index_comments_on_edited", using: :btree
 
   create_table "documents", force: true do |t|
-    t.integer  "group_id",      null: false
-    t.string   "title",         null: false
+    t.integer  "group_id",                      null: false
+    t.string   "title",                         null: false
     t.string   "document_type"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "deleted",       default: false, null: false
+    t.integer  "deletor_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "documents", ["deletor_id"], name: "index_documents_on_deletor_id", using: :btree
   add_index "documents", ["group_id"], name: "index_documents_on_group_id", using: :btree
   add_index "documents", ["title"], name: "index_documents_on_title", using: :btree
 
