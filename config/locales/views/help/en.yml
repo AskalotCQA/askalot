@@ -2,12 +2,12 @@ en:
   help:
     navigation: 'Help'
 
-    title: 'Keď si nevieš dať rady v Askalote'
-    lead: 'Ak máš pochybnosti ako sa správne pýtať, odpovedať, alebo si prispôsobiť Askalot, tak si na správnom mieste.'
+    title: 'When you are lost in Askalot'
+    lead: 'If you are not sure how to ask a good question, give a good answer, or if you want to personalize Askalot, this is the right place for you.'
 
     heading:
-      answer_question: 'Chcem odpovedať na otázky'
-      ask_question: 'Chcem sa opýtať otázku'
-      explore: 'Chcem sa naučiť niečo nové'
-      profile: 'Chcem si upraviť profil'
-      markdown: 'Chcem použiť Markdown'
+      answer_question: 'I want to answer questions'
+      ask_question: 'I want to ask a question'
+      explore: 'I want to learn something new'
+      profile: 'I want to edit my profile'
+      markdown: 'I want to use Markdown'

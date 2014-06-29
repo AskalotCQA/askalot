@@ -1,1 +1,8 @@
 en:
+  markdown:
+    text: 'Text'
+    preview: 'Preview'
+    documentation: 'Processed by %{link}'
+
+    loading_preview: 'Loading preview…'
+    nothing_to_preview: 'Nothing to preview.'
