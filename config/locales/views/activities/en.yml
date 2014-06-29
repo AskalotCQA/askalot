@@ -1,1 +1,89 @@
 en:
+  activity:
+    navigation: 'Activity'
+
+    tab:
+      global: 'Global'
+      followees: 'Followees'
+
+    index:
+      title: 'Activity'
+      title: 'Čo je nové v Askalote?' #TODO
+
+    more: 'Show more'
+    none: 'No activity.'
+
+    none:
+      global: 'No activity.'
+      followees: 'You are not following anyone yet.'
+
+    note:
+      global: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí a ich označení, komentárov a hodnotení všetkými používateľmi.'
+      followees: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí a ich označení, komentárov a hodnotení používateľmi, ktorých nasledujete.'
+      profile: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí a ich označení, komentárov a hodnotení.'
+
+    action:
+      create: 'Addition'
+      update: 'Editation'
+      delete: 'Deletion'
+      mention: 'Mention'
+
+    icon:
+      persistence: '%{action} %{resource}'
+      mention: 'Mention in %{resource}'
+
+    content:
+      persistence:
+        answer: 'answer'
+        comment: 'comment'
+        evaluation: 'evaluation'
+        favorite: 'favorite'
+        labeling: 'labeling'
+        question: 'question'
+        view: 'view'
+        vote: 'vote'
+
+      mention:
+        answer: 'answer'
+        comment: 'comment'
+        question: 'question'
+
+      answer:
+        create: 'Pridanie %{resource} k otázke %{question}'
+        update: 'Upravenie %{resource} k otázke %{question}'
+        delete: 'Zmazanie odpovede z otázky %{question}'
+        mention: 'Spomenutie v %{resource} k otázke %{question}'
+
+      comment:
+        answer:
+          create: 'Pridanie %{resource} k odpovedi v otázke %{question}'
+          update: 'Upravenie %{resource} k odpovedi v otázke %{question}'
+          delete: 'Zmazanie komentáru z odpovede v otázke %{question}'
+          mention: 'Spomenutie v %{resource} k %{question}'
+        question:
+          create: 'Pridanie %{resource} k otázke %{question}'
+          update: 'Upravenie %{resource} k otázke %{question}'
+          delete: 'Zmazanie komentára z otázky %{question}'
+          mention: 'Spomenutie v %{resource} k otázke %{question}'
+
+      evaluation:
+        answer:
+          create: 'Pridanie %{resource} k odpovedi v otázke %{question}'
+          update: 'Upravenie %{resource} k odpovedi v otázke %{question}'
+        question:
+          create: 'Pridanie %{resource} k otázke %{question}'
+          update: 'Upravenie %{resource} k otázke %{question}'
+
+      favorite:
+        create: 'Pridanie obľúbenia otázky %{question}'
+        delete: 'Zrušenie obľúbenia otázky %{question}'
+
+      labeling:
+        create: 'Pridanie %{resource} odpovede k otázke %{question}'
+        delete: 'Zrušenie %{resource} odpovede k otázke %{question}'
+
+      question:
+        create: 'Addition of question %{question}'
+        update: 'Editation of question %{question}'
+        delete: 'Deletion of question %{question}'
+        mention: 'Mention in question %{question}'

@@ -1,1 +1,34 @@
 en:
+  comment:
+    new:
+      action: 'Add comment'
+      submit: 'Comment'
+
+    create:
+      success: 'Comment was added successfuly.'
+
+    edit:
+      action: 'Edit'
+      title: 'Edit comment'
+      submit: 'Save'
+      cancel: 'Back'
+
+    update:
+      success: 'Comment was successfuly updated.'
+      unchanged: "Comment wasn't changed."
+
+    delete:
+      action: 'Delete'
+      title: 'Warning!'
+      text: 'Are you sure you want to delete comment?'
+      submit: 'Delete'
+      cancel: 'Back'
+      success: 'Comment was successfuly deleted.'
+      failure: "Comment couldn't be deleted"
+
+    details:
+      created: 'Pridal'
+      updated: 'Upravil'
+      deleted: 'Zmazal'
+
+    deleted: 'Comment was deleted'

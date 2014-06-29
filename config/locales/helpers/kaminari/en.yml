@@ -1,1 +1,11 @@
 en:
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: 'No %{entry_name}'
+          one: '1 %{entry_name}'
+          other: 'Showing all %{count}'
+
+      more_pages:
+        display_entries: 'Showing %{first} &ndash; %{last} from total %{total}' #TODO

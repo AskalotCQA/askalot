@@ -1,1 +1,33 @@
 en:
+  evaluation:
+    new:
+      action: 'Evaluate'
+      title: 'Evaluation'
+      submit: 'Evaluate'
+      cancel: 'Cancel'
+      help: 'Evaluation comment'
+
+    create:
+      success: 'Your evaluation was successfuly added.'
+
+    update:
+      success: 'Your evaluation was successfuly updated.'
+
+    rank:
+      very_bad: 'Very bad'
+      bad: 'Bad'
+      neutral: 'Good'
+      good: 'Very good'
+      very_good: 'Excelent' #TODO double l?
+
+      question:
+        bad: 'Bad question'
+        neutral: 'Good question'
+        good: 'Great question'
+
+      answer:
+        bad: 'Bad answer'
+        neutral: 'Good answer'
+        good: 'Great answer'
+
+    deleted: 'Evaluation was deleted'

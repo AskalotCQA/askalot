@@ -1,1 +1,17 @@
 en:
+  changelog:
+    navigation: 'System updates'
+
+    index:
+      title: 'Čo je nové v Askalote?' #TODO
+      introduction: 'História pridanej funkcionality a zlepšení systému.'
+
+    create:
+      success: 'Changelog was added successfuly.'
+
+    update:
+      success: 'Changelog was successfuly updated.'
+
+    delete:
+      success: 'Changelog was successfuly deleted.'
+      failure: "Changelog couldn't be deleted."
