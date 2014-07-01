@@ -5,16 +5,16 @@ en:
       submit: 'Answer'
 
     create:
-      success: 'Answer was successfuly created.' #TODO added?
+      success: 'Answer was successfully created.'
 
     edit:
       action: 'Edit'
       title: 'Edit answer'
       submit: 'Save'
-      cancel: 'Back' #ToDO shouldn't this be cancel(zrusit)?
+      cancel: 'Back'
 
     update:
-      success: 'Answer was successfuly updated.'
+      success: 'Answer was successfully updated.'
       unchanged: "Answer wasn't changed."
 
     delete:
@@ -23,17 +23,17 @@ en:
       text: 'Are you sure you want to delete answer?'
       submit: 'Delete'
       cancel: 'Back'
-      success: 'Answer was successfuly deleted.'
+      success: 'Answer was successfully deleted.'
       failure: "Answer couldn't be deleted."
 
     label:
-      best: 'Label as best' #TODO mark vs label
+      best: 'Label as best'
       helpful: 'Label as helpful'
 
-    details: #TODO fuha
-      created: 'Pridal'
-      updated: 'Upravil'
-      deleted: 'Zmazal'
+    details:
+      created: 'Added by' #TODO (jharinek) created?
+      updated: 'Updated by'
+      deleted: 'Deleted by'
 
     best: 'Best'
     helpful: 'Helpful'

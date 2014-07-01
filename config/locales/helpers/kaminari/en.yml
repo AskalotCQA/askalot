@@ -8,4 +8,4 @@ en:
           other: 'Showing all %{count}'
 
       more_pages:
-        display_entries: 'Showing %{first} &ndash; %{last} from total %{total}' #TODO
+        display_entries: 'Showing %{first} &ndash; %{last} from total %{total}'

@@ -3,15 +3,15 @@ en:
     navigation: 'System updates'
 
     index:
-      title: 'Čo je nové v Askalote?' #TODO
+      title: 'Askalot news' #TODO (jharinek) Co je nove v Askalote?
       introduction: 'História pridanej funkcionality a zlepšení systému.'
 
     create:
-      success: 'Changelog was added successfuly.'
+      success: 'Changelog was added successfully.'
 
     update:
-      success: 'Changelog was successfuly updated.'
+      success: 'Changelog was successfully updated.'
 
     delete:
-      success: 'Changelog was successfuly deleted.'
+      success: 'Changelog was successfully deleted.'
       failure: "Changelog couldn't be deleted."

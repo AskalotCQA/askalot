@@ -14,13 +14,13 @@ en:
       results: 'Results'
 
     create:
-      success: 'Category was added successfuly.' #TODO slovosled
+      success: 'Category was successfully created.'
 
     update:
-      success: 'Category was successfuly updated.'
+      success: 'Category was successfully updated.'
 
     delete:
-      success: 'Category was successfuly deleted.'
+      success: 'Category was successfully deleted.'
       failure: "Category couldn't be deleted."
 
     no_records: 'No categories found.'

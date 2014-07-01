@@ -30,7 +30,7 @@ en:
       few: 'evaluations'
       other: 'evaluations'
 
-    favorite: #TODO staci toto?
+    favorite:
       zero: 'favorites'
       one: 'favorite'
       few: 'favorites'
@@ -92,49 +92,49 @@ en:
 
   count_x:
     answer:
-      zero: 'no answers' #TODO zero?
+      zero: 'no answers'
       one: '1 answer'
       few: '%{count} answers'
       other: '%{count} answers'
 
     author:
-      zero: 'no author' #TODO zero?
+      zero: 'no authors'
       one: '1 author'
       few: '%{count} authors'
       other: '%{count} authors'
 
     category:
-      zero: 'no category'  #TODO zero? plural?
+      zero: 'no categories'
       one: '1 category'
       few: '%{count} categories'
       other: '%{count} categories'
 
     comment:
-      zero: 'no comments' #TODO zero?
+      zero: 'no comments'
       one: '1 comment'
       few: '%{count} comments'
       other: '%{count} comments'
 
     evaluation:
-      zero: 'no evaluations' #TODO zero?
+      zero: 'no evaluations'
       one: '1 evaluation'
       few: '%{count} evaluations'
       other: '%{count} evaluations'
 
     favorite:
-      zero: 'no favorites' #TODO zero?
+      zero: 'no favorites'
       one: '1 favorite'
       few: '%{count} favorites'
       other: '%{count} favorites'
 
     followee:
-      zero: 'no followees' #TODO zero?
+      zero: 'no followees'
       one: '1 followee'
       few: '%{count} followees'
       other: '%{count} followees'
 
     follower:
-      zero: 'no followers' #TODO zero?
+      zero: 'no followers'
       one: 'one follower'
       few: '%{count} followers'
       other: '%{count} followers'
@@ -203,7 +203,7 @@ en:
         text: 'Answer'
 
       category:
-        name: 'Name' #TODO Title?
+        name: 'Name'
         tags: 'Tags'
 
       changelog:
@@ -231,7 +231,7 @@ en:
         password: 'Password'
         password_confirmation: 'Password confirmation'
         current_password: 'Current password'
-        remember_me: 'Remember' #TODO me?
+        remember_me: 'Remember me'
 
         confirmation_token: 'Confirmation token'
         reset_password_token: 'Reset password token'
@@ -261,5 +261,5 @@ en:
         show_name:  'Show name to other users'
         show_email: 'Show e-mail to other users'
 
-        hide_name: 'Hide name from other users' #TODO check
+        hide_name: 'Hide name from other users'
         hide_email: 'Hide e-mail from other users'

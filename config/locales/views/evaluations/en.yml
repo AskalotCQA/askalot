@@ -8,17 +8,17 @@ en:
       help: 'Evaluation comment'
 
     create:
-      success: 'Your evaluation was successfuly added.'
+      success: 'Your evaluation was successfully created.'
 
     update:
-      success: 'Your evaluation was successfuly updated.'
+      success: 'Your evaluation was successfully updated.'
 
     rank:
       very_bad: 'Very bad'
       bad: 'Bad'
       neutral: 'Good'
       good: 'Very good'
-      very_good: 'Excelent' #TODO double l?
+      very_good: 'Excellent'
 
       question:
         bad: 'Bad question'

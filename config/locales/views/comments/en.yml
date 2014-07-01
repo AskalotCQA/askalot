@@ -5,7 +5,7 @@ en:
       submit: 'Comment'
 
     create:
-      success: 'Comment was added successfuly.'
+      success: 'Comment was successfully created.'
 
     edit:
       action: 'Edit'
@@ -14,7 +14,7 @@ en:
       cancel: 'Back'
 
     update:
-      success: 'Comment was successfuly updated.'
+      success: 'Comment was successfully updated.'
       unchanged: "Comment wasn't changed."
 
     delete:
@@ -23,12 +23,12 @@ en:
       text: 'Are you sure you want to delete comment?'
       submit: 'Delete'
       cancel: 'Back'
-      success: 'Comment was successfuly deleted.'
+      success: 'Comment was successfully deleted.'
       failure: "Comment couldn't be deleted"
 
     details:
-      created: 'Pridal'
-      updated: 'Upravil'
-      deleted: 'Zmazal'
+      created: 'Added by' #TODO created by?
+      updated: 'Updated by'
+      deleted: 'deleted by'
 
     deleted: 'Comment was deleted'

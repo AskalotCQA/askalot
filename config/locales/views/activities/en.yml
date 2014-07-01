@@ -8,7 +8,7 @@ en:
 
     index:
       title: 'Activity'
-      title: 'Čo je nové v Askalote?' #TODO
+      title: 'Askalot news' #TODO (jharinek) Co je nove v Askalote? - other translation?
 
     more: 'Show more'
     none: 'No activity.'
@@ -23,7 +23,7 @@ en:
       profile: 'Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí a ich označení, komentárov a hodnotení.'
 
     action:
-      create: 'Addition'
+      create: 'Addition' #TODO pridanie?
       update: 'Editation'
       delete: 'Deletion'
       mention: 'Mention'
@@ -49,8 +49,8 @@ en:
         question: 'question'
 
       answer:
-        create: 'Pridanie %{resource} k otázke %{question}'
-        update: 'Upravenie %{resource} k otázke %{question}'
+        create: 'Add %{resource} to question %{question}'
+        update: 'Editation of %{resource} to question %{question}'
         delete: 'Zmazanie odpovede z otázky %{question}'
         mention: 'Spomenutie v %{resource} k otázke %{question}'
 

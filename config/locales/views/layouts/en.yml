@@ -1,24 +1,23 @@
 en:
   head:
     authors: 'Rastislav Dobšovič, Marek Grznár, Jozef Harinek, Samuel Molnár, Peter Páleník, Dušan Poizl, Ivan Srba, Pavol Zbell'
-    description: 'Community question answering system of next generation.' #TODO CQA?
+    description: 'Community question answering system of next generation.' #TODO (jharinek) only CQA?
     keywords: 'CQA, FIIT, STU, question, answer, community'
-    content: 'Community question answering system of next generation for students of Faculty of Informatics and Information Technology at Slovak University of Technology in Bratislava.' #TODO correct?
-
+    content: 'Community question answering system of next generation for students of Faculty of Informatics and Information Technologies at Slovak University of Technology in Bratislava.'
   home:
     headline: 'Community question answering system of next generation'
 
     ask: 'Ask a question'
     answer: 'Try to answer'
     questions: 'All questions'
-    activities: 'Čo je nové v Askalote?' #TODO
+    activities: 'Askalot news' #TODO (jharinek) Co je nove...
 
     sign_up: 'Sign up'
     sign_in: 'Sign in'
 
     step:
       first: 'Ask questions'
-      second: 'Odpovedajte a diskutujte' #TODO
+      second: 'Answer and have a discussion'
       third: 'Choose best answers'
 
     featured:
@@ -32,4 +31,4 @@ en:
     contact: 'Contact'
     documents: 'Documents'
     help: 'Help'
-    repositories: 'Repository' #TODO plural?
+    repositories: 'Repository' #TODO (jharinek) plural?
