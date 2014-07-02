@@ -14,7 +14,7 @@ en:
       title: 'Not Found'
       description: 'The page you were looking for does not exists.'
 
- errors: &errors
+  errors: &errors
     format: '%{attribute} – %{message}.'
 
     messages:
