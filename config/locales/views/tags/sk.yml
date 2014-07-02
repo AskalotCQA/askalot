@@ -1,18 +1,18 @@
 sk:
   tag:
-    navigation: 'Tagy'
+    navigation: "Tagy"
 
     index:
-      title: 'Tagy'
+      title: "Tagy"
 
     search:
-      title: 'Vyhľadávanie tagov'
+      title: "Vyhľadávanie tagov"
 
     tab:
-      all: 'Všetky'
-      recent: 'Nové'
-      popular: 'Populárne'
+      all: "Všetky"
+      recent: "Nové"
+      popular: "Populárne"
 
-      results: 'Výsledky'
+      results: "Výsledky"
 
-    no_records: 'Neboli nájdené žiadne tagy.'
+    no_records: "Neboli nájdené žiadne tagy."

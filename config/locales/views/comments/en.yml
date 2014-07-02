@@ -1,34 +1,34 @@
 en:
   comment:
     new:
-      action: 'Add comment'
-      submit: 'Comment'
+      action: "Add comment"
+      submit: "Comment"
 
     create:
-      success: 'Comment was successfully created.'
+      success: "Comment was successfully added."
 
     edit:
-      action: 'Edit'
-      title: 'Edit comment'
-      submit: 'Save'
-      cancel: 'Back'
+      action: "Edit"
+      title: "Edit comment"
+      submit: "Save"
+      cancel: "Back"
 
     update:
-      success: 'Comment was successfully updated.'
-      unchanged: "Comment wasn't changed."
+      success: "Comment was successfully updated."
+      unchanged: "Comment was not changed."
 
     delete:
-      action: 'Delete'
-      title: 'Warning!'
-      text: 'Are you sure you want to delete comment?'
-      submit: 'Delete'
-      cancel: 'Back'
-      success: 'Comment was successfully deleted.'
-      failure: "Comment couldn't be deleted"
+      action: "Delete"
+      title: "Warning!"
+      text: "Are you sure you want to delete this comment?"
+      submit: "Delete"
+      cancel: "Back"
+      success: "Comment was successfully deleted."
+      failure: "Comment could not be deleted"
 
     details:
-      created: 'Added by' #TODO created by?
-      updated: 'Updated by'
-      deleted: 'deleted by'
+      created: "Added by"
+      updated: "Updated by"
+      deleted: "deleted by"
 
-    deleted: 'Comment was deleted'
+    deleted: "Comment was deleted"

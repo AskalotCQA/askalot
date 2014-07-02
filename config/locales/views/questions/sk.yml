@@ -1,73 +1,73 @@
 sk:
   question:
-    navigation: 'Otázky'
+    navigation: "Otázky"
 
     index:
-      title: 'Otázky'
-      new: 'Nová otázka'
+      title: "Otázky"
+      new: "Nová otázka"
 
     search:
-      title: 'Vyhľadávanie v otázkach'
-      submit: 'Vyhľadať'
-      placeholder: 'napr. NoSQL databázy, návrhové vzory, …'
+      title: "Vyhľadávanie v otázkach"
+      submit: "Vyhľadať"
+      placeholder: "napr. NoSQL databázy, návrhové vzory, …"
 
     new:
-      title: 'Nová otázka'
-      submit: 'Opýtať'
-      submit_anonymously: 'Opýtať sa anonymne'
-      feature: 'Pridať otázku'
+      title: "Nová otázka"
+      submit: "Opýtať"
+      submit_anonymously: "Opýtať sa anonymne"
+      feature: "Pridať otázku"
 
     create:
-      success: 'Otázka bola úspešne pridaná.'
+      success: "Otázka bola úspešne pridaná."
 
     edit:
-      action: 'Upraviť'
-      title: 'Úprava otázky'
-      submit: 'Uložiť'
-      cancel: 'Späť'
+      action: "Upraviť"
+      title: "Úprava otázky"
+      submit: "Uložiť"
+      cancel: "Späť"
 
     update:
-      success: 'Otázka bola úspešne aktualizovaná.'
-      unchanged: 'Otázka nebola zmenená.'
+      success: "Otázka bola úspešne aktualizovaná."
+      unchanged: "Otázka nebola zmenená."
 
     delete:
-      action: 'Zmazať'
-      title: 'Pozor!'
-      text: 'Naozaj chcete zmazať otázku?'
-      submit: 'Zmazať'
-      cancel: 'Späť'
-      success: 'Otázka bola úspešne zmazaná.'
-      failure: 'Otázku sa nepodarilo zmazať.'
+      action: "Zmazať"
+      title: "Pozor!"
+      text: "Naozaj chcete zmazať túto otázku?"
+      submit: "Zmazať"
+      cancel: "Späť"
+      success: "Otázka bola úspešne zmazaná."
+      failure: "Otázku sa nepodarilo zmazať."
 
     tab:
-      recent: 'Aktuálne'
-      unanswered: 'Bez odpovede'
-      answered: 'Odpovedané'
-      solved: 'Vyriešené'
-      favored: 'Obľúbené'
+      recent: "Aktuálne"
+      unanswered: "Bez odpovede"
+      answered: "Odpovedané"
+      solved: "Vyriešené"
+      favored: "Obľúbené"
 
-      results: 'Výsledky'
+      results: "Výsledky"
 
     tag:
-      new: 'nový'
-      searching: 'Hľadám…'
-      no_matches: 'Nenájdený žiadny výsledok'
-      placeholder: 'napr. elasticsearch, linux-server, use-case'
+      new: "nový"
+      searching: "Hľadám…"
+      no_matches: "Nenájdený žiadny výsledok"
+      placeholder: "napr. elasticsearch, linux-server, use-case"
 
     poll:
-      start: 'Aktualizovať automaticky'
-      end: 'Aktualizované %{time}'
+      start: "Aktualizovať automaticky"
+      end: "Aktualizované %{time}"
 
     details:
-      created: 'Pridal'
-      updated: 'Upravil'
-      deleted: 'Zmazal'
+      created: "Pridal"
+      updated: "Upravil"
+      deleted: "Zmazal"
 
-    favor: 'Pridať medzi obľúbené'
-    unfavor: 'Odobrať z obľúbených'
+    favor: "Pridať medzi obľúbené"
+    unfavor: "Odobrať z obľúbených"
 
-    favored: 'Obľúbená'
+    favored: "Obľúbená"
 
-    deleted: 'Otázka bola zmazaná'
+    deleted: "Otázka bola zmazaná"
 
-    no_records: 'Neboli nájdené žiadne otázky.'
+    no_records: "Neboli nájdené žiadne otázky."

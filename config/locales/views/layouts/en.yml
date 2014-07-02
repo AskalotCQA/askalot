@@ -1,34 +1,34 @@
 en:
   head:
-    authors: 'Rastislav Dobšovič, Marek Grznár, Jozef Harinek, Samuel Molnár, Peter Páleník, Dušan Poizl, Ivan Srba, Pavol Zbell'
-    description: 'Community question answering system of next generation.' #TODO (jharinek) only CQA?
-    keywords: 'CQA, FIIT, STU, question, answer, community'
-    content: 'Community question answering system of next generation for students of Faculty of Informatics and Information Technologies at Slovak University of Technology in Bratislava.'
+    authors: "Rastislav Dobšovič, Marek Grznár, Jozef Harinek, Samuel Molnár, Peter Páleník, Dušan Poizl, Ivan Srba, Pavol Zbell"
+    description: "Community question answering system of next generation."
+    keywords: "CQA, FIIT, STU, question, answer, community"
+    content: "Community question answering system of next generation for students of Faculty of Informatics and Information Technologies at Slovak University of Technology in Bratislava."
   home:
-    headline: 'Community question answering system of next generation'
+    headline: "Community question answering system of next generation"
 
-    ask: 'Ask a question'
-    answer: 'Try to answer'
-    questions: 'All questions'
-    activities: 'Askalot news' #TODO (jharinek) Co je nove...
+    ask: "Ask a question"
+    answer: "Try to answer"
+    questions: "Browse questions"
+    activities: "Activity in Askalot"
 
-    sign_up: 'Sign up'
-    sign_in: 'Sign in'
+    sign_up: "Sign up"
+    sign_in: "Sign in"
 
     step:
-      first: 'Ask questions'
-      second: 'Answer and have a discussion'
-      third: 'Choose best answers'
+      first: "Ask questions"
+      second: "Answer and discuss"
+      third: "Choose best answers"
 
     featured:
-      new: 'New questions'
-      solved: 'Solved questions'
-      favored: 'Favorite questions'
+      new: "New questions"
+      solved: "Solved questions"
+      favored: "Favorite questions"
 
   footer:
-    about: 'About project'
-    authors: 'Authors'
-    contact: 'Contact'
-    documents: 'Documents'
-    help: 'Help'
-    repositories: 'Repository' #TODO (jharinek) plural?
+    about: "About"
+    authors: "Authors"
+    contact: "Contact"
+    documents: "Documents"
+    help: "Help"
+    repositories: "Repository"

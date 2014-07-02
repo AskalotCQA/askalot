@@ -1,17 +1,17 @@
 en:
   changelog:
-    navigation: 'System updates'
+    navigation: "System updates"
 
     index:
-      title: 'Askalot news' #TODO (jharinek) Co je nove v Askalote?
-      introduction: 'História pridanej funkcionality a zlepšení systému.'
+      title: "What's new in Askalot?"
+      introduction: "History of new system functionality and improvements."
 
     create:
-      success: 'Changelog was added successfully.'
+      success: "Changelog was successfully added."
 
     update:
-      success: 'Changelog was successfully updated.'
+      success: "Changelog was successfully updated."
 
     delete:
-      success: 'Changelog was successfully deleted.'
-      failure: "Changelog couldn't be deleted."
+      success: "Changelog was successfully deleted."
+      failure: "Changelog could not be deleted."

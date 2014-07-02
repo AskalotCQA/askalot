@@ -1,8 +1,8 @@
 sk:
   views:
     pagination:
-      first: 'Prvá strana'
-      last: 'Posledná strana'
-      previous: '<i class="fa fa-angle-left"></i>'
-      next: '<i class="fa fa-angle-right"></i>'
-      truncate: '&hellip;'
+      first: "Prvá strana"
+      last: "Posledná strana"
+      previous: <i class="fa fa-angle-left"></i>
+      next: <i class="fa fa-angle-right"></i>
+      truncate: "&hellip;"

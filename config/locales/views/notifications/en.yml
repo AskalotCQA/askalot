@@ -1,1 +1,37 @@
 en:
+  notification:
+    navigation: "Notifications"
+
+    index:
+      title: "Notifications"
+
+    read:
+      submit: "Mark as read"
+      success: "Notification marked as read."
+      failure: "Unable to mark notification as read."
+
+    unread:
+      submit: "Mark as unread"
+      success: "Notification marked as unread."
+      failure: "Unable to mark notification as unread."
+
+    clean:
+      submit: "Mark all as read"
+      success: "Notifications marked as read."
+      failure: "Unable to mark notifications as read."
+
+    tab:
+      all: "All"
+      read: "Read"
+      unread: "Unread"
+
+    more: "More"
+    none: "No notifications."
+
+    all_read: "No unread notifications, good job!"
+
+    unread_x:
+      zero: "No unread notifications"
+      one: "1 unread notification"
+      few: "%{count} unread notifications"
+      other: "%{count} unread notifications"

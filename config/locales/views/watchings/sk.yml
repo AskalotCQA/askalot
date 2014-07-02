@@ -1,34 +1,34 @@
 sk:
   watching:
-    navigation: 'Sledovania'
+    navigation: "Sledovania"
 
     index:
-      title: 'Sledovania'
+      title: "Sledovania"
 
     create:
-      category: 'Sledovať kategóriu'
-      question: 'Sledovať otázku'
-      tag: 'Sledovať tag'
+      category: "Sledovať kategóriu"
+      question: "Sledovať otázku"
+      tag: "Sledovať tag"
 
     delete:
-      submit: 'Nesledovať'
-      success: 'Sledovanie bolo zrušené.'
-      failure: 'Sledovanie sa nepodarilo zrušiť.'
+      submit: "Nesledovať"
+      success: "Sledovanie bolo zrušené."
+      failure: "Sledovanie sa nepodarilo zrušiť."
 
     clean:
-      action: 'Zrušiť všetky sledovania %{model}'
-      title: 'Pozor!'
-      text: 'Naozaj chcete zrušiť všetky sledovania %{model}?'
-      submit: 'Zrušiť všetky sledovania'
-      cancel: 'Spať'
-      success: 'Sledovania boli zrušené.'
-      failure: 'Sledovania sa nepodarilo zrušiť.'
+      action: "Zrušiť všetky sledovania %{model}"
+      title: "Pozor!"
+      text: "Naozaj chcete zrušiť všetky sledovania %{model}?"
+      submit: "Zrušiť všetky sledovania"
+      cancel: "Spať"
+      success: "Sledovania boli zrušené."
+      failure: "Sledovania sa nepodarilo zrušiť."
 
     tab:
-      questions: 'Otázky'
-      categories: 'Kategórie'
-      tags: 'Tagy'
+      questions: "Otázky"
+      categories: "Kategórie"
+      tags: "Tagy"
 
-    none: 'Žiadne sledovania.'
+    none: "Žiadne sledovania."
 
-    deleted: 'Sledovanie bolo zrušené'
+    deleted: "Sledovanie bolo zrušené"

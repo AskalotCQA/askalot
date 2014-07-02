@@ -1,37 +1,37 @@
 sk:
   notification:
-    navigation: 'Notifikácie'
+    navigation: "Notifikácie"
 
     index:
-      title: 'Notifikácie'
+      title: "Notifikácie"
 
     read:
-      submit: 'Označiť ako prečítané'
-      success: 'Notifikácia bola označená ako prečítaná.'
-      failure: 'Notifikáciu sa nepodarilo označiť ako prečítanú.'
+      submit: "Označiť ako prečítané"
+      success: "Notifikácia bola označená ako prečítaná."
+      failure: "Notifikáciu sa nepodarilo označiť ako prečítanú."
 
     unread:
-      submit: 'Označiť ako neprečítané'
-      success: 'Notifikácia bola označená ako neprečítaná.'
-      failure: 'Notifikáciu sa nepodarilo označiť ako neprečítanú.'
+      submit: "Označiť ako neprečítané"
+      success: "Notifikácia bola označená ako neprečítaná."
+      failure: "Notifikáciu sa nepodarilo označiť ako neprečítanú."
 
     clean:
-      submit: 'Označiť všetky ako prečítané'
-      success: 'Notifikácie boli označené ako prečítané.'
-      failure: 'Notifikácie sa nepodarilo označiť ako prečítané.'
+      submit: "Označiť všetky ako prečítané"
+      success: "Notifikácie boli označené ako prečítané."
+      failure: "Notifikácie sa nepodarilo označiť ako prečítané."
 
     tab:
-      all: 'Všetky'
-      read: 'Prečítané'
-      unread: 'Neprečítané'
+      all: "Všetky"
+      read: "Prečítané"
+      unread: "Neprečítané"
 
-    more: 'Zobraziť viac'
-    none: 'Žiadne notifikácie.'
+    more: "Zobraziť viac"
+    none: "Žiadne notifikácie."
 
-    all_read: 'Všetky notifikácie prečítané, dobrá práca!'
+    all_read: "Všetky notifikácie prečítané, dobrá práca!"
 
     unread_x:
-      zero: 'Žiadne neprečítané notifikácie'
-      one: '1 neprečítaná notifikácia'
-      few: '%{count} neprečítané notifikácie'
-      other: '%{count} neprečítaných notifikácií'
+      zero: "Žiadne neprečítané notifikácie"
+      one: "1 neprečítaná notifikácia"
+      few: "%{count} neprečítané notifikácie"
+      other: "%{count} neprečítaných notifikácií"

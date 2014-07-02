@@ -1,140 +1,140 @@
 sk:
   user:
-    navigation: 'Používatelia'
+    navigation: "Používatelia"
 
     index:
-      title: 'Používatelia'
+      title: "Používatelia"
 
     search:
-      title: 'Vyhľadávanie používateľov'
+      title: "Vyhľadávanie používateľov"
 
     tab:
-      all: 'Všetci'
-      recent: 'Noví'
+      all: "Všetci"
+      recent: "Noví"
 
-      results: 'Výsledky'
+      results: "Výsledky"
 
-      profile: 'Profil'
-      questions: 'Otázky'
-      anonymous: 'Anonymné otázky'
-      answers: 'Odpovede'
-      favorites: 'Obľúbené'
-      activities: 'Aktivita'
+      profile: "Profil"
+      questions: "Otázky"
+      anonymous: "Anonymné otázky"
+      answers: "Odpovede"
+      favorites: "Obľúbené"
+      activities: "Aktivita"
 
-      followees: 'Nasledovaní'
-      followers: 'Nasledovníci'
+      followees: "Nasledovaní"
+      followers: "Nasledovníci"
 
-    registration: 'Registrácia'
-    confirmation: 'Potvrdenie registrácie'
-    session_start: 'Prihlásenie'
-    password_change: 'Zmena hesla'
-    account_settings: 'Nastavenia účtu'
-    account_unlock: 'Odomknutie účtu'
-    account_deletion: 'Zrušenie účtu'
+    registration: "Registrácia"
+    confirmation: "Potvrdenie registrácie"
+    session_start: "Prihlásenie"
+    password_change: "Zmena hesla"
+    account_settings: "Nastavenia účtu"
+    account_unlock: "Odomknutie účtu"
+    account_deletion: "Zrušenie účtu"
 
-    sign_up: 'Registrovať'
-    sign_in: 'Prihlásiť'
-    sign_out: 'Odhlásiť'
+    sign_up: "Registrovať"
+    sign_in: "Prihlásiť"
+    sign_out: "Odhlásiť"
 
-    sign_up_with: 'Registrovať cez %{provider}'
-    sign_in_with: 'Prihlásiť cez %{provider}'
+    sign_up_with: "Registrovať cez %{provider}"
+    sign_in_with: "Prihlásiť cez %{provider}"
 
-    confirmation_pending: 'Čaká sa na potvrdenie e-mailu %{email}.'
-    signed_in_as: 'Prihlásený ako %{login}'
+    confirmation_pending: "Čaká sa na potvrdenie e-mailu %{email}."
+    signed_in_as: "Prihlásený ako %{login}"
 
-    last_sign_in_at: 'Naposledy prihlásený'
-    registered_at: 'Registrovaný'
+    last_sign_in_at: "Naposledy prihlásený"
+    registered_at: "Registrovaný"
 
-    confirm_registration: 'Poslať inštrukcie pre potvrdenie registrácie'
-    change_password: 'Zmeniť'
-    reset_password: 'Poslať inštrukcie pre obnovenie hesla'
-    save_account: 'Uložiť'
-    unlock_account: 'Poslať inštrukcie pre odomknutie účtu'
-    delete_account: 'Zrušiť'
+    confirm_registration: "Poslať inštrukcie pre potvrdenie registrácie"
+    change_password: "Zmeniť"
+    reset_password: "Poslať inštrukcie pre obnovenie hesla"
+    save_account: "Uložiť"
+    unlock_account: "Poslať inštrukcie pre odomknutie účtu"
+    delete_account: "Zrušiť"
 
-    new_password: 'Nové heslo'
-    confirm_password: 'Potvrdenie hesla'
+    new_password: "Nové heslo"
+    confirm_password: "Potvrdenie hesla"
 
-    more_social: 'Viac'
+    more_social: "Viac"
 
-    leave_current_password: 'ponechajte prázdne pokiaľ nechcete zmeniť'
-    enter_current_password: 'pre potvrdenie potrebujeme Vaše aktuálne heslo'
+    leave_current_password: "ponechajte prázdne pokiaľ nechcete zmeniť"
+    enter_current_password: "pre potvrdenie potrebujeme Vaše aktuálne heslo"
 
-    unconfirmed_registration: 'Nepotvrdená registrácia?'
-    forgotten_password: 'Zabudli ste heslo?'
-    locked_account: 'Zamknutý účet?'
+    unconfirmed_registration: "Nepotvrdená registrácia?"
+    forgotten_password: "Zabudli ste heslo?"
+    locked_account: "Zamknutý účet?"
 
-    ais_login_notice: 'použite prihlasovacie údaje z Akademického informačného systému'
+    ais_login_notice: "použite prihlasovacie údaje z Akademického informačného systému"
 
-    settings: 'Nastavenia'
+    settings: "Nastavenia"
 
     welcome:
-      title: 'Ďakujeme za registráciu'
-      message: 'Pre ďalšie pokračovanie v práci so systémom je potrebné registráciu potvrdiť.'
+      title: "Ďakujeme za registráciu"
+      message: "Pre ďalšie pokračovanie v práci so systémom je potrebné registráciu potvrdiť."
 
-    profile: 'Profil'
-    social: 'Sociálne siete'
-    privacy: 'Súkromie'
-    account: 'Účet'
+    profile: "Profil"
+    social: "Sociálne siete"
+    privacy: "Súkromie"
+    account: "Účet"
 
     show:
-      about: 'O mne'
-      edit: 'Upraviť profil'
+      about: "O mne"
+      edit: "Upraviť profil"
 
-      ask: 'Opýtajte sa otázku'
-      answer: 'Skúste odpovedať'
-      browse: 'Prezrite si otázky'
-      or: 'alebo'
+      ask: "Opýtajte sa otázku"
+      answer: "Skúste odpovedať"
+      browse: "Prezrite si otázky"
+      or: "alebo"
 
-      no_questions: 'Zatiaľ ste sa neopýtali žiadnu otázku'
-      no_answers: 'Zatiaľ ste neodpovedali na žiadnu otázku'
-      no_favorites: 'Zatiaľ ste si nepridali žiadnu otázku medzi obľúbené'
-      no_activity: 'Zatiaľ nemáte žiadnu verejnú aktivitu'
+      no_questions: "Zatiaľ ste sa neopýtali žiadnu otázku"
+      no_answers: "Zatiaľ ste neodpovedali na žiadnu otázku"
+      no_favorites: "Zatiaľ ste si nepridali žiadnu otázku medzi obľúbené"
+      no_activity: "Zatiaľ nemáte žiadnu verejnú aktivitu"
 
       other:
-        no_questions: 'Používateľ sa zatiaľ neopýtal žiadnu otázku.'
-        no_answers: 'Používateľ zatiaľ neodpovedal na žiadnu otázku.'
-        no_favorites: 'Používateľ si zatiaľ nepridal žiadnu otázku medzi obľúbené.'
-        no_activity: 'Používateľ zatiaľ nemá žiadnu verejnú aktivitu.'
+        no_questions: "Používateľ sa zatiaľ neopýtal žiadnu otázku."
+        no_answers: "Používateľ zatiaľ neodpovedal na žiadnu otázku."
+        no_favorites: "Používateľ si zatiaľ nepridal žiadnu otázku medzi obľúbené."
+        no_activity: "Používateľ zatiaľ nemá žiadnu verejnú aktivitu."
 
     edit:
-      profile: 'Úprava profilu'
-      social: 'Sociálne siete'
-      privacy: 'Správa súkromia'
-      account: 'Nastavenia účtu'
+      profile: "Úprava profilu"
+      social: "Sociálne siete"
+      privacy: "Správa súkromia"
+      account: "Nastavenia účtu"
 
     update:
-      success: 'Úspešne ste aktualizovali Váš profil.'
+      success: "Úspešne ste aktualizovali Váš profil."
 
     followings:
-      title: 'Nasledovania'
+      title: "Nasledovania"
 
-      browse: 'Prezrite si používateľov'
+      browse: "Prezrite si používateľov"
 
-      no_followees: 'Zatiaľ nenasledujete žiadneho používateľa'
-      no_followers: 'Zatiaľ vás nenasledujú žiadni používatelia.'
+      no_followees: "Zatiaľ nenasledujete žiadneho používateľa"
+      no_followers: "Zatiaľ vás nenasledujú žiadni používatelia."
 
       other:
-        no_followees: 'Používateľ zatiaľ nenasleduje žiadnych používateľov.'
-        no_followers: 'Používateľa zatiaľ nenasledujú žiadni používatelia.'
+        no_followees: "Používateľ zatiaľ nenasleduje žiadnych používateľov."
+        no_followers: "Používateľa zatiaľ nenasledujú žiadni používatelia."
 
-    follow: 'Nasledovať'
-    unfollow: 'Nenasledovať'
+    follow: "Nasledovať"
+    unfollow: "Nenasledovať"
 
     activity:
       calendar:
-        title: 'Aktivita'
-        note: 'Zobrazená miera aktivity zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení. Ďalej zahŕňa hlasovania za otázky a odpovede, označenia správnych odpovedí, obľúbenia, sledovania, tagovania a zobrazenia otázok, nasledovania používateľov a spomenutia používateľov v texte.'
+        title: "Aktivita"
+        note: "Zobrazená miera aktivity zahŕňa pridania, úpravy a zmazania otázok, odpovedí, komentárov a hodnotení. Ďalej zahŕňa hlasovania za otázky a odpovede, označenia správnych odpovedí, obľúbenia, sledovania, tagovania a zobrazenia otázok, nasledovania používateľov a spomenutia používateľov v texte."
 
         item:
-          singular: 'aktivita'
-          plural: 'aktivity'
+          singular: "aktivita"
+          plural: "aktivity"
 
         legend:
-          lower: 'menej ako {min}'
-          inner: 'medzi {down} a {up}'
-          upper: 'viac ako {max}'
+          lower: "menej ako {min}"
+          inner: "medzi {down} a {up}"
+          upper: "viac ako {max}"
 
-    anonymous: 'Anonym'
+    anonymous: "Anonym"
 
-    no_records: 'Neboli nájdení žiadni používatelia.'
+    no_records: "Neboli nájdení žiadni používatelia."
