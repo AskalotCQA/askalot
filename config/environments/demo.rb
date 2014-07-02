@@ -83,6 +83,9 @@ Askalot::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
+  # Default locate
+  config.i18n.default_locale = :en
+
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
 
