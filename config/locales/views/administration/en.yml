@@ -1,1 +1,34 @@
 en:
+  administration:
+    navigation: 'Administration'
+
+    tab:
+      categories: 'Categories'
+      changelogs: 'Changelogs'
+
+    changelog:
+      create:
+        action: 'Add changelog'
+
+      edit:
+        action: 'Edit'
+        title: 'Edit changelog'
+        submit: 'Save'
+        cancel: 'Cancel'
+
+      delete:
+        action: 'Delete'
+        title: 'Warning!'
+        text: 'Are you sure you want to delete this changelog?'
+        submit: 'Delete'
+        cancel: 'Cancel'
+
+    category:
+      create:
+        action: 'Add category'
+
+      edit:
+        action: 'Edit'
+        title: 'Edit category'
+        cancel: 'Cancel'
+        submit: 'Save'

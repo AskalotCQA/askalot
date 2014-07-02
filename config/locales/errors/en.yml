@@ -1,4 +1,8 @@
 en:
+  unicorn:
+    title: 'Unicorn'
+    message: 'And the unicorn got really mad!'
+
   exception:
     bad_request:
       title: 'Bad Request'
@@ -9,3 +13,40 @@ en:
     not_found:
       title: 'Not Found'
       description: 'The page you were looking for does not exists.'
+
+ errors: &errors
+    format: '%{attribute} – %{message}.'
+
+    messages:
+      accepted: 'must be confirmed'
+      blank: 'is compulsory'
+      confirmation: "wasn't confirmed"
+      empty: 'attribute cannot be empty'
+      equal_to: 'must be equal to %{count}'
+      even: 'must be even number'
+      exclusion: 'is reserved for another purpose'
+      greater_than: 'must be greater than %{count}'
+      greater_than_or_equal_to: 'must be greater or equal to %{count}'
+      inclusion: 'is not in the list of allowed values'
+      invalid: 'is not a valid value'
+      less_than: 'must be less than %{count}'
+      less_than_or_equal_to: 'must be smaller or qual to %{count}'
+      not_a_number: 'is not a number'
+      not_an_integer: 'must be an integer'
+      odd: 'must be an odd number'
+      record_invalid: 'Validation failed: %{errors}'
+      taken: 'is already taken'
+      too_long: 'attribute is too long, max. length %{count}'
+      too_short: 'attribute is too short, min. length %{count}'
+      wrong_length: "doesn't have correct length, expected length: %{count}"
+
+  activemodel:
+    errors:
+      <<: *errors
+
+  activerecord:
+    errors:
+      <<: *errors
+
+  cancan:
+    access_denied: "You don't have access rights to perform this action"
