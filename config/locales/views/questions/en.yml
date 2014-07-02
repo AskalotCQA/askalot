@@ -13,9 +13,9 @@ en:
 
     new:
       title: "New question"
-      submit: "Submit"
+      submit: "Ask question"
       submit_anonymously: "Ask anonymously"
-      feature: "Ask question"
+      feature: "Ask a question"
 
     create:
       success: "Question was successfully added."
