@@ -56,7 +56,7 @@ en:
 
     poll:
       start: "Refresh automatically"
-      end: "Refreshed at %{time}"
+      end: "Refreshed %{time}"
 
     details:
       created: "Added by"
