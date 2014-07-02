@@ -1,265 +1,265 @@
 sk:
   count:
     answer:
-      zero: 'odpovedí'
-      one: 'odpoveď'
-      few: 'odpovede'
-      other: 'odpovedí'
+      zero: "odpovedí"
+      one: "odpoveď"
+      few: "odpovede"
+      other: "odpovedí"
 
     author:
-      zero: 'autorov'
-      one: 'autor'
-      few: 'autori'
-      other: 'autorov'
+      zero: "autorov"
+      one: "autor"
+      few: "autori"
+      other: "autorov"
 
     category:
-      zero: 'kategórií'
-      one: 'kategória'
-      few: 'kategórie'
-      other: 'kategórií'
+      zero: "kategórií"
+      one: "kategória"
+      few: "kategórie"
+      other: "kategórií"
 
     comment:
-      zero: 'komentárov'
-      one: 'komentár'
-      few: 'komentáre'
-      other: 'komentárov'
+      zero: "komentárov"
+      one: "komentár"
+      few: "komentáre"
+      other: "komentárov"
 
     evaluation:
-      zero: 'hodnotení'
-      one: 'hodnotenie'
-      few: 'hodnotenia'
-      other: 'hodnotení'
+      zero: "hodnotení"
+      one: "hodnotenie"
+      few: "hodnotenia"
+      other: "hodnotení"
 
     favorite:
-      zero: 'obľúbení'
-      one: 'obľúbenie'
-      few: 'obľúbenia'
-      other: 'obľúbení'
+      zero: "obľúbení"
+      one: "obľúbenie"
+      few: "obľúbenia"
+      other: "obľúbení"
 
     followee:
-      zero: 'nasledovaných'
-      one: 'nasledovaný'
-      few: 'nasledovaný'
-      other: 'nasledovaných'
+      zero: "nasledovaných"
+      one: "nasledovaný"
+      few: "nasledovaný"
+      other: "nasledovaných"
 
     follower:
-      zero: 'nasledovníkov'
-      one: 'nasledovník'
-      few: 'nasledovníci'
-      other: 'nasledovníkov'
+      zero: "nasledovníkov"
+      one: "nasledovník"
+      few: "nasledovníci"
+      other: "nasledovníkov"
 
     notification:
-      zero: 'notifikácií'
-      one: 'notifikácia'
-      few: 'notifikácie'
-      other: 'notifikácií'
+      zero: "notifikácií"
+      one: "notifikácia"
+      few: "notifikácie"
+      other: "notifikácií"
 
     question:
-      zero: 'otázok'
-      one: 'otázka'
-      few: 'otázky'
-      other: 'otázok'
+      zero: "otázok"
+      one: "otázka"
+      few: "otázky"
+      other: "otázok"
 
     tag:
-      zero: 'tagov'
-      one: 'tag'
-      few: 'tagy'
-      other: 'tagov'
+      zero: "tagov"
+      one: "tag"
+      few: "tagy"
+      other: "tagov"
 
     user:
-      zero: 'používateľov'
-      one: 'používateľ'
-      few: 'používatelia'
-      other: 'používateľov'
+      zero: "používateľov"
+      one: "používateľ"
+      few: "používatelia"
+      other: "používateľov"
 
     view:
-      zero: 'zobrazení'
-      one: 'zobrazenie'
-      few: 'zobrazenia'
-      other: 'zobrazení'
+      zero: "zobrazení"
+      one: "zobrazenie"
+      few: "zobrazenia"
+      other: "zobrazení"
 
     vote:
-      zero: 'hlasov'
-      one: 'hlas'
-      few: 'hlasy'
-      other: 'hlasov'
+      zero: "hlasov"
+      one: "hlas"
+      few: "hlasy"
+      other: "hlasov"
 
     watching:
-      zero: 'sledovanií'
-      one: 'sledovanie'
-      few: 'sledovania'
-      other: 'sledovaní'
+      zero: "sledovanií"
+      one: "sledovanie"
+      few: "sledovania"
+      other: "sledovaní"
 
   count_x:
     answer:
-      zero: 'žiadna odpoveď'
-      one: '1 odpoveď'
-      few: '%{count} odpovede'
-      other: '%{count} odpovedí'
+      zero: "žiadna odpoveď"
+      one: "1 odpoveď"
+      few: "%{count} odpovede"
+      other: "%{count} odpovedí"
 
     author:
-      zero: 'žiaden autor'
-      one: '1 autor'
-      few: '%{count} autori'
-      other: '%{count} autorov'
+      zero: "žiaden autor"
+      one: "1 autor"
+      few: "%{count} autori"
+      other: "%{count} autorov"
 
     category:
-      zero: 'žiadna kategória'
-      one: '1 kategória'
-      few: '%{count} kategórie'
-      other: '%{count} kategórií'
+      zero: "žiadna kategória"
+      one: "1 kategória"
+      few: "%{count} kategórie"
+      other: "%{count} kategórií"
 
     comment:
-      zero: 'žiaden komentár'
-      one: '1 komentár'
-      few: '%{count} komentáre'
-      other: '%{count} komentárov'
+      zero: "žiaden komentár"
+      one: "1 komentár"
+      few: "%{count} komentáre"
+      other: "%{count} komentárov"
 
     evaluation:
-      zero: 'žiadne hodnotenie'
-      one: '1 hodnotenie'
-      few: '%{count} hodnotenia'
-      other: '%{count} hodnotení'
+      zero: "žiadne hodnotenie"
+      one: "1 hodnotenie"
+      few: "%{count} hodnotenia"
+      other: "%{count} hodnotení"
 
     favorite:
-      zero: 'žiadne obľúbenie'
-      one: '1 obľúbenie'
-      few: '%{count} obľúbenia'
-      other: '%{count} obľúbení'
+      zero: "žiadne obľúbenie"
+      one: "1 obľúbenie"
+      few: "%{count} obľúbenia"
+      other: "%{count} obľúbení"
 
     followee:
-      zero: 'žiaden nasledovaný'
-      one: '1 nasledovaný'
-      few: '%{count} nasledovaný'
-      other: '%{count} nasledovaných'
+      zero: "žiaden nasledovaný"
+      one: "1 nasledovaný"
+      few: "%{count} nasledovaný"
+      other: "%{count} nasledovaných"
 
     follower:
-      zero: 'žiaden nasledovník'
-      one: 'jeden nasledovník'
-      few: '%{count} nasledovníci'
-      other: '%{count} nasledovníkov'
+      zero: "žiaden nasledovník"
+      one: "jeden nasledovník"
+      few: "%{count} nasledovníci"
+      other: "%{count} nasledovníkov"
 
     notification:
-      zero: 'žiadna notifikácia'
-      one: '1 notifikácia'
-      few: '%{count} notifikácie'
-      other: '%{count} notifikácií'
+      zero: "žiadna notifikácia"
+      one: "1 notifikácia"
+      few: "%{count} notifikácie"
+      other: "%{count} notifikácií"
 
     question:
-      zero: 'žiadna otázka'
-      one: '1 otázka'
-      few: '%{count} otázky'
-      other: '%{count} otázok'
+      zero: "žiadna otázka"
+      one: "1 otázka"
+      few: "%{count} otázky"
+      other: "%{count} otázok"
 
     tag:
-      zero: 'žiaden tag'
-      one: '1 tag'
-      few: '%{count} tagy'
-      other: '%{count} tagov'
+      zero: "žiaden tag"
+      one: "1 tag"
+      few: "%{count} tagy"
+      other: "%{count} tagov"
 
     user:
-      zero: 'žiaden používateľ'
-      one: '1 používateľ'
-      few: '%{count} používatelia'
-      other: '%{count} používateľov'
+      zero: "žiaden používateľ"
+      one: "1 používateľ"
+      few: "%{count} používatelia"
+      other: "%{count} používateľov"
 
     view:
-      zero: 'žiadne videnia'
-      one: '1 videnie'
-      few: '%{count} videnia'
-      other: '%{count} videní'
+      zero: "žiadne videnia"
+      one: "1 videnie"
+      few: "%{count} videnia"
+      other: "%{count} videní"
 
     vote:
-      zero: 'žiadne hlasy'
-      one: '1 hlas'
-      few: '%{count} hlasy'
-      other: '%{count} hlasov'
+      zero: "žiadne hlasy"
+      one: "1 hlas"
+      few: "%{count} hlasy"
+      other: "%{count} hlasov"
 
     watching:
-      zero: 'žiadne sledovania'
-      one: '1 sledovanie'
-      few: '%{count} sledovania'
-      other: '%{count} sledovaní'
+      zero: "žiadne sledovania"
+      one: "1 sledovanie"
+      few: "%{count} sledovania"
+      other: "%{count} sledovaní"
 
   activerecord:
     models:
-      activity: 'Aktivita'
-      answer: 'Odpoveď'
-      category: 'Kategória'
-      changelog: 'Protokol zmien'
-      comment: 'Komentár'
-      evaluation: 'Hodnotenie'
-      favorite: 'Obľúbenie'
-      question: 'Otázka'
-      notification: 'Notifikácia'
-      tag: 'Tag'
-      user: 'Používateľ'
-      view: 'Zobrazenie'
-      vote: 'Hlas'
-      watching: 'Sledovanie'
+      activity: "Aktivita"
+      answer: "Odpoveď"
+      category: "Kategória"
+      changelog: "Protokol zmien"
+      comment: "Komentár"
+      evaluation: "Hodnotenie"
+      favorite: "Obľúbenie"
+      question: "Otázka"
+      notification: "Notifikácia"
+      tag: "Tag"
+      user: "Používateľ"
+      view: "Zobrazenie"
+      vote: "Hlas"
+      watching: "Sledovanie"
 
     attributes:
       answer:
-        text: 'Odpoveď'
+        text: "Odpoveď"
 
       category:
-        name: 'Názov'
-        tags: 'Tagy'
+        name: "Názov"
+        tags: "Tagy"
 
       changelog:
-        text: 'Text'
-        title: 'Názov'
-        version: 'Verzia'
+        text: "Text"
+        title: "Názov"
+        version: "Verzia"
 
       comment:
-        text: 'Komentár'
+        text: "Komentár"
 
       evaluation:
-        text: 'Komentár'
-        value: 'Hodnotenie'
+        text: "Komentár"
+        value: "Hodnotenie"
 
       question:
-        anonymous: 'Opýtať sa anonymne'
-        category: 'Kategória'
-        category_id: 'Kategória'
-        tag_list: 'Tagy'
-        text: 'Text'
-        title: 'Nadpis'
+        anonymous: "Opýtať sa anonymne"
+        category: "Kategória"
+        category_id: "Kategória"
+        tag_list: "Tagy"
+        text: "Text"
+        title: "Nadpis"
 
       user:
-        email: 'E-mail'
-        password: 'Heslo'
-        password_confirmation: 'Potvrdenie hesla'
-        current_password: 'Aktuálne heslo'
-        remember_me: 'Zapamätať'
+        email: "E-mail"
+        password: "Heslo"
+        password_confirmation: "Potvrdenie hesla"
+        current_password: "Aktuálne heslo"
+        remember_me: "Zapamätať"
 
-        confirmation_token: 'Potvrdzovací kľúč'
-        reset_password_token: 'Obnovovací kľúč'
+        confirmation_token: "Potvrdzovací kľúč"
+        reset_password_token: "Obnovovací kľúč"
 
-        nick: 'Prezývka'
-        first: 'Krstné meno'
-        middle: 'Druhé meno'
-        last: 'Priezvisko'
-        about: 'O mne'
+        nick: "Prezývka"
+        first: "Krstné meno"
+        middle: "Druhé meno"
+        last: "Priezvisko"
+        about: "O mne"
 
-        gravatar_email: 'Gravatar e-mail'
+        gravatar_email: "Gravatar e-mail"
 
-        bitbucket: 'Bitbucket'
-        facebook: 'Facebook'
-        flickr: 'Flickr'
-        foursquare: 'Foursquare'
-        github: 'GitHub'
-        google_plus: 'Google Plus'
-        instagram: 'Instagram'
-        linkedin: 'LinkedIn'
-        pinterest: 'Pinterest'
-        stack_overflow: 'Stack Overflow'
-        tumblr: 'Tumblr'
-        twitter: 'Twitter'
-        youtube: 'YouTube'
+        bitbucket: "Bitbucket"
+        facebook: "Facebook"
+        flickr: "Flickr"
+        foursquare: "Foursquare"
+        github: "GitHub"
+        google_plus: "Google Plus"
+        instagram: "Instagram"
+        linkedin: "LinkedIn"
+        pinterest: "Pinterest"
+        stack_overflow: "Stack Overflow"
+        tumblr: "Tumblr"
+        twitter: "Twitter"
+        youtube: "YouTube"
 
-        show_name:  'Zobraziť meno ostatným používateľom'
-        show_email: 'Zobraziť e-mail ostatným používateľom'
+        show_name:  "Zobraziť meno ostatným používateľom"
+        show_email: "Zobraziť e-mail ostatným používateľom"
 
-        hide_name: 'Skryť meno ostatným používateľom'
-        hide_email: 'Skryť e-mail ostatným používateľom'
+        hide_name: "Skryť meno ostatným používateľom"
+        hide_email: "Skryť e-mail ostatným používateľom"

@@ -1,265 +1,265 @@
 en:
   count:
     answer:
-      zero: 'answers'
-      one: 'answer'
-      few: 'answers'
-      other: 'answers'
+      zero: "answers"
+      one: "answer"
+      few: "answers"
+      other: "answers"
 
     author:
-      zero: 'authors'
-      one: 'author'
-      few: 'authors'
-      other: 'authors'
+      zero: "authors"
+      one: "author"
+      few: "authors"
+      other: "authors"
 
     category:
-      zero: 'categories'
-      one: 'category'
-      few: 'categories'
-      other: 'categories'
+      zero: "categories"
+      one: "category"
+      few: "categories"
+      other: "categories"
 
     comment:
-      zero: 'comments'
-      one: 'comment'
-      few: 'comments'
-      other: 'comments'
+      zero: "comments"
+      one: "comment"
+      few: "comments"
+      other: "comments"
 
     evaluation:
-      zero: 'evaluations'
-      one: 'evaluation'
-      few: 'evaluations'
-      other: 'evaluations'
+      zero: "evaluations"
+      one: "evaluation"
+      few: "evaluations"
+      other: "evaluations"
 
     favorite:
-      zero: 'favorites'
-      one: 'favorite'
-      few: 'favorites'
-      other: 'favorites'
+      zero: "favorites"
+      one: "favorite"
+      few: "favorites"
+      other: "favorites"
 
     followee:
-      zero: 'followees'
-      one: 'followee'
-      few: 'followees'
-      other: 'followees'
+      zero: "followees"
+      one: "followee"
+      few: "followees"
+      other: "followees"
 
     follower:
-      zero: 'followers'
-      one: 'follower'
-      few: 'followers'
-      other: 'followers'
+      zero: "followers"
+      one: "follower"
+      few: "followers"
+      other: "followers"
 
     notification:
-      zero: 'notifications'
-      one: 'notification'
-      few: 'notifications'
-      other: 'notifications'
+      zero: "notifications"
+      one: "notification"
+      few: "notifications"
+      other: "notifications"
 
     question:
-      zero: 'questions'
-      one: 'question'
-      few: 'questions'
-      other: 'questions'
+      zero: "questions"
+      one: "question"
+      few: "questions"
+      other: "questions"
 
     tag:
-      zero: 'tags'
-      one: 'tag'
-      few: 'tags'
-      other: 'tags'
+      zero: "tags"
+      one: "tag"
+      few: "tags"
+      other: "tags"
 
     user:
-      zero: 'users'
-      one: 'user'
-      few: 'users'
-      other: 'users'
+      zero: "users"
+      one: "user"
+      few: "users"
+      other: "users"
 
     view:
-      zero: 'views'
-      one: 'view'
-      few: 'views'
-      other: 'views'
+      zero: "views"
+      one: "view"
+      few: "views"
+      other: "views"
 
     vote:
-      zero: 'votes'
-      one: 'vote'
-      few: 'votes'
-      other: 'votes'
+      zero: "votes"
+      one: "vote"
+      few: "votes"
+      other: "votes"
 
     watching:
-      zero: 'watchings'
-      one: 'watching'
-      few: 'watchings'
-      other: 'watchings'
+      zero: "watchings"
+      one: "watching"
+      few: "watchings"
+      other: "watchings"
 
   count_x:
     answer:
-      zero: 'no answers'
-      one: '1 answer'
-      few: '%{count} answers'
-      other: '%{count} answers'
+      zero: "no answers"
+      one: "1 answer"
+      few: "%{count} answers"
+      other: "%{count} answers"
 
     author:
-      zero: 'no authors'
-      one: '1 author'
-      few: '%{count} authors'
-      other: '%{count} authors'
+      zero: "no authors"
+      one: "1 author"
+      few: "%{count} authors"
+      other: "%{count} authors"
 
     category:
-      zero: 'no categories'
-      one: '1 category'
-      few: '%{count} categories'
-      other: '%{count} categories'
+      zero: "no categories"
+      one: "1 category"
+      few: "%{count} categories"
+      other: "%{count} categories"
 
     comment:
-      zero: 'no comments'
-      one: '1 comment'
-      few: '%{count} comments'
-      other: '%{count} comments'
+      zero: "no comments"
+      one: "1 comment"
+      few: "%{count} comments"
+      other: "%{count} comments"
 
     evaluation:
-      zero: 'no evaluations'
-      one: '1 evaluation'
-      few: '%{count} evaluations'
-      other: '%{count} evaluations'
+      zero: "no evaluations"
+      one: "1 evaluation"
+      few: "%{count} evaluations"
+      other: "%{count} evaluations"
 
     favorite:
-      zero: 'no favorites'
-      one: '1 favorite'
-      few: '%{count} favorites'
-      other: '%{count} favorites'
+      zero: "no favorites"
+      one: "1 favorite"
+      few: "%{count} favorites"
+      other: "%{count} favorites"
 
     followee:
-      zero: 'no followees'
-      one: '1 followee'
-      few: '%{count} followees'
-      other: '%{count} followees'
+      zero: "no followees"
+      one: "1 followee"
+      few: "%{count} followees"
+      other: "%{count} followees"
 
     follower:
-      zero: 'no followers'
-      one: 'one follower'
-      few: '%{count} followers'
-      other: '%{count} followers'
+      zero: "no followers"
+      one: "one follower"
+      few: "%{count} followers"
+      other: "%{count} followers"
 
     notification:
-      zero: 'no notifications'
-      one: '1 notification'
-      few: '%{count} notifications'
-      other: '%{count} notifications'
+      zero: "no notifications"
+      one: "1 notification"
+      few: "%{count} notifications"
+      other: "%{count} notifications"
 
     question:
-      zero: 'no questions'
-      one: '1 question'
-      few: '%{count} questions'
-      other: '%{count} questions'
+      zero: "no questions"
+      one: "1 question"
+      few: "%{count} questions"
+      other: "%{count} questions"
 
     tag:
-      zero: 'no tags'
-      one: '1 tag'
-      few: '%{count} tags'
-      other: '%{count} tags'
+      zero: "no tags"
+      one: "1 tag"
+      few: "%{count} tags"
+      other: "%{count} tags"
 
     user:
-      zero: 'no users'
-      one: '1 user'
-      few: '%{count} users'
-      other: '%{count} users'
+      zero: "no users"
+      one: "1 user"
+      few: "%{count} users"
+      other: "%{count} users"
 
     view:
-      zero: 'no views'
-      one: '1 view'
-      few: '%{count} views'
-      other: '%{count} views'
+      zero: "no views"
+      one: "1 view"
+      few: "%{count} views"
+      other: "%{count} views"
 
     vote:
-      zero: 'no votes'
-      one: '1 vote'
-      few: '%{count} votes'
-      other: '%{count} votes'
+      zero: "no votes"
+      one: "1 vote"
+      few: "%{count} votes"
+      other: "%{count} votes"
 
     watching:
-      zero: 'no watchings'
-      one: '1 watching'
-      few: '%{count} watchings'
-      other: '%{count} watchings'
+      zero: "no watchings"
+      one: "1 watching"
+      few: "%{count} watchings"
+      other: "%{count} watchings"
 
   activerecord:
     models:
-      activity: 'Activity'
-      answer: 'Answer'
-      category: 'Category'
-      changelog: 'Changelog'
-      comment: 'Comment'
-      evaluation: 'Evaluation'
-      favorite: 'Favorite'
-      question: 'Question'
-      notification: 'Notification'
-      tag: 'Tag'
-      user: 'User'
-      view: 'View'
-      vote: 'Vote'
-      watching: 'Watching'
+      activity: "Activity"
+      answer: "Answer"
+      category: "Category"
+      changelog: "Changelog"
+      comment: "Comment"
+      evaluation: "Evaluation"
+      favorite: "Favorite"
+      question: "Question"
+      notification: "Notification"
+      tag: "Tag"
+      user: "User"
+      view: "View"
+      vote: "Vote"
+      watching: "Watching"
 
     attributes:
       answer:
-        text: 'Answer'
+        text: "Answer"
 
       category:
-        name: 'Name'
-        tags: 'Tags'
+        name: "Name"
+        tags: "Tags"
 
       changelog:
-        text: 'Text'
-        title: 'Title'
-        version: 'Version'
+        text: "Text"
+        title: "Title"
+        version: "Version"
 
       comment:
-        text: 'Comment'
+        text: "Comment"
 
       evaluation:
-        text: 'Comment'
-        value: 'Evaluation'
+        text: "Comment"
+        value: "Evaluation"
 
       question:
-        anonymous: 'Ask anonymously'
-        category: 'Category'
-        category_id: 'Category'
-        tag_list: 'Tags'
-        text: 'Text'
-        title: 'Title'
+        anonymous: "Ask anonymously"
+        category: "Category"
+        category_id: "Category"
+        tag_list: "Tags"
+        text: "Text"
+        title: "Title"
 
       user:
-        email: 'E-mail'
-        password: 'Password'
-        password_confirmation: 'Password confirmation'
-        current_password: 'Current password'
-        remember_me: 'Remember me'
+        email: "E-mail"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        current_password: "Current password"
+        remember_me: "Remember me"
 
-        confirmation_token: 'Confirmation token'
-        reset_password_token: 'Reset password token'
+        confirmation_token: "Confirmation token"
+        reset_password_token: "Reset password token"
 
-        nick: 'Nickname'
-        first: 'First name'
-        middle: 'Middle name'
-        last: 'Last name'
-        about: 'About'
+        nick: "Nickname"
+        first: "First name"
+        middle: "Middle name"
+        last: "Last name"
+        about: "About"
 
-        gravatar_email: 'Gravatar e-mail'
+        gravatar_email: "Gravatar e-mail"
 
-        bitbucket: 'Bitbucket'
-        facebook: 'Facebook'
-        flickr: 'Flickr'
-        foursquare: 'Foursquare'
-        github: 'GitHub'
-        google_plus: 'Google Plus'
-        instagram: 'Instagram'
-        linkedin: 'LinkedIn'
-        pinterest: 'Pinterest'
-        stack_overflow: 'Stack Overflow'
-        tumblr: 'Tumblr'
-        twitter: 'Twitter'
-        youtube: 'YouTube'
+        bitbucket: "Bitbucket"
+        facebook: "Facebook"
+        flickr: "Flickr"
+        foursquare: "Foursquare"
+        github: "GitHub"
+        google_plus: "Google Plus"
+        instagram: "Instagram"
+        linkedin: "LinkedIn"
+        pinterest: "Pinterest"
+        stack_overflow: "Stack Overflow"
+        tumblr: "Tumblr"
+        twitter: "Twitter"
+        youtube: "YouTube"
 
-        show_name:  'Show name to other users'
-        show_email: 'Show e-mail to other users'
+        show_name:  "Show name to other users"
+        show_email: "Show e-mail to other users"
 
-        hide_name: 'Hide name from other users'
-        hide_email: 'Hide e-mail from other users'
+        hide_name: "Hide name from other users"
+        hide_email: "Hide e-mail from other users"
