@@ -4,6 +4,6 @@ server domain, :app, :web, :db, primary: true
 
 set :user,      'deploy'
 set :rails_env, 'demo'
-set :branch,    'demo'
+set :branch,    'master'
 
 role :db, domain, primary: true
