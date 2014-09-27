@@ -5,10 +5,9 @@
     <div class="list-center">
       <ul>
         <li><%= link_to t('footer.about'), url_to_site('#about') %></li>
-        <li><%= link_to t('footer.documents'), url_to_site('#documents') %></li>
-        <li><%= link_to t('footer.repositories'), url_to_site('#repositories') %></li>
         <li><%= link_to t('footer.authors'), url_to_site('#authors') %></li>
         <li><%= link_to t('footer.contact'), url_to_site('#contact') %></li>
+        <li><%= link_to t('footer.changelogs'), changelogs_path %></li>
         <li><%= link_to t('footer.help'), help_path %></li>
       </ul>
     </div>
