@@ -8,7 +8,11 @@ class TagsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @tags = Tag.order(:name)
+    @tags = case params[:tab].to_sym
+            when :recent then Tag.recent
+            when :popular then Tag.popular
+            else Tag.order(:name)
+            end
   end
 
   # TODO (smolnar)

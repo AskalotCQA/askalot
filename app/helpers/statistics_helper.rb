@@ -38,8 +38,12 @@ module StatisticsHelper
       values = chain.any? ? relation.map { |o| chain.inject(o) { |r, m| r.send(m) }.size } : relation.to_a
     end
 
-    median          = median(values)
-    mean, deviation = mean_and_standard_deviation(values)
+    if values.any?
+      median          = median(values)
+      mean, deviation = mean_and_standard_deviation(values)
+    else
+      median = mean = deviation = :'?'
+    end
 
     content_tag(:td, number_with_precision(median, precision: 2), class: :'text-right') +
     content_tag(:td, number_with_precision(mean, precision: 2), class: :'text-right') +
@@ -48,6 +52,6 @@ module StatisticsHelper
 
   def data_fraction_tag(numeration, denomination)
     content_tag(:td, numeration.size, class: :'text-right') +
-    content_tag(:td, number_to_percentage(100 * numeration.size / denomination.size.to_f, precision: 2), class: :'text-right')
+    content_tag(:td, denomination.size != 0 ? number_to_percentage(100 * numeration.size / denomination.size.to_f, precision: 2) : :'?%', class: :'text-right')
   end
 end
