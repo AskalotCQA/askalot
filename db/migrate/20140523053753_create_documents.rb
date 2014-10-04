@@ -4,14 +4,18 @@ class CreateDocuments < ActiveRecord::Migration
       t.references :group, null: false
 
       t.string :title, null: false
+      t.text   :content
+      t.string :document_type, null: false, default: ''
 
-      t.string :document_type
-      t.string :content
+      t.boolean    :deleted, null: false, default: false
+      t.references :deletor, null: true
+      t.timestamp  :deleted_at
 
       t.timestamps
     end
 
     add_index :documents, :group_id
     add_index :documents, :title
+    add_index :documents, :deletor_id
   end
 end
