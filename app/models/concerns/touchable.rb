@@ -17,11 +17,9 @@ module Touchable
   private
 
   def attribute_changed?(column)
-    attributes = [:favorites_count, :votes_count, :views_count, :votes_difference, :votes_lb_wsci_bp ]
+    attributes = [:favorites_count, :votes_count, :views_count, :votes_difference, :votes_lb_wsci_bp]
 
-    if column == 'touched_at'
-      return (self.changed & attributes).any? ? true : super
-    end
+    return true if column.to_s == :touched_at && (self.changed & attributes).any?
 
     super
   end
