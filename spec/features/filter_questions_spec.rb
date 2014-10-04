@@ -2,14 +2,18 @@ require 'spec_helper'
 
 describe 'Filter Questions', js: true do
   let(:user) { create :user }
-  let(:category) { create :category, :with_tags }
+  let!(:category) { create :category, :with_tags }
 
   before :each do
     login_as user
 
-    10.times { create :question, tag_list: 'ruby,linux' }
-    10.times { create :question, tag_list: 'elasticsearch' }
-    20.times { create :question, tag_list: 'elasticsearch,ruby' }
+    Tag.autoimport = true
+
+    Tag.probe.index.reload do
+      10.times { create :question, tag_list: 'ruby,linux' }
+      10.times { create :question, tag_list: 'elasticsearch' }
+      20.times { create :question, tag_list: 'elasticsearch,ruby' }
+    end
   end
 
   it 'filters questions by tag' do
@@ -71,6 +75,7 @@ describe 'Filter Questions', js: true do
   it 'filters questions by question tags' do
     visit root_path
 
+    click_link 'Otázky'
     click_link 'Otázky'
 
     list = all('#questions > ol > li')

@@ -1,34 +1,34 @@
 sk:
   administration:
-    navigation: 'Administrácia'
+    navigation: "Administrácia"
 
     tab:
-      categories: 'Kategórie'
-      changelogs: 'Protokoly zmien'
+      categories: "Kategórie"
+      changelogs: "Protokoly zmien"
 
     changelog:
       create:
-        action: 'Pridať protokol zmien'
+        action: "Pridať protokol zmien"
 
       edit:
-        action: 'Upraviť'
-        title: 'Upraviť protokol zmien'
-        submit: 'Uložiť'
-        cancel: 'Zrušiť'
+        action: "Upraviť"
+        title: "Upraviť protokol zmien"
+        submit: "Uložiť"
+        cancel: "Zrušiť"
 
       delete:
-        action: 'Zmazať protokol zmien'
-        title: 'Pozor!'
-        text: 'Naozaj chcete zmazať tento protokol zmien?'
-        submit: 'Zmazať'
-        cancel: 'Zrušiť'
+        action: "Zmazať"
+        title: "Pozor!"
+        text: "Naozaj chcete zmazať tento protokol zmien?"
+        submit: "Zmazať"
+        cancel: "Zrušiť"
 
     category:
       create:
-        action: 'Pridať kategóriu'
+        action: "Pridať kategóriu"
 
       edit:
-        action: 'Upraviť'
-        title: 'Upraviť kategóriu'
-        cancel: 'Zrušiť'
-        submit: 'Uložiť'
+        action: "Upraviť"
+        title: "Upraviť kategóriu"
+        cancel: "Zrušiť"
+        submit: "Uložiť"

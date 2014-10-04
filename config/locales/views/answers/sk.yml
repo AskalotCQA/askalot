@@ -1,41 +1,41 @@
 sk:
   answer:
     new:
-      action: 'Pridať odpoveď'
-      submit: 'Odpovedať'
+      action: "Pridať odpoveď"
+      submit: "Odpovedať"
 
     create:
-      success: 'Odpoveď bola úspešne pridaná.'
+      success: "Odpoveď bola úspešne pridaná."
 
     edit:
-      action: 'Upraviť'
-      title: 'Úprava odpovede'
-      submit: 'Uložiť'
-      cancel: 'Spať'
+      action: "Upraviť"
+      title: "Úprava odpovede"
+      submit: "Uložiť"
+      cancel: "Spať"
 
     update:
-      success: 'Odpoveď bola úspešne aktualizovaná.'
-      unchanged: 'Odpoveď nebola zmenená.'
+      success: "Odpoveď bola úspešne aktualizovaná."
+      unchanged: "Odpoveď nebola zmenená."
 
     delete:
-      action: 'Zmazať'
-      title: 'Pozor!'
-      text: 'Naozaj chcete zmazať odpoveď?'
-      submit: 'Zmazať'
-      cancel: 'Spať'
-      success: 'Odpoveď bola úspešne zmazaná.'
-      failure: 'Odpoveď sa nepodarilo zmazať.'
+      action: "Zmazať"
+      title: "Pozor!"
+      text: "Naozaj chcete zmazať túto odpoveď?"
+      submit: "Zmazať"
+      cancel: "Spať"
+      success: "Odpoveď bola úspešne zmazaná."
+      failure: "Odpoveď sa nepodarilo zmazať."
 
     label:
-      best: 'Označiť ako najlepšiu'
-      helpful: 'Označiť ako pomocnú'
+      best: "Označiť ako najlepšiu"
+      helpful: "Označiť ako pomocnú"
 
     details:
-      created: 'Pridal'
-      updated: 'Upravil'
-      deleted: 'Zmazal'
+      created: "Pridal"
+      updated: "Upravil"
+      deleted: "Zmazal"
 
-    best: 'Najlepšia'
-    helpful: 'Pomocná'
+    best: "Najlepšia"
+    helpful: "Pomocná"
 
-    deleted: 'Odpoveď bola zmazaná'
+    deleted: "Odpoveď bola zmazaná"

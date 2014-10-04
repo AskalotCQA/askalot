@@ -1,1 +1,6 @@
 en:
+  statistic:
+    navigation: "Statistics"
+
+    index:
+      title: "Statistics"

@@ -1,1 +1,139 @@
 en:
+  user:
+    navigation: "Users"
+
+    index:
+      title: "Users"
+
+    search:
+      title: "Search users"
+
+    tab:
+      all: "All"
+      recent: "New"
+
+      results: "Results"
+
+      profile: "Profile"
+      questions: "Questions"
+      anonymous: "Anonymous questions"
+      answers: "Answers"
+      favorites: "Favorites"
+      activities: "Activity"
+
+      followees: "Followees"
+      followers: "Followers"
+
+    registration: "Registration"
+    confirmation: "Registration confirmation"
+    session_start: "Sign in"
+    password_change: "Password change"
+    account_settings: "Account settings"
+    account_unlock: "Account unlock"
+    account_deletion: "Account deletion"
+
+    sign_up: "Sign up"
+    sign_in: "Sign in"
+    sign_out: "Sing out"
+
+    sign_up_with: "Sign up with %{provider}"
+    sign_in_with: "Sign in with %{provider}"
+
+    confirmation_pending: "Verification pending for e-mail %{email}."
+    signed_in_as: "Signed in as %{login}"
+
+    last_sign_in_at: "Last sign in at"
+    registered_at: "Registered at"
+
+    confirm_registration: "Send registration confirmation instructions"
+    change_password: "Change"
+    reset_password: "Send password recovery instructions"
+    save_account: "Update"
+    unlock_account: "Send account unlock instructions"
+    delete_account: "Delete"
+
+    new_password: "New password"
+    confirm_password: "Confirm password"
+
+    more_social: "More"
+
+    leave_current_password: "leave blank if don't want to change"
+    enter_current_password: "enter current password to confirm"
+
+    unconfirmed_registration: "Unconfirmed registration?"
+    forgotten_password: "Forgotten password?"
+    locked_account: "Locked account?"
+
+    ais_login_notice: "use login credentials to Academic Information System"
+
+    settings: "Settings"
+
+    welcome:
+      title: "Thank you for signing up with us"
+      message: "To be able to use our system you need to confirm your registration first."
+
+    profile: "Profile"
+    social: "Social"
+    privacy: "Privacy"
+    account: "Account"
+
+    show:
+      about: "About me"
+      edit: "Edit profile"
+
+      ask: "Ask a question"
+      answer: "Try to answer"
+      browse: "Browse questions"
+      or: "or"
+
+      no_questions: "You have not asked anything yet"
+      no_answers: "You have not answered anything yet"
+      no_favorites: "You have not favored anything yet"
+      no_activity: "You have no public activity yet"
+
+      other:
+        no_questions: "User has not asked anything yet."
+        no_answers: "User has not answered anything yet."
+        no_favorites: "User has not favored anything yet."
+        no_activity: "User has no public activity yet."
+
+    edit:
+      profile: "Update profile"
+      social: "Social networks"
+      privacy: "Privacy settings"
+      account: "Account settings"
+
+    update:
+      success: "You have successfully updated your profile."
+
+    followings:
+      title: "Followings"
+
+      browse: "Browse users"
+
+      no_followees: "You are not following anyone yet"
+      no_followers: "You are not followed by anyone yet."
+
+      other:
+        no_followees: "User does not follow any other users yet."
+        no_followers: "User is not followed by any other users yet."
+
+    follow: "Follow"
+    unfollow: "Unfollow"
+
+    activity:
+      calendar:
+        title: "Activity"
+        note: "Activity heat map includes additions, updates and deletions of questions, answers, comments and evaluations. It further includes question and answer voting, answer labeling, favorings, watchings, question tagging and viewing, user following and mentioning activity."
+        item:
+          singular: "activity"
+          plural: "activities"
+
+        legend:
+          lower: "less than {min}"
+          inner: "between {down} and {up}"
+          upper: "more than {max}"
+
+    anonymous: "Anonymous"
+
+    no_records: "No users found."

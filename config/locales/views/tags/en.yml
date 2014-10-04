@@ -1,1 +1,18 @@
 en:
+  tag:
+    navigation: "Tags"
+
+    index:
+      title: "Tags"
+
+    search:
+      title: "Search tags"
+
+    tab:
+      all: "All"
+      recent: "New"
+      popular: "Popular"
+
+      results: "Results"
+
+    no_records: "No tags found."

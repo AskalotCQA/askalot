@@ -1,18 +1,24 @@
-<% group_categories_by_prefix(categories).each do |_, group| %>
-  <div class="category-group">
-    <div class="row">
-      <% group.each do |category| %>
-        <div class="col-sm-6 col-md-4">
-          <h4>
-            <%= link_to_category category, analytics_attributes(:category, :click, category.name) %>
-          </h4>
-          <div class="category-details">
-            <%= t('count.question', count: category.questions.size).upcase_first %> <%= category.questions.size %> &middot;
-            <%= t('count.answer', count: category.answers.size).upcase_first %> <%= category.answers.size %> &middot;
-            <%= render 'watching', category: category %>
+<% if categories.any? %>
+  <% group_categories_by_prefix(categories).each do |_, group| %>
+    <div class="category-group">
+      <div class="row">
+        <% group.each do |category| %>
+          <div class="col-sm-6 col-md-4">
+            <h4>
+              <%= link_to_category category, analytics_attributes(:category, :click, category.name) %>
+            </h4>
+            <div class="category-details">
+              <%= t('count.question', count: category.questions.size).upcase_first %> <%= category.questions.size %> &middot;
+              <%= t('count.answer', count: category.answers.size).upcase_first %> <%= category.answers.size %> &middot;
+              <%= render 'watching', category: category %>
+            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
+  <% end %>
+<% else %>
+  <div class="alert alert-warning">
+    <%= t('category.no_records') %>
   </div>
 <% end %>

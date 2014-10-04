@@ -11,13 +11,13 @@ module Bootstrap::BarHelper
 
   def navbar_li_tag(body = nil, options = {}, &block)
     classes = Array.wrap options.delete(:class)
-    classes << :active if request.fullpath.split('?').first == options.delete(:url).split('?').first
+    classes << :active if Array.wrap(options.delete(:active)).map { |url| url.split('?').first }.include? request.fullpath.split('?').first
 
     content_tag :li, body || capture(&block), options.merge(class: classes.blank? ? nil : classes)
   end
 
   def navbar_link_tag(body, url, options = {})
-    navbar_li_tag link_to(body, url), options.merge(url: url)
+    navbar_li_tag link_to(body, url), options.merge(active: options.delete(:active) || url)
   end
 
   def navbar_logo_tag(title, options = {})

@@ -97,16 +97,22 @@ group :development, :test do
   gem 'launchy'
   gem 'capybara', '~> 2.2.1'
   gem 'selenium-webdriver'
-  gem 'capybara-webkit'
   gem 'poltergeist', '~> 1.5.0'
   gem 'guard-rspec'
 
   # database
   gem 'faker', '1.1.2'
+
+  # code metrics
+  gem 'simplecov', require: false
 end
 
-group :production do
+# demo, staging & production
+group :demo, :staging, :production do
   gem 'unicorn'
   gem 'rack-timeout'
   gem 'exception_notification'
 end
+
+# TODO(zbell) resolve
+gem 'codeclimate-test-reporter', group: :test, require: nil

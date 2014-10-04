@@ -1,8 +1,8 @@
 sk:
   markdown:
-    text: 'Text'
-    preview: 'Náhľad'
-    documentation: 'Spracované pomocou %{link}'
+    text: "Text"
+    preview: "Náhľad"
+    documentation: "Spracované pomocou %{link}"
 
-    loading_preview: 'Načítavam náhľad…'
-    nothing_to_preview: 'Žiadny text pre náhľad.'
+    loading_preview: "Načítavam náhľad…"
+    nothing_to_preview: "Žiadny text pre náhľad."

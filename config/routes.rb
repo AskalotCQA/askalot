@@ -1,28 +1,4 @@
 Askalot::Application.routes.draw do
-  root 'static_pages#home'
-
-  get '/404', to: 'errors#show'
-  get '/500', to: 'errors#show'
-
-  devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }
-
-  resources :users, only: [:index] do
-    patch :profile,  on: :collection, to: 'users#update'
-    get   :suggest,  on: :collection
-
-    get :follow, on: :member
-  end
-
-  get 'users/:nick',            to: 'users#show',       as: :user
-  get 'users/:nick/activities', to: 'users#activities', as: :user_activities
-  get 'users/:nick/followings', to: 'users#followings', as: :user_followings
-
-  post 'groups/:id/documents', to: 'documents#create', as: :group_documents
-
-  get :statistics, to: 'statistics#index'
-  get :help,       to: 'static_pages#help'
-  get :welcome,    to: 'static_pages#welcome'
-
   concern :commetable do
     resources :comments, only: [:create, :update, :destroy]
 
@@ -35,8 +11,12 @@ Askalot::Application.routes.draw do
     get :evaluation, on: :member
   end
 
+  concern :searchable do
+    get :search, on: :collection
+  end
+
   concern :votable do
-    get :voteup, on: :member
+    get :voteup,   on: :member
     get :votedown, on: :member
   end
 
@@ -44,17 +24,44 @@ Askalot::Application.routes.draw do
     get :watch, on: :member
   end
 
-  resources :groups, only: [:index, :new, :create, :show, :update, :destroy]
+  root 'static_pages#home'
 
+  get '/404', to: 'errors#show'
+  get '/500', to: 'errors#show'
+
+  devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }
+
+  resources :users, only: [:index] do
+    patch :profile,  on: :collection, to: 'users#update'
+    get   :suggest,  on: :collection
+
+    get :follow, on: :member
+
+    concerns :searchable
+  end
+
+  get 'users/:nick',            to: 'users#show',       as: :user
+  get 'users/:nick/activities', to: 'users#activities', as: :user_activities
+  get 'users/:nick/followings', to: 'users#followings', as: :user_followings
+
+  post 'groups/:id/documents', to: 'documents#create', as: :group_documents
+
+  get :statistics, to: 'statistics#index'
+  get :help,       to: 'static_pages#help'
+  get :welcome,    to: 'static_pages#welcome'
+
+  resources :groups,    only: [:index, :new, :create, :show, :update, :destroy]
   resources :documents, only: [:new, :create, :update, :destroy]
 
   resources :categories do
+    concerns :searchable
     concerns :watchable
   end
 
   resources :tags, only: [:index] do
     get :suggest, on: :collection
 
+    concerns :searchable
     concerns :watchable
   end
 
@@ -66,6 +73,7 @@ Askalot::Application.routes.draw do
 
     concerns :commetable
     concerns :evaluable
+    concerns :searchable
     concerns :votable
     concerns :watchable
   end

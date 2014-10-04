@@ -12,8 +12,8 @@ describe Following do
   describe "follower methods" do
     it { expect(following).to respond_to(:follower) }
     it { expect(following).to respond_to(:followee) }
-    it { expect(following.follower).to eql follower }
-    it { expect(following.followee).to eql followee }
+    it { expect(following.follower.login).to eql follower.login }
+    it { expect(following.followee.login).to eql followee.login }
   end
 
   describe "when followee id is not present" do

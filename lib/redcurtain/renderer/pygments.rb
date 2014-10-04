@@ -13,7 +13,9 @@ module Redcurtain::Renderer
         pre.replace ::Pygments.highlight(pre.text.strip, lexer: block[:class])
       end
 
-      document.at('body').inner_html.html_safe
+      body = document.at('body')
+
+      body.inner_html.html_safe if body
     end
   end
 end

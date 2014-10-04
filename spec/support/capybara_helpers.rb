@@ -20,7 +20,11 @@ module CapybaraHelpers
 
   def click_link(locator, options = {})
     begin
-      find(:link, locator, options).click
+      link = find(:link, locator, options)
+
+      link.click
+
+      wait_for_modal(link['data-target']) if locator =~ /-modal\z/
     rescue Exception => e
       raise e unless example.metadata[:js]
 
@@ -62,5 +66,9 @@ module CapybaraHelpers
     end
 
     raise "Could not find #{value} in #{label}."
+  end
+
+  def wait_for_modal(locator)
+    sleep 0.1 until page.has_css?(locator)
   end
 end

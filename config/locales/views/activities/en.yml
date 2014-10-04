@@ -1,1 +1,89 @@
 en:
+  activity:
+    navigation: "Activity"
+
+    tab:
+      global: "Global"
+      followees: "Followed"
+
+    index:
+      title: "Activity"
+      title: "What's new in Askalot?"
+
+    more: "More"
+    none: "No activity."
+
+    none:
+      global: "No activity."
+      followees: "You are not following anyone yet."
+
+    note:
+      global: "Shown activity includes additions, updates and deletions of questions, answers and respective labels, comments and evaluations by all users."
+      followees: "Shown activity includes additions, updates and deletions of questions, answers and respective labels, comments and evaluations by followed users."
+      profile: "Shown activity includes additions, updates and deletions of questions, answers and respective labels, comments and evaluations."
+
+    action:
+      create: "Addition of"
+      update: "Editation of"
+      delete: "Deletion of"
+      mention: "Mention of"
+
+    icon:
+      persistence: "%{action} %{resource}"
+      mention: "Mention in %{resource}"
+
+    content:
+      persistence:
+        answer: "answer"
+        comment: "comment"
+        evaluation: "evaluation"
+        favorite: "favorite"
+        labeling: "labeling"
+        question: "question"
+        view: "view"
+        vote: "vote"
+
+      mention:
+        answer: "answer"
+        comment: "comment"
+        question: "question"
+
+      answer:
+        create: "Addition of %{resource} to question %{question}"
+        update: "Update of %{resource} to question %{question}"
+        delete: "Deletion of an answer to question %{question}"
+        mention: "Mention in %{resource} to question %{question}"
+
+      comment:
+        answer:
+          create: "Addition of %{resource} to answer of question %{question}"
+          update: "Update of %{resource} to answer of question %{question}"
+          delete: "Deletion of comment from answer of question %{question}"
+          mention: "Mention in %{resource} to question %{question}"
+        question:
+          create: "Addition of %{resource} to question %{question}"
+          update: "Update of %{resource} to question %{question}"
+          delete: "Deletion of comment from question %{question}"
+          mention: "Mention in %{resource} to question %{question}"
+
+      evaluation:
+        answer:
+          create: "Addition of %{resource} to answer of question %{question}"
+          update: "Update of %{resource} to answer of question %{question}"
+        question:
+          create: "Addition of %{resource} to question %{question}"
+          update: "Update of %{resource} to question %{question}"
+
+      favorite:
+        create: "Addition of favoring to %{question}"
+        delete: "Deletion of favoring from %{question}"
+
+      labeling:
+        create: "Addition of %{resource} to answer of question %{question}"
+        delete: "Deletion of %{resource} from answer of question %{question}"
+
+      question:
+        create: "Addition of question %{question}"
+        update: "Update of question %{question}"
+        delete: "Deletion of question %{question}"
+        mention: "Mention in question %{question}"

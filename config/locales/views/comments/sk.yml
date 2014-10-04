@@ -1,34 +1,34 @@
 sk:
   comment:
     new:
-      action: 'Pridať komentár'
-      submit: 'Komentovať'
+      action: "Pridať komentár"
+      submit: "Komentovať"
 
     create:
-      success: 'Komentár bol úspešne pridaný.'
+      success: "Komentár bol úspešne pridaný."
 
     edit:
-      action: 'Upraviť'
-      title: 'Úprava komentára'
-      submit: 'Uložiť'
-      cancel: 'Spať'
+      action: "Upraviť"
+      title: "Úprava komentára"
+      submit: "Uložiť"
+      cancel: "Spať"
 
     update:
-      success: 'Komentár bol úspešne aktualizovaný.'
-      unchanged: 'Komentár nebol zmenený.'
+      success: "Komentár bol úspešne aktualizovaný."
+      unchanged: "Komentár nebol zmenený."
 
     delete:
-      action: 'Zmazať'
-      title: 'Pozor!'
-      text: 'Naozaj chcete zmazať komentár?'
-      submit: 'Zmazať'
-      cancel: 'Spať'
-      success: 'Komentár bol úspešne zmazaný.'
-      failure: 'Komentár sa nepodarilo zmazať.'
+      action: "Zmazať"
+      title: "Pozor!"
+      text: "Naozaj chcete zmazať tento komentár?"
+      submit: "Zmazať"
+      cancel: "Spať"
+      success: "Komentár bol úspešne zmazaný."
+      failure: "Komentár sa nepodarilo zmazať."
 
     details:
-      created: 'Pridal'
-      updated: 'Upravil'
-      deleted: 'Zmazal'
+      created: "Pridal"
+      updated: "Upravil"
+      deleted: "Zmazal"
 
-    deleted: 'Komentár bol zmazaný'
+    deleted: "Komentár bol zmazaný"

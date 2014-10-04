@@ -4,6 +4,16 @@ require 'models/concerns/searchable_spec'
 shared_examples_for Questions::Searchable do
   it_behaves_like Searchable
 
+  let(:questions) { 10.times.map { |record| create :question } }
+
+  before :each do
+    Question.autoimport = true
+
+    Question.probe.index.reload do
+      questions
+    end
+  end
+
   describe '.search' do
     it 'searches questions by fulltext query' do
       questions = []

@@ -1,29 +1,25 @@
 require 'spec_helper'
 
 shared_examples_for Searchable do
-  let(:model) { described_class }
+  let(:model)   { described_class }
   let(:factory) { model.name.underscore.to_sym }
+  let(:records) { 10.times.map { |record| create factory } }
 
   before :each do
-    model.probe.index.delete
-    model.probe.index.create
-  end
-
-  after :each do
-    model.probe.index.delete
+    model.probe.index.reload do
+      records
+    end
   end
 
   describe '.search' do
-    let!(:records) { 10.times.map { |record| create factory } }
-
     it 'searches records' do
       results = model.search
 
-      expect(results.sort).to eql(records)
+      expect(results.sort.to_a).to eql(records.sort.to_a)
     end
 
     it 'paginates records' do
-      results = model.search(page: 0, per_page: 5)
+      results = model.search(page: 1, per_page: 5)
 
       expect(results.size).to eql(5)
     end
@@ -34,11 +30,11 @@ shared_examples_for Searchable do
       # TODO make more abstract for any attribute, not just Question
       record = create factory
 
-      record.text = 'Blabla'
+      record.send(:"#{attribute}=", 'Blabla')
 
       record.save!
 
-      result = model.search.first
+      result = model.search_by(q: 'bla*').first
 
       expect(result.text).to eql('Blabla')
     end

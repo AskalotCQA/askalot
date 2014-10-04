@@ -1,17 +1,17 @@
 sk:
   changelog:
-    navigation: 'Aktualizácie systému'
+    navigation: "Aktualizácie systému"
 
     index:
-      title: 'Čo je nové v Askalote?'
-      introduction: 'História pridanej funkcionality a zlepšení systému.'
+      title: "Čo je nové v Askalote?"
+      introduction: "História pridanej funkcionality a zlepšení systému."
 
     create:
-      success: 'Protokol zmien bol úspešne pridaný.'
+      success: "Protokol zmien bol úspešne pridaný."
 
     update:
-      success: 'Protokol zmien bol úspešne aktualizovaný.'
+      success: "Protokol zmien bol úspešne aktualizovaný."
 
     delete:
-      success: 'Protokol zmien bol úspešne zmazaný.'
-      failure: 'Protokol zmien sa nepodarilo zmazať.'
+      success: "Protokol zmien bol úspešne zmazaný."
+      failure: "Protokol zmien sa nepodarilo zmazať."

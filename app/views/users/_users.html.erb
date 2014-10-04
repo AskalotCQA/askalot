@@ -8,10 +8,14 @@
       <% end %>
     </div>
 
-    <%= paginate users, remote: true, data: { state: true, scroll: 'body', fade: '#users' } %>
+    <% if remote %>
+      <%= paginate users, remote: true, data: { state: true, scroll: :body, fade: '#users' } %>
+    <% else %>
+      <%= paginate users %>
+    <% end %>
   <% else %>
     <div class="alert alert-warning">
-      <%= t('user.index.no_results_found') %>
+      <%= t('user.no_records') %>
     </div>
   <% end %>
 </div>
