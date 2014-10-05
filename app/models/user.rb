@@ -92,6 +92,16 @@ class User < ActiveRecord::Base
     (value = read_attribute key).blank? ? nil : { original: value, shown: value.gsub(/\Ahttps?\:\/\//, '') }
   end
 
+  def from_omniauth(auth)
+      self.provider = auth.provider
+      binding.pry
+      self.facebook = auth.extra.raw_info.link
+      self.facebook_uid = auth.uid
+      self.oauth_token = auth.credentials.token
+      self.oauth_expires_at = Time.at(auth.credentials.expires_at)
+      self.save!
+  end
+
   def self.create_without_confirmation!(attributes)
     user = User.new(attributes)
 
