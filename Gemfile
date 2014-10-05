@@ -13,6 +13,10 @@ gem 'devise', '~> 3.1.1'
 gem 'cancan', '~> 1.6.9'
 gem 'net-ldap'
 
+#facebook
+gem 'omniauth-facebook'
+gem 'fb_graph'
+
 # stylesheets
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.1.1'
