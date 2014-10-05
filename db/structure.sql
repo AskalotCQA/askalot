@@ -876,7 +876,11 @@ CREATE TABLE users (
     remember_token character varying(255),
     followers_count integer DEFAULT 0 NOT NULL,
     followees_count integer DEFAULT 0 NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    facebook_uid integer,
+    provider character varying(255),
+    oauth_token text,
+    oauth_expires_at timestamp without time zone
 );
 
 
@@ -2426,4 +2430,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140429003614');
 INSERT INTO schema_migrations (version) VALUES ('20140513162801');
 
 INSERT INTO schema_migrations (version) VALUES ('20140611004811');
+
+INSERT INTO schema_migrations (version) VALUES ('20141004130146');
 
