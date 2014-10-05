@@ -59,6 +59,12 @@ class UsersController < ApplicationController
     render json: @data
   end
 
+  def facebook
+    @user = current_user
+    @user.from_omniauth(env["omniauth.auth"])
+    redirect_to root_path
+  end
+
   def followings
     @user = User.by(nick: params[:nick])
 
