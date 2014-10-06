@@ -3,7 +3,7 @@ class Evaluation < ActiveRecord::Base
   include Deletable
   include Notifiable
 
-  belongs_to :evaluable, polymorphic: true, counter_cache: true
+  belongs_to :evaluable, -> { unscope where: :deleted }, polymorphic: true, counter_cache: true
 
   validates :value, presence: true, inclusion: { in: -2..2 }
 
