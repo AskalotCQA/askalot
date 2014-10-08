@@ -24,7 +24,6 @@ class Question < ActiveRecord::Base
 
   has_many :revisions, class_name: :'Question::Revision', dependent: :destroy
 
-  # TODO (jharinek) do not allow blank category
   validates :category,  presence: true, if: :blank_document?
   validates :document,  presence: true, if: :blank_category?
 
