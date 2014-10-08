@@ -54,7 +54,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
   # Fail after first fail
-  config.fail_fast = true
+  config.fail_fast = false
 
   # If true, the base class of anonymous controllers will be inferred
   # automatically. This will be the default behavior in future versions of
