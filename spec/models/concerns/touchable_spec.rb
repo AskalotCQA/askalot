@@ -14,7 +14,6 @@ shared_examples_for Touchable do
       expect(record.to_question.touched_at).not_to eql(timestamp)
 
       record = create factory
-
       timestamp = record.touched_at
 
       record.text += 'some additional text'
