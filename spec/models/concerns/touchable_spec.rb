@@ -9,10 +9,18 @@ shared_examples_for Touchable do
       record = build factory
 
       timestamp = record.to_question.touched_at
-
       record.save!
 
       expect(record.to_question.touched_at).not_to eql(timestamp)
+
+      record = create factory
+
+      timestamp = record.touched_at
+
+      record.text += 'some additional text'
+      record.save!
+
+      expect(record.touched_at).not_to eql(timestamp)
     end
 
     it 'does not update question touched_at attribute when voting, viewing, favoring' do
