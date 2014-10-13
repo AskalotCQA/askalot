@@ -238,7 +238,7 @@ sk:
 
       group:
         title: "Názov"
-        description: "Popis skupiny"
+        description: "Popis"
 
       question:
         anonymous: "Opýtať sa anonymne"

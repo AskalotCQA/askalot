@@ -21,6 +21,7 @@ class DocumentsController < ApplicationController
   end
 
   private
+
   def create_params
     params.require(:document).permit(:title, :content).merge(group: Group.find(params[:id]))
   end
