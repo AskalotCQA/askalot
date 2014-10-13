@@ -1,9 +1,9 @@
 class CreateGroups < ActiveRecord::Migration
   def change
     create_table :groups do |t|
-      t.references :owner, null: false
+      t.references :creator, null: false
 
-      t.string :title, null: false, default: ''
+      t.string :title, null: false
       t.text   :description
 
       t.string :visibility, null: false, default: :public
