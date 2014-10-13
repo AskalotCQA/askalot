@@ -18,14 +18,14 @@ class Question < ActiveRecord::Base
   before_save { self.tag_list += self.category.tags if category }
 
   belongs_to :category, counter_cache: true
-  belongs_to :document
+  belongs_to :document, counter_cache: true
 
   has_many :answers, dependent: :destroy
 
   has_many :revisions, class_name: :'Question::Revision', dependent: :destroy
 
-  validates :category,  presence: true, if: :blank_document?
-  validates :document,  presence: true, if: :blank_category?
+  validates :category,  presence: true, if: lambda { |question| question.document.blank? }
+  validates :document,  presence: true, if: lambda { |question| question.category.blank? }
 
   validates :title,     presence: true, length: { minimum: 2, maximum: 140 }
   validates :text,      presence: true, length: { minimum: 2 }
@@ -60,14 +60,5 @@ class Question < ActiveRecord::Base
 
   def to_question
     self
-  end
-
-  private
-  def blank_category?
-    category.blank?
-  end
-
-  def blank_document?
-    document.blank?
   end
 end
