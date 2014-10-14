@@ -1,5 +1,5 @@
 module Notifications
-  module Notifier include ActivitiesHelper
+  module Notifier include NotificationsHelper
   extend self
 
   attr_accessor :factory
