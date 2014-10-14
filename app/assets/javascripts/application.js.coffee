@@ -39,3 +39,5 @@
 #
 #= require analytics
 #= require fixes
+#
+#= require facebook
