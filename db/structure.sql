@@ -880,7 +880,7 @@ CREATE TABLE users (
     facebook_uid integer,
     provider character varying(255),
     oauth_token text,
-    oauth_expires_at timestamp without time zone
+    oauth_token_expires_at timestamp without time zone
 );
 
 
