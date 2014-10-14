@@ -11,24 +11,35 @@ module ActivitiesHelper
   end
 
   def activity_content(activity, options = {})
-    resource = activity.resource
-    mute     = options.delete(:mute) || lambda { |_| false }
+    mute = options.delete(:mute) || lambda { |_| false }
+    
+    content = activity_content_by_resource(activity.resource, options)
 
-    content = case resource.class.name.downcase.to_sym
-              when :comment then "activity.content.#{resource.class.name.downcase}.#{resource.commentable.class.name.downcase}.#{activity.action}"
-              when :evaluation then "activity.content.#{resource.class.name.downcase}.#{resource.evaluable.class.name.downcase}.#{activity.action}"
-              else "activity.content.#{resource.class.name.downcase}.#{activity.action}"
-              end
-
-    resource_body = t("activity.content.#{activity.action == :mention ? :mention : :persistence}.#{resource.class.name.downcase}")
-    resource_link = link_to_activity(activity, options.merge(body: resource_body))
-    question_link = link_to_activity(activity, options.merge(deleted: resource.to_question.deleted?, length: 50))
-
-    content = t(content, resource: resource_link, question: question_link).html_safe
-
-    !mute.call(activity) ? content : content_tag(:span, content, class: :'text-muted')
+    mute.call(activity) ? content_tag(:span, content, class: :'text-muted') : content
   end
 
+  def activity_content_by_resource(resource, options = {})
+    question = resource.to_question
+    
+    resource_options = options.clone
+    question_options = options.merge(deleted: question.deleted?, length: 50)
+    
+    content = activity_content_pattern(resource)
+
+    resource_body = activity_resource_body(resource, resource_options)
+    question_body = activity_question_body(question, question_options)
+
+    # TODO(zbell) note that unlinked content also lacks any struct info about deletion: no muted spans
+    if options.delete(:unlink)
+      return translate content, resource: resource_body, question: question_body
+    end
+      
+    resource_link = link_to_activity activity, resource_options.merge(body: resource_body)
+    question_link = link_to_activity activity, question_options.merge(body: question_body)
+
+    translate(content, resource: resource_link, question: question_link).html_safe
+  end
+  
   def link_to_activity(activity, options = {}, &block)
     options[:body] = capture(&block) if block_given?
 
@@ -78,5 +89,21 @@ module ActivitiesHelper
     end
 
     { color: color, icon: icon }
+  end
+  
+  def activity_content_pattern(resource)
+    case resource.class.name.downcase.to_sym
+    when :comment then "activity.content.#{resource.class.name.downcase}.#{resource.commentable.class.name.downcase}.#{activity.action}"
+    when :evaluation then "activity.content.#{resource.class.name.downcase}.#{resource.evaluable.class.name.downcase}.#{activity.action}"
+    else "activity.content.#{resource.class.name.downcase}.#{activity.action}"
+    end
+  end
+
+  def activity_question_body(question, options = {})
+    question_title_preview question, extract_truncate_options!(options)
+  end
+
+  def activity_resource_body(resource, options = {})
+    translate "activity.content.#{activity.action == :mention ? :mention : :persistence}.#{resource.class.name.downcase}"
   end
 end
