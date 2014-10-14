@@ -94,7 +94,6 @@ class User < ActiveRecord::Base
 
   def from_omniauth(auth)
       self.provider = auth.provider
-      binding.pry
       self.facebook = auth.extra.raw_info.link
       self.facebook_uid = auth.uid
       self.oauth_token = auth.credentials.token
