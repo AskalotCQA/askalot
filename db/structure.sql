@@ -878,9 +878,9 @@ CREATE TABLE users (
     followees_count integer DEFAULT 0 NOT NULL,
     evaluations_count integer DEFAULT 0 NOT NULL,
     facebook_uid integer,
-    provider character varying(255),
-    oauth_token text,
-    oauth_token_expires_at timestamp without time zone
+    auth_provider character varying(255),
+    auth_token text,
+    auth_token_expires_at timestamp without time zone
 );
 
 

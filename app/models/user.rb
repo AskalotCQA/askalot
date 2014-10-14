@@ -93,11 +93,11 @@ class User < ActiveRecord::Base
   end
 
   def from_omniauth(auth)
-      self.provider = auth.provider
+      self.auth_provider = auth.provider
       self.facebook = auth.extra.raw_info.link
       self.facebook_uid = auth.uid
-      self.oauth_token = auth.credentials.token
-      self.oauth_token_expires_at = Time.at(auth.credentials.expires_at)
+      self.auth_token = auth.credentials.token
+      self.auth_token_expires_at = Time.at(auth.credentials.expires_at)
       self.save!
   end
 
