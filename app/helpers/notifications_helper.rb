@@ -6,6 +6,8 @@ module NotificationsHelper
   def notification_content(notification, options = {})
     activity_content notification, notification_options(notification, options)
   end
+  
+  alias :notification_content_by_resource :activity_content_by_resource
 
   def link_to_notification(notification, options = {}, &block)
     link_to_activity notification, notification_options(notification, options), &block
