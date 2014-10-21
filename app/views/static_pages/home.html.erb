@@ -56,6 +56,8 @@
   </section>
 
   <section>
-    <%= render 'facebook/facebook' %>
+    <% unless session[:facebook_modal] %>
+        <%= render 'facebook/facebook' %>
+    <% end %>
   </section>
 </div>
