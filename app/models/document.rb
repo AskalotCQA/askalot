@@ -7,8 +7,6 @@ class Document < ActiveRecord::Base
 
   has_many :questions
 
-  validate :author_id, presence: true
-
   validates :title,   presence: true, length: { minimum: 2, maximum: 140 }
   validates :content, presence: true, length: { minimum: 2 }
 end

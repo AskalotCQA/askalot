@@ -8,8 +8,6 @@ class Group < ActiveRecord::Base
 
   belongs_to :creator, class_name: :User
 
-  validates :creator_id, presence: true
-
   validates :title,       presence: true, length: { minimum: 2, maximum: 140 }
   validates :description, presence: true, length: { minimum: 2 }
 
