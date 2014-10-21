@@ -24,7 +24,7 @@ shared_examples_for Touchable do
 
     it 'does not update question touched_at attribute when voting, viewing, favoring' do
       record        = create factory
-      old_timestamp = record.to_question.touched_at
+      old_timestamp = record.to_question.touched_at.to_i
       user          = create :user
 
       record.toggle_voteup_by! user          if record.respond_to? :toggle_voteup_by!
@@ -37,7 +37,7 @@ shared_examples_for Touchable do
 
       raise "Record does not respond to anything" unless record.changed?
 
-      expect(record.to_question.touched_at).to eql(old_timestamp)
+      expect(record.to_question.touched_at.to_i).to eql(old_timestamp)
     end
   end
 end
