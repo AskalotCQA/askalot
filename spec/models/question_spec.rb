@@ -219,3 +219,20 @@ describe Question do
     end
   end
 end
+
+describe Touchable do
+  it 'does not update questions touched_at attribute when voting, viewing or labeling' do
+    question      = create :question
+    old_timestamp = question.touched_at
+    user          = create :user
+
+    question.toggle_voteup_by! user
+    question.votes_count += 1
+    question.votes_difference += 1
+    question.votes_lb_wsci_bp += 1
+    question.views_count += 1
+    question.toggle_favoring_by! user
+
+    expect(question.touched_at).to eql(old_timestamp)
+  end
+end
