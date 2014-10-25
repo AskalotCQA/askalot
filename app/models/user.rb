@@ -92,12 +92,16 @@ class User < ActiveRecord::Base
     (value = read_attribute key).blank? ? nil : { original: value, shown: value.gsub(/\Ahttps?\:\/\//, '') }
   end
 
-  def from_omniauth(auth)
-      self.auth_provider = auth.provider
+  def from_omniauth(auth, friends, likes)
+      self.omniauth_provider = auth.provider
       self.facebook = auth.extra.raw_info.link
       self.facebook_uid = auth.uid
       self.omniauth_token = auth.credentials.token
       self.omniauth_token_expires_at = Time.at(auth.credentials.expires_at)
+
+      self.facebook_friends = friends
+      self.facebook_likes = likes
+
       self.save!
   end
 
