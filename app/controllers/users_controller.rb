@@ -66,7 +66,6 @@ class UsersController < ApplicationController
     @facebook_user = FbGraph::User.me( @auth.credentials.token )
     @friends = @facebook_user.friends
     @likes = @facebook_user.likes
-    binding.pry
 
     @user.from_omniauth(@auth, @friends, @likes)
     redirect_to root_path
