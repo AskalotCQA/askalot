@@ -6,11 +6,13 @@ module NotificationsHelper
   def notification_content(notification, options = {})
     activity_content notification, notification_options(notification, options)
   end
-  
-  alias :notification_content_by_resource :activity_content_by_resource
+
+  def notification_content_by_attributes(action, initiator, resource, options = {})
+    activity_content_by_attributes(action, initiator, resource, options)
+  end
 
   def link_to_notification(notification, options = {}, &block)
-    link_to_activity notification, notification_options(notification, options), &block
+    link_to_activity notification.action, notification.initiator, notification.resource, notification_options(notification, options), &block
   end
 
   def link_to_notifications(notifications, options = {})
