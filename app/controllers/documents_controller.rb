@@ -6,8 +6,6 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(create_params)
-    @document.document_type = :chunk
-
     @group = Group.find(params[:id])
 
     if @document.save
@@ -23,6 +21,6 @@ class DocumentsController < ApplicationController
   private
 
   def create_params
-    params.require(:document).permit(:title, :content).merge(group: Group.find(params[:id]))
+    params.require(:document).permit(:title, :content).merge(group: Group.find(params[:id]), author: current_user)
   end
 end
