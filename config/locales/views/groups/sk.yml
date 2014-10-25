@@ -16,3 +16,7 @@ sk:
 
     tab:
       all: 'Všetky'
+
+    visibility:
+      public: "Verejná"
+      private: "Súkromná"

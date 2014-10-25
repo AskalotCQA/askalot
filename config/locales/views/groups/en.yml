@@ -1,1 +1,4 @@
 en:
+  visibility:
+        public: "Public"
+        private: "Private"
