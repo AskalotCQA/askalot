@@ -1,11 +1,14 @@
 facebook = module Facebook
   module Notifier
-    include NotificationsHelper
-    include ActivitiesHelper
-    include TextHelper
     include QuestionsHelper
+    include TextHelper
+
+    include ActivitiesHelper
+    include NotificationsHelper
+
     include ActionView::Helpers::TextHelper
     include ActionView::Helpers::TranslationHelper
+
     include ERB::Util
 
     extend self
