@@ -11,7 +11,7 @@ class CreateDocuments < ActiveRecord::Migration
       t.references :deletor, null: true
       t.timestamp  :deleted_at
 
-      t.counter :questions
+      t.integer :questions_count, null: false, default: 0
 
       t.timestamps
     end

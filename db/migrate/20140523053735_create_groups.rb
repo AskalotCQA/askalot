@@ -12,13 +12,13 @@ class CreateGroups < ActiveRecord::Migration
       t.references :deletor, null: true
       t.timestamp  :deleted_at
 
-      t.counter :documents
+      t.integer :documents_count, null:false, default: 0
 
       t.timestamps
     end
 
     add_index :groups, :title
-    add_index :groups, :owner_id
+    add_index :groups, :creator_id
     add_index :groups, :deletor_id
   end
 end
