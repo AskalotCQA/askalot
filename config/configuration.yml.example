@@ -2,6 +2,12 @@ defaults: &defaults
   devise:
     key: TODO
 
+  facebook:
+    application:
+      id: '308609915963601'
+      link: 'http://askalot.fiit.stuba.sk'
+      secret: TODO
+
   mailer:
     username: TODO
     password: TODO

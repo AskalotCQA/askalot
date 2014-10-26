@@ -48,6 +48,9 @@ Askalot::Application.routes.draw do
   get :help,       to: 'static_pages#help'
   get :welcome,    to: 'static_pages#welcome'
 
+  get 'auth/:provider/callback', to: 'users#facebook'
+  get 'auth/failure', to: redirect('/')
+
   resources :categories do
     concerns :searchable
     concerns :watchable

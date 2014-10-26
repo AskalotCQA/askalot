@@ -1,0 +1,19 @@
+<% if session[:facebook_modal] && current_user.facebook_uid.blank? %>
+  <div class="modal fade" id="facebook_modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <%= close_link_to_modal %>
+          <h4 class="modal-title"><%= t('facebook.title') %></h4>
+        </div>
+        <div class="modal-body">
+          <%= link_to t('facebook.join.message'), '/auth/facebook', id: 'sign_in' %>
+          <%= t('facebook.benefit') %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('facebook.close') %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -876,7 +876,13 @@ CREATE TABLE users (
     remember_token character varying(255),
     followers_count integer DEFAULT 0 NOT NULL,
     followees_count integer DEFAULT 0 NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    omniauth_provider character varying(255),
+    omniauth_token text,
+    omniauth_token_expires_at timestamp without time zone,
+    facebook_uid integer,
+    facebook_friends text,
+    facebook_likes text
 );
 
 
@@ -2047,6 +2053,13 @@ CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
+-- Name: index_users_on_facebook_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_facebook_uid ON users USING btree (facebook_uid);
+
+
+--
 -- Name: index_users_on_first; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2426,4 +2439,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140429003614');
 INSERT INTO schema_migrations (version) VALUES ('20140513162801');
 
 INSERT INTO schema_migrations (version) VALUES ('20140611004811');
+
+INSERT INTO schema_migrations (version) VALUES ('20141004130146');
+
+INSERT INTO schema_migrations (version) VALUES ('20141023161800');
 
