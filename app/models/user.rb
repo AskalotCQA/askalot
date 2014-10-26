@@ -2,10 +2,6 @@ class User < ActiveRecord::Base
   include Followable
   include Users::Searchable
 
-  # TODO (zbell) use Role model + DB seeds / Rails 4 enum instead of this constant
-  # TODO (jharinek) consider https://github.com/ryanb/cancan/wiki/Separate-Role-Model
-  ROLES = [:student, :teacher, :administrator]
-
   devise :database_authenticatable,
          :confirmable,
          :lockable,
@@ -77,14 +73,12 @@ class User < ActiveRecord::Base
     (value = read_attribute :gravatar_email).blank? ? email : value
   end
 
-  #TODO(zbell) refactor
-  def role?(base)
-    assignments.any? { |assignment| ROLES.index(base.to_sym) <= ROLES.index(assignment.role.name.to_sym) }
+  def assigned?(category, role)
+    assignments.where(category: category).joins(:role).where(roles: { name: role }).any?
   end
 
-  #TODO(zbell) refactor
-  def assignment?(role, category)
-    assignments.any? { |assignment| assignment.role.name.to_sym == role.to_sym && assignment.category_id == category.id }
+  def role?(role)
+    roles.where(name: role).any?
   end
 
   def urls

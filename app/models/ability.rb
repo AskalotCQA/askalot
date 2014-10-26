@@ -33,20 +33,20 @@ class Ability
     can :comment, [Question, Answer]
     can :vote,    [Question, Answer]
 
-    # TODO(zbell) refactor: depends on category + role (not role only)
     can :label, [Question, Answer] do |resource|
-      resource.author == user || (user.role?(:teacher) && resource.author == User.find_by(login: :slido))
+      resource.author == user || (resource.author == User.find_by(login: :slido) && user.assigned?(resource.to_question.category, :teacher))
     end
 
-    if user.role? :student
+    can :evaluate, [Question, Answer] do |resource|
+      user.assigned?(resource.to_question.category, :teacher)
+    end
+
+    can :vote, [Question, Answer] do |resource|
+      !user.assigned?(resource.to_question.category, :teacher)
     end
 
     if user.role? :teacher
-      can :evaluate, [Question, Answer] # TODO(zbell) refactor: depends on category + role (not role only)
-
       can :observe, :all
-
-      cannot :vote, :all # TODO(zbell) refactor: depends on category + role (not role only)
     end
 
     if user.role? :administrator
