@@ -71,8 +71,9 @@ module Users
       }
 
       probe.index.mapper.define(
-        id:   -> { id },
-        nick: -> { nick }
+        id:    -> { id },
+        nick:  -> { nick },
+        about: -> { about }
       )
 
       probe.index.create
@@ -85,7 +86,7 @@ module Users
             query_string: {
               query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
               default_operator: :and,
-              fields: [:nick]
+              fields: [:nick, :about]
             }
           },
           page: params[:page].to_i

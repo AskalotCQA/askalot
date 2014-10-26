@@ -1,1 +1,73 @@
 en:
+  question:
+    navigation: "Questions"
+
+    index:
+      title: "Questions"
+      new: "New question"
+
+    search:
+      title: "Vyhľadávanie v otázkach"
+      submit: "Search"
+      placeholder: "e.g. NoSQL databases, design patterns, …"
+
+    new:
+      title: "New question"
+      submit: "Ask question"
+      submit_anonymously: "Ask anonymously"
+      feature: "Ask a question"
+
+    create:
+      success: "Question was successfully added."
+
+    edit:
+      action: "Edit"
+      title: "Edit question"
+      submit: "Save"
+      cancel: "Back"
+
+    update:
+      success: "Question was successfully updated."
+      unchanged: "Question was not changed."
+
+    delete:
+      action: "Delete"
+      title: "Warning!"
+      text: "Are you sure you want to delete this question?"
+      submit: "Delete"
+      cancel: "Back"
+      success: "Question was successfully deleted."
+      failure: "Question could not be deleted"
+
+    tab:
+      recent: "Recent"
+      unanswered: "Unanswered"
+      answered: "Answered"
+      solved: "Solved"
+      favored: "Favored"
+
+      results: "Results"
+
+    tag:
+      new: "new"
+      searching: "Searching…"
+      no_matches: "No results found"
+      placeholder: "e.g. elasticsearch, linux-server, use-case"
+
+    poll:
+      start: "Refresh automatically"
+      end: "Refreshed %{time}"
+
+    details:
+      created: "Added by"
+      updated: "Updated by"
+      deleted: "deleted by"
+
+    favor: "Add to favorites"
+    unfavor: "Remove from favorites"
+
+    favored: "Favored"
+
+    deleted: "Question was deleted"
+
+    no_records: "No questions found."

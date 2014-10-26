@@ -5,12 +5,20 @@ module Searchable
     include Probe
     include Orderable
 
+    class << self
+      attr_accessor :autoimport
+
+      alias :autoimport? :autoimport
+    end
+
+    self.autoimport = true
+
     after_save do
-      self.class.probe.index.import(self)
+      self.class.probe.index.import(self) if self.class.autoimport?
     end
 
     after_destroy do
-      self.class.probe.index.import(self, action: :delete)
+      self.class.probe.index.import(self, action: :delete) if self.class.autoimport?
     end
   end
 

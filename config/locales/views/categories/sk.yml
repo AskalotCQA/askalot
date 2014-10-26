@@ -1,19 +1,26 @@
 sk:
   category:
-    navigation: 'Kategórie'
+    navigation: "Kategórie"
 
     index:
-      title: 'Kategórie'
+      title: "Kategórie"
+
+    search:
+      title: "Vyhľadávanie kategórií"
 
     tab:
-      all: 'Všetky'
+      all: "Všetky"
+
+      results: "Výsledky"
 
     create:
-      success: 'Kategória bola úspešne pridaná.'
+      success: "Kategória bola úspešne pridaná."
 
     update:
-      success: 'Kategória bola úspešne aktualizovaná.'
+      success: "Kategória bola úspešne aktualizovaná."
 
     delete:
-      success: 'Kategória bola úspešne zmazaná.'
-      failure: 'Kategóriu sa nepodarilo zmazať.'
+      success: "Kategória bola úspešne zmazaná."
+      failure: "Kategóriu sa nepodarilo zmazať."
+
+    no_records: "Neboli nájdené žiadne kategórie."

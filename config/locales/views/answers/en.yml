@@ -1,1 +1,41 @@
 en:
+  answer:
+    new:
+      action: "Add answer"
+      submit: "Answer"
+
+    create:
+      success: "Answer was successfully added."
+
+    edit:
+      action: "Edit"
+      title: "Edit answer"
+      submit: "Save"
+      cancel: "Back"
+
+    update:
+      success: "Answer was successfully updated."
+      unchanged: "Answer was not changed."
+
+    delete:
+      action: "Delete"
+      title: "Warning!"
+      text: "Are you sure you want to delete this answer?"
+      submit: "Delete"
+      cancel: "Back"
+      success: "Answer was successfully deleted."
+      failure: "Answer could not be deleted."
+
+    label:
+      best: "Label as best"
+      helpful: "Label as helpful"
+
+    details:
+      created: "Added by"
+      updated: "Updated by"
+      deleted: "Deleted by"
+
+    best: "Best"
+    helpful: "Helpful"
+
+    deleted: "Answer was deleted"

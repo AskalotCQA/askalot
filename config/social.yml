@@ -97,5 +97,8 @@ test:
 staging:
   <<: *defaults
 
+demo:
+  <<: *defaults
+
 production:
   <<: *defaults

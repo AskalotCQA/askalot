@@ -5,6 +5,8 @@ describe 'Question Polling', js: true do
   let!(:question) { create :question, tag_list: 'elasticsearch' }
 
   before :each do
+    Configuration.poll.default = 5
+
     login_as user
   end
 
@@ -19,34 +21,6 @@ describe 'Question Polling', js: true do
     expect(last_event.data[:params]).not_to include(:poll)
 
     create :question, title: 'Elasticsearch problem'
-
-    wait_for_questions_polling
-
-    list = all('#questions > ol > li')
-    expect(list).to have(2).items
-
-    expect(page).to have_content('Elasticsearch problem')
-    expect(page).to have_content('Aktualizované pred menej než minútou')
-
-    expect(last_event.data[:params]).to include(poll: 'true')
-  end
-
-  it 'refreshes list of filtered questions' do
-    visit root_path
-
-    click_link 'Otázky'
-
-    list = all('#questions > ol > li')
-    expect(list).to have(1).items
-
-    fill_in_select2 'question_tags', with: 'elasticsearch'
-
-    list = all('#questions > ol > li')
-    expect(list).to have(1).items
-
-    expect(last_event.data[:params]).to include(poll: 'true')
-
-    create :question, title: 'Elasticsearch problem', tag_list: 'elasticsearch'
 
     wait_for_questions_polling
 

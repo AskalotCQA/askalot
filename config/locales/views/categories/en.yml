@@ -1,1 +1,26 @@
 en:
+  category:
+    navigation: "Categories"
+
+    index:
+      title: "Categories"
+
+    search:
+      title: "Search categories"
+
+    tab:
+      all: "All"
+
+      results: "Results"
+
+    create:
+      success: "Category was successfully created."
+
+    update:
+      success: "Category was successfully updated."
+
+    delete:
+      success: "Category was successfully deleted."
+      failure: "Category could not be deleted."
+
+    no_records: "No categories found."

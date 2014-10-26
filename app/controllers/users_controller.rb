@@ -1,11 +1,12 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
-
   include Searchables::Search
 
   default_tab :all, only: :index
+  default_tab :results, only: :search
   default_tab :profile, only: :show
   default_tab :followers, only: :followings
+
+  before_action :authenticate_user!
 
   def index
     @users = case params[:tab].to_sym

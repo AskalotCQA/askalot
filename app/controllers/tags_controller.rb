@@ -3,13 +3,16 @@ class TagsController < ApplicationController
   include Watchables::Watch
 
   default_tab :all, only: :index
+  default_tab :results, only: :search
 
   before_action :authenticate_user!
 
   def index
-    @tags = Tag.order(:name)
-
-    @tags = search(@tags)
+    @tags = case params[:tab].to_sym
+            when :recent then Tag.recent
+            when :popular then Tag.popular
+            else Tag.order(:name)
+            end
   end
 
   # TODO (smolnar)
@@ -17,12 +20,12 @@ class TagsController < ApplicationController
   # * consider pagination
 
   def suggest
-    tags = Tag.where('tags.name LIKE ?', "#{params[:q]}%").limit(10).order(:name)
+    @tags = Tag.search_by(q: params[:q]).first(10)
 
     render json: {
-      results: tags.map { |tag|
+      results: @tags.map { |tag|
         {
-          id:    tag.name,
+          id:   tag.name,
           text: "#{tag.name} (#{tag.count})"
         }
       },

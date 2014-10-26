@@ -19,8 +19,6 @@ describe 'Deleting' do
 
       click_link "question-#{question.id}-delete-modal"
 
-      sleep 0.5
-
       within "#question-#{question.id}-deleting" do
         click_button 'Zmazať'
       end
@@ -41,6 +39,7 @@ describe 'Deleting' do
     before :each do
       login_as answer.author
     end
+
     it 'can delete answer' do
       visit root_path
 
@@ -49,8 +48,6 @@ describe 'Deleting' do
       click_link question.title
 
       click_link "answer-#{answer.id}-delete-modal"
-
-      sleep 0.5
 
       within "#answer-#{answer.id}-deleting" do
         click_button 'Zmazať'
@@ -84,8 +81,6 @@ describe 'Deleting' do
 
       click_link "comment-#{answer_comment.id}-delete-modal"
 
-      sleep 0.5
-
       within "#comment-#{answer_comment.id}-deleting" do
         click_button 'Zmazať'
       end
@@ -113,7 +108,6 @@ describe 'Deleting' do
       end
 
       expect(page).to have_content('Komentár bol úspešne zmazaný.')
-
       expect(page.current_path).to eql(question_path question)
     end
   end
@@ -164,6 +158,7 @@ describe 'Deleting' do
     before :each do
       login_as answer.author
     end
+
     it 'does not delete the question' do
       visit root_path
 
@@ -202,6 +197,7 @@ describe 'Deleting' do
     before :each do
       login_as user
     end
+
     it 'does not delete the question' do
       visit root_path
 
@@ -240,6 +236,7 @@ describe 'Deleting' do
     before :each do
       login_as administrator
     end
+
     it 'can delete question' do
       visit root_path
 

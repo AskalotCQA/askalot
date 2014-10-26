@@ -1,1 +1,34 @@
 en:
+  watching:
+    navigation: "Watchings"
+
+    index:
+      title: "Watchings"
+
+    create:
+      category: "Watch category"
+      question: "Watch question"
+      tag: "Watch tag"
+
+    delete:
+      submit: "Unwatch"
+      success: "Watching successfully cancelled."
+      failure: "Watching could not be cancelled."
+
+    clean:
+      action: "Unwatch all %{model}"
+      title: "Warning!"
+      text: "Are you sure you want to unwatch all %{model}?"
+      submit: "Unwatch all"
+      cancel: "Back"
+      success: "Watchings successfully cancelled."
+      failure: "Watchings could not be cancelled."
+
+    tab:
+      questions: "Questions"
+      categories: "Categories"
+      tags: "Tags"
+
+    none: "No watchings."
+
+    deleted: "Watching was cancelled"

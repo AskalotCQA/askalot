@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   include Deletables::Destroy
   include Editables::Update
+  include Searchables::Search
   include Votables::Vote
   include Watchables::Watch
 
@@ -8,7 +9,8 @@ class QuestionsController < ApplicationController
   include Markdown::Process
   include Watchings::Register
 
-  default_tab :recent, only: :index
+  default_tab :recent,  only: :index
+  default_tab :results, only: :search
 
   before_action :authenticate_user!
 

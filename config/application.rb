@@ -35,6 +35,7 @@ module Askalot
 
     config.i18n.available_locales = [:en, :sk]
 
+    # Export DB schema in SQL format
     config.active_record.schema_format = :sql
   end
 end

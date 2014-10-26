@@ -28,6 +28,15 @@ module Probe
       client.indices.delete index: name if exists?
     end
 
+    def reload
+      delete
+      create
+
+      yield if block_given?
+
+      flush
+    end
+
     def mapper
       @mapper ||= Probe::Mapper.new
     end

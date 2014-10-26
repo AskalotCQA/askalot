@@ -1,1 +1,17 @@
 en:
+  changelog:
+    navigation: "System updates"
+
+    index:
+      title: "What's new in Askalot?"
+      introduction: "History of new system functionality and improvements."
+
+    create:
+      success: "Changelog was successfully added."
+
+    update:
+      success: "Changelog was successfully updated."
+
+    delete:
+      success: "Changelog was successfully deleted."
+      failure: "Changelog could not be deleted."
