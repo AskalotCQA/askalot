@@ -875,7 +875,8 @@ CREATE TABLE users (
     remember_token character varying(255),
     followers_count integer DEFAULT 0 NOT NULL,
     followees_count integer DEFAULT 0 NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    role character varying
 );
 
 
@@ -1521,6 +1522,13 @@ CREATE INDEX index_assignments_on_user_id ON assignments USING btree (user_id);
 
 
 --
+-- Name: index_assignments_on_user_id_and_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_assignments_on_user_id_and_category_id ON assignments USING btree (user_id, category_id);
+
+
+--
 -- Name: index_categories_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1930,7 +1938,7 @@ CREATE INDEX index_questions_on_votes_lb_wsci_bp ON questions USING btree (votes
 -- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_roles_on_name ON roles USING btree (name);
+CREATE UNIQUE INDEX index_roles_on_name ON roles USING btree (name);
 
 
 --
@@ -2413,4 +2421,8 @@ INSERT INTO schema_migrations (version) VALUES ('20140429003614');
 INSERT INTO schema_migrations (version) VALUES ('20140513162801');
 
 INSERT INTO schema_migrations (version) VALUES ('20140611004811');
+
+INSERT INTO schema_migrations (version) VALUES ('20141026134711');
+
+INSERT INTO schema_migrations (version) VALUES ('20141026134908');
 
