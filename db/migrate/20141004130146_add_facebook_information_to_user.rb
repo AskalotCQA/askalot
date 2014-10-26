@@ -6,4 +6,6 @@ class AddFacebookInformationToUser < ActiveRecord::Migration
 
     add_column :users, :facebook_uid, :integer
   end
+
+  add_index :users, :facebook_uid
 end
