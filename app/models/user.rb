@@ -92,19 +92,6 @@ class User < ActiveRecord::Base
     (value = read_attribute key).blank? ? nil : { original: value, shown: value.gsub(/\Ahttps?\:\/\//, '') }
   end
 
-  def from_omniauth(auth, friends = nil, likes = nil)
-    self.omniauth_provider = auth.provider
-    self.facebook = auth.extra.raw_info.link
-    self.facebook_uid = auth.uid
-    self.omniauth_token = auth.credentials.token
-    self.omniauth_token_expires_at = Time.at(auth.credentials.expires_at)
-
-    self.facebook_friends = friends.to_s
-    self.facebook_likes = likes.to_s
-
-    self.save!
-  end
-
   def self.create_without_confirmation!(attributes)
     user = User.new(attributes)
 
@@ -122,6 +109,19 @@ class User < ActiveRecord::Base
     where(conditions).where(["login = :value OR email = :value", { value: login.downcase }]).first
   end
 
+  def from_omniauth(auth, friends = nil, likes = nil)
+    self.omniauth_provider         = auth.provider
+    self.omniauth_token            = auth.credentials.token
+    self.omniauth_token_expires_at = Time.at(auth.credentials.expires_at)
+
+    self.facebook         = auth.extra.raw_info.link
+    self.facebook_uid     = auth.uid
+    self.facebook_friends = friends.to_s
+    self.facebook_likes   = likes.to_s
+
+    self.save!
+  end
+  
   protected
 
   def password_required?
