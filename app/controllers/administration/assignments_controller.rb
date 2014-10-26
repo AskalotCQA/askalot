@@ -15,13 +15,25 @@ class Administration::AssignmentsController < Administration::DashboardControlle
     end
   end
 
+  def update
+    @assignment = Assignment.find(params[:id])
+
+    if @assignment.update_attributes(assignment_params)
+      form_message :notice, t('assignment.update.success'), key: params[:tab]
+    else
+      form_error_messages_for @assignment, key: params[:tab]
+    end
+
+    redirect_to administration_root_path(tab: params[:tab])
+  end
+
   def destroy
     @assignment = Assignment.find(params[:id])
 
     if @assignment.destroy
-      form_message :notice, t('assignment.update.success'), key: params[:tab]
+      form_message :notice, t('assignment.delete.success'), key: params[:tab]
     else
-      form_error_message t('assignment.update.success'), key: params[:tab]
+      form_error_message t('assignment.delete.failure'), key: params[:tab]
     end
 
     redirect_to administration_root_path(tab: params[:tab])
@@ -30,6 +42,6 @@ class Administration::AssignmentsController < Administration::DashboardControlle
   private
 
   def assignment_params
-    params.require(:assignments).permit(:user_id, :category_id, :role_id)
+    params.require(:assignment).permit(:user_nick, :category_id, :role_id)
   end
 end
