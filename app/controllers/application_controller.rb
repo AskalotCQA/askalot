@@ -9,5 +9,7 @@ class ApplicationController < ActionController::Base
 
   include Events::Log
 
+  include Facebook::Modal
+
   include Slido::Flash
 end
