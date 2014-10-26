@@ -5,7 +5,7 @@ class AddFacebookInformationToUser < ActiveRecord::Migration
     add_column :users, :omniauth_token_expires_at, :datetime
 
     add_column :users, :facebook_uid, :integer
-  end
 
-  add_index :users, :facebook_uid
+    add_index :users, :facebook_uid
+  end
 end

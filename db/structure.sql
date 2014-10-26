@@ -877,10 +877,10 @@ CREATE TABLE users (
     followers_count integer DEFAULT 0 NOT NULL,
     followees_count integer DEFAULT 0 NOT NULL,
     evaluations_count integer DEFAULT 0 NOT NULL,
-    facebook_uid integer,
     omniauth_provider character varying(255),
     omniauth_token text,
     omniauth_token_expires_at timestamp without time zone,
+    facebook_uid integer,
     facebook_friends text,
     facebook_likes text
 );
@@ -2050,6 +2050,13 @@ CREATE UNIQUE INDEX index_users_on_confirmation_token ON users USING btree (conf
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_facebook_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_facebook_uid ON users USING btree (facebook_uid);
 
 
 --
