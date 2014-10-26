@@ -1,6 +1,9 @@
 en:
   facebook:
     title: "Askalot is on Facebook"
-    join: "Join us on Facebook"
+
+    join:
+      message: "Join us on Facebook"
+
     benefit: "and get notification about what interests you!"
     close: "Close"
