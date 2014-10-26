@@ -60,14 +60,12 @@ class UsersController < ApplicationController
   end
 
   def facebook
-    @user = current_user
+    @auth    = request.env['omniauth.auth']
+    @proxy   = FbGraph::User.me(@auth.credentials.token)
+    @friends = @proxy.friends
+    @likes   = @proxy.likes
 
-    @auth = request.env['omniauth.auth']
-    @facebook_user = FbGraph::User.me(@auth.credentials.token)
-    @friends = @facebook_user.friends
-    @likes = @facebook_user.likes
-
-    @user.from_omniauth(@auth, @friends, @likes)
+    current_user.from_omniauth(@auth, @friends, @likes)
 
     redirect_to root_path
   end
