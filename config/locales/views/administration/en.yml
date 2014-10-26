@@ -34,7 +34,7 @@ en:
         submit: "Save"
         cancel: "Cancel"
 
-     delete:
+      delete:
         action: "Delete"
         title: "Warning!"
         text: "Are you sure you want to delete this category?"
