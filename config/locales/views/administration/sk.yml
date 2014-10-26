@@ -31,8 +31,8 @@ sk:
       edit:
         action: "Upraviť"
         title: "Upraviť kategóriu"
-        cancel: "Zrušiť"
         submit: "Uložiť"
+        cancel: "Zrušiť"
 
       delete:
         action: "Zmazať"
