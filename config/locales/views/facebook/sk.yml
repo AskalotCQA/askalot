@@ -1,6 +1,6 @@
 sk:
   facebook:
-    close: "Zavrieť"
-    join: "Pridaj sa k nám na Facebook-u"
     title: "Askalot aj na Facebook-u"
-    text: "a dostávaj notifikácie o tom čo ťa zaujíma!"
+    join: "Pridaj sa k nám na Facebook-u"
+    benefit: "a dostávaj notifikácie o tom čo ťa zaujíma!"
+    close: "Zavrieť"

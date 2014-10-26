@@ -15,7 +15,7 @@ facebook = module Facebook
 
       if [Answer, Question, Comment].find { |type| resource.is_a? type }
         recipients.each do |recipient|
-          binding.pry
+
           if recipient.omniauth_token
             user = FbGraph::User.me(recipient.omniauth_token).fetch
             application = FbGraph::Application.new(Configuration.facebook.application.id, secret: Configuration.facebook.application.secret)
@@ -23,7 +23,7 @@ facebook = module Facebook
             user.notification!(
               access_token: application.get_access_token,
               href: Configuration.facebook.application.link,
-              template: notification_content_by_attributes(action, initiator, resource, unlink: true) # TODO use this and only this here
+              template: notification_content_by_attributes(action, initiator, resource, unlink: true)
             )
           end
         end

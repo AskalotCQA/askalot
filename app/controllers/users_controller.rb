@@ -62,12 +62,13 @@ class UsersController < ApplicationController
   def facebook
     @user = current_user
 
-    @auth = env["omniauth.auth"]
-    @facebook_user = FbGraph::User.me( @auth.credentials.token )
+    @auth = env['omniauth.auth']
+    @facebook_user = FbGraph::User.me(@auth.credentials.token)
     @friends = @facebook_user.friends
     @likes = @facebook_user.likes
 
     @user.from_omniauth(@auth, @friends, @likes)
+
     redirect_to root_path
   end
 
