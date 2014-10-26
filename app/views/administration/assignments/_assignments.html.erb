@@ -20,6 +20,8 @@
 
         <div class="col-xs-2">
           <div class="pull-right">
+            <%= render 'administration/assignments/editing', assignment: assignment, tab: tab %>
+            <span class="text-muted">&middot;</span>
             <%= render 'administration/assignments/deleting', assignment: assignment, tab: tab %>
           </div>
         </div>
