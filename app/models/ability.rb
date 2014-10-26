@@ -41,8 +41,8 @@ class Ability
       user.assigned?(resource.to_question.category, :teacher)
     end
 
-    can :vote, [Question, Answer] do |resource|
-      !user.assigned?(resource.to_question.category, :teacher)
+    cannot :vote, [Question, Answer] do |resource|
+      user.assigned?(resource.to_question.category, :teacher)
     end
 
     if user.role? :teacher
