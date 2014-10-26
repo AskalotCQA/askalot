@@ -99,8 +99,8 @@ class User < ActiveRecord::Base
     self.omniauth_token = auth.credentials.token
     self.omniauth_token_expires_at = Time.at(auth.credentials.expires_at)
 
-    self.facebook_friends = friends
-    self.facebook_likes = likes
+    self.facebook_friends = friends.to_s
+    self.facebook_likes = likes.to_s
 
     self.save!
   end

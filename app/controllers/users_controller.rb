@@ -62,7 +62,7 @@ class UsersController < ApplicationController
   def facebook
     @user = current_user
 
-    @auth = env['omniauth.auth']
+    @auth = request.env['omniauth.auth']
     @facebook_user = FbGraph::User.me(@auth.credentials.token)
     @friends = @facebook_user.friends
     @likes = @facebook_user.likes
