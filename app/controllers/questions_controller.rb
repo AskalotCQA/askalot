@@ -38,8 +38,11 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
-    @document = Document.find(params[:document_id])
-    @group    = Group.find(params[:group_id])
+
+    if params[:document_id]
+      @document = Document.find(params[:document_id])
+      @group    = @document.group
+    end
   end
 
   def create
@@ -67,9 +70,13 @@ class QuestionsController < ApplicationController
   end
 
   def show
+    binding.pry
     @question = Question.find(params[:id])
-    @document = Document.find(params[:document_id])
-    @group    = @document.group
+
+    if params[:document_id]
+      @document = Document.find(params[:document_id])
+      @group    = @document.group
+    end
 
     authorize! :view, @question
 
