@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
          authentication_keys: [:login]
 
+  ROLES = [:student, :teacher, :administrator]
+
   has_many :questions,   foreign_key: :author_id, dependent: :destroy
   has_many :answers,     foreign_key: :author_id, dependent: :destroy
   has_many :comments,    foreign_key: :author_id, dependent: :destroy
@@ -32,6 +34,8 @@ class User < ActiveRecord::Base
   has_many :roles,      through: :assignments
   has_many :categories, through: :assignments
 
+  validates :role, presence: true
+
   # TODO (smolnar) consult usage of functional indices for nick, login and email uniqueness checking
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 20 }, if: :login?
@@ -48,6 +52,8 @@ class User < ActiveRecord::Base
   Social.networks.each do |key, network|
     validates key, format: { with: network.regexp }, allow_blank: true
   end
+
+  symbolize :role, in: ROLES
 
   before_validation :resolve_nick, on: :create
 
@@ -74,11 +80,11 @@ class User < ActiveRecord::Base
   end
 
   def assigned?(category, role)
-    assignments.where(category: category).joins(:role).where(roles: { name: role }).any?
+    assignments.where(category: category).joins(:role).where(roles: { name: role }).any? || self.role == role.to_sym
   end
 
   def role?(role)
-    roles.where(name: role).any?
+    roles.where(name: role).any? || self.role == role.to_sym
   end
 
   def urls

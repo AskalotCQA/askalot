@@ -21,7 +21,8 @@ slido.update_attributes(
   first: 'Automaton',
   last: 'Slido',
   about: 'Automatizovaný robot, ktorý zbiera otázky zo systému sli.do',
-  show_email: false
+  show_email: false,
+  role: :student
 )
 
 slido.save!

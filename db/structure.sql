@@ -866,6 +866,7 @@ CREATE TABLE users (
     stack_overflow character varying(255),
     tumblr character varying(255),
     youtube character varying(255),
+    role character varying(255) DEFAULT 'student'::character varying NOT NULL,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -2102,6 +2103,13 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 
 
 --
+-- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_role ON users USING btree (role);
+
+
+--
 -- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2413,8 +2421,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140420091223');
 INSERT INTO schema_migrations (version) VALUES ('20140420093029');
 
 INSERT INTO schema_migrations (version) VALUES ('20140421091947');
-
-INSERT INTO schema_migrations (version) VALUES ('20140422093803');
 
 INSERT INTO schema_migrations (version) VALUES ('20140423082147');
 
