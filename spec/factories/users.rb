@@ -13,14 +13,16 @@ FactoryGirl.define do
     show_email true
     show_name  true
 
-    role Role.find_by(name: :student)
-
     factory :teacher, class: :User do
-      role Role.find_by(name: :teacher)
+      after :create do |user|
+        create :assignment, user: user, role: Role.find_by(name: :teacher)
+      end
     end
 
     factory :administrator, class: :User do
-      role Role.find_by(name: :administrator)
+      after :create do |user|
+        create :assignment, user: user, role: Role.find_by(name: :administrator)
+      end
     end
 
     after :create do |user|
