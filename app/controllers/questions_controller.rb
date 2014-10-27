@@ -31,6 +31,8 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @document = Document.find(params[:document_id])
+    @group    = Group.find(params[:group_id])
   end
 
   def create
@@ -43,13 +45,14 @@ class QuestionsController < ApplicationController
         dispatch_event :mention, @question, for: user
       end
 
-      dispatch_event :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
+      dispatch_event :create, @question, for: @question.parent.watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
       register_watching_for @question
 
       flash[:notice] = t('question.create.success')
 
-      redirect_to question_path(@question)
+      redirect_to @question.category.blank? ? documents_questions_path(document_id: @question.document_id) : question_path(@question)
     else
+      # TODO (jharinek) if parent is document
       @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
 
       render :new
@@ -110,7 +113,7 @@ class QuestionsController < ApplicationController
   end
 
   def create_params
-    params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user)
+    params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user, document: Document.find(params[:document_id]))
   end
 
   def update_params
