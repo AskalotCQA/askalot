@@ -2,6 +2,7 @@ class Document < ActiveRecord::Base
   include Authorable
   include Deletable
   include Editable
+  include Watchable
 
   belongs_to :group, counter_cache: true
 

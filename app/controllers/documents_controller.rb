@@ -1,6 +1,7 @@
 class DocumentsController < ApplicationController
   include Deletables::Destroy
   include Editables::Update
+  include Watchables::Watch
 
   include Markdown::Process
 
