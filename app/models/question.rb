@@ -61,4 +61,8 @@ class Question < ActiveRecord::Base
   def to_question
     self
   end
+
+  def parent
+    category || document
+  end
 end
