@@ -59,6 +59,17 @@ class UsersController < ApplicationController
     render json: @data
   end
 
+  def facebook
+    @auth    = request.env['omniauth.auth']
+    @proxy   = FbGraph::User.me(@auth.credentials.token)
+    @friends = @proxy.friends
+    @likes   = @proxy.likes
+
+    current_user.from_omniauth(@auth, @friends, @likes)
+
+    redirect_to root_path
+  end
+
   def followings
     @user = User.by(nick: params[:nick])
 
