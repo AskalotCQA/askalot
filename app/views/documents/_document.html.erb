@@ -13,7 +13,7 @@
       <a href="<%= documents_questions_path(document_id: document.id) %>" data-remote="true" id="document-<%= document.id %>-questions">
         <%= t('count.question', count: document.questions.size).upcase_first %> <%= document.questions.size %>
       </a>
-      <a href="<%= new_documents_question_path(document_id: document.id, group_id: @group.id) %>" data-remote="true" id="document-<%= document.id %>-new-question" class="btn btn-sm btn-default">
+      <a href="<%= new_question_path(document_id: document.id, group_id: @group.id) %>" data-remote="true" id="document-<%= document.id %>-new-question" class="btn btn-sm btn-default">
         <%= icon_tag :plus, label: t('question.new.title') %>
       </a>
     </div>
