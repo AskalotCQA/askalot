@@ -1,4 +1,10 @@
 class GroupsController < ApplicationController
+  include Deletables::Destroy
+  include Editables::Update
+
+  include Events::Dispatch
+  include Markdown::Process
+
   default_tab :all, only: :index
 
   before_action :authenticate_user!
@@ -20,14 +26,6 @@ class GroupsController < ApplicationController
   def show
     @group     = Group.find(params[:id])
     @documents = @group.documents
-    @question  = Question.new
-    @labels  = @question.labels
-    @answers = @question.ordered_answers
-    @answer  = Answer.new(question: @question)
-    @document= Document.new
-    @questions = Question.recent
-
-    @questions = @questions.page(params[:page]).per(20)
   end
 
   def index
