@@ -24,7 +24,7 @@
 
             <div class="form-group">
               <%= f.label :visibility %>
-              <%= f.collection_select :visibility, { public: t('group.visibility.public'), private: t('group.visibility.private') }, :first, :last %>
+              <%= f.visibility_collection_select :visibility %>
             </div>
           </div>
 
