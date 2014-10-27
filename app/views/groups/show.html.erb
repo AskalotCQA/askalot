@@ -9,7 +9,7 @@
   <div class="col-md-6">
     <div class="documents-group" id="documents">
       <% @documents.each do |document| %>
-          <%= render 'documents/document', document: document %>
+				<%= render 'documents/document', document: document, group: @group %>
       <% end %>
     </div>
   </div>
