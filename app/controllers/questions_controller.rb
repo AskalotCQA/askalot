@@ -29,6 +29,13 @@ class QuestionsController < ApplicationController
     initialize_polling
   end
 
+  def document_questions_index
+    @document  = Document.find(params[:document_id])
+    @questions = @document.questions
+
+    @questions = @questions.page(params[:page]).per(20)
+  end
+
   def new
     @question = Question.new
     @document = Document.find(params[:document_id])

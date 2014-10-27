@@ -112,8 +112,9 @@ Askalot::Application.routes.draw do
     resources :categories, only: [:create, :update, :destroy]
   end
 
+  get 'document/:document_id/questions', to: 'questions#document_questions_index', as: :document_questions
+  
   namespace :documents do
-    resources :questions, only: [:index, :new, :create, :show, :update, :destroy]
     resources :answers,   only: [:create, :update, :destroy]
     resources :comments,  only: [:create, :update, :destroy]
   end
