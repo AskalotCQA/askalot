@@ -1,6 +1,6 @@
 <div class="well" id="document-<%= document.id %>">
   <h4 class="document-header">
-    <%= link_to document.title, documents_questions_path(document_id: document.id), remote: true %>
+    <%= link_to document.title, document_questions_path(document_id: document.id), remote: true %>
   </h4>
 
   <div class="document-body">
@@ -10,7 +10,7 @@
   <div class="row">
     <hr class="document-footer-border"/>
     <div class="col-md-offset-8 document-footer">
-      <a href="<%= documents_questions_path(document_id: document.id) %>" data-remote="true" id="document-<%= document.id %>-questions">
+      <a href="<%= document_questions_path(document_id: document.id) %>" data-remote="true" id="document-<%= document.id %>-questions">
         <%= t('count.question', count: document.questions.size).upcase_first %> <%= document.questions.size %>
       </a>
       <a href="<%= new_question_path(document_id: document.id, group_id: group.id) %>" data-remote="true" id="document-<%= document.id %>-new-question" class="btn btn-sm btn-default">
