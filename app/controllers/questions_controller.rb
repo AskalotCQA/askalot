@@ -61,6 +61,8 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    @document = Document.find(params[:document_id])
+    @group    = @document.group
 
     authorize! :view, @question
 
