@@ -1,6 +1,6 @@
 module AnswersHelper
-  def answer_highlighted?(resource)
-      resource.author.role?(:teacher) && !resource.author.role?(:administrator)
+  def answer_highlighted?(answer)
+    answer.author.assigned?(answer.to_question.category, :teacher)
   end
 
   def answer_text_preview(answer, options = {})

@@ -3,8 +3,43 @@ sk:
     navigation: "Administrácia"
 
     tab:
+      assignments: "Roly používateľov"
       categories: "Kategórie"
       changelogs: "Protokoly zmien"
+
+    assignment:
+      create:
+        action: "Pridať rolu používateľa"
+
+      edit:
+        action: "Upraviť"
+        title: "Upraviť rolu používateľa"
+        submit: "Uložiť"
+        cancel: "Zrušiť"
+
+      delete:
+        action: "Zmazať"
+        title: "Pozor!"
+        text: "Naozaj chcete zmazať túto rolu používateľa?"
+        submit: "Zmazať"
+        cancel: "Zrušiť"
+
+    category:
+      create:
+        action: "Pridať kategóriu"
+
+      edit:
+        action: "Upraviť"
+        title: "Upraviť kategóriu"
+        submit: "Uložiť"
+        cancel: "Zrušiť"
+
+      delete:
+        action: "Zmazať"
+        title: "Pozor!"
+        text: "Naozaj chcete zmazať túto kategóriu?"
+        submit: "Zmazať"
+        cancel: "Zrušiť"
 
     changelog:
       create:
@@ -22,13 +57,3 @@ sk:
         text: "Naozaj chcete zmazať tento protokol zmien?"
         submit: "Zmazať"
         cancel: "Zrušiť"
-
-    category:
-      create:
-        action: "Pridať kategóriu"
-
-      edit:
-        action: "Upraviť"
-        title: "Upraviť kategóriu"
-        cancel: "Zrušiť"
-        submit: "Uložiť"

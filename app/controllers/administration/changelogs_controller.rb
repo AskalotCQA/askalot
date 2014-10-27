@@ -10,7 +10,7 @@ class Administration::ChangelogsController < Administration::DashboardController
       redirect_to administration_root_path(tab: params[:tab])
     else
       form_error_messages_for @changelog, flash: flash.now, key: params[:tab]
-      
+
       render_dashboard
     end
   end
@@ -31,9 +31,9 @@ class Administration::ChangelogsController < Administration::DashboardController
     @changelog = Changelog.find(params[:id])
 
     if @changelog.destroy
-      form_message :notice, t('changelog.update.success'), key: params[:tab]
+      form_message :notice, t('changelog.delete.success'), key: params[:tab]
     else
-      form_error_message t('changelog.update.success'), key: params[:tab]
+      form_error_message t('changelog.delete.failure'), key: params[:tab]
     end
 
     redirect_to administration_root_path(tab: params[:tab])

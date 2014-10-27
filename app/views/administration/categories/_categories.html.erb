@@ -6,17 +6,17 @@
   <% categories.each do |category| %>
     <li>
       <div class="row">
-        <div class="col-xs-5">
+        <div class="col-xs-4">
           <%= link_to_category category %>
         </div>
 
-        <div class="col-xs-5">
+        <div class="col-xs-7">
           <% category.tags.each do |tag| %>
             <span class="label label-inverse"><%= tag %></span>
           <% end %>
         </div>
 
-        <div class="col-xs-2">
+        <div class="col-xs-1">
           <div class="pull-right">
             <%= render 'administration/categories/editing', category: category, tab: tab %>
           </div>
