@@ -11,7 +11,9 @@ class GroupsController < ApplicationController
 
       redirect_to group_path(@group)
     else
-      render :new
+      flash_error_messages_for @group
+
+      redirect_to groups_path(tab: :all)
     end
   end
 
