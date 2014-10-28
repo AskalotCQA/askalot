@@ -53,6 +53,8 @@ Askalot::Application.routes.draw do
   resources :groups,    only: [:index, :new, :create, :show, :update, :destroy]
   resources :documents, only: [:new, :create, :update, :destroy]
 
+  get 'document/:document_id/questions', to: 'questions#document_questions_index', as: :document_questions
+
   resources :categories do
     concerns :searchable
     concerns :watchable
@@ -110,13 +112,6 @@ Askalot::Application.routes.draw do
 
     resources :changelogs, only: [:create, :update, :destroy]
     resources :categories, only: [:create, :update, :destroy]
-  end
-
-  get 'document/:document_id/questions', to: 'questions#document_questions_index', as: :document_questions
-  
-  namespace :documents do
-    resources :answers,   only: [:create, :update, :destroy]
-    resources :comments,  only: [:create, :update, :destroy]
   end
 
   resources :changelogs
