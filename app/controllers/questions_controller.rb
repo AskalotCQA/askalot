@@ -70,11 +70,10 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    binding.pry
     @question = Question.find(params[:id])
+    @document = @question.document
 
-    if params[:document_id]
-      @document = Document.find(params[:document_id])
+    if @document
       @group    = @document.group
     end
 
