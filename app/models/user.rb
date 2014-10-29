@@ -2,9 +2,6 @@ class User < ActiveRecord::Base
   include Followable
   include Users::Searchable
 
-  # TODO (jharinek) consider https://github.com/ryanb/cancan/wiki/Separate-Role-Model
-  ROLES = [:student, :teacher, :administrator]
-
   devise :database_authenticatable,
          :confirmable,
          :lockable,
@@ -15,6 +12,8 @@ class User < ActiveRecord::Base
          :validatable,
 
          authentication_keys: [:login]
+
+  ROLES = [:student, :teacher, :administrator]
 
   has_many :questions,   foreign_key: :author_id, dependent: :destroy
   has_many :answers,     foreign_key: :author_id, dependent: :destroy
@@ -80,8 +79,12 @@ class User < ActiveRecord::Base
     (value = read_attribute :gravatar_email).blank? ? email : value
   end
 
-  def role?(base)
-    ROLES.index(base.to_sym) <= ROLES.index(role)
+  def assigned?(category, role)
+    assignments.where(category: category).joins(:role).where(roles: { name: role }).any? || self.role == role.to_sym
+  end
+
+  def role?(role)
+    roles.where(name: role).any? || self.role == role.to_sym
   end
 
   def urls
