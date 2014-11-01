@@ -9,12 +9,14 @@ class Ability
     can(:edit,   User) { |resource| resource == user }
     can(:follow, User) { |resource| resource != user }
 
-    can(:edit,   [Question, Answer, Comment, Document]) { |resource| resource.author == user }
-    can(:delete, [Question, Answer, Comment, Document]) { |resource| resource.author == user }
+    can(:edit,   [Group, Document, Question, Answer, Comment]) { |resource| resource.author == user }
+    can(:delete, [Group, Document, Question, Answer, Comment]) { |resource| resource.author == user }
 
     cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.any? }
     cannot(:edit, [Answer]) { |resource| resource.labelings.any? }
 
+    cannot(:delete, [Group])    { |resource| resource.documents.any? }
+    cannot(:delete, [Document]) { |resource| resource.questions.any? }
     cannot(:delete, [Question]) { |resource| resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
     cannot(:delete, [Answer]) { |resource| resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
 
@@ -24,6 +26,8 @@ class Ability
 
     can :change_name,     User unless user.ais_login?
     can :change_password, User unless user.ais_login?
+
+    can :create, [Group, Document]
 
     can :ask,    Question
     can :answer, Question
@@ -46,13 +50,15 @@ class Ability
       can :observe, :all
 
       cannot :vote, :all
+
+      cannot(:view, [Group]) { |resource| resource.visibility == :private }
     end
 
     if user.role? :administrator
       can :administrate, :all
 
-      can :edit,   [Question, Answer, Comment, Document]
-      can :delete, [Question, Answer, Comment, Document]
+      can :edit,   [Document, Question, Answer, Comment]
+      can :delete, [Document, Question, Answer, Comment]
 
       can :create,  [Category, Changelog]
       can :update,  [Category, Changelog]
