@@ -80,11 +80,11 @@ class User < ActiveRecord::Base
   end
 
   def assigned?(category, role)
-    assignments.where(category: category).joins(:role).where(roles: { name: role }).any? || self.role == role.to_sym
+    assignments.where(category: category).joins(:role).where(roles: { name: role }).any? || (assignments.none? && self.role == role.to_sym)
   end
 
   def role?(role)
-    roles.where(name: role).any? || self.role == role.to_sym
+    roles.where(name: role).any? || (roles.none? && self.role == role.to_sym)
   end
 
   def urls
@@ -124,7 +124,7 @@ class User < ActiveRecord::Base
 
     self.save!
   end
-  
+
   protected
 
   def password_required?
