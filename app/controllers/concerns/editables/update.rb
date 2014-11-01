@@ -4,6 +4,7 @@ module Editables::Update
   include Events::Dispatch
 
   def update
+    binding.pry
     @model    = controller_name.classify.downcase.to_sym
     @editable = controller_name.classify.constantize.find(params[:id])
 
@@ -33,6 +34,9 @@ module Editables::Update
       flash[:warning] = t "#{@model}.update.unchanged"
     end
 
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back, format: :html }
+      format.js   { redirect_to :back, format: :js }
+    end
   end
 end

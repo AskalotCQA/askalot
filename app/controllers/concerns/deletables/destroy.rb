@@ -4,6 +4,7 @@ module Deletables::Destroy
   include Events::Dispatch
 
   def destroy
+    binding.pry
     @model     = controller_name.classify.downcase.to_sym
     @deletable = controller_name.classify.constantize.find(params[:id])
 
@@ -18,9 +19,15 @@ module Deletables::Destroy
     end
 
     if @deletable.is_a? Question
-      redirect_to questions_path
+      respond_to do |format|
+        format.html { redirect_to questions_path, format: :html }
+        format.js   { redirect_to document_questions_path(@deletable.parent), format: :js }
+      end
     else
-      redirect_to :back
+      respond_to do |format|
+        format.html { redirect_to :back, format: :html }
+        format.js   { redirect_to :back, format: :js }
+      end
     end
   end
 end
