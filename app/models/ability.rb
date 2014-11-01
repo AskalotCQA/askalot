@@ -57,8 +57,8 @@ class Ability
     if user.role? :administrator
       can :administrate, :all
 
-      can :edit,   [Document, Question, Answer, Comment]
-      can :delete, [Document, Question, Answer, Comment]
+      can :edit,   [Group, Document, Question, Answer, Comment]
+      can :delete, [Group, Document, Question, Answer, Comment]
 
       can :create,  [Category, Changelog]
       can :update,  [Category, Changelog]
