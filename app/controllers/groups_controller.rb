@@ -37,4 +37,8 @@ class GroupsController < ApplicationController
   def create_params
     params.require(:group).permit(:title, :description, :visibility).merge(creator: current_user)
   end
+
+  def update_params
+    params.require(:group).permit(:title, :description, :visibility)
+  end
 end

@@ -24,4 +24,8 @@ class DocumentsController < ApplicationController
   def create_params
     params.require(:document).permit(:title, :content).merge(group: Group.find(params[:id]), author: current_user)
   end
+
+  def update_params
+    params.require(:document).permit(:title, :content)
+  end
 end
