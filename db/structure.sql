@@ -93,8 +93,8 @@ CREATE TABLE answer_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -135,8 +135,8 @@ CREATE TABLE answers (
     votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
     evaluations_count integer DEFAULT 0 NOT NULL
 );
@@ -274,8 +274,8 @@ CREATE TABLE comment_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -313,8 +313,8 @@ CREATE TABLE comments (
     deleted boolean DEFAULT false NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL
 );
 
@@ -352,8 +352,8 @@ CREATE TABLE evaluations (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -417,8 +417,8 @@ CREATE TABLE favorites (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -488,8 +488,8 @@ CREATE TABLE labelings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -596,8 +596,8 @@ CREATE TABLE question_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -642,12 +642,12 @@ CREATE TABLE questions (
     slido_question_uuid integer,
     slido_event_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
-    votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     touched_at timestamp without time zone NOT NULL,
+    votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
     evaluations_count integer DEFAULT 0 NOT NULL
 );
@@ -760,8 +760,8 @@ CREATE TABLE taggings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     author_id integer NOT NULL
 );
 
@@ -876,7 +876,13 @@ CREATE TABLE users (
     remember_token character varying(255),
     followers_count integer DEFAULT 0 NOT NULL,
     followees_count integer DEFAULT 0 NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    omniauth_provider character varying(255),
+    omniauth_token text,
+    omniauth_token_expires_at timestamp without time zone,
+    facebook_uid bigint,
+    facebook_friends text,
+    facebook_likes text
 );
 
 
@@ -909,8 +915,8 @@ CREATE TABLE views (
     viewer_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -946,8 +952,8 @@ CREATE TABLE votes (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -2054,6 +2060,13 @@ CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
+-- Name: index_users_on_facebook_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_facebook_uid ON users USING btree (facebook_uid);
+
+
+--
 -- Name: index_users_on_first; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2434,7 +2447,13 @@ INSERT INTO schema_migrations (version) VALUES ('20140513162801');
 
 INSERT INTO schema_migrations (version) VALUES ('20140611004811');
 
+INSERT INTO schema_migrations (version) VALUES ('20141004130146');
+
+INSERT INTO schema_migrations (version) VALUES ('20141023161800');
+
 INSERT INTO schema_migrations (version) VALUES ('20141026134711');
 
 INSERT INTO schema_migrations (version) VALUES ('20141026134908');
+
+INSERT INTO schema_migrations (version) VALUES ('20141027134900');
 
