@@ -15,3 +15,8 @@ sk:
       text: 'Naozaj chcete zmazať dokument?'
       cancel: 'Zrušiť'
       submit: 'Zmazať'
+
+    edit:
+      action: "Upraviť"
+      title: "Úprava dokumentu"
+

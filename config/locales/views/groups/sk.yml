@@ -15,6 +15,17 @@ sk:
       title: 'Skupiny'
       no_results_found: 'Neboli nájdené žiadne skupiny'
 
+    edit:
+      action: "Upraviť"
+      title: "Úprava skupiny"
+
+    delete:
+      action: "Zmazať"
+      cancel: "Zrušiť"
+      submit: "Zmazať"
+      text: "Naozaj chcete zmazať skupinu?"
+      title: "Pozor!"
+
     tab:
       all: 'Všetky'
 

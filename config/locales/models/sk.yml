@@ -239,6 +239,7 @@ sk:
       group:
         title: "Názov"
         description: "Popis"
+        visibility: "Viditeľnosť"
 
       question:
         anonymous: "Opýtať sa anonymne"
