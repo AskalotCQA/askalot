@@ -1,7 +1,6 @@
 <div id="document-content">
   <a href="<%= document_questions_path(document_id: @document.id) %>" data-remote="true" class="btn btn-sm btn-default">
-		<!--TODO (jharinek) add translation-->
-    <%= icon_tag :list, label: 'Zoznam otázok' %>
+    <%= icon_tag :list, label: t('group.list') %>
   </a>
   <h3 class="form-title"><%= t 'question.new.title' %></h3>
 

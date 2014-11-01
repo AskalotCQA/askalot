@@ -1,6 +1,7 @@
 sk:
   group:
     navigation: 'Skupiny'
+    list: "Zoznam skupín"
 
     create:
       success: 'Skupina bola úspešne vytvorená'
