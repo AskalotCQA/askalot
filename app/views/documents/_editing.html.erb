@@ -1,34 +1,34 @@
 <% if can? :edit, document %>
-	&middot;
+  &middot;
 
-	<a href="#" id="document-<%= document.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#document-<%= document.id %>-editing">
-		<%= tooltip_icon_tag :edit, t('document.edit.action'), placement: :top %>
-	</a>
+  <a href="#" id="document-<%= document.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#document-<%= document.id %>-editing">
+    <%= tooltip_icon_tag :edit, t('document.edit.action'), placement: :top %>
+  </a>
 
-	<div id="document-<%= document.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<%= form_for document do |f| %>
-				  <div class="modal-header">
-						<h3 class="modal-title"><%= t('document.edit.title') %></h3>
-				  </div>
-					<div class="modal-body">
-						<div class="form-group">
-							<%= f.label :title %>
-							<%= f.text_field :title, class: :'form-control' %>
-						</div>
-						<div class="form-group">
-							<%= markdown_editor_for document do %>
-								<%= f.text_area :content, class: :'form-control', rows: 5 %>
-							<% end %>
-						</div>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'answer.edit.cancel' %></button>
-						<button type="submit" class="btn btn-primary"><%= t 'answer.edit.submit' %></button>
-					</div>
-				<% end %>
-			</div>
-		</div>
-	</div>
+  <div id="document-<%= document.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <%= form_for document do |f| %>
+          <div class="modal-header">
+            <h3 class="modal-title"><%= t('document.edit.title') %></h3>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <%= f.label :title %>
+              <%= f.text_field :title, class: :'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= markdown_editor_for document do %>
+                <%= f.text_area :content, class: :'form-control', rows: 5 %>
+              <% end %>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'answer.edit.cancel' %></button>
+            <button type="submit" class="btn btn-primary"><%= t 'answer.edit.submit' %></button>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 <% end %>

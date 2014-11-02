@@ -4,7 +4,6 @@ module Deletables::Destroy
   include Events::Dispatch
 
   def destroy
-    binding.pry
     @model     = controller_name.classify.downcase.to_sym
     @deletable = controller_name.classify.constantize.find(params[:id])
 

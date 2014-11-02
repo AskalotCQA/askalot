@@ -5,12 +5,11 @@
 
   <div id="<%= identify commentable, :comment %>" class="collapse" data-markdown="true">
     <%= form_for [commentable, Comment.new], remote: true, html: { id: nil, class: :'new-comment' } do |f| %>
+      <div id="<%= identify commentable, :comment %>-text" class="form-group">
+        <%= f.text_area :text, id: nil, class: :'form-control', rows: 2 %>
+      </div>
 
-        <div id="<%= identify commentable, :comment %>-text" class="form-group">
-          <%= f.text_area :text, id: nil, class: :'form-control', rows: 2 %>
-        </div>
-
-        <button type="submit" class="btn btn-primary"><%= t 'comment.new.submit' %></button>
+      <button type="submit" class="btn btn-primary"><%= t 'comment.new.submit' %></button>
     <% end %>
   </div>
 </div>

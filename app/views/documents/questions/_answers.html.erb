@@ -14,11 +14,11 @@
 <hr/>
 
 <% if answers.any? %>
-    <ol class="question-answers">
-      <% answers.each do |answer| %>
-          <%= render 'documents/questions/answer', answer: answer %>
-      <% end %>
-    </ol>
+  <ol class="question-answers">
+    <% answers.each do |answer| %>
+      <%= render 'documents/questions/answer', answer: answer %>
+    <% end %>
+  </ol>
 
-    <hr/>
+  <hr/>
 <% end %>

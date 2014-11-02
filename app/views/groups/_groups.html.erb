@@ -5,6 +5,7 @@
         <h4>
           <%= link_to group.title, group_path(group), analytics_attributes(:group, :click, group.title) %>
         </h4>
+
         <div class="group-details">
           <%= group.description %> </br>
           <%= t('count.document', count: group.documents.size).upcase_first %> <%= group.documents.size %>
@@ -15,5 +16,5 @@
     <div class="alert alert-warning">
       <%= t('group.index.no_results_found') %>
     </div>
-  <%end %>
+  <% end %>
 </div>

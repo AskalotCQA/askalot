@@ -4,7 +4,6 @@ module Editables::Update
   include Events::Dispatch
 
   def update
-    binding.pry
     @model    = controller_name.classify.downcase.to_sym
     @editable = controller_name.classify.constantize.find(params[:id])
 
@@ -16,7 +15,9 @@ module Editables::Update
 
     if @editable.changed?
       if @editable.update_attributes_by_revision(@revision)
-        process_markdown_for @editable do |user|
+
+        attribute = { attribute: :@editable.is_a?(Document) ? :content : :text }
+        process_markdown_for @editable, attribute do |user|
           dispatch_event :mention, @editable, for: user
         end
 
