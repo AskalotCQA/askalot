@@ -880,7 +880,7 @@ CREATE TABLE users (
     omniauth_provider character varying(255),
     omniauth_token text,
     omniauth_token_expires_at timestamp without time zone,
-    facebook_uid integer,
+    facebook_uid bigint,
     facebook_friends text,
     facebook_likes text
 );
@@ -2443,4 +2443,6 @@ INSERT INTO schema_migrations (version) VALUES ('20140611004811');
 INSERT INTO schema_migrations (version) VALUES ('20141004130146');
 
 INSERT INTO schema_migrations (version) VALUES ('20141023161800');
+
+INSERT INTO schema_migrations (version) VALUES ('20141027134900');
 
