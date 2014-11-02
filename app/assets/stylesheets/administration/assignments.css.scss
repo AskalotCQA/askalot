@@ -1,0 +1,23 @@
+// collection
+
+.administration-assignments {
+  @extend .list-unstyled;
+
+  margin: 15px 0;
+  border-top: 1px solid $gray-lighter;
+  border-bottom: 1px solid $gray-lighter;
+
+  li {
+    margin: 15px 0;
+  }
+}
+
+.administration-users {
+  @extend .list-unstyled;
+
+  margin: 15px 0;
+
+  li {
+    margin: 15px 0;
+  }
+}

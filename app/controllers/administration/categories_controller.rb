@@ -27,6 +27,8 @@ class Administration::CategoriesController < Administration::DashboardController
     redirect_to administration_root_path(tab: params[:tab])
   end
 
+  # TODO(zbell) add destroy?
+
   private
 
   def category_params
