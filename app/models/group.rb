@@ -1,5 +1,4 @@
 class Group < ActiveRecord::Base
-  include Authorable
   include Deletable
   include Editable
 
@@ -7,7 +6,7 @@ class Group < ActiveRecord::Base
 
   has_many :documents
 
-  belongs_to :author, class_name: :User
+  belongs_to :creator, class_name: :User
 
   validates :title,       presence: true, length: { minimum: 2, maximum: 140 }
   validates :description, presence: true, length: { minimum: 2 }
