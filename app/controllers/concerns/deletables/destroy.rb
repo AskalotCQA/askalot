@@ -24,6 +24,8 @@ module Deletables::Destroy
         format.html { redirect_to questions_path, format: :html }
         format.js   { redirect_to document_questions_path(@deletable.parent), format: :js }
       end
+    elsif @deletable.is_a? Group
+      redirect_to groups_path
     else
       respond_to do |format|
         format.html { redirect_to :back, format: :html }
