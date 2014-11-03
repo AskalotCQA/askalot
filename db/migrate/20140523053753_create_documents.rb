@@ -5,7 +5,7 @@ class CreateDocuments < ActiveRecord::Migration
       t.references :group, null: false
 
       t.string :title, null: false
-      t.text   :content, null: false
+      t.text   :text, null: false
 
       t.boolean    :deleted, null: false, default: false
       t.references :deletor, null: true
