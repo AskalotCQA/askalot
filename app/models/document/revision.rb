@@ -10,7 +10,7 @@ class Document
       revision.editor   = editor
       revision.document = document
       revision.title    = document.title
-      revision.content  = document.content
+      revision.text     = document.text
 
       revision.save!
       revision

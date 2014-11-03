@@ -3,6 +3,11 @@
 <h1 class="page-header"><%= @group.title %></h1>
 <p class="lead"><%= @group.description %></p>
 
+<div class="group-details">
+  <%= render 'groups/deleting', group: @group %>
+  <%= render 'groups/editing', group: @group %>
+</div>
+
 <%= render 'documents/new' %>
 
 <div class="row">

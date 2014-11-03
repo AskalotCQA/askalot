@@ -3,8 +3,13 @@
     <%= link_to document.title, document_questions_path(document_id: document.id), remote: true %>
   </h4>
 
+  <div class="document-details">
+    <%= render 'documents/deleting', document: document %>
+    <%= render 'documents/editing', document: document%>
+  </div>
+
   <div class="document-body">
-    <%= render_markdown document.content %>
+    <%= render_markdown document.text %>
   </div>
 
   <div class="row">

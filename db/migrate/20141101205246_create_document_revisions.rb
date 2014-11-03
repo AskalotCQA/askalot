@@ -5,7 +5,7 @@ class CreateDocumentRevisions < ActiveRecord::Migration
       t.references :editor,   null: false
 
       t.string :title,   null: false
-      t.text   :content, null: false
+      t.text   :text, null: false
 
       t.timestamps
     end
