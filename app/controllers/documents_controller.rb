@@ -26,6 +26,6 @@ class DocumentsController < ApplicationController
   end
 
   def update_params
-    params.require(:document).permit(:title, :content)
+    params.require(:document).permit(:title, :text)
   end
 end
