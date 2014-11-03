@@ -10,7 +10,9 @@ module Deletables::Destroy
     authorize! :delete, @deletable
 
     if @deletable.mark_as_deleted_by! current_user
-      dispatch_event :delete, @deletable, for: @deletable.to_question.watchers, anonymous: (@deletable.is_a?(Question) && @deletable.anonymous)
+      if @deletable.respond_to? :to_question
+        dispatch_event :delete, @deletable, for: @deletable.to_question.watchers, anonymous: (@deletable.is_a?(Question) && @deletable.anonymous)
+      end
 
       flash[:notice] = t "#{@model}.delete.success"
     else

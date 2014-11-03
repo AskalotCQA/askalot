@@ -16,12 +16,15 @@ module Editables::Update
     if @editable.changed?
       if @editable.update_attributes_by_revision(@revision)
 
-        attribute = { attribute: :@editable.is_a?(Document) ? :content : :text }
-        process_markdown_for @editable, attribute do |user|
-          dispatch_event :mention, @editable, for: user
+        if @editable.respond_to? :text
+          process_markdown_for @editable do |user|
+            dispatch_event :mention, @editable, for: user
+          end
         end
 
-        dispatch_event :update, @editable, for: @editable.to_question.watchers, anonymous: (@editable.is_a?(Question) && @editable.anonymous)
+        if @editable.respond_to? :to_question
+          dispatch_event :update, @editable, for: @editable.to_question.watchers, anonymous: (@editable.is_a?(Question) && @editable.anonymous)
+        end
 
         flash[:notice] = t "#{@model}.update.success"
       else
