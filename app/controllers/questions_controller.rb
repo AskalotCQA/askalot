@@ -58,13 +58,13 @@ class QuestionsController < ApplicationController
       dispatch_event :create, @question, for: @question.parent.watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
       register_watching_for @question
 
-      flash[:notice]     = t('question.create.success')
-      flash.now[:notice] = t('question.create.success')
+      flash[:notice] = t('question.create.success')
 
       redirect_to @question.category.blank? ? document_questions_path(document_id: @question.document_id) : question_path(@question)
     else
-      # TODO (jharinek) if parent is document
       @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
+      @document = @question.document
+      @group    = @document.group if @document
 
       render :new
     end
