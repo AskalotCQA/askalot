@@ -1,22 +1,28 @@
 sk:
   document:
     new:
-      title: 'Nový dokument'
-      feature: 'Nový dokument'
-      submit: 'Vytvoriť dokument'
-      cancel: 'Zrušiť'
+      title: "Nový dokument"
+      feature: "Nový dokument"
+      submit: "Vytvoriť dokument"
+      cancel: "Zrušiť"
 
     create:
-      success: 'Dokument bol úspešne pridaný'
+      success: "Dokument bol úspešne pridaný"
 
     delete:
-      action: 'Zmazať'
-      title: 'Pozor!'
-      text: 'Naozaj chcete zmazať dokument?'
-      cancel: 'Zrušiť'
-      submit: 'Zmazať'
+      action: "Zmazať"
+      title: "Pozor!"
+      text: "Naozaj chcete zmazať dokument?"
+      cancel: "Zrušiť"
+      submit: "Zmazať"
+      success: "Dokument bol úspešne zmazaný."
+      failure: "Dokument sa nepodarilo zmazať."
 
     edit:
       action: "Upraviť"
       title: "Úprava dokumentu"
+
+    update:
+      unchanged: "Dokument nebol zmenený."
+      success: "Dokument bol úspešne aktualizovaný."
 

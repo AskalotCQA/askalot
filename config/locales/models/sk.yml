@@ -25,10 +25,10 @@ sk:
       other: "komentárov"
 
     document:
-      zero: 'dokumentov'
-      one: 'dokument'
-      few: 'dokumenty'
-      other: 'dokumentov'
+      zero: "dokumentov"
+      one: "dokument"
+      few: "dokumenty"
+      other: "dokumentov"
 
     evaluation:
       zero: "hodnotení"
@@ -55,10 +55,10 @@ sk:
       other: "nasledovníkov"
 
     group:
-      zero: 'skupín'
-      one: 'skupina'
-      few: 'skupiny'
-      other: 'skupín'
+      zero: "skupín"
+      one: "skupina"
+      few: "skupiny"
+      other: "skupín"
 
     notification:
       zero: "notifikácií"

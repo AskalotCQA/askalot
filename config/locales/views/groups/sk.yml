@@ -1,33 +1,39 @@
 sk:
   group:
-    navigation: 'Skupiny'
+    navigation: "Skupiny"
     list: "Zoznam skupín"
 
     create:
-      success: 'Skupina bola úspešne vytvorená'
+      success: "Skupina bola úspešne vytvorená"
 
     new:
-      title: 'Nová skupina'
-      submit: 'Vytvoriť'
-      cancel: 'Zrušiť'
+      title: "Nová skupina"
+      submit: "Vytvoriť"
+      cancel: "Zrušiť"
 
     index:
-      title: 'Skupiny'
-      no_results_found: 'Neboli nájdené žiadne skupiny'
+      title: "Skupiny"
+      no_results_found: "Neboli nájdené žiadne skupiny"
 
     edit:
       action: "Upraviť"
       title: "Úprava skupiny"
 
+    update:
+      success: "Skupina bola úspešne aktualizovaná."
+      unchanged: "Skupina nebola zmenená."
+
     delete:
       action: "Zmazať"
+      title: "Pozor!"
+      text: "Naozaj chcete zmazať skupinu?"
       cancel: "Zrušiť"
       submit: "Zmazať"
-      text: "Naozaj chcete zmazať skupinu?"
-      title: "Pozor!"
+      success: "Skupina bola úspešne zmazaná."
+      failure: "Skupinu sa nepodarilo zmazať."
 
     tab:
-      all: 'Všetky'
+      all: "Všetky"
 
     visibility:
       public: "Verejná"
