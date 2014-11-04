@@ -31,7 +31,7 @@ class QuestionsController < ApplicationController
 
   def document_questions_index
     @document  = Document.find(params[:document_id])
-    @questions = @document.questions
+    @questions = @document.questions.order(touched_at: :desc)
 
     @questions = @questions.page(params[:page]).per(20)
   end
