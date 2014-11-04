@@ -26,3 +26,8 @@ sk:
       unchanged: "Dokument nebol zmenený."
       success: "Dokument bol úspešne aktualizovaný."
 
+    details:
+      created: "Pridal"
+      updated: "Upravil"
+      deleted: "Zmazal"
+
