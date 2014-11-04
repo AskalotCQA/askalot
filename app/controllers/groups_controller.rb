@@ -26,10 +26,12 @@ class GroupsController < ApplicationController
   def show
     @group     = Group.find(params[:id])
     @documents = @group.documents
+
+    authorize! :show, @group
   end
 
   def index
-    @groups = Group.all
+    @groups = Group.accessible_by(current_ability)
   end
 
   private
