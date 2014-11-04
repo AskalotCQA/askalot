@@ -32,6 +32,8 @@ class Question < ActiveRecord::Base
   validates :text,      presence: true, length: { minimum: 2 }
   validates :anonymous, inclusion: { in: [true, false] }
 
+  default_scope -> { where(document: nil) }
+
   scope :random,     lambda { select('questions.*, random()').order('random()') }
   scope :recent,     lambda { order(touched_at: :desc) }
   scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }
