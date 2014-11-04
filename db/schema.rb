@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624065642) do
+ActiveRecord::Schema.define(version: 20141103192331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,8 +43,8 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "deleted",    default: false, null: false
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
   end
 
   add_index "answer_revisions", ["answer_id"], name: "index_answer_revisions_on_answer_id", using: :btree
@@ -65,17 +65,15 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.decimal  "votes_lb_wsci_bp",  precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
     t.boolean  "edited",                                      default: false, null: false
     t.integer  "evaluations_count",                           default: 0,     null: false
-    t.integer  "document_id"
   end
 
   add_index "answers", ["author_id"], name: "index_answers_on_author_id", using: :btree
   add_index "answers", ["deleted"], name: "index_answers_on_deleted", using: :btree
   add_index "answers", ["deletor_id"], name: "index_answers_on_deletor_id", using: :btree
-  add_index "answers", ["document_id"], name: "index_answers_on_document_id", using: :btree
   add_index "answers", ["edited"], name: "index_answers_on_edited", using: :btree
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
   add_index "answers", ["votes_difference"], name: "index_answers_on_votes_difference", using: :btree
@@ -124,8 +122,8 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "deleted",    default: false, null: false
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
   end
 
   add_index "comment_revisions", ["comment_id"], name: "index_comment_revisions_on_comment_id", using: :btree
@@ -143,8 +141,8 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.boolean  "deleted",          default: false, null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
     t.boolean  "edited",           default: false, null: false
   end
 
@@ -154,20 +152,40 @@ ActiveRecord::Schema.define(version: 20140624065642) do
   add_index "comments", ["deletor_id"], name: "index_comments_on_deletor_id", using: :btree
   add_index "comments", ["edited"], name: "index_comments_on_edited", using: :btree
 
-  create_table "documents", force: true do |t|
-    t.integer  "group_id",                      null: false
-    t.string   "title",                         null: false
-    t.string   "document_type"
-    t.text     "content"
+  create_table "document_revisions", force: true do |t|
+    t.integer  "document_id", null: false
+    t.integer  "editor_id",   null: false
+    t.string   "title",       null: false
+    t.text     "text",        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "deleted",       default: false, null: false
-    t.integer  "deletor_id"
-    t.datetime "deleted_at"
   end
 
+  add_index "document_revisions", ["document_id"], name: "index_document_revisions_on_document_id", using: :btree
+  add_index "document_revisions", ["editor_id"], name: "index_document_revisions_on_editor_id", using: :btree
+
+  create_table "documents", force: true do |t|
+    t.integer  "author_id",                       null: false
+    t.integer  "group_id",                        null: false
+    t.string   "title",                           null: false
+    t.text     "text",                            null: false
+    t.boolean  "deleted",         default: false, null: false
+    t.integer  "deletor_id"
+    t.datetime "deleted_at"
+    t.integer  "questions_count", default: 0,     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "edited",          default: false, null: false
+    t.datetime "edited_at"
+    t.integer  "editor_id"
+    t.boolean  "anonymous",       default: false, null: false
+  end
+
+  add_index "documents", ["anonymous"], name: "index_documents_on_anonymous", using: :btree
   add_index "documents", ["deletor_id"], name: "index_documents_on_deletor_id", using: :btree
+  add_index "documents", ["edited"], name: "index_documents_on_edited", using: :btree
   add_index "documents", ["group_id"], name: "index_documents_on_group_id", using: :btree
+  add_index "documents", ["questions_count"], name: "index_documents_on_questions_count", using: :btree
   add_index "documents", ["title"], name: "index_documents_on_title", using: :btree
 
   create_table "evaluations", force: true do |t|
@@ -179,8 +197,8 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "deleted",        default: false, null: false
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
   end
 
   add_index "evaluations", ["author_id"], name: "index_evaluations_on_author_id", using: :btree
@@ -201,8 +219,8 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.boolean  "deleted",     default: false, null: false
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
   end
 
   add_index "favorites", ["deleted"], name: "index_favorites_on_deleted", using: :btree
@@ -227,20 +245,47 @@ ActiveRecord::Schema.define(version: 20140624065642) do
   add_index "followings", ["follower_id", "followee_id"], name: "index_followings_on_unique_key", unique: true, using: :btree
   add_index "followings", ["follower_id"], name: "index_followings_on_follower_id", using: :btree
 
+  create_table "group_members", force: true do |t|
+    t.integer "group_id",                    null: false
+    t.integer "user_id",                     null: false
+    t.string  "role",     default: "member", null: false
+  end
+
+  add_index "group_members", ["group_id"], name: "index_group_members_on_group_id", using: :btree
+  add_index "group_members", ["user_id"], name: "index_group_members_on_user_id", using: :btree
+
+  create_table "group_revisions", force: true do |t|
+    t.integer  "group_id",                       null: false
+    t.integer  "editor_id",                      null: false
+    t.string   "title",                          null: false
+    t.text     "description"
+    t.string   "visibility",  default: "public", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "group_revisions", ["editor_id"], name: "index_group_revisions_on_editor_id", using: :btree
+  add_index "group_revisions", ["group_id"], name: "index_group_revisions_on_group_id", using: :btree
+
   create_table "groups", force: true do |t|
-    t.integer  "owner_id",                           null: false
-    t.string   "title",           default: "",       null: false
-    t.string   "description"
+    t.integer  "creator_id",                         null: false
+    t.string   "title",                              null: false
+    t.text     "description"
     t.string   "visibility",      default: "public", null: false
     t.boolean  "deleted",         default: false,    null: false
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
+    t.integer  "documents_count", default: 0,        null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "documents_count", default: 0,        null: false
+    t.boolean  "edited",          default: false,    null: false
+    t.datetime "edited_at"
+    t.integer  "editor_id"
   end
 
+  add_index "groups", ["creator_id"], name: "index_groups_on_creator_id", using: :btree
   add_index "groups", ["deletor_id"], name: "index_groups_on_deletor_id", using: :btree
-  add_index "groups", ["owner_id"], name: "index_groups_on_owner_id", using: :btree
+  add_index "groups", ["edited"], name: "index_groups_on_edited", using: :btree
   add_index "groups", ["title"], name: "index_groups_on_title", using: :btree
 
   create_table "labelings", force: true do |t|
@@ -250,8 +295,8 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.boolean  "deleted",    default: false, null: false
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
   end
 
   add_index "labelings", ["answer_id", "label_id", "author_id"], name: "index_labelings_on_unique_key", unique: true, using: :btree
@@ -294,19 +339,21 @@ ActiveRecord::Schema.define(version: 20140624065642) do
   create_table "question_revisions", force: true do |t|
     t.integer  "question_id",                 null: false
     t.integer  "editor_id",                   null: false
-    t.string   "category",                    null: false
+    t.string   "category"
     t.string   "tags",                        null: false, array: true
     t.string   "title",                       null: false
     t.text     "text",                        null: false
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.boolean  "deleted",     default: false, null: false
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
+    t.integer  "document_id"
   end
 
   add_index "question_revisions", ["deleted"], name: "index_question_revisions_on_deleted", using: :btree
   add_index "question_revisions", ["deletor_id"], name: "index_question_revisions_on_deletor_id", using: :btree
+  add_index "question_revisions", ["document_id"], name: "index_question_revisions_on_document_id", using: :btree
   add_index "question_revisions", ["editor_id"], name: "index_question_revisions_on_editor_id", using: :btree
   add_index "question_revisions", ["question_id"], name: "index_question_revisions_on_question_id", using: :btree
 
@@ -327,12 +374,12 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.integer  "slido_question_uuid"
     t.integer  "slido_event_uuid"
     t.boolean  "deleted",                                       default: false, null: false
-    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "touched_at",                                                    null: false
+    t.decimal  "votes_lb_wsci_bp",    precision: 13, scale: 12, default: 0.0,   null: false
     t.datetime "edited_at"
     t.integer  "editor_id"
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
     t.boolean  "edited",                                        default: false, null: false
     t.integer  "evaluations_count",                             default: 0,     null: false
     t.integer  "document_id"
@@ -382,8 +429,8 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.boolean  "deleted",     default: false, null: false
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
     t.integer  "author_id",                   null: false
   end
 
@@ -458,6 +505,7 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.integer  "followers_count",        default: 0,         null: false
     t.integer  "followees_count",        default: 0,         null: false
     t.integer  "evaluations_count",      default: 0,         null: false
+    t.integer  "documents_count",        default: 0,         null: false
   end
 
   add_index "users", ["ais_login"], name: "index_users_on_ais_login", unique: true, using: :btree
@@ -479,8 +527,8 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.integer  "viewer_id",                   null: false
     t.datetime "created_at",                  null: false
     t.boolean  "deleted",     default: false, null: false
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
   end
 
   add_index "views", ["deleted"], name: "index_views_on_deleted", using: :btree
@@ -496,8 +544,8 @@ ActiveRecord::Schema.define(version: 20140624065642) do
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
     t.boolean  "deleted",      default: false, null: false
-    t.datetime "deleted_at"
     t.integer  "deletor_id"
+    t.datetime "deleted_at"
   end
 
   add_index "votes", ["deleted"], name: "index_votes_on_deleted", using: :btree

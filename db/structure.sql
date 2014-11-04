@@ -339,6 +339,82 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
+-- Name: document_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE document_revisions (
+    id integer NOT NULL,
+    document_id integer NOT NULL,
+    editor_id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    text text NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: document_revisions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE document_revisions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: document_revisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE document_revisions_id_seq OWNED BY document_revisions.id;
+
+
+--
+-- Name: documents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE documents (
+    id integer NOT NULL,
+    author_id integer NOT NULL,
+    group_id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    text text NOT NULL,
+    deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer,
+    deleted_at timestamp without time zone,
+    questions_count integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    edited boolean DEFAULT false NOT NULL,
+    edited_at timestamp without time zone,
+    editor_id integer,
+    anonymous boolean DEFAULT false NOT NULL
+);
+
+
+--
+-- Name: documents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE documents_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: documents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE documents_id_seq OWNED BY documents.id;
+
+
+--
 -- Name: evaluations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -477,6 +553,113 @@ ALTER SEQUENCE followings_id_seq OWNED BY followings.id;
 
 
 --
+-- Name: group_members; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE group_members (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    user_id integer NOT NULL,
+    role character varying(255) DEFAULT 'member'::character varying NOT NULL
+);
+
+
+--
+-- Name: group_members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE group_members_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: group_members_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE group_members_id_seq OWNED BY group_members.id;
+
+
+--
+-- Name: group_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE group_revisions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    editor_id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    description text,
+    visibility character varying(255) DEFAULT 'public'::character varying NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: group_revisions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE group_revisions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: group_revisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE group_revisions_id_seq OWNED BY group_revisions.id;
+
+
+--
+-- Name: groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE groups (
+    id integer NOT NULL,
+    creator_id integer NOT NULL,
+    title character varying(255) NOT NULL,
+    description text,
+    visibility character varying(255) DEFAULT 'public'::character varying NOT NULL,
+    deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer,
+    deleted_at timestamp without time zone,
+    documents_count integer DEFAULT 0 NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    edited boolean DEFAULT false NOT NULL,
+    edited_at timestamp without time zone,
+    editor_id integer
+);
+
+
+--
+-- Name: groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
+
+
+--
 -- Name: labelings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -589,7 +772,7 @@ CREATE TABLE question_revisions (
     id integer NOT NULL,
     question_id integer NOT NULL,
     editor_id integer NOT NULL,
-    category character varying(255) NOT NULL,
+    category character varying(255),
     tags character varying(255)[] NOT NULL,
     title character varying(255) NOT NULL,
     text text NOT NULL,
@@ -597,7 +780,8 @@ CREATE TABLE question_revisions (
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     deletor_id integer,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    document_id integer
 );
 
 
@@ -627,7 +811,7 @@ ALTER SEQUENCE question_revisions_id_seq OWNED BY question_revisions.id;
 CREATE TABLE questions (
     id integer NOT NULL,
     author_id integer NOT NULL,
-    category_id integer NOT NULL,
+    category_id integer,
     title character varying(255) NOT NULL,
     text text NOT NULL,
     created_at timestamp without time zone NOT NULL,
@@ -649,7 +833,8 @@ CREATE TABLE questions (
     deletor_id integer,
     deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    document_id integer
 );
 
 
@@ -876,7 +1061,8 @@ CREATE TABLE users (
     remember_token character varying(255),
     followers_count integer DEFAULT 0 NOT NULL,
     followees_count integer DEFAULT 0 NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    documents_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1066,6 +1252,20 @@ ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq':
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY document_revisions ALTER COLUMN id SET DEFAULT nextval('document_revisions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY documents ALTER COLUMN id SET DEFAULT nextval('documents_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY evaluations ALTER COLUMN id SET DEFAULT nextval('evaluations_id_seq'::regclass);
 
 
@@ -1088,6 +1288,27 @@ ALTER TABLE ONLY favorites ALTER COLUMN id SET DEFAULT nextval('favorites_id_seq
 --
 
 ALTER TABLE ONLY followings ALTER COLUMN id SET DEFAULT nextval('followings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY group_members ALTER COLUMN id SET DEFAULT nextval('group_members_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY group_revisions ALTER COLUMN id SET DEFAULT nextval('group_revisions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY groups ALTER COLUMN id SET DEFAULT nextval('groups_id_seq'::regclass);
 
 
 --
@@ -1246,6 +1467,22 @@ ALTER TABLE ONLY comments
 
 
 --
+-- Name: document_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY document_revisions
+    ADD CONSTRAINT document_revisions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY documents
+    ADD CONSTRAINT documents_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: evaluations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1275,6 +1512,30 @@ ALTER TABLE ONLY favorites
 
 ALTER TABLE ONLY followings
     ADD CONSTRAINT followings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: group_members_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY group_members
+    ADD CONSTRAINT group_members_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: group_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY group_revisions
+    ADD CONSTRAINT group_revisions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY groups
+    ADD CONSTRAINT groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -1620,6 +1881,62 @@ CREATE INDEX index_comments_on_edited ON comments USING btree (edited);
 
 
 --
+-- Name: index_document_revisions_on_document_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_document_revisions_on_document_id ON document_revisions USING btree (document_id);
+
+
+--
+-- Name: index_document_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_document_revisions_on_editor_id ON document_revisions USING btree (editor_id);
+
+
+--
+-- Name: index_documents_on_anonymous; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_documents_on_anonymous ON documents USING btree (anonymous);
+
+
+--
+-- Name: index_documents_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_documents_on_deletor_id ON documents USING btree (deletor_id);
+
+
+--
+-- Name: index_documents_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_documents_on_edited ON documents USING btree (edited);
+
+
+--
+-- Name: index_documents_on_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_documents_on_group_id ON documents USING btree (group_id);
+
+
+--
+-- Name: index_documents_on_questions_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_documents_on_questions_count ON documents USING btree (questions_count);
+
+
+--
+-- Name: index_documents_on_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_documents_on_title ON documents USING btree (title);
+
+
+--
 -- Name: index_evaluations_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1722,6 +2039,62 @@ CREATE INDEX index_followings_on_follower_id ON followings USING btree (follower
 --
 
 CREATE UNIQUE INDEX index_followings_on_unique_key ON followings USING btree (follower_id, followee_id);
+
+
+--
+-- Name: index_group_members_on_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_group_members_on_group_id ON group_members USING btree (group_id);
+
+
+--
+-- Name: index_group_members_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_group_members_on_user_id ON group_members USING btree (user_id);
+
+
+--
+-- Name: index_group_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_group_revisions_on_editor_id ON group_revisions USING btree (editor_id);
+
+
+--
+-- Name: index_group_revisions_on_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_group_revisions_on_group_id ON group_revisions USING btree (group_id);
+
+
+--
+-- Name: index_groups_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_groups_on_creator_id ON groups USING btree (creator_id);
+
+
+--
+-- Name: index_groups_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_groups_on_deletor_id ON groups USING btree (deletor_id);
+
+
+--
+-- Name: index_groups_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_groups_on_edited ON groups USING btree (edited);
+
+
+--
+-- Name: index_groups_on_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_groups_on_title ON groups USING btree (title);
 
 
 --
@@ -1844,6 +2217,13 @@ CREATE INDEX index_question_revisions_on_deletor_id ON question_revisions USING 
 
 
 --
+-- Name: index_question_revisions_on_document_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_question_revisions_on_document_id ON question_revisions USING btree (document_id);
+
+
+--
 -- Name: index_question_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1890,6 +2270,13 @@ CREATE INDEX index_questions_on_deleted ON questions USING btree (deleted);
 --
 
 CREATE INDEX index_questions_on_deletor_id ON questions USING btree (deletor_id);
+
+
+--
+-- Name: index_questions_on_document_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_questions_on_document_id ON questions USING btree (document_id);
 
 
 --
@@ -2425,5 +2812,27 @@ INSERT INTO schema_migrations (version) VALUES ('20140429003614');
 
 INSERT INTO schema_migrations (version) VALUES ('20140513162801');
 
+INSERT INTO schema_migrations (version) VALUES ('20140523053735');
+
+INSERT INTO schema_migrations (version) VALUES ('20140523053753');
+
+INSERT INTO schema_migrations (version) VALUES ('20140523053816');
+
 INSERT INTO schema_migrations (version) VALUES ('20140611004811');
+
+INSERT INTO schema_migrations (version) VALUES ('20141008092820');
+
+INSERT INTO schema_migrations (version) VALUES ('20141008095014');
+
+INSERT INTO schema_migrations (version) VALUES ('20141025092934');
+
+INSERT INTO schema_migrations (version) VALUES ('20141101205230');
+
+INSERT INTO schema_migrations (version) VALUES ('20141101205246');
+
+INSERT INTO schema_migrations (version) VALUES ('20141101214034');
+
+INSERT INTO schema_migrations (version) VALUES ('20141103003512');
+
+INSERT INTO schema_migrations (version) VALUES ('20141103192331');
 
