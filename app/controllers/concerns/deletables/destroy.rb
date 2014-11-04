@@ -29,7 +29,13 @@ module Deletables::Destroy
     else
       respond_to do |format|
         format.html { redirect_to :back, format: :html }
-        format.js   { redirect_to :back, format: :js }
+        format.js   {
+          if @deletable.is_a?(Answer) || @deletable.is_a?(Comment)
+            redirect_to question_path(@deletable.to_question), format: :js
+          else
+            redirect_to :back, format: :js
+          end
+        }
       end
     end
   end

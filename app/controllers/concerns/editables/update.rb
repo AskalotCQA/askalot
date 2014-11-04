@@ -30,6 +30,7 @@ module Editables::Update
       else
         @revision.destroy!
 
+        # TODO (jharinek) error messages for js request
         flash_error_messages_for @editable
       end
     else
@@ -40,7 +41,13 @@ module Editables::Update
 
     respond_to do |format|
       format.html { redirect_to :back, format: :html }
-      format.js   { redirect_to :back, format: :js }
+      format.js   {
+        if @editable.is_a?(Question) || @editable.is_a?(Answer) || @editable.is_a?(Comment)
+          redirect_to question_path(@editable.to_question), format: :js
+        else
+          redirect_to :back, format: :js
+        end
+      }
     end
   end
 end
