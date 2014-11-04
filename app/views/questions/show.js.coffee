@@ -5,4 +5,6 @@ $(document).ready ->
   $('#document-<%= @document.id %>').attr class: 'well well-active'
   $('#document-content').css 'margin-top', $('#document-<%= @document.id %>').position().top
 
+  $('.modal-backdrop').remove()
+
   fixes()
