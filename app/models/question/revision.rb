@@ -7,7 +7,6 @@ class Question
     belongs_to :editor, class_name: :User
 
     def self.create_revision!(editor, question)
-      binding.pry
       revision          = Question::Revision.new
       revision.editor   = editor
       revision.question = question
