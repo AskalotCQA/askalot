@@ -32,15 +32,13 @@ class Question < ActiveRecord::Base
   validates :text,      presence: true, length: { minimum: 2 }
   validates :anonymous, inclusion: { in: [true, false] }
 
-  default_scope -> { where(document: nil) }
-
   scope :random,     lambda { select('questions.*, random()').order('random()') }
-  scope :recent,     lambda { order(touched_at: :desc) }
-  scope :unanswered, lambda { includes(:answers).where(answers: { question_id: nil }) }
-  scope :answered,   lambda { joins(:answers).uniq }
-  scope :solved,     lambda { joins(:answers).merge(best_answers).references(:labelings).uniq }
+  scope :recent,     lambda { where(document: nil).order(touched_at: :desc) }
+  scope :unanswered, lambda { includes(:answers).where(document: nil, answers: { question_id: nil }) }
+  scope :answered,   lambda { where(document: nil).joins(:answers).uniq }
+  scope :solved,     lambda { where(document: nil).joins(:answers).merge(best_answers).references(:labelings).uniq }
 
-  scope :answered_but_not_best, lambda { joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).references(:labeling).uniq.select('questions.id')).uniq }
+  scope :answered_but_not_best, lambda { joins(:answers).where(document: nil).where('questions.id not in (?)', joins(:answers).merge(best_answers).references(:labeling).uniq.select('questions.id')).uniq }
 
   scope :by, lambda { |user| where(author: user) }
 
