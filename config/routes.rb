@@ -112,4 +112,6 @@ Askalot::Application.routes.draw do
   end
 
   resources :changelogs
+
+  post 'facebook/*path', to: 'facebook#redirect', as: :facebook
 end

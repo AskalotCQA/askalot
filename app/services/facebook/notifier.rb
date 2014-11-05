@@ -5,6 +5,7 @@ module Facebook
     def publish(action, initiator, resource, options = {})
       return unless [Answer, Question, Comment].find { |type| resource.is_a? type }
 
+      controller  = options.delete(:controller)
       application = FbGraph::Application.new(Configuration.facebook.application.id, secret: Configuration.facebook.application.secret)
 
       attributes = {action: action, initiator: initiator, resource: resource}
@@ -15,8 +16,8 @@ module Facebook
 
         user.notification!(
           access_token: application.get_access_token,
-          href: render_to_string(partial: 'facebook/notification_link', locals: attributes),
-          template: render_to_string(partial: 'facebook/notification_content', locals: attributes)
+          href: Nokogiri::HTML(controller.render_to_string(partial: 'facebook/notification_link', locals: attributes)).css('a')[0][:href],
+          template: controller.render_to_string(partial: 'facebook/notification_content', locals: attributes).strip
         )
       end
     end
