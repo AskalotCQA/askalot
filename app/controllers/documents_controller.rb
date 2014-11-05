@@ -7,10 +7,9 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(create_params)
-    @group = Group.find(params[:id])
+    @group    = Group.find(params[:id])
 
     if @document.save
-
       flash[:notice] = t('document.create.success')
     else
       flash_error_messages_for @document
