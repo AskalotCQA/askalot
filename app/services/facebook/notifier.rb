@@ -1,35 +1,23 @@
-facebook = module Facebook
+module Facebook
   module Notifier
-    include QuestionsHelper
-    include TextHelper
-
-    include ActivitiesHelper
-    include NotificationsHelper
-
-    include ActionView::Helpers::TextHelper
-    include ActionView::Helpers::TranslationHelper
-
-    include ERB::Util
-
     extend self
 
     def publish(action, initiator, resource, options = {})
+      return unless [Answer, Question, Comment].find { |type| resource.is_a? type }
+
+      application = FbGraph::Application.new(Configuration.facebook.application.id, secret: Configuration.facebook.application.secret)
+
+      attributes = {action: action, initiator: initiator, resource: resource}
       recipients = (Array.wrap(options[:for] || resource.watchers) - [initiator]).uniq
 
-      if [Answer, Question, Comment].find { |type| resource.is_a? type }
-        recipients.each do |recipient|
+      recipients.select { |recipient| recipient.omniauth_token }.each do |recipient|
+        user = FbGraph::User.me(recipient.omniauth_token).fetch
 
-          if recipient.omniauth_token
-            user = FbGraph::User.me(recipient.omniauth_token).fetch
-            application = FbGraph::Application.new(Configuration.facebook.application.id, secret: Configuration.facebook.application.secret)
-
-            user.notification!(
-              access_token: application.get_access_token,
-              href: Configuration.facebook.application.link,
-              template: notification_content_by_attributes(action, initiator, resource, unlink: true)
-            )
-          end
-        end
+        user.notification!(
+          access_token: application.get_access_token,
+          href: render_to_string(partial: 'facebook/notification_link', locals: attributes),
+          template: render_to_string(partial: 'facebook/notification_content', locals: attributes)
+        )
       end
     end
   end

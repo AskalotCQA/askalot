@@ -34,13 +34,17 @@ module ActivitiesHelper
       return translate content, resource: resource_body, question: question_body
     end
 
-    resource_link = link_to_activity action, initiator, resource, resource_options.merge(body: resource_body)
-    question_link = link_to_activity action, initiator, resource, question_options.merge(body: question_body)
+    resource_link = link_to_activity_by_attributes action, initiator, resource, resource_options.merge(body: resource_body)
+    question_link = link_to_activity_by_attributes action, initiator, resource, question_options.merge(body: question_body)
 
     translate(content, resource: resource_link, question: question_link).html_safe
   end
 
-  def link_to_activity(action, initiator, resource, options = {}, &block)
+  def link_to_activity(activity, option = {}, &block)
+    link_to_activity_by_attributes(activity.action, activity.initiator, activity.resource, options, &block)
+  end
+
+  def link_to_activity_by_attributes(action, initiator, resource, options = {}, &block)
     options[:body] = capture(&block) if block_given?
 
     # TODO(zbell) add specific link_to_* helpers for all cases
