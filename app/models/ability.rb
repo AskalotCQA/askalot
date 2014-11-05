@@ -51,6 +51,7 @@ class Ability
 
     if user.role? :administrator
       can :administrate, :all
+      can :observe, :all
 
       can :edit,   [Question, Answer, Comment]
       can :delete, [Question, Answer, Comment]

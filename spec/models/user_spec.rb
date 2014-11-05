@@ -104,6 +104,131 @@ describe User do
     end
   end
 
+  describe '.role?' do
+    let(:category) { create :category }
+
+    context 'when AIS student' do
+      it 'is student' do
+        user = build :student
+
+        expect(user.role? :student).to be_true
+        expect(user.role? :teacher).to be_false
+        expect(user.role? :administrator).to be_false
+      end
+
+      context 'with assignment to teacher' do
+        it 'is still student' do
+          user = build :student
+
+          create :assignment, user: user, category: category, role: Role.find_by(name: :teacher)
+
+          expect(user.role? :student).to be_true
+          expect(user.role? :teacher).to be_false
+          expect(user.role? :administrator).to be_false
+        end
+      end
+    end
+
+    context 'when AIS teacher' do
+      it 'is teacher' do
+        user = build :teacher
+
+        expect(user.role? :student).to be_false
+        expect(user.role? :teacher).to be_true
+        expect(user.role? :administrator).to be_false
+      end
+
+      context 'with assignment to administrator' do
+        it 'is still teacher' do
+          user = build :teacher
+
+          create :assignment, user: user, category: category, role: Role.find_by(name: :administrator)
+
+          expect(user.role? :student).to be_false
+          expect(user.role? :teacher).to be_true
+          expect(user.role? :administrator).to be_false
+        end
+      end
+    end
+
+    context 'when AIS administrator' do
+      it 'is administrator' do
+        user = build :administrator
+
+        expect(user.role? :student).to be_false
+        expect(user.role? :teacher).to be_false
+        expect(user.role? :administrator).to be_true
+      end
+    end
+  end
+
+  describe '.assigned?' do
+    let(:a) { create :category }
+    let(:b) { create :category }
+
+    context 'when AIS student' do
+      it 'is student' do
+        user = build :student
+
+        expect(user.assigned? a, :student).to be_true
+        expect(user.assigned? a, :teacher).to be_false
+        expect(user.assigned? a, :administrator).to be_false
+      end
+
+      context 'with assignment to teacher' do
+        it 'is teacher for assigned category, student otherwise' do
+          user = build :student
+
+          create :assignment, user: user, category: a, role: Role.find_by(name: :teacher)
+
+          expect(user.assigned? a, :student).to be_false
+          expect(user.assigned? a, :teacher).to be_true
+          expect(user.assigned? a, :administrator).to be_false
+
+          expect(user.assigned? b, :student).to be_true
+          expect(user.assigned? b, :teacher).to be_false
+          expect(user.assigned? b, :administrator).to be_false
+        end
+      end
+    end
+
+    context 'when AIS teacher' do
+      it 'is teacher' do
+        user = build :teacher
+
+        expect(user.assigned? a, :student).to be_false
+        expect(user.assigned? a, :teacher).to be_true
+        expect(user.assigned? a, :administrator).to be_false
+      end
+
+      context 'with assignment to administrator' do
+        it 'is administrator for assigned category, teacher otherwise' do
+          user = build :teacher
+
+          create :assignment, user: user, category: a, role: Role.find_by(name: :administrator)
+
+          expect(user.assigned? a, :student).to be_false
+          expect(user.assigned? a, :teacher).to be_false
+          expect(user.assigned? a, :administrator).to be_true
+
+          expect(user.assigned? b, :student).to be_false
+          expect(user.assigned? b, :teacher).to be_true
+          expect(user.assigned? b, :administrator).to be_false
+        end
+      end
+    end
+
+    context 'when AIS administrator' do
+      it 'is administrator' do
+        user = build :administrator
+
+        expect(user.assigned? a, :student).to be_false
+        expect(user.assigned? a, :teacher).to be_false
+        expect(user.assigned? a, :administrator).to be_true
+      end
+    end
+  end
+
   describe 'Abilities' do
     let(:ability) { Ability.new(user) }
 
@@ -216,7 +341,7 @@ describe User do
     end
   end
 
-  describe "following" do
+  describe 'following' do
     let(:other_user) { create :user }
 
     before do
@@ -224,17 +349,17 @@ describe User do
       user.follow!(other_user)
     end
 
-    it 'user follow othe user' do
+    it 'user follow other user' do
       expect(user.followees).to include(other_user)
     end
 
-    describe "followee" do
+    describe 'followee' do
       it 'other user followed by user' do
         expect(other_user.followers).to include(user)
       end
     end
 
-    describe "unfollow" do
+    describe 'unfollow' do
       before do
         user.unfollow!(other_user)
       end
@@ -247,6 +372,5 @@ describe User do
         expect(other_user.followers).not_to include(user)
       end
     end
-
   end
 end

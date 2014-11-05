@@ -15,6 +15,10 @@ FactoryGirl.define do
 
     role :student
 
+    factory :student, class: :User do
+      role :student
+    end
+
     factory :teacher, class: :User do
       role :teacher
     end
