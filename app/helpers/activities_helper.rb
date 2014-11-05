@@ -40,7 +40,7 @@ module ActivitiesHelper
     translate(content, resource: resource_link, question: question_link).html_safe
   end
 
-  def link_to_activity(activity, option = {}, &block)
+  def link_to_activity(activity, options = {}, &block)
     link_to_activity_by_attributes(activity.action, activity.initiator, activity.resource, options, &block)
   end
 
