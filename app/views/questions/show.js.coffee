@@ -8,3 +8,5 @@ $(document).ready ->
   $('.modal-backdrop').remove()
 
   fixes()
+
+  new Select()

@@ -6,3 +6,5 @@ $(document).ready ->
   $('#document-content').css 'margin-top', $('#document-<%= @document.id %>').position().top
 
   fixes()
+
+  new Select()
