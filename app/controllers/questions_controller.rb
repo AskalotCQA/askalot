@@ -60,7 +60,7 @@ class QuestionsController < ApplicationController
 
       flash[:notice] = t('question.create.success')
 
-      redirect_to @question.category.blank? ? document_questions_path(document_id: @question.document_id) : question_path(@question)
+      redirect_to question_path(@question)
     else
       @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
       @document = @question.document
