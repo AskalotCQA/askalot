@@ -10,6 +10,7 @@ module Deletables::Destroy
     authorize! :delete, @deletable
 
     if @deletable.mark_as_deleted_by! current_user
+      # TODO (jharinek) refactor after making G,D watchable, notifiable
       if @deletable.respond_to? :to_question
         dispatch_event :delete, @deletable, for: @deletable.to_question.watchers, anonymous: (@deletable.is_a?(Question) && @deletable.anonymous)
       end
@@ -30,6 +31,7 @@ module Deletables::Destroy
       respond_to do |format|
         format.html { redirect_to :back, format: :html }
         format.js   {
+          # TODO (jharinek) remove ifs
           if @deletable.is_a?(Answer) || @deletable.is_a?(Comment)
             redirect_to question_path(@deletable.to_question), format: :js
           else

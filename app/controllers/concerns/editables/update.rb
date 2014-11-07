@@ -22,6 +22,7 @@ module Editables::Update
           end
         end
 
+        # TODO (jharinek) refactor after making G,D watchable, notifiable
         if @editable.respond_to? :to_question
           dispatch_event :update, @editable, for: @editable.to_question.watchers, anonymous: (@editable.is_a?(Question) && @editable.anonymous)
         end
@@ -42,6 +43,7 @@ module Editables::Update
     respond_to do |format|
       format.html { redirect_to :back, format: :html }
       format.js   {
+        # TODO (jharinek) remove ifs
         if @editable.is_a?(Question) || @editable.is_a?(Answer) || @editable.is_a?(Comment)
           redirect_to question_path(@editable.to_question), format: :js
         else
