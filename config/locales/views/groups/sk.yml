@@ -3,17 +3,13 @@ sk:
     navigation: "Skupiny"
     list: "Zoznam skupín"
 
-    create:
-      success: "Skupina bola úspešne vytvorená"
-
     new:
       title: "Nová skupina"
       submit: "Vytvoriť"
       cancel: "Zrušiť"
 
-    index:
-      title: "Skupiny"
-      no_results_found: "Neboli nájdené žiadne skupiny"
+    create:
+      success: "Skupina bola úspešne vytvorená"
 
     edit:
       action: "Upraviť"
@@ -31,6 +27,15 @@ sk:
       submit: "Zmazať"
       success: "Skupina bola úspešne zmazaná."
       failure: "Skupinu sa nepodarilo zmazať."
+
+    index:
+      title: "Skupiny"
+      no_results_found: "Neboli nájdené žiadne skupiny"
+
+    details:
+      created: "Pridal"
+      updated: "Upravil"
+      deleted: "Zmazal"
 
     tab:
       all: "Všetky"

@@ -4,6 +4,7 @@
 <p class="lead"><%= @group.description %></p>
 
 <div class="group-details">
+  <%= render 'groups/details', group: @group %>
   <%= render 'groups/deleting', group: @group %>
   <%= render 'groups/editing', group: @group %>
 </div>
