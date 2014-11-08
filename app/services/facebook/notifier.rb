@@ -16,7 +16,7 @@ module Facebook
 
         user.notification!(
           access_token: application.get_access_token,
-          href: Nokogiri::HTML(controller.render_to_string(partial: 'facebook/notification_link', locals: attributes)).css('a')[0][:href],
+          href: Configuration.facebook.application.link,
           template: controller.render_to_string(partial: 'facebook/notification_content', locals: attributes).strip
         )
       end
