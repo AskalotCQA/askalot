@@ -66,6 +66,8 @@ class QuestionsController < ApplicationController
       @document = @question.document
       @group    = @document.group if @document
 
+      # TODO (jharinek) error flash messages for document question
+
       render :new
     end
   end
@@ -129,8 +131,8 @@ class QuestionsController < ApplicationController
   end
 
   def create_params
-    # TODO if document
-    params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user, document: Document.find(params[:document_id]))
+    document = Document.find(params[:document_id]) if params[:document_id]
+    params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user, document: document)
   end
 
   def update_params
