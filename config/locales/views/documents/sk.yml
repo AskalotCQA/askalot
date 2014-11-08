@@ -21,6 +21,8 @@ sk:
     edit:
       action: "Upraviť"
       title: "Úprava dokumentu"
+      submit: "Uložiť"
+      cancel: "Späť"
 
     update:
       unchanged: "Dokument nebol zmenený."

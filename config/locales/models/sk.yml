@@ -229,16 +229,17 @@ sk:
         text: "Komentár"
 
       document:
-        title: "Názov"
         text: "Text"
+        title: "Názov"
+
 
       evaluation:
         text: "Komentár"
         value: "Hodnotenie"
 
       group:
-        title: "Názov"
         description: "Popis"
+        title: "Názov"
         visibility: "Viditeľnosť"
 
       question:

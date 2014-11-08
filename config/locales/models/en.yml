@@ -24,6 +24,12 @@ en:
       few: "comments"
       other: "comments"
 
+    document:
+      zero: "documents"
+      one: "document"
+      few: "documents"
+      other: "documents"
+
     evaluation:
       zero: "evaluations"
       one: "evaluation"
@@ -47,6 +53,12 @@ en:
       one: "follower"
       few: "followers"
       other: "followers"
+
+    group:
+      zero: "groups"
+      one: "group"
+      few: "groups"
+      other: "groups"
 
     notification:
       zero: "notifications"
@@ -188,8 +200,10 @@ en:
       category: "Category"
       changelog: "Changelog"
       comment: "Comment"
+      document: "Document"
       evaluation: "Evaluation"
       favorite: "Favorite"
+      group: "Group"
       question: "Question"
       notification: "Notification"
       tag: "Tag"
@@ -214,9 +228,18 @@ en:
       comment:
         text: "Comment"
 
+      document:
+        text: "Text"
+        title: "Title"
+
       evaluation:
         text: "Comment"
         value: "Evaluation"
+
+      group:
+        description: "Description"
+        title: "Title"
+        visbility: "Visibility"
 
       question:
         anonymous: "Ask anonymously"

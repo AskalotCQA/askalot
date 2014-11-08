@@ -1,4 +1,51 @@
 en:
-  visibility:
-        public: "Public"
-        private: "Private"
+  group:
+    navigation: "Groups"
+    list: "Groups"
+
+    new:
+      title: "New group"
+      submit: "Create"
+      cancel: "Back"
+
+    create:
+      success: "Group was successfully added."
+
+    edit:
+      action: "Edit"
+      title: "Edit group"
+      submit: "Save"
+      cancel: "Back"
+
+    update:
+      success: "Group was successfully updated."
+      unchanged: "Group was not changed."
+
+    delete:
+      action: "Delete"
+      title: "Warning!"
+      text: "Are you sure you want to delete this group?"
+      cancel: "Back"
+      submit: "Delete"
+      success: "Group was successfully deleted."
+      failure: "Group could not be deleted."
+
+    index:
+      title: "Groups"
+
+    details:
+      created: "Added by"
+      updated: "Updated by"
+      deleted: "Deleted by"
+
+    tab:
+      all: "All"
+
+    visibility:
+      public: "Public"
+      private: "Private"
+
+
+    deleted: "Document was deleted"
+
+    no_records: "No documents found."
