@@ -6,6 +6,6 @@
       <% end %>
     </ol>
 
-    <%= paginate questions, params: { tab: :questions } %>
+    <%= paginate questions, remote: true, params: { tab: :questions } %>
   <% end %>
 </div>
