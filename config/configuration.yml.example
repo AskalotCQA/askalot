@@ -5,7 +5,7 @@ defaults: &defaults
   facebook:
     application:
       id: '308609915963601'
-      link: 'http://askalot.fiit.stuba.sk'
+      link: 'facebook/'
       secret: TODO
 
   mailer:

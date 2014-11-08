@@ -1,6 +1,9 @@
 class FacebookController < ApplicationController
   after_action :allow_facebook_iframe
 
+  def index
+  end
+
   def redirect
     path = "/#{params[:path]}"
 
