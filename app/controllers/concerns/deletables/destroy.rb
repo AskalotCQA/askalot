@@ -20,6 +20,7 @@ module Deletables::Destroy
       flash[:error] = t "#{@model}.delete.failure"
     end
 
+    # TODO (zbell) remove ifs, add abstract protected method call instead
     if @deletable.is_a? Question
       respond_to do |format|
         format.html { redirect_to questions_path, format: :html }
