@@ -4,12 +4,6 @@ class FacebookController < ApplicationController
 
   layout 'layouts/facebook'
 
-  def index
-  end
-
-  def notification
-  end
-
   def redirect
     path = "/#{params[:path]}"
 
