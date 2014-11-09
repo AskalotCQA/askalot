@@ -15,3 +15,24 @@
 #group-new-modal {
   margin-top: 20px;
 }
+
+.group-description {
+  h1 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+  }
+
+  h5 {
+    margin: 0 0 5px;
+    height: 20px;
+    line-height: 20px;
+
+    font-weight: bold;
+  }
+
+  ul {
+    margin-bottom: 15px;
+  }
+
+  color: $text-muted;
+}
