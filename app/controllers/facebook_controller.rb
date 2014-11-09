@@ -2,6 +2,8 @@ class FacebookController < ApplicationController
   after_action :allow_facebook_iframe
   skip_before_action :verify_authenticity_token
 
+  layout 'layouts/facebook'
+
   def index
   end
 
