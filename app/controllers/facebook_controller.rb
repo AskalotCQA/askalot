@@ -1,5 +1,6 @@
 class FacebookController < ApplicationController
-  after_action :allow_facebook_iframe
+  after_action :allow_facebook_ifram
+  skip_before_action :verify_authenticity_token
 
   def index
   end
@@ -13,6 +14,6 @@ class FacebookController < ApplicationController
   private
 
   def allow_facebook_iframe
-    response.headers['X-Frame-Options'] = 'ALLOW-FROM https://apps.facebook.com'
+    response.headers['X-Frame-Options'] = 'ALLOWALL'
   end
 end
