@@ -1,0 +1,21 @@
+<div class="introducing jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1><%= default_title %></h1>
+
+        <p class="text-lead">
+          <em><%= t('home.headline') %></em>
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-4 col-xs-offset-3">
+        <div class="text-right">
+          <%= icon_link_to :home, t('facebook.join.button'), notifications_path, analytics_attributes(:notification, :list, :facebook).merge(class: 'btn btn-danger', fixed: true, target: :_blank) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
