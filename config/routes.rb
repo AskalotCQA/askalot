@@ -113,6 +113,6 @@ Askalot::Application.routes.draw do
 
   resources :changelogs
 
-  post :facebook,              to: 'facebook#index'
-  post 'facebook/notification',to: 'facebook#notification'
+  post :facebook,               to: 'facebook#index'
+  post 'facebook/notification', to: 'facebook#notification'
 end
