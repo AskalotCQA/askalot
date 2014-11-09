@@ -30,7 +30,7 @@
   <body<%= resolve_sidebar(yield :sidebar) %>>
     <%= render 'layouts/header' %>
     <% if use_container? %>
-      <div class="container" id="main-container">
+      <div id="main" class="container">
         <%= flash_messages %>
         <%= yield %>
       </div>

@@ -7,7 +7,6 @@
   <%= form_for question, remote: true do |f| %>
       <%= form_messages_for question %>
 
-      <%= hidden_field_tag :group_id, @group.id %>
       <%= hidden_field_tag :document_id, @document.id %>
 
       <div class="form-group">
