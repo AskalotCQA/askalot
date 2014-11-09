@@ -1,4 +1,5 @@
 class Group < ActiveRecord::Base
+  # TODO (jharinek) consider Authorable
   include Deletable
   include Editable
 
