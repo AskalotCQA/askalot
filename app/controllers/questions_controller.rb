@@ -55,6 +55,7 @@ class QuestionsController < ApplicationController
         dispatch_event :mention, @question, for: user
       end
 
+      # TODO (zbell) refactor: do not compose watchers here
       dispatch_event :create, @question, for: @question.parent.watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
       register_watching_for @question
 
@@ -75,10 +76,7 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @document = @question.document
-
-    if @document
-      @group    = @document.group
-    end
+    @group    = @document.group if @document
 
     authorize! :view, @question
 
