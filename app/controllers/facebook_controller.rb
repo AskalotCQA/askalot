@@ -1,8 +1,11 @@
 class FacebookController < ApplicationController
-  after_action :allow_facebook_ifram
+  after_action :allow_facebook_iframe
   skip_before_action :verify_authenticity_token
 
   def index
+  end
+
+  def notification
   end
 
   def redirect
