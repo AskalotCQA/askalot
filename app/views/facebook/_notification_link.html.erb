@@ -1,1 +1,1 @@
-<%= facebook_notification_path params: { n: link_to_notification(notification) } %>
+<%= facebook_notification_path(params: { n: Nokogiri::HTML(link_to_notification notification).css('a')[0][:href] }).sub(/\A\/.+\//, '') %>
