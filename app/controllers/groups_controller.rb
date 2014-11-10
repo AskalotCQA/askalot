@@ -31,7 +31,8 @@ class GroupsController < ApplicationController
   end
 
   def index
-    @groups = Group.accessible_by(current_ability)
+    # TODO (jharinek) consider refactoring
+    # @groups gets loaded automatically by load_and_authorize_resource -> @groups = Group.accessible_by(current_ability)
     @groups =  @groups.page(params[:page]).per(20)
   end
 
