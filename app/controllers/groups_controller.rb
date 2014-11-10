@@ -32,6 +32,7 @@ class GroupsController < ApplicationController
 
   def index
     @groups = Group.accessible_by(current_ability)
+    @groups =  @groups.page(params[:page]).per(20)
   end
 
   private
