@@ -22,7 +22,7 @@ describe Answer do
   describe Touchable do
     it 'does not update questions touched_at attribute when voting or labeling' do
       answer        = create :answer
-      old_timestamp = answer.to_question.touched_at.to_i
+      old_timestamp = answer.to_question.touched_at
       user          = create :user
 
       answer.toggle_voteup_by! user
@@ -31,8 +31,10 @@ describe Answer do
       answer.votes_lb_wsci_bp += 1
       answer.toggle_labeling_by! user, :best
 
-      expect(answer.to_question.touched_at.to_i).to eql(old_timestamp)
+      # always compare timestamps directly, do not round with to_i
+      expect(answer.to_question.touched_at).to eql(old_timestamp)
     end
   end
+
   # TODO(zbell) pridat testy pre toggle_labeling_by!
 end
