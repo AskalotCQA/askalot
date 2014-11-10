@@ -27,7 +27,7 @@ class GroupsController < ApplicationController
 
   def show
     @group     = Group.find(params[:id])
-    @documents = @group.documents
+    @documents = @group.documents.page(params[:page]).per(20)
   end
 
   def index
