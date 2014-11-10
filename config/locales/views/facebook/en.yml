@@ -3,7 +3,9 @@ en:
     join:
       title: "Askalot is on Facebook"
       message: "Join us on Facebook"
-      benefit: " and watch what interesting happened in Askalot!"
+      benefit: " and watch what interesting happened in Askalot! Be informed about events in Askalot by automatic notifications in Facebook social network."
+      note: "During integration Askalot views only information in public user profile."
+      submit: "Join"
       close: "Close"
 
     notification:

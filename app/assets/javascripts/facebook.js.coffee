@@ -1,2 +1,2 @@
 $(document).ready ->
-  $('#facebook_modal').modal 'show'
+  $('#facebook-joining').modal 'show'

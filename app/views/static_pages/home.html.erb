@@ -1,6 +1,8 @@
 <% provide :header, render(partial: 'static_pages/home/header', locals: { target: nil }) %>
 
 <div class="container">
+  <%= render 'facebook/joining' %>
+
   <%= flash_messages { |content| content_tag :section, content } %>
 
   <section>
@@ -53,9 +55,5 @@
         </div>
       </div>
     </div>
-  </section>
-
-  <section>
-    <%= render 'facebook/joining' %>
   </section>
 </div>
