@@ -51,6 +51,9 @@ Askalot::Application.routes.draw do
   get 'auth/:provider/callback', to: 'users#facebook'
   get 'auth/failure', to: redirect('/')
 
+  post 'facebook',              to: 'facebook#index'
+  post 'facebook/notification', to: 'facebook#notification'
+
   resources :categories do
     concerns :searchable
     concerns :watchable
@@ -112,7 +115,4 @@ Askalot::Application.routes.draw do
   end
 
   resources :changelogs
-
-  post :facebook,               to: 'facebook#index'
-  post 'facebook/notification', to: 'facebook#notification'
 end
