@@ -9,15 +9,6 @@ class Ability
     can(:edit,   User) { |resource| resource == user }
     can(:follow, User) { |resource| resource != user }
 
-    can(:edit,   [Question, Answer, Comment]) { |resource| resource.author == user }
-    can(:delete, [Question, Answer, Comment]) { |resource| resource.author == user }
-
-    cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.any? }
-    cannot(:edit, [Answer]) { |resource| resource.labelings.any? }
-
-    cannot(:delete, [Question]) { |resource| resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
-    cannot(:delete, [Answer]) { |resource| resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
-
     can(:show_anonymous, User) { |resource| resource == user }
     can(:show_email,     User) { |resource| resource.show_email? }
     can(:show_name,      User) { |resource| resource.show_name? && resource.name.present? }
@@ -33,27 +24,50 @@ class Ability
     can :comment, [Question, Answer]
     can :vote,    [Question, Answer]
 
+    # user.role? refers exactly and only to AIS role, user.assigned? refers
+    # to assigned role for specific category or AIS role if no assignments
+    # for specific category exist
+
+    # only author can edit or delete question, answer or comment
+    can(:edit,   [Question, Answer, Comment]) { |resource| resource.author == user }
+    can(:delete, [Question, Answer, Comment]) { |resource| resource.author == user }
+
+    # but only if question or answer has no evaluations, and answer has no labelings
+    cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.any? }
+    cannot(:edit, [Answer]) { |resource| resource.labelings.any? }
+
+    # but only if question has no answers, comments and evaluations, and answer has no labels, comments and evaluations
+    cannot(:delete, [Question]) { |resource| resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
+    cannot(:delete, [Answer]) { |resource| resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
+
+    # on the other hand assigned administrator can edit or delete question, answer or comment
+    can(:edit,   [Question, Answer, Comment]) { |resource| user.assigned?(resource.to_question.category, :administrator) }
+    can(:delete, [Question, Answer, Comment]) { |resource| user.assigned?(resource.to_question.category, :administrator) }
+
+    # only author or assigned teacher when author is slido can label question or answer
     can :label, [Question, Answer] do |resource|
       resource.author == user || (resource.author == User.find_by(login: :slido) && user.assigned?(resource.to_question.category, :teacher))
     end
 
+    # only assigned teacher can evaluate question or answer
     can :evaluate, [Question, Answer] do |resource|
       user.assigned?(resource.to_question.category, :teacher)
     end
 
+    # but assigned teacher can not vote for question or answer
     cannot :vote, [Question, Answer] do |resource|
       user.assigned?(resource.to_question.category, :teacher)
     end
 
+    # only AIS teacher
     if user.role? :teacher
       can :observe, :all
     end
 
+    # only AIS administrator
     if user.role? :administrator
       can :administrate, :all
-
-      can :edit,   [Question, Answer, Comment]
-      can :delete, [Question, Answer, Comment]
+      can :observe, :all
 
       can :create,  [Assignment, Category, Changelog]
       can :update,  [Assignment, Category, Changelog]
