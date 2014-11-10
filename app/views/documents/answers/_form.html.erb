@@ -4,7 +4,6 @@
 
     <%= form_for [question, answer], remote: true do |f| %>
       <%= hidden_field_tag :question_id, @question.id %>
-      <%= hidden_field_tag :group_id, @group.id %>
 
       <div class="form-group">
         <%= markdown_editor_for answer do %>
