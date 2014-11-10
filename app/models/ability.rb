@@ -46,15 +46,13 @@ class Ability
     cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.any? }
     cannot(:edit, [Answer]) { |resource| resource.labelings.any? }
 
+    # but only if group has no documents, and document has no questions
+    cannot(:delete, [Group]) { |resource| resource.documents.any? }
+    cannot(:delete, [Document]) { |resource| resource.questions.any? }
+
     # but only if question has no answers, comments and evaluations, and answer has no labels, comments and evaluations
     cannot(:delete, [Question]) { |resource| resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
     cannot(:delete, [Answer]) { |resource| resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
-
-    # but only if group has no documents
-    cannot(:delete, [Group]) { |resource| resource.documents.any? }
-
-    # but only if document has no questions
-    cannot(:delete, [Document]) { |resource| resource.questions.any? }
 
     # on the other hand assigned administrator can edit or delete question, answer or comment
     can(:edit,   [Question, Answer, Comment]) { |resource| user.assigned?(resource.to_question.category, :administrator) }
