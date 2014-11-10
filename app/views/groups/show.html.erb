@@ -18,6 +18,8 @@
         <%= render 'documents/document', document: document, group: @group %>
       <% end %>
     </div>
+
+    <%= paginate @documents %>
   </div>
 
   <div class="col-md-6">
