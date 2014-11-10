@@ -1,4 +1,4 @@
-<% if !session[:facebook_modal] && current_user.facebook_uid.blank? %>
+<% if session[:facebook_modal] && current_user.facebook_uid.blank? %>
   <div id="facebook-joining" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
