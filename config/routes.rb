@@ -118,4 +118,7 @@ Askalot::Application.routes.draw do
   end
 
   resources :changelogs
+
+  post :facebook,              to: 'facebook#index'
+  post 'facebook/notification',to: 'facebook#notification'
 end

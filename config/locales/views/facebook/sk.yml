@@ -1,9 +1,10 @@
 sk:
   facebook:
-    title: "Askalot aj na Facebook-u"
+    title: "Askalot aj na Facebook"
 
     join:
-      message: "Pridaj sa k nám na Facebook-u"
+      button: "Prejdi do systému Askalot"
+      message: "Pridaj sa k nám na Facebook"
 
-    benefit: "a dostávaj notifikácie o tom čo ťa zaujíma!"
+    benefit: "a sleduj čo zaujímavé sa udialo na Askalote!"
     close: "Zavrieť"

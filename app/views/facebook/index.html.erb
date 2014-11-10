@@ -1,0 +1,32 @@
+<div class="introducing jumbotron">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1><%= default_title %></h1>
+        <p class="text-lead">
+          <em><%= t('home.headline') %></em>
+        </p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 col-xs-offset-2">
+        <div class="text-right">
+          <%= icon_link_to :'question-circle', t('home.ask'), new_question_path, analytics_attributes(:question, :'open-new-form', :home).merge(class: 'btn btn-primary', fixed: true, target: :_blank) %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-6">
+        <div class="text-right">
+          <%= icon_link_to :tasks, t('home.questions'), questions_path, analytics_attributes(:questions, :list, :home).merge(class: 'btn btn-info', fixed: true, target: :_blank) %>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <div class="text-left">
+          <%= icon_link_to :magic, t('home.activities'), activities_path, analytics_attributes(:activities, :list, :home).merge(class: 'btn btn-warning', fixed: true, target: :_blank) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

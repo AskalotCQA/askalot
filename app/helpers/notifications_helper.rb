@@ -12,7 +12,11 @@ module NotificationsHelper
   end
 
   def link_to_notification(notification, options = {}, &block)
-    link_to_activity notification.action, notification.initiator, notification.resource, notification_options(notification, options), &block
+    link_to_activity notification, notification_options(notification, options), &block
+  end
+
+  def link_to_notification_by_attributes(action, initiator, resource, options = {}, &block)
+    link_to_activity_by_attributes action, initiator, resource, options, &block
   end
 
   def link_to_notifications(notifications, options = {})
