@@ -13,7 +13,7 @@ describe Events::Dispatcher do
       resource = double(:resource)
       user     = double(:user)
 
-      expect(notifier).to receive(:publish).with(:action, user, resource, {})
+      expect(notifier).to receive(:publish).with(:action, user, resource, { results: {}})
 
       dispatcher.dispatch(:action, user, resource)
     end
