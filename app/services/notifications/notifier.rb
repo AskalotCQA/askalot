@@ -6,10 +6,13 @@ module Notifications
 
     def publish(action, initiator, resource, options = {})
       recipients = (Array.wrap(options[:for] || resource.watchers) - [initiator]).uniq
+      notifications = []
 
       recipients.each do |recipient|
-        factory.create!(action: action, initiator: initiator, recipient: recipient, resource: resource, anonymous: !!options[:anonymous])
+        notifications << factory.create!(action: action, initiator: initiator, recipient: recipient, resource: resource, anonymous: !!options[:anonymous])
       end
+
+      notifications
     end
 
     def factory
