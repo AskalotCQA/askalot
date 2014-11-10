@@ -16,10 +16,9 @@ class Ability
     can :change_name,     User unless user.ais_login?
     can :change_password, User unless user.ais_login?
 
+    can :index,  [Group, Document]
     can :create, [Group, Document]
-
-    can :show,  [Group, Document]
-    can :index, [Group, Document]
+    can :show,   [Group, Document]
 
     can :ask,    Question
     can :answer, Question
