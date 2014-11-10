@@ -9,6 +9,8 @@ class GroupsController < ApplicationController
 
   before_action :authenticate_user!
 
+  load_and_authorize_resource
+
   def create
     @group = Group.new(create_params)
 
@@ -26,8 +28,6 @@ class GroupsController < ApplicationController
   def show
     @group     = Group.find(params[:id])
     @documents = @group.documents
-
-    authorize! :show, @group
   end
 
   def index
