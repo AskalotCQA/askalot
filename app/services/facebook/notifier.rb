@@ -8,7 +8,7 @@ module Facebook
       controller  = options.delete(:controller)
       application = FbGraph::Application.new(Configuration.facebook.application.id, secret: Configuration.facebook.application.secret)
 
-      attributes = {action: action, initiator: initiator, resource: resource}
+      attributes = { action: action, initiator: initiator, resource: resource }
       recipients = (Array.wrap(options[:for] || resource.watchers) - [initiator]).uniq
 
       recipients.select { |recipient| recipient.omniauth_token }.each do |recipient|
