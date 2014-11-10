@@ -77,7 +77,7 @@ class Ability
       can :observe, :all
 
       # TODO (jharinek) refactor when implementing "true" roles for group
-      cannot :view,  Group, visibility: :private
+      cannot :show,  Group, visibility: :private
       cannot :index, Group, visibility: :private
     end
 
