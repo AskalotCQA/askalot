@@ -197,6 +197,7 @@ sk:
     models:
       activity: "Aktivita"
       answer: "Odpoveď"
+      assignment: "Priradenie"
       category: "Kategória"
       changelog: "Protokol zmien"
       comment: "Komentár"
@@ -215,6 +216,14 @@ sk:
     attributes:
       answer:
         text: "Odpoveď"
+
+      assignment:
+        category: "Kategória"
+        category_id: "Kategória"
+        role: "Rola"
+        role_id: "Rola"
+        user: "Používateľ"
+        user_nick: "Používateľ"
 
       category:
         name: "Názov"

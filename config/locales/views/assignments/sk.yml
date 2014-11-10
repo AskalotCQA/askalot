@@ -1,0 +1,11 @@
+sk:
+  assignment:
+    create:
+      success: 'Rola používateľa bola úspešne pridaná.'
+
+    update:
+      success: 'Rola používateľa bola úspešne aktualizovaná.'
+
+    delete:
+      success: 'Rola používateľa bola úspešne zmazaná.'
+      failure: 'Rolu používateľa sa nepodarilo zmazať.'

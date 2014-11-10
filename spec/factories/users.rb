@@ -13,7 +13,11 @@ FactoryGirl.define do
     show_email true
     show_name  true
 
-    role User::ROLES.first
+    role :student
+
+    factory :student, class: :User do
+      role :student
+    end
 
     factory :teacher, class: :User do
       role :teacher

@@ -2,9 +2,6 @@ class User < ActiveRecord::Base
   include Followable
   include Users::Searchable
 
-  # TODO (jharinek) consider https://github.com/ryanb/cancan/wiki/Separate-Role-Model
-  ROLES = [:student, :teacher, :administrator]
-
   devise :database_authenticatable,
          :confirmable,
          :lockable,
@@ -15,6 +12,8 @@ class User < ActiveRecord::Base
          :validatable,
 
          authentication_keys: [:login]
+
+  ROLES = [:student, :teacher, :administrator]
 
   has_many :documents,   foreign_key: :author_id, dependent: :destroy
   has_many :questions,   foreign_key: :author_id, dependent: :destroy
@@ -81,8 +80,12 @@ class User < ActiveRecord::Base
     (value = read_attribute :gravatar_email).blank? ? email : value
   end
 
-  def role?(base)
-    ROLES.index(base.to_sym) <= ROLES.index(role)
+  def assigned?(category, role)
+    assignments.where(category: category).joins(:role).where(roles: { name: role }).any? || (assignments.where(category: category).none? && self.role == role.to_sym)
+  end
+
+  def role?(role)
+    self.role == role.to_sym
   end
 
   def urls
@@ -108,6 +111,19 @@ class User < ActiveRecord::Base
     return where(conditions).first unless login
 
     where(conditions).where(["login = :value OR email = :value", { value: login.downcase }]).first
+  end
+
+  def from_omniauth(auth, friends = nil, likes = nil)
+    self.omniauth_provider         = auth.provider
+    self.omniauth_token            = auth.credentials.token
+    self.omniauth_token_expires_at = Time.at(auth.credentials.expires_at)
+
+    self.facebook         = auth.extra.raw_info.link
+    self.facebook_uid     = auth.uid
+    self.facebook_friends = friends.to_s
+    self.facebook_likes   = likes.to_s
+
+    self.save!
   end
 
   protected

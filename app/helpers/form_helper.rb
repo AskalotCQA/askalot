@@ -11,6 +11,13 @@ module FormHelper
     collection_select(id, collection, value, label, options, html_options)
   end
 
+  def role_collection_select(id, collection = Role.all.order(:name), value = :id, label = :name, options = {}, html_options = {})
+    options.merge! include_blank: true
+    html_options.deep_merge! class: :'form-control', data: { as: :select2 }
+
+    collection_select(id, collection, value, label, options, html_options)
+  end
+
   def visibility_collection_select(id, collection = { public: I18n.t('group.visibility.public'), private: I18n.t('group.visibility.private') }, value = :first, label = :last, options = {}, html_options = {})
     options.merge! include_blank: false
     html_options.deep_merge! class: :'form-control', data: { as: :select2 }

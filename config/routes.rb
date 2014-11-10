@@ -44,8 +44,6 @@ Askalot::Application.routes.draw do
   get 'users/:nick/activities', to: 'users#activities', as: :user_activities
   get 'users/:nick/followings', to: 'users#followings', as: :user_followings
 
-  post 'groups/:id/documents', to: 'documents#create', as: :group_documents
-
   get :statistics, to: 'statistics#index'
   get :help,       to: 'static_pages#help'
   get :welcome,    to: 'static_pages#welcome'
@@ -53,7 +51,11 @@ Askalot::Application.routes.draw do
   resources :groups,    only: [:index, :new, :create, :show, :update, :destroy]
   resources :documents, only: [:new, :create, :update, :destroy]
 
-  get 'document/:document_id/questions', to: 'questions#document_questions_index', as: :document_questions
+  get  'document/:document_id/questions', to: 'questions#document_questions_index', as: :document_questions
+  post 'groups/:id/documents', to: 'documents#create', as: :group_documents
+
+  get 'auth/:provider/callback', to: 'users#facebook'
+  get 'auth/failure', to: redirect('/')
 
   resources :categories do
     concerns :searchable
@@ -110,8 +112,9 @@ Askalot::Application.routes.draw do
   namespace :administration do
     root 'dashboard#index'
 
-    resources :changelogs, only: [:create, :update, :destroy]
-    resources :categories, only: [:create, :update, :destroy]
+    resources :assignments, only: [:create, :update, :destroy]
+    resources :categories,  only: [:create, :update, :destroy]
+    resources :changelogs,  only: [:create, :update, :destroy]
   end
 
   resources :changelogs

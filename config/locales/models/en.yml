@@ -197,6 +197,7 @@ en:
     models:
       activity: "Activity"
       answer: "Answer"
+      assignment: "Assignment"
       category: "Category"
       changelog: "Changelog"
       comment: "Comment"
@@ -215,6 +216,14 @@ en:
     attributes:
       answer:
         text: "Answer"
+
+      assignment:
+        category: "Category"
+        category_id: "Category"
+        role: "Role"
+        role_id: "Role"
+        user: "User"
+        user_nick: "User"
 
       category:
         name: "Name"

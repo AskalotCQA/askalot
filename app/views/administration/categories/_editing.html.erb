@@ -17,7 +17,7 @@
 
           <div class="form-group">
             <%= f.label :tags %>
-            <%= f.text_field :tags,  :value => category.tags.join(','), class: :'form-control', data: { as: :select2, role: :tags } %>
+            <%= f.text_field :tags, value: category.tags.join(','), class: :'form-control', data: { as: :select2, role: :tags } %>
           </div>
         </div>
         <div class="modal-footer">

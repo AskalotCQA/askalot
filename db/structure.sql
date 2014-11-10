@@ -1062,7 +1062,13 @@ CREATE TABLE users (
     followers_count integer DEFAULT 0 NOT NULL,
     followees_count integer DEFAULT 0 NOT NULL,
     evaluations_count integer DEFAULT 0 NOT NULL,
-    documents_count integer DEFAULT 0 NOT NULL
+    documents_count integer DEFAULT 0 NOT NULL,
+    omniauth_provider character varying(255),
+    omniauth_token text,
+    omniauth_token_expires_at timestamp without time zone,
+    facebook_uid bigint,
+    facebook_friends text,
+    facebook_likes text
 );
 
 
@@ -1790,6 +1796,13 @@ CREATE INDEX index_assignments_on_user_id ON assignments USING btree (user_id);
 
 
 --
+-- Name: index_assignments_on_user_id_and_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_assignments_on_user_id_and_category_id ON assignments USING btree (user_id, category_id);
+
+
+--
 -- Name: index_categories_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2325,7 +2338,7 @@ CREATE INDEX index_questions_on_votes_lb_wsci_bp ON questions USING btree (votes
 -- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_roles_on_name ON roles USING btree (name);
+CREATE UNIQUE INDEX index_roles_on_name ON roles USING btree (name);
 
 
 --
@@ -2431,6 +2444,13 @@ CREATE UNIQUE INDEX index_users_on_confirmation_token ON users USING btree (conf
 --
 
 CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- Name: index_users_on_facebook_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_users_on_facebook_uid ON users USING btree (facebook_uid);
 
 
 --
@@ -2820,11 +2840,21 @@ INSERT INTO schema_migrations (version) VALUES ('20140523053816');
 
 INSERT INTO schema_migrations (version) VALUES ('20140611004811');
 
+INSERT INTO schema_migrations (version) VALUES ('20141004130146');
+
 INSERT INTO schema_migrations (version) VALUES ('20141008092820');
 
 INSERT INTO schema_migrations (version) VALUES ('20141008095014');
 
+INSERT INTO schema_migrations (version) VALUES ('20141023161800');
+
 INSERT INTO schema_migrations (version) VALUES ('20141025092934');
+
+INSERT INTO schema_migrations (version) VALUES ('20141026134711');
+
+INSERT INTO schema_migrations (version) VALUES ('20141026134908');
+
+INSERT INTO schema_migrations (version) VALUES ('20141027134900');
 
 INSERT INTO schema_migrations (version) VALUES ('20141101205230');
 
