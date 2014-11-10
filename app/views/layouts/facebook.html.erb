@@ -3,19 +3,17 @@
   <head>
     <meta charset="utf-8"/>
     <title><%= resolve_title(yield :title) %></title>
-
     <%= render 'layouts/styles' %>
     <%= render 'layouts/description' %>
     <%= render 'layouts/social' %>
-
     <%= csrf_meta_tags %>
   </head>
   <body>
-  <%= yield %>
-  <%= render 'layouts/footer' %>
-  <%= render 'shared/fixes' %>
-  <%= javascript_include_tag 'application' %>
-  <%= yield :scripts %>
-  <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? %>
+    <%= yield %>
+    <%= render 'layouts/footer' %>
+    <%= render 'shared/fixes' %>
+    <%= javascript_include_tag 'application' %>
+    <%= yield :scripts %>
+    <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? %>
   </body>
 </html>
