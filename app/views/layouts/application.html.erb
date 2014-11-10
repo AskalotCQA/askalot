@@ -3,11 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title><%= resolve_title(yield :title) %></title>
-
     <%= render 'layouts/styles' %>
     <%= render 'layouts/description' %>
     <%= render 'layouts/social' %>
-
     <%= csrf_meta_tags %>
   </head>
   <body<%= resolve_sidebar(yield :sidebar) %>>
