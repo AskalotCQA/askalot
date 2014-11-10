@@ -2,6 +2,8 @@ sk:
   question:
     navigation: "Otázky"
 
+    list: "Zoznam otázok"
+
     index:
       title: "Otázky"
       new: "Nová otázka"
