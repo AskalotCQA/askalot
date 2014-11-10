@@ -1,7 +1,7 @@
 class FacebookController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  after_action :allow_facebook_in_frame
+  after_action :allow_inline_frame
   
   layout 'layouts/facebook'
 
@@ -11,7 +11,7 @@ class FacebookController < ApplicationController
 
   private
 
-  def allow_facebook_in_frame
+  def allow_inline_frame
     response.headers['X-Frame-Options'] = 'ALLOWALL'
   end
 end
