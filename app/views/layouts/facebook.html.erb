@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title><%= resolve_title(yield :title) %></title>
-    <%= render 'layouts/styles' %>
-    <%= render 'layouts/description' %>
-    <%= render 'layouts/social' %>
-    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%= render 'layouts/description' -%>
+    <%= render 'layouts/social' -%>
+    <%= render 'layouts/styles' -%>
+    <%= csrf_meta_tags -%>
   </head>
-  <body>
-    <%= yield %>
-    <%= render 'layouts/footer' %>
-    <%= render 'shared/fixes' %>
-    <%= javascript_include_tag 'application' %>
-    <%= yield :scripts %>
-    <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? %>
+  <body class="facebook">
+    <%= yield -%>
+    <%= render 'shared/fixes' -%>
+    <%= javascript_include_tag 'application' -%>
+    <%= yield :scripts -%>
+    <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? -%>
   </body>
 </html>

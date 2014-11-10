@@ -3,26 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <title><%= resolve_title(yield :title) %></title>
-    <%= render 'layouts/styles' %>
-    <%= render 'layouts/description' %>
-    <%= render 'layouts/social' %>
-    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <%= render 'layouts/description' -%>
+    <%= render 'layouts/social' -%>
+    <%= render 'layouts/styles' -%>
+    <%= csrf_meta_tags -%>
   </head>
   <body<%= resolve_sidebar(yield :sidebar) %>>
-    <%= render 'layouts/header' %>
+    <%= render 'layouts/header' -%>
     <% if use_container? %>
       <div class="container">
-        <%= flash_messages %>
-        <%= yield %>
+        <%= flash_messages -%>
+        <%= yield -%>
       </div>
     <% else %>
-      <%= yield %>
+      <%= yield -%>
     <% end %>
-    <%= render 'layouts/footer' %>
-    <%= render 'shared/fixes' %>
-    <%= render 'shared/locales' %>
-    <%= javascript_include_tag 'application' %>
-    <%= yield :scripts %>
-    <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? %>
+    <%= render 'layouts/footer' -%>
+    <%= render 'shared/fixes' -%>
+    <%= render 'shared/locales' -%>
+    <%= javascript_include_tag 'application' -%>
+    <%= yield :scripts -%>
+    <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? -%>
   </body>
 </html>

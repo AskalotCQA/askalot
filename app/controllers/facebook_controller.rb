@@ -5,8 +5,14 @@ class FacebookController < ApplicationController
   
   layout 'layouts/facebook'
 
-  def redirect
-    redirect_to "/#{params[:path]}"
+  def index
+    @question = Questions::ToAnswerRecommender.next
+  end
+
+  def notification
+    fail unless params[:n] =~ /\A\//
+
+    @link = params[:n]
   end
 
   private

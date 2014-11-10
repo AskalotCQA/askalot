@@ -5,7 +5,6 @@ defaults: &defaults
   facebook:
     application:
       id: '308609915963601'
-      link: 'notification'
       secret: TODO
 
   mailer:
