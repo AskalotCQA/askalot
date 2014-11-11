@@ -2,7 +2,7 @@ module Askalot
   module VERSION
     MAJOR = 1
     MINOR = 8
-    PATCH = 1
+    PATCH = 2
 
     PRE = 'beta'
 
