@@ -10,9 +10,10 @@ class FacebookController < ApplicationController
   end
 
   def notification
-    fail unless params[:n] =~ /\A\//
+    @content = params[:n]
+    @link    = params[:r]
 
-    @link = params[:n]
+    fail unless !@link || @link =~ /\A\//
   end
 
   private
