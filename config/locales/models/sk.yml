@@ -241,7 +241,6 @@ sk:
         text: "Text"
         title: "Názov"
 
-
       evaluation:
         text: "Komentár"
         value: "Hodnotenie"
