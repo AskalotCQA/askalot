@@ -8,6 +8,6 @@ $(document).ready ->
   $('.modal-backdrop').remove()
 
   $('#flash').remove()
-  $('#main-container').prepend("<%= escape_javascript render('shared/flash_messages', messages: flash_to_messages) %>")
+  $('#main').prepend("<%= escape_javascript render('shared/flash_messages', messages: flash_to_messages) %>")
 
   fixes()
