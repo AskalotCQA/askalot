@@ -61,9 +61,6 @@ class QuestionsController < ApplicationController
     else
       @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
       @document = @question.document
-      @group    = @document.group if @document
-
-      # TODO (jharinek) error flash messages for document question
 
       render :new
     end
