@@ -38,7 +38,7 @@ describe 'Voting Question', js: true do
     end
   end
 
-  context 'when question have been already voted up' do
+  context 'when question has been already voted up' do
     before :each do
       question.toggle_voteup_by! question.author
     end

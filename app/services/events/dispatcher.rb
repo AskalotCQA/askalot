@@ -19,9 +19,13 @@ module Events
     end
 
     def dispatch(action, initiator, resource, options = {})
+      results = options[:results] = {}
+
       listeners.each do |listener|
-        listener.publish(action, initiator, resource, options)
+        results[listener] = listener.publish(action, initiator, resource, options.clone)
       end
+
+      results
     end
   end
 end

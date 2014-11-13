@@ -6,7 +6,7 @@ class StaticPagesController < ApplicationController
     @solved  = Question.solved.random.limit(count)
     @favored = Question.favored.random.limit(count)
 
-    @question = Question.unanswered.random.first || Question.random.first
+    @question = Questions::ToAnswerRecommender.next
   end
 
   def help

@@ -54,8 +54,12 @@ Askalot::Application.routes.draw do
   get  'document/:document_id/questions', to: 'questions#document_questions_index', as: :document_questions
   post 'groups/:id/documents', to: 'documents#create', as: :group_documents
 
-  get 'auth/:provider/callback', to: 'users#facebook'
-  get 'auth/failure', to: redirect('/')
+  get 'auth/facebook'
+  get 'auth/facebook/callback', to: 'users#facebook'
+  get 'auth/failure',           to: redirect('/')
+
+  post 'facebook',              to: 'facebook#index'
+  post 'facebook/notification', to: 'facebook#notification'
 
   resources :categories do
     concerns :searchable
@@ -118,7 +122,4 @@ Askalot::Application.routes.draw do
   end
 
   resources :changelogs
-
-  post :facebook,              to: 'facebook#index'
-  post 'facebook/notification',to: 'facebook#notification'
 end

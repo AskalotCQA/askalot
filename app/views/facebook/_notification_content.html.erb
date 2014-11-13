@@ -1,1 +1,1 @@
-<%= notification_content_by_attributes action, initiator, resource, unlink: true %>
+<%= truncate notification_content(notification, unlink: true), default_truncate_options.merge(length: 180) %>

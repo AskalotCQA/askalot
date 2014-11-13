@@ -1,16 +1,18 @@
 <% if session[:facebook_modal] && current_user.facebook_uid.blank? %>
-  <div class="modal fade" id="facebook_modal">
+  <div id="facebook-joining" class="modal fade">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title"><%= t('facebook.title') %></h4>
+        <div class="modal-header bg-primary">
+          <h2 class="modal-title"><%= icon_tag :facebook, fixed: true %> <%= t('facebook.join.title') %></h2>
         </div>
         <div class="modal-body">
-          <%= link_to t('facebook.join.message'), '/auth/facebook', id: 'sign_in' %>
-          <%= t('facebook.benefit') %>
+          <%= link_to t('facebook.join.message'), auth_facebook_path %>
+          <%= t('facebook.join.benefit') %><br/>
+          <small class="text-muted"><%= t('facebook.join.note') %></small>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('facebook.close') %></button>
+          <%= link_to t('facebook.join.submit'), auth_facebook_path, class: 'btn btn-success' %>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('facebook.join.close') %></button>
         </div>
       </div>
     </div>

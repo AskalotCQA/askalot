@@ -9,7 +9,7 @@ describe 'Editing' do
   let!(:comment)        { create :comment, commentable: question, author: question.author }
   let(:administrator)   { create :administrator }
 
-  context 'when question have no evaluation' do
+  context 'when question has no evaluation' do
     before :each do
       login_as question.author
     end

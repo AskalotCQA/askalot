@@ -1,0 +1,12 @@
+<meta itemprop="name" content="<%= resolve_title(yield :title) %>"/>
+<meta itemprop="description" content="<%= t 'head.content' %>"/>
+<meta itemprop="image" content="<%= image_path 'icons/icon.png' %>"/>
+<meta property="og:title" content="<%= resolve_title(yield :title) %>"/>
+<meta property="og:description" content="<%= t 'head.content' %>"/>
+<meta property="og:image" content="<%= image_path 'icons/icon.png' %>"/>
+<meta property="og:url" content="<%= canonical_url %>"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="<%= resolve_title(yield :title) %>"/>
+<meta name="twitter:description" content="<%= t 'head.content' %>"/>
+<meta name="twitter:image" content="<%= image_path 'icons/icon.png' %>"/>
+<meta name="twitter:url" content="<%= canonical_url %>"/>

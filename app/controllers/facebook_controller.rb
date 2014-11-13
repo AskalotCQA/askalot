@@ -1,22 +1,24 @@
 class FacebookController < ApplicationController
-  after_action :allow_facebook_iframe
   skip_before_action :verify_authenticity_token
 
+  after_action :allow_inline_frame
+
+  layout 'layouts/facebook'
+
   def index
+    @question = Questions::ToAnswerRecommender.next
   end
 
   def notification
-  end
+    @content = params[:n]
+    @link    = params[:r]
 
-  def redirect
-    path = "/#{params[:path]}"
-
-    redirect_to path
+    fail unless !@link || @link =~ /\A\//
   end
 
   private
 
-  def allow_facebook_iframe
+  def allow_inline_frame
     response.headers['X-Frame-Options'] = 'ALLOWALL'
   end
 end

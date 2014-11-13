@@ -1,1 +1,1 @@
-<%= link_to_notification_by_attributes action, initiator, resource %>
+<%= facebook_notification_path(params: { n: content, r: find_tag(link_to_notification(notification), :a) { |a| a[0][:href] if a.present? }}).sub(/\A\/.+\//, '') %>
