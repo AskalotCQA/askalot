@@ -32,7 +32,7 @@ sk:
 
     index:
       title: "Skupiny"
-      no_results_found: "Neboli nájdené žiadne skupiny"
+      no_results_found: "Neboli nájdené žiadne skupiny."
 
     details:
       created: "Pridal"
@@ -45,3 +45,7 @@ sk:
     visibility:
       public: "Verejná"
       private: "Súkromná"
+
+    deleted: "Skupina bola zmazaná."
+
+    no_records: "Neboli nájdené žiadne skupiny."

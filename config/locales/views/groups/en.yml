@@ -32,6 +32,7 @@ en:
 
     index:
       title: "Groups"
+      no_results_found: "No groups found."
 
     details:
       created: "Added by"
@@ -45,7 +46,6 @@ en:
       public: "Public"
       private: "Private"
 
+    deleted: "Group was deleted."
 
-    deleted: "Document was deleted"
-
-    no_records: "No documents found."
+    no_records: "No groups found."
