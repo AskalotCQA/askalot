@@ -32,15 +32,16 @@ class Question < ActiveRecord::Base
   validates :text,      presence: true, length: { minimum: 2 }
   validates :anonymous, inclusion: { in: [true, false] }
 
-  scope :without_document, lambda { where(document: nil) }
+  scope :with_document, lambda { where('document_id IS NOT null') }
+  scope :with_category, lambda { where('category_id IS NOT null') }
 
-  scope :random,     lambda { without_document.select('questions.*, random()').order('random()') }
-  scope :recent,     lambda { without_document.order(touched_at: :desc) }
-  scope :unanswered, lambda { without_document.includes(:answers).where(answers: { question_id: nil }) }
-  scope :answered,   lambda { without_document.joins(:answers).uniq }
-  scope :solved,     lambda { without_document.joins(:answers).merge(best_answers).references(:labelings).uniq }
+  scope :random,     lambda { with_category.select('questions.*, random()').order('random()') }
+  scope :recent,     lambda { with_category.order(touched_at: :desc) }
+  scope :unanswered, lambda { with_category.includes(:answers).where(answers: { question_id: nil }) }
+  scope :answered,   lambda { with_category.joins(:answers).uniq }
+  scope :solved,     lambda { with_category.joins(:answers).merge(best_answers).references(:labelings).uniq }
 
-  scope :answered_but_not_best, lambda { without_document.joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).references(:labeling).uniq.select('questions.id')).uniq }
+  scope :answered_but_not_best, lambda { with_category.joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).references(:labeling).uniq.select('questions.id')).uniq }
 
   scope :by, lambda { |user| where(author: user) }
 
