@@ -21,8 +21,8 @@
 
           <div class="question-details">
             <%= render 'questions/details', question: @question %>
-            <%= render 'documents/questions/editing', question: @question %>
-            <%= render 'documents/questions/deleting', question: @question %>
+            <%= render 'documents/questions/editing', question: @question, remote: true %>
+            <%= render 'documents/questions/deleting', question: @question, remote: true %>
           </div>
 
           <div id="question-evaluations">
@@ -30,8 +30,8 @@
           </div>
 
           <div id="question-comments">
-            <%= render 'documents/questions/comments', question: @question %>
-            <%= render 'documents/comments/form', commentable: @question %>
+            <%= render 'documents/questions/comments', question: @question, remote: true %>
+            <%= render 'documents/comments/form', commentable: @question, remote: true %>
           </div>
         </div>
       </div>
@@ -49,6 +49,6 @@
   </div>
 
   <div id="question-answer" class="new-answer-form">
-    <%= render 'documents/answers/form', question: @question, answer: @answer %>
+    <%= render 'documents/answers/form', question: @question, answer: @answer, remote: true %>
   </div>
 </div>

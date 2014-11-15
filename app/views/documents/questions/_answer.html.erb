@@ -7,13 +7,13 @@
 
       <div class="answer-details">
         <%= render 'answers/details', answer: answer %>
-        <%= render 'documents/answers/editing', answer: answer %>
-        <%= render 'documents/answers/deleting', answer: answer %>
+        <%= render 'documents/answers/editing', answer: answer, remote: true %>
+        <%= render 'documents/answers/deleting', answer: answer, remote: true %>
       </div>
 
       <%= render 'answers/evaluations', answer: answer %>
-      <%= render 'documents/answers/comments', answer: answer %>
-      <%= render 'documents/comments/form', commentable: answer %>
+      <%= render 'documents/answers/comments', answer: answer, remote: true %>
+      <%= render 'documents/comments/form', commentable: answer, remote: true %>
     </div>
 
     <div class="col-xs-3 col-sm-2">
