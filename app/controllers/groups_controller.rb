@@ -9,8 +9,6 @@ class GroupsController < ApplicationController
 
   before_action :authenticate_user!
 
-  load_and_authorize_resource
-
   def create
     @group = Group.new(create_params)
 
@@ -28,12 +26,15 @@ class GroupsController < ApplicationController
   def show
     @group     = Group.find(params[:id])
     @documents = @group.documents.page(params[:page]).per(20)
+
+    authorize! :show, @group
   end
 
   def index
-    # TODO (jharinek) consider refactoring
-    # @groups gets loaded automatically by load_and_authorize_resource -> @groups = Group.accessible_by(current_ability)
-    @groups =  @groups.page(params[:page]).per(20)
+    authorize! :index, Group
+
+    @groups = Group.accessible_by(current_ability)
+    @groups = @groups.page(params[:page]).per(20)
   end
 
   private
