@@ -3,6 +3,8 @@
     <h4 id="answer" class="form-title"><%= Answer.human_attribute_name :text %></h4>
 
     <%= form_for [question, answer], remote: remote do |f| %>
+      <%= form_messages_for answer %>
+
       <%= hidden_field_tag :question_id, @question.id %>
 
       <div class="form-group">
