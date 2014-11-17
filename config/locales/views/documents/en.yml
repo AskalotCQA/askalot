@@ -33,3 +33,6 @@ en:
       updated: "Updated by"
       deleted: "Deleted by"
 
+    deleted: "Document was deleted."
+
+    no_records: "No documents found."

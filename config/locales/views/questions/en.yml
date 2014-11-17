@@ -2,8 +2,6 @@ en:
   question:
     navigation: "Questions"
 
-    list: "Questions list"
-
     index:
       title: "Questions"
       new: "New question"
@@ -71,5 +69,7 @@ en:
     favored: "Favored"
 
     deleted: "Question was deleted"
+
+    list: "Questions list"
 
     no_records: "No questions found."

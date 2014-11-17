@@ -33,3 +33,6 @@ sk:
       updated: "Upravil"
       deleted: "Zmazal"
 
+    deleted: "Dokument bol zmazaný."
+
+    no_records: "Neboli nájdené žiadne dokumenty."
