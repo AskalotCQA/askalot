@@ -553,37 +553,6 @@ ALTER SEQUENCE followings_id_seq OWNED BY followings.id;
 
 
 --
--- Name: group_members; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE group_members (
-    id integer NOT NULL,
-    group_id integer NOT NULL,
-    user_id integer NOT NULL,
-    role character varying(255) DEFAULT 'member'::character varying NOT NULL
-);
-
-
---
--- Name: group_members_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE group_members_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: group_members_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE group_members_id_seq OWNED BY group_members.id;
-
-
---
 -- Name: group_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1300,13 +1269,6 @@ ALTER TABLE ONLY followings ALTER COLUMN id SET DEFAULT nextval('followings_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY group_members ALTER COLUMN id SET DEFAULT nextval('group_members_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY group_revisions ALTER COLUMN id SET DEFAULT nextval('group_revisions_id_seq'::regclass);
 
 
@@ -1518,14 +1480,6 @@ ALTER TABLE ONLY favorites
 
 ALTER TABLE ONLY followings
     ADD CONSTRAINT followings_pkey PRIMARY KEY (id);
-
-
---
--- Name: group_members_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY group_members
-    ADD CONSTRAINT group_members_pkey PRIMARY KEY (id);
 
 
 --
@@ -2052,20 +2006,6 @@ CREATE INDEX index_followings_on_follower_id ON followings USING btree (follower
 --
 
 CREATE UNIQUE INDEX index_followings_on_unique_key ON followings USING btree (follower_id, followee_id);
-
-
---
--- Name: index_group_members_on_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_group_members_on_group_id ON group_members USING btree (group_id);
-
-
---
--- Name: index_group_members_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_group_members_on_user_id ON group_members USING btree (user_id);
 
 
 --
@@ -2865,4 +2805,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141101214034');
 INSERT INTO schema_migrations (version) VALUES ('20141103003512');
 
 INSERT INTO schema_migrations (version) VALUES ('20141103192331');
+
+INSERT INTO schema_migrations (version) VALUES ('20141117173517');
 
