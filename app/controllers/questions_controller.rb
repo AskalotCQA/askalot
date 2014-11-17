@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
     initialize_polling
   end
 
-  def document_questions_index
+  def document_index
     @document  = Document.find(params[:document_id])
     @questions = @document.questions.order(touched_at: :desc)
 
@@ -38,7 +38,8 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
-    @document = Document.find(params[:document_id]) if params[:document_id]
+
+    @question.document = Document.find(params[:document_id]) if params[:document_id]
   end
 
   def create
@@ -59,16 +60,12 @@ class QuestionsController < ApplicationController
 
       redirect_to question_path(@question)
     else
-      @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
-      @document = @question.document
-
       render :new
     end
   end
 
   def show
     @question = Question.find(params[:id])
-    @document = @question.document
 
     authorize! :view, @question
 
@@ -121,8 +118,7 @@ class QuestionsController < ApplicationController
   end
 
   def create_params
-    document = Document.find(params[:document_id]) if params[:document_id]
-    params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user, document: document)
+    params.require(:question).permit(:title, :text, :category_id, :document_id, :tag_list, :anonymous).merge(author: current_user)
   end
 
   def update_params

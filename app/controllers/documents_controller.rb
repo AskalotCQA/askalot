@@ -6,8 +6,8 @@ class DocumentsController < ApplicationController
   include Markdown::Process
 
   def create
+    @group    = Group.find(params[:group_id])
     @document = Document.new(create_params)
-    @group    = Group.find(params[:id])
 
     if @document.save
       flash[:notice] = t('document.create.success')
@@ -21,7 +21,7 @@ class DocumentsController < ApplicationController
   private
 
   def create_params
-    params.require(:document).permit(:title, :text).merge(group: Group.find(params[:id]), author: current_user)
+    params.require(:document).permit(:title, :text).merge(group: @group, author: current_user)
   end
 
   def update_params

@@ -11,7 +11,6 @@ class AnswersController < ApplicationController
 
   def create
     @question = Question.find(params[:question_id])
-    @document = @question.document
     @answer   = Answer.new(create_params)
 
     authorize! :answer, @question
