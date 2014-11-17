@@ -1,14 +1,10 @@
 Askalot::Application.routes.draw do
   concern :commetable do
-    resources :comments, only: [:create, :update, :destroy]
-
-    get :comment, on: :member
+    resources :comments, only: [:create]
   end
 
   concern :evaluable do
-    resources :evaluations, only: [:create, :update]
-
-    get :evaluation, on: :member
+    resources :evaluations, only: [:create]
   end
 
   concern :searchable do
@@ -48,12 +44,6 @@ Askalot::Application.routes.draw do
   get :help,       to: 'static_pages#help'
   get :welcome,    to: 'static_pages#welcome'
 
-  resources :groups,    only: [:index, :new, :create, :show, :update, :destroy]
-  resources :documents, only: [:new, :create, :update, :destroy]
-
-  get  'document/:document_id/questions', to: 'questions#document_questions_index', as: :document_questions
-  post 'groups/:id/documents', to: 'documents#create', as: :group_documents
-
   get 'auth/facebook'
   get 'auth/facebook/callback', to: 'users#facebook'
   get 'auth/failure',           to: redirect('/')
@@ -61,7 +51,17 @@ Askalot::Application.routes.draw do
   post 'facebook',              to: 'facebook#index'
   post 'facebook/notification', to: 'facebook#notification'
 
-  resources :categories do
+  resources :groups, only: [:index, :new, :create, :show, :update, :destroy] do
+    resources :documents, only: [:create]
+  end
+
+  resources :documents, only: [:update, :destroy] do
+    resources :questions, only: [] do
+      get :document_index, on: :collection, as: :index
+    end
+  end
+
+  resources :categories, only: [:index] do
     concerns :searchable
     concerns :watchable
   end
@@ -74,7 +74,7 @@ Askalot::Application.routes.draw do
   end
 
   resources :questions, only: [:index, :new, :create, :show, :update, :destroy] do
-    resources :answers, only: [:create, :update, :destroy]
+    resources :answers, only: [:create]
 
     get :favor,   on: :member
     get :suggest, on: :collection
@@ -95,6 +95,8 @@ Askalot::Application.routes.draw do
   end
 
   resources :comments, only: [:update, :destroy]
+
+  resources :evaluations, only: [:update]
 
   resources :markdown, only: [] do
     post :preview, on: :collection
@@ -121,5 +123,5 @@ Askalot::Application.routes.draw do
     resources :changelogs,  only: [:create, :update, :destroy]
   end
 
-  resources :changelogs
+  resources :changelogs, only: [:index]
 end
