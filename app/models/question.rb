@@ -32,8 +32,8 @@ class Question < ActiveRecord::Base
   validates :text,      presence: true, length: { minimum: 2 }
   validates :anonymous, inclusion: { in: [true, false] }
 
-  scope :with_document, lambda { where('document_id IS NOT null') }
-  scope :with_category, lambda { where('category_id IS NOT null') }
+  scope :with_category, lambda { where.not(category: nil) }
+  scope :with_document, lambda { where.not(document: nil) }
 
   scope :random,     lambda { with_category.select('questions.*, random()').order('random()') }
   scope :recent,     lambda { with_category.order(touched_at: :desc) }
@@ -66,6 +66,7 @@ class Question < ActiveRecord::Base
     self
   end
 
+  # TODO (jharinek) delete when refactoring watchings
   def parent
     category || document
   end
