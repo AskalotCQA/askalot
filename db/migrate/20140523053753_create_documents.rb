@@ -17,8 +17,10 @@ class CreateDocuments < ActiveRecord::Migration
     end
 
     add_index :documents, :group_id
-    add_index :documents, :title
     add_index :documents, :deletor_id
+
+    add_index :documents, :title
+
     add_index :documents, :questions_count
   end
 end

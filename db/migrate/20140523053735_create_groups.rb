@@ -17,8 +17,9 @@ class CreateGroups < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :groups, :title
     add_index :groups, :creator_id
     add_index :groups, :deletor_id
+
+    add_index :groups, :title
   end
 end

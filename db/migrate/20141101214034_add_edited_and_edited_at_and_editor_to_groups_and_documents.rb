@@ -1,4 +1,4 @@
-class AddEditedEditedAtAndEditorToGroupsAndDocuments < ActiveRecord::Migration
+class AddEditedAndEditedAtAndEditorToGroupsAndDocuments < ActiveRecord::Migration
   def change
     add_column :groups,    :edited, :boolean, null: false, default: false
     add_column :documents, :edited, :boolean, null: false, default: false
