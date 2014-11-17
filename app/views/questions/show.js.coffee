@@ -2,8 +2,8 @@ $(document).ready ->
   $('#document-content').replaceWith("<%= escape_javascript render('documents/questions/show', question: @question) %>")
 
   $('.well-active').attr class: 'well'
-  $('#document-<%= @document.id %>').attr class: 'well well-active'
-  $('#document-content').css 'margin-top', $('#document-<%= @document.id %>').position().top
+  $('#document-<%= @question.document_id %>').attr class: 'well well-active'
+  $('#document-content').css 'margin-top', $('#document-<%= @question.document_id %>').position().top
 
   $('.modal-backdrop').remove()
 

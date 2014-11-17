@@ -1,5 +1,5 @@
 <div id="document-content">
-  <a href="<%= document_questions_path(document_id: @document.id) %>" data-remote="true" class="btn btn-sm btn-default">
+  <a href="<%= index_document_questions_path(document_id: @question.document_id) %>" data-remote="true" class="btn btn-sm btn-default">
     <%= icon_tag :list, label: t('question.list') %>
   </a>
 
