@@ -1,22 +1,29 @@
-<div id="groups" class="row">
+<div id="groups" class="groups tab-content">
   <% if groups.any? %>
-    <% groups.each do |group| %>
-      <div class="col-md-4">
-        <h4>
-          <%= link_to group.title, group_path(group), analytics_attributes(:group, :click, group.title) %>
-        </h4>
-
-        <div class="group-details">
-          <%= group.description %> </br>
-          <%= t('count.document', count: group.documents.size).upcase_first %> <%= group.documents.size %>
+    <div class="row">
+      <% groups.each do |group| %>
+        <div class="col-sm-6 col-md-4">
+          <h4>
+            <%= link_to_group group %>
+          </h4>
+          <div class="group-content">
+            <%= html_escape preview_content(group.description, length: 100) %>
+          </div>
+          <div class="group-details">
+            <%= t('count.document', count: group.documents.size).upcase_first %> <%= group.documents.size %>
+          </div>
         </div>
-      </div>
+      <% end %>
+    </div>
+
+    <% if remote %>
+      <%= paginate groups, remote: true, data: { state: true, scroll: :body, fade: '#groups' } %>
+    <% else %>
+      <%= paginate groups %>
     <% end %>
   <% else %>
     <div class="alert alert-warning">
-      <%= t('group.index.no_results_found') %>
+      <%= t('group.no_records') %>
     </div>
   <% end %>
 </div>
-
-<%= paginate groups %>

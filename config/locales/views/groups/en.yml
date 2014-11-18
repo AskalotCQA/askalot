@@ -1,7 +1,9 @@
 en:
   group:
     navigation: "Groups"
-    list: "Groups"
+
+    index:
+      title: "Groups"
 
     new:
       title: "New group"
@@ -30,22 +32,20 @@ en:
       success: "Group was successfully deleted."
       failure: "Group could not be deleted."
 
-    index:
-      title: "Groups"
-      no_results_found: "No groups found."
+    tab:
+      all: "All"
 
     details:
       created: "Added by"
       updated: "Updated by"
       deleted: "Deleted by"
 
-    tab:
-      all: "All"
-
     visibility:
       public: "Public"
       private: "Private"
 
     deleted: "Group was deleted."
+
+    list: "Groups"
 
     no_records: "No groups found."

@@ -1,6 +1,10 @@
-<a href="#" id="group-new-modal" class="btn btn-success" data-toggle="modal" data-target="#group-new">
-  <%= icon_tag :plus, label: t('group.new.title') %>
-</a>
+<div class="row">
+  <div class="col-xs-12 col-sm-2">
+    <%= link_to '#', analytics_attributes(:groups, :'open-new-form', :list).deep_merge(id: :'group-new-modal', class: 'btn btn-success', data: { toggle: :modal, target: :'#group-new' }) do %>
+      <%= icon_tag :plus, label: t('group.new.title') %>
+    <% end %>
+  </div>
+</div>
 
 <div id="group-new" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <%= form_for Group.new do |f| %>

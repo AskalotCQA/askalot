@@ -60,6 +60,12 @@ sk:
       few: "skupiny"
       other: "skupín"
 
+    member:
+      zero: "členov"
+      one: "člen"
+      few: "členovia"
+      other: "členov"
+
     notification:
       zero: "notifikácií"
       one: "notifikácia"
@@ -150,6 +156,12 @@ sk:
       one: "jeden nasledovník"
       few: "%{count} nasledovníci"
       other: "%{count} nasledovníkov"
+
+    member:
+      zero: "žiaden člen"
+      one: "jeden člen"
+      few: "%{count} členovia"
+      other: "%{count} členov"
 
     notification:
       zero: "žiadna notifikácia"

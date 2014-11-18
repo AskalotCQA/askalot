@@ -1,7 +1,9 @@
 sk:
   group:
     navigation: "Skupiny"
-    list: "Zoznam skupín"
+
+    index:
+      title: "Skupiny"
 
     new:
       title: "Nová skupina"
@@ -30,22 +32,20 @@ sk:
       success: "Skupina bola úspešne zmazaná."
       failure: "Skupinu sa nepodarilo zmazať."
 
-    index:
-      title: "Skupiny"
-      no_results_found: "Neboli nájdené žiadne skupiny."
+    tab:
+      all: "Všetky"
 
     details:
       created: "Pridal"
       updated: "Upravil"
       deleted: "Zmazal"
 
-    tab:
-      all: "Všetky"
-
     visibility:
       public: "Verejná"
       private: "Súkromná"
 
     deleted: "Skupina bola zmazaná."
+
+    list: "Zoznam skupín"
 
     no_records: "Neboli nájdené žiadne skupiny."

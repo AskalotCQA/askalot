@@ -4,7 +4,7 @@ module QuestionsHelper
   end
 
   def question_text_preview(question, options = {})
-    preview_content question.text, options.reverse_merge(length: 200)
+    html_escape preview_content question.text, options.reverse_merge(length: 200)
   end
 
   def question_answers_coloring(question)
