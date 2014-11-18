@@ -1,0 +1,51 @@
+sk:
+  group:
+    navigation: "Skupiny"
+
+    index:
+      title: "Skupiny"
+
+    new:
+      title: "Nová skupina"
+      submit: "Vytvoriť"
+      cancel: "Zrušiť"
+
+    create:
+      success: "Skupina bola úspešne vytvorená"
+
+    edit:
+      action: "Upraviť"
+      title: "Úprava skupiny"
+      submit: "Uložiť"
+      cancel: "Späť"
+
+    update:
+      success: "Skupina bola úspešne aktualizovaná."
+      unchanged: "Skupina nebola zmenená."
+
+    delete:
+      action: "Zmazať"
+      title: "Pozor!"
+      text: "Naozaj chcete zmazať skupinu?"
+      cancel: "Zrušiť"
+      submit: "Zmazať"
+      success: "Skupina bola úspešne zmazaná."
+      failure: "Skupinu sa nepodarilo zmazať."
+
+    tab:
+      all: "Všetky"
+
+    details:
+      created: "Pridal"
+      updated: "Upravil"
+      deleted: "Zmazal"
+
+    visibility:
+      public: "Verejná"
+      private: "Súkromná"
+
+    deleted: "Skupina bola zmazaná."
+
+    list: "Zoznam skupín"
+
+    no_records: "Neboli nájdené žiadne skupiny."

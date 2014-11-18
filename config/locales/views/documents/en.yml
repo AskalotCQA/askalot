@@ -1,0 +1,38 @@
+en:
+  document:
+    new:
+      title: "New document"
+      feature: "New document"
+      submit: "Create document"
+      cancel: "Back"
+
+    create:
+      success: "Document was successfully added"
+
+    edit:
+      action: "Edit"
+      title: "Edit document"
+      submit: "Save"
+      cancel: "Back"
+
+    update:
+      unchanged: "Document was not changed."
+      success: "Document was successfully updated."
+
+    delete:
+      action: "Delete"
+      title: "Warning!"
+      text: "Are you sure you want to delete this document?"
+      cancel: "Back"
+      submit: "Delete"
+      success: "Document was successfully deleted."
+      failure: "Document could not be deleted."
+
+    details:
+      created: "Added by"
+      updated: "Updated by"
+      deleted: "Deleted by"
+
+    deleted: "Document was deleted."
+
+    no_records: "No documents found."

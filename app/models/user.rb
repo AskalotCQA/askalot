@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   ROLES = [:student, :teacher, :administrator]
 
+  has_many :documents,   foreign_key: :author_id, dependent: :destroy
   has_many :questions,   foreign_key: :author_id, dependent: :destroy
   has_many :answers,     foreign_key: :author_id, dependent: :destroy
   has_many :comments,    foreign_key: :author_id, dependent: :destroy

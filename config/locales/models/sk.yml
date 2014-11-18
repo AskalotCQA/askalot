@@ -24,6 +24,12 @@ sk:
       few: "komentáre"
       other: "komentárov"
 
+    document:
+      zero: "dokumentov"
+      one: "dokument"
+      few: "dokumenty"
+      other: "dokumentov"
+
     evaluation:
       zero: "hodnotení"
       one: "hodnotenie"
@@ -47,6 +53,18 @@ sk:
       one: "nasledovník"
       few: "nasledovníci"
       other: "nasledovníkov"
+
+    group:
+      zero: "skupín"
+      one: "skupina"
+      few: "skupiny"
+      other: "skupín"
+
+    member:
+      zero: "členov"
+      one: "člen"
+      few: "členovia"
+      other: "členov"
 
     notification:
       zero: "notifikácií"
@@ -139,6 +157,12 @@ sk:
       few: "%{count} nasledovníci"
       other: "%{count} nasledovníkov"
 
+    member:
+      zero: "žiaden člen"
+      one: "jeden člen"
+      few: "%{count} členovia"
+      other: "%{count} členov"
+
     notification:
       zero: "žiadna notifikácia"
       one: "1 notifikácia"
@@ -189,8 +213,10 @@ sk:
       category: "Kategória"
       changelog: "Protokol zmien"
       comment: "Komentár"
+      document: "Dokument"
       evaluation: "Hodnotenie"
       favorite: "Obľúbenie"
+      group: "Skupina"
       question: "Otázka"
       notification: "Notifikácia"
       tag: "Tag"
@@ -223,9 +249,18 @@ sk:
       comment:
         text: "Komentár"
 
+      document:
+        text: "Text"
+        title: "Názov"
+
       evaluation:
         text: "Komentár"
         value: "Hodnotenie"
+
+      group:
+        description: "Popis"
+        title: "Názov"
+        visibility: "Viditeľnosť"
 
       question:
         anonymous: "Opýtať sa anonymne"

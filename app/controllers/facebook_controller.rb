@@ -2,7 +2,7 @@ class FacebookController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   after_action :allow_inline_frame
-  
+
   layout 'layouts/facebook'
 
   def index
