@@ -70,4 +70,6 @@ en:
 
     deleted: "Question was deleted"
 
+    list: "Questions list"
+
     no_records: "No questions found."

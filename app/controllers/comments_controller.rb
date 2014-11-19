@@ -28,7 +28,10 @@ class CommentsController < ApplicationController
       flash_error_messages_for @comment
     end
 
-    redirect_to question_path(@question)
+    respond_to do |format|
+      format.html { redirect_to question_path(@question), format: :html }
+      format.js   { redirect_to question_path(@question), format: :js }
+    end
   end
 
   private

@@ -28,7 +28,10 @@ class AnswersController < ApplicationController
       form_error_messages_for @answer
     end
 
-    redirect_to question_path(@question, anchor: @answer.id ? nil : :answer)
+    respond_to do |format|
+      format.html { redirect_to question_path(@question, anchor: @answer.id ? nil : :answer), format: :html }
+      format.js   { redirect_to question_path(@question, anchor: @answer.id ? nil : :answer), format: :js }
+    end
   end
 
   def label

@@ -1,1 +1,1 @@
-<%= truncate notification_content(notification, unlink: true), default_truncate_options.merge(length: 180) %>
+<%= html_escape truncate(notification_content(notification, unlink: true), default_truncate_options.merge(length: 180)) %>

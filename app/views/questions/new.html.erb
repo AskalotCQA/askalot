@@ -26,8 +26,8 @@
       <div class="form-group">
         <%= f.label :tag_list %>
         <ul id="question-category-tags" class="category-tags nav nav-labels">
-          <% if @category %>
-            <% @category.tags.each do |category| %>
+          <% if @question.category %>
+            <% @question.category.tags.each do |category| %>
               <li>
                 <span class="label label-info"><%= category %></span>
               </li>
@@ -49,7 +49,7 @@
 
   <div class="col-md-6">
     <div class="help-side">
-      <%= render 'static_pages/help/create_question' %>
+      <%= render 'static_pages/help/questions/create_question' %>
     </div>
   </div>
 </div>

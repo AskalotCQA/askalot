@@ -15,16 +15,23 @@ module Editables::Update
 
     if @editable.changed?
       if @editable.update_attributes_by_revision(@revision)
-        process_markdown_for @editable do |user|
-          dispatch_event :mention, @editable, for: user
+
+        if @editable.respond_to? :text
+          process_markdown_for @editable do |user|
+            dispatch_event :mention, @editable, for: user
+          end
         end
 
-        dispatch_event :update, @editable, for: @editable.to_question.watchers, anonymous: (@editable.is_a?(Question) && @editable.anonymous)
+        # TODO (jharinek) refactor after making G,D watchable, notifiable
+        if @editable.respond_to? :to_question
+          dispatch_event :update, @editable, for: @editable.to_question.watchers, anonymous: (@editable.is_a?(Question) && @editable.anonymous)
+        end
 
         flash[:notice] = t "#{@model}.update.success"
       else
         @revision.destroy!
 
+        # TODO (jharinek) error messages for js request
         flash_error_messages_for @editable
       end
     else
@@ -33,6 +40,16 @@ module Editables::Update
       flash[:warning] = t "#{@model}.update.unchanged"
     end
 
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back, format: :html }
+      format.js   {
+        # TODO (jharinek) remove ifs
+        if @editable.is_a?(Question) || @editable.is_a?(Answer) || @editable.is_a?(Comment)
+          redirect_to question_path(@editable.to_question), format: :js
+        else
+          redirect_to :back, format: :js
+        end
+      }
+    end
   end
 end

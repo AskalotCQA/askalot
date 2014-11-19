@@ -55,7 +55,7 @@ module Probe
     end
 
     def stats
-      client.indices.stats index: name, all: true
+      client.indices.stats index: name
     end
 
     def flush

@@ -70,4 +70,6 @@ sk:
 
     deleted: "Otázka bola zmazaná"
 
+    list: "Zoznam otázok"
+
     no_records: "Neboli nájdené žiadne otázky."

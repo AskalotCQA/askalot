@@ -1,0 +1,11 @@
+<div id="document-content">
+  <% if questions.any? %>
+    <ol class="user-questions">
+      <% questions.each do |question| %>
+        <%= render 'documents/questions/question', question: question %>
+      <% end %>
+    </ol>
+
+    <%= paginate questions, params: { tab: :questions }, remote: true %>
+  <% end %>
+</div>

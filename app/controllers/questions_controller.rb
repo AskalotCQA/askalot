@@ -29,8 +29,17 @@ class QuestionsController < ApplicationController
     initialize_polling
   end
 
+  def document_index
+    @document  = Document.find(params[:document_id])
+    @questions = @document.questions.order(touched_at: :desc)
+
+    @questions = @questions.page(params[:page]).per(20)
+  end
+
   def new
     @question = Question.new
+
+    @question.document = Document.find(params[:document_id]) if params[:document_id]
   end
 
   def create
@@ -43,15 +52,14 @@ class QuestionsController < ApplicationController
         dispatch_event :mention, @question, for: user
       end
 
-      dispatch_event :create, @question, for: @question.category.watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
+      # TODO (zbell) refactor: do not compose watchers here
+      dispatch_event :create, @question, for: @question.parent.watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
       register_watching_for @question
 
       flash[:notice] = t('question.create.success')
 
       redirect_to question_path(@question)
     else
-      @category = Category.find_by(id: params[:question][:category_id]) if params[:question]
-
       render :new
     end
   end
@@ -110,7 +118,7 @@ class QuestionsController < ApplicationController
   end
 
   def create_params
-    params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous).merge(author: current_user)
+    params.require(:question).permit(:title, :text, :category_id, :document_id, :tag_list, :anonymous).merge(author: current_user)
   end
 
   def update_params

@@ -10,17 +10,36 @@ module Deletables::Destroy
     authorize! :delete, @deletable
 
     if @deletable.mark_as_deleted_by! current_user
-      dispatch_event :delete, @deletable, for: @deletable.to_question.watchers, anonymous: (@deletable.is_a?(Question) && @deletable.anonymous)
+      # TODO (jharinek) refactor after making G,D watchable, notifiable
+      if @deletable.respond_to? :to_question
+        dispatch_event :delete, @deletable, for: @deletable.to_question.watchers, anonymous: (@deletable.is_a?(Question) && @deletable.anonymous)
+      end
 
       flash[:notice] = t "#{@model}.delete.success"
     else
       flash[:error] = t "#{@model}.delete.failure"
     end
 
+    # TODO (zbell) remove ifs, add abstract protected method call instead
     if @deletable.is_a? Question
-      redirect_to questions_path
+      respond_to do |format|
+        format.html { redirect_to questions_path, format: :html }
+        format.js   { redirect_to document_questions_path(@deletable.parent), format: :js }
+      end
+    elsif @deletable.is_a? Group
+      redirect_to groups_path
     else
-      redirect_to :back
+      respond_to do |format|
+        format.html { redirect_to :back, format: :html }
+        format.js   {
+          # TODO (jharinek) remove ifs
+          if @deletable.is_a?(Answer) || @deletable.is_a?(Comment)
+            redirect_to question_path(@deletable.to_question), format: :js
+          else
+            redirect_to :back, format: :js
+          end
+        }
+      end
     end
   end
 end

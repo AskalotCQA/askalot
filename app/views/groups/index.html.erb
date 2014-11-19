@@ -1,0 +1,24 @@
+<% provide :title, t('group.index.title') %>
+
+<div class="help-side">
+  <div class="row">
+    <div class="col-md-6">
+      <%= render 'static_pages/help/groups/about' %>
+    </div>
+    <div class="col-md-6">
+      <%= render 'static_pages/help/groups/usage' %>
+    </div>
+  </div>
+</div>
+
+<div class="new-group-form">
+  <%= render 'form' %>
+</div>
+
+<div class="groups-controls">
+  <ul id="groups-tabs" class="nav nav-tabs">
+    <%= tab_link_tag t('group.tab.all'), :all, groups_path(params.except(:page).merge tab: :all), analytics_attributes(:groups, :switch, :all) %>
+  </ul>
+</div>
+
+<%= render 'groups', groups: @groups, remote: false %>

@@ -1,0 +1,27 @@
+<div class="well" id="document-<%= document.id %>">
+  <h4 class="document-header">
+    <%= link_to document.title, index_document_questions_path(document_id: document.id), remote: true %>
+  </h4>
+
+  <div class="document-details">
+    <%= render 'documents/details',  document: document %>
+    <%= render 'documents/deleting', document: document %>
+    <%= render 'documents/editing',  document: document%>
+  </div>
+
+  <div class="document-body">
+    <%= render_markdown document.text %>
+  </div>
+
+  <div class="row">
+    <hr class="document-footer-border"/>
+    <div class="col-md-offset-8 document-footer">
+      <a href="<%= index_document_questions_path(document_id: document.id) %>" data-remote="true" id="document-<%= document.id %>-questions">
+        <%= t('count.question', count: document.questions.size).upcase_first %> <%= document.questions.size %>
+      </a>
+      <a href="<%= new_question_path(document_id: document.id, group_id: group.id) %>" data-remote="true" id="document-<%= document.id %>-new-question" class="btn btn-sm btn-default">
+        <%= icon_tag :plus, label: t('question.new.title') %>
+      </a>
+    </div>
+  </div>
+</div>

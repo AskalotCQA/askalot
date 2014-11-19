@@ -26,7 +26,10 @@ class EvaluationsController < ApplicationController
       flash_error_messages_for @evaluation
     end
 
-    redirect_to question_path(@question)
+    respond_to do |format|
+      format.html { redirect_to question_path(@question) }
+      format.js   { redirect_to question_path(@question), format: :js }
+    end
   end
 
   def update
@@ -45,7 +48,10 @@ class EvaluationsController < ApplicationController
       flash_error_messages_for @evaluation
     end
 
-    redirect_to question_path(@question)
+    respond_to do |format|
+      format.html { redirect_to question_path(@question) }
+      format.js   { redirect_to question_path(@question), format: :js }
+    end
   end
 
   private

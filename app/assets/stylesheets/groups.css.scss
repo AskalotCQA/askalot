@@ -1,0 +1,21 @@
+// general
+
+.new-group-form {
+  margin: $navbar-height 0 45px;
+}
+
+// collection
+
+.group-details {
+  margin-bottom: 20px;
+
+  color: $text-muted;
+}
+
+// member
+
+.group-content {
+  @include markdown-content;
+
+  margin-bottom: 10px;
+}
