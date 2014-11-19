@@ -52,6 +52,9 @@ describe User do
     user = build :user, last: 'Last'
     expect(user).to be_valid
 
+    user = build :user, first: 'Peter', last: 'Žuk-Olszewski'
+    expect(user).to be_valid
+
     user = build :user, first: 'Peťo', last: 'Šťastný'
     expect(user).to be_valid
   end
