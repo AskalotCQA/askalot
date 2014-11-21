@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
 
   validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, allow_blank: true
 
-  validates :first, format: { with: /\A\p{Lu}\p{Ll}*\z/u }, allow_blank: true
+  validates :first, format: { with: /\A\p{Lu}[\p{Ll}\-\p{Lu}]*\z/u }, allow_blank: true
   validates :last,  format: { with: /\A\p{Lu}[\p{Ll}\-\p{Lu}]*\z/u }, allow_blank: true
 
   scope :by, lambda { |args| where(args).first || raise(ActiveRecord::RecordNotFound) }
