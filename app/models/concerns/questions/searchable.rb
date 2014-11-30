@@ -134,6 +134,10 @@ module Questions
                   index: :not_analyzed
                 }
               }
+            },
+
+            topics: {
+              type: :float
             }
           }
         }
@@ -146,7 +150,8 @@ module Questions
         tags:       ->  { tags.map(&:name) },
         answers:    ->  { answers.map(&:text) },
         comments:    -> { comments.map(&:text) + answers.map { |answer| answer.comments.map(&:text) } },
-        evaluations: -> { evaluations.map(&:text) + answers.map { |answer| answer.evaluations.map(&:text) } }
+        evaluations: -> { evaluations.map(&:text) + answers.map { |answer| answer.evaluations.map(&:text) } },
+        topics: -> { profiles.where(source: :LDA).order(:property).pluck(:value) }
       )
 
       probe.index.create

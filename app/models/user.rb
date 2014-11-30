@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
   has_many :roles,      through: :assignments
   has_many :categories, through: :assignments
 
+  has_many :profiles, class_name: :'User::Profile', dependent: :destroy
+
   validates :role, presence: true
 
   # TODO (smolnar) consult usage of functional indices for nick, login and email uniqueness checking

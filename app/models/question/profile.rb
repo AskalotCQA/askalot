@@ -1,0 +1,11 @@
+class Question
+  class Profile < ActiveRecord::Base
+    belongs_to :question
+
+    symbolize :property
+    symbolize :source
+
+    scope :as,  lambda { |source| where(source: source) }
+    scope :for, lambda { |property| where(property: property) }
+  end
+end

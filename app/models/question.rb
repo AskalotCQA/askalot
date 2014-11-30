@@ -24,6 +24,7 @@ class Question < ActiveRecord::Base
   has_many :answers, dependent: :destroy
 
   has_many :revisions, class_name: :'Question::Revision', dependent: :destroy
+  has_many :profiles, class_name: :'Question::Profile', dependent: :destroy
 
   validates :category,  presence: true, if: lambda { |question| question.document.blank? }
   validates :document,  presence: true, if: lambda { |question| question.category.blank? }
