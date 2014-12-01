@@ -128,8 +128,8 @@ CREATE TABLE answer_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    deletor_id integer
 );
 
 
@@ -170,8 +170,8 @@ CREATE TABLE answers (
     votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deletor_id integer,
     deleted_at timestamp without time zone,
+    deletor_id integer,
     edited boolean DEFAULT false NOT NULL,
     evaluations_count integer DEFAULT 0 NOT NULL,
     stack_exchange_uuid integer
@@ -310,8 +310,8 @@ CREATE TABLE comment_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    deletor_id integer
 );
 
 
@@ -349,8 +349,8 @@ CREATE TABLE comments (
     deleted boolean DEFAULT false NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deletor_id integer,
     deleted_at timestamp without time zone,
+    deletor_id integer,
     edited boolean DEFAULT false NOT NULL,
     stack_exchange_uuid integer
 );
@@ -465,8 +465,8 @@ CREATE TABLE evaluations (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    deletor_id integer
 );
 
 
@@ -530,8 +530,8 @@ CREATE TABLE favorites (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
     deleted_at timestamp without time zone,
+    deletor_id integer,
     stack_exchange_uuid integer
 );
 
@@ -678,8 +678,8 @@ CREATE TABLE labelings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
     deleted_at timestamp without time zone,
+    deletor_id integer,
     stack_exchange_uuid integer
 );
 
@@ -822,8 +822,8 @@ CREATE TABLE question_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
     deleted_at timestamp without time zone,
+    deletor_id integer,
     document_id integer
 );
 
@@ -869,12 +869,12 @@ CREATE TABLE questions (
     slido_question_uuid integer,
     slido_event_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
-    touched_at timestamp without time zone NOT NULL,
     votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
+    touched_at timestamp without time zone NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deletor_id integer,
     deleted_at timestamp without time zone,
+    deletor_id integer,
     edited boolean DEFAULT false NOT NULL,
     evaluations_count integer DEFAULT 0 NOT NULL,
     document_id integer,
@@ -991,8 +991,8 @@ CREATE TABLE taggings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
     deleted_at timestamp without time zone,
+    deletor_id integer,
     author_id integer NOT NULL
 );
 
@@ -1185,8 +1185,8 @@ CREATE TABLE views (
     viewer_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    deletor_id integer
 );
 
 
@@ -1222,8 +1222,8 @@ CREATE TABLE votes (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
     deleted_at timestamp without time zone,
+    deletor_id integer,
     stack_exchange_uuid integer
 );
 
