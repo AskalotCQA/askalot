@@ -42,7 +42,6 @@ module StackExchange
           return if Vote.exists?(stack_exchange_uuid: vote[:Id])
 
           return Vote.create!(
-            voter_id:            0,
             votable:             votable,
             positive:            positive,
             created_at:          date,

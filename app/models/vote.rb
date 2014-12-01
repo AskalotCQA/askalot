@@ -11,6 +11,9 @@ class Vote < ActiveRecord::Base
   scope :positive, lambda { where(positive: true) }
   scope :negative, lambda { where(positive: false) }
 
+  validates :voter, presence: true, unless: :stack_exchange_uuid?
+  validates :stack_exchange_uuid, presence: true, unless: :voter_id?
+
   def to_question
     self.votable.to_question
   end

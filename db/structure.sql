@@ -164,6 +164,7 @@ CREATE TABLE answers (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
+    stack_exchange_uuid integer,
     comments_count integer DEFAULT 0 NOT NULL,
     votes_count integer DEFAULT 0 NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
@@ -173,8 +174,7 @@ CREATE TABLE answers (
     deletor_id integer,
     deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    stack_exchange_uuid integer
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -346,13 +346,13 @@ CREATE TABLE comments (
     text text NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
+    stack_exchange_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
     deletor_id integer,
     deleted_at timestamp without time zone,
-    edited boolean DEFAULT false NOT NULL,
-    stack_exchange_uuid integer
+    edited boolean DEFAULT false NOT NULL
 );
 
 
@@ -861,6 +861,7 @@ CREATE TABLE questions (
     updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
     anonymous boolean DEFAULT false NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -876,11 +877,10 @@ CREATE TABLE questions (
     deletor_id integer,
     deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    document_id integer,
-    stack_exchange_uuid integer,
     stack_exchange_duplicate boolean,
-    stack_exchange_questions_uuids integer[]
+    stack_exchange_questions_uuids integer[],
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    document_id integer
 );
 
 
@@ -1135,6 +1135,7 @@ CREATE TABLE users (
     tumblr character varying(255),
     youtube character varying(255),
     role character varying(255) DEFAULT 'student'::character varying NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -1151,8 +1152,7 @@ CREATE TABLE users (
     facebook_uid bigint,
     facebook_friends text,
     facebook_likes text,
-    documents_count integer DEFAULT 0 NOT NULL,
-    stack_exchange_uuid integer
+    documents_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1215,7 +1215,7 @@ ALTER SEQUENCE views_id_seq OWNED BY views.id;
 
 CREATE TABLE votes (
     id integer NOT NULL,
-    voter_id integer NOT NULL,
+    voter_id integer,
     votable_id integer NOT NULL,
     votable_type character varying(255) NOT NULL,
     positive boolean DEFAULT true NOT NULL,
@@ -2747,7 +2747,7 @@ CREATE UNIQUE INDEX index_votes_on_stack_exchange_uuid ON votes USING btree (sta
 -- Name: index_votes_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_votes_on_unique_key ON votes USING btree (voter_id, votable_id, votable_type);
+CREATE UNIQUE INDEX index_votes_on_unique_key ON votes USING btree (voter_id, votable_id, votable_type, stack_exchange_uuid);
 
 
 --
@@ -3057,4 +3057,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141103003512');
 INSERT INTO schema_migrations (version) VALUES ('20141103192331');
 
 INSERT INTO schema_migrations (version) VALUES ('20141117173517');
+
+INSERT INTO schema_migrations (version) VALUES ('20141201144422');
 
