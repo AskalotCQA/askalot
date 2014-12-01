@@ -1,7 +1,7 @@
 module Askalot
   module VERSION
     MAJOR = 2
-    MINOR = 0
+    MINOR = 1
     PATCH = 0
 
     PRE = 'alpha'
