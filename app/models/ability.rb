@@ -37,9 +37,9 @@ class Ability
     can(:edit,   [Group]) { |resource| resource.creator == user}
     can(:delete, [Group]) { |resource| resource.creator == user }
 
-    # only author can edit or delete document, question, answer or comment
-    can(:edit,   [Document, Question, Answer, Comment]) { |resource| resource.author == user }
-    can(:delete, [Document, Question, Answer, Comment]) { |resource| resource.author == user }
+    # only author can edit or delete document, question, answer, comment or evaluation
+    can(:edit,   [Document, Question, Answer, Comment, Evaluation]) { |resource| resource.author == user }
+    can(:delete, [Document, Question, Answer, Comment, Evaluation]) { |resource| resource.author == user }
 
     # but only if question or answer has no evaluations, and answer has no labelings
     cannot(:edit, [Question, Answer]) { |resource| resource.evaluations.any? }

@@ -147,10 +147,11 @@ module Questions
         id:         ->  { id },
         title:      ->  { title },
         text:       ->  { text },
-        tags:       ->  { tags.map(&:name) },
-        answers:    ->  { answers.map(&:text) },
-        comments:    -> { comments.map(&:text) + answers.map { |answer| answer.comments.map(&:text) } },
-        evaluations: -> { evaluations.map(&:text) + answers.map { |answer| answer.evaluations.map(&:text) } },
+        tags:       ->  { tags.pluck(:name) },
+        answers:    ->  { answers.pluck(:text) },
+        comments:    -> { comments.pluck(:text) + answers.map { |answer| answer.comments.pluck(:text) }},
+        evaluations: -> { evaluations.pluck(:text) + answers.map { |answer| answer.evaluations.pluck(:text) }},
+
         topics: -> { profiles.where(source: :LDA).order(:property).pluck(:value) }
       )
 

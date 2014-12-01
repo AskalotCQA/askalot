@@ -198,6 +198,36 @@ ALTER SEQUENCE answers_id_seq OWNED BY answers.id;
 
 
 --
+-- Name: api_keys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE api_keys (
+    id integer NOT NULL,
+    value character varying(255) NOT NULL,
+    created_at timestamp without time zone
+);
+
+
+--
+-- Name: api_keys_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE api_keys_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: api_keys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE api_keys_id_seq OWNED BY api_keys.id;
+
+
+--
 -- Name: assignments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -452,6 +482,40 @@ ALTER SEQUENCE documents_id_seq OWNED BY documents.id;
 
 
 --
+-- Name: evaluation_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE evaluation_revisions (
+    id integer NOT NULL,
+    evaluation_id integer NOT NULL,
+    editor_id integer NOT NULL,
+    text text,
+    value integer NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: evaluation_revisions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE evaluation_revisions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: evaluation_revisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE evaluation_revisions_id_seq OWNED BY evaluation_revisions.id;
+
+
+--
 -- Name: evaluations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -466,7 +530,10 @@ CREATE TABLE evaluations (
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
     deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    edited boolean DEFAULT false NOT NULL,
+    edited_at timestamp without time zone,
+    editor_id integer
 );
 
 
@@ -1315,6 +1382,13 @@ ALTER TABLE ONLY answers ALTER COLUMN id SET DEFAULT nextval('answers_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY api_keys ALTER COLUMN id SET DEFAULT nextval('api_keys_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY assignments ALTER COLUMN id SET DEFAULT nextval('assignments_id_seq'::regclass);
 
 
@@ -1358,6 +1432,13 @@ ALTER TABLE ONLY document_revisions ALTER COLUMN id SET DEFAULT nextval('documen
 --
 
 ALTER TABLE ONLY documents ALTER COLUMN id SET DEFAULT nextval('documents_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY evaluation_revisions ALTER COLUMN id SET DEFAULT nextval('evaluation_revisions_id_seq'::regclass);
 
 
 --
@@ -1540,6 +1621,14 @@ ALTER TABLE ONLY answers
 
 
 --
+-- Name: api_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY api_keys
+    ADD CONSTRAINT api_keys_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: assignments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1593,6 +1682,14 @@ ALTER TABLE ONLY document_revisions
 
 ALTER TABLE ONLY documents
     ADD CONSTRAINT documents_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: evaluation_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY evaluation_revisions
+    ADD CONSTRAINT evaluation_revisions_pkey PRIMARY KEY (id);
 
 
 --
@@ -1904,6 +2001,13 @@ CREATE INDEX index_answers_on_votes_lb_wsci_bp ON answers USING btree (votes_lb_
 
 
 --
+-- Name: index_api_keys_on_value; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_api_keys_on_value ON api_keys USING btree (value);
+
+
+--
 -- Name: index_assignments_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2086,6 +2190,20 @@ CREATE INDEX index_documents_on_title ON documents USING btree (title);
 
 
 --
+-- Name: index_evaluation_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_evaluation_revisions_on_editor_id ON evaluation_revisions USING btree (editor_id);
+
+
+--
+-- Name: index_evaluation_revisions_on_evaluation_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_evaluation_revisions_on_evaluation_id ON evaluation_revisions USING btree (evaluation_id);
+
+
+--
 -- Name: index_evaluations_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2104,6 +2222,13 @@ CREATE INDEX index_evaluations_on_deleted ON evaluations USING btree (deleted);
 --
 
 CREATE INDEX index_evaluations_on_deletor_id ON evaluations USING btree (deletor_id);
+
+
+--
+-- Name: index_evaluations_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_evaluations_on_edited ON evaluations USING btree (edited);
 
 
 --
@@ -3057,4 +3182,12 @@ INSERT INTO schema_migrations (version) VALUES ('20141103003512');
 INSERT INTO schema_migrations (version) VALUES ('20141103192331');
 
 INSERT INTO schema_migrations (version) VALUES ('20141117173517');
+
+INSERT INTO schema_migrations (version) VALUES ('20141201141538');
+
+INSERT INTO schema_migrations (version) VALUES ('20141201144408');
+
+INSERT INTO schema_migrations (version) VALUES ('20141201163635');
+
+INSERT INTO schema_migrations (version) VALUES ('20141201163936');
 
