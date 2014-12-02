@@ -1024,7 +1024,8 @@ CREATE TABLE tags (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    stack_exchange_uuid integer
 );
 
 
@@ -2569,6 +2570,13 @@ CREATE UNIQUE INDEX index_tags_on_name ON tags USING btree (name);
 
 
 --
+-- Name: index_tags_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_tags_on_stack_exchange_uuid ON tags USING btree (stack_exchange_uuid);
+
+
+--
 -- Name: index_user_profiles_on_targetable_id_and_targetable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3059,4 +3067,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141103192331');
 INSERT INTO schema_migrations (version) VALUES ('20141117173517');
 
 INSERT INTO schema_migrations (version) VALUES ('20141201144422');
+
+INSERT INTO schema_migrations (version) VALUES ('20141201232355');
 
