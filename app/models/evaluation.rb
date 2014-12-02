@@ -1,7 +1,9 @@
 class Evaluation < ActiveRecord::Base
   include Authorable
   include Deletable
+  include Editable
   include Notifiable
+  include Touchable
 
   belongs_to :evaluable, -> { unscope where: :deleted }, polymorphic: true, counter_cache: true
 
