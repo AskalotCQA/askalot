@@ -5,11 +5,6 @@ module StackExchange
         super()
 
         @type = type
-        @tags = Tag.all.inject(Hash.new) do |hash, tag|
-          hash[tag.name] = tag.id
-
-          hash
-        end
 
         if @type == :tagging
           Mapper.reload!
