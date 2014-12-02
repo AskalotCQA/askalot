@@ -14,7 +14,7 @@ describe Vote do
   end
 
   context 'when from askalot' do
-    it 'requires stack exchange uuid instead of voter' do
+    it 'requires voter instead of stack exchange uuid' do
       vote = build :vote, voter: nil, stack_exchange_uuid: nil
 
       expect(vote).not_to be_valid
