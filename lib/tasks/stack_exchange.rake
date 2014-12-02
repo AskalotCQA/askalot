@@ -1,16 +1,15 @@
 # Usage:
 #
-# rake stack_exchange:users
-# rake stack_exchange:posts
-# rake stack_exchange:comments
-# rake stack_exchange:votes
-# rake stack_exchange:all
+# rake stack_exchange:import
 
 namespace :stack_exchange do
   desc "Import Stack Exchange data"
-  task :import, [:url] => :environment do |_, args|
+  task import: :environment do
     StackExchange.config.document.from = Time.parse(ENV['FROM']) if ENV['FROM']
     StackExchange.config.document.to   = Time.parse(ENV['TO']) if ENV['TO']
+
+    processor = StackExchange::Processor::Tags.new
+    processor.process("#{ENV['PATH']}/Tags.xml")
 
     processor = StackExchange::Processor::Users.new
     processor.process("#{ENV['PATH']}/Users.xml")

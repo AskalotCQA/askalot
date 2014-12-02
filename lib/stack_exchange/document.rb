@@ -21,7 +21,6 @@ module StackExchange
       @count      = 0
       @started_at = Time.now
       @records    = []
-      @callbacks  = []
     end
 
     def end_document
@@ -39,15 +38,16 @@ module StackExchange
 
         result = process_element(attributes)
 
-        record, callbacks = result.is_a?(Array) ? [result.first] + result[1..-1] : [result] + []
+        records = Array.wrap(result)
 
-        if record
-          puts "[#{self.name}] Processed #{@count}th #{self.name.singularize.underscore} with UUID: #{attributes[:Id]}"
+        if records.any?
+          # puts "[#{self.name}] Processed #{@count}th #{self.name.singularize.underscore} with UUID: #{attributes[:Id]}"
 
           @count += 1
 
-          @records << record if !@records.include?(record) && record.new_record?
-          @callbacks += Array.wrap(callbacks)
+          records.each do |record|
+            @records << record if !@records.include?(record) && record.new_record?
+          end
 
           import if @records.size >= batch_size
         end
@@ -67,10 +67,7 @@ module StackExchange
         model.import records, validate: false, timestamps: false
       end
 
-      @callbacks.map(&:call)
-
       @records   = []
-      @callbacks = []
     end
   end
 end

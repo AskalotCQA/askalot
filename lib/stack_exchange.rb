@@ -1,5 +1,8 @@
+require 'stack_exchange/mapper'
 require 'stack_exchange/processor'
 require 'stack_exchange/document'
+require 'stack_exchange/processor/tags'
+require 'stack_exchange/document/tags'
 require 'stack_exchange/processor/posts'
 require 'stack_exchange/document/posts'
 require 'stack_exchange/processor/comments'

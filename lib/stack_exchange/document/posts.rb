@@ -5,13 +5,20 @@ module StackExchange
         super()
 
         @type = type
+        @tags = Tag.all.inject(Hash.new) do |hash, tag|
+          hash[tag.name] = tag.id
+
+          hash
+        end
+
+        if @type == :tagging
+          Mapper.reload!
+        end
       end
 
       def process_element(post, options = {})
         if @type == :question && post[:PostTypeId] == '1'
           user = User.find_by(stack_exchange_uuid: post[:OwnerUserId]) || User.first
-
-          return unless user
 
           return if Question.exists?(stack_exchange_uuid: post[:Id])
 
@@ -26,21 +33,7 @@ module StackExchange
             stack_exchange_uuid: post[:Id]
           )
 
-          tags = post[:Tags].gsub(/^</,'').gsub(/>$/,'').split(/></).map do |t|
-            t.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '')
-          end
-
-          return question, -> do
-            question = Question.find_by(stack_exchange_uuid: post[:Id])
-
-            taggings = tags.uniq.map do |name|
-              tag = Tag.find_or_create_by! name: name
-
-              Tagging.new tag: tag, question: question, author: question.author
-            end
-
-            Tagging.import taggings, validate: false
-          end
+          return question
         end
 
         if @type == :answer && post[:PostTypeId] == '2'
@@ -61,6 +54,30 @@ module StackExchange
           )
 
           return answer
+        end
+
+        if @type == :tagging && post[:PostTypeId] == '1'
+          tags = post[:Tags].gsub(/^</,'').gsub(/>$/,'').split(/></).map do |t|
+            t.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '')
+          end
+
+          taggings = tags.uniq.map do |name|
+            user_id     = Mapper.users[post[:OwnerUserId]] || User.first.id
+            tag_id      = Mapper.tags[name] || Tag.create!(name: name).id
+            question_id = Mapper.questions[post[:Id]]
+
+            Mapper.tags[name] ||= tag_id
+
+            Tagging.new(
+              tag_id:      tag_id,
+              question_id: question_id,
+              author_id:   user_id,
+              created_at:  post[:CreationDate],
+              updated_at:  post[:CreationDate]
+            )
+          end
+
+          return taggings.compact
         end
       end
     end

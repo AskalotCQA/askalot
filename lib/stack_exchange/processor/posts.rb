@@ -11,6 +11,9 @@ module StackExchange
 
         parser = Nokogiri::XML::SAX::Parser.new(Document::Posts.new(:answer))
         parser.parse(File.open(path))
+
+        parser = Nokogiri::XML::SAX::Parser.new(Document::Posts.new(:tagging))
+        parser.parse(File.open(path))
       end
     end
   end
