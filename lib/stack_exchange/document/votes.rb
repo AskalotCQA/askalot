@@ -14,6 +14,8 @@ module StackExchange
           answer = StackExchange::Mapper.answers[vote[:PostId]]
 
           return unless answer
+          return if Labeling.exists?(answer_id: answer[:id], label_id: @label.id)
+          return if @records.find { |record| record.class == Labeling && record.label_id == label.id && record.answer_id == question[:id].to_i }
 
           # TODO fix for some weird dates in SE datasets
           date = Time.parse(vote[:CreationDate]) > answer[:created_at] ? vote[:CreationDate] : answer[:created_at] + 1.minute
@@ -39,6 +41,9 @@ module StackExchange
 
           return if !answer && !question
 
+          return if Vote.exists?(votable_id: votable[:id], votable_type: votable_type, positive: positive)
+          return if @records.find { |record| record.class == Vote && record.votable_id == votable[:id].to_i && record.votable_type == votable_type && record.positive == positive }
+
           date = Time.parse(vote[:CreationDate]) > votable[:created_at] ? vote[:CreationDate] : votable[:created_at] + 1.minute
 
           return Vote.new(
@@ -56,8 +61,9 @@ module StackExchange
           question = StackExchange::Mapper.questions[vote[:PostId]]
 
           return if question.nil? || user.nil?
-
           return if Favorite.exists?(stack_exchange_uuid: vote[:Id])
+          return if Favorite.exists?(favorer_id: user[:id], question_id: question[:id])
+          return if @records.find { |record| record.class == Favorite && record.favorer_id == user[:id].to_i && record.question_id == question[:id].to_i }
 
           date = Time.parse(vote[:CreationDate]) > question[:created_at] ? vote[:CreationDate] : question[:created_at] + 1.minute
 

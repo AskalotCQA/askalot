@@ -29,7 +29,7 @@ describe Probe::Index do
     }
   end
 
-  after :all do
+  after :each do
     index.delete
   end
 

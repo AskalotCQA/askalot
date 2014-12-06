@@ -9,12 +9,11 @@ module StackExchange
 
       def process_element(post, options = {})
         if @type == :question && post[:PostTypeId] == '1'
-          user = User.find_by(stack_exchange_uuid: post[:OwnerUserId]) || User.first
-
           return if Question.exists?(stack_exchange_uuid: post[:Id])
+          user = Mapper.users[post[:OwnerUserId]] || User.first
 
           question = Question.new(
-            author:              user,
+            author_id:           user[:id],
             category:            Category.first,
             title:               post[:Title], # TODO (smolnar) make title only 145 characters long, restrictions on DB
             text:                ActionView::Base.full_sanitizer.sanitize(post[:Body]).to_s,
@@ -28,16 +27,16 @@ module StackExchange
         end
 
         if @type == :answer && post[:PostTypeId] == '2'
-          user     = User.find_by(stack_exchange_uuid: post[:OwnerUserId])
-          question = Question.find_by(stack_exchange_uuid: post[:ParentId])
+          user     = Mapper.users[post[:OwnerUserId]]
+          question = Mapper.questions[post[:ParentId]]
 
           return if user.nil? || question.nil?
 
           return if Answer.exists?(stack_exchange_uuid: post[:Id])
 
           answer = Answer.new(
-            author:              user,
-            question:            question,
+            author_id:           user[:id],
+            question_id:         question[:id],
             text:                ActionView::Base.full_sanitizer.sanitize(post[:Body]).to_s,
             created_at:          post[:CreationDate],
             updated_at:          post[:CreationDate],
@@ -53,7 +52,7 @@ module StackExchange
           end
 
           taggings = tags.uniq.map do |name|
-            user_id     = Mapper.users[post[:OwnerUserId]][:id] || User.first.id
+            user_id     = Mapper.users[post[:OwnerUserId]] ? Mapper.users[post[:OwnerUserId]][:id] : User.first.id
             tag_id      = Mapper.tags[name] ? Mapper.tags[name][:id] : Tag.create!(name: name).id
             question_id = Mapper.questions[post[:Id]][:id]
 

@@ -2,18 +2,20 @@ module StackExchange
   class Document
     class Comments < StackExchange::Document
       def process_element(comment)
-        user        = User.find_by(stack_exchange_uuid: comment[:UserId])
-        question    = Question.find_by(stack_exchange_uuid: comment[:PostId])
-        answer      = Answer.find_by(stack_exchange_uuid: comment[:PostId])
+        user        = Mapper.users[comment[:UserId]]
+        question    = Mapper.questions[comment[:PostId]]
+        answer      = Mapper.answers[comment[:PostId]]
         commentable = question.nil? ? answer : question
+        type        = question.nil? ? :Answer : :Question
 
         return if commentable.nil? || user.nil?
 
         return if Comment.exists?(stack_exchange_uuid: comment[:Id])
 
         comment = Comment.new(
-          author:              user,
-          commentable:         commentable,
+          author_id:           user[:id],
+          commentable_id:      commentable[:id],
+          commentable_type:    type,
           text:                ActionView::Base.full_sanitizer.sanitize(comment[:Text]).to_s,
           created_at:          comment[:CreationDate],
           updated_at:          comment[:CreationDate],

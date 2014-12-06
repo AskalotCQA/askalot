@@ -71,6 +71,12 @@ RSpec.configure do |config|
     c.syntax = :expect # Allow only usage of expect syntax
   end
 
+  # In order to make example reference yield inside it, before, each blocks
+  config.expose_current_running_example_as :example
+
+  # Choose type of spec based on it's directory
+  config.infer_spec_type_from_file_location!
+
   # FactoryGirl
   config.include FactoryGirl::Syntax::Methods
 
