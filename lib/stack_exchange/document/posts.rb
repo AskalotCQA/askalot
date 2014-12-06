@@ -5,10 +5,6 @@ module StackExchange
         super()
 
         @type = type
-
-        if @type == :tagging
-          Mapper.reload!
-        end
       end
 
       def process_element(post, options = {})
@@ -57,11 +53,11 @@ module StackExchange
           end
 
           taggings = tags.uniq.map do |name|
-            user_id     = Mapper.users[post[:OwnerUserId]] || User.first.id
-            tag_id      = Mapper.tags[name] || Tag.create!(name: name).id
-            question_id = Mapper.questions[post[:Id]]
+            user_id     = Mapper.users[post[:OwnerUserId]][:id] || User.first.id
+            tag_id      = Mapper.tags[name] ? Mapper.tags[name][:id] : Tag.create!(name: name).id
+            question_id = Mapper.questions[post[:Id]][:id]
 
-            Mapper.tags[name] ||= tag_id
+            Mapper.tags[name] ||= { id: tag_id }
 
             Tagging.new(
               tag_id:      tag_id,

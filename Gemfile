@@ -82,8 +82,6 @@ group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
   gem 'rvm-capistrano'
-
-  gem 'activerecord-import'
 end
 
 # development & test
@@ -109,6 +107,9 @@ group :development, :test do
 
   # code metrics
   gem 'simplecov', require: false
+
+  # mass import
+  gem 'activerecord-import'
 end
 
 # demo, staging & production

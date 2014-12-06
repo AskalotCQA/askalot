@@ -5,6 +5,8 @@ module StackExchange
     def initialize
       @from = StackExchange.config.document.from
       @to   = StackExchange.config.document.to
+
+      StackExchange::Mapper.reload!
     end
 
     def name
@@ -67,7 +69,7 @@ module StackExchange
         model.import records, validate: false, timestamps: false
       end
 
-      @records   = []
+      @records = []
     end
   end
 end
