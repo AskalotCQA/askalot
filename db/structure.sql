@@ -452,6 +452,40 @@ ALTER SEQUENCE documents_id_seq OWNED BY documents.id;
 
 
 --
+-- Name: evaluation_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE evaluation_revisions (
+    id integer NOT NULL,
+    evaluation_id integer NOT NULL,
+    editor_id integer NOT NULL,
+    text text,
+    value integer NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: evaluation_revisions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE evaluation_revisions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: evaluation_revisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE evaluation_revisions_id_seq OWNED BY evaluation_revisions.id;
+
+
+--
 -- Name: evaluations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -466,7 +500,10 @@ CREATE TABLE evaluations (
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
     deletor_id integer,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    edited boolean DEFAULT false NOT NULL,
+    edited_at timestamp without time zone,
+    editor_id integer
 );
 
 
@@ -1365,6 +1402,13 @@ ALTER TABLE ONLY documents ALTER COLUMN id SET DEFAULT nextval('documents_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY evaluation_revisions ALTER COLUMN id SET DEFAULT nextval('evaluation_revisions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY evaluations ALTER COLUMN id SET DEFAULT nextval('evaluations_id_seq'::regclass);
 
 
@@ -1594,6 +1638,14 @@ ALTER TABLE ONLY document_revisions
 
 ALTER TABLE ONLY documents
     ADD CONSTRAINT documents_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: evaluation_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY evaluation_revisions
+    ADD CONSTRAINT evaluation_revisions_pkey PRIMARY KEY (id);
 
 
 --
@@ -2087,6 +2139,20 @@ CREATE INDEX index_documents_on_title ON documents USING btree (title);
 
 
 --
+-- Name: index_evaluation_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_evaluation_revisions_on_editor_id ON evaluation_revisions USING btree (editor_id);
+
+
+--
+-- Name: index_evaluation_revisions_on_evaluation_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_evaluation_revisions_on_evaluation_id ON evaluation_revisions USING btree (evaluation_id);
+
+
+--
 -- Name: index_evaluations_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2105,6 +2171,13 @@ CREATE INDEX index_evaluations_on_deleted ON evaluations USING btree (deleted);
 --
 
 CREATE INDEX index_evaluations_on_deletor_id ON evaluations USING btree (deletor_id);
+
+
+--
+-- Name: index_evaluations_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_evaluations_on_edited ON evaluations USING btree (edited);
 
 
 --
@@ -3067,6 +3140,10 @@ INSERT INTO schema_migrations (version) VALUES ('20141103192331');
 INSERT INTO schema_migrations (version) VALUES ('20141117173517');
 
 INSERT INTO schema_migrations (version) VALUES ('20141201144422');
+
+INSERT INTO schema_migrations (version) VALUES ('20141201163635');
+
+INSERT INTO schema_migrations (version) VALUES ('20141201163936');
 
 INSERT INTO schema_migrations (version) VALUES ('20141201232355');
 
