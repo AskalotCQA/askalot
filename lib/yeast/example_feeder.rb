@@ -3,7 +3,7 @@ module Yeast
     extend self
 
     def publish(action, initiator, resource, options = {})
-      puts "Feeding for #{action} '#{action}' on #{resource} by #{initiator.name} ..."
+      puts "Feeding for #{action} '#{action}' on #{resource} by #{initiator.try(:nick) || 'no one'} ..."
     end
   end
 end
