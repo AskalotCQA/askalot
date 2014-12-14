@@ -84,6 +84,6 @@ RSpec.configure do |config|
     filename = example.metadata[:file_path].split(/\//).last
     name     = "#{filename}_#{FAILED_EXAMPLES[filename] += 1}"
 
-    save_screenshot(name) if example.exception
+    save_screenshot(name) if example.exception && Capybara.javascript_driver == :poltergeist
   end
 end

@@ -114,9 +114,9 @@ describe User do
       it 'is student' do
         user = build :student
 
-        expect(user.role? :student).to be_true
-        expect(user.role? :teacher).to be_false
-        expect(user.role? :administrator).to be_false
+        expect(user.role? :student).to be_truthy
+        expect(user.role? :teacher).to be_falsey
+        expect(user.role? :administrator).to be_falsey
       end
 
       context 'with assignment to teacher' do
@@ -125,9 +125,9 @@ describe User do
 
           create :assignment, user: user, category: category, role: Role.find_by(name: :teacher)
 
-          expect(user.role? :student).to be_true
-          expect(user.role? :teacher).to be_false
-          expect(user.role? :administrator).to be_false
+          expect(user.role? :student).to be_truthy
+          expect(user.role? :teacher).to be_falsey
+          expect(user.role? :administrator).to be_falsey
         end
       end
     end
@@ -136,9 +136,9 @@ describe User do
       it 'is teacher' do
         user = build :teacher
 
-        expect(user.role? :student).to be_false
-        expect(user.role? :teacher).to be_true
-        expect(user.role? :administrator).to be_false
+        expect(user.role? :student).to be_falsey
+        expect(user.role? :teacher).to be_truthy
+        expect(user.role? :administrator).to be_falsey
       end
 
       context 'with assignment to administrator' do
@@ -147,9 +147,9 @@ describe User do
 
           create :assignment, user: user, category: category, role: Role.find_by(name: :administrator)
 
-          expect(user.role? :student).to be_false
-          expect(user.role? :teacher).to be_true
-          expect(user.role? :administrator).to be_false
+          expect(user.role? :student).to be_falsey
+          expect(user.role? :teacher).to be_truthy
+          expect(user.role? :administrator).to be_falsey
         end
       end
     end
@@ -158,9 +158,9 @@ describe User do
       it 'is administrator' do
         user = build :administrator
 
-        expect(user.role? :student).to be_false
-        expect(user.role? :teacher).to be_false
-        expect(user.role? :administrator).to be_true
+        expect(user.role? :student).to be_falsey
+        expect(user.role? :teacher).to be_falsey
+        expect(user.role? :administrator).to be_truthy
       end
     end
   end
@@ -173,9 +173,9 @@ describe User do
       it 'is student' do
         user = build :student
 
-        expect(user.assigned? a, :student).to be_true
-        expect(user.assigned? a, :teacher).to be_false
-        expect(user.assigned? a, :administrator).to be_false
+        expect(user.assigned? a, :student).to be_truthy
+        expect(user.assigned? a, :teacher).to be_falsey
+        expect(user.assigned? a, :administrator).to be_falsey
       end
 
       context 'with assignment to teacher' do
@@ -184,13 +184,13 @@ describe User do
 
           create :assignment, user: user, category: a, role: Role.find_by(name: :teacher)
 
-          expect(user.assigned? a, :student).to be_false
-          expect(user.assigned? a, :teacher).to be_true
-          expect(user.assigned? a, :administrator).to be_false
+          expect(user.assigned? a, :student).to be_falsey
+          expect(user.assigned? a, :teacher).to be_truthy
+          expect(user.assigned? a, :administrator).to be_falsey
 
-          expect(user.assigned? b, :student).to be_true
-          expect(user.assigned? b, :teacher).to be_false
-          expect(user.assigned? b, :administrator).to be_false
+          expect(user.assigned? b, :student).to be_truthy
+          expect(user.assigned? b, :teacher).to be_falsey
+          expect(user.assigned? b, :administrator).to be_falsey
         end
       end
     end
@@ -199,9 +199,9 @@ describe User do
       it 'is teacher' do
         user = build :teacher
 
-        expect(user.assigned? a, :student).to be_false
-        expect(user.assigned? a, :teacher).to be_true
-        expect(user.assigned? a, :administrator).to be_false
+        expect(user.assigned? a, :student).to be_falsey
+        expect(user.assigned? a, :teacher).to be_truthy
+        expect(user.assigned? a, :administrator).to be_falsey
       end
 
       context 'with assignment to administrator' do
@@ -210,13 +210,13 @@ describe User do
 
           create :assignment, user: user, category: a, role: Role.find_by(name: :administrator)
 
-          expect(user.assigned? a, :student).to be_false
-          expect(user.assigned? a, :teacher).to be_false
-          expect(user.assigned? a, :administrator).to be_true
+          expect(user.assigned? a, :student).to be_falsey
+          expect(user.assigned? a, :teacher).to be_falsey
+          expect(user.assigned? a, :administrator).to be_truthy
 
-          expect(user.assigned? b, :student).to be_false
-          expect(user.assigned? b, :teacher).to be_true
-          expect(user.assigned? b, :administrator).to be_false
+          expect(user.assigned? b, :student).to be_falsey
+          expect(user.assigned? b, :teacher).to be_truthy
+          expect(user.assigned? b, :administrator).to be_falsey
         end
       end
     end
@@ -225,9 +225,9 @@ describe User do
       it 'is administrator' do
         user = build :administrator
 
-        expect(user.assigned? a, :student).to be_false
-        expect(user.assigned? a, :teacher).to be_false
-        expect(user.assigned? a, :administrator).to be_true
+        expect(user.assigned? a, :student).to be_falsey
+        expect(user.assigned? a, :teacher).to be_falsey
+        expect(user.assigned? a, :administrator).to be_truthy
       end
     end
   end

@@ -37,7 +37,7 @@ describe Probe::Index do
     it 'creates index' do
       index.create
 
-      expect(index.exists?).to be_true
+      expect(index.exists?).to be_truthy
     end
   end
 
@@ -47,7 +47,7 @@ describe Probe::Index do
 
       index.delete
 
-      expect(index.exists?).to be_false
+      expect(index.exists?).to be_falsey
     end
   end
 
