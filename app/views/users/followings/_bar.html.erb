@@ -15,7 +15,7 @@
         <%= t('count_x.question', count: user.questions.where(anonymous: false).size) %> <span>&middot;</span>
         <%= t('count_x.answer', count: user.answers.size) %> <span>&middot;</span>
         <%= t('count_x.comment', count: user.comments.size) %> <span>&middot;</span>
-        <%= t('user.registered_at').downcase_first %> <%= time_tag user.created_at.to_date, format: :short %>
+        <%= t('user.registered_at', time: time_tag(user.created_at.to_date, format: :short)).downcase_first.html_safe %>
       </small>
     </div>
   </div>

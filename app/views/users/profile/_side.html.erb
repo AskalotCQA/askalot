@@ -28,8 +28,8 @@
       <% end %>
 
       <li>
-        <%= icon_tag :'clock-o', fixed: true %> <%= t 'user.registered_at' %>
-        <%= time_tag user.created_at.to_date, format: :short %>
+        <%= icon_tag :'clock-o', fixed: true %>
+        <%= t('user.registered_at', time: time_tag(user.created_at.to_date, format: :short)).html_safe %>
       </li>
     </ul>
   </div>
