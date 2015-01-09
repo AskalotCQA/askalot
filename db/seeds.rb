@@ -20,7 +20,7 @@ slido.update_attributes(
   password: SecureRandom.hex,
   first: 'Automaton',
   last: 'Slido',
-  about: 'Automatizovaný robot, ktorý zbiera otázky zo systému sli.do',
+  about: 'Automatizovaný robot, ktorý zbiera otázky zo systému [sli.do](http://sli.do)',
   show_email: false,
   role: :student
 )
