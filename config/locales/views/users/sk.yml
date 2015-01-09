@@ -42,8 +42,8 @@ sk:
     confirmation_pending: "Čaká sa na potvrdenie e-mailu %{email}."
     signed_in_as: "Prihlásený ako %{login}"
 
-    last_sign_in_at: "Naposledy prihlásený"
-    registered_at: "Registrovaný"
+    registered_at: "Registrovaný %{time}"
+    last_sign_in_at: "Naposledy prihlásený %{time}"
 
     confirm_registration: "Poslať inštrukcie pre potvrdenie registrácie"
     change_password: "Zmeniť"

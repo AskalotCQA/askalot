@@ -42,8 +42,8 @@ en:
     confirmation_pending: "Verification pending for e-mail %{email}."
     signed_in_as: "Signed in as %{login}"
 
-    last_sign_in_at: "Last sign in at"
-    registered_at: "Registered at"
+    registered_at: "Registered at %{time}"
+    last_sign_in_at: "Last sign in at %{time}"
 
     confirm_registration: "Send registration confirmation instructions"
     change_password: "Change"
