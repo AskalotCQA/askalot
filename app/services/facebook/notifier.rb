@@ -13,8 +13,11 @@ module Facebook
       notifications.select { |notification| notification.recipient.omniauth_token }.each do |notification|
         content = controller.render_to_string(partial: 'facebook/notification_content', locals: { notification: notification }).strip
         link    = controller.render_to_string(partial: 'facebook/notification_link', locals: { notification: notification, content: content }).strip
+        token   = notification.recipient.omniauth_token
 
-        FbGraph::User.me(notification.recipient.omniauth_token).fetch.notification! access_token: application.get_access_token, href: link, template: content
+        token_validation = application.debug_token token
+        next unless token_validation.is_valid
+        FbGraph::User.me(token).fetch.notification! access_token: application.get_access_token, href: link, template: content
       end
     end
   end
