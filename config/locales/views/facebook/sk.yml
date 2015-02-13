@@ -11,3 +11,11 @@ sk:
     notification:
       continue: "Pokračovať do Askalotu"
       browse: "Zobraziť notifikácie"
+
+    restore:
+      title: "Askalot na Facebook"
+      message: "Zostaň s nami na sociálnej sieti Facebook"
+      benefit: "a naďalej buď informovaný o dianí v Askalote pomocou automatických notifikácií."
+      note: "Pri integrácii s Askalotom sa prezrie iba verejný profil používateľa."
+      submit: "Zostať"
+      close: "Zavrieť"
