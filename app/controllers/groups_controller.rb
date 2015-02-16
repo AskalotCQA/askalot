@@ -25,7 +25,7 @@ class GroupsController < ApplicationController
 
   def show
     @group     = Group.find(params[:id])
-    @documents = @group.documents.page(params[:page]).per(20)
+    @documents = @group.documents.order(created_at: :desc).page(params[:page]).per(20)
 
     authorize! :show, @group
   end
