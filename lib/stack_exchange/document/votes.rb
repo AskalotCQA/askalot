@@ -9,13 +9,11 @@ module StackExchange
 
       def process_element(vote)
         if vote[:VoteTypeId] == '1'
-          return if Labeling.exists?(stack_exchange_uuid: vote[:Id])
-
           answer = StackExchange::Mapper.answers[vote[:PostId]]
 
           return unless answer
-          return if Labeling.exists?(answer_id: answer[:id], label_id: @label.id)
-          return if @records.find { |record| record.class == Labeling && record.label_id == label.id && record.answer_id == question[:id].to_i }
+          return if Labeling.exists?(answer_id: answer[:id], label_id: @label.id, stack_exchange_uuid: vote[:Id])
+          return if @records.find { |record| record.class == Labeling && record.label_id == label.id && record.answer_id == question[:id].to_i && record.stack_exchange_uuid == vote[:Id] }
 
           # TODO fix for some weird dates in SE datasets
           date = Time.parse(vote[:CreationDate]) > answer[:created_at] ? vote[:CreationDate] : answer[:created_at] + 1.minute
@@ -31,8 +29,6 @@ module StackExchange
         end
 
         if vote[:VoteTypeId] == '2' || vote[:VoteTypeId] == '3'
-          return if Vote.exists?(stack_exchange_uuid: vote[:Id])
-
           answer        = StackExchange::Mapper.answers[vote[:PostId]]
           question      = StackExchange::Mapper.questions[vote[:PostId]]
           votable       = answer || question
@@ -41,8 +37,8 @@ module StackExchange
 
           return if !answer && !question
 
-          return if Vote.exists?(votable_id: votable[:id], votable_type: votable_type, positive: positive)
-          return if @records.find { |record| record.class == Vote && record.votable_id == votable[:id].to_i && record.votable_type == votable_type && record.positive == positive }
+          return if Vote.exists?(votable_id: votable[:id], votable_type: votable_type, positive: positive, stack_exchange_uuid: vote[:Id])
+          return if @records.find { |record| record.class == Vote && record.votable_id == votable[:id].to_i && record.votable_type == votable_type && record.positive == positive && record.stack_exchange_uuid == vote[:Id] }
 
           date = Time.parse(vote[:CreationDate]) > votable[:created_at] ? vote[:CreationDate] : votable[:created_at] + 1.minute
 
