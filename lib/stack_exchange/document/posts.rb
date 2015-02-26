@@ -20,6 +20,7 @@ module StackExchange
             created_at:          post[:CreationDate],
             updated_at:          post[:CreationDate],
             touched_at:          post[:CreationDate],
+            votes_difference:    post[:Score],
             stack_exchange_uuid: post[:Id]
           )
 
@@ -40,6 +41,7 @@ module StackExchange
             text:                ActionView::Base.full_sanitizer.sanitize(post[:Body]).to_s,
             created_at:          post[:CreationDate],
             updated_at:          post[:CreationDate],
+            votes_difference:    post[:Score],
             stack_exchange_uuid: post[:Id]
           )
 
