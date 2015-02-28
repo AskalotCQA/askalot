@@ -34,6 +34,8 @@ class QuestionsController < ApplicationController
     @questions = @document.questions.order(touched_at: :desc)
 
     @questions = @questions.page(params[:page]).per(20)
+
+    initialize_polling
   end
 
   def new
