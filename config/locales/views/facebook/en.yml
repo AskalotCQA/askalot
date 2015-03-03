@@ -8,7 +8,7 @@ en:
       submit: "Join"
       close: "Close"
 
- restore:
+    restore:
       title: "Askalot is on Facebook"
       message: "Stay with us on Facebook social network."
       benefit: "and continue to be informed about events in Askalot by automatic notifications."
