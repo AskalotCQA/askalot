@@ -8,10 +8,6 @@ sk:
       submit: "Pridať"
       close: "Zavrieť"
 
-    notification:
-      continue: "Pokračovať do Askalotu"
-      browse: "Zobraziť notifikácie"
-
     restore:
       title: "Askalot na Facebook"
       message: "Zostaň s nami na sociálnej sieti Facebook"
@@ -19,3 +15,7 @@ sk:
       note: "Pri integrácii s Askalotom sa prezrie iba verejný profil používateľa."
       submit: "Zostať"
       close: "Zavrieť"
+
+    notification:
+      continue: "Pokračovať do Askalotu"
+      browse: "Zobraziť notifikácie"
