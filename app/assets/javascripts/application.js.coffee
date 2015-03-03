@@ -33,6 +33,7 @@
 #= require helper
 #= require effects
 #
+#= require documents
 #= require questions
 #= require answers
 #= require comments

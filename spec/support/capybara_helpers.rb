@@ -76,14 +76,3 @@ module CapybaraHelpers
     page.save_screenshot(Rails.root.join("tmp/screenshots/#{name}.png"), full: true)
   end
 end
-
-RSpec.configure do |config|
-  FAILED_EXAMPLES = Hash.new(0)
-
-  config.after :each, js: true do
-    filename = example.metadata[:file_path].split(/\//).last
-    name     = "#{filename}_#{FAILED_EXAMPLES[filename] += 1}"
-
-    save_screenshot(name) if example.exception && Capybara.javascript_driver == :poltergeist
-  end
-end
