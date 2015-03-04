@@ -11,9 +11,10 @@ module StackExchange
         if @type == :question && post[:PostTypeId] == '1'
           return if Question.exists?(stack_exchange_uuid: post[:Id])
           user = Mapper.users[post[:OwnerUserId]] || User.first
+          user_id = post[:CommunityOwnedDate].nil? ? user[:id] : 0
 
           question = Question.new(
-            author_id:           user[:id],
+            author_id:           user_id,
             category:            Category.first,
             title:               post[:Title], # TODO (smolnar) make title only 145 characters long, restrictions on DB
             text:                ActionView::Base.full_sanitizer.sanitize(post[:Body]).to_s,
