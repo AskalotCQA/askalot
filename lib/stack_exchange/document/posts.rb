@@ -50,7 +50,7 @@ module StackExchange
 
         if @type == :tagging && post[:PostTypeId] == '1'
           tags = post[:Tags].gsub(/^</,'').gsub(/>$/,'').split(/></).map do |t|
-            t.downcase.gsub(/[^[:alnum:]]+/, '-').gsub(/\A-|-\z/, '')
+            t.downcase.gsub(/[^[:alnum:]#\-\+\.]+/, '-').gsub(/\A-|-\z/, '')
           end
 
           taggings = tags.uniq.map do |name|
