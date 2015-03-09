@@ -1,0 +1,16 @@
+<p>
+  Welcome to <%= link_to 'Askalot', 'http://askalot.fiit.stuba.sk' %>,
+</p>
+<p>
+  In order to confirm your account, please click on the following link:
+  <%= link_to 'Confirm registration', confirmation_url(@resource, confirmation_token: @token) %>.
+</p>
+<p>
+  You have to confirm your registration in next two days, otherwise you'll not be able to log in again.
+</p>
+<p>
+  In case of any questions, do not hasitate to <%= mail_to 'askalot@fiit.stuba.sk', 'contact us' %>.
+</p>
+<p>
+  Thank you for joing Askalot and we're happy to see you like our project.
+</p>
