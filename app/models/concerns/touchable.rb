@@ -8,10 +8,8 @@ module Touchable
   def update_touched_at!
     return if self.is_a? Question
 
-    attributes_blacklist = [:favorites_count, :votes_count, :views_count, :votes_difference, :votes_lb_wsci_bp]
-
     question            = self.to_question
-    question.touched_at = self.updated_at unless (self.changed.map(&:to_sym) & attributes_blacklist).any?
+    question.touched_at = self.updated_at unless cache_changed?
 
     question.save!
   end
@@ -19,10 +17,14 @@ module Touchable
   private
 
   def attribute_changed?(column)
-    attributes_blacklist = [:favorites_count, :votes_count, :views_count, :votes_difference, :votes_lb_wsci_bp]
-
-    return true if column.to_sym == :touched_at && (self.changed.map(&:to_sym) & attributes_blacklist).any?
+    return true if column.to_sym == :touched_at && cache_changed?
 
     super
+  end
+
+  def cache_changed?
+    attributes = [:favorites_count, :votes_count, :views_count, :votes_difference, :votes_lb_wsci_bp]
+
+    (self.changed.map(&:to_sym) & attributes).any?
   end
 end
