@@ -15,5 +15,9 @@
     </ol>
 
     <%= paginate questions, params: { tab: :questions }, remote: true %>
+  <% else %>
+    <div class="alert alert-warning">
+      <%= t('question.no_records') %>
+    </div>
   <% end %>
 </div>
