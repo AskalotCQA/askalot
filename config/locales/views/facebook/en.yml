@@ -8,6 +8,14 @@ en:
       submit: "Join"
       close: "Close"
 
+    restore:
+      title: "Askalot is on Facebook"
+      message: "Stay with us on Facebook social network."
+      benefit: "and continue to be informed about events in Askalot by automatic notifications."
+      note: "During integration Askalot views only information in public user profile."
+      submit: "Stay"
+      close: "Close"
+
     notification:
       continue: "Continue to Askalot"
       browse: "View notifications"

@@ -1,7 +1,10 @@
 <% provide :header, render(partial: 'static_pages/home/header', locals: { target: nil }) %>
 
 <div class="container">
-  <%= render 'facebook/joining' %>
+  <% if session[:facebook_modal] %>
+    <%= render 'facebook/joining' %>
+    <%= render 'facebook/restoring' %>
+  <% end %>
 
   <%= flash_messages { |content| content_tag :section, content } %>
 
