@@ -9,6 +9,7 @@ module StackExchange
         end
 
         user = User.find_by(id: 0)
+
         if user.nil?
           User.create_without_confirmation!(id: 0, login: :community_wiki, email: 'community_wiki@stackexchange.com', password: 'password', password_confirmation: 'password')
         end
