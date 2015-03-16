@@ -25,6 +25,8 @@ describe Answer do
       old_timestamp = answer.to_question.touched_at
       user          = create :user
 
+      Timecop.freeze(Time.now + 100)
+
       answer.toggle_voteup_by! user
       answer.votes_count += 1
       answer.votes_difference += 1

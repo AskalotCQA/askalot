@@ -9,7 +9,7 @@ module Touchable
     return if self.is_a? Question
 
     question            = self.to_question
-    question.touched_at = self.updated_at
+    question.touched_at = self.updated_at unless untouching_attributes_changed?
 
     question.save!
   end
@@ -17,10 +17,14 @@ module Touchable
   private
 
   def attribute_changed?(column)
-    attributes = [:favorites_count, :votes_count, :views_count, :votes_difference, :votes_lb_wsci_bp]
-
-    return true if column.to_sym == :touched_at && (self.changed.map(&:to_sym) & attributes).any?
+    return true if column.to_sym == :touched_at && untouching_attributes_changed?
 
     super
+  end
+
+  def untouching_attributes_changed?
+    attributes = [:favorites_count, :votes_count, :views_count, :votes_difference, :votes_lb_wsci_bp]
+
+    (self.changed.map(&:to_sym) & attributes).any?
   end
 end
