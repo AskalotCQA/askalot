@@ -225,7 +225,7 @@ describe Question do
       old_timestamp = question.touched_at
       user          = create :user
 
-      Timecop.freeze(Time.now + 100)
+      Timecop.travel(Time.now + 100)
 
       question.toggle_voteup_by! user
       question.votes_count += 1

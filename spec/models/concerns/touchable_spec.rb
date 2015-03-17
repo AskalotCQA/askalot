@@ -9,7 +9,7 @@ shared_examples_for Touchable do
       record = create factory
       timestamp = record.to_question.touched_at
 
-      Timecop.freeze(Time.now + 100)
+      Timecop.travel(Time.now + 100)
 
       record.text += 'some additional text'
       record.save!
