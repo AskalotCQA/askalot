@@ -34,10 +34,12 @@ module StackExchange
 
           return if user.nil? || question.nil?
 
+          user_id = post[:CommunityOwnedDate].nil? ? user[:id] : 0
+
           return if Answer.exists?(stack_exchange_uuid: post[:Id])
 
           answer = Answer.new(
-            author_id:           user[:id],
+            author_id:           user_id,
             question_id:         question[:id],
             text:                ActionView::Base.full_sanitizer.sanitize(post[:Body]).to_s,
             created_at:          post[:CreationDate],
