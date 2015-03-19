@@ -26,3 +26,7 @@ end
 every 1.day do
   rake 'backup:database'
 end
+
+every 1.day, at: '5:32am' do
+  rake 'users:notifications'
+end
