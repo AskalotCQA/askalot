@@ -1,0 +1,25 @@
+<%= render 'header' %>
+
+<h4 class="notifications-title">Sumár vašich notifikácií od <%= tooltip_time_tag @from %></h4>
+
+<ol class="notifications">
+  <% @notifications.each do |notification| %>
+    <li>
+      <%= notification_content notification %>
+
+      <span class="pull-right">
+        <%= link_to_user notification.initiator_or_anonymous %>
+        <span class="text-muted">&middot;</span>
+        <%= tooltip_time_tag notification.created_at, class: 'text-muted', format: :normal, placement: :bottom %>
+      </span>
+    </li>
+  <% end %>
+</ol>
+
+<p>
+  <%= link_to "Zobraziť neprečítané notifikácie", notifications_path(tab: :unread) %>
+  &middot;
+  <%= link_to "Zobraziť všetky notifikácie", notifications_path(tab: :all) %>
+</p>
+
+<%= render 'footer' %>

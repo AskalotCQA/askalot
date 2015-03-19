@@ -1,25 +1,19 @@
-<%= yield :footer %>
-
 <footer>
   <div class="container">
-    <div class="list-center">
-      <ul>
-        <li><%= link_to t('footer.about'), url_to_site('#about') %></li>
-        <li><%= link_to t('footer.authors'), url_to_site('#authors') %></li>
-        <li><%= link_to t('footer.contact'), url_to_site('#contact') %></li>
-        <li><%= link_to t('footer.changelogs'), changelogs_path %></li>
-        <li><%= link_to t('footer.help'), help_path %></li>
-      </ul>
-    </div>
+    <ul class="list-inline">
+      <li><%= link_to t('footer.about'), url_to_site('#about') %></li>
+      <li><%= link_to t('footer.authors'), url_to_site('#authors') %></li>
+      <li><%= link_to t('footer.contact'), url_to_site('#contact') %></li>
+      <li><%= link_to t('footer.changelogs'), changelogs_path %></li>
+      <li><%= link_to t('footer.help'), help_path %></li>
+    </ul>
 
     <hr/>
 
-    <div class="list-center">
-      <ul>
-        <li><span>Copyright <%= Time.now.year %></span></li>
-        <li><a class="text-capital" href="<%= url_to_organization %>">na&#x042f;uby</a></li>
-        <li><%= link_to Askalot::VERSION::STRING, url_to_repository("releases/tag/v#{Askalot::VERSION::STRING}") %></li>
-      </ul>
-    </div>
+    <ul class="list-inline">
+      <li><span>Copyright <%= Time.now.year %></span></li>
+      <li><a class="text-capital" href="<%= url_to_organization %>">na&#x042f;uby</a></li>
+      <li><%= link_to Askalot::VERSION::STRING, url_to_repository("releases/tag/v#{Askalot::VERSION::STRING}") %></li>
+    </ul>
   </div>
 </footer>
