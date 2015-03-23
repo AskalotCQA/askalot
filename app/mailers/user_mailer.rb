@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: 'Askalot <askalot@fiit.stuba.sk>', css: 'mailers/layout'
+  default from: ::Configuration.mailer.alias, css: 'mailers/layout'
 
   helper ActivitiesHelper
   helper AnswersHelper
