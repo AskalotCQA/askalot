@@ -2,7 +2,7 @@ unless [:development, :test].include?(Rails.env.to_sym)
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     address:              'smtp.mandrillapp.com',
-    port:                 25,
+    port:                 587,
     enable_starttls_auto: true,
     user_name:            Configuration.mailer.username,
     password:             Configuration.mailer.password,
