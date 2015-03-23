@@ -1190,7 +1190,8 @@ CREATE TABLE users (
     facebook_uid bigint,
     facebook_friends text,
     facebook_likes text,
-    documents_count integer DEFAULT 0 NOT NULL
+    documents_count integer DEFAULT 0 NOT NULL,
+    send_email_notifications boolean DEFAULT true NOT NULL
 );
 
 
@@ -3146,4 +3147,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141201163635');
 INSERT INTO schema_migrations (version) VALUES ('20141201163936');
 
 INSERT INTO schema_migrations (version) VALUES ('20141201232355');
+
+INSERT INTO schema_migrations (version) VALUES ('20150323112635');
 
