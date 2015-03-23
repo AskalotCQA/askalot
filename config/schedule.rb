@@ -28,5 +28,5 @@ every 1.day do
 end
 
 every 1.day, at: '5:32am' do
-  rake 'users:notifications'
+  runner 'Mailers::UserMailerService.deliver_notifications!'
 end
