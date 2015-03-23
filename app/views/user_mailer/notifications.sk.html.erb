@@ -18,8 +18,8 @@
 
 <p>
   <%= link_to "Zobraziť neprečítané notifikácie", notifications_path(tab: :unread) %>
-  &middot;
-  <%= link_to "Zobraziť všetky notifikácie", notifications_path(tab: :all) %>
+  <span class="text-muted">&middot;</span>
+  <%= link_to "Zrušiť odoberanie notifikácii", edit_user_registration_path(tab: :notifications) %>
 </p>
 
 <%= render 'footer' %>

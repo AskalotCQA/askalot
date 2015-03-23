@@ -18,8 +18,8 @@
 
 <p>
   <%= link_to "Show unread notifications", notifications_path(tab: :unread) %>
-  &middot;
-  <%= link_to "Show all notifications", notifications_path(tab: :all) %>
+  <span class="text-muted">&middot;</span>
+  <%= link_to "Cancel email notifications", edit_user_registration_path(tab: :notifications) %>
 </p>
 
 <%= render 'footer' %>
