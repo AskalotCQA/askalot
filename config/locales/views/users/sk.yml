@@ -73,6 +73,7 @@ sk:
       message: "Pre ďalšie pokračovanie v práci so systémom je potrebné registráciu potvrdiť."
 
     profile: "Profil"
+    notifications: "Notifikácie"
     social: "Sociálne siete"
     privacy: "Súkromie"
     account: "Účet"
@@ -99,6 +100,7 @@ sk:
 
     edit:
       profile: "Úprava profilu"
+      notifications: "Správa notifikácii"
       social: "Sociálne siete"
       privacy: "Správa súkromia"
       account: "Nastavenia účtu"
