@@ -25,13 +25,13 @@ describe Answer do
       old_timestamp = answer.to_question.touched_at
       user          = create :user
 
-      Timecop.travel(Time.now + 100)
-
-      answer.toggle_voteup_by! user
-      answer.votes_count += 1
-      answer.votes_difference += 1
-      answer.votes_lb_wsci_bp += 1
-      answer.toggle_labeling_by! user, :best
+      Timecop.travel(Time.now + 100) do
+        answer.toggle_voteup_by! user
+        answer.votes_count += 1
+        answer.votes_difference += 1
+        answer.votes_lb_wsci_bp += 1
+        answer.toggle_labeling_by! user, :best
+      end
 
       # always compare timestamps directly, do not round with to_i
       expect(answer.to_question.touched_at).to eql(old_timestamp)

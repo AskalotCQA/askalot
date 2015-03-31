@@ -9,10 +9,10 @@ shared_examples_for Touchable do
       record = create factory
       timestamp = record.to_question.touched_at
 
-      Timecop.travel(Time.now + 100)
-
-      record.text += 'some additional text'
-      record.save!
+      Timecop.travel(Time.now + 100) do
+        record.text += 'some additional text'
+        record.save!
+      end
 
       expect(record.to_question.touched_at).not_to eql(timestamp)
     end
