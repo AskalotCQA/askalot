@@ -151,6 +151,30 @@ describe 'User Profile' do
       expect(page).not_to have_content(user.email)
       expect(page).to     have_link('Upraviť profil')
     end
+
+    context 'with mail notifications' do
+      it 'turns off email notifications', js: true do
+        expect(user.send_email_notifications).to be(true)
+
+        click_link 'Notifikácie'
+
+        label = find('label', text: 'Zasielať emailové notifikácie')
+
+        expect(label[:class]).to include('active')
+
+        label.click
+
+        expect(label[:class]).not_to include('active')
+
+        click_button 'Uložiť'
+
+        expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
+
+        user.reload
+
+        expect(user.send_email_notifications).to be(false)
+      end
+    end
   end
 
   context 'with AIS user' do

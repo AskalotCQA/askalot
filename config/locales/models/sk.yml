@@ -307,3 +307,5 @@ sk:
 
         hide_name: "Skryť meno ostatným používateľom"
         hide_email: "Skryť e-mail ostatným používateľom"
+
+        send_email_notifications: "Zasielať emailové notifikácie"

@@ -1,13 +1,12 @@
-unless Rails.env.test?
+unless [:development, :test].include?(Rails.env.to_sym)
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    address:              'smtp.zoho.com',
-    port:                 465,
+    address:              'smtp.mandrillapp.com',
+    port:                 587,
+    enable_starttls_auto: true,
     user_name:            Configuration.mailer.username,
     password:             Configuration.mailer.password,
-    authentication:       :login,
-    ssl:                  true,
-    tls:                  true,
-    enable_starttls_auto: true
+    authentication:       'login',
+    domain:               'askalot.fiit.stuba.sk'
   }
 end

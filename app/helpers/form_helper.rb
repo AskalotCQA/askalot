@@ -1,7 +1,7 @@
 module FormHelper
   def category_collection_select(id, collection = Category.all.order(:name), value = :id, label = :name, options = {}, html_options = {})
     tags = collection.inject({}) do |hash, category|
-      hash[category.name] = category.tags
+      hash[category.name] = category.effective_tags
       hash
     end
 

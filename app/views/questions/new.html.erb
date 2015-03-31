@@ -27,7 +27,7 @@
         <%= f.label :tag_list %>
         <ul id="question-category-tags" class="category-tags nav nav-labels">
           <% if @question.category %>
-            <% @question.category.tags.each do |category| %>
+            <% @question.category.effective_tags.each do |category| %>
               <li>
                 <span class="label label-info"><%= category %></span>
               </li>

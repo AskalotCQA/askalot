@@ -18,6 +18,10 @@ class Category < ActiveRecord::Base
     questions.reload.size
   end
 
+  def effective_tags
+    tags << Tag.current_academic_year_value
+  end
+
   def tags=(values)
     write_attribute(:tags, Tags::Extractor.extract(values))
   end

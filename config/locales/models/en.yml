@@ -295,3 +295,5 @@ en:
 
         hide_name: "Hide name from other users"
         hide_email: "Hide e-mail from other users"
+
+        send_email_notifications: "Send email notifications"

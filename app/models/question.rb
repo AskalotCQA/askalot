@@ -16,7 +16,7 @@ class Question < ActiveRecord::Base
   include Questions::Searchable
 
   # TODO (jharinek) propose change to parent tags
-  before_save { self.tag_list += self.category.tags if category }
+  before_save { self.tag_list += self.category.effective_tags if category }
 
   belongs_to :category, counter_cache: true
   belongs_to :document, counter_cache: true

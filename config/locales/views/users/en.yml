@@ -73,6 +73,7 @@ en:
       message: "To be able to use our system you need to confirm your registration first."
 
     profile: "Profile"
+    notifications: "Notifications"
     social: "Social"
     privacy: "Privacy"
     account: "Account"
@@ -99,6 +100,7 @@ en:
 
     edit:
       profile: "Update profile"
+      notifications: "Notifications settings"
       social: "Social networks"
       privacy: "Privacy settings"
       account: "Account settings"

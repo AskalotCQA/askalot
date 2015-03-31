@@ -43,6 +43,10 @@ gem 'redcarpet'
 gem 'pygments.rb'
 gem 'gemoji', '~> 1.5.0'
 
+# mailer
+gem 'roadie'
+gem 'letter_opener', group: :development
+
 # internationalization
 gem 'rails-i18n', '~> 4.0.0'
 gem 'i18n-js', '~> 2.1.2'
