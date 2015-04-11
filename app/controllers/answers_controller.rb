@@ -39,6 +39,8 @@ class AnswersController < ApplicationController
     @answers  = [@answer]
     @question = @answer.question
 
+    anonymous = @question.anonymous && @question.author == current_user
+
     case params[:value].to_sym
     when :best
       authorize! :label, @question
@@ -50,7 +52,7 @@ class AnswersController < ApplicationController
           @answers << answer
           labeling.mark_as_deleted_by! current_user
 
-          dispatch_event :delete, labeling, for: answer.question.watchers
+          dispatch_event :delete, labeling, for: answer.question.watchers, anonymous: anonymous
         end
       end
     when :helpful
@@ -63,7 +65,7 @@ class AnswersController < ApplicationController
 
     @labeling = @answer.toggle_labeling_by! current_user, params[:value]
 
-    dispatch_event dispatch_event_action_for(@labeling), @labeling, for: @question.watchers
+    dispatch_event dispatch_event_action_for(@labeling), @labeling, for: @question.watchers, anonymous: anonymous
   end
 
   private
