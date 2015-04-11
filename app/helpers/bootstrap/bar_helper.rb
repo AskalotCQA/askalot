@@ -6,7 +6,7 @@ module Bootstrap::BarHelper
     list  = content_tag :ul, capture(&block), class: :'dropdown-menu'
     body  = (link << list).html_safe
 
-    navbar_li_tag body, options.merge(class: [:dropdown, options.delete(:class)], url: url)
+    navbar_li_tag body, options.merge(class: [:dropdown, options.delete(:class)])
   end
 
   def navbar_li_tag(body = nil, options = {}, &block)
