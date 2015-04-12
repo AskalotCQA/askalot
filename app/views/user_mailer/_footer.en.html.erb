@@ -1,26 +1,6 @@
 <div class="footer">
   <p>
-    Best regards, <br/>
+    Best regards,<br/>
     team of <%= link_to 'Askalot', root_url %>
-  </p>
-
-  <p>
-    <%= link_to t('footer.about'), url_to_site('#about') %>
-    <span class="text-muted">&middot;</span>
-    <%= link_to t('footer.authors'), url_to_site('#authors') %>
-    <span class="text-muted">&middot;</span>
-    <%= link_to t('footer.contact'), url_to_site('#contact') %>
-    <span class="text-muted">&middot;</span>
-    <%= link_to t('footer.changelogs'), changelogs_path %>
-    <span class="text-muted">&middot;</span>
-    <%= link_to t('footer.help'), help_path %>
-
-    <br/>
-
-    <span>Copyright <%= Time.now.year %></span>
-    <span class="text-muted">&middot;</span>
-    <a class="text-capital" href="<%= url_to_organization %>">na&#x042f;uby</a>
-    <span class="text-muted">&middot;</span>
-    <%= link_to Askalot::VERSION::STRING, url_to_repository("releases/tag/v#{Askalot::VERSION::STRING}") %> 
   </p>
 </div>

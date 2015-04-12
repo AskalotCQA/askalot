@@ -44,7 +44,7 @@
           <%= navbar_link_tag t('user.profile'), user_path(current_user.nick), class: :'visible-xs' %>
           <%= navbar_link_tag t('notification.navigation'), notifications_path, class: :'visible-xs' %>
           <%= navbar_link_tag t('user.settings'), edit_user_registration_path, class: :'visible-xs' %>
-          <%= navbar_link_tag t('user.sign_out'), destroy_user_session_path, method: :delete, class: :'visible-xs' %>
+          <%= navbar_link_tag t('user.sign_out'), destroy_user_session_path, class: :'visible-xs' %>
         <% else %>
           <%= navbar_link_tag t('user.sign_up'), new_user_registration_path if Configuration.enable.registrations? %>
           <%= navbar_link_tag t('user.sign_in'), new_user_session_path %>
