@@ -4,7 +4,7 @@ Askalot::Application.config.roadie.after_inlining = lambda do |document|
 
   document.css('a').each do |link|
     unless link['href'].match(/(http:\/\/\w+[\.\:]|#)/)
-      link['href'] = "http://#{hostname}#{link['href']}"
+      link['href'] = "#{hostname}#{link['href']}"
     end
   end
 end
