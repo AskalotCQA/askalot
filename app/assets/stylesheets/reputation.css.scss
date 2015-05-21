@@ -1,0 +1,77 @@
+.user-reputation {
+  @include center-block;
+
+  position: relative;
+  border-radius: 50%;
+  text-align: center;
+  border: 1px solid #fff;
+
+  > span {
+    color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+  }
+
+  &.negative {
+    background: #fff;
+    box-shadow: inset 0 0 1px #000;
+
+    > span {
+      color: #444;
+    }
+  }
+
+  &.dashed {
+    border: 1px dashed #333;
+  }
+
+  &.bronze {
+    background: #cd7f32;
+  }
+
+  &.silver {
+    background: #999;
+  }
+
+  &.gold {
+    background: #ffd700;
+  }
+}
+
+.user-reputation-sm {
+  @include square(22px);
+
+  margin-top: -22px;
+  left: 22px;
+
+  > span {
+    font-size: 14px;
+    margin-top: -7px;
+  }
+}
+
+.user-reputation-md {
+  @include square(28px);
+
+  margin-top: -28px;
+  left: 28px;
+
+  > span {
+    font-size: 18px;
+    margin-top: -9px;
+  }
+}
+
+.user-reputation-lg {
+  @include square(32px);
+
+  margin-top: -34px;
+  margin-right: 2px;
+
+  > span {
+    font-size: 20px;
+    margin-top: -10px;
+  }
+}

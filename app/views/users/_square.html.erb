@@ -1,5 +1,6 @@
 <div class="user-square">
   <%= user_avatar_tag user, image: { class: 'img-circle img-responsive', size: 96 } %>
+  <%= render 'users/reputation', user: user, size: :md %>
 
   <span class="user-link">
     <%= link_to_user user %>

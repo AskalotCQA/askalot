@@ -42,6 +42,7 @@
       <div class="question-author">
         <small><%= link_to_user question.author_or_anonymous %></small>
         <%= user_avatar_tag question.author_or_anonymous, image: { class: :'img-circle img-responsive', size: 64 }, class: :'hidden-xs' %>
+        <%= render 'users/reputation', user: question.author_or_anonymous, size: :sm %>
         <small class="text-muted"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
       </div>
     </div>

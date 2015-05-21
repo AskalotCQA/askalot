@@ -36,11 +36,12 @@ class Question < ActiveRecord::Base
   scope :with_category, lambda { where.not(category: nil) }
   scope :with_document, lambda { where.not(document: nil) }
 
-  scope :random,     lambda { with_category.select('questions.*, random()').order('random()') }
-  scope :recent,     lambda { with_category.order(touched_at: :desc) }
-  scope :unanswered, lambda { with_category.includes(:answers).where(answers: { question_id: nil }) }
-  scope :answered,   lambda { with_category.joins(:answers).uniq }
-  scope :solved,     lambda { with_category.joins(:answers).merge(best_answers).references(:labelings).uniq }
+  scope :random,       lambda { with_category.select('questions.*, random()').order('random()') }
+  scope :recent,       lambda { with_category.order(touched_at: :desc) }
+  scope :unanswered,   lambda { with_category.includes(:answers).where(answers: { question_id: nil }) }
+  scope :answered,     lambda { with_category.joins(:answers).uniq }
+  scope :all_answered, lambda { joins(:answers).uniq }
+  scope :solved,       lambda { with_category.joins(:answers).merge(best_answers).references(:labelings).uniq }
 
   scope :answered_but_not_best, lambda { with_category.joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).references(:labeling).uniq.select('questions.id')).uniq }
 
@@ -65,6 +66,14 @@ class Question < ActiveRecord::Base
 
   def to_question
     self
+  end
+
+  def reputation
+    self.profiles.for('reputation').first_or_create do |p|
+      p.property    = 'reputation'
+      p.value       = 0
+      p.probability = 0
+    end
   end
 
   # TODO (jharinek) delete when refactoring watchings

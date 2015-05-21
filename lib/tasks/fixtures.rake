@@ -8,7 +8,7 @@ namespace :fixtures do
   desc 'Fill database with sample user'
   task users: :environment do
     10.times do |n|
-      User.create_without_confirmation!(login: "user_#{n}", email: Forgery(:email).address, password: 'password', password_confirmation: 'password') 
+      User.create_without_confirmation!(login: "user_#{n}", email: Forgery(:email).address, password: 'password', password_confirmation: 'password')
     end
   end
 
@@ -68,6 +68,28 @@ namespace :fixtures do
                                             nick: nick,
                                             password: password)
         end
+      end
+    end
+  end
+
+  desc 'Updates cache for tags\' statistics'
+  task tag_statistics: :environment do
+    Tag.all.each do |t|
+      puts "Updating tag ##{t.id}."
+      Reputation::Adjuster.update_tag_statistics(t)
+    end
+  end
+
+  desc 'Creates missing reputation profiles'
+  task reputation_profiles: :environment do
+    User.all.each do |u|
+      u.profiles.of('reputation').first_or_create do |p|
+        p.targetable_id   = 1
+        p.targetable_type = 'Reputation'
+        p.property        = 'Reputation'
+        p.value           = 0
+        p.probability     = 0.0
+        p.save
       end
     end
   end

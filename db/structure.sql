@@ -198,36 +198,6 @@ ALTER SEQUENCE answers_id_seq OWNED BY answers.id;
 
 
 --
--- Name: api_keys; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE api_keys (
-    id integer NOT NULL,
-    value character varying(255) NOT NULL,
-    created_at timestamp without time zone
-);
-
-
---
--- Name: api_keys_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE api_keys_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: api_keys_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE api_keys_id_seq OWNED BY api_keys.id;
-
-
---
 -- Name: assignments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1092,7 +1062,10 @@ CREATE TABLE tags (
     name character varying(255) NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
-    stack_exchange_uuid integer
+    stack_exchange_uuid integer,
+    max_time numeric(20,6),
+    min_votes_difference integer,
+    max_votes_difference integer
 );
 
 
@@ -1385,13 +1358,6 @@ ALTER TABLE ONLY answers ALTER COLUMN id SET DEFAULT nextval('answers_id_seq'::r
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY api_keys ALTER COLUMN id SET DEFAULT nextval('api_keys_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY assignments ALTER COLUMN id SET DEFAULT nextval('assignments_id_seq'::regclass);
 
 
@@ -1621,14 +1587,6 @@ ALTER TABLE ONLY answer_revisions
 
 ALTER TABLE ONLY answers
     ADD CONSTRAINT answers_pkey PRIMARY KEY (id);
-
-
---
--- Name: api_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY api_keys
-    ADD CONSTRAINT api_keys_pkey PRIMARY KEY (id);
 
 
 --
@@ -2001,13 +1959,6 @@ CREATE INDEX index_answers_on_votes_difference ON answers USING btree (votes_dif
 --
 
 CREATE INDEX index_answers_on_votes_lb_wsci_bp ON answers USING btree (votes_lb_wsci_bp);
-
-
---
--- Name: index_api_keys_on_value; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_api_keys_on_value ON api_keys USING btree (value);
 
 
 --
@@ -3193,10 +3144,6 @@ INSERT INTO schema_migrations (version) VALUES ('20141103192331');
 
 INSERT INTO schema_migrations (version) VALUES ('20141117173517');
 
-INSERT INTO schema_migrations (version) VALUES ('20141201141538');
-
-INSERT INTO schema_migrations (version) VALUES ('20141201144408');
-
 INSERT INTO schema_migrations (version) VALUES ('20141201144422');
 
 INSERT INTO schema_migrations (version) VALUES ('20141201163635');
@@ -3206,6 +3153,8 @@ INSERT INTO schema_migrations (version) VALUES ('20141201163936');
 INSERT INTO schema_migrations (version) VALUES ('20141201232355');
 
 INSERT INTO schema_migrations (version) VALUES ('20150323112635');
+
+INSERT INTO schema_migrations (version) VALUES ('20150323125346');
 
 INSERT INTO schema_migrations (version) VALUES ('20150411100033');
 

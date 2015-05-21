@@ -35,6 +35,15 @@ class Answer < ActiveRecord::Base
     self.question
   end
 
+  def reputation
+    self.profiles.for('reputation').first_or_create do |p|
+      p.property    = :reputation
+      p.source      = :reputation
+      p.value       = 0
+      p.probability = 0
+    end
+  end
+
   private
 
   def slido_label_with_best!

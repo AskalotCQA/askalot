@@ -60,6 +60,8 @@ class User < ActiveRecord::Base
 
   before_validation :resolve_nick, on: :create
 
+  after_create :create_reputation_profile
+
   def activities_seen_by(user)
     user == self ? activities.unscope(where: :anonymous) : activities
   end
@@ -138,5 +140,9 @@ class User < ActiveRecord::Base
     nick, k = self.nick, 1
 
     self.nick = "#{nick}#{k += 1}" while User.where(nick: self.nick).where.not(id: self.id).exists?
+  end
+
+  def create_reputation_profile
+    User::Profile.create(user: self, targetable_id: 1, targetable_type: 'Reputation', property: 'Reputation', value: 0, probability: 0.0)
   end
 end
