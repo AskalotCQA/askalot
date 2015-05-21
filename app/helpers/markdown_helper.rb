@@ -20,13 +20,16 @@ module MarkdownHelper
   end
 
   def render_markdown(text, options = {})
+    mailer   = ActionMailer::Base.default_url_options
+    hostname = "#{mailer[:host]}#{":#{mailer[:port]}" if mailer[:port]}"
+
     options.deep_merge! :'user-link' => {
-      regex: /http.*\/users\/\w+/,
+      regex: /#{hostname}\/users\/\w+/,
       replacement: lambda { |match| (user = User.find_by(nick: match[/\w+\z/])) ? "@#{user.id}" : match }
     }
 
     options.deep_merge! :'question-link' => {
-      regex: /http.*\/questions\/\d+/,
+      regex: /#{hostname}\/questions\/\d+/,
       replacement: lambda { |match| "##{match[/\d+\z/]}" }
     }
 
