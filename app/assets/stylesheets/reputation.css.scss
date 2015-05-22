@@ -6,7 +6,7 @@
   text-align: center;
   border: 1px solid #fff;
 
-  > span {
+  > i {
     color: #fff;
     position: absolute;
     top: 50%;
@@ -15,16 +15,15 @@
   }
 
   &.negative {
-    background: #fff;
-    box-shadow: inset 0 0 1px #000;
+    background: #666;
 
-    > span {
-      color: #444;
+    > i {
+      color: #ddd;
     }
   }
 
-  &.dashed {
-    border: 1px dashed #333;
+  &.none {
+    display: none;
   }
 
   &.bronze {
@@ -46,7 +45,7 @@
   margin-top: -22px;
   left: 22px;
 
-  > span {
+  > i {
     font-size: 14px;
     margin-top: -7px;
   }
@@ -58,7 +57,7 @@
   margin-top: -28px;
   left: 28px;
 
-  > span {
+  > i {
     font-size: 18px;
     margin-top: -9px;
   }
@@ -70,7 +69,7 @@
   margin-top: -34px;
   margin-right: 2px;
 
-  > span {
+  > i {
     font-size: 20px;
     margin-top: -10px;
   }

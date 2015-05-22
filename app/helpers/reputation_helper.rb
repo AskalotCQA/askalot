@@ -1,11 +1,11 @@
 module ReputationHelper
   def reputation_icon(user)
     reputation_icon_map = {
-        zero:     { class: 'dashed',   icon: '' },
-        negative: { class: 'negative', icon: 'fa-minus' },
-        bronze:   { class: 'bronze',   icon: 'fa-angle-up' },
-        silver:   { class: 'silver',   icon: 'fa-angle-double-up' },
-        gold:     { class: 'gold',     icon: 'fa-star-o' },
+        zero:     { class: 'none' },
+        negative: { class: 'negative', title: t('user.reputation.negative'), icon: 'minus' },
+        bronze:   { class: 'bronze',   title: t('user.reputation.bronze'),   icon: 'angle-up' },
+        silver:   { class: 'silver',   title: t('user.reputation.silver'),   icon: 'angle-double-up' },
+        gold:     { class: 'gold',     title: t('user.reputation.gold'),     icon: 'star-o' },
     }
 
     return reputation_icon_map[:zero] if user == :anonymous

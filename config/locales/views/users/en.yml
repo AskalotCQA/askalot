@@ -139,3 +139,9 @@ en:
     anonymous: "Anonymous"
 
     no_records: "No users found."
+
+    reputation:
+      negative: "Negative reputation"
+      bronze: "Bronze reputation"
+      silver: "Silver reputation"
+      gold: "Gold reputation"
