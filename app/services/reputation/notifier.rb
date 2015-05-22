@@ -11,7 +11,9 @@ module Reputation
     end
 
     def answer(answer, action)
-      @manager.send "answer_#{action.to_s}", answer
+      method = "answer_#{action.to_s}"
+
+      @manager.send method, answer if @manager.respond_to?(method)
     end
 
     def vote(vote, action)
