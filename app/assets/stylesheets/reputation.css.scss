@@ -14,7 +14,7 @@
     right: 0;
   }
 
-  &.negative {
+  &.user-reputation-negative {
     background: #666;
 
     > i {
@@ -22,19 +22,19 @@
     }
   }
 
-  &.none {
+  &.user-reputation-none {
     display: none;
   }
 
-  &.bronze {
+  &.user-reputation-bronze {
     background: #cd7f32;
   }
 
-  &.silver {
+  &.user-reputation-silver {
     background: #999;
   }
 
-  &.gold {
+  &.user-reputation-gold {
     background: #ffd700;
   }
 }
