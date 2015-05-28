@@ -141,7 +141,7 @@ en:
     no_records: "No users found."
 
     reputation:
-      negative: "Negative reputation"
+      negative: "Grey reputation"
       bronze: "Bronze reputation"
       silver: "Silver reputation"
       gold: "Gold reputation"
