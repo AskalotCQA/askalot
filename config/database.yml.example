@@ -37,3 +37,11 @@ production:
   pool: 5
   username: postgres
   password: postgres
+
+experimental:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_experimental
+  pool: 5
+  username: postgres
+  password: postgres

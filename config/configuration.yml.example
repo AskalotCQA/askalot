@@ -55,3 +55,6 @@ demo:
 
 production:
   <<: *defaults
+
+experimental:
+  <<: *defaults
