@@ -2,7 +2,7 @@ require 'rvm/capistrano'
 require 'bundler/capistrano'
 require 'whenever/capistrano'
 
-set :stages, [:staging, :demo, :production]
+set :stages, [:staging, :demo, :production, :experimental]
 
 require 'capistrano/ext/multistage'
 
