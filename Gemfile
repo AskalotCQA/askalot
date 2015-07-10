@@ -117,7 +117,7 @@ group :development, :test do
 end
 
 # demo, staging & production
-group :demo, :staging, :production do
+group :demo, :staging, :production, :experimental do
   gem 'unicorn'
   gem 'rack-timeout'
   gem 'exception_notification'
