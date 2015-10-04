@@ -85,7 +85,7 @@ end
 group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
-  gem 'rvm-capistrano'
+  gem 'rvm-capistrano', require: false
 end
 
 # development & test
