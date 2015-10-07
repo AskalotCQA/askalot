@@ -100,8 +100,8 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'launchy'
   gem 'capybara', '~> 2.2.1'
-  gem 'selenium-webdriver'
-  gem 'poltergeist', '~> 1.5.0'
+  gem 'selenium-webdriver', require: false
+  gem 'poltergeist', '~> 1.5.0', require: false
   gem 'guard-rspec'
 
   # database
