@@ -142,7 +142,7 @@ sk:
     no_records: "Neboli nájdení žiadni používatelia."
 
     reputation:
-      negative: "Záporná reputácia"
+      negative: "Sivá reputácia"
       bronze: "Bronzová reputácia"
       silver: "Strieborná reputácia"
       gold: "Zlatá reputácia"

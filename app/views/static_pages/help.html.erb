@@ -21,6 +21,9 @@
 
       <h2 id="markdown" class="page-header"><%= t('help.heading.markdown') %></h2>
       <%= render 'static_pages/help/markdown' %>
+
+      <h2 id="reputation" class="page-header"><%= t('help.heading.reputation') %></h2>
+      <%= render 'static_pages/help/reputation' %>
     </div>
 
     <div class="col-md-3 hidden-xs hidden-sm hidden-print">
@@ -40,6 +43,9 @@
           </li>
           <li>
             <%= link_to t('help.heading.markdown'), '#markdown',  analytics_attributes(:help, :scroll, :'markdown') %>
+          </li>
+          <li>
+            <%= link_to t('help.heading.reputation'), '#reputation',  analytics_attributes(:help, :scroll, :'reputation') %>
           </li>
         </ul>
       <% end %>
