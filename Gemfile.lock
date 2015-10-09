@@ -1,7 +1,12 @@
 GIT
+  remote: git://github.com/pavolzbell/bump.git
+  revision: 8b7125e4f539f068b7c038e44a06e75bd12aa50e
+  specs:
+    bump (0.0.2)
+
+GIT
   remote: git://github.com/smolnar/scout.git
   revision: d7c94e47e0f3ef671980c592268fafd303970aa9
-  branch: master
   specs:
     scout (0.3.1)
       activesupport (>= 4.0.0)
@@ -90,10 +95,10 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     columnize (0.8.9)
-    connection_pool (2.1.0)
+    connection_pool (2.2.0)
     css_parser (1.3.5)
       addressable
-    curb (0.8.6)
+    curb (0.8.8)
     d3_rails (3.4.13)
       railties (>= 3.1.0)
     database_cleaner (1.2.0)
@@ -304,8 +309,8 @@ GEM
     rdoc (4.1.2)
       json (~> 1.4)
     redcarpet (3.2.0)
-    redis (3.1.0)
-    redis-namespace (1.5.1)
+    redis (3.2.1)
+    redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
     ref (1.0.5)
     roadie (2.4.3)
@@ -428,6 +433,7 @@ DEPENDENCIES
   activerecord-import
   bootstrap-datepicker-rails (~> 1.3.0)
   bootstrap-sass (~> 3.1.1)
+  bump!
   cal-heatmap-rails (~> 0.0.1)
   cancan (~> 1.6.9)
   capistrano (~> 2.15.5)
@@ -496,3 +502,6 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   unicorn
   whenever
+
+BUNDLED WITH
+   1.10.6

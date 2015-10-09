@@ -66,7 +66,7 @@ gem 'forgery'
 gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
 gem 'nokogiri', '~> 1.6.1'
-gem 'scout', github: 'smolnar/scout', branch: :master
+gem 'scout', github: 'smolnar/scout'
 gem 'statistics2'
 gem 'symbolize'
 gem 'lda-ruby'
@@ -76,19 +76,17 @@ gem 'timecop'
 # search
 gem 'elasticsearch'
 
-# documentation
 group :doc do
   gem 'sdoc', require: false
 end
 
-# development
 group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
   gem 'rvm-capistrano', require: false
+  gem 'bump', github: 'pavolzbell/bump'
 end
 
-# development & test
 group :development, :test do
   # debugging
   gem 'pry'
@@ -116,7 +114,6 @@ group :development, :test do
   gem 'activerecord-import'
 end
 
-# demo, staging & production
 group :demo, :staging, :production, :experimental do
   gem 'unicorn'
   gem 'rack-timeout'

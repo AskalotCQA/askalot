@@ -1,0 +1,3 @@
+--branches=beta,staging,master
+--pre=alpha
+--schema=rails
