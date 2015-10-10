@@ -53,7 +53,11 @@ class User < ActiveRecord::Base
   scope :recent, lambda { where('created_at >= ?', Time.now - 1.month ) }
 
   Social.networks.each do |key, network|
-    validates key, format: { with: network.regexp }, allow_blank: true
+    if network.alt_regexp
+      validates(key, format: { with: network.regexp }, allow_blank: true) || validates(key, format: { with: network.alt_regexp }, allow_blank: true)
+    else
+      validates key, format: { with: network.regexp }, allow_blank: true
+    end
   end
 
   symbolize :role, in: ROLES

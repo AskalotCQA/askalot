@@ -22,9 +22,11 @@ class Social
 
     def build(networks)
       Hash[networks.map { |key|
-        network        = send(key)
-        network.key    = key
-        network.regexp = regexp(network.placeholder)
+        network            = send(key)
+        network.key        = key
+        network.regexp     = regexp(network.placeholder)
+
+        network.alt_regexp = network.alternative_placeholder ? regexp(network.alternative_placeholder) : nil
 
         [key, network]
       }]
