@@ -53,7 +53,7 @@ class User < ActiveRecord::Base
   scope :recent, lambda { where('created_at >= ?', Time.now - 1.month ) }
 
   Social.networks.each do |key, network|
-    unless key == :facebook
+    unless key == 'facebook'
       validates(key, format: { with: network.regexp }, allow_blank: true)
     else
       regexp_string             = network.regexp.inspect
