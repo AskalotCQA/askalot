@@ -53,11 +53,22 @@ class User < ActiveRecord::Base
   scope :recent, lambda { where('created_at >= ?', Time.now - 1.month ) }
 
   Social.networks.each do |key, network|
-    if network.alt_regexp
-      validates(key, format: { with: network.regexp }, allow_blank: true) || validates(key, format: { with: network.alt_regexp }, allow_blank: true)
+    unless key == :facebook
+      validates(key, format: { with: network.regexp }, allow_blank: true)
     else
-      validates key, format: { with: network.regexp }, allow_blank: true
+      regexp_string             = network.regexp.inspect
+      regexp_string_alternative = network.alt_regexp.inspect
+
+      regexp_string.chomp!('/')
+      regexp_string_alternative.chomp!('/')
+
+      regexp_string.slice!(0)
+      regexp_string_alternative.slice!(0)
+
+      regexp = Regexp.new regexp_string + '|' + regexp_string_alternative
+      validates(key, format: { with: regexp}, allow_blank: true)
     end
+
   end
 
   symbolize :role, in: ROLES
