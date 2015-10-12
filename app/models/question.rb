@@ -1,5 +1,6 @@
 class Question < ActiveRecord::Base
   include Authorable
+  include Closeable
   include Commentable
   include Deletable
   include Evaluable
@@ -38,7 +39,7 @@ class Question < ActiveRecord::Base
 
   scope :random,       lambda { with_category.select('questions.*, random()').order('random()') }
   scope :recent,       lambda { with_category.order(touched_at: :desc) }
-  scope :unanswered,   lambda { with_category.includes(:answers).where(answers: { question_id: nil }) }
+  scope :unanswered,   lambda { unclosed.with_category.includes(:answers).where(answers: { question_id: nil }) }
   scope :answered,     lambda { with_category.joins(:answers).uniq }
   scope :all_answered, lambda { joins(:answers).uniq }
   scope :solved,       lambda { with_category.joins(:answers).merge(best_answers).references(:labelings).uniq }
