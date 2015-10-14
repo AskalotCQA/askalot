@@ -15,7 +15,7 @@
             <%= t "question.close.text" %>
           </div>
           <div class="modal-footer">
-            <%= form_for question, method: :close, html: { id: nil, class: nil }, remote: remote ||= false do %>
+            <%= form_for [:close, question], method: :post, html: { id: nil, class: nil }, remote: remote ||= false do %>
                 <a href="#" class="btn btn-default" data-dismiss="modal"><%= t "question.close.cancel" %></a>
                 <button id="<%= "question-#{question.id}-close" %>" class="btn btn-danger"><%= t "question.close.submit" %></button>
             <% end %>

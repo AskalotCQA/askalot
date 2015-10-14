@@ -47,6 +47,7 @@ sk:
       cancel: "Späť"
       success: "Otázka bola úspešne uzatvorená."
       failure: "Otázku sa nepodarilo uzatvoriť."
+      closed: "Otázka je uzatvorená."
 
     tab:
       recent: "Aktuálne"

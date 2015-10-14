@@ -4,11 +4,11 @@ module Closeable
   included do
     belongs_to :closer, class_name: :User
 
-    scope :closed,   lambda { unscope(where: :closed).where(closed: true) }
+    scope :closed, lambda { unscope(where: :closed).where(closed: true) }
     scope :unclosed, lambda { unscope(where: :closed).where(closed: false) }
 
-    after_save do
-      mark_as_unclosed! if self.answers.any?
+    before_save do
+      mark_as_unclosed if self.answers.any?
     end
   end
 
@@ -33,15 +33,17 @@ module Closeable
 
   def mark_as_unclosed!
     self.transaction do
-      self.closed = false
-
-      closed_changed = self.closed_changed?
-
-      self.closer, self.closed_at = nil, nil if deleted_changed
-
+      mark_as_unclosed
       self.save!
     end
 
+    self
+  end
+
+  def mark_as_unclosed
+    self.closed = false
+    closed_changed = self.closed_changed?
+    self.closer, self.closed_at = nil, nil if closed_changed
     self
   end
 
