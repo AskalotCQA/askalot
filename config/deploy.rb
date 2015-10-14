@@ -77,8 +77,7 @@ namespace :deploy do
 
   desc "Restart unicorn server"
   task :restart, roles: :app, except: { no_release: true } do
-    run "/etc/init.d/unicorn-#{application}-#{rails_env} stop"
-    run "/etc/init.d/unicorn-#{application}-#{rails_env} start"
+    run "/etc/init.d/unicorn-#{application}-#{rails_env} stop && /etc/init.d/unicorn-#{application}-#{rails_env} start"
   end
 
   desc "Symlink shared"
