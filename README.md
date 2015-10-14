@@ -35,17 +35,24 @@ Create database.
 RAILS_ENV=development rake db:create
 ```
 
+Seed the database.
+
+```
+RAILS_ENV=development rake db:seed
+```
+
 ## Testing
 
-Run specs with `bundle exec rspec`.
+1. Install [PhantomJS](http://phantomjs.org/) (v2.0).
+2. Run specs with `bundle exec rspec`.
 
 ## Contributing
 
-1. Fork it
-2. Create your feature branch (`git checkout -b new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin new-feature`)
-5. Create new Pull Request
+1. Fork it.
+2. Create your feature branch (`git checkout -b new-feature`).
+3. Commit your changes (`git commit -am 'Add some feature'`).
+4. Push to the branch (`git push origin new-feature`).
+5. Create new Pull Request.
 
 ## License
 
