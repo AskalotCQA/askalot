@@ -16,6 +16,7 @@ sk:
       submit: "Opýtať"
       submit_anonymously: "Opýtať sa anonymne"
       feature: "Pridať otázku"
+      same_question: "Nenašiel si čo si hľadal? Opýtaj sa otázku v rovnakej kategórii."
 
     create:
       success: "Otázka bola úspešne pridaná."

@@ -52,6 +52,15 @@
   <%= render 'questions/answers', answers: @answers %>
 </div>
 
+<div id="same-question" class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <%= link_to (t 'question.new.same_question'), new_question_path({category: @question.category_id}), analytics_attributes(:questions, :'open-new-form', :list) %>
+  </div>
+</div>
+
+<hr/>
+
 <div id="question-answer" class="new-answer-form">
   <%= render 'answers/form', question: @question, answer: @answer %>
 </div>
+
