@@ -1,4 +1,8 @@
 Askalot::Application.routes.draw do
+  concern :closeable do
+    post :close, on: :member
+  end
+
   concern :commetable do
     resources :comments, only: [:create]
   end
@@ -79,6 +83,7 @@ Askalot::Application.routes.draw do
     get :favor,   on: :member
     get :suggest, on: :collection
 
+    concerns :closeable
     concerns :commetable
     concerns :evaluable
     concerns :searchable

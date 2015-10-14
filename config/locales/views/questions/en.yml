@@ -47,6 +47,7 @@ en:
       cancel: "Back"
       success: "Question was successfully closed."
       failure: "Question could not be closed."
+      closed: "Question is closed."
 
     tab:
       recent: "Recent"

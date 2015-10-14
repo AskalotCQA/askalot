@@ -1,4 +1,5 @@
 class QuestionsController < ApplicationController
+  include Closeables::Close
   include Deletables::Destroy
   include Editables::Update
   include Searchables::Search
