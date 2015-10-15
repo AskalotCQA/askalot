@@ -159,13 +159,12 @@
 
 <section>
   <div class="row">
-    <div class="col-md-12" style="/* overflow-y: scroll; */">
+    <div class="col-md-12">
       <h3>Používatelia</h3>
 
       <% if @users.any? %>
         <div class="responsive-block">
-          <!-- FIXME why table-responsive not working ? -->
-          <table class="table table-bordered table-condensed table-statistical table-responsive" data-sortable="true">
+          <table class="table table-bordered table-condensed table-statistical" data-sortable="true">
             <thead>
               <tr class="active">
                 <th colspan="2" rowspan="3" class="text-center">Používateľ</th>
