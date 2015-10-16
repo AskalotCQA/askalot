@@ -17,7 +17,7 @@ describe 'Following user' do
       visit root_path
 
       click_link 'Používatelia'
-      click_link other_user.nick
+      click_link other_user.nick, match: :first
 
       click_link 'Nasledovať'
 
@@ -30,7 +30,7 @@ describe 'Following user' do
       visit root_path
 
       click_link 'Používatelia'
-      click_link other_user.nick
+      click_link other_user.nick, match: :first
 
       click_link 'Nenasledovať'
 
@@ -71,7 +71,7 @@ describe 'Following user' do
       visit root_path
 
       click_link 'Používatelia'
-      click_link other_user.nick
+      click_link other_user.nick, match: :first
 
       click_link 'nasledovník'
 

@@ -27,7 +27,7 @@ describe 'Search Questions' do
 
     list = all('#questions ol > li')
 
-    expect(list).to have(2).items
+    expect(list.size).to eq(2)
 
     within '#questions' do
       expect(page).to have_content('Elasticsearch scripts')
@@ -48,7 +48,7 @@ describe 'Search Questions' do
 
     list = all('#questions ol > li')
 
-    expect(list).to have(1).item
+    expect(list.size).to eq(1)
 
     within '#questions' do
       expect(page).to have_content('PostgreSQL features')

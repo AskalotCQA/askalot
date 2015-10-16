@@ -16,7 +16,7 @@ describe 'Search Users' do
   it 'searches users by name' do
     visit root_path
 
-    click_link 'Používatelia'
+    click_link 'Používatelia', match: :first
 
     fill_in 'q', with: 'k'
     click_button 'search-submit'
@@ -40,7 +40,7 @@ describe 'Search Users' do
 
     visit root_path
 
-    click_link 'Používatelia'
+    click_link 'Používatelia', match: :first
 
     fill_in 'q', with: 'user_'
     click_button 'search-submit'

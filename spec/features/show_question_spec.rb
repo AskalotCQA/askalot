@@ -46,7 +46,7 @@ describe 'Show Question' do
 
       list = all('#questions > ol > li')
 
-      expect(list).to have(4).items
+      expect(list.size).to eq(4)
 
       within '#questions > ol' do
         expect(page).to have_content('PostgreSQL indices')
@@ -80,7 +80,7 @@ describe 'Show Question' do
 
       list = all('#questions > ol > li')
 
-      expect(list).to have(4).items
+      expect(list.size).to eq(4)
 
       within '#questions > ol' do
         expect(page).to have_content('Elasticsearch config')

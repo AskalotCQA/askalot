@@ -44,7 +44,7 @@ describe Question do
     category = create :category, tags: ['dbms', 'elasticsearch']
     question = create :question, category: category, tag_list: 'redis'
 
-    expect(question.tags.pluck(:name).sort).to eql(['dbms', 'elasticsearch', 'redis'])
+    expect(question.tags.pluck(:name).sort).to eql([Tag.current_academic_year_value, 'dbms', 'elasticsearch', 'redis'])
   end
 
   context 'deleted' do
@@ -63,14 +63,14 @@ describe Question do
 
       question.mark_as_deleted_by! question.author
 
-      expect(question.taggings.deleted.count).to eql(2)
+      expect(question.taggings.deleted.count).to eql(3)
       expect(question.taggings.undeleted.count).to eql(0)
 
       question = create :question, category: category, tag_list: 'redis, cassandra'
 
       question.mark_as_deleted_by! question.author
 
-      expect(question.taggings.deleted.count).to eql(4)
+      expect(question.taggings.deleted.count).to eql(5)
       expect(question.taggings.undeleted.count).to eql(0)
     end
   end
@@ -121,10 +121,10 @@ describe Question do
 
   describe '#labels' do
     context 'with no tag' do
-      it 'contains only category' do
+      it 'contains only category and academic year tag' do
         question = create :question
 
-        expect(question.labels.size).to eql(1)
+        expect(question.labels.size).to eql(2)
         expect(question.labels.first).to be_a(Category)
       end
     end
@@ -135,18 +135,20 @@ describe Question do
 
         question = create :question, tag_list: 'a, b, c'
 
-        expect(question.labels.size).to eql(4)
+        expect(question.labels.size).to eql(5)
         expect(question.labels[0]).to be_a(Category)
 
-        tags = question.labels[1..3].sort { |a, b| a.name <=> b.name }
+        tags = question.labels[1..4].sort { |a, b| a.name <=> b.name }
 
-        expect(tags[0].name).to eql('a')
-        expect(tags[1].name).to eql('b')
-        expect(tags[2].name).to eql('c')
+        expect(tags[0].name).to eql(Tag.current_academic_year_value)
+        expect(tags[1].name).to eql('a')
+        expect(tags[2].name).to eql('b')
+        expect(tags[3].name).to eql('c')
 
         expect(tags[0].count).to eql(2)
         expect(tags[1].count).to eql(2)
-        expect(tags[2].count).to eql(1)
+        expect(tags[2].count).to eql(2)
+        expect(tags[3].count).to eql(1)
       end
     end
   end

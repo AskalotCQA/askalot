@@ -16,7 +16,7 @@ describe 'Question Polling', js: true do
     click_link 'Otázky'
 
     list = all('#questions > ol > li')
-    expect(list).to have(1).items
+    expect(list.size).to eq(1)
 
     expect(last_event.data[:params]).not_to include(:poll)
 
@@ -25,7 +25,7 @@ describe 'Question Polling', js: true do
     wait_for_questions_polling
 
     list = all('#questions > ol > li')
-    expect(list).to have(2).items
+    expect(list.size).to eq(2)
 
     expect(page).to have_content('Elasticsearch problem')
     expect(page).to have_content('Aktualizované pred menej než minútou')
@@ -39,7 +39,7 @@ describe 'Question Polling', js: true do
     click_link 'Otázky'
 
     list = all('#questions > ol > li')
-    expect(list).to have(1).items
+    expect(list.size).to eq(1)
 
     create :question, title: 'Elasticsearch problem'
 
@@ -48,7 +48,7 @@ describe 'Question Polling', js: true do
     wait_for_questions_polling
 
     list = all('#questions > ol > li')
-    expect(list).to have(2).items
+    expect(list.size).to eq(2)
 
     expect(page).to have_content('Elasticsearch problem')
 
@@ -64,7 +64,7 @@ describe 'Question Polling', js: true do
 
     list = all('#questions > ol > li')
 
-    expect(list).to have(2).items
+    expect(list.size).to eq(2)
     expect(page).not_to have_content('Another Elasticsearch problem')
 
     expect(last_event.data[:params]).to include(poll: 'false')
