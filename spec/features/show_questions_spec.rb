@@ -94,10 +94,10 @@ describe 'Show Questions', js: true do
   end
 
   it 'shows list of unanswered questions' do
-    pending
+    skip
   end
 
   it 'shows list of solved questions' do
-    pending
+    skip
   end
 end

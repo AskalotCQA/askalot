@@ -56,14 +56,14 @@ describe 'Search Questions' do
   end
 
   it 'searches questions by answers' do
-    pending
+    skip
   end
 
   it 'searches questions by comments' do
-    pending
+    skip
   end
 
   it 'searches questions by evaluations' do
-    pending
+    skip
   end
 end
