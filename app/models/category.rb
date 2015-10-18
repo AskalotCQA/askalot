@@ -27,7 +27,7 @@ class Category < ActiveRecord::Base
   end
 
   def teachers
-    assignments.where({category_id: id, role_id: 2}).map {|t| t.user }
+    assignments.where({ category_id: id, role_id: 2 }).map { |t| t.user }
   end
 
   def has_teachers?
