@@ -17,7 +17,7 @@ describe 'Closing' do
 
       click_link "question-#{question.id}-close-modal"
 
-      within "#question-#{question.id}-closig" do
+      within "#question-#{question.id}-closing" do
         click_button 'Uzavrieť'
       end
 
