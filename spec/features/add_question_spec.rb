@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'Add Question' do
   let(:user) { create :user }
   let!(:category) { create :category }
+  let!(:question) { create :question, :with_tags }
 
   before :each do
     login_as user
@@ -107,6 +108,20 @@ describe 'Add Question' do
           expect(page).to have_content('westside')
           expect(page).to have_content('ali-gz')
         end
+      end
+    end
+
+    context 'for question' do
+      it 'create new question with the same category' do
+        visit root_path
+
+        click_link 'Otázky'
+        click_link question.title
+
+        click_link 'sa opýtaj otázku v rovnakej kategórii.'
+
+        expect(page).to have_content('Nová otázka')
+        expect(page).to have_field('question_category_id', with: question.category_id)
       end
     end
   end

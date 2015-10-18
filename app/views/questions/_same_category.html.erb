@@ -8,6 +8,7 @@
         <%= render 'questions/labels', labels: @labels %>
       </div>
 
+      <br>
       <%= t 'coupling.or' %>
       <%= link_to (t 'question.new.same_category_link'), new_question_path({category: @question.category_id}), analytics_attributes(:questions, :'open-new-form', :list) %>
     </div>
