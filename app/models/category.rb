@@ -25,4 +25,12 @@ class Category < ActiveRecord::Base
   def tags=(values)
     write_attribute(:tags, Tags::Extractor.extract(values))
   end
+
+  def teachers
+    assignments.where({category_id: id, role_id: 2}).map {|t| t.user }
+  end
+
+  def has_teachers?
+    teachers.length > 0
+  end
 end

@@ -146,3 +146,7 @@ sk:
       bronze: "Bronzová reputácia"
       silver: "Strieborná reputácia"
       gold: "Zlatá reputácia"
+
+    teacher_followed_category:
+      one: "Podporovaná učiteľom: "
+      more: "Podporovaná učiteľmi: "

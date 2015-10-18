@@ -6,6 +6,9 @@
           <div class="col-sm-6 col-md-4">
             <h4>
               <%= link_to_category category, analytics_attributes(:category, :click, category.name) %>
+              <% if category.has_teachers? %>
+                  <%= fa_icon :university, tooltip_attributes(get_names_for_teachers(category.teachers)).merge({class:'supported-category-icon-large'}) %>
+              <% end %>
             </h4>
             <div class="category-details">
               <%= t('count.question', count: category.questions.size).upcase_first %> <%= category.questions.size %> &middot;
