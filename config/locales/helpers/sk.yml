@@ -159,3 +159,6 @@ sk:
       hour: Hodina
       minute: Minúta
       second: Sekunda
+
+  coupling:
+    or: "alebo"
