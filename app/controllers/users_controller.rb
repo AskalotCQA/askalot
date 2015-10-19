@@ -10,8 +10,9 @@ class UsersController < ApplicationController
 
   def index
     @users = case params[:tab].to_sym
-             when :recent then User.recent.order(created_at: :desc)
-             else User.order(:nick)
+               when :recent then User.recent.order(created_at: :desc)
+               when :alumni then User.alumni.order(:nick)
+               else User.order(:nick)
              end
 
     @users = @users.page(params[:page]).per(60)

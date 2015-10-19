@@ -1145,6 +1145,7 @@ CREATE TABLE users (
     middle character varying(255),
     last character varying(255),
     about text,
+    alumni boolean DEFAULT true NOT NULL,
     facebook character varying(255),
     twitter character varying(255),
     linkedin character varying(255),

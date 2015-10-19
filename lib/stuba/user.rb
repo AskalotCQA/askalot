@@ -36,6 +36,10 @@ module Stuba
       @role ||= ((value = @data[:employeetype].first.to_sym) == :staff ? :teacher : :student)
     end
 
+    def alumni?
+      @alumni ||= @data[:accountstatus].include? 'uis:active'
+    end
+
     def to_params
       {
         ais_uid: uid,
