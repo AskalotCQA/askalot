@@ -67,6 +67,18 @@ describe 'Add Question' do
     end
   end
 
+  it 'selects category when creating new question from a question\'s page' do
+    visit root_path
+
+    click_link 'Otázky'
+    click_link question.title
+
+    click_link 'sa opýtaj otázku v rovnakej kategórii.'
+
+    expect(page).to have_content('Nová otázka')
+    expect(page).to have_field('question_category_id', with: question.category_id)
+  end
+
   context 'when selecting category' do
     before :each do
       create :category, name: 'Westside Playground', tags: ['westside', 'ali-gz']
@@ -108,20 +120,6 @@ describe 'Add Question' do
           expect(page).to have_content('westside')
           expect(page).to have_content('ali-gz')
         end
-      end
-    end
-
-    context 'for question' do
-      it 'create new question with the same category' do
-        visit root_path
-
-        click_link 'Otázky'
-        click_link question.title
-
-        click_link 'sa opýtaj otázku v rovnakej kategórii.'
-
-        expect(page).to have_content('Nová otázka')
-        expect(page).to have_field('question_category_id', with: question.category_id)
       end
     end
   end
