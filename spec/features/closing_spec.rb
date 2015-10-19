@@ -5,10 +5,12 @@ describe 'Closing' do
   let(:user)          { create :user }
   let(:administrator) { create :administrator }
 
-  context 'when question has no answers', js: true do
-    it 'administrator close a question' do
+  context 'when question has no answers and user is administrator', js: true do
+    before :each do
       login_as administrator
+    end
 
+    it 'can close a question' do
       visit root_path
 
       click_link 'Otázky'
@@ -28,9 +30,21 @@ describe 'Closing' do
       question.reload
 
       expect(question).to be_closed
-    end
 
-    it 'user does not close a question' do
+      visit root_path
+
+      click_link 'Otázky'
+
+      expect(page).to have_content(question.title)
+
+      click_link 'Bez odpovede'
+
+      expect(page).not_to have_content(question.title)
+    end
+  end
+
+  context 'when question has no answers and user is not administrator', js: true do
+    it 'does not close a question' do
       login_as user
 
       visit root_path
@@ -43,10 +57,10 @@ describe 'Closing' do
     end
   end
 
-  context 'when question has answer', js: true do
+  context 'when question has answer and user is administrator', js: true do
     let!(:answer) { create :answer, question: question }
 
-    it 'administrator does not close a question' do
+    it 'does not close a question' do
       login_as administrator
 
       visit root_path
@@ -57,8 +71,10 @@ describe 'Closing' do
 
       expect(page).not_to have_css("#question-#{question.id}-close-modal")
     end
+  end
 
-    it 'user does not close a question' do
+  context 'when question has answer and user is not administrator', js: true do
+    it 'does not close a question' do
       login_as user
 
       visit root_path
