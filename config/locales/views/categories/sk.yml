@@ -24,3 +24,5 @@ sk:
       failure: "Kategóriu sa nepodarilo zmazať."
 
     no_records: "Neboli nájdené žiadne kategórie."
+
+    teacher_supported: " (podporovaná učiteľom)"

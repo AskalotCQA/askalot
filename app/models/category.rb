@@ -33,4 +33,9 @@ class Category < ActiveRecord::Base
   def has_teachers?
     teachers.length > 0
   end
+
+  def name_with_teacher_supported
+    return name + I18n.t('category.teacher_supported') if has_teachers?
+    name
+  end
 end
