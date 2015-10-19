@@ -99,6 +99,6 @@ Askalot::Application.configure do
     email: {
       email_prefix: '[TP][error] ',
       sender_address: %{'Askalot' <askalot@fiit.stuba.sk>},
-      exception_recipients: %w{askalot@fiit.stuba.com}
+      exception_recipients: %w{askalot@fiit.stuba.sk}
   }
 end
