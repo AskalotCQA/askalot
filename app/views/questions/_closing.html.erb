@@ -2,7 +2,7 @@
     &middot;
 
     <a href="#" id="<%= "question-#{question.id}-close-modal" %>" class="text-muted text-undecorated" data-toggle="modal" data-target="#<%= identify question, :closing %>">
-      <%= tooltip_icon_tag :'lock', t("question.close.action"), placement: :top %>
+      <%= tooltip_icon_tag :archive, t("question.close.action"), placement: :top %>
     </a>
 
     <div id="<%= identify question, :closing %>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
