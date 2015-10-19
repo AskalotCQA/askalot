@@ -33,7 +33,7 @@ module CapybaraHelpers
   end
 
   def navigate_back
-    page.evaluate_script('window.history.back()')
+    page.driver.go_back
   end
 
   def navigate_forward

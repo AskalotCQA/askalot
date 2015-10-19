@@ -21,7 +21,7 @@ window.fixes = ->
   Hash.bind()
   Analytics.bind()
 
-  moment.lang('sk')
+  moment.locale('sk')
 
   $('.popover').remove()
   $('.tooltip').remove()

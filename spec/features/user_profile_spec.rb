@@ -76,7 +76,7 @@ describe 'User Profile' do
 
     it 'edits user social links', js: true do
       click_link 'Sociálne siete'
-      click_link 'Viac'
+      find('a', :text => 'Viac').click
 
       fill_in 'user_facebook',       with: 'http://facebook.com/'
       fill_in 'user_twitter',        with: 'http://twitter.com/'
@@ -88,7 +88,7 @@ describe 'User Profile' do
       fill_in 'user_stack_overflow', with: 'http://stackoverflow.com/users/xxx'
 
       click_button 'Uložiť'
-      click_link 'Viac'
+      find('a', :text => 'Viac').click
 
       expect(page).to have_content('Facebook – nie je platná hodnota.')
       expect(page).to have_content('Twitter – nie je platná hodnota.')
@@ -110,7 +110,7 @@ describe 'User Profile' do
       fill_in 'user_stack_overflow', with: 'http://stackoverflow.com/users/1234567890'
 
       click_button 'Uložiť'
-      click_link 'Viac'
+      find('a', :text => 'Viac').click
 
       expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
       expect(page.current_path).to eql(edit_user_registration_path)
@@ -158,7 +158,7 @@ describe 'User Profile' do
 
         click_link 'Notifikácie'
 
-        label = find('label', text: 'Zasielať emailové notifikácie')
+        label = find('label', text: 'Zasielať e-mailové notifikácie')
 
         expect(label[:class]).to include('active')
 

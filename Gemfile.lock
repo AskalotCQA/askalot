@@ -253,7 +253,7 @@ GEM
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
     pg (0.17.1)
-    poltergeist (1.5.1)
+    poltergeist (1.7.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
@@ -416,7 +416,9 @@ GEM
     warden (1.2.3)
       rack (>= 1.0)
     websocket (1.2.1)
-    websocket-driver (0.4.0)
+    websocket-driver (0.6.2)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
     whenever (0.9.4)
       chronic (>= 0.6.3)
     xpath (2.0.0)
@@ -475,7 +477,7 @@ DEPENDENCIES
   nokogiri (~> 1.6.1)
   omniauth-facebook
   pg
-  poltergeist (~> 1.5.0)
+  poltergeist (~> 1.7.0)
   pry
   pry-debugger
   pygments.rb

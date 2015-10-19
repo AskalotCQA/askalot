@@ -29,7 +29,7 @@ describe 'Show Questions', js: true do
 
     list = all('#questions > ol > li')
 
-    expect(list).to have(17).items
+    expect(list.size).to eq(17)
 
     within list[0] do
       expect(page).to have_content(newest_question.title)
@@ -54,7 +54,7 @@ describe 'Show Questions', js: true do
 
     list = all('#questions > ol > li')
 
-    expect(list).to have(4).items
+    expect(list.size).to eq(4)
 
     within list[0] do
       expect(page).to have_content(answered_question.title)
@@ -81,7 +81,7 @@ describe 'Show Questions', js: true do
 
     list = all('#questions > ol > li')
 
-    expect(list).to have(3).items
+    expect(list.size).to eq(3)
 
     within list[0] do
       expect(page).to have_content(favored_question.title)
@@ -94,10 +94,10 @@ describe 'Show Questions', js: true do
   end
 
   it 'shows list of unanswered questions' do
-    pending
+    skip
   end
 
   it 'shows list of solved questions' do
-    pending
+    skip
   end
 end

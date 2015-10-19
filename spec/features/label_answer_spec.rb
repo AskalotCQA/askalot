@@ -29,7 +29,7 @@ describe 'Label Answer', js: true do
     end
 
     it 'labels answer as helpful' do
-      pending
+      skip
 
       visit root_path
 

@@ -28,7 +28,7 @@ describe Redcurtain::Markdown do
   describe '#strip' do
     it 'renders plain text from markdown' do
       html = "# Hello, [google](https://google.com)"
-      text = "Hello, google\n"
+      text = "Hello, google (https://google.com)\n"
 
       expect(markdown.strip(html)).to eql(text)
     end

@@ -22,7 +22,7 @@ require 'capybara/poltergeist'
 require 'cancan/matchers'
 
 Capybara.default_selector  = :css
-Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :selenium
+Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :poltergeist
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, window_size: [1600, 1200], inspector: true)

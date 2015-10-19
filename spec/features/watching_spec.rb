@@ -77,7 +77,7 @@ describe 'Watching' do
 
   context 'with tag' do
     it 'registers watching for tag' do
-      pending
+      skip
     end
   end
 

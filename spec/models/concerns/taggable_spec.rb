@@ -21,13 +21,13 @@ shared_examples_for Taggable do
 
       record.save!
 
-      expect(record.tag_list.tags.sort).to     eql(['a', 'b'])
-      expect(record.tags.pluck(:name).sort).to eql(['a', 'b'])
+      expect(record.tag_list.tags.sort).to     eql([Tag.current_academic_year_value, 'a', 'b'])
+      expect(record.tags.pluck(:name).sort).to eql([Tag.current_academic_year_value, 'a', 'b'])
 
       record = model.find(record.id)
 
-      expect(record.tag_list.tags.sort).to     eql(['a', 'b'])
-      expect(record.tags.pluck(:name).sort).to eql(['a', 'b'])
+      expect(record.tag_list.tags.sort).to     eql([Tag.current_academic_year_value, 'a', 'b'])
+      expect(record.tags.pluck(:name).sort).to eql([Tag.current_academic_year_value, 'a', 'b'])
     end
 
     context 'when no tags assigned' do
@@ -88,14 +88,14 @@ shared_examples_for Taggable do
     it 'create tags' do
       record = create factory, tag_list: 'a, b, c'
 
-      expect(record.tags.order(:name).pluck(:name)).to eql(['a', 'b', 'c'])
+      expect(record.tags.order(:name).pluck(:name)).to eql(['a', 'b', 'c', Tag.current_academic_year_value])
     end
 
     context 'when tag list changes' do
       it 'removes unused tagging relations' do
         record = create factory, tag_list: 'a, b, c'
 
-        expect(record.tags.order(:name).pluck(:name)).to eql(['a', 'b', 'c'])
+        expect(record.tags.order(:name).pluck(:name)).to eql(['a', 'b', 'c', Tag.current_academic_year_value])
 
         record.tag_list = 'a, b'
 
