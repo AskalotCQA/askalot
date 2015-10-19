@@ -78,7 +78,7 @@ Askalot::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.action_mailer.default_url_options = { host: 'https://askalot.fiit.stuba.sk:12025' }
+  config.action_mailer.default_url_options = { host: 'https://askalot.fiit.stuba.sk/demo' }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
@@ -97,8 +97,8 @@ Askalot::Application.configure do
 
   config.middleware.use ExceptionNotification::Rack,
     email: {
-      email_prefix: '[tp][error] ',
-      sender_address: %{'naRuby' <naruby@otvoreneprojekty.sk>},
-      exception_recipients: %w{tp-1314-13@googlegroups.com}
+      email_prefix: '[TP][error] ',
+      sender_address: %{'Askalot' <askalot@fiit.stuba.sk>},
+      exception_recipients: %w{askalot@fiit.stuba.com}
   }
 end
