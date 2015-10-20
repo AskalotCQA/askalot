@@ -88,14 +88,14 @@ shared_examples_for Taggable do
     it 'create tags' do
       record = create factory, tag_list: 'a, b, c'
 
-      expect(record.tags.order(:name).pluck(:name)).to eql(['a', 'b', 'c', Tag.current_academic_year_value])
+      expect(record.tags.order(:name).pluck(:name)).to eql([Tag.current_academic_year_value, 'a', 'b', 'c'])
     end
 
     context 'when tag list changes' do
       it 'removes unused tagging relations' do
         record = create factory, tag_list: 'a, b, c'
 
-        expect(record.tags.order(:name).pluck(:name)).to eql(['a', 'b', 'c', Tag.current_academic_year_value])
+        expect(record.tags.order(:name).pluck(:name)).to eql([Tag.current_academic_year_value, 'a', 'b', 'c'])
 
         record.tag_list = 'a, b'
 
