@@ -12,30 +12,28 @@ describe 'Following user' do
     end
   end
 
-  context 'when following from profile page', js: true do
+  context 'when following from profile page' do
     it 'sets user as follower', skip_before: true do
       visit root_path
 
-      click_link 'Používatelia'
+      click_link 'Používatelia', match: :first
       click_link other_user.nick, match: :first
 
       click_link 'Nasledovať'
 
-      wait_for_remote
-
+      expect(page).to have_css('.fa.fa-unlink', count: 1)
       expect(user).to be_following(other_user)
     end
 
     it 'aborts user as follower' do
       visit root_path
 
-      click_link 'Používatelia'
+      click_link 'Používatelia', match: :first
       click_link other_user.nick, match: :first
 
       click_link 'Nenasledovať'
 
-      wait_for_remote
-
+      expect(page).to have_css('.fa.fa-link', count: 1)
       expect(user).not_to be_following(other_user)
     end
   end
@@ -48,8 +46,7 @@ describe 'Following user' do
 
       click_link "user-#{other_user.id}-follow"
 
-      wait_for_remote
-
+      expect(page).to have_css('.fa.fa-unlink', count: 1)
       expect(user).to be_following(other_user)
     end
 
@@ -60,8 +57,7 @@ describe 'Following user' do
 
       click_link "user-#{other_user.id}-unfollow"
 
-      wait_for_remote
-
+      expect(page).to have_css('.fa.fa-link', count: 2)
       expect(user).not_to be_following(other_user)
     end
   end
