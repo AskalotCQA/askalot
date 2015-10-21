@@ -89,6 +89,7 @@ class Ability
       # TODO (jharinek) refactor when implementing "true" roles for group
       can :edit,   [Group, Document]
       can :delete, [Group, Document]
+      can(:close,  [Question]) { |resource| resource.answers.empty? && !resource.closed }
 
       can :create,  [Assignment, Category, Changelog]
       can :update,  [Assignment, Category, Changelog]

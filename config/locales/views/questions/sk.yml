@@ -39,6 +39,16 @@ sk:
       success: "Otázka bola úspešne zmazaná."
       failure: "Otázku sa nepodarilo zmazať."
 
+    close:
+      action: "Uzavrieť"
+      title: "Pozor!"
+      text: "Naozaj chcete uzavrieť túto otázku?"
+      submit: "Uzavrieť"
+      cancel: "Späť"
+      success: "Otázka bola úspešne uzatvorená."
+      failure: "Otázku sa nepodarilo uzatvoriť."
+      closed: "Otázka je uzatvorená."
+
     tab:
       recent: "Aktuálne"
       unanswered: "Bez odpovede"

@@ -37,7 +37,17 @@ en:
       submit: "Delete"
       cancel: "Back"
       success: "Question was successfully deleted."
-      failure: "Question could not be deleted"
+      failure: "Question could not be deleted."
+
+    close:
+      action: "Close"
+      title: "Warning!"
+      text: "Are you sure you want to close this question?"
+      submit: "Close"
+      cancel: "Back"
+      success: "Question was successfully closed."
+      failure: "Question could not be closed."
+      closed: "Question is closed."
 
     tab:
       recent: "Recent"

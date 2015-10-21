@@ -917,7 +917,10 @@ CREATE TABLE questions (
     stack_exchange_duplicate boolean,
     stack_exchange_questions_uuids integer[],
     evaluations_count integer DEFAULT 0 NOT NULL,
-    document_id integer
+    document_id integer,
+    closed boolean DEFAULT false NOT NULL,
+    closer_id integer,
+    closed_at timestamp without time zone
 );
 
 
@@ -2494,6 +2497,13 @@ CREATE INDEX index_questions_on_category_id ON questions USING btree (category_i
 
 
 --
+-- Name: index_questions_on_closer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_questions_on_closer_id ON questions USING btree (closer_id);
+
+
+--
 -- Name: index_questions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3157,4 +3167,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150323112635');
 INSERT INTO schema_migrations (version) VALUES ('20150323125346');
 
 INSERT INTO schema_migrations (version) VALUES ('20150411100033');
+
+INSERT INTO schema_migrations (version) VALUES ('20151012143719');
 

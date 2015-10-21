@@ -10,6 +10,7 @@
       <div id="question-title">
         <h1 class="question-title">
           <%= @question.title %>
+          <%= fa_icon :lock, tooltip_attributes(t 'question.close.closed') if @question.closed %>
           <%= evaluation_badge_tag @question if @question.evaluations.any? %>
         </h1>
         <%= render 'questions/labels', labels: @labels %>
@@ -24,6 +25,7 @@
           <%= render 'questions/details', question: @question %>
           <%= render 'questions/editing', question: @question %>
           <%= render 'questions/deleting', question: @question %>
+          <%= render 'questions/closing', question: @question %>
         </div>
 
         <div id="question-evaluations">
