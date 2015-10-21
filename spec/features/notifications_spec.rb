@@ -35,6 +35,32 @@ describe 'Notifications' do
       expect(last_notification.action).to    eql(:create)
       expect(last_notification.resource).to  eql(question)
     end
+
+    context 'with anonymous question' do
+      it 'notifies watchers about new question and hides asker' do
+        category.toggle_watching_by!(watcher)
+
+        visit root_path
+
+        click_link 'Opýtať sa otázku'
+
+        select category.name, from: 'question_category_id'
+
+        fill_in 'question_title', with: 'Lorem ipsum?'
+        fill_in 'question_text',  with: 'Lorem ipsum'
+        check 'question_anonymous'
+
+        click_button 'Opýtať'
+
+        expect(notifications.size).to eql(1)
+
+        click_link 'Odhlásiť', match: :first
+
+        login_as watcher
+
+        expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::img[@alt='Anonym']")
+      end
+    end
   end
 
   context 'with tag' do
