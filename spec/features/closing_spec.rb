@@ -5,12 +5,22 @@ describe 'Closing' do
   let(:user)          { create :user }
   let(:administrator) { create :administrator }
 
-  context 'when question has no answers and user is administrator', js: true do
-    before :each do
-      login_as administrator
+  context 'when question has no answers', js: true do
+    it 'does not close a question as user' do
+      login_as user
+
+      visit root_path
+
+      click_link 'Otázky'
+
+      click_link question.title
+
+      expect(page).not_to have_css("#question-#{question.id}-close-modal")
     end
 
-    it 'can close a question' do
+    it 'closes a question as administrator' do
+      login_as administrator
+
       visit root_path
 
       click_link 'Otázky'
@@ -24,7 +34,6 @@ describe 'Closing' do
       end
 
       expect(page).to have_content('Otázka bola úspešne uzatvorená.')
-
       expect(page.current_path).to eql(questions_path)
 
       question.reload
@@ -43,24 +52,10 @@ describe 'Closing' do
     end
   end
 
-  context 'when question has no answers and user is not administrator', js: true do
-    it 'does not close a question' do
-      login_as user
-
-      visit root_path
-
-      click_link 'Otázky'
-
-      click_link question.title
-
-      expect(page).not_to have_css("#question-#{question.id}-close-modal")
-    end
-  end
-
-  context 'when question has answer and user is administrator', js: true do
+  context 'when question has answer', js: true do
     let!(:answer) { create :answer, question: question }
 
-    it 'does not close a question' do
+    it 'does not close a question as adminitrator' do
       login_as administrator
 
       visit root_path
@@ -71,10 +66,8 @@ describe 'Closing' do
 
       expect(page).not_to have_css("#question-#{question.id}-close-modal")
     end
-  end
 
-  context 'when question has answer and user is not administrator', js: true do
-    it 'does not close a question' do
+    it 'does not close a question as user' do
       login_as user
 
       visit root_path
