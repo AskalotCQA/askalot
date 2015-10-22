@@ -64,7 +64,7 @@ describe 'Notifications' do
 
         login_as watcher
 
-        expect(page).to have_xpath('//a[text()="1 neprečítaná notifikácia"]/../../descendant::img[@alt="Anonym"]')
+        expect(page).to have_xpath('//a[text()="1 neprečítaná notifikácia"]/../../descendant::img[@alt="anonymous"]')
       end
     end
   end
