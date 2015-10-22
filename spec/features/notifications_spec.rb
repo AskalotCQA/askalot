@@ -34,6 +34,12 @@ describe 'Notifications' do
       expect(last_notification.recipient).to eql(watcher)
       expect(last_notification.action).to    eql(:create)
       expect(last_notification.resource).to  eql(question)
+
+      click_link 'Odhlásiť', match: :first
+
+      login_as watcher
+
+      expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::img[@alt='#{user.nick}']")
     end
 
     context 'with anonymous question' do
@@ -58,7 +64,7 @@ describe 'Notifications' do
 
         login_as watcher
 
-        expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::img[@alt='Anonym']")
+        expect(page).to have_xpath('//a[text()="1 neprečítaná notifikácia"]/../../descendant::img[@alt="Anonym"]')
       end
     end
   end
