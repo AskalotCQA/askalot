@@ -12,7 +12,7 @@ describe 'Teacher Supported Category' do
     login_as user
   end
 
-  it 'show icons if it contains 1 teacher' do
+  it 'shows icons if it contains 1 teacher' do
     Assignment.create({ category_id: category.id, role_id: 2, user_id: user.id })
 
     expect(category.teachers.count).to eql(1)
@@ -41,7 +41,7 @@ describe 'Teacher Supported Category' do
     expect(list[1].text).to eql(category.name + ' (podporovaná učiteľom)')
   end
 
-  it 'show icons if it contains 2 teachers' do
+  it 'shows icons if it contains 2 teachers' do
     Assignment.create({ category_id: category.id, role_id: 2, user_id: user.id })
     Assignment.create({ category_id: category.id, role_id: 3, user_id: user2.id })
     Assignment.create({ category_id: category.id, role_id: 2, user_id: user3.id })
@@ -72,7 +72,7 @@ describe 'Teacher Supported Category' do
     expect(list[1].text).to eql(category.name + ' (podporovaná učiteľom)')
   end
 
-  it 'doesnt show icons if it contains only administrators and students' do
+  it 'doesn\'t show icons if it contains only administrators and students' do
     Assignment.create({ category_id: category.id, role_id: 3, user_id: user.id })
     Assignment.create({ category_id: category.id, role_id: 1, user_id: user2.id })
     Assignment.create({ category_id: category.id, role_id: 3, user_id: user3.id })
@@ -101,7 +101,7 @@ describe 'Teacher Supported Category' do
     expect(list[1].text).to eql(category.name)
   end
 
-  it 'doesnt show icons if it has no users' do
+  it 'doesn\'t show icons if it has no users' do
     expect(category.teachers.count).to eql(0)
 
     visit root_path
