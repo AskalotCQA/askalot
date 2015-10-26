@@ -144,7 +144,7 @@ GEM
       rack-oauth2 (>= 0.14.4)
       tzinfo
     ffi (1.9.6)
-    font-awesome-rails (4.0.3.2)
+    font-awesome-rails (4.4.0.0)
       railties (>= 3.2, < 5.0)
     forgery (0.6.0)
     formatador (0.2.5)
@@ -451,7 +451,7 @@ DEPENDENCIES
   factory_girl_rails
   faker (= 1.1.2)
   fb_graph
-  font-awesome-rails (~> 4.0.3)
+  font-awesome-rails (~> 4.4.0)
   forgery
   fuubar
   garelic

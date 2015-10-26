@@ -19,4 +19,10 @@ module CategoriesHelper
   def link_to_category(category, options = {})
     link_to category.name, questions_path(tags: category.tags.join(',')), options
   end
+
+  def names_for_teachers(teachers)
+    text = teachers.length == 1 ? t('user.teacher_followed_category.one') : t('user.teacher_followed_category.more')
+
+    text << teachers.map { |t| t.name }.join(', ')
+  end
 end

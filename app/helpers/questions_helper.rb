@@ -35,7 +35,7 @@ module QuestionsHelper
     options.merge!(class: classes)
     options.deep_merge! class: classes, data: { id: filter } unless filter.blank?
 
-    link_to label.name, questions_path(tags: filter), analytics_attributes(model, :click, label.name).deep_merge(options)
+    link_to question_label_name(label), questions_path(tags: filter), analytics_attributes(model, :click, label.name).deep_merge(options)
   end
 
   def link_to_question(question, options = {})
@@ -47,5 +47,10 @@ module QuestionsHelper
   def question_label_attributes(label)
     return :tag, [label.name], [:label, :'label-info', :'question-tag'] unless label.is_a? Category
     return :category, label.tags.to_a, [:label, :'label-primary', :'question-category']
+  end
+
+  def question_label_name(label)
+    return (label.name + ' ' + fa_icon(:university, tooltip_attributes(names_for_teachers(label.teachers)).merge({ class: 'supported-category-icon-sm' })) + ' ').html_safe if label.is_a?(Category) && label.has_teachers?
+    label.name
   end
 end

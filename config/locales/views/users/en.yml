@@ -145,3 +145,7 @@ en:
       bronze: "Bronze reputation"
       silver: "Silver reputation"
       gold: "Gold reputation"
+
+    teacher_followed_category:
+      one: "Followed by teacher: "
+      more: "Followed by teachers: "

@@ -24,3 +24,5 @@ en:
       failure: "Category could not be deleted."
 
     no_records: "No categories found."
+
+    teacher_supported: " (followed by teacher)"
