@@ -58,4 +58,9 @@ describe Stuba::AIS do
       end
     end
   end
+
+  describe '.alumni' do
+    # TODO (fjandura) finish test alumni method
+  end
+
 end

@@ -37,7 +37,7 @@ module Stuba
     end
 
     def alumni?
-      @alumni ||= @data[:accountstatus].include? 'uis:active'
+      @alumni ||= @data[:accountstatus].exclude? 'uis:active'
     end
 
     def to_params
@@ -50,7 +50,8 @@ module Stuba
         first: first,
         middle: middle,
         last: last,
-        role: role
+        role: role,
+        alumni: alumni?
       }
     end
 

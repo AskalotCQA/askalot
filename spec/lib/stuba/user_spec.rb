@@ -9,7 +9,8 @@ describe Stuba::User do
       sn: ['Hrasko'],
       givenname: ['Janko'],
       mail: ['xuser1@is.stuba.sk','xuser1@stuba.sk'],
-      employeetype: ['student']
+      employeetype: ['student'],
+      accountstatus: ['uis:active']
     }
   }
   let(:teacher_data) {
@@ -46,6 +47,7 @@ describe Stuba::User do
     expect(user.last).to   eql('Hraško')
     expect(user.email).to  eql('xuser1@stuba.sk')
     expect(user.role).to   eql(:student)
+    expect(user.alumni?).to   eql(false)
   end
 
   it 'assigns correct role' do
@@ -98,7 +100,8 @@ describe Stuba::User do
         last: 'Hraško',
         ais_login: 'xuser1',
         ais_uid: '1234',
-        role: :student
+        role: :student,
+        alumni: false
       })
     end
   end

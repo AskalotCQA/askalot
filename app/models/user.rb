@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
 
   scope :recent, lambda { where('created_at >= ?', Time.now - 1.month ) }
 
-  scope :alumni, lambda { where('alumni = ?', false) }
+  scope :alumni, lambda { where('alumni = ?', true) }
 
   Social.networks.each do |key, network|
     validates key, format: { with: network.regexp }, allow_blank: true
