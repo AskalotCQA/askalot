@@ -163,82 +163,84 @@
       <h3>Používatelia</h3>
 
       <% if @users.any? %>
-        <table class="table table-bordered table-condensed table-statistical" data-sortable="true">
-          <thead>
-            <tr class="active">
-              <th colspan="2" rowspan="3" class="text-center">Používateľ</th>
+        <div class="responsive-block">
+          <table class="table table-bordered table-condensed table-statistical" data-sortable="true">
+            <thead>
+              <tr class="active">
+                <th colspan="2" rowspan="3" class="text-center">Používateľ</th>
 
-              <th colspan="5" data-sorter="false">Otázky</th>
-              <th colspan="5" data-sorter="false">Odpovede</th>
-              <th colspan="3" data-sorter="false">Komentáre</th>
-              <th colspan="3" data-sorter="false">Hlasy</th>
-              <th colspan="1" data-sorter="false">Zobrazenia</th>
-              <th colspan="1" data-sorter="false">Obľúbenia</th>
-            </tr>
-            <tr class="active">
-              <th rowspan="2">Celkom</th>
-              <th colspan="4" data-sorter="false">Používateľmi</th>
-
-              <th rowspan="2">Celkom</th>
-              <th colspan="4" data-sorter="false">Používateľmi</th>
-
-              <th rowspan="2">Celkom</th>
-              <th rowspan="2">Otázok</th>
-              <th rowspan="2">Odpovedí</th>
-
-              <th rowspan="2">Celkom</th>
-              <th rowspan="2">Otázok</th>
-              <th rowspan="2">Odpovedí</th>
-
-              <th rowspan="2">Otázok</th>
-
-              <th rowspan="2">Otázok</th>
-            </tr>
-            <tr class="active">
-              <th>Zobrazené</th>
-              <th>Hlasované</th>
-              <th>Komentované</th>
-              <th>Obľúbené</th>
-
-              <th>Hlasované</th>
-              <th>Komentované</th>
-              <th>Najlepšie</th>
-              <th>Pomocné</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @users.each_with_index do |user, i| %>
-              <tr>
-                <td class="text-right"><%= i + 1 %></td>
-                <%= data_tag(user) { |u| [link_to(u.name || u.nick, user_path(u.nick)), { administrator: :'text-muted', teacher: :info }[u.role]] } %>
-
-                <%= data_tag user.questions.where(id: @questions).size %>
-                <%= data_tag user.questions.where(id: @questions).viewed.size %>
-                <%= data_tag user.questions.where(id: @questions).voted.size %>
-                <%= data_tag user.questions.where(id: @questions).commented.size %>
-                <%= data_tag user.questions.where(id: @questions).favored.size %>
-
-                <%= data_tag join_question(user.answers, @questions).size %>
-                <%= data_tag join_question(user.answers.voted, @questions).size %>
-                <%= data_tag join_question(user.answers.commented, @questions).size %>
-                <%= data_tag join_question(user.answers.labeled_with(:best), @questions).size %>
-                <%= data_tag join_question(user.answers.labeled_with(:helpful), @questions).size %>
-
-                <%= data_tag join_questions(user.comments, :commentable, @questions).size + join_questions_through_answers(user.comments, :commentable, @questions).size %>
-                <%= data_tag join_questions(user.comments, :commentable, @questions).size %>
-                <%= data_tag join_questions_through_answers(user.comments, :commentable, @questions).size %>
-
-                <%= data_tag join_questions(user.votes, :votable, @questions).size + join_questions_through_answers(user.votes, :votable, @questions).size %>
-                <%= data_tag join_questions(user.votes, :votable, @questions).size %>
-                <%= data_tag join_questions_through_answers(user.votes, :votable, @questions).size %>
-
-                <%= data_tag join_question(user.views, @questions).size %>
-
-                <%= data_tag join_question(user.favorites, @questions).size %>
+                <th colspan="5" data-sorter="false">Otázky</th>
+                <th colspan="5" data-sorter="false">Odpovede</th>
+                <th colspan="3" data-sorter="false">Komentáre</th>
+                <th colspan="3" data-sorter="false">Hlasy</th>
+                <th colspan="1" data-sorter="false">Zobrazenia</th>
+                <th colspan="1" data-sorter="false">Obľúbenia</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+              <tr class="active">
+                <th rowspan="2">Celkom</th>
+                <th colspan="4" data-sorter="false">Používateľmi</th>
+
+                <th rowspan="2">Celkom</th>
+                <th colspan="4" data-sorter="false">Používateľmi</th>
+
+                <th rowspan="2">Celkom</th>
+                <th rowspan="2">Otázok</th>
+                <th rowspan="2">Odpovedí</th>
+
+                <th rowspan="2">Celkom</th>
+                <th rowspan="2">Otázok</th>
+                <th rowspan="2">Odpovedí</th>
+
+                <th rowspan="2">Otázok</th>
+
+                <th rowspan="2">Otázok</th>
+              </tr>
+              <tr class="active">
+                <th>Zobrazené</th>
+                <th>Hlasované</th>
+                <th>Komentované</th>
+                <th>Obľúbené</th>
+
+                <th>Hlasované</th>
+                <th>Komentované</th>
+                <th>Najlepšie</th>
+                <th>Pomocné</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each_with_index do |user, i| %>
+                <tr>
+                  <td class="text-right"><%= i + 1 %></td>
+                  <%= data_tag(user) { |u| [link_to(u.name || u.nick, user_path(u.nick)), { administrator: :'text-muted', teacher: :info }[u.role]] } %>
+
+                  <%= data_tag user.questions.where(id: @questions).size %>
+                  <%= data_tag user.questions.where(id: @questions).viewed.size %>
+                  <%= data_tag user.questions.where(id: @questions).voted.size %>
+                  <%= data_tag user.questions.where(id: @questions).commented.size %>
+                  <%= data_tag user.questions.where(id: @questions).favored.size %>
+
+                  <%= data_tag join_question(user.answers, @questions).size %>
+                  <%= data_tag join_question(user.answers.voted, @questions).size %>
+                  <%= data_tag join_question(user.answers.commented, @questions).size %>
+                  <%= data_tag join_question(user.answers.labeled_with(:best), @questions).size %>
+                  <%= data_tag join_question(user.answers.labeled_with(:helpful), @questions).size %>
+
+                  <%= data_tag join_questions(user.comments, :commentable, @questions).size + join_questions_through_answers(user.comments, :commentable, @questions).size %>
+                  <%= data_tag join_questions(user.comments, :commentable, @questions).size %>
+                  <%= data_tag join_questions_through_answers(user.comments, :commentable, @questions).size %>
+
+                  <%= data_tag join_questions(user.votes, :votable, @questions).size + join_questions_through_answers(user.votes, :votable, @questions).size %>
+                  <%= data_tag join_questions(user.votes, :votable, @questions).size %>
+                  <%= data_tag join_questions_through_answers(user.votes, :votable, @questions).size %>
+
+                  <%= data_tag join_question(user.views, @questions).size %>
+
+                  <%= data_tag join_question(user.favorites, @questions).size %>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       <% else %>
         <div class="alert alert-warning">
           Neboli nájdení žiadni používatelia.
