@@ -177,3 +177,11 @@
 .question-evaluations {
   @include block-evaluations;
 }
+
+.question-same-category {
+  display: inline-block;
+
+  .nav-labels > li {
+      margin-bottom: 0px;
+  }
+}

@@ -161,3 +161,6 @@ en:
       hour: Hour
       minute: Minute
       second: Second
+
+  coupling:
+    or: "or"

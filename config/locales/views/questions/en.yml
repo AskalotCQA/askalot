@@ -7,7 +7,7 @@ en:
       new: "New question"
 
     search:
-      title: "Vyhľadávanie v otázkach"
+      title: "Search in questions"
       submit: "Search"
       placeholder: "e.g. NoSQL databases, design patterns, …"
 
@@ -16,6 +16,8 @@ en:
       submit: "Ask question"
       submit_anonymously: "Ask anonymously"
       feature: "Ask a question"
+      same_category_link: "ask a question in the same category."
+      same_category: "Browse questions tagged"
 
     create:
       success: "Question was successfully added."

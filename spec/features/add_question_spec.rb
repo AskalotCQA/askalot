@@ -4,6 +4,7 @@ describe 'Add Question' do
   let(:user) { create :user }
   let!(:category) { create :category }
 
+
   before :each do
     login_as user
   end
@@ -63,6 +64,22 @@ describe 'Add Question' do
 
     within '#question' do
       expect(page).to have_content('Anonym')
+    end
+  end
+
+  context 'when creating new question from a question\'s page' do
+    let!(:question) { create :question, :with_tags }
+
+    it 'selects the same category' do
+      visit root_path
+
+      click_link 'Otázky'
+      click_link question.title
+
+      click_link 'sa opýtaj otázku v rovnakej kategórii.'
+
+      expect(page).to have_content('Nová otázka')
+      expect(page).to have_field('question_category_id', with: question.category_id)
     end
   end
 
