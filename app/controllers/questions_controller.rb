@@ -43,7 +43,7 @@ class QuestionsController < ApplicationController
     @question = Question.new
 
     @question.document = Document.find(params[:document_id]) if params[:document_id]
-    @question.category = Category.find(params[:category]) if params[:category]
+    @question.category = Category.find(params[:category_id]) if params[:category_id]
   end
 
   def create
