@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Add Question' do
   let(:user) { create :user }
   let!(:category) { create :category }
-  let!(:question) { create :question, :with_tags }
+
 
   before :each do
     login_as user
@@ -67,16 +67,20 @@ describe 'Add Question' do
     end
   end
 
-  it 'selects category when creating new question from a question\'s page' do
-    visit root_path
+  context 'when creating new question from a question\'s page' do
+    let!(:question) { create :question, :with_tags }
 
-    click_link 'Otázky'
-    click_link question.title
+    it 'selects the same category' do
+      visit root_path
 
-    click_link 'sa opýtaj otázku v rovnakej kategórii.'
+      click_link 'Otázky'
+      click_link question.title
 
-    expect(page).to have_content('Nová otázka')
-    expect(page).to have_field('question_category_id', with: question.category_id)
+      click_link 'sa opýtaj otázku v rovnakej kategórii.'
+
+      expect(page).to have_content('Nová otázka')
+      expect(page).to have_field('question_category_id', with: question.category_id)
+    end
   end
 
   context 'when selecting category' do
