@@ -1199,7 +1199,7 @@ CREATE TABLE users (
     documents_count integer DEFAULT 0 NOT NULL,
     send_email_notifications boolean DEFAULT true NOT NULL,
     read_notifications_thread boolean DEFAULT true NOT NULL,
-    alumni boolean DEFAULT true NOT NULL
+    alumni boolean DEFAULT false NOT NULL
 );
 
 
@@ -3172,3 +3172,4 @@ INSERT INTO schema_migrations (version) VALUES ('20150411100033');
 INSERT INTO schema_migrations (version) VALUES ('20151012143719');
 
 INSERT INTO schema_migrations (version) VALUES ('20151014122011');
+
