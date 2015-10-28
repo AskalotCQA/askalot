@@ -20,7 +20,8 @@ module AuthenticationHelper
       sn: [user.last],
       givenname: [user.first],
       mail: [user.email],
-      employeetype: [user.role]
+      employeetype: [user.role],
+      accountstatus: ['uis:active']
     }
 
     Stuba::AIS.stub(:authenticate).with(user.login, options[:password] || 'password') do
