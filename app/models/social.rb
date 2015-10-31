@@ -24,9 +24,8 @@ class Social
       Hash[networks.map { |key|
         network            = send(key)
         network.key        = key
-        network.regexp     = regexp(network.placeholder)
-
-        network.alt_regexp = network.alternative_placeholder ? regexp(network.alternative_placeholder) : nil
+        network.pattern    = network.pattern? ? network.pattern : nil
+        network.regexp     = regexp(network.pattern.presence || network.placeholder)
 
         [key, network]
       }]
@@ -39,6 +38,7 @@ class Social
       s.gsub!(/[\.\/]/) { |c| '\\' + c }
       s.gsub!('userid', '(?<userid>[0-9]+)')
       s.gsub!('username', '(?<username>[a-zA-Z0-9\.\_\-\?\=]+)')
+      s.gsub!('|', '\z|\A')
 
       /\Ahttps?\:\/\/?(www.)?#{s}\/?\z/
     end
