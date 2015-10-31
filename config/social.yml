@@ -23,83 +23,74 @@ defaults: &defaults
     - github
     - bitbucket
 
+  optional:
+    - pattern
+
   bitbucket:
     icon: bitbucket
     name: Bitbucket
     placeholder: 'http://bitbucket.org/username'
-    alternative_placeholder: ''
 
   facebook:
     icon: facebook
     name: Facebook
     placeholder: 'http://facebook.com/username'
-    alternative_placeholder: 'http://facebook.com/app_scoped_user_id/userid'
+    pattern: 'http://facebook.com/username|http://facebook.com/app_scoped_user_id/userid'
 
   flickr:
     icon: flickr
     name: Flickr
     placeholder: 'http://flickr.com/photos/username'
-    alternative_placeholder: ''
 
   foursquare:
     icon: foursquare
     name: Foursquare
     placeholder: 'http://foursquare.com/username'
-    alternative_placeholder: ''
 
   github:
     icon: github-alt
     name: GitHub
     placeholder: 'http://github.com/username'
-    alternative_placeholder: ''
 
   google_plus:
     icon: google-plus
     name: Google +
     placeholder: 'http://plus.google.com/userid'
-    alternative_placeholder: ''
 
   instagram:
     icon: instagram
     name: Instagram
     placeholder: 'http://instagram.com/username'
-    alternative_placeholder: ''
 
   linkedin:
     icon: linkedin
     name: LinkedIn
     placeholder: 'http://linkedin.com/in/username'
-    alternative_placeholder: ''
 
   pinterest:
     icon: pinterest
     name: Pinterest
     placeholder: 'http://pinterest.com/username'
-    alternative_placeholder: ''
 
   stack_overflow:
     icon: stack-overflow
     name: Stack Overflow
     placeholder: 'http://stackoverflow.com/users/userid'
-    alternative_placeholder: ''
 
   tumblr:
     icon: tumblr
     name: Tumblr
     placeholder: 'http://username.tumblr.com'
-    alternative_placeholder: ''
 
   twitter:
     icon: twitter
     name: Twitter
     placeholder: 'http://twitter.com/username'
-    alternative_placeholder: ''
 
   youtube:
     icon: youtube-play
     name: YouTube
     placeholder: 'http://youtube.com/username'
-    alternative_placeholder: ''
 
 development:
   <<: *defaults
