@@ -23,9 +23,6 @@ defaults: &defaults
     - github
     - bitbucket
 
-  optional:
-    - pattern
-
   bitbucket:
     icon: bitbucket
     name: Bitbucket
