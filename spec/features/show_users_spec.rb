@@ -23,8 +23,6 @@ describe 'Show Users', js: true do
 
     list = all('#users .user-square')
 
-    save_screenshot 'all_users'
-
     expect(list.size).to eq(10)
   end
 
@@ -40,8 +38,6 @@ describe 'Show Users', js: true do
     end
 
     list = all('#users .user-square')
-
-    save_screenshot 'alumni_users'
 
     expect(list.size).to eq(4)
 

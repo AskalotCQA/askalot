@@ -35,19 +35,19 @@ module Stuba
 
     def alumni?(username, options = {})
       request = Stuba::LDAP.build(
-          host: 'ldap.stuba.sk',
-          port: 636,
-          base: 'ou=People,dc=stuba,dc=sk',
-          encryption: :simple_tls
+        host: 'ldap.stuba.sk',
+        port: 636,
+        base: 'ou=People,dc=stuba,dc=sk',
+        encryption: :simple_tls
       )
 
       treebase = 'dc=stuba,dc=sk'
-      filter   = Stuba::LDAP.build_filter :eq, 'uid', username
+      filter = Stuba::LDAP.build_filter :eq, 'uid', username
+
       begin
-        Timeout.timeout(options[:timeout] || 20) do
+        Timeout.timeout(options[:timeout] || 3) do
           begin
             entries = request.search base: treebase, filter: filter, return_result: true rescue nil
-
             user = Stuba::User.new(entries.first) if entries.present?
 
             return user.alumni? if entries.present?

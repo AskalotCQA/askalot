@@ -64,18 +64,18 @@ describe Stuba::AIS do
     let(:request) { double(:request) }
     let(:options) do
       {
-          host: 'ldap.stuba.sk',
-          port: 636,
-          base: 'ou=People,dc=stuba,dc=sk',
-          encryption: :simple_tls
+        host: 'ldap.stuba.sk',
+        port: 636,
+        base: 'ou=People,dc=stuba,dc=sk',
+        encryption: :simple_tls
       }
     end
 
     let(:query) do
       {
-          base: 'dc=stuba,dc=sk',
-          filter: 'filter',
-          return_result: true
+        base: 'dc=stuba,dc=sk',
+        filter: 'filter',
+        return_result: true
       }
     end
 
@@ -88,7 +88,7 @@ describe Stuba::AIS do
         expect(ldap).to receive(:build).with(options).and_return(request)
         expect(ldap).to receive(:build_filter).with(:eq, 'uid', 'xuser1').and_return('filter')
 
-        expect(request).to receive(:search).with(query).and_return([{ uid: ['xuser1'], accountstatus: ["uis:active"] }])
+        expect(request).to receive(:search).with(query).and_return([{ uid: ['xuser1'], accountstatus: ['uis:active'] }])
 
         alumni = Stuba::AIS.alumni?('xuser1')
 
@@ -99,7 +99,7 @@ describe Stuba::AIS do
         expect(ldap).to receive(:build).with(options).and_return(request)
         expect(ldap).to receive(:build_filter).with(:eq, 'uid', 'xuser1').and_return('filter')
 
-        expect(request).to receive(:search).with(query).and_return([{ uid: ['xuser1'], accountstatus: ["uis:pending,neznamo"] }])
+        expect(request).to receive(:search).with(query).and_return([{ uid: ['xuser1'], accountstatus: ['uis:pending,neznamo'] }])
 
         alumni = Stuba::AIS.alumni?('xuser1')
 
