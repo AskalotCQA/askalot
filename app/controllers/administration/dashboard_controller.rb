@@ -17,6 +17,7 @@ class Administration::DashboardController < AdministrationController
     @assignment ||= Assignment.new
     @category   ||= Category.new
     @changelog  ||= Changelog.new
+    @email        = {}
 
     render 'administration/dashboard/index'
   end

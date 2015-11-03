@@ -6,6 +6,7 @@ sk:
       assignments: "Roly používateľov"
       categories: "Kategórie"
       changelogs: "Protokoly zmien"
+      emails: "Hromadný email"
 
     assignment:
       create:
@@ -57,3 +58,8 @@ sk:
         text: "Naozaj chcete zmazať tento protokol zmien?"
         submit: "Zmazať"
         cancel: "Zrušiť"
+
+    email:
+      create:
+        action: "Poslať hromadný email"
+
