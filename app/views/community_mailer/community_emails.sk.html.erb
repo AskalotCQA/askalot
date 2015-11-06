@@ -1,15 +1,14 @@
 <%= render 'user_mailer/header' %>
 
-<h4 class="title">TESTOVACI email - tu bude nadpis, <%= @user.name %></h4>
-
-<p>
-  Text z textoveho pola, vlozi sa z formulara.
+<div>
   <%= @content %>
-</p>
+</div>
+
+<br/>
 
 <p>
   <span class="text-muted">&middot;</span>
-  <%= link_to "Zrušiť odoberanie tzchto emailov", edit_user_registration_path(tab: :notifications) %>
+  <%= link_to "Zrušiť odoberanie týchto emailov", edit_user_registration_path(tab: :notifications) %>
 </p>
 
 <%= render 'user_mailer/footer' %>

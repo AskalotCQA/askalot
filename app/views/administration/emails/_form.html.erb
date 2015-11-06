@@ -1,23 +1,23 @@
-<%= form_tag("/administration/emails", method: "post") do %>
+<%= form_for @email, url: administration_emails_path(@email), method: :post do |f| %>
 
     <div class="form-group">
-      <%= label_tag :subject, "Predmet emailu" %>
-      <%= text_field_tag :subject, nil, class: :'form-control' %>
+      <%= f.label :subject, "Predmet emailu" %>
+      <%= f.text_field :subject, class: :'form-control' %>
     </div>
 
     <div class="form-group">
-      <%= label_tag :test, "Poslať iba mne" %>
-      <%= check_box_tag :test, nil, nil, class: :'form-control' %>
+      <%= check_box_tag :test %>
+      <%= "Poslať iba mne" %>
     </div>
 
     <div class="form-group">
-      <%= label_tag :html, "HTML mail" %>
-      <%= check_box_tag :html, nil, nil, class: :'form-control' %>
+      <%= f.check_box :send_html_email %>
+      <%= "HTML mail" %>
     </div>
 
     <div class="form-group">
       <%= markdown_editor_for_email do %>
-          <%= text_area_tag :text, nil, class: :'form-control', rows: 15 %>
+          <%= f.text_area :body, class: :'form-control', rows: 15 %>
       <% end %>
     </div>
 

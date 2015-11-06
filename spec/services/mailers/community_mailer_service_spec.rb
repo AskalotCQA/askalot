@@ -17,12 +17,12 @@ describe Mailers::CommunityMailerService do
 
 
     it 'delivers community emails' do
-      expect { Mailers::CommunityMailerService.deliver_mails!('body','test') }.to change { ActionMailer::Base.deliveries.count }.by(5)
+      expect { Mailers::CommunityMailerService.deliver_mails!({ body: '[telo mailu]', subject: '[predmet]', send_html_email: false }) }.to change { ActionMailer::Base.deliveries.count }.by(5)
     end
 
     it 'delivers test community email' do
       user = create(:user)
-      expect { Mailers::CommunityMailerService.deliver_test_mail!('body','test', user) }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect { Mailers::CommunityMailerService.deliver_test_mail!({ body: '[telo mailu]', subject: '[predmet]', send_html_email: false, user: user }) }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
 end

@@ -31,6 +31,10 @@ every 1.day, at: '5:32am' do
   runner 'Mailers::UserMailerService.deliver_notifications!'
 end
 
+every 10.minutes do
+  runner 'Mailers::CommunityMailerService.deliver_all_emails!'
+end
+
 every 1.day, at: '4:32am' do
   rake 'reputation:adjust'
 end

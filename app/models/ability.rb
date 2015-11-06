@@ -91,7 +91,7 @@ class Ability
       can :delete, [Group, Document]
       can(:close,  [Question]) { |resource| resource.answers.empty? && !resource.closed }
 
-      can :create,  [Assignment, Category, Changelog]
+      can :create,  [Assignment, Category, Changelog, Email]
       can :update,  [Assignment, Category, Changelog]
       can :destroy, [Assignment, Category, Changelog]
 

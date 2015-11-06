@@ -1,0 +1,15 @@
+en:
+  email:
+    create:
+      success: "Community email was successfully added."
+      failure: "Community email could not be added."
+
+    create_test:
+      success: "Community email was successfully sent."
+
+    update:
+      success: "Community email was successfully updated."
+
+    delete:
+      success: "Community email was successfully deleted."
+      failure: "Community email could not be deleted."

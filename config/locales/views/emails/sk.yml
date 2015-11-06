@@ -1,0 +1,15 @@
+sk:
+  email:
+    create:
+      success: "Hromadný email bol úspešne pridaný."
+      failure: "Hromadný email sa nepodarilo pridať."
+
+    create_test:
+      success: "Hromadný email bol úspešne odoslany."
+
+    update:
+      success: "Hromadný email bol úspešne aktualizovaný."
+
+    delete:
+      success: "Hromadný email bol úspešne zmazaný."
+      failure: "Hromadný email sa nepodarilo zmazať."

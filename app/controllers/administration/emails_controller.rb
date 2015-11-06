@@ -1,17 +1,27 @@
 class Administration::EmailsController < Administration::DashboardController
-  #authorize_resource
-  skip_authorization_check
-  before_action :authenticate_user!
 
   def create
-    form_message :notice, "Email bol uspesne odoslany", key: 'emails'
+    authorize! :create, Email
 
     if params[:test]
-      Mailers::CommunityMailerService.deliver_test_mail!(params[:text], params[:subject], current_user, params[:html])
+      Mailers::CommunityMailerService.deliver_test_mail!(email_params)
+      form_message :notice, t('email.create_test.success'), key: 'emails'
     else
-      Mailers::CommunityMailerService.deliver_mails!(params[:text], params[:subject], params[:html])
-    end
+      @email = Email.new(email_params)
 
+      if @email.save
+        form_message :notice, t('email.create.success'), key: 'emails'
+      else
+        form_message :error, t('email.create.failure'), key: 'emails'
+      end
+    end
     redirect_to administration_root_path(tab: 'emails')
+  end
+
+  private
+
+  def email_params
+    email = params.require(:email).permit(:subject, :body, :send_html_email).deep_merge({ user: current_user, status: false })
+    email.deep_merge({ send_html_email: email[:send_html_email] == "1" })
   end
 end

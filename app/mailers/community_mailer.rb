@@ -23,13 +23,13 @@ class CommunityMailer < ActionMailer::Base
 
   layout 'mailer'
 
-  def community_emails(body, subject, user, send_html_email=false)
+  def community_emails(email, user)
     @user = user
 
-    @content = body
+    @content = email[:body].html_safe
 
-    mail(to: @user.email, subject: subject, content_type: 'text/html') do |format|
-      format.html if send_html_email
+    mail(to: @user.email, subject: email[:subject], content_type: email[:send_html_email] ? 'text/html' : 'text/plain') do |format|
+      format.html if email[:send_html_email]
       format.text
     end
   end
