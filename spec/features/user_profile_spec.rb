@@ -123,6 +123,16 @@ describe 'User Profile' do
       expect(page).to have_field('user_github',         with: 'http://github.com/nickynickmann')
       expect(page).to have_field('user_youtube',        with: 'http://youtube.com/nickynickmann')
       expect(page).to have_field('user_stack_overflow', with: 'http://stackoverflow.com/users/1234567890')
+
+      fill_in 'user_facebook',       with: 'http://facebook.com/app_scoped_user_id/12345678901234567'
+
+      click_button 'Uložiť'
+      click_link 'Viac'
+
+      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
+      expect(page.current_path).to eql(edit_user_registration_path)
+
+      expect(page).to have_field('user_facebook', with: 'http://facebook.com/app_scoped_user_id/12345678901234567')
     end
 
     it 'shows user profile' do

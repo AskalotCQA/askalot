@@ -41,6 +41,10 @@ FactoryGirl.define do
       password_confirmation nil
     end
 
+    trait :alumni do
+      alumni true
+    end
+
     trait :without_name do
       first  nil
       middle nil

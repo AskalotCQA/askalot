@@ -9,7 +9,8 @@ describe Stuba::User do
       sn: ['Hrasko'],
       givenname: ['Janko'],
       mail: ['xuser1@is.stuba.sk','xuser1@stuba.sk'],
-      employeetype: ['student']
+      employeetype: ['student'],
+      accountstatus: ['uis:active']
     }
   }
   let(:teacher_data) {
@@ -20,7 +21,8 @@ describe Stuba::User do
       sn: ['Hrasko'],
       givenname: ['Janko'],
       mail: ['xuser2@is.stuba.sk','xuser2@stuba.sk'],
-      employeetype: ['staff']
+      employeetype: ['staff'],
+      accountstatus: ['uis:active']
     }
   }
 
@@ -32,20 +34,22 @@ describe Stuba::User do
       sn: ['Hrasko'],
       givenname: ['Janko'],
       mail: ['xuser3@is.stuba.sk','xuser3@stuba.sk'],
-      employeetype: ['researcher']
+      employeetype: ['researcher'],
+      accountstatus: ['uis:active']
     }
   }
 
   it 'provides user information' do
     user = Stuba::User.new(student_data)
 
-    expect(user.uid).to    eql('1234')
-    expect(user.login).to  eql('xuser1')
-    expect(user.first).to  eql('Janko')
-    expect(user.middle).to be_nil
-    expect(user.last).to   eql('Hraško')
-    expect(user.email).to  eql('xuser1@stuba.sk')
-    expect(user.role).to   eql(:student)
+    expect(user.uid).to       eql('1234')
+    expect(user.login).to     eql('xuser1')
+    expect(user.first).to     eql('Janko')
+    expect(user.middle).to    be_nil
+    expect(user.last).to      eql('Hraško')
+    expect(user.email).to     eql('xuser1@stuba.sk')
+    expect(user.role).to      eql(:student)
+    expect(user.alumni?).to   eql(false)
   end
 
   it 'assigns correct role' do
@@ -67,7 +71,8 @@ describe Stuba::User do
         sn: ['Hrasko'],
         givenname: ['Janko'],
         mail: ['xuser1@is.stuba.sk','xuser1@stuba.sk'],
-        employeetype: ['student']
+        employeetype: ['student'],
+        accountstatus: ['uis:active']
       }
     }
 
@@ -98,7 +103,8 @@ describe Stuba::User do
         last: 'Hraško',
         ais_login: 'xuser1',
         ais_uid: '1234',
-        role: :student
+        role: :student,
+        alumni: false
       })
     end
   end
