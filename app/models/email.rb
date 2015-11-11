@@ -4,6 +4,5 @@ class Email < ActiveRecord::Base
   validates :user,            presence: true
   validates :subject,         presence: true
   validates :body,            presence: true
-  #validates :status,          presence: true
-  #validates :send_html_email, presence: true
+  validates :send_html_email, presence: true
 end

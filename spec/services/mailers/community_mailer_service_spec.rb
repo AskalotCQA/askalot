@@ -15,7 +15,6 @@ describe Mailers::CommunityMailerService do
       create(:user, send_email_notifications: false)
     end
 
-
     it 'delivers community emails' do
       expect { Mailers::CommunityMailerService.deliver_mails!({ body: '[telo mailu]', subject: '[predmet]', send_html_email: false }) }.to change { ActionMailer::Base.deliveries.count }.by(5)
     end
