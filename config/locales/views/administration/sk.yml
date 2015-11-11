@@ -6,7 +6,7 @@ sk:
       assignments: "Roly používateľov"
       categories: "Kategórie"
       changelogs: "Protokoly zmien"
-      emails: "Hromadný email"
+      emails: "Hromadný e-mail"
 
     assignment:
       create:
@@ -61,18 +61,18 @@ sk:
 
     email:
       create:
-        action: "Poslať hromadný email"
+        action: "Poslať hromadný e-mail"
 
       edit:
         action: "Upraviť"
-        title: "Upraviť hromadný email"
+        title: "Upraviť hromadný e-mail"
         submit: "Uložiť"
         cancel: "Zrušiť"
 
       delete:
         action: "Zmazať"
         title: "Pozor!"
-        text: "Naozaj chcete zmazať tento hromadný email?"
+        text: "Naozaj chcete zmazať tento hromadný e-mail?"
         submit: "Zmazať"
         cancel: "Zrušiť"
 

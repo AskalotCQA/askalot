@@ -4,7 +4,7 @@ class Administration::EmailsController < Administration::DashboardController
     authorize! :create, Email
 
     if params[:test]
-      Mailers::CommunityMailerService.deliver_test_mail!(email_params)
+      Mailers::CommunityMailerService.deliver_test_email!(email_params)
       form_message :notice, t('email.create_test.success'), key: 'emails'
     else
       @email = Email.new(email_params)
