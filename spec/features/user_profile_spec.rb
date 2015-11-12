@@ -127,7 +127,7 @@ describe 'User Profile' do
       fill_in 'user_facebook',       with: 'http://facebook.com/app_scoped_user_id/12345678901234567'
 
       click_button 'Uložiť'
-      click_link 'Viac'
+      find('a', :text => 'Viac').click
 
       expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
       expect(page.current_path).to eql(edit_user_registration_path)
