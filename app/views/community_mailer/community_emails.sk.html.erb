@@ -1,0 +1,14 @@
+<%= render 'user_mailer/header' %>
+
+<div>
+  <%= @content %>
+</div>
+
+<br/>
+
+<p>
+  <span class="text-muted">&middot;</span>
+  <%= link_to "Zrušiť odoberanie týchto e-mailov", edit_user_registration_path(tab: :notifications) %>
+</p>
+
+<%= render 'user_mailer/footer' %>

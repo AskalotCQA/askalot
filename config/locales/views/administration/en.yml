@@ -6,6 +6,7 @@ en:
       assignments: "User roles"
       categories: "Categories"
       changelogs: "Changelogs"
+      emails: "Community e-mail"
 
     assignment:
       create:
@@ -55,5 +56,22 @@ en:
         action: "Delete"
         title: "Warning!"
         text: "Are you sure you want to delete this changelog?"
+        submit: "Delete"
+        cancel: "Cancel"
+
+    email:
+      create:
+        action: "Add community e-mail"
+
+      edit:
+        action: "Edit"
+        title: "Edit community e-mail"
+        submit: "Save"
+        cancel: "Cancel"
+
+      delete:
+        action: "Delete"
+        title: "Warning!"
+        text: "Are you sure you want to delete this community e-mail?"
         submit: "Delete"
         cancel: "Cancel"

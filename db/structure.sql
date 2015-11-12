@@ -452,6 +452,41 @@ ALTER SEQUENCE documents_id_seq OWNED BY documents.id;
 
 
 --
+-- Name: emails; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE emails (
+    id integer NOT NULL,
+    user_id integer,
+    subject text,
+    body text,
+    status boolean,
+    send_html_email boolean,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: emails_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE emails_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: emails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE emails_id_seq OWNED BY emails.id;
+
+
+--
 -- Name: evaluation_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1411,6 +1446,13 @@ ALTER TABLE ONLY documents ALTER COLUMN id SET DEFAULT nextval('documents_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY emails ALTER COLUMN id SET DEFAULT nextval('emails_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY evaluation_revisions ALTER COLUMN id SET DEFAULT nextval('evaluation_revisions_id_seq'::regclass);
 
 
@@ -1647,6 +1689,14 @@ ALTER TABLE ONLY document_revisions
 
 ALTER TABLE ONLY documents
     ADD CONSTRAINT documents_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: emails_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY emails
+    ADD CONSTRAINT emails_pkey PRIMARY KEY (id);
 
 
 --
@@ -3172,4 +3222,6 @@ INSERT INTO schema_migrations (version) VALUES ('20150411100033');
 INSERT INTO schema_migrations (version) VALUES ('20151012143719');
 
 INSERT INTO schema_migrations (version) VALUES ('20151014122011');
+
+INSERT INTO schema_migrations (version) VALUES ('20151103135754');
 

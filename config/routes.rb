@@ -127,6 +127,7 @@ Askalot::Application.routes.draw do
       resources :assignments, only: [:create, :update, :destroy]
       resources :categories,  only: [:create, :update, :destroy]
       resources :changelogs,  only: [:create, :update, :destroy]
+      post :emails, to: 'emails#create'
     end
 
     resources :changelogs, only: [:index]

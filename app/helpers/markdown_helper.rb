@@ -5,6 +5,10 @@ module MarkdownHelper
     render 'markdown/editor', id: id, content: block, help: options[:help].nil? || options[:help], text: options[:text]
   end
 
+  def markdown_editor_for_email(options = {}, &block)
+    render 'markdown/editor', id: :new, content: block, help:'', text: 'Text mailu'
+  end
+
   def markdown_link_to_user(match, options = {})
     id   = match[/\d+\z/] || match.gsub(/@/, '')
     user = User.find_by(id: id)
