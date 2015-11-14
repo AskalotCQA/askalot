@@ -126,3 +126,5 @@ end
 
 # TODO(zbell) resolve
 gem 'codeclimate-test-reporter', group: :test, require: nil
+
+gem 'university', path: 'components/university'

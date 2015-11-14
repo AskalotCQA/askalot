@@ -1,4 +1,4 @@
-Askalot::Application.routes.draw do
+University::Engine.routes.draw do
   scope ENV['RAILS_RELATIVE_URL_ROOT'] || '/' do
     concern :closeable do
       post :close, on: :member
