@@ -1,3 +1,4 @@
+module University
 class CommentsController < ApplicationController
   include Deletables::Destroy
   include Editables::Update
@@ -47,4 +48,5 @@ class CommentsController < ApplicationController
   def update_params
     params.require(:comment).permit(:text)
   end
+end
 end

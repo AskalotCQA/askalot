@@ -8,23 +8,23 @@
       <p><%= render_markdown @group.description %></p>
 
       <div class="group-details">
-        <%= render 'groups/details',  group: @group %>
-        <%= render 'groups/deleting', group: @group %>
-        <%= render 'groups/editing',  group: @group %>
+        <%= render 'university/groups/details',  group: @group %>
+        <%= render 'university/groups/deleting', group: @group %>
+        <%= render 'university/groups/editing',  group: @group %>
       </div>
     </div>
   </div>
 </div>
 
 <div class="new-document-form">
-  <%= render 'documents/form' %>
+  <%= render 'university/documents/form' %>
 </div>
 
 <div class="row">
   <div class="col-md-6">
     <div class="documents-group" id="documents">
       <% @documents.each do |document| %>
-        <%= render 'documents/document', document: document, group: @group %>
+        <%= render 'university/documents/document', document: document, group: @group %>
       <% end %>
     </div>
 

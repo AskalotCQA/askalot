@@ -1,4 +1,4 @@
-module Applications::Flash
+module University::Concerns::Applications::Flash
   extend ActiveSupport::Concern
 
   included do

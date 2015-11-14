@@ -1,3 +1,4 @@
+module University
 class DocumentsController < ApplicationController
   include Deletables::Destroy
   include Editables::Update
@@ -27,4 +28,5 @@ class DocumentsController < ApplicationController
   def update_params
     params.require(:document).permit(:title, :text)
   end
+end
 end

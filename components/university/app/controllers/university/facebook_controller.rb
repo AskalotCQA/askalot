@@ -1,3 +1,4 @@
+module University
 class FacebookController < ApplicationController
   skip_before_action :verify_authenticity_token
 
@@ -21,4 +22,5 @@ class FacebookController < ApplicationController
   def allow_inline_frame
     response.headers['X-Frame-Options'] = 'ALLOWALL'
   end
+end
 end

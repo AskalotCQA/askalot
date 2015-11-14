@@ -1,4 +1,4 @@
-module Bootstrap::IconHelper
+module University::Bootstrap::IconHelper
   def icon_tag(type, options = {})
     classes = ['fa', "fa-#{type.to_s}"]
     classes << 'fa-fw' if options.delete(:fixed)

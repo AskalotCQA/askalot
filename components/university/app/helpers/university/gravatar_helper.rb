@@ -1,4 +1,4 @@
-module GravatarHelper
+module University::GravatarHelper
   def gravatar_url(email, options = {})
     hash    = Digest::MD5::hexdigest(email).downcase
     rating  = options[:rating]  || :g

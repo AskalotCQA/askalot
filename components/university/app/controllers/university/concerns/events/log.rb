@@ -1,4 +1,4 @@
-module Events::Log
+module University::Concerns::Events::Log
   extend ActiveSupport::Concern
 
   included do

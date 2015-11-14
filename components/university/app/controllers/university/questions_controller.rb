@@ -1,3 +1,4 @@
+module University
 class QuestionsController < ApplicationController
   include Closeables::Close
   include Deletables::Destroy
@@ -128,4 +129,5 @@ class QuestionsController < ApplicationController
   def update_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list)
   end
+end
 end

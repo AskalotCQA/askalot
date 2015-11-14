@@ -1,7 +1,7 @@
 <li id="answer-<%= answer.id %>" class="question-answer<%= ' bg-warning' if answer_highlighted? answer %>">
   <div class="row">
     <div class="col-sm-3 col-md-2 hidden-xs">
-      <%= render 'users/square', user: answer.author %>
+      <%= render 'university/users/square', user: answer.author %>
     </div>
 
     <div class="col-xs-9 col-sm-7 col-md-8">
@@ -10,20 +10,20 @@
       </div>
 
       <div class="answer-details">
-        <%= render 'answers/details', answer: answer %>
-        <%= render 'answers/editing', answer: answer %>
-        <%= render 'answers/deleting', answer: answer %>
+        <%= render 'university/answers/details', answer: answer %>
+        <%= render 'university/answers/editing', answer: answer %>
+        <%= render 'university/answers/deleting', answer: answer %>
       </div>
 
-      <%= render 'answers/evaluations', answer: answer %>
-      <%= render 'answers/comments', answer: answer %>
-      <%= render 'comments/form', commentable: answer %>
+      <%= render 'university/answers/evaluations', answer: answer %>
+      <%= render 'university/answers/comments', answer: answer %>
+      <%= render 'university/comments/form', commentable: answer %>
     </div>
 
     <div class="col-xs-3 col-sm-2">
-      <%= render 'answers/voting', answer: answer %>
-      <%= render 'answers/labeling', answer: answer %>
-      <%= render 'answers/evaluating', answer: answer %>
+      <%= render 'university/answers/voting', answer: answer %>
+      <%= render 'university/answers/labeling', answer: answer %>
+      <%= render 'university/answers/evaluating', answer: answer %>
     </div>
   </div>
 </li>

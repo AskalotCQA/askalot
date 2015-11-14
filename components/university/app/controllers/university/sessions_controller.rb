@@ -1,3 +1,4 @@
+module University
 class SessionsController < Devise::SessionsController
   include Devise::Controllers::Rememberable
 
@@ -26,4 +27,5 @@ class SessionsController < Devise::SessionsController
   def login_params
     params.require(:user).permit(:login, :password, :remember_me)
   end
+end
 end

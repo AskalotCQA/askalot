@@ -1,4 +1,4 @@
-module CategoriesHelper
+module University::CategoriesHelper
   def group_categories_by_prefix(categories)
     mixed  = []
     groups = categories.inject(Hash.new) do |groups, category|

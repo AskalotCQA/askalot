@@ -4,13 +4,13 @@
     <meta charset="utf-8" />
     <title><%= resolve_title(yield :title) %></title>
     <meta name="viewport" content="width=device-width, initial-scale=0.8"/>
-    <%= render 'layouts/description' -%>
-    <%= render 'layouts/social' -%>
-    <%= render 'layouts/styles' -%>
+    <%= render 'layouts/university/description' -%>
+    <%= render 'layouts/university/social' -%>
+    <%= render 'layouts/university/styles' -%>
     <%= csrf_meta_tags -%>
   </head>
   <body<%= resolve_sidebar(yield :sidebar) %>>
-    <%= render 'layouts/header' -%>
+    <%= render 'layouts/university/header' -%>
     <% if use_container? %>
       <div id="main" class="container">
         <%= flash_messages -%>
@@ -19,9 +19,9 @@
     <% else %>
       <%= yield -%>
     <% end %>
-    <%= render 'layouts/footer' -%>
-    <%= render 'shared/fixes' -%>
-    <%= render 'shared/locales' -%>
+    <%= render 'layouts/university/footer' -%>
+    <%= render 'university/shared/fixes' -%>
+    <%= render 'university/shared/locales' -%>
     <%= javascript_include_tag 'application' -%>
     <%= yield :scripts -%>
     <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? -%>

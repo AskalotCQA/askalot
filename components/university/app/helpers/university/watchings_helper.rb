@@ -1,4 +1,4 @@
-module WatchingsHelper
+module University::WatchingsHelper
   def watchable_icon_tag(watchable, options = {})
     data  = watchable_data watchable
     color = watchable.is_a?(Deletable) && watchable.deleted ? :'text-muted' : :'text-primary'

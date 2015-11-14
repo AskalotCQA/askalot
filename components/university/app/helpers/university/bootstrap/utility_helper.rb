@@ -1,4 +1,4 @@
-module Bootstrap::UtilityHelper
+module University::Bootstrap::UtilityHelper
   def clearfix_tag(options = {})
     content_tag :div, nil, options.merge(class: Array.wrap(options[:class]) << :clearfix)
   end

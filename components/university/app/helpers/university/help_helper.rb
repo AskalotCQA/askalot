@@ -1,4 +1,4 @@
-module HelpHelper
+module University::HelpHelper
   def help_image_tag(path, options = {})
     path = image_path "screenshots/#{path}"
 

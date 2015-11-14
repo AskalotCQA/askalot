@@ -1,4 +1,4 @@
-module MarkdownHelper
+module University::MarkdownHelper
   def markdown_editor_for(resource, options = {}, &block)
     id = "markdown-#{resource.class.name.underscore}-#{resource.new_record? ? :new : resource.id}"
 

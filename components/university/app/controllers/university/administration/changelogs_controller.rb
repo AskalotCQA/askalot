@@ -1,3 +1,4 @@
+module University
 class Administration::ChangelogsController < Administration::DashboardController
   authorize_resource
 
@@ -44,4 +45,5 @@ class Administration::ChangelogsController < Administration::DashboardController
   def changelog_params
     params.require(:changelog).permit(:version, :title, :text)
   end
+end
 end

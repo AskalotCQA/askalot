@@ -1,13 +1,13 @@
-module BootstrapHelper
-  include Bootstrap::BarHelper
-  include Bootstrap::IconHelper
-  include Bootstrap::LabelHelper
-  include Bootstrap::LinkHelper
-  include Bootstrap::PillHelper
-  include Bootstrap::PopoverHelper
-  include Bootstrap::TabHelper
-  include Bootstrap::TooltipHelper
-  include Bootstrap::UtilityHelper
+module University::BootstrapHelper
+  include University::Bootstrap::BarHelper
+  include University::Bootstrap::IconHelper
+  include University::Bootstrap::LabelHelper
+  include University::Bootstrap::LinkHelper
+  include University::Bootstrap::PillHelper
+  include University::Bootstrap::PopoverHelper
+  include University::Bootstrap::TabHelper
+  include University::Bootstrap::TooltipHelper
+  include University::Bootstrap::UtilityHelper
 
   def identify(object, suffix = [])
     ([object.class.name.downcase, object.id] + Array.wrap(suffix)).reject(&:blank?).join '-'

@@ -1,3 +1,4 @@
+module University
 class EvaluationsController < ApplicationController
   include Editables::Update
 
@@ -47,4 +48,5 @@ class EvaluationsController < ApplicationController
   def update_params
     params.require(:evaluation).permit(:value, :text)
   end
+end
 end

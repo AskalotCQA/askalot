@@ -1,9 +1,9 @@
 <%= provide(:title, t('question.search.title')) %>
 
-<%= render 'searchables/search', target: controller_name %>
+<%= render 'university/searchables/search', target: controller_name %>
 
 <ul id="questions-tabs" class="nav nav-tabs tab-navigation">
   <%= tab_link_tag_with_count t('question.tab.results'), :results, questions_path(params.slice(:q, :page).merge tab: :results), @results.total_entries, analytics_attributes(:questions, :search, :results).merge(remote: true, data: { fade: '#questions' }) %>
 </ul>
 
-<%= render 'questions', questions: @results, remote: false %>
+<%= render 'university/questions', questions: @results, remote: false %>

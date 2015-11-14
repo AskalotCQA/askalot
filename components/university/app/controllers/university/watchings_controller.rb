@@ -1,3 +1,4 @@
+module University
 class WatchingsController < ApplicationController
   default_tab :questions, only: [:index, :destroy, :clean]
 
@@ -40,4 +41,5 @@ class WatchingsController < ApplicationController
 
     redirect_to :back
   end
+end
 end

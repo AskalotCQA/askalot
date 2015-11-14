@@ -1,3 +1,4 @@
+module University
 class ActivitiesController < ApplicationController
   default_tab :global, only: :index
 
@@ -12,4 +13,5 @@ class ActivitiesController < ApplicationController
     @global    = @global.page(tab_page :global).per(count)
     @followees = @followees.page(tab_page :followees).per(count)
   end
+end
 end

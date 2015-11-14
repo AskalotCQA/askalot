@@ -1,6 +1,6 @@
 <%= form_messages key: tab %>
 
-<%= render 'administration/categories/form', category: @category, tab: tab %>
+<%= render 'university/administration/categories/form', category: @category, tab: tab %>
 
 <ol class="administration-categories">
   <% categories.each do |category| %>
@@ -18,7 +18,7 @@
 
         <div class="col-xs-1">
           <div class="pull-right">
-            <%= render 'administration/categories/editing', category: category, tab: tab %>
+            <%= render 'university/administration/categories/editing', category: category, tab: tab %>
           </div>
         </div>
       </div>

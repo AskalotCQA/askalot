@@ -1,3 +1,4 @@
+module University
 class Administration::AssignmentsController < Administration::DashboardController
   authorize_resource
 
@@ -44,4 +45,5 @@ class Administration::AssignmentsController < Administration::DashboardControlle
   def assignment_params
     params.require(:assignment).permit(:user_nick, :category_id, :role_id)
   end
+end
 end

@@ -1,4 +1,4 @@
-module DeletablesHelper
+module University::DeletablesHelper
   def link_to_deletable(deletable, body, url, options = {})
     delete = options.delete(:delete)
 

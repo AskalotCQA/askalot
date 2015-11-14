@@ -1,3 +1,4 @@
+module University
 class Administration::DashboardController < AdministrationController
   default_tab :categories, only: :index
 
@@ -21,4 +22,5 @@ class Administration::DashboardController < AdministrationController
 
     render 'administration/dashboard/index'
   end
+end
 end

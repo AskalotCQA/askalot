@@ -1,5 +1,6 @@
 # NOTE(zbell) refactor to use only raw SQL if too slow
 
+module University
 class StatisticsController < ApplicationController
   before_action :authenticate_user!
 
@@ -57,4 +58,5 @@ class StatisticsController < ApplicationController
   def join_questions_through_answers(relation, column, questions)
     relation.for(Answer).joins("INNER JOIN answers ON answers.id = #{column}_id INNER JOIN questions ON questions.id = answers.question_id").where(questions: { id: questions }).uniq
   end
+end
 end

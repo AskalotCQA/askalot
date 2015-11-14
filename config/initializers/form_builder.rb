@@ -1,1 +1,1 @@
-ActionView::Helpers::FormBuilder.send(:include, FormHelper)
+ActionView::Helpers::FormBuilder.send(:include, University::FormHelper)

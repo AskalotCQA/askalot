@@ -1,4 +1,4 @@
-module Editables::Update
+module University::Editables::Update
   extend ActiveSupport::Concern
 
   include Events::Dispatch

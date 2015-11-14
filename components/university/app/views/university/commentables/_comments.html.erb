@@ -5,7 +5,7 @@
 
   <ol class="<%= model %>-comments">
     <% comments.order(:created_at).each do |comment| %>
-      <%= render 'commentables/comment', commentable: commentable, comment: comment, remote: remote ||= false %>
+      <%= render 'university/commentables/comment', commentable: commentable, comment: comment, remote: remote ||= false %>
     <% end %>
   </ol>
 <% end %>

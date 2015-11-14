@@ -1,14 +1,16 @@
+module University
 class ApplicationController < ActionController::Base
   protected
 
   # concerns order is significant
-  include Applications::Security
-  include Applications::Flash
-  include Applications::Form
-  include Applications::Tab
+  include University::Concerns::Applications::Security
+  include University::Concerns::Applications::Flash
+  include University::Concerns::Applications::Form
+  include University::Concerns::Applications::Tab
 
-  include Events::Log
+  # include University::Concerns::Events::Log
 
-  include Facebook::Modal
-  include Slido::Flash
+  include University::Concerns::Facebook::Modal
+  include University::Concerns::Slido::Flash
+end
 end

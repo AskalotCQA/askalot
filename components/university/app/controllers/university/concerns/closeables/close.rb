@@ -1,4 +1,4 @@
-module Closeables::Close
+module University::Closeables::Close
   extend ActiveSupport::Concern
 
   def close

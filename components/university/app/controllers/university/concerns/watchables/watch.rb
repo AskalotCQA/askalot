@@ -1,4 +1,4 @@
-module Watchables::Watch
+module University::Watchables::Watch
   extend ActiveSupport::Concern
 
   def watch

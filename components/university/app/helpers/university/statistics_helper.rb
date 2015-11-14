@@ -1,4 +1,4 @@
-module StatisticsHelper
+module University::StatisticsHelper
   def mean(values)
     values.sum.to_f / values.count
   end

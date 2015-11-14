@@ -1,3 +1,4 @@
+module University
 class CategoriesController < ApplicationController
   include Searchables::Search
   include Watchables::Watch
@@ -11,4 +12,5 @@ class CategoriesController < ApplicationController
     @categories = Category.order(:name)
     @tags       = Tag.order(:name)
   end
+end
 end

@@ -3,7 +3,7 @@
 <% if notifications.any? %>
   <ol class="notifications">
     <% notifications.each do |notification| %>
-      <%= render 'notification', notification: notification %>
+      <%= render 'university/notification', notification: notification %>
     <% end %>
   </ol>
 

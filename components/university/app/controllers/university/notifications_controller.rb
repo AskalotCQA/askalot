@@ -1,3 +1,4 @@
+module University
 class NotificationsController < ApplicationController
   default_tab :unread, only: [:index, :read, :unread, :clean]
 
@@ -45,4 +46,5 @@ class NotificationsController < ApplicationController
 
     redirect_to(params[:r] ? params[:r] : :back)
   end
+end
 end

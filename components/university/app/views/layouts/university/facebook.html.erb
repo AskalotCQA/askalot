@@ -4,14 +4,14 @@
     <meta charset="utf-8" />
     <title><%= resolve_title(yield :title) %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <%= render 'layouts/description' -%>
-    <%= render 'layouts/social' -%>
-    <%= render 'layouts/styles' -%>
+    <%= render 'layouts/university/description' -%>
+    <%= render 'layouts/university/social' -%>
+    <%= render 'layouts/university/styles' -%>
     <%= csrf_meta_tags -%>
   </head>
   <body class="facebook">
     <%= yield -%>
-    <%= render 'shared/fixes' -%>
+    <%= render 'university/shared/fixes' -%>
     <%= javascript_include_tag 'application' -%>
     <%= yield :scripts -%>
     <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? -%>

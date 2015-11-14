@@ -1,3 +1,4 @@
+module University
 class UsersController < ApplicationController
   include Searchables::Search
 
@@ -105,4 +106,5 @@ class UsersController < ApplicationController
 
     params.require(:user).permit(attributes)
   end
+end
 end

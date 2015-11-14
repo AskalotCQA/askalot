@@ -1,4 +1,4 @@
-module Bootstrap::PillHelper
+module University::Bootstrap::PillHelper
   def pill_link_tag(title, tab, path, options = {})
     tab_link_tag title, tab, path, options.deep_merge(data: { toggle: :pill })
   end

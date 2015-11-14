@@ -1,4 +1,4 @@
-module ActivitiesHelper
+module University::ActivitiesHelper
   def activity_icon_tag(activity, options = {})
     data    = activity_data activity
     mute    = options.delete(:mute) || lambda { |_| false }

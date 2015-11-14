@@ -1,3 +1,4 @@
+module University
 class ErrorsController < ApplicationController
   def show
     @exception = env['action_dispatch.exception'] ||= Exception.new
@@ -19,4 +20,5 @@ class ErrorsController < ApplicationController
 
     render status: @status
   end
+end
 end

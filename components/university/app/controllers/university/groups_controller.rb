@@ -1,3 +1,4 @@
+module University
 class GroupsController < ApplicationController
   include Deletables::Destroy
   include Editables::Update
@@ -46,4 +47,5 @@ class GroupsController < ApplicationController
   def update_params
     params.require(:group).permit(:title, :description, :visibility)
   end
+end
 end

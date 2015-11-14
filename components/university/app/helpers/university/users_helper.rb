@@ -1,4 +1,4 @@
-module UsersHelper
+module University::UsersHelper
   def user_avatar_tag(user, options = {})
     classes = [:'user-avatar'] + Array.wrap(options.delete :class)
     image   = options.delete(:image) || {}

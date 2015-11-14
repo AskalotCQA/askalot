@@ -1,4 +1,4 @@
-module ResourcesHelper
+module University::ResourcesHelper
   def link_to_resource(resource, options = {})
     body = options.delete(:body)
     url  = options.delete(:url)

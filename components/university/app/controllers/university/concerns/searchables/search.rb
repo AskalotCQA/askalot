@@ -1,4 +1,4 @@
-module Searchables::Search
+module University::Searchables::Search
   extend ActiveSupport::Concern
 
   def search

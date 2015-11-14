@@ -3,16 +3,16 @@
 <div class="help-side">
   <div class="row">
     <div class="col-md-6">
-      <%= render 'static_pages/help/groups/about' %>
+      <%= render 'university/static_pages/help/groups/about' %>
     </div>
     <div class="col-md-6">
-      <%= render 'static_pages/help/groups/usage' %>
+      <%= render 'university/static_pages/help/groups/usage' %>
     </div>
   </div>
 </div>
 
 <div class="new-group-form">
-  <%= render 'form' %>
+  <%= render 'university/form' %>
 </div>
 
 <div class="groups-controls">
@@ -21,4 +21,4 @@
   </ul>
 </div>
 
-<%= render 'groups', groups: @groups, remote: false %>
+<%= render 'university/groups', groups: @groups, remote: false %>

@@ -1,6 +1,6 @@
 <% provide(:title, t('tag.index.title')) %>
 
-<%= render 'searchables/search', target: controller_name %>
+<%= render 'university/searchables/search', target: controller_name %>
 
 <ul id="tags-tabs" class="nav nav-tabs tab-navigation">
   <%= tab_link_tag_with_count t('tag.tab.all'), :all, tags_path(params.except(:page).merge tab: :all), Tag.count, analytics_attributes(:tags, :switch, :all).merge(remote: true, data: { fade: '#tags' }) %>
@@ -8,4 +8,4 @@
   <%= tab_link_tag_with_count t('tag.tab.popular'), :popular, tags_path(params.except(:page).merge tab: :popular), Tag.popular.load.size, analytics_attributes(:tags, :switch, :popular).merge(remote: true, data: { fade: '#tags' }) %>
 </ul>
 
-<%= render 'tags', tags: @tags, remote: true %>
+<%= render 'university/tags', tags: @tags, remote: true %>

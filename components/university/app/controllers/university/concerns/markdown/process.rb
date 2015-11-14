@@ -1,4 +1,4 @@
-module Markdown::Process
+module University::Markdown::Process
   extend ActiveSupport::Concern
 
   included do

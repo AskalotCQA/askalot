@@ -1,3 +1,4 @@
+module University
 class TagsController < ApplicationController
   include Searchables::Search
   include Watchables::Watch
@@ -31,4 +32,5 @@ class TagsController < ApplicationController
       },
     }
   end
+end
 end

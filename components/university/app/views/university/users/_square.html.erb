@@ -1,10 +1,10 @@
 <div class="user-square">
   <%= user_avatar_tag user, image: { class: 'img-circle img-responsive', size: 96 } %>
-  <%= render 'users/reputation', user: user, size: :md %>
+  <%= render 'university/users/reputation', user: user, size: :md %>
 
   <span class="user-link">
     <%= link_to_user user %>
-    <%= render 'users/following', user: user if local_assigns.has_key? :following %>
+    <%= render 'university/users/following', user: user if local_assigns.has_key? :following %>
   </span>
 
   <span class="user-nick">

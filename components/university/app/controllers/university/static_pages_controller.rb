@@ -1,4 +1,7 @@
-class StaticPagesController < ApplicationController
+# require_dependency 'university/application_controller'
+
+module University
+class StaticPagesController < ::University::ApplicationController
   def home
     count = 4
 
@@ -15,4 +18,5 @@ class StaticPagesController < ApplicationController
 
   def welcome
   end
+end
 end

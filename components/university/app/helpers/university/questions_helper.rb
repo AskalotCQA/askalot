@@ -1,4 +1,4 @@
-module QuestionsHelper
+module University::QuestionsHelper
   def question_title_preview(question, options = {})
     html_escape truncate(question.title, default_truncate_options.merge(length: 120).merge(options))
   end

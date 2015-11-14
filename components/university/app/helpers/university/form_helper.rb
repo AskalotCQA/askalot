@@ -1,4 +1,4 @@
-module FormHelper
+module University::FormHelper
   def category_collection_select(id, collection = Category.all.order(:name), value = :id, label = :name_with_teacher_supported, options = {}, html_options = {})
     tags = collection.inject({}) do |hash, category|
       hash[category.name] = category.effective_tags

@@ -1,4 +1,4 @@
-module Bootstrap::LabelHelper
+module University::Bootstrap::LabelHelper
   def badge_tag(body, options = {})
     content_tag :span, body, options.merge(class: [:badge] + Array.wrap(options.delete :class))
   end

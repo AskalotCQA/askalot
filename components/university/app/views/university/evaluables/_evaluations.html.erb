@@ -6,7 +6,7 @@
   <% if evaluations.where.not(text: nil).any? %>
     <ol class="<%= model %>-evaluations">
       <% evaluations.where.not(text: nil).order(:created_at).each do |evaluation| %>
-        <%= render 'evaluables/evaluation', evaluation: evaluation %>
+        <%= render 'university/evaluables/evaluation', evaluation: evaluation %>
       <% end %>
     </ol>
   <% end %>

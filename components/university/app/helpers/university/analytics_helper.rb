@@ -1,6 +1,6 @@
 # See https://developers.google.com/analytics/devguides/collection/gajs/eventTrackerGuide
 
-module AnalyticsHelper
+module University::AnalyticsHelper
   def analytics_attributes(category, action, label = nil, options = {})
     category = category.to_s.downcase
 

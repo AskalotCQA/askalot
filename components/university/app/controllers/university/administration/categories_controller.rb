@@ -1,3 +1,4 @@
+module University
 class Administration::CategoriesController < Administration::DashboardController
   authorize_resource
 
@@ -34,4 +35,5 @@ class Administration::CategoriesController < Administration::DashboardController
   def category_params
     params.require(:category).permit(:name, :tags)
   end
+end
 end

@@ -1,6 +1,6 @@
 <%= form_for resource, as: resource_name, url: registration_path(resource_name, tab: tab), html: { method: :put } do |f| %>
   <%= form_messages_for resource, key: tab %>
-  <%= render 'shared/form_messages', messages: flash_to_messages(reject: [:form, :slido]) %>
+  <%= render 'university/shared/form_messages', messages: flash_to_messages(reject: [:form, :slido]) %>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div class="alert alert-info">

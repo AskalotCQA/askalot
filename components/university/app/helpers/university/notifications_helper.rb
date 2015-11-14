@@ -1,4 +1,4 @@
-module NotificationsHelper
+module University::NotificationsHelper
   def notification_icon_tag(notification, options = {})
     activity_icon_tag notification, notification_options(notification, options)
   end

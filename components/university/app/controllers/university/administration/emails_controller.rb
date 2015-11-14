@@ -1,3 +1,4 @@
+module University
 class Administration::EmailsController < Administration::DashboardController
 
   def create
@@ -24,4 +25,5 @@ class Administration::EmailsController < Administration::DashboardController
     email = params.require(:email).permit(:subject, :body, :send_html_email).deep_merge({ user: current_user, status: false })
     email.deep_merge({ send_html_email: email[:send_html_email] == "1" })
   end
+end
 end

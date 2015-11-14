@@ -1,4 +1,4 @@
-module Bootstrap::BarHelper
+module University::Bootstrap::BarHelper
   def navbar_dropdown_tag(type, body, url, options = {}, &block)
     caret = options.delete(:caret)
     body  = icon_tag(caret, label: body, fixed: true, join: :append) if caret

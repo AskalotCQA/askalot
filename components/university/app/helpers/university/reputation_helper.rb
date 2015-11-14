@@ -1,4 +1,4 @@
-module ReputationHelper
+module University::ReputationHelper
   def reputation_icon(user)
     reputation_icon_map = {
         zero:     { class: 'none' },

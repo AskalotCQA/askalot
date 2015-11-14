@@ -1,4 +1,4 @@
-module Facebook::Modal
+module University::Concerns::Facebook::Modal
   extend ActiveSupport::Concern
 
   included do

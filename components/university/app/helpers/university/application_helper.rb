@@ -1,3 +1,4 @@
+module University
 module ApplicationHelper
   def default_title
     'Askalot'
@@ -37,4 +38,5 @@ module ApplicationHelper
   def use_container?
     [DeviseController, ErrorsController, StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
   end
+end
 end

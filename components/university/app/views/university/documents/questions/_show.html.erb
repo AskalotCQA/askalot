@@ -11,7 +11,7 @@
             <%= @question.title %>
             <%= evaluation_badge_tag @question if @question.evaluations.any? %>
           </h3>
-          <%= render 'questions/labels', labels: @labels %>
+          <%= render 'university/questions/labels', labels: @labels %>
         </div>
 
         <div id="question-data">
@@ -20,35 +20,35 @@
           </div>
 
           <div class="question-details">
-            <%= render 'questions/details', question: @question %>
-            <%= render 'documents/questions/editing', question: @question, remote: true %>
-            <%= render 'documents/questions/deleting', question: @question, remote: true %>
+            <%= render 'university/questions/details', question: @question %>
+            <%= render 'university/documents/questions/editing', question: @question, remote: true %>
+            <%= render 'university/documents/questions/deleting', question: @question, remote: true %>
           </div>
 
           <div id="question-evaluations">
-            <%= render 'questions/evaluations', question: @question %>
+            <%= render 'university/questions/evaluations', question: @question %>
           </div>
 
           <div id="question-comments">
-            <%= render 'documents/questions/comments', question: @question, remote: true %>
-            <%= render 'documents/comments/form', commentable: @question, remote: true %>
+            <%= render 'university/documents/questions/comments', question: @question, remote: true %>
+            <%= render 'university/documents/comments/form', commentable: @question, remote: true %>
           </div>
         </div>
       </div>
 
       <div class="col-xs-3 col-sm-2">
-        <%= render 'questions/voting', question: @question %>
-        <%= render 'questions/watching', question: @question %>
-        <%= render 'documents/questions/evaluating', question: @question, remote: true %>
+        <%= render 'university/questions/voting', question: @question %>
+        <%= render 'university/questions/watching', question: @question %>
+        <%= render 'university/documents/questions/evaluating', question: @question, remote: true %>
       </div>
     </div>
   </div>
 
   <div id="question-answers">
-    <%= render 'documents/questions/answers', answers: @answers %>
+    <%= render 'university/documents/questions/answers', answers: @answers %>
   </div>
 
   <div id="question-answer" class="new-answer-form">
-    <%= render 'documents/answers/form', question: @question, answer: @answer, remote: true %>
+    <%= render 'university/documents/answers/form', question: @question, answer: @answer, remote: true %>
   </div>
 </div>
