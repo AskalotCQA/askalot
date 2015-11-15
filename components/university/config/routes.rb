@@ -30,7 +30,7 @@ University::Engine.routes.draw do
     get '/404', to: 'errors#show'
     get '/500', to: 'errors#show'
 
-    devise_for :users, controllers: { sessions: :sessions, registrations: :registrations }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }
+    devise_for :users, class_name: 'University::User', controllers: { sessions: :sessions, registrations: :registrations }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }
 
     resources :users, only: [:index] do
       patch :profile,  on: :collection, to: 'users#update'
