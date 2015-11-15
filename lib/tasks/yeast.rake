@@ -1,5 +1,5 @@
 require 'yeast'
-require_relative '../../app/services/events/dispatcher'
+require_relative '../../components/university/app/services/university/events/dispatcher'
 
 # rake yeast:feed FEEDERS=ExampleFeeder,MyAwesomeFeeder
 #   NOTE feeders order MATTERS!
@@ -7,7 +7,7 @@ require_relative '../../app/services/events/dispatcher'
 namespace :yeast do
   desc 'Prepare dispatcher'
   task feed: :environment do
-    Events::Dispatcher.unsubscribe_all
+    University::Events::Dispatcher.unsubscribe_all
 
     raise ArgumentError.new('You have to specify at least one feeder.') unless ENV['FEEDERS']
 
@@ -16,7 +16,7 @@ namespace :yeast do
     end
 
     feeders.each do |feeder|
-      Events::Dispatcher.subscribe(feeder)
+      University::Events::Dispatcher.subscribe(feeder)
     end
 
     Yeast.run

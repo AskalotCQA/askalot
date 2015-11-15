@@ -5,5 +5,5 @@ require 'slido/scraper'
 module Slido
   mattr_accessor :config
 
-  self.config ||= Configuration.slido
+  self.config ||= University::Configuration.slido
 end

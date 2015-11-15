@@ -1,4 +1,4 @@
-require_relative '../../app/services/events/dispatcher'
+require_relative '../../components/university/app/services/university/events/dispatcher'
 
 namespace :generators do
   desc 'Generate activities'
@@ -29,8 +29,8 @@ namespace :generators do
       alias :initiator :watcher
     end
 
-    Events::Dispatcher.unsubscribe_all
-    Events::Dispatcher.subscribe Activities::Feeder
+    University::Events::Dispatcher.unsubscribe_all
+    University::Events::Dispatcher.subscribe Activities::Feeder
 
     models = [Answer, Comment, Evaluation, Favorite, Following, Labeling, Question, Tagging, View, Vote, Watching]
     date   = Question.order(:created_at).first.created_at
@@ -46,7 +46,7 @@ namespace :generators do
         Timecop.freeze(resource.created_at) do
           initiator = resource.initiator
 
-          Events::Dispatcher.dispatch(:create, initiator, resource)
+          University::Events::Dispatcher.dispatch(:create, initiator, resource)
         end
       end
 
