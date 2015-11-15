@@ -15,7 +15,7 @@ module University::ResourcesHelper
       url = url.is_a?(Proc) ? url.call(path) : path
     end
 
-    if resource.is_a? Deletable
+    if resource.is_a? University::Deletable
       link_to_deletable resource, body, url, options
     else
       link_to body, url, options

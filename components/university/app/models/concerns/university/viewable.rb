@@ -1,4 +1,4 @@
-module Viewable
+module University::Viewable
   extend ActiveSupport::Concern
 
   included do

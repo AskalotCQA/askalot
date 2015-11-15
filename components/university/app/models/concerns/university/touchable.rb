@@ -1,12 +1,12 @@
-module Touchable
+module University::Touchable
   extend ActiveSupport::Concern
 
   included do
-    after_save :update_touched_at! if self != Question
+    after_save :update_touched_at! if self != University::Question
   end
 
   def update_touched_at!
-    return if self.is_a? Question
+    return if self.is_a? University::Question
 
     question            = self.to_question
     question.touched_at = self.updated_at unless untouching_attributes_changed?

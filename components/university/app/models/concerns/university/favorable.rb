@@ -1,4 +1,4 @@
-module Favorable
+module University::Favorable
   extend ActiveSupport::Concern
 
   included do

@@ -1,4 +1,4 @@
-module Labelable
+module University::Labelable
   extend ActiveSupport::Concern
 
   included do

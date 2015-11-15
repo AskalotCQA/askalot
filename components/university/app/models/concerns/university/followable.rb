@@ -1,4 +1,4 @@
-module Followable
+module University::Followable
   extend ActiveSupport::Concern
 
   included do

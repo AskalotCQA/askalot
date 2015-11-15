@@ -3,7 +3,7 @@ module University::Questions
     extend self
 
     def next
-      Question.unanswered.random.first || Question.random.first
+      University::Question.unanswered.random.first || University::Question.random.first
     end
   end
 end

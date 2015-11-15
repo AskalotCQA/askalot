@@ -1,12 +1,12 @@
-module Categories
+module University::Tags
   module Searchable
     extend ActiveSupport::Concern
 
     included do
-      include ::Searchable
+      include ::University::Searchable
 
-      probe.index.name = :"categories_#{Rails.env}"
-      probe.index.type = :category
+      probe.index.name = :"tags_#{Rails.env}"
+      probe.index.type = :tag
 
       probe.index.settings = {
         index: {
@@ -47,7 +47,7 @@ module Categories
       }
 
       probe.index.mappings = {
-        category: {
+        tag: {
           properties: {
             id: {
               type: :integer
@@ -65,14 +65,24 @@ module Categories
                   index: :not_analyzed
                 }
               }
+            },
+
+            created_at: {
+              type: :date
+            },
+
+            count: {
+              type: :integer
             }
           }
         }
       }
 
       probe.index.mapper.define(
-        id:   -> { id },
-        name: -> { name }
+        id:         -> { id },
+        name:       -> { name },
+        created_at: -> { created_at },
+        count:      -> { taggings.count }
       )
 
       probe.index.create

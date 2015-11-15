@@ -1,9 +1,9 @@
-module Questions
+module University::Questions
   module Searchable
     extend ActiveSupport::Concern
 
     included do
-      include ::Searchable
+      include ::University::Searchable
 
       probe.index.name = :"questions_#{Rails.env}"
       probe.index.type = :question

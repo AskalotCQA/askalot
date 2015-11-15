@@ -1,21 +1,21 @@
 module University
 class Question < ActiveRecord::Base
-  include Authorable
-  include Closeable
-  include Commentable
-  include Deletable
-  include Evaluable
-  include Editable
-  include Favorable
-  include Notifiable
-  include Orderable
-  include Taggable
-  include Touchable
-  include Viewable
-  include Votable
-  include Watchable
+  include University::Authorable
+  include University::Closeable
+  include University::Commentable
+  include University::Deletable
+  include University::Evaluable
+  include University::Editable
+  include University::Favorable
+  include University::Notifiable
+  include University::Orderable
+  include University::Taggable
+  include University::Touchable
+  include University::Viewable
+  include University::Votable
+  include University::Watchable
 
-  include Questions::Searchable
+  include University::Questions::Searchable
 
   # TODO (jharinek) propose change to parent tags
   before_save { self.tag_list += (new_record? ? category.effective_tags : category.tags) if category }

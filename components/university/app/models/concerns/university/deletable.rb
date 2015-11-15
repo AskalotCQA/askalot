@@ -1,4 +1,4 @@
-module Deletable
+module University::Deletable
   extend ActiveSupport::Concern
 
   included do

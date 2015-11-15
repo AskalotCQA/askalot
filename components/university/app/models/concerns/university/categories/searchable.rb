@@ -1,12 +1,12 @@
-module Users
+module University::Categories
   module Searchable
     extend ActiveSupport::Concern
 
     included do
-      include ::Searchable
+      include ::University::Searchable
 
-      probe.index.name = :"users_#{Rails.env}"
-      probe.index.type = :user
+      probe.index.name = :"categories_#{Rails.env}"
+      probe.index.type = :category
 
       probe.index.settings = {
         index: {
@@ -47,16 +47,16 @@ module Users
       }
 
       probe.index.mappings = {
-        user: {
+        category: {
           properties: {
             id: {
               type: :integer
             },
 
-            nick: {
+            name: {
               type: :multi_field,
               fields: {
-                nick: {
+                name: {
                   type: :string,
                   analyzer: :text,
                 },
@@ -71,9 +71,8 @@ module Users
       }
 
       probe.index.mapper.define(
-        id:    -> { id },
-        nick:  -> { nick },
-        about: -> { about }
+        id:   -> { id },
+        name: -> { name }
       )
 
       probe.index.create
@@ -86,10 +85,9 @@ module Users
             query_string: {
               query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
               default_operator: :and,
-              fields: [:nick, :about]
+              fields: [:name]
             }
-          },
-          page: params[:page].to_i
+          }
         )
       end
     end

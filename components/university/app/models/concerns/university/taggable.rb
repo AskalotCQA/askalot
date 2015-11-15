@@ -1,4 +1,4 @@
-module Taggable
+module University::Taggable
   extend ActiveSupport::Concern
 
   included do

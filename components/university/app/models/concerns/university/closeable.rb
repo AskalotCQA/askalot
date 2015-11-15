@@ -1,8 +1,8 @@
-module Closeable
+module University::Closeable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :closer, class_name: :User
+    belongs_to :closer, class_name: 'University::User'
 
     scope :closed, lambda { unscope(where: :closed).where(closed: true) }
     scope :unclosed, lambda { unscope(where: :closed).where(closed: false) }

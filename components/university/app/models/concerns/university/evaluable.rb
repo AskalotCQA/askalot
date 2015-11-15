@@ -1,4 +1,4 @@
-module Evaluable
+module University::Evaluable
   extend ActiveSupport::Concern
 
   included do

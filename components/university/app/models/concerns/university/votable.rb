@@ -1,4 +1,4 @@
-module Votable
+module University::Votable
   extend ActiveSupport::Concern
 
   included do

@@ -1,4 +1,4 @@
-module Initiable
+module University::Initiable
   extend ActiveSupport::Concern
 
   included do

@@ -6,7 +6,7 @@ module University::Concerns::Slido::Flash
   end
 
   def flash_slido_events
-    events = SlidoEvent.where('? between started_at and ended_at', Time.now).order(:ended_at).load
+    events = University::SlidoEvent.where('? between started_at and ended_at', Time.now).order(:ended_at).load
 
     if events.any?
       flash.now[:slido] = []

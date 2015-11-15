@@ -1,12 +1,12 @@
-module Tags
+module University::Users
   module Searchable
     extend ActiveSupport::Concern
 
     included do
-      include ::Searchable
+      include ::University::Searchable
 
-      probe.index.name = :"tags_#{Rails.env}"
-      probe.index.type = :tag
+      probe.index.name = :"users_#{Rails.env}"
+      probe.index.type = :user
 
       probe.index.settings = {
         index: {
@@ -47,16 +47,16 @@ module Tags
       }
 
       probe.index.mappings = {
-        tag: {
+        user: {
           properties: {
             id: {
               type: :integer
             },
 
-            name: {
+            nick: {
               type: :multi_field,
               fields: {
-                name: {
+                nick: {
                   type: :string,
                   analyzer: :text,
                 },
@@ -65,24 +65,15 @@ module Tags
                   index: :not_analyzed
                 }
               }
-            },
-
-            created_at: {
-              type: :date
-            },
-
-            count: {
-              type: :integer
             }
           }
         }
       }
 
       probe.index.mapper.define(
-        id:         -> { id },
-        name:       -> { name },
-        created_at: -> { created_at },
-        count:      -> { taggings.count }
+        id:    -> { id },
+        nick:  -> { nick },
+        about: -> { about }
       )
 
       probe.index.create
@@ -95,9 +86,10 @@ module Tags
             query_string: {
               query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
               default_operator: :and,
-              fields: [:name]
+              fields: [:nick, :about]
             }
-          }
+          },
+          page: params[:page].to_i
         )
       end
     end

@@ -1,4 +1,4 @@
-module Notifiable
+module University::Notifiable
   extend ActiveSupport::Concern
 
   included do
