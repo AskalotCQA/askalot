@@ -1,4 +1,4 @@
-module University::Concerns::Applications::Form
+module University::Applications::Form
   extend ActiveSupport::Concern
 
   def form_message(type, message, flash: self.flash, key: nil)

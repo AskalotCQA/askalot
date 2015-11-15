@@ -1,4 +1,4 @@
-module University::Concerns::Applications::Security
+module University::Applications::Security
   extend ActiveSupport::Concern
 
   included do
