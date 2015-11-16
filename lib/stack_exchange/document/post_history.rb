@@ -2,7 +2,7 @@ module StackExchange
   class Document
     class PostHistory < StackExchange::Document
       def process_element(history)
-        question = Question.find_by(stack_exchange_uuid: history[:PostId])
+        question = University::Question.find_by(stack_exchange_uuid: history[:PostId])
 
         return unless question
 

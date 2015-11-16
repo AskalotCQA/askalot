@@ -3,7 +3,7 @@ class Administration::AssignmentsController < Administration::DashboardControlle
   authorize_resource
 
   def create
-    @assignment = Assignment.new(assignment_params)
+    @assignment = University::Assignment.new(assignment_params)
 
     if @assignment.save
       form_message :notice, t('assignment.create.success'), key: params[:tab]
@@ -17,7 +17,7 @@ class Administration::AssignmentsController < Administration::DashboardControlle
   end
 
   def update
-    @assignment = Assignment.find(params[:id])
+    @assignment = University::Assignment.find(params[:id])
 
     if @assignment.update_attributes(assignment_params)
       form_message :notice, t('assignment.update.success'), key: params[:tab]
@@ -29,7 +29,7 @@ class Administration::AssignmentsController < Administration::DashboardControlle
   end
 
   def destroy
-    @assignment = Assignment.find(params[:id])
+    @assignment = University::Assignment.find(params[:id])
 
     if @assignment.destroy
       form_message :notice, t('assignment.delete.success'), key: params[:tab]

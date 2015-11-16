@@ -21,7 +21,7 @@ module University::Events
         fail if data[:user]
       end
 
-      Event.create! data: secure(data)
+      University::Event.create! data: secure(data)
     end
 
     private

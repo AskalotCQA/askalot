@@ -17,8 +17,8 @@ module University::ReputationHelper
 
     rank = reputation_ranking(reputation)
 
-    return reputation_icon_map[:gold] if rank < Configuration.reputation.gold
-    return reputation_icon_map[:silver] if rank < Configuration.reputation.silver
+    return reputation_icon_map[:gold] if rank < University::Configuration.reputation.gold
+    return reputation_icon_map[:silver] if rank < University::Configuration.reputation.silver
 
     reputation_icon_map[:bronze]
   end
@@ -26,6 +26,6 @@ module University::ReputationHelper
   private
 
   def reputation_ranking(reputation)
-    User::Profile.of('reputation').where('value > ?', reputation).count / User::Profile.of('reputation').where('value > 0').count.to_f * 100
+    University::User::Profile.of('reputation').where('value > ?', reputation).count / University::User::Profile.of('reputation').where('value > 0').count.to_f * 100
   end
 end

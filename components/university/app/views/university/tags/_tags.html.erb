@@ -9,7 +9,7 @@
           <div class="tag-details">
             <%= t('count.question', count: tag.questions.size).upcase_first %> <%= tag.questions.size %> &middot;
             <%= t('count.answer', count: tag.questions.answered.size).upcase_first %> <%= tag.answers.size %> &middot;
-            <%= render 'university/watching', tag: tag %>
+            <%= render 'watching', tag: tag %>
           </div>
         </div>
       <% end %>

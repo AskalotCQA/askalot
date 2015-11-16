@@ -22,7 +22,7 @@
     <%= render 'layouts/university/footer' -%>
     <%= render 'university/shared/fixes' -%>
     <%= render 'university/shared/locales' -%>
-    <%= javascript_include_tag 'application' -%>
+    <%= javascript_include_tag 'university/application' -%>
     <%= yield :scripts -%>
     <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? -%>
   </body>

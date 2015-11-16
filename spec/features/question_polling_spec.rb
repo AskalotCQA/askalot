@@ -5,7 +5,7 @@ describe 'Question Polling', js: true do
   let!(:question) { create :question, tag_list: 'elasticsearch' }
 
   before :each do
-    Configuration.poll.default = 5
+    University::Configuration.poll.default = 5
 
     login_as user
   end

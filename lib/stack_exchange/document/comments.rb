@@ -10,9 +10,9 @@ module StackExchange
 
         return if commentable.nil? || user.nil?
 
-        return if Comment.exists?(stack_exchange_uuid: comment[:Id])
+        return if University::Comment.exists?(stack_exchange_uuid: comment[:Id])
 
-        comment = Comment.new(
+        comment = University::Comment.new(
           author_id:           user[:id],
           commentable_id:      commentable[:id],
           commentable_type:    type,

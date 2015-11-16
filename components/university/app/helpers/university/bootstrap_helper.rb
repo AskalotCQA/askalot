@@ -10,7 +10,7 @@ module University::BootstrapHelper
   include University::Bootstrap::UtilityHelper
 
   def identify(object, suffix = [])
-    ([object.class.name.downcase, object.id] + Array.wrap(suffix)).reject(&:blank?).join '-'
+    ([object.class.name.demodulize.downcase, object.id] + Array.wrap(suffix)).reject(&:blank?).join '-'
   end
 
   #TODO(zbell) make gem out of this, add more helpers for alerts, panels, ...

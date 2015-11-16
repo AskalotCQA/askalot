@@ -1,14 +1,14 @@
 module University
 class DocumentsController < ApplicationController
-  include Deletables::Destroy
-  include Editables::Update
-  include Watchables::Watch
+  include University::Deletables::Destroy
+  include University::Editables::Update
+  include University::Watchables::Watch
 
-  include Markdown::Process
+  include University::Markdown::Process
 
   def create
-    @group    = Group.find(params[:group_id])
-    @document = Document.new(create_params)
+    @group    = University::Group.find(params[:group_id])
+    @document = University::Document.new(create_params)
 
     if @document.save
       flash[:notice] = t('document.create.success')

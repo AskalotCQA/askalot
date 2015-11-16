@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-shared_examples_for Taggable do
+shared_examples_for University::Taggable do
   let(:model) { described_class }
-  let(:factory) { model.name.underscore.to_sym }
+  let(:factory) { model.name.demodulize.underscore.to_sym }
 
   describe '#tag_list' do
     it 'assignes tags from string' do
@@ -21,13 +21,13 @@ shared_examples_for Taggable do
 
       record.save!
 
-      expect(record.tag_list.tags.sort).to     eql([Tag.current_academic_year_value, 'a', 'b'])
-      expect(record.tags.pluck(:name).sort).to eql([Tag.current_academic_year_value, 'a', 'b'])
+      expect(record.tag_list.tags.sort).to     eql([University::Tag.current_academic_year_value, 'a', 'b'])
+      expect(record.tags.pluck(:name).sort).to eql([University::Tag.current_academic_year_value, 'a', 'b'])
 
       record = model.find(record.id)
 
-      expect(record.tag_list.tags.sort).to     eql([Tag.current_academic_year_value, 'a', 'b'])
-      expect(record.tags.pluck(:name).sort).to eql([Tag.current_academic_year_value, 'a', 'b'])
+      expect(record.tag_list.tags.sort).to     eql([University::Tag.current_academic_year_value, 'a', 'b'])
+      expect(record.tags.pluck(:name).sort).to eql([University::Tag.current_academic_year_value, 'a', 'b'])
     end
 
     context 'when no tags assigned' do
@@ -66,6 +66,8 @@ shared_examples_for Taggable do
 
     context 'with multiple tags' do
       it 'searches records tagged by those tags' do
+        puts 'factory:'
+        puts factory
         create factory, tag_list: 'a, b'
         create factory, tag_list: 'a, c'
         create factory, tag_list: 'a, c, d'
@@ -88,14 +90,14 @@ shared_examples_for Taggable do
     it 'create tags' do
       record = create factory, tag_list: 'a, b, c'
 
-      expect(record.tags.order(:name).pluck(:name)).to eql([Tag.current_academic_year_value, 'a', 'b', 'c'])
+      expect(record.tags.order(:name).pluck(:name)).to eql([University::Tag.current_academic_year_value, 'a', 'b', 'c'])
     end
 
     context 'when tag list changes' do
       it 'removes unused tagging relations' do
         record = create factory, tag_list: 'a, b, c'
 
-        expect(record.tags.order(:name).pluck(:name)).to eql([Tag.current_academic_year_value, 'a', 'b', 'c'])
+        expect(record.tags.order(:name).pluck(:name)).to eql([University::Tag.current_academic_year_value, 'a', 'b', 'c'])
 
         record.tag_list = 'a, b'
 
@@ -119,7 +121,7 @@ shared_examples_for Taggable do
   end
 end
 
-describe Taggable::TagList do
+describe University::Taggable::TagList do
   let(:extractor) { double(:extractor) }
 
   describe '#+' do
@@ -127,7 +129,7 @@ describe Taggable::TagList do
       expect(extractor).to receive(:extract).with('a, b').and_return(['a', 'b'])
       expect(extractor).to receive(:extract).with('c, d').and_return(['c', 'd'])
 
-      list = Taggable::TagList.new(extractor, 'a, b')
+      list = University::Taggable::TagList.new(extractor, 'a, b')
 
       expect(list.tags).to eql(['a', 'b'])
 
@@ -141,7 +143,7 @@ describe Taggable::TagList do
     it 'iterates over tags' do
       expect(extractor).to receive(:extract).with('a, b').and_return(['a', 'b'])
 
-      list = Taggable::TagList.new(extractor, 'a, b')
+      list = University::Taggable::TagList.new(extractor, 'a, b')
 
       list.each { |value| expect(['a', 'b']).to include(value) }
     end
@@ -151,7 +153,7 @@ describe Taggable::TagList do
     it 'extract tags' do
       expect(extractor).to receive(:extract).with('a, b').and_return(['a', 'b'])
 
-      list = Taggable::TagList.new(extractor, 'a, b')
+      list = University::Taggable::TagList.new(extractor, 'a, b')
 
       expect(list.tags).to eql(['a', 'b'])
     end

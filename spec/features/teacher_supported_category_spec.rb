@@ -13,7 +13,7 @@ describe 'Teacher Supported Category' do
   end
 
   it 'shows icons if it contains 1 teacher' do
-    Assignment.create({ category_id: category.id, role_id: 2, user_id: user.id })
+    University::Assignment.create({ category_id: category.id, role_id: 2, user_id: user.id })
 
     expect(category.teachers.count).to eql(1)
 
@@ -42,9 +42,9 @@ describe 'Teacher Supported Category' do
   end
 
   it 'shows icons if it contains 2 teachers' do
-    Assignment.create({ category_id: category.id, role_id: 2, user_id: user.id })
-    Assignment.create({ category_id: category.id, role_id: 3, user_id: user2.id })
-    Assignment.create({ category_id: category.id, role_id: 2, user_id: user3.id })
+    University::Assignment.create({ category_id: category.id, role_id: 2, user_id: user.id })
+    University::Assignment.create({ category_id: category.id, role_id: 3, user_id: user2.id })
+    University::Assignment.create({ category_id: category.id, role_id: 2, user_id: user3.id })
 
     expect(category.teachers.count).to eql(2)
 
@@ -73,9 +73,9 @@ describe 'Teacher Supported Category' do
   end
 
   it 'doesn\'t show icons if it contains only administrators and students' do
-    Assignment.create({ category_id: category.id, role_id: 3, user_id: user.id })
-    Assignment.create({ category_id: category.id, role_id: 1, user_id: user2.id })
-    Assignment.create({ category_id: category.id, role_id: 3, user_id: user3.id })
+    University::Assignment.create({ category_id: category.id, role_id: 3, user_id: user.id })
+    University::Assignment.create({ category_id: category.id, role_id: 1, user_id: user2.id })
+    University::Assignment.create({ category_id: category.id, role_id: 3, user_id: user3.id })
 
     expect(category.teachers.count).to eql(0)
 

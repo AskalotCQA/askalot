@@ -1,12 +1,12 @@
-<%= form_for resource, as: :user, url: profile_users_path(tab: tab), html: { method: :patch } do |f| %>
+<%= form_for resource, as: :user, url: university.profile_users_path(tab: tab), html: { method: :patch } do |f| %>
   <%= form_messages_for resource, key: tab %>
   <div class="wrap-social">
-    <% Social.highlighted_networks.each do |_, network| %>
-      <%= render 'university/social_network_input', form_field: f, network: network %>
+    <% University::Social.highlighted_networks.each do |_, network| %>
+      <%= render 'social_network_input', form_field: f, network: network %>
     <% end %>
     <div id="more-social" class="collapse">
-      <% Social.suppressed_networks.each do |_, network| %>
-        <%= render 'university/social_network_input', form_field: f, network: network %>
+      <% University::Social.suppressed_networks.each do |_, network| %>
+        <%= render 'social_network_input', form_field: f, network: network %>
       <% end %>
     </div>
   </div>

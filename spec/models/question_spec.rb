@@ -8,15 +8,15 @@ require 'models/concerns/touchable_spec'
 require 'models/concerns/watchable_spec'
 require 'models/concerns/questions/searchable_spec'
 
-describe Question do
-  it_behaves_like Editable
-  it_behaves_like Deletable
-  it_behaves_like Orderable
-  it_behaves_like Taggable
-  it_behaves_like Touchable
-  it_behaves_like Watchable
+describe University::Question do
+  it_behaves_like University::Editable
+  it_behaves_like University::Deletable
+  it_behaves_like University::Orderable
+  it_behaves_like University::Taggable
+  it_behaves_like University::Touchable
+  it_behaves_like University::Watchable
 
-  it_behaves_like Questions::Searchable do
+  it_behaves_like University::Questions::Searchable do
     let(:attribute) { :text }
   end
 
@@ -44,7 +44,7 @@ describe Question do
     category = create :category, tags: ['dbms', 'elasticsearch']
     question = create :question, category: category, tag_list: 'redis'
 
-    expect(question.tags.pluck(:name).sort).to eql([Tag.current_academic_year_value, 'dbms', 'elasticsearch', 'redis'])
+    expect(question.tags.pluck(:name).sort).to eql([University::Tag.current_academic_year_value, 'dbms', 'elasticsearch', 'redis'])
   end
 
   context 'deleted' do
@@ -92,7 +92,7 @@ describe Question do
         question.toggle_favoring_by!(other_user)
       end
 
-      questions = Question.favored_by(user)
+      questions = University::Question.favored_by(user)
 
       expect(questions.size).to eql(3)
 
@@ -111,9 +111,9 @@ describe Question do
     end
 
     it 'returns questions having at least one answer' do
-      expect(Question.answered.count).to eql(3)
+      expect(University::Question.answered.count).to eql(3)
 
-      Question.answered.each do |question|
+      University::Question.answered.each do |question|
         expect(questions).to include(question)
       end
     end
@@ -125,7 +125,7 @@ describe Question do
         question = create :question
 
         expect(question.labels.size).to eql(2)
-        expect(question.labels.first).to be_a(Category)
+        expect(question.labels.first).to be_a(University::Category)
       end
     end
 
@@ -136,11 +136,11 @@ describe Question do
         question = create :question, tag_list: 'a, b, c'
 
         expect(question.labels.size).to eql(5)
-        expect(question.labels[0]).to be_a(Category)
+        expect(question.labels[0]).to be_a(University::Category)
 
         tags = question.labels[1..4].sort { |a, b| a.name <=> b.name }
 
-        expect(tags[0].name).to eql(Tag.current_academic_year_value)
+        expect(tags[0].name).to eql(University::Tag.current_academic_year_value)
         expect(tags[1].name).to eql('a')
         expect(tags[2].name).to eql('b')
         expect(tags[3].name).to eql('c')
@@ -221,7 +221,7 @@ describe Question do
     end
   end
 
-  describe Touchable do
+  describe University::Touchable do
     it 'does not update questions touched_at attribute when voting, viewing or labeling' do
       question      = create :question
       old_timestamp = question.touched_at

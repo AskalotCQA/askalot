@@ -7,9 +7,9 @@ describe 'Filter Questions', js: true do
   before :each do
     login_as user
 
-    Tag.autoimport = true
+    University::Tag.autoimport = true
 
-    Tag.probe.index.reload do
+    University::Tag.probe.index.reload do
       10.times { create :question, tag_list: 'ruby,linux' }
       10.times { create :question, tag_list: 'elasticsearch' }
       20.times { create :question, tag_list: 'elasticsearch,ruby' }
@@ -111,7 +111,7 @@ describe 'Filter Questions', js: true do
   end
 
   it 'filters questions by category tags' do
-    Question.tagged_with(:ruby).order(created_at: :desc).first(5).each do |question|
+    University::Question.tagged_with(:ruby).order(created_at: :desc).first(5).each do |question|
       question.update_attributes(category_id: category.id)
     end
 
@@ -153,7 +153,7 @@ describe 'Filter Questions', js: true do
   end
 
   context 'when changing tabs' do
-    let(:questions) { Question.tagged_with('elasticsearch').first(3) }
+    let(:questions) { University::Question.tagged_with('elasticsearch').first(3) }
 
     before :each do
       questions.each { |q| q.toggle_favoring_by! user }

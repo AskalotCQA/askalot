@@ -1,5 +1,5 @@
 module University::FormHelper
-  def category_collection_select(id, collection = Category.all.order(:name), value = :id, label = :name_with_teacher_supported, options = {}, html_options = {})
+  def category_collection_select(id, collection = University::Category.all.order(:name), value = :id, label = :name_with_teacher_supported, options = {}, html_options = {})
     tags = collection.inject({}) do |hash, category|
       hash[category.name] = category.effective_tags
       hash
@@ -11,7 +11,7 @@ module University::FormHelper
     collection_select(id, collection, value, label, options, html_options)
   end
 
-  def role_collection_select(id, collection = Role.all.order(:name), value = :id, label = :name, options = {}, html_options = {})
+  def role_collection_select(id, collection = University::Role.all.order(:name), value = :id, label = :name, options = {}, html_options = {})
     options.merge! include_blank: true
     html_options.deep_merge! class: :'form-control', data: { as: :select2 }
 
@@ -38,7 +38,7 @@ module University::FormHelper
   end
 
   def form_messages_context
-    { key: (params[:tab] || :global).to_sym, partial: 'shared/form_messages' }
+    { key: (params[:tab] || :global).to_sym, partial: 'university/shared/form_messages' }
   end
 
   def form_messages_for(resource, options = {})

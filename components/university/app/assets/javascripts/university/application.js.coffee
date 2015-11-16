@@ -26,19 +26,19 @@
 #= require d3
 #= require cal-heatmap
 #
-#= require gemoji
-#= require form
-#= require table
-#= require hash
-#= require helper
-#= require effects
+#= require ./gemoji
+#= require ./form
+#= require ./table
+#= require ./hash
+#= require ./helper
+#= require ./effects
 #
-#= require documents
-#= require questions
-#= require answers
-#= require comments
+#= require ./documents
+#= require ./questions
+#= require ./answers
+#= require ./comments
 #
-#= require analytics
-#= require fixes
+#= require ./analytics
+#= require ./fixes
 #
-#= require facebook
+#= require ./facebook

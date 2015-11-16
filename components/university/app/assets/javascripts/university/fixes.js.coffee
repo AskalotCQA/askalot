@@ -1,10 +1,10 @@
-#= require hash
-#= require remote
-#= require date
-#= require select
-#= require poll
-#= require markdown
-#= require hash
+#= require ./hash
+#= require ./remote
+#= require ./date
+#= require ./select
+#= require ./poll
+#= require ./markdown
+#= require ./hash
 
 Remote.bindState()
 

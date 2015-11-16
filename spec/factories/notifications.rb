@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :notification do
+  factory :notification, class: University::Notification do
     association :recipient
     association :initiator
   end

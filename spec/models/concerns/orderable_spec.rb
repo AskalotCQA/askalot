@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-shared_examples_for Orderable do
+shared_examples_for University::Orderable do
   let(:model) { described_class }
-  let(:factory) { model.name.underscore.to_sym }
+  let(:factory) { model.name.demodulize.underscore.to_sym }
 
   describe '.order_by' do
     it 'orders records by custom array of values' do

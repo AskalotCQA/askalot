@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-shared_examples_for Searchable do
+shared_examples_for University::Searchable do
   let(:model)   { described_class }
-  let(:factory) { model.name.underscore.to_sym }
+  let(:factory) { model.name.demodulize.underscore.to_sym }
   let(:records) { 10.times.map { |record| create factory } }
 
   before :each do

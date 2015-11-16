@@ -13,7 +13,7 @@
             <div class="category-details">
               <%= t('count.question', count: category.questions.size).upcase_first %> <%= category.questions.size %> &middot;
               <%= t('count.answer', count: category.answers.size).upcase_first %> <%= category.answers.size %> &middot;
-              <%= render 'university/watching', category: category %>
+              <%= render 'watching', category: category %>
             </div>
           </div>
         <% end %>

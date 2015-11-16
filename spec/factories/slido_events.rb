@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :slido_event do
+  factory :slido_event, class: University::SlidoEvent do
     sequence(:name)       { |n| "Slido Event ##{n}" }
     sequence(:uuid)       { |n| n }
     sequence(:identifier) { |n| "abc#{n}" }

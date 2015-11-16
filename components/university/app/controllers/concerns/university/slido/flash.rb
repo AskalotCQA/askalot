@@ -1,4 +1,4 @@
-module University::Concerns::Slido::Flash
+module University::Slido::Flash
   extend ActiveSupport::Concern
 
   included do
@@ -12,7 +12,7 @@ module University::Concerns::Slido::Flash
       flash.now[:slido] = []
 
       events.each do |event|
-        flash.now[:slido] << render_to_string(partial: 'slido/message', locals: { event: event })
+        flash.now[:slido] << render_to_string(partial: 'university/slido/message', locals: { event: event })
       end
     end
   end

@@ -22,9 +22,9 @@ module University::Bootstrap::BarHelper
 
   def navbar_logo_tag(title, options = {})
     classes = [:'navbar-brand']
-    classes << :active if current_page? root_path
+    classes << :active if current_page? university.root_path
 
-    link_to title, root_path, class: classes
+    link_to title, university.root_path, class: classes
   end
 
   def sidebar_tag(options = {}, &block)

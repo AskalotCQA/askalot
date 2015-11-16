@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :user, aliases: [:author, :followee, :follower, :favorer, :voter, :watcher, :viewer, :recipient, :initiator] do
+  factory :user, class: University::User, aliases: [:author, :followee, :follower, :favorer, :voter, :watcher, :viewer, :recipient, :initiator] do
     sequence(:login) { |n| "user_#{n}" }
     sequence(:email) { |n| "user_#{n}@example.com" }
 
@@ -15,15 +15,15 @@ FactoryGirl.define do
 
     role :student
 
-    factory :student, class: :User do
+    factory :student, class: University::User do
       role :student
     end
 
-    factory :teacher, class: :User do
+    factory :teacher, class: University::User do
       role :teacher
     end
 
-    factory :administrator, class: :User do
+    factory :administrator, class: University::User do
       role :administrator
     end
 

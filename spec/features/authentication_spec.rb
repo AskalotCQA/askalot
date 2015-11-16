@@ -7,7 +7,7 @@ describe 'Authentication' do
 
   context 'when not registered' do
     it 'does not sign in user successfully' do
-      Stuba::AIS.stub(:authenticate) { nil }
+      University::Stuba::AIS.stub(:authenticate) { nil }
 
       visit root_path
 
@@ -24,7 +24,7 @@ describe 'Authentication' do
 
   context 'when registered' do
     it 'signs in user successfully' do
-      Stuba::AIS.stub(:authenticate) { nil }
+      University::Stuba::AIS.stub(:authenticate) { nil }
 
       visit root_path
 
@@ -62,7 +62,7 @@ describe 'Authentication' do
 
       #expect(page).to have_content('Úspešne prihlásený.')
 
-      expect { click_button 'Prihlásiť' }.to change { User.count }.by(1)
+      expect { click_button 'Prihlásiť' }.to change { University::User.count }.by(1)
 
       expect(page).to have_content(user.login)
     end

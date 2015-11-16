@@ -3,7 +3,7 @@ class Administration::CategoriesController < Administration::DashboardController
   authorize_resource
 
   def create
-    @category = Category.new(category_params)
+    @category = University::Category.new(category_params)
 
     if @category.save
       form_message :notice, t('category.create.success'), key: params[:tab]
@@ -17,7 +17,7 @@ class Administration::CategoriesController < Administration::DashboardController
   end
 
   def update
-    @category = Category.find(params[:id])
+    @category = University::Category.find(params[:id])
 
     if @category.update_attributes(category_params)
       form_message :notice, t('category.update.success'), key: params[:tab]

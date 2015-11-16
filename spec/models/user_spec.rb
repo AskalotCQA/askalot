@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe User do
+describe University::User do
   let(:user) { create :user }
 
   it 'requires login' do
@@ -123,7 +123,7 @@ describe User do
         it 'is still student' do
           user = build :student
 
-          create :assignment, user: user, category: category, role: Role.find_by(name: :teacher)
+          create :assignment, user: user, category: category, role: University::Role.find_by(name: :teacher)
 
           expect(user.role? :student).to be_truthy
           expect(user.role? :teacher).to be_falsey
@@ -145,7 +145,7 @@ describe User do
         it 'is still teacher' do
           user = build :teacher
 
-          create :assignment, user: user, category: category, role: Role.find_by(name: :administrator)
+          create :assignment, user: user, category: category, role: University::Role.find_by(name: :administrator)
 
           expect(user.role? :student).to be_falsey
           expect(user.role? :teacher).to be_truthy
@@ -182,7 +182,7 @@ describe User do
         it 'is teacher for assigned category, student otherwise' do
           user = build :student
 
-          create :assignment, user: user, category: a, role: Role.find_by(name: :teacher)
+          create :assignment, user: user, category: a, role: University::Role.find_by(name: :teacher)
 
           expect(user.assigned? a, :student).to be_falsey
           expect(user.assigned? a, :teacher).to be_truthy
@@ -208,7 +208,7 @@ describe User do
         it 'is administrator for assigned category, teacher otherwise' do
           user = build :teacher
 
-          create :assignment, user: user, category: a, role: Role.find_by(name: :administrator)
+          create :assignment, user: user, category: a, role: University::Role.find_by(name: :administrator)
 
           expect(user.assigned? a, :student).to be_falsey
           expect(user.assigned? a, :teacher).to be_falsey
@@ -233,7 +233,7 @@ describe User do
   end
 
   describe 'Abilities' do
-    let(:ability) { Ability.new(user) }
+    let(:ability) { University::Ability.new(user) }
 
     context 'when name is present' do
       it 'allows showing user name' do
@@ -313,7 +313,7 @@ describe User do
     it 'creates user without confirmation' do
       params = { login: 'user', email: 'email@example.com', password: 'password' }
 
-      user = User.create_without_confirmation!(params)
+      user = University::User.create_without_confirmation!(params)
 
       expect(user.login).to eql('user')
       expect(user.email).to eql('email@example.com')
@@ -325,11 +325,11 @@ describe User do
   describe '.find_first_by_auth_conditions' do
     context 'with login' do
       it 'finds user by login' do
-        other = User.find_first_by_auth_conditions(login: user.login)
+        other = University::User.find_first_by_auth_conditions(login: user.login)
 
         expect(other).to eql(user)
 
-        other = User.find_first_by_auth_conditions(login: user.login.upcase)
+        other = University::User.find_first_by_auth_conditions(login: user.login.upcase)
 
         expect(other).to eql(user)
       end
@@ -337,7 +337,7 @@ describe User do
 
     context 'with email' do
       it 'finds user by email' do
-        other = User.find_first_by_auth_conditions(login: user.email)
+        other = University::User.find_first_by_auth_conditions(login: user.email)
 
         expect(other).to eql(user)
       end

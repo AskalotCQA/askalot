@@ -18,7 +18,7 @@
       <div class="col-xs-12 col-sm-6">
         <div class="text-left">
           <% unless current_user %>
-            <% if Configuration.enable.registrations? %>
+            <% if University::Configuration.enable.registrations? %>
               <%= icon_link_to :rocket, t('home.sign_up'), new_user_registration_path, analytics_attributes(:user, :register, :home).merge(class: 'btn btn-success', fixed: true, target: target) %>
             <% else %>
               <%= icon_link_to :rocket, t('home.sign_in'), new_user_session_path, analytics_attributes(:user, :'sign-in', :home).merge(class: 'btn btn-success', fixed: true, target: target) %>

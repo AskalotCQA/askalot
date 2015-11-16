@@ -1,10 +1,10 @@
 module University
 class EvaluationsController < ApplicationController
-  include Editables::Update
+  include University::Editables::Update
 
-  include Events::Dispatch
-  include Markdown::Process
-  include Watchings::Register
+  include University::Events::Dispatch
+  include University::Markdown::Process
+  include University::Watchings::Register
 
   before_action :authenticate_user!
 
@@ -14,7 +14,7 @@ class EvaluationsController < ApplicationController
     authorize! :evaluate, @evaluable
 
     @question   = @evaluable.to_question
-    @evaluation = Evaluation.new(create_params)
+    @evaluation = University::Evaluation.new(create_params)
 
     if @evaluation.save
       process_markdown_for @evaluation do |user|

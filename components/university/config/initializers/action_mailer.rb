@@ -4,8 +4,8 @@ unless [:development, :test].include?(Rails.env.to_sym)
     address:              'smtp.mandrillapp.com',
     port:                 587,
     enable_starttls_auto: true,
-    user_name:            Configuration.mailer.username,
-    password:             Configuration.mailer.password,
+    user_name:            University::Configuration.mailer.username,
+    password:             University::Configuration.mailer.password,
     authentication:       'login',
     domain:               'askalot.fiit.stuba.sk'
   }

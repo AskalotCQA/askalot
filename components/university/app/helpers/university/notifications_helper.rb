@@ -26,7 +26,7 @@ module University::NotificationsHelper
   def link_to_notifications(notifications, options = {})
     count = notifications.unread.unscope(:limit, :offset).size
     body  = options.delete(:body) || t('notification.unread_x', count: count)
-    url   = options.delete(:url)  || notifications_path
+    url   = options.delete(:url)  || university.notifications_path
 
     link_to body, url, analytics_attributes(:notifications, :list, "#{count}-unread").deep_merge(options)
   end

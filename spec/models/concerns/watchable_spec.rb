@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-shared_examples_for Watchable do
+shared_examples_for University::Watchable do
   let(:model) { described_class }
-  let(:factory) { model.name.underscore.to_sym }
+  let(:factory) { model.name.demodulize.underscore.to_sym }
   let(:resource) { create factory }
 
   describe '#watched_by?' do

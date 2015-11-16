@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe StatisticsController do
+describe University::StatisticsController do
   render_views
 
   let(:user) { create :teacher }

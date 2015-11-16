@@ -1,11 +1,11 @@
-<%= form_for resource, as: :user, url: profile_users_path(tab: tab), html: { method: :patch } do |f| %>
+<%= form_for resource, as: :user, url: university.profile_users_path(tab: tab), html: { method: :patch } do |f| %>
   <%= form_messages_for resource, key: tab %>
 
   <div class="form-group">
     <div class="btn-group" data-toggle="buttons">
       <label class="btn btn-default">
         <%= f.check_box :read_notifications_thread, checked: resource.read_notifications_thread %>
-        <%= User.human_attribute_name :read_notifications_thread %> <%= icon_tag resource.read_notifications_thread ? :check : :blank %>
+        <%= University::User.human_attribute_name :read_notifications_thread %> <%= icon_tag resource.read_notifications_thread ? :check : :blank %>
       </label>
     </div>
   </div>
@@ -14,7 +14,7 @@
     <div class="btn-group" data-toggle="buttons">
       <label class="btn btn-default">
         <%= f.check_box :send_email_notifications, checked: resource.send_email_notifications %>
-        <%= User.human_attribute_name :send_email_notifications %> <%= icon_tag resource.send_email_notifications ? :check : :blank %>
+        <%= University::User.human_attribute_name :send_email_notifications %> <%= icon_tag resource.send_email_notifications ? :check : :blank %>
       </label>
     </div>
   </div>

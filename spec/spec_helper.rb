@@ -80,6 +80,9 @@ RSpec.configure do |config|
   # FactoryGirl
   config.include FactoryGirl::Syntax::Methods
 
+  # Engine routes
+  config.include University::Engine.routes.url_helpers, type: :feature
+
   # Include support
   config.include AuthenticationHelper, type: :feature
   config.include CapybaraHelpers,      type: :feature
@@ -96,8 +99,8 @@ RSpec.configure do |config|
   config.before(:each) { reset_emails }
 
   config.before(:each) do
-    [Category, Question, Tag, User].each { |model| model.autoimport = false }
+    [University::Category, University::Question, University::Tag, University::User].each { |model| model.autoimport = false }
 
-    Configuration.poll.default = 60
+    University::Configuration.poll.default = 60
   end
 end

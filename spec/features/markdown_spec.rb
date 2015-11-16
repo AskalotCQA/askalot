@@ -63,7 +63,7 @@ describe 'Markdown' do
 
       expect(notifications.size).to eql(1)
 
-      question = Question.last
+      question = University::Question.last
 
       expect(last_notification.resource).to  eql(question)
       expect(last_notification.recipient).to eql(other)
@@ -212,7 +212,7 @@ describe 'Markdown' do
 
       expect(notifications.size).to eql(1)
 
-      answer = Answer.last
+      answer = University::Answer.last
 
       expect(last_notification.resource).to  eql(answer)
       expect(last_notification.recipient).to eql(other)
@@ -248,7 +248,7 @@ describe 'Markdown' do
 
       expect(notifications.size).to eql(1)
 
-      comment = Comment.last
+      comment = University::Comment.last
 
       expect(last_notification.resource).to  eql(comment)
       expect(last_notification.recipient).to eql(other)

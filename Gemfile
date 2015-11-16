@@ -9,7 +9,7 @@ gem 'pg'
 gem 'squire', '~> 1.3.6'
 
 # authentification
-gem 'devise', '~> 3.1.1'
+# gem 'devise', '~> 3.1.1'
 gem 'cancan', '~> 1.6.9'
 gem 'net-ldap'
 

@@ -1,17 +1,17 @@
 module University
 class GroupsController < ApplicationController
-  include Deletables::Destroy
-  include Editables::Update
+  include University::Deletables::Destroy
+  include University::Editables::Update
 
-  include Events::Dispatch
-  include Markdown::Process
+  include University::Events::Dispatch
+  include University::Markdown::Process
 
   default_tab :all, only: :index
 
   before_action :authenticate_user!
 
   def create
-    @group = Group.new(create_params)
+    @group = University::Group.new(create_params)
 
     if @group.save
       flash[:notice] = t('group.create.success')
@@ -25,16 +25,16 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @group     = Group.find(params[:id])
+    @group     = University::Group.find(params[:id])
     @documents = @group.documents.order(created_at: :desc).page(params[:page]).per(20)
 
     authorize! :show, @group
   end
 
   def index
-    authorize! :index, Group
+    authorize! :index, University::Group
 
-    @groups = Group.accessible_by(current_ability)
+    @groups = University::Group.accessible_by(current_ability)
     @groups = @groups.page(params[:page]).per(20)
   end
 

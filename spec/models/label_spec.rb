@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Label do
+describe University::Label do
   it 'requires value' do
     label = build :label, value: nil
 

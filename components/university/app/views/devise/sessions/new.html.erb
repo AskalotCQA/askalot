@@ -11,7 +11,7 @@
         <%= form_messages_for resource %>
 
         <div class="form-group">
-          <%= f.label :login %> <%= content_tag(:em, "(#{t('user.ais_login_notice')})") unless Configuration.enable.registrations? %>
+          <%= f.label :login %> <%= content_tag(:em, "(#{t('user.ais_login_notice')})") unless University::Configuration.enable.registrations? %>
           <%= f.text_field :login, autofocus: true, class: :'form-control' %>
         </div>
 
@@ -25,12 +25,12 @@
         <% if devise_mapping.rememberable? %>
           <div class="btn-group" data-toggle="buttons">
             <label class="btn btn-primitive btn-sm">
-              <%= f.check_box :remember_me, checked: true %> <%= User.human_attribute_name :remember_me %> <%= icon_tag :check %>
+              <%= f.check_box :remember_me, checked: true %> <%= University::User.human_attribute_name :remember_me %> <%= icon_tag :check %>
             </label>
           </div>
         <% end %>
 
-        <%= render 'university/devise/shared/links' %>
+        <%= render 'devise/shared/links' %>
       <% end %>
     </div>
   </div>

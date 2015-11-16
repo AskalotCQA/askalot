@@ -18,6 +18,7 @@ PATH
   remote: components/university
   specs:
     university (1.0)
+      devise (= 3.1.2)
       rails (= 4.1.0)
 
 GEM
@@ -451,7 +452,6 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   d3_rails (~> 3.4.6)
   database_cleaner (~> 1.2.0)
-  devise (~> 3.1.1)
   elasticsearch
   exception_notification
   factory_girl_rails

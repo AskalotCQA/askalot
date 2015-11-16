@@ -7,7 +7,7 @@ class FacebookController < ApplicationController
   layout 'layouts/facebook'
 
   def index
-    @question = Questions::ToAnswerRecommender.next
+    @question = University::Questions::ToAnswerRecommender.next
   end
 
   def notification

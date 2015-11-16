@@ -2,7 +2,7 @@ module University::Searchables::Search
   extend ActiveSupport::Concern
 
   def search
-    @model = controller_name.classify.constantize
+    @model = ('University::' + controller_name.classify).constantize
 
     @results = @model.search_by(search_params)
   end

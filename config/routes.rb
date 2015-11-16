@@ -1,3 +1,3 @@
 Askalot::Application.routes.draw do
-  mount University::Engine => '/university', as: 'university'
+  mount University::Engine => '/', as: 'university'
 end

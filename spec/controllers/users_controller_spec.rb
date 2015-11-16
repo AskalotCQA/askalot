@@ -1,7 +1,9 @@
 require 'spec_helper'
 
-describe UsersController do
+describe University::UsersController do
   describe 'PATCH update' do
+    routes { University::Engine.routes }
+
     context 'with AIS user' do
       let(:user) { create :user, :as_ais, first: 'Ali', last: 'G', password: 'password' }
 

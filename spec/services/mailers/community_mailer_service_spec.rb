@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Mailers::CommunityMailerService do
+describe University::Mailers::CommunityMailerService do
 
   describe '.deliver_mails!' do
 
@@ -16,12 +16,12 @@ describe Mailers::CommunityMailerService do
     end
 
     it 'delivers community emails' do
-      expect { Mailers::CommunityMailerService.deliver_emails!({ body: '[telo mailu]', subject: '[predmet]', send_html_email: false }) }.to change { ActionMailer::Base.deliveries.count }.by(5)
+      expect { University::Mailers::CommunityMailerService.deliver_emails!({ body: '[telo mailu]', subject: '[predmet]', send_html_email: false }) }.to change { ActionMailer::Base.deliveries.count }.by(5)
     end
 
     it 'delivers test community email' do
       user = create(:user)
-      expect { Mailers::CommunityMailerService.deliver_test_email!({ body: '[telo mailu]', subject: '[predmet]', send_html_email: false, user: user }) }.to change { ActionMailer::Base.deliveries.count }.by(1)
+      expect { University::Mailers::CommunityMailerService.deliver_test_email!({ body: '[telo mailu]', subject: '[predmet]', send_html_email: false, user: user }) }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
 end

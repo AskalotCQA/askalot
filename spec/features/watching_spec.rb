@@ -22,7 +22,7 @@ describe 'Watching' do
 
       click_button 'Opýtať'
 
-      question = Question.find_by(title: 'Watched question')
+      question = University::Question.find_by(title: 'Watched question')
 
       expect(question).to be_watched_by(user)
     end

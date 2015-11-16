@@ -1,18 +1,18 @@
 module University
 class AnswersController < ApplicationController
-  include Deletables::Destroy
-  include Editables::Update
-  include Votables::Vote
+  include University::Deletables::Destroy
+  include University::Editables::Update
+  include University::Votables::Vote
 
-  include Events::Dispatch
-  include Markdown::Process
-  include Watchings::Register
+  include University::Events::Dispatch
+  include University::Markdown::Process
+  include University::Watchings::Register
 
   before_action :authenticate_user!
 
   def create
-    @question = Question.find(params[:question_id])
-    @answer   = Answer.new(create_params)
+    @question = University::Question.find(params[:question_id])
+    @answer   = University::Answer.new(create_params)
 
     authorize! :answer, @question
 
@@ -36,7 +36,7 @@ class AnswersController < ApplicationController
   end
 
   def label
-    @answer   = Answer.find(params[:id])
+    @answer   = University::Answer.find(params[:id])
     @answers  = [@answer]
     @question = @answer.question
 

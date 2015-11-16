@@ -37,5 +37,8 @@ module Askalot
 
     # Export DB schema in SQL format
     config.active_record.schema_format = :sql
+
+    config.logger = Logger.new(STDOUT)
+    config.log_level = :warn # In any environment initializer, or
   end
 end

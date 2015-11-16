@@ -42,44 +42,44 @@
       <h3>Používatelia</h3>
 
       <table class="table table-bordered table-condensed">
-        <%= render 'university/fraction_header', title: 'Celkovo', numeration: @users, denomination: @users %>
+        <%= render 'fraction_header', title: 'Celkovo', numeration: @users, denomination: @users %>
         <tbody>
-          <%= render 'university/fraction_data', title: 'Bez položenej otázky',     numeration: @users.where(questions_count: 0), denomination: @users %>
-          <%= render 'university/fraction_data', title: 'Bez poskytnutej odpovede', numeration: @users.where(answers_count: 0),   denomination: @users %>
-          <%= render 'university/fraction_data', title: 'Bez komentára',            numeration: @users.where(comments_count: 0),  denomination: @users %>
+          <%= render 'fraction_data', title: 'Bez položenej otázky',     numeration: @users.where(questions_count: 0), denomination: @users %>
+          <%= render 'fraction_data', title: 'Bez poskytnutej odpovede', numeration: @users.where(answers_count: 0),   denomination: @users %>
+          <%= render 'fraction_data', title: 'Bez komentára',            numeration: @users.where(comments_count: 0),  denomination: @users %>
         </tbody>
       </table>
 
       <table class="table table-bordered table-condensed">
-        <%= render 'university/description_header', title: 'Otázky' %>
+        <%= render 'description_header', title: 'Otázky' %>
         <tbody>
-          <%= render 'university/description_data', title: 'Pridané otázky', relation: @users, chain: :questions %>
+          <%= render 'description_data', title: 'Pridané otázky', relation: @users, chain: :questions %>
         </tbody>
         <tbody>
-          <%= render 'university/description_data', title: 'Zobrazené otázky',   relation: @users, chain: [:questions, :viewed_by_others] %>
-          <%= render 'university/description_data', title: 'Hlasované otázky',   relation: @users, chain: [:questions, :voted] %>
-          <%= render 'university/description_data', title: 'Komentované otázky', relation: @users, chain: [:questions, :commented] %>
-          <%= render 'university/description_data', title: 'Obľúbené otázky',    relation: @users, chain: [:questions, :favored] %>
+          <%= render 'description_data', title: 'Zobrazené otázky',   relation: @users, chain: [:questions, :viewed_by_others] %>
+          <%= render 'description_data', title: 'Hlasované otázky',   relation: @users, chain: [:questions, :voted] %>
+          <%= render 'description_data', title: 'Komentované otázky', relation: @users, chain: [:questions, :commented] %>
+          <%= render 'description_data', title: 'Obľúbené otázky',    relation: @users, chain: [:questions, :favored] %>
         </tbody>
         <tbody>
-          <%= render 'university/description_data', title: 'Neodpovedané otázky', relation: @users, chain: [:questions, :unanswered] %>
-          <%= render 'university/description_data', title: 'Odpovedané otázky',   relation: @users, chain: [:questions, :answered] %>
-          <%= render 'university/description_data', title: 'Vyriešené otázky',    relation: @users, chain: [:questions, :solved] %>
+          <%= render 'description_data', title: 'Neodpovedané otázky', relation: @users, chain: [:questions, :unanswered] %>
+          <%= render 'description_data', title: 'Odpovedané otázky',   relation: @users, chain: [:questions, :answered] %>
+          <%= render 'description_data', title: 'Vyriešené otázky',    relation: @users, chain: [:questions, :solved] %>
         </tbody>
       </table>
 
       <table class="table table-bordered table-condensed">
-        <%= render 'university/description_header', title: 'Odpovede' %>
+        <%= render 'description_header', title: 'Odpovede' %>
         <tbody>
-          <%= render 'university/description_data', title: 'Pridané odpovede', relation: @users, chain: :answers %>
+          <%= render 'description_data', title: 'Pridané odpovede', relation: @users, chain: :answers %>
         </tbody>
         <tbody>
-          <%= render 'university/description_data', title: 'Hlasované odpovede',   relation: @users, chain: [:answers, :voted] %>
-          <%= render 'university/description_data', title: 'Komentované odpovede', relation: @users, chain: [:answers, :commented] %>
+          <%= render 'description_data', title: 'Hlasované odpovede',   relation: @users, chain: [:answers, :voted] %>
+          <%= render 'description_data', title: 'Komentované odpovede', relation: @users, chain: [:answers, :commented] %>
         </tbody>
         <tbody>
-          <%= render 'university/description_data', title: 'Vybrané najlepšie odpovede', relation: @users, chain: [:answers, :best] %>
-          <%= render 'university/description_data', title: 'Vybrané pomocné odpovede',   relation: @users, chain: [:answers, :helpful] %>
+          <%= render 'description_data', title: 'Vybrané najlepšie odpovede', relation: @users, chain: [:answers, :best] %>
+          <%= render 'description_data', title: 'Vybrané pomocné odpovede',   relation: @users, chain: [:answers, :helpful] %>
         </tbody>
       </table>
     </div>
@@ -88,37 +88,37 @@
       <h3>Otázky</h3>
 
       <table class="table table-bordered table-condensed">
-        <%= render 'university/fraction_header', title: 'Celkovo', numeration: @questions, denomination: @questions %>
+        <%= render 'fraction_header', title: 'Celkovo', numeration: @questions, denomination: @questions %>
         <tbody>
-          <%= render 'university/fraction_data', title: 'Bez odpovede', numeration: @questions.unanswered, denomination: @questions %>
-          <%= render 'university/fraction_data', title: 'S odpoveďou',  numeration: @questions.answered,   denomination: @questions %>
-          <%= render 'university/fraction_data', title: 'Vyriešené',    numeration: @questions.solved,     denomination: @questions %>
+          <%= render 'fraction_data', title: 'Bez odpovede', numeration: @questions.unanswered, denomination: @questions %>
+          <%= render 'fraction_data', title: 'S odpoveďou',  numeration: @questions.answered,   denomination: @questions %>
+          <%= render 'fraction_data', title: 'Vyriešené',    numeration: @questions.solved,     denomination: @questions %>
         </tbody>
       </table>
 
       <table class="table table-bordered table-condensed">
-        <%= render 'university/fraction_header', title: 'Hodnotené', numeration: @questions.evaluated, denomination: @questions %>
+        <%= render 'fraction_header', title: 'Hodnotené', numeration: @questions.evaluated, denomination: @questions %>
         <tbody>
-          <%= render 'university/fraction_data', title: 'Veľmi zlé',   numeration: @questions.evaluated.where(evaluations: { value: -2 }), denomination: @questions %>
-          <%= render 'university/fraction_data', title: 'Zlé',         numeration: @questions.evaluated.where(evaluations: { value: -1 }), denomination: @questions %>
-          <%= render 'university/fraction_data', title: 'Dobré',       numeration: @questions.evaluated.where(evaluations: { value:  0 }), denomination: @questions %>
-          <%= render 'university/fraction_data', title: 'Veľmi dobré', numeration: @questions.evaluated.where(evaluations: { value: +1 }), denomination: @questions %>
-          <%= render 'university/fraction_data', title: 'Výborné',     numeration: @questions.evaluated.where(evaluations: { value: +2 }), denomination: @questions %>
+          <%= render 'fraction_data', title: 'Veľmi zlé',   numeration: @questions.evaluated.where(evaluations: { value: -2 }), denomination: @questions %>
+          <%= render 'fraction_data', title: 'Zlé',         numeration: @questions.evaluated.where(evaluations: { value: -1 }), denomination: @questions %>
+          <%= render 'fraction_data', title: 'Dobré',       numeration: @questions.evaluated.where(evaluations: { value:  0 }), denomination: @questions %>
+          <%= render 'fraction_data', title: 'Veľmi dobré', numeration: @questions.evaluated.where(evaluations: { value: +1 }), denomination: @questions %>
+          <%= render 'fraction_data', title: 'Výborné',     numeration: @questions.evaluated.where(evaluations: { value: +2 }), denomination: @questions %>
         </tbody>
       </table>
 
       <table class="table table-bordered table-condensed">
-        <%= render 'university/description_header', title: 'Väzby' %>
+        <%= render 'description_header', title: 'Väzby' %>
         <tbody>
-          <%= render 'university/description_data', title: 'Odpovedí na otázku',            relation: @questions, chain: [:answers] %>
-          <%= render 'university/description_data', title: 'Najlepších odpovedí na otázku', relation: @questions, chain: [:answers, :best] %>
-          <%= render 'university/description_data', title: 'Pomocných odpovedí na otázku',  relation: @questions, chain: [:answers, :helpful] %>
+          <%= render 'description_data', title: 'Odpovedí na otázku',            relation: @questions, chain: [:answers] %>
+          <%= render 'description_data', title: 'Najlepších odpovedí na otázku', relation: @questions, chain: [:answers, :best] %>
+          <%= render 'description_data', title: 'Pomocných odpovedí na otázku',  relation: @questions, chain: [:answers, :helpful] %>
         </tbody>
         <tbody>
-          <%= render 'university/description_data', title: 'Zobrazení na otázku',  relation: @questions, chain: [:views] %>
-          <%= render 'university/description_data', title: 'Hlasov na otázku',     relation: @questions, chain: [:votes] %>
-          <%= render 'university/description_data', title: 'Komentárov na otázku', relation: @questions, chain: [:comments] %>
-          <%= render 'university/description_data', title: 'Obľúbení na otázku',   relation: @questions, chain: [:favorites] %>
+          <%= render 'description_data', title: 'Zobrazení na otázku',  relation: @questions, chain: [:views] %>
+          <%= render 'description_data', title: 'Hlasov na otázku',     relation: @questions, chain: [:votes] %>
+          <%= render 'description_data', title: 'Komentárov na otázku', relation: @questions, chain: [:comments] %>
+          <%= render 'description_data', title: 'Obľúbení na otázku',   relation: @questions, chain: [:favorites] %>
         </tbody>
       </table>
     </div>
@@ -127,30 +127,30 @@
       <h3>Odpovede</h3>
 
       <table class="table table-bordered table-condensed">
-        <%= render 'university/fraction_header', title: 'Celkovo', numeration: @answers, denomination: @answers %>
+        <%= render 'fraction_header', title: 'Celkovo', numeration: @answers, denomination: @answers %>
         <tbody>
-          <%= render 'university/fraction_data', title: 'Najlepšie odpovede',  numeration: @answers.best,      denomination: @answers %>
-          <%= render 'university/fraction_data', title: 'Pomocné odpovede',    numeration: @answers.helpful,   denomination: @answers %>
-          <%= render 'university/fraction_data', title: 'Ohodnotené odpovede', numeration: @answers.evaluated, denomination: @answers %>
+          <%= render 'fraction_data', title: 'Najlepšie odpovede',  numeration: @answers.best,      denomination: @answers %>
+          <%= render 'fraction_data', title: 'Pomocné odpovede',    numeration: @answers.helpful,   denomination: @answers %>
+          <%= render 'fraction_data', title: 'Ohodnotené odpovede', numeration: @answers.evaluated, denomination: @answers %>
         <tbody>
       </table>
 
       <table class="table table-bordered table-condensed">
-        <%= render 'university/fraction_header', title: 'Hodnotené', numeration: @answers.evaluated, denomination: @answers %>
+        <%= render 'fraction_header', title: 'Hodnotené', numeration: @answers.evaluated, denomination: @answers %>
         <tbody>
-          <%= render 'university/fraction_data', title: 'Veľmi zlé',   numeration: @answers.evaluated.where(evaluations: { value: -2 }), denomination: @answers %>
-          <%= render 'university/fraction_data', title: 'Zlé',         numeration: @answers.evaluated.where(evaluations: { value: -1 }), denomination: @answers %>
-          <%= render 'university/fraction_data', title: 'Dobré',       numeration: @answers.evaluated.where(evaluations: { value:  0 }), denomination: @answers %>
-          <%= render 'university/fraction_data', title: 'Veľmi dobré', numeration: @answers.evaluated.where(evaluations: { value: +1 }), denomination: @answers %>
-          <%= render 'university/fraction_data', title: 'Výborné',     numeration: @answers.evaluated.where(evaluations: { value: +2 }), denomination: @answers %>
+          <%= render 'fraction_data', title: 'Veľmi zlé',   numeration: @answers.evaluated.where(evaluations: { value: -2 }), denomination: @answers %>
+          <%= render 'fraction_data', title: 'Zlé',         numeration: @answers.evaluated.where(evaluations: { value: -1 }), denomination: @answers %>
+          <%= render 'fraction_data', title: 'Dobré',       numeration: @answers.evaluated.where(evaluations: { value:  0 }), denomination: @answers %>
+          <%= render 'fraction_data', title: 'Veľmi dobré', numeration: @answers.evaluated.where(evaluations: { value: +1 }), denomination: @answers %>
+          <%= render 'fraction_data', title: 'Výborné',     numeration: @answers.evaluated.where(evaluations: { value: +2 }), denomination: @answers %>
         </tbody>
       </table>
 
       <table class="table table-bordered table-condensed">
-        <%= render 'university/description_header', title: 'Väzby' %>
+        <%= render 'description_header', title: 'Väzby' %>
         <tbody>
-          <%= render 'university/description_data', title: 'Hlasov na odpoveď',     relation: @answers, chain: [:votes] %>
-          <%= render 'university/description_data', title: 'Komentárov na odpoveď', relation: @answers, chain: [:comments] %>
+          <%= render 'description_data', title: 'Hlasov na odpoveď',     relation: @answers, chain: [:votes] %>
+          <%= render 'description_data', title: 'Komentárov na odpoveď', relation: @answers, chain: [:comments] %>
         </tbody>
       </table>
     </div>

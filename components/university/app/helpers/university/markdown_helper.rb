@@ -1,24 +1,24 @@
 module University::MarkdownHelper
   def markdown_editor_for(resource, options = {}, &block)
-    id = "markdown-#{resource.class.name.underscore}-#{resource.new_record? ? :new : resource.id}"
+    id = "markdown-#{resource.class.name.demodulize.underscore}-#{resource.new_record? ? :new : resource.id}"
 
-    render 'markdown/editor', id: id, content: block, help: options[:help].nil? || options[:help], text: options[:text]
+    render 'university/markdown/editor', id: id, content: block, help: options[:help].nil? || options[:help], text: options[:text]
   end
 
   def markdown_editor_for_email(options = {}, &block)
-    render 'markdown/editor', id: :new, content: block, help:'', text: 'Text mailu'
+    render 'university/markdown/editor', id: :new, content: block, help:'', text: 'Text mailu'
   end
 
   def markdown_link_to_user(match, options = {})
     id   = match[/\d+\z/] || match.gsub(/@/, '')
-    user = User.find_by(id: id)
+    user = University::User.find_by(id: id)
 
     link_to "@#{user.nick}", user_path(user.nick) if user
   end
 
   def markdown_link_to_question(match, options = {})
     id       = match[/\d+\z/] || match.gsub(/#/, '')
-    question = Question.find_by(id: id)
+    question = University::Question.find_by(id: id)
 
     link_to "##{id}", question if question
   end
@@ -29,7 +29,7 @@ module University::MarkdownHelper
 
     options.deep_merge! :'user-link' => {
       regex: /#{hostname}\/users\/\w+/,
-      replacement: lambda { |match| (user = User.find_by(nick: match[/\w+\z/])) ? "@#{user.id}" : match }
+      replacement: lambda { |match| (user = University::User.find_by(nick: match[/\w+\z/])) ? "@#{user.id}" : match }
     }
 
     options.deep_merge! :'question-link' => {

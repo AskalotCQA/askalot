@@ -33,7 +33,7 @@
 </ol>
 
 <ol class="administration-users">
-  <% User.where.not(role: :student).order(:nick).each do |user| %>
+  <% University::User.where.not(role: :student).order(:nick).each do |user| %>
     <li>
       <div class="row">
         <div class="col-xs-4">

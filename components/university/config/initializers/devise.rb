@@ -259,4 +259,7 @@ Devise.setup do |config|
   # Allow insecure token lookup for test environment in
   # order to easily use generated tokens
   config.allow_insecure_token_lookup = true if Rails.env.test?
+
+  # Inherit from engine's controller not the main controller
+  config.parent_controller = 'University::ApplicationController'
 end

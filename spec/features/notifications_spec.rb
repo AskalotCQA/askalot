@@ -28,7 +28,7 @@ describe 'Notifications' do
 
       expect(notifications.size).to eql(1)
 
-      question = Question.last
+      question = University::Question.last
 
       expect(last_notification.initiator).to eql(user)
       expect(last_notification.recipient).to eql(watcher)
@@ -87,7 +87,7 @@ describe 'Notifications' do
 
       expect(notifications.size).to eql(1)
 
-      question = Question.last
+      question = University::Question.last
 
       expect(last_notification.initiator).to eql(user)
       expect(last_notification.recipient).to eql(watcher)
@@ -111,7 +111,7 @@ describe 'Notifications' do
 
       expect(notifications.size).to eql(1)
 
-      answer = Answer.last
+      answer = University::Answer.last
 
       expect(last_notification.initiator).to eql(user)
       expect(last_notification.recipient).to eql(question.author)
@@ -140,7 +140,7 @@ describe 'Notifications' do
 
         expect(notifications.size).to eql(1)
 
-        comment = Comment.last
+        comment = University::Comment.last
 
         expect(last_notification.resource).to  eql(comment)
         expect(last_notification.recipient).to eql(question.author)
@@ -187,7 +187,7 @@ describe 'Notifications' do
 
         expect(notifications.size).to eql(1)
 
-        comment = Comment.last
+        comment = University::Comment.last
 
         expect(last_notification.resource).to  eql(comment)
         expect(last_notification.recipient).to eql(question.author)

@@ -1,15 +1,15 @@
 module University::Editables::Update
   extend ActiveSupport::Concern
 
-  include Events::Dispatch
+  include University::Events::Dispatch
 
   def update
     @model    = controller_name.classify.downcase.to_sym
-    @editable = controller_name.classify.constantize.find(params[:id])
+    @editable = ('University::' + controller_name.classify).constantize.find(params[:id])
 
     authorize! :edit, @editable
 
-    @revision = "#{controller_name.classify}::Revision".constantize.create_revision!(current_user, @editable)
+    @revision = "University::#{controller_name.classify}::Revision".constantize.create_revision!(current_user, @editable)
 
     @editable.assign_attributes(update_params)
 
@@ -24,7 +24,7 @@ module University::Editables::Update
 
         # TODO (jharinek) refactor after making G,D watchable, notifiable
         if @editable.respond_to? :to_question
-          dispatch_event :update, @editable, for: @editable.to_question.watchers, anonymous: (@editable.is_a?(Question) && @editable.anonymous)
+          dispatch_event :update, @editable, for: @editable.to_question.watchers, anonymous: (@editable.is_a?(University::Question) && @editable.anonymous)
         end
 
         flash[:notice] = t "#{@model}.update.success"
@@ -44,7 +44,7 @@ module University::Editables::Update
       format.html { redirect_to :back, format: :html }
       format.js   {
         # TODO (jharinek) remove ifs
-        if @editable.is_a?(Question) || @editable.is_a?(Answer) || @editable.is_a?(Comment)
+        if @editable.is_a?(University::Question) || @editable.is_a?(University::Answer) || @editable.is_a?(University::Comment)
           redirect_to question_path(@editable.to_question), format: :js
         else
           redirect_to :back, format: :js

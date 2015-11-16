@@ -1,27 +1,27 @@
 class UserMailer < ActionMailer::Base
-  default from: ::Configuration.mailer.alias, css: 'mailers/layout'
+  default from: ::University::Configuration.mailer.alias, css: 'university/mailers/layout'
 
-  helper ActivitiesHelper
-  helper AnswersHelper
-  helper ApplicationHelper
-  helper BootstrapHelper
-  helper CategoriesHelper
-  helper CommentsHelper
-  helper DeletablesHelper
-  helper DocumentsHelper
-  helper FavoritesHelper
-  helper GroupsHelper
-  helper LabelingsHelper
-  helper NotificationsHelper
-  helper QuestionsHelper
-  helper ResourcesHelper
-  helper TagsHelper
-  helper TextHelper
-  helper UsersHelper
-  helper VotesHelper
-  helper WatchingsHelper
+  helper University::ActivitiesHelper
+  helper University::AnswersHelper
+  helper University::ApplicationHelper
+  helper University::BootstrapHelper
+  helper University::CategoriesHelper
+  helper University::CommentsHelper
+  helper University::DeletablesHelper
+  helper University::DocumentsHelper
+  helper University::FavoritesHelper
+  helper University::GroupsHelper
+  helper University::LabelingsHelper
+  helper University::NotificationsHelper
+  helper University::QuestionsHelper
+  helper University::ResourcesHelper
+  helper University::TagsHelper
+  helper University::TextHelper
+  helper University::UsersHelper
+  helper University::VotesHelper
+  helper University::WatchingsHelper
 
-  layout 'mailer'
+  layout 'university/mailer'
 
   def notifications(user, from:)
     @from = from

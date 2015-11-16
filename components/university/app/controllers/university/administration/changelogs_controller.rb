@@ -3,7 +3,7 @@ class Administration::ChangelogsController < Administration::DashboardController
   authorize_resource
 
   def create
-    @changelog = Changelog.new(changelog_params)
+    @changelog = University::Changelog.new(changelog_params)
 
     if @changelog.save
       form_message :notice, t('changelog.create.success'), key: params[:tab]
@@ -17,7 +17,7 @@ class Administration::ChangelogsController < Administration::DashboardController
   end
 
   def update
-    @changelog = Changelog.find(params[:id])
+    @changelog = University::Changelog.find(params[:id])
 
     if @changelog.update_attributes(changelog_params)
       form_message :notice, t('changelog.update.success'), key: params[:tab]
@@ -29,7 +29,7 @@ class Administration::ChangelogsController < Administration::DashboardController
   end
 
   def destroy
-    @changelog = Changelog.find(params[:id])
+    @changelog = University::Changelog.find(params[:id])
 
     if @changelog.destroy
       form_message :notice, t('changelog.delete.success'), key: params[:tab]

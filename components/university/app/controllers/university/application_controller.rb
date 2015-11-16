@@ -3,14 +3,18 @@ class ApplicationController < ActionController::Base
   protected
 
   # concerns order is significant
-  include University::Concerns::Applications::Security
-  include University::Concerns::Applications::Flash
-  include University::Concerns::Applications::Form
-  include University::Concerns::Applications::Tab
+  include University::Applications::Security
+  include University::Applications::Flash
+  include University::Applications::Form
+  include University::Applications::Tab
 
-  # include University::Concerns::Events::Log
+  include University::Events::Log
 
-  include University::Concerns::Facebook::Modal
-  include University::Concerns::Slido::Flash
+  include University::Facebook::Modal
+  include University::Slido::Flash
+
+  def current_ability
+    @current_ability ||= University::Ability.new(current_user)
+  end
 end
 end

@@ -4,8 +4,8 @@ describe 'Search Questions' do
   let!(:user) { create :user }
 
   before :each do
-    Question.autoimport = true
-    Question.probe.index.reload
+    University::Question.autoimport = true
+    University::Question.probe.index.reload
 
     login_as user
 

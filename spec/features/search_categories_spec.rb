@@ -4,8 +4,8 @@ describe 'Search Categories' do
   let!(:user) { create :user }
 
   before :each do
-    Category.autoimport = true
-    Category.probe.index.reload
+    University::Category.autoimport = true
+    University::Category.probe.index.reload
 
     login_as user
 

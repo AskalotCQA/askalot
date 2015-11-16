@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :tag do
+  factory :tag, class: University::Tag do
     sequence(:name) { |n| "tag-#{n}" }
     max_time { rand(18000..100000.0) }
     max_votes_difference 5

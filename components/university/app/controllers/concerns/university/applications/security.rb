@@ -1,4 +1,5 @@
-module University::Applications::Security
+module University
+  module Applications::Security
   extend ActiveSupport::Concern
 
   included do
@@ -26,4 +27,5 @@ module University::Applications::Security
     # TODO (smolnar) use users_controller update method
     devise_parameter_sanitizer.for(:account_update) { |u| u.permit :email, :password, :password_confirmation, :current_password }
   end
+end
 end

@@ -1,15 +1,15 @@
 module University
 class QuestionsController < ApplicationController
-  include Closeables::Close
-  include Deletables::Destroy
-  include Editables::Update
-  include Searchables::Search
-  include Votables::Vote
-  include Watchables::Watch
+  include University::Closeables::Close
+  include University::Deletables::Destroy
+  include University::Editables::Update
+  include University::Searchables::Search
+  include University::Votables::Vote
+  include University::Watchables::Watch
 
-  include Events::Dispatch
-  include Markdown::Process
-  include Watchings::Register
+  include University::Events::Dispatch
+  include University::Markdown::Process
+  include University::Watchings::Register
 
   default_tab :recent,  only: :index
   default_tab :results, only: :search
@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
   end
 
   def document_index
-    @document  = Document.find(params[:document_id])
+    @document  = University::Document.find(params[:document_id])
     @questions = @document.questions.order(touched_at: :desc)
 
     @questions = @questions.page(params[:page]).per(20)
@@ -41,14 +41,14 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @question = University::Question.new
 
-    @question.document = Document.find(params[:document_id]) if params[:document_id]
-    @question.category = Category.find(params[:category_id]) if params[:category_id]
+    @question.document = University::Document.find(params[:document_id]) if params[:document_id]
+    @question.category = University::Category.find(params[:category_id]) if params[:category_id]
   end
 
   def create
-    @question = Question.new(create_params)
+    @question = University::Question.new(create_params)
 
     authorize! :ask, @question
 
@@ -70,13 +70,13 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find(params[:id])
+    @question = University::Question.find(params[:id])
 
     authorize! :view, @question
 
     @labels  = @question.labels
     @answers = @question.ordered_answers
-    @answer  = Answer.new(question: @question)
+    @answer  = University::Answer.new(question: @question)
     @view    = @question.views.create! viewer: current_user
 
     @question.increment :views_count
@@ -85,7 +85,7 @@ class QuestionsController < ApplicationController
   end
 
   def favor
-    @question = Question.find(params[:id])
+    @question = University::Question.find(params[:id])
 
     authorize! :favor, @question
 
@@ -97,7 +97,7 @@ class QuestionsController < ApplicationController
   end
 
   def suggest
-    @questions = Question.where('id = ? or title like ?', params[:q].to_i, "#{params[:q]}%")
+    @questions = University::Question.where('id = ? or title like ?', params[:q].to_i, "#{params[:q]}%")
 
     render json: @questions, root: false
   end

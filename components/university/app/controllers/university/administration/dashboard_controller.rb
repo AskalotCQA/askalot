@@ -11,16 +11,16 @@ class Administration::DashboardController < AdministrationController
   def render_dashboard
     authorize! :administrate, nil
 
-    @assignments = Assignment.includes(:user, :category, :role).order('categories.name', 'users.nick')
-    @categories  = Category.order(:name)
-    @changelogs  = Changelog.all.sort
+    @assignments = University::Assignment.includes(:user, :category, :role).order('categories.name', 'users.nick')
+    @categories  = University::Category.order(:name)
+    @changelogs  = University::Changelog.all.sort
 
-    @assignment ||= Assignment.new
-    @category   ||= Category.new
-    @changelog  ||= Changelog.new
-    @email      ||= Email.new
+    @assignment ||= University::Assignment.new
+    @category   ||= University::Category.new
+    @changelog  ||= University::Changelog.new
+    @email      ||= University::Email.new
 
-    render 'administration/dashboard/index'
+    render 'university/administration/dashboard/index'
   end
 end
 end

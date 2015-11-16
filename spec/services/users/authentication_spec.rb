@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Users::Authentication do
-  subject { Users::Authentication.new(service, params) }
+describe University::Users::Authentication do
+  subject { University::Users::Authentication.new(service, params) }
 
   let(:params) { { login: 'user', password: 'password' } }
   let(:service) { double(:service) }

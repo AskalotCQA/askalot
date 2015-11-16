@@ -1,6 +1,6 @@
 module NotificationsHelper
   def notifications
-    Notification.where(resource_type: [Question, Answer, Comment])
+    University::Notification.where(resource_type: [University::Question, University::Answer, University::Comment])
   end
 
   def last_notification
@@ -8,6 +8,6 @@ module NotificationsHelper
   end
 
   def reset_notifications
-    Notification.delete_all
+    University::Notification.delete_all
   end
 end

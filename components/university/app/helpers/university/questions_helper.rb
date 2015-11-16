@@ -45,12 +45,12 @@ module University::QuestionsHelper
   private
 
   def question_label_attributes(label)
-    return :tag, [label.name], [:label, :'label-info', :'question-tag'] unless label.is_a? Category
+    return :tag, [label.name], [:label, :'label-info', :'question-tag'] unless label.is_a? University::Category
     return :category, label.tags.to_a, [:label, :'label-primary', :'question-category']
   end
 
   def question_label_name(label)
-    return (label.name + ' ' + fa_icon(:university, tooltip_attributes(names_for_teachers(label.teachers)).merge({ class: 'supported-category-icon-sm' })) + ' ').html_safe if label.is_a?(Category) && label.has_teachers?
+    return (label.name + ' ' + fa_icon(:university, tooltip_attributes(names_for_teachers(label.teachers)).merge({ class: 'supported-category-icon-sm' })) + ' ').html_safe if label.is_a?(University::Category) && label.has_teachers?
     label.name
   end
 end

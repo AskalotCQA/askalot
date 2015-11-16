@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Events::Dispatcher do
-  let(:dispatcher) { Class.new { include Events::Dispatcher }.new }
+describe University::Events::Dispatcher do
+  let(:dispatcher) { Class.new { include University::Events::Dispatcher }.new }
   let(:notifier) { double(:notifier) }
 
   describe '.dispatch' do

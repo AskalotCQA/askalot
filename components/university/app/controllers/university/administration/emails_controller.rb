@@ -2,13 +2,13 @@ module University
 class Administration::EmailsController < Administration::DashboardController
 
   def create
-    authorize! :create, Email
+    authorize! :create, University::Email
 
     if params[:test]
-      Mailers::CommunityMailerService.deliver_test_email!(email_params)
+      University::Mailers::CommunityMailerService.deliver_test_email!(email_params)
       form_message :notice, t('email.create_test.success'), key: 'emails'
     else
-      @email = Email.new(email_params)
+      @email = University::Email.new(email_params)
 
       if @email.save
         form_message :notice, t('email.create.success'), key: 'emails'

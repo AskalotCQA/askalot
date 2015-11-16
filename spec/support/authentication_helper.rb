@@ -2,7 +2,7 @@ module AuthenticationHelper
   def login_as(user, options = {})
     stub_ais_for(user) if options[:with] == :AIS
 
-    visit new_user_session_path
+    visit university.new_user_session_path
 
     fill_in 'user_login', with: user.login
     fill_in 'user_password', with: user.password || options[:password] || 'password'

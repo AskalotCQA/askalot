@@ -19,12 +19,12 @@
     </div>
 
     <div class="tab-content">
-      <%= render_tab_content 'users/profile/home', :profile, locals: { user: @user } %>
-      <%= render_tab_content 'users/profile/questions', :questions, locals: { user: @user, questions: @questions } %>
-      <%= render_tab_content 'users/profile/answers', :answers, locals: { user: @user, answers: @answers } %>
-      <%= render_tab_content 'users/profile/favorites', :favorites, locals: { user: @user, favorites: @favorites } %>
-      <%= render_tab_content 'users/profile/anonymous', :anonymous, locals: { user: @user, questions: @anonymous } if can? :show_anonymous, @user %>
-      <%= render_tab_content 'users/profile/activities', :activities, locals: { user: @user, activities: @activities } %>
+      <%= render_tab_content 'university/users/profile/home', :profile, locals: { user: @user } %>
+      <%= render_tab_content 'university/users/profile/questions', :questions, locals: { user: @user, questions: @questions } %>
+      <%= render_tab_content 'university/users/profile/answers', :answers, locals: { user: @user, answers: @answers } %>
+      <%= render_tab_content 'university/users/profile/favorites', :favorites, locals: { user: @user, favorites: @favorites } %>
+      <%= render_tab_content 'university/users/profile/anonymous', :anonymous, locals: { user: @user, questions: @anonymous } if can? :show_anonymous, @user %>
+      <%= render_tab_content 'university/users/profile/activities', :activities, locals: { user: @user, activities: @activities } %>
     </div>
   </div>
 </div>

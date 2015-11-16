@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :category do
+  factory :category, class: University::Category do
     sequence(:name) { |n| "Category ##{n}" }
 
     trait :with_tags do

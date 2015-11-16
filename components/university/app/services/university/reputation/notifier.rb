@@ -5,9 +5,9 @@ module University::Reputation
     @manager = University::Reputation::Manager.new
 
     def publish(action, initiator, resource, options = {})
-      return unless [Answer, Vote, Question, Tagging, Labeling].include?(resource.class)
+      return unless [University::Answer, University::Vote, University::Question, University::Tagging, University::Labeling].include?(resource.class)
 
-      send resource.class.name.downcase, resource, action
+      send resource.class.name.demodulize.downcase, resource, action
     end
 
     def answer(answer, action)
@@ -19,9 +19,9 @@ module University::Reputation
     def vote(vote, action)
       votable = vote.votable.reload
 
-      return @manager.question_vote(votable) if votable.is_a?(Question) && votable.answers.present?
+      return @manager.question_vote(votable) if votable.is_a?(University::Question) && votable.answers.present?
 
-      @manager.answer_vote(votable) if votable.is_a? Answer
+      @manager.answer_vote(votable) if votable.is_a? University::Answer
     end
 
     def question(question, action)

@@ -48,7 +48,7 @@ module University::ActivitiesHelper
     options[:body] = capture(&block) if block_given?
 
     # TODO(zbell) add specific link_to_* helpers for all cases
-    case resource.class.name.downcase.to_sym
+    case resource.class.name.demodulize.downcase.to_sym
     when :answer     then link_to_answer resource, options
     when :comment    then link_to_comment resource, options
     when :evaluation then link_to_evaluation resource, options

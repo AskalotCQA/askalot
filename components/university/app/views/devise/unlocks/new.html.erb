@@ -1,4 +1,4 @@
-<% provide :title, t('user.unconfirmed_registration') %>
+<% provide :title, t('user.locked_account') %>
 
 <div class="container">
   <div class="row">
@@ -7,7 +7,7 @@
 
       <h1 class="form-title"><%= yield :title %></h1>
 
-      <%= form_for resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post } do |f| %>
+      <%= form_for resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post } do |f| %>
         <%= form_messages_for resource %>
 
         <div class="form-group">
@@ -15,9 +15,9 @@
           <%= f.text_field :email, autofocus: true, class: :'form-control' %>
         </div>
 
-        <button type="submit" class="btn btn-info btn-lg"><%= t('user.confirm_registration') %></button>
+        <button type="submit" class="btn btn-info btn-lg"><%= t('user.unlock_account') %></button>
 
-        <%= render 'university/devise/shared/links' %>
+        <%= render 'devise/shared/links' %>
       <% end %>
     </div>
   </div>

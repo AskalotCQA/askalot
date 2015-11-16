@@ -74,7 +74,7 @@ namespace :fixtures do
 
   desc 'Updates cache for tags\' statistics'
   task tag_statistics: :environment do
-    Tag.all.each do |t|
+    University::Tag.all.each do |t|
       puts "Updating tag ##{t.id}."
       Reputation::Adjuster.update_tag_statistics(t)
     end
