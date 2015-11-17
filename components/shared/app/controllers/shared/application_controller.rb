@@ -1,20 +1,20 @@
-module University
+module Shared
 class ApplicationController < ActionController::Base
   protected
 
   # concerns order is significant
-  include University::Applications::Security
-  include University::Applications::Flash
-  include University::Applications::Form
-  include University::Applications::Tab
+  include Shared::Applications::Security
+  include Shared::Applications::Flash
+  include Shared::Applications::Form
+  include Shared::Applications::Tab
 
-  include University::Events::Log
+  include Shared::Events::Log
 
-  include University::Facebook::Modal
-  include University::Slido::Flash
+  include Shared::Facebook::Modal
+  include Shared::Slido::Flash
 
   def current_ability
-    @current_ability ||= University::Ability.new(current_user)
+    @current_ability ||= Shared::Ability.new(current_user)
   end
 end
 end

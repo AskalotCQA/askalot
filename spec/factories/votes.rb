@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :vote, class: University::Vote do
+  factory :vote, class: Shared::Vote do
     association :voter
   end
 end

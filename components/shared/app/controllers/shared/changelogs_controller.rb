@@ -1,9 +1,9 @@
-module University
+module Shared
 class ChangelogsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @changelogs = University::Changelog.all.sort
+    @changelogs = Shared::Changelog.all.sort
   end
 end
 end

@@ -1,4 +1,4 @@
-module University
+module Shared
   module Applications::Security
   extend ActiveSupport::Concern
 

@@ -1,21 +1,21 @@
-module University
+module Shared
 class Question < ActiveRecord::Base
-  include University::Authorable
-  include University::Closeable
-  include University::Commentable
-  include University::Deletable
-  include University::Evaluable
-  include University::Editable
-  include University::Favorable
-  include University::Notifiable
-  include University::Orderable
-  include University::Taggable
-  include University::Touchable
-  include University::Viewable
-  include University::Votable
-  include University::Watchable
+  include Shared::Authorable
+  include Shared::Closeable
+  include Shared::Commentable
+  include Shared::Deletable
+  include Shared::Evaluable
+  include Shared::Editable
+  include Shared::Favorable
+  include Shared::Notifiable
+  include Shared::Orderable
+  include Shared::Taggable
+  include Shared::Touchable
+  include Shared::Viewable
+  include Shared::Votable
+  include Shared::Watchable
 
-  include University::Questions::Searchable
+  include Shared::Questions::Searchable
 
   # TODO (jharinek) propose change to parent tags
   before_save { self.tag_list += (new_record? ? category.effective_tags : category.tags) if category }

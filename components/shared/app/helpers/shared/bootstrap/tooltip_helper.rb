@@ -1,4 +1,4 @@
-module University::Bootstrap::TooltipHelper
+module Shared::Bootstrap::TooltipHelper
   def tooltip_attributes(title, options = {})
     options.deep_merge title: title, data: { toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover }
   end

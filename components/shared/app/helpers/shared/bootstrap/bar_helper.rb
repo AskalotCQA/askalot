@@ -1,4 +1,4 @@
-module University::Bootstrap::BarHelper
+module Shared::Bootstrap::BarHelper
   def navbar_dropdown_tag(type, body, url, options = {}, &block)
     caret = options.delete(:caret)
     body  = icon_tag(caret, label: body, fixed: true, join: :append) if caret
@@ -22,9 +22,9 @@ module University::Bootstrap::BarHelper
 
   def navbar_logo_tag(title, options = {})
     classes = [:'navbar-brand']
-    classes << :active if current_page? university.root_path
+    classes << :active if current_page? shared.root_path
 
-    link_to title, university.root_path, class: classes
+    link_to title, shared.root_path, class: classes
   end
 
   def sidebar_tag(options = {}, &block)

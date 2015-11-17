@@ -1,10 +1,10 @@
 module University
 class DocumentsController < ApplicationController
-  include University::Deletables::Destroy
-  include University::Editables::Update
-  include University::Watchables::Watch
+  include Shared::Deletables::Destroy
+  include Shared::Editables::Update
+  include Shared::Watchables::Watch
 
-  include University::Markdown::Process
+  include Shared::Markdown::Process
 
   def create
     @group    = University::Group.find(params[:group_id])

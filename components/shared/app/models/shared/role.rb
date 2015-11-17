@@ -1,4 +1,4 @@
-module University
+module Shared
 class Role < ActiveRecord::Base
   has_many :assignments, dependent: :restrict_with_exception
   has_many :users, through: :assignments

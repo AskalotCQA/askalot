@@ -1,4 +1,4 @@
-module University
+module Shared
 class Vote < ActiveRecord::Base
   include Deletable
   include Notifiable

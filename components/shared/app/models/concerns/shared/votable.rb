@@ -1,4 +1,4 @@
-module University::Votable
+module Shared::Votable
   extend ActiveSupport::Concern
 
   included do
@@ -23,7 +23,7 @@ module University::Votable
   end
 
   def toggle_vote_by!(user, positive)
-    vote = University::Vote.deleted_or_new votable: self, voter: user
+    vote = Shared::Vote.deleted_or_new votable: self, voter: user
 
     if vote.new_record? || vote.deleted? || vote.positive != positive
       vote.positive = positive

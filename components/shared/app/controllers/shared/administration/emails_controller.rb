@@ -1,14 +1,14 @@
-module University
+module Shared
 class Administration::EmailsController < Administration::DashboardController
 
   def create
-    authorize! :create, University::Email
+    authorize! :create, Shared::Email
 
     if params[:test]
-      University::Mailers::CommunityMailerService.deliver_test_email!(email_params)
+      Shared::Mailers::CommunityMailerService.deliver_test_email!(email_params)
       form_message :notice, t('email.create_test.success'), key: 'emails'
     else
-      @email = University::Email.new(email_params)
+      @email = Shared::Email.new(email_params)
 
       if @email.save
         form_message :notice, t('email.create.success'), key: 'emails'

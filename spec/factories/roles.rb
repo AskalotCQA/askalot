@@ -1,4 +1,4 @@
 FactoryGirl.define do
-  factory :role, class: University::Role do
+  factory :role, class: Shared::Role do
   end
 end

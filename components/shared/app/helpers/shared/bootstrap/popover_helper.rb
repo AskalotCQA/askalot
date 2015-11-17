@@ -1,4 +1,4 @@
-module University::Bootstrap::PopoverHelper
+module Shared::Bootstrap::PopoverHelper
   def popover_attributes(content, options = {})
     options.deep_merge data: { toggle: :popover, content: content, html: true, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :click }
   end

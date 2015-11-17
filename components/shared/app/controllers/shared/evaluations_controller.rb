@@ -1,10 +1,10 @@
-module University
+module Shared
 class EvaluationsController < ApplicationController
-  include University::Editables::Update
+  include Shared::Editables::Update
 
-  include University::Events::Dispatch
-  include University::Markdown::Process
-  include University::Watchings::Register
+  include Shared::Events::Dispatch
+  include Shared::Markdown::Process
+  include Shared::Watchings::Register
 
   before_action :authenticate_user!
 
@@ -14,7 +14,7 @@ class EvaluationsController < ApplicationController
     authorize! :evaluate, @evaluable
 
     @question   = @evaluable.to_question
-    @evaluation = University::Evaluation.new(create_params)
+    @evaluation = Shared::Evaluation.new(create_params)
 
     if @evaluation.save
       process_markdown_for @evaluation do |user|

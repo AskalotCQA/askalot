@@ -1,4 +1,4 @@
-module University::Reputation
+module Shared::Reputation
   class QuestionCalculator
     def reputation(question, time, score)
       difficulty = difficulty question, time

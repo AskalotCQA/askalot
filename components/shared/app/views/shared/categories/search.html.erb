@@ -1,6 +1,6 @@
 <% provide(:title, t('category.search.title')) %>
 
-<%= render 'university/searchables/search', target: controller_name %>
+<%= render 'shared/searchables/search', target: controller_name %>
 
 <ul class="nav nav-tabs tab-navigation">
   <%= tab_link_tag_with_count t('category.tab.results'), :results, search_categories_path(params.slice(:q, :page).merge tab: :results), @results.total_entries, analytics_attributes(:categories, :search, :results).merge(remote: true, data: {fade: '#categories'}) %>

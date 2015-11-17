@@ -1,4 +1,4 @@
-require_relative '../../components/university/app/services/university/events/dispatcher'
+require_relative '../../components/shared/app/services/shared/events/dispatcher'
 
 namespace :sample_data do
   task all: :environment do
@@ -457,8 +457,8 @@ namespace :sample_data do
           edited_at: input[:edited_at].nil? ? nil : Time.now - input[:edited_at].days,
         )
 
-        University::Events::Dispatcher.dispatch :mention, user, question, for: mention unless mention.nil?
-        University::Events::Dispatcher.dispatch :create, user, question, for: question.parent.watchers + question.tags.map(&:watchers).flatten, anonymous: question.anonymous
+        Shared::Events::Dispatcher.dispatch :mention, user, question, for: mention unless mention.nil?
+        Shared::Events::Dispatcher.dispatch :create, user, question, for: question.parent.watchers + question.tags.map(&:watchers).flatten, anonymous: question.anonymous
         ::Watching.deleted_or_new(watcher: user, watchable: question).mark_as_undeleted!
       end
     end
@@ -555,8 +555,8 @@ namespace :sample_data do
           edited_at: input[:edited_at].nil? ? nil : Time.now - input[:edited_at].days,
         )
 
-        University::Events::Dispatcher.dispatch :mention, user, answer, for: mention unless mention.nil?
-        University::Events::Dispatcher.dispatch :create, user, answer, for: question.watchers
+        Shared::Events::Dispatcher.dispatch :mention, user, answer, for: mention unless mention.nil?
+        Shared::Events::Dispatcher.dispatch :create, user, answer, for: question.watchers
         ::Watching.deleted_or_new(watcher: user, watchable: question).mark_as_undeleted!
       end
     end
@@ -637,8 +637,8 @@ namespace :sample_data do
           edited_at: input[:edited_at].nil? ? nil : Time.now - input[:edited_at].days,
         )
 
-        University::Events::Dispatcher.dispatch :mention, user, comment, for: mention unless mention.nil?
-        University::Events::Dispatcher.dispatch :create, user, comment, for: question.watchers
+        Shared::Events::Dispatcher.dispatch :mention, user, comment, for: mention unless mention.nil?
+        Shared::Events::Dispatcher.dispatch :create, user, comment, for: question.watchers
         ::Watching.deleted_or_new(watcher: user, watchable: question).mark_as_undeleted!
       end
     end
@@ -664,7 +664,7 @@ namespace :sample_data do
         user = User.find_by(nick: input[:user])
 
         favorite = question.toggle_favoring_by! user
-        University::Events::Dispatcher.dispatch :create, user, favorite, for: question.watchers
+        Shared::Events::Dispatcher.dispatch :create, user, favorite, for: question.watchers
       end
     end
   end
@@ -693,7 +693,7 @@ namespace :sample_data do
         user = User.find_by(nick: input[:user])
 
         vote = question.toggle_vote_by! user, input[:positive]
-        University::Events::Dispatcher.dispatch :create, user, vote, for: question.watchers
+        Shared::Events::Dispatcher.dispatch :create, user, vote, for: question.watchers
       end
     end
 
@@ -720,7 +720,7 @@ namespace :sample_data do
         user = User.find_by(nick: input[:user])
 
         vote = answer.toggle_vote_by! user, input[:positive]
-        University::Events::Dispatcher.dispatch :create, user, vote, for: question.watchers
+        Shared::Events::Dispatcher.dispatch :create, user, vote, for: question.watchers
       end
     end
   end
@@ -743,7 +743,7 @@ namespace :sample_data do
         user = User.find_by(nick: input[:user])
 
         labeling = answer.toggle_labeling_by! user, :best
-        University::Events::Dispatcher.dispatch :create, user, labeling, for: question.watchers
+        Shared::Events::Dispatcher.dispatch :create, user, labeling, for: question.watchers
       end
     end
   end
@@ -813,7 +813,7 @@ namespace :sample_data do
         user = User.find_by(nick: input[:user])
 
         view = question.views.create! viewer: user
-        University::Events::Dispatcher.dispatch :create, user, view, for: question.watchers
+        Shared::Events::Dispatcher.dispatch :create, user, view, for: question.watchers
       end
     end
   end

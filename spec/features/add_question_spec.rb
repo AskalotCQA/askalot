@@ -34,7 +34,7 @@ describe 'Add Question' do
 
     expect(page).to have_content('Otázka bola úspešne pridaná.')
 
-    expect(University::Question.count).to eq(1)
+    expect(Shared::Question.count).to eq(1)
 
     within '#question-title' do
       expect(page).to have_content('Lorem ipsum title?')

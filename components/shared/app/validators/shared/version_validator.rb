@@ -1,4 +1,4 @@
-module University
+module Shared
 class VersionValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     version = Gem::Version.create value rescue nil

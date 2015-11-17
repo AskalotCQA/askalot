@@ -1,4 +1,4 @@
-module University::Taggable
+module Shared::Taggable
   extend ActiveSupport::Concern
 
   included do
@@ -41,8 +41,8 @@ module University::Taggable
     user = editor || author
 
     (tag_list.tags - tags.pluck(:name)).each do |name|
-      tag     = University::Tag.find_or_create_by!(name: name)
-      tagging = University::Tagging.deleted_or_new(author: user, question: self, tag: tag).mark_as_undeleted!
+      tag     = Shared::Tag.find_or_create_by!(name: name)
+      tagging = Shared::Tagging.deleted_or_new(author: user, question: self, tag: tag).mark_as_undeleted!
 
       self.class.taggable.dispatcher.dispatch :create, user, tagging, for: watchers
     end
@@ -66,8 +66,8 @@ module University::Taggable
       @taggable ||= Class.new do
         include Squire::Base
 
-        config.dispatcher = University::Events::Dispatcher
-        config.extractor  = University::Tags::Extractor
+        config.dispatcher = Shared::Events::Dispatcher
+        config.extractor  = Shared::Tags::Extractor
       end
     end
   end
@@ -80,7 +80,7 @@ module University::Taggable
     end
 
     def build(values, options = {})
-      tags = University::Taggable::TagList.new(relation.taggable.extractor, values).tags
+      tags = Shared::Taggable::TagList.new(relation.taggable.extractor, values).tags
 
       if options[:any]
         relation.where tags: { name: tags }

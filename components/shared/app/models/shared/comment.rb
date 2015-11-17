@@ -1,4 +1,4 @@
-module University
+module Shared
 class Comment < ActiveRecord::Base
   include Authorable
   include Deletable

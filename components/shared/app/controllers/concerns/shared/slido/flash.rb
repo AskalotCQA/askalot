@@ -1,4 +1,4 @@
-module University::Slido::Flash
+module Shared::Slido::Flash
   extend ActiveSupport::Concern
 
   included do
@@ -6,13 +6,13 @@ module University::Slido::Flash
   end
 
   def flash_slido_events
-    events = University::SlidoEvent.where('? between started_at and ended_at', Time.now).order(:ended_at).load
+    events = Shared::SlidoEvent.where('? between started_at and ended_at', Time.now).order(:ended_at).load
 
     if events.any?
       flash.now[:slido] = []
 
       events.each do |event|
-        flash.now[:slido] << render_to_string(partial: 'university/slido/message', locals: { event: event })
+        flash.now[:slido] << render_to_string(partial: 'shared/slido/message', locals: { event: event })
       end
     end
   end

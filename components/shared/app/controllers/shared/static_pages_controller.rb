@@ -1,4 +1,4 @@
-module University
+module Shared
 class StaticPagesController < ApplicationController
   def home
     count = 4

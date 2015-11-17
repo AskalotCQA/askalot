@@ -1,4 +1,4 @@
-module University::Watchable
+module Shared::Watchable
   extend ActiveSupport::Concern
 
   included do

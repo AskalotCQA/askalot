@@ -214,10 +214,10 @@ en:
       watching: "Watching"
 
     attributes:
-      university/answer:
+      shared/answer:
         text: "Answer"
 
-      university/assignment:
+      shared/assignment:
         category: "Category"
         category_id: "Category"
         role: "Role"
@@ -225,23 +225,23 @@ en:
         user: "User"
         user_nick: "User"
 
-      university/category:
+      shared/category:
         name: "Name"
         tags: "Tags"
 
-      university/changelog:
+      shared/changelog:
         text: "Text"
         title: "Title"
         version: "Version"
 
-      university/comment:
+      shared/comment:
         text: "Comment"
 
       university/document:
         text: "Text"
         title: "Title"
 
-      university/evaluation:
+      shared/evaluation:
         text: "Comment"
         value: "Evaluation"
 
@@ -250,7 +250,7 @@ en:
         title: "Title"
         visbility: "Visibility"
 
-      university/question:
+      shared/question:
         anonymous: "Ask anonymously"
         category: "Category"
         category_id: "Category"
@@ -258,7 +258,7 @@ en:
         text: "Text"
         title: "Title"
 
-      university/user:
+      shared/user:
         email: "E-mail"
         password: "Password"
         password_confirmation: "Password confirmation"

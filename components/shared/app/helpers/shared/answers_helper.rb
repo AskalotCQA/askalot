@@ -1,4 +1,4 @@
-module University::AnswersHelper
+module Shared::AnswersHelper
   def answer_highlighted?(answer)
     answer.author.assigned?(answer.to_question.category, :teacher)
   end

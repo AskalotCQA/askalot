@@ -1,9 +1,9 @@
 module University
 class Document < ActiveRecord::Base
-  include Authorable
-  include Deletable
-  include Editable
-  include Watchable
+  include Shared::Authorable
+  include Shared::Deletable
+  include Shared::Editable
+  include Shared::Watchable
 
   belongs_to :group, counter_cache: true
 

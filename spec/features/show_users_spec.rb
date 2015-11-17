@@ -41,7 +41,7 @@ describe 'Show Users', js: true do
 
     expect(list.size).to eq(4)
 
-    expect(page).to have_content(University::User.last.nick)
+    expect(page).to have_content(Shared::User.last.nick)
   end
 
   it 'shows list of recent users' do

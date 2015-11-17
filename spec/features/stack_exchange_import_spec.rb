@@ -4,7 +4,7 @@ describe 'Stack Exchange Import' do
   it 'imports stack exchange beer dataset' do
     StackExchange.import_from(fixture('stack_exchange/beer').path)
 
-    question = University::Question.find_by(title: 'Do IPAs cause worse hangovers?')
+    question = Shared::Question.find_by(title: 'Do IPAs cause worse hangovers?')
 
     expect(question.title).to eql('Do IPAs cause worse hangovers?')
     expect(question.text).to eql("I usually drink strong Belgian Ales, particularly Triples, Quads and Trappists, so I'm no stranger to strong beer.  But I've noticed that I get far, far worse hangovers when drinking IPAs.  \n\nIs there anything about IPAs that would make this possible?  The lower quality places like ask.com or Yahoo answers usually say no, that only ABV produces hangovers, though one source did seem to imply that IPAs have special ingredients that make this a possibility. \n\nSo I want to ask the experts here: do IPAs have ingredients that other strong beers lack, that could exacerbate hangovers? \n")
@@ -31,13 +31,13 @@ describe 'Stack Exchange Import' do
     expect(vote.stack_exchange_uuid).to eql(219)
     expect(vote.created_at.to_s).to eql(Time.parse('2014-01-21 21:51:43').to_s)
 
-    labeling = University::Labeling.find_by(stack_exchange_uuid: 65)
+    labeling = Shared::Labeling.find_by(stack_exchange_uuid: 65)
 
     expect(labeling.answer.stack_exchange_uuid).to eql(19)
     expect(labeling.created_at).to eql(labeling.answer.created_at + 1.minute)
     expect(labeling.label.value).to eql(:best)
 
-    favorite = University::Favorite.find_by(stack_exchange_uuid: 141)
+    favorite = Shared::Favorite.find_by(stack_exchange_uuid: 141)
 
     expect(favorite.question.stack_exchange_uuid).to eql(63)
     expect(favorite.created_at).to eql(favorite.question.created_at + 1.minute)

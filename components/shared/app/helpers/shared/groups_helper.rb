@@ -1,4 +1,4 @@
-module University::GroupsHelper
+module Shared::GroupsHelper
   def group_title_preview(group, options = {})
     html_escape truncate(group.title, default_truncate_options.merge(length: 50).merge(options))
   end

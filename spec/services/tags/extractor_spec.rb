@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe University::Tags::Extractor do
+describe Shared::Tags::Extractor do
   let(:extractor) { described_class }
 
   describe '.extract' do

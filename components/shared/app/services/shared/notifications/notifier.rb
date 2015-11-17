@@ -1,4 +1,4 @@
-module University::Notifications
+module Shared::Notifications
   module Notifier
     extend self
 
@@ -16,7 +16,7 @@ module University::Notifications
     end
 
     def factory
-      @factory ||= University::Notification
+      @factory ||= Shared::Notification
     end
   end
 end

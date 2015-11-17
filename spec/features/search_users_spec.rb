@@ -4,8 +4,8 @@ describe 'Search Users' do
   let!(:user) { create :user, login: 'smolnar' }
 
   before :each do
-    University::User.autoimport = true
-    University::User.probe.index.reload
+    Shared::User.autoimport = true
+    Shared::User.probe.index.reload
 
     login_as user
 

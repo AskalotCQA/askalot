@@ -1,7 +1,7 @@
-module University
+module Shared
 module ApplicationHelper
   include FontAwesome::Rails::IconHelper
-  
+
   def default_title
     'Askalot'
   end
@@ -26,11 +26,11 @@ module ApplicationHelper
   end
 
   def url_to_site(path = nil)
-    File.join(University::Configuration.url.site, path.to_s)
+    File.join(Shared::Configuration.url.site, path.to_s)
   end
 
   def url_to_organization(path = nil)
-    File.join(University::Configuration.url.organization, path.to_s).sub(/\/\z/, '')
+    File.join(Shared::Configuration.url.organization, path.to_s).sub(/\/\z/, '')
   end
 
   def url_to_repository(path = nil)
@@ -38,7 +38,7 @@ module ApplicationHelper
   end
 
   def use_container?
-    [DeviseController, University::ErrorsController, University::StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
+    [DeviseController, Shared::ErrorsController, Shared::StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
   end
 end
 end

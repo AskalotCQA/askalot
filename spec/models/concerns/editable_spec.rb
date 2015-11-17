@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples_for University::Editable do
+shared_examples_for Shared::Editable do
   let(:model) { described_class }
   let(:factory) { model.name.demodulize.underscore.to_sym }
   let(:editor) { create :user }

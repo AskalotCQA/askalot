@@ -4,8 +4,8 @@ describe 'Search Tags' do
   let!(:user) { create :user }
 
   before :each do
-    University::Tag.autoimport = true
-    University::Tag.probe.index.reload
+    Shared::Tag.autoimport = true
+    Shared::Tag.probe.index.reload
 
     login_as user
 

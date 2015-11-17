@@ -1,4 +1,4 @@
-module University
+module Shared
 class SessionsController < Devise::SessionsController
   include Devise::Controllers::Rememberable
 

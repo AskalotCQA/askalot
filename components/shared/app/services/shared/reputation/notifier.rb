@@ -1,11 +1,11 @@
-module University::Reputation
+module Shared::Reputation
   module Notifier
     extend self
 
-    @manager = University::Reputation::Manager.new
+    @manager = Shared::Reputation::Manager.new
 
     def publish(action, initiator, resource, options = {})
-      return unless [University::Answer, University::Vote, University::Question, University::Tagging, University::Labeling].include?(resource.class)
+      return unless [Shared::Answer, Shared::Vote, Shared::Question, Shared::Tagging, Shared::Labeling].include?(resource.class)
 
       send resource.class.name.demodulize.downcase, resource, action
     end
@@ -19,9 +19,9 @@ module University::Reputation
     def vote(vote, action)
       votable = vote.votable.reload
 
-      return @manager.question_vote(votable) if votable.is_a?(University::Question) && votable.answers.present?
+      return @manager.question_vote(votable) if votable.is_a?(Shared::Question) && votable.answers.present?
 
-      @manager.answer_vote(votable) if votable.is_a? University::Answer
+      @manager.answer_vote(votable) if votable.is_a? Shared::Answer
     end
 
     def question(question, action)

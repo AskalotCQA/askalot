@@ -1,8 +1,8 @@
-module University::Searchables::Search
+module Shared::Searchables::Search
   extend ActiveSupport::Concern
 
   def search
-    @model = ('University::' + controller_name.classify).constantize
+    @model = ('Shared::' + controller_name.classify).constantize
 
     @results = @model.search_by(search_params)
   end

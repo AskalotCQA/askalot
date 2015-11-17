@@ -1,4 +1,4 @@
-module University::Events
+module Shared::Events
   class Management
     def log(data)
       data     = data.clone
@@ -21,7 +21,7 @@ module University::Events
         fail if data[:user]
       end
 
-      University::Event.create! data: secure(data)
+      Shared::Event.create! data: secure(data)
     end
 
     private

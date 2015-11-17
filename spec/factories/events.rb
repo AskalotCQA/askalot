@@ -1,4 +1,4 @@
 FactoryGirl.define do
-  factory :event, class: University::Event do
+  factory :event, class: Shared::Event do
   end
 end

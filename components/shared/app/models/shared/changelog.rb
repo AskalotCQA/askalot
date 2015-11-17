@@ -1,4 +1,4 @@
-module University
+module Shared
 class Changelog < ActiveRecord::Base
   include Comparable
 

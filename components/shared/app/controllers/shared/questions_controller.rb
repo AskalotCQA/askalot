@@ -1,15 +1,15 @@
-module University
+module Shared
 class QuestionsController < ApplicationController
-  include University::Closeables::Close
-  include University::Deletables::Destroy
-  include University::Editables::Update
-  include University::Searchables::Search
-  include University::Votables::Vote
-  include University::Watchables::Watch
+  include Shared::Closeables::Close
+  include Shared::Deletables::Destroy
+  include Shared::Editables::Update
+  include Shared::Searchables::Search
+  include Shared::Votables::Vote
+  include Shared::Watchables::Watch
 
-  include University::Events::Dispatch
-  include University::Markdown::Process
-  include University::Watchings::Register
+  include Shared::Events::Dispatch
+  include Shared::Markdown::Process
+  include Shared::Watchings::Register
 
   default_tab :recent,  only: :index
   default_tab :results, only: :search
@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
   end
 
   def document_index
-    @document  = University::Document.find(params[:document_id])
+    @document  = Shared::Document.find(params[:document_id])
     @questions = @document.questions.order(touched_at: :desc)
 
     @questions = @questions.page(params[:page]).per(20)
@@ -41,14 +41,14 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = University::Question.new
+    @question = Shared::Question.new
 
-    @question.document = University::Document.find(params[:document_id]) if params[:document_id]
-    @question.category = University::Category.find(params[:category_id]) if params[:category_id]
+    @question.document = Shared::Document.find(params[:document_id]) if params[:document_id]
+    @question.category = Shared::Category.find(params[:category_id]) if params[:category_id]
   end
 
   def create
-    @question = University::Question.new(create_params)
+    @question = Shared::Question.new(create_params)
 
     authorize! :ask, @question
 
@@ -70,13 +70,13 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = University::Question.find(params[:id])
+    @question = Shared::Question.find(params[:id])
 
     authorize! :view, @question
 
     @labels  = @question.labels
     @answers = @question.ordered_answers
-    @answer  = University::Answer.new(question: @question)
+    @answer  = Shared::Answer.new(question: @question)
     @view    = @question.views.create! viewer: current_user
 
     @question.increment :views_count
@@ -85,7 +85,7 @@ class QuestionsController < ApplicationController
   end
 
   def favor
-    @question = University::Question.find(params[:id])
+    @question = Shared::Question.find(params[:id])
 
     authorize! :favor, @question
 
@@ -97,7 +97,7 @@ class QuestionsController < ApplicationController
   end
 
   def suggest
-    @questions = University::Question.where('id = ? or title like ?', params[:q].to_i, "#{params[:q]}%")
+    @questions = Shared::Question.where('id = ? or title like ?', params[:q].to_i, "#{params[:q]}%")
 
     render json: @questions, root: false
   end

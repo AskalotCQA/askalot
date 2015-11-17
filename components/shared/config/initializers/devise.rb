@@ -4,13 +4,13 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  config.secret_key = ::University::Configuration.devise.key
+  config.secret_key = ::Shared::Configuration.devise.key
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = ::University::Configuration.mailer.alias
+  config.mailer_sender = ::Shared::Configuration.mailer.alias
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -250,7 +250,7 @@ Devise.setup do |config|
   #     mount MyEngine, at: '/my_engine'
   #
   # The router that invoked `devise_for`, in the example above, would be:
-  config.router_name = :university
+  config.router_name = :shared
 
   # When using omniauth, Devise cannot automatically set Omniauth path,
   # so you need to do it manually. For the users scope, it would be:
@@ -261,5 +261,5 @@ Devise.setup do |config|
   config.allow_insecure_token_lookup = true if Rails.env.test?
 
   # Inherit from engine's controller not the main controller
-  config.parent_controller = 'University::ApplicationController'
+  config.parent_controller = 'Shared::ApplicationController'
 end

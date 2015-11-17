@@ -1,4 +1,4 @@
-module University::Markdown::Process
+module Shared::Markdown::Process
   extend ActiveSupport::Concern
 
   included do
@@ -10,7 +10,7 @@ module University::Markdown::Process
 
     return if text.empty?
 
-    result = University::Markdown::Processor.process(text, current_user, &callback)
+    result = Shared::Markdown::Processor.process(text, current_user, &callback)
 
     resource.public_send(:"#{attribute}=", result)
 
@@ -22,7 +22,7 @@ module University::Markdown::Process
 
     return if text.empty?
 
-    result = University::Markdown::Processor.unprocess(text, current_user, &callback)
+    result = Shared::Markdown::Processor.unprocess(text, current_user, &callback)
 
     resource.public_send(:"#{attribute}", result)
   end

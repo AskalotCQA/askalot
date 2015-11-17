@@ -1,8 +1,8 @@
 module University
 class Group < ActiveRecord::Base
   # TODO (jharinek) consider Authorable
-  include Deletable
-  include Editable
+  include Shared::Deletable
+  include Shared::Editable
 
   VISIBILITIES = [:public, :private]
 

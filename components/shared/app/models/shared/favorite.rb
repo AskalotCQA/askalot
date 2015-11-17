@@ -1,4 +1,4 @@
-module University
+module Shared
 class Favorite < ActiveRecord::Base
   include Deletable
   include Notifiable

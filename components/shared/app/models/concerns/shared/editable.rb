@@ -1,4 +1,4 @@
-module University::Editable
+module Shared::Editable
   extend ActiveSupport::Concern
 
   included do

@@ -1,4 +1,4 @@
-module University
+module Shared
 class ErrorsController < ApplicationController
   def show
     @exception = env['action_dispatch.exception'] ||= Exception.new

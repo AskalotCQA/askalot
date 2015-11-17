@@ -1,4 +1,4 @@
-module University::Events::Log
+module Shared::Events::Log
   extend ActiveSupport::Concern
 
   included do
@@ -6,7 +6,7 @@ module University::Events::Log
   end
 
   def events_management
-    @events_management ||= University::Events::Management.new
+    @events_management ||= Shared::Events::Management.new
   end
 
   def log(data)

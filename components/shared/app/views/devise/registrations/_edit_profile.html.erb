@@ -1,4 +1,4 @@
-<%= form_for resource, as: :user, url: university.profile_users_path(tab: tab), html: { method: :patch } do |f| %>
+<%= form_for resource, as: :user, url: shared.profile_users_path(tab: tab), html: { method: :patch } do |f| %>
   <%= form_messages_for resource, key: tab %>
 
   <div class="form-group">
@@ -26,7 +26,7 @@
   <br/>
 
   <div class="form-group">
-    <%= markdown_editor_for resource, text: University::User.human_attribute_name(:about), help: false do %>
+    <%= markdown_editor_for resource, text: Shared::User.human_attribute_name(:about), help: false do %>
       <%= f.text_area :about, class: :'form-control', rows: 5 %>
     <% end %>
   </div>

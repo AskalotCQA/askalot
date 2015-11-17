@@ -1,8 +1,8 @@
 require 'spec_helper'
 require 'models/concerns/watchable_spec'
 
-describe University::Category do
-  it_behaves_like University::Watchable
+describe Shared::Category do
+  it_behaves_like Shared::Watchable
 
   it 'requires name' do
     category = build :category, name: ''
@@ -55,7 +55,7 @@ describe University::Category do
 
       question = create :category, :with_slido
 
-      questions = University::Category.with_slido
+      questions = Shared::Category.with_slido
 
       expect(questions.size).to eql(1)
       expect(questions).to      include(question)

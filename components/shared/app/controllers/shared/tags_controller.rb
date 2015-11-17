@@ -1,7 +1,7 @@
-module University
+module Shared
 class TagsController < ApplicationController
-  include University::Searchables::Search
-  include University::Watchables::Watch
+  include Shared::Searchables::Search
+  include Shared::Watchables::Watch
 
   default_tab :all, only: :index
   default_tab :results, only: :search

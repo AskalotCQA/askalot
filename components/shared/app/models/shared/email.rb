@@ -1,4 +1,4 @@
-module University
+module Shared
 class Email < ActiveRecord::Base
   belongs_to :user
 

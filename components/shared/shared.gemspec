@@ -2,7 +2,7 @@ $:.push File.expand_path('../lib', __FILE__)
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
-  s.name        = 'university'
+  s.name        = 'shared'
   # TODO(huna) dynamic version
   s.version     = '1.0'
   s.authors     = ['team naRuby', 'team AskEd']

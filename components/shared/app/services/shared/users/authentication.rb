@@ -1,4 +1,4 @@
-module University::Users
+module Shared::Users
   class Authentication
     attr_accessor :service, :factory, :params
 
@@ -24,7 +24,7 @@ module University::Users
     end
 
     def factory
-      @factory ||= University::User
+      @factory ||= Shared::User
     end
 
     private

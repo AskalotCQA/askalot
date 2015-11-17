@@ -1,18 +1,18 @@
-module University
+module Shared
 class AnswersController < ApplicationController
-  include University::Deletables::Destroy
-  include University::Editables::Update
-  include University::Votables::Vote
+  include Shared::Deletables::Destroy
+  include Shared::Editables::Update
+  include Shared::Votables::Vote
 
-  include University::Events::Dispatch
-  include University::Markdown::Process
-  include University::Watchings::Register
+  include Shared::Events::Dispatch
+  include Shared::Markdown::Process
+  include Shared::Watchings::Register
 
   before_action :authenticate_user!
 
   def create
-    @question = University::Question.find(params[:question_id])
-    @answer   = University::Answer.new(create_params)
+    @question = Shared::Question.find(params[:question_id])
+    @answer   = Shared::Answer.new(create_params)
 
     authorize! :answer, @question
 
@@ -36,7 +36,7 @@ class AnswersController < ApplicationController
   end
 
   def label
-    @answer   = University::Answer.find(params[:id])
+    @answer   = Shared::Answer.find(params[:id])
     @answers  = [@answer]
     @question = @answer.question
 

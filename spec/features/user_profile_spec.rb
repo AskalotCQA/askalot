@@ -227,7 +227,7 @@ describe 'User Profile' do
       expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
       expect(page.current_path).to eql(edit_user_registration_path)
 
-      expect(University::User.find_by(login: user.login).encrypted_password).to be_empty
+      expect(Shared::User.find_by(login: user.login).encrypted_password).to be_empty
     end
 
     it 'requires current password for changing account information', js: true do

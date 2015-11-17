@@ -1,4 +1,4 @@
-University::Engine.routes.draw do
+Shared::Engine.routes.draw do
   scope ENV['RAILS_RELATIVE_URL_ROOT'] || '/' do
     concern :closeable do
       post :close, on: :member
@@ -30,7 +30,7 @@ University::Engine.routes.draw do
     get '/404', to: 'errors#show'
     get '/500', to: 'errors#show'
 
-    devise_for :users, class_name: 'University::User', controllers: { sessions: 'university/sessions', registrations: 'university/registrations' }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }, module: :devise
+    devise_for :users, class_name: 'Shared::User', controllers: { sessions: 'shared/sessions', registrations: 'shared/registrations' }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }, module: :devise
 
     resources :users, only: [:index] do
       patch :profile,  on: :collection, to: 'users#update'
@@ -55,10 +55,6 @@ University::Engine.routes.draw do
 
     post 'facebook',              to: 'facebook#index'
     post 'facebook/notification', to: 'facebook#notification'
-
-    resources :groups, only: [:index, :new, :create, :show, :update, :destroy] do
-      resources :documents, only: [:create]
-    end
 
     resources :documents, only: [:update, :destroy] do
       resources :questions, only: [] do

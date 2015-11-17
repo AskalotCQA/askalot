@@ -4,10 +4,10 @@ require 'models/concerns/editable_spec'
 require 'models/concerns/deletable_spec'
 require 'models/concerns/touchable_spec'
 
-describe University::Answer do
-  it_behaves_like University::Editable
-  it_behaves_like University::Deletable
-  it_behaves_like University::Touchable
+describe Shared::Answer do
+  it_behaves_like Shared::Editable
+  it_behaves_like Shared::Deletable
+  it_behaves_like Shared::Touchable
 
   it 'requires text' do
     answer = build :answer, text: nil
@@ -19,7 +19,7 @@ describe University::Answer do
     expect(answer).to be_valid
   end
 
-  describe University::Touchable do
+  describe Shared::Touchable do
     it 'does not update questions touched_at attribute when voting or labeling' do
       answer        = create :answer
       old_timestamp = answer.to_question.touched_at

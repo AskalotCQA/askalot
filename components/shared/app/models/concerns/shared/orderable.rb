@@ -1,4 +1,4 @@
-module University::Orderable
+module Shared::Orderable
   extend ActiveSupport::Concern
 
   included do

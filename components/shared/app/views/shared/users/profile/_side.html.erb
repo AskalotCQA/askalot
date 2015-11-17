@@ -2,7 +2,7 @@
   <div class="col-xs-5 col-sm-5 col-md-12">
     <div class="user-profile-avatar">
       <%= user_avatar_tag user, image: { class: :'img-responsive', size: 263 }, url: gravatar_url(user.gravatar_email, size: 400) %>
-      <%= render 'university/users/reputation', user: user, size: :lg %>
+      <%= render 'shared/users/reputation', user: user, size: :lg %>
     </div>
   </div>
   <div class="col-xs-7 col-sm-5 col-md-12">

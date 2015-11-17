@@ -17,5 +17,4 @@ Gem::Specification.new do |s|
 
   # TODO(huna) list all dependencies
   s.add_dependency 'rails', '4.1.0'
-  s.add_dependency 'devise', '3.1.2'
 end

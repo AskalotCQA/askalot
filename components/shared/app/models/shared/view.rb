@@ -1,4 +1,4 @@
-module University
+module Shared
 class View < ActiveRecord::Base
   include Deletable
   include Notifiable

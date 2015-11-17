@@ -24,7 +24,7 @@ describe 'Activities' do
 
       activity = user.activities.last
 
-      expect(activity.resource).to  eql(University::Question.last)
+      expect(activity.resource).to  eql(Shared::Question.last)
       expect(activity.action).to    eql(:create)
       expect(activity.initiator).to eql(user)
     end
@@ -42,7 +42,7 @@ describe 'Activities' do
 
         activity = user.activities.last
 
-        expect(activity.resource).to  eql(University::Answer.last)
+        expect(activity.resource).to  eql(Shared::Answer.last)
         expect(activity.action).to    eql(:create)
         expect(activity.initiator).to eql(user)
       end

@@ -1,11 +1,11 @@
 <% provide(:title, t('tag.index.title')) %>
 
-<%= render 'university/searchables/search', target: controller_name %>
+<%= render 'shared/searchables/search', target: controller_name %>
 
 <ul id="tags-tabs" class="nav nav-tabs tab-navigation">
-  <%= tab_link_tag_with_count t('tag.tab.all'), :all, tags_path(params.except(:page).merge tab: :all), University::Tag.count, analytics_attributes(:tags, :switch, :all).merge(remote: true, data: { fade: '#tags' }) %>
-  <%= tab_link_tag_with_count t('tag.tab.recent'), :recent, tags_path(params.except(:page).merge tab: :recent), University::Tag.recent.count, analytics_attributes(:tags, :switch, :recent).merge(remote: true, data: { fade: '#tags' }) %>
-  <%= tab_link_tag_with_count t('tag.tab.popular'), :popular, tags_path(params.except(:page).merge tab: :popular), University::Tag.popular.load.size, analytics_attributes(:tags, :switch, :popular).merge(remote: true, data: { fade: '#tags' }) %>
+  <%= tab_link_tag_with_count t('tag.tab.all'), :all, tags_path(params.except(:page).merge tab: :all), Shared::Tag.count, analytics_attributes(:tags, :switch, :all).merge(remote: true, data: { fade: '#tags' }) %>
+  <%= tab_link_tag_with_count t('tag.tab.recent'), :recent, tags_path(params.except(:page).merge tab: :recent), Shared::Tag.recent.count, analytics_attributes(:tags, :switch, :recent).merge(remote: true, data: { fade: '#tags' }) %>
+  <%= tab_link_tag_with_count t('tag.tab.popular'), :popular, tags_path(params.except(:page).merge tab: :popular), Shared::Tag.popular.load.size, analytics_attributes(:tags, :switch, :popular).merge(remote: true, data: { fade: '#tags' }) %>
 </ul>
 
 <%= render 'tags', tags: @tags, remote: true %>

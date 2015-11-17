@@ -1,9 +1,9 @@
-module University::Categories
+module Shared::Categories
   module Searchable
     extend ActiveSupport::Concern
 
     included do
-      include ::University::Searchable
+      include ::Shared::Searchable
 
       probe.index.name = :"categories_#{Rails.env}"
       probe.index.type = :category

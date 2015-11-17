@@ -1,6 +1,6 @@
 # NOTE(zbell) refactor to use only raw SQL if too slow
 
-module University
+module Shared
 class StatisticsController < ApplicationController
   before_action :authenticate_user!
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-shared_examples_for University::Taggable do
+shared_examples_for Shared::Taggable do
   let(:model) { described_class }
   let(:factory) { model.name.demodulize.underscore.to_sym }
 
@@ -21,13 +21,13 @@ shared_examples_for University::Taggable do
 
       record.save!
 
-      expect(record.tag_list.tags.sort).to     eql([University::Tag.current_academic_year_value, 'a', 'b'])
-      expect(record.tags.pluck(:name).sort).to eql([University::Tag.current_academic_year_value, 'a', 'b'])
+      expect(record.tag_list.tags.sort).to     eql([Shared::Tag.current_academic_year_value, 'a', 'b'])
+      expect(record.tags.pluck(:name).sort).to eql([Shared::Tag.current_academic_year_value, 'a', 'b'])
 
       record = model.find(record.id)
 
-      expect(record.tag_list.tags.sort).to     eql([University::Tag.current_academic_year_value, 'a', 'b'])
-      expect(record.tags.pluck(:name).sort).to eql([University::Tag.current_academic_year_value, 'a', 'b'])
+      expect(record.tag_list.tags.sort).to     eql([Shared::Tag.current_academic_year_value, 'a', 'b'])
+      expect(record.tags.pluck(:name).sort).to eql([Shared::Tag.current_academic_year_value, 'a', 'b'])
     end
 
     context 'when no tags assigned' do
@@ -90,14 +90,14 @@ shared_examples_for University::Taggable do
     it 'create tags' do
       record = create factory, tag_list: 'a, b, c'
 
-      expect(record.tags.order(:name).pluck(:name)).to eql([University::Tag.current_academic_year_value, 'a', 'b', 'c'])
+      expect(record.tags.order(:name).pluck(:name)).to eql([Shared::Tag.current_academic_year_value, 'a', 'b', 'c'])
     end
 
     context 'when tag list changes' do
       it 'removes unused tagging relations' do
         record = create factory, tag_list: 'a, b, c'
 
-        expect(record.tags.order(:name).pluck(:name)).to eql([University::Tag.current_academic_year_value, 'a', 'b', 'c'])
+        expect(record.tags.order(:name).pluck(:name)).to eql([Shared::Tag.current_academic_year_value, 'a', 'b', 'c'])
 
         record.tag_list = 'a, b'
 
@@ -121,7 +121,7 @@ shared_examples_for University::Taggable do
   end
 end
 
-describe University::Taggable::TagList do
+describe Shared::Taggable::TagList do
   let(:extractor) { double(:extractor) }
 
   describe '#+' do
@@ -129,7 +129,7 @@ describe University::Taggable::TagList do
       expect(extractor).to receive(:extract).with('a, b').and_return(['a', 'b'])
       expect(extractor).to receive(:extract).with('c, d').and_return(['c', 'd'])
 
-      list = University::Taggable::TagList.new(extractor, 'a, b')
+      list = Shared::Taggable::TagList.new(extractor, 'a, b')
 
       expect(list.tags).to eql(['a', 'b'])
 
@@ -143,7 +143,7 @@ describe University::Taggable::TagList do
     it 'iterates over tags' do
       expect(extractor).to receive(:extract).with('a, b').and_return(['a', 'b'])
 
-      list = University::Taggable::TagList.new(extractor, 'a, b')
+      list = Shared::Taggable::TagList.new(extractor, 'a, b')
 
       list.each { |value| expect(['a', 'b']).to include(value) }
     end
@@ -153,7 +153,7 @@ describe University::Taggable::TagList do
     it 'extract tags' do
       expect(extractor).to receive(:extract).with('a, b').and_return(['a', 'b'])
 
-      list = University::Taggable::TagList.new(extractor, 'a, b')
+      list = Shared::Taggable::TagList.new(extractor, 'a, b')
 
       expect(list.tags).to eql(['a', 'b'])
     end

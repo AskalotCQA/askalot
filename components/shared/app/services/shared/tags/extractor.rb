@@ -1,4 +1,4 @@
-module University::Tags
+module Shared::Tags
   module Extractor
     extend self
 

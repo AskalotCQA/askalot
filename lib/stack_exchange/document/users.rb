@@ -14,9 +14,9 @@ module StackExchange
       def process_element(user)
         return if user[:Id] == '-1'
 
-        return if University::User.exists?(stack_exchange_uuid: user[:Id])
+        return if Shared::User.exists?(stack_exchange_uuid: user[:Id])
 
-        user = University::User.new(
+        user = Shared::User.new(
           login:              'user_' + user[:Id],
           email:               SecureRandom.hex + '@stackexchange.com',
           name:                user[:DisplayName],

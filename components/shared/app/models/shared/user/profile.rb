@@ -1,4 +1,4 @@
-module University
+module Shared
 class User
   class Profile < ActiveRecord::Base
     belongs_to :user

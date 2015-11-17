@@ -62,7 +62,7 @@ describe 'Authentication' do
 
       #expect(page).to have_content('Úspešne prihlásený.')
 
-      expect { click_button 'Prihlásiť' }.to change { University::User.count }.by(1)
+      expect { click_button 'Prihlásiť' }.to change { Shared::User.count }.by(1)
 
       expect(page).to have_content(user.login)
     end

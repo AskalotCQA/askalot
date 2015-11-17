@@ -1,4 +1,4 @@
-module University
+module Shared
 class Administration::DashboardController < AdministrationController
   default_tab :categories, only: :index
 
@@ -11,16 +11,16 @@ class Administration::DashboardController < AdministrationController
   def render_dashboard
     authorize! :administrate, nil
 
-    @assignments = University::Assignment.includes(:user, :category, :role).order('categories.name', 'users.nick')
-    @categories  = University::Category.order(:name)
-    @changelogs  = University::Changelog.all.sort
+    @assignments = Shared::Assignment.includes(:user, :category, :role).order('categories.name', 'users.nick')
+    @categories  = Shared::Category.order(:name)
+    @changelogs  = Shared::Changelog.all.sort
 
-    @assignment ||= University::Assignment.new
-    @category   ||= University::Category.new
-    @changelog  ||= University::Changelog.new
-    @email      ||= University::Email.new
+    @assignment ||= Shared::Assignment.new
+    @category   ||= Shared::Category.new
+    @changelog  ||= Shared::Changelog.new
+    @email      ||= Shared::Email.new
 
-    render 'university/administration/dashboard/index'
+    render 'shared/administration/dashboard/index'
   end
 end
 end

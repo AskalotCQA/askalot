@@ -1,11 +1,11 @@
-module University::Reputation
+module Shared::Reputation
   class Manager
     attr_reader :question_calculator
     attr_reader :answer_calculator
 
     def initialize
-      @question_calculator = University::Reputation::QuestionCalculator.new
-      @answer_calculator   = University::Reputation::AnswerCalculator.new
+      @question_calculator = Shared::Reputation::QuestionCalculator.new
+      @answer_calculator   = Shared::Reputation::AnswerCalculator.new
     end
 
     def question_vote(question)

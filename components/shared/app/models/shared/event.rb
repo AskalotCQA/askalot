@@ -1,4 +1,4 @@
-module University
+module Shared
 class Event < ActiveRecord::Base
   validates :data, presence: true
 

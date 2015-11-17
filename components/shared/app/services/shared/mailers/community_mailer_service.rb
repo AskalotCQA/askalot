@@ -1,7 +1,7 @@
-module University::Mailers
+module Shared::Mailers
   class CommunityMailerService
     def self.users
-      University::User.where(send_email_notifications: true)
+      Shared::User.where(send_email_notifications: true)
     end
 
     def self.deliver_emails!(email)
@@ -15,7 +15,7 @@ module University::Mailers
     end
 
     def self.deliver_all_emails!
-      University::Email.where(status: false).each do |email|
+      Shared::Email.where(status: false).each do |email|
         deliver_emails!(email)
         email.status = true
 

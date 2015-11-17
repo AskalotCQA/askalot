@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe University::Notifications::Notifier do
+describe Shared::Notifications::Notifier do
   after :each do
-    University::Notifications::Notifier.factory = nil
+    Shared::Notifications::Notifier.factory = nil
   end
 
   describe '.publish' do
@@ -14,8 +14,8 @@ describe University::Notifications::Notifier do
       expect(factory).to receive(:create!).with(action: :edit, recipient: watchers.first,  initiator: :user, resource: resource, anonymous: false)
       expect(factory).to receive(:create!).with(action: :edit, recipient: watchers.second, initiator: :user, resource: resource, anonymous: false)
 
-      University::Notifications::Notifier.factory = factory
-      University::Notifications::Notifier.publish(:edit, :user, resource)
+      Shared::Notifications::Notifier.factory = factory
+      Shared::Notifications::Notifier.publish(:edit, :user, resource)
     end
 
     it 'provides custom recipients for notification' do
@@ -25,8 +25,8 @@ describe University::Notifications::Notifier do
 
       expect(factory).to receive(:create!).with(action: :edit, recipient: watcher, initiator: :user, resource: resource, anonymous: false)
 
-      University::Notifications::Notifier.factory = factory
-      University::Notifications::Notifier.publish(:edit, :user, resource, for: watcher)
+      Shared::Notifications::Notifier.factory = factory
+      Shared::Notifications::Notifier.publish(:edit, :user, resource, for: watcher)
     end
 
     context 'with duplicated recipient' do
@@ -37,8 +37,8 @@ describe University::Notifications::Notifier do
 
         expect(factory).to receive(:create!).with(action: :edit, recipient: watcher, initiator: :user, resource: resource, anonymous: false).once
 
-        University::Notifications::Notifier.factory = factory
-        University::Notifications::Notifier.publish(:edit, :user, resource, for: [watcher, watcher])
+        Shared::Notifications::Notifier.factory = factory
+        Shared::Notifications::Notifier.publish(:edit, :user, resource, for: [watcher, watcher])
       end
     end
 
@@ -48,8 +48,8 @@ describe University::Notifications::Notifier do
         resource  = double(:resource, watchers: [initiator])
         factory   = double(:factory)
 
-        University::Notifications::Notifier.factory = factory
-        University::Notifications::Notifier.publish(:edit, initiator, resource)
+        Shared::Notifications::Notifier.factory = factory
+        Shared::Notifications::Notifier.publish(:edit, initiator, resource)
       end
     end
   end

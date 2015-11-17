@@ -1,4 +1,4 @@
-module University
+module Shared
 class Category < ActiveRecord::Base
   include Watchable
 

@@ -1,4 +1,4 @@
-module University
+module Shared
 class WatchingsController < ApplicationController
   default_tab :questions, only: [:index, :destroy, :clean]
 

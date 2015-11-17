@@ -1,4 +1,4 @@
-module University
+module Shared
 class FacebookController < ApplicationController
   skip_before_action :verify_authenticity_token
 
@@ -7,7 +7,7 @@ class FacebookController < ApplicationController
   layout 'layouts/facebook'
 
   def index
-    @question = University::Questions::ToAnswerRecommender.next
+    @question = Shared::Questions::ToAnswerRecommender.next
   end
 
   def notification

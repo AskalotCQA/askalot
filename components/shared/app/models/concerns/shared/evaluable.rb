@@ -1,4 +1,4 @@
-module University::Evaluable
+module Shared::Evaluable
   extend ActiveSupport::Concern
 
   included do

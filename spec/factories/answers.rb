@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :answer, class: University::Answer do
+  factory :answer, class: Shared::Answer do
     association :author
     association :question
 

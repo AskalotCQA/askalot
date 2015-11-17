@@ -1,4 +1,4 @@
-module University::Applications::Tab
+module Shared::Applications::Tab
   extend ActiveSupport::Concern
 
   module ClassMethods

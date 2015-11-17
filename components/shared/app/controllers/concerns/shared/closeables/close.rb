@@ -1,9 +1,9 @@
-module University::Closeables::Close
+module Shared::Closeables::Close
   extend ActiveSupport::Concern
 
   def close
     @model = controller_name.classify.downcase.to_sym
-    @closeable = ('University::' + controller_name.classify).constantize.find(params[:id])
+    @closeable = ('Shared::' + controller_name.classify).constantize.find(params[:id])
 
     authorize! :close, @closeable
 
@@ -13,7 +13,7 @@ module University::Closeables::Close
       flash[:error] = t "#{@model}.close.failure"
     end
 
-    if @closeable = ('University::' + controller_name.classify).constantize.find(params[:id])
+    if @closeable = ('Shared::' + controller_name.classify).constantize.find(params[:id])
       respond_to do |format|
         format.html { redirect_to questions_path, format: :html }
         format.js { redirect_to document_questions_path(@closeable.parent), format: :js }

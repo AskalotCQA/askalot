@@ -1,10 +1,12 @@
 module University
 class GroupsController < ApplicationController
-  include University::Deletables::Destroy
-  include University::Editables::Update
+  include Shared::Deletables::Destroy
+  include Shared::Editables::Update
 
-  include University::Events::Dispatch
-  include University::Markdown::Process
+  include Shared::Events::Dispatch
+  include Shared::Markdown::Process
+
+  include Shared::MarkdownHelper
 
   default_tab :all, only: :index
 

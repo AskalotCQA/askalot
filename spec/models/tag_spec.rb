@@ -1,8 +1,8 @@
 require 'spec_helper'
 require 'models/concerns/watchable_spec'
 
-describe University::Tag do
-  it_behaves_like University::Watchable
+describe Shared::Tag do
+  it_behaves_like Shared::Watchable
 
   describe '#normalize' do
     it 'replaces spaces with dash' do
@@ -25,25 +25,25 @@ describe University::Tag do
     end
 
     it 'provides count by taggings' do
-      tag = University::Tag.find_by name: 'doge'
+      tag = Shared::Tag.find_by name: 'doge'
 
       expect(tag.count).to eql(3)
 
-      tag = University::Tag.find_by name: 'wow'
+      tag = Shared::Tag.find_by name: 'wow'
 
       expect(tag.count).to eql(2)
     end
 
     context 'when taggable model is deleted' do
       it 'ommits couting relation' do
-        tag       = University::Tag.find_by name: 'doge'
-        questions = University::Question.tagged_with('doge')
+        tag       = Shared::Tag.find_by name: 'doge'
+        questions = Shared::Question.tagged_with('doge')
 
         expect(tag.count).to eql(questions.count)
 
         questions.first.mark_as_deleted_by! questions.first.author
 
-        tag = University::Tag.find_by name: 'doge'
+        tag = Shared::Tag.find_by name: 'doge'
 
         expect(tag.count).to eql(2)
       end

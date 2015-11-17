@@ -1,11 +1,11 @@
-module University::FlashHelper
-  include University::FormHelper
+module Shared::FlashHelper
+  include Shared::FormHelper
 
   alias :flash_message_type_to_class :form_message_type_to_class
 
   def flash_messages(flash: self.flash, &block)
     messages = flash_to_messages flash: flash
-    content  = render 'university/shared/flash_messages', messages: messages
+    content  = render 'shared/shared/flash_messages', messages: messages
 
     block ? capture(content, &block) : content if messages.any?
   end

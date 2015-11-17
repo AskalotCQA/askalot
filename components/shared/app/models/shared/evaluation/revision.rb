@@ -1,4 +1,4 @@
-module University
+module Shared
 class Evaluation
   class Revision < ActiveRecord::Base
     include Deletable

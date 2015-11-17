@@ -81,7 +81,7 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   # Engine routes
-  config.include University::Engine.routes.url_helpers, type: :feature
+  config.include Shared::Engine.routes.url_helpers, type: :feature
 
   # Include support
   config.include AuthenticationHelper, type: :feature
@@ -99,8 +99,8 @@ RSpec.configure do |config|
   config.before(:each) { reset_emails }
 
   config.before(:each) do
-    [University::Category, University::Question, University::Tag, University::User].each { |model| model.autoimport = false }
+    [Shared::Category, Shared::Question, Shared::Tag, Shared::User].each { |model| model.autoimport = false }
 
-    University::Configuration.poll.default = 60
+    Shared::Configuration.poll.default = 60
   end
 end

@@ -1,4 +1,4 @@
-module University
+module Shared
 class Answer < ActiveRecord::Base
   include Authorable
   include Commentable

@@ -2,9 +2,9 @@ require 'spec_helper'
 
 # TODO (smolnar) Refactor, move persistance to Event spec
 
-describe University::Events::Management do
+describe Shared::Events::Management do
   describe '#log' do
-    let(:management) { University::Events::Management.new }
+    let(:management) { Shared::Events::Management.new }
 
     let(:request) do
       double :request, {

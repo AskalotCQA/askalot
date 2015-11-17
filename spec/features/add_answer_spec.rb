@@ -34,9 +34,9 @@ describe 'Add Answer' do
   context 'with question from slido' do
     let!(:teacher) { create :teacher }
     let!(:student) { create :user }
-    let!(:question) { create :question, author: University::User.find_by(login: :slido) }
-    let!(:question_2) { create :question, author: University::User.find_by(login: :slido) }
-    let!(:answered_question) { create :question, :with_answers, author: University::User.find_by(login: :slido) }
+    let!(:question) { create :question, author: Shared::User.find_by(login: :slido) }
+    let!(:question_2) { create :question, author: Shared::User.find_by(login: :slido) }
+    let!(:answered_question) { create :question, :with_answers, author: Shared::User.find_by(login: :slido) }
     let!(:answer) { create :answer, author: teacher, question: question_2 }
 
     it 'adds first answer to slido question by teacher' do

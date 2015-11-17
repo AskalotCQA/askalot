@@ -226,10 +226,10 @@ sk:
       watching: "Sledovanie"
 
     attributes:
-      university/answer:
+      shared/answer:
         text: "Odpoveď"
 
-      university/assignment:
+      shared/assignment:
         category: "Kategória"
         category_id: "Kategória"
         role: "Rola"
@@ -237,23 +237,23 @@ sk:
         user: "Používateľ"
         user_nick: "Používateľ"
 
-      university/category:
+      shared/category:
         name: "Názov"
         tags: "Tagy"
 
-      university/changelog:
+      shared/changelog:
         text: "Text"
         title: "Názov"
         version: "Verzia"
 
-      university/comment:
+      shared/comment:
         text: "Komentár"
 
       university/document:
         text: "Text"
         title: "Názov"
 
-      university/evaluation:
+      shared/evaluation:
         text: "Komentár"
         value: "Hodnotenie"
 
@@ -262,7 +262,7 @@ sk:
         title: "Názov"
         visibility: "Viditeľnosť"
 
-      university/question:
+      shared/question:
         anonymous: "Opýtať sa anonymne"
         category: "Kategória"
         category_id: "Kategória"
@@ -270,7 +270,7 @@ sk:
         text: "Text"
         title: "Nadpis"
 
-      university/user:
+      shared/user:
         email: "E-mail"
         password: "Heslo"
         password_confirmation: "Potvrdenie hesla"

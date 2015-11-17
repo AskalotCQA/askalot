@@ -1,4 +1,4 @@
-module University::Reputation
+module Shared::Reputation
   module Adjuster
     extend self
 

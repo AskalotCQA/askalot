@@ -1,4 +1,4 @@
-module University::Events
+module Shared::Events
   module Dispatcher
     extend self
 

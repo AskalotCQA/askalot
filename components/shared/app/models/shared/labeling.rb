@@ -1,4 +1,4 @@
-module University
+module Shared
 class Labeling < ActiveRecord::Base
   include Deletable
   include Notifiable

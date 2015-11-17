@@ -1,4 +1,4 @@
-module University
+module Shared
 class Tag < ActiveRecord::Base
   include Tags::Searchable
   include Watchable

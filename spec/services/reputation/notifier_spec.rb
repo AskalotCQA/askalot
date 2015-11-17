@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe University::Reputation::Notifier do
+describe Shared::Reputation::Notifier do
   let!(:asker) { create :user }
   let!(:asker_profile) { create :reputation_profile, user: asker }
   let!(:answerer) { create :user }
@@ -22,25 +22,25 @@ describe University::Reputation::Notifier do
       old_reputation = reputation.value
       vote           = question.toggle_voteup_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       reputation.reload
       expect(reputation.value).to eq(old_reputation)
 
       vote = question.toggle_voteup_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       reputation.reload
       expect(reputation.value).to eq(old_reputation)
 
       vote = question.toggle_votedown_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       reputation.reload
       expect(reputation.value).to eq(old_reputation)
 
       vote = question.toggle_voteup_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       reputation.reload
       expect(reputation.value).to eq(old_reputation)
     end
@@ -52,17 +52,17 @@ describe University::Reputation::Notifier do
     let!(:answerer_rep) { answerer.profiles.of('reputation').first }
     let!(:old_answerer_rep) { answerer_rep.value }
 
-    let!(:answer) { University::Answer.create(question: question, author: answerer, created_at: Time.now + 5.hours, text: 'Lorem') }
+    let!(:answer) { Shared::Answer.create(question: question, author: answerer, created_at: Time.now + 5.hours, text: 'Lorem') }
 
     it 'changes reputation upon first answer creation and deletion' do
-      University::Reputation::Notifier.publish(:create, answerer, answer)
+      Shared::Reputation::Notifier.publish(:create, answerer, answer)
       asker_rep.reload
       expect(asker_rep.value).not_to eq(old_asker_rep)
       answerer_rep.reload
       expect(answerer_rep.value).not_to eq(old_answerer_rep)
 
       answer.mark_as_deleted_by!(answerer)
-      University::Reputation::Notifier.publish(:delete, answerer, answer)
+      Shared::Reputation::Notifier.publish(:delete, answerer, answer)
       asker_rep.reload
       expect(asker_rep.value).to eq(0.0)
       answerer_rep.reload
@@ -75,27 +75,27 @@ describe University::Reputation::Notifier do
 
       asker_rep.save
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       asker_rep.reload
       expect(asker_rep.value).to be > old_asker_rep
 
       after_voteup = asker_rep.value
       vote         = question.toggle_voteup_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       asker_rep.reload
       expect(asker_rep.value).to be < after_voteup
 
       old_asker_rep = asker_rep.value
       vote          = question.toggle_votedown_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       asker_rep.reload
       expect(asker_rep.value).to be < old_asker_rep
 
       vote = question.toggle_voteup_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       asker_rep.reload
       expect(asker_rep.value).to eq(after_voteup)
     end
@@ -107,28 +107,28 @@ describe University::Reputation::Notifier do
 
       vote = answer.toggle_voteup_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       answerer_rep.reload
       expect(answerer_rep.value).to be > old_answerer_rep
 
       after_voteup = answerer_rep.value
       vote         = answer.toggle_voteup_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       answerer_rep.reload
       expect(answerer_rep.value).to be < after_voteup
 
       old_answerer_rep = answerer_rep.value
       vote             = answer.toggle_votedown_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       answerer_rep.reload
       expect(answerer_rep.value).to be < after_voteup
       expect(answerer_rep.value).to be < old_answerer_rep
 
       vote = answer.toggle_voteup_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       answerer_rep.reload
       expect(answerer_rep.value).to eq(after_voteup)
     end
@@ -142,9 +142,9 @@ describe University::Reputation::Notifier do
     let!(:answerer_3_rep) { answerer_3.profiles.of('reputation').first }
     let!(:old_answerer_3_rep) { answerer_3_rep.value }
 
-    let!(:answer) { University::Answer.create(question: question, author: answerer, created_at: Time.now + 5.hours, text: 'Lorem', votes_difference: 5) }
-    let!(:answer_2) { University::Answer.create(question: question, author: answerer_2, created_at: Time.now + 5.hours, text: 'Lorem') }
-    let!(:answer_3) { University::Answer.create(question: question, author: answerer_3, created_at: Time.now + 5.hours, text: 'Lorem') }
+    let!(:answer) { Shared::Answer.create(question: question, author: answerer, created_at: Time.now + 5.hours, text: 'Lorem', votes_difference: 5) }
+    let!(:answer_2) { Shared::Answer.create(question: question, author: answerer_2, created_at: Time.now + 5.hours, text: 'Lorem') }
+    let!(:answer_3) { Shared::Answer.create(question: question, author: answerer_3, created_at: Time.now + 5.hours, text: 'Lorem') }
 
 
     it 'changes only one reputation if not changing max score' do
@@ -153,7 +153,7 @@ describe University::Reputation::Notifier do
 
       vote = answer_2.toggle_voteup_by!(user)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       answerer_rep.reload
       expect(answerer_rep.value).to eq(old_answerer_rep)
       answerer_2_rep.reload
@@ -174,7 +174,7 @@ describe University::Reputation::Notifier do
 
       vote = answer.toggle_voteup_by!(answerer_2)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       answerer_rep.reload
       answerer_2_rep.reload
       answerer_3_rep.reload
@@ -197,7 +197,7 @@ describe University::Reputation::Notifier do
       answer.toggle_votedown_by!(user)
       vote = answer.toggle_votedown_by!(answerer_2)
 
-      University::Reputation::Notifier.publish(:create, :user, vote)
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
       answerer_rep.reload
       answerer_2_rep.reload
       answerer_3_rep.reload

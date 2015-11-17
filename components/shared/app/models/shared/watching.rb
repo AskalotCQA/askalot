@@ -1,4 +1,4 @@
-module University
+module Shared
 class Watching < ActiveRecord::Base
   include Deletable
   include Notifiable

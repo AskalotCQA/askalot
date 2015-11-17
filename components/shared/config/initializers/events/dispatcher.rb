@@ -1,6 +1,6 @@
 # Order is important since a subscriber can pass results to following ones.
 
-University::Events::Dispatcher.subscribe University::Activities::Feeder
-University::Events::Dispatcher.subscribe University::Notifications::Notifier
-University::Events::Dispatcher.subscribe University::Facebook::Notifier
-University::Events::Dispatcher.subscribe University::Reputation::Notifier
+Shared::Events::Dispatcher.subscribe Shared::Activities::Feeder
+Shared::Events::Dispatcher.subscribe Shared::Notifications::Notifier
+Shared::Events::Dispatcher.subscribe Shared::Facebook::Notifier
+Shared::Events::Dispatcher.subscribe Shared::Reputation::Notifier

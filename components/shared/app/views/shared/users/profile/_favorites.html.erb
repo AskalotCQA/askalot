@@ -1,7 +1,7 @@
 <% if favorites.any? %>
   <ol class="user-favorites">
     <% favorites.each do |favorite| %>
-      <%= render 'university/users/profile/favorite', favorite: favorite %>
+      <%= render 'shared/users/profile/favorite', favorite: favorite %>
     <% end %>
   </ol>
 

@@ -1,9 +1,9 @@
-module University::Tags
+module Shared::Tags
   module Searchable
     extend ActiveSupport::Concern
 
     included do
-      include ::University::Searchable
+      include ::Shared::Searchable
 
       probe.index.name = :"tags_#{Rails.env}"
       probe.index.type = :tag

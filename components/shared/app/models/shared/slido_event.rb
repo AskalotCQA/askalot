@@ -1,4 +1,4 @@
-module University
+module Shared
 class SlidoEvent < ActiveRecord::Base
   belongs_to :category
 

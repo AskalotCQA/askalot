@@ -1,4 +1,4 @@
-module University::Viewable
+module Shared::Viewable
   extend ActiveSupport::Concern
 
   included do
@@ -6,7 +6,7 @@ module University::Viewable
     has_many :viewers, through: :views, source: :viewer
 
     scope :viewed, lambda { joins(:views).uniq }
-    scope :viewed_by, lambda { |user| viewed.merge(University::View.by user) }
+    scope :viewed_by, lambda { |user| viewed.merge(Shared::View.by user) }
     scope :viewed_by_others, lambda { viewed.where('viewer_id != author_id') }
   end
 
@@ -15,6 +15,6 @@ module University::Viewable
   end
 
   def views_total
-    University::View.where(question: self).distinct.count(:viewer_id)
+    Shared::View.where(question: self).distinct.count(:viewer_id)
   end
 end

@@ -7,7 +7,7 @@
           <%= link_to_question question, length: 120 %>
         </h4>
 
-        <%= render 'university/questions/labels', labels: question.labels %>
+        <%= render 'shared/questions/labels', labels: question.labels %>
 
         <div class="question-content">
           <%= question_text_preview question, length: 250 %>
@@ -42,7 +42,7 @@
       <div class="question-author">
         <small><%= link_to_user question.author_or_anonymous %></small>
         <%= user_avatar_tag question.author_or_anonymous, image: { class: :'img-circle img-responsive', size: 64 }, class: :'hidden-xs' %>
-        <%= render 'university/users/reputation', user: question.author_or_anonymous, size: :sm %>
+        <%= render 'shared/users/reputation', user: question.author_or_anonymous, size: :sm %>
         <small class="text-muted"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
       </div>
     </div>

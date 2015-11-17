@@ -1,4 +1,4 @@
-module University::EvaluationsHelper
+module Shared::EvaluationsHelper
   Infinity = 1.0 / 0.0
   Boundary = 2.0 / 3.0
 

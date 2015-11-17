@@ -1,4 +1,4 @@
-module University::Reputation
+module Shared::Reputation
   class AnswerCalculator
     def reputation(answer, difficulty, min_score, max_score)
       return nil if difficulty.nil?

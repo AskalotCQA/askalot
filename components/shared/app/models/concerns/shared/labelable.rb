@@ -1,4 +1,4 @@
-module University::Labelable
+module Shared::Labelable
   extend ActiveSupport::Concern
 
   included do
@@ -8,7 +8,7 @@ module University::Labelable
     scope :labeled,   lambda { joins(:labelings) }
     scope :unlabeled, lambda { includes(:labelings).where(labelings: { answer_id: nil }) }
 
-    scope :labeled_with, lambda { |label| joins(:labelings).merge(University::Labeling.with label) }
+    scope :labeled_with, lambda { |label| joins(:labelings).merge(Shared::Labeling.with label) }
   end
 
   def labeled_by?(user, label)
@@ -16,8 +16,8 @@ module University::Labelable
   end
 
   def toggle_labeling_by!(user, label)
-    label = University::Label.where(value: label).first_or_create! unless label.is_a? University::Label
+    label = Shared::Label.where(value: label).first_or_create! unless label.is_a? Shared::Label
 
-    University::Labeling.deleted_or_new(author: user, answer: self, label: label).toggle_deleted_by! user
+    Shared::Labeling.deleted_or_new(author: user, answer: self, label: label).toggle_deleted_by! user
   end
 end

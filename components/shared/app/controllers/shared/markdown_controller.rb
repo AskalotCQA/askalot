@@ -1,7 +1,7 @@
-module University
+module Shared
 class MarkdownController < ApplicationController
   def preview
-    @text = University::Markdown::Processor.process(params[:text])
+    @text = Shared::Markdown::Processor.process(params[:text])
 
     render partial: 'preview', locals: { text: @text }
   end

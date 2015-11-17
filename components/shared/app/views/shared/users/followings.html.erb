@@ -1,9 +1,9 @@
 <% provide :title, t("user.followings.title") %>
 
-<%= render 'university/users/followings/bar', user: @user %>
+<%= render 'shared/users/followings/bar', user: @user %>
 
 <div class="tab-navigation">
-  <%= render 'university/users/actions', user: @user %>
+  <%= render 'shared/users/actions', user: @user %>
 
   <ul class="nav nav-tabs">
     <%= tab_link_tag_with_count t('user.tab.followers'), :followers, user_followings_path(params.except(:page).merge tab: :followers), @followers.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :followers) %>
@@ -12,6 +12,6 @@
 </div>
 
 <div class="tab-content">
-  <%= render_tab_content 'university/users/followings/followers', :followers, locals: { user: @user, followers: @followers } %>
-  <%= render_tab_content 'university/users/followings/followees', :followees, locals: { user: @user, followees: @followees } %>
+  <%= render_tab_content 'shared/users/followings/followers', :followers, locals: { user: @user, followers: @followers } %>
+  <%= render_tab_content 'shared/users/followings/followees', :followees, locals: { user: @user, followees: @followees } %>
 </div>

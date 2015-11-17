@@ -1,18 +1,18 @@
-module University
+module Shared
 class CommentsController < ApplicationController
-  include University::Deletables::Destroy
-  include University::Editables::Update
+  include Shared::Deletables::Destroy
+  include Shared::Editables::Update
 
-  include University::Events::Dispatch
-  include University::Markdown::Process
-  include University::Watchings::Register
+  include Shared::Events::Dispatch
+  include Shared::Markdown::Process
+  include Shared::Watchings::Register
 
   before_action :authenticate_user!
 
   def create
     @commentable = find_commentable
     @question    = @commentable.to_question
-    @comment     = University::Comment.new(create_params)
+    @comment     = Shared::Comment.new(create_params)
 
     authorize! :comment, @commentable
 
@@ -38,7 +38,7 @@ class CommentsController < ApplicationController
   private
 
   def find_commentable
-    [:question_id, :answer_id].each { |id| return ('University::' + id.to_s[0..-4].classify).constantize.find(params[id]) if params[id] }
+    [:question_id, :answer_id].each { |id| return ('Shared::' + id.to_s[0..-4].classify).constantize.find(params[id]) if params[id] }
   end
 
   def create_params

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe University::Mailers::UserMailerService do
+describe Shared::Mailers::UserMailerService do
   describe '.deliver_notifications!' do
     it 'delivers notifications' do
       users = [
@@ -16,11 +16,11 @@ describe University::Mailers::UserMailerService do
 
         email = double(:email)
 
-        University::UserMailer.stub(:notifications).with(users[2], from: 1.days.ago) { email }
+        Shared::UserMailer.stub(:notifications).with(users[2], from: 1.days.ago) { email }
 
         expect(email).to receive(:deliver!)
 
-        University::Mailers::UserMailerService.deliver_notifications!
+        Shared::Mailers::UserMailerService.deliver_notifications!
       end
     end
   end

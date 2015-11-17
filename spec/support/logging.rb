@@ -1,6 +1,6 @@
 module Logging
   def events
-    University::Event.all
+    Shared::Event.all
   end
 
   def last_event

@@ -1,7 +1,7 @@
 module University
 class Document
   class Revision < ActiveRecord::Base
-    include Deletable
+    include Shared::Deletable
 
     belongs_to :document
     belongs_to :editor, class_name: :User

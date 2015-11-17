@@ -1,14 +1,14 @@
-module University::Facebook
+module Shared::Facebook
   module Notifier
     extend self
 
     def publish(action, initiator, resource, options = {})
-      notifications = options[:results][University::Notifications::Notifier] || fail
+      notifications = options[:results][Shared::Notifications::Notifier] || fail
 
-      return unless [University::Answer, University::Question, University::Comment, University::Evaluation, University::Label].find { |type| resource.is_a? type }
+      return unless [Shared::Answer, Shared::Question, Shared::Comment, Shared::Evaluation, Shared::Label].find { |type| resource.is_a? type }
 
       controller  = options.delete(:controller)
-      application = FbGraph::Application.new(University::Configuration.facebook.application.id, secret: University::Configuration.facebook.application.secret)
+      application = FbGraph::Application.new(Shared::Configuration.facebook.application.id, secret: Shared::Configuration.facebook.application.secret)
 
       notifications.select { |notification| notification.recipient.omniauth_token }.each do |notification|
         content          = controller.render_to_string(partial: 'facebook/notification_content', locals: { notification: notification }).strip

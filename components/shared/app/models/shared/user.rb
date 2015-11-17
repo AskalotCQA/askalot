@@ -1,4 +1,4 @@
-module University
+module Shared
 class User < ActiveRecord::Base
   include Followable
   include Users::Searchable

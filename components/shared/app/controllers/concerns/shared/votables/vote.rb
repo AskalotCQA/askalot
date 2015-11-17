@@ -1,4 +1,4 @@
-module University::Votables::Vote
+module Shared::Votables::Vote
   extend ActiveSupport::Concern
 
   def voteup
@@ -13,7 +13,7 @@ module University::Votables::Vote
 
   def vote(positive)
     @model   = controller_name.classify.downcase.to_sym
-    @votable = ('University::' + controller_name.classify).constantize.find(params[:id])
+    @votable = ('Shared::' + controller_name.classify).constantize.find(params[:id])
 
     authorize! :vote, @votable
 
@@ -23,6 +23,6 @@ module University::Votables::Vote
 
     dispatch_event dispatch_event_action_for(@vote), @vote, for: @votable.to_question.watchers
 
-    render 'university/votables/vote', formats: :js
+    render 'shared/votables/vote', formats: :js
   end
 end

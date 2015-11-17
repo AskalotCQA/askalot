@@ -1,4 +1,4 @@
-module University
+module Shared
 class Assignment < ActiveRecord::Base
   belongs_to :user
   belongs_to :category

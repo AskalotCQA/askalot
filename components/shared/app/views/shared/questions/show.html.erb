@@ -3,7 +3,7 @@
 <div id="question">
   <div class="row">
     <div class="col-sm-3 col-md-2 hidden-xs">
-      <%= render 'university/users/square', user: @question.author_or_anonymous %>
+      <%= render 'shared/users/square', user: @question.author_or_anonymous %>
     </div>
 
     <div class="col-xs-9 col-sm-7 col-md-8">
@@ -13,7 +13,7 @@
           <%= fa_icon :archive, tooltip_attributes(t 'question.close.closed') if @question.closed %>
           <%= evaluation_badge_tag @question if @question.evaluations.any? %>
         </h1>
-        <%= render 'university/questions/labels', labels: @labels %>
+        <%= render 'shared/questions/labels', labels: @labels %>
       </div>
 
       <div id="question-data">
@@ -22,41 +22,41 @@
         </div>
 
         <div class="question-details">
-          <%= render 'university/questions/details', question: @question %>
-          <%= render 'university/questions/editing', question: @question %>
-          <%= render 'university/questions/deleting', question: @question %>
-          <%= render 'university/questions/closing', question: @question %>
+          <%= render 'shared/questions/details', question: @question %>
+          <%= render 'shared/questions/editing', question: @question %>
+          <%= render 'shared/questions/deleting', question: @question %>
+          <%= render 'shared/questions/closing', question: @question %>
         </div>
 
         <div id="question-evaluations">
-          <%= render 'university/questions/evaluations', question: @question %>
+          <%= render 'shared/questions/evaluations', question: @question %>
         </div>
 
         <div id="question-comments">
-          <%= render 'university/questions/comments', question: @question %>
-          <%= render 'university/comments/form', commentable: @question %>
+          <%= render 'shared/questions/comments', question: @question %>
+          <%= render 'shared/comments/form', commentable: @question %>
         </div>
       </div>
     </div>
 
     <div class="col-xs-3 col-sm-2">
-      <%= render 'university/questions/voting', question: @question %>
-      <%= render 'university/questions/favoring', question: @question %>
-      <%= render 'university/questions/watching', question: @question %>
-      <%= render 'university/questions/evaluating', question: @question %>
+      <%= render 'shared/questions/voting', question: @question %>
+      <%= render 'shared/questions/favoring', question: @question %>
+      <%= render 'shared/questions/watching', question: @question %>
+      <%= render 'shared/questions/evaluating', question: @question %>
     </div>
   </div>
 </div>
 
 <div id="question-answers">
-  <%= render 'university/questions/answers', answers: @answers %>
+  <%= render 'shared/questions/answers', answers: @answers %>
 </div>
 
 <div id="same-category">
-  <%= render 'university/questions/same_category', question: @question %>
+  <%= render 'shared/questions/same_category', question: @question %>
 </div>
 
 <div id="question-answer" class="new-answer-form">
-  <%= render 'university/answers/form', question: @question, answer: @answer %>
+  <%= render 'shared/answers/form', question: @question, answer: @answer %>
 </div>
 

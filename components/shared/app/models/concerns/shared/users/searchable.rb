@@ -1,9 +1,9 @@
-module University::Users
+module Shared::Users
   module Searchable
     extend ActiveSupport::Concern
 
     included do
-      include ::University::Searchable
+      include ::Shared::Searchable
 
       probe.index.name = :"users_#{Rails.env}"
       probe.index.type = :user

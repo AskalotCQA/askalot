@@ -1,4 +1,4 @@
-module University::DocumentsHelper
+module Shared::DocumentsHelper
   def document_title_preview(document, options = {})
     html_escape truncate(document.title, default_truncate_options.merge(length: 120).merge(options))
   end

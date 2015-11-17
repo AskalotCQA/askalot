@@ -1,4 +1,4 @@
-module University::ResourcesHelper
+module Shared::ResourcesHelper
   def link_to_resource(resource, options = {})
     body = options.delete(:body)
     url  = options.delete(:url)
@@ -15,7 +15,7 @@ module University::ResourcesHelper
       url = url.is_a?(Proc) ? url.call(path) : path
     end
 
-    if resource.is_a? University::Deletable
+    if resource.is_a? Shared::Deletable
       link_to_deletable resource, body, url, options
     else
       link_to body, url, options

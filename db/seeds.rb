@@ -6,14 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-University::Role.find_or_create_by! name: :student
-University::Role.find_or_create_by! name: :teacher
-University::Role.find_or_create_by! name: :administrator
+Shared::Role.find_or_create_by! name: :student
+Shared::Role.find_or_create_by! name: :teacher
+Shared::Role.find_or_create_by! name: :administrator
 
-University::Label.find_or_create_by! value: :best
-University::Label.find_or_create_by! value: :helpful
+Shared::Label.find_or_create_by! value: :best
+Shared::Label.find_or_create_by! value: :helpful
 
-slido = University::User.find_or_initialize_by(login: 'slido')
+slido = Shared::User.find_or_initialize_by(login: 'slido')
 
 slido.update_attributes(
   email: 'automaton@sli.do',

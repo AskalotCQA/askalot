@@ -1,4 +1,4 @@
-module University
+module Shared
 class UsersController < ApplicationController
   include Searchables::Search
 

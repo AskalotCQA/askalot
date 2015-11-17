@@ -1,4 +1,4 @@
-module University
+module Shared
 class Activity < ActiveRecord::Base
   include Initiable
 

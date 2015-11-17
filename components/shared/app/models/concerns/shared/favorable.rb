@@ -1,4 +1,4 @@
-module University::Favorable
+module Shared::Favorable
   extend ActiveSupport::Concern
 
   included do
@@ -6,7 +6,7 @@ module University::Favorable
     has_many :favorers, through: :favorites, source: :favorer
 
     scope :favored, lambda { joins(:favorites).uniq }
-    scope :favored_by, lambda { |user| favored.merge(University::Favorite.by user) }
+    scope :favored_by, lambda { |user| favored.merge(Shared::Favorite.by user) }
   end
 
   def favored_by?(user)

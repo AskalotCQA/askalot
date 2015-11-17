@@ -1,7 +1,7 @@
 <li id="answer-<%= answer.id %>" class="question-answer<%= ' bg-warning' if answer_highlighted? answer %>">
   <div class="row">
     <div class="col-sm-3 col-md-2 hidden-xs">
-      <%= render 'university/users/square', user: answer.author %>
+      <%= render 'shared/users/square', user: answer.author %>
     </div>
 
     <div class="col-xs-9 col-sm-7 col-md-8">
@@ -10,20 +10,20 @@
       </div>
 
       <div class="answer-details">
-        <%= render 'university/answers/details', answer: answer %>
-        <%= render 'university/answers/editing', answer: answer %>
-        <%= render 'university/answers/deleting', answer: answer %>
+        <%= render 'shared/answers/details', answer: answer %>
+        <%= render 'shared/answers/editing', answer: answer %>
+        <%= render 'shared/answers/deleting', answer: answer %>
       </div>
 
-      <%= render 'university/answers/evaluations', answer: answer %>
-      <%= render 'university/answers/comments', answer: answer %>
-      <%= render 'university/comments/form', commentable: answer %>
+      <%= render 'shared/answers/evaluations', answer: answer %>
+      <%= render 'shared/answers/comments', answer: answer %>
+      <%= render 'shared/comments/form', commentable: answer %>
     </div>
 
     <div class="col-xs-3 col-sm-2">
-      <%= render 'university/answers/voting', answer: answer %>
-      <%= render 'university/answers/labeling', answer: answer %>
-      <%= render 'university/answers/evaluating', answer: answer %>
+      <%= render 'shared/answers/voting', answer: answer %>
+      <%= render 'shared/answers/labeling', answer: answer %>
+      <%= render 'shared/answers/evaluating', answer: answer %>
     </div>
   </div>
 </li>

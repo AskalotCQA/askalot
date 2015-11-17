@@ -1,7 +1,7 @@
 <% if answers.any? %>
   <ol class="user-answers">
     <% answers.each do |answer| %>
-      <%= render 'university/users/profile/answer', answer: answer %>
+      <%= render 'shared/users/profile/answer', answer: answer %>
     <% end %>
   </ol>
 

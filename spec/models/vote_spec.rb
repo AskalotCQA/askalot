@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe University::Vote do
+describe Shared::Vote do
   context 'when from stack exchange' do
     it 'requires stack exchange uuid instead of voter' do
       vote = build :vote, voter: nil, stack_exchange_uuid: nil

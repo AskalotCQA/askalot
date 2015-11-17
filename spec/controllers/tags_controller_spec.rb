@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe University::TagsController do
+describe Shared::TagsController do
   let(:user) { create :user }
 
-  routes { University::Engine.routes }
+  routes { Shared::Engine.routes }
 
   before :each do
     sign_in user
@@ -11,9 +11,9 @@ describe University::TagsController do
 
   describe 'GET suggest' do
     before :each do
-      University::Tag.autoimport = true
+      Shared::Tag.autoimport = true
 
-      University::Tag.probe.index.reload do
+      Shared::Tag.probe.index.reload do
         create :tag, name: 'test'
         create :tag, name: 'testing'
         create :tag, name: 'elasticsearch'

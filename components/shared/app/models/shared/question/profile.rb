@@ -1,4 +1,4 @@
-module University
+module Shared
 class Question
   class Profile < ActiveRecord::Base
     belongs_to :question

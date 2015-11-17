@@ -1,9 +1,9 @@
-module University::Searchable
+module Shared::Searchable
   extend ActiveSupport::Concern
 
   included do
     include Probe
-    include University::Orderable
+    include Shared::Orderable
 
     class << self
       attr_accessor :autoimport

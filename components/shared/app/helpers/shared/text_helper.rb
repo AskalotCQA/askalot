@@ -1,4 +1,4 @@
-module University::TextHelper
+module Shared::TextHelper
   def default_truncate_options
     { escape: false, omission: '&hellip;', separator: ' ' }
   end

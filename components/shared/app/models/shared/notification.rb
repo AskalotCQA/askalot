@@ -1,4 +1,4 @@
-module University
+module Shared
 class Notification < ActiveRecord::Base
   include Initiable
 
