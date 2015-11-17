@@ -1,3 +1,4 @@
+module University
 class UserMailer < ActionMailer::Base
   default from: ::University::Configuration.mailer.alias, css: 'university/mailers/layout'
 
@@ -32,4 +33,5 @@ class UserMailer < ActionMailer::Base
 
     mail to: @user.email, subject: "[Askalot] Nové notifikácie", content_type: 'text/html'
   end
+end
 end

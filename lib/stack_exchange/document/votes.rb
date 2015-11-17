@@ -32,7 +32,7 @@ module StackExchange
           answer        = StackExchange::Mapper.answers[vote[:PostId]]
           question      = StackExchange::Mapper.questions[vote[:PostId]]
           votable       = answer || question
-          votable_type  = question.nil? ? :Answer : :Question
+          votable_type  = question.nil? ? 'University::Answer' : 'University::Question'
           positive      = vote[:VoteTypeId] == '2' ? true : false
 
           return if !answer && !question

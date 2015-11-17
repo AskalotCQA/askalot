@@ -1,3 +1,4 @@
+module University
 class CommunityMailer < ActionMailer::Base
   default from: ::University::Configuration.mailer.alias, css: 'university/mailers/layout'
 
@@ -37,4 +38,5 @@ class CommunityMailer < ActionMailer::Base
       format.text unless email[:send_html_email]
     end
   end
+end
 end

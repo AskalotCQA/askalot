@@ -94,10 +94,10 @@ module University::ActivitiesHelper
   end
 
   def activity_content_pattern(action, resource)
-    case resource.class.name.downcase.to_sym
-    when :comment then "activity.content.#{resource.class.name.downcase}.#{resource.commentable.class.name.downcase}.#{action}"
-    when :evaluation then "activity.content.#{resource.class.name.downcase}.#{resource.evaluable.class.name.downcase}.#{action}"
-    else "activity.content.#{resource.class.name.downcase}.#{action}"
+    case resource.class.name.demodulize.downcase.to_sym
+    when :comment then "activity.content.#{resource.class.name.demodulize.downcase}.#{resource.commentable.class.name.demodulize.downcase}.#{action}"
+    when :evaluation then "activity.content.#{resource.class.name.demodulize.downcase}.#{resource.evaluable.class.name.demodulize.downcase}.#{action}"
+    else "activity.content.#{resource.class.name.demodulize.downcase}.#{action}"
     end
   end
 

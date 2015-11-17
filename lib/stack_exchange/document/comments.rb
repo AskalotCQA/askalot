@@ -6,7 +6,7 @@ module StackExchange
         question    = Mapper.questions[comment[:PostId]]
         answer      = Mapper.answers[comment[:PostId]]
         commentable = question.nil? ? answer : question
-        type        = question.nil? ? :Answer : :Question
+        type        = question.nil? ? 'University::Answer' : 'University::Question'
 
         return if commentable.nil? || user.nil?
 

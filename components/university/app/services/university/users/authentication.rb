@@ -24,7 +24,7 @@ module University::Users
     end
 
     def factory
-      @factory ||= User
+      @factory ||= University::User
     end
 
     private

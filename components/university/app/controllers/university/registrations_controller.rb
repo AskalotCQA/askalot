@@ -19,11 +19,11 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    edit_user_registration_path(tab: :account)
+    university.edit_user_registration_path(tab: :account)
   end
 
   def update_resource(resource, params)
-    service = University::Users::Authentication.new University::Stuba::AIS, login: current_user.login, password: params[:current_password]
+    service = University::Users::Authentication.new Stuba::AIS, login: current_user.login, password: params[:current_password]
 
     if service.authorized?
       resource.update_without_password(params.except(:current_password))

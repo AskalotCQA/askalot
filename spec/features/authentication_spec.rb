@@ -7,7 +7,7 @@ describe 'Authentication' do
 
   context 'when not registered' do
     it 'does not sign in user successfully' do
-      University::Stuba::AIS.stub(:authenticate) { nil }
+      Stuba::AIS.stub(:authenticate) { nil }
 
       visit root_path
 
@@ -24,7 +24,7 @@ describe 'Authentication' do
 
   context 'when registered' do
     it 'signs in user successfully' do
-      University::Stuba::AIS.stub(:authenticate) { nil }
+      Stuba::AIS.stub(:authenticate) { nil }
 
       visit root_path
 

@@ -142,9 +142,9 @@ describe University::Reputation::Notifier do
     let!(:answerer_3_rep) { answerer_3.profiles.of('reputation').first }
     let!(:old_answerer_3_rep) { answerer_3_rep.value }
 
-    let!(:answer) { Answer.create(question: question, author: answerer, created_at: Time.now + 5.hours, text: 'Lorem', votes_difference: 5) }
-    let!(:answer_2) { Answer.create(question: question, author: answerer_2, created_at: Time.now + 5.hours, text: 'Lorem') }
-    let!(:answer_3) { Answer.create(question: question, author: answerer_3, created_at: Time.now + 5.hours, text: 'Lorem') }
+    let!(:answer) { University::Answer.create(question: question, author: answerer, created_at: Time.now + 5.hours, text: 'Lorem', votes_difference: 5) }
+    let!(:answer_2) { University::Answer.create(question: question, author: answerer_2, created_at: Time.now + 5.hours, text: 'Lorem') }
+    let!(:answer_3) { University::Answer.create(question: question, author: answerer_3, created_at: Time.now + 5.hours, text: 'Lorem') }
 
 
     it 'changes only one reputation if not changing max score' do
