@@ -8,11 +8,11 @@ Gem::Specification.new do |s|
   s.authors     = ['team naRuby', 'team AskEd']
   s.email       = ['askalot@fiit.stuba.sk']
   s.homepage    = 'http://askalot.fiit.stuba.sk'
-  s.summary     = 'University version of Askalot'
-  s.description = 'This version provides functionality for university domain.'
+  s.summary     = 'Shared functionality between Askalot versions'
+  s.description = 'This engine contains similary that is shared between various Askalot versions.'
   s.license     = 'MIT'
 
-  s.files = Dir['{app,config,lib,vendor}/**/*']
+  s.files = Dir['{app,config,lib}/**/*']
   s.test_files = Dir['spec/**/*']
 
   # TODO(huna) list all dependencies
