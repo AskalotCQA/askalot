@@ -1,4 +1,4 @@
 Askalot::Application.routes.draw do
-  mount Shared::Engine => '/', as: 'shared'
   mount University::Engine => '/', as: 'university'
+  mount Shared::Engine => '/', as: 'shared'
 end

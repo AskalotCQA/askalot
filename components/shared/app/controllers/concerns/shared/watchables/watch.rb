@@ -3,7 +3,7 @@ module Shared::Watchables::Watch
 
   def watch
     @model     = controller_name.classify.downcase
-    @watchable = ('Shared::' + controller_name.classify).constantize.find(params[:id])
+    @watchable = controller_path.classify.constantize.find(params[:id])
 
     @watchable.toggle_watching_by! current_user
 

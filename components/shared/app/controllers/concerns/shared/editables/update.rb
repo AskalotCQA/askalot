@@ -5,7 +5,7 @@ module Shared::Editables::Update
 
   def update
     @model    = controller_name.classify.downcase.to_sym
-    @editable = ('Shared::' + controller_name.classify).constantize.find(params[:id])
+    @editable = controller_path.classify.constantize.find(params[:id])
 
     authorize! :edit, @editable
 
@@ -42,7 +42,7 @@ module Shared::Editables::Update
 
     respond_to do |format|
       format.html { redirect_to :back, format: :html }
-      format.js   {
+      format.js {
         # TODO (jharinek) remove ifs
         if @editable.is_a?(Shared::Question) || @editable.is_a?(Shared::Answer) || @editable.is_a?(Shared::Comment)
           redirect_to question_path(@editable.to_question), format: :js

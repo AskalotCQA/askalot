@@ -28,5 +28,14 @@ class DocumentsController < ApplicationController
   def update_params
     params.require(:document).permit(:title, :text)
   end
+
+  protected
+
+  def destroy_callback(deletable)
+    respond_to do |format|
+      format.html { redirect_to :back, format: :html }
+      format.js   { redirect_to :back, format: :js }
+    end
+  end
 end
 end

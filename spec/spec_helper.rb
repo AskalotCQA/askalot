@@ -81,8 +81,8 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   # Engine routes
-  config.include Shared::Engine.routes.url_helpers, type: :feature
   config.include University::Engine.routes.url_helpers, type: :feature
+  config.include Shared::Engine.routes.url_helpers, type: :feature
 
   # Include support
   config.include AuthenticationHelper, type: :feature

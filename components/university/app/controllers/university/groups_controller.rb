@@ -49,5 +49,11 @@ class GroupsController < ApplicationController
   def update_params
     params.require(:group).permit(:title, :description, :visibility)
   end
+
+  protected
+
+  def destroy_callback(deletable)
+    redirect_to groups_path
+  end
 end
 end

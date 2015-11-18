@@ -13,7 +13,7 @@ module Shared::Votables::Vote
 
   def vote(positive)
     @model   = controller_name.classify.downcase.to_sym
-    @votable = ('Shared::' + controller_name.classify).constantize.find(params[:id])
+    @votable = controller_path.classify.constantize.find(params[:id])
 
     authorize! :vote, @votable
 

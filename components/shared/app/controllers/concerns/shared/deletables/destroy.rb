@@ -5,7 +5,7 @@ module Shared::Deletables::Destroy
 
   def destroy
     @model     = controller_name.classify.downcase.to_sym
-    @deletable = ('Shared::' + controller_name.classify).constantize.find(params[:id])
+    @deletable = controller_path.classify.constantize.find(params[:id])
 
     authorize! :delete, @deletable
 
@@ -20,26 +20,10 @@ module Shared::Deletables::Destroy
       flash[:error] = t "#{@model}.delete.failure"
     end
 
-    # TODO (zbell) remove ifs, add abstract protected method call instead
-    if @deletable.is_a? Shared::Question
-      respond_to do |format|
-        format.html { redirect_to questions_path, format: :html }
-        format.js   { redirect_to document_questions_path(@deletable.parent), format: :js }
-      end
-    elsif @deletable.is_a? Shared::Group
-      redirect_to groups_path
-    else
-      respond_to do |format|
-        format.html { redirect_to :back, format: :html }
-        format.js   {
-          # TODO (jharinek) remove ifs
-          if @deletable.is_a?(Shared::Answer) || @deletable.is_a?(Shared::Comment)
-            redirect_to question_path(@deletable.to_question), format: :js
-          else
-            redirect_to :back, format: :js
-          end
-        }
-      end
-    end
+    destroy_callback @deletable
+  end
+
+  def destroy_callback
+    raise NotImplementedError, "Subclasses must define 'destroy_callback'."
   end
 end

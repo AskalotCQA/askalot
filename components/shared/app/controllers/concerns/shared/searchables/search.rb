@@ -2,7 +2,7 @@ module Shared::Searchables::Search
   extend ActiveSupport::Concern
 
   def search
-    @model = ('Shared::' + controller_name.classify).constantize
+    @model = controller_path.classify.constantize
 
     @results = @model.search_by(search_params)
   end

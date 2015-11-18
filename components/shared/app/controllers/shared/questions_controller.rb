@@ -129,5 +129,14 @@ class QuestionsController < ApplicationController
   def update_params
     params.require(:question).permit(:title, :text, :category_id, :tag_list)
   end
+
+  protected
+
+  def destroy_callback(deletable)
+    respond_to do |format|
+      format.html { redirect_to questions_path, format: :html }
+      format.js   { redirect_to document_questions_path(@deletable.parent), format: :js }
+    end
+  end
 end
 end

@@ -112,7 +112,7 @@ describe 'Deleting' do
     end
   end
 
-  context 'when question has answer with comments and and user is question author' do
+  context 'when question has answer with comments and user is question author' do
     let!(:answer) { create :answer, question: question }
     let!(:comment) { create :comment, commentable: answer }
 
