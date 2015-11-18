@@ -13,7 +13,7 @@ module Shared::MarkdownHelper
     id   = match[/\d+\z/] || match.gsub(/@/, '')
     user = Shared::User.find_by(id: id)
 
-    link_to "@#{user.nick}", user_path(user.nick) if user
+    link_to "@#{user.nick}", shared.user_path(user.nick) if user
   end
 
   def markdown_link_to_question(match, options = {})

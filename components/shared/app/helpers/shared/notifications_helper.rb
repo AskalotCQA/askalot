@@ -35,7 +35,7 @@ module Shared::NotificationsHelper
 
   def notification_options(notification, options = {})
     options[:mute] = lambda { |_| !notification.unread }
-    options[:url]  = lambda { |url| notification.unread ? read_notification_path(notification, params: { r: url }) : url }
+    options[:url]  = lambda { |url| notification.unread ? shared.read_notification_path(notification, params: { r: url }) : url }
     options
   end
 end

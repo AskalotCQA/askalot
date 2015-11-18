@@ -35,7 +35,7 @@ module Shared::QuestionsHelper
     options.merge!(class: classes)
     options.deep_merge! class: classes, data: { id: filter } unless filter.blank?
 
-    link_to question_label_name(label), questions_path(tags: filter), analytics_attributes(model, :click, label.name).deep_merge(options)
+    link_to question_label_name(label), shared.questions_path(tags: filter), analytics_attributes(model, :click, label.name).deep_merge(options)
   end
 
   def link_to_question(question, options = {})

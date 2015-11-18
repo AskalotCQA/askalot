@@ -1,4 +1,4 @@
-module Shared::Mailers
+module University::Mailers
   class CommunityMailerService
     def self.users
       Shared::User.where(send_email_notifications: true)

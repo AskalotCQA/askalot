@@ -1,8 +1,8 @@
 @import 'bootstrap/mixins';
 @import 'bootstrap/variables';
 
-@import '../variables';
-@import '../mixins';
+@import '../../../../../components/shared/app/assets/stylesheets/shared/variables';
+@import '../../../../../components/shared/app/assets/stylesheets/shared/mixins';
 @import 'bootstrap';
 
 // general

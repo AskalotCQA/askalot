@@ -10,7 +10,7 @@ module Shared::ResourcesHelper
       question = resource.to_question
 
       body ||= question_title_preview(question, body_options)
-      path ||= question_path(question, url_options)
+      path ||= shared.question_path(question, url_options)
 
       url = url.is_a?(Proc) ? url.call(path) : path
     end

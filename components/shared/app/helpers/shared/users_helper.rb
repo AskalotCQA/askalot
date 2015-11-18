@@ -41,7 +41,7 @@ module Shared::UsersHelper
 
     return content_tag :span, t('user.anonymous'), options if user == :anonymous
 
-    link_to user.nick, user_path(user.nick), options
+    link_to user.nick, shared.user_path(user.nick), options
   end
 
   private
@@ -61,6 +61,6 @@ module Shared::UsersHelper
 
     return content_tag :span, tag, options if options.delete(:link) == false || user == :anonymous
 
-    link_to tag, url || user_path(user.nick), options
+    link_to tag, url || shared.user_path(user.nick), options
   end
 end

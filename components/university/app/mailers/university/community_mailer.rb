@@ -9,9 +9,9 @@ class CommunityMailer < ActionMailer::Base
   helper Shared::CategoriesHelper
   helper Shared::CommentsHelper
   helper Shared::DeletablesHelper
-  helper Shared::DocumentsHelper
+  helper University::DocumentsHelper
   helper Shared::FavoritesHelper
-  helper Shared::GroupsHelper
+  helper University::GroupsHelper
   helper Shared::LabelingsHelper
   helper Shared::NotificationsHelper
   helper Shared::QuestionsHelper
