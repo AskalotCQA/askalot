@@ -1,6 +1,6 @@
 module Shared::HelpHelper
   def help_image_tag(path, options = {})
-    path = image_path "screenshots/#{path}"
+    path = image_path "shared/screenshots/#{path}"
 
     image_tag(path, class: :'help-image')
   end
