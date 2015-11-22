@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
   has_many :roles,      through: :assignments
   has_many :categories, through: :assignments
 
-  has_many :profiles, class_name: :'User::Profile', dependent: :destroy
+  has_many :profiles, class_name: :'Shared::User::Profile', dependent: :destroy
 
   validates :role, presence: true
 

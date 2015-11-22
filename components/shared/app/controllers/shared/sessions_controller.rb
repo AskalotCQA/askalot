@@ -1,9 +1,11 @@
+require 'shared/stuba/ais'
+
 module Shared
 class SessionsController < Devise::SessionsController
   include Devise::Controllers::Rememberable
 
   def create
-    service = Users::Authentication.new Stuba::AIS, login_params
+    service = Shared::Users::Authentication.new Shared::Stuba::AIS, login_params
 
     if service.authorized?
       self.resource = service.authenticate!

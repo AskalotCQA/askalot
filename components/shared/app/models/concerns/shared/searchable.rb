@@ -3,7 +3,6 @@ require 'shared/probe'
 module Shared::Searchable
   extend ActiveSupport::Concern
 
-
   included do
     include Shared::Probe
     include Shared::Orderable

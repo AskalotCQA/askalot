@@ -7,7 +7,7 @@ class User
     symbolize :property
     symbolize :source
 
-    scope :of, lambda { |type| where(targetable_type: type.to_s.camelize) }
+    scope :of, lambda { |type| where(property: type.to_s.camelize) }
 
     self.table_name = 'user_profiles'
   end
