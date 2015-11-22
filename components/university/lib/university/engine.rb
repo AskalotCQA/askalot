@@ -16,6 +16,9 @@ module University
 
         ActiveRecord::Tasks::DatabaseTasks.migrations_paths = ActiveRecord::Tasks::DatabaseTasks.migrations_paths | app.config.paths['db/migrate'].to_a
         ActiveRecord::Migrator.migrations_paths = ActiveRecord::Migrator.migrations_paths | app.config.paths['db/migrate'].to_a
+
+        app.config.paths['db'] = config.paths['db'].expanded
+        ActiveRecord::Tasks::DatabaseTasks.db_dir = app.config.paths['db'].first
       end
     end
   end
