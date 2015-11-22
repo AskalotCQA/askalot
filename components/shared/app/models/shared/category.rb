@@ -1,5 +1,7 @@
 module Shared
 class Category < ActiveRecord::Base
+  acts_as_nested_set
+
   include Watchable
 
   include Categories::Searchable
@@ -11,7 +13,7 @@ class Category < ActiveRecord::Base
   has_many :users, through: :assignments
   has_many :roles, through: :assignments
 
-  validates :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { scope: :parent_id }
 
   scope :with_slido, -> { where.not(slido_username: nil) }
 
@@ -40,6 +42,39 @@ class Category < ActiveRecord::Base
   def name_with_teacher_supported
     return name + I18n.t('category.teacher_supported') if has_teachers?
     name
+  end
+
+  def self.groups_in_context(context)
+    groups = []
+    empty = []
+    find_by(name: context).children.sort_by(&:name).each do |group|
+      if group.children.size == 0
+        empty << group
+      else
+        groups << group.children.each do |category|
+          category.name = group.name + ' - ' + category.name
+        end
+      end
+    end
+    groups << empty unless empty.empty?
+  end
+
+  def self.categories_in_context(context)
+    categories = []
+    find_by(name: context).children.each do |group|
+      group.children.each do |category|
+        category.name = group.name + ' - ' + category.name
+        categories << category
+      end
+      categories << group if group.leaf?
+    end
+    categories.sort_by(&:name)
+  end
+
+  def self.categories_with_parent_name(context)
+    Category.find_by(name: context).self_and_descendants.each do |category|
+      category.name = category.parent.name + ' - ' + category.name unless category.root?
+    end
   end
 end
 end

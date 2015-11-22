@@ -28,6 +28,7 @@ en:
     category:
       create:
         action: "Add category"
+        parent: "Parent"
 
       edit:
         action: "Edit"

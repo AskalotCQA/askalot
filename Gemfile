@@ -72,6 +72,7 @@ gem 'symbolize'
 gem 'lda-ruby'
 gem 'tf_idf'
 gem 'timecop'
+gem 'awesome_nested_set'
 
 # search
 gem 'elasticsearch'

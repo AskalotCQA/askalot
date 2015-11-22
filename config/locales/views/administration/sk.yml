@@ -28,6 +28,7 @@ sk:
     category:
       create:
         action: "Pridať kategóriu"
+        parent: "Rodič"
 
       edit:
         action: "Upraviť"

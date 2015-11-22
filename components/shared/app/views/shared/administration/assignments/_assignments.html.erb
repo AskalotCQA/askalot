@@ -7,7 +7,7 @@
     <li>
       <div class="row">
         <div class="col-xs-4">
-          <%= link_to_category assignment.category %>
+          <%= f.category_collection_select :category_id, categories %>
         </div>
 
         <div class="col-xs-4">

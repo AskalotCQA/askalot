@@ -1,5 +1,5 @@
 <% if categories.any? %>
-  <% group_categories_by_prefix(categories).each do |_, group| %>
+  <% categories.each do |group| %>
     <div class="category-group">
       <div class="row">
         <% group.each do |category| %>

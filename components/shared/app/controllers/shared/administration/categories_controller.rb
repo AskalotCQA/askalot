@@ -33,7 +33,7 @@ class Administration::CategoriesController < Administration::DashboardController
   private
 
   def category_params
-    params.require(:category).permit(:name, :tags)
+    params.require(:category).permit(:name, :tags, :parent_id)
   end
 end
 end

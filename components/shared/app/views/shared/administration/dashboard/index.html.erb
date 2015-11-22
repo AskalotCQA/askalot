@@ -12,7 +12,7 @@
   <div class="col-md-9">
     <div class="pill-content tab-content">
       <%= render_tab_content 'shared/administration/categories/categories',   :categories,  locals: { categories:  @categories } %>
-      <%= render_tab_content 'shared/administration/assignments/assignments', :assignments, locals: { assignments: @assignments } %>
+      <%= render_tab_content 'administration/assignments/assignments', :assignments, locals: { assignments: @assignments, categories:  @categories } %>
       <%= render_tab_content 'shared/administration/changelogs/changelogs',   :changelogs,  locals: { changelogs:  @changelogs } %>
       <%= render_tab_content 'shared/administration/emails/emails',           :emails %>
     </div>
