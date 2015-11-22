@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/stuba/ais'
 
-describe Stuba::AIS do
+describe Shared::Stuba::AIS do
   describe '.authenticate' do
     let(:ldap) { double(:ldap) }
     let(:request) { double(:request) }
@@ -27,7 +28,7 @@ describe Stuba::AIS do
     end
 
     before :each do
-      stub_const('Stuba::LDAP', ldap)
+      stub_const('Shared::Stuba::LDAP', ldap)
     end
 
     context 'when service is available' do
@@ -37,7 +38,7 @@ describe Stuba::AIS do
 
         expect(request).to receive(:search).with(query).and_return([{ uid: ['xuser1'] }])
 
-        user = Stuba::AIS.authenticate('xuser1', 'password')
+        user = Shared::Stuba::AIS.authenticate('xuser1', 'password')
 
         expect(user.login).to eql('xuser1')
       end
@@ -52,7 +53,7 @@ describe Stuba::AIS do
           sleep 10
         end
 
-        user = Stuba::AIS.authenticate('xuser1', 'password', timeout: 0.1)
+        user = Shared::Stuba::AIS.authenticate('xuser1', 'password', timeout: 0.1)
 
         expect(user).to be_nil
       end
@@ -80,7 +81,7 @@ describe Stuba::AIS do
     end
 
     before :each do
-      stub_const('Stuba::LDAP', ldap)
+      stub_const('Shared::Stuba::LDAP', ldap)
     end
 
     context 'when service is available' do
@@ -90,7 +91,7 @@ describe Stuba::AIS do
 
         expect(request).to receive(:search).with(query).and_return([{ uid: ['xuser1'], accountstatus: ['uis:active'] }])
 
-        alumni = Stuba::AIS.alumni?('xuser1')
+        alumni = Shared::Stuba::AIS.alumni?('xuser1')
 
         expect(alumni).to eql(false)
       end
@@ -101,7 +102,7 @@ describe Stuba::AIS do
 
         expect(request).to receive(:search).with(query).and_return([{ uid: ['xuser1'], accountstatus: ['uis:pending,neznamo'] }])
 
-        alumni = Stuba::AIS.alumni?('xuser1')
+        alumni = Shared::Stuba::AIS.alumni?('xuser1')
 
         expect(alumni).to eql(true)
       end
@@ -116,7 +117,7 @@ describe Stuba::AIS do
           sleep 10
         end
 
-        alumni = Stuba::AIS.alumni?('xuser1', timeout: 0.1)
+        alumni = Shared::Stuba::AIS.alumni?('xuser1', timeout: 0.1)
 
         expect(alumni).to be_nil
       end

@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/redcurtain/renderer/pygments'
 
-describe Redcurtain::Renderer::Pygments do
+describe Shared::Redcurtain::Renderer::Pygments do
   subject { described_class }
 
   describe '.render' do

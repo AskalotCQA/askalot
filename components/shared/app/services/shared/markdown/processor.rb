@@ -3,7 +3,7 @@ module Shared::Markdown
     extend self
 
     def process(text, user = nil, &callback)
-      linker = Redcurtain::Renderer::Linker.new(:user)
+      linker = Shared::Redcurtain::Renderer::Linker.new(:user)
 
       linker.render(text, regex: /(^|\s+)(@\w+)/, linker: lambda { |match|
         nick = match.gsub(/@/, '').strip
@@ -20,7 +20,7 @@ module Shared::Markdown
     end
 
     def unprocess(text, user = nil, &callback)
-      linker = Redcurtain::Renderer::Linker.new(:user)
+      linker = Shared::Redcurtain::Renderer::Linker.new(:user)
 
       linker.render(text, regex: /(^|\s+)(@\d+)/, linker: lambda { |match|
         id   = match.gsub(/@/, '').strip

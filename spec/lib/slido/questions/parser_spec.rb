@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/slido/questions/parser'
 
-describe Slido::Questions::Parser do
+describe Shared::Slido::Questions::Parser do
   subject { described_class }
 
   it 'parses questions' do

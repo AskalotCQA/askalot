@@ -1,0 +1,13 @@
+require 'gemoji'
+require 'nokogiri'
+require 'pygments'
+require 'redcarpet'
+require 'redcarpet/render_strip'
+
+require 'shared/redcurtain/markdown'
+require 'shared/redcurtain/renderer'
+require 'shared/redcurtain/renderer/gemoji'
+require 'shared/redcurtain/renderer/linker'
+require 'shared/redcurtain/renderer/pygments'
+require 'shared/redcurtain/renderer/replacer'
+require 'shared/redcurtain/renderer/redcarpet'

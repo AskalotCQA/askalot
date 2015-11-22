@@ -1,7 +1,9 @@
 require 'spec_helper'
+require 'shared/probe'
+require 'shared/probe/index'
 
-describe Probe::Index do
-  let(:index) { Probe::Index.new(name: :test, type: :document) }
+describe Shared::Probe::Index do
+  let(:index) { Shared::Probe::Index.new(name: :test, type: :document) }
 
   before :each do
     index.settings = {
@@ -52,7 +54,7 @@ describe Probe::Index do
   end
 
   describe '#import' do
-    let(:document) { Class.new(OpenStruct) { include Probe } }
+    let(:document) { Class.new(OpenStruct) { include Shared::Probe } }
 
     before :each do
       document.probe.index = index

@@ -9,11 +9,12 @@ Gem::Specification.new do |s|
   s.email       = ['askalot@fiit.stuba.sk']
   s.homepage    = 'http://askalot.fiit.stuba.sk'
   s.summary     = 'Shared functionality between Askalot versions'
-  s.description = 'This engine contains similary that is shared between various Askalot versions.'
+  s.description = 'This engine contains code that is shared between various Askalot versions.'
   s.license     = 'MIT'
 
-  s.files = Dir['{app,config,lib}/**/*']
-  s.test_files = Dir['spec/**/*']
+  s.files         = Dir['{app,config,lib}/**/*']
+  s.test_files    = Dir['spec/**/*']
+  s.require_paths = Dir['lib']
 
   # TODO(huna) list all dependencies
   s.add_dependency 'rails', '4.1.0'

@@ -2,7 +2,7 @@ module Shared::Reputation
   module Adjuster
     extend self
 
-    @manager = Reputation::Manager.new
+    @manager = Shared::Reputation::Manager.new
 
     def tags_by_answers(last_update)
       affected_tags = Array.new

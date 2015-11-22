@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/redcurtain/renderer/gemoji'
 
-describe Redcurtain::Renderer::Gemoji do
+describe Shared::Redcurtain::Renderer::Gemoji do
   subject { described_class }
 
   describe '.render' do

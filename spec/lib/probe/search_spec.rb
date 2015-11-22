@@ -1,11 +1,13 @@
 require 'spec_helper'
+require 'shared/probe'
+require 'shared/probe/search'
 
-describe Probe::Search do
+describe Shared::Probe::Search do
   subject { probe }
 
   let(:probe) { document.probe }
   let(:index) { probe.index }
-  let(:document) { Class.new(OpenStruct) { include Probe } }
+  let(:document) { Class.new(OpenStruct) { include Shared::Probe } }
 
   before :each do
     index.name = :test

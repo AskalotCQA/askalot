@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/slido/wall/parser'
 
-describe Slido::Wall::Parser do
+describe Shared::Slido::Wall::Parser do
   subject { described_class }
 
   it 'parses slido event information' do

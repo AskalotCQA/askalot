@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/core/finder'
 
-describe Core::Finder do
+describe Shared::Core::Finder do
   subject { described_class }
 
   context 'when model exists' do

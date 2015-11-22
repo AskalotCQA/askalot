@@ -1,3 +1,5 @@
+require 'shared/redcurtain/markdown'
+
 module Shared::MarkdownHelper
   def markdown_editor_for(resource, options = {}, &block)
     id = "markdown-#{resource.class.name.demodulize.underscore}-#{resource.new_record? ? :new : resource.id}"
@@ -47,10 +49,10 @@ module Shared::MarkdownHelper
       regex: /(^|\s)(#\d+)/
     }
 
-    Redcurtain::Markdown.render(text, options)
+    Shared::Redcurtain::Markdown.render(text, options)
   end
 
   def render_stripdown(text, options = {})
-    Redcurtain::Markdown.strip(text, options)
+    Shared::Redcurtain::Markdown.strip(text, options)
   end
 end

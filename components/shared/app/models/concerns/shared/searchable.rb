@@ -1,8 +1,11 @@
+require 'shared/probe'
+
 module Shared::Searchable
   extend ActiveSupport::Concern
 
+
   included do
-    include Probe
+    include Shared::Probe
     include Shared::Orderable
 
     class << self

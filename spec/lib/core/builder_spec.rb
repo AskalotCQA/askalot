@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/core/builder'
 
-describe Core::Builder do
+describe Shared::Core::Builder do
   subject { described_class }
 
   describe '.create_<model>_by' do

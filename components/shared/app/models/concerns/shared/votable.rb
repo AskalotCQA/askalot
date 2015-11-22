@@ -1,3 +1,5 @@
+require 'shared/ratain'
+
 module Shared::Votable
   extend ActiveSupport::Concern
 
@@ -54,7 +56,7 @@ module Shared::Votable
     negative = votes.negative.size
 
     self.votes_difference = positive - negative
-    self.votes_lb_wsci_bp = Ratain.lb_wsci_bp positive, positive + negative
+    self.votes_lb_wsci_bp = Shared::Ratain.lb_wsci_bp positive, positive + negative
 
     self.save!
   end

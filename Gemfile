@@ -106,7 +106,6 @@ group :development, :test do
 
   # database
   gem 'faker', '1.1.2'
-  gem 'fix-db-schema-conflicts'
 
   # code metrics
   gem 'simplecov', require: false

@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/probe/sanitizer'
 
-describe Probe::Sanitizer do
+describe Shared::Probe::Sanitizer do
   subject { described_class }
 
   describe '.sanitize_query' do

@@ -1,12 +1,13 @@
 require 'spec_helper'
+require 'shared/redcurtain/renderer/redcarpet'
 
-module Redcurtain::Renderer::Redcarpet
+module Shared::Redcurtain::Renderer::Redcarpet
   describe Factory do
     describe '.create' do
       it 'creates renderer' do
         renderer = Factory.create
 
-        Redcurtain::Renderer::Redcarpet.defaults[:tags].each do |tag|
+        Shared::Redcurtain::Renderer::Redcarpet.defaults[:tags].each do |tag|
           expect(renderer).not_to respond_to(tag)
         end
       end

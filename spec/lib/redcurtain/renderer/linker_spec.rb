@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/redcurtain/renderer/linker'
 
-describe Redcurtain::Renderer::Linker do
+describe Shared::Redcurtain::Renderer::Linker do
   subject { described_class.new(:linker) }
 
   describe '#render' do

@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.description = 'This version provides functionality for university domain.'
   s.license     = 'MIT'
 
-  s.files = Dir['{app,config,lib,vendor}/**/*']
+  s.files      = Dir['{app,config,lib,vendor}/**/*']
   s.test_files = Dir['spec/**/*']
 
   # TODO(huna) list all dependencies

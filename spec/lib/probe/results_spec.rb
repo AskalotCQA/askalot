@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/probe/results'
 
-describe Probe::Results do
+describe Shared::Probe::Results do
   subject { described_class.new(query, &search) }
 
   let(:query) { { from: 0, size: 25 } }

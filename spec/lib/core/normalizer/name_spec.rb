@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/core/normalizer/name'
 
-describe Core::Normalizer::Name do
+describe Shared::Core::Normalizer::Name do
   subject { described_class }
 
   it 'parses simple name' do

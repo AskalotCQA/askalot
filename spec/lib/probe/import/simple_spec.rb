@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/probe/import/simple'
 
-describe Probe::Import::Simple do
+describe Shared::Probe::Import::Simple do
   describe '#import' do
     it 'imports documents one by one' do
       client    = double(:client)
@@ -13,7 +14,7 @@ describe Probe::Import::Simple do
       expect(client).to receive(:index).with(index: 'test', type: 'type', id: 1, body: { id: 1 })
       expect(client).to receive(:index).with(index: 'test', type: 'type', id: 2, body: { id: 2 })
 
-      Probe::Import::Simple.new(index, documents).import
+      Shared::Probe::Import::Simple.new(index, documents).import
     end
   end
 end

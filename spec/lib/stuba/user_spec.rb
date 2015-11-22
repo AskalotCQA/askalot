@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/stuba/user'
 
-describe Stuba::User do
+describe Shared::Stuba::User do
   let(:student_data) {
     {
       uisid: ['1234'],
@@ -40,7 +41,7 @@ describe Stuba::User do
   }
 
   it 'provides user information' do
-    user = Stuba::User.new(student_data)
+    user = Shared::Stuba::User.new(student_data)
 
     expect(user.uid).to       eql('1234')
     expect(user.login).to     eql('xuser1')
@@ -53,9 +54,9 @@ describe Stuba::User do
   end
 
   it 'assigns correct role' do
-    student    = Stuba::User.new(student_data)
-    teacher    = Stuba::User.new(teacher_data)
-    researcher = Stuba::User.new(researcher_data)
+    student    = Shared::Stuba::User.new(student_data)
+    teacher    = Shared::Stuba::User.new(teacher_data)
+    researcher = Shared::Stuba::User.new(researcher_data)
 
     expect(student.role).to    eql(:student)
     expect(teacher.role).to    eql(:teacher)
@@ -77,7 +78,7 @@ describe Stuba::User do
     }
 
     it 'parses middle name correctly' do
-      user = Stuba::User.new(data)
+      user = Shared::Stuba::User.new(data)
 
       expect(user.uid).to    eql('1234')
       expect(user.login).to  eql('xuser1')
@@ -92,7 +93,7 @@ describe Stuba::User do
 
   describe '.to_params' do
     it 'converts user to params' do
-      user = Stuba::User.new(student_data)
+      user = Shared::Stuba::User.new(student_data)
 
       expect(user.to_params).to eql({
         login: 'xuser1',

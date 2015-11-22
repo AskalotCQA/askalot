@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/slido/scraper'
 
-describe Slido::Scraper do
+describe Shared::Slido::Scraper do
   it 'scrapes slido questions with event' do
     cookies    = { cookie1: 1, cookie2: 2 }
 
@@ -27,15 +28,15 @@ describe Slido::Scraper do
     expect(builder).to          receive(:create_slido_event_by).with(:uuid, uuid: 123, identifier: 'woow', name: 'such event', category_id: 1).and_return(double.as_null_object)
     expect(builder).to          receive(:create_question_by).with(:slido_question_uuid, title: 'Wow?', category_id: 1, author_id: 2).and_return(double.as_null_object)
 
-    Slido.config.cookies = cookies
+    Shared::Slido.config.cookies = cookies
 
     stub_const('Scout::Downloader', downloader)
-    stub_const('Slido::Wall::Parser', wall_parser)
-    stub_const('Slido::Questions::Parser', questions_parser)
-    stub_const('Core::Builder', builder)
-    stub_const('Core::Finder', finder)
+    stub_const('Shared::Slido::Wall::Parser', wall_parser)
+    stub_const('Shared::Slido::Questions::Parser', questions_parser)
+    stub_const('Shared::Core::Builder', builder)
+    stub_const('Shared::Core::Finder', finder)
 
-    Slido::Scraper.run(category)
+    Shared::Slido::Scraper.run(category)
   end
 
   context 'when events does not start with valid prefix' do
@@ -53,12 +54,12 @@ describe Slido::Scraper do
       expect(downloader).to  receive(:download).with('https://www.sli.do/doge/woow/wall').and_return(:html)
       expect(wall_parser).to receive(:parse).with(:html).and_return(event)
 
-      Slido.config.cookies = cookies
+      Shared::Slido.config.cookies = cookies
 
       stub_const('Scout::Downloader', downloader)
-      stub_const('Slido::Wall::Parser', wall_parser)
+      stub_const('Shared::Slido::Wall::Parser', wall_parser)
 
-      expect { Slido::Scraper.run(category) }.to raise_error(RuntimeError, 'Current event such event does not match prefix wow')
+      expect { Shared::Slido::Scraper.run(category) }.to raise_error(RuntimeError, 'Current event such event does not match prefix wow')
     end
   end
 end

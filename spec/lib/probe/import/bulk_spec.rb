@@ -1,6 +1,7 @@
 require 'spec_helper'
+require 'shared/probe/import/bulk'
 
-describe Probe::Import::Bulk do
+describe Shared::Probe::Import::Bulk do
   describe '#import' do
     it 'imports documents in batches' do
       client    = double(:client)
@@ -26,7 +27,7 @@ describe Probe::Import::Bulk do
         { id: 4 }
       ])
 
-      Probe::Import::Bulk.new(index, documents, batch_size: 2).import
+      Shared::Probe::Import::Bulk.new(index, documents, batch_size: 2).import
     end
   end
 end
