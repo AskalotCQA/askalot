@@ -6,7 +6,7 @@ class AddVotesExperimentalToQuestionsAndAnswers < ActiveRecord::Migration
     add_index :questions, :votes_lb_wsci_bp
     add_index :answers,   :votes_lb_wsci_bp
 
-    [Question, Answer].each do |model|
+    [Shared::Question, Shared::Answer].each do |model|
       model.find_each do |votable|
         votable.votes_lb_wsci_bp = Ratain.lb_wsci_bp votable.votes.positive.count, votable.votes.count
 

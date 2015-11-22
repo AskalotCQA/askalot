@@ -3,17 +3,17 @@ class FixLabelingsAndTaggings < ActiveRecord::Migration
     remove_index :labelings, name: 'index_labelings_on_unique_key'
     remove_index :taggings,  name: 'index_taggings_on_unique_key'
 
-    Answer.unscoped.find_each do |answer|
-      Labeling.unscoped.where(deleted: true, answer_id: answer).each do |labeling|
-        if Labeling.unscoped.where(deleted: false, answer_id: answer, label: labeling.label, author: labeling.author).exists?
+    Shared::Answer.unscoped.find_each do |answer|
+      Shared::Labeling.unscoped.where(deleted: true, answer_id: answer).each do |labeling|
+        if Shared::Labeling.unscoped.where(deleted: false, answer_id: answer, label: labeling.label, author: labeling.author).exists?
           labeling.destroy!
         end
       end
     end
 
-    Question.unscoped.find_each do |question|
-      Tagging.unscoped.where(deleted: true, question_id: question).each do |tagging|
-        if Tagging.unscoped.where(deleted: false, question_id: question, tag: tagging.tag, author: tagging.author).exists?
+    Shared::Question.unscoped.find_each do |question|
+      Shared::Tagging.unscoped.where(deleted: true, question_id: question).each do |tagging|
+        if Shared::Tagging.unscoped.where(deleted: false, question_id: question, tag: tagging.tag, author: tagging.author).exists?
           tagging.destroy!
         end
       end

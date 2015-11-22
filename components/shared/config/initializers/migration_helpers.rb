@@ -10,7 +10,7 @@ class ActiveRecord::Migration
   end
 
   def reset_counter(table, association)
-    model = table.to_s.classify.constantize
+    model = ('Shared::' + table.to_s.classify).constantize
 
     model.reset_column_information
 

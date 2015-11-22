@@ -3,9 +3,9 @@ class AddCreatedOnAndUpdatedOnToActivity < ActiveRecord::Migration
     add_column :activities, :created_on, :date
     add_column :activities, :updated_on, :date
 
-    Activity.reset_column_information
+    Shared::Activity.reset_column_information
 
-    Activity.unscoped.each do |activity|
+    Shared::Activity.unscoped.each do |activity|
       activity.created_on = activity.created_at.to_date
       activity.updated_on = activity.updated_at.to_date
       activity.save!

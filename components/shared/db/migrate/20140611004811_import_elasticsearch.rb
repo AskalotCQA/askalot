@@ -1,6 +1,6 @@
 class ImportElasticsearch < ActiveRecord::Migration
   def up
-    [Category, Question, Tag, User].each do |model|
+    [Shared::Category, Shared::Question, Shared::Tag, Shared::User].each do |model|
       model.probe.index.import model.all, with: :bulk
     end
   end

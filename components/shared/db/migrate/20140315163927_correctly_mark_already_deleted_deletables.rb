@@ -1,18 +1,18 @@
 class CorrectlyMarkAlreadyDeletedDeletables < ActiveRecord::Migration
   def change
     models = [
-      Answer,
-      Answer::Revision,
-      Comment,
-      Comment::Revision,
-      Evaluation,
-      Favorite,
-      Labeling,
-      Question,
-      Question::Revision,
-      Tagging,
-      View,
-      Vote
+      Shared::Answer,
+      Shared::Answer::Revision,
+      Shared::Comment,
+      Shared::Comment::Revision,
+      Shared::Evaluation,
+      Shared::Favorite,
+      Shared::Labeling,
+      Shared::Question,
+      Shared::Question::Revision,
+      Shared::Tagging,
+      Shared::View,
+      Shared::Vote
     ]
 
     models.each do |model|
