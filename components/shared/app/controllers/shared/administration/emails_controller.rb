@@ -5,7 +5,7 @@ class Administration::EmailsController < Administration::DashboardController
     authorize! :create, Shared::Email
 
     if params[:test]
-      Shared::Mailers::CommunityMailerService.deliver_test_email!(email_params)
+      University::Mailers::CommunityMailerService.deliver_test_email!(email_params)
       form_message :notice, t('email.create_test.success'), key: 'emails'
     else
       @email = Shared::Email.new(email_params)
