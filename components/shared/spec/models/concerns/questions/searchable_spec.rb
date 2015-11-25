@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'models/concerns/searchable_spec'
 
 shared_examples_for Shared::Questions::Searchable do
   it_behaves_like Shared::Searchable

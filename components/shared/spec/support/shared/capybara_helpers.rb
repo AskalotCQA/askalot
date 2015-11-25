@@ -1,4 +1,4 @@
-module CapybaraHelpers
+module Shared::CapybaraHelpers
   extend ActiveSupport::Concern
 
   included do

@@ -1,4 +1,4 @@
-module Logging
+module Shared::Logging
   def events
     Shared::Event.all
   end

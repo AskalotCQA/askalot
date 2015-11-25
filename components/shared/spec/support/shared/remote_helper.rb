@@ -1,4 +1,4 @@
-module RemoteHelper
+module Shared::RemoteHelper
   def wait_for_remote(time = nil)
     sleep time if time
 

@@ -1,4 +1,4 @@
-module PageHelper
+module Shared::PageHelper
   def current_params
     params = Hash.new
     uri    = URI.parse(current_url)

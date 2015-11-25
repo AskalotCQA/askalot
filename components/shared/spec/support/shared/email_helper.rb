@@ -1,4 +1,4 @@
-module EmailHelper
+module Shared::EmailHelper
   def emails
     ActionMailer::Base.deliveries
   end

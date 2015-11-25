@@ -1,4 +1,4 @@
-module TextcompleteHelper
+module Shared::TextcompleteHelper
   def select_textcomplete(value, options)
     raise "Must pass a hash containing 'from'." unless options.is_a?(Hash) and [:from].any? { |k| options.has_key? k }
 

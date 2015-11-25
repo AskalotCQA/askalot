@@ -1,4 +1,4 @@
-module NotificationsHelper
+module Shared::NotificationsHelper
   def notifications
     Shared::Notification.where(resource_type: [Shared::Question, Shared::Answer, Shared::Comment])
   end

@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'models/concerns/watchable_spec'
+require_relative 'concerns/watchable_spec'
 
 describe Shared::Tag do
   it_behaves_like Shared::Watchable

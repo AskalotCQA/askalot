@@ -1,4 +1,4 @@
-module AuthenticationHelper
+module Shared::AuthenticationHelper
   def login_as(user, options = {})
     stub_ais_for(user) if options[:with] == :AIS
 
