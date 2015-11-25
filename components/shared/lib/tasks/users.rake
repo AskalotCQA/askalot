@@ -1,5 +1,4 @@
 namespace :users do
-
   desc 'Update user alumni flag'
   task alumni: :environment do
     Shared::User.all.each do |u|

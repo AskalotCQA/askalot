@@ -1,4 +1,4 @@
-require_relative '../../components/shared/app/services/shared/events/dispatcher'
+require_relative '../../app/services/shared/events/dispatcher'
 
 namespace :sample_data do
   task all: :environment do

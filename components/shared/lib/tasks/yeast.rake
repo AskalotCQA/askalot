@@ -1,4 +1,4 @@
-require 'yeast'
+require 'shared/yeast'
 require_relative '../../app/services/shared/events/dispatcher'
 
 # rake yeast:feed FEEDERS=ExampleFeeder,MyAwesomeFeeder

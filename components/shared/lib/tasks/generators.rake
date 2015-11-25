@@ -1,4 +1,4 @@
-require_relative '../../components/shared/app/services/shared/events/dispatcher'
+require_relative '../../app/services/shared/events/dispatcher'
 
 namespace :generators do
   desc 'Generate activities'

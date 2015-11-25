@@ -2,6 +2,9 @@ module Shared
   class Engine < ::Rails::Engine
     isolate_namespace Shared
 
+    # config.rspec_paths ||= []
+    # config.rspec_paths << self.root
+
     config.to_prepare do
       Devise::SessionsController.layout 'shared/application'
     end
@@ -13,6 +16,11 @@ module Shared
         ActiveRecord::Tasks::DatabaseTasks.migrations_paths = ActiveRecord::Tasks::DatabaseTasks.migrations_paths | app.config.paths['db/migrate'].to_a
         ActiveRecord::Migrator.migrations_paths = ActiveRecord::Migrator.migrations_paths | app.config.paths['db/migrate'].to_a
       end
+    end
+
+    config.generators do |g|
+      g.test_framework :rspec
+      g.fixture_replacement :factory_girl, :dir => 'spec/factories'
     end
   end
 end
