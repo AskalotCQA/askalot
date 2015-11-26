@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
 
   scope :alumni, lambda { where(alumni: true) }
 
-  Social.networks.each do |key, network|
+  Shared::Social.networks.each do |key, network|
     validates key, format: { with: network.regexp }, allow_blank: true
   end
 

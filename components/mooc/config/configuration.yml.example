@@ -38,22 +38,22 @@ defaults: &defaults
     gold: 20
     silver: 35
 
-development_university:
+development_mooc:
   <<: *defaults
 
-test_university:
+test_mooc:
   <<: *defaults
 
   poll:
     default: 5
 
-staging_university:
+staging_mooc:
   <<: *defaults
 
 demo:
   <<: *defaults
 
-production_university:
+production_mooc:
   <<: *defaults
 
 experimental:

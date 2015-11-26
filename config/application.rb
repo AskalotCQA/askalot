@@ -37,5 +37,9 @@ module Askalot
 
     # Export DB schema in SQL format
     config.active_record.schema_format = :sql
+
+    def self.is?(module_object)
+      config.module == module_object
+    end
   end
 end

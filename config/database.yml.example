@@ -1,23 +1,63 @@
-development:
+development_university:
   adapter: postgresql
   encoding: unicode
-  database: askalot_development
+  database: askalot_development_university
   pool: 5
   username: postgres
   password: postgres
 
-test:
+test_university:
   adapter: postgresql
   encoding: unicode
-  database: askalot_test
+  database: askalot_test_university
   pool: 5
   username: postgres
   password: postgres
 
-staging:
+staging_university:
   adapter: postgresql
   encoding: unicode
-  database: askalot_staging
+  database: askalot_staging_university
+  pool: 5
+  username: postgres
+  password: postgres
+
+production_university:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_production_university
+  pool: 5
+  username: postgres
+  password: postgres
+
+development_mooc:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_development_mooc
+  pool: 5
+  username: postgres
+  password: postgres
+
+test_mooc:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_test_mooc
+  pool: 5
+  username: postgres
+  password: postgres
+
+staging_mooc:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_staging_mooc
+  pool: 5
+  username: postgres
+  password: postgres
+
+production_mooc:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_production_mooc
   pool: 5
   username: postgres
   password: postgres
@@ -26,14 +66,6 @@ demo:
   adapter: postgresql
   encoding: unicode
   database: askalot_demo
-  pool: 5
-  username: postgres
-  password: postgres
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: askalot_production
   pool: 5
   username: postgres
   password: postgres

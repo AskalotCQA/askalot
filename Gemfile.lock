@@ -15,6 +15,12 @@ GIT
       squire (>= 1.2.1)
 
 PATH
+  remote: components/mooc
+  specs:
+    mooc (1.0)
+      rails (= 4.1.0)
+
+PATH
   remote: components/shared
   specs:
     shared (1.0)
@@ -486,6 +492,7 @@ DEPENDENCIES
   lda-ruby
   letter_opener
   momentjs-rails
+  mooc!
   murmurhash3
   net-ldap
   newrelic_rpm
