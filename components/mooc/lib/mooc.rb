@@ -1,5 +1,5 @@
 require 'devise'
 require 'mooc/engine'
 
-module University
+module MOOC
 end

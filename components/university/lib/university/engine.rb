@@ -6,9 +6,9 @@ module University
       helpers = Shared.constants.select { |c| c.to_s.ends_with? 'Helper' }
 
       helpers.each do |helper|
-        ApplicationController.helper ('Shared::' + helper.to_s).constantize
+        ApplicationController.helper ('University::' + helper.to_s).constantize
       end
-    end
+    end if Askalot::Application.is? University
 
     initializer :append_migrations do |app|
       unless app.root.to_s.match root.to_s
@@ -20,6 +20,6 @@ module University
         app.config.paths['db'] = config.paths['db'].expanded
         ActiveRecord::Tasks::DatabaseTasks.db_dir = app.config.paths['db'].first
       end
-    end
+    end if Askalot::Application.is? University
   end
 end
