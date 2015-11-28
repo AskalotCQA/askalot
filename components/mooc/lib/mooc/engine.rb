@@ -1,6 +1,6 @@
-module MOOC
+module Mooc
   class Engine < ::Rails::Engine
-    isolate_namespace MOOC
+    isolate_namespace Mooc
 
     config.to_prepare do
       helpers = Shared.constants.select { |c| c.to_s.ends_with? 'Helper' }

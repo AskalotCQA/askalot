@@ -1,3 +1,3 @@
-MOOC::Engine.routes.draw do
+Mooc::Engine.routes.draw do
 
 end

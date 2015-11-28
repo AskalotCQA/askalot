@@ -1,4 +1,4 @@
 require 'mooc/engine'
 
-module MOOC
+module Mooc
 end
