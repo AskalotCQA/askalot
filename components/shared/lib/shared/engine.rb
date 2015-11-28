@@ -5,7 +5,7 @@ module Shared
     config.i18n.load_path += Dir[config.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
     config.to_prepare do
-      Devise::SessionsController.layout 'shared/application'
+      Devise::SessionsController.layout "#{Rails.module}/application"
     end
 
     initializer :append_migrations do |app|
