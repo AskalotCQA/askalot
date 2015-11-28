@@ -17,9 +17,12 @@ class Ability
     can :change_name,     Shared::User unless user.ais_login?
     can :change_password, Shared::User unless user.ais_login?
 
-    can :index,  [University::Group, University::Document]
-    can :create, [University::Group, University::Document]
-    can :show,   [University::Group, University::Document]
+    # TODO(huna) model inheritance
+    if Rails.module.university?
+      can :index,  [University::Group, University::Document]
+      can :create, [University::Group, University::Document]
+      can :show,   [University::Group, University::Document]
+    end
 
     can :ask,    Shared::Question
     can :answer, Shared::Question
@@ -34,21 +37,30 @@ class Ability
     # for specific category exist
 
     # TODO (jharinek) consider Authorable
+    # TODO(huna) model inheritance
     # only group creator can edit or delete group
-    can(:edit,   [University::Group]) { |resource| resource.creator == user }
-    can(:delete, [University::Group]) { |resource| resource.creator == user }
+    if Rails.module.university?
+      can(:edit,   [University::Group]) { |resource| resource.creator == user }
+      can(:delete, [University::Group]) { |resource| resource.creator == user }
+
+      can(:edit,   [University::Document]) { |resource| resource.author == user }
+      can(:delete, [University::Document]) { |resource| resource.author == user }
+    end
 
     # only author can edit or delete document, question, answer, comment or evaluation
-    can(:edit,   [University::Document, Shared::Question, Shared::Answer, Shared::Comment, Shared::Evaluation]) { |resource| resource.author == user }
-    can(:delete, [University::Document, Shared::Question, Shared::Answer, Shared::Comment, Shared::Evaluation]) { |resource| resource.author == user }
+    can(:edit,   [Shared::Question, Shared::Answer, Shared::Comment, Shared::Evaluation]) { |resource| resource.author == user }
+    can(:delete, [Shared::Question, Shared::Answer, Shared::Comment, Shared::Evaluation]) { |resource| resource.author == user }
 
     # but only if question or answer has no evaluations, and answer has no labelings
     cannot(:edit, [Shared::Question, Shared::Answer]) { |resource| resource.evaluations.any? }
     cannot(:edit, [Shared::Answer]) { |resource| resource.labelings.any? }
 
     # but only if group has no documents, and document has no questions
-    cannot(:delete, [University::Group]) { |resource| resource.documents.any? }
-    cannot(:delete, [University::Document]) { |resource| resource.questions.any? }
+    # TODO(huna) model inheritance
+    if Rails.module.university?
+      cannot(:delete, [University::Group]) { |resource| resource.documents.any? }
+      cannot(:delete, [University::Document]) { |resource| resource.questions.any? }
+    end
 
     # but only if question has no answers, comments and evaluations, and answer has no labels, comments and evaluations
     cannot(:delete, [Shared::Question]) { |resource| resource.answers.any? || resource.comments.any? || resource.evaluations.any? }
@@ -78,8 +90,10 @@ class Ability
       can :observe, :all
 
       # TODO (jharinek) refactor when implementing "true" roles for group
-      cannot :show,  University::Group, visibility: :private
-      cannot :index, University::Group, visibility: :private
+      if Rails.module.university?
+        cannot :show,  University::Group, visibility: :private
+        cannot :index, University::Group, visibility: :private
+      end
     end
 
     # only AIS administrator
@@ -88,8 +102,11 @@ class Ability
       can :observe, :all
 
       # TODO (jharinek) refactor when implementing "true" roles for group
-      can :edit,   [University::Group, University::Document]
-      can :delete, [University::Group, University::Document]
+      if Rails.module.university?
+        can :edit,   [University::Group, University::Document]
+        can :delete, [University::Group, University::Document]
+      end
+
       can(:close,  [Shared::Question]) { |resource| resource.answers.empty? && !resource.closed }
 
       can :create,  [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::Email]

@@ -13,8 +13,6 @@ module University
     include Shared::Facebook::Modal
     include Shared::Slido::Flash
 
-    layout 'shared/application'
-
     def current_ability
       @current_ability ||= Shared::Ability.new(current_user)
     end

@@ -10,7 +10,7 @@
     <%= csrf_meta_tags -%>
   </head>
   <body<%= resolve_sidebar(yield :sidebar) %>>
-    <%= render 'layouts/shared/header' -%>
+    <%= render 'layouts/mooc/header' -%>
     <% if use_container? %>
       <div id="main" class="container">
         <%= flash_messages -%>
