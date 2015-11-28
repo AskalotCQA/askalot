@@ -50,11 +50,32 @@ test_university:
 staging_university:
   <<: *defaults
 
-demo:
+demo_university:
   <<: *defaults
 
 production_university:
   <<: *defaults
 
-experimental:
+experimental_university:
+  <<: *defaults
+
+development_mooc:
+  <<: *defaults
+
+test_mooc:
+  <<: *defaults
+
+  poll:
+    default: 5
+
+staging_mooc:
+  <<: *defaults
+
+demo_mooc:
+  <<: *defaults
+
+production_mooc:
+  <<: *defaults
+
+experimental_mooc:
   <<: *defaults

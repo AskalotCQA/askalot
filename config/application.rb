@@ -10,12 +10,16 @@ require "sprockets/railtie"
 
 module Rails
   class << self
+    def env
+      @_env ||= ActiveSupport::StringInquirer.new(ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development_university')
+    end
+
     def env_type
-      @_env_type ||= ActiveSupport::StringInquirer.new Rails.env.split('_', 2)[0]
+      @_env_type ||= ActiveSupport::StringInquirer.new(Rails.env.split('_', 2)[0] || 'development')
     end
 
     def module
-      @_module ||= ActiveSupport::StringInquirer.new Rails.env.split('_', 2)[1]
+      @_module ||= ActiveSupport::StringInquirer.new(Rails.env.split('_', 2)[1] || 'university')
     end
   end
 end

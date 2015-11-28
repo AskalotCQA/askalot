@@ -4,7 +4,7 @@ class Social
 
   squire.source Rails.root.join('config', 'social.yml')
 
-  squire.namespace Rails.env_type.to_sym, base: :defaults
+  squire.namespace Rails.env.to_sym, base: :defaults
 
   module ClassMethods
     def networks

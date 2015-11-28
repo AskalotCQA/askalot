@@ -89,17 +89,32 @@ defaults: &defaults
     name: YouTube
     placeholder: 'http://youtube.com/username'
 
-development:
+development_university:
   <<: *defaults
 
-test:
+test_university:
   <<: *defaults
 
-staging:
+staging_university:
   <<: *defaults
 
-demo:
+demo_university:
   <<: *defaults
 
-production:
+production_university:
+  <<: *defaults
+
+development_mooc:
+  <<: *defaults
+
+test_mooc:
+  <<: *defaults
+
+staging_mooc:
+  <<: *defaults
+
+demo_mooc:
+  <<: *defaults
+
+production_mooc:
   <<: *defaults
