@@ -8,7 +8,7 @@ module MOOC
       helpers.each do |helper|
         ApplicationController.helper ('MOOC::' + helper.to_s).constantize
       end
-    end if Askalot::Application.is? MOOC
+    end if Rails.module == 'mooc'
 
     initializer :append_migrations do |app|
       unless app.root.to_s.match root.to_s
@@ -20,6 +20,6 @@ module MOOC
         app.config.paths['db'] = config.paths['db'].expanded
         ActiveRecord::Tasks::DatabaseTasks.db_dir = app.config.paths['db'].first
       end
-    end if Askalot::Application.is? MOOC
+    end if Rails.module == 'mooc'
   end
 end

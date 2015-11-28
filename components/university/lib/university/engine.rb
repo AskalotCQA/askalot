@@ -8,7 +8,7 @@ module University
       helpers.each do |helper|
         ApplicationController.helper ('University::' + helper.to_s).constantize
       end
-    end if Askalot::Application.is? University
+    end if Rails.module == 'university'
 
     initializer :append_migrations do |app|
       unless app.root.to_s.match root.to_s
@@ -20,6 +20,6 @@ module University
         app.config.paths['db'] = config.paths['db'].expanded
         ActiveRecord::Tasks::DatabaseTasks.db_dir = app.config.paths['db'].first
       end
-    end if Askalot::Application.is? University
+    end if Rails.module == 'university'
   end
 end

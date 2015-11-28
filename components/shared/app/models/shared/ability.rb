@@ -35,7 +35,7 @@ class Ability
 
     # TODO (jharinek) consider Authorable
     # only group creator can edit or delete group
-    can(:edit,   [University::Group]) { |resource| resource.creator == user}
+    can(:edit,   [University::Group]) { |resource| resource.creator == user }
     can(:delete, [University::Group]) { |resource| resource.creator == user }
 
     # only author can edit or delete document, question, answer, comment or evaluation

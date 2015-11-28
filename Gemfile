@@ -45,7 +45,7 @@ gem 'gemoji', '~> 1.5.0'
 
 # mailer
 gem 'roadie'
-gem 'letter_opener', group: :development_university
+gem 'letter_opener', group: :development
 
 # internationalization
 gem 'rails-i18n', '~> 4.0.0'
@@ -81,14 +81,14 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :development_university do
+group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
   gem 'rvm-capistrano', require: false
   gem 'bump', github: 'pavolzbell/bump'
 end
 
-group :development_university, :test_univeristy do
+group :development, :test do
   # debugging
   gem 'pry'
   gem 'pry-debugger'
@@ -115,7 +115,7 @@ group :development_university, :test_univeristy do
   gem 'activerecord-import'
 end
 
-group :demo, :staging_univeristy, :production_university, :experimental do
+group :demo, :staging, :production, :experimental do
   gem 'unicorn'
   gem 'rack-timeout'
   gem 'exception_notification'
@@ -126,8 +126,14 @@ group :demo, :staging_univeristy, :production_university, :experimental do
 end
 
 # TODO(zbell) resolve
-gem 'codeclimate-test-reporter', group: :test_univeristy, require: nil
+gem 'codeclimate-test-reporter', group: :test, require: nil
 
 gem 'shared', path: 'components/shared'
-gem 'university', path: 'components/university'
-gem 'mooc', path: 'components/mooc'
+
+group :university do
+  gem 'university', path: 'components/university'
+end
+
+group :mooc do
+  gem 'mooc', path: 'components/mooc'
+end
