@@ -1,4 +1,4 @@
-unless [:development, :test].include?(Rails.env.to_sym)
+unless [:development, :test].include?(Rails.env_type.to_sym)
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     address:              'smtp.mandrillapp.com',

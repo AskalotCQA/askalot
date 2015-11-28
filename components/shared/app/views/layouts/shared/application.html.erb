@@ -24,6 +24,6 @@
     <%= render 'shared/shared/locales' -%>
     <%= javascript_include_tag 'shared/application' -%>
     <%= yield :scripts -%>
-    <%= Garelic.monitoring 'UA-47906233-1' if Rails.env.production? -%>
+    <%= Garelic.monitoring 'UA-47906233-1' if Rails.env_type.production? -%>
   </body>
 </html>

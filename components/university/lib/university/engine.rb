@@ -3,7 +3,7 @@ module University
     isolate_namespace University
 
     config.to_prepare do
-      helpers = Shared.constants.select { |c| c.to_s.ends_with? 'Helper' }
+      helpers = University.constants.select { |c| c.to_s.ends_with? 'Helper' }
 
       helpers.each do |helper|
         ApplicationController.helper ('University::' + helper.to_s).constantize

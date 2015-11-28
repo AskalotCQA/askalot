@@ -11,11 +11,11 @@ require "sprockets/railtie"
 module Rails
   class << self
     def env_type
-      @env_type ||= Rails.env.split('_', 2)[0]
+      @_env_type ||= ActiveSupport::StringInquirer.new Rails.env.split('_', 2)[0]
     end
 
     def module
-      @module ||= Rails.env.split('_', 2)[1]
+      @_module ||= ActiveSupport::StringInquirer.new Rails.env.split('_', 2)[1]
     end
   end
 end

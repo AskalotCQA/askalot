@@ -1,5 +1,5 @@
 Askalot::Application.routes.draw do
-  mount University::Engine => '/', as: 'university' if Askalot::Application.config.module == 'University'
-  mount MOOC::Engine => '/', as: 'mooc' if Askalot::Application.config.module == 'MOOC'
+  mount University::Engine => '/', as: 'university' if Rails.module == 'university'
+  mount MOOC::Engine => '/', as: 'mooc' if Rails.module == 'mooc'
   mount Shared::Engine => '/', as: 'shared'
 end

@@ -108,7 +108,7 @@ class QuestionsController < ApplicationController
 
   def initialize_polling
     unless params[:poll]
-      session[:poll] = Rails.env.development? ? false : true if session[:poll].nil?
+      session[:poll] = Rails.env_type.development? ? false : true if session[:poll].nil?
 
       return @poll = params[:poll] = session[:poll]
     end

@@ -3,7 +3,7 @@ module MOOC
     isolate_namespace MOOC
 
     config.to_prepare do
-      helpers = Shared.constants.select { |c| c.to_s.ends_with? 'Helper' }
+      helpers = MOOC.constants.select { |c| c.to_s.ends_with? 'Helper' }
 
       helpers.each do |helper|
         ApplicationController.helper ('MOOC::' + helper.to_s).constantize

@@ -95,7 +95,7 @@ Devise.setup do |config|
   # Limiting the stretches to just one in testing will increase the performance of
   # your test suite dramatically. However, it is STRONGLY RECOMMENDED to not use
   # a value less than 10 in other environments.
-  config.stretches = Rails.env.test? ? 1 : 10
+  config.stretches = Rails.env_type.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
   # config.pepper = 'd22d3231a184fbb1f6d37219ffaa71d50a36c716dfd04176517619d2398235ef6b0acb92abefd12f9fbc9eafa36bde384db59351747522d9831d77226d37b525'
@@ -258,7 +258,7 @@ Devise.setup do |config|
 
   # Allow insecure token lookup for test environment in
   # order to easily use generated tokens
-  config.allow_insecure_token_lookup = true if Rails.env.test?
+  config.allow_insecure_token_lookup = true if Rails.env_type.test?
 
   # Inherit from engine's controller not the main controller
   config.parent_controller = 'Shared::ApplicationController'
