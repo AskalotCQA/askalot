@@ -3,12 +3,12 @@ module MOOC
     isolate_namespace MOOC
 
     config.to_prepare do
-      helpers = MOOC.constants.select { |c| c.to_s.ends_with? 'Helper' }
+      helpers = Shared.constants.select { |c| c.to_s.ends_with? 'Helper' }
 
       helpers.each do |helper|
-        ApplicationController.helper ('MOOC::' + helper.to_s).constantize
+        ApplicationController.helper ('Shared::' + helper.to_s).constantize
       end
-    end if Rails.module == 'mooc'
+    end
 
     initializer :append_migrations do |app|
       unless app.root.to_s.match root.to_s
@@ -20,6 +20,6 @@ module MOOC
         app.config.paths['db'] = config.paths['db'].expanded
         ActiveRecord::Tasks::DatabaseTasks.db_dir = app.config.paths['db'].first
       end
-    end if Rails.module == 'mooc'
+    end
   end
 end
