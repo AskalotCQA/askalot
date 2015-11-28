@@ -34,6 +34,6 @@ module Shared::EvaluationsHelper
   end
 
   def evaluation_title(evaluable, rank)
-    translate "evaluation.rank.#{evaluable.class.to_s.downcase}.#{rank}"
+    translate "evaluation.rank.#{evaluable.class.name.demodulize.downcase}.#{rank}"
   end
 end
