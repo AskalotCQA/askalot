@@ -1,5 +1,5 @@
 module University
-class DocumentsController < ApplicationController
+class DocumentsController < Shared::ApplicationController
   include Shared::Deletables::Destroy
   include Shared::Editables::Update
   include Shared::Watchables::Watch

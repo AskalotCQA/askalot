@@ -1,5 +1,5 @@
 module University
-class GroupsController < ApplicationController
+class GroupsController < Shared::ApplicationController
   include Shared::Deletables::Destroy
   include Shared::Editables::Update
 
