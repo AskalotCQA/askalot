@@ -1,4 +1,4 @@
-module Mooc
+module MOOC
   class ApplicationController < ActionController::Base
     protected
 
