@@ -14,6 +14,14 @@ GIT
       sidekiq (~> 2.15.2)
       squire (>= 1.2.1)
 
+GIT
+  remote: https://github.com/instructure/ims-lti.git
+  revision: 53612abf45311b3f425e75784dc85fdae2affc12
+  specs:
+    ims-lti (1.1.10)
+      builder
+      oauth (~> 0.4.5)
+
 PATH
   remote: components/mooc
   specs:
@@ -256,6 +264,7 @@ GEM
     newrelic_rpm (3.9.7.266)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
+    oauth (0.4.7)
     oauth2 (1.0.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0)
@@ -481,6 +490,7 @@ DEPENDENCIES
   handlebars_assets
   hirb
   i18n-js (~> 2.1.2)
+  ims-lti!
   jbuilder (~> 1.2)
   jquery-rails
   jquery-tablesorter (~> 1.9.5)
