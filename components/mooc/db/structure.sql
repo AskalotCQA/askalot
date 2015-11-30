@@ -248,8 +248,7 @@ CREATE TABLE categories (
     rgt integer,
     uuid character varying(255),
     shared boolean DEFAULT true,
-    askable boolean DEFAULT false,
-    lti_id character varying(255)
+    askable boolean DEFAULT false
 );
 
 
@@ -1177,8 +1176,8 @@ ALTER SEQUENCE user_profiles_id_seq OWNED BY user_profiles.id;
 CREATE TABLE users (
     id integer NOT NULL,
     login character varying(255) NOT NULL,
-    email character varying(255) DEFAULT ''::character varying,
-    encrypted_password character varying(255) DEFAULT NULL::character varying,
+    email character varying(255) DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
     ais_uid character varying(255),
     ais_login character varying(255),
     nick character varying(255) NOT NULL,
