@@ -248,8 +248,7 @@ CREATE TABLE categories (
     rgt integer,
     uuid character varying(255),
     shared boolean DEFAULT true,
-    askable boolean DEFAULT false,
-    lti_id character varying(255)
+    askable boolean DEFAULT false
 );
 
 
