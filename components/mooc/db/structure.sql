@@ -248,8 +248,7 @@ CREATE TABLE categories (
     rgt integer,
     uuid character varying(255),
     shared boolean DEFAULT true,
-    askable boolean DEFAULT false,
-    lti_id character varying(255)
+    askable boolean DEFAULT false
 );
 
 
@@ -3261,4 +3260,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151122112444');
 INSERT INTO schema_migrations (version) VALUES ('20151130051140');
 
 INSERT INTO schema_migrations (version) VALUES ('20151207221041');
+
+INSERT INTO schema_migrations (version) VALUES ('20151130051140');
 
