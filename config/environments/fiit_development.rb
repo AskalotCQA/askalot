@@ -33,4 +33,8 @@ Askalot::Application.configure do
 
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
+
+  config.action_dispatch.default_headers = {
+      'X-Frame-Options' => 'ALLOWALL'
+  }
 end
