@@ -1,6 +1,6 @@
 <%= form_messages key: tab %>
 
-<%= render 'administration/assignments/form', assignment: @assignment, categories: categories, tab: tab %>
+<%= render 'shared/administration/assignments/form', assignment: @assignment, categories: categories, tab: tab %>
 
 <ol class="administration-assignments">
   <% assignments.each do |assignment| %>

@@ -1,6 +1,6 @@
 <%= form_messages key: tab %>
 
-<%= render 'administration/categories/form', category: @category, categories: categories, tab: tab %>
+<%= render 'shared/administration/categories/form', category: @category, categories: categories, tab: tab %>
 
 <ol class="administration-categories">
   <% categories.each do |category| %>
