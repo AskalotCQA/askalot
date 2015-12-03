@@ -38,6 +38,10 @@ defaults: &defaults
     gold: 20
     silver: 35
 
+  oauth:
+    consumer_key: test
+    consumer_secret: secret
+
 development_university:
   <<: *defaults
 
