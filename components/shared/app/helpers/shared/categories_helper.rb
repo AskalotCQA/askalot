@@ -25,4 +25,19 @@ module Shared::CategoriesHelper
 
     text << teachers.map { |t| t.name }.join(', ')
   end
+
+  def recursive_tree_table(root_category)
+    "<table>#{recursive_tree_table_level(root_category.children)}</table>"
+  end
+
+  def recursive_tree_table_level(categories)
+    res = ''
+    categories.each do |category|
+      res << '<tr>'
+      res << "<td>#{category.name}</td>"
+      res << "</tr>\n"
+      res << recursive_tree_table_level(category.children)
+    end
+    res
+  end
 end
