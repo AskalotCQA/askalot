@@ -17,6 +17,8 @@ class Administration::CategoriesController < Administration::DashboardController
     @category = Shared::Category.find params[:id]
   end
 
+  include CategoriesHelper
+
   def create
     @category = Shared::Category.new(category_params)
 
