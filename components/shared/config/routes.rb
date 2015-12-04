@@ -56,12 +56,6 @@ Shared::Engine.routes.draw do
     post 'facebook',              to: 'facebook#index'
     post 'facebook/notification', to: 'facebook#notification'
 
-    resources :documents, only: [:update, :destroy] do
-      resources :questions, only: [] do
-        get :document_index, on: :collection, as: :index
-      end
-    end
-
     resources :categories, only: [:index] do
       concerns :searchable
       concerns :watchable
