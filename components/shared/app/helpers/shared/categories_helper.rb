@@ -27,13 +27,13 @@ module Shared::CategoriesHelper
   end
 
   def recursive_tree_table(root_category)
-    "<table>#{recursive_tree_table_level(root_category.children)}</table>"
+    "<table class=\"treegrid\"><tr class=\"treegrid-404\"></tr>#{recursive_tree_table_level(root_category.children)}</table>"
   end
 
   def recursive_tree_table_level(categories)
     res = ''
     categories.each do |category|
-      res << '<tr>'
+      res << "<tr class=\"treegrid-#{category.id} treegird-parent-#{category.parent_id}\">"
       res << "<td>#{category.name}</td>"
       res << "</tr>\n"
       res << recursive_tree_table_level(category.children)
