@@ -22,6 +22,7 @@
 #= require moment
 #= require moment/sk.js
 #= require jquery-textcomplete
+#= require jquery.treegrid.min.js
 #
 #= require d3
 #= require cal-heatmap
