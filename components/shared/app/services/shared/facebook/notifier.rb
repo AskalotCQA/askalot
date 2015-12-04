@@ -11,8 +11,8 @@ module Shared::Facebook
       application = FbGraph::Application.new(Shared::Configuration.facebook.application.id, secret: Shared::Configuration.facebook.application.secret)
 
       notifications.select { |notification| notification.recipient.omniauth_token }.each do |notification|
-        content          = controller.render_to_string(partial: 'facebook/notification_content', locals: { notification: notification }).strip
-        link             = controller.render_to_string(partial: 'facebook/notification_link', locals: { notification: notification, content: content }).strip
+        content          = controller.render_to_string(partial: 'shared/facebook/notification_content', locals: { notification: notification }).strip
+        link             = controller.render_to_string(partial: 'shared/facebook/notification_link', locals: { notification: notification, content: content }).strip
         token            = notification.recipient.omniauth_token
         token_validation = application.debug_token token
 
