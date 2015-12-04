@@ -1,21 +1,21 @@
 module Mooc
-class User < Shared::User
-  ROLES = [:Student, :Administrator, :AskalotAdministrator]
+  class User < Shared::User
+    ROLES = [:Student, :Administrator, :Askalotadministrator]
 
-  symbolize :role, in: ROLES
+    symbolize :role, in: ROLES
 
-  protected
+    protected
 
-  def self.create_without_confirmation!(attributes)
-    user = User.new(attributes)
+    def self.create_without_confirmation!(attributes)
+      user = User.new(attributes)
 
-    user.skip_confirmation!
-    user.save!
-    user
+      user.skip_confirmation!
+      user.save!
+      user
+    end
+
+    def password_required?
+      return false
+    end
   end
-
-  def password_required?
-    return false
-  end
-end
 end
