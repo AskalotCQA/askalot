@@ -24,7 +24,7 @@
           <% end %>
         </div>
         <div class="col-xs-4 col-sm-12 col-md-4">
-          <%= link_to question_path(question, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
+          <%= link_to shared.question_path(question, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
             <span class="question-metric-value"><%= question.answers.size %></span>
             <%= t('count.answer', count: question.answers.size) %>
           <% end %>
