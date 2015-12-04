@@ -12,7 +12,7 @@
   <% if help %>
     <div class="col-xs-7">
       <div class="markdown-help">
-        <%= t('markdown.documentation', link: link_to('Markdown', help_path(anchor: :markdown), analytics_attributes(:markdown, :help))).html_safe %>
+        <%= t('markdown.documentation', link: link_to('Markdown', shared.help_path(anchor: :markdown), analytics_attributes(:markdown, :help))).html_safe %>
       </div>
     </div>
   <% end %>

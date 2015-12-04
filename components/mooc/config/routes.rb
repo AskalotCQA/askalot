@@ -6,8 +6,6 @@ Mooc::Engine.routes.draw do
   resources :units, only: [:index, :new, :create, :show, :update, :destroy]
 
   resources :units, only: [:update, :destroy] do
-    resources :questions, only: [] do
-      get :document_index, on: :collection, as: :index
-    end
+    resources :questions, only: [:index, :create, :show, :update, :destroy]
   end
 end
