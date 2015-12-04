@@ -59,7 +59,8 @@ class User < ActiveRecord::Base
     validates key, format: { with: network.regexp }, allow_blank: true
   end
 
-  symbolize :role, in: ROLES
+  # TODO (filip jandura) Move to University engine only
+  symbolize :role, in: ROLES if Rails.module.university?
 
   before_validation :resolve_nick, on: :create
 
