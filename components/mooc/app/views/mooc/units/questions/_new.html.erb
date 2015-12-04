@@ -1,12 +1,14 @@
 <div id="document-content">
-  <h3 id="new-unit-question-title" class="form-title btn btn-success"><%= t 'question.new.title' %></h3>
+  <a href="<%= index_document_questions_path(document_id: @question.document.id) %>" data-remote="true" class="btn btn-sm btn-default">
+    <%= icon_tag :list, label: t('question.list') %>
+  </a>
 
-  <%= form_for question, url: shared.questions_path do |f| %>
+  <h3 class="form-title"><%= t 'question.new.title' %></h3>
+
+  <%= form_for question, remote: true do |f| %>
     <%= form_messages_for question %>
 
-    <%= f.hidden_field :category_id, value: unit.id %>
-
-    <%= f.hidden_field :unit_view, value: true %>
+    <%= f.hidden_field :document_id %>
 
     <div class="form-group">
       <%= f.label :title %>
@@ -21,16 +23,10 @@
 
     <div class="form-group">
       <%= f.label :tag_list %>
-        <ul id="question-category-tags" class="category-tags nav nav-labels">
-          <% if question.category %>
-            <% question.category.effective_tags.each do |category| %>
-              <li>
-                <span class="label label-info"><%= category %></span>
-              </li>
-            <% end %>
-          <% end %>
-        </ul>
-        <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
+      <ul id="question-category-tags" class="category-tags nav nav-labels">
+        <!--TODO (jharinek) add group(document) tags-->
+      </ul>
+      <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
     </div>
 
     <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
