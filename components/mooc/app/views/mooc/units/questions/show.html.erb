@@ -1,11 +1,11 @@
 <div id="document-content">
-  <a href="<%= mooc.unit_path(id: @question.category.id) %>" class="btn btn-sm btn-default">
+  <a href="<%= units_path(@question.category) %>" class="btn btn-sm btn-default">
     <%= icon_tag :list, label: t('question.list') %>
   </a>
 
   <div id="document-question">
     <div class="row">
-      <div class="col-xs-9 col-sm-10 col-md-10">
+      <div class="col-xs-9 col-sm-7 col-md-10">
         <div id="question-title">
           <h3 class="question-title">
             <%= @question.title %>
