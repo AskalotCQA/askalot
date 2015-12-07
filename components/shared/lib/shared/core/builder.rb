@@ -6,7 +6,7 @@ module Shared::Core
       _, model_name = *method.to_s.match(/\Acreate_(?<model>\w+)_by\z/)
 
       if model_name
-        model_name = model_name.classify
+        model_name = 'Shared::' + model_name.classify
         model      = model_name.constantize rescue nil
 
         raise ArgumentError.new("Cannot find model '#{model_name}'") unless model

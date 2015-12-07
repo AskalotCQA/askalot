@@ -255,7 +255,7 @@ namespace :sample_data do
 
     followings.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        User.find_by(nick: input[:follower]).toggle_following_by! User.find_by(nick: input[:followee])
+        Shared::User.find_by(nick: input[:follower]).toggle_following_by! User.find_by(nick: input[:followee])
       end
     end
   end
@@ -286,9 +286,9 @@ namespace :sample_data do
 
     groups.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        user = User.find_by(nick: input[:user])
+        user = Shared::User.find_by(nick: input[:user])
 
-        group = Group.create!(
+        group = University::Group.create!(
           creator_id: user.id,
           title: input[:title],
           description: input[:description],
@@ -307,10 +307,10 @@ namespace :sample_data do
 
     documents.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        user = User.find_by(nick: input[:user])
-        group = Group.find_by(title: input[:group])
+        user = Shared::User.find_by(nick: input[:user])
+        group = University::Group.find_by(title: input[:group])
 
-        document = Document.create!(
+        document = University::Document.create!(
           author_id: user.id,
           group_id: group.id,
           title: input[:title],
@@ -339,7 +339,7 @@ namespace :sample_data do
 
     watchings.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        Category.find_by(name: input[:category]).toggle_watching_by! User.find_by(nick: input[:user])
+        Shared::Category.find_by(name: input[:category]).toggle_watching_by! User.find_by(nick: input[:user])
       end
     end
   end
@@ -440,13 +440,13 @@ namespace :sample_data do
 
     questions.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        category = Category.find_by(name: input[:category]) unless input[:category].nil?
-        document = Document.find_by(title: input[:document]) unless input[:document].nil?
-        user = User.find_by(nick: input[:user])
-        editor = User.find_by(nick: input[:editor]) unless input[:editor].nil?
-        mention = User.find_by(nick: input[:editor]) unless input[:mention].nil?
+        category = Shared::Category.find_by(name: input[:category]) unless input[:category].nil?
+        document = Shared::Document.find_by(title: input[:document]) unless input[:document].nil?
+        user = Shared::User.find_by(nick: input[:user])
+        editor = Shared::User.find_by(nick: input[:editor]) unless input[:editor].nil?
+        mention = Shared::User.find_by(nick: input[:editor]) unless input[:mention].nil?
 
-        question = Question.create!(
+        question = Shared::Question.create!(
           author_id: user.id,
           category_id: category.nil? ? nil : category.id,
           document_id: document.nil? ? nil : document.id,
@@ -542,10 +542,10 @@ namespace :sample_data do
 
     answers.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        question = Question.find_by(title: input[:question])
-        user = User.find_by(nick: input[:user])
-        editor = User.find_by(nick: input[:editor]) unless input[:editor].nil?
-        mention = User.find_by(nick: input[:editor]) unless input[:mention].nil?
+        question = Shared::Question.find_by(title: input[:question])
+        user = Shared::User.find_by(nick: input[:user])
+        editor = Shared::User.find_by(nick: input[:editor]) unless input[:editor].nil?
+        mention = Shared::User.find_by(nick: input[:editor]) unless input[:mention].nil?
 
         answer = Answer.create!(
           author_id: user.id,
@@ -618,17 +618,17 @@ namespace :sample_data do
 
     comments.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        user = User.find_by(nick: input[:user])
-        answerer = User.find_by(nick: input[:answerer]) unless input[:answerer].nil?
-        editor = User.find_by(nick: input[:editor]) unless input[:editor].nil?
-        mention = User.find_by(nick: input[:editor]) unless input[:mention].nil?
+        user = Shared::User.find_by(nick: input[:user])
+        answerer = Shared::User.find_by(nick: input[:answerer]) unless input[:answerer].nil?
+        editor = Shared::User.find_by(nick: input[:editor]) unless input[:editor].nil?
+        mention = Shared::User.find_by(nick: input[:editor]) unless input[:mention].nil?
 
-        question = Question.find_by(title: input[:question])
+        question = Shared::Question.find_by(title: input[:question])
 
-        commentable = Question.find_by(title: input[:question]) if input[:commentable_type] == "Question"
-        commentable = Answer.find_by(question_id: question.id, author_id: answerer.id) if input[:commentable_type] == "Answer"
+        commentable = Shared::Question.find_by(title: input[:question]) if input[:commentable_type] == "Question"
+        commentable = Shared::Answer.find_by(question_id: question.id, author_id: answerer.id) if input[:commentable_type] == "Answer"
 
-        comment = Comment.create!(
+        comment = Shared::Comment.create!(
           author_id: user.id,
           commentable_id: commentable.id,
           commentable_type: input[:commentable_type],
@@ -660,8 +660,8 @@ namespace :sample_data do
 
     favors.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        question = Question.find_by(title: input[:question])
-        user = User.find_by(nick: input[:user])
+        question = Shared::Question.find_by(title: input[:question])
+        user = Shared::User.find_by(nick: input[:user])
 
         favorite = question.toggle_favoring_by! user
         Shared::Events::Dispatcher.dispatch :create, user, favorite, for: question.watchers
@@ -689,8 +689,8 @@ namespace :sample_data do
 
     votes.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        question = Question.find_by(title: input[:question])
-        user = User.find_by(nick: input[:user])
+        question = Shared::Question.find_by(title: input[:question])
+        user = Shared::User.find_by(nick: input[:user])
 
         vote = question.toggle_vote_by! user, input[:positive]
         Shared::Events::Dispatcher.dispatch :create, user, vote, for: question.watchers
@@ -714,10 +714,10 @@ namespace :sample_data do
 
     votes.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        question = Question.find_by(title: input[:question])
-        answerer = User.find_by(nick: input[:answerer])
-        answer = Answer.find_by(question_id: question.id, author_id: answerer.id)
-        user = User.find_by(nick: input[:user])
+        question = Shared::Question.find_by(title: input[:question])
+        answerer = Shared::User.find_by(nick: input[:answerer])
+        answer = Shared::Answer.find_by(question_id: question.id, author_id: answerer.id)
+        user = Shared::User.find_by(nick: input[:user])
 
         vote = answer.toggle_vote_by! user, input[:positive]
         Shared::Events::Dispatcher.dispatch :create, user, vote, for: question.watchers
@@ -737,10 +737,10 @@ namespace :sample_data do
 
     labellings.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        question = Question.find_by(title: input[:question])
-        answerer = User.find_by(nick: input[:answerer])
-        answer = Answer.find_by(question_id: question.id, author_id: answerer.id)
-        user = User.find_by(nick: input[:user])
+        question = Shared::Question.find_by(title: input[:question])
+        answerer = Shared::User.find_by(nick: input[:answerer])
+        answer = Shared::Answer.find_by(question_id: question.id, author_id: answerer.id)
+        user = Shared::User.find_by(nick: input[:user])
 
         labeling = answer.toggle_labeling_by! user, :best
         Shared::Events::Dispatcher.dispatch :create, user, labeling, for: question.watchers
@@ -809,8 +809,8 @@ namespace :sample_data do
 
     views.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        question = Question.find_by(title: input[:question])
-        user = User.find_by(nick: input[:user])
+        question = Shared::Question.find_by(title: input[:question])
+        user = Shared::User.find_by(nick: input[:user])
 
         view = question.views.create! viewer: user
         Shared::Events::Dispatcher.dispatch :create, user, view, for: question.watchers
