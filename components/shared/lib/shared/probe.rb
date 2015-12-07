@@ -1,6 +1,5 @@
 require 'shared/probe/index'
 require 'shared/probe/mapper'
-require 'shared/probe/proxy'
 require 'shared/probe/base'
 require 'shared/probe/import'
 require 'shared/probe/import/simple'
@@ -10,6 +9,7 @@ require 'shared/probe/results'
 require 'shared/probe/search'
 require 'shared/probe/analyze'
 require 'shared/probe/sanitizer'
+require_dependency 'shared/probe/proxy'
 
 module Shared::Probe
   extend ActiveSupport::Concern

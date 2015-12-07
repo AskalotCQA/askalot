@@ -240,6 +240,8 @@ sk:
       shared/category:
         name: "Názov"
         tags: "Tagy"
+        shared: "Zobraziť aj otázky z ostatných súvisiacich kategórií"
+        askable: "Otázky môžu byť položené priamo v tejto kategórii"
 
       shared/changelog:
         text: "Text"

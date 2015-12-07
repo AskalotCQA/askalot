@@ -32,7 +32,8 @@ class Category < ActiveRecord::Base
   end
 
   def teachers
-    assignments.where({ category_id: id, role_id: 2 }).map { |t| t.user }
+    list = association(:assignments).loaded? ? assignments.select { |item| item.role_id = 2 } : assignments.where({ role_id: 2 })
+    list.map { |t| t.user }
   end
 
   def has_teachers?

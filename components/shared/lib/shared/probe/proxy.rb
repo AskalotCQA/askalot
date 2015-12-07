@@ -1,4 +1,4 @@
-require 'shared/probe/index'
+require_dependency 'shared/probe/index'
 require 'shared/probe/search'
 require 'shared/probe/analyze'
 

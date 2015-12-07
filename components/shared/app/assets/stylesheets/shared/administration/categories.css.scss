@@ -1,13 +1,5 @@
 // collection
 
 .administration-categories {
-  @extend .list-unstyled;
-
-  margin: 15px 0;
-  border-top: 1px solid $gray-lighter;
-  border-bottom: 1px solid $gray-lighter;
-
-  li {
-    margin: 15px 0;
-  }
+  margin-top: 15px;
 }

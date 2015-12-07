@@ -228,6 +228,8 @@ en:
       shared/category:
         name: "Name"
         tags: "Tags"
+        shared: "Show questions also from other related categories"
+        askable: "Questions can be asked directly in this category"
 
       shared/changelog:
         text: "Text"
