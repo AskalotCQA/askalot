@@ -1,0 +1,43 @@
+<%= form_messages key: tab %>
+
+<%= render 'shared/administration/categories/form', category: @category, categories: categories, tab: tab %>
+
+<% content_for :categories_header do %>
+    <th></th>
+    <th></th>
+    <th>
+      <%= fa_icon :group, tooltip_attributes(t 'activerecord.attributes.shared/category.shared') %>
+    </th>
+    <th>
+      <%= fa_icon :question, tooltip_attributes(t 'activerecord.attributes.shared/category.askable') %>
+    </th>
+    <th></th>
+<% end %>
+
+<div class="administration-categories">
+  <%= tree_table(categories, yield(:categories_header)) do |category| %>
+    <td>
+      <%= link_to_category category, target: '_blank' %>
+    </td>
+
+    <td>
+      <% category.tags.each do |tag| %>
+        <span class="label label-inverse"><%= tag %></span>
+      <% end %>
+    </td>
+
+    <td>
+      <%= check_box_tag 'shared[]', category.id, category.shared, tooltip_attributes(t 'activerecord.attributes.shared/category.shared') %>
+    </td>
+
+    <td>
+      <%= check_box_tag 'askable[]', category.id, category.askable, tooltip_attributes(t 'activerecord.attributes.shared/category.askable').merge({class: 'treetable-checkbox'}) %>
+    </td>
+
+    <td>
+      <div class="pull-right">
+        <%= render 'shared/administration/categories/editing', category: category, tab: tab %>
+      </div>
+    </td>
+  <% end %>
+</div>
