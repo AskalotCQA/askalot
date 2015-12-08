@@ -14,8 +14,6 @@ $('.update-settings').click (e) ->
   $(".treetable-checkbox:checked").each ->
     data[$(this).attr('name')].push $(this).val()
 
-  console.log data
-
   $.post $(this).data('url'), data, (response) ->
     $this.prop 'disabled', false
     $this.text original_text
