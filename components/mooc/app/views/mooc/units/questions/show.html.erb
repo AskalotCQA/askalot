@@ -1,5 +1,5 @@
 <div id="document-content">
-  <a href="<%= units_path(@question.category) %>" class="btn btn-sm btn-default">
+  <a href="<%= mooc.unit_path(id: @question.category.id) %>" class="btn btn-sm btn-default">
     <%= icon_tag :list, label: t('question.list') %>
   </a>
 
