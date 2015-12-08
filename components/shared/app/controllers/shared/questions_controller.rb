@@ -63,8 +63,10 @@ class QuestionsController < ApplicationController
 
       flash[:notice] = t('question.create.success')
 
+      return redirect_to mooc.unit_question_path(unit_id: params[:question][:category_id], id: @question.id) if params[:question][:unit_view]
       redirect_to question_path(@question)
     else
+      #TODO (filip jandura) render mooc new question form
       render :new
     end
   end
