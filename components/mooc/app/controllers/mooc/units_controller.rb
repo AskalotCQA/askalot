@@ -7,8 +7,7 @@ module Mooc
     include Shared::Markdown::Process
     include Shared::MarkdownHelper
 
-    skip_before_filter :verify_authenticity_token
-    skip_before_filter :login_required
+    skip_before_filter  :verify_authenticity_token
 
     layout 'mooc/unit'
 
@@ -18,12 +17,11 @@ module Mooc
       login unless signed_in?
 
       if params[:resource_link_id]
-        @unit = Mooc::Category.find_by lti_id: params[:resource_link_id]
-        @unit = Mooc::Category.create(name: params[:resource_link_id], lti_id: params[:resource_link_id]) if @unit.nil?
+        @unit = Shared::Category.find_by lti_id: params[:resource_link_id]
+        @unit = Shared::Category.create(name: params[:resource_link_id], lti_id: params[:resource_link_id]) if @unit.nil?
       else
-        @unit = Mooc::Category.find params[:id]
+        @unit = Shared::Category.find params[:id]
       end
-
       @questions = @unit.questions.order(created_at: :desc).page(params[:page]).per(20)
     end
 
