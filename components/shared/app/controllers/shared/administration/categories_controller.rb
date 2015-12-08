@@ -53,6 +53,14 @@ class Administration::CategoriesController < Administration::DashboardController
     render json: { success: true }
   end
 
+  def update_settings
+    Shared::Category.update_all askable: false
+    Shared::Category.update_all shared: false
+    Shared::Category.where(id: params[:askable]).update_all askable: true
+    Shared::Category.where(id: params[:shared]).update_all shared: true
+    render json: { success: true }
+  end
+
   # TODO(zbell) add destroy?
 
   private

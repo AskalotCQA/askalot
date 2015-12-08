@@ -15,9 +15,11 @@
 <% end %>
 
 <div class="administration-categories">
+  <%= render 'shared/administration/categories/update_settings' %>
+
   <%= tree_table(categories, yield(:categories_header)) do |category| %>
     <td>
-      <%= link_to_category category, target: '_blank' %>
+      <%= link_to_category category, tooltip_attributes(category.full_public_name).merge(target: '_blank') %>
     </td>
 
     <td>
@@ -36,8 +38,11 @@
 
     <td>
       <div class="pull-right">
+        <%= fa_icon 'plus-circle', tooltip_attributes(t 'administration.category.create.action').merge({class: 'text-success add-category', data: {id: category.id, uuid: category.uuid}}) %>
         <%= render 'shared/administration/categories/editing', category: category, tab: tab %>
       </div>
     </td>
   <% end %>
+
+  <%= render 'shared/administration/categories/update_settings' %>
 </div>
