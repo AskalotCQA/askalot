@@ -65,6 +65,24 @@ class Category < ActiveRecord::Base
     self.full_public_name = names.join(' - ')
   end
 
+  def all_directly_related_questions
+    return questions unless self.shared
+
+    category_ids = Shared::Category.select('id').where("uuid = ? AND created <= ?", self.uuid, self.created)
+    Shared::Question.where('category_id IN (?)', category_ids)
+  end
+
+  def all_related_questions
+    if self.shared
+      uuids = self.self_and_descendants.map { |item| item.uuid }.reject { |item| item.nil? || item.blank? || item.empty?}
+      category_ids = Shared::Category.select('id').where("uuid IN (?) AND created <= ?", uuids, self.created)
+    else
+      category_ids = self.self_and_descendants.map { |item| item.id }
+    end
+
+    Shared::Question.where('category_id IN (?)', category_ids)
+  end
+
   def count
     questions.reload.size
   end
