@@ -248,7 +248,8 @@ CREATE TABLE categories (
     rgt integer,
     uuid character varying(255),
     shared boolean DEFAULT true,
-    askable boolean DEFAULT false
+    askable boolean DEFAULT false,
+    lti_id character varying(255)
 );
 
 
@@ -1176,8 +1177,8 @@ ALTER SEQUENCE user_profiles_id_seq OWNED BY user_profiles.id;
 CREATE TABLE users (
     id integer NOT NULL,
     login character varying(255) NOT NULL,
-    email character varying(255) DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
+    email character varying(255) DEFAULT ''::character varying,
+    encrypted_password character varying(255) DEFAULT NULL::character varying,
     ais_uid character varying(255),
     ais_login character varying(255),
     nick character varying(255) NOT NULL,
@@ -3260,4 +3261,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151122112444');
 INSERT INTO schema_migrations (version) VALUES ('20151207231221');
 
 INSERT INTO schema_migrations (version) VALUES ('20151130051140');
+
+INSERT INTO schema_migrations (version) VALUES ('20151207221041');
 
