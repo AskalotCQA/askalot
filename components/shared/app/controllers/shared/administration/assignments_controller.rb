@@ -1,6 +1,12 @@
 module Shared
-class Administration::AssignmentsController < Administration::DashboardController
+class Administration::AssignmentsController < AdministrationController
   authorize_resource class: Shared::Assignment
+
+  def index
+    @assignments = Shared::Assignment.includes(:user, :category, :role).order('categories.name', 'users.nick')
+    @assignments.each { |a| a.category.name = a.category.parent.name + ' - ' + a.category.name unless a.category.root? }
+    @assignment ||= Shared::Assignment.new
+  end
 
   def create
     @assignment = Shared::Assignment.new(assignment_params)
@@ -12,7 +18,7 @@ class Administration::AssignmentsController < Administration::DashboardControlle
     else
       form_error_messages_for @assignment, flash: flash.now, key: params[:tab]
 
-      render_dashboard
+      render 'shared/administration/assignments/index'
     end
   end
 
@@ -25,7 +31,7 @@ class Administration::AssignmentsController < Administration::DashboardControlle
       form_error_messages_for @assignment, key: params[:tab]
     end
 
-    redirect_to administration_root_path(tab: params[:tab])
+    redirect_to administration_assignments_path
   end
 
   def destroy
@@ -37,7 +43,7 @@ class Administration::AssignmentsController < Administration::DashboardControlle
       form_error_message t('assignment.delete.failure'), key: params[:tab]
     end
 
-    redirect_to administration_root_path(tab: params[:tab])
+    redirect_to administration_assignments_path
   end
 
   private

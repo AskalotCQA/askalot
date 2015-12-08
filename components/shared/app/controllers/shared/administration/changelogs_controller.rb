@@ -1,6 +1,11 @@
 module Shared
-class Administration::ChangelogsController < Administration::DashboardController
-  authorize_resource
+class Administration::ChangelogsController < AdministrationController
+  authorize_resource class: Shared::Changelog
+
+  def index
+    @changelogs = Shared::Changelog.all.sort
+    @changelog  ||= Shared::Changelog.new
+  end
 
   def create
     @changelog = Shared::Changelog.new(changelog_params)
@@ -12,7 +17,7 @@ class Administration::ChangelogsController < Administration::DashboardController
     else
       form_error_messages_for @changelog, flash: flash.now, key: params[:tab]
 
-      render_dashboard
+      render 'shared/administration/changelogs/index'
     end
   end
 
@@ -25,7 +30,7 @@ class Administration::ChangelogsController < Administration::DashboardController
       form_error_messages_for @changelog, key: params[:tab]
     end
 
-    redirect_to administration_root_path(tab: params[:tab])
+    redirect_to administration_changelogs_path
   end
 
   def destroy
@@ -37,7 +42,7 @@ class Administration::ChangelogsController < Administration::DashboardController
       form_error_message t('changelog.delete.failure'), key: params[:tab]
     end
 
-    redirect_to administration_root_path(tab: params[:tab])
+    redirect_to administration_changelogs_path
   end
 
   private

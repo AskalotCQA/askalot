@@ -1,5 +1,11 @@
 module Shared
-class Administration::EmailsController < Administration::DashboardController
+class Administration::EmailsController < AdministrationController
+
+  def index
+    authorize! :create, Shared::Email
+
+    @email ||= Shared::Email.new
+  end
 
   def create
     authorize! :create, Shared::Email
@@ -16,7 +22,8 @@ class Administration::EmailsController < Administration::DashboardController
         form_message :error, t('email.create.failure'), key: 'emails'
       end
     end
-    redirect_to administration_root_path(tab: 'emails')
+
+    redirect_to administration_emails_path
   end
 
   private

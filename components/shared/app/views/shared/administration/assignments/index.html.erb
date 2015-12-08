@@ -1,0 +1,57 @@
+<%= render layout: 'shared/administration/layout' do %>
+  <%= render 'shared/administration/assignments/form', assignment: @assignment %>
+
+  <ol class="administration-assignments">
+    <% @assignments.each do |assignment| %>
+      <li>
+        <div class="row">
+          <div class="col-xs-4">
+            <%= link_to_category assignment.category %>
+          </div>
+
+          <div class="col-xs-4">
+            <%= link_to_user assignment.user %>
+            <span class="text-muted">(<%= assignment.user.login %>)</span>
+          </div>
+
+          <div class="col-xs-3">
+            <%= assignment.role.name %>
+            <span class="text-muted">(<%= assignment.user.role %>)</span>
+          </div>
+
+          <div class="col-xs-1">
+            <div class="pull-right">
+              <%= render 'shared/administration/assignments/editing', assignment: assignment %>
+              <span class="text-muted">&middot;</span>
+              <%= render 'shared/administration/assignments/deleting', assignment: assignment %>
+            </div>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+
+  <ol class="administration-users">
+    <% Shared::User.includes(:assignments).where.not(role: :student).order(:nick).each do |user| %>
+      <li>
+        <div class="row">
+          <div class="col-xs-4">
+            <% unless user.assignments.size.zero? %>
+              <%= icon_tag :check, class: :'text-success' %>
+              <span class="text-muted">(<%= user.assignments.size %>)</span>
+            <% end %>
+          </div>
+
+          <div class="col-xs-4">
+            <%= link_to_user user %>
+            <span class="text-muted">(<%= user.login %>)</span>
+          </div>
+
+          <div class="col-xs-4">
+            <span class="text-muted"><%= user.role %></span>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+<% end %>

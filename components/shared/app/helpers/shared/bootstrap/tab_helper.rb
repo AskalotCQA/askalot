@@ -5,7 +5,10 @@ module Shared::Bootstrap::TabHelper
 
     options = defaults.deep_merge(options)
 
-    classes.merge! class: :active if params[:tab].to_sym == tab.to_sym
+    is_tab        = params[:tab] && params[:tab].to_sym == tab.to_sym
+    is_controller = params[:controller] && params[:controller].to_sym == tab.to_sym
+
+    classes.merge! class: :active if is_tab || is_controller
 
     content_tag :li, classes do
       block_given? ? yield(options) : link_to(title, path, options)

@@ -1,18 +1,5 @@
 class UpdateCategoriesTree < ActiveRecord::Migration
   def up
-    create_table :category_depths do |t|
-      t.integer :depth, index: true
-      t.string :name
-      t.boolean :is_in_public_name
-
-      t.timestamps
-    end
-
-    Shared::CategoryDepth.create!({depth: 0, name: 'Root', is_in_public_name: false})
-    Shared::CategoryDepth.create!({depth: 1, name: 'Školský rok', is_in_public_name: false})
-    Shared::CategoryDepth.create!({depth: 2, name: 'Predmet', is_in_public_name: true})
-    Shared::CategoryDepth.create!({depth: 3, name: 'Časť', is_in_public_name: true})
-
     add_column :categories, :depth, :integer, index: true
     add_column :categories, :children_count, :integer
     add_column :categories, :full_tree_name, :string, index: true
@@ -45,7 +32,7 @@ class UpdateCategoriesTree < ActiveRecord::Migration
         full_public_path = []
         path.each do |id|
           full_tree_path << finder[id].name if finder[id] && finder[id].name != 'root'
-          full_public_path << finder[id].name if finder[id] && [2,3].include?(finder[id].level)
+          full_public_path << finder[id].name if finder[id] && Shared::CategoryDepth.public_depths.include?(finder[id].level)
         end
       end
 
@@ -65,7 +52,5 @@ class UpdateCategoriesTree < ActiveRecord::Migration
     remove_column :categories, :full_tree_name
     remove_column :categories, :full_public_name
     remove_index :categories, :lft
-
-    remove_table :category_depths
   end
 end

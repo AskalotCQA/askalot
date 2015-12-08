@@ -1,4 +1,4 @@
-<%= form_for changelog, url: administration_changelogs_path(changelog, tab: tab) do |f| %>
+<%= form_for changelog, url: administration_changelogs_path(changelog) do |f| %>
   <div class="form-group">
     <%= f.label :version %>
     <%= f.text_field :version, class: :'form-control' %>

@@ -4,17 +4,30 @@ class Administration::CategoriesController < Administration::DashboardController
 
   include CategoriesHelper
 
+  def index
+    @categories  = Shared::Category.includes(:assignments).order(:lft)
+    @category   ||= Shared::Category.new
+  end
+
+  def new
+    @category = Shared::Category.new params.permit([:parent_id, :uuid])
+  end
+
+  def edit
+    @category = Shared::Category.find params[:id]
+  end
+
   def create
     @category = Shared::Category.new(category_params)
 
     if @category.save
       form_message :notice, t('category.create.success'), key: params[:tab]
 
-      redirect_to administration_root_path(tab: params[:tab])
+      redirect_to administration_categories_path
     else
       form_error_messages_for @category, flash: flash.now, key: params[:tab]
 
-      render_dashboard
+      render :new
     end
   end
 
@@ -27,7 +40,7 @@ class Administration::CategoriesController < Administration::DashboardController
       form_error_messages_for @category, key: params[:tab]
     end
 
-    redirect_to administration_root_path(tab: params[:tab])
+    redirect_to administration_categories_path
   end
 
   def update_settings
