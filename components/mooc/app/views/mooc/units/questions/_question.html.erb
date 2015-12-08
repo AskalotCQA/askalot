@@ -4,7 +4,7 @@
       <div class="question-preview">
         <h4>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
-          <%= link_to question.title, unit_question_path(id: question.id, unit_id: @unit.id) %>
+          <%= link_to question.title, mooc.unit_question_path(id: question.id, unit_id: @unit.id) %>
           <small class="pull-right"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
         </h4>
 
@@ -31,7 +31,7 @@
           <% end %>
         </div>
         <div class="col-xs-3 col-sm-6">
-          <%= link_to unit_question_path(question, @unit, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
+          <%= link_to mooc.unit_question_path(question, @unit, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
             <span class="question-metric-value"><%= question.answers.size %></span>
             <%= t('count.answer', count: question.answers.size) %>
           <% end %>
