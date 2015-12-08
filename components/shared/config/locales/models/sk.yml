@@ -239,8 +239,9 @@ sk:
 
       shared/category:
         name: "Názov"
+        uuid: "UUID"
         tags: "Tagy"
-        shared: "Zobraziť aj otázky z ostatných súvisiacich kategórií"
+        shared: "Zobraziť aj otázky z predošlých súvisiacich kategórií"
         askable: "Otázky môžu byť položené priamo v tejto kategórii"
 
       shared/changelog:

@@ -73,9 +73,10 @@ class Ability
 
       can(:close,  [Shared::Question]) { |resource| resource.answers.empty? && !resource.closed }
 
-      can :create,  [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::Email]
-      can :update,  [Shared::Assignment, Shared::Category, Shared::Changelog]
-      can :destroy, [Shared::Assignment, Shared::Category, Shared::Changelog]
+      can :create,          [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::Email]
+      can :update,          [Shared::Assignment, Shared::Category, Shared::Changelog]
+      can :destroy,         [Shared::Assignment, Shared::Category, Shared::Changelog]
+      can :update_settings, [Shared::Category]
 
       can :vote, :all
     end

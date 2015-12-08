@@ -33,6 +33,7 @@
 #= require ./helper
 #= require ./effects
 #
+#= require ./administration
 #= require ./documents
 #= require ./questions
 #= require ./answers

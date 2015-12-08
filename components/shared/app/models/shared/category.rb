@@ -19,23 +19,24 @@ class Category < ActiveRecord::Base
   scope :askable, -> { where(askable: true) }
 
   before_save :refresh_names
+  after_save :refresh_descendants_names
 
   self.table_name = 'categories'
 
   def refresh_names
-    refresh_descs = false
+    @refresh_descs = false
 
     if !self.full_tree_name_changed? && self.name_changed?
         self.refresh_full_tree_name
-        refresh_descs = true
+        @refresh_descs = true
     end
 
     if !self.full_public_name_changed? && self.name_changed?
         self.refresh_full_public_name
-        refresh_descs = true
+        @refresh_descs = true
     end
 
-    self.refresh_descendants_names if refresh_descs
+    return true
   end
 
   def refresh_descendants_names
@@ -43,7 +44,11 @@ class Category < ActiveRecord::Base
       category.refresh_full_tree_name
       category.refresh_full_public_name
       category.save validate: false
-    end
+    end if defined?(@refresh_descs) && @refresh_descs
+
+    @refresh_descs = false
+
+    return true
   end
 
   def refresh_full_tree_name
@@ -54,8 +59,7 @@ class Category < ActiveRecord::Base
   def refresh_full_public_name
     depths = CategoryDepth.public_depths
 
-    names = []
-    names << self.ancestors.select { |item| depths.include? item.depth}.map { |item| item.name }
+    names = self.ancestors.select { |item| depths.include? item.depth }.map { |item| item.name }
     names << self.name
 
     self.full_public_name = names.join(' - ')

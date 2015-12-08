@@ -1,5 +1,5 @@
 module Shared::FormHelper
-  def category_collection_select(id, collection = Shared::Category.all.includes(:assignments).order(:name), value = :id, label = :name_with_teacher_supported, options = {}, html_options = {})
+  def category_collection_select(id, collection = Shared::Category.askable.includes(:assignments).order(:name), value = :id, label = :name_with_teacher_supported, options = {}, html_options = {})
     tags = collection.inject({}) do |hash, category|
       hash[category.send label] = category.effective_tags
       hash

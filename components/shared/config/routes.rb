@@ -121,7 +121,9 @@ Shared::Engine.routes.draw do
       root 'dashboard#index'
 
       resources :assignments, only: [:create, :update, :destroy]
-      resources :categories,  only: [:create, :update, :destroy]
+      resources :categories,  only: [:create, :update, :destroy] do
+        post 'settings' => 'categories#update_settings', on: :collection
+      end
       resources :changelogs,  only: [:create, :update, :destroy]
       post :emails, to: 'emails#create'
     end

@@ -1,6 +1,5 @@
-require 'shared/probe/search'
-require 'shared/probe/analyze'
-
+require_dependency 'shared/probe/search'
+require_dependency 'shared/probe/analyze'
 require_dependency 'shared/probe/index'
 require_dependency 'shared/probe/sanitizer'
 
