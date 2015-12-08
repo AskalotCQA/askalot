@@ -19,6 +19,19 @@ class Administration::CategoriesController < Administration::DashboardController
 
   include CategoriesHelper
 
+  def index
+    @categories  = Shared::Category.includes(:assignments).order(:lft)
+    @category   ||= Shared::Category.new
+  end
+
+  def new
+    @category = Shared::Category.new params.permit([:parent_id, :uuid])
+  end
+
+  def edit
+    @category = Shared::Category.find params[:id]
+  end
+
   def create
     @category = Shared::Category.new(category_params)
 
