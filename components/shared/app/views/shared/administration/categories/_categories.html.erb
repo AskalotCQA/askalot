@@ -27,7 +27,7 @@
     </td>
 
     <td>
-      <%= check_box_tag 'shared[]', category.id, category.shared, tooltip_attributes(t 'activerecord.attributes.shared/category.shared') %>
+      <%= check_box_tag 'shared[]', category.id, category.shared, tooltip_attributes(t 'activerecord.attributes.shared/category.shared').merge({class: 'treetable-checkbox'}) %>
     </td>
 
     <td>

@@ -1,8 +1,8 @@
-require_dependency 'shared/probe/index'
 require 'shared/probe/search'
 require 'shared/probe/analyze'
 
-require 'shared/probe/sanitizer'
+require_dependency 'shared/probe/index'
+require_dependency 'shared/probe/sanitizer'
 
 module Shared::Probe
   class Proxy

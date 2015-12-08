@@ -16,8 +16,50 @@ class Category < ActiveRecord::Base
   validates :name, presence: true, uniqueness: { scope: :parent_id }
 
   scope :with_slido, -> { where.not(slido_username: nil) }
+  scope :askable, -> { where(askable: true) }
+
+  before_save :refresh_names
 
   self.table_name = 'categories'
+
+  def refresh_names
+    refresh_descs = false
+
+    if !self.full_tree_name_changed? && self.name_changed?
+        self.refresh_full_tree_name
+        refresh_descs = true
+    end
+
+    if !self.full_public_name_changed? && self.name_changed?
+        self.refresh_full_public_name
+        refresh_descs = true
+    end
+
+    self.refresh_descendants_names if refresh_descs
+  end
+
+  def refresh_descendants_names
+    self.descendants.each do |category|
+      category.refresh_full_tree_name
+      category.refresh_full_public_name
+      category.save validate: false
+    end
+  end
+
+  def refresh_full_tree_name
+    # TODO (ladislav.gallay) Remove the filtering of 'root' node
+    self.full_tree_name = self.self_and_ancestors.select { |item| item.name != 'root' }.map { |item| item.name }.join(' - ')
+  end
+
+  def refresh_full_public_name
+    depths = CategoryDepth.public_depths
+
+    names = []
+    names << self.ancestors.select { |item| depths.include? item.depth}.map { |item| item.name }
+    names << self.name
+
+    self.full_public_name = names.join(' - ')
+  end
 
   def count
     questions.reload.size
@@ -41,8 +83,8 @@ class Category < ActiveRecord::Base
   end
 
   def name_with_teacher_supported
-    return name + I18n.t('category.teacher_supported') if has_teachers?
-    name
+    return full_public_name + I18n.t('category.teacher_supported') if has_teachers?
+    full_public_name
   end
 
   def self.groups_in_context(context)

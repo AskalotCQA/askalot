@@ -248,7 +248,11 @@ CREATE TABLE categories (
     rgt integer,
     uuid character varying(255),
     shared boolean DEFAULT true,
-    askable boolean DEFAULT false
+    askable boolean DEFAULT false,
+    depth integer,
+    children_count integer,
+    full_tree_name character varying(255),
+    full_public_name character varying(255)
 );
 
 
@@ -269,6 +273,39 @@ CREATE SEQUENCE categories_id_seq
 --
 
 ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
+
+
+--
+-- Name: category_depths; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE category_depths (
+    id integer NOT NULL,
+    depth integer,
+    name character varying(255),
+    is_in_public_name boolean,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: category_depths_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE category_depths_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: category_depths_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE category_depths_id_seq OWNED BY category_depths.id;
 
 
 --
@@ -1417,6 +1454,13 @@ ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY category_depths ALTER COLUMN id SET DEFAULT nextval('category_depths_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY changelogs ALTER COLUMN id SET DEFAULT nextval('changelogs_id_seq'::regclass);
 
 
@@ -1655,6 +1699,14 @@ ALTER TABLE ONLY assignments
 
 ALTER TABLE ONLY categories
     ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: category_depths_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY category_depths
+    ADD CONSTRAINT category_depths_pkey PRIMARY KEY (id);
 
 
 --
@@ -2047,6 +2099,13 @@ CREATE INDEX index_assignments_on_user_id ON assignments USING btree (user_id);
 --
 
 CREATE UNIQUE INDEX index_assignments_on_user_id_and_category_id ON assignments USING btree (user_id, category_id);
+
+
+--
+-- Name: index_categories_on_lft; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_categories_on_lft ON categories USING btree (lft);
 
 
 --
@@ -3254,4 +3313,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151122110354');
 INSERT INTO schema_migrations (version) VALUES ('20151122112216');
 
 INSERT INTO schema_migrations (version) VALUES ('20151122112444');
+
+INSERT INTO schema_migrations (version) VALUES ('20151207231221');
 
