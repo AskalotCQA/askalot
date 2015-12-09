@@ -197,7 +197,7 @@ describe 'Filter Questions', type: :feature, js: true do
           click_link questions.first.title
         end
 
-        expect(current_path).to eql(question_path(questions.first))
+        expect(current_path).to eql(shared.question_path(questions.first))
 
         navigate_back
 

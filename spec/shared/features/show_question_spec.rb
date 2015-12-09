@@ -41,7 +41,7 @@ describe 'Show Question', type: :feature do
         click_link 'ruby'
       end
 
-      expect(current_path).to   eql(questions_path)
+      expect(current_path).to   eql(shared.questions_path)
       expect(current_params).to eql(tags: 'ruby')
 
       list = all('#questions > ol > li')
@@ -75,7 +75,7 @@ describe 'Show Question', type: :feature do
         click_link 'Elasticsearch'
       end
 
-      expect(current_path).to   eql(questions_path)
+      expect(current_path).to   eql(shared.questions_path)
       expect(current_params).to eql(tags: 'elasticsearch,lucene')
 
       list = all('#questions > ol > li')

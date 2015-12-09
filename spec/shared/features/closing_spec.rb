@@ -34,7 +34,7 @@ describe 'Closing', type: :feature do
       end
 
       expect(page).to have_content('Otázka bola úspešne uzatvorená.')
-      expect(page.current_path).to eql(questions_path)
+      expect(page.current_path).to eql(shared.questions_path)
 
       question.reload
 

@@ -12,7 +12,7 @@ describe 'Authorization', type: :feature do
 
     visit shared.label_answer_path(answer, value: :helpful)
 
-    expect(current_path).to eql(root_path)
+    expect(current_path).to eql(shared.root_path)
     expect(page).to have_content('Nemáte právo na vykonanie tejto akcie.')
   end
 end

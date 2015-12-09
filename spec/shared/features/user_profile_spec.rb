@@ -31,7 +31,7 @@ describe 'User Profile', type: :feature do
 
       click_button 'Uložiť'
 
-      expect(page.current_path).to eql(edit_user_registration_path)
+      expect(page.current_path).to eql(shared.edit_user_registration_path)
       expect(page).to have_content('Váš účet bol úspešne aktualizovaný ale potrebujeme overiť Vašu novú e-mailovú adresu.')
     end
 
@@ -43,7 +43,7 @@ describe 'User Profile', type: :feature do
       click_button 'Uložiť'
 
       expect(page).to have_content('Prezývka – je povinná položka.')
-      expect(page.current_path).to eql(edit_user_registration_path)
+      expect(page.current_path).to eql(shared.edit_user_registration_path)
 
       fill_in 'user_nick', with: '*()BadNick*-'
       fill_in 'user_first', with: '65badFirst?#$%'
@@ -56,7 +56,7 @@ describe 'User Profile', type: :feature do
       expect(page).to have_content('Gravatar e-mail – nie je platná hodnota.')
       expect(page).to have_content('Krstné meno – nie je platná hodnota.')
       expect(page).to have_content('Priezvisko – nie je platná hodnota.')
-      expect(page.current_path).to eql(edit_user_registration_path)
+      expect(page.current_path).to eql(shared.edit_user_registration_path)
 
       fill_in 'user_nick',  with: 'Nicky'
       fill_in 'user_first', with: 'Nick'
@@ -66,7 +66,7 @@ describe 'User Profile', type: :feature do
       click_button 'Uložiť'
 
       expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
-      expect(page.current_path).to eql(edit_user_registration_path)
+      expect(page.current_path).to eql(shared.edit_user_registration_path)
 
       expect(page).to have_field('user_nick',  with: 'Nicky')
       expect(page).to have_field('user_first', with: 'Nick')
@@ -98,7 +98,7 @@ describe 'User Profile', type: :feature do
       expect(page).to have_content('GitHub – nie je platná hodnota.')
       expect(page).to have_content('YouTube – nie je platná hodnota.')
       expect(page).to have_content('Stack Overflow – nie je platná hodnota.')
-      expect(page.current_path).to eql(edit_user_registration_path)
+      expect(page.current_path).to eql(shared.edit_user_registration_path)
 
       fill_in 'user_facebook',       with: 'http://facebook.com/nicky.nickmann'
       fill_in 'user_twitter',        with: 'http://twitter.com/nnickmann'
@@ -113,7 +113,7 @@ describe 'User Profile', type: :feature do
       find('a', :text => 'Viac').click
 
       expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
-      expect(page.current_path).to eql(edit_user_registration_path)
+      expect(page.current_path).to eql(shared.edit_user_registration_path)
 
       expect(page).to have_field('user_facebook',       with: 'http://facebook.com/nicky.nickmann')
       expect(page).to have_field('user_twitter',        with: 'http://twitter.com/nnickmann')
@@ -130,7 +130,7 @@ describe 'User Profile', type: :feature do
       find('a', :text => 'Viac').click
 
       expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
-      expect(page.current_path).to eql(edit_user_registration_path)
+      expect(page.current_path).to eql(shared.edit_user_registration_path)
 
       expect(page).to have_field('user_facebook', with: 'http://facebook.com/app_scoped_user_id/12345678901234567')
     end
@@ -208,7 +208,7 @@ describe 'User Profile', type: :feature do
       click_button 'Uložiť'
 
       expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
-      expect(page.current_path).to eql(edit_user_registration_path)
+      expect(page.current_path).to eql(shared.edit_user_registration_path)
 
       expect(page).to have_field('user_nick',  with: 'Nicky')
       expect(page).to have_field('user_about', with: 'Lorem ipsum')
@@ -225,7 +225,7 @@ describe 'User Profile', type: :feature do
       click_button 'Uložiť'
 
       expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
-      expect(page.current_path).to eql(edit_user_registration_path)
+      expect(page.current_path).to eql(shared.edit_user_registration_path)
 
       expect(Shared::User.find_by(login: user.login).encrypted_password).to be_empty
     end

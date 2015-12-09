@@ -58,7 +58,7 @@ describe 'Markdown', type: :feature do
       click_button 'Opýtať'
 
       within '.question-content' do
-        expect(page).to have_link('@smolnar', href: user_path(:smolnar))
+        expect(page).to have_link('@smolnar', href: shared.user_path(:smolnar))
       end
 
       expect(notifications.size).to eql(1)
@@ -85,7 +85,7 @@ describe 'Markdown', type: :feature do
       click_button 'Opýtať'
 
       within '.question-content' do
-        expect(page).to have_link("##{question.id}", href: question_path(question))
+        expect(page).to have_link("##{question.id}", href: shared.question_path(question))
       end
     end
 
@@ -99,12 +99,12 @@ describe 'Markdown', type: :feature do
 
         select  category.name,    from: 'question_category_id'
         fill_in 'question_title', with: 'Lorem ipsum?'
-        fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{question_path(question)}"
+        fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{shared.question_path(question)}"
 
         click_button 'Opýtať'
 
         within '.question-content' do
-          expect(page).to have_link("##{question.id}", href: question_path(question))
+          expect(page).to have_link("##{question.id}", href: shared.question_path(question))
         end
       end
     end
@@ -119,12 +119,12 @@ describe 'Markdown', type: :feature do
 
         select  category.name,    from: 'question_category_id'
         fill_in 'question_title', with: 'Lorem ipsum?'
-        fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{user_path(user.nick)}"
+        fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{shared.user_path(user.nick)}"
 
         click_button 'Opýtať'
 
         within '.question-content' do
-          expect(page).to have_link("@#{user.nick}", href: user_path(user.nick))
+          expect(page).to have_link("@#{user.nick}", href: shared.user_path(user.nick))
         end
       end
     end
@@ -206,8 +206,8 @@ describe 'Markdown', type: :feature do
       expect(page).to have_content('Odpoveď bola úspešne pridaná.')
 
       within '#question-answers' do
-        expect(page).to have_link('@smolnar',        href: user_path(:smolnar))
-        expect(page).to have_link("##{question.id}", href: question_path(question))
+        expect(page).to have_link('@smolnar',        href: shared.user_path(:smolnar))
+        expect(page).to have_link("##{question.id}", href: shared.question_path(question))
       end
 
       expect(notifications.size).to eql(1)
@@ -241,7 +241,7 @@ describe 'Markdown', type: :feature do
       within '#question-comments' do
         expect(page).not_to have_css('h1')
         expect(page).to     have_content('Hey, @smolnar, check out askalot and http://www.example.com')
-        expect(page).to     have_link('@smolnar', href: user_path(:smolnar))
+        expect(page).to     have_link('@smolnar', href: shared.user_path(:smolnar))
         expect(page).to     have_link('askalot',  href: 'https://askalot.fiit.stuba.sk')
         expect(page).to     have_link('http://www.example.com',  href: 'http://www.example.com')
       end

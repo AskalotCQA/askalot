@@ -25,7 +25,7 @@ describe 'Deleting', type: :feature do
 
       expect(page).to have_content('Otázka bola úspešne zmazaná.')
 
-      expect(page.current_path).to eql(questions_path)
+      expect(page.current_path).to eql(shared.questions_path)
 
       question.reload
 
@@ -55,7 +55,7 @@ describe 'Deleting', type: :feature do
 
       expect(page).to have_content('Odpoveď bola úspešne zmazaná.')
 
-      expect(page.current_path).to eql(question_path question)
+      expect(page.current_path).to eql(shared.question_path question)
 
       answer.reload
 
@@ -87,7 +87,7 @@ describe 'Deleting', type: :feature do
 
       expect(page).to have_content('Komentár bol úspešne zmazaný.')
 
-      expect(page.current_path).to eql(question_path question)
+      expect(page.current_path).to eql(shared.question_path question)
 
       answer_comment.reload
 
@@ -108,7 +108,7 @@ describe 'Deleting', type: :feature do
       end
 
       expect(page).to have_content('Komentár bol úspešne zmazaný.')
-      expect(page.current_path).to eql(question_path question)
+      expect(page.current_path).to eql(shared.question_path question)
     end
   end
 
