@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Question Polling', js: true do
+describe 'Question Polling', type: :feature, js: true do
   let(:user) { create :user }
   let!(:question) { create :question, tag_list: 'elasticsearch' }
 
@@ -11,7 +11,7 @@ describe 'Question Polling', js: true do
   end
 
   it 'refreshes the list of questions by default' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
 
@@ -34,7 +34,7 @@ describe 'Question Polling', js: true do
   end
 
   it 'stops refreshing' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
 

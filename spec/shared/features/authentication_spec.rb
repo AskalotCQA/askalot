@@ -2,14 +2,14 @@ require 'spec_helper'
 
 # TODO (smolnar) resolve notice messages after signing in and signing out
 
-describe 'Authentication' do
+describe 'Authentication', type: :feature do
   let(:user) { create :user, password: 'password' }
 
   context 'when not registered' do
     it 'does not sign in user successfully' do
       Shared::Stuba::AIS.stub(:authenticate) { nil }
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Prihlásiť'
 
@@ -26,7 +26,7 @@ describe 'Authentication' do
     it 'signs in user successfully' do
       Shared::Stuba::AIS.stub(:authenticate) { nil }
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Prihlásiť'
 
@@ -53,7 +53,7 @@ describe 'Authentication' do
 
       stub_ais_for user
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Prihlásiť'
 

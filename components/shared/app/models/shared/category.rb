@@ -2,9 +2,9 @@ module Shared
 class Category < ActiveRecord::Base
   acts_as_nested_set
 
-  include Watchable
+  include Shared::Watchable
 
-  include Categories::Searchable
+  include Shared::Categories::Searchable
 
   has_many :questions, dependent: :restrict_with_exception
   has_many :answers, through: :questions
@@ -24,11 +24,11 @@ class Category < ActiveRecord::Base
   end
 
   def effective_tags
-    tags << Tag.current_academic_year_value
+    tags << Shared::Tag.current_academic_year_value
   end
 
   def tags=(values)
-    write_attribute(:tags, Tags::Extractor.extract(values))
+    write_attribute(:tags, Shared::Tags::Extractor.extract(values))
   end
 
   def teachers
@@ -47,6 +47,7 @@ class Category < ActiveRecord::Base
   def self.groups_in_context(context)
     groups = []
     empty = []
+
     find_by(name: context).children.sort_by(&:name).each do |group|
       if group.children.size == 0
         empty << group
@@ -56,23 +57,28 @@ class Category < ActiveRecord::Base
         end
       end
     end
+
     groups << empty unless empty.empty?
+    groups
   end
 
   def self.categories_in_context(context)
     categories = []
+
     find_by(name: context).children.each do |group|
       group.children.each do |category|
         category.name = group.name + ' - ' + category.name
         categories << category
       end
+
       categories << group if group.leaf?
     end
+
     categories.sort_by(&:name)
   end
 
   def self.categories_with_parent_name(context)
-    Category.find_by(name: context).self_and_descendants.each do |category|
+    Shared::Category.find_by(name: context).self_and_descendants.each do |category|
       category.name = category.parent.name + ' - ' + category.name unless category.root?
     end
   end

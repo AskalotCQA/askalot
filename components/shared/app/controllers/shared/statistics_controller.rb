@@ -7,9 +7,9 @@ class StatisticsController < ApplicationController
   def index
     authorize! :observe, nil
 
-    @users     = User.order(:name)
-    @questions = Question.all
-    @answers   = Answer.all
+    @users     = Shared::User.order(:name)
+    @questions = Shared::Question.all
+    @answers   = Shared::Answer.all
 
     filter_by_date
     filter_by_tags
@@ -34,13 +34,13 @@ class StatisticsController < ApplicationController
 
   def filter_by_tags
     @questions = @questions.tagged_with(params[:tags]).uniq if params[:tags].present?
-    @answers   = join_question(Answer, @questions).uniq
+    @answers   = join_question(Shared::Answer, @questions).uniq
 
     users  = (@questions.pluck(:author_id) + @answers.pluck(:author_id)).to_set
-    users += join_questions(Comment, :commentable, @questions).uniq.pluck(:author_id)
-    users += join_questions_through_answers(Comment, :commentable, @questions).pluck(:author_id)
-    users += join_questions(Vote, :votable, @questions).uniq.pluck(:voter_id)
-    users += join_questions_through_answers(Vote, :votable, @questions).pluck(:voter_id)
+    users += join_questions(Shared::Comment, :commentable, @questions).uniq.pluck(:author_id)
+    users += join_questions_through_answers(Shared::Comment, :commentable, @questions).pluck(:author_id)
+    users += join_questions(Shared::Vote, :votable, @questions).uniq.pluck(:voter_id)
+    users += join_questions_through_answers(Shared::Vote, :votable, @questions).pluck(:voter_id)
 
     @users = @users.where(id: users.to_a)
   end
@@ -52,11 +52,11 @@ class StatisticsController < ApplicationController
   end
 
   def join_questions(relation, column, questions)
-    relation.for(Question).joins("INNER JOIN questions ON questions.id = #{column}_id").where("#{column}_id" => questions).uniq
+    relation.for(Shared::Question).joins("INNER JOIN questions ON questions.id = #{column}_id").where("#{column}_id" => questions).uniq
   end
 
   def join_questions_through_answers(relation, column, questions)
-    relation.for(Answer).joins("INNER JOIN answers ON answers.id = #{column}_id INNER JOIN questions ON questions.id = answers.question_id").where(questions: { id: questions }).uniq
+    relation.for(Shared::Answer).joins("INNER JOIN answers ON answers.id = #{column}_id INNER JOIN questions ON questions.id = answers.question_id").where(questions: { id: questions }).uniq
   end
 end
 end

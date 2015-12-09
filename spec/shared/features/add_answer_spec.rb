@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Add Answer' do
+describe 'Add Answer', type: :feature do
   context 'with question from student' do
     let(:user)      { create :user }
     let!(:question) { create :question, :with_tags }
@@ -10,7 +10,7 @@ describe 'Add Answer' do
     end
 
     it 'adds new answer to question' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -42,7 +42,7 @@ describe 'Add Answer' do
     it 'adds first answer to slido question by teacher' do
       login_as teacher
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -58,7 +58,7 @@ describe 'Add Answer' do
     it 'adds next answer to slido question by teacher' do
       login_as teacher
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link answered_question.title
@@ -74,7 +74,7 @@ describe 'Add Answer' do
     it 'adds first answer to slido question by student' do
       login_as student
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -90,7 +90,7 @@ describe 'Add Answer' do
     it 'adds next answer to slido question by student' do
       login_as student
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link answered_question.title
@@ -106,7 +106,7 @@ describe 'Add Answer' do
     it 'keeps best label after saving existing answer' do
       login_as teacher
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question_2.title

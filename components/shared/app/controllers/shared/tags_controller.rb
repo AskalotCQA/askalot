@@ -10,9 +10,9 @@ class TagsController < ApplicationController
 
   def index
     @tags = case params[:tab].to_sym
-            when :recent then Tag.recent
-            when :popular then Tag.popular
-            else Tag.order(:name)
+            when :recent then Shared::Tag.recent
+            when :popular then Shared::Tag.popular
+            else Shared::Tag.order(:name)
             end
   end
 
@@ -21,7 +21,7 @@ class TagsController < ApplicationController
   # * consider pagination
 
   def suggest
-    @tags = Tag.search_by(q: params[:q]).first(10)
+    @tags = Shared::Tag.search_by(q: params[:q]).first(10)
 
     render json: {
       results: @tags.map { |tag|

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Search Questions' do
+describe 'Search Questions', type: :feature do
   let!(:user) { create :user }
 
   before :each do
@@ -15,7 +15,7 @@ describe 'Search Questions' do
   end
 
   it 'searches questions by title' do
-    visit questions_path
+    visit shared.questions_path
 
     all('.fulltext-switch a').first.click
 
@@ -36,7 +36,7 @@ describe 'Search Questions' do
   end
 
   it 'searches questions by texts' do
-    visit questions_path
+    visit shared.questions_path
 
     all('.fulltext-switch a').first.click
 

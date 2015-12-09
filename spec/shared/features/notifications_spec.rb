@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Notifications' do
+describe 'Notifications', type: :feature do
   let(:user)      { create :user }
   let!(:question) { create :question, :with_tags }
   let!(:category) { create :category }
@@ -15,7 +15,7 @@ describe 'Notifications' do
     it 'notifies watchers about new question' do
       category.toggle_watching_by!(watcher)
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
@@ -46,7 +46,7 @@ describe 'Notifications' do
       it 'notifies watchers about new question and hides asker' do
         category.toggle_watching_by!(watcher)
 
-        visit root_path
+        visit shared.root_path
 
         click_link 'Opýtať sa otázku'
 
@@ -73,7 +73,7 @@ describe 'Notifications' do
     it 'notifies watchers about new question' do
       tag.toggle_watching_by!(watcher)
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
@@ -100,7 +100,7 @@ describe 'Notifications' do
     it 'notifies watchers about new answer' do
       question.toggle_watching_by!(question.author)
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -125,7 +125,7 @@ describe 'Notifications' do
       it 'notifies about new comment' do
         question.toggle_watching_by!(question.author)
 
-        visit root_path
+        visit shared.root_path
 
         click_link 'Otázky'
         click_link question.title
@@ -153,7 +153,7 @@ describe 'Notifications' do
       let!(:answer) { create :answer, question: question }
 
       it 'registers commenter as watcher of the question' do
-        visit root_path
+        visit shared.root_path
 
         click_link 'Otázky'
         click_link question.title
@@ -172,7 +172,7 @@ describe 'Notifications' do
       it 'notifies about new comment' do
         question.toggle_watching_by!(question.author)
 
-        visit root_path
+        visit shared.root_path
 
         click_link 'Otázky'
         click_link question.title

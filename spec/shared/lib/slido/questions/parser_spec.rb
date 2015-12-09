@@ -5,7 +5,7 @@ describe Shared::Slido::Questions::Parser do
   subject { described_class }
 
   it 'parses questions' do
-    data = fixture('slido/questions.json').read
+    data = fixture('shared/slido/questions.json').read
 
     questions = subject.parse(data)
 

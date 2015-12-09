@@ -2,7 +2,7 @@ require 'spec_helper'
 
 # TODO (smolnar) pavolzbell, resolve specs for helpful
 
-describe 'Label Answer', js: true do
+describe 'Label Answer', type: :feature, js: true do
   let(:user)      { create :user }
   let(:author)    { create :user }
   let(:teacher)   { create :teacher }
@@ -15,7 +15,7 @@ describe 'Label Answer', js: true do
     end
 
     it 'labels answers as best' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -31,7 +31,7 @@ describe 'Label Answer', js: true do
     it 'labels answer as helpful' do
       skip
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -47,7 +47,7 @@ describe 'Label Answer', js: true do
     it 'removes best label from answer' do
       answer.toggle_labeling_by! author, :best
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -70,7 +70,7 @@ describe 'Label Answer', js: true do
       answer.toggle_labeling_by! author,  :best
       answer.toggle_labeling_by! author,  :helpful
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title

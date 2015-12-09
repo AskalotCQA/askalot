@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Search Categories' do
+describe 'Search Categories', type: :feature do
   let!(:user) { create :user }
 
   before :each do
@@ -15,7 +15,7 @@ describe 'Search Categories' do
   end
 
   it 'searches categories by name' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Kategórie'
 

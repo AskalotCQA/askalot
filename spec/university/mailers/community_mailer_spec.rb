@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe University::CommunityMailer do
+describe University::CommunityMailer, type: :mailer do
   describe '.community_emails' do
     it 'sends community emails' do
       user = create :user

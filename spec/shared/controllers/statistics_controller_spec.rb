@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Shared::StatisticsController do
+describe Shared::StatisticsController, type: :controller do
   render_views
 
   let(:user) { create :teacher }

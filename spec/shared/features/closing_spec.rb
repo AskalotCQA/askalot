@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Closing' do
+describe 'Closing', type: :feature do
   let!(:question)     { create :question, :with_tags, title: 'Closing question' }
   let(:user)          { create :user }
   let(:administrator) { create :administrator }
@@ -9,7 +9,7 @@ describe 'Closing' do
     it 'does not close a question as user' do
       login_as user
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -21,7 +21,7 @@ describe 'Closing' do
     it 'closes a question as administrator' do
       login_as administrator
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -40,7 +40,7 @@ describe 'Closing' do
 
       expect(question).to be_closed
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -58,7 +58,7 @@ describe 'Closing' do
     it 'does not close a question as adminitrator' do
       login_as administrator
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -70,7 +70,7 @@ describe 'Closing' do
     it 'does not close a question as user' do
       login_as user
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 

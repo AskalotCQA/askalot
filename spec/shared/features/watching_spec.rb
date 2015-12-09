@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Watching' do
+describe 'Watching', type: :feature do
   let(:user)      { create :user }
   let!(:category) { create :category }
   let!(:question) { create :question }
@@ -11,7 +11,7 @@ describe 'Watching' do
 
   context 'with question' do
     it 'registers author as watcher as question' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
@@ -28,7 +28,7 @@ describe 'Watching' do
     end
 
     it 'registers watching for question', js: true do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -43,7 +43,7 @@ describe 'Watching' do
 
   context 'with answer' do
     it 'registers answer author as watcher of question' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -58,7 +58,7 @@ describe 'Watching' do
 
   context 'with comment' do
     it 'registers commenter as watcher of question' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -85,7 +85,7 @@ describe 'Watching' do
     let!(:category) { create :category }
 
     it 'registers watching for category', js: true do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Kategórie'
 

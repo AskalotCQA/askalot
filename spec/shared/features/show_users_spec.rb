@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Show Users', js: true do
+describe 'Show Users', type: :feature, js: true do
   let(:user) { create :user }
 
   let!(:active_users) { 4.times.map { |u| create :user }}
@@ -11,7 +11,7 @@ describe 'Show Users', js: true do
   end
 
   it 'shows list of all users' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Používatelia'
 
@@ -27,7 +27,7 @@ describe 'Show Users', js: true do
   end
 
   it 'shows list of alumni users' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Používatelia'
 

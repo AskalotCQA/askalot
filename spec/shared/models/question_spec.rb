@@ -8,7 +8,7 @@ require_relative 'concerns/touchable_spec'
 require_relative 'concerns/watchable_spec'
 require_relative 'concerns/questions/searchable_spec'
 
-describe Shared::Question do
+describe Shared::Question, type: :model do
   it_behaves_like Shared::Editable
   it_behaves_like Shared::Deletable
   it_behaves_like Shared::Orderable

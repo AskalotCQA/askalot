@@ -23,7 +23,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def update_resource(resource, params)
-    service = Shared::Users::Authentication.new Stuba::AIS, login: current_user.login, password: params[:current_password]
+    service = Shared::Users::Authentication.new Shared::Stuba::AIS, login: current_user.login, password: params[:current_password]
 
     if service.authorized?
       resource.update_without_password(params.except(:current_password))

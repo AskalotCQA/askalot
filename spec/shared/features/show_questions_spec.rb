@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Show Questions', js: true do
+describe 'Show Questions', type: :feature, js: true do
   let(:user) { create :user }
 
   let!(:answered_questions) { 4.times.map { |q| create :question, :with_tags, :with_answers, author: user }  }
@@ -17,7 +17,7 @@ describe 'Show Questions', js: true do
   end
 
   it 'shows list of new questions' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
 
@@ -42,7 +42,7 @@ describe 'Show Questions', js: true do
   end
 
   it 'shows list of answered questions' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
 
@@ -69,7 +69,7 @@ describe 'Show Questions', js: true do
   it 'shows list of favored questions' do
     favored_questions.each { |q| q.toggle_favoring_by! user }
 
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
 

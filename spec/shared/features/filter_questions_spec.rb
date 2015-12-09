@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Filter Questions', js: true do
+describe 'Filter Questions', type: :feature, js: true do
   let(:user) { create :user }
   let!(:category) { create :category, :with_tags }
 
@@ -17,7 +17,7 @@ describe 'Filter Questions', js: true do
   end
 
   it 'filters questions by tag' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
 
@@ -45,7 +45,7 @@ describe 'Filter Questions', js: true do
   end
 
   it 'filters questions by multiple tags' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
 
@@ -74,7 +74,7 @@ describe 'Filter Questions', js: true do
   end
 
   it 'filters questions by question tags' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
 
@@ -115,7 +115,7 @@ describe 'Filter Questions', js: true do
       question.update_attributes(category_id: category.id)
     end
 
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
 
@@ -160,7 +160,7 @@ describe 'Filter Questions', js: true do
     end
 
     it 'persists question filter by tag' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -185,7 +185,7 @@ describe 'Filter Questions', js: true do
 
     context 'when navigating in history' do
       it 'correctly filters questions' do
-        visit root_path
+        visit shared.root_path
 
         click_link 'Otázky'
 

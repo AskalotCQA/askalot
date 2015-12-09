@@ -11,16 +11,16 @@ class UsersController < ApplicationController
 
   def index
     @users = case params[:tab].to_sym
-             when :recent then User.recent.order(created_at: :desc)
-             when :alumni then User.alumni.order(:nick)
-             else User.order(:nick)
+             when :recent then Shared::User.recent.order(created_at: :desc)
+             when :alumni then Shared::User.alumni.order(:nick)
+             else Shared::User.order(:nick)
              end
 
     @users = @users.page(params[:page]).per(60)
   end
 
   def show
-    @user = User.by(nick: params[:nick])
+    @user = Shared::User.by(nick: params[:nick])
 
     @questions  = @user.questions.where(anonymous: false).order(created_at: :desc)
     @anonymous  = @user.questions.where(anonymous: true).order(created_at: :desc)
@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     @favorites  = @favorites.page(tab_page :favorites).per(10)
     @activities = @activities.page(tab_page :activities).per(20)
 
-    @question = Question.unanswered.random.first || Question.random.first
+    @question = Shared::Question.unanswered.random.first || Shared::Question.random.first
   end
 
   def update
@@ -55,8 +55,8 @@ class UsersController < ApplicationController
 
     from, to = to, from if from > to
 
-    @user = User.by(nick: params[:nick])
-    @data = Activity.data(@user, from: from, to: to)
+    @user = Shared::User.by(nick: params[:nick])
+    @data = Shared::Activity.data(@user, from: from, to: to)
 
     render json: @data
   end
@@ -73,14 +73,14 @@ class UsersController < ApplicationController
   end
 
   def followings
-    @user = User.by(nick: params[:nick])
+    @user = Shared::User.by(nick: params[:nick])
 
     @followees = @user.followees.order(:nick).page(tab_page :followees).per(20)
     @followers = @user.followers.order(:nick).page(tab_page :followers).per(20)
   end
 
   def follow
-    @followee = User.find(params[:id])
+    @followee = Shared::User.find(params[:id])
 
     authorize! :follow, @followee
 
@@ -90,7 +90,7 @@ class UsersController < ApplicationController
   end
 
   def suggest
-    @users = User.where('nick like ?', "#{params[:q]}%")
+    @users = Shared::User.where('nick like ?', "#{params[:q]}%")
 
     render json: @users, root: false
   end
@@ -100,7 +100,7 @@ class UsersController < ApplicationController
   def user_params
     attributes = [:email, :nick, :about, :gravatar_email, :show_name, :show_email, :read_notifications_thread, :send_email_notifications]
 
-    attributes += Social.networks.keys
+    attributes += Shared::Social.networks.keys
     attributes += [:first, :last] if can? :change_name, current_user
     attributes += [:password, :password_confirmation] if can? :change_password, current_user
 

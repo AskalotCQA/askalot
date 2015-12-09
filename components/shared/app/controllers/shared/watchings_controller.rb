@@ -7,7 +7,7 @@ class WatchingsController < ApplicationController
   def index
     count = 20
 
-    @watchings = Watching.by(current_user).order(created_at: :desc)
+    @watchings = Shared::Watching.by(current_user).order(created_at: :desc)
 
     @questions  = @watchings.of(:question).page(tab_page :questions).per(count)
     @categories = @watchings.of(:category).page(tab_page :categories).per(count)
@@ -15,7 +15,7 @@ class WatchingsController < ApplicationController
   end
 
   def destroy
-    @watching = Watching.find(params[:id])
+    @watching = Shared::Watching.find(params[:id])
 
     begin
       @watching.mark_as_deleted_by! current_user
@@ -29,7 +29,7 @@ class WatchingsController < ApplicationController
   end
 
   def clean
-    @watchings = Watching.where(watcher: current_user, watchable_type: params[:type].classify)
+    @watchings = Shared::Watching.where(watcher: current_user, watchable_type: params[:type].classify)
 
     begin
       @watchings.each { |watching| watching.mark_as_deleted_by! current_user }

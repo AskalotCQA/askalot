@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Shared::TagsController do
+describe Shared::TagsController, type: :controller do
   let(:user) { create :user }
 
   routes { Shared::Engine.routes }

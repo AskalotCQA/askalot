@@ -6,7 +6,7 @@ describe Shared::Probe::Results do
 
   let(:query) { { from: 0, size: 25 } }
   let(:search) { -> { response }}
-  let(:response) { JSON.parse(fixture('probe/search/response.json').read) }
+  let(:response) { JSON.parse(fixture('shared/probe/search/response.json').read) }
 
   describe '#response' do
     it 'return response' do

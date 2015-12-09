@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Activities' do
+describe 'Activities', type: :feature do
   let(:user)      { create :user }
   let!(:question) { create :question, :with_tags, author: user }
   let!(:category) { create :category }
@@ -11,7 +11,7 @@ describe 'Activities' do
 
   context 'when asking question' do
     it 'creates an activity' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
@@ -31,7 +31,7 @@ describe 'Activities' do
 
     context 'when answering' do
       it 'creates an activity' do
-        visit root_path
+        visit shared.root_path
 
         click_link 'Otázky'
         click_link question.title
@@ -50,7 +50,7 @@ describe 'Activities' do
 
     context 'when editing question', js: true do
       it 'creates an activity' do
-        visit root_path
+        visit shared.root_path
 
         click_link 'Otázky'
         click_link question.title

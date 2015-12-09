@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe University::UserMailer do
+describe University::UserMailer, type: :mailer do
   describe '.notifications' do
     it 'sends notifications summary for day' do
       user = create :user

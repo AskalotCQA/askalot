@@ -1,7 +1,7 @@
 require 'spec_helper'
 require_relative 'concerns/watchable_spec'
 
-describe Shared::Tag do
+describe Shared::Tag, type: :model do
   it_behaves_like Shared::Watchable
 
   describe '#normalize' do

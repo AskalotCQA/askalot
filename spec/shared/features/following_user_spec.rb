@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Following user' do
+describe 'Following user', type: :feature do
   let!(:user)       { create :user }
   let!(:other_user) { create :user }
 
@@ -14,7 +14,7 @@ describe 'Following user' do
 
   context 'when following from profile page' do
     it 'sets user as follower', skip_before: true do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Používatelia', match: :first
       click_link other_user.nick, match: :first
@@ -26,7 +26,7 @@ describe 'Following user' do
     end
 
     it 'aborts user as follower' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Používatelia', match: :first
       click_link other_user.nick, match: :first
@@ -40,7 +40,7 @@ describe 'Following user' do
 
   context 'when following from users page', js: true do
     it 'sets user as follower', skip_before: true do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Používatelia'
 
@@ -51,7 +51,7 @@ describe 'Following user' do
     end
 
     it 'aborts user as follower' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Používatelia'
 
@@ -64,7 +64,7 @@ describe 'Following user' do
 
   context 'when checking followees and followers list', js: true do
     it 'shows followers list' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Používatelia'
       click_link other_user.nick, match: :first
@@ -75,7 +75,7 @@ describe 'Following user' do
     end
 
     it 'shows followees list' do
-      visit root_path
+      visit shared.root_path
 
       click_link user.nick
 

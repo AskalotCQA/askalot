@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Shared::Label do
+describe Shared::Label, type: :model do
   it 'requires value' do
     label = build :label, value: nil
 

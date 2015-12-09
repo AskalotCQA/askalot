@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Slido Notifications' do
+describe 'Slido Notifications', type: :feature do
   let(:category) { create :category }
   let(:user) { create :user }
 
@@ -11,7 +11,7 @@ describe 'Slido Notifications' do
   it 'shows notifications about current slido events' do
     create :slido_event, category: category, name: 'Westside Party #3', url: 'https://sli.do/ali.g/wp03'
 
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
 
@@ -22,7 +22,7 @@ describe 'Slido Notifications' do
 
   context 'when automaticly refreshing', js: true do
     it 'shows new notiticaitons about current events' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 

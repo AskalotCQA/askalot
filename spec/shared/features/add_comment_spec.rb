@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Add Comment' do
+describe 'Add Comment', type: :feature do
   let(:user) { create :user }
   let!(:question) { create :question, :with_tags }
 
@@ -9,7 +9,7 @@ describe 'Add Comment' do
   end
 
   it 'adds new comment' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
     click_link question.title
@@ -40,7 +40,7 @@ describe 'Add Comment' do
   context 'for question' do
     context 'with notifications' do
       it 'registers commenter as watcher of question' do
-        visit root_path
+        visit shared.root_path
 
         click_link 'Otázky'
         click_link question.title

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Search Tags' do
+describe 'Search Tags', type: :feature do
   let!(:user) { create :user }
 
   before :each do
@@ -15,7 +15,7 @@ describe 'Search Tags' do
   end
 
   it 'searches tags by name' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Tagy'
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Search Users' do
+describe 'Search Users', type: :feature do
   let!(:user) { create :user, login: 'smolnar' }
 
   before :each do
@@ -14,7 +14,7 @@ describe 'Search Users' do
   end
 
   it 'searches users by name' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Používatelia', match: :first
 
@@ -38,7 +38,7 @@ describe 'Search Users' do
   it 'paginates through records' do
     users = 60.times.map { |n| create :user, name: "user_#{n}" }
 
-    visit root_path
+    visit shared.root_path
 
     click_link 'Používatelia', match: :first
 

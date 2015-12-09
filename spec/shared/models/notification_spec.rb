@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Shared::Notification do
+describe Shared::Notification, type: :model do
   it 'requires action' do
     notification = build :notification, action: nil
 

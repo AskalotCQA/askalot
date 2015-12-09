@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Teacher Supported Category' do
+describe 'Teacher Supported Category', type: :feature do
 
   let(:user) { create :user }
   let(:user2) { create :user }
@@ -17,7 +17,7 @@ describe 'Teacher Supported Category' do
 
     expect(category.teachers.count).to eql(1)
 
-    visit root_path
+    visit shared.root_path
 
     click_link 'Kategórie'
 
@@ -48,7 +48,7 @@ describe 'Teacher Supported Category' do
 
     expect(category.teachers.count).to eql(2)
 
-    visit root_path
+    visit shared.root_path
 
     click_link 'Kategórie'
 
@@ -79,7 +79,7 @@ describe 'Teacher Supported Category' do
 
     expect(category.teachers.count).to eql(0)
 
-    visit root_path
+    visit shared.root_path
 
     click_link 'Kategórie'
 
@@ -104,7 +104,7 @@ describe 'Teacher Supported Category' do
   it 'doesn\'t show icons if it has no users' do
     expect(category.teachers.count).to eql(0)
 
-    visit root_path
+    visit shared.root_path
 
     click_link 'Kategórie'
 

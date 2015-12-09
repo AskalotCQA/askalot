@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Favor Question' do
+describe 'Favor Question', type: :feature do
   let(:user)      { create :user }
   let!(:question) { create :question }
 
@@ -10,7 +10,7 @@ describe 'Favor Question' do
 
   context 'when user is not a favorer' do
     it 'favors the question', js: true do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -29,7 +29,7 @@ describe 'Favor Question' do
     end
 
     it 'unfavors the question', js: true do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title

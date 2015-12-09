@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Add Question' do
+describe 'Add Question', type: :feature do
   let(:user) { create :user }
   let!(:category) { create :category }
 
@@ -10,7 +10,7 @@ describe 'Add Question' do
   end
 
   it 'adds new question', js: true do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Opýtať sa otázku'
 
@@ -49,7 +49,7 @@ describe 'Add Question' do
   end
 
   it 'adds new question anonymously' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Opýtať sa otázku'
 
@@ -71,7 +71,7 @@ describe 'Add Question' do
     let!(:question) { create :question, :with_tags }
 
     it 'selects the same category' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -89,7 +89,7 @@ describe 'Add Question' do
     end
 
     it 'shows automaticaly assigned tags', js: true do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
@@ -110,7 +110,7 @@ describe 'Add Question' do
 
     context 'after realoading page' do
       it 'shows automaticly assigned tags', js: true do
-        visit root_path
+        visit shared.root_path
 
         click_link 'Opýtať sa otázku'
 

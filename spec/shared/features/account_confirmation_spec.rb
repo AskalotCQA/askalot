@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe 'Account Confirmation' do
+describe 'Account Confirmation', type: :feature do
   let(:user) { create :user, :unconfirmed }
 
   it 'confirms user registration' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Prihlásiť'
     click_link 'Nepotvrdená registrácia?'
@@ -17,7 +17,7 @@ describe 'Account Confirmation' do
 
     user.reload
 
-    visit user_confirmation_path(confirmation_token: user.confirmation_token)
+    visit shared.user_confirmation_path(confirmation_token: user.confirmation_token)
 
     expect(page).to have_content('Váš účet bol úspešne overený. Teraz ste prihlásený.')
   end

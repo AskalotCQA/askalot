@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Deleting' do
+describe 'Deleting', type: :feature do
   let!(:question)     { create :question, :with_tags, title: 'Deleting question' }
   let(:user)          { create :user }
   let(:administrator) { create :administrator }
@@ -11,7 +11,7 @@ describe 'Deleting' do
     end
 
     it 'can delete question' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -41,7 +41,7 @@ describe 'Deleting' do
     end
 
     it 'can delete answer' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -73,7 +73,7 @@ describe 'Deleting' do
     end
 
     it 'can delete answer comment' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -95,7 +95,7 @@ describe 'Deleting' do
     end
 
     it 'can delete question comment' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -121,7 +121,7 @@ describe 'Deleting' do
     end
 
     it 'does not delete the question' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -131,7 +131,7 @@ describe 'Deleting' do
     end
 
     it 'does not delete the answer' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -141,7 +141,7 @@ describe 'Deleting' do
     end
 
     it 'does not delete the comment' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -160,7 +160,7 @@ describe 'Deleting' do
     end
 
     it 'does not delete the question' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -170,7 +170,7 @@ describe 'Deleting' do
     end
 
     it 'does not delete the answer' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -180,7 +180,7 @@ describe 'Deleting' do
     end
 
     it 'does not delete the comment' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -199,7 +199,7 @@ describe 'Deleting' do
     end
 
     it 'does not delete the question' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -209,7 +209,7 @@ describe 'Deleting' do
     end
 
     it 'does not delete the answer' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -219,7 +219,7 @@ describe 'Deleting' do
     end
 
     it 'does not delete the comment' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -238,7 +238,7 @@ describe 'Deleting' do
     end
 
     it 'can delete question' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -248,7 +248,7 @@ describe 'Deleting' do
     end
 
     it 'can delete answer' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -258,7 +258,7 @@ describe 'Deleting' do
     end
 
     it 'can delete comment' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 

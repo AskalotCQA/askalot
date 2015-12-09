@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Shared::User do
+describe Shared::User, type: :model do
   let(:user) { create :user }
 
   it 'requires login' do

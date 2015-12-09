@@ -5,7 +5,7 @@ describe Shared::Slido::Wall::Parser do
   subject { described_class }
 
   it 'parses slido event information' do
-    data = fixture('slido/wall.html').read
+    data = fixture('shared/slido/wall.html').read
 
     event = subject.parse(data)
 

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe 'Registration' do
+describe 'Registration', type: :feature do
   context 'with provided login' do
     it 'signs up user' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Registrovať'
 

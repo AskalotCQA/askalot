@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Editing' do
+describe 'Editing', type: :feature do
   let(:user)            { create :user }
   let(:teacher)         { create :teacher }
   let!(:question)       { create :question, :with_tags, title: 'Elasticsearch prablem' }
@@ -15,7 +15,7 @@ describe 'Editing' do
     end
 
     it 'can edit question', js: true do
-      visit question_path question
+      visit shared.question_path question
 
       click_link "question-#{question.id}-edit-modal"
 
@@ -43,7 +43,7 @@ describe 'Editing' do
     end
 
     it 'can edit answer', js: true do
-      visit question_path question
+      visit shared.question_path question
 
       click_link "answer-#{answer_user.id}-edit-modal"
 
@@ -58,7 +58,7 @@ describe 'Editing' do
     end
 
     it 'can edit comment', js: true do
-      visit question_path question
+      visit shared.question_path question
 
       click_link "comment-#{comment.id}-edit-modal"
 
@@ -81,7 +81,7 @@ describe 'Editing' do
 
     it 'user cannot edit' do
       login_as question.author
-      visit question_path question
+      visit shared.question_path question
 
       expect(page).not_to have_css("#question-#{question.id}-edit-modal")
       expect(page).not_to have_css("#answer-#{answer_user.id}-edit-modal")
@@ -90,7 +90,7 @@ describe 'Editing' do
     it 'administrator can edit' do
       login_as administrator
 
-      visit question_path question
+      visit shared.question_path question
 
       expect(page).to have_css("#question-#{question.id}-edit-modal")
       expect(page).to have_css("#answer-#{answer_user.id}-edit-modal")
@@ -105,7 +105,7 @@ describe 'Editing' do
     end
 
     it 'cant edit' do
-      visit question_path question
+      visit shared.question_path question
 
       expect(page).not_to have_css("#question-#{question.id}-edit-modal")
       expect(page).not_to have_css("#answer-#{answer_user.id}-edit-modal")

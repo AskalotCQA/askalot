@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Voting Question', js: true do
+describe 'Voting Question', type: :feature, js: true do
   let(:question) { create :question, :with_tags, title: 'Voting in democracy' }
   let(:user) { create :user }
 
@@ -10,7 +10,7 @@ describe 'Voting Question', js: true do
 
   context 'when question has no votes' do
     it 'votes up' do
-      visit question_path(question.id)
+      visit shared.question_path(question.id)
 
       click_link "question-#{question.id}-voteup"
 
@@ -24,7 +24,7 @@ describe 'Voting Question', js: true do
     end
 
     it 'votes down' do
-      visit question_path(question.id)
+      visit shared.question_path(question.id)
 
       click_link "question-#{question.id}-votedown"
 
@@ -44,7 +44,7 @@ describe 'Voting Question', js: true do
     end
 
     it 'votes down' do
-      visit question_path(question.id)
+      visit shared.question_path(question.id)
 
       click_link "question-#{question.id}-votedown"
 
@@ -58,7 +58,7 @@ describe 'Voting Question', js: true do
     end
 
     it 'cancels vote' do
-      visit question_path(question.id)
+      visit shared.question_path(question.id)
 
       click_link "question-#{question.id}-voteup"
 
@@ -76,7 +76,7 @@ describe 'Voting Question', js: true do
     end
 
     it 'votes up' do
-      visit question_path(question.id)
+      visit shared.question_path(question.id)
 
       click_link "question-#{question.id}-voteup"
 
@@ -90,7 +90,7 @@ describe 'Voting Question', js: true do
     end
 
     it 'votes down' do
-      visit question_path(question.id)
+      visit shared.question_path(question.id)
 
       click_link "question-#{question.id}-votedown"
 

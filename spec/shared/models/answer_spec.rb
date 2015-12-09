@@ -4,7 +4,7 @@ require_relative 'concerns/editable_spec'
 require_relative 'concerns/deletable_spec'
 require_relative 'concerns/touchable_spec'
 
-describe Shared::Answer do
+describe Shared::Answer, type: :model do
   it_behaves_like Shared::Editable
   it_behaves_like Shared::Deletable
   it_behaves_like Shared::Touchable

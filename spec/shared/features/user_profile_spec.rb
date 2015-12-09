@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe 'User Profile' do
+describe 'User Profile', type: :feature do
   let(:user) { create :user }
 
   context 'with registered user' do
     before :each do
       login_as user
 
-      visit edit_user_registration_path
+      visit shared.edit_user_registration_path
     end
 
     it 'edits user account', js: true do
@@ -136,7 +136,7 @@ describe 'User Profile' do
     end
 
     it 'shows user profile' do
-      visit root_path
+      visit shared.root_path
 
       click_link user.nick
 
@@ -195,7 +195,7 @@ describe 'User Profile' do
     end
 
     it 'disallows editing of first and last name', js: true do
-      visit edit_user_registration_path
+      visit shared.edit_user_registration_path
 
       click_link 'Profil'
 
@@ -215,7 +215,7 @@ describe 'User Profile' do
     end
 
     it 'disallows editing of password', js: true do
-      visit edit_user_registration_path
+      visit shared.edit_user_registration_path
 
       click_link 'Profil'
 
@@ -231,7 +231,7 @@ describe 'User Profile' do
     end
 
     it 'requires current password for changing account information', js: true do
-      visit edit_user_registration_path
+      visit shared.edit_user_registration_path
 
       click_link 'Účet'
 

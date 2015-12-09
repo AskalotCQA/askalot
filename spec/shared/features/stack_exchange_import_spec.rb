@@ -1,9 +1,9 @@
 require 'spec_helper'
 require 'shared/stack_exchange'
 
-describe 'Stack Exchange Import' do
+describe 'Stack Exchange Import', type: :feature do
   it 'imports stack exchange beer dataset' do
-    Shared::StackExchange.import_from(fixture('stack_exchange/beer').path)
+    Shared::StackExchange.import_from(fixture('shared/stack_exchange/beer').path)
 
     question = Shared::Question.find_by(title: 'Do IPAs cause worse hangovers?')
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Markdown' do
+describe 'Markdown', type: :feature do
   let(:user) { create :user }
   let!(:question) { create :question, :with_tags }
   let!(:category) { create :category }
@@ -11,7 +11,7 @@ describe 'Markdown' do
 
   context 'with question' do
     it 'renders preview', js: true do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
@@ -29,7 +29,7 @@ describe 'Markdown' do
     end
 
     it 'embeds emoji icons' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
@@ -47,7 +47,7 @@ describe 'Markdown' do
     it 'embeds references to user' do
       other = create :user, login: :smolnar
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
@@ -74,7 +74,7 @@ describe 'Markdown' do
     it 'embeds reference to question' do
       question = create :question
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
@@ -93,7 +93,7 @@ describe 'Markdown' do
       it 'embeds reference to question' do
         question = create :question
 
-        visit root_path
+        visit shared.root_path
 
         click_link 'Opýtať sa otázku'
 
@@ -113,7 +113,7 @@ describe 'Markdown' do
       it 'embeds reference to user' do
         user = create :user, login: :smolnar
 
-        visit root_path
+        visit shared.root_path
 
         click_link 'Opýtať sa otázku'
 
@@ -135,7 +135,7 @@ describe 'Markdown' do
       end
 
       it 'processes markdown text' do
-        visit root_path
+        visit shared.root_path
 
         click_link 'Otázky'
 
@@ -156,7 +156,7 @@ describe 'Markdown' do
 
   context 'with answer' do
     it 'renders preview of the answer', js: true do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -174,7 +174,7 @@ describe 'Markdown' do
     end
 
     it 'processes answer text' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -194,7 +194,7 @@ describe 'Markdown' do
     it 'embers reference to user and question' do
       other = create :user, login: :smolnar
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title
@@ -225,7 +225,7 @@ describe 'Markdown' do
     it 'renders only links and mentions' do
       other = create :user, login: :smolnar
 
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
       click_link question.title

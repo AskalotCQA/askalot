@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Show Question' do
+describe 'Show Question', type: :feature do
   let(:question) { create :question, :with_tags, title: 'PostgreSQL setup' }
 
   before :each do
@@ -8,7 +8,7 @@ describe 'Show Question' do
   end
 
   it 'shows new question' do
-    visit root_path
+    visit shared.root_path
 
     click_link 'Otázky'
 
@@ -31,7 +31,7 @@ describe 'Show Question' do
     end
 
     it 'searches questions by the tag' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 
@@ -65,7 +65,7 @@ describe 'Show Question' do
     end
 
     it 'searches questions by category tags' do
-      visit root_path
+      visit shared.root_path
 
       click_link 'Otázky'
 

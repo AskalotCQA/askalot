@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Shared::UsersController do
+describe Shared::UsersController, type: :controller do
   describe 'PATCH update' do
     routes { Shared::Engine.routes }
 

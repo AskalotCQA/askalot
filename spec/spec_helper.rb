@@ -7,7 +7,7 @@ if ENV['COVERAGE'] == 'true'
   SimpleCov.start 'rails'
 end
 
-ENV["RAILS_ENV"] ||= 'test'
+ENV["RAILS_ENV"] ||= 'test_university'
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
@@ -30,9 +30,7 @@ end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
-Dir[Rails.root.join("components/shared/spec/support/**/*.rb")].each { |f| require f }
-
-Dir[Rails.root.join("components/shared/spec/factories/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
@@ -83,8 +81,8 @@ RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
 
   # Engine routes
-  config.include University::Engine.routes.url_helpers, type: :feature
   config.include Shared::Engine.routes.url_helpers, type: :feature
+  config.include "#{Rails.module.capitalize}::Engine".constantize.routes.url_helpers, type: :feature
 
   # Include support
   config.include Shared::AuthenticationHelper, type: :feature
