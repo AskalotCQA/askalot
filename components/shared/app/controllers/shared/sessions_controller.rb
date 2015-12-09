@@ -4,6 +4,8 @@ module Shared
 class SessionsController < Devise::SessionsController
   include Devise::Controllers::Rememberable
 
+  skip_before_filter :login_required
+
   def create
     service = Shared::Users::Authentication.new Shared::Stuba::AIS, login_params
 
