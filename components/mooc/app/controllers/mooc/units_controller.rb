@@ -8,12 +8,14 @@ module Mooc
     include Shared::MarkdownHelper
 
     skip_before_filter  :verify_authenticity_token
+    skip_before_filter :login_required
 
     layout 'mooc/unit'
 
     $oauth_creds = { Shared::Configuration.oauth.consumer_key => Shared::Configuration.oauth.consumer_secret }
 
     def show
+      puts 'In show before login'
       login unless signed_in?
 
       if params[:resource_link_id]
