@@ -4,6 +4,11 @@
   <%= form_for question, url: shared.questions_path do |f| %>
     <%= form_messages_for question %>
 
+    <div class="form-group">
+      <%= f.label :category_id %>
+      <%= f.category_collection_select :category_id, Shared::Category.categories_in_context(Shared::Tag.current_academic_year_value) %>
+    </div>
+
     <%= f.hidden_field :category_id, value: unit.id %>
 
     <%= f.hidden_field :unit_view, value: true %>
