@@ -26,6 +26,8 @@ module Mooc
         @unit = Mooc::Category.find params[:id]
       end
       @questions = @unit.questions.order(created_at: :desc).page(params[:page]).per(20)
+
+      puts @questions.inspect
     end
 
     protected
@@ -37,7 +39,7 @@ module Mooc
       u = User.create_without_confirmation! login: params['user_id'], nick: params['lis_person_sourcedid'],
                                             email: params['lis_person_contact_email_primary'], role: params['roles'] if u.nil?
 
-      sign_in(:user, u) unless signed_in?
+      sign_in(:user, u)
     end
 
     def authorize!
