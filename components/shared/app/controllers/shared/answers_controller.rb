@@ -29,6 +29,8 @@ class AnswersController < ApplicationController
       form_error_messages_for @answer
     end
 
+    #TODO (filip jandura) move logic to mooc module
+    return redirect_to mooc.unit_question_path(unit_id: @question.category.id, id: @question.id) if Rails.module.mooc?
     respond_to do |format|
       format.html { redirect_to question_path(@question, anchor: @answer.id ? nil : :answer), format: :html }
       format.js   { redirect_to question_path(@question, anchor: @answer.id ? nil : :answer), format: :js }
