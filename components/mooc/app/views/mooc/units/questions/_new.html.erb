@@ -1,5 +1,5 @@
 <div id="document-content">
-  <h3 class="form-title"><%= t 'question.new.title' %></h3>
+  <h3 id="new-unit-question-title" class="form-title btn btn-success"><%= t 'question.new.title' %></h3>
 
   <%= form_for question, url: shared.questions_path do |f| %>
     <%= form_messages_for question %>
