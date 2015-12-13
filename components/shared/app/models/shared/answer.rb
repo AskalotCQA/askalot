@@ -11,6 +11,8 @@ class Answer < ActiveRecord::Base
   include Votable
 
   after_create :slido_label_with_best!
+  after_create { self.question.category.reload_answer_counters }
+  after_destroy { self.question.category.reload_answer_counters }
 
   belongs_to :question, -> { unscope where: :deleted }, counter_cache: true
 

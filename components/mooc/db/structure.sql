@@ -255,7 +255,11 @@ CREATE TABLE categories (
     children_count integer,
     full_tree_name character varying(255),
     full_public_name character varying(255),
-    public_tags character varying(255)[] DEFAULT '{}'::character varying[]
+    public_tags character varying(255)[] DEFAULT '{}'::character varying[],
+    direct_questions_count integer,
+    direct_shared_questions_count integer,
+    direct_answers_count integer,
+    direct_shared_answers_count integer
 );
 
 
@@ -3274,4 +3278,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151207231221');
 INSERT INTO schema_migrations (version) VALUES ('20151213143631');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
+
+INSERT INTO schema_migrations (version) VALUES ('20151212205452');
 

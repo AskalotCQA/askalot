@@ -15,6 +15,8 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: { scope: :parent_id }
 
+  after_save { self.all_versions.reload_question_counters }
+  after_save { self.all_versions.reload_answers_counters }
   scope :with_slido, -> { where.not(slido_username: nil) }
   scope :askable, -> { where(askable: true) }
 
@@ -149,6 +151,29 @@ class Category < ActiveRecord::Base
     Shared::Category.find_by(name: context).self_and_descendants.each do |category|
       category.name = category.parent.name + ' - ' + category.name unless category.root?
     end
+  end
+
+  def all_versions
+    Shared::Category.select('id').where("uuid = ? AND created_at <= ?", self.uuid, self.created_at)
+  end
+
+  def all_directly_related_questions(relation = nil)
+    category_ids = self.shared ? self.all_versions : self.id
+
+    relation ||= Shared::Question.all
+    relation.where('category_id IN (?)', category_ids)
+  end
+
+  def reload_question_counters
+    self.direct_questions_count = self.questions.size
+    self.direct_shared_questions_count = all_directly_related_questions.size
+    self.save!
+  end
+
+  def reload_answers_counters
+    self.direct_answers_count = self.answers.size
+    self.direct_shared_answers_count = Shared::Answer.where("question_id IN (?)", all_directly_related_questions.select('id')).count
+    self.save!
   end
 end
 end
