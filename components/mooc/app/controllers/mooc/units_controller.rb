@@ -25,6 +25,8 @@ module Mooc
       end
 
       @questions = @unit.questions.order(created_at: :desc).page(params[:page]).per(20)
+
+      puts @questions.inspect
     end
 
     protected
