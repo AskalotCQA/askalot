@@ -1,5 +1,7 @@
 module Shared
 class ApplicationController < ActionController::Base
+  helper Mooc::Engine.helpers
+
   protected
 
   # concerns order is significant
