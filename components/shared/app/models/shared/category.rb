@@ -15,9 +15,8 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: { scope: :parent_id }
 
-  after_create { self.reload_question_counters }
-  after_create { self.reload_answer_counters }
-  after_update { self.check_changed_sharing }
+  after_save { self.all_versions.reload_question_counters }
+  after_save { self.all_versions.reload_answers_counters }
 
   scope :with_slido, -> { where.not(slido_username: nil) }
   scope :askable, -> { where(askable: true) }
@@ -71,13 +70,6 @@ class Category < ActiveRecord::Base
     names << self.name
 
     self.full_public_name = names.join(' - ')
-  end
-
-  def all_directly_related_questions(relation)
-    category_ids = self.shared ? Shared::Category.select('id').where("uuid = ? AND created_at <= ?", self.uuid, self.created_at) : self.id
-
-    relation ||= Shared::Question.all
-    relation.where('category_id IN (?)', category_ids)
   end
 
   def all_related_questions(relation)
@@ -175,7 +167,6 @@ class Category < ActiveRecord::Base
     category_ids = self.shared ? self.all_versions.select('id') : self.id
 
     relation ||= Shared::Question.all
-
     relation.where('category_id IN (?)', category_ids)
   end
 
