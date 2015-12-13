@@ -1,12 +1,12 @@
 <div id="questions-filter" class="questions-filter">
   <div class="row">
     <div class="col-xs-12 col-sm-2">
-      <%= icon_link_to :plus, t('question.new.feature'), new_question_path, analytics_attributes(:questions, :'open-new-form', :list).merge(class: 'btn btn-success') %>
+      <%= icon_link_to :plus, t('question.new.feature'), shared.new_question_path, analytics_attributes(:questions, :'open-new-form', :list).merge(class: 'btn btn-success') %>
     </div>
 
     <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-6">
       <div id="fulltext-search">
-        <%= form_tag search_questions_path, id: :fulltext_search, method: :get do %>
+        <%= form_tag shared.search_questions_path, id: :fulltext_search, method: :get do %>
           <%= hidden_field_tag :poll, params[:poll] %>
           <div class="form-group">
             <div class="input-group select2-bootstrap-prepend">
@@ -26,7 +26,7 @@
       </div>
 
       <div id="tag-search">
-        <%= form_tag questions_path, id: :filter_questions, method: :get, remote: true, data: { state: true } do %>
+        <%= form_tag shared.questions_path, id: :filter_questions, method: :get, remote: true, data: { state: true } do %>
           <%= hidden_field_tag :tab, params[:tab] %>
           <%= hidden_field_tag :poll, params[:poll] %>
           <div class="form-group">
