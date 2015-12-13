@@ -25,6 +25,7 @@ module Mooc
       end
 
       @questions = @unit.questions.order(created_at: :desc).page(params[:page]).per(20)
+      @page_url = params[:custom_page_url]
     end
 
     protected

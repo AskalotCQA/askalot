@@ -2,4 +2,4 @@
 
 <%= render 'mooc/units/questions/new', unit: @unit, question: Shared::Question.new %>
 
-<%= render 'mooc/units/questions/questions', unit: @unit, questions: @questions %>
+<%= render 'mooc/units/questions/questions', unit: @unit, questions: @questions, page_url: @page_url %>
