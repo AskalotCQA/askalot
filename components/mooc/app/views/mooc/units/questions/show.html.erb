@@ -1,5 +1,5 @@
 <div id="document-content">
-  <a href="<%= mooc.unit_path(id: @question.category.id) %>" class="btn btn-sm btn-default">
+  <a href="<%= mooc.unit_path(id: @question.category.id) + '?custom_page_url=' + @page_url %>" class="btn btn-sm btn-default">
     <%= icon_tag :list, label: t('question.list') %>
   </a>
 
@@ -11,7 +11,7 @@
             <%= @question.title %>
             <%= evaluation_badge_tag @question if @question.evaluations.any? %>
           </h3>
-          <%= render 'shared/questions/labels', labels: @labels %>
+          <%= render 'mooc/units/questions/labels', labels: @labels, page_url: @page_url %>
         </div>
 
         <div id="question-data">
