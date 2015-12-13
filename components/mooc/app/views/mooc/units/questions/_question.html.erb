@@ -4,7 +4,7 @@
       <div class="question-preview">
         <h4>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
-          <%= link_to question.title, mooc.unit_question_path(id: question.id, unit_id: @unit.id) %>
+          <%= link_to question.title, mooc.unit_question_path(id: question.id, unit_id: @unit.id) + '?page_url=' + page_url%>
           <small class="pull-right"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
         </h4>
 

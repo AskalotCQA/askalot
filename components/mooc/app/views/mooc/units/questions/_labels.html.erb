@@ -1,8 +1,7 @@
 <ul class="nav nav-labels">
   <% labels.each do |label| %>
     <li>
-      <% puts page_url.inspect %>
-      <%= question_label label %>
+      <%= question_prefix_label label, page_url %>
     </li>
   <% end %>
 </ul>
