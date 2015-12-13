@@ -6,4 +6,7 @@ Mooc::Engine.routes.draw do
   resources :units, only: [:show] do
     resources :questions, only: [:index, :create, :show, :update, :destroy]
   end
+
+  match '/parser' => "parser#parser", via: [:post]
+  match '/parser' => "parser#options", via: [:options]
 end

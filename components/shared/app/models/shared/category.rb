@@ -13,7 +13,7 @@ class Category < ActiveRecord::Base
   has_many :users, through: :assignments
   has_many :roles, through: :assignments
 
-  validates :name, presence: true, uniqueness: { scope: :parent_id }
+  validates :name, presence: true
 
   after_create { self.reload_question_counters }
   after_create { self.reload_answer_counters }
