@@ -23,9 +23,8 @@ module Mooc
       else
         @unit = Mooc::Category.find params[:id]
       end
-      @questions = @unit.questions.order(created_at: :desc).page(params[:page]).per(20)
 
-      puts @questions.inspect
+      @questions = @unit.questions.order(created_at: :desc).page(params[:page]).per(20)
     end
 
     protected
