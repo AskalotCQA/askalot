@@ -14,13 +14,13 @@ class Administration::AssignmentsController < AdministrationController
     @assignment = Shared::Assignment.new(assignment_params)
 
     if @assignment.save
-      form_message :notice, t('assignment.create.success'), key: params[:tab]
+      form_message :notice, t('assignment.create.success')
 
-      redirect_to mooc.administration_root_path(tab: params[:tab])
+      redirect_to shared.administration_assignments_path
     else
-      form_error_messages_for @assignment, flash: flash.now, key: params[:tab]
+      index
 
-      render 'shared/administration/assignments/index'
+      render :index
     end
   end
 
@@ -28,9 +28,11 @@ class Administration::AssignmentsController < AdministrationController
     @assignment = Shared::Assignment.find(params[:id])
 
     if @assignment.update_attributes(assignment_params)
-      form_message :notice, t('assignment.update.success'), key: params[:tab]
+      form_message :notice, t('assignment.update.success')
     else
-      form_error_messages_for @assignment, key: params[:tab]
+      index
+
+      render :index
     end
 
     redirect_to shared.administration_assignments_path
@@ -40,9 +42,9 @@ class Administration::AssignmentsController < AdministrationController
     @assignment = Shared::Assignment.find(params[:id])
 
     if @assignment.destroy
-      form_message :notice, t('assignment.delete.success'), key: params[:tab]
+      form_message :notice, t('assignment.delete.success')
     else
-      form_error_message t('assignment.delete.failure'), key: params[:tab]
+      form_error_message t('assignment.delete.failure')
     end
 
     redirect_to shared.administration_assignments_path

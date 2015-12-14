@@ -1,4 +1,4 @@
-<%= form_for @category, url: url do |f| %>
+<%= form_for @category, url: [:administration, @category] do |f| %>
   <%= form_messages_for @category %>
 
   <div class="form-group">

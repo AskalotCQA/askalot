@@ -36,11 +36,11 @@ class Administration::CategoriesController < Administration::DashboardController
     @category = Shared::Category.new(category_params)
 
     if @category.save
-      form_message :notice, t('category.create.success'), key: params[:tab]
+      form_message :notice, t('category.create.success')
 
       redirect_to shared.administration_categories_path
     else
-      form_error_messages_for @category, flash: flash.now, key: params[:tab]
+      form_error_messages_for @category, flash: flash.now
 
       render :new
     end
@@ -50,9 +50,9 @@ class Administration::CategoriesController < Administration::DashboardController
     @category = Shared::Category.find(params[:id])
 
     if @category.update_attributes(category_params)
-      form_message :notice, t('category.update.success'), key: params[:tab]
+      form_message :notice, t('category.update.success')
     else
-      form_error_messages_for @category, key: params[:tab]
+      form_error_messages_for @category
     end
 
     redirect_to shared.administration_categories_path
