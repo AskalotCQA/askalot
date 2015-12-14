@@ -115,7 +115,7 @@ group :development, :test do
   gem 'activerecord-import'
 end
 
-group :demo_university, :staging, :production, :experimental do
+group :demo, :staging, :production, :experimental do
   gem 'unicorn'
   gem 'rack-timeout'
   gem 'exception_notification'
