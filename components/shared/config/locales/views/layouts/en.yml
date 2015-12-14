@@ -33,3 +33,8 @@ en:
     documents: "Documents"
     help: "Help"
     repositories: "Repository"
+
+  body:
+    unread:
+      show: "Show unread notifications"
+      cancel: "Cancel e-mail notifications"

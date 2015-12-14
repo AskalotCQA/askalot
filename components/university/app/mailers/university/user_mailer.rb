@@ -31,7 +31,7 @@ class UserMailer < ActionMailer::Base
 
     return if @notifications.empty?
 
-    mail to: @user.email, subject: "[Askalot] Nové notifikácie", content_type: 'text/html'
+    mail to: @user.email, subject: t('user_mailer.subject'), content_type: 'text/html'
   end
 end
 end

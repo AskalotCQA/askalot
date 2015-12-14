@@ -19,12 +19,18 @@ sk:
     mailer:
       confirmation_instructions:
         subject: "Potvrdenie registrácie"
+        confirm: "Potvrdiť registráciu"
+        contact: "kontaktujte"
 
       reset_password_instructions:
         subject: "Obnovenie hesla"
+        change_password: "zmeniť heslo"
+        contact: "kontaktujte"
 
       unlock_instructions:
         subject: "Odomknutie účtu"
+        change_password: "zmeniť heslo"
+        contact: "kontaktujte"
 
     omniauth_callbacks:
       failure: "Nebolo Vás možné autentifikovať z %{kind} účtu z dôvodu &bdquo;%{reason}&ldquo;."

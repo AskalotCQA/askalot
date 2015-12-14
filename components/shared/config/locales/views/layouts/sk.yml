@@ -34,3 +34,8 @@ sk:
     documents: "Dokumentácia"
     help: "Pomoc"
     repositories: "Repozitár"
+
+  body:
+    unread:
+      show: "Zobraziť neprečítané notifikácie"
+      cancel: "Zrušiť odoberanie notifikácii"

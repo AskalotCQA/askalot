@@ -1,12 +1,12 @@
 <% if group.edited? %>
-  <%= t "group.details.updated" %>
+  <%= t 'group.details.updated' %>
   <%= group.editor.nick %>
   <%= tooltip_time_tag group.edited_at, format: :normal, placement: :top %>
 <% end %>
 
 <% if group.editor != group.creator %>
   <%= '&middot;'.html_safe if group.edited? %>
-  <%= t("group.details.created").tap { |s| s.downcase_first! if group.edited? } %>
+  <%= t('group.details.created').tap { |s| s.downcase_first! if group.edited? } %>
   <%= group.creator.nick %>
 <% end %>
 

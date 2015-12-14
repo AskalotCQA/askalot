@@ -50,3 +50,6 @@ en:
 
   cancan:
     access_denied: "You don't have permission to perform this action."
+
+  destroy:
+    destroy_callback: "Subclasses must define 'destroy_callback'."

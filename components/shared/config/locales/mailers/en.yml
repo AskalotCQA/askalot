@@ -1,0 +1,6 @@
+en:
+  user_mailer:
+    subject: "[Askalot] New notifications"
+
+  community_emails:
+    cancel: "Cancel subscribing these e-mails"
