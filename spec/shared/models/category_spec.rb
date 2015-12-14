@@ -53,9 +53,9 @@ describe Shared::Category, type: :model do
 
   describe '#question_counts' do
     let(:category) { create :category, uuid: 'category' }
+    let(:version) { create :category, uuid: 'category', shared: true }
 
     context 'with no questions' do
-
       it 'has zero direct questions' do
         expect(category.direct_questions_count).to be_zero
       end
@@ -65,8 +65,7 @@ describe Shared::Category, type: :model do
       end
     end
 
-    context 'with three direct questions' do
-
+    context 'with multiple direct questions' do
       it 'has three direct questions' do
         3.times { create :question, category: category }
 
@@ -76,7 +75,6 @@ describe Shared::Category, type: :model do
     end
 
     context 'with three indirect questions' do
-
       it 'has three shared questions' do
         version = create :category, uuid: 'category'
         outer = create :category
@@ -103,7 +101,6 @@ describe Shared::Category, type: :model do
     let(:qouter_question) { create :question, category: outer }
 
     context 'with no answer' do
-
       it 'has no answers' do
         expect(shared1.direct_answers_count).to be_zero
         expect(shared2.direct_answers_count).to be_zero
@@ -115,7 +112,6 @@ describe Shared::Category, type: :model do
     end
 
     context 'one category with three questions on category one' do
-
       it 'has three answers on one category in two questions and other has one' do
         2.times { create :answer, question: sh1q1 }
 
@@ -129,12 +125,22 @@ describe Shared::Category, type: :model do
         expect(shared2.direct_answers_count).to eql(1)
         expect(shared2.direct_shared_answers_count).to eql(4)
         expect(outer.direct_shared_answers_count).to be_zero
+        expect(category.direct_shared_questions_count).to be_zero
+      end
+    end
+
+    context 'with multiple direct shared questions' do
+      it 'has three shared questions' do
+        3.times { create :question, category: version }
+
+        expect(version.direct_questions_count).to eql(3)
+        expect(version.direct_shared_questions_count).to be_zero
+        expect(category.direct_shared_questions_count).to eql(3)
       end
     end
   end
 
   describe '.with_slido' do
-
     it 'finds only categories with slido username' do
       create :category
 
