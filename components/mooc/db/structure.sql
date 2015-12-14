@@ -207,7 +207,9 @@ CREATE TABLE assignments (
     category_id integer NOT NULL,
     role_id integer NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    admin_visible boolean DEFAULT true,
+    parent integer
 );
 
 
@@ -3266,5 +3268,5 @@ INSERT INTO schema_migrations (version) VALUES ('20151122112216');
 
 INSERT INTO schema_migrations (version) VALUES ('20151122112444');
 
-INSERT INTO schema_migrations (version) VALUES ('20151207231221');
+INSERT INTO schema_migrations (version) VALUES ('20151213225917');
 
