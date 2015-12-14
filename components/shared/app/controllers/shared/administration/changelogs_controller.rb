@@ -3,8 +3,8 @@ class Administration::ChangelogsController < AdministrationController
   authorize_resource class: Shared::Changelog
 
   def index
-    @changelogs = Shared::Changelog.all.sort
-    @changelog  ||= Shared::Changelog.new
+    @changelogs  = Shared::Changelog.all.sort
+    @changelog ||= Shared::Changelog.new
   end
 
   def create
@@ -30,7 +30,7 @@ class Administration::ChangelogsController < AdministrationController
       form_error_messages_for @changelog, key: params[:tab]
     end
 
-    redirect_to administration_changelogs_path
+    redirect_to shared.administration_changelogs_path
   end
 
   def destroy
@@ -42,7 +42,7 @@ class Administration::ChangelogsController < AdministrationController
       form_error_message t('changelog.delete.failure'), key: params[:tab]
     end
 
-    redirect_to administration_changelogs_path
+    redirect_to shared.administration_changelogs_path
   end
 
   private

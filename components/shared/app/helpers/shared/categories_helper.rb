@@ -29,19 +29,18 @@ module Shared::CategoriesHelper
   def tree_table(objects, header = '', &block)
     objects = objects.order(:lft) if objects.is_a? Class
 
-    return '' if objects.size == 0
+    return '' if objects.empty?
 
     parents = objects.group_by(&:parent_id)
     output  = '<table class="treetable table">'
+
     output << '<tr>' << header << '</tr>' unless header.blank?
 
     path    = [nil]
 
     objects.each do |o|
       if o.parent_id != path.last
-        # We are on a new level, did we descend or ascend?
         if path.include?(o.parent_id)
-          # Remove the wrong trailing path elements
           while path.last != o.parent_id
             path.pop
           end

@@ -4,8 +4,10 @@ class Administration::AssignmentsController < AdministrationController
 
   def index
     @assignments = Shared::Assignment.includes(:user, :category, :role).order('categories.name', 'users.nick')
-    @assignments.each { |a| a.category.name = a.category.parent.name + ' - ' + a.category.name unless a.category.root? }
+
     @assignment ||= Shared::Assignment.new
+
+    @assignments.each { |a| a.category.name = a.category.parent.name + ' - ' + a.category.name unless a.category.root? }
   end
 
   def create
@@ -14,7 +16,7 @@ class Administration::AssignmentsController < AdministrationController
     if @assignment.save
       form_message :notice, t('assignment.create.success'), key: params[:tab]
 
-      redirect_to administration_root_path(tab: params[:tab])
+      redirect_to mooc.administration_root_path(tab: params[:tab])
     else
       form_error_messages_for @assignment, flash: flash.now, key: params[:tab]
 
@@ -31,7 +33,7 @@ class Administration::AssignmentsController < AdministrationController
       form_error_messages_for @assignment, key: params[:tab]
     end
 
-    redirect_to administration_assignments_path
+    redirect_to shared.administration_assignments_path
   end
 
   def destroy
@@ -43,7 +45,7 @@ class Administration::AssignmentsController < AdministrationController
       form_error_message t('assignment.delete.failure'), key: params[:tab]
     end
 
-    redirect_to administration_assignments_path
+    redirect_to shared.administration_assignments_path
   end
 
   private

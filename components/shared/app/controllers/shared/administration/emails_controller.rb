@@ -23,7 +23,7 @@ class Administration::EmailsController < AdministrationController
       end
     end
 
-    redirect_to administration_emails_path
+    redirect_to shared.administration_emails_path
   end
 
   private

@@ -121,11 +121,14 @@ Shared::Engine.routes.draw do
       root 'categories#index'
 
       resources :assignments, only: [:index, :create, :update, :destroy]
-      resources :categories,  except: [:show] do
+
+      resources :changelogs, only: [:index, :create, :update, :destroy]
+
+      resources :categories, except: [:show] do
         post 'settings' => 'categories#update_settings', on: :collection
       end
-      resources :changelogs,  only: [:index, :create, :update, :destroy]
-      get :emails, to: 'emails#index'
+
+      get  :emails, to: 'emails#index'
       post :emails, to: 'emails#create'
     end
 

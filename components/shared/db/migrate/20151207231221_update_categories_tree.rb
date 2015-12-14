@@ -16,11 +16,10 @@ class UpdateCategoriesTree < ActiveRecord::Migration
 
     i = 1
     total = categories.count.to_s
+
     categories.each do |category|
       if category.parent_id != path.last
-        # We are on a new level, did we descend or ascend?
         if path.include?(category.parent_id)
-          # Remove the wrong trailing path elements
           while path.last != category.parent_id
             path.pop
           end
@@ -28,7 +27,7 @@ class UpdateCategoriesTree < ActiveRecord::Migration
           path << category.parent_id
         end
 
-        full_tree_path = []
+        full_tree_path   = []
         full_public_path = []
         path.each do |id|
           full_tree_path << finder[id].name if finder[id] && finder[id].name != 'root'

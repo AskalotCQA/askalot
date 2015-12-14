@@ -1,54 +1,27 @@
 <%= render layout: 'shared/administration/layout' do %>
-    <div class="text-right">
-      <%= link_to t('administration.category.create.action'), new_administration_category_path, class: 'btn btn-primary' %>
-    </div>
-
-    <% content_for :categories_header do %>
-        <th></th>
-        <th></th>
-        <th>
-          <%= fa_icon :group, tooltip_attributes(t 'activerecord.attributes.shared/category.shared') %>
-        </th>
-        <th>
-          <%= fa_icon :question, tooltip_attributes(t 'activerecord.attributes.shared/category.askable') %>
-        </th>
-        <th></th>
+  <div class="text-right">
+    <%= link_to t('administration.category.create.action'), shared.new_administration_category_path, class: 'btn btn-primary' %>
+  </div>
+  
+  <% content_for :categories_header do %>
+    <th></th>
+    <th></th>
+    <th>
+      <%= fa_icon :group, tooltip_attributes(t 'activerecord.attributes.shared/category.shared') %>
+    </th>
+    <th>
+      <%= fa_icon :question, tooltip_attributes(t 'activerecord.attributes.shared/category.askable') %>
+    </th>
+    <th></th>
+  <% end %>
+  
+  <div class="administration-categories">
+    <%= render 'shared/administration/categories/update_settings' %>
+  
+    <%= tree_table(@categories, yield(:categories_header)) do |category| %>
+      <%= render 'shared/administration/categories/category', category: category %>
     <% end %>
-
-    <div class="administration-categories">
-      <%= render 'shared/administration/categories/update_settings' %>
-
-      <%= tree_table(@categories, yield(:categories_header)) do |category| %>
-          <td>
-            <%= link_to_category category, tooltip_attributes(category.full_public_name).merge(target: '_blank') %>
-          </td>
-
-          <td>
-            <% category.tags.each do |tag| %>
-                <span class="label label-inverse"><%= tag %></span>
-            <% end %>
-          </td>
-
-          <td>
-            <%= check_box_tag 'shared[]', category.id, category.shared, tooltip_attributes(t 'activerecord.attributes.shared/category.shared').merge({class: 'treetable-checkbox'}) %>
-          </td>
-
-          <td>
-            <%= check_box_tag 'askable[]', category.id, category.askable, tooltip_attributes(t 'activerecord.attributes.shared/category.askable').merge({class: 'treetable-checkbox'}) %>
-          </td>
-
-          <td>
-            <div class="pull-right">
-              <a href="<%= new_administration_category_path({ parent_id: category.id, uuid: category.uuid }) %>" class="text-success text-undecorated">
-                <%= tooltip_icon_tag 'plus-circle', t('administration.category.create.action') %>
-              </a>
-              <a href="<%= edit_administration_category_path category %>" class="text-muted text-undecorated">
-                <%= tooltip_icon_tag :edit, t('administration.category.edit.action'), placement: :top %>
-              </a>
-            </div>
-          </td>
-      <% end %>
-
-      <%= render 'shared/administration/categories/update_settings' %>
-    </div>
+  
+    <%= render 'shared/administration/categories/update_settings' %>
+  </div>
 <% end %>

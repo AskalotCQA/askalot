@@ -119,6 +119,7 @@ class QuestionsController < ApplicationController
   def filter_questions(relation)
     relation = relation.tagged_with(params[:tags]) if params[:tags].present?
     relation = relation.all_directly_related Shared::Category.find(params[:category]) if params[:category]
+
     relation
   end
 

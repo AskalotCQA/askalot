@@ -1,4 +1,4 @@
-<%= form_for @email, url: administration_emails_path(@email), method: :post do |f| %>
+<%= form_for @email, url: shared.administration_emails_path(@email), method: :post do |f| %>
 
     <div class="form-group">
       <%= f.label :subject, "Predmet e-mailu" %>

@@ -12,7 +12,7 @@
         <%= t 'administration.assignment.delete.text' %>
       </div>
       <div class="modal-footer">
-        <%= form_for assignment, method: :delete, html: { id: nil, class: nil }, url: administration_assignment_path(assignment) do %>
+        <%= form_for assignment, method: :delete, html: { id: nil, class: nil }, url: shared.administration_assignment_path(assignment) do %>
           <a href="#" class="btn btn-default" data-dismiss="modal"><%= t 'administration.assignment.delete.cancel' %></a>
           <button id="<%= "assignment-delete" %>" class="btn btn-danger"><%= t 'administration.assignment.delete.submit' %></button>
         <% end %>

@@ -5,7 +5,7 @@
 <div id="assignment-<%= assignment.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= form_for assignment, url: administration_assignment_path(assignment) do |f| %>
+      <%= form_for assignment, url: shared.administration_assignment_path(assignment) do |f| %>
         <div class="modal-header">
           <h3 class="modal-title"><%= t 'administration.assignment.edit.title' %></h3>
         </div>

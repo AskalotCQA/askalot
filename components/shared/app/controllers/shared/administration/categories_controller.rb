@@ -20,8 +20,8 @@ class Administration::CategoriesController < Administration::DashboardController
   include CategoriesHelper
 
   def index
-    @categories  = Shared::Category.includes(:assignments).order(:lft)
-    @category   ||= Shared::Category.new
+    @categories = Shared::Category.includes(:assignments).order(:lft)
+    @category ||= Shared::Category.new
   end
 
   def new
@@ -38,7 +38,7 @@ class Administration::CategoriesController < Administration::DashboardController
     if @category.save
       form_message :notice, t('category.create.success'), key: params[:tab]
 
-      redirect_to administration_categories_path
+      redirect_to shared.administration_categories_path
     else
       form_error_messages_for @category, flash: flash.now, key: params[:tab]
 
@@ -55,7 +55,7 @@ class Administration::CategoriesController < Administration::DashboardController
       form_error_messages_for @category, key: params[:tab]
     end
 
-    redirect_to administration_categories_path
+    redirect_to shared.administration_categories_path
   end
 
   def update_settings
@@ -63,6 +63,7 @@ class Administration::CategoriesController < Administration::DashboardController
     Shared::Category.update_all shared: false
     Shared::Category.where(id: params[:askable]).update_all askable: true
     Shared::Category.where(id: params[:shared]).update_all shared: true
+
     render json: { success: true }
   end
 

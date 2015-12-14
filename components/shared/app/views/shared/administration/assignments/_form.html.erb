@@ -1,4 +1,4 @@
-<%= form_for @assignment, url: administration_assignments_path(@assignment) do |f| %>
+<%= form_for @assignment, url: shared.administration_assignments_path(@assignment) do |f| %>
   <div class="form-group">
     <%= f.label :category_id %>
     <%= f.category_collection_select :category_id, Shared::Category.all, :id, :full_tree_name %>

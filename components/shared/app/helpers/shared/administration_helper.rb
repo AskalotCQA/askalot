@@ -1,8 +1,7 @@
 module Shared
   module AdministrationHelper
     def administration_link_tag(title, tab, path, options = {})
-      classes  = Hash.new
-
+      classes       = Hash.new
       is_tab        = params[:tab] && params[:tab].to_sym == tab.to_sym
       is_controller = params[:controller] && params[:controller].include?(tab.to_s)
 

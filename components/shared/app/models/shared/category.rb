@@ -27,16 +27,16 @@ class Category < ActiveRecord::Base
     @refresh_descs = false
 
     if !self.full_tree_name_changed? && self.name_changed?
-        self.refresh_full_tree_name
-        @refresh_descs = true
+      self.refresh_full_tree_name
+      @refresh_descs = true
     end
 
     if !self.full_public_name_changed? && self.name_changed?
-        self.refresh_full_public_name
-        @refresh_descs = true
+      self.refresh_full_public_name
+      @refresh_descs = true
     end
 
-    return true
+    true
   end
 
   def refresh_descendants_names
@@ -48,7 +48,7 @@ class Category < ActiveRecord::Base
 
     @refresh_descs = false
 
-    return true
+    true
   end
 
   def refresh_full_tree_name

@@ -1,10 +1,8 @@
 module Shared::Bootstrap::TabHelper
   def tab_link_tag(title, tab, path, options = {})
-    classes  = Hash.new
-    defaults = { data: { toggle: :tab, state: true, target: "##{tab}" }}
-
-    options = defaults.deep_merge(options)
-
+    classes       = Hash.new
+    defaults      = {data: {toggle: :tab, state: true, target: "##{tab}"}}
+    options       = defaults.deep_merge(options)
     is_tab        = params[:tab] && params[:tab].to_sym == tab.to_sym
     is_controller = params[:controller] && params[:controller].to_sym == tab.to_sym
 
