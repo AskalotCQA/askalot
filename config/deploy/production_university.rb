@@ -4,6 +4,6 @@ server domain, :app, :web, :db, primary: true
 
 set :user,      'deploy'
 set :rails_env, 'production_university'
-set :branch,    'gama'
+set :branch,    'deploy-feature'
 
 role :db, domain, primary: true

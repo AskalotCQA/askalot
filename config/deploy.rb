@@ -1,8 +1,9 @@
 require 'rvm/capistrano'
 require 'bundler/capistrano'
 require 'whenever/capistrano'
+require 'active_support/inflector'
 
-set :stages, [:staging_univeristy, :demo_university, :production_university, :staing_mooc, :demo_mooc, :production_mooc]
+set :stages, [:staging_university, :demo_university, :production_university, :staging_mooc, :demo_mooc, :production_mooc]
 
 require 'capistrano/ext/multistage'
 
