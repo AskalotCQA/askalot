@@ -89,8 +89,8 @@ Askalot::Application.configure do
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
 
-  ENV["RAILS_RELATIVE_URL_ROOT"] = '/demo'
-  config.assets.prefix  = '/demo/assets/'
+  ENV["RAILS_RELATIVE_URL_ROOT"] = '/demo-mooc'
+  config.assets.prefix  = '/demo-mooc/assets/'
 
   # config.relative_url_root = '/demo'
   # config.action_controller.relative_url_root = '/demo'
@@ -100,5 +100,13 @@ Askalot::Application.configure do
       email_prefix: '[TP][error] ',
       sender_address: %{'Askalot' <askalot@fiit.stuba.sk>},
       exception_recipients: %w{askalot@fiit.stuba.sk}
+  }
+
+  config.action_dispatch.default_headers = {
+      'X-Frame-Options' => 'ALLOWALL',
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Request-Methods' => '*',
+      'Access-Control-Allow-Methods' => 'POST, GET, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers' => 'X-CSRFToken'
   }
 end

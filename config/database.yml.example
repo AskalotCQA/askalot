@@ -22,14 +22,6 @@ staging_university:
   username: postgres
   password: postgres
 
-production_university:
-  adapter: postgresql
-  encoding: unicode
-  database: askalot_production_university
-  pool: 5
-  username: postgres
-  password: postgres
-
 demo_university:
   adapter: postgresql
   encoding: unicode
@@ -38,10 +30,10 @@ demo_university:
   username: postgres
   password: postgres
 
-experimental_university:
+production_university:
   adapter: postgresql
   encoding: unicode
-  database: askalot_experimental
+  database: askalot_production_university
   pool: 5
   username: postgres
   password: postgres
@@ -70,14 +62,6 @@ staging_mooc:
   username: postgres
   password: postgres
 
-production_mooc:
-  adapter: postgresql
-  encoding: unicode
-  database: askalot_production_mooc
-  pool: 5
-  username: postgres
-  password: postgres
-
 demo_mooc:
   adapter: postgresql
   encoding: unicode
@@ -86,10 +70,10 @@ demo_mooc:
   username: postgres
   password: postgres
 
-experimental_mooc:
+production_mooc:
   adapter: postgresql
   encoding: unicode
-  database: askalot_experimental
+  database: askalot_production_mooc
   pool: 5
   username: postgres
   password: postgres

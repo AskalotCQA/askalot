@@ -19,27 +19,28 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 5.minutes do
-  rake 'slido:questions'
-end
-
 every 1.day do
   rake 'backup:database'
 end
 
-every 1.day, at: '5:32am' do
-  runner 'University::Mailers::UserMailerService.deliver_notifications!'
-end
+if ENV['RAILS_ENV'].split('_', 2)[1] == 'university'
+  every 5.minutes do
+    rake 'slido:questions'
+  end
 
-every 10.minutes do
-  runner 'University::Mailers::CommunityMailerService.deliver_all_emails!'
-end
+  every 1.day, at: '5:32am' do
+    runner 'University::Mailers::UserMailerService.deliver_notifications!'
+  end
 
-every 1.day, at: '4:32am' do
-  rake 'reputation:adjust'
-end
+  every 10.minutes do
+    runner 'University::Mailers::CommunityMailerService.deliver_all_emails!'
+  end
 
+  every 1.day, at: '4:32am' do
+    rake 'reputation:adjust'
+  end
 
-every 6.months do
-  rake 'users:alumni'
+  every 6.months do
+    rake 'users:alumni'
+  end
 end

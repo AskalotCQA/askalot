@@ -82,9 +82,6 @@ demo_university:
 production_university:
   <<: *defaults
 
-experimental_university:
-  <<: *defaults
-
 development_mooc:
   <<: *defaults
 
@@ -101,7 +98,4 @@ demo_mooc:
   <<: *defaults
 
 production_mooc:
-  <<: *defaults
-
-experimental_mooc:
   <<: *defaults

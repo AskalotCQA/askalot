@@ -31,6 +31,9 @@ Askalot::Application.configure do
   config.action_mailer.default_url_options = { host: 'http://localhost', port: 3000 }
   config.action_mailer.delivery_method = :letter_opener
 
+  # Default locate
+  config.i18n.default_locale = :en
+
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
 end

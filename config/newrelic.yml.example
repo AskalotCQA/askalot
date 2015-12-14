@@ -210,6 +210,14 @@ test_university:
   # unit, functional or integration tests or the like.
   monitor_mode: false
 
+# Many applications have a staging environment which behaves
+# identically to production. Support for that environment is provided
+# here.  By default, the staging environment has the agent turned on.
+staging_university:
+  <<: *default_settings
+  monitor_mode: true
+  # app_name: My Application (Staging)
+
 demo_university:
   <<: *default_settings
   monitor_mode: true
@@ -220,15 +228,7 @@ demo_university:
 # incurring any user-visible performance degradation.
 production_university:
   <<: *default_settings
-  monitor_mode: true
-
-# Many applications have a staging environment which behaves
-# identically to production. Support for that environment is provided
-# here.  By default, the staging environment has the agent turned on.
-staging_university:
-  <<: *default_settings
-  monitor_mode: true
-  # app_name: My Application (Staging)
+  monitor_mode: tru
 
 development_mooc:
   <<: *default_settings
@@ -254,6 +254,14 @@ test_mooc:
   # unit, functional or integration tests or the like.
   monitor_mode: false
 
+# Many applications have a staging environment which behaves
+# identically to production. Support for that environment is provided
+# here.  By default, the staging environment has the agent turned on.
+staging_mooc:
+  <<: *default_settings
+  monitor_mode: true
+  # app_name: My Application (Staging)
+
 demo_mooc:
   <<: *default_settings
   monitor_mode: true
@@ -265,11 +273,3 @@ demo_mooc:
 production_mooc:
   <<: *default_settings
   monitor_mode: true
-
-# Many applications have a staging environment which behaves
-# identically to production. Support for that environment is provided
-# here.  By default, the staging environment has the agent turned on.
-staging_mooc:
-  <<: *default_settings
-  monitor_mode: true
-  # app_name: My Application (Staging)

@@ -29,22 +29,29 @@ cp config/database.{yml.example,yml}
 cp config/newrelic.{yml.example,yml}
 ```
 
-Create database.
+There are two types of environments: *university* and *mooc*. You have to use this as suffix to standart development, test, staging, demo and production environment.
+
+Create database, load schema and seed the database.
 
 ```
-RAILS_ENV=development rake db:create
-```
-
-Seed the database.
-
-```
-RAILS_ENV=development rake db:seed
+RAILS_ENV=development_university rake db:create db:structure:load db:seed
+RAILS_ENV=development_mooc rake db:create db:structure:load db:seed
 ```
 
 ## Testing
 
 1. Install [PhantomJS](http://phantomjs.org/) (v2.0).
-2. Run specs with `bundle exec rspec`.
+2. Run specs with:
+
+```
+RAILS_ENV=test_university rake db:create db:structure:load
+RAILS_ENV=test_university bundle exec rake rspec:test
+or
+RAILS_ENV=test_mooc rake db:create db:structure:load
+RAILS_ENV=test_mooc bundle exec rake rspec:test
+```
+
+Tests will run either *shared+university* or *shared+mooc* tests.
 
 ## Contributing
 
