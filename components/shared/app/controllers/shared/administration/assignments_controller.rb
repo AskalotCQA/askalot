@@ -1,6 +1,6 @@
 module Shared
 class Administration::AssignmentsController < Administration::DashboardController
-  authorize_resource class: 'Shared::Assignment'
+  authorize_resource class: Shared::Assignment
 
   def create
     @assignment = Shared::Assignment.new(assignment_params)

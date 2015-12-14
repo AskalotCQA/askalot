@@ -31,16 +31,16 @@ class Assignment < ActiveRecord::Base
     if admin_visible
       delete_assignments_from_descendants
       category.descendants.each do |c|
-        a = Shared::Assignment.create(role: role, user: user, category: c, admin_visible: false, parent: id)
-        a.save
+        Shared::Assignment.create(role: role, user: user, category: c, admin_visible: false, parent: id)
       end
     end
+
+    true
   end
 
   def delete_assignments_from_descendants
-    if admin_visible
-      Shared::Assignment.where({ parent: id }).destroy_all
-    end
+    Shared::Assignment.where({ parent: id }).destroy_all if admin_visible
+    true
   end
 end
 end
