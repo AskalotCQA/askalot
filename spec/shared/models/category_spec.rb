@@ -49,6 +49,39 @@ describe Shared::Category, type: :model do
     end
   end
 
+  describe '#question_counts' do
+    let(:category) { create :category, uuid: 'category', shared: true }
+    let(:version) { create :category, uuid: 'category', shared: true }
+
+    context 'with no questions' do
+      it 'has zero direct questions' do
+        expect(category.direct_questions_count).to be_nil
+      end
+      it 'has zero direct shared questions' do
+        expect(category.direct_shared_questions_count).to be_nil
+      end
+    end
+
+    context 'with multiple direct questions' do
+      it 'has three direct questions' do
+        3.times { create :question, category: category }
+
+        expect(category.direct_questions_count).to eql(3)
+        expect(category.direct_shared_questions_count).to be_zero
+      end
+    end
+
+    context 'with multiple direct shared questions' do
+      it 'has three shared questions' do
+        3.times { create :question, category: version }
+
+        expect(version.direct_questions_count).to eql(3)
+        expect(version.direct_shared_questions_count).to be_zero
+        expect(category.direct_shared_questions_count).to eql(3)
+      end
+    end
+  end
+
   describe '.with_slido' do
     it 'finds only categories with slido username' do
       create :category

@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :category, class: Shared::Category do
     sequence(:name) { |n| "Category ##{n}" }
-    parent_id 1
     askable true
+    parent_id Shared::Category.find_by name: 'root', parent: nil
 
     trait :with_tags do
       sequence(:tags) { |n| ["category-#{n}"] }
