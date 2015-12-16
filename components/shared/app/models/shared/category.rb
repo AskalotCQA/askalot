@@ -15,8 +15,10 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: { scope: :parent_id }
 
-  after_save { self.all_versions.each { |category| category.reload_question_counters } }
-  after_save { self.all_versions.each { |category| category.reload_answer_counters } }
+  after_create { self.reload_question_counters }
+  after_create { self.reload_answer_counters }
+  after_update { self.check_changed_sharing }
+  #after_save { self.all_versions.each { |category| category.reload_answer_counters } }
   scope :with_slido, -> { where.not(slido_username: nil) }
   scope :askable, -> { where(askable: true) }
 
@@ -154,11 +156,20 @@ class Category < ActiveRecord::Base
   end
 
   def all_versions
-    Shared::Category.select('id').where("uuid = ? AND created_at <= ?", self.uuid, self.created_at)
+    Shared::Category.where("uuid = ? AND created_at <= ?", self.uuid, self.created_at)
+  end
+
+  def check_changed_sharing
+    if self.shared_changed?
+      all_versions.each do |category|
+        category.reload_question_counters
+        category.reload_answer_counters
+      end
+    end
   end
 
   def all_directly_related_questions(relation = nil)
-    category_ids = self.shared ? self.all_versions : self.id
+    category_ids = self.shared ? self.all_versions.select('id') : self.id
 
     relation ||= Shared::Question.all
     relation.where('category_id IN (?)', category_ids)
@@ -172,7 +183,7 @@ class Category < ActiveRecord::Base
 
   def reload_answer_counters
     self.direct_answers_count = self.answers.size
-    self.direct_shared_answers_count = Shared::Answer.where("question_id IN (?)", all_directly_related_questions.select('id')).count
+    self.direct_shared_answers_count = Shared::Answer.where('question_id IN (?)', all_directly_related_questions.select('id')).count
     self.save!
   end
 end
