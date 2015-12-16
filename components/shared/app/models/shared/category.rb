@@ -15,9 +15,16 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: { scope: :parent_id }
 
+<<<<<<< HEAD
   after_save { self.all_versions.reload_question_counters }
   after_save { self.all_versions.reload_answers_counters }
 
+=======
+  after_create { self.reload_question_counters }
+  after_create { self.reload_answer_counters }
+  after_update { self.check_changed_sharing }
+  #after_save { self.all_versions.each { |category| category.reload_answer_counters } }
+>>>>>>> Add test for category answers count
   scope :with_slido, -> { where.not(slido_username: nil) }
   scope :askable, -> { where(askable: true) }
 

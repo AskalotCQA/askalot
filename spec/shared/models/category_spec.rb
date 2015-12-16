@@ -53,7 +53,6 @@ describe Shared::Category, type: :model do
 
   describe '#question_counts' do
     let(:category) { create :category, uuid: 'category' }
-    let(:version) { create :category, uuid: 'category', shared: true }
 
     context 'with no questions' do
       it 'has zero direct questions' do
@@ -65,7 +64,7 @@ describe Shared::Category, type: :model do
       end
     end
 
-    context 'with multiple direct questions' do
+    context 'with three direct questions' do
       it 'has three direct questions' do
         3.times { create :question, category: category }
 
@@ -129,13 +128,18 @@ describe Shared::Category, type: :model do
       end
     end
 
-    context 'with multiple direct shared questions' do
+    context 'with three indirect questions' do
       it 'has three shared questions' do
+        version = create :category, uuid: 'category'
+        outer = create :category
         3.times { create :question, category: version }
 
+        expect(category.direct_questions_count).to be_zero
         expect(version.direct_questions_count).to eql(3)
-        expect(version.direct_shared_questions_count).to be_zero
         expect(category.direct_shared_questions_count).to eql(3)
+        expect(version.direct_shared_questions_count).to eql(3)
+        expect(outer.direct_questions_count).to be_zero
+        expect(outer.direct_shared_questions_count).to be_zero
       end
     end
   end
