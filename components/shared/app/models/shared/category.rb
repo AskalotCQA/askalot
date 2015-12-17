@@ -18,12 +18,14 @@ class Category < ActiveRecord::Base
   after_create { self.reload_question_counters }
   after_create { self.reload_answer_counters }
   after_update { self.check_changed_sharing }
-  #after_save { self.all_versions.each { |category| category.reload_answer_counters } }
+
   scope :with_slido, -> { where.not(slido_username: nil) }
   scope :askable, -> { where(askable: true) }
 
   before_save :refresh_names
   after_save :refresh_descendants_names
+
+  scope :questions?, -> { where.not(direct_shared_questions_count: 0) }
 
   self.table_name = 'categories'
 
@@ -124,7 +126,7 @@ class Category < ActiveRecord::Base
       if group.children.size == 0
         empty << group
       else
-        groups << group.children.each do |category|
+        groups << group.children.questions?.each do |category|
           category.name = group.name + ' - ' + category.name
         end
       end
