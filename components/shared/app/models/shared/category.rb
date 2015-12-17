@@ -15,21 +15,16 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true, uniqueness: { scope: :parent_id }
 
-<<<<<<< HEAD
-  after_save { self.all_versions.reload_question_counters }
-  after_save { self.all_versions.reload_answers_counters }
-
-=======
   after_create { self.reload_question_counters }
   after_create { self.reload_answer_counters }
   after_update { self.check_changed_sharing }
-  #after_save { self.all_versions.each { |category| category.reload_answer_counters } }
->>>>>>> Add test for category answers count
+
   scope :with_slido, -> { where.not(slido_username: nil) }
   scope :askable, -> { where(askable: true) }
 
   before_save :refresh_names
   after_save :refresh_descendants_names
+  scope :questions?, -> { where.not(direct_shared_questions_count: 0) }
 
   scope :direct_and_shared_question_count?, -> { where.not(direct_shared_questions_count: 0) }
 
@@ -125,10 +120,15 @@ class Category < ActiveRecord::Base
       if group.children.size == 0
         empty << group
       else
+<<<<<<< HEAD
         if group.children.direct_and_shared_question_count?.size > 0
           groups << group.children.questions?.each do |category|
             category.name = group.name + ' - ' + category.name
           end
+=======
+        groups << group.children.questions?.each do |category|
+          category.name = group.name + ' - ' + category.name
+>>>>>>> Update show onli categories with direct questions
         end
       end
     end
