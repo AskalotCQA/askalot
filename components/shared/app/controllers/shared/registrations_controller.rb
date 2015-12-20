@@ -2,6 +2,8 @@ module Shared
 class RegistrationsController < Devise::RegistrationsController
   include Shared::Applications::Tab
 
+  skip_before_filter :login_required
+
   default_tab :profile, only: :edit
 
   def destroy
