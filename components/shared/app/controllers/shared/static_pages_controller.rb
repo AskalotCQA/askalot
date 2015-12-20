@@ -1,5 +1,7 @@
 module Shared
 class StaticPagesController < ApplicationController
+  skip_before_filter :login_required, only: :home
+
   def home
     count = 4
 

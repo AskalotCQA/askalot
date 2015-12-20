@@ -264,3 +264,6 @@ Devise.setup do |config|
   # Inherit from engine's controller not the main controller
   config.parent_controller = 'Shared::ApplicationController'
 end
+
+Devise::ConfirmationsController.skip_before_filter :login_required
+Devise::PasswordsController.skip_before_filter :login_required
