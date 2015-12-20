@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @categories = Shared::Category.groups_in_context(Shared::Tag.current_academic_year_value)
+    @categories = Shared::Category.groups_in_context(:root)
     @tags       = Shared::Tag.order(:name)
   end
 end

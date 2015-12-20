@@ -1,3 +1,5 @@
+require_relative '../../../components/shared/lib/shared/stuba/ais'
+
 module Shared::AuthenticationHelper
   def login_as(user, options = {})
     stub_ais_for(user) if options[:with] == :AIS

@@ -13,7 +13,7 @@ class Administration::DashboardController < AdministrationController
 
     @assignments = Shared::Assignment.includes(:user, :category, :role).order('categories.name', 'users.nick')
     @assignments.each { |a| a.category.name = a.category.parent.name + ' - ' + a.category.name unless a.category.root? }
-    @categories  = Category.categories_with_parent_name 'root'
+    @categories  = Shared::Category.categories_with_parent_name :root
     @changelogs  = Shared::Changelog.all.sort
 
     @assignment ||= Shared::Assignment.new

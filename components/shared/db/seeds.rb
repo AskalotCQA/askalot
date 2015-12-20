@@ -13,7 +13,7 @@ Shared::Role.find_or_create_by! name: :administrator
 Shared::Label.find_or_create_by! value: :best
 Shared::Label.find_or_create_by! value: :helpful
 
-Shared::Category.create(name: Shared::Tag.current_academic_year_value)
+Shared::Category.create(name: :root)
 
 slido = Shared::User.find_or_initialize_by(login: 'slido')
 

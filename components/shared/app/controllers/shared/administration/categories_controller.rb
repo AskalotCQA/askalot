@@ -1,6 +1,6 @@
 module Shared
 class Administration::CategoriesController < Administration::DashboardController
-  authorize_resource
+  authorize_resource class: 'Shared::Category'
 
   def create
     @category = Shared::Category.new(category_params)
