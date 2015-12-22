@@ -120,15 +120,10 @@ class Category < ActiveRecord::Base
       if group.children.size == 0
         empty << group
       else
-<<<<<<< HEAD
         if group.children.direct_and_shared_question_count?.size > 0
           groups << group.children.questions?.each do |category|
             category.name = group.name + ' - ' + category.name
           end
-=======
-        groups << group.children.questions?.each do |category|
-          category.name = group.name + ' - ' + category.name
->>>>>>> Update show onli categories with direct questions
         end
       end
     end
