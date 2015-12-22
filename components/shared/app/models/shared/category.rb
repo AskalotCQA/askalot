@@ -126,8 +126,10 @@ class Category < ActiveRecord::Base
       if group.children.size == 0
         empty << group
       else
-        groups << group.children.questions?.each do |category|
-          category.name = group.name + ' - ' + category.name
+        if group.children.questions?.size > 0
+          groups << group.children.questions?.each do |category|
+            category.name = group.name + ' - ' + category.name
+          end
         end
       end
     end
