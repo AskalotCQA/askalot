@@ -1,0 +1,14 @@
+<p>
+  Hello <%= @resource.login %>,
+</p>
+<p>
+  Your account was locked because of you reached maximum count of unsuccessful tries to sign in.
+  Click on this link for unlock:
+  <%= link_to t('mailer.unlock_instructions.change_password'), unlock_url(@resource, reset_password_token: @token) %>.
+</p>
+<p>
+  If you have any problems in, please <%= mail_to 'askalot@fiit.stuba.sk', t('mailer.unlock_instructions.contact') %>.
+</p>
+<p>
+  Thank you for your understanding.
+</p>
