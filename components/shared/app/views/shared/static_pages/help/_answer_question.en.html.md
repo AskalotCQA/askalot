@@ -5,4 +5,4 @@ Also you can [filter](<%= help_path anchor: :explore %>) unanswered or unresolve
 
 ### Answering the question
 
-Look at existing answers before adding a new one. Do not repeat what was written. Vote for good answers. If the answer is bad, give it negative vote and possibly explain in a comment why you did so.
+Look at existing answers before adding a new one. Do not repeat what was written. Vote for good answers. If an answer is bad, give it negative vote and possibly explain in a comment why you did so.

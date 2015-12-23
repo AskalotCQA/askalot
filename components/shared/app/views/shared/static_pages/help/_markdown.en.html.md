@@ -2,7 +2,7 @@ You can use Markdown in texts of questions, answers and comments. The implementa
 
 ### Linking questions
 
-Questions can be referred after typing '#' followed by identificator of a question (e.g. '#1' refers to `id = 1`). When you write an identificator, title of the question will be added automatically.
+Questions can be referred after typing `#` followed by identificator of a question (e.g. `#1` refers to `id = 1`). When you write an identificator, title of the question will be added automatically.
 
 ### Linking users
 

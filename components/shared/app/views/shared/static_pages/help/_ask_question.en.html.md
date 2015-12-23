@@ -1,8 +1,8 @@
-How to ask a question properly to get the best answer as quickly as possible? Here are few tips how to do it.
+How to ask a new question properly to get the best answer as quickly as possible? Here are few tips how to do it.
 
 ### Category
 
-Choosing the right category helps to answer your question faster. Questions are organized into topics based on choosing the right category. These topics are watched by individual experts in the area.
+Choosing the right category helps to answer your question faster. Questions are organized into topics based on the right category. These topics can be watched by individual experts in the area.
 
 <%= help_image_tag 'new-question-category.png' %>
 
@@ -26,7 +26,7 @@ To route your question to the right people as quickly as possible, you need to a
 
 ### If the question is answered
 
-To store the knowledge and solved problems it is important to mark the best answer.
+To store knowledge and solved problems it is important to mark the best answer.
 
 <%= help_image_tag 'label-answer-as-best.png' %>
 

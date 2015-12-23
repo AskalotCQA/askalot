@@ -8,7 +8,7 @@
 ##### Title
 
 - It briefly and clearly captures the topic.
-- If it is interesting, you have the biggest chance for quick and good answer.
+- If it is interesting, you have the highest chance for quick and good answer.
 
 ##### Text
 
