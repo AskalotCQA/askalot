@@ -1,37 +1,37 @@
-How to ask the question best for answer as quickly as possible? Here are a few tips how to do it.
+How to ask a question properly to get the best answer as quickly as possible? Here are few tips how to do it.
 
 ### Category
 
-Choosing right category helps to answer your question. Categories are used for inclusion of questions into circles, which can be watched by individual experts in the areas.
+Choosing the right category helps to answer your question faster. Questions are organized into topics based on choosing the right category. These topics are watched by individual experts in the area.
 
 <%= help_image_tag 'new-question-category.png' %>
 
 ### How to fill the title?
 
-The title of question briefly and clearly describes the essence of what I'm going to ask. You have the best chance to quick and good answer when title is interesting.
+The title of the question briefly and clearly describes the topic you are going to ask about. Keep the title interesting to get quick and good answers.
 
 <%= help_image_tag 'new-question-title.png' %>
 
-### How to fill text of question?
+### How to fill the text of a question?
 
-You need to ask question directly, explain the context well. it is a good question, when it asks directly on the problem and includes your knowledge about the problem. Use [Markdown](<%= help_path anchor: :markdown %>) for better strucutre of text, or [Gemojis](<%= help_path anchor: :markdown %>) for explain your emotions :dancer:
+You need to ask the question concisely. Explain the context and get directly to the root of a problem. Include your knowledge about the problem and use [Markdown](<%= help_path anchor: :markdown %>) to structure the text or [Gemojis](<%= help_path anchor: :markdown %>) to express your emotions :dancer:
 
 <%= help_image_tag 'new-question-text.png' %>
 
 ### Tags
 
-To get your question to the right people as soon as possible, you need to gie it right tags. This is the most important step for correct classification of your question! There are some in the system and they are auto-completed during writting. If your tag exists, do not make new, please (for example rails vs. ruby-on-rails). Right tag are which complete your question. Other users use tags to find or answer questions.
+To route your question to the right people as quickly as possible, you need to assign it corresponding tags. This is the most important step for correct classification of your question! There are some tags in the system, and they are auto-completed during writting of the text. If your tag already exists do not make a new one, please (e.g. rails vs. ruby-on-rails). Correct tags shall complete your question. Other users use tags in order to find or answer the questions with similar topic.
 
 <%= help_image_tag 'new-question-tags.png' %>
 
 ### If the question is answered
 
-To store knowledge and solved problems it is important mark the best answer.
+To store the knowledge and solved problems it is important to mark the best answer.
 
 <%= help_image_tag 'label-answer-as-best.png' %>
 
 ### I made a mistake!
 
-If you want to edit your question, click on <%= icon_tag :edit %> and you can change the text of your question. However, nature should not be changed! If you add new txt to the question, put key word `edit:` and next you can write what is missing. It will be clear to everyone.
+If you want to edit your question, click on <%= icon_tag :edit %>, and you can change the text of your question. However, the meaning of your question should not be changed! If you add a new text to the question, put the keyword `edit:` and next to it you can write what is missing. It will be clear to everyone what is your update on the question.
 
 <%= help_image_tag 'edit-question.png' %>

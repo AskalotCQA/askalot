@@ -17,9 +17,9 @@
 </ol>
 
 <p>
-  <%= link_to t('body.unread.show'), shared.notifications_path(tab: :unread) %>
+  <%= link_to "Zobraziť neprečítané notifikácie", shared.notifications_path(tab: :unread) %>
   <span class="text-muted">&middot;</span>
-  <%= link_to t('body.unread.cancel'), shared.edit_user_registration_path(tab: :notifications) %>
+  <%= link_to "Zrušiť odoberanie notifikácii", shared.edit_user_registration_path(tab: :notifications) %>
 </p>
 
 <%= render 'footer' %>

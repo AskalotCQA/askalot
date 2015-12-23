@@ -2,13 +2,13 @@ You can set several things in your profile:
 
 ### Profile
 
-Informations about you. You can change nick name, set e-mail to [Gravatar](http://gravatar.com), write something about you. Use [Markdown](<%= help_path anchor: :markdown %>).
+Information about you. You can change nickname, set e-mail for [Gravatar](http://gravatar.com), or write something about you. Feel free to use [Markdown](<%= help_path anchor: :markdown %>).
 
 <%= help_image_tag 'edit-profile.png' %>
 
 ### Social networks
 
-Link profiles from other social networks to your Askalot account. Fill in you favourite social networks.
+Link profiles from other social networks to your Askalot account. Fill in your favourite social networks.
 
 <%= help_image_tag 'edit-social.png' %>
 
@@ -20,6 +20,6 @@ Do you want your name hidden? You can.
 
 ### Account
 
-Change you e-mail to actual.
+Update your e-mail.
 
 <%= help_image_tag 'edit-account.png' %>

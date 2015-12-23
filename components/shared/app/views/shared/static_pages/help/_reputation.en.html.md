@@ -1,12 +1,12 @@
 You get reputation for your asking and answering.
 
-### Determine reputation
+### Reputation calculation
 
-You get score for activity, which will be added to your actual reputation. Score is combination of difficulty and usefulness of question or answer. Answer for more difficult question means bigger score and reputation. Because of this, the user who has answered few difficult questions can get higher reputation than another who has answered many easier questions.
+For asking and answering you get some reputation score, that is added to your previously earned reputation. How much reputation you get for asking a question is determined on question difficulty and question utility. Also the more difficult question you can answer, and the better your answer is received by the rest of community, the more reputation you will earn. Because of that, an user who answered few but difficult questions can have higher reputation than someone who answers many but easier questions.
 
 ### Reputation levels
 
-Users are divided to more levels according to reputation. In each level, there are only several users in one level, so if someone gets higher reputation and he achieves highest level, another is put into lower level. If your reputation is gray, it is because most of yours questions or answers were marked as negative. We recognize four levels of reputation:
+Users are divided into more levels according to their reputation. In each level, there are only predefined number of users in one level, so if someone gets higher reputation, and he achieves highest level, another user is put into lower level. If your reputationis gray, it means that most of yours questions or answers were marked as negative. In Askalot, there are four levels:
 
 - Gold level,
 - Silver level,

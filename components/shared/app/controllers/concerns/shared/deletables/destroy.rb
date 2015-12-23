@@ -24,6 +24,6 @@ module Shared::Deletables::Destroy
   end
 
   def destroy_callback
-    raise NotImplementedError, t 'destroy.destroy_callback'
+    raise NotImplementedError, "Subclasses must define 'destroy_callback'."
   end
 end

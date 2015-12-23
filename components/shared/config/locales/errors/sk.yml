@@ -50,6 +50,3 @@ sk:
 
   cancan:
     access_denied: "Nemáte právo na vykonanie tejto akcie."
-
-  destroy:
-    destroy_callback: "Podtriedy musia definovať 'destroy_callback'."

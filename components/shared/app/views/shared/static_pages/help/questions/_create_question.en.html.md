@@ -1,26 +1,26 @@
 # How to write a good question?
 
-##### <%= t('activerecord.attributes.question.category') %>
+##### Category
 
-- It is used for inclusion of issues to circles.
+- It is used for inclusion of issues to topics.
 - Right category will help answering your question.
 
-##### <%= t('activerecord.attributes.question.title') %>
+##### Title
 
-- It clearly and brief captures the essence.
-- If it interested, you have the bigger chance for quick and good answer.
+- It briefly and clearly captures the topic.
+- If it is interesting, you have the biggest chance for quick and good answer.
 
-##### <%= t('activerecord.attributes.question.text') %>
+##### Text
 
-- Ask directly, explain the kontext well.
+- Ask directly, explain the context well.
 - Include what have you learned about the problem so far.
 - Format text by [Markdown](<%= help_path anchor: :markdown %>).
 
-##### <%= t('activerecord.attributes.question.tag_list') %>
+##### Tags
 
 - The most important step for correct classification of the issue.
 - Auto-complete as you type.
-- Do not make a new tag, if it exists.
-- Proper tags are those that best complement question context.
+- Do not make a new tag, if it already exists.
+- Proper tags are those that best complement question's context.
 
 [I need help with Askalot](<%= help_path %>)

@@ -17,7 +17,7 @@ en:
 
       without_question: "Without asked question"
       without_answer: "Without answer"
-      without_comment: "ithout comment"
+      without_comment: "Without comment"
 
       questions: "Questions"
       questions_more: "Questions"
@@ -26,7 +26,7 @@ en:
       questions_vote: "Voted questions"
       questions_comment: "Commented questions"
       questions_favourite: "Favourited questions"
-      questions_not_answer: "Not answered questions"
+      questions_not_answer: "Unanswered questions"
       questions_answer: "Answered questions"
       questions_resolve: "Resolved questions"
 
@@ -35,10 +35,10 @@ en:
       answers_add: "Added answers"
       answers_vote: "Voted answers"
       answers_comment: "Commented answers"
-      answers_best: "Chosen best answers"
+      answers_best: "Chosen as the best answers"
       answers_help: "Chosen auxiliary answers"
 
-      questions_without_answer: "Wtihout answers"
+      questions_without_answer: "Without answers"
       questions_with_answer: "With answers"
       questions_resolved: "Resolved"
 
@@ -50,13 +50,13 @@ en:
       vote_great: "Great"
 
       bindings: "Bindings"
-      bindings_answers: "Answers to question"
-      bindings_best: "Best answers to question"
-      bindings_help: "Auxiliary answers to question"
-      bindings_show: "Views to question"
-      bindings_vote: "Votes to question"
-      bindings_comment: "Comments to question"
-      bindings_favourite: "Favourites to question"
+      bindings_answers: "Answers to the question"
+      bindings_best: "Best answers to the question"
+      bindings_help: "Auxiliary answers to the question"
+      bindings_show: "Views to the question"
+      bindings_vote: "Votes to the question"
+      bindings_comment: "Comments to the question"
+      bindings_favourite: "Favourites to the question"
       bindings_best_all: "Best answers"
       bindings_help_all: "Auxiliary answers"
       bindings_vote_all: "Evaluated answers"
