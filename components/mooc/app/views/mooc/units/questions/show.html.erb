@@ -22,7 +22,7 @@
           <div class="question-details">
             <%= render 'shared/questions/details', question: @question %>
             <%= render 'mooc/units/questions/editing', question: @question, remote: true %>
-            <%= render 'mooc/units/questions/deleting', question: @question, remote: true %>
+            <%= render 'mooc/units/questions/deleting', question: @question,  page_url: @page_url, remote: true %>
           </div>
 
           <div id="question-evaluations">
@@ -49,6 +49,6 @@
   </div>
 
   <div id="question-answer" class="new-answer-form">
-    <%= render 'mooc/units/answers/form', question: @question, answer: @answer, remote: true %>
+    <%= render 'mooc/units/answers/form', question: @question, answer: @answer, page_url: @page_url, remote: true %>
   </div>
 </div>
