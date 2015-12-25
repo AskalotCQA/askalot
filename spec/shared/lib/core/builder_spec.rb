@@ -12,7 +12,7 @@ describe Shared::Core::Builder do
         model  = double(:model)
         record = double(:record)
 
-        stub_const('Model', model)
+        stub_const('Shared::Model', model)
 
         expect(model).to receive(:find_or_initialize_by).with(first: 'Peter').and_return(record)
         expect(record).to receive(:update_attributes!).with(attributes).and_return(true)
@@ -26,7 +26,7 @@ describe Shared::Core::Builder do
         model  = double(:model)
         record = double(:record)
 
-        stub_const('Model', model)
+        stub_const('Shared::Model', model)
 
         expect(model).to receive(:find_or_initialize_by).with(first: 'Peter', last: 'Parker').and_return(record)
         expect(record).to receive(:update_attributes!).with(attributes).and_return(true)
@@ -37,7 +37,7 @@ describe Shared::Core::Builder do
 
     context 'when model does not exists' do
       it 'raises an error' do
-        expect { subject.create_very_bogus_model_by(name: 'Bogus') }.to raise_error(ArgumentError, 'Cannot find model \'VeryBogusModel\'')
+        expect { subject.create_very_bogus_model_by(name: 'Bogus') }.to raise_error(ArgumentError, 'Cannot find model \'Shared::VeryBogusModel\'')
       end
     end
   end

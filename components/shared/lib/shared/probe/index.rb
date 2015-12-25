@@ -1,5 +1,5 @@
-require_dependency 'shared/probe/index'
-require_dependency 'shared/probe/mapper'
+require 'shared/probe/index'
+require 'shared/probe/mapper'
 
 module Shared::Probe
   class Index

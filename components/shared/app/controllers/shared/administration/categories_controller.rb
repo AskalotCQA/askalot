@@ -1,6 +1,6 @@
 module Shared
 class Administration::CategoriesController < Administration::DashboardController
-  authorize_resource class: 'Shared::Category'
+  authorize_resource class: Shared::Category
 
   include CategoriesHelper
 
@@ -72,6 +72,7 @@ class Administration::CategoriesController < Administration::DashboardController
     Shared::Category.update_all shared: false
     Shared::Category.where(id: params[:askable]).update_all askable: true
     Shared::Category.where(id: params[:shared]).update_all shared: true
+
     render json: { success: true }
   end
 
