@@ -15,7 +15,7 @@ module Mooc
     end
 
     def password_required?
-      return false
+      false
     end
   end
 end

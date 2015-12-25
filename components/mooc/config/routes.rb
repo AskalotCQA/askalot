@@ -5,7 +5,7 @@ Mooc::Engine.routes.draw do
 
   resources :units, only: [:show]
 
-  resources :units, only: [] do
+  resources :units, [] do
     resources :questions, only: [:index, :create, :show, :update, :destroy]
   end
 end
