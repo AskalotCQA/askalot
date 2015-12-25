@@ -7,6 +7,13 @@
     <%= f.hidden_field :category_id, value: unit.id %>
     <%= f.hidden_field :unit_view, value: true %>
 
+    <%= f.hidden_field :page_url, value: page_url %>
+
+    <div class="form-group">
+      <%= f.label :category_id %>
+      <%= f.text_field :category_name, value: unit.name, class: :'form-control', disabled: true %>
+    </div>
+
     <div class="form-group">
       <%= f.label :title %>
       <%= f.text_field :title, class: :'form-control' %>
