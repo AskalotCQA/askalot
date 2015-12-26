@@ -25,7 +25,7 @@ class Category < ActiveRecord::Base
   before_save :refresh_names
   after_save :refresh_descendants_names
 
-  scope :questions?, -> { where.not(direct_shared_questions_count: 0) }
+  scope :direct_and_shared_question_count?, -> { where.not(direct_shared_questions_count: 0) }
 
   self.table_name = 'categories'
 
@@ -126,7 +126,7 @@ class Category < ActiveRecord::Base
       if group.children.size == 0
         empty << group
       else
-        if group.children.questions?.size > 0
+        if group.children.direct_and_shared_question_count?.size > 0
           groups << group.children.questions?.each do |category|
             category.name = group.name + ' - ' + category.name
           end
@@ -164,11 +164,10 @@ class Category < ActiveRecord::Base
   end
 
   def check_changed_sharing
-    if self.shared_changed?
-      all_versions.each do |category|
+    return unless self.shared_changed?
+    all_versions.each do |category|
         category.reload_question_counters
         category.reload_answer_counters
-      end
     end
   end
 
@@ -176,18 +175,23 @@ class Category < ActiveRecord::Base
     category_ids = self.shared ? self.all_versions.select('id') : self.id
 
     relation ||= Shared::Question.all
+
     relation.where('category_id IN (?)', category_ids)
   end
 
   def reload_question_counters
     self.direct_questions_count = self.questions.count
+
     self.direct_shared_questions_count = all_directly_related_questions.count
+
     self.save!
   end
 
   def reload_answer_counters
     self.direct_answers_count = self.answers.size
+
     self.direct_shared_answers_count = Shared::Answer.where('question_id IN (?)', all_directly_related_questions.select('id')).count
+
     self.save!
   end
 end

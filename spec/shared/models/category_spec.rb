@@ -32,6 +32,7 @@ describe Shared::Category, type: :model do
     end
 
     context 'with multiple questions' do
+
       it 'has count more than zero' do
         3.times { create :question, category: category }
 
@@ -40,6 +41,7 @@ describe Shared::Category, type: :model do
     end
 
     context 'with deleted questions' do
+
       it 'ommits deleted questions for count' do
         4.times { create :question, category: category }
         2.times { create :question, :deleted, category: category }
@@ -53,26 +55,32 @@ describe Shared::Category, type: :model do
     let(:category) { create :category, uuid: 'category' }
 
     context 'with no questions' do
+
       it 'has zero direct questions' do
         expect(category.direct_questions_count).to be_zero
       end
+
       it 'has zero direct shared questions' do
         expect(category.direct_shared_questions_count).to be_zero
       end
     end
 
     context 'with three direct questions' do
+
       it 'has three direct questions' do
         3.times { create :question, category: category }
+
         expect(category.direct_questions_count).to eql(3)
         expect(category.direct_shared_questions_count).to eql(3)
       end
     end
 
     context 'with three indirect questions' do
+
       it 'has three shared questions' do
         version = create :category, uuid: 'category'
         outer = create :category
+
         3.times { create :question, category: version }
 
         expect(category.direct_questions_count).to be_zero
@@ -95,6 +103,7 @@ describe Shared::Category, type: :model do
     let(:qouter_question) { create :question, category: outer }
 
     context 'with no answer' do
+
       it 'has no answers' do
         expect(shared1.direct_answers_count).to be_zero
         expect(shared2.direct_answers_count).to be_zero
@@ -106,8 +115,10 @@ describe Shared::Category, type: :model do
     end
 
     context 'one category with three questions on category one' do
+
       it 'has three answers on one category in two questions and other has one' do
         2.times { create :answer, question: sh1q1 }
+
         create :answer, question: sh1q2
         create :answer, question: sh2q
 
@@ -123,6 +134,7 @@ describe Shared::Category, type: :model do
   end
 
   describe '.with_slido' do
+
     it 'finds only categories with slido username' do
       create :category
 
