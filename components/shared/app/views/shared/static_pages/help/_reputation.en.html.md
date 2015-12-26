@@ -1,4 +1,4 @@
-You get reputation for your asking and answering.
+You get reputation for asking and answering questions.
 
 ### Reputation calculation
 
