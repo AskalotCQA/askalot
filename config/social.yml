@@ -89,32 +89,32 @@ defaults: &defaults
     name: YouTube
     placeholder: 'http://youtube.com/username'
 
-development_university:
+fiit_development:
   <<: *defaults
 
-test_university:
+fiit_test:
   <<: *defaults
 
-staging_university:
+fiit_staging:
   <<: *defaults
 
-demo_university:
+fiit_demo:
   <<: *defaults
 
-production_university:
+fiit_production:
   <<: *defaults
 
-development_mooc:
+edx_development:
   <<: *defaults
 
-test_mooc:
+edx_test:
   <<: *defaults
 
-staging_mooc:
+edx_staging:
   <<: *defaults
 
-demo_mooc:
+edx_demo:
   <<: *defaults
 
-production_mooc:
+edx_production:
   <<: *defaults

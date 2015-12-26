@@ -37,6 +37,7 @@ Askalot::Application.configure do
   config.action_mailer.delivery_method     = :test
   config.action_mailer.default_url_options = { host: 'https://askalot.fiit.stuba.sk' }
 
+  # Default locate
   config.i18n.default_locale = :sk
 
   # Precompilation for I18n-js

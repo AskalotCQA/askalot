@@ -64,44 +64,38 @@ defaults: &defaults
         sk: Časť
       is_in_public_name: false
 
-development_university:
+fiit_development:
   <<: *defaults
 
-test_university:
-  <<: *defaults
-
-  poll:
-    default: 5
-
-staging_university:
-  <<: *defaults
-
-demo_university:
-  <<: *defaults
-
-production_university:
-  <<: *defaults
-
-experimental_university:
-  <<: *defaults
-
-development_mooc:
-  <<: *defaults
-
-test_mooc:
+fiit_test:
   <<: *defaults
 
   poll:
     default: 5
 
-staging_mooc:
+fiit_staging:
   <<: *defaults
 
-demo_mooc:
+fiit_demo:
   <<: *defaults
 
-production_mooc:
+fiit_production:
   <<: *defaults
 
-experimental_mooc:
+edx_development:
+  <<: *defaults
+
+edx_test:
+  <<: *defaults
+
+  poll:
+    default: 5
+
+edx_staging:
+  <<: *defaults
+
+edx_demo:
+  <<: *defaults
+
+edx_production:
   <<: *defaults

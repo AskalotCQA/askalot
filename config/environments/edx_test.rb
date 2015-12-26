@@ -37,8 +37,17 @@ Askalot::Application.configure do
   config.action_mailer.delivery_method     = :test
   config.action_mailer.default_url_options = { host: 'https://askalot.fiit.stuba.sk' }
 
+  # Default locate
   config.i18n.default_locale = :sk
 
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
+
+  config.action_dispatch.default_headers = {
+    'X-Frame-Options' => 'ALLOWALL',
+    'Access-Control-Allow-Origin' => '*',
+    'Access-Control-Request-Methods' => '*',
+    'Access-Control-Allow-Methods' => 'POST, GET, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers' => 'X-CSRFToken'
+  }
 end

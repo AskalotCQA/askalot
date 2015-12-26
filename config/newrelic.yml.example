@@ -186,7 +186,7 @@ common: &default_settings
 # NOTE if your application has other named environments, you should
 # provide newrelic configuration settings for these environments here.
 
-development_university:
+fiit_development:
   <<: *default_settings
   # Turn off communication to New Relic service in development mode (also
   # 'enabled').
@@ -204,13 +204,21 @@ development_university:
   # Enable textmate links
   # textmate: true
 
-test_university:
+fiit_test:
   <<: *default_settings
   # It almost never makes sense to turn on the agent when running
   # unit, functional or integration tests or the like.
   monitor_mode: false
 
-demo_university:
+# Many applications have a staging environment which behaves
+# identically to production. Support for that environment is provided
+# here.  By default, the staging environment has the agent turned on.
+fiit_staging:
+  <<: *default_settings
+  monitor_mode: true
+  # app_name: My Application (Staging)
+
+fiit_demo:
   <<: *default_settings
   monitor_mode: true
 
@@ -218,19 +226,11 @@ demo_university:
 # testing shows an average performance impact of < 5 ms per
 # transaction, you can leave this on all the time without
 # incurring any user-visible performance degradation.
-production_university:
+fiit_production:
   <<: *default_settings
-  monitor_mode: true
+  monitor_mode: tru
 
-# Many applications have a staging environment which behaves
-# identically to production. Support for that environment is provided
-# here.  By default, the staging environment has the agent turned on.
-staging_university:
-  <<: *default_settings
-  monitor_mode: true
-  # app_name: My Application (Staging)
-
-development_mooc:
+edx_development:
   <<: *default_settings
   # Turn off communication to New Relic service in development mode (also
   # 'enabled').
@@ -248,13 +248,21 @@ development_mooc:
   # Enable textmate links
   # textmate: true
 
-test_mooc:
+edx_test:
   <<: *default_settings
   # It almost never makes sense to turn on the agent when running
   # unit, functional or integration tests or the like.
   monitor_mode: false
 
-demo_mooc:
+# Many applications have a staging environment which behaves
+# identically to production. Support for that environment is provided
+# here.  By default, the staging environment has the agent turned on.
+edx_staging:
+  <<: *default_settings
+  monitor_mode: true
+  # app_name: My Application (Staging)
+
+edx_demo:
   <<: *default_settings
   monitor_mode: true
 
@@ -262,14 +270,6 @@ demo_mooc:
 # testing shows an average performance impact of < 5 ms per
 # transaction, you can leave this on all the time without
 # incurring any user-visible performance degradation.
-production_mooc:
+edx_production:
   <<: *default_settings
   monitor_mode: true
-
-# Many applications have a staging environment which behaves
-# identically to production. Support for that environment is provided
-# here.  By default, the staging environment has the agent turned on.
-staging_mooc:
-  <<: *default_settings
-  monitor_mode: true
-  # app_name: My Application (Staging)

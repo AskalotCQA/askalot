@@ -83,6 +83,9 @@ Askalot::Application.configure do
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
 
+  # Default locate
+  config.i18n.default_locale = :en
+
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
 
@@ -91,5 +94,13 @@ Askalot::Application.configure do
       email_prefix: '[TP][error] ',
       sender_address: %{'Askalot' <askalot@fiit.stuba.sk>},
       exception_recipients: %w{askalot@fiit.stuba.sk}
+  }
+
+  config.action_dispatch.default_headers = {
+      'X-Frame-Options' => 'ALLOWALL',
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Request-Methods' => '*',
+      'Access-Control-Allow-Methods' => 'POST, GET, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers' => 'X-CSRFToken'
   }
 end
