@@ -12,7 +12,7 @@
         <%= t 'administration.changelog.delete.text' %>
       </div>
       <div class="modal-footer">
-        <%= form_for changelog, method: :delete, html: { id: nil, class: nil }, url: administration_changelog_path(changelog, tab: tab) do %>
+        <%= form_for changelog, method: :delete, html: { id: nil, class: nil }, url: shared.administration_changelog_path(changelog) do %>
           <a href="#" class="btn btn-default" data-dismiss="modal"><%= t 'administration.changelog.delete.cancel' %></a>
           <button id="<%= "changelog-delete" %>" class="btn btn-danger"><%= t 'administration.changelog.delete.submit' %></button>
         <% end %>

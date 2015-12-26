@@ -16,8 +16,73 @@ class Category < ActiveRecord::Base
   validates :name, presence: true, uniqueness: { scope: :parent_id }
 
   scope :with_slido, -> { where.not(slido_username: nil) }
+  scope :askable, -> { where(askable: true) }
+
+  before_save :refresh_names
+  after_save :refresh_descendants_names
 
   self.table_name = 'categories'
+
+  def refresh_names
+    @refresh_descs = false
+
+    if !self.full_tree_name_changed? && self.name_changed?
+      self.refresh_full_tree_name
+      @refresh_descs = true
+    end
+
+    if !self.full_public_name_changed? && self.name_changed?
+      self.refresh_full_public_name
+      @refresh_descs = true
+    end
+
+    true
+  end
+
+  def refresh_descendants_names
+    self.descendants.each do |category|
+      category.refresh_full_tree_name
+      category.refresh_full_public_name
+      category.save validate: false
+    end if defined?(@refresh_descs) && @refresh_descs
+
+    @refresh_descs = false
+
+    true
+  end
+
+  def refresh_full_tree_name
+    # TODO (ladislav.gallay) Remove the filtering of 'root' node
+    self.full_tree_name = self.self_and_ancestors.select { |item| item.name != 'root' }.map { |item| item.name }.join(' - ')
+  end
+
+  def refresh_full_public_name
+    depths = CategoryDepth.public_depths
+
+    names = self.ancestors.select { |item| depths.include? item.depth }.map { |item| item.name }
+    names << self.name
+
+    self.full_public_name = names.join(' - ')
+  end
+
+  def all_directly_related_questions(relation)
+    category_ids = self.shared ? Shared::Category.select('id').where("uuid = ? AND created_at <= ?", self.uuid, self.created_at) : self.id
+
+    relation ||= Shared::Question.all
+    relation.where('category_id IN (?)', category_ids)
+  end
+
+  def all_related_questions(relation)
+    if self.shared
+      uuids = self.self_and_descendants.map { |item| item.uuid }.reject { |item| item.nil? || item.blank? || item.empty?}
+      category_ids = Shared::Category.select('id').where("uuid IN (?) AND created_at <= ?", uuids, self.created_at)
+    else
+      category_ids = self.self_and_descendants.map { |item| item.id }
+    end
+
+    relation ||= Shared::Question.all
+    relation.where('category_id IN (?)', category_ids)
+  end
 
   def count
     questions.reload.size
@@ -32,7 +97,8 @@ class Category < ActiveRecord::Base
   end
 
   def teachers
-    assignments.where({ category_id: id, role_id: 2 }).map { |t| t.user }
+    list = association(:assignments).loaded? ? assignments.select { |item| item.role_id = 2 } : assignments.where({ role_id: 2 })
+    list.map { |t| t.user }
   end
 
   def has_teachers?
@@ -40,8 +106,8 @@ class Category < ActiveRecord::Base
   end
 
   def name_with_teacher_supported
-    return name + I18n.t('category.teacher_supported') if has_teachers?
-    name
+    return full_public_name + I18n.t('category.teacher_supported') if has_teachers?
+    full_public_name
   end
 
   def self.groups_in_context(context)

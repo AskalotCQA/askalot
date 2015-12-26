@@ -26,6 +26,11 @@ en:
         cancel: "Cancel"
 
     category:
+      index:
+        update_settings: "Update settings"
+        wait: "Wait, please..."
+        success: "Categories were updated successfully"
+
       create:
         action: "Add category"
         parent: "Parent"

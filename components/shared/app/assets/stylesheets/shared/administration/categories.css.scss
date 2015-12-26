@@ -1,13 +1,17 @@
 // collection
 
 .administration-categories {
-  @extend .list-unstyled;
+  margin-top: 15px;
 
-  margin: 15px 0;
-  border-top: 1px solid $gray-lighter;
-  border-bottom: 1px solid $gray-lighter;
-
-  li {
-    margin: 15px 0;
+  .add-category {
+    cursor: pointer !important;
   }
+}
+
+.update-settings-box {
+  margin-bottom: 15px;
+}
+
+.update-settings-box {
+  margin-bottom: 15px;
 }

@@ -1,0 +1,5 @@
+<%= render layout: 'shared/administration/layout' do %>
+  <%= form_messages key: :emails %>
+
+  <%= render 'shared/administration/emails/form', email: @email %>
+<% end %>

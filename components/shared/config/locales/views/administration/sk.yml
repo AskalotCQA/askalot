@@ -26,6 +26,11 @@ sk:
         cancel: "Zrušiť"
 
     category:
+      index:
+        update_settings: "Upraviť nastavenia"
+        wait: "Čakajte, prosím..."
+        success: "Kategórie boli úspešne upravené"
+
       create:
         action: "Pridať kategóriu"
         parent: "Rodič"

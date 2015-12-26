@@ -1,7 +1,9 @@
-<%= form_for assignment, url: administration_assignments_path(assignment, tab: tab) do |f| %>
+<%= form_for @assignment, url: [:administration, @assignment] do |f| %>
+  <%= form_messages_for @assignment %>
+
   <div class="form-group">
     <%= f.label :category_id %>
-    <%= f.category_collection_select :category_id, categories %>
+    <%= f.category_collection_select :category_id, Shared::Category.all, :id, :full_tree_name %>
   </div>
 
   <div class="form-group">

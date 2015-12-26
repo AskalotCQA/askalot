@@ -1,18 +1,25 @@
 module Shared
-class Administration::AssignmentsController < Administration::DashboardController
-  authorize_resource
+class Administration::AssignmentsController < AdministrationController
+  authorize_resource class: Shared::Assignment
+
+  def index
+    @assignments  = Shared::Assignment.includes(:user, :category, :role).order('categories.name', 'users.nick')
+    @assignment ||= Shared::Assignment.new
+
+    @assignments.each { |a| a.category.name = a.category.parent.name + ' - ' + a.category.name unless a.category.root? }
+  end
 
   def create
     @assignment = Shared::Assignment.new(assignment_params)
 
     if @assignment.save
-      form_message :notice, t('assignment.create.success'), key: params[:tab]
+      form_message :notice, t('assignment.create.success')
 
-      redirect_to administration_root_path(tab: params[:tab])
+      redirect_to shared.administration_assignments_path
     else
-      form_error_messages_for @assignment, flash: flash.now, key: params[:tab]
+      index
 
-      render_dashboard
+      render :index
     end
   end
 
@@ -20,24 +27,26 @@ class Administration::AssignmentsController < Administration::DashboardControlle
     @assignment = Shared::Assignment.find(params[:id])
 
     if @assignment.update_attributes(assignment_params)
-      form_message :notice, t('assignment.update.success'), key: params[:tab]
+      form_message :notice, t('assignment.update.success')
     else
-      form_error_messages_for @assignment, key: params[:tab]
+      index
+
+      render :index
     end
 
-    redirect_to administration_root_path(tab: params[:tab])
+    redirect_to shared.administration_assignments_path
   end
 
   def destroy
     @assignment = Shared::Assignment.find(params[:id])
 
     if @assignment.destroy
-      form_message :notice, t('assignment.delete.success'), key: params[:tab]
+      form_message :notice, t('assignment.delete.success')
     else
-      form_error_message t('assignment.delete.failure'), key: params[:tab]
+      form_error_message t('assignment.delete.failure')
     end
 
-    redirect_to administration_root_path(tab: params[:tab])
+    redirect_to shared.administration_assignments_path
   end
 
   private

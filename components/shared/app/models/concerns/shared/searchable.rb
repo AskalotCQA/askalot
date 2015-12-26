@@ -1,4 +1,4 @@
-require 'shared/probe'
+require_dependency  'shared/probe'
 
 module Shared::Searchable
   extend ActiveSupport::Concern

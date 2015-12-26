@@ -38,6 +38,32 @@ defaults: &defaults
     gold: 20
     silver: 35
 
+  category_depths:
+    -
+      depth: 0
+      label:
+        en: Root
+        sk: Root
+      is_in_public_name: false
+    -
+      depth: 1
+      label:
+        en: Academic year
+        sk: Školský rok
+      is_in_public_name: false
+    -
+      depth: 2
+      label:
+        en: Class
+        sk: Predmet
+      is_in_public_name: false
+    -
+      depth: 3
+      label:
+        en: Part
+        sk: Časť
+      is_in_public_name: false
+
 development_university:
   <<: *defaults
 

@@ -118,11 +118,17 @@ Shared::Engine.routes.draw do
     end
 
     namespace :administration do
-      root 'dashboard#index'
+      root 'categories#index'
 
-      resources :assignments, only: [:create, :update, :destroy]
-      resources :categories,  only: [:create, :update, :destroy]
-      resources :changelogs,  only: [:create, :update, :destroy]
+      resources :assignments, only: [:index, :create, :update, :destroy]
+
+      resources :changelogs, only: [:index, :create, :update, :destroy]
+
+      resources :categories, except: [:show] do
+        post 'settings' => 'categories#update_settings', on: :collection
+      end
+
+      get  :emails, to: 'emails#index'
       post :emails, to: 'emails#create'
     end
 
