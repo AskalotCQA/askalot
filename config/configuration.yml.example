@@ -64,7 +64,7 @@ defaults: &defaults
         sk: Časť
       is_in_public_name: false
 
-development_university:
+fiit_development:
   <<: *defaults
 
 fiit_test:
