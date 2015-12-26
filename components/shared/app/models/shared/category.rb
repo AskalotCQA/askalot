@@ -24,7 +24,7 @@ class Category < ActiveRecord::Base
 
   before_save :refresh_names
   after_save :refresh_descendants_names
-  scope :questions?, -> { where.not(direct_shared_questions_count: 0) }
+  scope :direct_and_shared_question_count?, -> { where.not(direct_shared_questions_count: 0) }
 
   scope :direct_and_shared_question_count?, -> { where.not(direct_shared_questions_count: 0) }
 
@@ -169,6 +169,7 @@ class Category < ActiveRecord::Base
     category_ids = self.shared ? self.all_versions.select('id') : self.id
 
     relation ||= Shared::Question.all
+
     relation.where('category_id IN (?)', category_ids)
   end
 
