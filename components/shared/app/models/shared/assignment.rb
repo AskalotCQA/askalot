@@ -4,6 +4,9 @@ class Assignment < ActiveRecord::Base
   belongs_to :category
   belongs_to :role
 
+  after_save :add_assignments_to_descendants
+  before_destroy :delete_assignments_from_descendants
+
   validates :user,     presence: true, uniqueness: { scope: :category }
   validates :category, presence: true, uniqueness: { scope: :user }
   validates :role,     presence: true
@@ -22,6 +25,24 @@ class Assignment < ActiveRecord::Base
 
   def user_nick
     user.nick if user
+  end
+
+  def add_assignments_to_descendants
+    if admin_visible
+      delete_assignments_from_descendants
+
+      category.descendants.each do |c|
+        Shared::Assignment.create(role: role, user: user, category: c, admin_visible: false, parent: id)
+      end
+    end
+
+    true
+  end
+
+  def delete_assignments_from_descendants
+    Shared::Assignment.where({ parent: id }).destroy_all if admin_visible
+
+    true
   end
 end
 end
