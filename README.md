@@ -29,13 +29,14 @@ cp config/database.{yml.example,yml}
 cp config/newrelic.{yml.example,yml}
 ```
 
-There are two types of environments: *university* and *mooc*. You have to use this as suffix to standart development, test, staging, demo and production environment.
+There are two types of environments: *university* and *mooc* which are currently implemented as *fiit* and *edx* environments.
+You have to use this as suffix to standart development, test, staging, demo and production environment.
 
 Create database, load schema and seed the database.
 
 ```
-RAILS_ENV=development_university rake db:create db:structure:load db:seed
-RAILS_ENV=development_mooc rake db:create db:structure:load db:seed
+RAILS_ENV=fiit_development rake db:create db:structure:load db:seed
+RAILS_ENV=edx_development rake db:create db:structure:load db:seed
 ```
 
 ## Testing
@@ -44,14 +45,16 @@ RAILS_ENV=development_mooc rake db:create db:structure:load db:seed
 2. Run specs with:
 
 ```
-RAILS_ENV=test_university rake db:create db:structure:load
-RAILS_ENV=test_university bundle exec rake rspec:test
+RAILS_ENV=fiit_test rake db:create db:structure:load
+RAILS_ENV=fiit_test bundle exec rake rspec:test
 or
-RAILS_ENV=test_mooc rake db:create db:structure:load
-RAILS_ENV=test_mooc bundle exec rake rspec:test
+RAILS_ENV=edx_test rake db:create db:structure:load
+RAILS_ENV=edx_test bundle exec rake rspec:test
 ```
 
 Tests will run either *shared+university* or *shared+mooc* tests.
+
+The mapping of environments to the engines is in the `config/environment.yml`.
 
 ## Contributing
 
