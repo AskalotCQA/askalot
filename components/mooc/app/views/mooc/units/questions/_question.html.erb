@@ -8,7 +8,6 @@
           <small class="pull-right"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
         </h4>
 
-        <%puts question.inspect %>
         <%= render 'shared/questions/labels', labels: question.labels %>
 
         <div class="question-content">
