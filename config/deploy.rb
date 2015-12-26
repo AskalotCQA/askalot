@@ -89,6 +89,18 @@ namespace :deploy do
     run "for file in #{shared_path}/config/*.yml; do ln -nfs $file #{release_path}/config; done"
   end
 
+  desc "Cold deploy"
+  task :cold do
+    update
+    reload_schema
+    start
+  end
+
+  desc "Reload schema - drops and creates database"
+  task :reload_schema, roles: :app do
+    run "cd #{release_path}; RAILS_ENV=#{rails_env} bundle exec rake db:drop db:create db:structure:load"
+  end
+
   after 'deploy', 'deploy:cleanup'
   after 'deploy:update_code', 'deploy:symlink_shared', 'db:create_release', 'deploy:migrate', 'db:seed'
 
