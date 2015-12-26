@@ -3,7 +3,7 @@ require 'bundler/capistrano'
 require 'whenever/capistrano'
 require 'active_support/inflector'
 
-set :stages, [:staging_university, :demo_university, :production_university, :staging_mooc, :demo_mooc, :production_mooc]
+set :stages, [:fiit_staging, :fiit_demo, :fiit_production, :edx_staging, :edx_demo, :edx_production]
 
 require 'capistrano/ext/multistage'
 

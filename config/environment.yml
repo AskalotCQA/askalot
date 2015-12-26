@@ -1,0 +1,49 @@
+fiit_development:
+  module: university
+  type: development
+  name: fiit
+
+fiit_test:
+  module: university
+  type: test
+  name: fiit
+
+fiit_staging:
+  module: university
+  type: staging
+  name: fiit
+
+fiit_demo:
+  module: university
+  type: demo
+  name: fiit
+
+fiit_production:
+  module: university
+  type: production
+  name: fiit
+
+edx_development:
+  module: mooc
+  type: development
+  name: edx
+
+edx_test:
+  module: mooc
+  type: test
+  name: edx
+
+edx_staging:
+  module: mooc
+  type: staging
+  name: edx
+
+edx_demo:
+  module: mooc
+  type: demo
+  name: edx
+
+edx_production:
+  module: mooc
+  type: production
+  name: edx

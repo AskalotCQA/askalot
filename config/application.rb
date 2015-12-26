@@ -6,6 +6,7 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "sprockets/railtie"
+require "yaml"
 # require "rails/test_unit/railtie"
 
 module Rails
@@ -15,18 +16,28 @@ module Rails
     end
 
     def env_type
-      @_env_type ||= ActiveSupport::StringInquirer.new(Rails.env.split('_', 2)[0] || 'development')
+      @_env_type ||= ActiveSupport::StringInquirer.new(environment[Rails.env][:type] || 'development')
     end
 
     def module
-      @_module ||= ActiveSupport::StringInquirer.new(Rails.env.split('_', 2)[1] || 'university')
+      @_module ||= ActiveSupport::StringInquirer.new(environment[Rails.env][:module] || 'university')
+    end
+
+    def name
+      @_application ||= ActiveSupport::StringInquirer.new(environment[Rails.env][:name] || 'fiit')
+    end
+
+    private
+
+    def environment
+      @_environment ||= YAML.load_file(File.expand_path('../environment.yml', __FILE__))
     end
   end
 end
 
 # Require the gems listed in Gemfile, including any gems
 # e.g. :default, :development, :production, :university, :mooc, :development_university, :test_mooc
-Bundler.require(:default, Rails.env, Rails.env_type, Rails.module)
+Bundler.require(:default, Rails.env, Rails.env_type, Rails.module, Rails.name)
 
 module Askalot
   class Application < Rails::Application
