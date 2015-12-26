@@ -254,7 +254,8 @@ CREATE TABLE categories (
     depth integer,
     children_count integer,
     full_tree_name character varying(255),
-    full_public_name character varying(255)
+    full_public_name character varying(255),
+    public_tags character varying(255)[] DEFAULT '{}'::character varying[]
 );
 
 
@@ -3267,6 +3268,10 @@ INSERT INTO schema_migrations (version) VALUES ('20151122110354');
 INSERT INTO schema_migrations (version) VALUES ('20151122112216');
 
 INSERT INTO schema_migrations (version) VALUES ('20151122112444');
+
+INSERT INTO schema_migrations (version) VALUES ('20151207231221');
+
+INSERT INTO schema_migrations (version) VALUES ('20151213143631');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
 
