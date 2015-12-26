@@ -12,32 +12,32 @@ require "yaml"
 module Rails
   class << self
     def env
-      @_env ||= ActiveSupport::StringInquirer.new(ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'development_university')
+      @_env ||= ActiveSupport::StringInquirer.new(ENV['RAILS_ENV'] || ENV['RACK_ENV'] || 'fiit_development')
     end
 
     def env_type
-      @_env_type ||= ActiveSupport::StringInquirer.new(environment[Rails.env][:type] || 'development')
+      @_env_type ||= ActiveSupport::StringInquirer.new(env_settings[Rails.env][:type])
     end
 
     def module
-      @_module ||= ActiveSupport::StringInquirer.new(environment[Rails.env][:module] || 'university')
+      @_module ||= ActiveSupport::StringInquirer.new(env_settings[Rails.env][:module])
     end
 
-    def name
-      @_application ||= ActiveSupport::StringInquirer.new(environment[Rails.env][:name] || 'fiit')
+    def env_name
+      @_application ||= ActiveSupport::StringInquirer.new(env_settings[Rails.env][:name])
     end
 
     private
 
-    def environment
-      @_environment ||= YAML.load_file(File.expand_path('../environment.yml', __FILE__))
+    def env_settings
+      @_env_settings ||= HashWithIndifferentAccess.new YAML.load_file(File.expand_path('../environment.yml', __FILE__))
     end
   end
 end
 
 # Require the gems listed in Gemfile, including any gems
-# e.g. :default, :development, :production, :university, :mooc, :development_university, :test_mooc
-Bundler.require(:default, Rails.env, Rails.env_type, Rails.module, Rails.name)
+# e.g. :default, :development, :production, :university, :mooc, :fiit, :edx, :fiit_development, :edx_test
+Bundler.require(:default, Rails.env, Rails.env_type, Rails.module, Rails.env_name)
 
 module Askalot
   class Application < Rails::Application
