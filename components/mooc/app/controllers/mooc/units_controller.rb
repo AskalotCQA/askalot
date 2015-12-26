@@ -7,7 +7,7 @@ module Mooc
     include Shared::Markdown::Process
     include Shared::MarkdownHelper
 
-    skip_before_filter  :verify_authenticity_token
+    skip_before_filter :verify_authenticity_token
     skip_before_filter :login_required
 
     layout 'mooc/unit'

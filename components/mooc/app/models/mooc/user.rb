@@ -1,6 +1,6 @@
 module Mooc
   class User < Shared::User
-    ROLES = [:Student, :Administrator, :Askalotadministrator]
+    ROLES = [:Student, :Administrator, :AskalotAdministrator]
 
     symbolize :role, in: ROLES
 
@@ -15,7 +15,7 @@ module Mooc
     end
 
     def password_required?
-      return false
+      false
     end
   end
 end
