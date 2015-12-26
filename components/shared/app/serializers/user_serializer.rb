@@ -6,6 +6,6 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   module Helper
-    extend GravatarHelper
+    extend Shared::GravatarHelper
   end
 end
