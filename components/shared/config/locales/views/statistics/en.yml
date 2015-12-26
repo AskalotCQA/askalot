@@ -2,5 +2,81 @@ en:
   statistic:
     navigation: "Statistics"
 
+    description_header:
+      median: "Median"
+      average: "Average"
+      standard_deviation: "Standard deviation"
+
     index:
       title: "Statistics"
+      answering: "Considered users are authors of the questions or answers to questions or comments on the responses and question with selected tags during the period."
+      voting: "Considered are also those users who have voted for a question or answer to question with selected tags during the period."
+
+      overall: "Overall"
+      completely: "Completely"
+
+      without_question: "Without asked question"
+      without_answer: "Without answer"
+      without_comment: "Without comment"
+
+      questions: "Questions"
+      questions_more: "Questions"
+      questions_add: "Added questions"
+      questions_show: "Shown questions"
+      questions_vote: "Voted questions"
+      questions_comment: "Commented questions"
+      questions_favourite: "Favourited questions"
+      questions_not_answer: "Unanswered questions"
+      questions_answer: "Answered questions"
+      questions_resolve: "Resolved questions"
+
+      answers: "Answers"
+      answers_more: "Answers"
+      answers_add: "Added answers"
+      answers_vote: "Voted answers"
+      answers_comment: "Commented answers"
+      answers_best: "Chosen as the best answers"
+      answers_help: "Chosen auxiliary answers"
+
+      questions_without_answer: "Without answers"
+      questions_with_answer: "With answers"
+      questions_resolved: "Resolved"
+
+      vote: "Evaluated"
+      vote_very_bad: "Very bad"
+      vote_bad: "Bad"
+      vote_good: "Good"
+      vote_very_good: "Very good"
+      vote_great: "Great"
+
+      bindings: "Bindings"
+      bindings_answers: "Answers to the question"
+      bindings_best: "Best answers to the question"
+      bindings_help: "Auxiliary answers to the question"
+      bindings_show: "Views to the question"
+      bindings_vote: "Votes to the question"
+      bindings_comment: "Comments to the question"
+      bindings_favourite: "Favourites to the question"
+      bindings_best_all: "Best answers"
+      bindings_help_all: "Auxiliary answers"
+      bindings_vote_all: "Evaluated answers"
+
+      vote_on_answer: "Votes to answer"
+      comment_on_answer: "Comments to answer"
+
+      comments: "Comments"
+      votes: "Votes"
+      views: "Views"
+      favourites: "Favourites"
+
+      shown: "Shown"
+      voted: "Voted"
+      commented: "Commented"
+      favourited: "Favourited"
+      best: "Best"
+      auxiliary: "Auxiliary"
+
+      user: "User"
+      users: "Users"
+      users_more: "Users"
+      no_users: "No users was found."

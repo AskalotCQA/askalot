@@ -66,6 +66,8 @@ sk:
         cancel: "Zrušiť"
 
     email:
+      subject: "Predmet e-mailu"
+
       create:
         action: "Poslať hromadný e-mail"
 

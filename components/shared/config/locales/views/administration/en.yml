@@ -66,8 +66,10 @@ en:
         cancel: "Cancel"
 
     email:
+      subject: "Subject of the e-mail"
+
       create:
-        action: "Add community e-mail"
+        action: "Send community e-mail"
 
       edit:
         action: "Edit"

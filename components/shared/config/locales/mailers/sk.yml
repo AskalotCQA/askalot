@@ -1,0 +1,6 @@
+sk:
+  user_mailer:
+    subject: "[Askalot] Nové notifikácie"
+
+  community_emails:
+    cancel: "Zrušiť odoberanie týchto e-mailov"
