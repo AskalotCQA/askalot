@@ -248,7 +248,11 @@ CREATE TABLE categories (
     rgt integer,
     uuid character varying(255),
     shared boolean DEFAULT true,
-    askable boolean DEFAULT false
+    askable boolean DEFAULT false,
+    depth integer,
+    children_count integer,
+    full_tree_name character varying(255),
+    full_public_name character varying(255)
 );
 
 
@@ -2050,6 +2054,13 @@ CREATE UNIQUE INDEX index_assignments_on_user_id_and_category_id ON assignments 
 
 
 --
+-- Name: index_categories_on_lft; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_categories_on_lft ON categories USING btree (lft);
+
+
+--
 -- Name: index_categories_on_name_and_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3254,4 +3265,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151122110354');
 INSERT INTO schema_migrations (version) VALUES ('20151122112216');
 
 INSERT INTO schema_migrations (version) VALUES ('20151122112444');
+
+INSERT INTO schema_migrations (version) VALUES ('20151207231221');
 
