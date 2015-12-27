@@ -1,11 +1,12 @@
 module Mooc
   class QuestionsController < Shared::QuestionsController
-    load_and_authorize_resource
-
     layout 'mooc/unit'
 
     def show
-      @labels  = @question.labels
+      @question = Shared::Question.find(params[:id])
+
+      authorize! :view, @question
+
       @answers = @question.ordered_answers
       @answer  = Shared::Answer.new(question: @question)
       @view    = @question.views.create! viewer: current_user
