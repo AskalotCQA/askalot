@@ -42,7 +42,6 @@ defaults: &defaults
     consumer_key: test
     consumer_secret: secret
 
-development_university:
   category_depths:
     -
       depth: 0
@@ -103,7 +102,4 @@ edx_demo:
   <<: *defaults
 
 edx_production:
-  <<: *defaults
-
-experimental_mooc:
   <<: *defaults

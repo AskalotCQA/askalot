@@ -12,16 +12,16 @@ module Mooc
 
     layout 'mooc/unit'
 
-    $oauth_creds = { Shared::Configuration.oauth.consumer_key => Shared::Configuration.oauth.consumer_secret }
+    oauth_creds = { Shared::Configuration.oauth.consumer_key => Shared::Configuration.oauth.consumer_secret }
 
     def show
       login unless signed_in?
 
       if params[:resource_link_id]
-        @unit = Mooc::Category.find_by lti_id: params[:resource_link_id]
-        @unit = Mooc::Category.create(name: params[:resource_link_id], lti_id: params[:resource_link_id]) if @unit.nil?
+        @unit = Shared::Category.find_by lti_id: params[:resource_link_id]
+        @unit = Shared::Category.create(name: params[:resource_link_id], lti_id: params[:resource_link_id]) if @unit.nil?
       else
-        @unit = Mooc::Category.find params[:id]
+        @unit = Shared::Category.find params[:id]
       end
 
       @questions = @unit.questions.order(created_at: :desc).page(params[:page]).per(20)
@@ -30,6 +30,7 @@ module Mooc
     protected
 
     def login
+      # TODO (Filip Jandura) add error message
       redirect_to '/errors#show' unless authorize!
 
       u = User.find_by(login: params['user_id'])

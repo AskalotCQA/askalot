@@ -1,6 +1,6 @@
 <div id="document-content" class="unit-questions">
   <% if questions.any? %>
-    <% #TODO (Filip Jandura) fix refresh button %>
+    <% # FIXME (Filip Jandura) fix refresh button %>
     <div class="pull-right" style="visibility: hidden">
       <% if @poll %>
         <%= icon_link_to :refresh, t('question.poll.end', time: tooltip_time_tag(Time.now).html_safe), params.merge(poll: false), class: 'btn text-muted', data: { poll: Shared::Configuration.poll.default, remote: true, state: true, rel: index_document_questions_path(params) } %>
