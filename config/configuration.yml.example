@@ -104,3 +104,6 @@ edx_demo:
 
 edx_production:
   <<: *defaults
+
+experimental_mooc:
+  <<: *defaults

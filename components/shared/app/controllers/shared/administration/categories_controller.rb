@@ -1,5 +1,5 @@
 module Shared
-class Administration::CategoriesController < Administration::DashboardController
+class Administration::CategoriesController < AdministrationController
   authorize_resource class: Shared::Category
 
   include CategoriesHelper
