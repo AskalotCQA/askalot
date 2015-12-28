@@ -4,7 +4,7 @@ University::Engine.routes.draw do
   end
 
   resources :documents, [:update, :destroy] do
-    resources :questions, [] do
+    resources :questions do
       get :document_index, on: :collection, as: :index
     end
   end

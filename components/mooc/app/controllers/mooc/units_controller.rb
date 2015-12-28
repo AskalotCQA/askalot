@@ -12,7 +12,7 @@ module Mooc
 
     layout 'mooc/unit'
 
-    oauth_creds = { Shared::Configuration.oauth.consumer_key => Shared::Configuration.oauth.consumer_secret }
+    $oauth_creds = { Shared::Configuration.oauth.consumer_key => Shared::Configuration.oauth.consumer_secret }
 
     def show
       login unless signed_in?
@@ -25,7 +25,7 @@ module Mooc
       end
 
       @questions = @unit.questions.order(created_at: :desc).page(params[:page]).per(20)
-      @page_url = params[:custom_page_url]
+      @page_url = params[:custom_page_url] || ''
     end
 
     protected
@@ -48,8 +48,6 @@ module Mooc
       if secret = $oauth_creds[key]
         @tp = IMS::LTI::ToolProvider.new(key, secret, params)
       else
-        @tp = IMS::LTI::ToolProvider.new(nil, nil, params)
-
         return false
       end
 

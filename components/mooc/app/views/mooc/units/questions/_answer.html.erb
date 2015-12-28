@@ -13,7 +13,7 @@
 
       <%= render 'shared/answers/evaluations', answer: answer %>
       <%= render 'mooc/units/answers/comments', answer: answer, remote: true %>
-      <%= render 'mooc/units/comments/form', commentable: answer, remote: true %>
+      <%= render 'mooc/units/comments/form', commentable: answer,page_url: @page_url, remote: true %>
     </div>
 
     <div class="col-xs-3 col-sm-2">

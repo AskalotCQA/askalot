@@ -1,6 +1,6 @@
 module Mooc
   class User < Shared::User
-    ROLES = [:Student, :Administrator, :Askalotadministrator]
+    ROLES = [:student, :administrator, :askalotadministrator]
 
     symbolize :role, in: ROLES
 

@@ -13,7 +13,7 @@ module Mooc
 
       @question.increment :views_count
 
-      @page_url = params[:page_url]
+      @page_url = params[:page_url] || ''
 
       dispatch_event :create, @view, for: @question.watchers
       render 'mooc/units/questions/show'
