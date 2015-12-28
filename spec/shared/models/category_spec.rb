@@ -32,7 +32,6 @@ describe Shared::Category, type: :model do
     end
 
     context 'with multiple questions' do
-
       it 'has count more than zero' do
         3.times { create :question, category: category }
 
@@ -41,7 +40,6 @@ describe Shared::Category, type: :model do
     end
 
     context 'with deleted questions' do
-
       it 'ommits deleted questions for count' do
         4.times { create :question, category: category }
         2.times { create :question, :deleted, category: category }
@@ -55,7 +53,6 @@ describe Shared::Category, type: :model do
     let(:category) { create :category, uuid: 'category' }
 
     context 'with no questions' do
-
       it 'has zero direct questions' do
         expect(category.direct_questions_count).to be_zero
       end
@@ -66,7 +63,6 @@ describe Shared::Category, type: :model do
     end
 
     context 'with three direct questions' do
-
       it 'has three direct questions' do
         3.times { create :question, category: category }
 
@@ -76,7 +72,6 @@ describe Shared::Category, type: :model do
     end
 
     context 'with three indirect questions' do
-
       it 'has three shared questions' do
         version = create :category, uuid: 'category'
         outer = create :category
@@ -103,7 +98,6 @@ describe Shared::Category, type: :model do
     let(:qouter_question) { create :question, category: outer }
 
     context 'with no answer' do
-
       it 'has no answers' do
         expect(shared1.direct_answers_count).to be_zero
         expect(shared2.direct_answers_count).to be_zero
@@ -115,7 +109,6 @@ describe Shared::Category, type: :model do
     end
 
     context 'one category with three questions on category one' do
-
       it 'has three answers on one category in two questions and other has one' do
         2.times { create :answer, question: sh1q1 }
 
@@ -124,6 +117,7 @@ describe Shared::Category, type: :model do
 
         shared1.reload
         shared2.reload
+
         expect(shared1.direct_answers_count).to eql(3)
         expect(shared1.direct_shared_answers_count).to eql(3)
         expect(shared2.direct_answers_count).to eql(1)

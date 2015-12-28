@@ -24,7 +24,7 @@ class Category < ActiveRecord::Base
 
   before_save :refresh_names
   after_save :refresh_descendants_names
-  scope :direct_and_shared_question_count?, -> { where.not(direct_shared_questions_count: 0) }
+  scope :with_questions?, -> { where.not(direct_shared_questions_count: 0) }
 
   scope :direct_and_shared_question_count?, -> { where.not(direct_shared_questions_count: 0) }
 
@@ -120,7 +120,7 @@ class Category < ActiveRecord::Base
       if group.children.size == 0
         empty << group
       else
-        if group.children.direct_and_shared_question_count?.size > 0
+        if group.children.with_questions.size > 0
           groups << group.children.questions?.each do |category|
             category.name = group.name + ' - ' + category.name
           end
