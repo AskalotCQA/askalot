@@ -1,25 +1,27 @@
-#unit-view .container {
-  margin-right: 0px;
-  margin-left: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
-}
+#unit-view {
+  .container {
+    margin: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 
-#unit-view #new_question {
-  display: none;
-}
+  #new_question {
+    display: none;
+  }
 
-#unit-view .flash .alert:first-child {
-  margin-top: 0px;
-  margin-bottom: 20px;
-}
+  .flash {
+    .alert:first-child {
+      margin-top: 0px;
+      margin-bottom: 20px;
+    }
+  }
 
-#unit-view .form-title {
-  margin: 20px 0 20px;
-  padding-bottom: 6px;
-}
+  .form-title {
+    margin: 20px 0 20px;
+    padding-bottom: 6px;
+  }
 
-#unit-view .unit-questions {
-  padding-top: 10px;
+  .unit-questions {
+    padding-top: 10px;
+  }
 }
-

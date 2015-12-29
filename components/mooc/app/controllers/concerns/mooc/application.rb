@@ -5,7 +5,7 @@ module Mooc::Application
     layout 'mooc/application'
     prepend_view_path 'components/mooc/app/views'
 
-    before_action :login_required, :redirect
+    before_action :login_required, :redirect_if_params
 
     private
 
@@ -18,7 +18,7 @@ module Mooc::Application
       end
     end
 
-    def redirect
+    def redirect_if_params
       redirect_to params[:redirect] if params[:redirect]
     end
   end
