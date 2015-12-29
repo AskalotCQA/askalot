@@ -3,7 +3,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Category ##{n}" }
     askable true
 
-    parent_id Shared::Category.find_by(name: 'root', parent: nil).id
+    parent_id 1
 
     trait :with_tags do
       sequence(:tags) { |n| ["category-#{n}"] }
