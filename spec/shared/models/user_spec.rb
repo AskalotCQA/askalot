@@ -103,7 +103,7 @@ describe Shared::User, type: :model do
       user = build :user, :as_ais
 
       expect(user).to be_valid
-      expect(user.encrypted_password).to be_empty
+      expect(user.encrypted_password).to be_blank
     end
   end
 

@@ -34,9 +34,11 @@ module Mooc
       # TODO (Filip Jandura) add error message
       redirect_to '/errors#show' unless authorize!
 
+      params['roles'] = :teacher if params['roles'] == 'Administrator'
+
       u = User.find_by(login: params['user_id'])
       user_attributes = {login: params['user_id'], nick: params['lis_person_sourcedid'],
-          email: params['lis_person_contact_email_primary'], role: params['roles']}
+          email: params['lis_person_contact_email_primary'], role: params['roles'].downcase}
       u = User.create_without_confirmation! user_attributes if u.nil?
 
       sign_in(:user, u)

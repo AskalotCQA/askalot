@@ -22,7 +22,7 @@ module Shared::MarkdownHelper
     id       = match[/\d+\z/] || match.gsub(/#/, '')
     question = Shared::Question.find_by(id: id)
 
-    link_to "##{id}", question if question
+    link_to "##{id}", shared.question_path(question) if question
   end
 
   def render_markdown(text, options = {})

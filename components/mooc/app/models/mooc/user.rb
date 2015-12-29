@@ -1,9 +1,5 @@
 module Mooc
   class User < Shared::User
-    ROLES = [:student, :administrator, :askalotadministrator]
-
-    symbolize :role, in: ROLES
-
     protected
 
     def self.create_without_confirmation!(attributes)

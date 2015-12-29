@@ -25,7 +25,9 @@ describe 'Deleting', type: :feature do
 
       expect(page).to have_content('Otázka bola úspešne zmazaná.')
 
-      expect(page.current_path).to eql(shared.questions_path)
+      # TODO (filip jandura) separate test to different modules
+      expect(page.current_path).to eql(mooc.unit_path id: question.category.id) if Rails.module.mooc?
+      expect(page.current_path).to eql(shared.questions_path) if Rails.module.university?
 
       question.reload
 

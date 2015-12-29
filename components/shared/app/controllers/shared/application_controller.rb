@@ -1,6 +1,6 @@
 module Shared
 class ApplicationController < ActionController::Base
-  helper Mooc::Engine.helpers
+  helper Mooc::Engine.helpers if Rails.module.mooc?
 
   protected
 

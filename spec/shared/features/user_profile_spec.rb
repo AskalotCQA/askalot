@@ -227,7 +227,7 @@ describe 'User Profile', type: :feature do
       expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
       expect(page.current_path).to eql(shared.edit_user_registration_path)
 
-      expect(Shared::User.find_by(login: user.login).encrypted_password).to be_empty
+      expect(Shared::User.find_by(login: user.login).encrypted_password).to be_blank
     end
 
     it 'requires current password for changing account information', js: true do
