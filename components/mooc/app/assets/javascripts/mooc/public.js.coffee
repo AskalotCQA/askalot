@@ -17,16 +17,16 @@ infoParser = ->
   lti_element = ltis[ltis.length - 1].getElementsByClassName('lti')[0]
 
   data =
-    category_name: tree.getElementsByClassName('group-heading active')[0].textContent.trim()
-    subcategory_name: clone.textContent.trim(),
-    courseId: unit.getAttribute('data-course-id').trim()
+    course_id: unit.getAttribute('data-course-id').trim()
     course_name: document.getElementsByClassName('course-name')[0].textContent.trim()
-    categoryId: parsed[parsed.length-3]
-    subcategoryId: parsed[parsed.length - 2]
-    unitId: unit.getAttribute('data-usage-id')
-    content: unit.innerHTML
-    ltiId: lti_element.id.trim()
+    section_id: parsed[parsed.length-3]
+    section_name: tree.getElementsByClassName('group-heading active')[0].textContent.trim()
+    subsection_id: parsed[parsed.length - 2]
+    subsection_name: clone.textContent.trim(),
+    unit_id: unit.getAttribute('data-usage-id')
     unit_name: sequence.getElementsByClassName('active')[0].getAttribute('data-page-title').trim()
+    content: unit.innerHTML
+    lti_id: lti_element.id.trim()
 
   name_element = $('#sequence-list .active')[0]
 
@@ -36,24 +36,11 @@ infoParser = ->
 
 iFrameResize()
 
-data = infoParser()
-console.log(data)
-
 $.ajax
   type: 'POST'
-  url: 'http://192.168.1.8:3000/parser'
+  url: 'https://askalot.fiit.stuba.sk/edx/parser'
   dataType: 'json'
-  data:
-    course_id: data.courseId
-    course_name: data.courseId
-    section_id: data.categoryId
-    section_name: data.category_name
-    subsection_id: data.subcategoryId
-    subsection_name: data.subcategory_name
-    unit_id: data.unitId
-    unit_name: data.unit_name
-    content: data.content
-    lti_id: data.ltiId
+  data: infoParser()
   success: (data) ->
     console.dir data
 

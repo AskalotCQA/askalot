@@ -4,26 +4,24 @@ module Mooc
     def parser
       status_case = 'nothing'
       saved_flags = { course: false, section: false, subsection: false, unit: false }
-      content = params[:content]
+      content     = params[:content]
       unit_by_lti = Shared::Category.where({ lti_id: params[:lti_id] }).first
 
       if unit_by_lti.nil? || unit_by_lti.parent.nil?
-        root = Shared::Category.where({ name: 'root' }).first
-        course, saved_flags[:course] = create_category_if_not_exist(params[:course_id], params[:course_name], root)
-        section, saved_flags[:section] = create_category_if_not_exist(params[:section_id], params[:section_name], course)
+        root                                 = Shared::Category.where({ name: 'root' }).first
+        course, saved_flags[:course]         = create_category_if_not_exist(params[:course_id], params[:course_name], root)
+        section, saved_flags[:section]       = create_category_if_not_exist(params[:section_id], params[:section_name], course)
         subsection, saved_flags[:subsection] = create_category_if_not_exist(params[:subsection_id], params[:subsection_name], section)
       end
 
       if unit_by_lti.nil?
-        status_case = 'no_lti'
-        unit = Shared::Category.create({ uuid: params[:unit_id], lti_id: params[:lti_id], name: params[:unit_name], parent: subsection})
+        status_case        = 'no_lti'
+        unit               = Shared::Category.create({ uuid: params[:unit_id], lti_id: params[:lti_id], name: params[:unit_name], parent: subsection})
         saved_flags[:unit] = unit.save
-      else
-        if unit_by_lti.parent.nil?
-          status_case = 'lti_but_no_parent'
+      elsif unit_by_lti.parent.nil?
+          status_case        = 'lti_but_no_parent'
           unit_by_lti.parent = subsection
-          saved_unit = unit_by_lti.save
-        end
+          saved_unit         = unit_by_lti.save
       end
 
       render json: {
@@ -31,7 +29,6 @@ module Mooc
                  case: status_case,
                  flags: saved_flags
              }
-
     end
 
     def options
@@ -47,6 +44,7 @@ module Mooc
         category = Shared::Category.create({ uuid: uuid, name: name, parent: parent })
         saved_category = category.save
       end
+
       [category, saved_category]
     end
   end
