@@ -20,13 +20,11 @@ class Category < ActiveRecord::Base
   after_update { self.check_changed_sharing }
 
   scope :with_slido, -> { where.not(slido_username: nil) }
+  scope :with_questions, -> { where.not(direct_shared_questions_count: 0) }
   scope :askable, -> { where(askable: true) }
 
   before_save :refresh_names
   after_save :refresh_descendants_names
-  scope :with_questions, -> { where.not(direct_shared_questions_count: 0) }
-
-  scope :direct_and_shared_question_count?, -> { where.not(direct_shared_questions_count: 0) }
 
   self.table_name = 'categories'
 
@@ -120,11 +118,9 @@ class Category < ActiveRecord::Base
       if group.children.size == 0
         empty << group
       else
-        if group.children.with_questions.size > 0
-          groups << group.children.with_questions.each do |category|
-            category.name = group.name + ' - ' + category.name
-          end
-        end
+        groups << group.children.with_questions.each do |category|
+          category.name = group.name + ' - ' + category.name
+        end if group.children.with_questions.size > 0
       end
     end
 

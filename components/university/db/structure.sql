@@ -251,15 +251,14 @@ CREATE TABLE categories (
     uuid character varying(255),
     shared boolean DEFAULT true,
     askable boolean DEFAULT false,
-    depth integer,
-    children_count integer,
-    full_tree_name character varying(255),
-    full_public_name character varying(255),
-    public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     direct_questions_count integer DEFAULT 0 NOT NULL,
     direct_shared_questions_count integer DEFAULT 0 NOT NULL,
     direct_answers_count integer DEFAULT 0 NOT NULL,
-    direct_shared_answers_count integer DEFAULT 0 NOT NULL
+    direct_shared_answers_count integer DEFAULT 0 NOT NULL,
+    depth integer,
+    children_count integer,
+    full_tree_name character varying(255),
+    full_public_name character varying(255)
 );
 
 
@@ -3275,8 +3274,7 @@ INSERT INTO schema_migrations (version) VALUES ('20151122112444');
 
 INSERT INTO schema_migrations (version) VALUES ('20151207231221');
 
-INSERT INTO schema_migrations (version) VALUES ('20151213143631');
+INSERT INTO schema_migrations (version) VALUES ('20151212205452');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
 
-INSERT INTO schema_migrations (version) VALUES ('20151212205452');

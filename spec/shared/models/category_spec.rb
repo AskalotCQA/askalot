@@ -95,7 +95,7 @@ describe Shared::Category, type: :model do
     let(:sh1q1) { create :question, category: shared1 }
     let(:sh1q2) { create :question, category: shared1 }
     let(:sh2q) { create :question, category: shared2 }
-    let(:qouter_question) { create :question, category: outer }
+    let(:outer_question) { create :question, category: outer }
 
     context 'with no answer' do
       it 'has no answers' do
@@ -123,22 +123,6 @@ describe Shared::Category, type: :model do
         expect(shared2.direct_answers_count).to eql(1)
         expect(shared2.direct_shared_answers_count).to eql(4)
         expect(outer.direct_shared_answers_count).to be_zero
-        expect(category.direct_shared_questions_count).to be_zero
-      end
-    end
-
-    context 'with three indirect questions' do
-      it 'has three shared questions' do
-        version = create :category, uuid: 'category'
-        outer = create :category
-        3.times { create :question, category: version }
-
-        expect(category.direct_questions_count).to be_zero
-        expect(version.direct_questions_count).to eql(3)
-        expect(category.direct_shared_questions_count).to eql(3)
-        expect(version.direct_shared_questions_count).to eql(3)
-        expect(outer.direct_questions_count).to be_zero
-        expect(outer.direct_shared_questions_count).to be_zero
       end
     end
   end
