@@ -14,14 +14,6 @@ describe Shared::Category, type: :model do
     expect(category).to be_valid
   end
 
-  it 'has unique name' do
-    create :category, name: 'Category'
-
-    category = build :category, name: 'Category'
-
-    expect(category).not_to be_valid
-  end
-
   describe '#count' do
     let(:category) { create :category }
 
