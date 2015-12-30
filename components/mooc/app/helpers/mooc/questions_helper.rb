@@ -6,7 +6,7 @@ module Mooc::QuestionsHelper
 
     filter = ((params[:tags] || '').split(',') + tags).uniq.join(',')
 
-    options.merge!(class: classes)
+    options.merge!(class: classes, target: '_parent')
     options.deep_merge! class: classes, data: { id: filter } unless filter.blank?
 
     href = (page_url ? page_url + '?redirect=' : '') + shared.questions_path(tags: filter)

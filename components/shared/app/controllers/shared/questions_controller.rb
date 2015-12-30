@@ -63,7 +63,7 @@ class QuestionsController < ApplicationController
 
       flash[:notice] = t('question.create.success')
 
-      @params = {unit_id: params[:question][:category_id], id: @question.id, page_url: params[:question][:page_url]}
+      @params = { unit_id: params[:question][:category_id], id: @question.id, page_url: params[:question][:page_url] }
       return redirect_to mooc.unit_question_path(@params) if params[:question][:unit_view]
 
       redirect_to question_path(@question)

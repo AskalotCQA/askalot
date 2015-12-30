@@ -4,9 +4,9 @@ $(document).ready ->
   getURLParameter = (name) ->
     decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) or [null, ''])[1].replace(/\+/g, '%20')) or null
 
-  a_src = 'http://localhost:3000/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
+  a_src = 'https://askalot.fiit.stuba.sk/edx-staging/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
   redirect_url = getURLParameter('redirect')
-  a_src +=  if redirect_url then '&amp;redirect=' + redirect_url else null
+  a_src += if redirect_url then '&amp;redirect=' + redirect_url else null
 
   $('<iframe>Your browser does not support iframes!</iframe>')
     .attr('title', 'Askalot')

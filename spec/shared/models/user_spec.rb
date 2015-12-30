@@ -103,7 +103,10 @@ describe Shared::User, type: :model do
       user = build :user, :as_ais
 
       expect(user).to be_valid
-      expect(user.encrypted_password).to be_blank
+
+      # TODO (Filip Jandura) separate to modules
+      expect(user.encrypted_password).to be_empty if Rails.module.university?
+      expect(user.encrypted_password).to be_blank if Rails.module.mooc?
     end
   end
 
