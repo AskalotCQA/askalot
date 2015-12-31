@@ -1,0 +1,24 @@
+<div id="document-content" class="unit-questions">
+  <% if questions.any? %>
+    <% # FIXME (Filip Jandura) fix refresh button %>
+    <div class="pull-right" style="display: none">
+      <% if @poll %>
+        <%= icon_link_to :refresh, t('question.poll.end', time: tooltip_time_tag(Time.now).html_safe), params.merge(poll: false), class: 'btn text-muted', data: { poll: Shared::Configuration.poll.default, remote: true, state: true, rel: index_document_questions_path(params) } %>
+      <% else %>
+        <%= icon_link_to :refresh, t('question.poll.start'), mooc.unit_questions_path(params.merge unit_id: unit.id, poll: true), class: 'btn btn-default', data: { remote: true, state: true } %>
+      <% end %>
+    </div>
+
+    <ol class="user-questions">
+      <% questions.each do |question| %>
+        <%= render 'mooc/units/questions/question', question: question, page_url: page_url %>
+      <% end %>
+    </ol>
+
+    <%= paginate questions, params: { tab: :questions }, remote: true %>
+  <% else %>
+    <div class="alert alert-warning">
+      <%= t('question.no_records') %>
+    </div>
+  <% end %>
+</div>

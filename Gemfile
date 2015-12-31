@@ -73,6 +73,7 @@ gem 'lda-ruby'
 gem 'tf_idf'
 gem 'timecop'
 gem 'awesome_nested_set'
+gem 'ims-lti', :git => "https://github.com/instructure/ims-lti.git"
 
 # search
 gem 'elasticsearch'

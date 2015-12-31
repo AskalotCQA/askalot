@@ -29,6 +29,9 @@ class CommentsController < ApplicationController
       flash_error_messages_for @comment
     end
 
+    # TODO (filip jandura) move logic to mooc module
+    return redirect_to mooc.unit_question_path(unit_id: @question.category.id, id: @question.id, page_url: params[:page_url]) if Rails.module.mooc?
+
     respond_to do |format|
       format.html { redirect_to question_path(@question), format: :html }
       format.js   { redirect_to question_path(@question), format: :js }

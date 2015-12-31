@@ -1,0 +1,5 @@
+<% provide :title, @unit.name %>
+
+<%= render 'mooc/units/questions/new', unit: @unit, question: Shared::Question.new, page_url: @page_url%>
+
+<%= render 'mooc/units/questions/questions', unit: @unit, questions: @questions, page_url: @page_url %>

@@ -63,8 +63,12 @@ class QuestionsController < ApplicationController
 
       flash[:notice] = t('question.create.success')
 
+      @params = { unit_id: params[:question][:category_id], id: @question.id, page_url: params[:question][:page_url] }
+      return redirect_to mooc.unit_question_path(@params) if params[:question][:unit_view]
+
       redirect_to question_path(@question)
     else
+      # TODO (filip jandura) render mooc new question form
       render :new
     end
   end
@@ -134,6 +138,9 @@ class QuestionsController < ApplicationController
   protected
 
   def destroy_callback(deletable)
+    # TODO (filip jandura) move logic to mooc module
+    return redirect_to mooc.unit_path(id: @deletable.category.id, custom_page_url: params[:custom_page_url]) if Rails.module.mooc?
+
     respond_to do |format|
       format.html { redirect_to questions_path, format: :html }
       format.js   { redirect_to document_questions_path(@deletable.parent), format: :js }
