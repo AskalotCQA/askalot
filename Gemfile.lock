@@ -415,6 +415,9 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
+    sprockets-redirect (0.3.0)
+      activesupport (>= 3.1.0)
+      rack
     squire (1.3.6)
       activesupport (>= 3.0.0)
     statistics2 (0.54)
@@ -528,6 +531,7 @@ DEPENDENCIES
   selenium-webdriver
   shared!
   simplecov
+  sprockets-redirect
   squire (~> 1.3.6)
   statistics2
   symbolize
@@ -538,6 +542,3 @@ DEPENDENCIES
   unicorn
   university!
   whenever
-
-BUNDLED WITH
-   1.10.6
