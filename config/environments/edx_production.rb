@@ -89,6 +89,8 @@ Askalot::Application.configure do
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
 
+  config.relative_url_root = '/edx'
+
   config.middleware.use ExceptionNotification::Rack,
     email: {
       email_prefix: '[TP][error] ',

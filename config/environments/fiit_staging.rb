@@ -81,4 +81,6 @@ Askalot::Application.configure do
 
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
+
+  config.relative_url_root = '/fiit-staging'
 end

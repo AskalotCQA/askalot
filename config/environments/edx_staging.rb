@@ -85,6 +85,8 @@ Askalot::Application.configure do
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
 
+  config.relative_url_root = '/edx-staging'
+
   config.action_dispatch.default_headers = {
       'X-Frame-Options' => 'ALLOWALL',
       'Access-Control-Allow-Origin' => '*',
