@@ -31,19 +31,10 @@ class QuestionsController < ApplicationController
     initialize_polling
   end
 
-  def document_index
-    @document  = Shared::Document.find(params[:document_id])
-    @questions = @document.questions.order(touched_at: :desc)
-
-    @questions = @questions.page(params[:page]).per(20)
-
-    initialize_polling
-  end
-
   def new
     @question = Shared::Question.new
 
-    @question.document = Shared::Document.find(params[:document_id]) if params[:document_id]
+    @question.document = University::Document.find(params[:document_id]) if params[:document_id]
     @question.category = Shared::Category.find(params[:category_id]) if params[:category_id]
   end
 
@@ -66,7 +57,7 @@ class QuestionsController < ApplicationController
       @params = { unit_id: params[:question][:category_id], id: @question.id, page_url: params[:question][:page_url] }
       return redirect_to mooc.unit_question_path(@params) if params[:question][:unit_view]
 
-      redirect_to question_path(@question)
+      redirect_to shared.question_path(@question)
     else
       # TODO (filip jandura) render mooc new question form
       render :new
@@ -142,8 +133,8 @@ class QuestionsController < ApplicationController
     return redirect_to mooc.unit_path(id: @deletable.category.id, custom_page_url: params[:custom_page_url]) if Rails.module.mooc?
 
     respond_to do |format|
-      format.html { redirect_to questions_path, format: :html }
-      format.js   { redirect_to document_questions_path(@deletable.parent), format: :js }
+      format.html { redirect_to shared.questions_path, format: :html }
+      format.js   { redirect_to university.index_document_questions_path(@deletable.parent), format: :js }
     end
   end
 end

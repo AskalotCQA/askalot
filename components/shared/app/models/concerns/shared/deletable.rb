@@ -2,7 +2,7 @@ module Shared::Deletable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :deletor, class_name: :User
+    belongs_to :deletor, class_name: :'Shared::User'
 
     scope :deleted,   lambda { unscope(where: :deleted).where(deleted: true) }
     scope :undeleted, lambda { unscope(where: :deleted).where(deleted: false) }

@@ -3,7 +3,7 @@ class Watching < ActiveRecord::Base
   include Deletable
   include Notifiable
 
-  belongs_to :watcher, class_name: :User
+  belongs_to :watcher, class_name: :'Shared::User'
 
   belongs_to :watchable, -> { unscope where: :deleted }, polymorphic: true
 

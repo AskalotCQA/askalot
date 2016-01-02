@@ -6,10 +6,11 @@ module Shared::Editables::Update
   def update
     @model    = controller_name.classify.downcase.to_sym
     @editable = controller_path.classify.constantize.find(params[:id])
+    @engine   = controller_path.classify.deconstantize
 
     authorize! :edit, @editable
 
-    @revision = "Shared::#{controller_name.classify}::Revision".constantize.create_revision!(current_user, @editable)
+    @revision = "#{@engine}::#{controller_name.classify}::Revision".constantize.create_revision!(current_user, @editable)
 
     @editable.assign_attributes(update_params)
 

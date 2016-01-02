@@ -4,7 +4,7 @@ class Answer
     include Deletable
 
     belongs_to :answer
-    belongs_to :editor, class_name: :User
+    belongs_to :editor, class_name: :'Shared::User'
 
     self.table_name = 'answer_revisions'
 

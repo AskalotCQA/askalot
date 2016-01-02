@@ -4,7 +4,7 @@ class Evaluation
     include Deletable
 
     belongs_to :evaluation
-    belongs_to :editor, class_name: :User
+    belongs_to :editor, class_name: :'Shared::User'
 
     self.table_name = 'evaluation_revisions'
 

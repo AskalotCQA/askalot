@@ -4,7 +4,7 @@ class Document
     include Shared::Deletable
 
     belongs_to :document
-    belongs_to :editor, class_name: :User
+    belongs_to :editor, class_name: :'Shared::User'
 
     self.table_name = 'document_revisions'
 

@@ -2,7 +2,7 @@ module Shared::Closeable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :closer, class_name: 'Shared::User'
+    belongs_to :closer, class_name: :'Shared::User'
 
     scope :closed, lambda { unscope(where: :closed).where(closed: true) }
     scope :unclosed, lambda { unscope(where: :closed).where(closed: false) }

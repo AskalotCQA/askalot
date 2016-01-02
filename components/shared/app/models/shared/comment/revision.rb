@@ -4,7 +4,7 @@ class Comment
     include Deletable
 
     belongs_to :comment
-    belongs_to :editor, class_name: :User
+    belongs_to :editor, class_name: :'Shared::User'
 
     self.table_name = 'comment_revisions'
 

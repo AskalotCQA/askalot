@@ -2,7 +2,7 @@ module Shared::Editable
   extend ActiveSupport::Concern
 
   included do
-    belongs_to :editor, class_name: :User
+    belongs_to :editor, class_name: :'Shared::User'
 
     scope :edited,   lambda { where(edited: true) }
     scope :unedited, lambda { where(edited: false) }

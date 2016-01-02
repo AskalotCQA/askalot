@@ -21,4 +21,8 @@ module Shared::ResourcesHelper
       link_to body, url, options
     end
   end
+
+  def engine_url_helpers(resource)
+    "#{resource.class.name.deconstantize}::Engine".constantize.routes.url_helpers
+  end
 end

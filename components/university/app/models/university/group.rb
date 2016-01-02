@@ -6,7 +6,7 @@ class Group < ActiveRecord::Base
 
   VISIBILITIES = [:public, :private]
 
-  belongs_to :creator, class_name: :User
+  belongs_to :creator, class_name: :'Shared::User'
 
   has_many :documents
 

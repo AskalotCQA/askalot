@@ -1,7 +1,7 @@
 module Shared
 class User
   class Profile < ActiveRecord::Base
-    belongs_to :user
+    belongs_to :user, class_name: :'Shared::User'
     belongs_to :targetable, polymorphic: true
 
     symbolize :property

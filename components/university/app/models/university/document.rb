@@ -7,7 +7,7 @@ class Document < ActiveRecord::Base
 
   belongs_to :group, counter_cache: true
 
-  has_many :questions
+  has_many :questions, class_name: :'Shared::Question'
 
   validates :title, presence: true, length: { minimum: 2, maximum: 140 }
   validates :text,  presence: true, length: { minimum: 2 }

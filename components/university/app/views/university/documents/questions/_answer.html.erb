@@ -6,19 +6,19 @@
       </div>
 
       <div class="answer-details">
-        <%= render 'university/answers/details', answer: answer %>
+        <%= render 'shared/answers/details', answer: answer %>
         <%= render 'university/documents/answers/editing', answer: answer, remote: true %>
         <%= render 'university/documents/answers/deleting', answer: answer, remote: true %>
       </div>
 
-      <%= render 'university/answers/evaluations', answer: answer %>
+      <%= render 'shared/answers/evaluations', answer: answer %>
       <%= render 'university/documents/answers/comments', answer: answer, remote: true %>
       <%= render 'university/documents/comments/form', commentable: answer, remote: true %>
     </div>
 
     <div class="col-xs-3 col-sm-2">
-      <%= render 'university/answers/voting', answer: answer %>
-      <%= render 'university/answers/labeling', answer: answer %>
+      <%= render 'shared/answers/voting', answer: answer %>
+      <%= render 'shared/answers/labeling', answer: answer %>
       <%= render 'university/documents/answers/evaluating', answer: answer, remote: true %>
     </div>
   </div>

@@ -3,7 +3,7 @@ class Vote < ActiveRecord::Base
   include Deletable
   include Notifiable
 
-  belongs_to :voter, class_name: :User, counter_cache: true
+  belongs_to :voter, class_name: :'Shared::User', counter_cache: true
   belongs_to :votable, polymorphic: true, counter_cache: true
 
   scope :by,  lambda { |user| where(voter: user) }

@@ -3,7 +3,7 @@ class Tagging < ActiveRecord::Base
   include Deletable
   include Notifiable
 
-  belongs_to :author, class_name: :User
+  belongs_to :author, class_name: :'Shared::User'
   belongs_to :question
   belongs_to :tag
 

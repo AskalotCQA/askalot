@@ -4,11 +4,11 @@
       <div class="question-preview">
         <h4>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
-          <%= link_to question.title, question_path(id: question.id, document_id: @document.id), remote: true %>
+          <%= link_to question.title, shared.question_path(id: question.id, document_id: @document.id), remote: true %>
           <small class="pull-right"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
         </h4>
 
-        <%= render 'university/questions/labels', labels: question.labels %>
+        <%= render 'shared/questions/labels', labels: question.labels %>
 
         <div class="question-content">
           <%= question_text_preview question, length: 250 %>
@@ -31,7 +31,7 @@
           <% end %>
         </div>
         <div class="col-xs-3 col-sm-6">
-          <%= link_to question_path(question, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
+          <%= link_to shared.question_path(question, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
             <span class="question-metric-value"><%= question.answers.size %></span>
             <%= t('count.answer', count: question.answers.size) %>
           <% end %>

@@ -1,5 +1,5 @@
 $(document).ready ->
-  $('#document-content').replaceWith("<%= escape_javascript render('shared/documents/questions/show', question: @question) %>")
+  $('#document-content').replaceWith("<%= escape_javascript render('university/documents/questions/show', question: @question) %>")
 
   $('.well-active').attr class: 'well'
   $('#document-<%= @question.document_id %>').attr class: 'well well-active'

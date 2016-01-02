@@ -3,9 +3,9 @@ class Question
   class Revision < ActiveRecord::Base
     include Deletable
 
-    belongs_to :document
+    belongs_to :document, class_name: :'University::Document'
     belongs_to :question
-    belongs_to :editor, class_name: :User
+    belongs_to :editor, class_name: :'Shared::User'
 
     self.table_name = 'question_revisions'
 

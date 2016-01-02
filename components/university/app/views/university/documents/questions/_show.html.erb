@@ -1,5 +1,5 @@
 <div id="document-content">
-  <a href="<%= index_document_questions_path(document_id: @question.document_id) %>" data-remote="true" class="btn btn-sm btn-default">
+  <a href="<%= university.index_document_questions_path(document_id: @question.document_id) %>" data-remote="true" class="btn btn-sm btn-default">
     <%= icon_tag :list, label: t('question.list') %>
   </a>
 
@@ -11,7 +11,7 @@
             <%= @question.title %>
             <%= evaluation_badge_tag @question if @question.evaluations.any? %>
           </h3>
-          <%= render 'university/questions/labels', labels: @labels %>
+          <%= render 'shared/questions/labels', labels: @labels %>
         </div>
 
         <div id="question-data">
@@ -20,13 +20,13 @@
           </div>
 
           <div class="question-details">
-            <%= render 'university/questions/details', question: @question %>
+            <%= render 'shared/questions/details', question: @question %>
             <%= render 'university/documents/questions/editing', question: @question, remote: true %>
             <%= render 'university/documents/questions/deleting', question: @question, remote: true %>
           </div>
 
           <div id="question-evaluations">
-            <%= render 'university/questions/evaluations', question: @question %>
+            <%= render 'shared/questions/evaluations', question: @question %>
           </div>
 
           <div id="question-comments">
@@ -37,8 +37,8 @@
       </div>
 
       <div class="col-xs-3 col-sm-2">
-        <%= render 'university/questions/voting', question: @question %>
-        <%= render 'university/questions/watching', question: @question %>
+        <%= render 'shared/questions/voting', question: @question %>
+        <%= render 'shared/questions/watching', question: @question %>
         <%= render 'university/documents/questions/evaluating', question: @question, remote: true %>
       </div>
     </div>

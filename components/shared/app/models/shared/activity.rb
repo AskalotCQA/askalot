@@ -4,7 +4,7 @@ class Activity < ActiveRecord::Base
 
   ACTIONS = [:create, :update, :delete, :mention]
 
-  belongs_to :initiator, class_name: :User
+  belongs_to :initiator, class_name: :'Shared::User'
 
   belongs_to :resource, -> { unscope where: :deleted }, polymorphic: true
 

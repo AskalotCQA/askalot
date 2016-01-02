@@ -4,7 +4,7 @@ class Group
     include Shared::Deletable
 
     belongs_to :group
-    belongs_to :editor, class_name: :User
+    belongs_to :editor, class_name: :'Shared::User'
 
     self.table_name = 'group_revisions'
 

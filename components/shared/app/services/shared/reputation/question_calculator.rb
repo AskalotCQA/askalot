@@ -10,7 +10,8 @@ module Shared::Reputation
     def time(question, answer)
       return (answer.created_at - question.created_at).to_f.round(6) unless answer.nil?
 
-      (question.answers.order(:created_at).first.created_at - question.created_at).to_f.round(6) unless question.answers.empty?
+      # FIXME(huna) Answer.created_at = nil if question is deleteda
+      (question.answers.order(:created_at).first.created_at - question.created_at).to_f.round(6) unless question.answers.all.empty?
     end
 
     def difficulty(question, time)

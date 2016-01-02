@@ -4,8 +4,8 @@ class Notification < ActiveRecord::Base
 
   ACTIONS = Activity::ACTIONS
 
-  belongs_to :recipient, class_name: :User
-  belongs_to :initiator, class_name: :User
+  belongs_to :recipient, class_name: :'Shared::User'
+  belongs_to :initiator, class_name: :'Shared::User'
 
   belongs_to :resource, -> { unscope where: :deleted }, polymorphic: true
 
