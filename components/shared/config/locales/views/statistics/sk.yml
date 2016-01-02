@@ -9,6 +9,7 @@ sk:
 
     index:
       title: "Štatistiky"
+      filter: "Filtrovať"
       answering: "Uvažovaní používatelia sú autormi otázok, alebo odpovedí k otázkam, alebo komentárov k odpovediam a samotným otázkam s vybranými tagmi počas daného obdobia."
       voting: "Uvažovaní sú taktiež tí používatelia, ktorí hlasovali za otázku alebo odpoveď k otázke s vybranými tagmi počas daného obdobia."
 

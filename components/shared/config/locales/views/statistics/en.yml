@@ -9,6 +9,7 @@ en:
 
     index:
       title: "Statistics"
+      filter: "Filter"
       answering: "Considered users are authors of the questions or answers to questions or comments on the responses and question with selected tags during the period."
       voting: "Considered are also those users who have voted for a question or answer to question with selected tags during the period."
 

@@ -17,7 +17,7 @@
       </div>
     </div>
     <div class="col-md-4">
-      <button type="submit" class="btn btn-default">Filtrovať</button>
+      <button type="submit" class="btn btn-default"><%= t('statistic.index.filter') %></button>
     </div>
   </div>
   <div class="form-group">
@@ -36,7 +36,7 @@
 <section>
   <div class="row">
     <div class="col-md-4">
-      <h3>Používatelia</h3>
+      <h3><%= t('statistic.index.users') %></h3>
 
       <table class="table table-bordered table-condensed">
         <%= render 'fraction_header', title: t('statistic.index.overall'), numeration: @users, denomination: @users %>
@@ -82,7 +82,7 @@
     </div>
 
     <div class="col-md-4">
-      <h3>Otázky</h3>
+      <h3><%= t('statistic.index.questions') %></h3>
 
       <table class="table table-bordered table-condensed">
         <%= render 'fraction_header', title: t('statistic.index.overall'), numeration: @questions, denomination: @questions %>
@@ -121,7 +121,7 @@
     </div>
 
     <div class="col-md-4">
-      <h3>Odpovede</h3>
+      <h3><%= t('statistic.index.answers') %></h3>
 
       <table class="table table-bordered table-condensed">
         <%= render 'fraction_header', title: t('statistic.index.overall'), numeration: @answers, denomination: @answers %>
