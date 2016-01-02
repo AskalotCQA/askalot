@@ -4,7 +4,7 @@ module Shared::ActivitiesHelper
     mute    = options.delete(:mute) || lambda { |_| false }
     color   = !mute.call(activity) ? data[:color][:action] : :'text-muted'
     type    = activity.action == :mention ? :mention : :persistence
-    title   = t "activity.icon.#{type}", action: t("activity.action.#{activity.action}"), resource: t("activity.content.#{type}.#{activity.resource.class.name.downcase}")
+    title   = t "activity.icon.#{type}", action: t("activity.action.#{activity.action}"), resource: t("activity.content.#{type}.#{activity.resource.class.name.demodulize.downcase}")
     options = options.merge(tooltip_attributes title, placement: :bottom)
 
     icon_tag data[:icon][:resource], options.merge(class: color, fixed: true)
@@ -76,7 +76,7 @@ module Shared::ActivitiesHelper
     when :mention then color[:action], icon[:action] = :'text-warning', :bolt
     end
 
-    case activity.resource.class.name.downcase.to_sym
+    case activity.resource.class.name.demodulize.downcase.to_sym
     when :answer     then color[:resource], icon[:resource] = :'text-info',    :'exclamation-circle'
     when :comment    then color[:resource], icon[:resource] = :'text-warning', :comments
     when :evaluation then color[:resource], icon[:resource] = :'text-warning', :magic
@@ -106,6 +106,6 @@ module Shared::ActivitiesHelper
   end
 
   def activity_resource_body(action, resource, options = {})
-    translate "activity.content.#{action == :mention ? :mention : :persistence}.#{resource.class.name.downcase}"
+    translate "activity.content.#{action == :mention ? :mention : :persistence}.#{resource.class.name.demodulize.downcase}"
   end
 end
