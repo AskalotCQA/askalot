@@ -1,5 +1,5 @@
 Shared::Engine.routes.draw do
-  scope ENV['RAILS_RELATIVE_URL_ROOT'] || '/' do
+  scope '/' do
     concern :closeable do
       post :close, on: :member
     end

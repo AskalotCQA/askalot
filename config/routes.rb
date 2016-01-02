@@ -1,5 +1,9 @@
 Askalot::Application.routes.draw do
-  mount Shared::Engine => Rails.application.config.relative_url_root || '/', as: 'shared'
-  mount University::Engine => Rails.application.config.relative_url_root || '/', as: 'university' if Rails.module == 'university'
-  mount Mooc::Engine => Rails.application.config.relative_url_root || '/', as: 'mooc' if Rails.module == 'mooc'
+  scope Rails.application.config.relative_url_root || '/' do
+    mount Shared::Engine => '/', as: 'shared'
+    mount University::Engine => '/', as: 'university' if Rails.module == 'university'
+    mount Mooc::Engine => '/', as: 'mooc' if Rails.module == 'mooc'
+
+    root 'static_pages#home'
+  end
 end
