@@ -137,5 +137,5 @@ end
 
 group :mooc do
   gem 'mooc', path: 'components/mooc'
-  gem 'sprockets-redirect'
+  gem "non-stupid-digest-assets"
 end
