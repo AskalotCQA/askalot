@@ -1,4 +1,4 @@
-require_relative '../../app/services/shared/events/dispatcher'
+require_relative '../../../shared/app/services/shared/events/dispatcher'
 
 namespace :sample_data do
   task all: :environment do
@@ -255,7 +255,7 @@ namespace :sample_data do
 
     followings.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        Shared::User.find_by(nick: input[:follower]).toggle_following_by! User.find_by(nick: input[:followee])
+        Shared::User.find_by(nick: input[:follower]).toggle_following_by! Shared::User.find_by(nick: input[:followee])
       end
     end
   end
@@ -263,17 +263,30 @@ namespace :sample_data do
   desc 'Fills database with sample categories'
   task categories: :environment do
     categories = [
-      { name: "Principles of software engineering", tags: ["psi", "2014-2015"], time: 65 },
-      { name: "Database systems", tags: ["dbs", "2014-2015"], time: 65 },
-      { name: "Object-oriented programming", tags: ["oop", "2014-2015"], time: 65 },
+      { name: "2014/2015", tags: ["2014-2015"], uuid: nil, time: 385, parent_name: "root", shared: true, askable: false },
+      { name: "2015/2016", tags: ["2015-2016"], uuid: nil, time: 65, parent_name: "root", shared: true, askable: true },
+      { name: "Principles of software engineering", tags: ["psi"], uuid: "pse", time: 385, parent_name: "2014/2015", shared: true, askable: false },
+      { name: "Principles of software engineering", tags: ["psi"], uuid: "pse", time: 65, parent_name: "2015/2016", shared: true, askable: true },
+      { name: "Database systems", tags: ["dbs"], uuid: "dbs", time: 385, parent_name: "2014/2015", shared: true, askable: false },
+      { name: "Database systems", tags: ["dbs"], uuid: "dbs", time: 65, parent_name: "2015/2016", shared: true, askable: true },
+      { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", time: 385, parent_name: "2014/2015", shared: true, askable: false },
+      { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", time: 65, parent_name: "2015/2016", shared: true, askable: true },
     ]
 
     categories.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        Shared::Category.create!(
+        parent = Shared::Category.find_by(name: input[:parent_name])
+
+        category = Shared::Category.create!(
           name: input[:name],
-          tags: input[:tags]
+          tags: input[:tags],
+          uuid: input[:uuid],
+          parent_id: parent.id,
+          shared: input[:shared],
+          askable: input[:askable]
         )
+        category.refresh_full_tree_name
+        category.save
       end
     end
   end
@@ -323,23 +336,26 @@ namespace :sample_data do
   desc 'Fills database with sample watchings'
   task watchings: :environment do
     watchings = [
-      { category: "Principles of software engineering", user: "Ivan", time: 54 },
-      { category: "Principles of software engineering", user: "Ben", time: 32 },
-      { category: "Principles of software engineering", user: "John", time: 25 },
-      { category: "Principles of software engineering", user: "Samantha", time: 15 },
-      { category: "Database systems", user: "Andrew", time: 44 },
-      { category: "Database systems", user: "Tom", time: 12 },
-      { category: "Database systems", user: "Lauren", time: 11 },
-      { category: "Database systems", user: "Ella", time: 10 },
-      { category: "Object-oriented programming", user: "Ella", time: 60 },
-      { category: "Object-oriented programming", user: "Archie", time: 10 },
-      { category: "Object-oriented programming", user: "Adam", time: 10 },
-      { category: "Object-oriented programming", user: "Ben", time: 10 },
+      { category: "2014/2015 - Principles of software engineering", user: "Ivan", time: 54 },
+      { category: "2015/2016 - Principles of software engineering", user: "Ivan", time: 54 },
+      { category: "2014/2015 - Principles of software engineering", user: "Ben", time: 32 },
+      { category: "2015/2016 - Principles of software engineering", user: "John", time: 25 },
+      { category: "2015/2016 - Principles of software engineering", user: "Samantha", time: 15 },
+      { category: "2015/2016 - Database systems", user: "Andrew", time: 44 },
+      { category: "2015/2016 - Database systems", user: "Tom", time: 12 },
+      { category: "2015/2016 - Database systems", user: "Lauren", time: 11 },
+      { category: "2015/2016 - Database systems", user: "Ella", time: 10 },
+      { category: "2014/2015 - Object-oriented programming", user: "Ella", time: 60 },
+      { category: "2015/2016 - Object-oriented programming", user: "Ella", time: 60 },
+      { category: "2015/2016 - Object-oriented programming", user: "Archie", time: 10 },
+      { category: "2014/2015 - Object-oriented programming", user: "Adam", time: 10 },
+      { category: "2015/2016 - Object-oriented programming", user: "Adam", time: 10 },
+      { category: "2015/2016 - Object-oriented programming", user: "Ben", time: 10 },
     ]
 
     watchings.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        Shared::Category.find_by(name: input[:category]).toggle_watching_by! User.find_by(nick: input[:user])
+        Shared::Category.find_by(full_tree_name: input[:category]).toggle_watching_by! Shared::User.find_by(nick: input[:user])
       end
     end
   end
@@ -347,7 +363,7 @@ namespace :sample_data do
   desc 'Fills database with sample questions'
   task questions: :environment do
     questions = [{
-      category: "Principles of software engineering",
+      category: "2014/2015 - Principles of software engineering",
       user: "Ben",
       time: 53,
       title: "Model vs Diagram",
@@ -357,7 +373,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Principles of software engineering",
+      category: "2015/2016 - Principles of software engineering",
       user: "Archie",
       time: 49,
       title: "Minimal requirements on project",
@@ -367,7 +383,7 @@ namespace :sample_data do
       editor: "Archie",
       edited_at: 48
     }, {
-      category: "Principles of software engineering",
+      category: "2015/2016 - Principles of software engineering",
       user: "Sophia",
       time: 45,
       title: "What's is the difference between include and extend?",
@@ -377,7 +393,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Database systems",
+      category: "2014/2015 - Database systems",
       user: "Tom",
       time: 31,
       title: "Function COUNT()",
@@ -387,7 +403,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Database systems",
+      category: "2015/2016 - Database systems",
       user: "Sophia",
       time: 26,
       title: "PostgreSQL version",
@@ -397,7 +413,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Object-oriented programming",
+      category: "2015/2016 - Object-oriented programming",
       user: "Ivan",
       time: 18,
       title: "Singleton in Java",
@@ -407,7 +423,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Principles of software engineering",
+      category: "2015/2016 - Principles of software engineering",
       user: "Adam",
       time: 7,
       title: "What an abreviation UML stands for?",
@@ -417,7 +433,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Object-oriented programming",
+      category: "2015/2016 - Object-oriented programming",
       user: "Ruby",
       time: 10,
       title: "Anonymous class in always true condition",
@@ -440,8 +456,8 @@ namespace :sample_data do
 
     questions.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        category = Shared::Category.find_by(name: input[:category]) unless input[:category].nil?
-        document = Shared::Document.find_by(title: input[:document]) unless input[:document].nil?
+        category = Shared::Category.find_by(full_tree_name: input[:category]) unless input[:category].nil?
+        document = University::Document.find_by(title: input[:document]) unless input[:document].nil?
         user = Shared::User.find_by(nick: input[:user])
         editor = Shared::User.find_by(nick: input[:editor]) unless input[:editor].nil?
         mention = Shared::User.find_by(nick: input[:editor]) unless input[:mention].nil?
@@ -459,7 +475,7 @@ namespace :sample_data do
 
         Shared::Events::Dispatcher.dispatch :mention, user, question, for: mention unless mention.nil?
         Shared::Events::Dispatcher.dispatch :create, user, question, for: question.parent.watchers + question.tags.map(&:watchers).flatten, anonymous: question.anonymous
-        ::Watching.deleted_or_new(watcher: user, watchable: question).mark_as_undeleted!
+        Shared::Watching.deleted_or_new(watcher: user, watchable: question).mark_as_undeleted!
       end
     end
   end
@@ -547,7 +563,7 @@ namespace :sample_data do
         editor = Shared::User.find_by(nick: input[:editor]) unless input[:editor].nil?
         mention = Shared::User.find_by(nick: input[:editor]) unless input[:mention].nil?
 
-        answer = Answer.create!(
+        answer = Shared::Answer.create!(
           author_id: user.id,
           question_id: question.id,
           text: input[:text],
@@ -557,7 +573,7 @@ namespace :sample_data do
 
         Shared::Events::Dispatcher.dispatch :mention, user, answer, for: mention unless mention.nil?
         Shared::Events::Dispatcher.dispatch :create, user, answer, for: question.watchers
-        ::Watching.deleted_or_new(watcher: user, watchable: question).mark_as_undeleted!
+        Shared::Watching.deleted_or_new(watcher: user, watchable: question).mark_as_undeleted!
       end
     end
   end
@@ -631,7 +647,7 @@ namespace :sample_data do
         comment = Shared::Comment.create!(
           author_id: user.id,
           commentable_id: commentable.id,
-          commentable_type: input[:commentable_type],
+          commentable_type: "Shared::" + input[:commentable_type],
           text: input[:text],
           editor_id: editor.nil? ? nil : editor.id,
           edited_at: input[:edited_at].nil? ? nil : Time.now - input[:edited_at].days,
@@ -639,7 +655,7 @@ namespace :sample_data do
 
         Shared::Events::Dispatcher.dispatch :mention, user, comment, for: mention unless mention.nil?
         Shared::Events::Dispatcher.dispatch :create, user, comment, for: question.watchers
-        ::Watching.deleted_or_new(watcher: user, watchable: question).mark_as_undeleted!
+        Shared::Watching.deleted_or_new(watcher: user, watchable: question).mark_as_undeleted!
       end
     end
   end
