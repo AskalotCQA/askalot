@@ -1,5 +1,16 @@
 #= require iframeResizer.min.js
 
+# Parse host name to askalot
+host = document.querySelector('script[src$="assets/mooc/public.js"]')
+
+if (host == null)
+  for element in document.getElementsByTagName('pre')
+    if element.innerHTML.indexOf('assets/mooc/public.js') > -1
+      host = element.innerHTML.replace('&lt;script src="', '').replace('assets/mooc/public.js"&gt;&lt;/script&gt;', '')
+else
+  host = host.getAttribute('src').replace('assets/mooc/public.js', '')
+
+# Check if on global or unit view
 is_global = document.getElementsByClassName('course-content')[0] == undefined
 
 infoParser = ->
@@ -41,8 +52,6 @@ $('nav .course-tabs li:contains(Discussion)').hide()
 $(document).ready ->
   getURLParameter = (name) ->
     decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) or [null, ''])[1].replace(/\+/g, '%20')) or null
-
-  host = document.querySelector('script[src$="assets/mooc/public.js"]').getAttribute('src').replace('assets/mooc/public.js', '');
 
   a_src = host + 'questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
   redirect_url = getURLParameter('redirect')
