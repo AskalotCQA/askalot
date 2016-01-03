@@ -89,11 +89,38 @@ class Category < ActiveRecord::Base
   end
 
   def effective_tags
-    tags << Shared::Tag.current_academic_year_value
+    public_tags
   end
 
   def tags=(values)
-    write_attribute(:tags, Shared::Tags::Extractor.extract(values))
+    tags_array = Shared::Tags::Extractor.extract(values)
+    self.public_tags = (self.public_tags + tags_array).uniq
+    new_tags = tags_array - tags
+    deleted_tags = tags - tags_array
+
+    add_tags_to_descendants new_tags if new_tags.size > 0
+    delete_tags_from_descendants deleted_tags if deleted_tags.size > 0
+    write_attribute(:tags, tags_array)
+  end
+
+  def public_tags=(values)
+    write_attribute(:public_tags, Shared::Tags::Extractor.extract(values))
+  end
+
+  def add_tags_to_descendants tags
+    self_and_descendants.each do |category|
+      category.public_tags = (category.public_tags + tags).uniq
+
+      category.save
+    end
+  end
+
+  def delete_tags_from_descendants tags
+    self_and_descendants.each do |category|
+      category.public_tags -= tags
+
+      category.save
+    end
   end
 
   def teachers
