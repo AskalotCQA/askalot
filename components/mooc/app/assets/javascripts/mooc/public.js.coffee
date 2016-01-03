@@ -1,6 +1,6 @@
 #= require iframeResizer.min.js
 
-iFrameResize()
+is_global = document.getElementsByClassName('course-content')[0] == undefined
 
 infoParser = ->
   url = window.location.href
@@ -42,7 +42,9 @@ $(document).ready ->
   getURLParameter = (name) ->
     decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) or [null, ''])[1].replace(/\+/g, '%20')) or null
 
-  a_src = 'https://askalot.fiit.stuba.sk/edx-staging/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
+  host = document.querySelector('script[src$="assets/mooc/public.js"]').getAttribute('src').replace('assets/mooc/public.js', '');
+
+  a_src = host + 'questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
   redirect_url = getURLParameter('redirect')
   a_src += if redirect_url then '&amp;redirect=' + redirect_url else null
   login_url = $('#login-url').text()
@@ -58,10 +60,13 @@ $(document).ready ->
     .attr('frameborder', '0')
     .appendTo('#askalot-wrapper')
 
-  $.ajax
-    type: 'POST'
-    url: 'https://askalot.fiit.stuba.sk/edx/parser'
-    dataType: 'json'
-    data: infoParser()
-    success: (data) ->
-      console.dir data
+  iFrameResize()
+
+  if (!is_global)
+    $.ajax
+      type: 'POST'
+      url: 'https://askalot.fiit.stuba.sk/edx/parser'
+      dataType: 'json'
+      data: infoParser()
+      success: (data) ->
+        console.dir data

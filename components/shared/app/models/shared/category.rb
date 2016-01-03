@@ -29,8 +29,6 @@ class Category < ActiveRecord::Base
   self.table_name = 'categories'
 
   def refresh_names
-    return true unless Category.column_names.include? 'full_tree_name'
-
     if !self.full_tree_name_changed? && self.name_changed?
       self.refresh_full_tree_name
       @refresh_descs = true
@@ -45,8 +43,6 @@ class Category < ActiveRecord::Base
   end
 
   def refresh_descendants_names
-    return true unless Category.column_names.include? 'full_tree_name'
-
     self.descendants.each do |category|
       category.refresh_full_tree_name
       category.refresh_full_public_name
