@@ -60,12 +60,12 @@ $(document).ready ->
     .attr('frameborder', '0')
     .appendTo('#askalot-wrapper')
 
-  iFrameResize()
+  iFrameResize({checkOrigin: false})
 
   if (!is_global)
     $.ajax
       type: 'POST'
-      url: 'https://askalot.fiit.stuba.sk/edx/parser'
+      url: host + 'parser'
       dataType: 'json'
       data: infoParser()
       success: (data) ->
