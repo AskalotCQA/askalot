@@ -1,1 +1,1 @@
-NonStupidDigestAssets.whitelist += ["mooc/mooc.css", "mooc/mooc.js", "mooc/public.js"]
+NonStupidDigestAssets.whitelist += ["mooc/public.js"]
