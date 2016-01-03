@@ -7,6 +7,8 @@ $(document).ready ->
   a_src = 'https://askalot.fiit.stuba.sk/edx-staging/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
   redirect_url = getURLParameter('redirect')
   a_src += if redirect_url then '&amp;redirect=' + redirect_url else null
+  login_url = $('#login-url').text()
+  a_src += '&amp;login_url=' + login_url if login_url != ''
 
   $('<iframe>Your browser does not support iframes!</iframe>')
     .attr('title', 'Askalot')
