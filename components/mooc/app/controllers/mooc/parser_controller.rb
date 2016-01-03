@@ -49,6 +49,3 @@ module Mooc
     end
   end
 end
-
-
-

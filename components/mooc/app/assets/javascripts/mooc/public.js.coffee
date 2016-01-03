@@ -1,7 +1,8 @@
 #= require iframeResizer.min.js
 
-infoParser = ->
+iFrameResize()
 
+infoParser = ->
   url = window.location.href
   pathname = window.location.pathname
   parsed = pathname.split('/')
@@ -32,17 +33,8 @@ infoParser = ->
 
   if name_element
     data.unit_name = name_element.getAttribute('data-page-title').trim()
+
   data
-
-iFrameResize()
-
-$.ajax
-  type: 'POST'
-  url: 'https://askalot.fiit.stuba.sk/edx/parser'
-  dataType: 'json'
-  data: infoParser()
-  success: (data) ->
-    console.dir data
 
 $('nav .course-tabs li:contains(Discussion)').hide()
 
@@ -55,11 +47,19 @@ $(document).ready ->
   a_src += if redirect_url then '&amp;redirect=' + redirect_url else null
 
   $('<iframe>Your browser does not support iframes!</iframe>')
-  .attr('title', 'Askalot')
-  .attr('src', a_src)
-  .attr('width', '100%')
-  .attr('height', '600')
-  .attr('marginwidth', '0')
-  .attr('marginheight', '0')
-  .attr('frameborder', '0')
-  .appendTo('#askalot-wrapper')
+    .attr('title', 'Askalot')
+    .attr('src', a_src)
+    .attr('width', '100%')
+    .attr('height', '600')
+    .attr('marginwidth', '0')
+    .attr('marginheight', '0')
+    .attr('frameborder', '0')
+    .appendTo('#askalot-wrapper')
+
+  $.ajax
+    type: 'POST'
+    url: 'https://askalot.fiit.stuba.sk/edx/parser'
+    dataType: 'json'
+    data: infoParser()
+    success: (data) ->
+      console.dir data
