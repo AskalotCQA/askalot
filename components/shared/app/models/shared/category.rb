@@ -94,6 +94,7 @@ class Category < ActiveRecord::Base
 
   def tags=(values)
     tags_array = Shared::Tags::Extractor.extract(values)
+    self.public_tags = (self.public_tags + tags_array).uniq
     new_tags = tags_array - tags
     deleted_tags = tags - tags_array
 
