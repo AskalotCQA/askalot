@@ -2067,6 +2067,12 @@ CREATE UNIQUE INDEX index_assignments_on_user_id_and_category_id ON assignments 
 
 CREATE INDEX index_categories_on_lft ON categories USING btree (lft);
 
+--
+-- Name: index_categories_on_lti_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+--
+
+CREATE INDEX index_categories_on_lti_id ON categories USING btree (lti_id);
+
 
 --
 -- Name: index_categories_on_name_and_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
@@ -3285,4 +3291,7 @@ INSERT INTO schema_migrations (version) VALUES ('20151212205452');
 INSERT INTO schema_migrations (version) VALUES ('20151213143631');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
+
+INSERT INTO schema_migrations (version) VALUES ('20151213121223');
+
 
