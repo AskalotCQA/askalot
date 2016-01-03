@@ -251,16 +251,16 @@ CREATE TABLE categories (
     uuid character varying(255),
     shared boolean DEFAULT true,
     askable boolean DEFAULT false,
+    lti_id character varying(255),
     depth integer,
     children_count integer,
     full_tree_name character varying(255),
     full_public_name character varying(255),
-    lti_id character varying(255),
+    public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     direct_questions_count integer DEFAULT 0 NOT NULL,
     direct_shared_questions_count integer DEFAULT 0 NOT NULL,
     direct_answers_count integer DEFAULT 0 NOT NULL,
-    direct_shared_answers_count integer DEFAULT 0 NOT NULL,
-    public_tags character varying(255)[] DEFAULT '{}'::character varying[]
+    direct_shared_answers_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -2067,12 +2067,6 @@ CREATE UNIQUE INDEX index_assignments_on_user_id_and_category_id ON assignments 
 
 CREATE INDEX index_categories_on_lft ON categories USING btree (lft);
 
---
--- Name: index_categories_on_lti_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
---
-
-CREATE INDEX index_categories_on_lti_id ON categories USING btree (lti_id);
-
 
 --
 -- Name: index_categories_on_name_and_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
@@ -3291,7 +3285,4 @@ INSERT INTO schema_migrations (version) VALUES ('20151212205452');
 INSERT INTO schema_migrations (version) VALUES ('20151213143631');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
-
-INSERT INTO schema_migrations (version) VALUES ('20151213121223');
-
 
