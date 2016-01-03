@@ -1,6 +1,6 @@
 class InsertRoot < ActiveRecord::Migration
   def up
-    Shared::Category.find_or_create_by!(name: 'root')
+    Shared::Category.find_or_create_by! name: 'root'
   end
 
   def down

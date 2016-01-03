@@ -20,6 +20,9 @@ class Question < ActiveRecord::Base
   # TODO (jharinek) propose change to parent tags
   before_save { self.tag_list += (new_record? ? category.effective_tags : category.tags) if category }
 
+  after_create { self.category.reload_question_counters }
+  after_destroy { self.category.reload_question_counters }
+
   belongs_to :category, counter_cache: true
   belongs_to :document, class_name: :'University::Document', counter_cache: true
 
