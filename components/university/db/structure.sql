@@ -128,8 +128,8 @@ CREATE TABLE answer_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -164,17 +164,17 @@ CREATE TABLE answers (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
+    stack_exchange_uuid integer,
     comments_count integer DEFAULT 0 NOT NULL,
     votes_count integer DEFAULT 0 NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    stack_exchange_uuid integer
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -283,39 +283,6 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
--- Name: category_depths; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE category_depths (
-    id integer NOT NULL,
-    depth integer,
-    name character varying(255),
-    is_in_public_name boolean,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: category_depths_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE category_depths_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: category_depths_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE category_depths_id_seq OWNED BY category_depths.id;
-
-
---
 -- Name: changelogs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -360,8 +327,8 @@ CREATE TABLE comment_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -396,13 +363,13 @@ CREATE TABLE comments (
     text text NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
+    stack_exchange_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
-    edited boolean DEFAULT false NOT NULL,
-    stack_exchange_uuid integer
+    deleted_at timestamp without time zone,
+    edited boolean DEFAULT false NOT NULL
 );
 
 
@@ -584,8 +551,8 @@ CREATE TABLE evaluations (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer
@@ -652,8 +619,8 @@ CREATE TABLE favorites (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -800,8 +767,8 @@ CREATE TABLE labelings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -944,8 +911,8 @@ CREATE TABLE question_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     document_id integer
 );
 
@@ -983,6 +950,7 @@ CREATE TABLE questions (
     updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
     anonymous boolean DEFAULT false NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -991,18 +959,17 @@ CREATE TABLE questions (
     slido_question_uuid integer,
     slido_event_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
-    votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     touched_at timestamp without time zone NOT NULL,
+    votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    document_id integer,
-    stack_exchange_uuid integer,
     stack_exchange_duplicate boolean,
     stack_exchange_questions_uuids integer[],
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    document_id integer,
     closed boolean DEFAULT false NOT NULL,
     closer_id integer,
     closed_at timestamp without time zone
@@ -1116,8 +1083,8 @@ CREATE TABLE taggings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     author_id integer NOT NULL
 );
 
@@ -1264,6 +1231,7 @@ CREATE TABLE users (
     tumblr character varying(255),
     youtube character varying(255),
     role character varying(255) DEFAULT 'student'::character varying NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -1281,7 +1249,6 @@ CREATE TABLE users (
     facebook_friends text,
     facebook_likes text,
     documents_count integer DEFAULT 0 NOT NULL,
-    stack_exchange_uuid integer,
     send_email_notifications boolean DEFAULT true NOT NULL,
     read_notifications_thread boolean DEFAULT true NOT NULL,
     alumni boolean DEFAULT false NOT NULL
@@ -1317,8 +1284,8 @@ CREATE TABLE views (
     viewer_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -1354,8 +1321,8 @@ CREATE TABLE votes (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -1455,13 +1422,6 @@ ALTER TABLE ONLY assignments ALTER COLUMN id SET DEFAULT nextval('assignments_id
 --
 
 ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY category_depths ALTER COLUMN id SET DEFAULT nextval('category_depths_id_seq'::regclass);
 
 
 --
@@ -1706,14 +1666,6 @@ ALTER TABLE ONLY assignments
 
 ALTER TABLE ONLY categories
     ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
-
-
---
--- Name: category_depths_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY category_depths
-    ADD CONSTRAINT category_depths_pkey PRIMARY KEY (id);
 
 
 --
