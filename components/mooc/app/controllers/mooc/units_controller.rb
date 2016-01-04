@@ -17,6 +17,8 @@ module Mooc
     def show
       login unless signed_in?
 
+      return after_login_redirect if params[:custom_login_redirect]
+
       if params[:resource_link_id]
         @unit = Shared::Category.find_by lti_id: params[:resource_link_id]
         @unit = Shared::Category.create(name: params[:resource_link_id], lti_id: params[:resource_link_id]) if @unit.nil?
@@ -56,6 +58,12 @@ module Mooc
       return false unless @tp.valid_request?(request)
       return false if Time.now.utc.to_i - @tp.request_oauth_timestamp.to_i > 60*60
       true
+    end
+
+    def after_login_redirect
+      @url = params[:custom_page_url]
+
+      render '/mooc/page/to_page_redirect'
     end
   end
 end
