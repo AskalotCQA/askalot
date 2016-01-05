@@ -33,17 +33,17 @@ module Mooc
     protected
 
     def login
-      # TODO (Filip Jandura) add error message
-      redirect_to '/errors#show' unless authorize!
+      # FIXME (Filip Jandura) create custom error page
+      redirect_to shared.error_500_path unless authorize!
 
       params['roles'] = :teacher if params['roles'] == 'Administrator'
 
-      u = User.find_by(login: params['user_id'])
-      user_attributes = {login: params['user_id'], nick: params['lis_person_sourcedid'],
-          email: params['lis_person_contact_email_primary'], role: params['roles'].downcase}
-      u = User.create_without_confirmation! user_attributes if u.nil?
+      user = User.find_by(login: params['user_id'])
+      user_attributes = { login: params['user_id'], nick: params['lis_person_sourcedid'],
+          email: params['lis_person_contact_email_primary'], role: params['roles'].downcase }
+      user = User.create_without_confirmation! user_attributes if user.nil?
 
-      sign_in(:user, u)
+      sign_in(:user, user)
     end
 
     def authorize!

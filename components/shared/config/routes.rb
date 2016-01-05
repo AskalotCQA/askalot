@@ -27,8 +27,8 @@ Shared::Engine.routes.draw do
 
     root 'static_pages#home'
 
-    get '/404', to: 'errors#show'
-    get '/500', to: 'errors#show'
+    get '/404', to: 'errors#show', as: 'error_404'
+    get '/500', to: 'errors#show', as: 'error_500'
 
     devise_for :users, class_name: 'Shared::User', controllers: { sessions: 'shared/sessions', registrations: 'shared/registrations' }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }, module: :devise
 

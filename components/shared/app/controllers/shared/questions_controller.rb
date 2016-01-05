@@ -36,6 +36,11 @@ class QuestionsController < ApplicationController
 
     @question.document = University::Document.find(params[:document_id]) if params[:document_id]
     @question.category = Shared::Category.find(params[:category_id]) if params[:category_id]
+
+    respond_to do |format|
+      format.html { render :new }
+      format.js { render template: "#{Rails.module.downcase}/questions/new" }
+    end
   end
 
   def create
@@ -55,12 +60,12 @@ class QuestionsController < ApplicationController
       flash[:notice] = t('question.create.success')
 
       @params = { unit_id: params[:question][:category_id], id: @question.id, page_url: params[:question][:page_url] }
-      return redirect_to mooc.unit_question_path(@params) if params[:question][:unit_view]
 
+      return render js: "window.location = '#{mooc.unit_question_url(@params)}'" if params[:question][:unit_view]
       redirect_to shared.question_path(@question)
     else
-      # TODO (filip jandura) render mooc new question form
-      render :new
+      # TODO (filip jandura) refactor different types of rendering for mooc/university
+      render template: "#{Rails.module.downcase}/questions/new"
     end
   end
 
