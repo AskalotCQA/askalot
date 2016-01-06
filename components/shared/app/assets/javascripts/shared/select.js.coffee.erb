@@ -34,7 +34,7 @@ class window.Select extends Module
       formatSelection: (item) -> item.id
       createSearchChoice : (term, data) -> { id: term, text: "#{term} (#{I18n.t('question.tag.new')})" }
       ajax:
-        url: '/tags/suggest'
+        url: '<%= Rails.application.config.relative_url_root %>/tags/suggest'
         dataType: 'json'
         data: (term, page) ->
           q: term
