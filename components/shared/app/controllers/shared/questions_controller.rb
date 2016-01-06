@@ -65,7 +65,10 @@ class QuestionsController < ApplicationController
       redirect_to shared.question_path(@question)
     else
       # TODO (filip jandura) refactor different types of rendering for mooc/university
-      render template: "#{Rails.module.downcase}/questions/new"
+      respond_to do |format|
+        format.html { render :new }
+        format.js { render template: "#{Rails.module.downcase}/questions/new" }
+      end
     end
   end
 
