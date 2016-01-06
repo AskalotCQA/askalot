@@ -33,8 +33,7 @@ module Mooc
     protected
 
     def login
-      # FIXME (Filip Jandura) create custom error page
-      redirect_to shared.error_500_path unless authorize!
+      raise 'LTI authorization failed' unless authorize!
 
       params['roles'] = :teacher if params['roles'] == 'Administrator'
 
@@ -47,16 +46,15 @@ module Mooc
     end
 
     def authorize!
-      return false unless key = params['oauth_consumer_key']
+      raise 'LTI consumer key not provided' unless key = params['oauth_consumer_key']
+      raise 'LTI secret does not match' unless secret = $oauth_creds[key]
 
-      if secret = $oauth_creds[key]
-        @tp = IMS::LTI::ToolProvider.new(key, secret, params)
-      else
-        return false
-      end
+      @tp = IMS::LTI::ToolProvider.new(key, secret, params)
 
-      return false unless @tp.valid_request?(request)
-      return false if Time.now.utc.to_i - @tp.request_oauth_timestamp.to_i > 60*60
+      raise 'LTI request is not valid' unless @tp.valid_request?(request)
+      raise 'LTI request is too old' if Time.now.utc.to_i - @tp.request_oauth_timestamp.to_i > 60*60
+
+      # FIXME (huna|jandura) check if oauth nonce was used in the last x minutes
       true
     end
 
