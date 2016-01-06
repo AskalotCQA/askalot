@@ -2,7 +2,6 @@ module Shared
   class Engine < ::Rails::Engine
     isolate_namespace Shared
 
-    config.autoload_paths += Dir[config.root.join('lib', '**', '*.{rb,yml}').to_s]
     config.i18n.load_path += Dir[config.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
 
     config.to_prepare do
