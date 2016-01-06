@@ -17,6 +17,7 @@ class Category < ActiveRecord::Base
 
   after_create { self.reload_question_counters }
   after_create { self.reload_answer_counters }
+  after_create { self.save_parent_tags }
   after_update { self.check_changed_sharing }
 
   scope :with_slido, -> { where.not(slido_username: nil) }
@@ -204,6 +205,12 @@ class Category < ActiveRecord::Base
     self.direct_answers_count = self.answers.size
 
     self.direct_shared_answers_count = Shared::Answer.where('question_id IN (?)', all_directly_related_questions.select('id')).count
+
+    self.save!
+  end
+
+  def save_parent_tags
+    self.public_tags += ancestors.map { |ancestor| ancestor.tags }.flatten
 
     self.save!
   end
