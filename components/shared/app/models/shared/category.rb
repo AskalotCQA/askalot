@@ -31,11 +31,11 @@ class Category < ActiveRecord::Base
 
   attr_reader :what_changed
 
+  self.table_name = 'categories'
+
   def what_changed?
     @what_changed = changed || []
   end
-
-  self.table_name = 'categories'
 
   def refresh_names
     if !self.full_tree_name_changed? && self.name_changed?
