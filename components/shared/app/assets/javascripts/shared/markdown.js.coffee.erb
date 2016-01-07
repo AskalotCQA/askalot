@@ -23,7 +23,7 @@ class window.Markdown
         index:    2
         maxCount: 5
         search:   (term, callback) ->
-          $.get '/users/suggest', q: term, (data) -> try callback(data)
+          $.get '<%= Rails.application.config.relative_url_root %>/users/suggest', q: term, (data) -> try callback(data)
 
       questions:
         match:    /(^|\s*)#(\w*)$/
@@ -32,7 +32,7 @@ class window.Markdown
         index:    2
         maxCount: 5
         search: (term, callback) ->
-          $.get '/questions/suggest', q: term, (data) -> try callback(data)
+          $.get '<%= Rails.application.config.relative_url_root %>/questions/suggest', q: term, (data) -> try callback(data)
 
 
   @bind: ->
