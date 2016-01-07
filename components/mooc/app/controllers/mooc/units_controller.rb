@@ -19,9 +19,12 @@ module Mooc
 
       return after_login_redirect if params[:custom_login_redirect]
 
-      if params[:resource_link_id]
-        @unit = Shared::Category.find_by lti_id: params[:resource_link_id]
-        @unit = Shared::Category.create(name: params[:resource_link_id], lti_id: params[:resource_link_id]) if @unit.nil?
+      lti_id = params[:resource_link_id]
+
+      if lti_id
+        lti_id.slice! 'edge.edx.org-'
+        @unit = Shared::Category.find_by lti_id: lti_id
+        @unit = Shared::Category.create(name: lti_id, lti_id: lti_id) if @unit.nil?
       else
         @unit = Shared::Category.find params[:id]
       end
