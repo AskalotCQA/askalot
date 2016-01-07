@@ -22,6 +22,7 @@ module Mooc
           saved_flags[:unit] = unit.save
         elsif unit_by_lti.parent.nil?
             status_case        = 'lti_but_no_parent'
+            
             unit_by_lti.update({ uuid: params[:unit_id], name: params[:unit_name], parent: subsection })
             saved_unit         = unit_by_lti.save
         end
