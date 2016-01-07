@@ -19,13 +19,21 @@ class Category < ActiveRecord::Base
   after_create { self.reload_answer_counters }
   after_create { self.save_parent_tags }
   after_update { self.check_changed_sharing }
+  after_save   { self.update_public_tags }
 
   scope :with_slido, -> { where.not(slido_username: nil) }
   scope :with_questions, -> { where.not(direct_shared_questions_count: 0) }
   scope :askable, -> { where(askable: true) }
 
   before_save :refresh_names
+  before_save :what_changed?
   after_save :refresh_descendants_names
+
+  attr_reader :what_changed
+
+  def what_changed?
+    @what_changed = changed || []
+  end
 
   self.table_name = 'categories'
 
@@ -213,6 +221,16 @@ class Category < ActiveRecord::Base
     self.public_tags += ancestors.map { |ancestor| ancestor.tags }.flatten
 
     self.save!
+  end
+
+  def update_public_tags
+    if @what_changed.include? 'parent_id'
+      self_and_descendants.each do |category|
+        category.public_tags = category.self_and_ancestors.map { |ancestor| ancestor.tags }.flatten
+
+        category.save
+      end
+    end
   end
 end
 end
