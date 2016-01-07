@@ -23,8 +23,10 @@ module Mooc
 
       if lti_id
         lti_id.slice! 'edge.edx.org-'
-        @unit = Shared::Category.find_by lti_id: lti_id
-        @unit = Shared::Category.create(name: lti_id, lti_id: lti_id) if @unit.nil?
+        Shared::Category.transaction do
+          @unit = Shared::Category.find_by lti_id: lti_id
+          @unit = Shared::Category.create(name: lti_id, lti_id: lti_id) if @unit.nil?
+        end
       else
         @unit = Shared::Category.find params[:id]
       end
