@@ -24,7 +24,7 @@ $(document).ready ->
   # Callbacks for default category tags
   select = new Select.of('#question_category_id')
   select.on 'change', (event) ->
-    value = event.added.text
+    value = event.added.id
 
     tags = JSON.parse(select.attr('data-values'))
     html = templates['questions/category_tags'](tags: tags[value])
