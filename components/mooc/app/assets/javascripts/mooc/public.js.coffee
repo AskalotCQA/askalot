@@ -4,7 +4,6 @@
 host = document.querySelector('script[src$="assets/mooc/public.js"]')
 
 if (host == null)
-# Find hostname in unit view
   host = $($('[aria-labelledby=' + $('#seq_content').attr('aria-labelledby') + '][aria-hidden=true')).text().match('script src=\"(.*)' + 'assets/mooc/public.js')[1]
   if (host == null)
     for element in document.getElementsByTagName('pre')
@@ -13,7 +12,6 @@ if (host == null)
 else
   host = host.getAttribute('src').replace('assets/mooc/public.js', '')
 
-# Check if on global or unit view
 is_global = document.getElementsByClassName('course-content')[0] == undefined
 
 infoParser = ->
