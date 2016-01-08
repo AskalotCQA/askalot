@@ -29,7 +29,7 @@ module Mooc
         @unit = Shared::Category.find params[:id]
       end
 
-      @questions = @unit.questions.order(created_at: :desc).page(params[:page]).per(20)
+      @questions = @unit.all_directly_related_questions.order(created_at: :desc).page(params[:page]).per(20)
       @page_url = params[:custom_page_url] || ''
     end
 
