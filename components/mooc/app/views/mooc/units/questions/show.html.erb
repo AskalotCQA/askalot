@@ -1,5 +1,5 @@
 <div id="document-content">
-  <a href="<%= mooc.unit_path(id: @question.category.id) + '?custom_page_url=' + @page_url %>" class="btn btn-sm btn-default">
+  <a href="<%= mooc.unit_path(id: @question.category.id, custom_page_url: @page_url)%>" class="btn btn-sm btn-default">
     <%= icon_tag :list, label: t('question.list') %>
   </a>
 
@@ -20,7 +20,7 @@
           </div>
 
           <div class="question-details">
-            <%= render 'shared/questions/details', question: @question %>
+            <%= render 'mooc/units/questions/details', question: @question, page_url: @page_url%>
             <%= render 'mooc/units/questions/editing', question: @question, remote: true %>
             <%= render 'mooc/units/questions/deleting', question: @question,  page_url: @page_url, remote: true %>
             <%= render 'shared/questions/closing', question: @question %>

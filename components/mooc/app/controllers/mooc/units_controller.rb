@@ -22,7 +22,7 @@ module Mooc
       lti_id = params[:resource_link_id]
 
       if lti_id
-        lti_id.slice! 'edge.edx.org-'
+        lti_id = lti_id.split('-', 2).last
         Shared::Category.transaction do
           @unit = Shared::Category.find_by lti_id: lti_id
           @unit = Shared::Category.create(name: lti_id, lti_id: lti_id) if @unit.nil?

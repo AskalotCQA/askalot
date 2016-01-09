@@ -4,7 +4,7 @@
       <div class="question-preview">
         <h4>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
-          <%= link_to question.title, mooc.unit_question_path(id: question.id, unit_id: @unit.id) + '?page_url=' + page_url%>
+          <%= link_to question.title, mooc.unit_question_path(id: question.id, unit_id: @unit.id, page_url: page_url)%>
         </h4>
 
         <%= render 'mooc/units/questions/labels', labels: question.tags, page_url: page_url %>
@@ -13,7 +13,7 @@
           <%= question_text_preview question, length: 250 %>
         </div>
         <div class="question-details">
-          <%= render 'shared/questions/details', question: question %>
+          <%= render 'mooc/units/questions/details', question: question,page_url: page_url %>
         </div>
       </div>
     </div>
@@ -33,7 +33,7 @@
           <% end %>
         </div>
         <div class="col-xs-3 col-sm-6">
-          <%= link_to mooc.unit_question_path(question, @unit, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
+          <%= link_to mooc.unit_question_path(id: question.id, unit_id: @unit.id, page_url: page_url, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
             <span class="question-metric-value"><%= question.answers.size %></span>
             <%= t('count.answer', count: question.answers.size) %>
           <% end %>
