@@ -226,7 +226,7 @@ class Category < ActiveRecord::Base
   def update_public_tags
     if @what_changed.include? 'parent_id'
       self_and_descendants.each do |category|
-        category.public_tags = category.self_and_ancestors.map { |ancestor| ancestor.tags }.flatten
+        category.public_tags = category.self_and_ancestors.map { |ancestor| ancestor.tags }.flatten.uniq.sort
 
         category.save
       end
