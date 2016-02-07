@@ -22,24 +22,24 @@ infoParser = ->
   p = subtree.getElementsByTagName('p')[0]
   clone = p.cloneNode(true)
   clone.removeChild(clone.children[0])
-  unit = document.getElementsByClassName('xblock xblock-student_view xmodule_display xblock-initialized')[0]
+  subsection = document.getElementsByClassName('xblock xblock-student_view xmodule_display xblock-initialized')[0]
   sequence = document.getElementById('sequence-list')
-  unit_content = unit.getElementsByClassName('xblock xblock-student_view xmodule_display xblock-initialized')[0]
+  unit_content = subsection.getElementsByClassName('xblock xblock-student_view xmodule_display xblock-initialized')[0]
   ltis = document.getElementsByClassName('xblock-student_view-lti xmodule_LTIModule')
   lti_element = ltis[ltis.length - 1].getElementsByClassName('lti')[0]
-  unit_id = unit.getAttribute('data-usage-id')
-  path = unit.getElementsByClassName('path')[0].textContent.trim()
+  unit_id = $('#sequence-list a.active').attr('data-id')
+  path = subsection.getElementsByClassName('path')[0].textContent.trim()
 
   data =
-    course_id: unit.getAttribute('data-course-id').trim()
+    course_id: subsection.getAttribute('data-course-id').trim()
     course_name: document.getElementsByClassName('course-name')[0].textContent.trim()
     section_id: parsed[parsed.length-3]
     section_name: tree.getElementsByClassName('group-heading active')[0].textContent.trim()
     subsection_id: parsed[parsed.length - 2]
     subsection_name: clone.textContent.trim(),
-    unit_id: unit_id.substr(unit_id.lastIndexOf('_') + 1)
+    unit_id: unit_id.substr(unit_id.lastIndexOf('/') + 1)
     unit_name: path.substr(path.lastIndexOf('>') + 2)
-    content: unit.innerHTML
+    content: subsection.innerHTML
     lti_id: lti_element.id.trim()
 
 $('nav .course-tabs li:contains(Discussion)').hide()
