@@ -8,14 +8,14 @@
     <div class="checkbox">
       <label>
         <%= check_box_tag :test %>
-        Poslať iba mne
+        <%= t('administration.email.to_me_only') %>
       </label>
     </div>
 
     <div class="checkbox">
       <label>
         <%= f.check_box :send_html_email %>
-        HTML e-mail
+        <%= t('administration.email.html_email') %>
       </label>
     </div>
 

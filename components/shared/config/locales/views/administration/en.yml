@@ -67,6 +67,8 @@ en:
 
     email:
       subject: "Subject of the e-mail"
+      to_me_only: "Send only to me"
+      html_email: "HTML e-mail"
 
       create:
         action: "Send community e-mail"

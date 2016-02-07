@@ -67,6 +67,8 @@ sk:
 
     email:
       subject: "Predmet e-mailu"
+      to_me_only: "Poslať iba mne"
+      html_email: "HTML e-mail"
 
       create:
         action: "Poslať hromadný e-mail"
