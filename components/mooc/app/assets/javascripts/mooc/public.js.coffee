@@ -28,6 +28,7 @@ infoParser = ->
   ltis = document.getElementsByClassName('xblock-student_view-lti xmodule_LTIModule')
   lti_element = ltis[ltis.length - 1].getElementsByClassName('lti')[0]
   unit_id = unit.getAttribute('data-usage-id')
+  path = unit.getElementsByClassName('path')[0].textContent.trim()
 
   data =
     course_id: unit.getAttribute('data-course-id').trim()
@@ -37,16 +38,9 @@ infoParser = ->
     subsection_id: parsed[parsed.length - 2]
     subsection_name: clone.textContent.trim(),
     unit_id: unit_id.substr(unit_id.lastIndexOf('_') + 1)
-    unit_name: sequence.getElementsByClassName('active')[0].getAttribute('data-page-title').trim()
+    unit_name: path.substr(path.lastIndexOf('>') + 2)
     content: unit.innerHTML
     lti_id: lti_element.id.trim()
-
-  name_element = $('#sequence-list .active')[0]
-
-  if name_element
-    data.unit_name = name_element.getAttribute('data-page-title').trim()
-
-  data
 
 $('nav .course-tabs li:contains(Discussion)').hide()
 
