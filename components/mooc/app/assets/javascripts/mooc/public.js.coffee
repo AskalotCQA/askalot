@@ -27,6 +27,7 @@ infoParser = ->
   unit_content = unit.getElementsByClassName('xblock xblock-student_view xmodule_display xblock-initialized')[0]
   ltis = document.getElementsByClassName('xblock-student_view-lti xmodule_LTIModule')
   lti_element = ltis[ltis.length - 1].getElementsByClassName('lti')[0]
+  unit_id = unit.getAttribute('data-usage-id')
 
   data =
     course_id: unit.getAttribute('data-course-id').trim()
@@ -35,7 +36,7 @@ infoParser = ->
     section_name: tree.getElementsByClassName('group-heading active')[0].textContent.trim()
     subsection_id: parsed[parsed.length - 2]
     subsection_name: clone.textContent.trim(),
-    unit_id: unit.getAttribute('data-usage-id')
+    unit_id: unit_id.substr(unit_id.lastIndexOf('_') + 1)
     unit_name: sequence.getElementsByClassName('active')[0].getAttribute('data-page-title').trim()
     content: unit.innerHTML
     lti_id: lti_element.id.trim()
