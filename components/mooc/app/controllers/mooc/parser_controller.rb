@@ -18,11 +18,11 @@ module Mooc
 
         if unit_by_lti.nil?
           status_case        = 'no_lti'
-          unit               = Shared::Category.create({ uuid: params[:unit_id], lti_id: params[:lti_id], name: params[:unit_name], parent: subsection })
+          unit               = Shared::Category.create({ uuid: params[:unit_id], lti_id: params[:lti_id], name: params[:unit_name], parent: subsection, askable: true })
           saved_flags[:unit] = unit.save
         elsif unit_by_lti.parent.nil?
           status_case        = 'lti_but_no_parent'
-            
+
           unit_by_lti.update({ uuid: params[:unit_id], name: params[:unit_name], parent: subsection })
           saved_unit         = unit_by_lti.save
         end
