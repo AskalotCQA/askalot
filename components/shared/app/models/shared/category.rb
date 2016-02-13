@@ -66,6 +66,8 @@ class Category < ActiveRecord::Base
   def refresh_full_tree_name
     # TODO (ladislav.gallay) Remove the filtering of 'root' node
     self.full_tree_name = self.self_and_ancestors.select { |item| item.name != 'root' }.map { |item| item.name }.join(' - ')
+
+    self.save!
   end
 
   def refresh_full_public_name
@@ -75,6 +77,8 @@ class Category < ActiveRecord::Base
     names << self.name
 
     self.full_public_name = names.join(' - ')
+
+    self.save!
   end
 
   def all_related_questions(relation)
