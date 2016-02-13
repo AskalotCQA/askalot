@@ -6,7 +6,7 @@ module University::Application
     prepend_view_path 'components/university/app/views'
 
     def determine_context
-      @context = Tag.current_academic_year_value
+      @context = Shared::Tag.current_academic_year_value
     end
   end
 end
