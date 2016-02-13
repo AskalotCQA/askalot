@@ -5,21 +5,6 @@ class Administration::CategoriesController < AdministrationController
   include CategoriesHelper
 
   def index
-    @categories  = Shared::Category.includes(:assignments).order(:lft)
-    @category   ||= Shared::Category.new
-  end
-
-  def new
-    @category = Shared::Category.new params.permit([:parent_id, :uuid])
-  end
-
-  def edit
-    @category = Shared::Category.find params[:id]
-  end
-
-  include CategoriesHelper
-
-  def index
     @categories = Shared::Category.includes(:assignments).order(:lft)
     @category ||= Shared::Category.new
   end
@@ -56,15 +41,6 @@ class Administration::CategoriesController < AdministrationController
     end
 
     redirect_to shared.administration_categories_path
-  end
-
-  def update_settings
-    Shared::Category.update_all askable: false
-    Shared::Category.update_all shared: false
-    Shared::Category.where(id: params[:askable]).update_all askable: true
-    Shared::Category.where(id: params[:shared]).update_all shared: true
-
-    render json: { success: true }
   end
 
   def update_settings
