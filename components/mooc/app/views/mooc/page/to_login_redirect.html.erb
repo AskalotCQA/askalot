@@ -3,6 +3,6 @@
     <strong><%= t('page.to_login.header') %></strong><br/>
     <%= t('page.to_login.description') %><br/>
     <%= t('or') %>
-    <a id="login-url" href="<%= @url %>" target="_parent"><%= t('page.to_login.link') %></a>.
+    <a id="login-url" href="<%= @url %>?forced_login=true" target="_parent"><%= t('page.to_login.link') %></a>.
   </div>
 </div>

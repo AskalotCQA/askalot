@@ -75,3 +75,7 @@ $(document).ready ->
       data: infoParser()
       success: (data) ->
         console.dir data
+
+window.addEventListener 'message', (->
+  window.history.back() if window.location.href.indexOf('forced_login=true') > -1
+), false

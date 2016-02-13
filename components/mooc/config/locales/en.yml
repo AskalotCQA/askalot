@@ -4,9 +4,6 @@ en:
       header: "Ooops! It looks you are not signed in"
       description: "Please wait a few seconds to be automatically redirected"
       link: "go to login page manually"
-    to_page:
-      description: "You should have been automatically redirected to Askalot. If it doesn't happen please"
-      link: "click this link to go there manually"
     no_link:
       header: "Sorry, we couldn't identify login url"
       description: "You are not signed in and we are not able to identify login url to redirect you to. Please visit an unit with Askalot in order to login."
