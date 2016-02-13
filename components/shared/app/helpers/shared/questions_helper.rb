@@ -46,7 +46,7 @@ module Shared::QuestionsHelper
 
   def question_label_attributes(label)
     return :tag, [label.name], [:label, :'label-info', :'question-tag'] unless label.is_a? Shared::Category
-    return :category, label.tags.to_a, [:label, :'label-primary', :'question-category']
+    return :category, label.public_tags.to_a, [:label, :'label-primary', :'question-category']
   end
 
   def question_label_name(label)
