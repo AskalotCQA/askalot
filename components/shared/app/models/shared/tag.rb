@@ -14,6 +14,12 @@ class Tag < ActiveRecord::Base
 
   self.table_name = 'tags'
 
+  def self.current_academic_year_value
+    year = (now = Time.now).month >= 9 ? now.year : (now.year - 1)
+
+    "#{year}-#{(year + 1).to_s[-2..-1]}"
+  end
+
   def value
     read_attribute(:name)
   end

@@ -16,6 +16,8 @@ class ApplicationController < ActionController::Base
   include Shared::Slido::Flash
   include (Rails.module.classify + '::Application').constantize
 
+  before_action :determine_context
+
   def current_ability
     @current_ability ||= Shared::Ability.new(current_user)
   end

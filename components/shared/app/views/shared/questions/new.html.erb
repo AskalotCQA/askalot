@@ -9,7 +9,7 @@
 
       <div class="form-group">
         <%= f.label :category_id %>
-        <%= f.category_collection_select :category_id, Shared::Category.categories_in_context(:root) %>
+        <%= f.category_collection_select :category_id, Shared::Category.categories_in_context(@context) %>
       </div>
 
       <div class="form-group">

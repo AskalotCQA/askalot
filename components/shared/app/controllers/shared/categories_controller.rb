@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @categories = Shared::Category.groups_in_context(:root)
+    @categories = Shared::Category.groups_in_context(@context)
     @tags       = Shared::Tag.order(:name)
   end
 end

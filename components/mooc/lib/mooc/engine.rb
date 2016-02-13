@@ -6,7 +6,7 @@ module Mooc
       helpers = Shared.constants.select { |c| c.to_s.ends_with? 'Helper' }
 
       helpers.each do |helper|
-        ApplicationController.helper ('Shared::' + helper.to_s).constantize
+        Shared::ApplicationController.helper ('Shared::' + helper.to_s).constantize
       end
     end
 
