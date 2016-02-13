@@ -64,7 +64,7 @@ $(document).ready ->
     .attr('frameborder', '0')
     .appendTo('#askalot-wrapper')
 
-  iFrameResize({checkOrigin: false})
+  iFrameResize({checkOrigin: false, inPageLinks: true})
 
   if (!is_global)
     $.ajax
