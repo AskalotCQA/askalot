@@ -3,7 +3,7 @@ FactoryGirl.define do
     sequence(:name) { |n| "Category ##{n}" }
     askable true
 
-    parent_id 1
+    parent_id 2
 
     trait :with_tags do
       sequence(:tags) { |n| ["category-#{n}"] }
