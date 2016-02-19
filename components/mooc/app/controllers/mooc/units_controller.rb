@@ -14,8 +14,12 @@ module Mooc
 
     $oauth_creds = { Shared::Configuration.oauth.consumer_key => Shared::Configuration.oauth.consumer_secret }
 
+    def error
+      @exception = params[:exception]
+    end
+
     def show
-      login unless signed_in?
+      redirect_to mooc.units_error_path(exception: @exception) and return unless signed_in? || login
 
       return after_login_redirect if params[:custom_login_redirect]
 
@@ -42,7 +46,7 @@ module Mooc
     protected
 
     def login
-      raise 'LTI authorization failed' unless authorize!
+      return false unless authorize!
 
       params['roles'] = :teacher if params['roles'] == 'Administrator'
 
@@ -52,16 +56,24 @@ module Mooc
       user = User.create_without_confirmation! user_attributes if user.nil?
 
       sign_in(:user, user)
+
+      true
     end
 
     def authorize!
-      raise 'LTI consumer key not provided' unless key = params['oauth_consumer_key']
-      raise 'LTI secret does not match' unless secret = $oauth_creds[key]
+      begin
+        raise 'LTI consumer key not provided' unless key = params['oauth_consumer_key']
+        raise 'LTI secret does not match' unless secret = $oauth_creds[key]
 
-      @tp = IMS::LTI::ToolProvider.new(key, secret, params)
+        @tp = IMS::LTI::ToolProvider.new(key, secret, params)
 
-      raise 'LTI request is not valid' unless @tp.valid_request?(request)
-      raise 'LTI request is too old' if Time.now.utc.to_i - @tp.request_oauth_timestamp.to_i > 60*60
+        raise 'LTI request is not valid' unless @tp.valid_request?(request)
+        raise 'LTI request is too old' if Time.now.utc.to_i - @tp.request_oauth_timestamp.to_i > 60*60
+      rescue => e
+        @exception = e.message
+
+        return false
+      end
 
       # FIXME (huna|jandura) check if oauth nonce was used in the last x minutes
       true

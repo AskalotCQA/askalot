@@ -1,5 +1,5 @@
 module Mooc
-  class ParserController < ApplicationController
+  class ParserController < Shared::ApplicationController
 
     def parser
       status_case = 'nothing'

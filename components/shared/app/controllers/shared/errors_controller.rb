@@ -1,5 +1,7 @@
 module Shared
 class ErrorsController < ApplicationController
+  skip_before_filter :login_required if Rails.module.mooc?
+
   def show
     @exception = env['action_dispatch.exception'] ||= Exception.new
     @message   = @exception.message
