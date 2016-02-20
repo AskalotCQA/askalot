@@ -46,7 +46,7 @@ module ApplicationHelper
   end
 
   def self.current_context
-    @context
+    @context || :root
   end
 end
 end
