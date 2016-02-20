@@ -21,11 +21,5 @@ module Mooc::Application
     def redirect_if_params
       redirect_to params[:redirect] if params[:redirect]
     end
-
-    def determine_context
-      return @context = session[:context] = params[:context] if params[:context]
-      return @context = session[:context] if session[:context]
-      @context = :root
-    end
   end
 end

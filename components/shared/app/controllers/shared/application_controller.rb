@@ -21,5 +21,13 @@ class ApplicationController < ActionController::Base
   def current_ability
     @current_ability ||= Shared::Ability.new(current_user)
   end
+
+  def determine_context
+    @context = session[:context] = params[:context] if params[:context]
+    @context = session[:context] if session[:context]
+    @context = :root if @context.nil?
+
+    Shared::ApplicationHelper.current_context=(@context)
+  end
 end
 end
