@@ -7,7 +7,7 @@ if ENV['COVERAGE'] == 'true'
   SimpleCov.start 'rails'
 end
 
-ENV["RAILS_ENV"] ||= 'test_university'
+ENV["RAILS_ENV"] ||= 'fiit_test'
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
