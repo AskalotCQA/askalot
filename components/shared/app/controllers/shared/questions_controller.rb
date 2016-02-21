@@ -17,7 +17,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @category  = Shared::Category.find(params[:category]) if params[:category]
+    @category  = Shared::Category.find(params[:category])
+
     @questions = case params[:tab].to_sym
                  when :unanswered then Shared::Question.unanswered.by_votes
                  when :answered   then Shared::Question.answered_but_not_best.by_votes
@@ -26,9 +27,8 @@ class QuestionsController < ApplicationController
                  else Shared::Question.recent
                  end
 
-    @questions = filter_questions(@questions)
+    @questions = filter_shared_questions(@questions, @category)
     @questions = @questions.page(params[:page]).per(20)
-
     initialize_polling
   end
 
@@ -109,6 +109,7 @@ class QuestionsController < ApplicationController
   private
 
   helper_method :filter_questions
+  helper_method :filter_shared_questions
 
   def initialize_polling
     unless params[:poll]
@@ -123,6 +124,18 @@ class QuestionsController < ApplicationController
   def filter_questions(relation)
     relation = relation.tagged_with(params[:tags]) if params[:tags].present?
     relation = relation.all_directly_related Shared::Category.find(params[:category]) if params[:category]
+
+    relation
+  end
+
+  def filter_shared_questions(relation, category)
+
+    uuids = category.self_and_descendants.where(shared:true).map{|c|c.uuid}
+    shared_ids = Shared::Category.where(uuid: uuids).map{|c|c.id}
+    not_shared_ids = category.self_and_descendants.where(shared:false).map{|c|c.id}
+
+    relation = relation.tagged_with(params[:tags]) if params[:tags].present?
+    relation = relation.all_related(shared_ids + not_shared_ids)
 
     relation
   end

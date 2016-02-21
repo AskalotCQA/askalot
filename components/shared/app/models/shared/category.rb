@@ -203,6 +203,11 @@ class Category < ActiveRecord::Base
     relation.where('category_id IN (?)', category_ids)
   end
 
+  def self.all_related_questions_for_categories(relation, category_ids)
+    relation.where('category_id IN (?)', category_ids)
+  end
+
+
   def reload_question_counters
     self.direct_questions_count = self.questions.count
 
