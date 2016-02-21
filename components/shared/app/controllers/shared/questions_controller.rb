@@ -17,8 +17,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    #TODO (zuffa) default category
-    @category  = Shared::Category.find(params[:category])
+    @category  = Shared::Category.find(params[:category]) if params[:category]
+    @category  ||= Shared::Category.find_by_name(@context)
 
     @questions = case params[:tab].to_sym
                  when :unanswered then Shared::Question.unanswered.by_votes
@@ -134,7 +134,6 @@ class QuestionsController < ApplicationController
     uuids = category.self_and_descendants.where(shared:true).map{|c|c.uuid}
     shared_ids = Shared::Category.where(uuid: uuids).map{|c|c.id}
     not_shared_ids = category.self_and_descendants.where(shared:false).map{|c|c.id}
-
     relation = relation.tagged_with(params[:tags]) if params[:tags].present?
     relation = relation.all_related(shared_ids + not_shared_ids)
 
