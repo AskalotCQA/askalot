@@ -7,6 +7,14 @@ module Mooc::Application
 
     before_action :login_required, :redirect_if_params
 
+    def determine_context
+      @context = session[:context] = params[:context] if params[:context]
+      @context = session[:context] if session[:context]
+      @context = :root if @context.nil?
+
+      Shared::ApplicationHelper.current_context=(@context)
+    end
+
     private
 
     def login_required
