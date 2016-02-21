@@ -17,6 +17,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @category  = Shared::Category.find(params[:category]) if params[:category]
     @questions = case params[:tab].to_sym
                  when :unanswered then Shared::Question.unanswered.by_votes
                  when :answered   then Shared::Question.answered_but_not_best.by_votes

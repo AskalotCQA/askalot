@@ -1,5 +1,13 @@
 <div id="questions-filter" class="questions-filter">
   <div class="row">
+    <div class="col-xs-12 col-sm-12">
+      <h1 class="question-title">
+        <%= category.name %>
+      </h1>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-xs-12 col-sm-2">
       <%= icon_link_to :plus, t('question.new.feature'), shared.new_question_path, analytics_attributes(:questions, :'open-new-form', :list).merge(class: 'btn btn-success') %>
     </div>
