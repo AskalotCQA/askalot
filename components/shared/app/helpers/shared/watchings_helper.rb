@@ -13,10 +13,10 @@ module Shared::WatchingsHelper
   end
 
   def link_to_watchable(watchable, options = {})
-    case watchable.class.name.downcase.to_sym
-    when :category then link_to_category watchable, options.except(:length)
-    when :question then link_to_question watchable, options
-    when :tag      then link_to_tag watchable, options.except(:length)
+    case watchable.class.name
+    when 'Shared::Catagory' then link_to_category watchable, options.except(:length)
+    when 'Shared::Question' then link_to_question watchable, options
+    when 'Shared::Tag'      then link_to_tag watchable, options.except(:length)
     else watchable
     end
   end
@@ -24,10 +24,10 @@ module Shared::WatchingsHelper
   private
 
   def watchable_data(watchable)
-    case watchable.class.name.downcase.to_sym
-    when :category then { icon: :tags }
-    when :question then { icon: :'question-circle' }
-    when :tag      then { icon: :tag }
+    case watchable.class.name
+    when 'Shared::Catagory' then { icon: :tags }
+    when 'Shared::Question' then { icon: :'question-circle' }
+    when 'Shared::Tag'      then { icon: :tag }
     else fail
     end
   end
