@@ -17,6 +17,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    #TODO (zuffa) default category
     @category  = Shared::Category.find(params[:category])
 
     @questions = case params[:tab].to_sym
@@ -123,7 +124,7 @@ class QuestionsController < ApplicationController
 
   def filter_questions(relation)
     relation = relation.tagged_with(params[:tags]) if params[:tags].present?
-    relation = relation.all_directly_related Shared::Category.find(params[:category]) if params[:category]
+    relation = relation. Shared::Category.find(params[:category]) if params[:category]
 
     relation
   end
