@@ -130,7 +130,6 @@ class QuestionsController < ApplicationController
   end
 
   def filter_shared_questions(relation, category)
-
     uuids = category.self_and_descendants.where(shared:true).map{|c|c.uuid}
     shared_ids = Shared::Category.where(uuid: uuids).map{|c|c.id}
     not_shared_ids = category.self_and_descendants.where(shared:false).map{|c|c.id}
