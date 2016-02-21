@@ -1,11 +1,13 @@
 <div id="questions-filter" class="questions-filter">
-  <div class="row">
-    <div class="col-xs-12 col-sm-12">
-      <h1 class="question-title">
-        <%= category.name %>
-      </h1>
+  <% if category %>
+    <div class="row">
+      <div class="col-xs-12 col-sm-12">
+        <h1 class="question-title">
+          <%= category.full_public_name %>
+        </h1>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <div class="row">
     <div class="col-xs-12 col-sm-2">
