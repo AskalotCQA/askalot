@@ -9,9 +9,7 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @category_depths  = CategoryDepth.public_depths
-    @context_category = Shared::Category.find_by(name: @context)
-    @tags             = Shared::Tag.order(:name)
+    @categories = Shared::Category.groups_in_context(@context)
   end
 end
 end
