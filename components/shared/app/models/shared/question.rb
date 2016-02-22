@@ -20,8 +20,8 @@ class Question < ActiveRecord::Base
   # TODO (jharinek) propose change to parent tags
   before_save { self.tag_list += (new_record? ? category.effective_tags : category.tags) if category }
 
-  after_create { self.category.reload_question_counters if self.category }
-  after_destroy { self.category.reload_question_counters if self.category }
+  after_create { self.register_question if self.category }
+  #after_destroy { self.category.reload_question_counters if self.category }
 
   belongs_to :category, counter_cache: true
   belongs_to :document, class_name: :'University::Document', counter_cache: true
@@ -30,6 +30,7 @@ class Question < ActiveRecord::Base
 
   has_many :revisions, class_name: :'Question::Revision', dependent: :destroy
   has_many :profiles, class_name: :'Question::Profile', dependent: :destroy
+  has_many :category_questions, dependent: :destroy
 
   validates :category,  presence: true, if: lambda { |question| question.document.blank? }
   validates :document,  presence: true, if: lambda { |question| question.category.blank? }
@@ -83,6 +84,15 @@ class Question < ActiveRecord::Base
       p.property    = 'reputation'
       p.value       = 0
       p.probability = 0
+    end
+  end
+
+  def register_question
+    self.category.self_and_ancestors.each do |ancestor|
+      CategoryQuestion.create question_id: self.id, category_id: ancestor.id, shared: false
+      ancestor.siblings.shared do |category|
+        CategoryQuestion.create question_id: self.id, category_id: category.id, shared: true
+      end
     end
   end
 

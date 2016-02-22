@@ -256,10 +256,10 @@ CREATE TABLE categories (
     full_tree_name character varying(255),
     full_public_name character varying(255),
     direct_questions_count integer DEFAULT 0 NOT NULL,
-    direct_shared_questions_count integer DEFAULT 0 NOT NULL,
     direct_answers_count integer DEFAULT 0 NOT NULL,
-    direct_shared_answers_count integer DEFAULT 0 NOT NULL,
-    public_tags character varying(255)[] DEFAULT '{}'::character varying[]
+    public_tags character varying(255)[] DEFAULT '{}'::character varying[],
+    all_questions_count integer DEFAULT 0 NOT NULL,
+    all_answers_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -280,6 +280,39 @@ CREATE SEQUENCE categories_id_seq
 --
 
 ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
+
+
+--
+-- Name: categories_questions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE categories_questions (
+    id integer NOT NULL,
+    question_id integer NOT NULL,
+    category_id integer NOT NULL,
+    shared boolean DEFAULT false,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: categories_questions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE categories_questions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: categories_questions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE categories_questions_id_seq OWNED BY categories_questions.id;
 
 
 --
@@ -1428,6 +1461,13 @@ ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_s
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY categories_questions ALTER COLUMN id SET DEFAULT nextval('categories_questions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY changelogs ALTER COLUMN id SET DEFAULT nextval('changelogs_id_seq'::regclass);
 
 
@@ -1666,6 +1706,14 @@ ALTER TABLE ONLY assignments
 
 ALTER TABLE ONLY categories
     ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: categories_questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY categories_questions
+    ADD CONSTRAINT categories_questions_pkey PRIMARY KEY (id);
 
 
 --
@@ -2079,6 +2127,20 @@ CREATE UNIQUE INDEX index_categories_on_name_and_parent_id ON categories USING b
 --
 
 CREATE INDEX index_categories_on_slido_username ON categories USING btree (slido_username);
+
+
+--
+-- Name: index_categories_questions_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_categories_questions_on_category_id ON categories_questions USING btree (category_id);
+
+
+--
+-- Name: index_categories_questions_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_categories_questions_on_question_id ON categories_questions USING btree (question_id);
 
 
 --
@@ -3280,4 +3342,14 @@ INSERT INTO schema_migrations (version) VALUES ('20151212205452');
 INSERT INTO schema_migrations (version) VALUES ('20151213143631');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
+
+INSERT INTO schema_migrations (version) VALUES ('20160217230205');
+
+INSERT INTO schema_migrations (version) VALUES ('20160221143314');
+
+INSERT INTO schema_migrations (version) VALUES ('20160221150022');
+
+INSERT INTO schema_migrations (version) VALUES ('20160222183106');
+
+INSERT INTO schema_migrations (version) VALUES ('20160222190245');
 
