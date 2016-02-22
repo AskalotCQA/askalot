@@ -17,11 +17,6 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :uuid %>
-    <%= f.text_field :uuid, class: :'form-control' %>
-  </div>
-
-  <div class="form-group">
     <%= f.label :parent_id, t('administration.category.create.parent') %>
     <%= f.category_collection_select :parent_id, Shared::Category.all, :id, :full_tree_name %>
   </div>
