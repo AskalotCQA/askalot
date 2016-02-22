@@ -15,50 +15,49 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true
 
-  after_create { self.reload_question_counters }
-  after_create { self.reload_answer_counters }
-  after_create { self.save_parent_tags }
-  after_update { self.check_changed_sharing }
-  after_save   { self.update_public_tags }
+  before_save :update_changed
+  after_create :reload_question_counters
+  after_create :reload_answer_counters
+  after_create :save_parent_tags
+  after_update :check_changed_sharing
+  after_save :update_public_tags
+  after_save :refresh_names
 
   scope :with_slido, -> { where.not(slido_username: nil) }
   scope :with_questions, -> { where.not(direct_shared_questions_count: 0) }
   scope :askable, -> { where(askable: true) }
 
-  before_save :refresh_names
-  before_save :what_changed?
-  after_save :refresh_descendants_names
-
   attr_reader :what_changed
 
   self.table_name = 'categories'
 
-  def what_changed?
+  def update_changed
     @what_changed = changed || []
   end
 
   def refresh_names
-    if !self.full_tree_name_changed? && self.name_changed?
+    refresh_descs            = false
+    name_changed             = @what_changed.include? 'name'
+    full_tree_name_changed   = @what_changed.include? 'full_tree_name'
+    full_public_name_changed = @what_changed.include? 'full_public_name'
+
+    if !full_tree_name_changed && name_changed
       self.refresh_full_tree_name
-      @refresh_descs = true
+      refresh_descs = true
     end
 
-    if !self.full_public_name_changed? && self.name_changed?
+    if !full_public_name_changed && name_changed
       self.refresh_full_public_name
-      @refresh_descs = true
+      refresh_descs = true
     end
 
-    true
-  end
+    self.save validate: false if refresh_descs
 
-  def refresh_descendants_names
     self.descendants.each do |category|
       category.refresh_full_tree_name
       category.refresh_full_public_name
       category.save validate: false
-    end if defined?(@refresh_descs) && @refresh_descs
-
-    @refresh_descs = false
+    end if refresh_descs
 
     true
   end
@@ -66,19 +65,14 @@ class Category < ActiveRecord::Base
   def refresh_full_tree_name
     # TODO (ladislav.gallay) Remove the filtering of 'root' node
     self.full_tree_name = self.self_and_ancestors.select { |item| item.name != 'root' }.map { |item| item.name }.join(' - ')
-
-    self.save!
   end
 
   def refresh_full_public_name
     depths = CategoryDepth.public_depths
-
-    names = self.ancestors.select { |item| depths.include? item.depth }.map { |item| item.name }
+    names  = self.ancestors.select { |item| depths.include? item.depth }.map { |item| item.name }
     names << self.name
 
     self.full_public_name = names.join(' - ')
-
-    self.save!
   end
 
   def all_related_questions(relation)
@@ -191,6 +185,7 @@ class Category < ActiveRecord::Base
 
   def check_changed_sharing
     return unless self.shared_changed?
+
     all_versions.each do |category|
         category.reload_question_counters
         category.reload_answer_counters
