@@ -1,8 +1,146 @@
 // List of initial requirements (order is significant).
 //
+//=require cal-heatmap
+//=require gemoji
+//=require markdown
+//=require select2
+//=require jquery-textcomplete
+//
 //=require_self
 //
 // List of imports (order is significant).
 
 @import 'page';
 @import 'units';
+@import 'bootstrap/mixins';
+@import 'bootstrap/variables';
+
+@import 'shared/mixins';
+@import 'shared/variables';
+
+@import 'bootstrap';
+@import 'font-awesome';
+
+@import 'shared/bootstrap/datepicker';
+@import 'shared/bootstrap/markdown';
+@import 'shared/bootstrap/multiselect';
+@import 'shared/bootstrap/tablesorter';
+@import 'shared/bootstrap/textcomplete';
+
+@import 'shared/assets';
+@import 'shared/layout';
+@import 'shared/search';
+@import 'shared/errors';
+@import 'shared/treetable';
+
+@import 'shared/home';
+@import 'shared/help';
+
+@import 'shared/users';
+@import 'shared/reputation';
+@import 'shared/groups';
+@import 'shared/documents';
+@import 'shared/categories';
+@import 'shared/tags';
+
+@import 'shared/questions';
+@import 'shared/answers';
+@import 'shared/comments';
+@import 'shared/evaluations';
+
+@import 'shared/activities';
+@import 'shared/notifications';
+@import 'shared/watchings';
+
+@import 'shared/administration';
+@import 'shared/changelogs';
+@import 'shared/statistics';
+
+@import 'shared/responsive';
+@import 'shared/fixes';
+
+// footer
+
+// footer
+
+footer {
+  @include clearfix;
+
+  margin: 100px 0 0 0;
+  padding: 50px 0;
+  overflow-x: hidden;
+
+  background: $gray-lighter;
+  color: $text-muted;
+  text-align: center;
+
+  a {
+    @include color-variant($text-muted, $text-muted);
+  }
+
+  li a, li span {
+    margin: 0 $padding-xs-horizontal;
+  }
+
+  li:after {
+    content: '·';
+  }
+
+  li:last-child:after {
+    content: '';
+  }
+
+  hr {
+    @include clearfix;
+
+    margin: 25px 0 0 0;
+    border: none;
+  }
+}
+
+// lists
+
+.list-center {
+  float: left;
+  left: 50%;
+  position: relative;
+
+  text-align: center;
+
+  > ul {
+    @extend .list-unstyled;
+    float: left;
+    left: -50%;
+    position: relative;
+
+    margin: 0;
+
+    & > li {
+      float: left;
+    }
+  }
+}
+
+.list-row-left {
+  float: left;
+
+  > ul {
+    @extend .list-unstyled;
+
+    & > li {
+      float: left;
+    }
+  }
+}
+
+.list-row-right {
+  float: right;
+
+  > ul {
+    @extend .list-unstyled;
+
+    & > li {
+      float: left;
+    }
+  }
+}
