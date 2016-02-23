@@ -2,6 +2,12 @@ module Shared
 class ApplicationController < ActionController::Base
   helper Mooc::Engine.helpers if Rails.module.mooc?
 
+  def default_url_options(options={})
+    context = params[:context] || Shared::ApplicationHelper.default_context
+
+    Rails.module.mooc? ? { context: context  } : {}
+  end
+
   protected
 
   # concerns order is significant
@@ -15,8 +21,6 @@ class ApplicationController < ActionController::Base
   include Shared::Facebook::Modal
   include Shared::Slido::Flash
   include (Rails.module.classify + '::Application').constantize
-
-  before_action :determine_context
 
   def current_ability
     @current_ability ||= Shared::Ability.new(current_user)
