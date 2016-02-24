@@ -41,6 +41,10 @@ module ApplicationHelper
     [DeviseController, Shared::ErrorsController, Shared::StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
   end
 
+  def self.current_context=(context)
+    @context = context
+  end
+
   def self.current_context
     @context || default_context
   end

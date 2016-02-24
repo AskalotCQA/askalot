@@ -2,10 +2,11 @@ module Shared
 class ApplicationController < ActionController::Base
   helper Mooc::Engine.helpers if Rails.module.mooc?
 
-  def default_url_options(options={})
-    context = params[:context] || Shared::ApplicationHelper.default_context
+  before_action :determine_context
 
-    Rails.module.mooc? ? { context: context  } : {}
+  def default_url_options(options={})
+    return {} if Rails.module.university?
+    { context: Shared::ApplicationHelper.current_context }
   end
 
   protected
@@ -24,6 +25,11 @@ class ApplicationController < ActionController::Base
 
   def current_ability
     @current_ability ||= Shared::Ability.new(current_user)
+  end
+
+  def determine_context
+    context = params[:context] || Shared::ApplicationHelper.default_context
+    Shared::ApplicationHelper.current_context = context
   end
 end
 end
