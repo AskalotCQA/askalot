@@ -6,8 +6,12 @@ class WatchingsController < ApplicationController
 
   def index
     count = 20
+    @context = Shared::ApplicationHelper.current_context
 
-    @watchings = Shared::Watching.by(current_user).order(created_at: :desc)
+    puts "wathinching indec"
+    puts @context
+
+    @watchings = Shared::Watching.in_context(@context).by(current_user).order(created_at: :desc)
 
     @questions  = @watchings.of('Shared::Question').page(tab_page :questions).per(count)
     @categories = @watchings.of('Shared::Category').page(tab_page :categories).per(count)
@@ -29,7 +33,8 @@ class WatchingsController < ApplicationController
   end
 
   def clean
-    @watchings = Shared::Watching.where(watcher: current_user, watchable_type: params[:type].classify)
+    context = Shared::ApplicationHelper.current_context
+    @watchings = Shared::Watching.in_context(context).where(watcher: current_user, watchable_type: params[:type].classify)
 
     begin
       @watchings.each { |watching| watching.mark_as_deleted_by! current_user }

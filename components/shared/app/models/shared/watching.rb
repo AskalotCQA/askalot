@@ -9,6 +9,7 @@ class Watching < ActiveRecord::Base
 
   scope :by, lambda { |user| where(watcher: user) }
   scope :of, lambda { |model| where(watchable_type: model.to_s.classify) }
+  scope :in_context, lambda { |context| where(context: context) }
 
   self.table_name = 'watchings'
 end
