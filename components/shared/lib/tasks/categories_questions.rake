@@ -9,10 +9,10 @@ namespace :categories_questions do
         question.category.self_and_ancestors.each do |ancestor|
           puts "\t\tInserting into parent categoy #{ancestor.id} - #{ancestor.name}"
           Shared::CategoryQuestion.create question_id: question.id, category_id: ancestor.id, shared: false
-          ancestor.siblings.shared.each do |shared|
+          ancestor.all_versions.shared.each do |shared|
             puts "\t\t\tInserting into shared category #{shared.id} - #{shared.name}"
             Shared::CategoryQuestion.create question_id: question.id, category_id: shared.id, shared: true
-          end
+          end if ancestor.shared
         end
       end
     end
