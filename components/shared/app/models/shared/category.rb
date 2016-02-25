@@ -198,7 +198,7 @@ class Category < ActiveRecord::Base
           shared.questions.each do |question|
             CategoryQuestion.create question_id: question.id, category_id: self.id, shared: true
           end
-        end
+        end if descendant.shared
       end
     else
       self.category_questions.shared.destroy_all
