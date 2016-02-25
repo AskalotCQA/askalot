@@ -186,22 +186,22 @@ class Category < ActiveRecord::Base
   end
 
   def all_versions
-    Shared::Category.where("uuid = ? AND created_at <= ?", self.uuid, self.created_at)
+    siblings.where(uuid: self.uuid)
   end
 
   def check_changed_sharing
     return unless self.shared_changed?
 
     if self.shared
-      self.descendants.each do|descendant|
-        descendant.siblings.shared.each do |shared|
+      self.self_and_descendants.each do|descendant|
+        descendant.all_versions.shared.each do |shared|
           shared.questions.each do |question|
             CategoryQuestion.create question_id: question.id, category_id: self.id, shared: true
           end
         end
       end
     else
-      self.questions_categories.shared.destroy
+      self.category_questions.shared.destroy_all
     end
   end
 
