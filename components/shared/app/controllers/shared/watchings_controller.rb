@@ -6,7 +6,7 @@ class WatchingsController < ApplicationController
 
   def index
     count = 20
-    @context = Shared::ApplicationHelper.current_context
+    @context = Shared::Context::Manager.current_context
     @watchings = Shared::Watching.in_context(@context).by(current_user).order(created_at: :desc)
 
     @questions  = @watchings.of('Shared::Question').page(tab_page :questions).per(count)
@@ -29,7 +29,7 @@ class WatchingsController < ApplicationController
   end
 
   def clean
-    context = Shared::ApplicationHelper.current_context
+    context = Shared::Context::Manager.current_context
     @watchings = Shared::Watching.in_context(context).where(watcher: current_user, watchable_type: params[:type].classify)
 
     begin

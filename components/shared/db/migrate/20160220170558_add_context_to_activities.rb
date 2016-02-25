@@ -3,7 +3,7 @@ class AddContextToActivities < ActiveRecord::Migration
     add_column :activities, :context, :string
 
     Shared::Activity.unscoped.find_each do |activity|
-      activity.context = Shared::ApplicationHelper.current_context
+      activity.context = Shared::Context::Manager.current_context
 
       activity.save!
     end

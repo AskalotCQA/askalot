@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   def default_url_options(options={})
     return {} if Rails.module.university? || params[:context]
-    { context: Shared::ApplicationHelper.current_context }
+    { context: Shared::Context::Manager.current_context }
   end
 
   protected
@@ -28,8 +28,8 @@ class ApplicationController < ActionController::Base
   end
 
   def determine_context
-    context = params[:context] || Shared::ApplicationHelper.default_context
-    Shared::ApplicationHelper.current_context = context
+    context = params[:context] || Shared::Context::Manager.default_context
+    Shared::Context::Manager.current_context = context
   end
 end
 end

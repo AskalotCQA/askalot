@@ -20,7 +20,7 @@ class Tag < ActiveRecord::Base
     "#{year}-#{(year + 1).to_s[-2..-1]}"
   end
 
-  def self.tags_in_context(context = Shared::ApplicationHelper.current_context)
+  def self.tags_in_context(context = Shared::Context::Manager.current_context)
     category_ids = Shared::Category.find_by(name: context).descendants.leaves.pluck(:id)
     question_ids = Shared::Question.where(category_id: category_ids).pluck(:id)
 

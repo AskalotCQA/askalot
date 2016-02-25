@@ -6,7 +6,7 @@ class ActivitiesController < ApplicationController
 
   def index
     count = 20
-    context = Shared::ApplicationHelper.current_context
+    context = Shared::Context::Manager.current_context
 
     @global    = Shared::Activity.in_context(context).global.order(created_at: :desc)
     @followees = Shared::Activity.in_context(context).by_followees_of(current_user).order(created_at: :desc)

@@ -40,21 +40,5 @@ module ApplicationHelper
   def use_container?
     [DeviseController, Shared::ErrorsController, Shared::StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
   end
-
-  def self.current_context=(context)
-    @context = context
-  end
-
-  def self.current_context
-    @context || default_context
-  end
-
-  def self.default_context
-    context = Shared::Tag.current_academic_year_value if Rails.module.university?
-    context = Shared::Category.find_by(parent_id: nil).name if Rails.module.mooc?
-    @context ||= context
-
-    context
-  end
 end
 end

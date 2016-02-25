@@ -6,7 +6,7 @@ class NotificationsController < ApplicationController
 
   def index
     count = 20
-    context = Shared::ApplicationHelper.current_context
+    context = Shared::Context::Manager.current_context
 
     @notifications = Shared::Notification.in_context(context).for(current_user).order(created_at: :desc)
 
@@ -23,7 +23,7 @@ class NotificationsController < ApplicationController
   end
 
   def clean
-    context = Shared::ApplicationHelper.current_context
+    context = Shared::Context::Manager.current_context
     @notifications = Shared::Notification.in_context(context).where(recipient: current_user).unread
 
     if @notifications.update_all(unread: false, read_at: nil)

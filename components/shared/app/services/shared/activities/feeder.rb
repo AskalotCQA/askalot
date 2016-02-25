@@ -3,7 +3,7 @@ module Shared::Activities
     extend self
 
     def publish(action, initiator, resource, options = {})
-      context = Shared::ApplicationHelper.current_context
+      context = Shared::Context::Manager.current_context
 
       Shared::Activity.create!(action: action, initiator: initiator, resource: resource, anonymous: !!options[:anonymous], context: context)
     end

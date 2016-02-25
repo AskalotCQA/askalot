@@ -3,7 +3,7 @@ class AddContextToNotifications < ActiveRecord::Migration
     add_column :notifications, :context, :string
 
     Shared::Notification.unscoped.find_each do |notification|
-      notification.context = Shared::ApplicationHelper.current_context
+      notification.context = Shared::Context::Manager.current_context
 
       notification.save!
     end
