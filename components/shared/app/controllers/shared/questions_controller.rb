@@ -28,7 +28,7 @@ class QuestionsController < ApplicationController
                  else Shared::Question.recent
                  end
 
-    @questions = filter_shared_questions(@questions, @category)
+    @questions = filter_questions(@questions, @category)
     @questions = @questions.page(params[:page]).per(20)
     initialize_polling
   end
@@ -110,7 +110,6 @@ class QuestionsController < ApplicationController
   private
 
   helper_method :filter_questions
-  helper_method :filter_shared_questions
 
   def initialize_polling
     unless params[:poll]
@@ -122,17 +121,10 @@ class QuestionsController < ApplicationController
     @poll = session[:poll] = params[:poll] == 'true' ? true : false
   end
 
-  def filter_questions(relation)
-    relation = relation.tagged_with(params[:tags]) if params[:tags].present?
-    relation = relation. Shared::Category.find(params[:category]) if params[:category]
-
-    relation
-  end
-
-  def filter_shared_questions(relation, category)
-    uuids = category.self_and_descendants.where(shared:true).map{|c|c.uuid}
-    shared_ids = Shared::Category.where(uuid: uuids).map{|c|c.id}
-    not_shared_ids = category.self_and_descendants.where(shared:false).map{|c|c.id}
+  def filter_questions(relation, category)
+    uuids = category.self_and_descendants.where(shared:true).map(&:uuid)
+    shared_ids = Shared::Category.where(uuid: uuids).map(&:id)
+    not_shared_ids = category.self_and_descendants.where(shared:false).map(&:id)
     relation = relation.tagged_with(params[:tags]) if params[:tags].present?
     relation = relation.all_related(shared_ids + not_shared_ids)
 
