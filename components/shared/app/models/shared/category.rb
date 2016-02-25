@@ -193,7 +193,7 @@ class Category < ActiveRecord::Base
     return unless self.shared_changed?
 
     if self.shared
-      self.self_and_descendants.each do|descendant|
+      self.self_and_descendants.each do |descendant|
         descendant.all_versions.shared.each do |shared|
           shared.questions.each do |question|
             CategoryQuestion.create question_id: question.id, category_id: self.id, shared: true
