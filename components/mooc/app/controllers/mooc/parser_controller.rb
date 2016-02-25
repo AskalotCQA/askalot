@@ -10,8 +10,7 @@ module Mooc
         unit_by_lti = Shared::Category.where({ lti_id: params[:lti_id] }).first
 
         if unit_by_lti.nil? || unit_by_lti.parent.nil?
-          root                                 = Shared::Category.where({ name: 'root' }).first
-          course, saved_flags[:course]         = create_category_if_not_exist(params[:course_id], params[:course_name], root)
+          course, saved_flags[:course]         = create_category_if_not_exist(params[:course_id], params[:course_name], nil)
           section, saved_flags[:section]       = create_category_if_not_exist(params[:section_id], params[:section_name], course)
           subsection, saved_flags[:subsection] = create_category_if_not_exist(params[:subsection_id], params[:subsection_name], section)
         end
