@@ -27,6 +27,9 @@ module Mooc
 
       if lti_id
         lti_id = lti_id.split('-', 2).last
+        course_id = lti_id.split('-', 3).last.split('-', 2).first
+
+        Shared::ContextUser.find_or_create_by!(user: current_user, context: course_id)
 
         Shared::Category.transaction do
           @unit = Shared::Category.find_by lti_id: lti_id

@@ -45,9 +45,6 @@ describe Shared::Question, type: :model do
     category = create :category, tags: ['dbms', 'elasticsearch']
     question = create :question, category: category, tag_list: 'redis'
 
-    puts category.tags.inspect
-    puts category.public_tags.inspect
-
     expect(question.tags.pluck(:name).sort).to eql(['dbms', 'elasticsearch', 'redis'])
   end
 

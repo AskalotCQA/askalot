@@ -31,7 +31,7 @@ infoParser = ->
   path = subsection.getElementsByClassName('path')[0].textContent.trim()
 
   data =
-    course_id: subsection.getAttribute('data-course-id').trim()
+    course_id: $('.course-number').first().text()
     course_name: document.getElementsByClassName('course-name')[0].textContent.trim()
     section_id: parsed[parsed.length-3]
     section_name: tree.getElementsByClassName('group-heading active')[0].textContent.trim()
@@ -48,7 +48,8 @@ $(document).ready ->
   getURLParameter = (name) ->
     decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) or [null, ''])[1].replace(/\+/g, '%20')) or null
 
-  a_src = host + 'questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
+  course_id = $('.course-number').first().text()
+  a_src = host + course_id + '/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
   redirect_url = getURLParameter('redirect')
   a_src += if redirect_url then '&amp;redirect=' + redirect_url else null
   login_url = $('#login-url').text()
@@ -68,12 +69,15 @@ $(document).ready ->
   iFrameResize({checkOrigin: false, inPageLinks: true})
 
   if (!is_global)
+    console.log('sending to parser')
     $.ajax
       type: 'POST'
-      url: host + 'parser'
+      url: host + 'root/parser'
       dataType: 'json'
       data: infoParser()
       success: (data) ->
+        console.dir data
+      error: (data) ->
         console.dir data
 
 window.addEventListener 'message', (->

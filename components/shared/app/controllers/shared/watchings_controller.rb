@@ -7,10 +7,6 @@ class WatchingsController < ApplicationController
   def index
     count = 20
     @context = Shared::ApplicationHelper.current_context
-
-    puts "wathinching indec"
-    puts @context
-
     @watchings = Shared::Watching.in_context(@context).by(current_user).order(created_at: :desc)
 
     @questions  = @watchings.of('Shared::Question').page(tab_page :questions).per(count)
