@@ -61,13 +61,11 @@
 
 // footer
 
-// footer
-
 footer {
   @include clearfix;
 
   margin: 100px 0 0 0;
-  padding: 50px 0;
+  padding: 10px 0;
   overflow-x: hidden;
 
   background: $gray-lighter;
@@ -88,59 +86,5 @@ footer {
 
   li:last-child:after {
     content: '';
-  }
-
-  hr {
-    @include clearfix;
-
-    margin: 25px 0 0 0;
-    border: none;
-  }
-}
-
-// lists
-
-.list-center {
-  float: left;
-  left: 50%;
-  position: relative;
-
-  text-align: center;
-
-  > ul {
-    @extend .list-unstyled;
-    float: left;
-    left: -50%;
-    position: relative;
-
-    margin: 0;
-
-    & > li {
-      float: left;
-    }
-  }
-}
-
-.list-row-left {
-  float: left;
-
-  > ul {
-    @extend .list-unstyled;
-
-    & > li {
-      float: left;
-    }
-  }
-}
-
-.list-row-right {
-  float: right;
-
-  > ul {
-    @extend .list-unstyled;
-
-    & > li {
-      float: left;
-    }
   }
 }
