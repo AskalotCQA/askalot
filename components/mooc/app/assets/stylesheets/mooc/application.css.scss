@@ -10,8 +10,6 @@
 //
 // List of imports (order is significant).
 
-@import 'page';
-@import 'units';
 @import 'bootstrap/mixins';
 @import 'bootstrap/variables';
 
@@ -59,32 +57,6 @@
 @import 'shared/responsive';
 @import 'shared/fixes';
 
-// footer
-
-footer {
-  @include clearfix;
-
-  margin: 100px 0 0 0;
-  padding: 10px 0;
-  overflow-x: hidden;
-
-  background: $gray-lighter;
-  color: $text-muted;
-  text-align: center;
-
-  a {
-    @include color-variant($text-muted, $text-muted);
-  }
-
-  li a, li span {
-    margin: 0 $padding-xs-horizontal;
-  }
-
-  li:after {
-    content: '·';
-  }
-
-  li:last-child:after {
-    content: '';
-  }
-}
+@import 'page';
+@import 'units';
+@import 'footer';

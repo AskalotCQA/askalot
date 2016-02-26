@@ -1,10 +1,10 @@
 <%= yield :footer %>
 
 <footer>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-sm-12">
-        <div class="list-center">
+      <div class="col-sm-6 col-xs-12">
+        <div class="list-left">
           <ul>
             <li><%= link_to t('footer.about'), url_to_site('#about') %></li>
             <li><%= link_to t('footer.authors'), url_to_site('#authors') %></li>
@@ -14,11 +14,9 @@
           </ul>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="list-center">
+      <div class="col-sm-6 col-xs-12">
+        <div class="list-right">
           <ul>
             <li><span>Copyright <%= Time.now.year %></span></li>
             <li><a class="text-capital" href="<%= url_to_organization %>">na&#x042f;uby</a></li>
