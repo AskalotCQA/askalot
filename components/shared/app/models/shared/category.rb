@@ -38,15 +38,16 @@ class Category < ActiveRecord::Base
   def refresh_names
     refresh_descs            = false
     name_changed             = @what_changed.include? 'name'
+    parent_id_changed        = @what_changed.include? 'parent_id'
     full_tree_name_changed   = @what_changed.include? 'full_tree_name'
     full_public_name_changed = @what_changed.include? 'full_public_name'
 
-    if !full_tree_name_changed && name_changed
+    if !full_tree_name_changed && (name_changed || parent_id_changed)
       self.refresh_full_tree_name
       refresh_descs = true
     end
 
-    if !full_public_name_changed && name_changed
+    if !full_public_name_changed && (name_changed || parent_id_changed)
       self.refresh_full_public_name
       refresh_descs = true
     end

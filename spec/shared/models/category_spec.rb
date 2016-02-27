@@ -18,6 +18,7 @@ describe Shared::Category, type: :model do
     let!(:a) { create :category, name: 'A', parent: nil }
     let!(:b) { create :category, name: 'B', parent: a }
     let!(:c) { create :category, name: 'C', parent: b }
+    let!(:d) { create :category, name: 'D', parent: nil }
 
     it 'updates full tree names' do
       expect(a.full_tree_name).to eql('A')
@@ -26,11 +27,23 @@ describe Shared::Category, type: :model do
 
       b.name = 'BB'
       b.save
+      a.reload
+      b.reload
       c.reload
 
       expect(a.full_tree_name).to eql('A')
       expect(b.full_tree_name).to eql('A - BB')
       expect(c.full_tree_name).to eql('A - BB - C')
+
+      b.parent_id = d.id
+      b.save
+      a.reload
+      b.reload
+      c.reload
+
+      expect(a.full_tree_name).to eql('A')
+      expect(b.full_tree_name).to eql('D - BB')
+      expect(c.full_tree_name).to eql('D - BB - C')
     end
   end
 
