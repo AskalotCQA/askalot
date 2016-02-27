@@ -51,13 +51,15 @@ class Category < ActiveRecord::Base
       refresh_descs = true
     end
 
-    self.save validate: false if refresh_descs
+    if refresh_descs
+      self.save validate: false
 
-    self.descendants.each do |category|
-      category.refresh_full_tree_name
-      category.refresh_full_public_name
-      category.save validate: false
-    end if refresh_descs
+      self.descendants.each do |category|
+        category.refresh_full_tree_name
+        category.refresh_full_public_name
+        category.save validate: false
+      end
+    end
 
     true
   end
