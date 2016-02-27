@@ -36,7 +36,7 @@ defaults: &defaults
 
   reputation:
     gold: 20
-    silver: 35
+    silver: 55
 
   oauth:
     consumer_key: test
