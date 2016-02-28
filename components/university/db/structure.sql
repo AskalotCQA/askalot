@@ -259,7 +259,8 @@ CREATE TABLE categories (
     direct_answers_count integer DEFAULT 0 NOT NULL,
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     all_questions_count integer DEFAULT 0 NOT NULL,
-    all_answers_count integer DEFAULT 0 NOT NULL
+    all_answers_count integer DEFAULT 0 NOT NULL,
+    category_questions_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -292,7 +293,10 @@ CREATE TABLE categories_questions (
     category_id integer NOT NULL,
     shared boolean DEFAULT false,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -2137,6 +2141,13 @@ CREATE INDEX index_categories_questions_on_category_id ON categories_questions U
 
 
 --
+-- Name: index_categories_questions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_categories_questions_on_deletor_id ON categories_questions USING btree (deletor_id);
+
+
+--
 -- Name: index_categories_questions_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3352,4 +3363,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160221150022');
 INSERT INTO schema_migrations (version) VALUES ('20160222183106');
 
 INSERT INTO schema_migrations (version) VALUES ('20160222190245');
+
+INSERT INTO schema_migrations (version) VALUES ('20160228025239');
+
+INSERT INTO schema_migrations (version) VALUES ('20160228092338');
 

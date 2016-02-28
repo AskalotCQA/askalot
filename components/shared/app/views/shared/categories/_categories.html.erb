@@ -11,8 +11,8 @@
               <% end %>
             </h4>
             <div class="category-details">
-              <%= t('count.question', count: category.questions.size).upcase_first %> <%= category.direct_shared_questions_count %> &middot;
-              <%= t('count.answer', count: category.answers.size).upcase_first %> <%= category.direct_shared_answers_count %> &middot;
+              <%= t('count.question', count: category.questions.size).upcase_first %> <%= category.category_questions_count %> &middot;
+              <%= t('count.answer', count: category.answers.size).upcase_first %> <%= category.category_questions_count %> &middot;
               <%= render 'watching', category: category %>
             </div>
           </div>

@@ -1,7 +1,9 @@
 module Shared
 class CategoryQuestion < ActiveRecord::Base
-  belongs_to :category
-  belongs_to :question
+  include Shared::Deletable
+
+  belongs_to :category, :counter_cache => true, :dependent => :delete
+  belongs_to :question, :dependent => :delete
 
   scope :shared, -> { where('shared') }
 

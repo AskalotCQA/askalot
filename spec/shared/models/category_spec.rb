@@ -76,45 +76,6 @@ describe Shared::Category, type: :model do
     end
   end
 
-  describe '#question_counts' do
-    let(:category) { create :category, uuid: 'category' }
-
-    context 'with no questions' do
-      it 'has zero direct questions' do
-        expect(category.direct_questions_count).to be_zero
-      end
-
-      it 'has zero direct shared questions' do
-        expect(category.direct_shared_questions_count).to be_zero
-      end
-    end
-
-    context 'with three direct questions' do
-      it 'has three direct questions' do
-        3.times { create :question, category: category }
-
-        expect(category.direct_questions_count).to eql(3)
-        expect(category.direct_shared_questions_count).to eql(3)
-      end
-    end
-
-    context 'with three indirect questions' do
-      it 'has three shared questions' do
-        version = create :category, uuid: 'category'
-        outer = create :category
-
-        3.times { create :question, category: version }
-
-        expect(category.direct_questions_count).to be_zero
-        expect(version.direct_questions_count).to eql(3)
-        expect(category.direct_shared_questions_count).to eql(3)
-        expect(version.direct_shared_questions_count).to eql(3)
-        expect(outer.direct_questions_count).to be_zero
-        expect(outer.direct_shared_questions_count).to be_zero
-      end
-    end
-  end
-
   describe '#answer_counts' do
     let(:shared1) { create :category, uuid: 'category' }
     let(:shared2) { create :category, uuid: 'category' }

@@ -26,7 +26,7 @@ class Category < ActiveRecord::Base
   after_save   :refresh_names
 
   scope :with_slido, -> { where.not(slido_username: nil) }
-  scope :with_questions, -> { where.not(direct_shared_questions_count: 0) }
+  scope :with_questions, -> { where.not(category_questions_count: 0) }
   scope :askable, -> { where(askable: true) }
   scope :shared, -> { where(shared: true) }
 
@@ -189,6 +189,10 @@ class Category < ActiveRecord::Base
     siblings.where(uuid: self.uuid)
   end
 
+  def all_questions_count
+    category_questions_count
+  end
+
   def check_changed_sharing
     return unless self.shared_changed?
 
@@ -212,22 +216,6 @@ class Category < ActiveRecord::Base
 
     relation.where('category_id IN (?)', category_ids)
   end
-
-  # def reload_question_counters
-  #   self.direct_questions_count = self.questions.count
-  #
-  #   self.direct_shared_questions_count = all_directly_related_questions.count
-  #
-  #   self.save!
-  # end
-  #
-  # def reload_answer_counters
-  #   self.direct_answers_count = self.answers.size
-  #
-  #   self.direct_shared_answers_count = Shared::Answer.where('question_id IN (?)', all_directly_related_questions.select('id')).count
-  #
-  #   self.save!
-  # end
 
   def save_parent_tags
     self.public_tags += ancestors.map { |ancestor| ancestor.tags }.flatten
