@@ -34,7 +34,7 @@ describe Mooc::UnitsController, type: :controller do
       expect(response).to redirect_to(units_error_path(exception: 'LTI secret does not match'))
     end
 
-    it 'creates new category if does not exists' do
+    it 'creates new category if does not exist' do
       sign_in user
 
       before_count = Shared::Category.all.count
@@ -47,7 +47,7 @@ describe Mooc::UnitsController, type: :controller do
       expect(Shared::Category.last.name).to eql('category-hash')
     end
 
-    it 'does not create new category already exists' do
+    it 'does not create new category already exist' do
       sign_in user
 
       Shared::Category.create(name: 'category-hash', lti_id: 'category-hash')
