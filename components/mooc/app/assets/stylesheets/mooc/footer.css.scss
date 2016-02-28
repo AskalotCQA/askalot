@@ -4,10 +4,10 @@ footer {
   @include clearfix;
 
   margin: 100px 0 0 0;
-  padding: 10px 0;
+  padding: 10px 0 !important;
   overflow-x: hidden;
 
-  background: $gray-lightest;
+  background: $gray-lightest !important;
   color: $text-muted;
   text-align: center;
   font-size: $font-size-small;
@@ -41,38 +41,6 @@ footer {
 
     & > li {
       float: left;
-    }
-  }
-}
-
-// media
-
-@media (min-width: $screen-sm) {
-  .list-left, .list-right {
-    left: 0%;
-
-    > ul {
-      float: left;
-      left: 0%;
-    }
-  }
-
-  .list-left {
-    float: left;
-  }
-
-  .list-right {
-    float: right;
-  }
-}
-
-@media (max-width: $screen-sm) {
-  .list-left, .list-right {
-    float: left;
-    left: 50%;
-
-    > ul {
-      left: -50%;
     }
   }
 }

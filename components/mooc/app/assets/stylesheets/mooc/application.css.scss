@@ -10,53 +10,9 @@
 //
 // List of imports (order is significant).
 
-@import 'bootstrap/mixins';
-@import 'bootstrap/variables';
-
-@import 'shared/mixins';
-@import 'shared/variables';
-
-@import 'bootstrap';
-@import 'font-awesome';
-
-@import 'shared/bootstrap/datepicker';
-@import 'shared/bootstrap/markdown';
-@import 'shared/bootstrap/multiselect';
-@import 'shared/bootstrap/tablesorter';
-@import 'shared/bootstrap/textcomplete';
-
-@import 'shared/assets';
-@import 'shared/layout';
-@import 'shared/search';
-@import 'shared/errors';
-@import 'shared/treetable';
-
-@import 'shared/home';
-@import 'shared/help';
-
-@import 'shared/users';
-@import 'shared/reputation';
-@import 'shared/groups';
-@import 'shared/documents';
-@import 'shared/categories';
-@import 'shared/tags';
-
-@import 'shared/questions';
-@import 'shared/answers';
-@import 'shared/comments';
-@import 'shared/evaluations';
-
-@import 'shared/activities';
-@import 'shared/notifications';
-@import 'shared/watchings';
-
-@import 'shared/administration';
-@import 'shared/changelogs';
-@import 'shared/statistics';
-
-@import 'shared/responsive';
-@import 'shared/fixes';
+@import 'shared/application';
 
 @import 'page';
+@import 'responsive';
 @import 'units';
 @import 'footer';
