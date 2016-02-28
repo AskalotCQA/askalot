@@ -15,13 +15,13 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true
 
-  before_save :update_changed
+  before_save  :update_changed
   after_create :reload_question_counters
   after_create :reload_answer_counters
   after_create :save_parent_tags
   after_update :check_changed_sharing
-  after_save :update_public_tags
-  after_save :refresh_names
+  after_save   :update_public_tags
+  after_save   :refresh_names
 
   scope :with_slido, -> { where.not(slido_username: nil) }
   scope :with_questions, -> { where.not(direct_shared_questions_count: 0) }
