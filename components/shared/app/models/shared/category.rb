@@ -13,7 +13,7 @@ class Category < ActiveRecord::Base
   has_many :users, through: :assignments
   has_many :roles, through: :assignments
   has_many :category_questions, dependent: :destroy
-  has_many :shared_questions, -> { distinct }, through: :category_questions, :source => :question
+  has_many :related_questions, -> { distinct }, through: :category_questions, :source => :question
 
   validates :name, presence: true
 
@@ -79,18 +79,6 @@ class Category < ActiveRecord::Base
     names << self.name
 
     self.full_public_name = names.join(' - ')
-  end
-
-  def all_related_questions(relation)
-    if self.shared
-      uuids = self.self_and_descendants.map { |item| item.uuid }.reject { |item| item.nil? || item.blank? || item.empty?}
-      category_ids = Shared::Category.select('id').where("uuid IN (?) AND created_at <= ?", uuids, self.created_at)
-    else
-      category_ids = self.self_and_descendants.map { |item| item.id }
-    end
-
-    relation ||= Shared::Question.all
-    relation.where('category_id IN (?)', category_ids)
   end
 
   def count
@@ -207,14 +195,6 @@ class Category < ActiveRecord::Base
     else
       self.category_questions.shared.destroy_all
     end
-  end
-
-  def all_directly_related_questions(relation = nil)
-    category_ids = self.shared ? self.all_versions.select('id') : self.id
-
-    relation ||= Shared::Question.all
-
-    relation.where('category_id IN (?)', category_ids)
   end
 
   def save_parent_tags

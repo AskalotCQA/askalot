@@ -21,11 +21,11 @@ class QuestionsController < ApplicationController
     @category  ||= Shared::Category.find_by_name(@context)
 
     @questions = case params[:tab].to_sym
-                 when :unanswered then @category.shared_questions.unanswered.by_votes
-                 when :answered   then @category.shared_questions.answered.by_votes
-                 when :solved     then @category.shared_questions.solved.by_votes
-                 when :favored    then @category.shared_questions.favored.by_votes
-                 else @category.shared_questions.recent
+                 when :unanswered then @category.related_questions.unanswered.by_votes
+                 when :answered   then @category.related_questions.answered.by_votes
+                 when :solved     then @category.related_questions.solved.by_votes
+                 when :favored    then @category.related_questions.favored.by_votes
+                 else @category.related_questions.recent
                  end
 
     @questions = filter_questions(@questions)

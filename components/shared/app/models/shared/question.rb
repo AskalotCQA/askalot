@@ -50,8 +50,6 @@ class Question < ActiveRecord::Base
 
   scope :answered_but_not_best, lambda { with_category.joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).references(:labeling).uniq.select('questions.id')).uniq }
 
-  scope :all_directly_related, lambda { |category| category.all_directly_related_questions(self) }
-  scope :all_related, lambda { |category_ids| where('category_id IN (?)', category_ids) }
   scope :by, lambda { |user| where(author: user) }
 
   self.updated_timestamp = [:updated_at, :touched_at]
