@@ -26,6 +26,7 @@ describe Shared::Category, type: :model do
       expect(c.full_tree_name).to eql('A - B - C')
 
       b.name = 'BB'
+
       b.save
       a.reload
       b.reload
@@ -36,6 +37,7 @@ describe Shared::Category, type: :model do
       expect(c.full_tree_name).to eql('A - BB - C')
 
       b.parent_id = d.id
+
       b.save
       a.reload
       b.reload
