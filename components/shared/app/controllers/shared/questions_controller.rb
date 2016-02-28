@@ -21,14 +21,14 @@ class QuestionsController < ApplicationController
     @category  ||= Shared::Category.find_by_name(@context)
 
     @questions = case params[:tab].to_sym
-                 when :unanswered then Shared::Question.unanswered.by_votes
-                 when :answered   then Shared::Question.answered_but_not_best.by_votes
-                 when :solved     then Shared::Question.solved.by_votes
-                 when :favored    then Shared::Question.favored.by_votes
-                 else Shared::Question.recent
+                 when :unanswered then @category.shared_questions.unanswered.by_votes
+                 when :answered   then @category.shared_questions.answered.by_votes
+                 when :solved     then @category.shared_questions.solved.by_votes
+                 when :favored    then @category.shared_questions.favored.by_votes
+                 else @category.shared_questions.recent
                  end
 
-    @questions = filter_questions(@questions, @category)
+    @questions = filter_questions(@questions)
     @questions = @questions.page(params[:page]).per(20)
     initialize_polling
   end
@@ -121,13 +121,8 @@ class QuestionsController < ApplicationController
     @poll = session[:poll] = params[:poll] == 'true' ? true : false
   end
 
-  def filter_questions(relation, category)
-    uuids = category.self_and_descendants.where(shared:true).map(&:uuid)
-    shared_ids = Shared::Category.where(uuid: uuids).map(&:id)
-    not_shared_ids = category.self_and_descendants.where(shared:false).map(&:id)
+  def filter_questions(relation)
     relation = relation.tagged_with(params[:tags]) if params[:tags].present?
-    relation = relation.all_related(shared_ids + not_shared_ids)
-
     relation
   end
 

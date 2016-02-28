@@ -13,6 +13,7 @@ class Category < ActiveRecord::Base
   has_many :users, through: :assignments
   has_many :roles, through: :assignments
   has_many :category_questions, dependent: :destroy
+  has_many :shared_questions, through: :category_questions, :source => :question
 
   validates :name, presence: true
 
