@@ -27,10 +27,10 @@ module Shared::Context
     end
 
     def self.default_context
-      return :root unless ActiveRecord::Base.connection.table_exists? 'categories'
+      return 'root' unless ActiveRecord::Base.connection.table_exists? 'categories'
 
       category = Shared::Category.find_by(parent_id: nil)
-      context = :root if !category || Rails.module.university?
+      context = 'root' if !category || Rails.module.university?
       context = category.name if category && Rails.module.mooc?
       @context ||= context
 
@@ -45,7 +45,7 @@ module Shared::Context
       context
     end
 
-    def self.context_category(context = default_context)
+    def self.context_category(context = current_context)
       Shared::Category.where(name: context).first
     end
   end
