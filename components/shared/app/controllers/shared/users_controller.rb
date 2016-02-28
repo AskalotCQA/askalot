@@ -10,10 +10,13 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @context_category = Shared::Context::Manager.context_category
+    @context = @context_category.uuid
+
     @users = case params[:tab].to_sym
-             when :recent then Shared::User.recent.order(created_at: :desc)
-             when :alumni then Shared::User.alumni.order(:nick)
-             else Shared::User.order(:nick)
+             when :recent then Shared::User.in_context(@context).recent.order(created_at: :desc)
+             when :alumni then Shared::User.in_context(@context).alumni.order(:nick)
+             else Shared::User.in_context(@context).order(:nick)
              end
 
     @users = @users.page(params[:page]).per(60)

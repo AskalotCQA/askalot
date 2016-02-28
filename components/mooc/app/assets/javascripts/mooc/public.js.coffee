@@ -48,13 +48,11 @@ $(document).ready ->
   getURLParameter = (name) ->
     decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) or [null, ''])[1].replace(/\+/g, '%20')) or null
 
-  course_id = $('.course-number').first().text()
-  a_src = host + course_id + '/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
+  a_src = host + $('.course-name').first().text().trim() + '/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
   redirect_url = getURLParameter('redirect')
   a_src += if redirect_url then '&amp;redirect=' + redirect_url else null
   login_url = $('#login-url').text()
   a_src += '&amp;login_url=' + login_url if login_url != ''
-  a_src += '&amp;context=' + $('.course-name').first().text().trim()
 
   $('<iframe>Your browser does not support iframes!</iframe>')
     .attr('title', 'Askalot')
