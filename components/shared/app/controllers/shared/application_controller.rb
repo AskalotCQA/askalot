@@ -4,11 +4,6 @@ class ApplicationController < ActionController::Base
 
   before_action :determine_context
 
-  def default_url_options(options={})
-    return {} if Rails.module.university? || params[:context]
-    { context: Shared::Context::Manager.current_context }
-  end
-
   protected
 
   # concerns order is significant

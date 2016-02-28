@@ -1,5 +1,15 @@
 module Shared::Context
-  class Manager
+  module Manager
+    def self.context_url_prefix
+      return '' if Rails.module.university?
+      '/' + self.current_context
+    end
+
+    def self.regex_context_url_prefix
+      return '' if Rails.module.university?
+      '\/' + self.current_context
+    end
+
     def self.current_context=(context)
       @context = context
     end
@@ -17,8 +27,11 @@ module Shared::Context
     end
 
     def self.default_context
-      context = :root if Rails.module.university?
-      context = Shared::Category.find_by(parent_id: nil).name if Rails.module.mooc?
+      return :root unless ActiveRecord::Base.connection.table_exists? 'categories'
+
+      category = Shared::Category.find_by(parent_id: nil)
+      context = :root if !category || Rails.module.university?
+      context = category.name if category && Rails.module.mooc?
       @context ||= context
 
       context

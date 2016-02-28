@@ -1,7 +1,7 @@
 # TODO (smolnar) report try errors
 
 class window.Markdown
-  url: '/markdown/preview'
+  url: '<%= Rails.application.config.relative_url_root %><%= Shared::Context::Manager.context_url_prefix %>/markdown/preview'
 
   textcomplete:
     strategies:
@@ -32,7 +32,7 @@ class window.Markdown
         index:    2
         maxCount: 5
         search: (term, callback) ->
-          $.get '<%= Rails.application.config.relative_url_root %>/questions/suggest', q: term, (data) -> try callback(data)
+          $.get '<%= Rails.application.config.relative_url_root %><%= Shared::Context::Manager.context_url_prefix %>/questions/suggest', q: term, (data) -> try callback(data)
 
 
   @bind: ->

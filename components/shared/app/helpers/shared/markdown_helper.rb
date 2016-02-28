@@ -28,14 +28,15 @@ module Shared::MarkdownHelper
   def render_markdown(text, options = {})
     mailer   = ActionMailer::Base.default_url_options
     hostname = "#{mailer[:host]}#{":#{mailer[:port]}" if mailer[:port]}"
+    context_prefix = Shared::Context::Manager.regex_context_url_prefix
 
     options.deep_merge! :'user-link' => {
-      regex: /#{hostname}\/users\/\w+/,
+      regex: /#{hostname}#{context_prefix}\/users\/\w+/,
       replacement: lambda { |match| (user = Shared::User.find_by(nick: match[/\w+\z/])) ? "@#{user.id}" : match }
     }
 
     options.deep_merge! :'question-link' => {
-      regex: /#{hostname}\/questions\/\d+/,
+      regex: /#{hostname}#{context_prefix}\/questions\/\d+/,
       replacement: lambda { |match| "##{match[/\d+\z/]}" }
     }
 
