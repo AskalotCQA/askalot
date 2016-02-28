@@ -86,10 +86,14 @@ class Question < ActiveRecord::Base
   end
 
   def register_question
-    self.category.self_and_ancestors.each do |ancestor|
-      CategoryQuestion.create question_id: self.id, category_id: ancestor.id, shared: false
-      ancestor.all_versions.shared.each do |shared|
-        CategoryQuestion.create question_id: self.id, category_id: shared.id, shared: true
+    if self.category
+      self.category.self_and_ancestors.each do |ancestor|
+        Shared::CategoryQuestion.create question_id: self.id, category_id: ancestor.id, shared: false
+      end
+      self.category.all_versions.shared.each do |shared|
+        shared.self_and_ancestors.each do |c|
+          Shared::CategoryQuestion.create question_id: self.id, category_id: c.id, shared: true
+        end
       end
     end
   end
