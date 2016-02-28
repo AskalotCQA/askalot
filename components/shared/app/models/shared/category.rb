@@ -186,7 +186,7 @@ class Category < ActiveRecord::Base
   end
 
   def all_versions
-    siblings.where(uuid: self.uuid)
+    Shared::Category.where(uuid: self.uuid).where.not(id: self.id)
   end
 
   def all_questions_count
