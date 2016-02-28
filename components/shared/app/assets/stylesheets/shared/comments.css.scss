@@ -6,6 +6,11 @@
 
 .wrap-new-comment {
   margin-bottom: 10px;
+  margin-left: 30px;
+}
+
+.comments-section {
+  margin-left: 30px;
 }
 
 // member
@@ -14,4 +19,5 @@
   @include markdown-content;
 
   display: inline;
+  color: $gray;
 }

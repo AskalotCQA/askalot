@@ -1,6 +1,11 @@
 <li id="comment-<%= comment.id %>">
-  <div class="comment-content"><%= render_markdown comment.text, redcarpet: { tags: [:autolink, :codespan, :emphasis, :link, :striketrough, :underline] } %></div>
-  <%= render 'shared/comments/details', comment: comment %>
-  <%= render 'shared/comments/editing', comment: comment, remote: remote %>
-  <%= render 'shared/comments/deleting', comment: comment, remote: remote %>
+  <div>
+    <%= render 'shared/comments/details',  comment: comment %>
+    <%= render 'shared/comments/editing',  comment: comment, remote: remote %>
+    <%= render 'shared/comments/deleting', comment: comment, remote: remote %>
+  </div>
+
+  <div class="comment-content">
+    <%= render_markdown comment.text, redcarpet: { tags: [:autolink, :codespan, :emphasis, :link, :striketrough, :underline] } %>
+  </div>
 </li>

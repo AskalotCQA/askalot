@@ -1,8 +1,7 @@
-&ndash;
-
 <% if comment.edited? %>
   <%= t('comment.details.updated').downcase_first %>
   <%= link_to_user comment.editor, authorable: comment %>
+    &middot;
   <%= tooltip_time_tag comment.edited_at, format: :normal, placement: :top %>
 <% end %>
 
@@ -13,5 +12,6 @@
   <% end %>
 
   <%= link_to_user comment.author, authorable: comment %>
+    &middot;
   <%= tooltip_time_tag comment.created_at, format: :normal, placement: :top %>
 <% end %>
