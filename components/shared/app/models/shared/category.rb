@@ -7,7 +7,6 @@ class Category < ActiveRecord::Base
   include Shared::Categories::Searchable
 
   has_many :questions, dependent: :restrict_with_exception
-
   has_many :answers, through: :questions
 
   has_many :assignments, dependent: :destroy

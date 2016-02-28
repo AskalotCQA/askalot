@@ -41,7 +41,6 @@ describe Shared::CategoryQuestion, type: :model do
   describe '#change_category_sharing' do
     let!(:category) { create :category, uuid: 'category', shared: true }
     let!(:category_shared) { create :category, uuid: 'category', shared: true }
-    let(:category_shared2) { create :category, uuid: 'category', shared: true }
     let!(:category_unshared) { create :category, uuid: 'category', shared: false }
     let!(:question) { create :question, category: category }
 
@@ -54,7 +53,6 @@ describe Shared::CategoryQuestion, type: :model do
 
         expect(category.category_questions.count).to eql(1)
         expect(category_shared.category_questions.count).to eql(1)
-        expect(category_shared2.category_questions.count).to eql(1)
         expect(category_unshared.category_questions.count).to eql(0)
         expect(question.category_questions.count).to eql(5)
       end
@@ -71,7 +69,7 @@ describe Shared::CategoryQuestion, type: :model do
         category_unshared.reload
 
         expect(category.category_questions.count).to eql(1)
-        expect(category_shared2.category_questions.count).to eql(0)
+        expect(category_shared.category_questions.count).to eql(0)
         expect(category_unshared.category_questions.count).to eql(0)
         expect(question.category_questions.count).to eql(4)
       end
