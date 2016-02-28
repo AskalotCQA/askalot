@@ -21,7 +21,6 @@ class Category < ActiveRecord::Base
   after_create :reload_question_counters
   after_create :reload_answer_counters
   after_create :save_parent_tags
-  after_update :check_changed_sharing
   after_save   :update_public_tags
   after_save   :refresh_names
   after_save   :update_categories_questions
@@ -182,22 +181,6 @@ class Category < ActiveRecord::Base
     category_questions_count
   end
 
-  def check_changed_sharing
-    return unless self.shared_changed?
-
-    if self.shared
-      self.self_and_descendants.each do |descendant|
-        descendant.all_versions.shared.each do |shared|
-          shared.questions.each do |question|
-            CategoryQuestion.create question_id: question.id, category_id: self.id, shared: true
-          end
-        end if descendant.shared
-      end
-    else
-      self.category_questions.shared.destroy_all
-    end
-  end
-
   def save_parent_tags
     self.public_tags += ancestors.map { |ancestor| ancestor.tags }.flatten
 
@@ -212,12 +195,35 @@ class Category < ActiveRecord::Base
         category.save
       end
     end
+
+    true
   end
 
   def update_categories_questions
     if @what_changed.include? 'parent_id'
       reload_categories_questions
+    elsif @what_changed.include? 'shared'
+      if self.shared
+        self.all_versions.each do |shared_category|
+          shared_category.questions.each do |question|
+            self.self_and_ancestors.each do |ancestor|
+              CategoryQuestion.create question_id: question.id, category_id: ancestor.id, shared: true
+            end
+          end
+        end
+      else
+        shared_questions_ids = self.category_questions.shared.map(&:question_id)
+
+        shared_questions_ids.each do |shared_question_id|
+          self.self_and_ancestors.each do |ancestor|
+            ancestor.category_questions.where(question_id: shared_question_id).delete(1)
+          end
+        end
+      end
+
     end
+
+    true
   end
 
   def reload_categories_questions
