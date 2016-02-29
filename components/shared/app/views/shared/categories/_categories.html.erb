@@ -1,44 +1,20 @@
 <% unless category.nil? %>
-  <% category.children.each do |category| %>
-    <% if category_depths.include? category.depth %>
+  <% if category_depths.include?(category.depth) %>
+    <div class="cccc">
+    <%= render 'category', category: category %>
+    </div>
+  <% end %>
+
+  <% if category_depths.include?(category.depth) && category.children.any? %>
     <div class="category-group">
-    <% end %>
+  <% end %>
 
-      <% if category_depths.include? category.depth || category.children.nil? %>
-        <%= render 'category', category: category %>
-      <% end %>
+  <% category.children.each do |c| %>
+    <%= render 'categories', category: c, category_depths: category_depths %>
+  <% end %>
 
-      <% next if category.children.nil? %>
-
-      <% if category_depths.include? category.depth %>
-        <div class="category-group">
-      <% end %>
-
-      <% category.children.each do |category| %>
-        <% if category_depths.include? category.depth || category.children.nil? %>
-          <%= render 'category', category: category %>
-        <% end %>
-
-         <% next if category.children.nil? %>
-
-         <div class="category-group">
-
-         <% category.children.each do |category| %>
-           <% if category_depths.include? category.depth || category.children.nil? %>
-             <%= render 'category', category: category %>
-           <% end %>
-         <% end %>
-
-         </div>
-      <% end %>
-
-    <% if category_depths.include? category.depth %>
-      </div>
-    <% end %>
-
-    <% if category_depths.include? category.depth %>
-      </div>
-    <% end %>
+  <% if category_depths.include?(category.depth) && category.children.any? %>
+    </div>
   <% end %>
 <% else %>
   <div class="alert alert-warning">
