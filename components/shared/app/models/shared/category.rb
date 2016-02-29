@@ -183,9 +183,9 @@ class Category < ActiveRecord::Base
     Shared::Answer.where(question: related_questions)
   end
 
-  def related_questions_for_user(user, dont_show_anonymous = false)
+  def related_questions_for_user(user, show_anonymous = true)
     relation = related_questions.where(author: user)
-    relation = relation.where(anonymous: false) if dont_show_anonymous
+    relation = relation.where(anonymous: false) unless show_anonymous
 
     relation
   end
