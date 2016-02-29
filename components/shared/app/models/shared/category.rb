@@ -15,6 +15,8 @@ class Category < ActiveRecord::Base
   has_many :category_questions, dependent: :destroy
   has_many :related_questions, -> { distinct }, through: :category_questions, :source => :question
 
+  has_many :category_questions_shared_through_me, foreign_key: 'shared_through_category_id', class: Shared::CategoryQuestion
+
   validates :name, presence: true
 
   before_save  :update_changed
@@ -207,18 +209,12 @@ class Category < ActiveRecord::Base
         self.all_versions.each do |shared_category|
           shared_category.questions.each do |question|
             self.self_and_ancestors.each do |ancestor|
-              CategoryQuestion.create question_id: question.id, category_id: ancestor.id, shared: true
+              CategoryQuestion.create question_id: question.id, category_id: ancestor.id, shared: true, shared_through_category: self
             end
           end
         end
       else
-        shared_questions_ids = self.category_questions.shared.map(&:question_id)
-
-        shared_questions_ids.each do |shared_question_id|
-          self.self_and_ancestors.each do |ancestor|
-            ancestor.category_questions.where(question_id: shared_question_id).delete(1)
-          end
-        end
+        self.category_questions_shared_through_me.delete_all
       end
 
     end

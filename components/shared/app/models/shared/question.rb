@@ -90,7 +90,7 @@ class Question < ActiveRecord::Base
       end
       self.category.all_versions.shared.each do |shared|
         shared.self_and_ancestors.each do |c|
-          Shared::CategoryQuestion.create question_id: self.id, category_id: c.id, shared: true
+          Shared::CategoryQuestion.create question_id: self.id, category_id: c.id, shared: true, shared_through_category: shared
         end
       end
     end
