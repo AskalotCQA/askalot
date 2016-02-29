@@ -30,6 +30,7 @@ class QuestionsController < ApplicationController
 
     @questions = filter_questions(@questions)
     @questions = @questions.page(params[:page]).per(20)
+
     initialize_polling
   end
 
@@ -123,6 +124,7 @@ class QuestionsController < ApplicationController
 
   def filter_questions(relation)
     relation = relation.tagged_with(params[:tags]) if params[:tags].present?
+
     relation
   end
 

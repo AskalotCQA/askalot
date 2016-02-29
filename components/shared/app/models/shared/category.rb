@@ -28,7 +28,7 @@ class Category < ActiveRecord::Base
   after_save   :update_categories_questions
 
   scope :with_slido, -> { where.not(slido_username: nil) }
-  scope :with_questions, -> { where.not(category_questions_count: 0) }
+  scope :with_questions, lambda { joins(:related_questions).uniq }
   scope :askable, -> { where(askable: true) }
   scope :shared, -> { where(shared: true) }
 
@@ -179,8 +179,19 @@ class Category < ActiveRecord::Base
     Shared::Category.where(uuid: self.uuid).where.not(id: self.id)
   end
 
-  def all_questions_count
-    category_questions_count
+  def related_answers
+    Shared::Answer.where(question: related_questions)
+  end
+
+  def related_questions_for_user(user, dont_show_anonymous = false)
+    relation = related_questions.where(author: user)
+    relation = relation.where(anonymous: false) if dont_show_anonymous
+
+    relation
+  end
+
+  def related_answers_for_user(user)
+    related_answers.where(author: user)
   end
 
   def save_parent_tags
