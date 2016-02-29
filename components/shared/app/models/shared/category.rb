@@ -214,7 +214,7 @@ class Category < ActiveRecord::Base
           end
         end
       else
-        self.category_questions_shared_through_me.delete_all
+        self.category_questions_shared_through_me.destroy_all
       end
 
     end
