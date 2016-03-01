@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Shared::CategoryQuestion, type: :model do
 
-  it 'is created when question with category is created' do
+  it 'is creates question cache when question with category is created' do
     category = create :category
     create :question, category: category
 
-    expect(Shared::CategoryQuestion.all.count).to eql(4)
+    expect(Shared::CategoryQuestion.all.count).to eql(3)
     expect(Shared::CategoryQuestion.where(category_id: category.id).count).to eql(1)
     expect(Shared::CategoryQuestion.where(category_id: category.parent_id).count).to eql(1)
   end
@@ -18,7 +18,7 @@ describe Shared::CategoryQuestion, type: :model do
     let(:user) { create :user }
 
     context 'deleting category' do
-      it 'is deleted when category is deleted' do
+      it 'deletes question cache when category is deleted' do
         expect(Shared::CategoryQuestion.exists?(question_category)).to be_truthy
 
         category.destroy
@@ -28,7 +28,7 @@ describe Shared::CategoryQuestion, type: :model do
     end
 
     context 'deleting question' do
-      it 'is deleted when question is deleted' do
+      it 'deletes question cache question is deleted by user' do
         expect(Shared::CategoryQuestion.exists?(question_category)).to be_truthy
 
         question.mark_as_deleted_by! user
@@ -45,7 +45,7 @@ describe Shared::CategoryQuestion, type: :model do
     let!(:question) { create :question, category: category }
 
     context 'creating question for shared categories' do
-      it 'should by created for shared category' do
+      it 'creates question cache for shared category' do
         category.reload
         category_shared.reload
         category_unshared.reload
@@ -59,7 +59,7 @@ describe Shared::CategoryQuestion, type: :model do
     end
 
     context 'unshare category' do
-      it 'should remove question cache for unshared category' do
+      it 'removes question cache for unshared category' do
         category_shared.shared = false
         category_shared.save!
 
@@ -71,12 +71,12 @@ describe Shared::CategoryQuestion, type: :model do
         expect(category.category_questions.count).to eql(1)
         expect(category_shared.category_questions.count).to eql(0)
         expect(category_unshared.category_questions.count).to eql(0)
-        expect(question.category_questions.count).to eql(6)
+        expect(question.category_questions.count).to eql(3)
       end
     end
 
     context 'share category' do
-      it 'should add question cache for shared category' do
+      it 'creates question cache for shared category' do
         category_unshared.shared = true
         category_unshared.save!
 

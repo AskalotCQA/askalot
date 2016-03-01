@@ -220,14 +220,13 @@ class Category < ActiveRecord::Base
         self.all_versions.each do |shared_category|
           shared_category.questions.each do |question|
             self.self_and_ancestors.each do |ancestor|
-              CategoryQuestion.create question_id: question.id, category_id: ancestor.id, shared: true, shared_through_category: self
+              CategoryQuestion.find_or_create_by question_id: question.id, category_id: ancestor.id, shared: true, shared_through_category: self
             end
           end
         end
       else
         self.category_questions_shared_through_me.destroy_all
       end
-
     end
 
     true

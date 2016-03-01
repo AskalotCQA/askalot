@@ -20,7 +20,7 @@ class Question < ActiveRecord::Base
   # TODO (jharinek) propose change to parent tags
   before_save { self.tag_list += (new_record? ? category.effective_tags : category.tags) if category }
 
-  after_create { self.register_question() }
+  after_create { self.register_question }
 
   belongs_to :category, counter_cache: true
   belongs_to :document, class_name: :'University::Document', counter_cache: true
@@ -84,14 +84,15 @@ class Question < ActiveRecord::Base
   end
 
   def register_question
-    if self.category
-      self.category.self_and_ancestors.each do |ancestor|
-        Shared::CategoryQuestion.create question_id: self.id, category_id: ancestor.id, shared: false
-      end
-      self.category.all_versions.shared.each do |shared|
-        shared.self_and_ancestors.each do |c|
-          Shared::CategoryQuestion.create question_id: self.id, category_id: c.id, shared: true, shared_through_category: shared
-        end
+    return unless self.category
+
+    self.category.self_and_ancestors.each do |ancestor|
+      Shared::CategoryQuestion.create question_id: self.id, category_id: ancestor.id, shared: false
+    end
+
+    self.category.all_versions.shared.each do |shared|
+      shared.self_and_ancestors.each do |c|
+        Shared::CategoryQuestion.create question_id: self.id, category_id: c.id, shared: true, shared_through_category: shared
       end
     end
   end

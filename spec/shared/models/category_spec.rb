@@ -77,22 +77,22 @@ describe Shared::Category, type: :model do
   end
 
   describe '#answer_counts' do
-    let(:shared1) { create :category, uuid: 'category' }
-    let(:shared2) { create :category, uuid: 'category' }
-    let(:outer) { create :category }
-    let(:sh1q1) { create :question, category: shared1 }
-    let(:sh1q2) { create :question, category: shared1 }
-    let(:sh2q) { create :question, category: shared2 }
-    let(:outer_question) { create :question, category: outer }
+    let!(:shared1) { create :category, uuid: 'category' }
+    let!(:shared2) { create :category, uuid: 'category' }
+    let!(:outer) { create :category }
+    let!(:sh1q1) { create :question, category: shared1 }
+    let!(:sh1q2) { create :question, category: shared1 }
+    let!(:sh2q) { create :question, category: shared2 }
+    let!(:outer_question) { create :question, category: outer }
 
     context 'with no answer' do
       it 'has no answers' do
         expect(shared1.direct_answers_count).to be_zero
         expect(shared2.direct_answers_count).to be_zero
         expect(outer.direct_answers_count).to be_zero
-        expect(shared1.direct_shared_answers_count).to be_zero
-        expect(shared2.direct_shared_answers_count).to be_zero
-        expect(outer.direct_shared_answers_count).to be_zero
+        expect(shared1.related_answers.count).to be_zero
+        expect(shared2.related_answers.count).to be_zero
+        expect(outer.related_answers.count).to be_zero
       end
     end
 
@@ -106,11 +106,11 @@ describe Shared::Category, type: :model do
         shared1.reload
         shared2.reload
 
-        expect(shared1.direct_answers_count).to eql(3)
-        expect(shared1.direct_shared_answers_count).to eql(3)
-        expect(shared2.direct_answers_count).to eql(1)
-        expect(shared2.direct_shared_answers_count).to eql(4)
-        expect(outer.direct_shared_answers_count).to be_zero
+        expect(shared1.answers.count).to eql(3)
+        expect(shared1.related_answers.count).to eql(4)
+        expect(shared2.answers.count).to eql(1)
+        expect(shared2.related_answers.count).to eql(4)
+        expect(outer.related_answers.count).to be_zero
       end
     end
   end
