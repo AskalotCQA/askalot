@@ -58,7 +58,8 @@ CREATE TABLE activities (
     updated_at timestamp without time zone NOT NULL,
     created_on date NOT NULL,
     updated_on date NOT NULL,
-    anonymous boolean DEFAULT false NOT NULL
+    anonymous boolean DEFAULT false NOT NULL,
+    context character varying(255)
 );
 
 
@@ -258,8 +259,6 @@ CREATE TABLE categories (
     direct_questions_count integer DEFAULT 0 NOT NULL,
     direct_answers_count integer DEFAULT 0 NOT NULL,
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
-    all_questions_count integer DEFAULT 0 NOT NULL,
-    all_answers_count integer DEFAULT 0 NOT NULL,
     category_questions_count integer DEFAULT 0 NOT NULL
 );
 
@@ -296,7 +295,8 @@ CREATE TABLE categories_questions (
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
     deletor_id integer,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    shared_through_category_id integer
 );
 
 
@@ -427,6 +427,38 @@ CREATE SEQUENCE comments_id_seq
 --
 
 ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
+
+
+--
+-- Name: context_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE context_users (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    context character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: context_users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE context_users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: context_users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE context_users_id_seq OWNED BY context_users.id;
 
 
 --
@@ -875,7 +907,8 @@ CREATE TABLE notifications (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     read_at timestamp without time zone,
-    anonymous boolean DEFAULT false NOT NULL
+    anonymous boolean DEFAULT false NOT NULL,
+    context character varying(255)
 );
 
 
@@ -1396,7 +1429,8 @@ CREATE TABLE watchings (
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     deletor_id integer,
-    deleted_at timestamp without time zone
+    deleted_at timestamp without time zone,
+    context character varying(255)
 );
 
 
@@ -1487,6 +1521,13 @@ ALTER TABLE ONLY comment_revisions ALTER COLUMN id SET DEFAULT nextval('comment_
 --
 
 ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY context_users ALTER COLUMN id SET DEFAULT nextval('context_users_id_seq'::regclass);
 
 
 --
@@ -1742,6 +1783,14 @@ ALTER TABLE ONLY comment_revisions
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: context_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY context_users
+    ADD CONSTRAINT context_users_pkey PRIMARY KEY (id);
 
 
 --
@@ -2236,6 +2285,13 @@ CREATE INDEX index_comments_on_edited ON comments USING btree (edited);
 --
 
 CREATE UNIQUE INDEX index_comments_on_stack_exchange_uuid ON comments USING btree (stack_exchange_uuid);
+
+
+--
+-- Name: index_context_users_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_context_users_on_user_id ON context_users USING btree (user_id);
 
 
 --
@@ -3026,7 +3082,7 @@ CREATE INDEX index_watchings_on_deletor_id ON watchings USING btree (deletor_id)
 -- Name: index_watchings_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_watchings_on_unique_key ON watchings USING btree (watcher_id, watchable_id, watchable_type);
+CREATE UNIQUE INDEX index_watchings_on_unique_key ON watchings USING btree (watcher_id, watchable_id, watchable_type, context);
 
 
 --
@@ -3354,17 +3410,25 @@ INSERT INTO schema_migrations (version) VALUES ('20151213143631');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
 
-INSERT INTO schema_migrations (version) VALUES ('20160217230205');
+INSERT INTO schema_migrations (version) VALUES ('20160220170558');
 
-INSERT INTO schema_migrations (version) VALUES ('20160221143314');
-
-INSERT INTO schema_migrations (version) VALUES ('20160221150022');
+INSERT INTO schema_migrations (version) VALUES ('20160221111744');
 
 INSERT INTO schema_migrations (version) VALUES ('20160222183106');
 
 INSERT INTO schema_migrations (version) VALUES ('20160222190245');
 
+INSERT INTO schema_migrations (version) VALUES ('20160224152624');
+
+INSERT INTO schema_migrations (version) VALUES ('20160224210832');
+
 INSERT INTO schema_migrations (version) VALUES ('20160228025239');
 
 INSERT INTO schema_migrations (version) VALUES ('20160228092338');
+
+INSERT INTO schema_migrations (version) VALUES ('20160228103010');
+
+INSERT INTO schema_migrations (version) VALUES ('20160229094608');
+
+INSERT INTO schema_migrations (version) VALUES ('20160229115039');
 
