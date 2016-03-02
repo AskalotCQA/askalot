@@ -22,6 +22,13 @@
 
 // member
 
+.answer-teacher {
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+
 .answer-content {
   @include markdown-content;
 
@@ -30,7 +37,7 @@
 
 .answer-details {
   display: inline-block;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
   color: $text-muted;
 }
