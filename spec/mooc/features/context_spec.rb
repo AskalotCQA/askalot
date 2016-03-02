@@ -24,7 +24,7 @@ describe 'Context filtering', type: :feature do
       category = Shared::Category.create name: 'test'
       question = create :question, :with_tags, author: user, category: category
 
-      visit shared.question_path(question, context: 'test')
+      visit shared.question_path(question, context: 7)
 
       fill_in 'answer_text', with: 'Hey, look at this.'
       click_button 'Odpovedať'
@@ -53,10 +53,10 @@ describe 'Context filtering', type: :feature do
 
       login_as user2
 
-      visit shared.root_path context: 'test'
+      visit shared.root_path context: 7
       expect(page).to have_xpath('//a[@data-track-label="0-unread"]')
 
-      visit shared.notifications_path context: 'test'
+      visit shared.notifications_path context: 7
 
       expect(page).to have_content('Žiadne notifikácie.')
 
@@ -77,7 +77,7 @@ describe 'Context filtering', type: :feature do
 
       question.toggle_watching_by!(user)
 
-      visit shared.watchings_path context: 'test'
+      visit shared.watchings_path context: 7
 
       expect(page).to have_content('Žiadne sledovania.')
 

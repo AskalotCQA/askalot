@@ -181,17 +181,6 @@ class Category < ActiveRecord::Base
     Shared::Answer.where(question: related_questions)
   end
 
-  def related_questions_for_user(user, show_anonymous = true)
-    relation = related_questions.where(author: user)
-    relation = relation.where(anonymous: false) unless show_anonymous
-
-    relation
-  end
-
-  def related_answers_for_user(user)
-    related_answers.where(author: user)
-  end
-
   def save_parent_tags
     self.public_tags += ancestors.map { |ancestor| ancestor.tags }.flatten
 
