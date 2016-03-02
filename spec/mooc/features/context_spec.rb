@@ -8,7 +8,7 @@ describe 'Context filtering', type: :feature do
   before :each do
     login_as user
 
-    @context = Shared::Context::Manager.current_context
+    @context  = Shared::Context::Manager.current_context
     @category = Shared::Category.find(@context).leaves.first
   end
 
@@ -92,6 +92,7 @@ describe 'Context filtering', type: :feature do
   context 'for users' do
     it 'shows users in context' do
       category = Shared::Category.find(@context)
+
       Shared::ContextUser.create user: user, context: category.uuid
 
       visit shared.users_path
@@ -101,6 +102,7 @@ describe 'Context filtering', type: :feature do
       expect(list.size).to eq(2)
 
       category = Shared::Category.create name: 'test', uuid: 'test_uuid'
+
       visit shared.users_path context: category.id
 
       list = all('#users .user-square')
@@ -120,6 +122,7 @@ describe 'Context filtering', type: :feature do
       expect(list.size).to eq(1)
 
       category = Shared::Category.create name: 'test', uuid: 'test_uuid'
+
       visit shared.tags_path context: category.id
 
       list = all('#tags h4')
