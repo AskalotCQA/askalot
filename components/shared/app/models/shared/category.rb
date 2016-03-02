@@ -20,8 +20,6 @@ class Category < ActiveRecord::Base
   validates :name, presence: true
 
   before_save  :update_changed
-  after_create :reload_question_counters
-  after_create :reload_answer_counters
   after_create :save_parent_tags
   after_save   :update_public_tags
   after_save   :refresh_names
