@@ -31,7 +31,7 @@ infoParser = ->
   path = subsection.getElementsByClassName('path')[0].textContent.trim()
 
   data =
-    course_id: $('.course-number').first().text()
+    course_id: $('.provider').first().text().trim() + '/' + $('.course-number').first().text().trim()
     course_name: document.getElementsByClassName('course-name')[0].textContent.trim()
     section_id: parsed[parsed.length-3]
     section_name: tree.getElementsByClassName('group-heading active')[0].textContent.trim()
