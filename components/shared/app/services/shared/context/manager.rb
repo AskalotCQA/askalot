@@ -46,7 +46,7 @@ module Shared::Context
 
     def self.default_question_context
       category = Shared::Category.find_by(name: Shared::Tag.current_academic_year_value) if Rails.module.university?
-      category = Shared::Category.find_by(parent_id: nil) unless Rails.module.university?
+      category = Shared::Category.find(self.current_context) unless Rails.module.university?
       context  = category ? category.id : 1
 
       @question_context ||= context

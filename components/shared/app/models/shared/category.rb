@@ -168,7 +168,7 @@ class Category < ActiveRecord::Base
   end
 
   def self.categories_with_parent_name(context)
-    Shared::Category.find_by(name: context).self_and_descendants.each do |category|
+    Shared::Category.find(context).self_and_descendants.each do |category|
       category.name = category.parent.name + ' - ' + category.name unless category.root?
     end
   end

@@ -91,15 +91,14 @@ describe 'Context filtering', type: :feature do
 
   context 'for users' do
     it 'shows users in context' do
-      context = Shared::Context::Manager.current_context
-      category = Shared::Category.find(context)
-      cu = Shared::ContextUser.create user: user, context: category.uuid
+      category = Shared::Category.find(@context)
+      Shared::ContextUser.create user: user, context: category.uuid
 
       visit shared.users_path
 
       list = all('#users .user-square')
 
-      expect(list.size).to eq(1)
+      expect(list.size).to eq(2)
 
       category = Shared::Category.create name: 'test', uuid: 'test_uuid'
       visit shared.users_path context: category.id

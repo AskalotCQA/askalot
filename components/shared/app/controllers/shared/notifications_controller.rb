@@ -6,9 +6,8 @@ class NotificationsController < ApplicationController
 
   def index
     count = 20
-    context = Shared::Context::Manager.current_context
 
-    @notifications = Shared::Notification.in_context(context).for(current_user).order(created_at: :desc)
+    @notifications = Shared::Notification.in_context(@context).for(current_user).order(created_at: :desc)
 
     @unread = @notifications.unread.page(tab_page :unread).per(count)
     @all    = @notifications.page(tab_page :all).per(count)
@@ -23,8 +22,7 @@ class NotificationsController < ApplicationController
   end
 
   def clean
-    context = Shared::Context::Manager.current_context
-    @notifications = Shared::Notification.in_context(context).where(recipient: current_user).unread
+    @notifications = Shared::Notification.in_context(@context).where(recipient: current_user).unread
 
     if @notifications.update_all(unread: false, read_at: nil)
       form_message :notice, t('notification.clean.success'), key: params[:tab]

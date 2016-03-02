@@ -20,9 +20,8 @@ class Tag < ActiveRecord::Base
     "#{year}-#{(year + 1).to_s[-2..-1]}"
   end
 
-  def self.tags_in_context(context = Shared::Context::Manager.current_context)
-    category_ids = Shared::Category.find(context).descendants.leaves.pluck(:id)
-    question_ids = Shared::Question.where(category_id: category_ids).pluck(:id)
+  def self.tags_in_context(context)
+    question_ids = Shared::Category.find(context).related_questions.pluck(:id)
 
     Shared::Tag.joins(:taggings).where(taggings: { question_id: question_ids }).uniq
   end
