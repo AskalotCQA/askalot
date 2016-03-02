@@ -62,22 +62,13 @@ module Shared::CategoriesHelper
     output.html_safe
   end
 
-  def askable_categories(context)
-    categories = askable_child_categories(Shared::Category.find_by(name: context))
-
-    categories.sort_by(&:name)
-  end
-
-  private
-
-  def askable_child_categories(category)
+  def askable_leaves_categories(context)
     categories = []
 
-    category.children.each do |category|
-      categories << category if category.askable
-      categories << askable_child_categories(category)
+    Shared::Category.find_by(name: context).leaves.sort_by(&:name).each do |c|
+      categories << c if c.askable
     end
 
-    categories.flatten
+    categories.sort_by(&:name)
   end
 end
