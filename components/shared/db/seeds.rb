@@ -29,3 +29,5 @@ slido.update_attributes(
 )
 
 slido.save!
+
+Shared::ContextUser.create user: slido, context: 'root_uuid'

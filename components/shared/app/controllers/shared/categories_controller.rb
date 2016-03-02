@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @categories = Shared::Category.groups_in_context(Shared::Context::Manager.current_context)
+    @categories = Shared::Category.groups_in_context(@context)
   end
 end
 end

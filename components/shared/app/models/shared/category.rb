@@ -138,7 +138,7 @@ class Category < ActiveRecord::Base
     groups = []
     empty = []
 
-    find_by(name: context).children.sort_by(&:name).each do |group|
+    find(context).children.sort_by(&:name).each do |group|
       if group.children.size == 0
         empty << group
       else

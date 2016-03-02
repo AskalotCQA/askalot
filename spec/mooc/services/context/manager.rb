@@ -10,12 +10,12 @@ describe Shared::Context::Manager do
       context = Shared::Context::Manager.current_context
       url_prefix = Shared::Context::Manager.context_url_prefix
 
-      expect(url_prefix).to eql('/' + context)
+      expect(url_prefix).to eql("/#{context}")
 
-      Shared::Context::Manager.current_context = 'test'
+      Shared::Context::Manager.current_context = 7
       url_prefix = Shared::Context::Manager.context_url_prefix
 
-      expect(url_prefix).to eql('/test')
+      expect(url_prefix).to eql('/7')
     end
   end
 
@@ -24,12 +24,12 @@ describe Shared::Context::Manager do
       context = Shared::Context::Manager.current_context
       url_prefix = Shared::Context::Manager.regex_context_url_prefix
 
-      expect(url_prefix).to eql('\/' + context)
+      expect(url_prefix).to eql("\\/#{context}")
 
-      Shared::Context::Manager.current_context = 'test'
+      Shared::Context::Manager.current_context = 7
       url_prefix = Shared::Context::Manager.regex_context_url_prefix
 
-      expect(url_prefix).to eql('\/test')
+      expect(url_prefix).to eql('\/7')
     end
   end
 
@@ -48,9 +48,9 @@ describe Shared::Context::Manager do
 
       expect(Shared::Context::Manager.question_context).to eql(context)
 
-      Shared::Context::Manager.question_context = 'test'
+      Shared::Context::Manager.question_context = 7
 
-      expect(Shared::Context::Manager.question_context).to eql('test')
+      expect(Shared::Context::Manager.question_context).to eql(7)
     end
   end
 
@@ -58,7 +58,7 @@ describe Shared::Context::Manager do
     it 'returns default question context' do
       context = Shared::Context::Manager.default_question_context
 
-      expect(context).to eql(Shared::Category.find_by(parent_id: nil).name)
+      expect(context).to eql(1)
     end
   end
 end

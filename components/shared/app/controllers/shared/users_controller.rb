@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @context_category = Shared::Context::Manager.context_category
+    @context_category = Shared::Category.find(@context)
     @context = @context_category.uuid
 
     @users = case params[:tab].to_sym

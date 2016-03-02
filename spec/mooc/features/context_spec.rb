@@ -7,13 +7,14 @@ describe 'Context filtering', type: :feature do
 
   before :each do
     login_as user
+
+    @context = Shared::Context::Manager.current_context
+    @category = Shared::Category.find(@context).leaves.first
   end
 
   context 'for activities' do
     it 'shows activities in context' do
-      context = Shared::Context::Manager.current_context
-      category = Shared::Context::Manager.context_category.leaves.first
-      question = create :question, :with_tags, author: user, category: category
+      question = create :question, :with_tags, author: user, category: @category
 
       visit shared.question_path question
 
@@ -28,7 +29,7 @@ describe 'Context filtering', type: :feature do
       fill_in 'answer_text', with: 'Hey, look at this.'
       click_button 'Odpovedať'
 
-      visit "/#{context}"
+      visit "/#{@context}"
       click_link 'Aktivita', match: :first
 
       list = all('.activities li')
@@ -39,9 +40,7 @@ describe 'Context filtering', type: :feature do
 
   context 'for notifications' do
     it 'shows activities in context' do
-      context = Shared::Context::Manager.current_context
-      category = Shared::Context::Manager.context_category.leaves.first
-      question = create :question, :with_tags, author: user2, category: category
+      question = create :question, :with_tags, author: user2, category: @category
 
       question.toggle_watching_by!(user2)
 
@@ -61,10 +60,10 @@ describe 'Context filtering', type: :feature do
 
       expect(page).to have_content('Žiadne notifikácie.')
 
-      visit shared.root_path context: context
+      visit shared.root_path context: @context
       expect(page).to have_xpath('//a[text()="1 neprečítaná notifikácia"]')
 
-      visit shared.notifications_path context: context
+      visit shared.notifications_path context: @context
 
       notifications = all('#unread > ol.notifications > li')
 
@@ -74,9 +73,7 @@ describe 'Context filtering', type: :feature do
 
   context 'for watchings' do
     it 'shows watchings in context' do
-      context = Shared::Context::Manager.current_context
-      category = Shared::Context::Manager.context_category.leaves.first
-      question = create :question, :with_tags, author: user2, category: category
+      question = create :question, :with_tags, author: user2, category: @category
 
       question.toggle_watching_by!(user)
 
@@ -84,7 +81,7 @@ describe 'Context filtering', type: :feature do
 
       expect(page).to have_content('Žiadne sledovania.')
 
-      visit shared.watchings_path context: context
+      visit shared.watchings_path context: @context
 
       watchings = all('ol.watchings > li')
 
@@ -94,7 +91,9 @@ describe 'Context filtering', type: :feature do
 
   context 'for users' do
     it 'shows users in context' do
-      Shared::ContextUser.create user: user, context: Shared::Context::Manager.context_category.uuid
+      context = Shared::Context::Manager.current_context
+      category = Shared::Category.find(context)
+      cu = Shared::ContextUser.create user: user, context: category.uuid
 
       visit shared.users_path
 
@@ -102,8 +101,8 @@ describe 'Context filtering', type: :feature do
 
       expect(list.size).to eq(1)
 
-      Shared::Category.create name: 'test', uuid: 'test_uuid'
-      visit shared.users_path context: 'test'
+      category = Shared::Category.create name: 'test', uuid: 'test_uuid'
+      visit shared.users_path context: category.id
 
       list = all('#users .user-square')
 
@@ -113,8 +112,7 @@ describe 'Context filtering', type: :feature do
 
   context 'for tags' do
     it 'shows tags in context' do
-      category = Shared::Context::Manager.context_category.leaves.first
-      create :question, :with_tags, author: user2, category: category
+      create :question, :with_tags, author: user2, category: @category
 
       visit shared.tags_path
 
@@ -122,8 +120,8 @@ describe 'Context filtering', type: :feature do
 
       expect(list.size).to eq(1)
 
-      Shared::Category.create name: 'test', uuid: 'test_uuid'
-      visit shared.tags_path context: 'test'
+      category = Shared::Category.create name: 'test', uuid: 'test_uuid'
+      visit shared.tags_path context: category.id
 
       list = all('#tags h4')
 
@@ -133,7 +131,9 @@ describe 'Context filtering', type: :feature do
 
   context 'for user profile' do
     it 'shows user profile items in context' do
-      question = create :question, :with_tags, author: user, category: category
+      question = create :question, :with_tags, author: user, category: @category
+      category = create :category
+
       create :answer, author: user
       question.toggle_favoring_by! user
 
@@ -176,7 +176,7 @@ describe 'Context filtering', type: :feature do
 
       expect(list.size).to eq(1)
 
-      visit shared.user_path(user.nick, context: 'test')
+      visit shared.user_path(user.nick, context: category.id)
 
       within '.tab-navigation' do
         click_link 'Otázky'

@@ -35,10 +35,12 @@ describe Shared::Context::Manager do
     it 'returns different context for questions and page context' do
       context = Shared::Context::Manager.default_context
       question_context = Shared::Context::Manager.default_question_context
+      academic_year = Shared::Tag.current_academic_year_value
+      category = Shared::Category.find_by(name: academic_year)
 
       expect(question_context).not_to eql(context)
-      expect(context).to eql('root')
-      expect(question_context).to eql(Shared::Tag.current_academic_year_value)
+      expect(context).to eql(1)
+      expect(question_context).to eql(category.id)
     end
   end
 
@@ -57,8 +59,10 @@ describe Shared::Context::Manager do
   describe 'self.default_question_context' do
     it 'returns default question context' do
       context = Shared::Context::Manager.default_question_context
+      academic_year = Shared::Tag.current_academic_year_value
+      category = Shared::Category.find_by(name: academic_year)
 
-      expect(context).to eql(Shared::Tag.current_academic_year_value)
+      expect(context).to eql(category.id)
     end
   end
 end

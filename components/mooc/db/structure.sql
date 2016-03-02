@@ -1431,7 +1431,7 @@ CREATE TABLE watchings (
     deleted boolean DEFAULT false NOT NULL,
     deletor_id integer,
     deleted_at timestamp without time zone,
-    context character varying(255)
+    context integer
 );
 
 
@@ -3426,4 +3426,10 @@ INSERT INTO schema_migrations (version) VALUES ('20160224152624');
 INSERT INTO schema_migrations (version) VALUES ('20160224210832');
 
 INSERT INTO schema_migrations (version) VALUES ('20160228103010');
+
+INSERT INTO schema_migrations (version) VALUES ('20160301212036');
+
+INSERT INTO schema_migrations (version) VALUES ('20160301212049');
+
+INSERT INTO schema_migrations (version) VALUES ('20160301212059');
 

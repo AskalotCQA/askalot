@@ -59,7 +59,7 @@ CREATE TABLE activities (
     created_on date NOT NULL,
     updated_on date NOT NULL,
     anonymous boolean DEFAULT false NOT NULL,
-    context character varying(255)
+    context integer
 );
 
 
@@ -908,7 +908,7 @@ CREATE TABLE notifications (
     updated_at timestamp without time zone NOT NULL,
     read_at timestamp without time zone,
     anonymous boolean DEFAULT false NOT NULL,
-    context character varying(255)
+    context integer
 );
 
 
@@ -1430,7 +1430,7 @@ CREATE TABLE watchings (
     deleted boolean DEFAULT false NOT NULL,
     deletor_id integer,
     deleted_at timestamp without time zone,
-    context character varying(255)
+    context integer
 );
 
 
@@ -3086,13 +3086,6 @@ CREATE UNIQUE INDEX index_watchings_on_unique_key ON watchings USING btree (watc
 
 
 --
--- Name: index_watchings_on_watchable_id_and_watchable_type; Type: INDEX; Schema: public; Owner: -; Tablespace:
---
-
-CREATE INDEX index_watchings_on_watchable_id_and_watchable_type ON watchings USING btree (watchable_id, watchable_type);
-
-
---
 -- Name: index_watchings_on_watcher_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
 --
 
@@ -3419,3 +3412,9 @@ INSERT INTO schema_migrations (version) VALUES ('20160224152624');
 INSERT INTO schema_migrations (version) VALUES ('20160224210832');
 
 INSERT INTO schema_migrations (version) VALUES ('20160228103010');
+
+INSERT INTO schema_migrations (version) VALUES ('20160301212036');
+
+INSERT INTO schema_migrations (version) VALUES ('20160301212049');
+
+INSERT INTO schema_migrations (version) VALUES ('20160301212059');

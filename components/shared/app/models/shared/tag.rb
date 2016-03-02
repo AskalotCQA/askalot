@@ -21,7 +21,7 @@ class Tag < ActiveRecord::Base
   end
 
   def self.tags_in_context(context = Shared::Context::Manager.current_context)
-    category_ids = Shared::Category.find_by(name: context).descendants.leaves.pluck(:id)
+    category_ids = Shared::Category.find(context).descendants.leaves.pluck(:id)
     question_ids = Shared::Question.where(category_id: category_ids).pluck(:id)
 
     Shared::Tag.joins(:taggings).where(taggings: { question_id: question_ids }).uniq

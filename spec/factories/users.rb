@@ -29,6 +29,8 @@ FactoryGirl.define do
 
     after :create do |user|
       user.confirm!
+
+      Shared::ContextUser.create user: user, context: 'root_uuid'
     end
 
     trait :as_ais do

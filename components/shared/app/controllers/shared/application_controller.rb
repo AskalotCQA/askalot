@@ -24,6 +24,10 @@ class ApplicationController < ActionController::Base
 
   def determine_context
     context = params[:context] || Shared::Context::Manager.default_context
+    context_id = context.is_a?(String) ? context.gsub(/[^0-9]/, '').to_i : nil
+    context = Shared::Context::Manager.determine_context_id(context) unless context_id.nil? || context_id.is_a?(Fixnum)
+
+    @context = context
     Shared::Context::Manager.current_context = context
   end
 end

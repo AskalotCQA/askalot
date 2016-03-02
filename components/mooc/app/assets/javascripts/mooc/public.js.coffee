@@ -70,7 +70,7 @@ $(document).ready ->
     console.log('sending to parser')
     $.ajax
       type: 'POST'
-      url: host + 'root/parser'
+      url: host + '1/parser'
       dataType: 'json'
       data: infoParser()
       success: (data) ->
