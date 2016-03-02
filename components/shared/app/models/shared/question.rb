@@ -20,8 +20,7 @@ class Question < ActiveRecord::Base
   # TODO (jharinek) propose change to parent tags
   before_save { self.tag_list += (new_record? ? category.effective_tags : category.tags) if category }
 
-  after_create { self.category.reload_question_counters if self.category }
-  after_destroy { self.category.reload_question_counters if self.category }
+  after_create { self.register_question }
 
   belongs_to :category, counter_cache: true
   belongs_to :document, class_name: :'University::Document', counter_cache: true
@@ -30,6 +29,7 @@ class Question < ActiveRecord::Base
 
   has_many :revisions, class_name: :'Question::Revision', dependent: :destroy
   has_many :profiles, class_name: :'Question::Profile', dependent: :destroy
+  has_many :category_questions, dependent: :destroy
 
   validates :category,  presence: true, if: lambda { |question| question.document.blank? }
   validates :document,  presence: true, if: lambda { |question| question.category.blank? }
@@ -49,8 +49,6 @@ class Question < ActiveRecord::Base
   scope :solved,       lambda { with_category.joins(:answers).merge(best_answers).references(:labelings).uniq }
 
   scope :answered_but_not_best, lambda { with_category.joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).references(:labeling).uniq.select('questions.id')).uniq }
-
-  scope :all_directly_related, lambda { |category| category.all_directly_related_questions(self) }
 
   scope :by, lambda { |user| where(author: user) }
 
@@ -82,6 +80,20 @@ class Question < ActiveRecord::Base
       p.property    = 'reputation'
       p.value       = 0
       p.probability = 0
+    end
+  end
+
+  def register_question
+    return unless self.category
+
+    self.category.self_and_ancestors.each do |ancestor|
+      Shared::CategoryQuestion.create question_id: self.id, category_id: ancestor.id, shared: false
+    end
+
+    self.category.all_versions.shared.each do |shared|
+      shared.self_and_ancestors.each do |c|
+        Shared::CategoryQuestion.create question_id: self.id, category_id: c.id, shared: true, shared_through_category: shared
+      end
     end
   end
 

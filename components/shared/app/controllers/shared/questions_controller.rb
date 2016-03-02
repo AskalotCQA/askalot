@@ -18,12 +18,14 @@ class QuestionsController < ApplicationController
 
   def index
     @category  = Shared::Category.find(params[:category]) if params[:category]
+    @category  ||= Shared::Category.find_by_name(@context)
+
     @questions = case params[:tab].to_sym
-                 when :unanswered then Shared::Question.unanswered.by_votes
-                 when :answered   then Shared::Question.answered_but_not_best.by_votes
-                 when :solved     then Shared::Question.solved.by_votes
-                 when :favored    then Shared::Question.favored.by_votes
-                 else Shared::Question.recent
+                 when :unanswered then @category.related_questions.unanswered.by_votes
+                 when :answered   then @category.related_questions.answered.by_votes
+                 when :solved     then @category.related_questions.solved.by_votes
+                 when :favored    then @category.related_questions.favored.by_votes
+                 else @category.related_questions.recent
                  end
 
     @questions = filter_questions(@questions)
@@ -122,7 +124,6 @@ class QuestionsController < ApplicationController
 
   def filter_questions(relation)
     relation = relation.tagged_with(params[:tags]) if params[:tags].present?
-    relation = relation.all_directly_related Shared::Category.find(params[:category]) if params[:category]
 
     relation
   end

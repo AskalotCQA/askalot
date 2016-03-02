@@ -12,20 +12,23 @@ class Category < ActiveRecord::Base
   has_many :assignments, dependent: :destroy
   has_many :users, through: :assignments
   has_many :roles, through: :assignments
+  has_many :category_questions, dependent: :destroy
+  has_many :related_questions, -> { distinct }, through: :category_questions, :source => :question
+
+  has_many :category_questions_shared_through_me, foreign_key: 'shared_through_category_id', class: Shared::CategoryQuestion
 
   validates :name, presence: true
 
   before_save  :update_changed
-  after_create :reload_question_counters
-  after_create :reload_answer_counters
   after_create :save_parent_tags
-  after_update :check_changed_sharing
   after_save   :update_public_tags
   after_save   :refresh_names
+  after_save   :update_categories_questions
 
   scope :with_slido, -> { where.not(slido_username: nil) }
-  scope :with_questions, -> { where.not(direct_shared_questions_count: 0) }
+  scope :with_questions, lambda { joins(:related_questions).uniq }
   scope :askable, -> { where(askable: true) }
+  scope :shared, -> { where(shared: true) }
 
   attr_reader :what_changed
 
@@ -76,18 +79,6 @@ class Category < ActiveRecord::Base
     names << self.name
 
     self.full_public_name = names.join(' - ')
-  end
-
-  def all_related_questions(relation)
-    if self.shared
-      uuids = self.self_and_descendants.map { |item| item.uuid }.reject { |item| item.nil? || item.blank? || item.empty?}
-      category_ids = Shared::Category.select('id').where("uuid IN (?) AND created_at <= ?", uuids, self.created_at)
-    else
-      category_ids = self.self_and_descendants.map { |item| item.id }
-    end
-
-    relation ||= Shared::Question.all
-    relation.where('category_id IN (?)', category_ids)
   end
 
   def count
@@ -183,40 +174,22 @@ class Category < ActiveRecord::Base
   end
 
   def all_versions
-    Shared::Category.where("uuid = ? AND created_at <= ?", self.uuid, self.created_at)
+    Shared::Category.where(uuid: self.uuid).where.not(id: self.id)
   end
 
-  def check_changed_sharing
-    return unless self.shared_changed?
-
-    all_versions.each do |category|
-        category.reload_question_counters
-        category.reload_answer_counters
-    end
+  def related_answers
+    Shared::Answer.where(question: related_questions)
   end
 
-  def all_directly_related_questions(relation = nil)
-    category_ids = self.shared ? self.all_versions.select('id') : self.id
+  def related_questions_for_user(user, show_anonymous = true)
+    relation = related_questions.where(author: user)
+    relation = relation.where(anonymous: false) unless show_anonymous
 
-    relation ||= Shared::Question.all
-
-    relation.where('category_id IN (?)', category_ids)
+    relation
   end
 
-  def reload_question_counters
-    self.direct_questions_count = self.questions.count
-
-    self.direct_shared_questions_count = all_directly_related_questions.count
-
-    self.save!
-  end
-
-  def reload_answer_counters
-    self.direct_answers_count = self.answers.size
-
-    self.direct_shared_answers_count = Shared::Answer.where('question_id IN (?)', all_directly_related_questions.select('id')).count
-
-    self.save!
+  def related_answers_for_user(user)
+    related_answers.where(author: user)
   end
 
   def save_parent_tags
@@ -231,6 +204,37 @@ class Category < ActiveRecord::Base
         category.public_tags = category.self_and_ancestors.map { |ancestor| ancestor.tags }.flatten.uniq.sort
 
         category.save
+      end
+    end
+
+    true
+  end
+
+  def update_categories_questions
+    if @what_changed.include? 'parent_id'
+      reload_categories_questions
+    elsif @what_changed.include? 'shared'
+      if self.shared
+        self.all_versions.each do |shared_category|
+          shared_category.questions.each do |question|
+            self.self_and_ancestors.each do |ancestor|
+              CategoryQuestion.find_or_create_by question_id: question.id, category_id: ancestor.id, shared: true, shared_through_category: self
+            end
+          end
+        end
+      else
+        self.category_questions_shared_through_me.destroy_all
+      end
+    end
+
+    true
+  end
+
+  def reload_categories_questions
+    self_and_descendants.each do |category|
+      category.questions.each do |question|
+        question.category_questions.delete_all
+        question.register_question
       end
     end
   end
