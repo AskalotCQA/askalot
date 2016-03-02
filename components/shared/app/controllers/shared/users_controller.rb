@@ -10,10 +10,13 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    @context_category = Shared::Category.find(@context)
+    @context = @context_category.uuid
+
     @users = case params[:tab].to_sym
-             when :recent then Shared::User.recent.order(created_at: :desc)
-             when :alumni then Shared::User.alumni.order(:nick)
-             else Shared::User.order(:nick)
+             when :recent then Shared::User.in_context(@context).recent.order(created_at: :desc)
+             when :alumni then Shared::User.in_context(@context).alumni.order(:nick)
+             else Shared::User.in_context(@context).order(:nick)
              end
 
     @users = @users.page(params[:page]).per(60)
@@ -21,12 +24,13 @@ class UsersController < ApplicationController
 
   def show
     @user = Shared::User.by(nick: params[:nick])
+    category = Shared::Category.find(@context)
 
-    @questions  = @user.questions.where(anonymous: false).order(created_at: :desc)
-    @anonymous  = @user.questions.where(anonymous: true).order(created_at: :desc)
-    @answers    = @user.answers.order(created_at: :desc)
-    @favorites  = @user.favorites.order(created_at: :desc)
-    @activities = @user.activities_seen_by(current_user).order(created_at: :desc)
+    @questions  = category.related_questions.where(author: @user).where(anonymous: false).order(created_at: :desc)
+    @anonymous  = category.related_questions.where(author: @user).where(anonymous: true).order(created_at: :desc)
+    @answers    = category.related_answers.where(author: @user).order(created_at: :desc)
+    @favorites  = @user.favorites.where(favorites: { question_id: category.related_questions.pluck(:id) }).order(created_at: :desc)
+    @activities = @user.activities_seen_by(current_user).in_context(category.id).order(created_at: :desc)
 
     @questions  = @questions.page(tab_page :questions).per(10)
     @anonymous  = @anonymous.page(tab_page :anonymous).per(10)

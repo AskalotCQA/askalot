@@ -66,8 +66,6 @@ shared_examples_for Shared::Taggable do
 
     context 'with multiple tags' do
       it 'searches records tagged by those tags' do
-        puts 'factory:'
-        puts factory
         create factory, tag_list: 'a, b'
         create factory, tag_list: 'a, c'
         create factory, tag_list: 'a, c, d'

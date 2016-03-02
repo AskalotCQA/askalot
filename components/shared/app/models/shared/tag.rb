@@ -7,7 +7,7 @@ class Tag < ActiveRecord::Base
   has_many :questions, through: :taggings
   has_many :answers, through: :questions
 
-  scope :recent,  lambda { where('created_at >= ?', Time.now - 1.month ).unscope(:order).order(:created_at) }
+  scope :recent,  lambda { where('tags.created_at >= ?', Time.now - 1.month ).unscope(:order).order('tags.created_at') }
   scope :popular, lambda { select('tags.*, count(*) as c').joins(:taggings).group('tags.id').unscope(:order).order('c desc').limit(30) }
 
   before_save :normalize
@@ -18,6 +18,12 @@ class Tag < ActiveRecord::Base
     year = (now = Time.now).month >= 9 ? now.year : (now.year - 1)
 
     "#{year}-#{(year + 1).to_s[-2..-1]}"
+  end
+
+  def self.tags_in_context(context)
+    question_ids = Shared::Category.find(context).related_questions.pluck(:id)
+
+    Shared::Tag.joins(:taggings).where(taggings: { question_id: question_ids }).uniq
   end
 
   def value

@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
   has_many :categories, through: :assignments
 
   has_many :profiles, class_name: :'Shared::User::Profile', dependent: :destroy
+  has_many :context_users
 
   validates :role, presence: true
 
@@ -50,10 +51,9 @@ class User < ActiveRecord::Base
   validates :last,  format: { with: /\A\p{Lu}[\p{Ll}\-\p{Lu}]*\z/u }, allow_blank: true
 
   scope :by, lambda { |args| where(args).first || raise(ActiveRecord::RecordNotFound) }
-
-  scope :recent, lambda { where('created_at >= ?', Time.now - 1.month ) }
-
+  scope :recent, lambda { where('users.created_at >= ?', Time.now - 1.month ) }
   scope :alumni, lambda { where(alumni: true) }
+  scope :in_context, lambda { |context| includes(:context_users).where(context_users: { context: context }).where.not(context_users: { id: nil }) unless Rails.module.university? }
 
   Shared::Social.networks.each do |key, network|
     validates key, format: { with: network.regexp }, allow_blank: true

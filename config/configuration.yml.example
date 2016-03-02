@@ -60,13 +60,13 @@ defaults: &defaults
       label:
         en: Class
         sk: Predmet
-      is_in_public_name: false
+      is_in_public_name: true
     -
       depth: 3
       label:
         en: Part
         sk: Časť
-      is_in_public_name: false
+      is_in_public_name: true
 
 fiit_development:
   <<: *defaults

@@ -138,7 +138,7 @@ class Category < ActiveRecord::Base
     groups = []
     empty = []
 
-    find_by(name: context).children.sort_by(&:name).each do |group|
+    find(context).children.sort_by(&:name).each do |group|
       if group.children.size == 0
         empty << group
       else
@@ -168,7 +168,7 @@ class Category < ActiveRecord::Base
   end
 
   def self.categories_with_parent_name(context)
-    Shared::Category.find_by(name: context).self_and_descendants.each do |category|
+    Shared::Category.find(context).self_and_descendants.each do |category|
       category.name = category.parent.name + ' - ' + category.name unless category.root?
     end
   end
@@ -179,17 +179,6 @@ class Category < ActiveRecord::Base
 
   def related_answers
     Shared::Answer.where(question: related_questions)
-  end
-
-  def related_questions_for_user(user, show_anonymous = true)
-    relation = related_questions.where(author: user)
-    relation = relation.where(anonymous: false) unless show_anonymous
-
-    relation
-  end
-
-  def related_answers_for_user(user)
-    related_answers.where(author: user)
   end
 
   def save_parent_tags

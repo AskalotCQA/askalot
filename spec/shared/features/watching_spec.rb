@@ -83,6 +83,7 @@ describe 'Watching', type: :feature do
 
   context 'with category' do
     let!(:category) { create :category }
+    let!(:question) { create :question, category: category }
 
     it 'registers watching for category', js: true do
       visit shared.root_path

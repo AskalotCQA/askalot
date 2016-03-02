@@ -1,5 +1,7 @@
 module Mooc
-  class ParserController < Shared::ApplicationController
+  class ParserController < ::Shared::ApplicationController
+    skip_before_filter :verify_authenticity_token
+    skip_before_filter :login_required
 
     def parser
       status_case = 'nothing'

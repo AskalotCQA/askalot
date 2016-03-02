@@ -19,7 +19,7 @@
         <%= navbar_dropdown_tag :'caret-down', nil, '#', class: :'visible-sm visible-md' do %>
           <%= content_tag :li, link_to(t('user.navigation'), shared.users_path) %>
           <%= content_tag :li, link_to(t('activity.navigation'), shared.activities_path) %>
-          <%= content_tag :li, link_to(t('statistic.navigation'), shared.statistics_path) if user_signed_in? && can?(:observe, :any) %>
+          <%= content_tag :li, link_to(t('statistic.navigation'), shared.statistics_path) if user_signed_in? && can?(:administrate, :any) %>
           <%= content_tag :li, link_to(t('administration.navigation'), shared.administration_root_path) if user_signed_in? && can?(:administrate, :any) %>
           <li class="divider"></li>
           <%= content_tag :li, link_to(t('help.navigation'), shared.help_path) %>
@@ -27,7 +27,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <%= render 'shared/shared/notifications', notifications: current_user.notifications.unread.order(created_at: :desc).limit(5) %>
+          <%= render 'shared/shared/notifications', notifications: current_user.notifications.in_context(@context).unread.order(created_at: :desc).limit(5) %>
           <li class="hidden-xs"><%= link_to current_user.nick, shared.user_path(current_user.nick) %></li>
           <%= navbar_dropdown_tag :cog, nil, '#', class: :'hidden-xs' do %>
             <li><%= link_to t('user.edit.profile'), shared.edit_user_registration_path(tab: :profile) %></li>

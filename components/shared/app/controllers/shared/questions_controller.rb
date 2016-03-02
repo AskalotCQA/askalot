@@ -18,7 +18,7 @@ class QuestionsController < ApplicationController
 
   def index
     @category  = Shared::Category.find(params[:category]) if params[:category]
-    @category  ||= Shared::Category.find_by_name(@context)
+    @category  ||= Shared::Category.find(@context)
 
     @questions = case params[:tab].to_sym
                  when :unanswered then @category.related_questions.unanswered.by_votes

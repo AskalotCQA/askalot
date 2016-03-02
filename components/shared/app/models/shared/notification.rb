@@ -17,6 +17,8 @@ class Notification < ActiveRecord::Base
   scope :read,   lambda { unscope(where: :unread).where(unread: false) }
   scope :unread, lambda { unscope(where: :unread).where(unread: true) }
 
+  scope :in_context, lambda { |context| where(context: context) }
+
   symbolize :action, in: ACTIONS
 
   self.table_name = 'notifications'
