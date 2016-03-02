@@ -1,4 +1,4 @@
-<li id="comment-<%= comment.id %>">
+<li id="comment-<%= comment.id %>" class="<%= 'comment-teacher' if comment_highlighted? comment %>">
   <div>
     <%= render 'shared/comments/details',  comment: comment %>
     <%= render 'shared/comments/editing',  comment: comment, remote: remote %>
