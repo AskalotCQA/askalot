@@ -10,7 +10,7 @@
   <% end %>
 
   <% category.children.each do |c| %>
-    <%= render 'categories', category: c, category_depths: category_depths %>
+    <%= render 'categories', category: c, category_depths: category_depths if c.related_questions.any? %>
   <% end %>
 
   <% if category_depths.include?(category.depth) && category.children.any? %>
