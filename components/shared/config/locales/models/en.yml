@@ -231,6 +231,7 @@ en:
         tags: "Tags"
         shared: "Show questions also from previous related categories"
         askable: "Questions can be asked directly in this category"
+        teacher_assistants: "Teacher assistants"
 
       shared/changelog:
         text: "Text"

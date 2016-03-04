@@ -208,7 +208,7 @@
               <% @users.each_with_index do |user, i| %>
                 <tr>
                   <td class="text-right"><%= i + 1 %></td>
-                  <%= data_tag(user) { |u| [link_to(u.name || u.nick, user_path(u.nick)), { administrator: :'text-muted', teacher: :info }[u.role]] } %>
+                  <%= data_tag(user) { |u| [link_to(u.name || u.nick, user_path(u.nick)), { administrator: :'text-muted', teacher: :info , teacher_assistant: :info }[u.role]] } %>
 
                   <%= data_tag user.questions.where(id: @questions).size %>
                   <%= data_tag user.questions.where(id: @questions).viewed.size %>

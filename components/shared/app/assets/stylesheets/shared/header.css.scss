@@ -1,0 +1,18 @@
+#header-navbar {
+  .container {
+    position: relative;
+  }
+}
+
+#context-change {
+  position: absolute;
+  bottom: -30px;
+  right: 0;
+  max-width: 200px;
+  z-index: 500;
+
+  select {
+    @extend .form-control;
+    @extend .input-sm;
+  }
+}
