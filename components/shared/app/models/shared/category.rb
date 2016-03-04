@@ -17,6 +17,9 @@ class Category < ActiveRecord::Base
 
   has_many :category_questions_shared_through_me, foreign_key: 'shared_through_category_id', class: Shared::CategoryQuestion
 
+  has_many :teacher_assistant_assignments, -> { where(role_id: Shared::Role::teacher_assistant.id) }, class_name: "Shared::Assignment"
+  has_many :teacher_assistants, through: :teacher_assistant_assignments, class_name: 'Shared::User', source: :user
+
   validates :name, presence: true
 
   before_save  :update_changed
@@ -29,6 +32,7 @@ class Category < ActiveRecord::Base
   scope :with_questions, lambda { joins(:related_questions).uniq }
   scope :askable, -> { where(askable: true) }
   scope :shared, -> { where(shared: true) }
+  scope :in_contexts, lambda { |contexts| Category.all_in_contexts(contexts, self) }
 
   attr_reader :what_changed
 
@@ -123,7 +127,9 @@ class Category < ActiveRecord::Base
   end
 
   def teachers
-    list = association(:assignments).loaded? ? assignments.select { |item| item.role_id = 2 } : assignments.where({ role_id: 2 })
+    roles = Shared::Role::teacher_roles.map(&:id)
+    list  = association(:assignments).loaded? ? assignments.select { |item| roles.include? item.role_id } : assignments.where({ role_id: roles })
+
     list.map { |t| t.user }
   end
 
@@ -173,6 +179,17 @@ class Category < ActiveRecord::Base
     Shared::Category.find(context).self_and_descendants.each do |category|
       category.name = category.parent.name + ' - ' + category.name unless category.root?
     end
+  end
+
+  def self.all_in_contexts(contexts, relation = nil)
+    relation   ||= Category::all
+    conditions = []
+
+    Category::where(name: contexts).each do |category|
+      conditions.append "(lft >= #{category.lft} AND rgt <= #{category.rgt})"
+    end
+
+    conditions.empty? ? relation.where('1 = 2') : relation.where(conditions.join(' OR '))
   end
 
   def all_versions

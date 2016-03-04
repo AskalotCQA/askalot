@@ -10,4 +10,12 @@ Mooc::Engine.routes.draw do
 
   match '/parser' => "parser#parser", via: [:post]
   match '/parser' => "parser#options", via: [:options]
+
+  namespace :teacher_administration do
+    root 'categories#index'
+
+    resources :categories, only: [:index, :update, :edit] do
+      post 'settings' => 'categories#update_settings', on: :collection
+    end
+  end
 end

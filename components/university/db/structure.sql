@@ -256,9 +256,9 @@ CREATE TABLE categories (
     children_count integer,
     full_tree_name character varying(255),
     full_public_name character varying(255),
+    public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     direct_questions_count integer DEFAULT 0 NOT NULL,
     direct_answers_count integer DEFAULT 0 NOT NULL,
-    public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     category_questions_count integer DEFAULT 0 NOT NULL
 );
 

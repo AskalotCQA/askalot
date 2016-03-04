@@ -256,10 +256,10 @@ CREATE TABLE categories (
     children_count integer,
     full_tree_name character varying(255),
     full_public_name character varying(255),
+    public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     lti_id character varying(255),
     direct_questions_count integer DEFAULT 0 NOT NULL,
     direct_answers_count integer DEFAULT 0 NOT NULL,
-    public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     category_questions_count integer DEFAULT 0 NOT NULL
 );
 
@@ -2170,13 +2170,6 @@ CREATE INDEX index_categories_on_lft ON categories USING btree (lft);
 
 
 --
--- Name: index_categories_on_lti_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_categories_on_lti_id ON categories USING btree (lti_id);
-
-
---
 -- Name: index_categories_on_name_and_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3410,8 +3403,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151207221041');
 INSERT INTO schema_migrations (version) VALUES ('20151207231221');
 
 INSERT INTO schema_migrations (version) VALUES ('20151212205452');
-
-INSERT INTO schema_migrations (version) VALUES ('20151213121223');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213143631');
 

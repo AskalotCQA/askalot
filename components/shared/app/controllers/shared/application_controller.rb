@@ -18,6 +18,8 @@ class ApplicationController < ActionController::Base
   include Shared::Slido::Flash
   include (Rails.module.classify + '::Application').constantize
 
+  helper_method :contexts
+
   def current_ability
     @current_ability ||= Shared::Ability.new(current_user)
   end
@@ -30,6 +32,16 @@ class ApplicationController < ActionController::Base
 
     @context = context
     Shared::Context::Manager.current_context = context
+  end
+
+  def contexts
+    return [] unless user_signed_in?
+
+    if current_user.role? :administrator
+      @contexts ||= Shared::Category.roots
+    else
+      @contexts ||= current_user.assigned_categories(:teacher).select { |t| t.parent_id.nil? }
+    end
   end
 end
 end

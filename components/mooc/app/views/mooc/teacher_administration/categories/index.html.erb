@@ -1,0 +1,23 @@
+<h1><%= t 'teacher_administration.category.index.title' %></h1>
+
+<% content_for :categories_header do %>
+  <th></th>
+  <th></th>
+  <th>
+    <%= fa_icon :group, tooltip_attributes(t 'activerecord.attributes.shared/category.shared') %>
+  </th>
+  <th>
+    <%= fa_icon :question, tooltip_attributes(t 'activerecord.attributes.shared/category.askable') %>
+  </th>
+  <th></th>
+<% end %>
+
+<div class="administration-categories">
+  <%= render 'mooc/teacher_administration/categories/update_settings' %>
+
+  <%= tree_table(@categories, yield(:categories_header)) do |category| %>
+    <%= render 'mooc/teacher_administration/categories/category', category: category %>
+  <% end %>
+
+  <%= render 'mooc/teacher_administration/categories/update_settings' %>
+</div>
