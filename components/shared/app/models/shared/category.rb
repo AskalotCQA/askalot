@@ -39,7 +39,7 @@ class Category < ActiveRecord::Base
   end
 
   def refresh_names
-    return true unless Shared::Category.column_names.include? :full_public_name
+    return true unless Shared::Category.column_names.include? 'full_public_name'
 
     refresh_descs            = false
     name_changed             = @what_changed.include? 'name'
@@ -184,7 +184,7 @@ class Category < ActiveRecord::Base
   end
 
   def save_parent_tags
-    return true unless Shared::Category.column_names.include? :public_tags
+    return true unless Shared::Category.column_names.include? 'public_tags'
 
     self.public_tags += ancestors.map { |ancestor| ancestor.tags }.flatten
 
@@ -192,7 +192,7 @@ class Category < ActiveRecord::Base
   end
 
   def update_public_tags
-    return true unless Shared::Category.column_names.include? :public_tags
+    return true unless Shared::Category.column_names.include? 'public_tags'
 
     if @what_changed.include? 'parent_id'
       self_and_descendants.each do |category|
