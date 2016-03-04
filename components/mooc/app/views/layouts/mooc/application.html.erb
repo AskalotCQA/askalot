@@ -13,14 +13,14 @@
   <body<%= resolve_sidebar(yield :sidebar) %>>
     <%= render 'layouts/mooc/header' -%>
     <% if use_container? %>
-      <div id="main" class="container">
+      <div id="main" class="container-fluid">
         <%= flash_messages -%>
         <%= yield -%>
       </div>
     <% else %>
       <%= yield -%>
     <% end %>
-    <%= render 'layouts/shared/footer' -%>
+    <%= render 'layouts/mooc/footer' -%>
     <%= render 'shared/shared/fixes' -%>
     <%= render 'shared/shared/locales' -%>
     <%= javascript_include_tag 'shared/application' -%>

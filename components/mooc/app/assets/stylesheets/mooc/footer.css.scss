@@ -1,0 +1,46 @@
+// footer
+
+footer {
+  @include clearfix;
+
+  margin: 100px 0 0 0;
+  padding: 10px 0 !important;
+  overflow-x: hidden;
+
+  background: $gray-lightest !important;
+  color: $text-muted;
+  text-align: center;
+  font-size: $font-size-small;
+
+  a {
+    @include color-variant($text-muted, $text-muted);
+  }
+
+  li a, li span {
+    margin: 0 $padding-xs-horizontal;
+  }
+
+  li:after {
+    content: '·';
+  }
+
+  li:last-child:after {
+    content: '';
+  }
+}
+
+// lists
+
+.list-left, .list-right {
+  position: relative;
+
+  > ul {
+    @extend .list-unstyled;
+    position: relative;
+    margin: 0;
+
+    & > li {
+      float: left;
+    }
+  }
+}
