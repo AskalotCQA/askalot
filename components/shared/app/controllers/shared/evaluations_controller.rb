@@ -38,7 +38,7 @@ class EvaluationsController < ApplicationController
   private
 
   def find_evaluable
-    [:question_id, :answer_id].each { |id| return id.to_s[0..-4].classify.constantize.find(params[id]) if params[id] }
+    [:question_id, :answer_id].each { |id| return "Shared::#{id.to_s[0..-4].classify}".constantize.find(params[id]) if params[id] }
   end
 
   def create_params
