@@ -9,6 +9,7 @@ class UserMailer < ActionMailer::Base
   helper CommentsHelper
   helper DeletablesHelper
   helper DocumentsHelper
+  helper EvaluationsHelper
   helper FavoritesHelper
   helper GroupsHelper
   helper LabelingsHelper
