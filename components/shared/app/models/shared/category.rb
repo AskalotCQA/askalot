@@ -228,7 +228,6 @@ class Category < ActiveRecord::Base
   def reload_categories_questions
     self_and_descendants.each do |category|
       category.questions.each do |question|
-        question.category_questions.delete_all
         question.register_question
       end
     end

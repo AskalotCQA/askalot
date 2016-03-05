@@ -21,7 +21,6 @@ class Question < ActiveRecord::Base
   before_save { self.tag_list += (new_record? ? category.effective_tags : category.tags) if category }
 
   after_create { self.register_question }
-  after_update { self.update_question_cache }
 
   belongs_to :category, counter_cache: true
   belongs_to :document, class_name: :'University::Document', counter_cache: true
@@ -97,11 +96,6 @@ class Question < ActiveRecord::Base
         Shared::CategoryQuestion.create question_id: self.id, category_id: c.id, shared: true, shared_through_category: shared
       end
     end
-  end
-
-  def update_question_cache
-    Shared::CategoryQuestion.where(question_id: self.id).destroy_all
-    register_question
   end
 
   # TODO (jharinek) delete when refactoring watchings
