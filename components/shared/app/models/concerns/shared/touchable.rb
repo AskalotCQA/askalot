@@ -23,7 +23,7 @@ module Shared::Touchable
   end
 
   def untouching_attributes_changed?
-    attributes = [:favorites_count, :votes_count, :views_count, :votes_difference, :votes_lb_wsci_bp]
+    attributes = [:favorites_count, :votes_count, :views_count, :votes_difference, :votes_lb_wsci_bp, :closed]
 
     (self.changed.map(&:to_sym) & attributes).any?
   end
