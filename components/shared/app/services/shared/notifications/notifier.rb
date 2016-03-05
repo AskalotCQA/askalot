@@ -10,7 +10,18 @@ module Shared::Notifications
       notifications = []
 
       recipients.each do |recipient|
-        notifications << factory.create!(action: action, initiator: initiator, recipient: recipient, resource: resource, anonymous: !!options[:anonymous], context: context)
+        attributes = {
+          action: action,
+          initiator: initiator,
+          recipient: recipient,
+          resource: resource,
+          anonymous: !!options[:anonymous],
+          context: context
+        }
+        notification = factory.new
+        notification.attributes = attributes.reject { |k, _| !factory.column_names.include? k.to_s }
+
+        notifications << factory.save!
       end
 
       notifications

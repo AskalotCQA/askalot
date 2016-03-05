@@ -85,6 +85,7 @@ class Question < ActiveRecord::Base
 
   def register_question
     return unless self.category
+    return unless Shared::CategoryQuestion.table_exists?
 
     self.category.self_and_ancestors.each do |ancestor|
       Shared::CategoryQuestion.create question_id: self.id, category_id: ancestor.id, shared: false

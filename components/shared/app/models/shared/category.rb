@@ -12,7 +12,7 @@ class Category < ActiveRecord::Base
   has_many :assignments, dependent: :destroy
   has_many :users, through: :assignments
   has_many :roles, through: :assignments
-  has_many :category_questions, dependent: :destroy
+  has_many :category_questions, dependent: :destroy if Shared::CategoryQuestion.table_exists?
   has_many :related_questions, -> { distinct }, through: :category_questions, :source => :question
 
   has_many :category_questions_shared_through_me, foreign_key: 'shared_through_category_id', class: Shared::CategoryQuestion
@@ -93,7 +93,7 @@ class Category < ActiveRecord::Base
 
   def tags=(values)
     tags_array = Shared::Tags::Extractor.extract(values)
-    self.public_tags = (self.public_tags + tags_array).uniq  if Shared::Category.column_names.include? 'public_tags'
+    self.public_tags = (self.public_tags + tags_array).uniq if Shared::Category.column_names.include? 'public_tags'
     new_tags = tags_array - tags
     deleted_tags = tags - tags_array
 
