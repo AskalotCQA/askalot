@@ -7,9 +7,11 @@
 
   <% if category_depths.include?(category.depth) && category.children.any? %>
     <div class="category-group">
+  <% elsif category.depth != 3 %>
+     <div class="clearfix"></div>
   <% end %>
 
-  <% category.children.each do |c| %>
+  <% category.children.sort_by { |c| c.name }.each do |c| %>
     <%= render 'categories', category: c, category_depths: category_depths if c.related_questions.any? %>
   <% end %>
 

@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
 
   def index
     @category_depths  = CategoryDepth.public_depths
-    @context_category = Shared::Category.find(@context)
+    @context_category = Shared::Category.find(Shared::Context::Manager.question_context)
   end
 end
 end
