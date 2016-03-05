@@ -1,8 +1,8 @@
-class MigrateQuestionToCategoriesHierarchy < ActiveRecord::Migration
+class MigrateQuestionToNewCategories < ActiveRecord::Migration
   def up
     root = Shared::Category.roots.find_by name: 'root'
     last_year = root.children.empty? ? '' : root.children.sort_by(&:name).last.name
-    Shared::Question.all.each do |question|
+    Shared::Question.unscoped.each do |question|
       puts "Updating question #{question.id} with category id #{question.category_id}"
       category = question.category
       puts "Category #{question.category}"

@@ -1,4 +1,4 @@
-class MigrateSlidoEventsToHierarchyCategory < ActiveRecord::Migration
+class MigrateSlidoEventsToNewCategories < ActiveRecord::Migration
   def up
     category_regex = /^([A-Z\/]{2,}[1-9]?)\s.\s(.*)$/
     categoryRoot = Shared::Category.roots.find_by name: :root
