@@ -52,7 +52,7 @@ module Shared::QuestionsHelper
 
   def question_label_name(label)
     name = label.name
-    name = label.parent.name + ' - ' + label.name unless (label.class.to_s == 'Shared::Tag') || (label.root?)
+    name = label.full_public_name unless (label.class.to_s == 'Shared::Tag') || (label.root?)
 
     return (name + ' ' + fa_icon(:university, tooltip_attributes(names_for_teachers(label.teachers)).merge({ class: 'supported-category-icon-sm' })) + ' ').html_safe if label.is_a?(Shared::Category) && label.has_teachers?
     name
