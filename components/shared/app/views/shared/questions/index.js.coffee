@@ -1,6 +1,6 @@
 $(document).ready ->
   $('#flash').remove()
-  $('body > .container').prepend("<%= escape_javascript flash_messages %>")
+  $('body > .container, body > .container-fluid').prepend("<%= escape_javascript flash_messages %>")
   $('#questions-controls').replaceWith("<%= escape_javascript render('controls') %>")
   $('#questions').replaceWith("<%= escape_javascript render('questions', questions: @questions, remote: true) %>")
 

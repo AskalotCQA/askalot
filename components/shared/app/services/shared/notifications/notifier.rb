@@ -10,18 +10,8 @@ module Shared::Notifications
       notifications = []
 
       recipients.each do |recipient|
-        attributes = {
-          action: action,
-          initiator: initiator,
-          recipient: recipient,
-          resource: resource,
-          anonymous: !!options[:anonymous],
-          context: context
-        }
-        notification = factory.new
-        notification.attributes = attributes.reject { |k, _| !factory.column_names.include? k.to_s }
-
-        notifications << factory.save!
+        notifications << factory.create!(action: action, initiator: initiator, recipient: recipient, resource: resource, anonymous: !!options[:anonymous], context: context) if Shared::Notification.column_names.include? 'context'
+        notifications << factory.create!(action: action, initiator: initiator, recipient: recipient, resource: resource, anonymous: !!options[:anonymous]) unless Shared::Notification.column_names.include? 'context'
       end
 
       notifications

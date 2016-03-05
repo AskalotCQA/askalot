@@ -4,17 +4,9 @@ module Shared::Activities
 
     def publish(action, initiator, resource, options = {})
       context = Shared::Context::Manager.current_context
-      attributes = {
-        action: action,
-        initiator: initiator,
-        resource: resource,
-        anonymous: !!options[:anonymous],
-        context: context
-      }
-      activity = Shared::Activity.new
-      activity.attributes = attributes.reject { |k, _| !Shared::Category.column_names.include? k.to_s }
 
-      activity.save
+      Shared::Activity.create!(action: action, initiator: initiator, resource: resource, anonymous: !!options[:anonymous], context: context) if Shared::Activity.column_names.include? 'context'
+      Shared::Activity.create!(action: action, initiator: initiator, resource: resource, anonymous: !!options[:anonymous]) unless Shared::Activity.column_names.include? 'context'
     end
   end
 end
