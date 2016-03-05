@@ -132,7 +132,7 @@ describe 'Filter Questions', type: :feature, js: true do
 
     list.each { |item| expect(item).to have_content(category.name) }
 
-    expect(current_params).to include(tags: category.tags.join(','))
+    expect(current_params).to include(category: category.id.to_s)
 
     within list[0] do
       click_link 'ruby'
@@ -149,7 +149,7 @@ describe 'Filter Questions', type: :feature, js: true do
       category.tags.each { |tag| expect(item).to have_content(tag) }
     end
 
-    expect(current_params).to include(tags: (category.tags + ['ruby']).join(','))
+    expect(current_params).to include(category: category.id.to_s, tags: 'ruby')
   end
 
   context 'when changing tabs' do

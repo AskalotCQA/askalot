@@ -76,7 +76,7 @@ describe 'Show Question', type: :feature do
       end
 
       expect(current_path).to   eql(shared.questions_path)
-      expect(current_params).to eql(tags: 'elasticsearch,lucene')
+      expect(current_params).to eql(category: category.id.to_s)
 
       list = all('#questions > ol > li')
 

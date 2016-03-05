@@ -39,6 +39,7 @@
         <%= form_tag shared.questions_path, id: :filter_questions, method: :get, remote: true, data: { state: true } do %>
           <%= hidden_field_tag :tab, params[:tab] %>
           <%= hidden_field_tag :poll, params[:poll] %>
+          <%= hidden_field_tag :category, params[:category] if params[:category] %>
           <div class="form-group">
             <div class="input-group select2-bootstrap-prepend">
               <span class="input-group-btn fulltext-switch">
