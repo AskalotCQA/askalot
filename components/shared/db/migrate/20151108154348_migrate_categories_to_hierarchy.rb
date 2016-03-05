@@ -23,14 +23,22 @@ class MigrateCategoriesToHierarchy < ActiveRecord::Migration
 
           if !subjects[year.name][subject_name]
             puts "\t\tSubject not fetched"
-            subjects[year.name][subject_name] = year.children.create!(name: subject_name, uuid: subject_name)
+
+            subject = Shared::Category.create!({
+                                name: match[1].strip,
+                                tags: category.tags.first,
+                                uuid: category.tags.first,
+                                parent_id: year.id,
+                            })
+
+            subjects[year.name][subject_name] = subject
           end
 
           puts "\tSaving"
           Shared::Category.create!({
                                name: match[2].strip,
-                               tags: category.tags,
-                               uuid: category.name,
+                               tags: category.tags.last,
+                               uuid: category.tags.join("-"),
                                parent_id: subjects[year.name][subject_name].id,
                                questions_count: category.questions_count,
                                slido_username: category.slido_username,
@@ -44,7 +52,7 @@ class MigrateCategoriesToHierarchy < ActiveRecord::Migration
           Shared::Category.create!({
                                name: category.name,
                                tags: category.tags,
-                               uuid: category.name,
+                               uuid: category.tags.join("-"),
                                parent_id: year.id,
                                questions_count: category.questions_count,
                                slido_username: category.slido_username,
