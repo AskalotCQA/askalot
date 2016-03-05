@@ -3,7 +3,7 @@ class MigrateWatchingsToNewCategories < ActiveRecord::Migration
     category_regex = /^([A-Z\/]{2,}[1-9]?)\s.\s(.*)$/
     categoryRoot = Shared::Category.roots.find_by name: :root
     Shared::Watching.unscoped.where(watchable_type: "Category").each do |watching|
-      category = watching.category
+      category = Shared::Category.find_by_id watching.watchable_id
       if match = category_regex.match(category.name)
         main_category = match[1].strip
         sub_category = match[2].strip
