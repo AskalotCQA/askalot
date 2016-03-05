@@ -14,6 +14,7 @@ class AddTreeAndHierarchyAttributesToCategories < ActiveRecord::Migration
     add_column :categories, :askable, :boolean, :default => false
 
     add_index :categories, :lft
+    add_index :categories, :rgt
 
     Shared::Category.rebuild!
   end
@@ -34,5 +35,6 @@ class AddTreeAndHierarchyAttributesToCategories < ActiveRecord::Migration
     remove_column :categories, :askable
 
     remove_index :categories, :lft
+    remove_index :categories, :rgt
   end
 end
