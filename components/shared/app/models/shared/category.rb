@@ -132,7 +132,7 @@ class Category < ActiveRecord::Base
   end
 
   def name_with_teacher_supported
-    return full_public_name + I18n.t('category.teacher_supported') if has_teachers?
+    return "#{full_public_name}#{I18n.t('category.teacher_supported')}" if has_teachers?
     full_public_name
   end
 
@@ -232,6 +232,11 @@ class Category < ActiveRecord::Base
         question.register_question
       end
     end
+  end
+
+  def self.rebuild!
+    super
+    self.update_all("#{depth_column_name} = ((select count(*) from #{self.quoted_table_name} t where t.lft <= #{self.quoted_table_name}.lft and t.rgt >= #{self.quoted_table_name}.rgt) - 1)")
   end
 end
 end
