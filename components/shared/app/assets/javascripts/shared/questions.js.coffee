@@ -12,7 +12,7 @@ $(document).ready ->
 
   ##
   # Filtering by category and tags for Select2
-  $(document).on 'click', '#questions .question-tag, #questions .question-category', (e) ->
+  $(document).on 'click', '#questions .question-tag', (e) ->
     e.preventDefault()
 
     items  = $(this).attr('data-id').split(',')
