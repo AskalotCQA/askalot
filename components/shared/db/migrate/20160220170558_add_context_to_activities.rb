@@ -1,12 +1,10 @@
 class AddContextToActivities < ActiveRecord::Migration
   def up
-    add_column :activities, :context, :string
+    add_column :activities, :context, :integer
 
-    Shared::Activity.unscoped.find_each do |activity|
-      activity.context = Shared::Context::Manager.current_context
+    context = Shared::Context::Manager.current_context
 
-      activity.save!
-    end
+    ActiveRecord::Base.connection.execute("update activities set context = #{context}")
   end
 
   def down

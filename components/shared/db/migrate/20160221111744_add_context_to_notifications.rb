@@ -1,12 +1,10 @@
 class AddContextToNotifications < ActiveRecord::Migration
   def up
-    add_column :notifications, :context, :string
+    add_column :notifications, :context, :integer
 
-    Shared::Notification.unscoped.find_each do |notification|
-      notification.context = Shared::Context::Manager.current_context
+    context = Shared::Context::Manager.current_context
 
-      notification.save!
-    end
+    ActiveRecord::Base.connection.execute("update notifications set context = #{context}")
   end
 
   def down
