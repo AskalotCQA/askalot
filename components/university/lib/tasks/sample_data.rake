@@ -263,19 +263,21 @@ namespace :sample_data do
   desc 'Fills database with sample categories'
   task categories: :environment do
     categories = [
-      { name: "2014/2015", tags: ["2014-2015"], uuid: nil, time: 385, parent_name: "root", shared: true, askable: false },
-      { name: "2015/2016", tags: ["2015-2016"], uuid: nil, time: 65, parent_name: "root", shared: true, askable: true },
-      { name: "Principles of software engineering", tags: ["psi"], uuid: "pse", time: 385, parent_name: "2014/2015", shared: true, askable: false },
-      { name: "Principles of software engineering", tags: ["psi"], uuid: "pse", time: 65, parent_name: "2015/2016", shared: true, askable: true },
-      { name: "Database systems", tags: ["dbs"], uuid: "dbs", time: 385, parent_name: "2014/2015", shared: true, askable: false },
-      { name: "Database systems", tags: ["dbs"], uuid: "dbs", time: 65, parent_name: "2015/2016", shared: true, askable: true },
-      { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", time: 385, parent_name: "2014/2015", shared: true, askable: false },
-      { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", time: 65, parent_name: "2015/2016", shared: true, askable: true },
+      { name: "2014-15", tags: ["2014-2015"], uuid: nil, time: 385, parent_name: "root", shared: true, askable: false },
+      { name: "2015-16", tags: ["2015-2016"], uuid: nil, time: 65, parent_name: "root", shared: true, askable: true },
+      { name: "Principles of software engineering", tags: ["psi"], uuid: "pse", time: 385, parent_name: "2014-15", shared: true, askable: false },
+      { name: "Principles of software engineering", tags: ["psi"], uuid: "pse", time: 65, parent_name: "2015-16", shared: true, askable: true },
+      { name: "Database systems", tags: ["dbs"], uuid: "dbs", time: 385, parent_name: "2014-15", shared: true, askable: false },
+      { name: "Database systems", tags: ["dbs"], uuid: "dbs", time: 65, parent_name: "2015-16", shared: true, askable: true },
+      { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", time: 385, parent_name: "2014-15", shared: true, askable: false },
+      { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", time: 65, parent_name: "2015-16", shared: true, askable: true },
     ]
 
     categories.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
         parent = Shared::Category.find_by(name: input[:parent_name])
+
+        next unless Shared::Category.find_by(name: input[:name], parent_id: parent.id ).nil?
 
         category = Shared::Category.create!(
           name: input[:name],
@@ -336,21 +338,21 @@ namespace :sample_data do
   desc 'Fills database with sample watchings'
   task watchings: :environment do
     watchings = [
-      { category: "2014/2015 - Principles of software engineering", user: "Ivan", time: 54 },
-      { category: "2015/2016 - Principles of software engineering", user: "Ivan", time: 54 },
-      { category: "2014/2015 - Principles of software engineering", user: "Ben", time: 32 },
-      { category: "2015/2016 - Principles of software engineering", user: "John", time: 25 },
-      { category: "2015/2016 - Principles of software engineering", user: "Samantha", time: 15 },
-      { category: "2015/2016 - Database systems", user: "Andrew", time: 44 },
-      { category: "2015/2016 - Database systems", user: "Tom", time: 12 },
-      { category: "2015/2016 - Database systems", user: "Lauren", time: 11 },
-      { category: "2015/2016 - Database systems", user: "Ella", time: 10 },
-      { category: "2014/2015 - Object-oriented programming", user: "Ella", time: 60 },
-      { category: "2015/2016 - Object-oriented programming", user: "Ella", time: 60 },
-      { category: "2015/2016 - Object-oriented programming", user: "Archie", time: 10 },
-      { category: "2014/2015 - Object-oriented programming", user: "Adam", time: 10 },
-      { category: "2015/2016 - Object-oriented programming", user: "Adam", time: 10 },
-      { category: "2015/2016 - Object-oriented programming", user: "Ben", time: 10 },
+      { category: "2014-15 - Principles of software engineering", user: "Ivan", time: 54 },
+      { category: "2015-16 - Principles of software engineering", user: "Ivan", time: 54 },
+      { category: "2014-15 - Principles of software engineering", user: "Ben", time: 32 },
+      { category: "2015-16 - Principles of software engineering", user: "John", time: 25 },
+      { category: "2015-16 - Principles of software engineering", user: "Samantha", time: 15 },
+      { category: "2015-16 - Database systems", user: "Andrew", time: 44 },
+      { category: "2015-16 - Database systems", user: "Tom", time: 12 },
+      { category: "2015-16 - Database systems", user: "Lauren", time: 11 },
+      { category: "2015-16 - Database systems", user: "Ella", time: 10 },
+      { category: "2014-15 - Object-oriented programming", user: "Ella", time: 60 },
+      { category: "2015-16 - Object-oriented programming", user: "Ella", time: 60 },
+      { category: "2015-16 - Object-oriented programming", user: "Archie", time: 10 },
+      { category: "2014-15 - Object-oriented programming", user: "Adam", time: 10 },
+      { category: "2015-16 - Object-oriented programming", user: "Adam", time: 10 },
+      { category: "2015-16 - Object-oriented programming", user: "Ben", time: 10 },
     ]
 
     watchings.each do |input|
@@ -363,7 +365,7 @@ namespace :sample_data do
   desc 'Fills database with sample questions'
   task questions: :environment do
     questions = [{
-      category: "2014/2015 - Principles of software engineering",
+      category: "2014-15 - Principles of software engineering",
       user: "Ben",
       time: 53,
       title: "Model vs Diagram",
@@ -373,7 +375,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015/2016 - Principles of software engineering",
+      category: "2015-16 - Principles of software engineering",
       user: "Archie",
       time: 49,
       title: "Minimal requirements on project",
@@ -383,7 +385,7 @@ namespace :sample_data do
       editor: "Archie",
       edited_at: 48
     }, {
-      category: "2015/2016 - Principles of software engineering",
+      category: "2015-16 - Principles of software engineering",
       user: "Sophia",
       time: 45,
       title: "What's is the difference between include and extend?",
@@ -393,7 +395,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2014/2015 - Database systems",
+      category: "2014-15 - Database systems",
       user: "Tom",
       time: 31,
       title: "Function COUNT()",
@@ -403,7 +405,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015/2016 - Database systems",
+      category: "2015-16 - Database systems",
       user: "Sophia",
       time: 26,
       title: "PostgreSQL version",
@@ -413,7 +415,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015/2016 - Object-oriented programming",
+      category: "2015-16 - Object-oriented programming",
       user: "Ivan",
       time: 18,
       title: "Singleton in Java",
@@ -423,7 +425,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015/2016 - Principles of software engineering",
+      category: "2015-16 - Principles of software engineering",
       user: "Adam",
       time: 7,
       title: "What an abreviation UML stands for?",
@@ -433,7 +435,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015/2016 - Object-oriented programming",
+      category: "2015-16 - Object-oriented programming",
       user: "Ruby",
       time: 10,
       title: "Anonymous class in always true condition",
