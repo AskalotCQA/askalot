@@ -4,7 +4,7 @@ class MigrateYearsToCategories < ActiveRecord::Migration
   def up
     root = Shared::Category.find_or_create_by!(name: 'root')
     Shared::Tag.where('name ~* ?', @@YEAR_REGEX).each do |tag|
-      root.children.create name: tag.name, tags: [tag.name]
+      root.children.create name: tag.name, tags: [tag.name], uuid: tag.name
     end
   end
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Teacher Supported Category', type: :feature do
+describe 'Teacher Supported Category', type: :feature, js: true do
 
   let(:user) { create :user }
   let(:user2) { create :user }
@@ -24,14 +24,14 @@ describe 'Teacher Supported Category', type: :feature do
     list = all('i.fa-university')
 
     expect(list.count).to eql(1)
-    expect(list[0][:title]).to eql('Podporovaná učiteľom: ' + user.name)
+    expect(list[0]['data-original-title']).to eql('Podporovaná učiteľom: ' + user.name)
 
     click_link 'Otázky'
 
     list = all('i.fa-university')
 
     expect(list.count).to eql(1)
-    expect(list[0][:title]).to eql('Podporovaná učiteľom: ' + user.name)
+    expect(list[0]['data-original-title']).to eql('Podporovaná učiteľom: ' + user.name)
 
     click_link 'Pridať otázku', match: :first
 
@@ -55,14 +55,14 @@ describe 'Teacher Supported Category', type: :feature do
     list = all('i.fa-university')
 
     expect(list.count).to eql(1)
-    expect(list[0][:title]).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
+    expect(list[0]['data-original-title']).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
 
     click_link 'Otázky'
 
     list = all('i.fa-university')
 
     expect(list.count).to eql(1)
-    expect(list[0][:title]).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
+    expect(list[0]['data-original-title']).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
 
     click_link 'Pridať otázku', match: :first
 

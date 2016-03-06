@@ -263,8 +263,8 @@ namespace :sample_data do
   desc 'Fills database with sample categories'
   task categories: :environment do
     categories = [
-      { name: "2014-15", tags: ["2014-2015"], uuid: nil, time: 385, parent_name: "root", shared: true, askable: false },
-      { name: "2015-16", tags: ["2015-2016"], uuid: nil, time: 65, parent_name: "root", shared: true, askable: true },
+      { name: "2014-15", tags: ["2014-2015"], uuid: nil, time: 385, parent_name: "root", shared: true, askable: false, uuid: "2014-15" },
+      { name: "2015-16", tags: ["2015-2016"], uuid: nil, time: 65, parent_name: "root", shared: true, askable: true, uuid: "2015-16" },
       { name: "Principles of software engineering", tags: ["psi"], uuid: "pse", time: 385, parent_name: "2014-15", shared: true, askable: false },
       { name: "Principles of software engineering", tags: ["psi"], uuid: "pse", time: 65, parent_name: "2015-16", shared: true, askable: true },
       { name: "Database systems", tags: ["dbs"], uuid: "dbs", time: 385, parent_name: "2014-15", shared: true, askable: false },
