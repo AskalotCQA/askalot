@@ -60,8 +60,8 @@ class MigrateCategoriesToHierarchy < ActiveRecord::Migration
                            })
         end
       end
-      Shared::Category.rebuild!
     end
+    Shared::Category.rebuild!
   end
 
   def down
