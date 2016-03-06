@@ -25,6 +25,7 @@ set :git_enable_submodules, 1
 set :ssh_options, { forward_agent: true }
 
 # Whenever
+set :whenever_command, ->{ "RAILS_ENV=#{rails_env} bundle exec whenever" }
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 default_run_options[:pty] = true
