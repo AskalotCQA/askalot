@@ -20,7 +20,8 @@ class Question < ActiveRecord::Base
   # TODO (jharinek) propose change to parent tags
   before_save { self.tag_list += (new_record? ? category.effective_tags : category.tags) if category }
 
-  after_save { self.register_question if changed.include? 'category_id' }
+  after_create { self.register_question }
+  after_update { self.register_question if changed.include? 'category_id' }
 
   belongs_to :category, counter_cache: true
   belongs_to :document, class_name: :'University::Document', counter_cache: true
