@@ -26,6 +26,8 @@ sk:
       solved: "Vyriešené otázky"
       favored: "Obľúbené otázky"
 
+    news: "Čo je nové v Askalote?"
+
   footer:
     about: "O projekte"
     authors: "Autori"

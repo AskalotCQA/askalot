@@ -206,6 +206,7 @@ en:
       favorite: "Favorite"
       group: "Group"
       question: "Question"
+      new: "News"
       notification: "Notification"
       tag: "Tag"
       user: "User"
@@ -237,6 +238,11 @@ en:
         text: "Text"
         title: "Title"
         version: "Version"
+
+      shared/new:
+        title: "Title"
+        description: "Description"
+        active: "Show on home page"
 
       shared/comment:
         text: "Comment"

@@ -1,0 +1,10 @@
+<% if news.any? %>
+    <ol class="list-unstyled">
+      <% news.each do |news| %>
+          <li>
+            <h4><%= news.title %></h4>
+            <%= html_escape preview_content news.description, { length: 160 } %>
+          </li>
+      <% end %>
+    </ol>
+<% end %>

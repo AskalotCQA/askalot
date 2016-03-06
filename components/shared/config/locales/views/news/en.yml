@@ -1,0 +1,17 @@
+en:
+  news:
+    navigation: "News"
+
+    index:
+      title: "What's new in Askalot?"
+      introduction: "History of news and improvements."
+
+    create:
+      success: "News was successfully added."
+
+    update:
+      success: "News was successfully updated."
+
+    delete:
+      success: "News was successfully deleted."
+      failure: "News could not be deleted."
