@@ -10,6 +10,7 @@ sk:
 
     tab:
       all: "Všetky"
+      active: "Aktívne"
 
       results: "Výsledky"
 

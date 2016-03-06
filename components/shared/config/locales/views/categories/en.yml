@@ -10,6 +10,7 @@ en:
 
     tab:
       all: "All"
+      active: "Active"
 
       results: "Results"
 
