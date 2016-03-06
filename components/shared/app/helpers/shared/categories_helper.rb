@@ -17,7 +17,7 @@ module Shared::CategoriesHelper
   end
 
   def link_to_category(category, options = {})
-    link_to category.name, shared.questions_path(category: category.id), options
+    link_to category.full_public_name, shared.questions_path(category: category.id), options
   end
 
   def names_for_teachers(teachers)

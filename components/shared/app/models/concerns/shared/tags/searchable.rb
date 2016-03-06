@@ -73,6 +73,10 @@ module Shared::Tags
 
             count: {
               type: :integer
+            },
+
+            context: {
+              type: :integer
             }
           }
         }
@@ -82,14 +86,15 @@ module Shared::Tags
         id:         -> { id },
         name:       -> { name },
         created_at: -> { created_at },
-        count:      -> { taggings.count }
+        count:      -> { taggings.count },
+        context:    -> { questions.map { |q| q.category_questions.select { |cq| cq.category.depth == 1 }.map { |cq| cq.category_id } } }
       )
 
       probe.index.create
     end
 
     module ClassMethods
-      def search_by(params)
+      def search_by(params, context = Shared::Context::Manager.question_context)
         search(
           query: {
             query_string: {
@@ -97,6 +102,14 @@ module Shared::Tags
               default_operator: :and,
               fields: [:name]
             }
+          },
+          filter: {
+            term: {
+              context: context
+            }
+          },
+          sort: {
+            :'name.untouched' => :asc
           }
         )
       end

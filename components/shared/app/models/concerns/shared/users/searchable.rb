@@ -65,6 +65,10 @@ module Shared::Users
                   index: :not_analyzed
                 }
               }
+            },
+
+            context: {
+              type: :integer
             }
           }
         }
@@ -73,14 +77,15 @@ module Shared::Users
       probe.index.mapper.define(
         id:    -> { id },
         nick:  -> { nick },
-        about: -> { about }
+        about: -> { about },
+        context: -> { context_users.empty? ? Shared::Category.where(depth: 1).pluck(:id) : context_users.map { |cu| Shared::Category.find_by(uuid: cu.context).id } },
       )
 
       probe.index.create
     end
 
     module ClassMethods
-      def search_by(params)
+      def search_by(params, context = Shared::Context::Manager.question_context)
         search(
           query: {
             query_string: {
@@ -88,6 +93,14 @@ module Shared::Users
               default_operator: :and,
               fields: [:nick, :about]
             }
+          },
+          filter: {
+              term: {
+                  context: context
+              }
+          },
+          sort: {
+              :'nick.untouched' => :asc
           },
           page: params[:page].to_i
         )
