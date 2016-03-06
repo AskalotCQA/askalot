@@ -213,7 +213,7 @@ class Category < ActiveRecord::Base
         self.all_versions.each do |shared_category|
           shared_category.questions.each do |question|
             self.self_and_ancestors.each do |ancestor|
-              CategoryQuestion.find_or_create_by question_id: question.id, category_id: ancestor.id, shared: true, shared_through_category: self
+              CategoryQuestion.create question_id: question.id, category_id: ancestor.id, shared: true, shared_through_category: self
             end
           end
         end

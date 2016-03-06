@@ -20,7 +20,7 @@ class Question < ActiveRecord::Base
   # TODO (jharinek) propose change to parent tags
   before_save { self.tag_list += (new_record? ? category.effective_tags : category.tags) if category }
 
-  after_create { self.register_question }
+  after_save { self.register_question if changed.include? 'category_id' }
 
   belongs_to :category, counter_cache: true
   belongs_to :document, class_name: :'University::Document', counter_cache: true
@@ -86,6 +86,8 @@ class Question < ActiveRecord::Base
   def register_question
     return unless self.category
     return unless Shared::CategoryQuestion.table_exists?
+
+    self.category_questions.delete_all
 
     self.category.self_and_ancestors.each do |ancestor|
       Shared::CategoryQuestion.create question_id: self.id, category_id: ancestor.id, shared: false
