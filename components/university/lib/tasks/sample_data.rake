@@ -478,6 +478,10 @@ namespace :sample_data do
         Shared::Watching.deleted_or_new(watcher: user, watchable: question).mark_as_undeleted!
       end
     end
+
+    Shared::Category.roots.each do |root|
+      root.reload_categories_questions
+    end
   end
 
   desc 'Fills database with sample answers'
