@@ -17,7 +17,7 @@ class MigrateAssignmentsToNewCategories < ActiveRecord::Migration
           assignment.save!
         end
       else
-        category_root.descendants.where(name: category.name).each do |category|
+        category_root.descendants.where(name: category.name, depth: 2).each do |category|
           puts "to #{category.name} assigning"
           assignment.category_id = category.id
           assignment.save!
