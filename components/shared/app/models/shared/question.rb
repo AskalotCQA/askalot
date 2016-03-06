@@ -20,8 +20,7 @@ class Question < ActiveRecord::Base
   # TODO (jharinek) propose change to parent tags
   before_save { self.tag_list += (new_record? ? category.effective_tags : category.tags) if category }
 
-  after_create { self.register_question }
-  after_update { self.update_question_cache }
+  after_save { self.register_question if changed.include? 'category_id' }
 
   belongs_to :category, counter_cache: true
   belongs_to :document, class_name: :'University::Document', counter_cache: true
@@ -88,6 +87,8 @@ class Question < ActiveRecord::Base
     return unless self.category
     return unless Shared::CategoryQuestion.table_exists?
 
+    self.category_questions.delete_all
+
     self.category.self_and_ancestors.each do |ancestor|
       Shared::CategoryQuestion.create question_id: self.id, category_id: ancestor.id, shared: false
     end
@@ -97,11 +98,6 @@ class Question < ActiveRecord::Base
         Shared::CategoryQuestion.create question_id: self.id, category_id: c.id, shared: true, shared_through_category: shared
       end
     end
-  end
-
-  def update_question_cache
-    Shared::CategoryQuestion.where(question_id: self.id).destroy_all
-    register_question
   end
 
   # TODO (jharinek) delete when refactoring watchings
