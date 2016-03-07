@@ -14,7 +14,7 @@ Mooc::Engine.routes.draw do
   namespace :teacher_administration do
     root 'categories#index'
 
-    resources :categories, only: [:index, :update, :edit] do
+    resources :categories, except: [:show, :destroy] do
       post 'settings' => 'categories#update_settings', on: :collection
     end
   end

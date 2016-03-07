@@ -185,7 +185,7 @@ class Category < ActiveRecord::Base
     relation   ||= Category::all
     conditions = []
 
-    Category::where(name: contexts).each do |category|
+    Category::where(id: contexts).each do |category|
       conditions.append "(lft >= #{category.lft} AND rgt <= #{category.rgt})"
     end
 
@@ -253,6 +253,10 @@ class Category < ActiveRecord::Base
   def self.rebuild!
     super
     self.update_all("#{depth_column_name} = ((select count(*) from #{self.quoted_table_name} t where t.lft <= #{self.quoted_table_name}.lft and t.rgt >= #{self.quoted_table_name}.rgt) - 1)")
+  end
+
+  def can_have_subcategories?
+     self.questions_count == 0
   end
 end
 end

@@ -4,10 +4,16 @@ en:
 
     category:
       index:
-        action: "Edit category"
+        title: "Categories administration"
         update_settings: "Update settings"
         wait: "Wait, please..."
         success: "Categories were updated successfully"
+
+      new:
+        action: "New"
+        title: "New category"
+        submit: "Save"
+        cancel: "Cancel"
 
       edit:
         action: "Edit"
