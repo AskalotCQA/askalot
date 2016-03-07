@@ -21,7 +21,7 @@ describe Shared::TagsController, type: :controller do
     end
 
     it 'suggests tags' do
-      get :suggest, q: 'test', format: :json
+      get :suggest, q: 'test', format: :json, context: 1
 
       tags = assigns(:tags)
 
@@ -40,7 +40,7 @@ describe Shared::TagsController, type: :controller do
     it 'suggest only 10 tags'  do
       20.times { |n| create :tag, name: "tag ##{n}" }
 
-      get :suggest, q: 'tag', format: :json
+      get :suggest, q: 'tag', format: :json, context: 1
 
       tags = assigns(:tags)
 
