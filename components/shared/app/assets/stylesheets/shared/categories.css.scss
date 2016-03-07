@@ -12,6 +12,11 @@
   color: #999;
 }
 
+.category-description {
+  color: $gray;
+  padding-bottom: 5px;
+  margin-top: -5px;
+}
 // collection
 
 .category-group {
@@ -39,3 +44,4 @@
   display: inline;
   font-size: inherit;
 }
+

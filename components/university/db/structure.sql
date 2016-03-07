@@ -129,8 +129,8 @@ CREATE TABLE answer_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -165,17 +165,17 @@ CREATE TABLE answers (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
+    stack_exchange_uuid integer,
     comments_count integer DEFAULT 0 NOT NULL,
     votes_count integer DEFAULT 0 NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    stack_exchange_uuid integer
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -256,10 +256,7 @@ CREATE TABLE categories (
     children_count integer,
     full_tree_name character varying(255),
     full_public_name character varying(255),
-    public_tags character varying(255)[] DEFAULT '{}'::character varying[],
-    direct_questions_count integer DEFAULT 0 NOT NULL,
-    direct_answers_count integer DEFAULT 0 NOT NULL,
-    category_questions_count integer DEFAULT 0 NOT NULL
+    description text
 );
 
 
@@ -364,8 +361,8 @@ CREATE TABLE comment_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -400,13 +397,13 @@ CREATE TABLE comments (
     text text NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
+    stack_exchange_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
-    edited boolean DEFAULT false NOT NULL,
-    stack_exchange_uuid integer
+    deleted_at timestamp without time zone,
+    edited boolean DEFAULT false NOT NULL
 );
 
 
@@ -620,8 +617,8 @@ CREATE TABLE evaluations (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer
@@ -688,8 +685,8 @@ CREATE TABLE favorites (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -836,8 +833,8 @@ CREATE TABLE labelings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -981,8 +978,8 @@ CREATE TABLE question_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     document_id integer
 );
 
@@ -1020,6 +1017,7 @@ CREATE TABLE questions (
     updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
     anonymous boolean DEFAULT false NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -1028,18 +1026,17 @@ CREATE TABLE questions (
     slido_question_uuid integer,
     slido_event_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
-    votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     touched_at timestamp without time zone NOT NULL,
+    votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    document_id integer,
-    stack_exchange_uuid integer,
     stack_exchange_duplicate boolean,
     stack_exchange_questions_uuids integer[],
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    document_id integer,
     closed boolean DEFAULT false NOT NULL,
     closer_id integer,
     closed_at timestamp without time zone
@@ -1153,8 +1150,8 @@ CREATE TABLE taggings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     author_id integer NOT NULL
 );
 
@@ -1301,6 +1298,7 @@ CREATE TABLE users (
     tumblr character varying(255),
     youtube character varying(255),
     role character varying(255) DEFAULT 'student'::character varying NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -1318,7 +1316,6 @@ CREATE TABLE users (
     facebook_friends text,
     facebook_likes text,
     documents_count integer DEFAULT 0 NOT NULL,
-    stack_exchange_uuid integer,
     send_email_notifications boolean DEFAULT true NOT NULL,
     read_notifications_thread boolean DEFAULT true NOT NULL,
     alumni boolean DEFAULT false NOT NULL
@@ -1354,8 +1351,8 @@ CREATE TABLE views (
     viewer_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -1391,8 +1388,8 @@ CREATE TABLE votes (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -2183,13 +2180,6 @@ CREATE INDEX index_categories_on_slido_username ON categories USING btree (slido
 
 
 --
--- Name: index_categories_questions_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_categories_questions_on_category_id ON categories_questions USING btree (category_id);
-
-
---
 -- Name: index_categories_questions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2197,10 +2187,10 @@ CREATE INDEX index_categories_questions_on_deletor_id ON categories_questions US
 
 
 --
--- Name: index_categories_questions_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_questions_on_question_id_and_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_categories_questions_on_question_id ON categories_questions USING btree (question_id);
+CREATE UNIQUE INDEX index_categories_questions_on_question_id_and_category_id ON categories_questions USING btree (question_id, category_id);
 
 
 --
@@ -3079,6 +3069,13 @@ CREATE INDEX index_watchings_on_deletor_id ON watchings USING btree (deletor_id)
 
 
 --
+-- Name: index_watchings_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_watchings_on_unique_key ON watchings USING btree (watcher_id, watchable_id, watchable_type, context);
+
+
+--
 -- Name: index_watchings_on_watchable_id_and_watchable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3399,10 +3396,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151122112444');
 
 INSERT INTO schema_migrations (version) VALUES ('20151207231221');
 
-INSERT INTO schema_migrations (version) VALUES ('20151212205452');
-
-INSERT INTO schema_migrations (version) VALUES ('20151213143631');
-
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
 
 INSERT INTO schema_migrations (version) VALUES ('20160220170558');
@@ -3411,13 +3404,9 @@ INSERT INTO schema_migrations (version) VALUES ('20160221111744');
 
 INSERT INTO schema_migrations (version) VALUES ('20160222183106');
 
-INSERT INTO schema_migrations (version) VALUES ('20160222190245');
-
 INSERT INTO schema_migrations (version) VALUES ('20160224152624');
 
 INSERT INTO schema_migrations (version) VALUES ('20160224210832');
-
-INSERT INTO schema_migrations (version) VALUES ('20160228025239');
 
 INSERT INTO schema_migrations (version) VALUES ('20160228092338');
 
@@ -3427,11 +3416,7 @@ INSERT INTO schema_migrations (version) VALUES ('20160229094608');
 
 INSERT INTO schema_migrations (version) VALUES ('20160229115039');
 
-INSERT INTO schema_migrations (version) VALUES ('20160301212036');
-
-INSERT INTO schema_migrations (version) VALUES ('20160301212049');
-
-INSERT INTO schema_migrations (version) VALUES ('20160301212059');
-
 INSERT INTO schema_migrations (version) VALUES ('20160306211255');
+
+INSERT INTO schema_migrations (version) VALUES ('20160307103948');
 

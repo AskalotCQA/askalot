@@ -28,8 +28,10 @@ $(document).ready ->
 
     tags = JSON.parse(select.attr('data-values'))
     html = templates['questions/category_tags'](tags: tags[value])
-
     $('ul#question-category-tags').html(html)
+
+    descriptions = JSON.parse(select.attr('data-descriptions'))
+    $('.category-description').html(descriptions[value])
 
   ##
   # Filter form
