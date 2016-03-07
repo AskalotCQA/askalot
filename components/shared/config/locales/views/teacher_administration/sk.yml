@@ -9,7 +9,7 @@ sk:
         wait: "Čakajte, prosím..."
         success: "Kategórie boli úspešne upravené"
 
-      new:
+      create:
         action: "Pridať"
         title: "Pridať kategóriu"
         submit: "Uložiť"

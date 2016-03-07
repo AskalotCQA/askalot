@@ -9,9 +9,9 @@ en:
         wait: "Wait, please..."
         success: "Categories were updated successfully"
 
-      new:
+      create:
         action: "New"
-        title: "New category"
+        title: "New subcategory in "
         submit: "Save"
         cancel: "Cancel"
 

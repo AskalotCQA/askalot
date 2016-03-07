@@ -1,16 +1,22 @@
 <%= form_for @category, url: [:teacher_administration, @category] do |f| %>
   <%= form_messages_for @category %>
 
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: :'form-control' %>
-  </div>
+  <% if @parent %>
+    <%= f.hidden_field :parent_id, value: @parent.id %>
+  <% end %>
+
+  <% if @category.custom? %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: :'form-control' %>
+    </div>
+  <% end %>
 
   <div class="form-group">
     <%= f.label :tags %>
     <%= f.text_field :tags, value: @category.tags.join(','), class: :'form-control', data: { as: :select2, role: :tags } %>
   </div>
-
+    
   <div class="form-group">
     <%= f.label :teacher_assistants %>
     <%= f.collection_select(:teacher_assistant_ids, Shared::User.all, :id, :nick, {selected: @category.teacher_assistants.map(&:id), include_blank: true}, {class: 'form-control', multiple: true , data: { as: :select2 } }) %>

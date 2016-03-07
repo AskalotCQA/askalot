@@ -3,6 +3,6 @@ $(document).ready ->
     # window.location.href = $(this).find(':selected').data('url')
     # TODO (ladislav.gallay) passing url did not work
 
-    parts = window.location.href.split '/'
-    parts[3] = $(this).val()
-    window.location.href = parts.join '/'
+    current_context = '/' + $('#context-change').data('current') + '/'
+    new_context = '/' + $(this).val() + '/'
+    window.location.href = window.location.href.replace current_context, new_context

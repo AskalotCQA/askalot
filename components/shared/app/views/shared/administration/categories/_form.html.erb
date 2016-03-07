@@ -21,6 +21,13 @@
     <%= f.category_collection_select :parent_id, Shared::Category.all, :id, :full_tree_name %>
   </div>
 
+  <% if Rails.module.mooc? %>
+    <div class="form-group">
+      <%= f.label :teacher_assistants %>
+      <%= f.collection_select(:teacher_assistant_ids, Shared::User.all, :id, :nick, {selected: @category.teacher_assistants.map(&:id), include_blank: true}, {class: 'form-control', multiple: true , data: { as: :select2 } }) %>
+    </div>
+  <% end %>
+
   <div class="checkbox">
     <label>
       <%= f.check_box :shared %>
