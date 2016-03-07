@@ -28,6 +28,8 @@ class ApplicationController < ActionController::Base
     context = context_id if context_id.is_a?(Fixnum) && context_id != 0
     context = Shared::Context::Manager.determine_context_id(context) unless context_id.nil? || context_id != 0
 
+    redirect_to "#{request.path}#{context}" if ! params[:context] && Rails.module.mooc?
+
     @context = context
     Shared::Context::Manager.current_context = context
   end
