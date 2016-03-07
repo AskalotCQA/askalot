@@ -44,8 +44,12 @@ class Category < ActiveRecord::Base
   end
 
   def update_uuid
+    return true unless self.uuid.blank?
+
     random_token = rand(36**5).to_s(36)
-    self.uuid    = "#{self.name.parameterize}-#{random_token}"
+    self.uuid    = "#{self.name.to_s.parameterize}-#{random_token}"
+
+    true
   end
 
   def refresh_names
