@@ -39,7 +39,6 @@
 #= require ./answers
 #= require ./comments
 #= require ./tree-table
-#= require ./header
 #
 #= require ./analytics
 #= require ./fixes
