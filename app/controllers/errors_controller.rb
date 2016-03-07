@@ -1,5 +1,4 @@
-module Shared
-class ErrorsController < ApplicationController
+class ErrorsController < ::Shared::ApplicationController
   skip_before_filter :login_required if Rails.module.mooc?
 
   def show
@@ -22,5 +21,4 @@ class ErrorsController < ApplicationController
 
     render status: @status
   end
-end
 end
