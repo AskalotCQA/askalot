@@ -44,7 +44,7 @@ module Mooc
     def contexts_to_administrate
       return [] if contexts.empty?
 
-      contexts.map(&:name).include?(@context) ? [@context] : []
+      contexts.map(&:id).include?(@context) ? [@context] : []
     end
 
     def category_params
