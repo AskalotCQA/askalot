@@ -1,22 +1,43 @@
 module Mooc
   class TeacherAdministration::CategoriesController < TeacherAdministrationController
-    def index
-      authorize! :teacher_administrate, :index
+    before_action :authorize_action
+    before_action :check_parent, only: [:new, :create]
 
+    def index
       @categories = Shared::Category.in_contexts(contexts_to_administrate).includes(:assignments).order(:lft)
     end
 
-    def edit
-      # TODO (ladislav.gallay) Authorisation based on category
-      authorize! :teacher_administrate, :edit
+    def new
+      @category = Shared::Category.new params.permit([:parent_id, :uuid])
+      @parent   = Shared::Category.find(params[:parent_id]) if params[:parent_id]
+    end
 
+    def create
+      @category         = Shared::Category.new(category_params)
+      @category.askable = true
+      parent_id         = params[:parent_id] || params[:category][:parent_id]
+
+      if parent_id
+        @parent             = Shared::Category.find parent_id
+        @category.parent_id = parent_id
+      end
+
+      if @category.save
+        form_message :notice, t('category.create.success')
+
+        redirect_to mooc.teacher_administration_categories_path
+      else
+        form_error_messages_for @category, flash: flash.now
+
+        render :new
+      end
+    end
+
+    def edit
       @category = Shared::Category.find params[:id]
     end
 
     def update
-      # TODO (ladislav.gallay) Authorisation based on category
-      authorize! :teacher_administrate, :update
-
       @category = Shared::Category.find(params[:id])
 
       if @category.update_attributes(category_params)
@@ -29,11 +50,7 @@ module Mooc
     end
 
     def update_settings
-      authorize! :teacher_administrate, :update_settings
-
-      Shared::Category.in_contexts(contexts_to_administrate).update_all askable: false
       Shared::Category.in_contexts(contexts_to_administrate).update_all shared: false
-      Shared::Category.in_contexts(contexts_to_administrate).where(id: params[:askable]).update_all askable: true
       Shared::Category.in_contexts(contexts_to_administrate).where(id: params[:shared]).update_all shared: true
 
       render json: { success: true }
@@ -48,7 +65,23 @@ module Mooc
     end
 
     def category_params
-      params.require(:category).permit(:name, :tags, :shared, :askable, :teacher_assistant_ids => [])
+      params.require(:category).permit(:name, :tags, :shared, :teacher_assistant_ids => [])
+    end
+
+    def check_parent
+      puts contexts.map(&:id).inspect
+
+      raise 'Access not allowed.' unless check_category_permissions(params[:parent_id] || params[:category][:parent_id])
+    end
+
+    def check_category_permissions(category_id)
+      return false if contexts.empty? || category_id.empty?
+
+      Shared::Category.in_contexts(contexts_to_administrate).map(&:id).include? category_id.to_i
+    end
+
+    def authorize_action
+      authorize! :teacher_administrate, :all
     end
   end
 end

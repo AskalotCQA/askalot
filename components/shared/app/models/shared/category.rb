@@ -23,6 +23,7 @@ class Category < ActiveRecord::Base
   validates :name, presence: true
 
   before_save  :update_changed
+  before_save  :update_uuid
   after_create :save_parent_tags
   after_save   :update_public_tags
   after_save   :refresh_names
@@ -40,6 +41,11 @@ class Category < ActiveRecord::Base
 
   def update_changed
     @what_changed = changed || []
+  end
+
+  def update_uuid
+    random_token = rand(36**5).to_s(36)
+    self.uuid    = "#{self.name.parameterize}-#{random_token}"
   end
 
   def refresh_names
@@ -257,6 +263,10 @@ class Category < ActiveRecord::Base
 
   def can_have_subcategories?
      self.questions_count == 0
+  end
+
+  def custom?
+    self.lti_id.blank?
   end
 end
 end
