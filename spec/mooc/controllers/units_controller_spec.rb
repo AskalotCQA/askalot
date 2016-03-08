@@ -9,6 +9,7 @@ describe Mooc::UnitsController, type: :controller do
 
   before :each do
     @params = {
+        context: '1',
         resource_link_id: '-category-hash',
         roles: 'student',
         user_id: '1000',
@@ -64,7 +65,7 @@ describe Mooc::UnitsController, type: :controller do
 
   describe 'GET error' do
     it 'shows error page with descriptive error' do
-      get :error, exception: 'LTI secret does not match'
+      get :error, context: 1, exception: 'LTI secret does not match'
 
       expect(response).to render_template('error')
 

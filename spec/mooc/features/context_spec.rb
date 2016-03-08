@@ -12,6 +12,15 @@ describe 'Context filtering', type: :feature do
     @category = Shared::Category.find(@context).leaves.first
   end
 
+  describe 'determine context' do
+    it 'redirects to url with context if not set' do
+      visit shared.questions_path
+
+      uri = URI.parse(current_url)
+      expect(uri.path).to eql(shared.questions_path(context: 1))
+    end
+  end
+
   context 'for activities' do
     it 'shows activities in context' do
       question = create :question, :with_tags, author: user, category: @category

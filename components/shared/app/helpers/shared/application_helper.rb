@@ -38,7 +38,7 @@ module ApplicationHelper
   end
 
   def use_container?
-    [DeviseController, Shared::ErrorsController, Shared::StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
+    [DeviseController, ErrorsController, Shared::StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
   end
 end
 end
