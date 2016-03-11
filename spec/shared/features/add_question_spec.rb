@@ -83,6 +83,18 @@ describe 'Add Question', type: :feature do
     end
   end
 
+  context 'when creating new question from questions index page' do
+    it 'does not select category if it is not leaf category' do
+      visit shared.questions_path(category: 1)
+
+      click_link 'Pridať otázku', match: :first
+
+      expect(page).to have_content('Nová otázka')
+      expect(page).not_to have_field('question_category_id', with: 1)
+      expect(page).to have_field('question_category_id', with: '')
+    end
+  end
+
   context 'when selecting category' do
     before :each do
       create :category, name: 'Westside Playground', tags: ['westside', 'ali-gz']
