@@ -20,6 +20,13 @@
               <%= f.label :description %>
               <%= f.text_area :description, class: :'form-control', rows: 5 %>
             </div>
+
+            <div class="checkbox">
+              <label>
+                <%= f.check_box :show %>
+                <%= t('administration.new.create.show') %>
+              </label>
+            </div>
           </div>
 
           <div class="modal-footer">

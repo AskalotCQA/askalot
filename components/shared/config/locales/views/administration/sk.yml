@@ -69,6 +69,7 @@ sk:
     new:
       create:
         action: "Pridať novinku"
+        show: "Zobraziť na domovskej stránke"
 
       edit:
         action: "Upraviť"

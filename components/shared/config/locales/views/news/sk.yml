@@ -4,7 +4,7 @@ sk:
 
     index:
       title: "Čo je nové v Askalote?"
-      introduction: "História noviniek a zlepšení systému."
+      introduction: "História noviniek a oznamov."
 
     create:
       success: "Novinka bola úspešne pridaná."

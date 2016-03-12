@@ -13,17 +13,14 @@
   <div class="col-md-3 hidden-xs hidden-sm hidden-print">
     <%= sidebar_tag do %>
       <ul class="nav">
-        <% group_news_by_latest(@news).each do |latest, news| %>
+        <% @news.each do |new| %>
           <li>
-            <% if news.any? %>
-              <ul class="nav">
-                <% news.select(&:title).each do |news| %>
-                  <li>
-                    <%= news.title %>
-                  </li>
-                <% end %>
-              </ul>
-            <% end %>
+            <ul class="nav">
+              <li>
+                <%= new.title %>
+                <%= new.description %>
+              </li>
+            </ul>
           </li>
         <% end %>
       </ul>

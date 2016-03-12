@@ -69,6 +69,7 @@ en:
     new:
       create:
         action: "Add news"
+        show: "Show on homepage"
 
       edit:
         action: "Edit"

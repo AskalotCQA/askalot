@@ -12,5 +12,12 @@
     <% end %>
   </div>
 
+  <div class="checkbox">
+    <label>
+      <%= f.check_box :show %>
+      <%= t('administration.new.create.show') %>
+    </label>
+  </div>
+
   <button type="submit" class="btn btn-success"><%= t('administration.new.create.action') %></button>
 <% end %>

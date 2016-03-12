@@ -126,5 +126,6 @@ Shared::Engine.routes.draw do
     end
 
     resources :changelogs, only: [:index]
+    resources :news, only: [:index]
   end
 end

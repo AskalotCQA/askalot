@@ -3,7 +3,7 @@ class Administration::NewsController < AdministrationController
   authorize_resource class: Shared::New
 
   def index
-    @news  = Shared::New.all.sort
+    @news  = Shared::New.order('news.created_at DESC')
     @new ||= Shared::New.new
   end
 

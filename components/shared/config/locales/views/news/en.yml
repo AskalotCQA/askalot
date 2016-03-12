@@ -4,7 +4,7 @@ en:
 
     index:
       title: "What's new in Askalot?"
-      introduction: "History of news and improvements."
+      introduction: "History of news and announcements."
 
     create:
       success: "News was successfully added."
