@@ -65,6 +65,10 @@ module Shared::Categories
                   index: :not_analyzed
                 }
               }
+            },
+
+            context: {
+                type: :integer
             }
           }
         }
@@ -72,14 +76,15 @@ module Shared::Categories
 
       probe.index.mapper.define(
         id:   -> { id },
-        name: -> { name }
+        name: -> { full_public_name },
+        context: -> { related_contexts.pluck(:id) }
       )
 
       probe.index.create
     end
 
     module ClassMethods
-      def search_by(params)
+      def search_by(params, context = Shared::Context::Manager.question_context)
         search(
           query: {
             query_string: {
@@ -87,6 +92,14 @@ module Shared::Categories
               default_operator: :and,
               fields: [:name]
             }
+          },
+          filter: {
+            term: {
+              context: context
+            }
+          },
+          sort: {
+            :'name.untouched' => :asc
           }
         )
       end

@@ -250,16 +250,12 @@ CREATE TABLE categories (
     lft integer,
     rgt integer,
     uuid character varying(255),
-    shared boolean DEFAULT true,
-    askable boolean DEFAULT false,
     depth integer,
-    children_count integer,
     full_tree_name character varying(255),
     full_public_name character varying(255),
-    direct_questions_count integer DEFAULT 0 NOT NULL,
-    direct_answers_count integer DEFAULT 0 NOT NULL,
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
-    category_questions_count integer DEFAULT 0 NOT NULL
+    shared boolean DEFAULT true,
+    askable boolean DEFAULT false
 );
 
 
@@ -2176,17 +2172,17 @@ CREATE UNIQUE INDEX index_categories_on_name_and_parent_id ON categories USING b
 
 
 --
+-- Name: index_categories_on_rgt; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_categories_on_rgt ON categories USING btree (rgt);
+
+
+--
 -- Name: index_categories_on_slido_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_categories_on_slido_username ON categories USING btree (slido_username);
-
-
---
--- Name: index_categories_questions_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_categories_questions_on_category_id ON categories_questions USING btree (category_id);
 
 
 --
@@ -2197,10 +2193,10 @@ CREATE INDEX index_categories_questions_on_deletor_id ON categories_questions US
 
 
 --
--- Name: index_categories_questions_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_questions_on_question_id_and_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_categories_questions_on_question_id ON categories_questions USING btree (question_id);
+CREATE UNIQUE INDEX index_categories_questions_on_question_id_and_category_id ON categories_questions USING btree (question_id, category_id);
 
 
 --
@@ -3079,6 +3075,13 @@ CREATE INDEX index_watchings_on_deletor_id ON watchings USING btree (deletor_id)
 
 
 --
+-- Name: index_watchings_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_watchings_on_unique_key ON watchings USING btree (watcher_id, watchable_id, watchable_type, context);
+
+
+--
 -- Name: index_watchings_on_watchable_id_and_watchable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3387,19 +3390,13 @@ INSERT INTO schema_migrations (version) VALUES ('20151109234218');
 
 INSERT INTO schema_migrations (version) VALUES ('20151110003132');
 
+INSERT INTO schema_migrations (version) VALUES ('20151110003133');
+
 INSERT INTO schema_migrations (version) VALUES ('20151119105858');
 
 INSERT INTO schema_migrations (version) VALUES ('20151122110354');
 
-INSERT INTO schema_migrations (version) VALUES ('20151122112216');
-
 INSERT INTO schema_migrations (version) VALUES ('20151122112444');
-
-INSERT INTO schema_migrations (version) VALUES ('20151207231221');
-
-INSERT INTO schema_migrations (version) VALUES ('20151212205452');
-
-INSERT INTO schema_migrations (version) VALUES ('20151213143631');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
 
@@ -3409,13 +3406,9 @@ INSERT INTO schema_migrations (version) VALUES ('20160221111744');
 
 INSERT INTO schema_migrations (version) VALUES ('20160222183106');
 
-INSERT INTO schema_migrations (version) VALUES ('20160222190245');
-
 INSERT INTO schema_migrations (version) VALUES ('20160224152624');
 
 INSERT INTO schema_migrations (version) VALUES ('20160224210832');
-
-INSERT INTO schema_migrations (version) VALUES ('20160228025239');
 
 INSERT INTO schema_migrations (version) VALUES ('20160228092338');
 
@@ -3425,11 +3418,5 @@ INSERT INTO schema_migrations (version) VALUES ('20160229094608');
 
 INSERT INTO schema_migrations (version) VALUES ('20160229115039');
 
-INSERT INTO schema_migrations (version) VALUES ('20160301212036');
-
-INSERT INTO schema_migrations (version) VALUES ('20160301212049');
-
-INSERT INTO schema_migrations (version) VALUES ('20160301212059');
-
-INSERT INTO schema_migrations (version) VALUES ('20160305135644');
+INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 

@@ -5,6 +5,8 @@ module Shared::Questions
     included do
       include ::Shared::Searchable
 
+      after_save { Shared::Tag.probe.index.import self.tags }
+
       probe.index.name = :"questions_#{Rails.env}"
       probe.index.type = :question
 
@@ -138,6 +140,10 @@ module Shared::Questions
 
             topics: {
               type: :float
+            },
+
+            context: {
+              type: :integer
             }
           }
         }
@@ -151,6 +157,7 @@ module Shared::Questions
         answers:    ->  { answers.pluck(:text) },
         comments:    -> { comments.pluck(:text) + answers.map { |answer| answer.comments.pluck(:text) }},
         evaluations: -> { evaluations.pluck(:text) + answers.map { |answer| answer.evaluations.pluck(:text) }},
+        context:    -> { related_contexts.pluck(:id) },
 
         topics: -> { profiles.where(source: :LDA).order(:property).pluck(:value) }
       )
@@ -159,7 +166,7 @@ module Shared::Questions
     end
 
     module ClassMethods
-      def search_by(params)
+      def search_by(params, context = Shared::Context::Manager.question_context)
         search(
           query: {
             query_string: {
@@ -167,6 +174,14 @@ module Shared::Questions
               default_operator: :and,
               fields: [:title, :text, :tags, :answers, :comments, :evaluations]
             }
+          },
+          filter: {
+            term: {
+                context: context
+            }
+          },
+          sort: {
+            :'title.untouched' => :asc
           }
         )
       end

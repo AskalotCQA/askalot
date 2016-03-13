@@ -13,7 +13,8 @@ class Category < ActiveRecord::Base
   has_many :users, through: :assignments
   has_many :roles, through: :assignments
   has_many :category_questions, dependent: :destroy if Shared::CategoryQuestion.table_exists?
-  has_many :related_questions, -> { distinct }, through: :category_questions, :source => :question
+  has_many :related_questions, -> { distinct }, through: :category_questions, source: :question
+  has_many :related_answers, -> { distinct }, through: :related_questions, source: :answers
 
   has_many :category_questions_shared_through_me, foreign_key: 'shared_through_category_id', class: Shared::CategoryQuestion
 
@@ -136,51 +137,8 @@ class Category < ActiveRecord::Base
     full_public_name
   end
 
-  def self.groups_in_context(context)
-    groups = []
-    empty = []
-
-    find(context).children.sort_by(&:name).each do |group|
-      if group.children.size == 0
-        empty << group
-      else
-        groups << group.children.with_questions.each do |category|
-          category.name = group.name + ' - ' + category.name
-        end if group.children.with_questions.size > 0
-      end
-    end
-
-    groups << empty unless empty.empty?
-    groups
-  end
-
-  def self.categories_in_context(context)
-    categories = []
-
-    find_by(name: context).children.each do |group|
-      group.children.each do |category|
-        category.name = group.name + ' - ' + category.name
-        categories << category
-      end
-
-      categories << group if group.leaf?
-    end
-
-    categories.sort_by(&:name)
-  end
-
-  def self.categories_with_parent_name(context)
-    Shared::Category.find(context).self_and_descendants.each do |category|
-      category.name = category.parent.name + ' - ' + category.name unless category.root?
-    end
-  end
-
   def all_versions
     Shared::Category.where(uuid: self.uuid).where.not(id: self.id)
-  end
-
-  def related_answers
-    Shared::Answer.where(question: related_questions)
   end
 
   def save_parent_tags
@@ -236,6 +194,10 @@ class Category < ActiveRecord::Base
   def self.rebuild!
     super
     self.update_all("#{depth_column_name} = ((select count(*) from #{self.quoted_table_name} t where t.lft <= #{self.quoted_table_name}.lft and t.rgt >= #{self.quoted_table_name}.rgt) - 1)")
+  end
+
+  def related_contexts
+    self_and_ancestors.where(depth: 1)
   end
 end
 end
