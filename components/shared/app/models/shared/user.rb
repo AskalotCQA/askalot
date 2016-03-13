@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
          :registerable,
          :rememberable,
          :trackable,
-         :validatable,
 
          authentication_keys: [:login]
 
@@ -49,6 +48,14 @@ class User < ActiveRecord::Base
 
   validates :first, format: { with: /\A\p{Lu}[\p{Ll}\-\p{Lu}]*\z/u }, allow_blank: true
   validates :last,  format: { with: /\A\p{Lu}[\p{Ll}\-\p{Lu}]*\z/u }, allow_blank: true
+
+  validates_presence_of   :email, if: :email_required?
+  validates_uniqueness_of :email, allow_blank: true, if: :email_changed_and_required?
+  validates_format_of     :email, with: Devise.email_regexp, allow_blank: true, if: :email_changed_and_required?
+
+  validates_presence_of     :password, if: :password_required?
+  validates_confirmation_of :password, if: :password_required?
+  validates_length_of       :password, within: Devise.password_length, allow_blank: true
 
   scope :by, lambda { |args| where(args).first || raise(ActiveRecord::RecordNotFound) }
   scope :recent, lambda { where('users.created_at >= ?', Time.now - 1.month ) }
@@ -138,7 +145,15 @@ class User < ActiveRecord::Base
   protected
 
   def password_required?
-    ais_login ? false : super
+    ais_login ? false : true
+  end
+
+  def email_required?
+    Shared::Configuration.devise.require_email
+  end
+
+  def email_changed_and_required?
+    email_changed? && email_required?
   end
 
   def resolve_nick
