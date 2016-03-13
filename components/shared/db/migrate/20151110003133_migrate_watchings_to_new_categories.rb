@@ -1,5 +1,7 @@
 class MigrateWatchingsToNewCategories < ActiveRecord::Migration
   def up
+    ActiveRecord::Base.disable_timestamps
+
     category_regex = /^([A-Z\/]{2,}[1-9]?)\s.\s(.*)$/
     categoryRoot = Shared::Category.roots.find_by name: :root
     Shared::Watching.unscoped.where(watchable_type: "Category").each do |watching|

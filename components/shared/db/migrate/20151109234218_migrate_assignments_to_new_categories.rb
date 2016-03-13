@@ -1,5 +1,7 @@
 class MigrateAssignmentsToNewCategories < ActiveRecord::Migration
   def up
+    ActiveRecord::Base.disable_timestamps
+
     category_regex = /^([A-Z\/]{2,}[1-9]?)\s.\s(.*)$/
     category_root = Shared::Category.roots.find_by name: :root
     Shared::Assignment.all.each do |assignment|
