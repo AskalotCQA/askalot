@@ -241,7 +241,7 @@ sk:
         name: "Názov"
         uuid: "UUID"
         tags: "Tagy"
-        shared: "Zobraziť aj otázky z predošlých súvisiacich kategórií"
+        shared: "Zobraziť aj otázky zo súvisiacich kategórií"
         askable: "Otázky môžu byť položené priamo v tejto kategórii"
         teacher_assistants: "Asistenti učiteľa"
 

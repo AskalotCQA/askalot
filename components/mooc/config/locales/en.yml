@@ -1,7 +1,7 @@
 en:
   page:
     to_login:
-      header: "Ooops! It looks you are not signed in"
+      header: "Ooops! It looks like you are not signed in"
       description: "Please wait a few seconds to be automatically redirected"
       link: "go to login page manually"
     no_link:
