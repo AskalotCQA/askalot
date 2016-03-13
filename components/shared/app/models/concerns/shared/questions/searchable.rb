@@ -5,6 +5,8 @@ module Shared::Questions
     included do
       include ::Shared::Searchable
 
+      after_save { Shared::Tag.probe.index.import self.tags }
+
       probe.index.name = :"questions_#{Rails.env}"
       probe.index.type = :question
 

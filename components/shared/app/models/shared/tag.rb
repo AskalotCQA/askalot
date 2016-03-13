@@ -6,7 +6,7 @@ class Tag < ActiveRecord::Base
   has_many :taggings, dependent: :restrict_with_exception
   has_many :questions, through: :taggings
   has_many :answers, through: :questions
-  has_many :related_categories, -> { distinct }, through: :questions, :source => :related_categories
+  has_many :related_categories, -> { distinct }, through: :questions, source: :related_categories
 
   scope :recent,  lambda { where('tags.created_at >= ?', Time.now - 1.month ).unscope(:order).order('tags.created_at') }
   scope :popular, lambda { select('tags.*, count(*) as c').joins(:taggings).group('tags.id').unscope(:order).order('c desc').limit(30) }

@@ -13,8 +13,8 @@ class Category < ActiveRecord::Base
   has_many :users, through: :assignments
   has_many :roles, through: :assignments
   has_many :category_questions, dependent: :destroy if Shared::CategoryQuestion.table_exists?
-  has_many :related_questions, -> { distinct }, through: :category_questions, :source => :question
-  has_many :related_answers, -> { distinct }, through: :related_questions, :source => :answers
+  has_many :related_questions, -> { distinct }, through: :category_questions, source: :question
+  has_many :related_answers, -> { distinct }, through: :related_questions, source: :answers
 
   has_many :category_questions_shared_through_me, foreign_key: 'shared_through_category_id', class: Shared::CategoryQuestion
 
