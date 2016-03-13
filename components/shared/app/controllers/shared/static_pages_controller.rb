@@ -18,5 +18,8 @@ class StaticPagesController < ApplicationController
 
   def welcome
   end
+
+  def welcome_without_confirmation
+  end
 end
 end
