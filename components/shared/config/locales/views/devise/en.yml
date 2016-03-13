@@ -43,6 +43,7 @@ en:
       signed_up_but_inactive: "You have signed up successfully. However, we could not sign you in because your account is not yet activated."
       signed_up_but_locked: "You have signed up successfully. However, we could not sign you in because your account is locked."
       signed_up_but_unconfirmed: "A message with a confirmation link has been sent to your e-mail address. Please open the link to activate your account."
+      signed_up_without_confirmation: "You did enter your email during the registration process. In order to take advantage of all Askalot features (e.g. to receive email notifications), you can enter your email in your profile anytime later."
       update_needs_confirmation: "You updated your account successfully, but we need to verify your new e-mail address. Please check your e-mail and click on the confirm link to finalize confirming your new e-mail address."
       updated: "You updated your account successfully."
 
