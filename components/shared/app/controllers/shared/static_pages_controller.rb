@@ -11,7 +11,7 @@ class StaticPagesController < ApplicationController
 
     @question = Shared::Questions::ToAnswerRecommender.next
 
-    @news = Shared::New.order('news.created_at DESC').active.limit(count)
+    @news = Shared::New.order('news.id DESC').active.limit(count)
   end
 
   def help

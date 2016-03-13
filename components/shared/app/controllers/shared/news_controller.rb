@@ -1,9 +1,9 @@
 module Shared
-class NewsController < ApplicationController
+class NewsController < Shared::ApplicationController
   before_action :authenticate_user!
 
   def index
-    @news = Shared::New.order('news.created_at DESC')
+    @news = Shared::New.order('news.id DESC')
   end
 end
 end

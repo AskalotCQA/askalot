@@ -6,33 +6,33 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <%= form_for new, url: shared.administration_news_path(new) do |f| %>
-          <div class="modal-header">
-            <h3 class="modal-title"><%= t 'administration.new.edit.title' %></h3>
+        <div class="modal-header">
+          <h3 class="modal-title"><%= t 'administration.new.edit.title' %></h3>
+        </div>
+
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.label :title %>
+            <%= f.text_field :title, class: :'form-control' %>
           </div>
 
-          <div class="modal-body">
-            <div class="form-group">
-              <%= f.label :title %>
-              <%= f.text_field :title, class: :'form-control' %>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :description %>
-              <%= f.text_area :description, class: :'form-control', rows: 5 %>
-            </div>
-
-            <div class="checkbox">
-              <label>
-                <%= f.check_box :show %>
-                <%= t('administration.new.create.show') %>
-              </label>
-            </div>
+          <div class="form-group">
+            <%= f.label :description %>
+            <%= f.text_area :description, class: :'form-control', rows: 5 %>
           </div>
 
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'administration.new.edit.cancel' %></button>
-            <button type="submit" class="btn btn-primary"><%= t 'administration.new.edit.submit' %></button>
+          <div class="checkbox">
+            <label>
+              <%= f.check_box :show %>
+              <%= t('administration.new.create.show') %>
+            </label>
           </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'administration.new.edit.cancel' %></button>
+          <button type="submit" class="btn btn-primary"><%= t 'administration.new.edit.submit' %></button>
+        </div>
       <% end %>
     </div>
   </div>
