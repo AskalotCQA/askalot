@@ -2904,7 +2904,7 @@ CREATE UNIQUE INDEX index_users_on_confirmation_token ON users USING btree (conf
 -- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+CREATE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
@@ -3424,4 +3424,7 @@ INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 INSERT INTO schema_migrations (version) VALUES ('20160307103948');
 
 INSERT INTO schema_migrations (version) VALUES ('20160318072719');
+
+INSERT INTO schema_migrations (version) VALUES ('20160306194117');
+
 
