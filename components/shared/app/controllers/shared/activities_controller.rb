@@ -1,6 +1,6 @@
 module Shared
 class ActivitiesController < ApplicationController
-  default_tab :global, only: :index
+  default_tab :all, only: :index
 
   before_action :authenticate_user!
 
