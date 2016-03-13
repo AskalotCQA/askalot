@@ -1,8 +1,8 @@
 require 'spec_helper'
 require 'shared/redcurtain/markdown'
 
-describe Shared::Redcurtain::Markdown do
-  let(:markdown) { Class.new { include Shared::Redcurtain::Markdown }.new }
+describe Redcurtain::Markdown do
+  let(:markdown) { Class.new { include Redcurtain::Markdown }.new }
 
   after :each do
     markdown.renderers = nil

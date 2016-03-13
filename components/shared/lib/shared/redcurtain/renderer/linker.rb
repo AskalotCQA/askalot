@@ -1,6 +1,6 @@
-module Shared::Redcurtain::Renderer
+module Redcurtain::Renderer
   class Linker
-    include Shared::Redcurtain::Renderer
+    include Redcurtain::Renderer
 
     attr_accessor :name
 

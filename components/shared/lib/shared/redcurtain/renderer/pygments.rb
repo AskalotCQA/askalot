@@ -1,6 +1,6 @@
-module Shared::Redcurtain::Renderer
+module Redcurtain::Renderer
   module Pygments
-    include Shared::Redcurtain::Renderer
+    include Redcurtain::Renderer
 
     extend self
 

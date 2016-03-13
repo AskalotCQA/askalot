@@ -1,4 +1,4 @@
-module Shared::Redcurtain::Renderer
+module Redcurtain::Renderer
   module Redcarpet
     extend self
 

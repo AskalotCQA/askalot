@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'shared/redcurtain/renderer/replacer'
 
-describe Shared::Redcurtain::Renderer::Replacer do
+describe Redcurtain::Renderer::Replacer do
   subject { described_class.new(:replacer) }
 
   describe '.render' do

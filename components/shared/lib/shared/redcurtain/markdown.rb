@@ -1,4 +1,4 @@
-module Shared::Redcurtain
+module Redcurtain
   module Markdown
     extend self
 
@@ -6,9 +6,9 @@ module Shared::Redcurtain
 
     def renderers
       @renderers ||= [
-        Shared::Redcurtain::Renderer::Gemoji,
-        Shared::Redcurtain::Renderer::Redcarpet,
-        Shared::Redcurtain::Renderer::Pygments
+        Renderer::Gemoji,
+        Renderer::Redcarpet,
+        Renderer::Pygments
       ]
     end
 

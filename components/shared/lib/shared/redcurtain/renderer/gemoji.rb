@@ -1,12 +1,12 @@
-module Shared::Redcurtain::Renderer
+module Redcurtain::Renderer
   module Gemoji
-    include Shared::Redcurtain::Renderer
+    include Redcurtain::Renderer
 
     extend self
 
     def render(content, options = {})
       classes = Array.wrap(options[:class] || :gemoji)
-      path    = options[:path]  || '/images/gemoji'
+      path    = options[:path]  || "#{Rails.application.config.relative_url_root}/images/gemoji"
       title   = options[:title] == false ? nil : options[:title] || lambda { |name| name }
 
       search(content, /:[a-z0-9\+\-_]+:/) { |match|
