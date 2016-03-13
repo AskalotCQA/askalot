@@ -252,14 +252,15 @@ CREATE TABLE categories (
     uuid character varying(255),
     shared boolean DEFAULT true,
     askable boolean DEFAULT false,
+    direct_questions_count integer DEFAULT 0 NOT NULL,
+    direct_answers_count integer DEFAULT 0 NOT NULL,
     depth integer,
     children_count integer,
     full_tree_name character varying(255),
     full_public_name character varying(255),
     lti_id character varying(255),
-    direct_questions_count integer DEFAULT 0 NOT NULL,
-    direct_answers_count integer DEFAULT 0 NOT NULL,
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
+    all_questions_count integer DEFAULT 0 NOT NULL,
     category_questions_count integer DEFAULT 0 NOT NULL
 );
 
@@ -3395,6 +3396,8 @@ INSERT INTO schema_migrations (version) VALUES ('20151109234218');
 
 INSERT INTO schema_migrations (version) VALUES ('20151110003132');
 
+INSERT INTO schema_migrations (version) VALUES ('20151110003133');
+
 INSERT INTO schema_migrations (version) VALUES ('20151119105858');
 
 INSERT INTO schema_migrations (version) VALUES ('20151122110354');
@@ -3411,11 +3414,11 @@ INSERT INTO schema_migrations (version) VALUES ('20151207231221');
 
 INSERT INTO schema_migrations (version) VALUES ('20151212205452');
 
-INSERT INTO schema_migrations (version) VALUES ('20151213121223');
-
 INSERT INTO schema_migrations (version) VALUES ('20151213143631');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
+
+INSERT INTO schema_migrations (version) VALUES ('20160217230205');
 
 INSERT INTO schema_migrations (version) VALUES ('20160220170558');
 
@@ -3445,5 +3448,5 @@ INSERT INTO schema_migrations (version) VALUES ('20160301212049');
 
 INSERT INTO schema_migrations (version) VALUES ('20160301212059');
 
-INSERT INTO schema_migrations (version) VALUES ('20160305135644');
+INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 

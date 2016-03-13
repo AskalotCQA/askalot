@@ -39,7 +39,7 @@
 #= require ./answers
 #= require ./comments
 #= require ./tree-table
-#
+#= require ./autofocus
 #= require ./analytics
 #= require ./fixes
 #
