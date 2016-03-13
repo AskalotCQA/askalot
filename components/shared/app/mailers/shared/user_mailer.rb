@@ -1,6 +1,6 @@
-module University
+module Shared
 class UserMailer < ActionMailer::Base
-  default from: ::Shared::Configuration.mailer.alias, css: 'university/mailers/layout'
+  default from: ::Shared::Configuration.mailer.alias, css: 'shared/mailers/layout'
 
   helper Shared::ActivitiesHelper
   helper Shared::AnswersHelper
@@ -23,7 +23,7 @@ class UserMailer < ActionMailer::Base
   helper Shared::VotesHelper
   helper Shared::WatchingsHelper
 
-  layout 'university/mailer'
+  layout 'shared/mailer'
 
   def notifications(user, from:)
     @from = from

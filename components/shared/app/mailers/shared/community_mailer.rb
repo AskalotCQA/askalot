@@ -1,6 +1,6 @@
-module University
+module Shared
 class CommunityMailer < ActionMailer::Base
-  default from: ::Shared::Configuration.mailer.alias, css: 'university/mailers/layout'
+  default from: ::Shared::Configuration.mailer.alias, css: 'shared/mailers/layout'
 
   helper Shared::ActivitiesHelper
   helper Shared::AnswersHelper
@@ -24,7 +24,7 @@ class CommunityMailer < ActionMailer::Base
 
   include Shared::MarkdownHelper
 
-  layout 'university/mailer'
+  layout 'shared/mailer'
 
   def community_emails(email, user)
     @user = user

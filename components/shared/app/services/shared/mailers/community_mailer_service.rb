@@ -1,4 +1,4 @@
-module University::Mailers
+module Shared::Mailers
   class CommunityMailerService
     def self.users
       Shared::User.where(send_email_notifications: true)
@@ -6,12 +6,12 @@ module University::Mailers
 
     def self.deliver_emails!(email)
       users.each.map { |user|
-        University::CommunityMailer.community_emails(email, user)
+        Shared::CommunityMailer.community_emails(email, user)
       }.map(&:deliver!)
     end
 
     def self.deliver_test_email!(email)
-      University::CommunityMailer.community_emails(email, email[:user]).deliver!
+      Shared::CommunityMailer.community_emails(email, email[:user]).deliver!
     end
 
     def self.deliver_all_emails!
