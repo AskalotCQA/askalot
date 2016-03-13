@@ -31,6 +31,7 @@ class Question < ActiveRecord::Base
   has_many :revisions, class_name: :'Question::Revision', dependent: :destroy
   has_many :profiles, class_name: :'Question::Profile', dependent: :destroy
   has_many :category_questions, dependent: :destroy
+  has_many :related_categories, -> { distinct }, through: :category_questions, :source => :category
 
   validates :category,  presence: true, if: lambda { |question| question.document.blank? }
   validates :document,  presence: true, if: lambda { |question| question.category.blank? }
@@ -52,6 +53,7 @@ class Question < ActiveRecord::Base
   scope :answered_but_not_best, lambda { with_category.joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).references(:labeling).uniq.select('questions.id')).uniq }
 
   scope :by, lambda { |user| where(author: user) }
+  scope :in_context, lambda { |context| includes(:related_categories).where(categories: { id: context }) }
 
   self.updated_timestamp = [:updated_at, :touched_at]
 
@@ -99,6 +101,10 @@ class Question < ActiveRecord::Base
         Shared::CategoryQuestion.create question_id: self.id, category_id: c.id, shared: true, shared_through_category: shared
       end
     end
+  end
+
+  def related_contexts
+    related_categories.where(depth: 1)
   end
 
   # TODO (jharinek) delete when refactoring watchings

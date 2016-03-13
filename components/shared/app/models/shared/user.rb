@@ -135,6 +135,10 @@ class User < ActiveRecord::Base
     self.save!
   end
 
+  def related_contexts
+    context_users.empty? ? Shared::Category.where(depth: 1) : Shared::Category.where(uuid: context_users.pluck(:context))
+  end
+
   protected
 
   def password_required?

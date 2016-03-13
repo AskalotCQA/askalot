@@ -6,9 +6,11 @@ class Tag < ActiveRecord::Base
   has_many :taggings, dependent: :restrict_with_exception
   has_many :questions, through: :taggings
   has_many :answers, through: :questions
+  has_many :related_categories, -> { distinct }, through: :questions, :source => :related_categories
 
   scope :recent,  lambda { where('tags.created_at >= ?', Time.now - 1.month ).unscope(:order).order('tags.created_at') }
   scope :popular, lambda { select('tags.*, count(*) as c').joins(:taggings).group('tags.id').unscope(:order).order('c desc').limit(30) }
+  scope :in_context, lambda { |context| includes(:related_categories).where(categories: { id: context }) }
 
   before_save :normalize
 
@@ -34,8 +36,12 @@ class Tag < ActiveRecord::Base
     self.name = name.to_s.downcase.gsub(/[^[:alnum:]#\-\+\.]+/, '-').gsub(/\A-|-\z/, '')
   end
 
-  def count
-    questions.size
+  def count(context = Shared::Context::Manager.question_context)
+    questions.in_context(context).size
+  end
+
+  def related_contexts
+    related_categories.where(depth: 1)
   end
 end
 end
