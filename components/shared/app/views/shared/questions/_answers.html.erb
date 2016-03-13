@@ -6,7 +6,7 @@
   </div>
   <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2">
     <div class="new-answer">
-      <%= icon_link_to :plus, t('answer.new.action'), '#answer', analytics_attributes(:answer, :'scroll-to-new-form').merge(class: 'btn btn-success') %>
+      <%= icon_link_to :plus, t('answer.new.action'), '#answer', analytics_attributes(:answer, :'scroll-to-new-form').merge(class: 'btn btn-success', :'data-click-focus' => '#answer_text') %>
     </div>
   </div>
 </div>
