@@ -17,7 +17,7 @@ class Notification < ActiveRecord::Base
   scope :read,   lambda { unscope(where: :unread).where(unread: false) }
   scope :unread, lambda { unscope(where: :unread).where(unread: true) }
 
-  scope :in_context, lambda { |context| where(context: context) }
+  scope :in_context, lambda { |context| where(context: context)  unless Rails.module.university? }
 
   symbolize :action, in: ACTIONS
 
