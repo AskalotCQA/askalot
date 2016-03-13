@@ -6,7 +6,7 @@ module Mooc::QuestionsHelper
 
     filter = ((params[:tags] || '').split(',') + tags).uniq.join(',')
 
-    options.merge!(class: classes, target: '_parent')
+    options.merge!(class: classes)
     options.deep_merge! class: classes, data: { id: filter } unless filter.blank?
 
     if label.class.to_s == 'Shared::Category'
@@ -14,6 +14,7 @@ module Mooc::QuestionsHelper
       href = mooc.unit_path(id: label.id) unless in_questions
     else
       href = (page_url ? page_url + '?redirect=' : '') + shared.questions_path(tags: filter)
+      options.merge!(target: '_parent')
     end
 
     link_to question_label_name(label), href, analytics_attributes(model, :click, label.name).deep_merge(options)
