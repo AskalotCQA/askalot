@@ -195,7 +195,7 @@ class Category < ActiveRecord::Base
 
   def update_categories_questions
     if @what_changed.include? 'parent_id'
-      reload_categories_questions
+      self.reload_categories_questions
     elsif @what_changed.include? 'shared'
       if self.shared
         self.all_versions.each do |shared_category|
@@ -214,7 +214,7 @@ class Category < ActiveRecord::Base
   end
 
   def reload_categories_questions
-    self_and_descendants.each do |category|
+    self.self_and_descendants.each do |category|
       category.questions.each do |question|
         question.register_question
       end

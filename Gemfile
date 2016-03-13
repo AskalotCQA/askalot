@@ -87,6 +87,7 @@ group :development do
   gem 'capistrano-ext'
   gem 'rvm-capistrano', require: false
   gem 'bump', github: 'pavolzbell/bump'
+  gem 'byebug'
 end
 
 group :development, :test do
