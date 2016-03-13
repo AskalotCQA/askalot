@@ -77,7 +77,7 @@ module Shared::Categories
       probe.index.mapper.define(
         id:   -> { id },
         name: -> { full_public_name },
-        context: -> { self_and_ancestors.where(depth: 1).pluck(:id) }
+        context: -> { related_contexts.pluck(:id) }
       )
 
       probe.index.create

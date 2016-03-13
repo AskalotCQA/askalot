@@ -155,7 +155,7 @@ module Shared::Questions
         answers:    ->  { answers.pluck(:text) },
         comments:    -> { comments.pluck(:text) + answers.map { |answer| answer.comments.pluck(:text) }},
         evaluations: -> { evaluations.pluck(:text) + answers.map { |answer| answer.evaluations.pluck(:text) }},
-        context:    -> { category_questions.select { |cq| cq.category.depth == 1 }.map { |cq| cq.category_id } },
+        context:    -> { related_contexts.pluck(:id) },
 
         topics: -> { profiles.where(source: :LDA).order(:property).pluck(:value) }
       )

@@ -87,7 +87,7 @@ module Shared::Tags
         name:       -> { name },
         created_at: -> { created_at },
         count:      -> { taggings.count },
-        context:    -> { questions.map { |q| q.category_questions.select { |cq| cq.category.depth == 1 }.map { |cq| cq.category_id } } }
+        context:    -> { related_contexts.pluck(:id) }
       )
 
       probe.index.create

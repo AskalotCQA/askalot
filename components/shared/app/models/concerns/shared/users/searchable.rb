@@ -78,7 +78,7 @@ module Shared::Users
         id:    -> { id },
         nick:  -> { nick },
         about: -> { about },
-        context: -> { context_users.empty? ? Shared::Category.where(depth: 1).pluck(:id) : context_users.map { |cu| Shared::Category.find_by(uuid: cu.context).id } },
+        context: -> { related_contexts.pluck(:id) },
       )
 
       probe.index.create
