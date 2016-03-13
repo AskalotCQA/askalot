@@ -39,9 +39,9 @@ module Shared
       @new = Shared::New.find(params[:id])
 
       if @new.destroy
-        form_message :notice, t('new.delete.success')
+        form_message :notice, t('news.delete.success')
       else
-        form_error_message t('new.delete.failure')
+        form_error_message t('news.delete.failure')
       end
 
       redirect_to shared.administration_news_index_path
