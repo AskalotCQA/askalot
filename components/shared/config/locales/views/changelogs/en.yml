@@ -3,7 +3,7 @@ en:
     navigation: "System updates"
 
     index:
-      title: "What's new in Askalot?"
+      title: "System updates"
       introduction: "History of new system functionality and improvements."
 
     create:

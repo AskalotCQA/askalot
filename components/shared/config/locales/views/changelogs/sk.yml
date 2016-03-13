@@ -3,7 +3,7 @@ sk:
     navigation: "Aktualizácie systému"
 
     index:
-      title: "Čo je nové v Askalote?"
+      title: "Aktualizácie systému"
       introduction: "História pridanej funkcionality a zlepšení systému."
 
     create:

@@ -7,8 +7,7 @@ sk:
       followees: "Nasledovaných"
 
     index:
-      title: "Aktivita"
-      title: "Čo je nové v Askalote?"
+      title: "Prehľad aktivity"
 
     more: "Zobraziť viac"
     none: "Žiadna aktivita."
