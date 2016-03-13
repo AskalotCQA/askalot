@@ -7,5 +7,18 @@ class Role < ActiveRecord::Base
   validates :name, presence: true
 
   self.table_name = 'roles'
+
+  def self.teacher_roles
+    # TODO (ladislav.gallay) Move to mooc model
+    if Rails.module.mooc?
+      Role::where(name: [:teacher, :teacher_assistant])
+    else
+      Role::where(name: [:teacher])
+    end
+  end
+
+  def self.teacher_assistant
+    @@teacher_assistant_role ||= Role::where(name: :teacher_assistant).first
+  end
 end
 end

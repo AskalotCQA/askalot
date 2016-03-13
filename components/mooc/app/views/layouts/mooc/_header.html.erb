@@ -15,12 +15,14 @@
         <%= navbar_link_tag t('activity.navigation'), shared.activities_path, class: :'hidden-sm hidden-md' %>
         <%= navbar_link_tag t('statistic.navigation'), shared.statistics_path, class: :'hidden-sm hidden-md' if user_signed_in? && can?(:observe, :any) %>
         <%= navbar_link_tag t('administration.navigation'), shared.administration_root_path, class: :'hidden-sm hidden-md' if user_signed_in? && can?(:administrate, :any) %>
+        <%= navbar_link_tag t('teacher_administration.navigation'), mooc.teacher_administration_root_path, class: :'hidden-sm hidden-md' if user_signed_in? && can?(:teacher_administrate, :any) %>
         <%= navbar_link_tag t('help.navigation'), shared.help_path, class: :'hidden-sm hidden-md' %>
         <%= navbar_dropdown_tag :'caret-down', nil, '#', class: :'visible-sm visible-md' do %>
           <%= content_tag :li, link_to(t('user.navigation'), shared.users_path) %>
           <%= content_tag :li, link_to(t('activity.navigation'), shared.activities_path) %>
           <%= content_tag :li, link_to(t('statistic.navigation'), shared.statistics_path) if user_signed_in? && can?(:administrate, :any) %>
           <%= content_tag :li, link_to(t('administration.navigation'), shared.administration_root_path) if user_signed_in? && can?(:administrate, :any) %>
+          <%= content_tag :li, link_to(t('teacher_administration.navigation'), mooc.teacher_administration_root_path) if user_signed_in? && can?(:teacher_administrate, :any) %>
           <li class="divider"></li>
           <%= content_tag :li, link_to(t('help.navigation'), shared.help_path) %>
         <% end %>
@@ -53,6 +55,7 @@
         <%= icon_link_to :'question-circle', nil, shared.new_question_path, analytics_attributes(:question, :'open-new-form', :navigation).deep_merge(tooltip_attributes(t('question.new.feature'), placement: :left).merge(class: 'btn btn-primary new-question')) %>
       </div>
     </div>
+    <%= render 'layouts/mooc/context' -%>
   </div>
 </header>
 

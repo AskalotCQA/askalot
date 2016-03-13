@@ -14,7 +14,12 @@ class User < ActiveRecord::Base
 
          authentication_keys: [:login]
 
-  ROLES = [:student, :teacher, :administrator]
+  if Rails.module.mooc?
+    # TODO (ladislav.gallay) Move to mooc user model
+    ROLES = [:student, :teacher, :teacher_assistant, :administrator]
+  else
+    ROLES = [:student, :teacher, :administrator]
+  end
 
   has_many :documents,   class_name: :'University::Document', foreign_key: :author_id, dependent: :destroy
   has_many :questions,   foreign_key: :author_id, dependent: :destroy
@@ -91,6 +96,16 @@ class User < ActiveRecord::Base
 
   def assigned?(category, role)
     assignments.where(category: category).joins(:role).where(roles: { name: role }).any? || (assignments.where(category: category).none? && self.role == role.to_sym)
+  end
+
+  def assigned_categories(role = nil)
+    return assignments.map { |t| t.category } if role.nil?
+
+    role = Shared::Role.find_by(name: role.to_s) if role.is_a? Symbol
+    role = role.id if role.is_a? ActiveRecord::Base
+    list = association(:assignments).loaded? ? assignments.select { |item| item.role_id = role } : assignments.includes(:category).where({ role_id: role })
+
+    list.map { |t| t.category }
   end
 
   def role?(role)

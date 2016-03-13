@@ -1,0 +1,27 @@
+<td>
+  <%= link_to_category category, tooltip_attributes(category.full_public_name).merge(target: '_blank') %>
+</td>
+
+<td>
+  <% category.tags.each do |tag| %>
+    <span class="label label-inverse"><%= tag %></span>
+  <% end %>
+</td>
+
+<td>
+  <%= check_box_tag 'shared[]', category.id, category.shared, tooltip_attributes(t 'activerecord.attributes.shared/category.shared').merge({class: 'treetable-checkbox'}) %>
+</td>
+
+<td class="text-center">
+  <% if category.can_have_subcategories? %>
+    <a href="<%= mooc.new_teacher_administration_category_path parent_id: category.id %>" class="text-muted text-undecorated">
+      <%= tooltip_icon_tag 'plus-circle', t('teacher_administration.category.create.action'), placement: :top %>
+    </a>
+  <% end %>
+</td>
+
+<td class="text-center">
+  <a href="<%= mooc.edit_teacher_administration_category_path category %>" class="text-muted text-undecorated">
+    <%= tooltip_icon_tag :edit, t('teacher_administration.category.edit.action'), placement: :top %>
+  </a>
+</td>

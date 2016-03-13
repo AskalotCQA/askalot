@@ -1,0 +1,22 @@
+en:
+  teacher_administration:
+    navigation: "Administration"
+
+    category:
+      index:
+        title: "Categories administration"
+        update_settings: "Update settings"
+        wait: "Wait, please..."
+        success: "Categories were updated successfully"
+
+      create:
+        action: "New"
+        title: "New subcategory in "
+        submit: "Save"
+        cancel: "Cancel"
+
+      edit:
+        action: "Edit"
+        title: "Edit category"
+        submit: "Save"
+        cancel: "Cancel"

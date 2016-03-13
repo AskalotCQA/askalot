@@ -257,7 +257,6 @@ CREATE TABLE categories (
     full_tree_name character varying(255),
     full_public_name character varying(255),
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
-    lti_id character varying(255),
     direct_questions_count integer DEFAULT 0 NOT NULL,
     direct_answers_count integer DEFAULT 0 NOT NULL,
     category_questions_count integer DEFAULT 0 NOT NULL
@@ -1259,7 +1258,7 @@ CREATE TABLE users (
     id integer NOT NULL,
     login character varying(255) NOT NULL,
     email character varying(255) DEFAULT ''::character varying NOT NULL,
-    encrypted_password character varying(255) DEFAULT NULL::character varying,
+    encrypted_password character varying(255) DEFAULT ''::character varying NOT NULL,
     ais_uid character varying(255),
     ais_login character varying(255),
     nick character varying(255) NOT NULL,
@@ -3397,10 +3396,6 @@ INSERT INTO schema_migrations (version) VALUES ('20151122110354');
 INSERT INTO schema_migrations (version) VALUES ('20151122112216');
 
 INSERT INTO schema_migrations (version) VALUES ('20151122112444');
-
-INSERT INTO schema_migrations (version) VALUES ('20151130051140');
-
-INSERT INTO schema_migrations (version) VALUES ('20151207221041');
 
 INSERT INTO schema_migrations (version) VALUES ('20151207231221');
 

@@ -52,6 +52,7 @@ module Mooc
       return false unless authorize!
 
       params['roles'] = :teacher if params['roles'] == 'Administrator'
+      params['roles'] = :teacher_assistant if params['roles'] == 'Teacher'
 
       user = User.find_by(login: params['user_id'])
       user_attributes = { login: params['user_id'], nick: params['lis_person_sourcedid'],
