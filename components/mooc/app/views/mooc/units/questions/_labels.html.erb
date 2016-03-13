@@ -1,7 +1,7 @@
 <ul class="nav nav-labels">
   <% labels.each do |label| %>
     <li>
-      <%= question_prefix_label label, page_url %>
+      <%= question_prefix_label label, page_url, {}, in_questions %>
     </li>
   <% end %>
 </ul>
