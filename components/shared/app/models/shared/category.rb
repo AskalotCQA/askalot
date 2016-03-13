@@ -234,5 +234,9 @@ class Category < ActiveRecord::Base
   def custom?
     self.lti_id.blank?
   end
+
+  def available_in_current_context?
+    self.related_contexts.where(id: Shared::Context::Manager.current_context).count > 0
+  end
 end
 end

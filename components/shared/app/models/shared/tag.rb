@@ -22,12 +22,6 @@ class Tag < ActiveRecord::Base
     "#{year}-#{(year + 1).to_s[-2..-1]}"
   end
 
-  def self.tags_in_context(context)
-    question_ids = Shared::Category.find(context).related_questions.pluck(:id)
-
-    Shared::Tag.joins(:taggings).where(taggings: { question_id: question_ids }).uniq
-  end
-
   def value
     read_attribute(:name)
   end
@@ -42,6 +36,10 @@ class Tag < ActiveRecord::Base
 
   def related_contexts
     related_categories.where(depth: 1)
+  end
+
+  def available_in_current_context?
+    self.related_contexts.where(id: Shared::Context::Manager.current_context).count > 0
   end
 end
 end
