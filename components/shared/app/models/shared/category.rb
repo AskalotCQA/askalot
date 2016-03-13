@@ -153,6 +153,17 @@ class Category < ActiveRecord::Base
     full_public_name
   end
 
+  def self.all_in_contexts(contexts, relation = nil)
+    relation   ||= Category::all
+    conditions = []
+
+    Category::where(id: contexts).each do |category|
+      conditions.append "(lft >= #{category.lft} AND rgt <= #{category.rgt})"
+    end
+
+    conditions.empty? ? relation.where('1 = 2') : relation.where(conditions.join(' OR '))
+  end
+
   def all_versions
     Shared::Category.where(uuid: self.uuid).where.not(id: self.id)
   end
