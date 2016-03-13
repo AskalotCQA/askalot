@@ -17,15 +17,17 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @category  = Shared::Category.find(params[:category]) if params[:category]
-    @category  ||= Shared::Category.find(@context)
+    if params[:category]
+      @category = Shared::Category.find(params[:category])
+      @context = @category.id
+    end
 
     @questions = case params[:tab].to_sym
-                 when :unanswered then @category.related_questions.unanswered.by_votes
-                 when :answered   then @category.related_questions.answered.by_votes
-                 when :solved     then @category.related_questions.solved.by_votes
-                 when :favored    then @category.related_questions.favored.by_votes
-                 else @category.related_questions.recent
+                 when :unanswered then Shared::Question.in_context(@context).unanswered.by_votes
+                 when :answered   then Shared::Question.in_context(@context).answered.by_votes
+                 when :solved     then Shared::Question.in_context(@context).solved.by_votes
+                 when :favored    then Shared::Question.in_context(@context).by_votes
+                 else Shared::Question.in_context(@context).recent
                  end
 
     @questions = filter_questions(@questions)
@@ -103,7 +105,7 @@ class QuestionsController < ApplicationController
   end
 
   def suggest
-    @questions = Shared::Question.where('id = ? or title like ?', params[:q].to_i, "#{params[:q]}%")
+    @questions = Shared::Question.in_context(@context).where('questions.id = ? or questions.title like ?', params[:q].to_i, "#{params[:q]}%")
 
     render json: @questions, root: false
   end
