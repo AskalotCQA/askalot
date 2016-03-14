@@ -7,6 +7,9 @@
           <%= fa_icon :university, tooltip_attributes(names_for_teachers(category.teachers)).merge({ class: 'supported-category-icon-lg' }) %>
         <% end %>
       </h4>
+      <div class="category-description">
+        <%= category.description %>
+      </div>
       <div class="category-details">
         <%= t('count.question', count: category.questions.size).upcase_first %> <%= category.questions.size %> &middot;
         <%= t('count.answer', count: category.answers.size).upcase_first %> <%= category.answers.size %> &middot;

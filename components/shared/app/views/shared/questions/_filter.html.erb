@@ -5,6 +5,9 @@
         <h1 class="question-title">
           <%= category.full_public_name if category.full_public_name != 'root' %>
         </h1>
+        <div class="category-description">
+          <%= category.description %>
+        </div>
       </div>
     </div>
   <% end %>

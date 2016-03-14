@@ -5,8 +5,13 @@ module Shared::FormHelper
       hash
     end
 
+    descriptions = collection.inject({}) do |hash, category|
+      hash[category.send :id] = category.description
+      hash
+    end
+
     options.merge! include_blank: true
-    html_options.deep_merge! class: :'form-control', data: { as: :select2, values: tags }
+    html_options.deep_merge! class: :'form-control', data: { as: :select2, values: tags, descriptions: descriptions }
 
     collection_select(id, collection, value, label, options, html_options)
   end

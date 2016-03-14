@@ -85,7 +85,7 @@ describe 'Add Question', type: :feature do
 
   context 'when selecting category' do
     before :each do
-      create :category, name: 'Westside Playground', tags: ['westside', 'ali-gz']
+      create :category, name: 'Westside Playground', description: 'Category description', tags: ['westside', 'ali-gz']
     end
 
     it 'shows automaticaly assigned tags', js: true do
@@ -101,6 +101,25 @@ describe 'Add Question', type: :feature do
       within '#question-category-tags' do
         expect(page).to have_content('westside')
         expect(page).to have_content('ali-gz')
+      end
+
+      click_button 'Opýtať'
+
+      expect(page).to have_content('Otázka bola úspešne pridaná.')
+    end
+
+    it 'shows automaticaly description', js: true do
+      visit shared.root_path
+
+      click_link 'Opýtať sa otázku'
+
+      fill_in 'question_title', with: "Ain't Westside tha best?"
+      fill_in 'question_text',  with: "Y'll eastsiders: Talk to the hand, 'cos the face ain't listening."
+
+      select2 'Westside Playground', from: 'question_category_id'
+
+      within '.category-description' do
+        expect(page).to have_content('Category description')
       end
 
       click_button 'Opýtať'

@@ -16,6 +16,10 @@
       <%= f.text_field :category_name, value: unit.full_public_name, class: :'form-control', disabled: true %>
     </div>
 
+    <div class="category-description">
+      <%= @question.category.description if @question.category %>
+    </div>
+
     <div class="form-group">
       <%= f.label :title %>
       <%= f.text_field :title, class: :'form-control' %>
