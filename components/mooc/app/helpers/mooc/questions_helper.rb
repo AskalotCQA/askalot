@@ -1,7 +1,7 @@
 module Mooc::QuestionsHelper
   extend Shared::QuestionsHelper
 
-  def question_prefix_label(label, page_url, options = {}, in_questions = false)
+  def question_prefix_label(label, page_url, options = {}, in_questions_index = false)
     model, tags, classes = question_label_attributes label
 
     filter = ((params[:tags] || '').split(',') + tags).uniq.join(',')
@@ -10,8 +10,7 @@ module Mooc::QuestionsHelper
     options.deep_merge! class: classes, data: { id: filter } unless filter.blank?
 
     if label.class.to_s == 'Shared::Category'
-      href = '#'
-      href = mooc.unit_path(id: label.id) unless in_questions
+      href = (in_questions_index) ? '#' : mooc.unit_path(id: label.id)
     else
       href = (page_url ? page_url + '?redirect=' : '') + shared.questions_path(tags: filter)
       options.merge!(target: '_parent')
