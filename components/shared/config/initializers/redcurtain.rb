@@ -2,18 +2,18 @@ require 'shared/redcurtain'
 
 # renderers order is significant
 
-Shared::Redcurtain::Markdown.renderers.unshift(*[
-  Shared::Redcurtain::Renderer::Replacer.new(:'user-link'),
-  Shared::Redcurtain::Renderer::Replacer.new(:'question-link'),
-  Shared::Redcurtain::Renderer::Linker.new(:user),
-  Shared::Redcurtain::Renderer::Linker.new(:question)
+Redcurtain::Markdown.renderers.unshift(*[
+  Redcurtain::Renderer::Replacer.new(:'user-link'),
+  Redcurtain::Renderer::Replacer.new(:'question-link'),
+  Redcurtain::Renderer::Linker.new(:user),
+  Redcurtain::Renderer::Linker.new(:question)
 ])
 
 [:autolink, :no_images, :no_styles].each do |flag|
-  Shared::Redcurtain::Renderer::Redcarpet.defaults[flag] = true
+  Redcurtain::Renderer::Redcarpet.defaults[flag] = true
 end
 
-Shared::Redcurtain::Renderer::Redcarpet.defaults[:tags] &= [
+Redcurtain::Renderer::Redcarpet.defaults[:tags] &= [
   :autolink,
   :block_code,
   :block_quote,
