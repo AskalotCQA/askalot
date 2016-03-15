@@ -9,6 +9,7 @@ module Shared::WatchingsHelper
   def watchable_content(watchable, options = {})
     if watchable.is_a?(Shared::Deletable) && watchable.deleted || !watchable.available_in_current_context?
       options[:class] = Array.wrap(options[:class]) << :'text-muted'
+
       return static_watchable watchable, options.reverse_merge(length: 80)
     end
 

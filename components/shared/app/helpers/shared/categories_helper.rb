@@ -63,12 +63,6 @@ module Shared::CategoriesHelper
   end
 
   def askable_leaves_categories(context)
-    categories = []
-
-    Shared::Category.find(context).leaves.each do |c|
-      categories << c if c.askable
-    end
-
-    categories.sort_by(&:full_public_name)
+    Shared::Category.find(context).leaves.where(askable: true).unscope(:order).order(:full_public_name)
   end
 end
