@@ -11,7 +11,7 @@
             <%= @question.title %>
             <%= evaluation_badge_tag @question if @question.evaluations.any? %>
           </h3>
-          <%= render 'mooc/units/questions/labels', labels: @question.tags, page_url: @page_url %>
+          <%= render 'mooc/units/questions/labels', labels: @question.labels, page_url: @page_url, in_questions_index: false %>
         </div>
 
         <div id="question-data">
