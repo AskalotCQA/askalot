@@ -107,6 +107,10 @@ class Question < ActiveRecord::Base
     related_categories.where(depth: 1)
   end
 
+  def available_in_current_context?
+    self.related_contexts.where(id: Shared::Context::Manager.current_context).count > 0
+  end
+
   # TODO (jharinek) delete when refactoring watchings
   def parent
     category || document

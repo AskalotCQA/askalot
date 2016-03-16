@@ -16,11 +16,13 @@ class Answer < ActiveRecord::Base
 
   has_many :profiles,  class_name: :'Answer::Profile',  dependent: :destroy
   has_many :revisions, class_name: :'Answer::Revision', dependent: :destroy
+  has_many :related_categories, -> { distinct }, through: :question, source: :related_categories
 
   validates :text, presence: true
 
   scope :by,  lambda { |user| where(author: user) }
   scope :for, lambda { |question| where(question: question) }
+  scope :in_context, lambda { |context| includes(:related_categories).where(categories: { id: context }) }
 
   Hash[Label.value_enum].values.each { |label| scope label, -> { labeled_with label } }
 

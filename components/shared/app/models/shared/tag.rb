@@ -9,7 +9,7 @@ class Tag < ActiveRecord::Base
   has_many :related_categories, -> { distinct }, through: :questions, source: :related_categories
 
   scope :recent,  lambda { where('tags.created_at >= ?', Time.now - 1.month ).unscope(:order).order('tags.created_at') }
-  scope :popular, lambda { select('tags.*, count(*) as c').joins(:taggings).group('tags.id').unscope(:order).order('c desc').limit(30) }
+  scope :popular, lambda { select('tags.id').group('tags.id, categories.id').unscope(:order).order('count(*) desc').limit(30) }
   scope :in_context, lambda { |context| includes(:related_categories).where(categories: { id: context }) }
 
   before_save :normalize
@@ -22,12 +22,6 @@ class Tag < ActiveRecord::Base
     "#{year}-#{(year + 1).to_s[-2..-1]}"
   end
 
-  def self.tags_in_context(context)
-    question_ids = Shared::Category.find(context).related_questions.pluck(:id)
-
-    Shared::Tag.joins(:taggings).where(taggings: { question_id: question_ids }).uniq
-  end
-
   def value
     read_attribute(:name)
   end
@@ -36,12 +30,16 @@ class Tag < ActiveRecord::Base
     self.name = name.to_s.downcase.gsub(/[^[:alnum:]#\-\+\.]+/, '-').gsub(/\A-|-\z/, '')
   end
 
-  def count(context = Shared::Context::Manager.question_context)
+  def count(context = Shared::Context::Manager.current_context)
     questions.in_context(context).size
   end
 
   def related_contexts
     related_categories.where(depth: 1)
+  end
+
+  def available_in_current_context?
+    self.related_contexts.where(id: Shared::Context::Manager.current_context).count > 0
   end
 end
 end

@@ -11,11 +11,9 @@ module Shared::ActivitiesHelper
   end
 
   def activity_content(activity, options = {})
-    mute = options.delete(:mute) || lambda { |_| false }
-
     content = activity_content_by_attributes(activity.action, activity.initiator, activity.resource, options)
 
-    mute.call(activity) ? content_tag(:span, content, class: :'text-muted') : content
+    options[:mute] ? content_tag(:span, content, class: :'text-muted') : content
   end
 
   def activity_content_by_attributes(action, initiator, resource, options = {})
@@ -30,7 +28,9 @@ module Shared::ActivitiesHelper
     question_body = activity_question_body(action, question, question_options)
 
     # TODO(zbell) note that unlinked content also lacks any struct info about deletion: no muted spans
-    if options.delete(:unlink)
+    if options.delete(:unlink) || !question.available_in_current_context?
+      options[:mute] = true
+
       return translate content, resource: resource_body, question: question_body
     end
 
