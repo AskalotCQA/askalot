@@ -41,6 +41,7 @@ class QuestionsController < ApplicationController
 
     @question.document = University::Document.find(params[:document_id]) if params[:document_id]
     @question.category = Shared::Category.find(params[:category_id]) if params[:category_id]
+    @question.category = nil if @question.category && @question.category.children.any?
 
     respond_to do |format|
       format.html { render :new }
