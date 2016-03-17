@@ -19,7 +19,6 @@ class RegistrationsController < Devise::RegistrationsController
     else
       shared.welcome_path
     end
-
   end
 
   def after_inactive_sign_up_path_for(resource)
