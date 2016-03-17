@@ -26,7 +26,7 @@ class QuestionsController < ApplicationController
                  when :unanswered then Shared::Question.in_context(@context).unanswered.by_votes
                  when :answered   then Shared::Question.in_context(@context).answered.by_votes
                  when :solved     then Shared::Question.in_context(@context).solved.by_votes
-                 when :favored    then Shared::Question.in_context(@context).by_votes
+                 when :favored    then Shared::Question.in_context(@context).favored.by_votes
                  else Shared::Question.in_context(@context).recent
                  end
 

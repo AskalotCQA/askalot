@@ -14,14 +14,12 @@ describe Shared::TagsController, type: :controller do
       Shared::Tag.autoimport = true
 
       Shared::Tag.probe.index.reload do
-        create :tag, name: 'test'
-        create :tag, name: 'testing'
-        create :tag, name: 'elasticsearch'
+        create :question, tag_list: 'test,testing,elasticsearch'
       end
     end
 
     it 'suggests tags' do
-      get :suggest, q: 'test', format: :json, context: 1
+      get :suggest, q: 'test', format: :json, context: Shared::Context::Manager.default_context
 
       tags = assigns(:tags)
 
@@ -29,8 +27,8 @@ describe Shared::TagsController, type: :controller do
 
       json = {
         results: [
-          { id: 'test', text: 'test (0)' },
-          { id: 'testing', text: 'testing (0)' }
+          { id: 'test', text: 'test (1)' },
+          { id: 'testing', text: 'testing (1)' }
         ]
       }.to_json
 
@@ -38,9 +36,12 @@ describe Shared::TagsController, type: :controller do
     end
 
     it 'suggest only 10 tags'  do
-      20.times { |n| create :tag, name: "tag ##{n}" }
+      tags_string = ''
 
-      get :suggest, q: 'tag', format: :json, context: 1
+      20.times { |n| tags_string += "tag-##{n}," }
+      create :question, tag_list: tags_string[0..-2]
+
+      get :suggest, q: 'tag', format: :json, context: Shared::Context::Manager.default_context
 
       tags = assigns(:tags)
 

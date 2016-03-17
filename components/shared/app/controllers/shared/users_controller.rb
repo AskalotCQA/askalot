@@ -78,9 +78,10 @@ class UsersController < ApplicationController
 
   def followings
     @user = Shared::User.by(nick: params[:nick])
+    context_uuid = Shared::Category.find(@context).uuid
 
-    @followees = @user.followees.in_context(@context).order(:nick).page(tab_page :followees).per(20)
-    @followers = @user.followers.in_context(@context).order(:nick).page(tab_page :followers).per(20)
+    @followees = @user.followees.in_context(context_uuid).order(:nick).page(tab_page :followees).per(20)
+    @followers = @user.followers.in_context(context_uuid).order(:nick).page(tab_page :followers).per(20)
   end
 
   def follow

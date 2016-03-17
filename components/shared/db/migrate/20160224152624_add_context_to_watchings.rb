@@ -2,7 +2,7 @@ class AddContextToWatchings < ActiveRecord::Migration
   def up
     add_column :watchings, :context, :integer
 
-    ActiveRecord::Base.disable_timestamps
+    ActiveRecord::Base.record_timestamps = false
 
     Shared::Watching.all.each do |watching|
       year = (now = watching.created_at).month >= 9 ? now.year : (now.year - 1)

@@ -224,7 +224,9 @@ class Category < ActiveRecord::Base
   end
 
   def related_contexts
-    self_and_ancestors.where(depth: 1)
+    depth = Rails.module.mooc? ? 0 : 1;
+
+    self_and_ancestors.where(depth: depth)
   end
 
   def can_have_subcategories?

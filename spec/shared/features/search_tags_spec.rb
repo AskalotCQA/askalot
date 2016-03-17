@@ -9,9 +9,7 @@ describe 'Search Tags', type: :feature do
 
     login_as user
 
-    create :tag, name: 'rails'
-    create :tag, name: 'ruby'
-    create :tag, name: 'linux'
+    create :question, tag_list: 'rails,ruby,linux'
   end
 
   it 'searches tags by name' do

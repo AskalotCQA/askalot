@@ -2,7 +2,7 @@ class AddContextToNotifications < ActiveRecord::Migration
   def up
     add_column :notifications, :context, :integer
 
-    ActiveRecord::Base.disable_timestamps
+    ActiveRecord::Base.record_timestamps = false
 
     Shared::Notification.all.each do |notification|
       year = (now = notification.created_at).month >= 9 ? now.year : (now.year - 1)
