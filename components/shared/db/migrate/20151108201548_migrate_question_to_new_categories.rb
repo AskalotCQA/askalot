@@ -1,6 +1,6 @@
 class MigrateQuestionToNewCategories < ActiveRecord::Migration
   def up
-    ActiveRecord::Base.disable_timestamps
+    ActiveRecord::Base.record_timestamps = false
 
     root = Shared::Category.roots.find_by name: 'root'
     last_year = root.children.empty? ? '' : root.children.sort_by(&:name).last.name
