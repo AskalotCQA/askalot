@@ -3,6 +3,8 @@ class Watching < ActiveRecord::Base
   include Deletable
   include Notifiable
 
+  before_save :default_values
+
   belongs_to :watcher, class_name: :'Shared::User'
 
   belongs_to :watchable, -> { unscope where: :deleted }, polymorphic: true
@@ -12,5 +14,11 @@ class Watching < ActiveRecord::Base
   scope :in_context, lambda { |context| where(context: context) if Rails.module.mooc? }
 
   self.table_name = 'watchings'
+
+  private
+
+  def default_values
+    self.context ||= Shared::Context::Manager.current_context
+  end
 end
 end
