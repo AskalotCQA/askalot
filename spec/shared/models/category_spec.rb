@@ -87,9 +87,6 @@ describe Shared::Category, type: :model do
 
     context 'with no answer' do
       it 'has no answers' do
-        expect(shared1.direct_answers_count).to be_zero
-        expect(shared2.direct_answers_count).to be_zero
-        expect(outer.direct_answers_count).to be_zero
         expect(shared1.related_answers.count).to be_zero
         expect(shared2.related_answers.count).to be_zero
         expect(outer.related_answers.count).to be_zero

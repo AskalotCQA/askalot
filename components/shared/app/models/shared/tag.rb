@@ -35,7 +35,9 @@ class Tag < ActiveRecord::Base
   end
 
   def related_contexts
-    related_categories.where(depth: 1)
+    depth = Rails.module.mooc? ? 0 : 1;
+
+    related_categories.where(depth: depth)
   end
 
   def available_in_current_context?

@@ -30,7 +30,7 @@ FactoryGirl.define do
     after :create do |user|
       user.confirm!
 
-      Shared::ContextUser.create user: user, context: 'root_uuid'
+      Shared::ContextUser.create user: user, context: 'root_uuid' if Rails.module.mooc?
     end
 
     trait :as_ais do

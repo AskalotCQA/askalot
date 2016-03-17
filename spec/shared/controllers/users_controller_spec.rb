@@ -12,7 +12,7 @@ describe Shared::UsersController, type: :controller do
       end
 
       it 'disallows changing of first and last name' do
-        patch :update, context: 1, user: { nick: 'xpeter', first: 'Peter', last: 'Pan' }
+        patch :update, context: Shared::Context::Manager.default_context, user: { nick: 'xpeter', first: 'Peter', last: 'Pan' }
 
         user.reload
 

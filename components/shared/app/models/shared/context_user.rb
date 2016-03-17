@@ -6,6 +6,6 @@ module Shared
 
     validates :context, presence: true
 
-    scope :in_context, lambda { |context| where(context: context) }
+    scope :in_context, lambda { |context| where(context: context.to_s ) }
   end
 end

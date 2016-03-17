@@ -33,7 +33,7 @@ describe 'Context filtering', type: :feature do
       category = Shared::Category.create name: 'test'
       question = create :question, :with_tags, author: user, category: category
 
-      visit shared.question_path(question, context: 7)
+      visit shared.question_path(question, context: category.id)
 
       fill_in 'answer_text', with: 'Hey, look at this.'
       click_button 'Odpovedať'
