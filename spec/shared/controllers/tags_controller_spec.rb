@@ -15,11 +15,6 @@ describe Shared::TagsController, type: :controller do
 
       Shared::Tag.probe.index.reload do
         create :question, tag_list: 'test,testing,elasticsearch'
-
-        tags_string = ''
-
-        20.times { |n| tags_string += "tag ##{n}," }
-        create :question, tag_list: tags_string[0..-2]
       end
     end
 
@@ -41,6 +36,11 @@ describe Shared::TagsController, type: :controller do
     end
 
     it 'suggest only 10 tags'  do
+      tags_string = ''
+
+      20.times { |n| tags_string += "tag-##{n}," }
+      create :question, tag_list: tags_string[0..-2]
+
       get :suggest, q: 'tag', format: :json, context: Shared::Context::Manager.default_context
 
       tags = assigns(:tags)
