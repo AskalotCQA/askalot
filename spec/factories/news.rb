@@ -1,7 +1,7 @@
 FactoryGirl.define do
-  factory :news do
-    title "MyString"
-    description "MyText"
-    show false
+  factory :news, class: Shared::New do
+    title 'Test News'
+    description 'News'
+    show true
   end
 end
