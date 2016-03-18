@@ -25,12 +25,8 @@ class ApplicationController < ActionController::Base
   end
 
   def determine_context
-    if params[:context]
-      context = params[:context].to_i if params[:context].is_number?
-      context = Shared::Context::Manager.determine_context_id(params[:context]) unless params[:context].is_number?
-    else
-      context = Shared::Context::Manager.default_context
-    end
+    context = context_from_params if params[:context]
+    context = Shared::Context::Manager.default_context unless params[:context]
 
     redirect_to "#{request.path}#{context}" if ! params[:context] && Rails.module.mooc?
 
@@ -46,6 +42,14 @@ class ApplicationController < ActionController::Base
     else
       @contexts ||= current_user.assigned_categories(:teacher).select { |t| t.parent_id.nil? }
     end
+  end
+
+  private
+
+  def context_from_params
+    return params[:context] unless params[:context].is_a?(String)
+    return params[:context].to_i if params[:context].is_number?
+    Shared::Context::Manager.determine_context_id(params[:context])
   end
 end
 end
