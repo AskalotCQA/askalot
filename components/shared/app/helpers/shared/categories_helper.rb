@@ -83,8 +83,10 @@ module Shared::CategoriesHelper
         output << '</li>'
       end
 
-      output << '<li>'
-      output << capture(o, path.size - 1, &block)
+      if o.visible?
+        output << '<li>'
+        output << capture(o, path.size - 1, &block)
+      end
     end
 
     output << '</ul>'

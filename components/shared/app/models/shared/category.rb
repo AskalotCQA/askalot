@@ -243,5 +243,9 @@ class Category < ActiveRecord::Base
   def available_in_current_context?
     self.related_contexts.where(id: Shared::Context::Manager.current_context).count > 0
   end
+
+  def visible?
+    Shared::CategoryDepth.public_depths.include? self.depth
+  end
 end
 end
