@@ -13,6 +13,10 @@ else
 
 is_global = document.getElementsByClassName('course-content')[0] == undefined
 
+courseUuid = ->
+  uuid = $('.provider').first().text().trim() + '-' + $('.course-number').first().text().trim() + '-' + $('.course-name').first().text().trim()
+  uuid.replace('/', '-').replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-')
+
 infoParser = ->
   url = window.location.href
   pathname = window.location.pathname
@@ -43,10 +47,6 @@ infoParser = ->
     lti_id: lti_element.id.trim()
 
 $('nav .course-tabs li:contains(Discussion)').hide()
-
-courseUuid = ->
-  uuid = $('.provider').first().text().trim() + '-' + $('.course-number').first().text().trim() + '-' + $('.course-name').first().text().trim()
-  uuid.replace('/', '-').replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-')
 
 $(document).ready ->
   getURLParameter = (name) ->

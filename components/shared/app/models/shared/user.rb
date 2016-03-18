@@ -60,7 +60,7 @@ class User < ActiveRecord::Base
   scope :by, lambda { |args| where(args).first || raise(ActiveRecord::RecordNotFound) }
   scope :recent, lambda { where('users.created_at >= ?', Time.now - 1.month ) }
   scope :alumni, lambda { where(alumni: true) }
-  scope :in_context, lambda { |context| includes(:contexts).where(categories: { id: context }) unless Rails.module.university? }
+  scope :in_context, lambda { |context| includes(:contexts).where(categories: { id: context }) if Rails.module.mooc? }
 
   Shared::Social.networks.each do |key, network|
     validates key, format: { with: network.regexp }, allow_blank: true

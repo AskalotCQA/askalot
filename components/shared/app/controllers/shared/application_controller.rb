@@ -25,8 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def determine_context
-    context = context_from_params if params[:context]
-    context = Shared::Context::Manager.default_context unless params[:context]
+    context = params[:context] ? context_from_params : Shared::Context::Manager.default_context
 
     redirect_to "#{request.path}#{context}" if ! params[:context] && Rails.module.mooc?
 
