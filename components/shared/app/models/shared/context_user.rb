@@ -4,8 +4,8 @@ module Shared
 
     belongs_to :user
 
-    validates :context, presence: true
+    validates :context_id, presence: true
 
-    scope :in_context, lambda { |context| where(context: context ) }
+    scope :in_context, lambda { |context| where(context_id: context ) }
   end
 end

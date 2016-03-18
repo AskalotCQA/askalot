@@ -433,9 +433,9 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 CREATE TABLE context_users (
     id integer NOT NULL,
     user_id integer NOT NULL,
-    context character varying(255),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    context_id integer
 );
 
 
@@ -2187,6 +2187,13 @@ CREATE INDEX index_categories_on_slido_username ON categories USING btree (slido
 
 
 --
+-- Name: index_categories_questions_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_categories_questions_on_category_id ON categories_questions USING btree (category_id);
+
+
+--
 -- Name: index_categories_questions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2194,10 +2201,10 @@ CREATE INDEX index_categories_questions_on_deletor_id ON categories_questions US
 
 
 --
--- Name: index_categories_questions_on_question_id_and_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_questions_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE UNIQUE INDEX index_categories_questions_on_question_id_and_category_id ON categories_questions USING btree (question_id, category_id);
+CREATE INDEX index_categories_questions_on_question_id ON categories_questions USING btree (question_id);
 
 
 --
@@ -3422,4 +3429,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160229115039');
 INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 
 INSERT INTO schema_migrations (version) VALUES ('20160307103948');
+
+INSERT INTO schema_migrations (version) VALUES ('20160318072719');
 

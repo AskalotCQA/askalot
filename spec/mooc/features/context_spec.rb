@@ -102,7 +102,7 @@ describe 'Context filtering', type: :feature do
     it 'shows users in context' do
       category = Shared::Category.find(@context)
 
-      Shared::ContextUser.create user: user, context: category.uuid
+      Shared::ContextUser.create user: user, context_id: category.id
 
       visit shared.users_path
 

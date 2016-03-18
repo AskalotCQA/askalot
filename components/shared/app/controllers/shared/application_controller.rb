@@ -25,10 +25,12 @@ class ApplicationController < ActionController::Base
   end
 
   def determine_context
-    context = params[:context] || Shared::Context::Manager.default_context
-    context_id = context.is_a?(String) ? context.gsub(/[^0-9]/, '').to_i : nil
-    context = context_id if context_id.is_a?(Fixnum) && context_id != 0
-    context = Shared::Context::Manager.determine_context_id(context) unless context_id.nil? || context_id != 0
+    if params[:context]
+      context = params[:context].to_i if params[:context].is_number?
+      context = Shared::Context::Manager.determine_context_id(params[:context]) unless params[:context].is_number?
+    else
+      context = Shared::Context::Manager.default_context
+    end
 
     redirect_to "#{request.path}#{context}" if ! params[:context] && Rails.module.mooc?
 

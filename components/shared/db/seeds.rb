@@ -30,4 +30,4 @@ slido.update_attributes(
 
 slido.save!
 
-Shared::ContextUser.create user: slido, context: 'root_uuid' if Rails.module.mooc?
+Shared::ContextUser.create user: slido, context_id: 1 if Rails.module.mooc?

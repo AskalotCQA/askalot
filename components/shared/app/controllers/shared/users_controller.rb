@@ -10,9 +10,6 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @context_category = Shared::Category.find(@context)
-    @context = @context_category.uuid
-
     @users = case params[:tab].to_sym
              when :recent then Shared::User.in_context(@context).recent.order(created_at: :desc)
              when :alumni then Shared::User.in_context(@context).alumni.order(:nick)

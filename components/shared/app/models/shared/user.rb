@@ -58,7 +58,7 @@ class User < ActiveRecord::Base
   scope :by, lambda { |args| where(args).first || raise(ActiveRecord::RecordNotFound) }
   scope :recent, lambda { where('users.created_at >= ?', Time.now - 1.month ) }
   scope :alumni, lambda { where(alumni: true) }
-  scope :in_context, lambda { |context| includes(:context_users).where(context_users: { context: context }).where.not(context_users: { id: nil }) unless Rails.module.university? }
+  scope :in_context, lambda { |context| includes(:context_users).where(context_users: { context_id: context }).where.not(context_users: { id: nil }) unless Rails.module.university? }
 
   Shared::Social.networks.each do |key, network|
     validates key, format: { with: network.regexp }, allow_blank: true
@@ -153,7 +153,7 @@ class User < ActiveRecord::Base
   def related_contexts
     depth = Rails.module.mooc? ? 0 : 1;
 
-    context_users.empty? ? Shared::Category.where(depth: depth) : Shared::Category.where(uuid: context_users.pluck(:context))
+    context_users.empty? ? Shared::Category.where(depth: depth) : Shared::Category.where(id: context_users.pluck(:context_id))
   end
 
   protected
