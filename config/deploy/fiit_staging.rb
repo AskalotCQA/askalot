@@ -4,6 +4,6 @@ server domain, :app, :web, :db, primary: true
 
 set :user,      'deploy'
 set :rails_env, 'fiit_staging'
-set :branch,    'gama'
+set :branch,    'staging'
 
 role :db, domain, primary: true
