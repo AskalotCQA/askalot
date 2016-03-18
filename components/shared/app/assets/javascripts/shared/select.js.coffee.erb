@@ -5,7 +5,7 @@ class window.Select extends Module
     base_url = '<%= Rails.application.config.relative_url_root %>'
   else
     current_url = window.location.pathname
-    context_pattern = ///<%= Regexp.escape Rails.application.config.relative_url_root %>\/[^\/]*///i
+    context_pattern = ///<%= Regexp.escape Rails.application.config.relative_url_root.to_s %>\/[^\/]*///i
     base_url = current_url.match context_pattern
 
   @of: (name, options = {}) ->

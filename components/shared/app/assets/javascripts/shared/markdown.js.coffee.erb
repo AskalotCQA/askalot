@@ -2,10 +2,10 @@
 
 class window.Markdown
   if <%= Rails.module.university? %>
-    base_url = '<%= Rails.application.config.relative_url_root %>'
+    base_url = '<%= Rails.application.config.relative_url_root.to_s %>'
   else
     current_url = window.location.pathname
-    context_pattern = ///<%= Regexp.escape Rails.application.config.relative_url_root %>\/[^\/]*///i
+    context_pattern = ///<%= Regexp.escape Rails.application.config.relative_url_root.to_s %>\/[^\/]*///i
     base_url = current_url.match context_pattern
 
   textcomplete:
@@ -28,7 +28,7 @@ class window.Markdown
         index:    2
         maxCount: 5
         search:   (term, callback) ->
-          $.get @base_url + '/users/suggest', q: term, (data) -> try callback(data)
+          $.get base_url + '/users/suggest', q: term, (data) -> try callback(data)
 
       questions:
         match:    /(^|\s*)#(\w*)$/
@@ -37,7 +37,7 @@ class window.Markdown
         index:    2
         maxCount: 5
         search: (term, callback) ->
-          $.get @base_url + '/questions/suggest', q: term, (data) -> try callback(data)
+          $.get base_url + '/questions/suggest', q: term, (data) -> try callback(data)
 
 
   @bind: ->
@@ -69,7 +69,7 @@ class window.Markdown
     text = @text()
 
     $.ajax
-      url:  @base_url + '/markdown/preview'
+      url:  base_url + '/markdown/preview'
       type: 'POST'
       data:
         text: text
