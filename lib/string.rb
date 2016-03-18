@@ -22,4 +22,8 @@ class String
   def upcase_first!
     self.sub!(/^\D{0,1}/) { |c| c.upcase }
   end
+
+  def is_number?
+    true if Float(self) rescue false
+  end
 end

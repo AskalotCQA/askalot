@@ -13,8 +13,9 @@ Shared::Role.find_or_create_by! name: :administrator
 Shared::Label.find_or_create_by! value: :best
 Shared::Label.find_or_create_by! value: :helpful
 
-root = Shared::Category.find_or_create_by! name: :root, uuid: :root_uuid if Rails.module.university?
-Shared::Category.find_or_create_by! name: Shared::Tag.current_academic_year_value, parent_id: root.id if Rails.module.university?
+root = Shared::Category.find_or_create_by! name: :root, uuid: :root_uuid if Rails.module.university? || Rails.env_type.test?
+
+Shared::Category.find_or_create_by! name: Shared::Tag.current_academic_year_value, parent_id: root.id if Rails.module.university? || Rails.env_type.test?
 
 slido = Shared::User.find_or_initialize_by(login: 'slido')
 
@@ -30,4 +31,4 @@ slido.update_attributes(
 
 slido.save!
 
-Shared::ContextUser.create user: slido, context: 'root_uuid' if Rails.module.mooc?
+Shared::ContextUser.create user: slido, context_id: 1 if Rails.module.mooc?

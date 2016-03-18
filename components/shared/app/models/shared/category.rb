@@ -18,6 +18,9 @@ class Category < ActiveRecord::Base
 
   has_many :category_questions_shared_through_me, foreign_key: 'shared_through_category_id', class: Shared::CategoryQuestion
 
+  has_many :context_users, foreign_key: 'context_id'
+  has_many :users, through: :context_users, class_name: 'Shared::User', source: :user
+
   has_many :teacher_assistant_assignments, -> { where(role_id: Shared::Role::teacher_assistant.id) }, class_name: "Shared::Assignment"
   has_many :teacher_assistants, through: :teacher_assistant_assignments, class_name: 'Shared::User', source: :user
 

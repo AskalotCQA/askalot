@@ -433,9 +433,9 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 CREATE TABLE context_users (
     id integer NOT NULL,
     user_id integer NOT NULL,
-    context character varying(255),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    context_id integer
 );
 
 
@@ -3422,4 +3422,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160229115039');
 INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 
 INSERT INTO schema_migrations (version) VALUES ('20160307103948');
+
+INSERT INTO schema_migrations (version) VALUES ('20160318072719');
 

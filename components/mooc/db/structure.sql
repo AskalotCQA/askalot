@@ -252,14 +252,14 @@ CREATE TABLE categories (
     uuid character varying(255),
     shared boolean DEFAULT true,
     askable boolean DEFAULT false,
-    lti_id character varying(255),
     depth integer,
     children_count integer,
     full_tree_name character varying(255),
     full_public_name character varying(255),
-    public_tags character varying(255)[] DEFAULT '{}'::character varying[],
+    lti_id character varying(255),
     direct_questions_count integer DEFAULT 0 NOT NULL,
     direct_answers_count integer DEFAULT 0 NOT NULL,
+    public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     category_questions_count integer DEFAULT 0 NOT NULL,
     description text
 );
@@ -438,9 +438,9 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 CREATE TABLE context_users (
     id integer NOT NULL,
     user_id integer NOT NULL,
-    context character varying(255),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    context_id integer
 );
 
 
@@ -2171,6 +2171,13 @@ CREATE INDEX index_categories_on_lft ON categories USING btree (lft);
 
 
 --
+-- Name: index_categories_on_lti_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_categories_on_lti_id ON categories USING btree (lti_id);
+
+
+--
 -- Name: index_categories_on_name_and_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3407,6 +3414,8 @@ INSERT INTO schema_migrations (version) VALUES ('20151207231221');
 
 INSERT INTO schema_migrations (version) VALUES ('20151212205452');
 
+INSERT INTO schema_migrations (version) VALUES ('20151213121223');
+
 INSERT INTO schema_migrations (version) VALUES ('20151213143631');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
@@ -3439,7 +3448,11 @@ INSERT INTO schema_migrations (version) VALUES ('20160301212049');
 
 INSERT INTO schema_migrations (version) VALUES ('20160301212059');
 
+INSERT INTO schema_migrations (version) VALUES ('20160305135644');
+
 INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 
 INSERT INTO schema_migrations (version) VALUES ('20160307103948');
+
+INSERT INTO schema_migrations (version) VALUES ('20160318072719');
 

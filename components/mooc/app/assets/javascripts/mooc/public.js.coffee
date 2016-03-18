@@ -13,6 +13,10 @@ else
 
 is_global = document.getElementsByClassName('course-content')[0] == undefined
 
+courseUuid = ->
+  uuid = $('.provider').first().text().trim() + '-' + $('.course-number').first().text().trim() + '-' + $('.course-name').first().text().trim()
+  uuid.replace('/', '-').replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-')
+
 infoParser = ->
   url = window.location.href
   pathname = window.location.pathname
@@ -31,7 +35,7 @@ infoParser = ->
   path = subsection.getElementsByClassName('path')[0].textContent.trim()
 
   data =
-    course_id: $('.provider').first().text().trim() + '/' + $('.course-number').first().text().trim()
+    course_id: courseUuid()
     course_name: document.getElementsByClassName('course-name')[0].textContent.trim()
     section_id: parsed[parsed.length-3]
     section_name: tree.getElementsByClassName('group-heading active')[0].textContent.trim()
@@ -48,7 +52,7 @@ $(document).ready ->
   getURLParameter = (name) ->
     decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) or [null, ''])[1].replace(/\+/g, '%20')) or null
 
-  a_src = host + $('.course-name').first().text().trim() + '/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
+  a_src = host + courseUuid() + '/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
   redirect_url = getURLParameter('redirect')
   a_src += if redirect_url then '&amp;redirect=' + redirect_url else null
   login_url = $('#login-url').text()

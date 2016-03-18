@@ -10,9 +10,6 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @context_category = Shared::Category.find(@context)
-    @context = @context_category.uuid
-
     @users = case params[:tab].to_sym
              when :recent then Shared::User.in_context(@context).recent.order(created_at: :desc)
              when :alumni then Shared::User.in_context(@context).alumni.order(:nick)
@@ -78,10 +75,9 @@ class UsersController < ApplicationController
 
   def followings
     @user = Shared::User.by(nick: params[:nick])
-    context_uuid = Shared::Category.find(@context).uuid
-
-    @followees = @user.followees.in_context(context_uuid).order(:nick).page(tab_page :followees).per(20)
-    @followers = @user.followers.in_context(context_uuid).order(:nick).page(tab_page :followers).per(20)
+    
+    @followees = @user.followees.in_context(@context).order(:nick).page(tab_page :followees).per(20)
+    @followers = @user.followers.in_context(@context).order(:nick).page(tab_page :followers).per(20)
   end
 
   def follow

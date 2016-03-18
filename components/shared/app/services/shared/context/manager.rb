@@ -11,7 +11,7 @@ module Shared::Context
     end
 
     def self.determine_context_id(context)
-      category = Shared::Category.find_by(parent_id: nil, name: context)
+      category = Shared::Category.find_by(parent_id: nil, uuid: context)
 
       category ? category.id : 1
     end
