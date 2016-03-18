@@ -2187,13 +2187,6 @@ CREATE INDEX index_categories_on_slido_username ON categories USING btree (slido
 
 
 --
--- Name: index_categories_questions_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_categories_questions_on_category_id ON categories_questions USING btree (category_id);
-
-
---
 -- Name: index_categories_questions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2201,10 +2194,10 @@ CREATE INDEX index_categories_questions_on_deletor_id ON categories_questions US
 
 
 --
--- Name: index_categories_questions_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_questions_on_question_id_and_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_categories_questions_on_question_id ON categories_questions USING btree (question_id);
+CREATE UNIQUE INDEX index_categories_questions_on_question_id_and_category_id ON categories_questions USING btree (question_id, category_id);
 
 
 --

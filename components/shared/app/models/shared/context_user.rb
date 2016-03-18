@@ -3,9 +3,9 @@ module Shared
     self.table_name = 'context_users'
 
     belongs_to :user
+    belongs_to :context, class_name: :'Shared::Category'
 
+    validates :user_id, presence: true
     validates :context_id, presence: true
-
-    scope :in_context, lambda { |context| where(context_id: context ) }
   end
 end
