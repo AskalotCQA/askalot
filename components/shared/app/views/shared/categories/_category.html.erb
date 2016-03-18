@@ -9,8 +9,8 @@
     <%= category.description %>
   </div>
   <div class="category-details">
-    <%= t('count.question', count: category.related_questions.size).upcase_first %> <%= category.related_questions.size %> &middot;
-    <%= t('count.answer', count: category.related_answers.size).upcase_first %> <%= category.related_answers.size %> &middot;
+    <%= t('count.question', count: questions_counts[category.id] || 0).upcase_first %> <%= questions_counts[category.id] || 0 %> &middot;
+    <%= t('count.answer', count: answers_counts[category.id] || 0).upcase_first %> <%= answers_counts[category.id] || 0 %> &middot;
     <%= render 'watching', category: category %>
   </div>
 </div>

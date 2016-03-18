@@ -62,6 +62,35 @@ module Shared::CategoriesHelper
     output.html_safe
   end
 
+  def tree_view(objects, &block)
+    parents = objects.group_by(&:parent_id)
+    output  = '<ul>'
+
+    path    = [nil]
+
+    objects.each do |o|
+      if o.parent_id != path.last
+        if path.include?(o.parent_id)
+          while path.last != o.parent_id
+            path.pop
+            output << '</ul></li>'
+          end
+        else
+          path << o.parent_id
+          output << '<ul>'
+        end
+      else
+        output << '</li>'
+      end
+
+      output << '<li>'
+      output << capture(o, path.size - 1, &block)
+    end
+
+    output << '</ul>'
+    output.html_safe
+  end
+
   def askable_leaves_categories(context)
     Shared::Category.find(context).leaves.where(askable: true).unscope(:order).order(:full_public_name)
   end

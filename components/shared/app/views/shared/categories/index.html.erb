@@ -3,11 +3,11 @@
 <%= render 'shared/searchables/search', target: controller_name %>
 
 <ul class="nav nav-tabs tab-navigation">
-  <%= tab_link_tag_with_count t('category.tab.all'), :all, categories_path(params.except(:page).merge tab: :all), @context_category.descendants.count, analytics_attributes(:categories, :switch, :all) %>
-  <%= tab_link_tag_with_count t('category.tab.active'), :active, categories_path(params.except(:page).merge tab: :active), @context_category.descendants.with_questions.count, analytics_attributes(:categories, :switch, :active) %>
+  <%= tab_link_tag_with_count t('category.tab.all'), :all, categories_path(params.except(:page).merge tab: :all), @context_categories.size, analytics_attributes(:categories, :switch, :all) %>
+  <%= tab_link_tag_with_count t('category.tab.active'), :active, categories_path(params.except(:page).merge tab: :active), @context_categories.size, analytics_attributes(:categories, :switch, :active) %>
 </ul>
 
 <div class="tab-content">
-  <%= render_tab_content 'categories', :all, locals: { category: @context_category, category_depths: @category_depths, tab: :all } %>
-  <%= render_tab_content 'categories', :active, locals: { category: @context_category, category_depths: @category_depths, tab: :active } %>
+  <%= render_tab_content 'categories', :all, locals: { categories: @context_categories, questions_counts: @questions_counts, answers_counts: @answers_counts, category_depths: @category_depths, tab: :all } %>
+  <%= render_tab_content 'categories', :active, locals: { categories: @context_categories, questions_counts: @questions_counts, answers_counts: @answers_counts, category_depths: @category_depths, tab: :active } %>
 </div>

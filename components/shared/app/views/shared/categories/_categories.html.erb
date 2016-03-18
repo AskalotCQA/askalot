@@ -1,25 +1,27 @@
-<% unless category.nil? %>
-  <% if category_depths.include?(category.depth) %>
-    <div class="category-wrapper">
-    <%= render 'category', category: category %>
-    </div>
-  <% end %>
+<%= tree_view(categories) do |category| %>
+  <%= render 'category', category: category, questions_counts: questions_counts, answers_counts: answers_counts  %>
+<% end %>
 
-  <% if category_depths.include?(category.depth) && category.children.any? %>
-    <div class="category-group">
-  <% elsif category.depth != 3 %>
-     <div class="clearfix"></div>
-  <% end %>
 
-  <% category.children.sort_by { |c| c.name }.each do |c| %>
-    <%= render 'categories', category: c, category_depths: category_depths, tab: tab if tab == :all || c.related_questions.any? %>
-  <% end %>
-
-  <% if category_depths.include?(category.depth) && category.children.any? %>
-    </div>
-  <% end %>
-<% else %>
+<% if categories.empty? %>
   <div class="alert alert-warning">
     <%= t('category.no_records') %>
   </div>
+<% end %>
+
+
+<% if 1 == 2 %>
+  <% if category_depths.include?(category.depth) %>
+    <div class="category-wrapper">
+      <% # render 'category', category: category  %>
+    </div>
+  <% end %>
+
+  <% if category_depths.include?(category.depth) && category.children.any? %>
+  <% elsif category.depth != 3 %>
+  <% end %>
+
+  <% # category.children.sort_by { |c| c.name }.each do |c|  %>
+  <% # render 'categories', category: c, category_depths: category_depths, tab: tab if tab == :all || c.related_questions.any?  %>
+  <% # end  %>
 <% end %>
