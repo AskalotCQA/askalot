@@ -13,7 +13,7 @@ namespace :sample_data do
     Rake::Task['sample_data:votes'].invoke
     Rake::Task['sample_data:labellings'].invoke
     Rake::Task['sample_data:views'].invoke
-    Rake::Task['sample_data:user_context'].invoke
+    Rake::Task['sample_data:contexts_users'].invoke
   end
 
   desc 'Fills database with sample users'
@@ -263,36 +263,38 @@ namespace :sample_data do
   task categories: :environment do
     categories = [
       # Courses
-      { name: "Machine Learning 2015", tags: ["ml-2015"], uuid: "Williams/202", lti_id: nil, parent_name: "", shared: true, askable: false, time: 385 },
-      { name: "Demonstration of Advanced Features", tags: ["ml-2016"], uuid: "Williams/203", lti_id: nil, parent_name: "", shared: true, askable: true, time: 65 },
+      { name: "Demonstration of Advanced Features 2015", tags: ["ml-2015"], uuid: "Williams:/202", lti_id: nil, parent_name: "", shared: true, askable: false, time: 385 },
+      { name: "Demonstration of Advanced Features", tags: ["ml-2016"], uuid: "Williams:/203", lti_id: nil, parent_name: "", shared: true, askable: true, time: 65 },
 
       # Sections
-      { name: "Askalot Demo", tags: [], uuid: "a32093e0cdfa483e9c39feb852bac3cf", lti_id: nil, parent_name: "Machine Learning 2015", shared: true, askable: false, time: 385 },
+      { name: "Askalot Demo", tags: [], uuid: "a32093e0cdfa483e9c39feb852bac3cf", lti_id: nil, parent_name: "Demonstration of Advanced Features 2015", shared: true, askable: false, time: 385 },
       { name: "Askalot Demo", tags: [], uuid: "a32093e0cdfa483e9c39feb852bac3cf", lti_id: nil, parent_name: "Demonstration of Advanced Features", shared: true, askable: true, time: 65 },
 
       # Subsections
-      { name: "Introduction", tags: ["intro"], uuid: "03bc97ee76734441899e6193ccfc756d", lti_id: nil, parent_name: "Machine Learning 2015 - Askalot Demo", shared: true, askable: false, time: 385 },
+      { name: "Introduction", tags: ["intro"], uuid: "03bc97ee76734441899e6193ccfc756d", lti_id: nil, parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo", shared: true, askable: false, time: 385 },
       { name: "Introduction", tags: ["intro"], uuid: "03bc97ee76734441899e6193ccfc756d", lti_id: nil, parent_name: "Demonstration of Advanced Features - Askalot Demo", shared: true, askable: true, time: 65 },
-      { name: "Linear Regression", tags: ["regression"], uuid: "cb364967b7bc4befa6434aa5da6b477f", lti_id: nil, parent_name: "Machine Learning 2015 - Askalot Demo", shared: true, askable: false, time: 385 },
+      { name: "Linear Regression", tags: ["regression"], uuid: "cb364967b7bc4befa6434aa5da6b477f", lti_id: nil, parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo", shared: true, askable: false, time: 385 },
       { name: "Linear Regression", tags: ["regression"], uuid: "cb364967b7bc4befa6434aa5da6b477f", lti_id: nil, parent_name: "Demonstration of Advanced Features - Askalot Demo", shared: true, askable: true, time: 65 },
-      { name: "Support Vector Machines", tags: ["svm"], uuid: "b5f80b813d10402da5dda0efd165afeb", lti_id: nil, parent_name: "Machine Learning 2015 - Askalot Demo", shared: true, askable: false, time: 385 },
+      { name: "Support Vector Machines", tags: ["svm"], uuid: "b5f80b813d10402da5dda0efd165afeb", lti_id: nil, parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo", shared: true, askable: false, time: 385 },
       { name: "Support Vector Machines", tags: ["svm"], uuid: "b5f80b813d10402da5dda0efd165afeb", lti_id: nil, parent_name: "Demonstration of Advanced Features - Askalot Demo", shared: true, askable: true, time: 65 },
       { name: "Neural Networks", tags: ["neural", "networks"], uuid: "f1edaca786904e279c3d0ec4a9f1aa91", lti_id: nil, parent_name: "Demonstration of Advanced Features - Askalot Demo", shared: true, askable: true, time: 65 },
 
       # Units
-      { name: "About Askalot", tags: [], uuid: "i4x:;_;_Williams;_203;_sequential;_03bc97ee76734441899e6193ccfc756d", lti_id: "i4x-Williams-202-lti-3f55254c7f434860a12e56bd821a1cca", parent_name: "Machine Learning 2015 - Askalot Demo - Introduction", shared: true, askable: false, time: 385 },
-      { name: "About Askalot", tags: [], uuid: "i4x:;_;_Williams;_203;_sequential;_03bc97ee76734441899e6193ccfc756d", lti_id: "i4x-Williams-203-lti-3f55254c7f434860a12e56bd821a1cca", parent_name: "Demonstration of Advanced Features - Askalot Demo - Introduction", shared: true, askable: true, time: 65 },
-      { name: "Definition of Linear Regression", tags: [], uuid: "i4x:;_;_Williams;_203;_sequential;_cb364967b7bc4befa6434aa5da6b477f", lti_id: "i4x-Williams-202-lti-1c0bccee67764f6c863b3f7303f8bd34", parent_name: "Machine Learning 2015 - Askalot Demo - Linear Regression", shared: true, askable: false, time: 385 },
-      { name: "Definition of Linear Regression", tags: [], uuid: "i4x:;_;_Williams;_203;_sequential;_cb364967b7bc4befa6434aa5da6b477f", lti_id: "i4x-Williams-203-lti-1c0bccee67764f6c863b3f7303f8bd34", parent_name: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", shared: true, askable: true, time: 65 },
-      { name: "Definition of SVM", tags: [], uuid: "i4x:;_;_Williams;_203;_sequential;_b5f80b813d10402da5dda0efd165afeb", lti_id: "i4x-Williams-202-lti-461e3407422745f9a479740854dd9ccc", parent_name: "Machine Learning 2015 - Askalot Demo - Support Vector Machines", shared: true, askable: false ,time: 385 },
-      { name: "Definition of SVM", tags: [], uuid: "i4x:;_;_Williams;_203;_sequential;_b5f80b813d10402da5dda0efd165afeb", lti_id: "i4x-Williams-203-lti-461e3407422745f9a479740854dd9ccc", parent_name: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", shared: true, askable: true, time: 65 },
-      { name: "Definition of Neural Networks", tags: [], uuid: "i4x:;_;_Williams;_203;_sequential;_f1edaca786904e279c3d0ec4a9f1aa91", lti_id: "i4x-Williams-203-lti-04f3e7941b6b4a37b442da8b7054ff44", parent_name: "Demonstration of Advanced Features - Askalot Demo - Neural Networks", shared: true, askable: true, time: 65 },
+      { name: "About Askalot", tags: [], uuid: "01d89a7d9b9f469ea0877da69dfd0893", lti_id: "i4x-Williams-202-lti-3f55254c7f434860a12e56bd821a1cca", parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo - Introduction", shared: true, askable: false, time: 385 },
+      { name: "About Askalot", tags: [], uuid: "01d89a7d9b9f469ea0877da69dfd0893", lti_id: "i4x-Williams-203-lti-3f55254c7f434860a12e56bd821a1cca", parent_name: "Demonstration of Advanced Features - Askalot Demo - Introduction", shared: true, askable: true, time: 65 },
+      { name: "Definition of Linear Regression", tags: [], uuid: "cc21ea01f83e475c880878ea37708b04", lti_id: "i4x-Williams-202-lti-1c0bccee67764f6c863b3f7303f8bd34", parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo - Linear Regression", shared: true, askable: false, time: 385 },
+      { name: "Definition of Linear Regression", tags: [], uuid: "cc21ea01f83e475c880878ea37708b04", lti_id: "i4x-Williams-203-lti-1c0bccee67764f6c863b3f7303f8bd34", parent_name: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", shared: true, askable: true, time: 65 },
+      { name: "Definition of SVM", tags: [], uuid: "47e3379fddc74be5bb2d6d83e8ca2d91", lti_id: "i4x-Williams-202-lti-461e3407422745f9a479740854dd9ccc", parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo - Support Vector Machines", shared: true, askable: false ,time: 385 },
+      { name: "Definition of SVM", tags: [], uuid: "47e3379fddc74be5bb2d6d83e8ca2d91", lti_id: "i4x-Williams-203-lti-461e3407422745f9a479740854dd9ccc", parent_name: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", shared: true, askable: true, time: 65 },
+      { name: "Definition of Neural Networks", tags: [], uuid: "b18fe93bc12e4ddcb5872e33dda459fc", lti_id: "i4x-Williams-203-lti-04f3e7941b6b4a37b442da8b7054ff44", parent_name: "Demonstration of Advanced Features - Askalot Demo - Neural Networks", shared: true, askable: true, time: 65 },
     ]
 
     categories.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
         parent = Shared::Category.find_by(full_tree_name: input[:parent_name])
         parent_id = parent ? parent.id : nil
+
+        next unless Shared::Category.find_by(parent_id: parent_id, name: input[:name]).nil?
 
         category = Shared::Category.create!(
           name: input[:name],
@@ -314,19 +316,19 @@ namespace :sample_data do
     context_id = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
 
     watchings = [
-      { category: "Machine Learning 2015 - Askalot Demo - Introduction", user: "Ivan", time: 54, context: context_id },
+      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Introduction", user: "Ivan", time: 54, context: context_id },
       { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "Ivan", time: 54, context: context_id },
-      { category: "Machine Learning 2015 - Askalot Demo - Introduction", user: "Ben", time: 32, context: context_id },
+      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Introduction", user: "Ben", time: 32, context: context_id },
       { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "John", time: 25, context: context_id },
       { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "Samantha", time: 15, context: context_id },
       { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Andrew", time: 44, context: context_id },
       { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Tom", time: 12, context: context_id },
       { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Lauren", time: 11, context: context_id },
       { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Ella", time: 10, context: context_id },
-      { category: "Machine Learning 2015 - Askalot Demo - Support Vector Machines", user: "Ella", time: 60, context: context_id },
+      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Support Vector Machines", user: "Ella", time: 60, context: context_id },
       { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Ella", time: 60, context: context_id },
       { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Archie", time: 10, context: context_id },
-      { category: "Machine Learning 2015 - Askalot Demo - Support Vector Machines", user: "Adam", time: 10, context: context_id },
+      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Support Vector Machines", user: "Adam", time: 10, context: context_id },
       { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Adam", time: 10, context: context_id },
       { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Ben", time: 10, context: context_id },
     ]
@@ -371,7 +373,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Machine Learning 2015 - Askalot Demo - Linear Regression - Definition of Linear Regression",
+      category: "Demonstration of Advanced Features 2015 - Askalot Demo - Linear Regression - Definition of Linear Regression",
       user: "Ben",
       time: 53,
       title: "Linear vs logistic regression",
@@ -789,11 +791,11 @@ namespace :sample_data do
   end
 
   desc 'Fills database with sample users in context data'
-  task labellings: :environment do
+  task contexts_users: :environment do
     context = Shared::Category.find_by(name: 'Demonstration of Advanced Features')
 
     Shared::User.all.each do |u|
-      Shared::ContextUser.create user: u, context: context.uuid
+      Shared::ContextUser.create user: u, context: context.id
     end
   end
 end

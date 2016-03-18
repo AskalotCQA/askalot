@@ -1,6 +1,13 @@
 #= require ./lib/module
 
 class window.Select extends Module
+  if <%= Rails.module.university? %>
+    base_url = '<%= Rails.application.config.relative_url_root %>'
+  else
+    current_url = window.location.pathname
+    context_pattern = ///<%= Regexp.escape Rails.application.config.relative_url_root %>\/[^\/]*///i
+    base_url = current_url.match context_pattern
+
   @of: (name, options = {}) ->
     options.bind ?= false
 
@@ -34,7 +41,7 @@ class window.Select extends Module
       formatSelection: (item) -> item.id
       createSearchChoice : (term, data) -> { id: term, text: "#{term} (#{I18n.t('question.tag.new')})" }
       ajax:
-        url: '<%= Rails.application.config.relative_url_root %><%= Shared::Context::Manager.context_url_prefix %>/tags/suggest'
+        url: base_url + '/tags/suggest'
         dataType: 'json'
         data: (term, page) ->
           q: term
