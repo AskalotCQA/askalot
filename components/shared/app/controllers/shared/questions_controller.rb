@@ -143,7 +143,7 @@ class QuestionsController < ApplicationController
 
   def destroy_callback(deletable)
     # TODO (filip jandura) move logic to mooc module
-    return redirect_to mooc.unit_path(id: @deletable.category.id, custom_page_url: params[:custom_page_url]) if Rails.module.mooc?
+    return redirect_to mooc.unit_path(id: @deletable.category.id, page_url: params[:page_url]) if params[:page_url]
 
     respond_to do |format|
       format.html { redirect_to shared.questions_path, format: :html }

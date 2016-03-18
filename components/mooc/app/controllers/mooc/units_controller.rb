@@ -43,7 +43,7 @@ module Mooc
       @question.category = @unit
 
       @questions = @unit.related_questions.order(created_at: :desc).page(params[:page]).per(20)
-      @page_url = params[:custom_page_url] || ''
+      @page_url = params[:page_url] || ''
     end
 
     protected
@@ -84,7 +84,7 @@ module Mooc
     end
 
     def after_login_redirect
-      @url = params[:custom_page_url]
+      @url = params[:page_url]
 
       render '/mooc/page/to_page_redirect'
     end
