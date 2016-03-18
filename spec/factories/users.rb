@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :user, aliases: [:author, :followee, :follower, :favorer, :voter, :watcher, :viewer, :recipient, :initiator] do
+  factory :user, class: Shared::User, aliases: [:author, :followee, :follower, :favorer, :voter, :watcher, :viewer, :recipient, :initiator] do
     sequence(:login) { |n| "user_#{n}" }
     sequence(:email) { |n| "user_#{n}@example.com" }
 
@@ -15,20 +15,22 @@ FactoryGirl.define do
 
     role :student
 
-    factory :student, class: :User do
+    factory :student, class: Shared::User do
       role :student
     end
 
-    factory :teacher, class: :User do
+    factory :teacher, class: Shared::User do
       role :teacher
     end
 
-    factory :administrator, class: :User do
+    factory :administrator, class: Shared::User do
       role :administrator
     end
 
     after :create do |user|
       user.confirm!
+
+      Shared::ContextUser.create user: user, context_id: 1 if Rails.module.mooc?
     end
 
     trait :as_ais do

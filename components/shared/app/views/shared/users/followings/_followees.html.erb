@@ -1,0 +1,12 @@
+<% if followees.any? %>
+  <%= render 'shared/users/followings/users', tab: tab, users: followees %>
+<% else %>
+  <% if user == current_user %>
+    <span class="text-muted"><%= t('user.followings.no_followees') %></span>
+    <%= icon_link_to :user, t('user.followings.browse'), users_path, class: 'btn btn-success' %>
+  <% else %>
+    <div class="alert alert-info">
+      <%= t('user.followings.other.no_followees') %>
+    </div>
+  <% end %>
+<% end %>

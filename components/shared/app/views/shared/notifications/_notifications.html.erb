@@ -1,0 +1,15 @@
+<%= form_messages key: tab %>
+
+<% if notifications.any? %>
+  <ol class="notifications">
+    <% notifications.each do |notification| %>
+      <%= render 'shared/notifications/notification', notification: notification %>
+    <% end %>
+  </ol>
+
+  <%= paginate notifications, params: { tab: tab } %>
+<% else %>
+  <div class="alert alert-info">
+    <%= t notifications.size.zero? && notifications.size != notifications.unread.size ? 'notification.all_read' : 'notification.none' %>
+  </div>
+<% end %>

@@ -1,0 +1,69 @@
+// general
+
+.new-answer {
+  margin-top: 40px;
+
+  text-align: center;
+}
+
+.new-answer-form {
+  margin-top: 40px;
+}
+
+// collection
+
+.answer-metric {
+  @include block-metric;
+}
+
+.answer-metric-value {
+  @include block-metric-value;
+}
+
+// member
+
+.answer-teacher {
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+
+.answer-content {
+  @include markdown-content;
+
+  margin: 10px 0;
+}
+
+.answer-details {
+  display: inline-block;
+  margin-bottom: 10px;
+
+  color: $text-muted;
+}
+
+.answer-voting {
+  @include block-voting(answer);
+}
+
+.answer-labeling {
+  .answer-labeling-best {
+    @include block-labeling(answer-labeled-best, $gray-light, $brand-success);
+  }
+
+  .answer-labeling-helpful {
+    @include block-labeling(answer-labeled-helpful, $gray-light, $brand-warning);
+  }
+}
+
+.answer-evaluating {
+  @include block-evaluating(answer);
+}
+
+.answer-comments {
+  @include block-comments;
+}
+
+.answer-evaluations {
+  @include block-evaluations;
+}

@@ -1,0 +1,62 @@
+<header id="header-navbar" class="navbar navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+      </button>
+      <%= navbar_logo_tag default_title %>
+    </div>
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <%= navbar_link_tag t('question.navigation'), shared.questions_path, active: [shared.questions_path, shared.search_questions_path] %>
+        <%= navbar_link_tag t('category.navigation'), shared.categories_path, active: [shared.categories_path, shared.search_categories_path] %>
+        <%= navbar_link_tag t('tag.navigation'), shared.tags_path, active: [shared.tags_path, shared.search_tags_path] %>
+        <%= navbar_link_tag t('user.navigation'), shared.users_path, class: :'hidden-sm hidden-md', active: [shared.users_path, shared.search_users_path] %>
+        <%= navbar_link_tag t('activity.navigation'), shared.activities_path, class: :'hidden-sm hidden-md' %>
+        <%= navbar_link_tag t('statistic.navigation'), shared.statistics_path, class: :'hidden-sm hidden-md' if user_signed_in? && can?(:observe, :any) %>
+        <%= navbar_link_tag t('administration.navigation'), shared.administration_root_path, class: :'hidden-sm hidden-md' if user_signed_in? && can?(:administrate, :any) %>
+        <%= navbar_link_tag t('teacher_administration.navigation'), mooc.teacher_administration_root_path, class: :'hidden-sm hidden-md' if user_signed_in? && can?(:teacher_administrate, :any) %>
+        <%= navbar_link_tag t('help.navigation'), shared.help_path, class: :'hidden-sm hidden-md' %>
+        <%= navbar_dropdown_tag :'caret-down', nil, '#', class: :'visible-sm visible-md' do %>
+          <%= content_tag :li, link_to(t('user.navigation'), shared.users_path) %>
+          <%= content_tag :li, link_to(t('activity.navigation'), shared.activities_path) %>
+          <%= content_tag :li, link_to(t('statistic.navigation'), shared.statistics_path) if user_signed_in? && can?(:administrate, :any) %>
+          <%= content_tag :li, link_to(t('administration.navigation'), shared.administration_root_path) if user_signed_in? && can?(:administrate, :any) %>
+          <%= content_tag :li, link_to(t('teacher_administration.navigation'), mooc.teacher_administration_root_path) if user_signed_in? && can?(:teacher_administrate, :any) %>
+          <li class="divider"></li>
+          <%= content_tag :li, link_to(t('help.navigation'), shared.help_path) %>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <%= render 'shared/shared/notifications', notifications: current_user.notifications.in_context(@context).unread.order(created_at: :desc).limit(5) %>
+          <li class="hidden-xs"><%= link_to current_user.nick, shared.user_path(current_user.nick) %></li>
+          <%= navbar_dropdown_tag :cog, nil, '#', class: :'hidden-xs' do %>
+            <li><%= link_to t('user.edit.profile'), shared.edit_user_registration_path(tab: :profile) %></li>
+            <li><%= link_to t('user.edit.notifications'), shared.edit_user_registration_path(tab: :notifications) %></li>
+            <li><%= link_to t('user.edit.social'), shared.edit_user_registration_path(tab: :social) %></li>
+            <li><%= link_to t('user.edit.privacy'), shared.edit_user_registration_path(tab: :privacy) %></li>
+            <li><%= link_to t('user.edit.account'), shared.edit_user_registration_path(tab: :account) %></li>
+            <li class="divider"></li>
+            <li><%= link_to t('help.navigation'), shared.help_path %></li>
+            <li class="divider"></li>
+            <li><%= link_to t('user.sign_out'), shared.destroy_user_session_path, method: :delete %></li>
+          <% end %>
+          <%= navbar_link_tag t('user.profile'), shared.user_path(current_user.nick), class: :'visible-xs' %>
+          <%= navbar_link_tag t('notification.navigation'), shared.notifications_path, class: :'visible-xs' %>
+          <%= navbar_link_tag t('user.settings'), shared.edit_user_registration_path, class: :'visible-xs' %>
+          <%= navbar_link_tag t('user.sign_out'), shared.destroy_user_session_path, class: :'visible-xs' %>
+        <% else %>
+          <%= navbar_link_tag t('user.sign_up'), shared.new_user_registration_path if Shared::Configuration.enable.registrations? %>
+          <%= navbar_link_tag t('user.sign_in'), shared.new_user_session_path %>
+        <% end %>
+      </ul>
+      <div class="navbar-form navbar-right hidden-xs hidden-sm hidden-print">
+        <%= icon_link_to :'question-circle', nil, shared.new_question_path, analytics_attributes(:question, :'open-new-form', :navigation).deep_merge(tooltip_attributes(t('question.new.feature'), placement: :left).merge(class: 'btn btn-primary new-question')) %>
+      </div>
+    </div>
+    <%= render 'layouts/mooc/context' -%>
+  </div>
+</header>
+
+<%= yield :header %>

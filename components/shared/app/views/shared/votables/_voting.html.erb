@@ -1,0 +1,11 @@
+<div id="<%= model %>-<%= votable.id %>-voting" class="<%= model %>-voting">
+  <% if can? :vote, votable %>
+    <%= icon_link_to :'chevron-up', nil, shared.public_send("voteup_#{model}_path", votable), id: "#{model}-#{votable.id}-voteup", class: (votable.upvoted_by?(current_user) ? "#{model}-voted" : nil), data: { remote: true } %>
+  <% end %>
+  <div class="<%= model %>-votes-value">
+    <%= content_tag :span, votes_difference(votable), tooltip_attributes("#{votable.votes.positive.size} - #{votable.votes.negative.size}", placement: :right) %>
+  </div>
+  <% if can? :vote, votable %>
+    <%= icon_link_to :'chevron-down', nil, shared.public_send("votedown_#{model}_path", votable), id: "#{model}-#{votable.id}-votedown", class: (votable.downvoted_by?(current_user) ? "#{model}-voted" : nil), data: { remote: true } %>
+  <% end %>
+</div>

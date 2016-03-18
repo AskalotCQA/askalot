@@ -9,7 +9,7 @@ gem 'pg'
 gem 'squire', '~> 1.3.6'
 
 # authentification
-gem 'devise', '~> 3.1.1'
+# gem 'devise', '~> 3.1.1'
 gem 'cancan', '~> 1.6.9'
 gem 'net-ldap'
 
@@ -72,6 +72,8 @@ gem 'symbolize'
 gem 'lda-ruby'
 gem 'tf_idf'
 gem 'timecop'
+gem 'awesome_nested_set'
+gem 'ims-lti', :git => "https://github.com/instructure/ims-lti.git"
 
 # search
 gem 'elasticsearch'
@@ -126,3 +128,14 @@ end
 
 # TODO(zbell) resolve
 gem 'codeclimate-test-reporter', group: :test, require: nil
+
+gem 'shared', path: 'components/shared'
+
+group :university do
+  gem 'university', path: 'components/university'
+end
+
+group :mooc do
+  gem 'mooc', path: 'components/mooc'
+  gem "non-stupid-digest-assets"
+end

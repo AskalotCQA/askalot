@@ -1,0 +1,40 @@
+en:
+  head:
+    authors: "Rastislav Dobšovič, Marek Grznár, Jozef Harinek, Samuel Molnár, Peter Páleník, Dušan Poizl, Ivan Srba, Pavol Zbell"
+    description: "Community question answering system of next generation."
+    keywords: "CQA, FIIT, STU, question, answer, community"
+    content: "Community question answering system of next generation for students of Faculty of Informatics and Information Technologies at Slovak University of Technology in Bratislava."
+  home:
+    headline: "Community question answering system of next generation"
+
+    ask: "Ask a question"
+    answer: "Try to answer"
+    questions: "Browse questions"
+    activities: "Activity in Askalot"
+
+    sign_up: "Sign up"
+    sign_in: "Sign in"
+
+    step:
+      first: "Ask questions"
+      second: "Answer and discuss"
+      third: "Choose best answers"
+
+    featured:
+      new: "New questions"
+      solved: "Solved questions"
+      favored: "Favorite questions"
+
+  footer:
+    about: "About"
+    authors: "Authors"
+    changelogs: "Changelogs"
+    contact: "Contact"
+    documents: "Documents"
+    help: "Help"
+    repositories: "Repository"
+
+  body:
+    unread:
+      show: "Show unread notifications"
+      cancel: "Cancel e-mail notifications"

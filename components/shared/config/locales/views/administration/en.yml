@@ -1,0 +1,87 @@
+en:
+  administration:
+    navigation: "Administration"
+
+    tab:
+      assignments: "User roles"
+      categories: "Categories"
+      changelogs: "Changelogs"
+      emails: "Community e-mail"
+
+    assignment:
+      create:
+        action: "Add user role"
+
+      edit:
+        action: "Edit"
+        title: "Edit user role"
+        submit: "Save"
+        cancel: "Cancel"
+
+      delete:
+        action: "Delete"
+        title: "Warning!"
+        text: "Are you sure you want to delete this user role?"
+        submit: "Delete"
+        cancel: "Cancel"
+
+    category:
+      index:
+        update_settings: "Update settings"
+        wait: "Wait, please..."
+        success: "Categories were updated successfully"
+
+      create:
+        action: "Add category"
+        parent: "Parent"
+
+      edit:
+        action: "Edit"
+        title: "Edit category"
+        submit: "Save"
+        cancel: "Cancel"
+
+      delete:
+        action: "Delete"
+        title: "Warning!"
+        text: "Are you sure you want to delete this category?"
+        submit: "Delete"
+        cancel: "Cancel"
+
+    changelog:
+      create:
+        action: "Add changelog"
+
+      edit:
+        action: "Edit"
+        title: "Edit changelog"
+        submit: "Save"
+        cancel: "Cancel"
+
+      delete:
+        action: "Delete"
+        title: "Warning!"
+        text: "Are you sure you want to delete this changelog?"
+        submit: "Delete"
+        cancel: "Cancel"
+
+    email:
+      subject: "Subject of the e-mail"
+      to_me_only: "Send only to me"
+      html_email: "HTML e-mail"
+
+      create:
+        action: "Send community e-mail"
+
+      edit:
+        action: "Edit"
+        title: "Edit community e-mail"
+        submit: "Save"
+        cancel: "Cancel"
+
+      delete:
+        action: "Delete"
+        title: "Warning!"
+        text: "Are you sure you want to delete this community e-mail?"
+        submit: "Delete"
+        cancel: "Cancel"

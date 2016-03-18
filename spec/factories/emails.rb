@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :email do
+  factory :email, class: Shared::Email do
     user nil
     subject "MyText"
     body "MyText"

@@ -1,47 +1,79 @@
-development:
+fiit_development:
   adapter: postgresql
   encoding: unicode
-  database: askalot_development
+  database: askalot_fiit_development
   pool: 5
   username: postgres
   password: postgres
 
-test:
+fiit_test:
   adapter: postgresql
   encoding: unicode
-  database: askalot_test
+  database: askalot_fiit_test
   pool: 5
   username: postgres
   password: postgres
 
-staging:
+fiit_staging:
   adapter: postgresql
   encoding: unicode
-  database: askalot_staging
+  database: askalot_fiit_staging
   pool: 5
   username: postgres
   password: postgres
 
-demo:
+fiit_demo:
   adapter: postgresql
   encoding: unicode
-  database: askalot_demo
+  database: askalot_fiit_demo
   pool: 5
   username: postgres
   password: postgres
 
-production:
+fiit_production:
   adapter: postgresql
   encoding: unicode
-  database: askalot_production
+  database: askalot_fiit_production
   pool: 5
   username: postgres
   password: postgres
 
-experimental:
+edx_development:
   adapter: postgresql
   encoding: unicode
-  database: askalot_experimental
+  database: askalot_edx_development
+  pool: 5
+  username: postgres
+  password: postgres
+
+edx_test:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_edx_test
+  pool: 5
+  username: postgres
+  password: postgres
+
+edx_staging:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_edx_staging
+  pool: 5
+  username: postgres
+  password: postgres
+
+edx_demo:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_edx_demo
+  pool: 5
+  username: postgres
+  password: postgres
+
+edx_production:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_edx_production
   pool: 5
   username: postgres
   password: postgres

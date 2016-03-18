@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :watching do
+  factory :watching, class: Shared::Watching do
     association :watcher
   end
 end

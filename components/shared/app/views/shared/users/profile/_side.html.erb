@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-xs-5 col-sm-5 col-md-12">
+    <div class="user-profile-avatar">
+      <%= user_avatar_tag user, image: { class: :'img-responsive', size: 263 }, url: gravatar_url(user.gravatar_email, size: 400) %>
+      <%= render 'shared/users/reputation', user: user, size: :lg %>
+    </div>
+  </div>
+  <div class="col-xs-7 col-sm-5 col-md-12">
+    <h1 class="user-profile-title">
+      <%= user.nick %>
+      <% if can? :show_name, user %>
+        <small><%= user.name %></small>
+      <% end %>
+    </h1>
+
+    <ul class="user-profile-details">
+      <% if can? :show_email, user %>
+        <li>
+          <%= icon_tag :'envelope-o', fixed: true %>
+          <%= mail_to user.email, nil, encode: :hex %>
+        </li>
+      <% end %>
+
+      <% user.urls.each do |network, url| %>
+        <li>
+          <%= icon_tag network.icon, fixed: true %>
+          <a href="<%= url[:original] %>"><%= url[:shown] %></a>
+        </li>
+      <% end %>
+
+      <li>
+        <%= icon_tag :'clock-o', fixed: true %>
+        <%= t('user.registered_at', time: time_tag(user.created_at.to_date, format: :short)).html_safe %>
+      </li>
+    </ul>
+  </div>
+  <div class="col-xs-12 col-sm-2 col-md-12">
+    <div class="user-profile-metrics">
+      <div class="row">
+        <div class="col-xs-4 col-sm-12 col-md-4">
+          <%= link_to user_followings_path(params.except(:page).merge(tab: :followers)), analytics_attributes(:profile, :list, :followers).merge(class: :'user-metric') do %>
+            <span class="user-metric-value"><%= user.followers.size %></span>
+            <%= t('count.follower', count: user.followers.size) %>
+          <% end %>
+        </div>
+        <div class="col-xs-4 col-sm-12 col-md-4">
+          <%= link_to user_path(params.except(:page).merge(tab: :favorites)), analytics_attributes(:profile, :list, :favorites).merge(class: :'user-metric') do %>
+            <span class="user-metric-value"><%= user.favorites.size %></span>
+            <%= t('count.favorite', count: user.favorites.size) %>
+          <% end %>
+        </div>
+        <div class="col-xs-4 col-sm-12 col-md-4">
+          <%= link_to user_followings_path(params.except(:page).merge(tab: :followees)), analytics_attributes(:profile, :list, :followees).merge(class: :'user-metric') do %>
+            <span class="user-metric-value"><%= user.followees.size %></span>
+            <%= t('count.followee', count: user.followees.size) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

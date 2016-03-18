@@ -1,0 +1,10 @@
+sk:
+  page:
+    to_login:
+      header: "Ooops! Zdá sa, že nie ste prihlásený"
+      description: "Za pár sekúnd budete automaticky presmerovaný"
+      link: "choďte rovno na prihlasovaciu stránku"
+    no_link:
+      header: "Prepáčte, no nevieme Vás prihlásiť"
+      description: "Momentálne nie ste prihlásený a nevieme identifikovať adresu, na ktorú by sme Vás presmerovali. Prosím návštívte niektorý Unit s Askalotom, čím sa automaticky prihlásite."
+  or: "alebo"

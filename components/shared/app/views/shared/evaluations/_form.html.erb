@@ -1,0 +1,40 @@
+<div id="<%= identify evaluable, :evaluate %>" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
+  <%= form_for evaluable.evaluations.where(author: current_user).first || [evaluable, Shared::Evaluation.new], url: shared.question_evaluations_path(question_id: evaluable), html: {id: nil, class: :'new-evaluation'}, remote: remote do |f| %>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title"><%= t 'evaluation.new.title' %></h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <div class="btn-group" data-toggle="buttons">
+              <label class="btn btn-danger">
+                <%= f.radio_button :value, -2, id: nil %> <%= t 'evaluation.rank.very_bad' %>
+              </label>
+              <label class="btn btn-danger">
+                <%= f.radio_button :value, -1, id: nil %> <%= t 'evaluation.rank.bad' %>
+              </label>
+              <label class="btn btn-warning">
+                <%= f.radio_button :value,  0, id: nil %> <%= t 'evaluation.rank.neutral' %>
+              </label>
+              <label class="btn btn-success">
+                <%= f.radio_button :value, +1, id: nil %> <%= t 'evaluation.rank.good' %>
+              </label>
+              <label class="btn btn-success">
+                <%= f.radio_button :value, +2, id: nil %> <%= t 'evaluation.rank.very_good' %>
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <span class="help-block"><%= t 'evaluation.new.help' %>:</span>
+            <%= f.text_area :text, id: nil, class: :'form-control', rows: 2 %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'evaluation.new.cancel' %></button>
+          <button type="submit" class="btn btn-primary"><%= t 'evaluation.new.submit' %></button>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

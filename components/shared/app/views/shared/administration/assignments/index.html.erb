@@ -1,0 +1,15 @@
+<%= render layout: 'shared/administration/layout' do %>
+  <%= render 'shared/administration/assignments/form' %>
+
+  <ol class="administration-assignments">
+    <% @assignments.each do |assignment| %>
+      <%= render 'shared/administration/assignments/assignment', assignment: assignment %>
+    <% end %>
+  </ol>
+
+  <ol class="administration-users">
+    <% Shared::User.includes(:assignments).where.not(role: :student).order(:nick).each do |user| %>
+      <%= render 'shared/administration/assignments/user', user: user %>
+    <% end %>
+  </ol>
+<% end %>

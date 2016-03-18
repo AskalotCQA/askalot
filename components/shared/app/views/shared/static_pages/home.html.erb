@@ -1,0 +1,62 @@
+<% provide :header, render(partial: 'shared/static_pages/home/header', locals: { target: nil }) %>
+
+<div class="container">
+  <% if session[:facebook_modal] %>
+    <%= render 'shared/facebook/joining' %>
+    <%= render 'shared/facebook/restoring' %>
+  <% end %>
+
+  <%= flash_messages { |content| content_tag :section, content } %>
+
+  <section>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="step">
+          <%= icon_tag :question %>
+          <h3><%= t('home.step.first') %></h3>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="step">
+          <%= icon_tag :'comments-o' %>
+          <h3><%= t('home.step.second') %></h3>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="step">
+          <%= icon_tag :check %>
+          <h3><%= t('home.step.third') %></h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr/>
+
+  <section>
+    <div class="row">
+      <div class="col-md-4">
+        <div class="featured">
+          <h2><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new'), analytics_attributes(:questions, :list, [:new, :home]) %></h2>
+          <%= render 'questions', questions: @new %>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="featured">
+          <h2><%= link_to t('home.featured.solved'), questions_path(tab: :'questions-solved'), analytics_attributes(:questions, :list, [:solved, :home]) %></h2>
+          <%= render 'questions', questions: @solved %>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="featured">
+          <h2><%= link_to t('home.featured.favored'), questions_path(tab: :'questions-favored'), analytics_attributes(:questions, :list, [:favored, :home]) %></h2>
+          <%= render 'questions', questions: @favored %>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

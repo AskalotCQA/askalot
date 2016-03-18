@@ -1,0 +1,22 @@
+sk:
+  teacher_administration:
+    navigation: "Administrácia"
+
+    category:
+      index:
+        title: "Administrácia kategórií"
+        update_settings: "Upraviť nastavenia"
+        wait: "Čakajte, prosím..."
+        success: "Kategórie boli úspešne upravené"
+
+      create:
+        action: "Pridať"
+        title: "Pridať kategóriu"
+        submit: "Uložiť"
+        cancel: "Zrušiť"
+
+      edit:
+        action: "Upraviť"
+        title: "Upraviť kategóriu"
+        submit: "Uložiť"
+        cancel: "Zrušiť"

@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :evaluation do
+  factory :evaluation, class: Shared::Evaluation do
     association :author
 
     text 'Lorem ipsum'

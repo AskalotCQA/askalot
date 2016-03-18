@@ -1,0 +1,11 @@
+<li id="comment-<%= comment.id %>" class="comment-teacher<%= ' bg-warning' if comment_highlighted? comment %>">
+  <div class="comment-content">
+    <%= render_markdown comment.text, redcarpet: { tags: [:autolink, :codespan, :emphasis, :link, :striketrough, :underline] } %>
+  </div>
+
+  <div>
+    <%= render 'shared/comments/details',  comment: comment %>
+    <%= render 'shared/comments/editing',  comment: comment, remote: remote %>
+    <%= render 'shared/comments/deleting', comment: comment, remote: remote %>
+  </div>
+</li>

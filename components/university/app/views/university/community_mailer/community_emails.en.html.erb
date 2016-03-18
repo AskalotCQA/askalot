@@ -1,0 +1,14 @@
+<%= render 'shared/user_mailer/header' %>
+
+<div>
+  <%= @content %>
+</div>
+
+<br/>
+
+<p>
+  <span class="text-muted">&middot;</span>
+  <%= link_to "Unsubscribe from these e-mails", edit_user_registration_path(tab: :notifications) %>
+</p>
+
+<%= render 'shared/user_mailer/footer' %>

@@ -1,0 +1,30 @@
+// general
+
+.new-comment {
+  margin-top: 15px;
+}
+
+.wrap-new-comment {
+  margin-bottom: 10px;
+  margin-left: 30px;
+}
+
+.comments-section {
+  margin-left: 30px;
+}
+
+.comment-teacher {
+  margin-left: -10px;
+  margin-right: -10px;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+// member
+
+.comment-content {
+  @include markdown-content;
+
+  display: inline;
+  color: $gray;
+}

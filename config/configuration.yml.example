@@ -36,25 +36,70 @@ defaults: &defaults
 
   reputation:
     gold: 20
-    silver: 35
+    silver: 55
 
-development:
+  oauth:
+    consumer_key: test
+    consumer_secret: secret
+
+  category_depths:
+    -
+      depth: 0
+      label:
+        en: Root
+        sk: Root
+      is_in_public_name: false
+    -
+      depth: 1
+      label:
+        en: Academic year
+        sk: Školský rok
+      is_in_public_name: false
+    -
+      depth: 2
+      label:
+        en: Class
+        sk: Predmet
+      is_in_public_name: true
+    -
+      depth: 3
+      label:
+        en: Part
+        sk: Časť
+      is_in_public_name: true
+
+fiit_development:
   <<: *defaults
 
-test:
+fiit_test:
   <<: *defaults
 
   poll:
     default: 5
 
-staging:
+fiit_staging:
   <<: *defaults
 
-demo:
+fiit_demo:
   <<: *defaults
 
-production:
+fiit_production:
   <<: *defaults
 
-experimental:
+edx_development:
+  <<: *defaults
+
+edx_test:
+  <<: *defaults
+
+  poll:
+    default: 5
+
+edx_staging:
+  <<: *defaults
+
+edx_demo:
+  <<: *defaults
+
+edx_production:
   <<: *defaults

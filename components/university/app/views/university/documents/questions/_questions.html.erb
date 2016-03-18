@@ -1,0 +1,23 @@
+<div id="document-content">
+  <% if questions.any? %>
+    <div class="pull-right">
+      <% if @poll %>
+        <%= icon_link_to :refresh, t('question.poll.end', time: tooltip_time_tag(Time.now).html_safe), params.merge(poll: false), class: 'btn text-muted', data: { poll: Shared::Configuration.poll.default, remote: true, state: true, rel: index_document_questions_path(params) } %>
+      <% else %>
+        <%= icon_link_to :refresh, t('question.poll.start'), university.index_document_questions_path(params.merge poll: true), class: 'btn btn-default', data: { remote: true, state: true } %>
+      <% end %>
+    </div>
+
+    <ol class="user-questions">
+      <% questions.each do |question| %>
+        <%= render 'university/documents/questions/question', question: question %>
+      <% end %>
+    </ol>
+
+    <%= paginate questions, params: { tab: :questions }, remote: true %>
+  <% else %>
+    <div class="alert alert-warning">
+      <%= t('question.no_records') %>
+    </div>
+  <% end %>
+</div>

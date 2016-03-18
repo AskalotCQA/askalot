@@ -1,0 +1,304 @@
+en:
+  count:
+    answer:
+      zero: "answers"
+      one: "answer"
+      few: "answers"
+      other: "answers"
+
+    author:
+      zero: "authors"
+      one: "author"
+      few: "authors"
+      other: "authors"
+
+    category:
+      zero: "categories"
+      one: "category"
+      few: "categories"
+      other: "categories"
+
+    comment:
+      zero: "comments"
+      one: "comment"
+      few: "comments"
+      other: "comments"
+
+    document:
+      zero: "documents"
+      one: "document"
+      few: "documents"
+      other: "documents"
+
+    evaluation:
+      zero: "evaluations"
+      one: "evaluation"
+      few: "evaluations"
+      other: "evaluations"
+
+    favorite:
+      zero: "favorites"
+      one: "favorite"
+      few: "favorites"
+      other: "favorites"
+
+    followee:
+      zero: "followees"
+      one: "followee"
+      few: "followees"
+      other: "followees"
+
+    follower:
+      zero: "followers"
+      one: "follower"
+      few: "followers"
+      other: "followers"
+
+    group:
+      zero: "groups"
+      one: "group"
+      few: "groups"
+      other: "groups"
+
+    notification:
+      zero: "notifications"
+      one: "notification"
+      few: "notifications"
+      other: "notifications"
+
+    question:
+      zero: "questions"
+      one: "question"
+      few: "questions"
+      other: "questions"
+
+    tag:
+      zero: "tags"
+      one: "tag"
+      few: "tags"
+      other: "tags"
+
+    user:
+      zero: "users"
+      one: "user"
+      few: "users"
+      other: "users"
+
+    view:
+      zero: "views"
+      one: "view"
+      few: "views"
+      other: "views"
+
+    vote:
+      zero: "votes"
+      one: "vote"
+      few: "votes"
+      other: "votes"
+
+    watching:
+      zero: "watchings"
+      one: "watching"
+      few: "watchings"
+      other: "watchings"
+
+  count_x:
+    answer:
+      zero: "no answers"
+      one: "1 answer"
+      few: "%{count} answers"
+      other: "%{count} answers"
+
+    author:
+      zero: "no authors"
+      one: "1 author"
+      few: "%{count} authors"
+      other: "%{count} authors"
+
+    category:
+      zero: "no categories"
+      one: "1 category"
+      few: "%{count} categories"
+      other: "%{count} categories"
+
+    comment:
+      zero: "no comments"
+      one: "1 comment"
+      few: "%{count} comments"
+      other: "%{count} comments"
+
+    evaluation:
+      zero: "no evaluations"
+      one: "1 evaluation"
+      few: "%{count} evaluations"
+      other: "%{count} evaluations"
+
+    favorite:
+      zero: "no favorites"
+      one: "1 favorite"
+      few: "%{count} favorites"
+      other: "%{count} favorites"
+
+    followee:
+      zero: "no followees"
+      one: "1 followee"
+      few: "%{count} followees"
+      other: "%{count} followees"
+
+    follower:
+      zero: "no followers"
+      one: "one follower"
+      few: "%{count} followers"
+      other: "%{count} followers"
+
+    notification:
+      zero: "no notifications"
+      one: "1 notification"
+      few: "%{count} notifications"
+      other: "%{count} notifications"
+
+    question:
+      zero: "no questions"
+      one: "1 question"
+      few: "%{count} questions"
+      other: "%{count} questions"
+
+    tag:
+      zero: "no tags"
+      one: "1 tag"
+      few: "%{count} tags"
+      other: "%{count} tags"
+
+    user:
+      zero: "no users"
+      one: "1 user"
+      few: "%{count} users"
+      other: "%{count} users"
+
+    view:
+      zero: "no views"
+      one: "1 view"
+      few: "%{count} views"
+      other: "%{count} views"
+
+    vote:
+      zero: "no votes"
+      one: "1 vote"
+      few: "%{count} votes"
+      other: "%{count} votes"
+
+    watching:
+      zero: "no watchings"
+      one: "1 watching"
+      few: "%{count} watchings"
+      other: "%{count} watchings"
+
+  activerecord:
+    models:
+      activity: "Activity"
+      answer: "Answer"
+      assignment: "Assignment"
+      category: "Category"
+      changelog: "Changelog"
+      comment: "Comment"
+      document: "Document"
+      evaluation: "Evaluation"
+      favorite: "Favorite"
+      group: "Group"
+      question: "Question"
+      notification: "Notification"
+      tag: "Tag"
+      user: "User"
+      view: "View"
+      vote: "Vote"
+      watching: "Watching"
+
+    attributes:
+      shared/answer:
+        text: "Answer"
+
+      shared/assignment:
+        category: "Category"
+        category_id: "Category"
+        role: "Role"
+        role_id: "Role"
+        user: "User"
+        user_nick: "User"
+
+      shared/category:
+        name: "Name"
+        uuid: "UUID"
+        tags: "Tags"
+        shared: "Show questions also from related categories"
+        askable: "Questions can be asked directly in this category"
+        teacher_assistants: "Teacher assistants"
+
+      shared/changelog:
+        text: "Text"
+        title: "Title"
+        version: "Version"
+
+      shared/comment:
+        text: "Comment"
+
+      university/document:
+        text: "Text"
+        title: "Title"
+
+      shared/evaluation:
+        text: "Comment"
+        value: "Evaluation"
+
+      university/group:
+        description: "Description"
+        title: "Title"
+        visbility: "Visibility"
+
+      shared/question:
+        anonymous: "Ask anonymously"
+        category: "Category"
+        category_id: "Category"
+        tag_list: "Tags"
+        text: "Text"
+        title: "Title"
+
+      shared/user:
+        email: "E-mail"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+        current_password: "Current password"
+        remember_me: "Remember me"
+
+        confirmation_token: "Confirmation token"
+        reset_password_token: "Reset password token"
+
+        nick: "Nickname"
+        first: "First name"
+        middle: "Middle name"
+        last: "Last name"
+        about: "About"
+
+        gravatar_email: "Gravatar e-mail"
+
+        bitbucket: "Bitbucket"
+        facebook: "Facebook"
+        flickr: "Flickr"
+        foursquare: "Foursquare"
+        github: "GitHub"
+        google_plus: "Google Plus"
+        instagram: "Instagram"
+        linkedin: "LinkedIn"
+        pinterest: "Pinterest"
+        stack_overflow: "Stack Overflow"
+        tumblr: "Tumblr"
+        twitter: "Twitter"
+        youtube: "YouTube"
+
+        show_name:  "Show name to other users"
+        show_email: "Show e-mail to other users"
+
+        hide_name: "Hide name from other users"
+        hide_email: "Hide e-mail from other users"
+
+        read_notifications_thread: "Mark whole thread as read"
+        send_email_notifications: "Send e-mail notifications"

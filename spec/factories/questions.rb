@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :question do
+  factory :question, class: Shared::Question do
     sequence(:title) { |n| "Title #{n}" }
 
     text 'Lorem ipsum'

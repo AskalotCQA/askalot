@@ -1,0 +1,7 @@
+<% if followers.any? %>
+  <%= render 'shared/users/followings/users', tab: tab, users: followers %>
+<% else %>
+  <div class="alert alert-info">
+    <%= t(user == current_user ? 'user.followings.no_followers' : 'user.followings.other.no_followers') %>
+  </div>
+<% end %>

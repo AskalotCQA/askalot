@@ -1,0 +1,83 @@
+sk:
+  statistic:
+    navigation: "Štatistiky"
+
+    description_header:
+      median: "Medián"
+      average: "Priemer"
+      standard_deviation: "Smerodajná odchýlka"
+
+    index:
+      title: "Štatistiky"
+      filter: "Filtrovať"
+      answering: "Uvažovaní používatelia sú autormi otázok, alebo odpovedí k otázkam, alebo komentárov k odpovediam a samotným otázkam s vybranými tagmi počas daného obdobia."
+      voting: "Uvažovaní sú taktiež tí používatelia, ktorí hlasovali za otázku alebo odpoveď k otázke s vybranými tagmi počas daného obdobia."
+
+      overall: "Celkovo"
+      completely: "Celkom"
+
+      without_question: "Bez položenej otázky"
+      without_answer: "Bez poskytnutej odpovede"
+      without_comment: "Bez komentára"
+
+      questions: "Otázky"
+      questions_more: "Otázok"
+      questions_add: "Pridané otázky"
+      questions_show: "Zobrazené otázky"
+      questions_vote: "Hlasované otázky"
+      questions_comment: "Komentované otázky"
+      questions_favourite: "Obľúbené otázky"
+      questions_not_answer: "Neodpovedané otázky"
+      questions_answer: "Odpovedané otázky"
+      questions_resolve: "Vyriešené otázky"
+
+      answers: "Odpovede"
+      answers_more: "Odpovedí"
+      answers_add: "Pridané odpovede"
+      answers_vote: "Hlasované odpovede"
+      answers_comment: "Komentované odpovede"
+      answers_best: "Vybrané najlepšie odpovede"
+      answers_help: "Vybrané pomocné odpovede"
+
+      questions_without_answer: "Bez odpovede"
+      questions_with_answer: "S odpoveďou"
+      questions_resolved: "Vyriešené"
+
+      vote: "Hodnotené"
+      vote_very_bad: "Veľmi zlé"
+      vote_bad: "Zlé"
+      vote_good: "Dobré"
+      vote_very_good: "Veľmi dobré"
+      vote_great: "Výborné"
+
+      bindings: "Väzby"
+      bindings_answers: "Odpovedí na otázku"
+      bindings_best: "Najlepších odpovedí na otázku"
+      bindings_help: "Pomocných odpovedí na otázku"
+      bindings_show: "Zobrazení na otázku"
+      bindings_vote: "Hlasov na otázku"
+      bindings_comment: "Komentárov na otázku"
+      bindings_favourite: "Obľúbení na otázku"
+      bindings_best_all: "Najlepšie odpovede"
+      bindings_help_all: "Pomocné odpovede"
+      bindings_vote_all: "Ohodnotené odpovede"
+
+      vote_on_answer: "Hlasov na odpoveď"
+      comment_on_answer: "Komentárov na odpoveď"
+
+      comments: "Komentáre"
+      votes: "Hlasy"
+      views: "Zobrazenia"
+      favourites: "Obľúbenia"
+
+      shown: "Zobrazené"
+      voted: "Hlasované"
+      commented: "Komentované"
+      favourited: "Obľúbené"
+      best: "Najlepšie"
+      auxiliary: "Pomocné"
+
+      user: "Používateľ"
+      users: "Používatelia"
+      users_more: "Používateľmi"
+      no_users: "Neboli nájdení žiadni používatelia."

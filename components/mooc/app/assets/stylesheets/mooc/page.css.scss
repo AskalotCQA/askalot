@@ -1,0 +1,21 @@
+.page-overlay {
+  background: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  font-size: 120%;
+
+  .page-login-msg {
+    text-align: center;
+    margin: 100px auto;
+    max-width: 550px;
+
+    > strong {
+      display: inline-block;
+      margin-bottom: 5px;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+<div id="answer-<%= answer.id %>-labeling" class="answer-labeling">
+  <div class="answer-labeling-best">
+    <% if can? :label, answer.question %>
+      <% if answer.best? %>
+        <%= icon_link_to :'check-circle', nil, shared.label_answer_path(answer, value: :best), data: { remote: true }, class: :'answer-labeled-best' %>
+      <% else %>
+        <%= icon_link_to :'check-circle', nil, shared.label_answer_path(answer, value: :best), tooltip_attributes(t('answer.label.best'), placement: :right).deep_merge(data: { remote: true }) %>
+      <% end %>
+    <% elsif answer.best? %>
+      <span><%= tooltip_icon_tag :'check-circle', t('answer.best'), placement: :right %></span>
+    <% end %>
+  </div>
+
+<!--
+ <% unless answer.labelings.with(:best).exists? %>
+    <div class="answer-labeling-helpful">
+      <% if can? :label, answer.question %>
+        <% if answer.labeled_by? current_user, :helpful %>
+          <%= icon_link_to :'lightbulb-o', nil, shared.label_answer_path(answer, value: :helpful), data: { remote: true }, class: :'answer-labeled-helpful' %>
+        <% else %>
+          <%= icon_link_to :'lightbulb-o', nil, shared.label_answer_path(answer, value: :helpful), tooltip_attributes(t('answer.label.helpful'), placement: :right).deep_merge(data: { remote: true }) %>
+        <% end %>
+      <% elsif answer.helpful? %>
+        <span><%= tooltip_icon_tag :'lightbulb-o', t('answer.helpful'), placement: :right %></span>
+      <% end %>
+    </div>
+  <% end %>
+-->
+</div>

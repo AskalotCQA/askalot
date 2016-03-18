@@ -1,0 +1,10 @@
+en:
+  page:
+    to_login:
+      header: "Ooops! It looks like you are not signed in"
+      description: "Please wait a few seconds to be automatically redirected"
+      link: "go to login page manually"
+    no_link:
+      header: "Sorry, we couldn't identify login url"
+      description: "You are not signed in and we are not able to identify login url to redirect you to. Please visit an unit with Askalot in order to login."
+  or: "or"

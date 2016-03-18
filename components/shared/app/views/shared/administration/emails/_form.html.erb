@@ -1,0 +1,29 @@
+<%= form_for @email, url: shared.administration_emails_path(@email), method: :post do |f| %>
+
+    <div class="form-group">
+      <%= f.label :subject, t('administration.email.subject') %>
+      <%= f.text_field :subject, class: :'form-control' %>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <%= check_box_tag :test %>
+        <%= t('administration.email.to_me_only') %>
+      </label>
+    </div>
+
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :send_html_email %>
+        <%= t('administration.email.html_email') %>
+      </label>
+    </div>
+
+    <div class="form-group">
+      <%= markdown_editor_for_email do %>
+          <%= f.text_area :body, class: :'form-control', rows: 15 %>
+      <% end %>
+    </div>
+
+    <button type="submit" class="btn btn-success"><%= t('administration.email.create.action') %></button>
+<% end %>

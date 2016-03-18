@@ -7,7 +7,7 @@ if ENV['COVERAGE'] == 'true'
   SimpleCov.start 'rails'
 end
 
-ENV["RAILS_ENV"] ||= 'test'
+ENV["RAILS_ENV"] ||= 'fiit_test'
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
@@ -80,24 +80,28 @@ RSpec.configure do |config|
   # FactoryGirl
   config.include FactoryGirl::Syntax::Methods
 
+  # Engine routes
+  config.include Shared::Engine.routes.url_helpers, type: :feature
+  config.include "#{Rails.module.capitalize}::Engine".constantize.routes.url_helpers, type: :feature
+
   # Include support
-  config.include AuthenticationHelper, type: :feature
-  config.include CapybaraHelpers,      type: :feature
+  config.include Shared::AuthenticationHelper, type: :feature
+  config.include Shared::CapybaraHelpers,      type: :feature
   config.include Devise::TestHelpers,  type: :controller
-  config.include EmailHelper
-  config.include FixtureHelper
-  config.include Logging
-  config.include NotificationsHelper
-  config.include PageHelper,           type: :feature
-  config.include PollingHelper,        type: :feature
-  config.include RemoteHelper,         type: :feature
-  config.include TextcompleteHelper,   type: :feature
+  config.include Shared::EmailHelper
+  config.include Shared::FixtureHelper
+  config.include Shared::Logging
+  config.include Shared::NotificationsHelper
+  config.include Shared::PageHelper,           type: :feature
+  config.include Shared::PollingHelper,        type: :feature
+  config.include Shared::RemoteHelper,         type: :feature
+  config.include Shared::TextcompleteHelper,   type: :feature
 
   config.before(:each) { reset_emails }
 
   config.before(:each) do
-    [Category, Question, Tag, User].each { |model| model.autoimport = false }
+    [Shared::Category, Shared::Question, Shared::Tag, Shared::User].each { |model| model.autoimport = false }
 
-    Configuration.poll.default = 60
+    Shared::Configuration.poll.default = 60
   end
 end

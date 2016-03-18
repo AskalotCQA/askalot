@@ -1,0 +1,11 @@
+<div id="<%= identify evaluable, :evaluating %>" class="<%= model %>-evaluating">
+  <% if can? :evaluate, evaluable %>
+    <a href="#" <%= "class=#{model}-evaluated" if evaluable.evaluated_by? current_user %> data-toggle="modal" data-target="#<%= identify evaluable, :evaluate %>">
+      <%= tooltip_icon_tag :magic, t('evaluation.new.action'), placement: :right %>
+    </a>
+  <% end %>
+</div>
+
+<% if can? :evaluate, evaluable %>
+  <%= render 'shared/evaluations/form', model: model, evaluable: evaluable, remote: remote ||= false %>
+<% end %>

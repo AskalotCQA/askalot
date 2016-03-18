@@ -1,0 +1,30 @@
+<% provide :title, @user.nick %>
+
+<div class="row">
+  <div class="col-md-3">
+    <%= render 'shared/users/profile/side', user: @user %>
+  </div>
+  <div class="col-md-9">
+    <div class="tab-navigation">
+      <%= render 'shared/users/actions', user: @user %>
+
+      <ul class="nav nav-tabs">
+        <%= tab_link_tag t('user.tab.profile'), :profile, user_path(params.except(:page).merge tab: :profile), analytics_attributes(:profile, :switch, :profile) %>
+        <%= tab_link_tag_with_count t('user.tab.questions'), :questions, user_path(params.except(:page).merge tab: :questions), @questions.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :questions) %>
+        <%= tab_link_tag_with_count t('user.tab.answers'), :answers, user_path(params.except(:page).merge tab: :answers), @answers.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :answers) %>
+        <%= tab_link_tag_with_count t('user.tab.favorites'), :favorites, user_path(params.except(:page).merge tab: :favorites), @favorites.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :favorites) %>
+        <%= tab_link_tag t('user.tab.anonymous'), :anonymous, user_path(params.except(:page).merge tab: :anonymous), analytics_attributes(:profile, :switch, :anonymous) if can? :show_anonymous, @user %>
+        <%= tab_link_tag t('user.tab.activities'), :activities, user_path(params.except(:page).merge tab: :activities), analytics_attributes(:profile, :switch, :activities) %>
+      </ul>
+    </div>
+
+    <div class="tab-content">
+      <%= render_tab_content 'shared/users/profile/home', :profile, locals: { user: @user } %>
+      <%= render_tab_content 'shared/users/profile/questions', :questions, locals: { user: @user, questions: @questions } %>
+      <%= render_tab_content 'shared/users/profile/answers', :answers, locals: { user: @user, answers: @answers } %>
+      <%= render_tab_content 'shared/users/profile/favorites', :favorites, locals: { user: @user, favorites: @favorites } %>
+      <%= render_tab_content 'shared/users/profile/anonymous', :anonymous, locals: { user: @user, questions: @anonymous } if can? :show_anonymous, @user %>
+      <%= render_tab_content 'shared/users/profile/activities', :activities, locals: { user: @user, activities: @activities } %>
+    </div>
+  </div>
+</div>

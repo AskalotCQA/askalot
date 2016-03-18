@@ -1,6 +1,10 @@
 FactoryGirl.define do
-  factory :category do
+  factory :category, class: Shared::Category do
     sequence(:name) { |n| "Category ##{n}" }
+    sequence(:uuid) { |n| "uuid#{n}" }
+    askable true
+
+    parent_id 2
 
     trait :with_tags do
       sequence(:tags) { |n| ["category-#{n}"] }

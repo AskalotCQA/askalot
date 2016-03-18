@@ -1,8 +1,9 @@
 require 'rvm/capistrano'
 require 'bundler/capistrano'
 require 'whenever/capistrano'
+require 'active_support/inflector'
 
-set :stages, [:staging, :demo, :production, :experimental]
+set :stages, [:fiit_staging, :fiit_demo, :fiit_production, :edx_staging, :edx_demo, :edx_production]
 
 require 'capistrano/ext/multistage'
 
@@ -12,7 +13,7 @@ set :repository,     'git@github.com:isrba/askalot.git'
 set :scm_passphrase, ''
 set :user,           'deploy'
 set(:branch)         { rails_env }
-set(:deploy_to)      { "/home/deploy/projects/#{application}-#{rails_env}" }
+set(:deploy_to)      { "/home/deploy/projects/#{application}-#{rails_env.dasherize}" }
 
 set :use_sudo, false
 
@@ -24,7 +25,8 @@ set :git_enable_submodules, 1
 set :ssh_options, { forward_agent: true }
 
 # Whenever
-set :whenever_command, "RAILS_ENV=#{rails_env} bundle exec whenever"
+set :whenever_command, ->{ "RAILS_ENV=#{rails_env} bundle exec whenever" }
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 default_run_options[:pty] = true
 
@@ -71,15 +73,15 @@ namespace :deploy do
   [:start, :stop, :upgrade].each do |command|
     desc "#{command.to_s.capitalize} unicorn server"
     task command, roles: :app, except: { no_release: true } do
-      run "/etc/init.d/unicorn-#{application}-#{rails_env} #{command}"
+      run "/etc/init.d/unicorn-#{application}-#{rails_env.dasherize} #{command}"
     end
   end
 
   desc "Restart unicorn server"
   task :restart, roles: :app, except: { no_release: true } do
-    run "/etc/init.d/unicorn-#{application}-#{rails_env} stop"
+    run "/etc/init.d/unicorn-#{application}-#{rails_env.dasherize} stop"
     run "sleep 3"
-    run "/etc/init.d/unicorn-#{application}-#{rails_env} start"
+    run "/etc/init.d/unicorn-#{application}-#{rails_env.dasherize} start"
   end
 
   desc "Symlink shared"

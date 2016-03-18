@@ -1,0 +1,316 @@
+sk:
+  count:
+    answer:
+      zero: "odpovedí"
+      one: "odpoveď"
+      few: "odpovede"
+      other: "odpovedí"
+
+    author:
+      zero: "autorov"
+      one: "autor"
+      few: "autori"
+      other: "autorov"
+
+    category:
+      zero: "kategórií"
+      one: "kategória"
+      few: "kategórie"
+      other: "kategórií"
+
+    comment:
+      zero: "komentárov"
+      one: "komentár"
+      few: "komentáre"
+      other: "komentárov"
+
+    document:
+      zero: "dokumentov"
+      one: "dokument"
+      few: "dokumenty"
+      other: "dokumentov"
+
+    evaluation:
+      zero: "hodnotení"
+      one: "hodnotenie"
+      few: "hodnotenia"
+      other: "hodnotení"
+
+    favorite:
+      zero: "obľúbení"
+      one: "obľúbenie"
+      few: "obľúbenia"
+      other: "obľúbení"
+
+    followee:
+      zero: "nasledovaných"
+      one: "nasledovaný"
+      few: "nasledovaný"
+      other: "nasledovaných"
+
+    follower:
+      zero: "nasledovníkov"
+      one: "nasledovník"
+      few: "nasledovníci"
+      other: "nasledovníkov"
+
+    group:
+      zero: "skupín"
+      one: "skupina"
+      few: "skupiny"
+      other: "skupín"
+
+    member:
+      zero: "členov"
+      one: "člen"
+      few: "členovia"
+      other: "členov"
+
+    notification:
+      zero: "notifikácií"
+      one: "notifikácia"
+      few: "notifikácie"
+      other: "notifikácií"
+
+    question:
+      zero: "otázok"
+      one: "otázka"
+      few: "otázky"
+      other: "otázok"
+
+    tag:
+      zero: "tagov"
+      one: "tag"
+      few: "tagy"
+      other: "tagov"
+
+    user:
+      zero: "používateľov"
+      one: "používateľ"
+      few: "používatelia"
+      other: "používateľov"
+
+    view:
+      zero: "zobrazení"
+      one: "zobrazenie"
+      few: "zobrazenia"
+      other: "zobrazení"
+
+    vote:
+      zero: "hlasov"
+      one: "hlas"
+      few: "hlasy"
+      other: "hlasov"
+
+    watching:
+      zero: "sledovanií"
+      one: "sledovanie"
+      few: "sledovania"
+      other: "sledovaní"
+
+  count_x:
+    answer:
+      zero: "žiadna odpoveď"
+      one: "1 odpoveď"
+      few: "%{count} odpovede"
+      other: "%{count} odpovedí"
+
+    author:
+      zero: "žiaden autor"
+      one: "1 autor"
+      few: "%{count} autori"
+      other: "%{count} autorov"
+
+    category:
+      zero: "žiadna kategória"
+      one: "1 kategória"
+      few: "%{count} kategórie"
+      other: "%{count} kategórií"
+
+    comment:
+      zero: "žiaden komentár"
+      one: "1 komentár"
+      few: "%{count} komentáre"
+      other: "%{count} komentárov"
+
+    evaluation:
+      zero: "žiadne hodnotenie"
+      one: "1 hodnotenie"
+      few: "%{count} hodnotenia"
+      other: "%{count} hodnotení"
+
+    favorite:
+      zero: "žiadne obľúbenie"
+      one: "1 obľúbenie"
+      few: "%{count} obľúbenia"
+      other: "%{count} obľúbení"
+
+    followee:
+      zero: "žiaden nasledovaný"
+      one: "1 nasledovaný"
+      few: "%{count} nasledovaný"
+      other: "%{count} nasledovaných"
+
+    follower:
+      zero: "žiaden nasledovník"
+      one: "jeden nasledovník"
+      few: "%{count} nasledovníci"
+      other: "%{count} nasledovníkov"
+
+    member:
+      zero: "žiaden člen"
+      one: "jeden člen"
+      few: "%{count} členovia"
+      other: "%{count} členov"
+
+    notification:
+      zero: "žiadna notifikácia"
+      one: "1 notifikácia"
+      few: "%{count} notifikácie"
+      other: "%{count} notifikácií"
+
+    question:
+      zero: "žiadna otázka"
+      one: "1 otázka"
+      few: "%{count} otázky"
+      other: "%{count} otázok"
+
+    tag:
+      zero: "žiaden tag"
+      one: "1 tag"
+      few: "%{count} tagy"
+      other: "%{count} tagov"
+
+    user:
+      zero: "žiaden používateľ"
+      one: "1 používateľ"
+      few: "%{count} používatelia"
+      other: "%{count} používateľov"
+
+    view:
+      zero: "žiadne videnia"
+      one: "1 videnie"
+      few: "%{count} videnia"
+      other: "%{count} videní"
+
+    vote:
+      zero: "žiadne hlasy"
+      one: "1 hlas"
+      few: "%{count} hlasy"
+      other: "%{count} hlasov"
+
+    watching:
+      zero: "žiadne sledovania"
+      one: "1 sledovanie"
+      few: "%{count} sledovania"
+      other: "%{count} sledovaní"
+
+  activerecord:
+    models:
+      activity: "Aktivita"
+      answer: "Odpoveď"
+      assignment: "Priradenie"
+      category: "Kategória"
+      changelog: "Protokol zmien"
+      comment: "Komentár"
+      document: "Dokument"
+      evaluation: "Hodnotenie"
+      favorite: "Obľúbenie"
+      group: "Skupina"
+      question: "Otázka"
+      notification: "Notifikácia"
+      tag: "Tag"
+      user: "Používateľ"
+      view: "Zobrazenie"
+      vote: "Hlas"
+      watching: "Sledovanie"
+
+    attributes:
+      shared/answer:
+        text: "Odpoveď"
+
+      shared/assignment:
+        category: "Kategória"
+        category_id: "Kategória"
+        role: "Rola"
+        role_id: "Rola"
+        user: "Používateľ"
+        user_nick: "Používateľ"
+
+      shared/category:
+        name: "Názov"
+        uuid: "UUID"
+        tags: "Tagy"
+        shared: "Zobraziť aj otázky zo súvisiacich kategórií"
+        askable: "Otázky môžu byť položené priamo v tejto kategórii"
+        teacher_assistants: "Asistenti učiteľa"
+
+      shared/changelog:
+        text: "Text"
+        title: "Názov"
+        version: "Verzia"
+
+      shared/comment:
+        text: "Komentár"
+
+      university/document:
+        text: "Text"
+        title: "Názov"
+
+      shared/evaluation:
+        text: "Komentár"
+        value: "Hodnotenie"
+
+      university/group:
+        description: "Popis"
+        title: "Názov"
+        visibility: "Viditeľnosť"
+
+      shared/question:
+        anonymous: "Opýtať sa anonymne"
+        category: "Kategória"
+        category_id: "Kategória"
+        tag_list: "Tagy"
+        text: "Text"
+        title: "Nadpis"
+
+      shared/user:
+        email: "E-mail"
+        password: "Heslo"
+        password_confirmation: "Potvrdenie hesla"
+        current_password: "Aktuálne heslo"
+        remember_me: "Zapamätať"
+
+        confirmation_token: "Potvrdzovací kľúč"
+        reset_password_token: "Obnovovací kľúč"
+
+        nick: "Prezývka"
+        first: "Krstné meno"
+        middle: "Druhé meno"
+        last: "Priezvisko"
+        about: "O mne"
+
+        gravatar_email: "Gravatar e-mail"
+
+        bitbucket: "Bitbucket"
+        facebook: "Facebook"
+        flickr: "Flickr"
+        foursquare: "Foursquare"
+        github: "GitHub"
+        google_plus: "Google Plus"
+        instagram: "Instagram"
+        linkedin: "LinkedIn"
+        pinterest: "Pinterest"
+        stack_overflow: "Stack Overflow"
+        tumblr: "Tumblr"
+        twitter: "Twitter"
+        youtube: "YouTube"
+
+        show_name:  "Zobraziť meno ostatným používateľom"
+        show_email: "Zobraziť e-mail ostatným používateľom"
+
+        hide_name: "Skryť meno ostatným používateľom"
+        hide_email: "Skryť e-mail ostatným používateľom"
+
+        read_notifications_thread: "Označiť súvisiace ako prečítané"
+        send_email_notifications: "Zasielať e-mailové notifikácie"

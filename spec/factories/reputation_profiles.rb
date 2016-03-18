@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :reputation_profile, class: User::Profile do
+  factory :reputation_profile, class: Shared::User::Profile do
     targetable_id    1
     targetable_type  'Reputation'
     property         'reputation'

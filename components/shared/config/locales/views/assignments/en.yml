@@ -1,0 +1,11 @@
+en:
+  assignment:
+    create:
+      success: 'User role was successfully added.'
+
+    update:
+      success: 'User role was successfully updated.'
+
+    delete:
+      success: 'User role was successfully deleted.'
+      failure: 'User role could not be deleted.'
