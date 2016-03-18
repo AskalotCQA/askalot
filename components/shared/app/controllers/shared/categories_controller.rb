@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
 
   def index
     @category_depths    = CategoryDepth.public_depths
-    @context_categories = Shared::Category.in_contexts(@context).includes(:assignments).order('lft')
+    @context_categories = Shared::Category.in_contexts(@context).includes(:assignments, :watchers).order('lft')
     category_ids        = Shared::Category.in_contexts(@context).pluck(:id)
     @questions_counts   = Shared::CategoryQuestion.where(category_id: category_ids).group(:category_id).pluck('category_id AS id, count(*) AS count').to_h
     @answers_counts     = Shared::CategoryQuestion.where(category_id: category_ids).joins(question: :answers).group('categories_questions.category_id').pluck('categories_questions.category_id AS id, count(*) AS count').to_h

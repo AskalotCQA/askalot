@@ -9,7 +9,7 @@ module Shared::Watchable
   end
 
   def watched_by?(user)
-    watchers.exists?(id: user.id)
+    watchers.loaded? ? watchers.map(&:id).include?(user.id) : watchers.exists?(id: user.id)
   end
 
   def toggle_watching_by!(user)
