@@ -56,13 +56,19 @@ defaults: &defaults
         sk: Školský rok
       is_in_public_name: false
     -
-      depth: 2
+      depth: 1
+      label:
+        en: Academic year
+        sk: Školský rok
+      is_in_public_name: false
+    -
+      depth: 3
       label:
         en: Class
         sk: Predmet
       is_in_public_name: true
     -
-      depth: 3
+      depth: 4
       label:
         en: Part
         sk: Časť
