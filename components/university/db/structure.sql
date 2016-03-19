@@ -3383,6 +3383,12 @@ INSERT INTO schema_migrations (version) VALUES ('20151106073335');
 
 INSERT INTO schema_migrations (version) VALUES ('20151107171100');
 
+INSERT INTO schema_migrations (version) VALUES ('20151107171101');
+
+INSERT INTO schema_migrations (version) VALUES ('20151107171102');
+
+INSERT INTO schema_migrations (version) VALUES ('20151107171103');
+
 INSERT INTO schema_migrations (version) VALUES ('20151108154348');
 
 INSERT INTO schema_migrations (version) VALUES ('20151108201548');
@@ -3405,23 +3411,17 @@ INSERT INTO schema_migrations (version) VALUES ('20160220170558');
 
 INSERT INTO schema_migrations (version) VALUES ('20160221111744');
 
-INSERT INTO schema_migrations (version) VALUES ('20160222183106');
-
 INSERT INTO schema_migrations (version) VALUES ('20160224152624');
 
 INSERT INTO schema_migrations (version) VALUES ('20160224210832');
 
-INSERT INTO schema_migrations (version) VALUES ('20160228092338');
+INSERT INTO schema_migrations (version) VALUES ('20160224210833');
 
 INSERT INTO schema_migrations (version) VALUES ('20160228103010');
-
-INSERT INTO schema_migrations (version) VALUES ('20160229094608');
 
 INSERT INTO schema_migrations (version) VALUES ('20160229115039');
 
 INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 
 INSERT INTO schema_migrations (version) VALUES ('20160307103948');
-
-INSERT INTO schema_migrations (version) VALUES ('20160318072719');
 

@@ -263,29 +263,53 @@ namespace :sample_data do
   desc 'Fills database with sample categories'
   task categories: :environment do
     categories = [
-      { name: "2014-15", tags: ["2014-2015"], uuid: nil, time: 385, parent_name: "root", shared: true, askable: false, uuid: "2014-15" },
-      { name: "2015-16", tags: ["2015-2016"], uuid: nil, time: 65, parent_name: "root", shared: true, askable: true, uuid: "2015-16" },
-      { name: "Principles of software engineering", tags: ["psi"], uuid: "pse", time: 385, parent_name: "2014-15", shared: true, askable: false },
-      { name: "Principles of software engineering", tags: ["psi"], uuid: "pse", time: 65, parent_name: "2015-16", shared: true, askable: true },
-      { name: "Database systems", tags: ["dbs"], uuid: "dbs", time: 385, parent_name: "2014-15", shared: true, askable: false },
-      { name: "Database systems", tags: ["dbs"], uuid: "dbs", time: 65, parent_name: "2015-16", shared: true, askable: true },
-      { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", time: 385, parent_name: "2014-15", shared: true, askable: false },
-      { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", time: 65, parent_name: "2015-16", shared: true, askable: true },
+        # Academic years
+        { name: "2014-15", tags: ["2014-15"], uuid: "2014-15", parent_name: "root", shared: true, askable: false, time: 385 },
+        { name: "2015-16", tags: ["2015-16"], uuid: "2015-16", parent_name: "root", shared: true, askable: true, time: 65 },
+
+        # Grades
+        { name: "Bachelor study: 1st grade", tags: ["bachelor-1st"], uuid: "bachelor-1st", parent_name: "2014-15", shared: true, askable: false, time: 385 },
+        { name: "Bachelor study: 1st grade", tags: ["bachelor-1st"], uuid: "bachelor-1st", parent_name: "2015-16", shared: true, askable: true, time: 65 },
+        { name: "Bachelor study: 2nd grade", tags: ["bachelor-2nd"], uuid: "bachelor-2ndt", parent_name: "2014-15", shared: true, askable: false, time: 385 },
+        { name: "Bachelor study: 2nd grade", tags: ["bachelor-2nd"], uuid: "bachelor-2ndt", parent_name: "2015-16", shared: true, askable: true, time: 65 },
+
+        # Subjects
+        { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", parent_name: "2014-15 - Bachelor study: 1st grade", shared: true, askable: false, time: 385 },
+        { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", parent_name: "2015-16 - Bachelor study: 1st grade", shared: true, askable: true, time: 65 },
+        { name: "Principles of software engineering", tags: ["pse"], uuid: "pse", parent_name: "2014-15 - Bachelor study: 2nd grade", shared: true, askable: false, time: 385 },
+        { name: "Principles of software engineering", tags: ["pse"], uuid: "pse", parent_name: "2015-16 - Bachelor study: 2nd grade", shared: true, askable: false, time: 65 },
+        { name: "Database systems", tags: ["dbs"], uuid: "dbs", parent_name: "2014-15 - Bachelor study: 2nd grade", shared: true, askable: false, time: 385 },
+        { name: "Database systems", tags: ["dbs"], uuid: "dbs", parent_name: "2015-16 - Bachelor study: 2nd grade", shared: true, askable: true, time: 65 },
+
+        # Subject parts
+        { name: "Lectures", tags: ["lectures"], uuid: "oop-lectures", parent_name: "2014-15 - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: false, time: 385 },
+        { name: "Lectures", tags: ["lectures"], uuid: "oop-lectures", parent_name: "2015-16 - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: true, time: 65 },
+        { name: "Exercises", tags: ["exercises"], uuid: "oop-exercise", parent_name: "2014-15 - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: false, time: 385 },
+        { name: "Exercises", tags: ["exercises"], uuid: "oop-exercise", parent_name: "2015-16 - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: true, time: 65 },
+
+        { name: "Lectures", tags: ["lectures"], uuid: "pse-project", parent_name: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: false, time: 385 },
+        { name: "Lectures", tags: ["lectures"], uuid: "pse-project", parent_name: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: true, time: 65 },
+        { name: "Project", tags: ["project"], uuid: "pse-exercise", parent_name: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: false, time: 385 },
+        { name: "Project", tags: ["project"], uuid: "pse-exercise", parent_name: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: true, time: 65 },
+
+        { name: "Lectures", tags: ["lectures"], uuid: "dbs-lectures", parent_name: "2014-15 - Bachelor study: 2nd grade - Database systems", shared: true, askable: false, time: 385 },
+        { name: "Lectures", tags: ["lectures"], uuid: "dbs-lectures", parent_name: "2015-16 - Bachelor study: 2nd grade - Database systems", shared: true, askable: true, time: 65 },
     ]
 
     categories.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        parent = Shared::Category.find_by(name: input[:parent_name])
+        parent = Shared::Category.find_by(full_tree_name: input[:parent_name])
+        parent_id = parent ? parent.id : nil
 
-        next unless Shared::Category.find_by(name: input[:name], parent_id: parent.id ).nil?
+        next unless Shared::Category.find_by(parent_id: parent_id, name: input[:name]).nil?
 
         category = Shared::Category.create!(
-          name: input[:name],
-          tags: input[:tags],
-          uuid: input[:uuid],
-          parent_id: parent.id,
-          shared: input[:shared],
-          askable: input[:askable]
+            name: input[:name],
+            tags: input[:tags],
+            uuid: input[:uuid],
+            parent_id: parent_id,
+            shared: input[:shared],
+            askable: input[:askable]
         )
         category.refresh_full_tree_name
         category.save
@@ -338,21 +362,34 @@ namespace :sample_data do
   desc 'Fills database with sample watchings'
   task watchings: :environment do
     watchings = [
-      { category: "2014-15 - Principles of software engineering", user: "Ivan", time: 54 },
-      { category: "2015-16 - Principles of software engineering", user: "Ivan", time: 54 },
-      { category: "2014-15 - Principles of software engineering", user: "Ben", time: 32 },
-      { category: "2015-16 - Principles of software engineering", user: "John", time: 25 },
-      { category: "2015-16 - Principles of software engineering", user: "Samantha", time: 15 },
-      { category: "2015-16 - Database systems", user: "Andrew", time: 44 },
-      { category: "2015-16 - Database systems", user: "Tom", time: 12 },
-      { category: "2015-16 - Database systems", user: "Lauren", time: 11 },
-      { category: "2015-16 - Database systems", user: "Ella", time: 10 },
-      { category: "2014-15 - Object-oriented programming", user: "Ella", time: 60 },
-      { category: "2015-16 - Object-oriented programming", user: "Ella", time: 60 },
-      { category: "2015-16 - Object-oriented programming", user: "Archie", time: 10 },
-      { category: "2014-15 - Object-oriented programming", user: "Adam", time: 10 },
-      { category: "2015-16 - Object-oriented programming", user: "Adam", time: 10 },
-      { category: "2015-16 - Object-oriented programming", user: "Ben", time: 10 },
+      { category: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Ivan", time: 54 },
+      { category: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Ivan", time: 54 },
+      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Ivan", time: 54 },
+      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Ivan", time: 54 },
+      { category: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Ben", time: 32 },
+      { category: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Ben", time: 32 },
+      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "John", time: 25 },
+      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "John", time: 25 },
+      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Samantha", time: 15 },
+      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Samantha", time: 15 },
+      { category: "2014-15 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Andrew", time: 44 },
+      { category: "2015-16 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Andrew", time: 44 },
+      { category: "2015-16 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Tom", time: 12 },
+      { category: "2014-15 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Lauren", time: 11 },
+      { category: "2015-16 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Lauren", time: 11 },
+      { category: "2015-16 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Ella", time: 10 },
+      { category: "2014-15 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Ella", time: 60 },
+      { category: "2014-15 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Ella", time: 60 },
+      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Ella", time: 60 },
+      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Ella", time: 60 },
+      { category: "2014-15 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Archie", time: 10 },
+      { category: "2014-15 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Archie", time: 10 },
+      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Archie", time: 60 },
+      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Archie", time: 60 },
+      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Adam", time: 60 },
+      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Adam", time: 60 },
+      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Ben", time: 60 },
+      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Ben", time: 60 },
     ]
 
     watchings.each do |input|
@@ -365,7 +402,7 @@ namespace :sample_data do
   desc 'Fills database with sample questions'
   task questions: :environment do
     questions = [{
-      category: "2014-15 - Principles of software engineering",
+      category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Lectures",
       user: "Ben",
       time: 53,
       title: "Model vs Diagram",
@@ -375,7 +412,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015-16 - Principles of software engineering",
+      category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Project",
       user: "Archie",
       time: 49,
       title: "Minimal requirements on project",
@@ -385,7 +422,7 @@ namespace :sample_data do
       editor: "Archie",
       edited_at: 48
     }, {
-      category: "2015-16 - Principles of software engineering",
+      category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Lectures",
       user: "Sophia",
       time: 45,
       title: "What's is the difference between include and extend?",
@@ -395,7 +432,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2014-15 - Database systems",
+      category: "2014-15 - Bachelor study: 2nd grade - Database systems - Lectures",
       user: "Tom",
       time: 31,
       title: "Function COUNT()",
@@ -405,7 +442,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015-16 - Database systems",
+      category: "2015-16 - Bachelor study: 2nd grade - Database systems - Lectures",
       user: "Sophia",
       time: 26,
       title: "PostgreSQL version",
@@ -415,7 +452,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015-16 - Object-oriented programming",
+      category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Lectures",
       user: "Ivan",
       time: 18,
       title: "Singleton in Java",
@@ -425,7 +462,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015-16 - Principles of software engineering",
+      category: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering - Lectures",
       user: "Adam",
       time: 7,
       title: "What an abreviation UML stands for?",
@@ -435,7 +472,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015-16 - Object-oriented programming",
+      category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Exercises",
       user: "Ruby",
       time: 10,
       title: "Anonymous class in always true condition",
