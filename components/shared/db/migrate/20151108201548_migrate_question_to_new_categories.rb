@@ -1,7 +1,5 @@
 class MigrateQuestionToNewCategories < ActiveRecord::Migration
   def up
-    ActiveRecord::Base.record_timestamps = false
-
     root = Shared::Category.roots.find_by name: 'root'
     last_year = root.children.empty? ? '' : root.children.sort_by(&:name).last.name
     Shared::Question.unscoped.each do |question|
@@ -21,11 +19,13 @@ class MigrateQuestionToNewCategories < ActiveRecord::Migration
           subcategory = match[2].strip
           puts "\tQuestion is in subject #{subject} and subcategory #{subcategory}"
 
-          question.category_id = root.children.find_by(name: year).children.find_by(name: subject).children.find_by(name: subcategory).id
+          question.category_id = root.children.find_by(name: year).descendants.find_by(name: subject).children.find_by(name: subcategory).id
+          question.record_timestamps = false
           question.save!
         else
           puts "\tQuestion is direct"
-          question.category_id = root.children.find_by(name: year).children.find_by(name: category.name).id
+          question.category_id = root.children.find_by(name: year).descendants.find_by(name: category.name).id
+          question.record_timestamps = false
           question.save!
         end
       else

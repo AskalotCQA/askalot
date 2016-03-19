@@ -19,7 +19,7 @@ class MigrateWatchingsToNewCategories < ActiveRecord::Migration
           watching.save!
         end
       else
-        categoryRoot.descendants.where(name: category.name, depth: 2).each do |category|
+        categoryRoot.descendants.where(name: category.name, depth: 3).each do |category|
           puts "to #{category.name} assigning"
           watching.watchable_id = category.id
           watching.save!
