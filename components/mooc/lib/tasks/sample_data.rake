@@ -795,7 +795,7 @@ namespace :sample_data do
     context = Shared::Category.find_by(name: 'Demonstration of Advanced Features')
 
     Shared::User.all.each do |u|
-      Shared::ContextUser.create user: u, context: context.id
+      Shared::ContextUser.create user: u, context: context
     end
   end
 end

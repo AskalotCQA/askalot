@@ -264,8 +264,8 @@ namespace :sample_data do
   task categories: :environment do
     categories = [
         # Academic years
-        { name: "2014-15", tags: ["2014-15"], uuid: "2014-15", parent_name: "root", shared: true, askable: false, time: 385 },
-        { name: "2015-16", tags: ["2015-16"], uuid: "2015-16", parent_name: "root", shared: true, askable: true, time: 65 },
+        { name: "2014-15", tags: ["2014-15"], uuid: "2014-15", parent_name: "", shared: true, askable: false, time: 385 },
+        { name: "2015-16", tags: ["2015-16"], uuid: "2015-16", parent_name: "", shared: true, askable: true, time: 65 },
 
         # Grades
         { name: "Bachelor study: 1st grade", tags: ["bachelor-1st"], uuid: "bachelor-1st", parent_name: "2014-15", shared: true, askable: false, time: 385 },
