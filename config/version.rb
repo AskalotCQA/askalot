@@ -2,7 +2,7 @@ module Askalot
   module VERSION
     MAJOR = 3
     MINOR = 0
-    PATCH = 0
+    PATCH = 1
 
     PRE = 'gama'
 
