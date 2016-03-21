@@ -93,6 +93,10 @@ module Shared::CategoriesHelper
     output.html_safe
   end
 
+  def active_categories(categories, questions_counts)
+    categories.select { |category| (questions_counts[category.id] || 0) > 0 }
+  end
+
   def askable_leaves_categories(context)
     Shared::Category.find(context).leaves.where(askable: true).unscope(:order).order(:full_public_name)
   end

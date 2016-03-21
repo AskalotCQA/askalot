@@ -1,8 +1,8 @@
-<% if categories.any? %>
+X<% if categories.any? %>
   <% categories.each do |category| %>
-    <div class="col-sm-6 col-md-4">
+    <div class="">
       <h4>
-        <%= link_to_category category, analytics_attributes(:category, :click, category.name) %>
+        <%= link_to_category category, analytics_attributes(:category, :click, category.full_public_name) %>
         <% if category.has_teachers? %>
           <%= fa_icon :university, tooltip_attributes(names_for_teachers(category.teachers)).merge({ class: 'supported-category-icon-lg' }) %>
         <% end %>

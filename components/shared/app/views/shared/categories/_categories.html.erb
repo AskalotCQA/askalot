@@ -1,4 +1,5 @@
 <div class="categories-tree">
+  <% categories = active_categories categories, questions_counts if tab == :active %>
   <%= tree_view(categories) do |category| %>
       <div class="">
         <h4>
