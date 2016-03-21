@@ -45,35 +45,40 @@ defaults: &defaults
 
   category_depths:
     -
-      depth: 0
-      label:
-        en: Root
-        sk: Root
-      is_in_public_name: false
-    -
-      depth: 1
-      label:
-        en: Academic year
-        sk: Školský rok
-      is_in_public_name: false
-    -
-      depth: 1
-      label:
-        en: Academic year
-        sk: Školský rok
-      is_in_public_name: false
-    -
-      depth: 3
-      label:
-        en: Class
-        sk: Predmet
-      is_in_public_name: true
-    -
-      depth: 4
-      label:
-        en: Part
-        sk: Časť
-      is_in_public_name: true
+        depth: 0
+        label:
+          en: Root
+          sk: Root
+        is_in_public_name: false
+        is_visible: false
+      -
+        depth: 1
+        label:
+          en: Academic year
+          sk: Školský rok
+        is_in_public_name: false
+        is_visible: false
+      -
+        depth: 2
+        label:
+          en: Grade
+          sk: Ročník
+        is_in_public_name: false
+        is_visible: true
+      -
+        depth: 3
+        label:
+          en: Class
+          sk: Predmet
+        is_in_public_name: true
+        is_visible: true
+      -
+        depth: 4
+        label:
+          en: Part
+          sk: Časť
+        is_in_public_name: true
+        is_visible: true
 
 fiit_development:
   <<: *defaults

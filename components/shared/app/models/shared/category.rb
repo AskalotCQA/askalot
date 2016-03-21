@@ -245,7 +245,7 @@ class Category < ActiveRecord::Base
   end
 
   def visible?
-    Shared::CategoryDepth.public_depths.include? self.depth
+    Shared::CategoryDepth.visible_depths.include? self.depth
   end
 end
 end

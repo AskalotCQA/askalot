@@ -18,6 +18,7 @@
   padding-left: 5px;
   margin-top: -5px;
 }
+
 // collection
 
 .category-group {
@@ -46,3 +47,37 @@
   font-size: inherit;
 }
 
+.categories-tree {
+  > ul {
+    @extend .list-unstyled;
+
+    > li {
+      > ul {
+        @extend .list-unstyled;
+
+        margin-left: 20px;
+        padding-left: 20px;
+        border-left: 2px solid $hr-border;
+        border-top: 1px solid $hr-border;
+        
+        > li {
+          > ul {
+            @extend .list-unstyled;
+            @extend .list-inline;
+
+            margin-left: 30px;
+
+            > li {
+              margin-right: 20px;
+              margin-bottom: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .category-details {
+    margin-bottom: 5px;
+  }
+}

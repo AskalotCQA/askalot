@@ -64,7 +64,7 @@ module Shared::CategoriesHelper
 
   def tree_view(objects, &block)
     parents = objects.group_by(&:parent_id)
-    output  = '<ul>'
+    output  = ''
 
     path    = [nil]
 
@@ -75,7 +75,7 @@ module Shared::CategoriesHelper
             path.pop
             output << '</ul></li>'
           end
-        else
+        elsif o.visible?
           path << o.parent_id
           output << '<ul>'
         end
@@ -89,7 +89,7 @@ module Shared::CategoriesHelper
       end
     end
 
-    output << '</ul>'
+    output << '</li></ul>' unless output.blank?
     output.html_safe
   end
 
