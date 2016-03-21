@@ -78,7 +78,6 @@ $(document).ready ->
   })
 
   if (!is_global)
-    console.log('sending to parser')
     $.ajax
       type: 'POST'
       url: host + '1/parser'
