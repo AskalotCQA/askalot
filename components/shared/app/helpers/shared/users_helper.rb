@@ -47,7 +47,7 @@ module Shared::UsersHelper
   private
 
   def anonymous_gravatar_image_tag(options = {})
-    gravatar_image_tag 'anonymous@fiit.stuba.sk', options.merge(default: image_url('anonymous.png'), alt: :anonymous)
+    gravatar_image_tag 'anonymous@fiit.stuba.sk', options.merge(default: image_url('shared/anonymous.png'), alt: :anonymous)
   end
 
   def wrapped_user_image_tag(user, image, options = {})
