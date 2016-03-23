@@ -43,7 +43,7 @@ class Ability
     cannot(:delete, [Shared::Answer]) { |resource| resource.labels.any? || resource.comments.any? || resource.evaluations.any? }
 
     # on the other hand assigned administrator can edit or delete question, answer or comment
-    can(:edit,   [Shared::Question, Shared::Answer, Shared::Comment]) { |resource| user.assigned?(resource.to_question.category, :administrator) }
+    can(:edit,   [Shared::Question, Shared::Answer, Shared::Comment]) { |resource| user.assigned?(resource.to_question.category, :administrator) || user.assigned?(resource.to_question.category, :teacher) }
     can(:delete, [Shared::Question, Shared::Answer, Shared::Comment]) { |resource| user.assigned?(resource.to_question.category, :administrator) }
 
     # only author or assigned teacher when author is slido can label question or answer
@@ -59,6 +59,11 @@ class Ability
     # but assigned teacher can not vote for question or answer
     cannot :vote, [Shared::Question, Shared::Answer] do |resource|
       user.assigned?(resource.to_question.category, :teacher)
+    end
+
+    # assigned teacher can close questions
+    can :close, [Shared::Question] do |resource|
+      resource.answers.empty? && !resource.closed && user.assigned?(resource.to_question.category, :teacher)
     end
 
     # only AIS teacher
