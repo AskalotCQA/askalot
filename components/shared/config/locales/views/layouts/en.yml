@@ -4,13 +4,14 @@ en:
     description: "Community question answering system of next generation."
     keywords: "CQA, FIIT, STU, question, answer, community"
     content: "Community question answering system of next generation for students of Faculty of Informatics and Information Technologies at Slovak University of Technology in Bratislava."
+
   home:
     headline: "Community question answering system of next generation"
 
     ask: "Ask a question"
     answer: "Try to answer"
     questions: "Browse questions"
-    activities: "Activity in Askalot"
+    activities: "Activity feed"
 
     sign_up: "Sign up"
     sign_in: "Sign in"
@@ -25,6 +26,8 @@ en:
       solved: "Solved questions"
       favored: "Favorite questions"
 
+    news: "What's new in Askalot"
+
   footer:
     about: "About"
     authors: "Authors"
@@ -32,6 +35,7 @@ en:
     contact: "Contact"
     documents: "Documents"
     help: "Help"
+    news: "News"
     repositories: "Repository"
 
   body:

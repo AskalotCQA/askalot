@@ -1,0 +1,29 @@
+<% provide(:sidebar, true) %>
+<% provide(:title, t('news.index.title')) %>
+
+<div class="row">
+  <div class="col-xs-12 col-md-9" role="main">
+    <h1 class="page-header"><%= yield :title %></h1>
+
+    <p class="lead"><%= t 'news.index.introduction' %></p>
+
+    <%= render 'shared/news/news', news: @news %>
+  </div>
+
+  <div class="col-md-3 hidden-xs hidden-sm hidden-print">
+    <%= sidebar_tag do %>
+      <ul class="nav">
+        <% @news.each do |new| %>
+          <li>
+            <ul class="nav">
+              <li>
+                <%= new.title %>
+                <%= new.description %>
+              </li>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

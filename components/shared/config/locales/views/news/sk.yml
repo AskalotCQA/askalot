@@ -1,0 +1,17 @@
+sk:
+  news:
+    navigation: "Novinky"
+
+    index:
+      title: "Čo je nové v Askalote?"
+      introduction: "História noviniek a oznamov."
+
+    create:
+      success: "Novinka bola úspešne pridaná."
+
+    update:
+      success: "Novinka bola úspešne aktualizovaná."
+
+    delete:
+      success: "Novinka bola úspešne zmazaná."
+      failure: "Novinku sa nepodarilo zmazať."

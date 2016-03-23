@@ -71,3 +71,23 @@
     }
   }
 }
+
+.news {
+  background-color: $gray-lighter;
+
+  h4 {
+    margin-bottom: 0px;
+  }
+
+  h2 {
+    border-bottom: 1px solid white;
+  }
+}
+
+.news-date {
+  small {
+    padding-top: $padding-small-vertical;
+    font-size: $font-size-small;
+    color: $gray-light;
+  }
+}

@@ -6,6 +6,7 @@ en:
       assignments: "User roles"
       categories: "Categories"
       changelogs: "Changelogs"
+      news: "News"
       emails: "Community e-mail"
 
     assignment:
@@ -62,6 +63,24 @@ en:
         action: "Delete"
         title: "Warning!"
         text: "Are you sure you want to delete this changelog?"
+        submit: "Delete"
+        cancel: "Cancel"
+
+    new:
+      create:
+        action: "Add news"
+        show: "Show on homepage"
+
+      edit:
+        action: "Edit"
+        title: "Edit news"
+        submit: "Save"
+        cancel: "Cancel"
+
+      delete:
+        action: "Delete"
+        title: "Warning!"
+        text: "Are you sure you want to delete this news?"
         submit: "Delete"
         cancel: "Cancel"
 

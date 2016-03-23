@@ -11,7 +11,7 @@ sk:
     ask: "Opýtať sa otázku"
     answer: "Skúsiť odpovedať"
     questions: "Všetky položené otázky"
-    activities: "Čo je nové v Askalote?"
+    activities: "Prehľad aktivity v systéme"
 
     sign_up: "Vytvoriť si účet"
     sign_in: "Prihlásiť sa"
@@ -26,6 +26,8 @@ sk:
       solved: "Vyriešené otázky"
       favored: "Obľúbené otázky"
 
+    news: "Čo je nové v Askalote?"
+
   footer:
     about: "O projekte"
     authors: "Autori"
@@ -33,6 +35,7 @@ sk:
     contact: "Kontakt"
     documents: "Dokumentácia"
     help: "Pomoc"
+    news: "Novinky"
     repositories: "Repozitár"
 
   body:

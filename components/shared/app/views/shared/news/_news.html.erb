@@ -1,0 +1,20 @@
+<ol class="list-unstyled">
+  <% news.each do |news| %>
+    <li id="news-<%= news.id %>" class="changelog">
+      <h2>
+        <% if news.title? %>
+          <%= news.title %>
+          <br/>
+        <% end %>
+        <small>
+          <%= time_tag news.created_at.to_date, format: :default %>
+        </small>
+      </h2>
+      <% if news.description? %>
+        <div class="changelog-content">
+          <%= render_markdown news.description %>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+</ol>

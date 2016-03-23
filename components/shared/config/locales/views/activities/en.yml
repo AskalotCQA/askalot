@@ -7,8 +7,7 @@ en:
       followees: "Followed"
 
     index:
-      title: "Activity"
-      title: "What's new in Askalot?"
+      title: "Activity feed"
 
     more: "More"
     none: "No activity."

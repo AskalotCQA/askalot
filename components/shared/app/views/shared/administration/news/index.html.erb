@@ -1,0 +1,9 @@
+<%= render layout: 'shared/administration/layout' do %>
+  <%= render 'shared/administration/news/form' %>
+
+  <ol class="administration-changelogs">
+    <% @news.each do |new| %>
+      <%= render 'shared/administration/news/new', new: new %>
+    <% end %>
+  </ol>
+<% end %>

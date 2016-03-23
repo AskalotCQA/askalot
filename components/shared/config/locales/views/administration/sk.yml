@@ -6,6 +6,7 @@ sk:
       assignments: "Roly používateľov"
       categories: "Kategórie"
       changelogs: "Protokoly zmien"
+      news: "Novinky"
       emails: "Hromadný e-mail"
 
     assignment:
@@ -62,6 +63,24 @@ sk:
         action: "Zmazať"
         title: "Pozor!"
         text: "Naozaj chcete zmazať tento protokol zmien?"
+        submit: "Zmazať"
+        cancel: "Zrušiť"
+
+    new:
+      create:
+        action: "Pridať novinku"
+        show: "Zobraziť na domovskej stránke"
+
+      edit:
+        action: "Upraviť"
+        title: "Upraviť novinku"
+        submit: "Uložiť"
+        cancel: "Zrušiť"
+
+      delete:
+        action: "Zmazať"
+        title: "Pozor!"
+        text: "Naozaj chcete zmazať túto novinku?"
         submit: "Zmazať"
         cancel: "Zrušiť"
 

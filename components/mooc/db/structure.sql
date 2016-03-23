@@ -250,18 +250,14 @@ CREATE TABLE categories (
     lft integer,
     rgt integer,
     uuid character varying(255),
-    shared boolean DEFAULT true,
-    askable boolean DEFAULT false,
     depth integer,
-    children_count integer,
     full_tree_name character varying(255),
     full_public_name character varying(255),
-    lti_id character varying(255),
-    direct_questions_count integer DEFAULT 0 NOT NULL,
-    direct_answers_count integer DEFAULT 0 NOT NULL,
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
-    category_questions_count integer DEFAULT 0 NOT NULL,
-    description text
+    shared boolean DEFAULT true,
+    askable boolean DEFAULT false,
+    description text,
+    lti_id character varying(255)
 );
 
 
@@ -892,6 +888,39 @@ CREATE SEQUENCE labels_id_seq
 --
 
 ALTER SEQUENCE labels_id_seq OWNED BY labels.id;
+
+
+--
+-- Name: news; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE news (
+    id integer NOT NULL,
+    title character varying(255),
+    description text,
+    show boolean,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: news_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE news_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: news_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE news_id_seq OWNED BY news.id;
 
 
 --
@@ -1620,6 +1649,13 @@ ALTER TABLE ONLY labels ALTER COLUMN id SET DEFAULT nextval('labels_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY news ALTER COLUMN id SET DEFAULT nextval('news_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
 
 
@@ -1889,6 +1925,14 @@ ALTER TABLE ONLY labelings
 
 ALTER TABLE ONLY labels
     ADD CONSTRAINT labels_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: news_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY news
+    ADD CONSTRAINT news_pkey PRIMARY KEY (id);
 
 
 --
@@ -2185,17 +2229,17 @@ CREATE UNIQUE INDEX index_categories_on_name_and_parent_id ON categories USING b
 
 
 --
+-- Name: index_categories_on_rgt; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_categories_on_rgt ON categories USING btree (rgt);
+
+
+--
 -- Name: index_categories_on_slido_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_categories_on_slido_username ON categories USING btree (slido_username);
-
-
---
--- Name: index_categories_questions_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_categories_questions_on_category_id ON categories_questions USING btree (category_id);
 
 
 --
@@ -2206,10 +2250,10 @@ CREATE INDEX index_categories_questions_on_deletor_id ON categories_questions US
 
 
 --
--- Name: index_categories_questions_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_questions_on_question_id_and_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
-CREATE INDEX index_categories_questions_on_question_id ON categories_questions USING btree (question_id);
+CREATE UNIQUE INDEX index_categories_questions_on_question_id_and_category_id ON categories_questions USING btree (question_id, category_id);
 
 
 --
@@ -3088,6 +3132,13 @@ CREATE INDEX index_watchings_on_deletor_id ON watchings USING btree (deletor_id)
 
 
 --
+-- Name: index_watchings_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_watchings_on_unique_key ON watchings USING btree (watcher_id, watchable_id, watchable_type, context);
+
+
+--
 -- Name: index_watchings_on_watchable_id_and_watchable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3410,6 +3461,10 @@ INSERT INTO schema_migrations (version) VALUES ('20151122110354');
 
 INSERT INTO schema_migrations (version) VALUES ('20151122112444');
 
+INSERT INTO schema_migrations (version) VALUES ('20151130051140');
+
+INSERT INTO schema_migrations (version) VALUES ('20151207221041');
+
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
 
 INSERT INTO schema_migrations (version) VALUES ('20160220170558');
@@ -3426,11 +3481,9 @@ INSERT INTO schema_migrations (version) VALUES ('20160228103010');
 
 INSERT INTO schema_migrations (version) VALUES ('20160229115039');
 
+INSERT INTO schema_migrations (version) VALUES ('20160306150418');
+
 INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 
 INSERT INTO schema_migrations (version) VALUES ('20160307103948');
-
-INSERT INTO schema_migrations (version) VALUES ('20151130051140');
-
-INSERT INTO schema_migrations (version) VALUES ('20151207221041');
 

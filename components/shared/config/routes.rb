@@ -115,6 +115,8 @@ Shared::Engine.routes.draw do
 
       resources :changelogs, only: [:index, :create, :update, :destroy]
 
+      resources :news, only: [:index, :create, :update, :destroy]
+
       resources :categories, except: [:show] do
         post 'settings' => 'categories#update_settings', on: :collection
       end
@@ -124,5 +126,6 @@ Shared::Engine.routes.draw do
     end
 
     resources :changelogs, only: [:index]
+    resources :news, only: [:index]
   end
 end

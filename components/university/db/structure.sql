@@ -890,6 +890,39 @@ ALTER SEQUENCE labels_id_seq OWNED BY labels.id;
 
 
 --
+-- Name: news; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE news (
+    id integer NOT NULL,
+    title character varying(255),
+    description text,
+    show boolean,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: news_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE news_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: news_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE news_id_seq OWNED BY news.id;
+
+
+--
 -- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1615,6 +1648,13 @@ ALTER TABLE ONLY labels ALTER COLUMN id SET DEFAULT nextval('labels_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY news ALTER COLUMN id SET DEFAULT nextval('news_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY notifications ALTER COLUMN id SET DEFAULT nextval('notifications_id_seq'::regclass);
 
 
@@ -1884,6 +1924,14 @@ ALTER TABLE ONLY labelings
 
 ALTER TABLE ONLY labels
     ADD CONSTRAINT labels_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: news_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY news
+    ADD CONSTRAINT news_pkey PRIMARY KEY (id);
 
 
 --
@@ -3420,6 +3468,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160224210833');
 INSERT INTO schema_migrations (version) VALUES ('20160228103010');
 
 INSERT INTO schema_migrations (version) VALUES ('20160229115039');
+
+INSERT INTO schema_migrations (version) VALUES ('20160306150418');
 
 INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 

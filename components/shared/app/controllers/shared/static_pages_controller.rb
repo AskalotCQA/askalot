@@ -10,6 +10,8 @@ class StaticPagesController < ApplicationController
     @favored = Shared::Question.favored.random.limit(count)
 
     @question = Shared::Questions::ToAnswerRecommender.next
+
+    @news = Shared::New.order('news.id DESC').active.limit(count)
   end
 
   def help
