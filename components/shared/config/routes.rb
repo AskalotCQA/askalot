@@ -45,6 +45,7 @@ Shared::Engine.routes.draw do
     get :statistics, to: 'statistics#index'
     get :help,       to: 'static_pages#help'
     get :welcome,    to: 'static_pages#welcome'
+    get :welcome2,    to: 'static_pages#welcome_without_confirmation'
 
     get 'auth/facebook'
     get 'auth/facebook/callback', to: 'users#facebook'

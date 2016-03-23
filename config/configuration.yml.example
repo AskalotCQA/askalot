@@ -1,6 +1,7 @@
 defaults: &defaults
   devise:
     key: TODO
+    require_email: true
 
   facebook:
     application:
