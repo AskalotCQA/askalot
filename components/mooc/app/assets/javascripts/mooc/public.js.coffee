@@ -68,10 +68,16 @@ $(document).ready ->
     .attr('frameborder', '0')
     .appendTo('#askalot-wrapper')
 
-  iFrameResize({checkOrigin: false, inPageLinks: true})
+  iFrameResize({
+    checkOrigin: false,
+    inPageLinks: true,
+    messageCallback: (data) ->
+      switch data.message.type
+        when 'checkForcedLogin'
+          window.history.back() if window.location.href.indexOf('forced_login=true') > -1
+  })
 
   if (!is_global)
-    console.log('sending to parser')
     $.ajax
       type: 'POST'
       url: host + '1/parser'
@@ -81,7 +87,3 @@ $(document).ready ->
         console.dir data
       error: (data) ->
         console.dir data
-
-window.addEventListener 'message', (->
-  window.history.back() if window.location.href.indexOf('forced_login=true') > -1
-), false
