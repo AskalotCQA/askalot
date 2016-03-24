@@ -49,18 +49,26 @@ infoParser = ->
 
 $('nav .course-tabs li:contains(Discussion)').hide()
 
+ignore_hash_change = false
+
+changeIframeSrc = ->
+  $('#iFrameResizer0').attr('src', url_domain(host) + window.location.hash.substring(1)) unless ignore_hash_change
+  ignore_hash_change = false
+
+url_domain = (url) ->
+  matches = url.match(/(^https?\:\/\/([^\/?#]+)(?:[\/?#]|$))/i)
+  matches[1]
+
 $(document).ready ->
-  getURLParameter = (name) ->
-    decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) or [null, ''])[1].replace(/\+/g, '%20')) or null
+  redirect_url = window.location.hash
+  login_url = $('#login-url').text()
 
   a_src = host + courseUuid() + '/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
 
-  redirect_url = getURLParameter('redirect')
   if redirect_url
     redirect_url = redirect_url.replace('/default/', '/' + courseUuid() + '/')
-    a_src += '&amp;redirect=' + redirect_url
+    a_src += '&amp;redirect=' + redirect_url.substring(1)
 
-  login_url = $('#login-url').text()
   a_src += '&amp;login_url=' + login_url if login_url != ''
 
   $("#askalot-wrapper").css("margin", "-32px -40px 0px -40px")
@@ -102,7 +110,13 @@ $(document).ready ->
               'text-align': 'center'
 
             $('nav .course-tabs li:contains(Askalot) a').first().css('position', 'relative').append($notification)
+        when 'reflectUrl'
+          ignore_hash_change = true
+          window.location.hash = data.message.data
   })
+
+  if (is_global)
+    window.addEventListener 'hashchange', changeIframeSrc
 
   if (!is_global)
     $.ajax
