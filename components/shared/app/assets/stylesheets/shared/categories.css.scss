@@ -14,9 +14,8 @@
 
 .category-description {
   color: $gray;
-  padding-bottom: 10px;
-  padding-left: 5px;
-  margin-top: -5px;
+  padding-top: 3px;
+  padding-bottom: 4px;
 }
 
 // collection
@@ -35,8 +34,6 @@
 }
 
 .category-details {
-  margin-bottom: 20px;
-
   color: $text-muted;
 }
 
@@ -52,13 +49,20 @@
     @extend .list-unstyled;
 
     > li {
+      margin-top: 20px;
+      border-top: 1px solid $hr-border;
+
+      &:first-child {
+        border-top: none;
+        margin-top: 0;
+      }
+
       > ul {
         @extend .list-unstyled;
 
         margin-left: 20px;
-        padding-left: 20px;
+        padding-left: 30px;
         border-left: 2px solid $hr-border;
-        border-top: 1px solid $hr-border;
 
         > li {
           > ul {
@@ -77,7 +81,7 @@
     }
   }
 
-  .category-details {
-    margin-bottom: 5px;
+  h4 {
+    margin-bottom: 0;
   }
 }
