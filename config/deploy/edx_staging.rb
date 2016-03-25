@@ -6,4 +6,6 @@ set :user,      'deploy'
 set :rails_env, 'edx_staging'
 set :branch,    'staging'
 
+set :whenever_command, -> { "" }
+
 role :db, domain, primary: true
