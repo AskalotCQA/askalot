@@ -442,7 +442,7 @@ namespace :sample_data do
         )
 
         Shared::Events::Dispatcher.dispatch :mention, user, question, for: mention unless mention.nil?
-        Shared::Events::Dispatcher.dispatch :create, user, question, for: question.parent.watchers + question.tags.map(&:watchers).flatten, anonymous: question.anonymous
+        Shared::Events::Dispatcher.dispatch :create, user, question, for: question.parent_watchers + question.tags.map(&:watchers).flatten, anonymous: question.anonymous
         Shared::Watching.deleted_or_new(watcher: user, watchable: question).mark_as_undeleted!
       end
     end

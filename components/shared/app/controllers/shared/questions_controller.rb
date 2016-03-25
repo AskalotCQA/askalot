@@ -60,7 +60,7 @@ class QuestionsController < ApplicationController
       end
 
       # TODO (zbell) refactor: do not compose watchers here
-      dispatch_event :create, @question, for: @question.parent.watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
+      dispatch_event :create, @question, for: @question.parent_watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
       register_watching_for @question
 
       flash[:notice] = t('question.create.success')

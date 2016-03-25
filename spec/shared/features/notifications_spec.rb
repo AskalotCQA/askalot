@@ -3,7 +3,10 @@ require 'spec_helper'
 describe 'Notifications', type: :feature do
   let(:user)      { create :user }
   let!(:question) { create :question, :with_tags }
-  let!(:category) { create :category }
+  let!(:category_parent_parent) { create :category, parent: Shared::Category.last }
+  let!(:category_parent) { create :category, parent: category_parent_parent }
+  let!(:category) { create :category, askable: true, parent: category_parent }
+
   let(:watcher)   { create :user }
   let(:tag)       { create :tag }
 
@@ -40,6 +43,128 @@ describe 'Notifications', type: :feature do
       login_as watcher
 
       expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::img[@alt='#{user.nick}']")
+    end
+
+    it 'notifies parent category watchers about new question' do
+      category_parent.toggle_watching_by!(watcher)
+
+      visit shared.root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select category.name, from: 'question_category_id'
+
+      fill_in 'question_title', with: 'Lorem ipsum?'
+      fill_in 'question_text',  with: 'Lorem ipsum'
+
+      click_button 'Opýtať'
+
+      expect(notifications.size).to eql(1)
+
+      question = Shared::Question.last
+
+      expect(last_notification.initiator).to eql(user)
+      expect(last_notification.recipient).to eql(watcher)
+      expect(last_notification.action).to    eql(:create)
+      expect(last_notification.resource).to  eql(question)
+
+      click_link 'Odhlásiť', match: :first
+
+      login_as watcher
+
+      expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::img[@alt='#{user.nick}']")
+    end
+
+    it 'notifies parent category watchers about new question 2' do
+      category_parent_parent.toggle_watching_by!(watcher)
+      category_parent.toggle_watching_by!(watcher)
+
+      visit shared.root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select category.name, from: 'question_category_id'
+
+      fill_in 'question_title', with: 'Lorem ipsum?'
+      fill_in 'question_text',  with: 'Lorem ipsum'
+
+      click_button 'Opýtať'
+
+      expect(notifications.size).to eql(1)
+
+      question = Shared::Question.last
+
+      expect(last_notification.initiator).to eql(user)
+      expect(last_notification.recipient).to eql(watcher)
+      expect(last_notification.action).to    eql(:create)
+      expect(last_notification.resource).to  eql(question)
+
+      click_link 'Odhlásiť', match: :first
+
+      login_as watcher
+
+      expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::img[@alt='#{user.nick}']")
+
+      click_link 'Odhlásiť', match: :first
+
+      login_as user
+
+      category_parent_parent.toggle_watching_by!(watcher)
+
+      visit shared.root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select category.name, from: 'question_category_id'
+
+      fill_in 'question_title', with: 'Lorem ipsum2?'
+      fill_in 'question_text',  with: 'Lorem ipsum2'
+
+      click_button 'Opýtať'
+
+      expect(notifications.size).to eql(2)
+
+      question = Shared::Question.last
+
+      expect(last_notification.initiator).to eql(user)
+      expect(last_notification.recipient).to eql(watcher)
+      expect(last_notification.action).to    eql(:create)
+      expect(last_notification.resource).to  eql(question)
+
+      click_link 'Odhlásiť', match: :first
+
+      login_as watcher
+
+      expect(page).to have_xpath("//a[text()='2 neprečítané notifikácie']/../../descendant::img[@alt='#{user.nick}']")
+
+      click_link 'Odhlásiť', match: :first
+
+      login_as user
+
+      category_parent.toggle_watching_by!(watcher)
+
+      visit shared.root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select category.name, from: 'question_category_id'
+
+      fill_in 'question_title', with: 'Lorem ipsum3?'
+      fill_in 'question_text',  with: 'Lorem ipsum3'
+
+      click_button 'Opýtať'
+
+      expect(notifications.size).to eql(2)
+
+      question = Shared::Question.last
+
+      expect(last_notification.resource).not_to eql(question)
+
+      click_link 'Odhlásiť', match: :first
+
+      login_as watcher
+
+      expect(page).to have_xpath("//a[text()='2 neprečítané notifikácie']/../../descendant::img[@alt='#{user.nick}']")
     end
 
     context 'with anonymous question' do
