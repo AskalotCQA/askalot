@@ -42,7 +42,7 @@ class User < ActiveRecord::Base
 
   has_many :profiles, class_name: :'Shared::User::Profile', dependent: :destroy
 
-  has_many :context_users
+  has_many :context_users, class_name: :'::Shared::ContextUser'
   has_many :contexts, through: :context_users, class_name: 'Shared::Category', source: :context
 
   validates :role, presence: true

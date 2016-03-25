@@ -35,7 +35,7 @@ module Mooc
           @unit = Shared::Category.create(name: lti_id, lti_id: lti_id, askable: true) if @unit.nil?
         end
 
-        Shared::ContextUser.find_or_create_by!(user: current_user, context_id: @unit.root.id) unless @unit.parent_id.nil?
+        Shared::ContextUser.find_or_create_by!(user: Shared::User.find(current_user.id), context_id: @unit.root.id) unless @unit.parent_id.nil?
       else
         @unit = Shared::Category.find params[:id]
       end
