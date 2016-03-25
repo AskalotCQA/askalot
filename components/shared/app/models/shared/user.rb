@@ -168,7 +168,7 @@ class User < ActiveRecord::Base
   protected
 
   def password_required?
-    ais_login ? false : true
+    ais_login ? false : !persisted? || !password.nil? || !password_confirmation.nil?
   end
 
   def email_required?

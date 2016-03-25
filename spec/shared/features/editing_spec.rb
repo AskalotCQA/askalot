@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe 'Editing', type: :feature do
   let(:user)            { create :user }
+  let(:user2)           { create :user }
   let(:teacher)         { create :teacher }
   let!(:question)       { create :question, :with_tags, title: 'Elasticsearch prablem' }
   let!(:answer_user)    { create :answer, question: question, author: question.author }
   let!(:answer_teacher) { create :answer, question: question, author: teacher }
+  let!(:answer_user2)   { create :answer, question: question, author: user2 }
   let!(:comment)        { create :comment, commentable: question, author: question.author }
   let(:administrator)   { create :administrator }
 
@@ -101,7 +103,7 @@ describe 'Editing', type: :feature do
 
   context 'when logged as another user' do
     before :each do
-      login_as teacher
+      login_as user2
     end
 
     it 'cant edit' do
@@ -109,7 +111,7 @@ describe 'Editing', type: :feature do
 
       expect(page).not_to have_css("#question-#{question.id}-edit-modal")
       expect(page).not_to have_css("#answer-#{answer_user.id}-edit-modal")
-      expect(page).to have_css("#answer-#{answer_teacher.id}-edit-modal")
+      expect(page).to have_css("#answer-#{answer_user2.id}-edit-modal")
       expect(page).not_to have_css("#comment-#{comment.id}-edit-modal")
     end
   end

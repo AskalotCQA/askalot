@@ -61,7 +61,7 @@ describe 'Search Categories', type: :feature do
 
     expect(page).to     have_content('rails-description')
 
-    click_link 'rails'
+    click_link 'rails', match: :first
 
     expect(page).to     have_content('rails-description')
   end
