@@ -4,7 +4,7 @@
   <div class="col-xs-12 col-md-9" role="main">
     <div class="categories-tree">
       <%= tree_view(categories) do |category| %>
-        <div id="<%= category.id %>">
+        <div id="<%= "#{tab.to_s}-#{category.id}" %>">
           <h4>
             <%= link_to_category category, analytics_attributes(:category, :click, category.name) %>
             <% if category.has_teachers? %>
@@ -40,7 +40,7 @@
         <% categories.each do |category| %>
           <% if category.depth == visible_depth %>
             <li>
-              <%= link_to category.name, "##{category.id}", analytics_attributes(:categories, :scroll, category.id) %>
+              <%= link_to category.name, "##{tab.to_s}-#{category.id}", analytics_attributes(:categories, :scroll, category.id) %>
             </li>
           <% end %>
         <% end %>
