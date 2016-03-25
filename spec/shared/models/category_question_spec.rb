@@ -54,7 +54,7 @@ describe Shared::CategoryQuestion, type: :model do
         expect(category.category_questions.count).to eql(1)
         expect(category_shared.category_questions.count).to eql(1)
         expect(category_unshared.category_questions.count).to eql(0)
-        expect(question.category_questions.count).to eql(4)
+        expect(question.category_questions.count).to eql(6)
       end
     end
 
@@ -88,7 +88,7 @@ describe Shared::CategoryQuestion, type: :model do
         expect(category.category_questions.count).to eql(1)
         expect(category_shared.category_questions.count).to eql(1)
         expect(category_unshared.category_questions.count).to eql(1)
-        expect(question.category_questions.count).to eql(5)
+        expect(question.category_questions.count).to eql(9)
       end
     end
   end

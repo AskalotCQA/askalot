@@ -2242,13 +2242,6 @@ CREATE INDEX index_categories_questions_on_deletor_id ON categories_questions US
 
 
 --
--- Name: index_categories_questions_on_question_id_and_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_categories_questions_on_question_id_and_category_id ON categories_questions USING btree (question_id, category_id);
-
-
---
 -- Name: index_changelogs_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2526,6 +2519,13 @@ CREATE INDEX index_followings_on_follower_id ON followings USING btree (follower
 --
 
 CREATE UNIQUE INDEX index_followings_on_unique_key ON followings USING btree (follower_id, followee_id);
+
+
+--
+-- Name: index_for_unique_category_questions; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_for_unique_category_questions ON categories_questions USING btree (question_id, category_id, shared_through_category_id);
 
 
 --
@@ -3476,4 +3476,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160306194117');
 INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 
 INSERT INTO schema_migrations (version) VALUES ('20160307103948');
+
+INSERT INTO schema_migrations (version) VALUES ('20160313091803');
 

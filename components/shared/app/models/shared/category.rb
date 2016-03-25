@@ -29,9 +29,9 @@ class Category < ActiveRecord::Base
   before_save  :update_changed
   before_save  :update_uuid
   after_create :save_parent_tags
+  after_save   :update_categories_questions
   after_save   :update_public_tags
   after_save   :refresh_names
-  after_save   :update_categories_questions
 
   scope :with_slido, -> { where.not(slido_username: nil) }
   scope :with_questions, lambda { joins(:related_questions).uniq }
@@ -177,6 +177,7 @@ class Category < ActiveRecord::Base
     self.public_tags += ancestors.map { |ancestor| ancestor.tags }.flatten
 
     self.save!
+    true
   end
 
   def update_public_tags
@@ -195,7 +196,7 @@ class Category < ActiveRecord::Base
 
   def update_categories_questions
     if @what_changed.include? 'parent_id'
-      reload_categories_questions
+      self.reload_categories_questions
     elsif @what_changed.include? 'shared'
       if self.shared
         self.all_versions.each do |shared_category|
@@ -214,7 +215,7 @@ class Category < ActiveRecord::Base
   end
 
   def reload_categories_questions
-    self_and_descendants.each do |category|
+    self.self_and_descendants.each do |category|
       category.questions.each do |question|
         question.register_question
       end
