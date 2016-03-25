@@ -11,9 +11,9 @@ class Role < ActiveRecord::Base
   def self.teacher_roles
     # TODO (ladislav.gallay) Move to mooc model
     if Rails.module.mooc?
-      Role::where(name: [:teacher, :teacher_assistant])
+      @@teacher_roles ||= Role::where(name: [:teacher, :teacher_assistant])
     else
-      Role::where(name: [:teacher])
+      @@teacher_roles ||= Role::where(name: [:teacher])
     end
   end
 
