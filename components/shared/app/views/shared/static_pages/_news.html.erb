@@ -3,14 +3,14 @@
     <% news.each do |news| %>
       <li>
         <h4>
-          <%= link_to t(news.title), news_index_path(tab: :'news')+"#news-#{news.id}" %>
+          <%= link_to news.title, news_index_path(tab: :'news')+"#news-#{news.id}" %>
         </h4>
         <div class="news-date">
           <small>
             <%= time_tag news.created_at.to_date, format: :default %>
           </small>
         </div>
-        <%= new_text_preview news, length: 160 %>
+        <%= render_markdown news.description %>
       </li>
     <% end %>
   </ol>
