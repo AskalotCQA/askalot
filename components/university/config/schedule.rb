@@ -23,14 +23,6 @@ every 5.minutes do
   rake 'slido:questions'
 end
 
-every 1.day do
-  rake 'backup:database'
-end
-
-every 1.day, at: '4:32am' do
-  rake 'reputation:adjust'
-end
-
 every 6.months do
   rake 'users:alumni'
 end

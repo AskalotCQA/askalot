@@ -9,9 +9,9 @@ class CommunityMailer < ActionMailer::Base
   helper Shared::CategoriesHelper
   helper Shared::CommentsHelper
   helper Shared::DeletablesHelper
-  helper University::DocumentsHelper
+  helper University::DocumentsHelper if Rails.module.university?
   helper Shared::FavoritesHelper
-  helper University::GroupsHelper
+  helper University::GroupsHelper if Rails.module.university?
   helper Shared::LabelingsHelper
   helper Shared::NotificationsHelper
   helper Shared::QuestionsHelper
