@@ -31,7 +31,7 @@ describe 'Add News', type: :feature do
       visit shared.root_path
 
       within '.news' do
-        expect(page).to have_content('Test News')
+        expect(page).to have_content('Test news')
         expect(page).to have_content(date)
         expect(page).to have_content('News')
       end
