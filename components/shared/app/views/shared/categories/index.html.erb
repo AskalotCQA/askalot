@@ -8,6 +8,6 @@
 </ul>
 
 <div class="tab-content">
-  <%= render_tab_content 'categories', :all, locals: { categories: @context_categories, questions_counts: @questions_counts, answers_counts: @answers_counts, category_depths: @category_depths, tab: :all } %>
-  <%= render_tab_content 'categories', :active, locals: { categories: @context_categories, questions_counts: @questions_counts, answers_counts: @answers_counts, category_depths: @category_depths, tab: :active } %>
+  <%= render_tab_content 'categories', :all, locals: { categories: @context_categories, questions_counts: @questions_counts, answers_counts: @answers_counts, tab: :all } %>
+  <%= render_tab_content 'categories', :active, locals: { categories: @context_categories, questions_counts: @questions_counts, answers_counts: @answers_counts, tab: :active } %>
 </div>
