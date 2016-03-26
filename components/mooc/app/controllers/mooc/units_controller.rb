@@ -19,6 +19,7 @@ module Mooc
     end
 
     def show
+      params[:page_url] = params[:custom_page_url] || params[:page_url]
       redirect_to mooc.units_error_path(exception: @exception) and return unless signed_in? || login
 
       return after_login_redirect if params[:custom_login_redirect]

@@ -54,6 +54,7 @@ $(document).ready ->
 
   a_src = host + courseUuid() + '/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
   redirect_url = getURLParameter('redirect')
+  redirect_url = redirect_url.replace('/1/', '/' + courseUuid() + '/')
   a_src += if redirect_url then '&amp;redirect=' + redirect_url else null
   login_url = $('#login-url').text()
   a_src += '&amp;login_url=' + login_url if login_url != ''
