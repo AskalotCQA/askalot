@@ -1,5 +1,9 @@
 Shared::Engine.routes.draw do
-  scope '/' do
+  scope = Rails.module.mooc? ? '/(:context)/' : '/'
+
+  default_url_options :context => Shared::Context::Manager.current_context if Rails.module.mooc?
+
+  scope scope do
     concern :closeable do
       post :close, on: :member
     end
@@ -46,13 +50,6 @@ Shared::Engine.routes.draw do
     get :help,       to: 'static_pages#help'
     get :welcome,    to: 'static_pages#welcome'
     get :welcome2,    to: 'static_pages#welcome_without_confirmation'
-
-    get 'auth/facebook'
-    get 'auth/facebook/callback', to: 'users#facebook'
-    get 'auth/failure',           to: redirect('/')
-
-    post 'facebook',              to: 'facebook#index'
-    post 'facebook/notification', to: 'facebook#notification'
 
     resources :categories, only: [:index] do
       concerns :searchable
@@ -129,4 +126,11 @@ Shared::Engine.routes.draw do
     resources :changelogs, only: [:index]
     resources :news, only: [:index]
   end
+
+  get 'auth/facebook'
+  get 'auth/facebook/callback', to: 'users#facebook'
+  get 'auth/failure',           to: redirect('/')
+
+  post 'facebook',              to: 'facebook#index'
+  post 'facebook/notification', to: 'facebook#notification'
 end
