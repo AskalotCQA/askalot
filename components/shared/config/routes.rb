@@ -1,8 +1,6 @@
 Shared::Engine.routes.draw do
   scope = Rails.module.mooc? ? '/(:context)/' : '/'
 
-  default_url_options :context => Shared::Context::Manager.current_context if Rails.module.mooc?
-
   scope scope do
     concern :closeable do
       post :close, on: :member

@@ -1,4 +1,5 @@
 Mooc::Engine.routes.draw do
+  scope '/(:context)/' do
   post '/units', to: 'units#show'
   get '/units/error', to: 'units#error'
 
@@ -17,5 +18,6 @@ Mooc::Engine.routes.draw do
     resources :categories, except: [:show, :destroy] do
       post 'settings' => 'categories#update_settings', on: :collection
     end
+  end
   end
 end
