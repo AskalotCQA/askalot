@@ -50,8 +50,8 @@ module Mooc
     end
 
     def update_settings
-      Shared::Category.in_contexts(contexts_to_administrate).update_all shared: false
-      Shared::Category.in_contexts(contexts_to_administrate).where(id: params[:shared]).update_all shared: true
+      Shared::Category.in_contexts(contexts_to_administrate).update_all askable: false
+      Shared::Category.in_contexts(contexts_to_administrate).where(id: params[:askable]).update_all askable: true
 
       render json: { success: true }
     end
@@ -65,7 +65,7 @@ module Mooc
     end
 
     def category_params
-      params.require(:category).permit(:name, :tags, :shared, :teacher_assistant_ids => [])
+      params.require(:category).permit(:name, :tags, :askable, :teacher_assistant_ids => [])
     end
 
     def check_parent
