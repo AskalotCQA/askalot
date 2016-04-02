@@ -19,3 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
+every 1.day, at: '5:32am' do
+  runner 'Mooc::Mailers::UserMailerService.deliver_notifications!'
+end

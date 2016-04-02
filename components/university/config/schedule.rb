@@ -19,6 +19,10 @@
 
 # Learn more: http://github.com/javan/whenever
 
+every 1.day, at: '5:32am' do
+  runner 'University::Mailers::UserMailerService.deliver_notifications!'
+end
+
 every 5.minutes do
   rake 'slido:questions'
 end

@@ -33,7 +33,8 @@ if ENV['RAILS_ENV'].split('_', 2)[0] == 'fiit'
   end
 
   every 1.day, at: '5:32am' do
-    runner 'Shared::Mailers::UserMailerService.deliver_notifications!'
+    runner 'University::Mailers::UserMailerService.deliver_notifications!' if Rails.module.university?
+    runner 'Mooc::Mailers::UserMailerService.deliver_notifications!'       if Rails.module.mooc?
   end
 
   every 10.minutes do

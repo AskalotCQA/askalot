@@ -19,10 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 1.day, at: '5:32am' do
-  runner 'Shared::Mailers::UserMailerService.deliver_notifications!'
-end
-
 every 10.minutes do
   runner 'Shared::Mailers::CommunityMailerService.deliver_all_emails!'
 end

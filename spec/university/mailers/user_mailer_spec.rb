@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Shared::UserMailer, type: :mailer do
+describe University::UserMailer, type: :mailer do
   describe '.notifications' do
     it 'sends notifications summary for day' do
       user = create :user
@@ -10,7 +10,7 @@ describe Shared::UserMailer, type: :mailer do
 
         create :notification, recipient: user, action: :create, resource: create(:question)
 
-        mail = Shared::UserMailer.notifications(user, from: 1.day.ago)
+        mail = University::UserMailer.notifications(user, from: 1.day.ago)
 
         expect(mail.subject).to eql('[Askalot] Nové notifikácie')
         expect(mail.body.encoded).to include('Pridanie otázky')
@@ -23,7 +23,7 @@ describe Shared::UserMailer, type: :mailer do
       it 'does not deliver email' do
         user = create :user
 
-        mail = Shared::UserMailer.notifications(user, from: 1.day.ago)
+        mail = University::UserMailer.notifications(user, from: 1.day.ago)
 
         expect(mail.subject).to be_nil
         expect(mail.class).to be(ActionMailer::Base::NullMail)

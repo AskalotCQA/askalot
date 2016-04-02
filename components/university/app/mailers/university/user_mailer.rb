@@ -1,4 +1,4 @@
-module Shared
+module University
 class UserMailer < ActionMailer::Base
   default from: ::Shared::Configuration.mailer.alias, css: 'shared/mailers/layout'
 
@@ -9,10 +9,10 @@ class UserMailer < ActionMailer::Base
   helper Shared::CategoriesHelper
   helper Shared::CommentsHelper
   helper Shared::DeletablesHelper
-  helper University::DocumentsHelper if Rails.module.university?
+  helper University::DocumentsHelper
   helper Shared::EvaluationsHelper
   helper Shared::FavoritesHelper
-  helper University::GroupsHelper if Rails.module.university?
+  helper University::GroupsHelper
   helper Shared::LabelingsHelper
   helper Shared::NotificationsHelper
   helper Shared::QuestionsHelper
@@ -23,17 +23,14 @@ class UserMailer < ActionMailer::Base
   helper Shared::VotesHelper
   helper Shared::WatchingsHelper
 
-  layout 'shared/mailer'
+  layout 'university/mailer'
 
   def notifications(user, from:)
     @from = from
     @user = user
-    @contexts = @user.contexts
-    @contexts_by_id = Hash[@contexts.map{|c| [c.id, c]}]
-    @notifications_in_contexts = @contexts.map{ |context| @user.notifications.in_context(context.id).where('created_at >= ?', @from) }
-    @notifications_in_contexts = @notifications_in_contexts.select { |n| n.count > 0 } unless @notifications_in_contexts.nil?
+    @notifications = @user.notifications.where('created_at >= ?', @from)
 
-    return if @notifications_in_contexts.empty?
+    return if @notifications.empty?
 
     mail to: @user.email, subject: t('user_mailer.subject'), content_type: 'text/html'
   end

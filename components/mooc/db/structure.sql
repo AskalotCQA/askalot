@@ -54,8 +54,8 @@ CREATE TABLE activities (
     resource_id integer NOT NULL,
     resource_type character varying(255) NOT NULL,
     action character varying(255) NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     created_on date NOT NULL,
     updated_on date NOT NULL,
     anonymous boolean DEFAULT false NOT NULL,
@@ -68,7 +68,7 @@ CREATE TABLE activities (
 --
 
 CREATE SEQUENCE activities_id_seq
-    START WITH 142
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -93,8 +93,8 @@ CREATE TABLE answer_profiles (
     value double precision,
     probability double precision,
     source character varying(255),
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -103,7 +103,7 @@ CREATE TABLE answer_profiles (
 --
 
 CREATE SEQUENCE answer_profiles_id_seq
-    START WITH 8
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -126,11 +126,11 @@ CREATE TABLE answer_revisions (
     answer_id integer NOT NULL,
     editor_id integer NOT NULL,
     text text NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp(6) without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -162,20 +162,20 @@ CREATE TABLE answers (
     author_id integer NOT NULL,
     question_id integer NOT NULL,
     text text NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
+    stack_exchange_uuid integer,
     comments_count integer DEFAULT 0 NOT NULL,
     votes_count integer DEFAULT 0 NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
-    edited_at timestamp(6) without time zone,
+    edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp(6) without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    stack_exchange_uuid integer
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -184,7 +184,7 @@ CREATE TABLE answers (
 --
 
 CREATE SEQUENCE answers_id_seq
-    START WITH 8
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -207,8 +207,8 @@ CREATE TABLE assignments (
     user_id integer NOT NULL,
     category_id integer NOT NULL,
     role_id integer NOT NULL,
-    created_at timestamp(6) without time zone,
-    updated_at timestamp(6) without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
     admin_visible boolean DEFAULT true,
     parent integer
 );
@@ -240,8 +240,8 @@ ALTER SEQUENCE assignments_id_seq OWNED BY assignments.id;
 CREATE TABLE categories (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     tags character varying(255)[] DEFAULT '{}'::character varying[],
     questions_count integer DEFAULT 0 NOT NULL,
     slido_username character varying(255),
@@ -250,13 +250,14 @@ CREATE TABLE categories (
     lft integer,
     rgt integer,
     uuid character varying(255),
-    shared boolean DEFAULT true,
-    askable boolean DEFAULT false,
+    depth integer,
+    full_tree_name character varying(255),
+    full_public_name character varying(255),
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     shared boolean DEFAULT true,
     askable boolean DEFAULT false,
-    description text,
-    lti_id character varying(255)
+    lti_id character varying(255),
+    description text
 );
 
 
@@ -265,7 +266,7 @@ CREATE TABLE categories (
 --
 
 CREATE SEQUENCE categories_id_seq
-    START WITH 18
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -323,8 +324,8 @@ ALTER SEQUENCE categories_questions_id_seq OWNED BY categories_questions.id;
 CREATE TABLE changelogs (
     id integer NOT NULL,
     text text,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     title character varying(255),
     version character varying(255) NOT NULL
 );
@@ -358,11 +359,11 @@ CREATE TABLE comment_revisions (
     comment_id integer NOT NULL,
     editor_id integer NOT NULL,
     text text NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp(6) without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -395,15 +396,15 @@ CREATE TABLE comments (
     commentable_id integer NOT NULL,
     commentable_type character varying(255) NOT NULL,
     text text NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    stack_exchange_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
-    edited_at timestamp(6) without time zone,
+    edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp(6) without time zone,
     deletor_id integer,
-    edited boolean DEFAULT false NOT NULL,
-    stack_exchange_uuid integer
+    deleted_at timestamp without time zone,
+    edited boolean DEFAULT false NOT NULL
 );
 
 
@@ -412,7 +413,7 @@ CREATE TABLE comments (
 --
 
 CREATE SEQUENCE comments_id_seq
-    START WITH 5
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -468,8 +469,8 @@ CREATE TABLE document_revisions (
     editor_id integer NOT NULL,
     title character varying(255) NOT NULL,
     text text NOT NULL,
-    created_at timestamp(6) without time zone,
-    updated_at timestamp(6) without time zone
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -504,12 +505,12 @@ CREATE TABLE documents (
     text text NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     deletor_id integer,
-    deleted_at timestamp(6) without time zone,
+    deleted_at timestamp without time zone,
     questions_count integer DEFAULT 0 NOT NULL,
-    created_at timestamp(6) without time zone,
-    updated_at timestamp(6) without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    edited_at timestamp(6) without time zone,
+    edited_at timestamp without time zone,
     editor_id integer,
     anonymous boolean DEFAULT false NOT NULL
 );
@@ -545,8 +546,8 @@ CREATE TABLE emails (
     body text,
     status boolean,
     send_html_email boolean,
-    created_at timestamp(6) without time zone,
-    updated_at timestamp(6) without time zone
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -579,8 +580,8 @@ CREATE TABLE evaluation_revisions (
     editor_id integer NOT NULL,
     text text,
     value integer NOT NULL,
-    created_at timestamp(6) without time zone,
-    updated_at timestamp(6) without time zone
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -614,13 +615,13 @@ CREATE TABLE evaluations (
     evaluable_type character varying(255) NOT NULL,
     text text,
     value integer NOT NULL,
-    created_at timestamp(6) without time zone,
-    updated_at timestamp(6) without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp(6) without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    edited_at timestamp(6) without time zone,
+    edited_at timestamp without time zone,
     editor_id integer
 );
 
@@ -651,7 +652,7 @@ ALTER SEQUENCE evaluations_id_seq OWNED BY evaluations.id;
 CREATE TABLE events (
     id integer NOT NULL,
     data json NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL
+    created_at timestamp without time zone NOT NULL
 );
 
 
@@ -660,7 +661,7 @@ CREATE TABLE events (
 --
 
 CREATE SEQUENCE events_id_seq
-    START WITH 242
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -682,11 +683,11 @@ CREATE TABLE favorites (
     id integer NOT NULL,
     favorer_id integer NOT NULL,
     question_id integer NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp(6) without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -696,7 +697,7 @@ CREATE TABLE favorites (
 --
 
 CREATE SEQUENCE favorites_id_seq
-    START WITH 9
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -718,11 +719,11 @@ CREATE TABLE followings (
     id integer NOT NULL,
     follower_id integer NOT NULL,
     followee_id integer NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     deletor_id integer,
-    deleted_at timestamp(6) without time zone
+    deleted_at timestamp without time zone
 );
 
 
@@ -731,7 +732,7 @@ CREATE TABLE followings (
 --
 
 CREATE SEQUENCE followings_id_seq
-    START WITH 11
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -756,8 +757,8 @@ CREATE TABLE group_revisions (
     title character varying(255) NOT NULL,
     description text,
     visibility character varying(255) DEFAULT 'public'::character varying NOT NULL,
-    created_at timestamp(6) without time zone,
-    updated_at timestamp(6) without time zone
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -792,12 +793,12 @@ CREATE TABLE groups (
     visibility character varying(255) DEFAULT 'public'::character varying NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     deletor_id integer,
-    deleted_at timestamp(6) without time zone,
+    deleted_at timestamp without time zone,
     documents_count integer DEFAULT 0 NOT NULL,
-    created_at timestamp(6) without time zone,
-    updated_at timestamp(6) without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    edited_at timestamp(6) without time zone,
+    edited_at timestamp without time zone,
     editor_id integer
 );
 
@@ -830,11 +831,11 @@ CREATE TABLE labelings (
     author_id integer NOT NULL,
     answer_id integer NOT NULL,
     label_id integer NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp(6) without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -844,7 +845,7 @@ CREATE TABLE labelings (
 --
 
 CREATE SEQUENCE labelings_id_seq
-    START WITH 5
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -865,8 +866,8 @@ ALTER SEQUENCE labelings_id_seq OWNED BY labelings.id;
 CREATE TABLE labels (
     id integer NOT NULL,
     value character varying(255) NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -875,7 +876,7 @@ CREATE TABLE labels (
 --
 
 CREATE SEQUENCE labels_id_seq
-    START WITH 2
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -934,9 +935,9 @@ CREATE TABLE notifications (
     resource_type character varying(255) NOT NULL,
     action character varying(255) NOT NULL,
     unread boolean DEFAULT true NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
-    read_at timestamp(6) without time zone,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    read_at timestamp without time zone,
     anonymous boolean DEFAULT false NOT NULL,
     context integer
 );
@@ -947,7 +948,7 @@ CREATE TABLE notifications (
 --
 
 CREATE SEQUENCE notifications_id_seq
-    START WITH 285
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -972,8 +973,8 @@ CREATE TABLE question_profiles (
     value double precision,
     probability double precision,
     source character varying(255),
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -982,7 +983,7 @@ CREATE TABLE question_profiles (
 --
 
 CREATE SEQUENCE question_profiles_id_seq
-    START WITH 7
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -1008,11 +1009,11 @@ CREATE TABLE question_revisions (
     tags character varying(255)[] NOT NULL,
     title character varying(255) NOT NULL,
     text text NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp(6) without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     document_id integer
 );
 
@@ -1046,10 +1047,11 @@ CREATE TABLE questions (
     category_id integer,
     title character varying(255) NOT NULL,
     text text NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
     anonymous boolean DEFAULT false NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -1058,21 +1060,20 @@ CREATE TABLE questions (
     slido_question_uuid integer,
     slido_event_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
+    touched_at timestamp without time zone NOT NULL,
     votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
-    touched_at timestamp(6) without time zone NOT NULL,
-    edited_at timestamp(6) without time zone,
+    edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp(6) without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    document_id integer,
-    stack_exchange_uuid integer,
     stack_exchange_duplicate boolean,
     stack_exchange_questions_uuids integer[],
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    document_id integer,
     closed boolean DEFAULT false NOT NULL,
     closer_id integer,
-    closed_at timestamp(6) without time zone
+    closed_at timestamp without time zone
 );
 
 
@@ -1081,7 +1082,7 @@ CREATE TABLE questions (
 --
 
 CREATE SEQUENCE questions_id_seq
-    START WITH 9
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -1102,8 +1103,8 @@ ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
 CREATE TABLE roles (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
-    created_at timestamp(6) without time zone,
-    updated_at timestamp(6) without time zone
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
 );
 
 
@@ -1112,7 +1113,7 @@ CREATE TABLE roles (
 --
 
 CREATE SEQUENCE roles_id_seq
-    START WITH 3
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -1146,10 +1147,10 @@ CREATE TABLE slido_events (
     identifier character varying(255) NOT NULL,
     name character varying(255) NOT NULL,
     url character varying(255) NOT NULL,
-    started_at timestamp(6) without time zone NOT NULL,
-    ended_at timestamp(6) without time zone NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    started_at timestamp without time zone NOT NULL,
+    ended_at timestamp without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -1180,11 +1181,11 @@ CREATE TABLE taggings (
     id integer NOT NULL,
     tag_id integer NOT NULL,
     question_id integer NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp(6) without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     author_id integer NOT NULL
 );
 
@@ -1194,7 +1195,7 @@ CREATE TABLE taggings (
 --
 
 CREATE SEQUENCE taggings_id_seq
-    START WITH 26
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -1215,8 +1216,8 @@ ALTER SEQUENCE taggings_id_seq OWNED BY taggings.id;
 CREATE TABLE tags (
     id integer NOT NULL,
     name character varying(255) NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     stack_exchange_uuid integer,
     max_time numeric(20,6),
     min_votes_difference integer,
@@ -1229,7 +1230,7 @@ CREATE TABLE tags (
 --
 
 CREATE SEQUENCE tags_id_seq
-    START WITH 18
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -1256,8 +1257,8 @@ CREATE TABLE user_profiles (
     value double precision,
     probability double precision,
     source character varying(255),
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
 );
 
 
@@ -1266,7 +1267,7 @@ CREATE TABLE user_profiles (
 --
 
 CREATE SEQUENCE user_profiles_id_seq
-    START WITH 15
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -1301,22 +1302,22 @@ CREATE TABLE users (
     twitter character varying(255),
     linkedin character varying(255),
     confirmation_token character varying(255),
-    confirmed_at timestamp(6) without time zone,
-    confirmation_sent_at timestamp(6) without time zone,
+    confirmed_at timestamp without time zone,
+    confirmation_sent_at timestamp without time zone,
     unconfirmed_email character varying(255),
     failed_attempts integer DEFAULT 0 NOT NULL,
     unlock_token character varying(255),
-    locked_at timestamp(6) without time zone,
+    locked_at timestamp without time zone,
     reset_password_token character varying(255),
-    reset_password_sent_at timestamp(6) without time zone,
-    remember_created_at timestamp(6) without time zone,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
     sign_in_count integer DEFAULT 0 NOT NULL,
-    current_sign_in_at timestamp(6) without time zone,
+    current_sign_in_at timestamp without time zone,
     current_sign_in_ip character varying(255),
-    last_sign_in_at timestamp(6) without time zone,
+    last_sign_in_at timestamp without time zone,
     last_sign_in_ip character varying(255),
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     gravatar_email character varying(255),
     show_name boolean DEFAULT true NOT NULL,
     show_email boolean DEFAULT true NOT NULL,
@@ -1331,6 +1332,7 @@ CREATE TABLE users (
     tumblr character varying(255),
     youtube character varying(255),
     role character varying(255) DEFAULT 'student'::character varying NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -1343,12 +1345,11 @@ CREATE TABLE users (
     evaluations_count integer DEFAULT 0 NOT NULL,
     omniauth_provider character varying(255),
     omniauth_token text,
-    omniauth_token_expires_at timestamp(6) without time zone,
+    omniauth_token_expires_at timestamp without time zone,
     facebook_uid bigint,
     facebook_friends text,
     facebook_likes text,
     documents_count integer DEFAULT 0 NOT NULL,
-    stack_exchange_uuid integer,
     send_email_notifications boolean DEFAULT true NOT NULL,
     read_notifications_thread boolean DEFAULT true NOT NULL,
     alumni boolean DEFAULT false NOT NULL
@@ -1360,7 +1361,7 @@ CREATE TABLE users (
 --
 
 CREATE SEQUENCE users_id_seq
-    START WITH 15
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -1382,10 +1383,10 @@ CREATE TABLE views (
     id integer NOT NULL,
     question_id integer NOT NULL,
     viewer_id integer NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp(6) without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -1394,7 +1395,7 @@ CREATE TABLE views (
 --
 
 CREATE SEQUENCE views_id_seq
-    START WITH 56
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -1418,11 +1419,11 @@ CREATE TABLE votes (
     votable_id integer NOT NULL,
     votable_type character varying(255) NOT NULL,
     positive boolean DEFAULT true NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp(6) without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -1432,7 +1433,7 @@ CREATE TABLE votes (
 --
 
 CREATE SEQUENCE votes_id_seq
-    START WITH 24
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -1455,11 +1456,11 @@ CREATE TABLE watchings (
     watcher_id integer NOT NULL,
     watchable_id integer NOT NULL,
     watchable_type character varying(255) NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     deletor_id integer,
-    deleted_at timestamp(6) without time zone,
+    deleted_at timestamp without time zone,
     context integer
 );
 
@@ -1469,7 +1470,7 @@ CREATE TABLE watchings (
 --
 
 CREATE SEQUENCE watchings_id_seq
-    START WITH 37
+    START WITH 1
     INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
@@ -1879,11 +1880,11 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: favorites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: favourites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
 --
 
 ALTER TABLE ONLY favorites
-    ADD CONSTRAINT favorites_pkey PRIMARY KEY (id);
+    ADD CONSTRAINT favourites_pkey PRIMARY KEY (id);
 
 
 --
