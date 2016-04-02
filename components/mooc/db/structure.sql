@@ -891,6 +891,38 @@ ALTER SEQUENCE labels_id_seq OWNED BY labels.id;
 
 
 --
+-- Name: mooc_category_contents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE mooc_category_contents (
+    id integer NOT NULL,
+    category_id integer,
+    content text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: mooc_category_contents_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mooc_category_contents_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mooc_category_contents_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mooc_category_contents_id_seq OWNED BY mooc_category_contents.id;
+
+
+--
 -- Name: news; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1649,6 +1681,13 @@ ALTER TABLE ONLY labels ALTER COLUMN id SET DEFAULT nextval('labels_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY mooc_category_contents ALTER COLUMN id SET DEFAULT nextval('mooc_category_contents_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY news ALTER COLUMN id SET DEFAULT nextval('news_id_seq'::regclass);
 
 
@@ -1925,6 +1964,14 @@ ALTER TABLE ONLY labelings
 
 ALTER TABLE ONLY labels
     ADD CONSTRAINT labels_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: mooc_category_contents_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY mooc_category_contents
+    ADD CONSTRAINT mooc_category_contents_pkey PRIMARY KEY (id);
 
 
 --
@@ -2632,6 +2679,13 @@ CREATE UNIQUE INDEX index_labelings_on_unique_key ON labelings USING btree (answ
 --
 
 CREATE UNIQUE INDEX index_labels_on_value ON labels USING btree (value);
+
+
+--
+-- Name: index_mooc_category_contents_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_mooc_category_contents_on_category_id ON mooc_category_contents USING btree (category_id);
 
 
 --
@@ -3490,4 +3544,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 INSERT INTO schema_migrations (version) VALUES ('20160307103948');
 
 INSERT INTO schema_migrations (version) VALUES ('20160313091803');
+
+INSERT INTO schema_migrations (version) VALUES ('20160402191527');
 
