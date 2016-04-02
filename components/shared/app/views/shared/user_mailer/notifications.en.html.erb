@@ -2,19 +2,27 @@
 
 <h4 class="title">Summary of your notifications from <%= tooltip_time_tag @from %></h4>
 
-<ol class="notifications">
-  <% @notifications.each do |notification| %>
-    <li>
-      <%= notification_content notification %>
+<ul class="notifications">
+  <% @notifications_in_contexts.each_with_index do |notifications, i| %>
 
-      <span class="text-muted">&middot;</span>
+      <h3><%= @contexts_by_id[notifications.first.context.to_s].name %></h3>
 
-      <%= link_to_user notification.initiator_or_anonymous %>
-      <span class="text-muted">&middot;</span>
-      <%= tooltip_time_tag notification.created_at, class: 'text-muted', format: :normal, placement: :bottom %>
-    </li>
+      <ol class="notifications">
+        <% notifications.each do |notification| %>
+            <li>
+              <%= notification_content notification %>
+
+              <span class="text-muted">&middot;</span>
+
+              <%= link_to_user notification.initiator_or_anonymous %>
+              <span class="text-muted">&middot;</span>
+              <%= tooltip_time_tag notification.created_at, class: 'text-muted', format: :normal, placement: :bottom %>
+            </li>
+        <% end %>
+      </ol>
+
   <% end %>
-</ol>
+</ul>
 
 <p>
   <%= link_to "Show unread notifications", shared.notifications_path(tab: :unread) %>

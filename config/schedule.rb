@@ -33,11 +33,11 @@ if ENV['RAILS_ENV'].split('_', 2)[0] == 'fiit'
   end
 
   every 1.day, at: '5:32am' do
-    runner 'University::Mailers::UserMailerService.deliver_notifications!'
+    runner 'Shared::Mailers::UserMailerService.deliver_notifications!'
   end
 
   every 10.minutes do
-    runner 'University::Mailers::CommunityMailerService.deliver_all_emails!'
+    runner 'Shared::Mailers::CommunityMailerService.deliver_all_emails!'
   end
 
   every 6.months do
