@@ -29,9 +29,8 @@ module Mooc
         end
 
         category_content = Mooc::CategoryContent.find_by_category_id(unit.id)
-        if category_content.nil?
-          Mooc::CategoryContent.create(category: unit, content: content)
-        end
+
+        Mooc::CategoryContent.create(category: unit, content: content) if category_content.nil?
       end
 
       render json: {
