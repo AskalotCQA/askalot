@@ -33,8 +33,7 @@ if ENV['RAILS_ENV'].split('_', 2)[0] == 'fiit'
   end
 
   every 1.day, at: '5:32am' do
-    runner 'University::Mailers::UserMailerService.deliver_notifications!' if Rails.module.university?
-    runner 'Mooc::Mailers::UserMailerService.deliver_notifications!'       if Rails.module.mooc?
+    runner 'University::Mailers::UserMailerService.deliver_notifications!'
   end
 
   every 10.minutes do
@@ -43,5 +42,11 @@ if ENV['RAILS_ENV'].split('_', 2)[0] == 'fiit'
 
   every 6.months do
     rake 'users:alumni'
+  end
+end
+
+if ENV['RAILS_ENV'].split('_', 2)[0] == 'edx'
+  every 1.day, at: '5:32am' do
+    runner 'Mooc::Mailers::UserMailerService.deliver_notifications!'
   end
 end
