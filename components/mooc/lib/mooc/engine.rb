@@ -2,6 +2,8 @@ module Mooc
   class Engine < ::Rails::Engine
     isolate_namespace Mooc
 
+    config.i18n.load_path += Dir[config.root.join('config', 'locales', '**', '*.{rb,yml}').to_s]
+
     config.to_prepare do
       helpers = Shared.constants.select { |c| c.to_s.ends_with? 'Helper' }
 
