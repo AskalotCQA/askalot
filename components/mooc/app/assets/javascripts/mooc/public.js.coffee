@@ -75,6 +75,21 @@ $(document).ready ->
       switch data.message.type
         when 'checkForcedLogin'
           window.history.back() if window.location.href.indexOf('forced_login=true') > -1
+        when 'unreadNotifications'
+          if data.message.count
+            $notification = $('<span/>').text(data.message.count).css
+              position: 'absolute'
+              top: 0
+              right: 0
+              'background-color': '#F00'
+              color: '#FFF'
+              'border-radius': '10px'
+              width: '20px'
+              height: '20px'
+              'font-size': '11px'
+              'text-align': 'center'
+
+            $('nav .course-tabs li:contains(Askalot) a').first().css('position', 'relative').append($notification)
   })
 
   if (!is_global)

@@ -1,4 +1,4 @@
-module Shared
+ module Shared
 class ApplicationController < ActionController::Base
   helper Mooc::Engine.helpers if Rails.module.mooc?
 
@@ -48,6 +48,7 @@ class ApplicationController < ActionController::Base
   def context_from_params
     return params[:context] unless params[:context].is_a?(String)
     return params[:context].to_i if params[:context].is_number?
+
     Shared::Context::Manager.determine_context_id(params[:context])
   end
 end
