@@ -39,7 +39,6 @@ class Social
       s.gsub!(/[\.\/]/) { |c| '\\' + c }
       s.gsub!('userid', '(?<userid>[0-9]+)')
       s.gsub!('username', '(?<username>[a-zA-Z0-9\.\_\-\?\=]+)')
-      s.gsub!('|', '\z|\A')
 
       /\Ahttps?\:\/\/?(www.)?#{s}\/?\z/
     end

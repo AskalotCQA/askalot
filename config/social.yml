@@ -32,7 +32,7 @@ defaults: &defaults
     icon: facebook
     name: Facebook
     placeholder: 'https://facebook.com/username'
-    pattern: 'https://facebook.com/username|https://facebook.com/app_scoped_user_id/userid'
+    pattern: '(http|https)://facebook.com/username|(http|https)://facebook.com/app_scoped_user_id/userid'
 
   flickr:
     icon: flickr
