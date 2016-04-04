@@ -1,5 +1,11 @@
 <div id="<%= identify evaluable, :evaluate %>" class="modal fade" role="dialog" tabindex="-1" aria-hidden="true">
-  <%= form_for evaluable.evaluations.where(author: current_user).first || [evaluable, Shared::Evaluation.new], html: {id: nil, class: :'new-evaluation'}, remote: remote do |f| %>
+  <%
+    evaluation = evaluable.evaluations.where(author: current_user).first
+    object = evaluation || [evaluable, Shared::Evaluation.new]
+    url = object.is_a?(Array) ? Shared::ApplicationController.config.relative_url_root.to_s + engine_url_helpers(evaluable).public_send("#{evaluable.class.name.demodulize.downcase}_evaluations_path", evaluable) : shared.evaluation_path(evaluation)
+  %>
+
+  <%= form_for object, url: url, html: {id: nil, class: :'new-evaluation'}, remote: remote do |f| %>
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
