@@ -73,36 +73,6 @@ module Shared::CategoriesHelper
 
     output << '</table>'
     output.html_safe
-
-    #TODO(martin) CLEAN
-    #output  = '<table class="treetable table">'
-
-    #output << '<tr>' << header << '</tr>' unless header.blank?
-
-    #path    = [nil]
-
-    #objects.each do |o|
-    #  if o.parent_id != path.last
-    #    if path.include?(o.parent_id)
-    #      while path.last != o.parent_id
-    #        path.pop
-    #      end
-    #    else
-    #      path << o.parent_id
-    #    end
-    #  end
-
-    #  ident_span = '<span class="treetable-indent"></span>'
-    #  expander = parents[o.id] ? '<span class="treetable-expander treetable-expander-expanded" data-id="'+ o.id.to_s + '"></span>' : ident_span
-    #  indent   = ident_span * (path.size - 1)
-
-    #  output << '<tr class="' << path.map { |id| 'treetable-parent-' + id.to_s unless id.nil? }.join(' ') << '">'
-    #  output << capture(o, path.size - 1, &block).sub('<td>', '<td>' + indent + expander)
-    #  output << '</tr>'
-    #end
-
-    #output << '</table>'
-    #output.html_safe
   end
 
   def tree_view(objects, &block)
