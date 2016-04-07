@@ -10,23 +10,21 @@ describe 'Show Users', type: :feature, js: true do
     login_as user
   end
 
-  it 'shows list of all users' do
+  it 'shows list of alumni users' do
     visit shared.root_path
 
     click_link 'Používatelia'
 
     within '#users-tabs' do
-      click_link 'Všetci'
+      click_link 'Alumni'
 
       wait_for_remote
     end
 
     list = all('#users .user-square')
 
-    expect(list.size).to eq(10)
-  end
+    expect(list.size).to eq(4)
 
-  it 'shows list of recent users' do
-    skip
+    expect(page).to have_content(Shared::User.last.nick)
   end
 end
