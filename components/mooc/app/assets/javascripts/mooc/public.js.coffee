@@ -31,7 +31,6 @@ infoParser = ->
   unit_element = document.getElementsByClassName('nav-item active')[0]
   unit_id = unit_element.getAttribute('data-id')
 
-  unit_content.getElementsByClassName('path')[0].textContent.trim()
   unit_name = unit_element.getAttribute('data-path').substr(unit_element.getAttribute('data-path').lastIndexOf('>') + 2)
 
   lti_id = document.getElementsByClassName('lti')[0].getAttribute('id')

@@ -28,7 +28,7 @@ module Shared::Context
       return -1 unless ActiveRecord::Base.connection.table_exists? 'categories'
 
       category = Shared::Category.find_by(name: Shared::Tag.current_academic_year_value) if Rails.module.university?
-      category = current_user.contexts.last if Rails.module.mooc? && ! current_user.nil?
+      category = current_user.contexts.last if Rails.module.mooc? && !current_user.nil?
 
       context  = category ? category.id : 'default'
 
