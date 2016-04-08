@@ -37,10 +37,16 @@ if ENV['RAILS_ENV'].split('_', 2)[0] == 'fiit'
   end
 
   every 10.minutes do
-    runner 'University::Mailers::CommunityMailerService.deliver_all_emails!'
+    runner 'Shared::Mailers::CommunityMailerService.deliver_all_emails!'
   end
 
   every 6.months do
     rake 'users:alumni'
+  end
+end
+
+if ENV['RAILS_ENV'].split('_', 2)[0] == 'edx'
+  every 1.day, at: '5:32am' do
+    runner 'Mooc::Mailers::UserMailerService.deliver_notifications!'
   end
 end
