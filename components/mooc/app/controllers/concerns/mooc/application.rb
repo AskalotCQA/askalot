@@ -11,7 +11,7 @@ module Mooc::Application
 
     def login_required
       unless user_signed_in?
-        @url = params[:login_url]
+        @url = params[:login_url].gsub ' ', '+'
 
         render '/mooc/page/to_login_redirect' if params[:login_url]
         render '/mooc/page/no_login_url' unless params[:login_url]
