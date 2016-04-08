@@ -24,12 +24,8 @@ module Mooc
 
       return after_login_redirect if params[:custom_login_redirect]
 
-      lti_id = params[:resource_link_id]
-
-      if lti_id
-        lti_id = lti_id.split('-', 2).last
-        course_id = lti_id.split('-', 3).last.split('-', 2).first
-
+      if params[:resource_link_id]
+        lti_id = params[:resource_link_id].split('-', 2).last
 
         Shared::Category.transaction do
           @unit = Shared::Category.find_by lti_id: lti_id

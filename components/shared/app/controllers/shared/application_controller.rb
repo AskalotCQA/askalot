@@ -25,9 +25,11 @@ class ApplicationController < ActionController::Base
   end
 
   def determine_context
-    context = params[:context] ? context_from_params : Shared::Context::Manager.default_context
+    context = params[:context] || params[:context_id] ? context_from_params : Shared::Context::Manager.default_context(current_user)
 
-    redirect_to "#{request.path}#{context}" if ! params[:context] && Rails.module.mooc?
+    if Rails.module.mooc?
+      redirect_to "#{relative_url_root}/#{context}" if ! params[:context] || params[:context] == 'default' && context != 'default'
+    end
 
     @context = context
     Shared::Context::Manager.current_context = context
@@ -46,10 +48,10 @@ class ApplicationController < ActionController::Base
   private
 
   def context_from_params
-    return params[:context] unless params[:context].is_a?(String)
+    return Shared::Context::Manager.determine_context_id(params[:context_id].sub! '/', '-') if params[:context_id]
     return params[:context].to_i if params[:context].is_number?
-
-    Shared::Context::Manager.determine_context_id(params[:context])
+    return Shared::Context::Manager.default_context(current_user) if params[:context] == 'default'
+    return Shared::Context::Manager.determine_context_id(params[:context]) if params[:context].is_a?(String)
   end
 end
 end
