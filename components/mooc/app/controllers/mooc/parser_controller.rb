@@ -9,24 +9,26 @@ module Mooc
       content     = params[:content]
 
       Shared::Category.transaction do
-        unit_by_lti = Shared::Category.where({ lti_id: params[:lti_id] }).first
+        unit = Shared::Category.where({ lti_id: params[:lti_id] }).first
 
-        if unit_by_lti.nil? || unit_by_lti.parent.nil?
+        if unit.nil? || unit.parent.nil?
           course, saved_flags[:course]         = create_category_if_not_exist(params[:course_id], params[:course_name], nil)
           section, saved_flags[:section]       = create_category_if_not_exist(params[:section_id], params[:section_name], course)
           subsection, saved_flags[:subsection] = create_category_if_not_exist(params[:subsection_id], params[:subsection_name], section)
         end
 
-        if unit_by_lti.nil?
+        if unit.nil?
           status_case        = 'no_lti'
           unit               = Shared::Category.create({ uuid: params[:unit_id], lti_id: params[:lti_id], name: params[:unit_name], parent: subsection, askable: true })
           saved_flags[:unit] = unit.save
-        elsif unit_by_lti.parent.nil?
+        elsif unit.parent.nil?
           status_case        = 'lti_but_no_parent'
 
-          unit_by_lti.update({ uuid: params[:unit_id], name: params[:unit_name], parent: subsection })
-          saved_unit         = unit_by_lti.save
+          unit.update({ uuid: params[:unit_id], name: params[:unit_name], parent: subsection })
+          unit.save
         end
+
+        Mooc::CategoryContent.create(category: unit, content: content) unless Mooc::CategoryContent.where(category: unit).exists?
       end
 
       render json: {
