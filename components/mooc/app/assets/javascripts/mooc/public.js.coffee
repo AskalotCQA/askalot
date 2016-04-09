@@ -29,7 +29,7 @@ infoParser = ->
 
   unit_content = document.getElementsByClassName('xblock xblock-student_view xmodule_display xblock-initialized')[0]
   unit_element = document.getElementsByClassName('nav-item active')[0]
-  unit_id = unit_element.getAttribute('data-id')
+  unit_id = unit_element.getAttribute('data-id').substr(unit_element.getAttribute('data-id').lastIndexOf('/')+1).substr(unit_element.getAttribute('data-id').lastIndexOf('@')+1)
 
   unit_name = unit_element.getAttribute('data-path').substr(unit_element.getAttribute('data-path').lastIndexOf('>') + 2)
 
