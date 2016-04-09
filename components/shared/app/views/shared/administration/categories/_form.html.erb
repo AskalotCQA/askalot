@@ -7,8 +7,13 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :description %>
+    <%= f.label :description, t('administration.category.create.description') %>
     <%= f.text_area :description, class: :'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :third_party_hash, t('administration.category.create.third_party_hash') %>
+    <%= f.text_field :third_party_hash, class: :'form-control' %>
   </div>
 
   <div class="form-group">

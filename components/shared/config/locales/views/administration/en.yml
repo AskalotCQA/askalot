@@ -35,6 +35,8 @@ en:
       create:
         action: "Add category"
         parent: "Parent"
+        third_party_hash: "Key for 3rd party apps integration"
+        description: "Description"
 
       edit:
         action: "Edit"

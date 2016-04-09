@@ -35,6 +35,8 @@ sk:
       create:
         action: "Pridať kategóriu"
         parent: "Rodič"
+        third_party_hash: "Kľúč pre integráciu s aplikáciou tretej strany"
+        description: "Opis"
 
       edit:
         action: "Upraviť"
