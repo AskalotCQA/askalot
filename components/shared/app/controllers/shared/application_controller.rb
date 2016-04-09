@@ -49,6 +49,7 @@ class ApplicationController < ActionController::Base
 
   def context_from_params
     return Shared::Context::Manager.determine_context_id(params[:context_id].sub! '/', '-') if params[:context_id]
+    return params[:context] unless params[:context].is_a?(String)
     return params[:context].to_i if params[:context].is_number?
     return Shared::Context::Manager.default_context(current_user) if params[:context] == 'default'
     return Shared::Context::Manager.determine_context_id(params[:context]) if params[:context].is_a?(String)
