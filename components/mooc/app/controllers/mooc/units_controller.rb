@@ -54,8 +54,20 @@ module Mooc
     def login
       return false unless authorize!
 
-      params['roles'] = :teacher if params['roles'] == 'Administrator'
-      params['roles'] = :teacher_assistant if params['roles'] == 'Teacher'
+      # In admin UI: Administrator
+      # In LTI request: Instructor
+      # In Askalot: :teacher
+
+      # In admin UI: Staff
+      # In LTI request: Administrator
+      # In Askalot: :teaching_assistant
+
+      # Course team members with the Admin role help you manage your course. They can do all of the tasks that Staff can do, and can also add and remove the Staff and Admin roles, discussion moderation roles, and the beta tester role to manage course team membership. You can only give course team roles to enrolled users.
+      # In admin UI: Administrator > Staff > everybody else
+      # In LTI: Instructor > Administrator > everybody else
+
+      params['roles'] = :teacher if params['roles'] == 'Instructor'
+      params['roles'] = :teacher_assistant if params['roles'] == 'Administrator'
 
       user = User.find_by(login: params['user_id'])
       user_attributes = { login: params['user_id'], nick: params['lis_person_sourcedid'],
