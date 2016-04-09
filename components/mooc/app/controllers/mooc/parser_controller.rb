@@ -50,6 +50,9 @@ module Mooc
       if category.nil?
         category = Shared::Category.create({ uuid: uuid, name: name, parent: parent })
         saved_category = category.save
+      elsif category.name == 'unknown'
+        category.update({ name: name, parent: parent })
+        saved_category = category.save
       end
 
       [category, saved_category]
