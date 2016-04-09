@@ -2293,6 +2293,13 @@ CREATE INDEX index_categories_questions_on_category_id ON categories_questions U
 
 
 --
+-- Name: index_categories_questions_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_categories_questions_on_category_id ON categories_questions USING btree (category_id);
+
+
+--
 -- Name: index_categories_questions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3584,3 +3591,4 @@ INSERT INTO schema_migrations (version) VALUES ('20160313091803');
 INSERT INTO schema_migrations (version) VALUES ('20160402191527');
 
 INSERT INTO schema_migrations (version) VALUES ('20160417130646');
+
