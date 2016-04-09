@@ -14,7 +14,7 @@ else
 is_global = document.getElementsByClassName('course-content')[0] == undefined
 
 courseUuid = ->
-  uuid = document.getElementsByClassName('xblock xmodule_display xmodule_SequenceModule')[0].getAttribute('data-course-id').replace(/\//g, "-")
+  uuid = document.getElementsByClassName('xblock xmodule_display')[0].getAttribute('data-course-id').replace(/\//g, "-")
 
 infoParser = ->
   course_id = courseUuid()
@@ -54,11 +54,16 @@ $(document).ready ->
     decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) or [null, ''])[1].replace(/\+/g, '%20')) or null
 
   a_src = host + courseUuid() + '/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
+
   redirect_url = getURLParameter('redirect')
-  redirect_url = redirect_url.replace('/1/', '/' + courseUuid() + '/')
-  a_src += if redirect_url then '&amp;redirect=' + redirect_url else null
+  if redirect_url
+    redirect_url = redirect_url.replace('/default/', '/' + courseUuid() + '/')
+    a_src += '&amp;redirect=' + redirect_url
+
   login_url = $('#login-url').text()
   a_src += '&amp;login_url=' + login_url if login_url != ''
+
+  $("#askalot-wrapper").css("margin", "-32px -40px 0px -40px")
 
   $('<iframe>Your browser does not support iframes!</iframe>')
     .attr('title', 'Askalot')
