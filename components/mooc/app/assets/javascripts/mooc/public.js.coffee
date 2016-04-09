@@ -76,6 +76,25 @@ $(document).ready ->
       switch data.message.type
         when 'checkForcedLogin'
           window.history.back() if window.location.href.indexOf('forced_login=true') > -1
+        when 'unreadNotifications'
+          if data.message.count
+            data.message.count = '99+' if data.message.count > 99
+
+            $notification = $('<span/>').text(data.message.count).css
+              position: 'absolute'
+              top: 0
+              right: '-8px'
+              'background-color': '#FF3030'
+              color: '#FFF'
+              'border-radius': '10px'
+              width: '20px'
+              height: '20px'
+              'font-size': '12px'
+              'text-align': 'center'
+              'font-weight': 'bold'
+              'text-align': 'center'
+
+            $('nav .course-tabs li:contains(Askalot) a').first().css('position', 'relative').append($notification)
   })
 
   if (!is_global)
