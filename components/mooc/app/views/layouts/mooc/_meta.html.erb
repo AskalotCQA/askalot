@@ -1,1 +1,1 @@
-<meta name="askalot" content="Askalot" data-unread-notifications="<%= current_user.notifications.in_context(@context).unread.count %>"/>
+<meta name="askalot" content="Askalot" data-unread-notifications="<%= current_user ? current_user.notifications.in_context(@context).unread.count : 0 %>"/>
