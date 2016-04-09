@@ -11,6 +11,7 @@ module Mooc::QuestionsHelper
 
     if label.class.to_s == 'Shared::Category'
       return content_tag(:div, label.name, :class => 'label label-primary') if in_questions_index
+
       href = mooc.unit_path(id: label.id)
     else
       href = (page_url ? page_url + '?redirect=' : '') + shared.questions_path(tags: filter)
