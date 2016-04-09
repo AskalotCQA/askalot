@@ -8,14 +8,17 @@ module Mooc
     end
 
     def new
-      @category = Shared::Category.new params.permit([:parent_id, :uuid])
-      @parent   = Shared::Category.find(params[:parent_id]) if params[:parent_id]
+      @category         = Shared::Category.new params.permit([:parent_id, :uuid])
+      @parent           = Shared::Category.find(params[:parent_id]) if params[:parent_id]
+      @category.askable = true
     end
 
     def create
-      @category         = Shared::Category.new(category_params)
-      @category.askable = true
-      parent_id         = params[:parent_id] || params[:category][:parent_id]
+      @category = Shared::Category.new(category_params)
+      parent_id = params[:parent_id] || params[:category][:parent_id]
+
+      puts category_params.inspect
+      puts @category.inspect
 
       if parent_id
         @parent             = Shared::Category.find parent_id
@@ -50,8 +53,8 @@ module Mooc
     end
 
     def update_settings
-      Shared::Category.in_contexts(contexts_to_administrate).update_all shared: false
-      Shared::Category.in_contexts(contexts_to_administrate).where(id: params[:shared]).update_all shared: true
+      Shared::Category.in_contexts(contexts_to_administrate).update_all askable: false
+      Shared::Category.in_contexts(contexts_to_administrate).where(id: params[:askable]).update_all askable: true if params[:askable]
 
       render json: { success: true }
     end
@@ -65,12 +68,10 @@ module Mooc
     end
 
     def category_params
-      params.require(:category).permit(:name, :tags, :shared, :teacher_assistant_ids => [])
+      params.require(:category).permit(:name, :tags, :askable, :teacher_assistant_ids => [])
     end
 
     def check_parent
-      puts contexts.map(&:id).inspect
-
       raise 'Access not allowed.' unless check_category_permissions(params[:parent_id] || params[:category][:parent_id])
     end
 

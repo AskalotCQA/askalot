@@ -230,7 +230,7 @@ en:
         name: "Name"
         uuid: "UUID"
         tags: "Tags"
-        shared: "Show questions also from related categories"
+        shared: "Show questions also in other related categories"
         askable: "Questions can be asked directly in this category"
         teacher_assistants: "Teacher assistants"
 
