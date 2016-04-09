@@ -35,9 +35,9 @@ module Mooc
         lti_id = params[:resource_link_id].split('-', 2).last
 
         @unit = Shared::Category.find_by lti_id: lti_id
-        @unit = Shared::Category.create(name: lti_id, lti_id: lti_id, askable: true) if @unit.nil?
+        @unit = Shared::Category.create(name: 'unknown', uuid: 'unknown', lti_id: lti_id, askable: true) if @unit.nil?
 
-        Shared::ContextUser.find_or_create_by!(user: current_user, context_id: @context) unless @unit.parent_id.nil?
+        Shared::ContextUser.find_or_create_by!(user: current_user, context_id: Shared::Context::Manager.current_context) unless @unit.parent_id.nil?
       else
         @unit = Shared::Category.find params[:id]
       end
@@ -54,13 +54,13 @@ module Mooc
     def login
       return false unless authorize!
 
-      # In admin UI: Administrator
+      # In admin UI: Admin
       # In LTI request: Instructor
       # In Askalot: :teacher
 
       # In admin UI: Staff
       # In LTI request: Administrator
-      # In Askalot: :teaching_assistant
+      # In Askalot: :teacher_assistant
 
       # Course team members with the Admin role help you manage your course. They can do all of the tasks that Staff can do, and can also add and remove the Staff and Admin roles, discussion moderation roles, and the beta tester role to manage course team membership. You can only give course team roles to enrolled users.
       # In admin UI: Administrator > Staff > everybody else
