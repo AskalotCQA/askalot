@@ -3,7 +3,12 @@ class Administration::AssignmentsController < AdministrationController
   authorize_resource class: Shared::Assignment
 
   def index
-    @assignments  = Shared::Assignment.includes(:user, :category, :role).order('categories.name', 'users.nick')
+    @assignments  = Shared::Assignment.includes(:user, :category, :role).order('categories.full_public_name', 'users.nick')
+
+    @categories = Shared::Category.order(:depth, :full_public_name).all
+
+    @users = Shared::User::order(:login).all
+
     @assignment ||= Shared::Assignment.new
 
     @assignments.each { |a| a.category.name = a.category.parent.name + ' - ' + a.category.name unless a.category.root? }

@@ -1,20 +1,9 @@
-<%= form_for @assignment, url: [:administration, @assignment] do |f| %>
-  <%= form_messages_for @assignment %>
+<%= form_for assignment, url: [:administration, @assignment] do |f| %>
+  <%= form_messages_for assignment %>
 
-  <div class="form-group">
-    <%= f.label :category_id %>
-    <%= f.category_collection_select :category_id, Shared::Category.all, :id, :full_tree_name %>
-  </div>
+  <%= render 'shared/administration/assignments/form_body', f: f %>
 
-  <div class="form-group">
-    <%= f.label :user_nick %>
-    <%= f.text_field :user_nick, class: :'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :role_id %>
-    <%= f.role_collection_select :role_id %>
-  </div>
-
-  <button type="submit" class="btn btn-success"><%= t('administration.assignment.create.action') %></button>
+  <button type="submit" class="btn btn-success">
+    <%= t('administration.assignment.create.action') %>
+  </button>
 <% end %>

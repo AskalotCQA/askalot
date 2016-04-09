@@ -74,6 +74,7 @@ module Shared::CategoriesHelper
     output << '</table>'
     output.html_safe
 
+    #TODO(martin) CLEAN
     #output  = '<table class="treetable table">'
 
     #output << '<tr>' << header << '</tr>' unless header.blank?

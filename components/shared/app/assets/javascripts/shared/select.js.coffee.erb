@@ -1,6 +1,7 @@
 #= require ./lib/module
 
 class window.Select extends Module
+  $.fn.modal.Constructor.prototype.enforceFocus = () -> true
   if <%= Rails.module.university? %>
     base_url = '<%= Rails.application.config.relative_url_root %>'
   else

@@ -255,7 +255,7 @@ CREATE TABLE categories (
     full_public_name character varying(255),
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     shared boolean DEFAULT true,
-    askable boolean DEFAULT false,
+    askable boolean DEFAULT true,
     description text
 );
 

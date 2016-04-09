@@ -4,6 +4,7 @@
 .sass-cache
 .tags
 
+.vim
 .~lock.*
 *.*~
 
