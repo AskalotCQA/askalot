@@ -24,19 +24,20 @@ module Mooc
 
       return after_login_redirect if params[:custom_login_redirect]
 
-      lti_id = params[:resource_link_id]
+      if params[:resource_link_id] && params[:context_id]
+        if @context == 'default'
+          context = Shared::Category.create({ name: 'unknown', uuid: params[:context_id].gsub('/', '-') })
 
-      if lti_id
-        lti_id = lti_id.split('-', 2).last
-        course_id = lti_id.split('-', 3).last.split('-', 2).first
-
-
-        Shared::Category.transaction do
-          @unit = Shared::Category.find_by lti_id: lti_id
-          @unit = Shared::Category.create(name: lti_id, lti_id: lti_id, askable: true) if @unit.nil?
+          @context = context.id
+          Shared::Context::Manager.current_context = context.id
         end
 
-        Shared::ContextUser.find_or_create_by!(user: Shared::User.find(current_user.id), context_id: @unit.root.id) unless @unit.parent_id.nil?
+        lti_id = params[:resource_link_id].split('-', 2).last
+
+        @unit = Shared::Category.find_by lti_id: lti_id
+        @unit = Shared::Category.create(name: lti_id, lti_id: lti_id, askable: true) if @unit.nil?
+
+        Shared::ContextUser.find_or_create_by!(user: current_user, context_id: @context) unless @unit.parent_id.nil?
       else
         @unit = Shared::Category.find params[:id]
       end
