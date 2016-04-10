@@ -5,6 +5,7 @@ namespace :sample_data do
     Rake::Task['sample_data:users'].invoke
     Rake::Task['sample_data:followings'].invoke
     Rake::Task['sample_data:categories'].invoke
+    Rake::Task['sample_data:assignments'].invoke
     Rake::Task['sample_data:groups'].invoke
     Rake::Task['sample_data:documents'].invoke
     Rake::Task['sample_data:watchings'].invoke
@@ -35,8 +36,8 @@ namespace :sample_data do
       role: "administrator",
       time: 65
     }, {
-      login: "andrew",
-      email: "AndrewBaker@Askalot.com",
+      login: "askalotteacher",
+      email: "askalotteacher@gmail.com",
       password: 'password',
       password_confirmation: 'password',
       nick: "Andrew",
@@ -50,8 +51,8 @@ namespace :sample_data do
       role: "teacher",
       time: 64
     }, {
-      login: "john",
-      email: "JohnShepherd@Askalot.com",
+      login: "askalotstudent",
+      email: "askalotstudent@gmail.com",
       password: 'password',
       password_confirmation: 'password',
       nick: "John",
@@ -313,6 +314,24 @@ namespace :sample_data do
         )
         category.refresh_full_tree_name
         category.save
+      end
+    end
+  end
+
+  desc 'Fills database with sample assignments'
+  task assignments: :environment do
+    assignments = [
+        { user: "Andrew", category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming", role: "teacher", time: 25 },
+        { user: "Andrew", category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering", role: "teacher", time: 25 },
+    ]
+
+    assignments.each do |input|
+      Timecop.freeze(Time.now - input[:time].days) do
+        category = Shared::Category.find_by(full_tree_name: input[:category])
+        user = Shared::User.find_by(nick: input[:user])
+        role = Shared::Role.find_by(name: input[:role])
+
+        Shared::Assignment.create(role: role, user: user, category: category, admin_visible: true, parent: nil)
       end
     end
   end

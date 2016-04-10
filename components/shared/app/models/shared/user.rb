@@ -51,13 +51,13 @@ class User < ActiveRecord::Base
   validates :login, format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }
   validates :nick,  format: { with: /\A[A-Za-z0-9_]+\z/ }, presence: true, uniqueness: { case_sensitive: false }, length: { maximum: 40 }, if: :login?
 
-  validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/ }, allow_blank: true
+  validates :gravatar_email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }, allow_blank: true
 
   validates :first, format: { with: /\A\p{Lu}[\p{Ll}\-\p{Lu}]*\z/u }, allow_blank: true
   validates :last,  format: { with: /\A\p{Lu}[\p{Ll}\-\p{Lu}]*\z/u }, allow_blank: true
 
   validates_presence_of   :email, if: :email_required?
-  validates_uniqueness_of :email, allow_blank: true, if: :email_changed_and_required?
+  validates_uniqueness_of :email, allow_blank: true, case_sensitive: false, if: :email_changed_and_required?
   validates_format_of     :email, with: Devise.email_regexp, allow_blank: true, if: :email_changed_and_required?
 
   validates_presence_of     :password, if: :password_required?

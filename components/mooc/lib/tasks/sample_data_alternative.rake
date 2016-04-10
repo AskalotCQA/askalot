@@ -1,19 +1,20 @@
 require_relative '../../../shared/app/services/shared/events/dispatcher'
 
-namespace :sample_data do
+namespace :sample_data_alternative do
   task all: :environment do
-    Rake::Task['sample_data:users'].invoke
-    Rake::Task['sample_data:followings'].invoke
-    Rake::Task['sample_data:categories'].invoke
-    Rake::Task['sample_data:watchings'].invoke
-    Rake::Task['sample_data:questions'].invoke
-    Rake::Task['sample_data:answers'].invoke
-    Rake::Task['sample_data:comments'].invoke
-    Rake::Task['sample_data:favors'].invoke
-    Rake::Task['sample_data:votes'].invoke
-    Rake::Task['sample_data:labellings'].invoke
-    Rake::Task['sample_data:views'].invoke
-    Rake::Task['sample_data:contexts_users'].invoke
+    Rake::Task['sample_data_alternative:users'].invoke
+    Rake::Task['sample_data_alternative:followings'].invoke
+    Rake::Task['sample_data_alternative:categories'].invoke
+    Rake::Task['sample_data_alternative:assignments'].invoke
+    Rake::Task['sample_data_alternative:watchings'].invoke
+    Rake::Task['sample_data_alternative:questions'].invoke
+    Rake::Task['sample_data_alternative:answers'].invoke
+    Rake::Task['sample_data_alternative:comments'].invoke
+    Rake::Task['sample_data_alternative:favors'].invoke
+    Rake::Task['sample_data_alternative:votes'].invoke
+    Rake::Task['sample_data_alternative:labellings'].invoke
+    Rake::Task['sample_data_alternative:views'].invoke
+    Rake::Task['sample_data_alternative:contexts_users'].invoke
   end
 
   desc 'Fills database with sample users'
@@ -74,6 +75,7 @@ namespace :sample_data do
       last: "Storey",
       about: nil,
       facebook: nil,
+      gravatar_email: nil,
       linkedin: nil,
       github: nil,
       role: "student",
@@ -311,26 +313,43 @@ namespace :sample_data do
     end
   end
 
+  desc 'Fills database with sample assignments'
+  task assignments: :environment do
+    assignments = [
+        { user: "Andrew", category: "Demonstration of Advanced Features", role: "teacher", time: 25 },
+    ]
+
+    assignments.each do |input|
+      Timecop.freeze(Time.now - input[:time].days) do
+        category = Shared::Category.find_by(full_tree_name: input[:category])
+        user = Shared::User.find_by(nick: input[:user])
+        role = Shared::Role.find_by(name: input[:role])
+
+        Shared::Assignment.create(role: role, user: user, category: category, admin_visible: true, parent: nil)
+      end
+    end
+  end
+
   desc 'Fills database with sample watchings'
   task watchings: :environment do
-    context_id = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
 
     watchings = [
-      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Introduction", user: "Ivan", time: 54, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "Ivan", time: 54, context: context_id },
-      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Introduction", user: "Ben", time: 32, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "John", time: 25, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "Samantha", time: 15, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Andrew", time: 44, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Tom", time: 12, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Lauren", time: 11, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Ella", time: 10, context: context_id },
-      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Support Vector Machines", user: "Ella", time: 60, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Ella", time: 60, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Archie", time: 10, context: context_id },
-      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Support Vector Machines", user: "Adam", time: 10, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Adam", time: 10, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Ben", time: 10, context: context_id },
+      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Introduction", user: "Ivan", time: 54, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "Ivan", time: 54, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Introduction", user: "Ben", time: 32, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "John", time: 25, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "Samantha", time: 15, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Andrew", time: 44, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Tom", time: 12, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Lauren", time: 11, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Ella", time: 10, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Support Vector Machines", user: "Ella", time: 60, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Ella", time: 60, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Archie", time: 10, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Support Vector Machines", user: "Adam", time: 10, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Adam", time: 10, context: Shared::Context::Manager.current_context },
+      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Ben", time: 10, context: Shared::Context::Manager.current_context },
     ]
 
     watchings.each do |input|
@@ -342,6 +361,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample questions'
   task questions: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
+
     questions = [{
       category: "Demonstration of Advanced Features - Askalot Demo - Introduction - About Askalot",
       user: "Archie",
@@ -450,6 +471,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample answers'
   task answers: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
+
     answers = [{
       question: "Minimal requirements on project",
       user: "Andrew",
@@ -540,6 +563,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample comments'
   task comments: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
+
     comments = [{
       question: "Minimal requirements on project",
       answerer: "Andrew",
@@ -622,6 +647,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample favors'
   task favors: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
+
     favors = [
       { question: "What's is the difference between clustering and classification?", user: "Ivan", time: 6 },
       { question: "Linear vs logistic regression", user: "Sophia", time: 28 },
@@ -647,6 +674,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample votes'
   task votes: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
+
     votes = [
       { question: "Minimal requirements on project", user: "Amelia", positive: true, time: 48 },
       { question: "Minimal requirements on project", user: "Samantha", positive: true, time: 47 },
@@ -703,6 +732,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample labellings'
   task labellings: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
+
     labellings = [
       { question: "Minimal requirements on project", answerer: "Andrew", user: "Archie", time: 51 },
       { question: "What's is the difference between clustering and classification?", answerer: "Ruby", user: "Sophia", time: 41 },
@@ -726,6 +757,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample views'
   task views: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
+
     views = [
       { question: "Minimal requirements on project", user: "John", time: 48 },
       { question: "Minimal requirements on project", user: "Ella", time: 47 },
@@ -792,10 +825,10 @@ namespace :sample_data do
 
   desc 'Fills database with sample users in context data'
   task contexts_users: :environment do
-    context = Shared::Category.find_by(name: 'Demonstration of Advanced Features')
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
 
     Shared::User.all.each do |u|
-      Shared::ContextUser.create user: u, context: context
+      Shared::ContextUser.create user: u, context_id: Shared::Context::Manager.current_context
     end
   end
 end

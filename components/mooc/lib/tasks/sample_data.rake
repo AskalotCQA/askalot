@@ -5,6 +5,7 @@ namespace :sample_data do
     Rake::Task['sample_data:users'].invoke
     Rake::Task['sample_data:followings'].invoke
     Rake::Task['sample_data:categories'].invoke
+    Rake::Task['sample_data:assignments'].invoke
     Rake::Task['sample_data:watchings'].invoke
     Rake::Task['sample_data:questions'].invoke
     Rake::Task['sample_data:answers'].invoke
@@ -34,8 +35,8 @@ namespace :sample_data do
       role: "administrator",
       time: 65
     }, {
-      login: "andrew",
-      email: "AndrewBaker@Askalot.com",
+      login: "askalotteacher",
+      email: "askalotteacher@gmail.com",
       password: 'password',
       password_confirmation: 'password',
       nick: "Andrew",
@@ -49,8 +50,8 @@ namespace :sample_data do
       role: "teacher",
       time: 64
     }, {
-      login: "john",
-      email: "JohnShepherd@Askalot.com",
+      login: "askalotstudent",
+      email: "askalotstudent@gmail.com",
       password: 'password',
       password_confirmation: 'password',
       nick: "John",
@@ -74,6 +75,7 @@ namespace :sample_data do
       last: "Storey",
       about: nil,
       facebook: nil,
+      gravatar_email: nil,
       linkedin: nil,
       github: nil,
       role: "student",
@@ -263,30 +265,28 @@ namespace :sample_data do
   task categories: :environment do
     categories = [
       # Courses
-      { name: "Demonstration of Advanced Features 2015", tags: ["ml-2015"], uuid: "Williams:/202", lti_id: nil, parent_name: "", shared: true, askable: false, time: 385 },
-      { name: "Demonstration of Advanced Features", tags: ["ml-2016"], uuid: "Williams:/203", lti_id: nil, parent_name: "", shared: true, askable: true, time: 65 },
+      { name: "Demo of Community Question Answering Tool AskALot", tags: ["askalot-demo-2016"], uuid: "course-v1:Demo+AskALot+T1", lti_id: nil, parent_name: "", shared: true, askable: true, time: 65 },
 
       # Sections
-      { name: "Askalot Demo", tags: [], uuid: "a32093e0cdfa483e9c39feb852bac3cf", lti_id: nil, parent_name: "Demonstration of Advanced Features 2015", shared: true, askable: false, time: 385 },
-      { name: "Askalot Demo", tags: [], uuid: "a32093e0cdfa483e9c39feb852bac3cf", lti_id: nil, parent_name: "Demonstration of Advanced Features", shared: true, askable: true, time: 65 },
+      { name: "Machine learning", tags: [], uuid: "ccafab4057eb4779af4e539f988ab0a8", lti_id: nil, parent_name: "Demo of Community Question Answering Tool AskALot", shared: true, askable: true, time: 65 },
+      { name: "Supervised Learning", tags: [], uuid: "3adb23729ccd4922b1c3a1d1bc19c5d7", lti_id: nil, parent_name: "Demo of Community Question Answering Tool AskALot", shared: true, askable: true, time: 65 },
+      { name: "Unsupervised Learning", tags: [], uuid: "b686423f469f41c893156b756cd703bc", lti_id: nil, parent_name: "Demo of Community Question Answering Tool AskALot", shared: true, askable: true, time: 65 },
 
       # Subsections
-      { name: "Introduction", tags: ["intro"], uuid: "03bc97ee76734441899e6193ccfc756d", lti_id: nil, parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo", shared: true, askable: false, time: 385 },
-      { name: "Introduction", tags: ["intro"], uuid: "03bc97ee76734441899e6193ccfc756d", lti_id: nil, parent_name: "Demonstration of Advanced Features - Askalot Demo", shared: true, askable: true, time: 65 },
-      { name: "Linear Regression", tags: ["regression"], uuid: "cb364967b7bc4befa6434aa5da6b477f", lti_id: nil, parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo", shared: true, askable: false, time: 385 },
-      { name: "Linear Regression", tags: ["regression"], uuid: "cb364967b7bc4befa6434aa5da6b477f", lti_id: nil, parent_name: "Demonstration of Advanced Features - Askalot Demo", shared: true, askable: true, time: 65 },
-      { name: "Support Vector Machines", tags: ["svm"], uuid: "b5f80b813d10402da5dda0efd165afeb", lti_id: nil, parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo", shared: true, askable: false, time: 385 },
-      { name: "Support Vector Machines", tags: ["svm"], uuid: "b5f80b813d10402da5dda0efd165afeb", lti_id: nil, parent_name: "Demonstration of Advanced Features - Askalot Demo", shared: true, askable: true, time: 65 },
-      { name: "Neural Networks", tags: ["neural", "networks"], uuid: "f1edaca786904e279c3d0ec4a9f1aa91", lti_id: nil, parent_name: "Demonstration of Advanced Features - Askalot Demo", shared: true, askable: true, time: 65 },
+      { name: "Welcome Video", tags: ["welcome-video"], uuid: "afb480f4d7fa44d9bd243a78b2351219", lti_id: nil, parent_name: "Demo of Community Question Answering Tool AskALot - Machine learning", shared: true, askable: true, time: 65 },
+      { name: "Introduction", tags: ["intro"], uuid: "6fddc505aa654832b957f9381ed6e502", lti_id: nil, parent_name: "Demo of Community Question Answering Tool AskALot - Machine learning", shared: true, askable: true, time: 65 },
+      { name: "Linear Regression", tags: ["regression"], uuid: "0bb070aafb2f4501bf801b9c2d393326", lti_id: nil, parent_name: "Demo of Community Question Answering Tool AskALot - Supervised Learning", shared: true, askable: true, time: 65 },
+      { name: "Support Vector Machines", tags: ["svm"], uuid: "63dda227d34b4eadac0c241d3be0cd58", lti_id: nil, parent_name: "Demo of Community Question Answering Tool AskALot - Supervised Learning", shared: true, askable: true, time: 65 },
+      { name: "Neural Networks", tags: ["neural", "networks"], uuid: "327420f4249f466da43cb896bd8adb54", lti_id: nil, parent_name: "Demo of Community Question Answering Tool AskALot - Supervised Learning", shared: true, askable: true, time: 65 },
+      { name: "K-means Clustering", tags: ["kmeans"], uuid: "bdc5b24b3a134acbb785276ce0d5daa9", lti_id: nil, parent_name: "Demo of Community Question Answering Tool AskALot - Unsupervised Learning", shared: true, askable: true, time: 65 },
 
       # Units
-      { name: "About Askalot", tags: [], uuid: "01d89a7d9b9f469ea0877da69dfd0893", lti_id: "i4x-Williams-202-lti-3f55254c7f434860a12e56bd821a1cca", parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo - Introduction", shared: true, askable: false, time: 385 },
-      { name: "About Askalot", tags: [], uuid: "01d89a7d9b9f469ea0877da69dfd0893", lti_id: "i4x-Williams-203-lti-3f55254c7f434860a12e56bd821a1cca", parent_name: "Demonstration of Advanced Features - Askalot Demo - Introduction", shared: true, askable: true, time: 65 },
-      { name: "Definition of Linear Regression", tags: [], uuid: "cc21ea01f83e475c880878ea37708b04", lti_id: "i4x-Williams-202-lti-1c0bccee67764f6c863b3f7303f8bd34", parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo - Linear Regression", shared: true, askable: false, time: 385 },
-      { name: "Definition of Linear Regression", tags: [], uuid: "cc21ea01f83e475c880878ea37708b04", lti_id: "i4x-Williams-203-lti-1c0bccee67764f6c863b3f7303f8bd34", parent_name: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", shared: true, askable: true, time: 65 },
-      { name: "Definition of SVM", tags: [], uuid: "47e3379fddc74be5bb2d6d83e8ca2d91", lti_id: "i4x-Williams-202-lti-461e3407422745f9a479740854dd9ccc", parent_name: "Demonstration of Advanced Features 2015 - Askalot Demo - Support Vector Machines", shared: true, askable: false ,time: 385 },
-      { name: "Definition of SVM", tags: [], uuid: "47e3379fddc74be5bb2d6d83e8ca2d91", lti_id: "i4x-Williams-203-lti-461e3407422745f9a479740854dd9ccc", parent_name: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", shared: true, askable: true, time: 65 },
-      { name: "Definition of Neural Networks", tags: [], uuid: "b18fe93bc12e4ddcb5872e33dda459fc", lti_id: "i4x-Williams-203-lti-04f3e7941b6b4a37b442da8b7054ff44", parent_name: "Demonstration of Advanced Features - Askalot Demo - Neural Networks", shared: true, askable: true, time: 65 },
+      { name: "Welcome Video", tags: [], uuid: "d550cc7aaf3949428939f27015902d5e", lti_id: "2c2e7e970dc34ac0a538276ef193a4d3", parent_name: "Demo of Community Question Answering Tool AskALot - Machine learning - Welcome Video", shared: true, askable: true, time: 65 },
+      { name: "Definition of Machine Learning", tags: [], uuid: "8e4efbe4e68e419491ea80af676058ec", lti_id: "79ef9a5971274eb88baccff99ff24987", parent_name: "Demo of Community Question Answering Tool AskALot - Machine learning - Introduction", shared: true, askable: true, time: 65 },
+      { name: "Definition of Linear Regression", tags: [], uuid: "cc517e81c32f480d975d9c1abbc8a899", lti_id: "6c3e36433540444aa8967c7922b3a4fb", parent_name: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Linear Regression", shared: true, askable: true, time: 65 },
+      { name: "Definition of SVM", tags: [], uuid: "66be018817d04ad9af7e7f97fe9f20e8", lti_id: "fed8f943880e489e9467df03feb3973c", parent_name: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Support Vector Machines", shared: true, askable: true, time: 65 },
+      { name: "Definition of Neural Networks", tags: [], uuid: "3e93e22db4c741c78e83863fe4f20fc3", lti_id: "8dd345a2d94f4b86bb9362d6539b4227", parent_name: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Neural Networks", shared: true, askable: true, time: 65 },
+      { name: "Definition of k-means Clustering", tags: [], uuid: "9972a469b6884cd9adedfe8cdb378765", lti_id: "343718b735ad47478e59325a8736c172", parent_name: "Demo of Community Question Answering Tool AskALot - Unsupervised Learning - K-means Clustering", shared: true, askable: true, time: 65 },
     ]
 
     categories.each do |input|
@@ -311,26 +311,44 @@ namespace :sample_data do
     end
   end
 
+  desc 'Fills database with sample assignments'
+  task assignments: :environment do
+    assignments = [
+        { user: "Andrew", category: "Demo of Community Question Answering Tool AskALot", role: "teacher", time: 25 },
+    ]
+
+    assignments.each do |input|
+      Timecop.freeze(Time.now - input[:time].days) do
+        category = Shared::Category.find_by(full_tree_name: input[:category])
+        user = Shared::User.find_by(nick: input[:user])
+        role = Shared::Role.find_by(name: input[:role])
+
+        Shared::Assignment.create(role: role, user: user, category: category, admin_visible: true, parent: nil)
+      end
+    end
+  end
+
   desc 'Fills database with sample watchings'
   task watchings: :environment do
-    context_id = Shared::Category.find_by(name: 'Demonstration of Advanced Features').id
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demo of Community Question Answering Tool AskALot').id
 
     watchings = [
-      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Introduction", user: "Ivan", time: 54, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "Ivan", time: 54, context: context_id },
-      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Introduction", user: "Ben", time: 32, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "John", time: 25, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Introduction", user: "Samantha", time: 15, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Andrew", time: 44, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Tom", time: 12, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Lauren", time: 11, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Linear Regression", user: "Ella", time: 10, context: context_id },
-      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Support Vector Machines", user: "Ella", time: 60, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Ella", time: 60, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Archie", time: 10, context: context_id },
-      { category: "Demonstration of Advanced Features 2015 - Askalot Demo - Support Vector Machines", user: "Adam", time: 10, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Adam", time: 10, context: context_id },
-      { category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines", user: "Ben", time: 10, context: context_id },
+      { category: "Demo of Community Question Answering Tool AskALot - Machine learning", user: "Andrew", time: 54, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Machine learning - Introduction", user: "Ivan", time: 54, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Machine learning", user: "Ben", time: 32, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Machine learning", user: "John", time: 25, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Machine learning", user: "Samantha", time: 15, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Linear Regression", user: "John", time: 44, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Linear Regression", user: "Tom", time: 12, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Linear Regression", user: "Lauren", time: 11, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Supervised Learning", user: "Ivan", time: 10, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Supervised Learning", user: "Andrew", time: 10, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Support Vector Machines", user: "Ella", time: 60, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Support Vector Machines", user: "Ella", time: 60, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Support Vector Machines", user: "Archie", time: 10, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Support Vector Machines", user: "Adam", time: 10, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Neural Networks", user: "Adam", time: 10, context: Shared::Context::Manager.current_context },
+      { category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Neural Networks", user: "Ben", time: 10, context: Shared::Context::Manager.current_context },
     ]
 
     watchings.each do |input|
@@ -342,8 +360,10 @@ namespace :sample_data do
 
   desc 'Fills database with sample questions'
   task questions: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demo of Community Question Answering Tool AskALot').id
+
     questions = [{
-      category: "Demonstration of Advanced Features - Askalot Demo - Introduction - About Askalot",
+      category: "Demo of Community Question Answering Tool AskALot - Machine learning - Welcome Video - Welcome Video",
       user: "Archie",
       time: 49,
       title: "Minimal requirements on project",
@@ -353,7 +373,7 @@ namespace :sample_data do
       editor: "Archie",
       edited_at: 48
     }, {
-      category: "Demonstration of Advanced Features - Askalot Demo - Introduction - About Askalot",
+      category: "Demo of Community Question Answering Tool AskALot - Machine learning - Welcome Video - Welcome Video",
       user: "Sophia",
       time: 45,
       title: "What's is the difference between clustering and classification?",
@@ -363,7 +383,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Demonstration of Advanced Features - Askalot Demo - Introduction - About Askalot",
+      category: "Demo of Community Question Answering Tool AskALot - Machine learning - Welcome Video - Welcome Video",
       user: "Sophia",
       time: 26,
       title: "Octave version",
@@ -373,7 +393,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Demonstration of Advanced Features 2015 - Askalot Demo - Linear Regression - Definition of Linear Regression",
+      category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Linear Regression - Definition of Linear Regression",
       user: "Ben",
       time: 53,
       title: "Linear vs logistic regression",
@@ -383,7 +403,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines - Definition of SVM",
+      category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Support Vector Machines - Definition of SVM",
       user: "Ivan",
       time: 18,
       title: "SVM implementation in Ruby",
@@ -393,7 +413,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Demonstration of Advanced Features - Askalot Demo - Support Vector Machines - Definition of SVM",
+      category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Support Vector Machines - Definition of SVM",
       user: "Adam",
       time: 7,
       title: "What an abreviation SVM stands for?",
@@ -403,7 +423,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Demonstration of Advanced Features - Askalot Demo - Neural Networks - Definition of Neural Networks",
+      category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Neural Networks - Definition of Neural Networks",
       user: "Tom",
       time: 31,
       title: "What does the hidden layer in a neural network compute?",
@@ -413,7 +433,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "Demonstration of Advanced Features - Askalot Demo - Neural Networks - Definition of Neural Networks",
+      category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Neural Networks - Definition of Neural Networks",
       user: "Adam",
       time: 41,
       title: "Deep learnign in neural network",
@@ -450,6 +470,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample answers'
   task answers: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demo of Community Question Answering Tool AskALot').id
+
     answers = [{
       question: "Minimal requirements on project",
       user: "Andrew",
@@ -540,6 +562,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample comments'
   task comments: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demo of Community Question Answering Tool AskALot').id
+
     comments = [{
       question: "Minimal requirements on project",
       answerer: "Andrew",
@@ -622,6 +646,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample favors'
   task favors: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demo of Community Question Answering Tool AskALot').id
+
     favors = [
       { question: "What's is the difference between clustering and classification?", user: "Ivan", time: 6 },
       { question: "Linear vs logistic regression", user: "Sophia", time: 28 },
@@ -647,6 +673,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample votes'
   task votes: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demo of Community Question Answering Tool AskALot').id
+
     votes = [
       { question: "Minimal requirements on project", user: "Amelia", positive: true, time: 48 },
       { question: "Minimal requirements on project", user: "Samantha", positive: true, time: 47 },
@@ -703,6 +731,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample labellings'
   task labellings: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demo of Community Question Answering Tool AskALot').id
+
     labellings = [
       { question: "Minimal requirements on project", answerer: "Andrew", user: "Archie", time: 51 },
       { question: "What's is the difference between clustering and classification?", answerer: "Ruby", user: "Sophia", time: 41 },
@@ -726,6 +756,8 @@ namespace :sample_data do
 
   desc 'Fills database with sample views'
   task views: :environment do
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demo of Community Question Answering Tool AskALot').id
+
     views = [
       { question: "Minimal requirements on project", user: "John", time: 48 },
       { question: "Minimal requirements on project", user: "Ella", time: 47 },
@@ -792,10 +824,10 @@ namespace :sample_data do
 
   desc 'Fills database with sample users in context data'
   task contexts_users: :environment do
-    context = Shared::Category.find_by(name: 'Demonstration of Advanced Features')
+    Shared::Context::Manager.current_context = Shared::Category.find_by(name: 'Demo of Community Question Answering Tool AskALot').id
 
     Shared::User.all.each do |u|
-      Shared::ContextUser.create user: u, context: context
+      Shared::ContextUser.create user: u, context_id: Shared::Context::Manager.current_context
     end
   end
 end
