@@ -265,8 +265,8 @@ namespace :sample_data_alternative do
   task categories: :environment do
     categories = [
       # Courses
-      { name: "Demonstration of Advanced Features 2015", tags: ["ml-2015"], uuid: "Williams:/202", lti_id: nil, parent_name: "", shared: true, askable: false, time: 385 },
-      { name: "Demonstration of Advanced Features", tags: ["ml-2016"], uuid: "Williams:/203", lti_id: nil, parent_name: "", shared: true, askable: true, time: 65 },
+      { name: "Demonstration of Advanced Features 2015", tags: ["ml-2015"], uuid: "Williams-202-2029", lti_id: nil, parent_name: "", shared: true, askable: false, time: 385 },
+      { name: "Demonstration of Advanced Features", tags: ["ml-2016"], uuid: "Williams-203-2029", lti_id: nil, parent_name: "", shared: true, askable: true, time: 65 },
 
       # Sections
       { name: "Askalot Demo", tags: [], uuid: "a32093e0cdfa483e9c39feb852bac3cf", lti_id: nil, parent_name: "Demonstration of Advanced Features 2015", shared: true, askable: false, time: 385 },

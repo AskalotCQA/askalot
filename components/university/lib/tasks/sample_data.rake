@@ -16,6 +16,7 @@ namespace :sample_data do
     Rake::Task['sample_data:votes'].invoke
     Rake::Task['sample_data:labellings'].invoke
     Rake::Task['sample_data:views'].invoke
+    Rake::Task['sample_data:news'].invoke
   end
 
   desc 'Fills database with sample users'
@@ -892,6 +893,23 @@ namespace :sample_data do
 
         view = question.views.create! viewer: user
         Shared::Events::Dispatcher.dispatch :create, user, view, for: question.watchers
+      end
+    end
+  end
+
+  desc 'Fills database with sample news'
+  task news: :environment do
+    news = [
+        { title: "Try university version of CQA system Askalot!", description: "#### Demo teacher account\nCredentials: askalotteacher / password\n\n#### Demo student account\nCredentials: askalotstudent / password", time: 0 },
+     ]
+
+    news.each do |input|
+      Timecop.freeze(Time.now - input[:time].days) do
+        new = Shared::New.create!(
+            title: input[:title],
+            description: input[:description],
+            show: true,
+        )
       end
     end
   end
