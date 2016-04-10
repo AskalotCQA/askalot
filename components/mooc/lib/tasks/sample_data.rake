@@ -20,7 +20,7 @@ namespace :sample_data do
   desc 'Fills database with sample users'
   task users: :environment do
     users = [{
-      login: "ivan",
+      login: "3cb0d3cecddd135b31eca73e20dddaff",
       email: "ivan.srba@stuba.sk",
       password: 'password',
       password_confirmation: 'password',
@@ -35,7 +35,7 @@ namespace :sample_data do
       role: "administrator",
       time: 65
     }, {
-      login: "askalotteacher",
+      login: "75c6d15072e0c3f931149d434b7d79b0",
       email: "askalotteacher@gmail.com",
       password: 'password',
       password_confirmation: 'password',
@@ -50,7 +50,7 @@ namespace :sample_data do
       role: "teacher",
       time: 64
     }, {
-      login: "askalotstudent",
+      login: "d9eea5c067f6116c9af24f03bda5c71d",
       email: "askalotstudent@gmail.com",
       password: 'password',
       password_confirmation: 'password',
