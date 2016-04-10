@@ -22,8 +22,6 @@ module Mooc
       params[:page_url] = params[:custom_page_url] || params[:page_url]
       redirect_to mooc.units_error_path(exception: @exception) and return unless signed_in? || login
 
-      return after_login_redirect if params[:custom_login_redirect]
-
       if params[:resource_link_id] && params[:context_id]
         if @context == 'default'
           context = Shared::Category.create({ name: 'unknown', uuid: params[:context_id].gsub('/', '-') })
@@ -96,12 +94,6 @@ module Mooc
 
       # FIXME (huna|jandura) check if oauth nonce was used in the last x minutes
       true
-    end
-
-    def after_login_redirect
-      @url = params[:page_url]
-
-      render '/mooc/page/to_page_redirect'
     end
   end
 end

@@ -82,7 +82,7 @@ $(document).ready ->
     messageCallback: (data) ->
       switch data.message.type
         when 'checkForcedLogin'
-          window.history.back() if window.location.href.indexOf('forced_login=true') > -1
+          window.location = data.message.pageUrl if window.location.href.indexOf('forced_login=true') > -1
         when 'unreadNotifications'
           if data.message.count
             data.message.count = '99+' if data.message.count > 99
