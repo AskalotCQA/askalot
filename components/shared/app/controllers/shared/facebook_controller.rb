@@ -4,7 +4,7 @@ class FacebookController < ApplicationController
 
   after_action :allow_inline_frame
 
-  layout 'layouts/facebook'
+  layout 'shared/facebook'
 
   def index
     @question = Shared::Questions::ToAnswerRecommender.next
@@ -14,6 +14,8 @@ class FacebookController < ApplicationController
     @content = params[:n]
     @link    = params[:r]
 
+    puts @content.inspect
+    puts @link.inspect
     fail unless !@link || @link =~ /\A\//
   end
 
