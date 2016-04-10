@@ -73,6 +73,7 @@ $(document).ready ->
     .attr('marginwidth', '0')
     .attr('marginheight', '0')
     .attr('frameborder', '0')
+    .attr('name', Date.now())
     .appendTo('#askalot-wrapper')
 
   iFrameResize({
