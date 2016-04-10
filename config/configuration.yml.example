@@ -39,10 +39,7 @@ defaults: &defaults
     gold: 20
     silver: 55
 
-  oauth:
-    consumer_key: test
-    consumer_secret: secret
-
+university: &university
   category_depths:
     -
       depth: 0
@@ -80,38 +77,83 @@ defaults: &defaults
       is_in_public_name: true
       is_visible: true
 
+mooc: &mooc
+  oauth:
+      consumer_key: TODO
+      consumer_secret: TODO
+
+  category_depths:
+    -
+      depth: 0
+      label:
+        en: Course
+        sk: Kurz
+      is_in_public_name: false
+      is_visible: false
+    -
+      depth: 1
+      label:
+        en: Section
+        sk: Kapitola
+      is_in_public_name: false
+      is_visible: true
+    -
+      depth: 2
+      label:
+        en: Subsection
+        sk: Podkapitola
+      is_in_public_name: true
+      is_visible: true
+    -
+      depth: 3
+      label:
+        en: Unit
+        sk: Vzdelávací objekt
+      is_in_public_name: true
+      is_visible: true
+
 fiit_development:
   <<: *defaults
+  <<: *university
 
 fiit_test:
   <<: *defaults
+  <<: *university
 
   poll:
     default: 5
 
 fiit_staging:
   <<: *defaults
+  <<: *university
 
 fiit_demo:
   <<: *defaults
+  <<: *university
 
 fiit_production:
   <<: *defaults
+  <<: *university
 
 edx_development:
   <<: *defaults
+  <<: *mooc
 
 edx_test:
   <<: *defaults
+  <<: *mooc
 
   poll:
     default: 5
 
 edx_staging:
   <<: *defaults
+  <<: *mooc
 
 edx_demo:
   <<: *defaults
+  <<: *mooc
 
 edx_production:
   <<: *defaults
+  <<: *mooc
