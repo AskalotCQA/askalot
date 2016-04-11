@@ -7,5 +7,5 @@
 </div>
 
 <% if can? :evaluate, evaluable %>
-  <%= render 'shared/evaluations/form', model: model, evaluable: evaluable, remote: remote ||= false %>
+  <%= render 'shared/evaluations/form', model: model, evaluable: evaluable, from_unit_view: from_unit_view ||= false %>
 <% end %>

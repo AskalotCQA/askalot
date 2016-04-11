@@ -5,7 +5,7 @@
     url = object.is_a?(Array) ? Shared::ApplicationController.config.relative_url_root.to_s + engine_url_helpers(evaluable).public_send("#{evaluable.class.name.demodulize.downcase}_evaluations_path", evaluable) : shared.evaluation_path(evaluation)
   %>
 
-  <%= form_for object, url: url, html: {id: nil, class: :'new-evaluation'}, remote: remote do |f| %>
+  <%= form_for object, url: url, html: {id: nil, class: :'new-evaluation'} do |f| %>
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -36,6 +36,9 @@
             <%= f.text_area :text, id: nil, class: :'form-control', rows: 2 %>
           </div>
         </div>
+        <% if from_unit_view %>
+          <%= f.hidden_field :from_unit_view, value: 'true' %>
+        <% end %>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'evaluation.new.cancel' %></button>
           <button type="submit" class="btn btn-primary"><%= t 'evaluation.new.submit' %></button>
