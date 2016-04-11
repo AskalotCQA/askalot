@@ -29,9 +29,13 @@ class EvaluationsController < ApplicationController
       flash_error_messages_for @evaluation
     end
 
-    respond_to do |format|
-      format.html { redirect_to question_path(@question) }
-      format.js   { redirect_to question_path(@question), format: :js }
+    if params[:evaluation][:from_unit_view]
+      redirect_to :back
+    else
+      respond_to do |format|
+        format.html { redirect_to question_path(@question) }
+        format.js   { redirect_to question_path(@question), format: :js }
+      end
     end
   end
 
