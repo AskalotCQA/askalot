@@ -44,10 +44,17 @@ class Administration::CategoriesController < AdministrationController
   end
 
   def update_settings
-    Shared::Category.update_all askable: false
-    Shared::Category.update_all shared: false
-    Shared::Category.where(id: params[:askable]).update_all askable: true
-    Shared::Category.where(id: params[:shared]).update_all shared: true
+    Shared::Category.all.each do |category|
+      shared = params[:askable].includes? category.id
+      askable = params[:askable].includes? category.id
+
+      if category.shared != shared || category.askable != askable
+        category.shared = shared
+        category.askable = askable
+
+        category.save
+      end
+    end
 
     render json: { success: true }
   end
