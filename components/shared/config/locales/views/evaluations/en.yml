@@ -12,6 +12,7 @@ en:
 
     update:
       success: "Your evaluation was successfully updated."
+      unchanged: "Your evaluation wasn't changed."
 
     rank:
       very_bad: "Very bad"

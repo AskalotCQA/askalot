@@ -12,6 +12,7 @@ sk:
 
     update:
       success: "Vaše hodnotenie bolo úspešne aktualizované."
+      unchanged: "Vaše hodnotenie ostalo nezmenené."
 
     rank:
       very_bad: "Veľmi zle"
