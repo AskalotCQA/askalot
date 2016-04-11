@@ -40,7 +40,7 @@ class Social
       s.gsub!('userid', '(?<userid>[0-9]+)')
       s.gsub!('username', '(?<username>[a-zA-Z0-9\.\_\-\?\=]+)')
 
-      /\Ahttps?\:\/\/?(www.)?#{s}\/?\z/
+      /\A(http|https)?\:\/\/?(www.)?#{s}\/?\z/
     end
   end
 

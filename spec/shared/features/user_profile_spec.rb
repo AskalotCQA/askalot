@@ -133,6 +133,26 @@ describe 'User Profile', type: :feature do
       expect(page.current_path).to eql(shared.edit_user_registration_path)
 
       expect(page).to have_field('user_facebook', with: 'http://facebook.com/app_scoped_user_id/12345678901234567')
+
+      fill_in 'user_facebook',       with: 'https://facebook.com/app_scoped_user_id/123456789/'
+
+      click_button 'Uložiť'
+      find('a', :text => 'Viac').click
+
+      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
+      expect(page.current_path).to eql(shared.edit_user_registration_path)
+
+      expect(page).to have_field('user_facebook', with: 'https://facebook.com/app_scoped_user_id/123456789/')
+
+      fill_in 'user_facebook',       with: 'https://facebook.com/nicky.nickmann'
+
+      click_button 'Uložiť'
+      find('a', :text => 'Viac').click
+
+      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
+      expect(page.current_path).to eql(shared.edit_user_registration_path)
+
+      expect(page).to have_field('user_facebook', with: 'https://facebook.com/nicky.nickmann')
     end
 
     it 'shows user profile' do
