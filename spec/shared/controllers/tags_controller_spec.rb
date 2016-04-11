@@ -19,7 +19,9 @@ describe Shared::TagsController, type: :controller do
     end
 
     it 'suggests tags' do
-      get :suggest, q: 'test', format: :json, context: Shared::Context::Manager.default_context
+      context = Rails.module.mooc? ? 1 : Shared::Context::Manager.default_context
+
+      get :suggest, q: 'test', format: :json, context: context
 
       tags = assigns(:tags)
 
@@ -41,7 +43,7 @@ describe Shared::TagsController, type: :controller do
       20.times { |n| tags_string += "tag-##{n}," }
       create :question, tag_list: tags_string[0..-2]
 
-      get :suggest, q: 'tag', format: :json, context: Shared::Context::Manager.default_context
+      get :suggest, q: 'tag', format: :json, context: Shared::Context::Manager.current_context
 
       tags = assigns(:tags)
 

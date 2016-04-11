@@ -36,6 +36,8 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
+Rails.application.routes.default_url_options[:context] = 1 if Rails.module.mooc?
+
 RSpec.configure do |config|
   # ## Mock Framework
   #
@@ -103,5 +105,9 @@ RSpec.configure do |config|
     [Shared::Category, Shared::Question, Shared::Tag, Shared::User].each { |model| model.autoimport = false }
 
     Shared::Configuration.poll.default = 60
+  end
+
+  config.before(:each, type: :feature) do
+    Shared::Context::Manager.current_context = 1
   end
 end

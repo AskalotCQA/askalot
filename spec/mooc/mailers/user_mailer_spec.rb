@@ -6,7 +6,7 @@ describe Mooc::UserMailer, type: :mailer do
       user = create :user
       user2 = create :user
 
-      @context  = Shared::Context::Manager.current_context
+      @context  = Shared::Category.where(depth: 0).first.id
       @category = Shared::Category.find(@context).leaves.first
 
       Timecop.freeze(Time.utc(2014, 03, 18)) do

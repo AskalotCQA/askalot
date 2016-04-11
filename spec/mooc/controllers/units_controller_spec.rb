@@ -9,7 +9,8 @@ describe Mooc::UnitsController, type: :controller do
 
   before :each do
     @params = {
-        context: '1',
+        context: 'default',
+        context_id: '1',
         resource_link_id: '-category-hash',
         roles: 'student',
         user_id: '1000',
@@ -35,7 +36,7 @@ describe Mooc::UnitsController, type: :controller do
       expect(response).to redirect_to(units_error_path(exception: 'LTI secret does not match'))
     end
 
-    it 'creates new category if does not exist' do
+    it 'creates new category and context category if does not exist' do
       sign_in user
 
       before_count = Shared::Category.all.count
@@ -44,11 +45,11 @@ describe Mooc::UnitsController, type: :controller do
 
       after_count = Shared::Category.all.count
 
-      expect(after_count).to eql(before_count + 1)
-      expect(Shared::Category.last.name).to eql('category-hash')
+      expect(after_count).to eql(before_count + 2)
+      expect(Shared::Category.last.name).to eql('unknown')
     end
 
-    it 'does not create new category already exist' do
+    it 'does not create new category if already exists but creates context' do
       sign_in user
 
       Shared::Category.create(name: 'category-hash', lti_id: 'category-hash')
@@ -59,7 +60,7 @@ describe Mooc::UnitsController, type: :controller do
 
       after_count = Shared::Category.all.count
 
-      expect(after_count).to eql(before_count)
+      expect(after_count).to eql(before_count + 1)
     end
   end
 
