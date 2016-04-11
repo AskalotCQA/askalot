@@ -25,7 +25,7 @@ Askalot::Application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = false
+  config.assets.debug = true
 
   # Default url options for ActionMailer
   config.action_mailer.default_url_options = { host: 'http://localhost', port: 3000, script_name: '/askalot'}
