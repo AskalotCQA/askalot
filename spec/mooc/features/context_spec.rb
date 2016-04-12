@@ -8,18 +8,16 @@ describe 'Context filtering', type: :feature do
   before :each do
     login_as user
 
-    @context  = Shared::Category.where(depth: 0).first.id
+    @context  = 1
     @category = Shared::Category.find(@context).leaves.first
-
-    Shared::Context::Manager.current_context = @context
   end
 
   describe 'determine context' do
     it 'redirects to url with context if not set' do
-      visit shared.questions_path context: @context
+      visit shared.questions_path
 
       uri = URI.parse(current_url)
-      expect(uri.path).to eql(shared.questions_path(context: @context))
+      expect(uri.path).to eql(shared.questions_path(context: 1))
     end
   end
 
@@ -27,7 +25,7 @@ describe 'Context filtering', type: :feature do
     it 'shows activities in context' do
       question = create :question, :with_tags, author: user, category: @category
 
-      visit shared.question_path question, context: @context
+      visit shared.question_path question
 
       fill_in 'answer_text', with: 'Hey, look at this.'
       click_button 'Odpovedať'
@@ -55,7 +53,7 @@ describe 'Context filtering', type: :feature do
 
       question.toggle_watching_by!(user2)
 
-      visit shared.question_path question, context: @context
+      visit shared.question_path question
 
       fill_in 'answer_text', with: 'Hey, look at this.'
       click_button 'Odpovedať'
@@ -106,7 +104,7 @@ describe 'Context filtering', type: :feature do
 
       Shared::ContextUser.create user: user, context_id: category.id
 
-      visit shared.users_path context: @context
+      visit shared.users_path
 
       list = all('#users .user-square')
 
@@ -126,7 +124,7 @@ describe 'Context filtering', type: :feature do
     it 'shows tags in context' do
       create :question, :with_tags, author: user2, category: @category
 
-      visit shared.tags_path context: @context
+      visit shared.tags_path
 
       list = all('#tags h4')
 
@@ -150,7 +148,7 @@ describe 'Context filtering', type: :feature do
       create :answer, author: user
       question.toggle_favoring_by! user
 
-      visit shared.question_path question, context: @context
+      visit shared.question_path question
 
       fill_in 'answer_text', with: 'Hey, look at this.'
       click_button 'Odpovedať'
