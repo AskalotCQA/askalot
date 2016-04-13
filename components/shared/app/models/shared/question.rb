@@ -120,7 +120,7 @@ class Question < ActiveRecord::Base
 
   def parent_watchers
     if parent.class == Shared::Category
-      parent.self_and_ancestors.map(&:watchers).flatten
+      parent.parent_watchers
     else
       parent.watchers
     end
