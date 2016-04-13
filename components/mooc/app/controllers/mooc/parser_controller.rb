@@ -6,9 +6,8 @@ module Mooc
     def parser
       status_case = 'nothing'
       saved_flags = { course: false, section: false, subsection: false, unit: false }
-      content     = params[:content]
 
-      unit = Shared::Category.where({ lti_id: params[:lti_id] }).first
+      unit = Shared::Category.in_contexts(Shared::Context::Manager.current_context).where({ lti_id: params[:lti_id] }).first
 
       if !unit.nil? && unit.name == 'unknown'
         course, saved_flags[:course]         = create_category_if_not_exist(params[:course_id], params[:course_name], nil)
@@ -20,7 +19,7 @@ module Mooc
 
         status_case        = 'unit_updated'
 
-        Mooc::CategoryContent.create(category: unit, content: content) unless Mooc::CategoryContent.where(category: unit).exists?
+        Mooc::CategoryContent.create(category: unit, content: params[:content]) unless Mooc::CategoryContent.where(category: unit).exists?
       end
 
       render json: {
@@ -37,7 +36,7 @@ module Mooc
     private
 
     def create_category_if_not_exist(uuid, name, parent)
-      category = Shared::Category.where({ uuid: uuid }).first
+      category = Shared::Category.in_contexts(Shared::Context::Manager.current_context).where({ uuid: uuid }).first
 
       if category.nil?
         category = Shared::Category.create({ uuid: uuid, name: name, parent: parent })

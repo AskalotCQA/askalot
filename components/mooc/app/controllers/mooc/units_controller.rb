@@ -32,8 +32,8 @@ module Mooc
 
         lti_id = params[:resource_link_id].split('-', 2).last
 
-        @unit = Shared::Category.find_by lti_id: lti_id
-        @unit = Shared::Category.create(name: 'unknown', uuid: 'unknown', lti_id: lti_id, askable: true) if @unit.nil?
+        @unit = Shared::Category.in_contexts(Shared::Context::Manager.current_context).find_by lti_id: lti_id
+        @unit = Shared::Category.create(name: 'unknown', uuid: 'unknown', lti_id: lti_id, parent_id: Shared::Context::Manager.current_context, askable: true) if @unit.nil?
 
         Shared::ContextUser.find_or_create_by!(user: current_user, context_id: Shared::Context::Manager.current_context) unless @unit.parent_id.nil?
       else
