@@ -31,7 +31,7 @@ module Shared::Editables::Update
 
           if @editable.is_a?(Shared::Question)
             watchers += @editable.parent_watchers
-            watchers += Shared::Category.find(old_category_id).parent_watchers if defined? old_category_id
+            watchers += Shared::Category.find(old_category_id).parent_watchers if defined?(old_category_id) && old_category_id
           end
 
           dispatch_event :update, @editable, for: watchers, anonymous: (@editable.is_a?(Shared::Question) && @editable.anonymous)
