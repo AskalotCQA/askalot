@@ -14,7 +14,7 @@ namespace :reputation do
   end
 
   task recalculate: :environment do
-    manager = Reputation::Manager.new
+    manager = Shared::Reputation::Manager.new
 
     ActiveRecord::Base.connection.execute('UPDATE user_profiles SET value = 0, probability = 0')
 
