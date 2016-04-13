@@ -1,8 +1,6 @@
 Askalot::Application.routes.draw do
   scope = Rails.module.mooc? ? '/(:context)/' : '/'
 
-  default_url_options :context => Shared::Context::Manager.current_context if Rails.module.mooc?
-
   get '/404', to: 'errors#show', as: 'error_404'
   get '/500', to: 'errors#show', as: 'error_500'
 

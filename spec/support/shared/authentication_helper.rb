@@ -4,7 +4,8 @@ module Shared::AuthenticationHelper
   def login_as(user, options = {})
     stub_ais_for(user) if options[:with] == :AIS
 
-    visit shared.new_user_session_path
+    visit shared.new_user_session_path context: 1 if Rails.module.mooc?
+    visit shared.new_user_session_path unless Rails.module.mooc?
 
     fill_in 'user_login', with: user.login
     fill_in 'user_password', with: user.password || options[:password] || 'password'

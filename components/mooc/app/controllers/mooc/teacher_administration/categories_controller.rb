@@ -4,7 +4,6 @@ module Mooc
     before_action :check_parent, only: [:new, :create]
 
     def index
-      puts contexts_to_administrate
       @categories = Shared::Category.in_contexts(contexts_to_administrate).includes(:assignments).order(:lft)
     end
 
@@ -17,9 +16,6 @@ module Mooc
     def create
       @category = Shared::Category.new(category_params)
       parent_id = params[:parent_id] || params[:category][:parent_id]
-
-      puts category_params.inspect
-      puts @category.inspect
 
       if parent_id
         @parent             = Shared::Category.find parent_id

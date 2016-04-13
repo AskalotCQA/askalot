@@ -8,7 +8,7 @@ describe 'Context filtering', type: :feature do
   before :each do
     login_as user
 
-    @context  = Shared::Context::Manager.current_context
+    @context  = 1
     @category = Shared::Category.find(@context).leaves.first
   end
 
@@ -148,7 +148,7 @@ describe 'Context filtering', type: :feature do
       create :answer, author: user
       question.toggle_favoring_by! user
 
-      visit shared.question_path(question)
+      visit shared.question_path question
 
       fill_in 'answer_text', with: 'Hey, look at this.'
       click_button 'Odpovedať'
