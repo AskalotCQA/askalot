@@ -67,12 +67,21 @@ module Mooc
       params['roles'] = :teacher if params['roles'] == 'Instructor'
       params['roles'] = :teacher_assistant if params['roles'] == 'Administrator'
 
-      user = User.find_by(login: params['user_id'])
-      user_attributes = { login: params['user_id'], nick: params['lis_person_sourcedid'],
-          email: params['lis_person_contact_email_primary'], role: params['roles'].downcase }
-      user = User.create_without_confirmation! user_attributes if user.nil?
+      begin
+        user = User.find_by(login: params['user_id'])
 
-      sign_in(:user, user)
+        raise 'Your user account is not registered yet and user information are not provided in this request (probably you are accessing Askalot unit view for the first time from edX Studio). Please, visit this unit directly from edX course to automatically register your account.' if user.nil? && (!params['lis_person_sourcedid'] || !params['lis_person_contact_email_primary'])
+
+        user_attributes = { login: params['user_id'], nick: params['lis_person_sourcedid'],
+            email: params['lis_person_contact_email_primary'], role: params['roles'].downcase }
+        user = User.create_without_confirmation! user_attributes if user.nil?
+
+        sign_in(:user, user)
+      rescue => e
+        @exception = e.message
+
+        return false
+      end
 
       true
     end
