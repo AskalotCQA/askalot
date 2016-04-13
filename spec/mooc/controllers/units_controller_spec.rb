@@ -49,9 +49,10 @@ describe Mooc::UnitsController, type: :controller do
       expect(Shared::Category.last.name).to eql('unknown')
     end
 
-    it 'does not create new category if already exists but creates context' do
+    it 'does not create new category and context if already exist' do
       sign_in user
 
+      Shared::Category.create(name: 'context', uuid: 1)
       Shared::Category.create(name: 'category-hash', lti_id: 'category-hash')
 
       before_count = Shared::Category.all.count
