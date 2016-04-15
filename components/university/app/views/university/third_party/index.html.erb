@@ -1,0 +1,5 @@
+<% provide :title, @category.name %>
+
+<%= render 'university/third_party/questions/new', category: @category, question: @question %>
+
+<%= render 'university/third_party/questions/questions', category: @category, questions: @questions%>

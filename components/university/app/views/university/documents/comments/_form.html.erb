@@ -3,8 +3,10 @@
     <%= t('comment.new.action') %>
   </a>
 
+  <% url = Shared::ApplicationController.config.relative_url_root.to_s + engine_url_helpers(commentable).public_send("#{commentable.class.name.demodulize.downcase}_comments_path", commentable) %>
+
   <div id="<%= identify commentable, :comment %>" class="collapse" data-markdown="true">
-    <%= form_for [commentable, Shared::Comment.new], html: { id: nil, class: :'new-comment' }, remote: remote do |f| %>
+    <%= form_for [commentable, Shared::Comment.new], url: url, html: { id: nil, class: :'new-comment' }, remote: remote do |f| %>
 
       <div id="<%= identify commentable, :comment %>-text" class="form-group">
         <%= f.text_area :text, id: nil, class: :'form-control', rows: 2 %>

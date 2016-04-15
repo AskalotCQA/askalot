@@ -8,7 +8,7 @@
   <div id="answer-<%= answer.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <%= form_for answer, remote: remote do |f| %>
+        <%= form_for answer, url: shared.answer_path(answer), remote: remote do |f| %>
           <div class="modal-header">
             <h3 class="modal-title"><%= t 'answer.edit.title' %></h3>
           </div>

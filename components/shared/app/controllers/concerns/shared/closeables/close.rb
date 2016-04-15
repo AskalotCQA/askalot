@@ -13,6 +13,8 @@ module Shared::Closeables::Close
       flash[:error] = t "#{@model}.close.failure"
     end
 
+    return redirect_to :back if request.referrer.include? 'third_party'
+
     if @closeable = controller_path.classify.constantize.find(params[:id])
       respond_to do |format|
         format.html { redirect_to questions_path, format: :html }

@@ -1,1 +1,1 @@
-<%= render 'shared/deletables/deleting', model: :question, deletable: question, remote: remote ||= true %>
+<%= render 'shared/deletables/deleting', model: :question, deletable: question, remote: defined?(remote) ? remote : true %>

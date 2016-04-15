@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="<%= I18n.locale %>">
+  <head>
+    <meta charset="utf-8" />
+    <title><%= resolve_title(yield :title) %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=0.8"/>
+    <%= render 'layouts/shared/description' -%>
+    <%= render 'layouts/shared/social' -%>
+    <%= render 'layouts/shared/styles' -%>
+    <%= csrf_meta_tags -%>
+  </head>
+  <body>
+    <div class="container">
+      <%= flash_messages -%>
+      <%= yield -%>
+    </div>
+    <%= render 'layouts/university/footer' -%>
+    <%= render 'shared/shared/fixes' -%>
+    <%= render 'shared/shared/locales' -%>
+    <%= javascript_include_tag 'shared/application' -%>
+    <%= javascript_include_tag 'university/third_party' -%>
+    <%= yield :scripts -%>
+    <%= Garelic.monitoring 'UA-47906233-1' if Rails.env_type.production? -%>
+  </body>
+</html>
