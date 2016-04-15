@@ -6,10 +6,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Shared::Role.find_or_create_by! name: :teacher_assistant
-
-slido = Shared::User.find_by login: :slido
-Shared::ContextUser.create user: slido, context_id: 1
-
-course = Shared::Category.find_or_create_by! name: :course, uuid: :course_uuid
-Shared::Category.find_or_create_by! name: :section, uuid: :section_uuid, parent_id: course.id
+root = Shared::Category.find_or_create_by! name: :root, uuid: :root_uuid
+Shared::Category.find_or_create_by! name: Shared::Tag.current_academic_year_value, parent_id: root.id
