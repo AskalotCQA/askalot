@@ -8,3 +8,6 @@ en:
       header: "Sorry, we couldn't identify login url"
       description: "You are not signed in and we are not able to identify login url to redirect you to. Please visit an unit with Askalot in order to login."
   or: "or"
+  unit:
+    error:
+      account_not_created_yet: 'Your user account is not registered yet and user information are not provided in this request (probably you are accessing Askalot unit view for the first time from edX Studio). Please, visit this unit directly from edX course to automatically register your account.'
