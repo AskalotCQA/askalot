@@ -47,3 +47,8 @@ edx_production:
   module: mooc
   type: production
   name: edx
+
+lugano_production:
+  module: university
+  type: production
+  name: lugano

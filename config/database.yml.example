@@ -77,3 +77,11 @@ edx_production:
   pool: 5
   username: postgres
   password: postgres
+
+edx_production:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_lugano_production
+  pool: 5
+  username: postgres
+  password: postgres

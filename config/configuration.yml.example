@@ -157,3 +157,7 @@ edx_demo:
 edx_production:
   <<: *defaults
   <<: *mooc
+
+lugano_production:
+  <<: *defaults
+  <<: *university

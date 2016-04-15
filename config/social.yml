@@ -118,3 +118,6 @@ edx_demo:
 
 edx_production:
   <<: *defaults
+
+lugano_production:
+  <<: *defaults
