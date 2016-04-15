@@ -107,7 +107,8 @@ RSpec.configure do |config|
     Shared::Configuration.poll.default = 60
   end
 
-  config.before(:each, type: :feature) do
-    Shared::Context::Manager.current_context = 1
+  config.before(:each) do
+    Shared::Context::Manager.current_context = 2 if Rails.module.university?
+    Shared::Context::Manager.current_context = 1 if Rails.module.mooc?
   end
 end

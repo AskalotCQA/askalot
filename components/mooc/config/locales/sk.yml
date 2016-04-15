@@ -8,3 +8,6 @@ sk:
       header: "Prepáčte, no nevieme Vás prihlásiť"
       description: "Momentálne nie ste prihlásený a nevieme identifikovať adresu, na ktorú by sme Vás presmerovali. Prosím návštívte niektorý Unit s Askalotom, čím sa automaticky prihlásite."
   or: "alebo"
+  unit:
+    error:
+      account_not_created_yet: 'Váš používateľský účet ešte nebol zaregistrovaný a informácie o používateľovi nie sú dostuné v tejto požiadavke na zobrazenie stránky (pravdedpodobne pristupujete po prvý krát k Askalotu z Unit pohľadu v edX štúdiu). Prosím, navštívte Unit priamo z edX kurzu, aby Vám bol automaticky vytvorený účet.'

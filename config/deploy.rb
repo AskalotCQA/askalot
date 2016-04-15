@@ -80,7 +80,7 @@ namespace :deploy do
   desc "Restart unicorn server"
   task :restart, roles: :app, except: { no_release: true } do
     run "/etc/init.d/unicorn-#{application}-#{rails_env.dasherize} stop"
-    run "sleep 3"
+    run "sleep 5"
     run "/etc/init.d/unicorn-#{application}-#{rails_env.dasherize} start"
   end
 

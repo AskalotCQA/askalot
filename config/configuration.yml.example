@@ -32,8 +32,8 @@ defaults: &defaults
       SESSIDCHECK: TODO
 
   url:
-    organization: TODO
-    site: TODO
+    organization: 'https://github.com/AskalotCQA'
+    site: 'http://AskalotCQA.github.io'
 
   reputation:
     gold: 20

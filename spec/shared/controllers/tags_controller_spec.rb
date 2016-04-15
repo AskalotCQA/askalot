@@ -19,9 +19,7 @@ describe Shared::TagsController, type: :controller do
     end
 
     it 'suggests tags' do
-      context = Rails.module.mooc? ? 1 : Shared::Context::Manager.default_context
-
-      get :suggest, q: 'test', format: :json, context: context
+      get :suggest, q: 'test', format: :json, context: Shared::Context::Manager.current_context
 
       tags = assigns(:tags)
 

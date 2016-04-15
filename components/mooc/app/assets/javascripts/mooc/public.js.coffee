@@ -33,7 +33,7 @@ infoParser = ->
 
   unit_name = unit_element.getAttribute('data-path').substr(unit_element.getAttribute('data-path').lastIndexOf('>') + 2)
 
-  lti_id = document.getElementsByClassName('lti')[0].getAttribute('id')
+  lti_id = document.getElementsByClassName('lti')[document.getElementsByClassName('lti').length-1].getAttribute('id')
 
   data =
     course_id: course_id

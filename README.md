@@ -2,14 +2,20 @@
 
 Askalot is a CQA (Community Question and Answer) system of next generation.
 
-[![Build Status](https://travis-ci.org/teamnaruby/askalot.png)](https://travis-ci.org/teamnaruby/askalot) [![Code Climate](https://codeclimate.com/github/teamnaruby/askalot.png)](https://codeclimate.com/github/teamnaruby/askalot) [![Code coverage](https://codeclimate.com/github/teamnaruby/askalot/coverage.png)](https://codeclimate.com/github/teamnaruby/askalot)
+**Latest release**
+
+[![Codeship](https://img.shields.io/codeship/ed259b90-587a-0133-afb6-26e98ecb9625/master.svg?maxAge=2592000)](https://codeship.com/projects/109682)  [![Code Climate](https://codeclimate.com/github/AskalotCQA/askalot/badges/gpa.svg)](https://codeclimate.com/github/AskalotCQA/askalot)
+
+**Development**
+
+[![Codeship](https://img.shields.io/codeship/ed259b90-587a-0133-afb6-26e98ecb9625/gama.svg?maxAge=2592000)](https://codeship.com/projects/109682)  [![Code Climate](https://codeclimate.com/repos/5710ad164c2a41314500449b/badges/f0124b8f7e331110e733/gpa.svg)](https://codeclimate.com/repos/5710ad164c2a41314500449b/feed)  [![Test Coverage](https://codeclimate.com/repos/5710ad164c2a41314500449b/badges/f0124b8f7e331110e733/coverage.svg)](https://codeclimate.com/repos/5710ad164c2a41314500449b/coverage)
 
 ## Requirements
 
 * Ruby 2.1
 * Rails 4.1
 * PostgreSQL 9.3
-* Elasticsearch 1.1
+* Elasticsearch 1.7
 
 ## Installation
 

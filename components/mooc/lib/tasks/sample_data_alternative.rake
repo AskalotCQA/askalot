@@ -15,6 +15,8 @@ namespace :sample_data_alternative do
     Rake::Task['sample_data_alternative:labellings'].invoke
     Rake::Task['sample_data_alternative:views'].invoke
     Rake::Task['sample_data_alternative:contexts_users'].invoke
+    Rake::Task['fixtures:tag_statistics'].invoke
+    Rake::Task['reputation:recalculate'].invoke
   end
 
   desc 'Fills database with sample users'

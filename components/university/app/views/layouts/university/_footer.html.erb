@@ -4,9 +4,9 @@
   <div class="container">
     <div class="list-center">
       <ul>
-        <li><%= link_to t('footer.about'), url_to_site('#about') %></li>
-        <li><%= link_to t('footer.authors'), url_to_site('#authors') %></li>
-        <li><%= link_to t('footer.contact'), url_to_site('#contact') %></li>
+        <li><%= link_to t('footer.about'), url_to_site('teamasked#about') %></li>
+        <li><%= link_to t('footer.authors'), url_to_site('teamasked#authors') %></li>
+        <li><%= link_to t('footer.contact'), url_to_site('teamasked#contact') %></li>
         <li><%= link_to t('footer.changelogs'), shared.changelogs_path %></li>
         <li><%= link_to t('footer.news'), shared.news_index_path %></li>
         <li><%= link_to t('footer.help'), shared.help_path %></li>
@@ -18,7 +18,8 @@
     <div class="list-center">
       <ul>
         <li><span>Copyright <%= Time.now.year %></span></li>
-        <li><a class="text-capital" href="<%= url_to_organization %>">na&#x042f;uby</a></li>
+        <li><a class="text-capital" href="<%= url_to_site "teamnaruby" %>">na&#x042f;uby</a></li>
+        <li><a class="text-capital" href="<%= url_to_site "teamasked" %>">AskEd</a></li>
         <li><%= link_to Askalot::VERSION::STRING, url_to_repository("releases/tag/v#{Askalot::VERSION::STRING}") %></li>
       </ul>
     </div>

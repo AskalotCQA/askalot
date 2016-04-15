@@ -36,7 +36,7 @@ describe 'Search Users', type: :feature do
   end
 
   it 'paginates through records' do
-    users = 60.times.map { |n| create :user, name: "user_#{n}" }
+    users = 60.times.map { |n| create :user, name: "user_#{n.to_s.rjust(3, '0')}", nick: "user_#{n.to_s.rjust(3, '0')}" }
 
     visit shared.root_path
 
@@ -47,7 +47,7 @@ describe 'Search Users', type: :feature do
 
     within '#users' do
       users.first(30).each do |user|
-        expect(page).to have_content(user.login)
+        expect(page).to have_content(user.name)
       end
     end
 
@@ -57,7 +57,7 @@ describe 'Search Users', type: :feature do
 
     within '#users' do
       users[30...60].each do |user|
-        expect(page).to have_content(user.login)
+        expect(page).to have_content(user.name)
       end
     end
   end

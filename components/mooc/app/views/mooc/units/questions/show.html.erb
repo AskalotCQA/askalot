@@ -32,7 +32,7 @@
 
           <div id="question-comments">
             <%= render 'mooc/units/questions/comments', question: @question, remote: true %>
-            <%= render 'mooc/units/comments/form', commentable: @question, page_url: @page_url, remote: true %>
+            <%= render 'mooc/units/comments/form', model: :question, commentable: @question, page_url: @page_url, remote: true %>
           </div>
         </div>
       </div>

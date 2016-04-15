@@ -32,8 +32,8 @@ module Mooc
 
         lti_id = params[:resource_link_id].split('-', 2).last
 
-        @unit = Shared::Category.find_by lti_id: lti_id
-        @unit = Shared::Category.create(name: 'unknown', uuid: 'unknown', lti_id: lti_id, askable: true) if @unit.nil?
+        @unit = Shared::Category.in_contexts(Shared::Context::Manager.current_context).find_by lti_id: lti_id
+        @unit = Shared::Category.create(name: 'unknown', uuid: 'unknown', lti_id: lti_id, parent_id: Shared::Context::Manager.current_context, askable: true) if @unit.nil?
 
         Shared::ContextUser.find_or_create_by!(user: current_user, context_id: Shared::Context::Manager.current_context) unless @unit.parent_id.nil?
       else
@@ -67,12 +67,21 @@ module Mooc
       params['roles'] = :teacher if params['roles'] == 'Instructor'
       params['roles'] = :teacher_assistant if params['roles'] == 'Administrator'
 
-      user = User.find_by(login: params['user_id'])
-      user_attributes = { login: params['user_id'], nick: params['lis_person_sourcedid'],
-          email: params['lis_person_contact_email_primary'], role: params['roles'].downcase }
-      user = User.create_without_confirmation! user_attributes if user.nil?
+      begin
+        user = User.find_by(login: params['user_id'])
 
-      sign_in(:user, user)
+        raise t('unit.error.account_not_created_yet') if user.nil? && (!params['lis_person_sourcedid'] || !params['lis_person_contact_email_primary'])
+
+        user_attributes = { login: params['user_id'], nick: params['lis_person_sourcedid'],
+            email: params['lis_person_contact_email_primary'], role: params['roles'].downcase }
+        user = User.create_without_confirmation! user_attributes if user.nil?
+
+        sign_in(:user, user)
+      rescue => e
+        @exception = e.message
+
+        return false
+      end
 
       true
     end
