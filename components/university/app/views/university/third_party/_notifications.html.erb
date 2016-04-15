@@ -1,0 +1,3 @@
+<% if notifications.any? %>
+  <%= link_to t('notification.unread_x', count: notifications.size), shared.notifications_path, class: 'btn btn-primary' %>
+<% end %>

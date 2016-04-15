@@ -3,6 +3,10 @@
     <%= icon_tag :list, label: t('question.list') %>
   </a>
 
+  <div class="pull-right">
+    <%= render 'university/third_party/notifications', notifications: current_user.notifications.unread %>
+  </div>
+
   <div id="question">
     <div class="row">
       <div class="col-xs-9 col-sm-10 col-md-10">
