@@ -49,11 +49,10 @@ describe Mooc::UnitsController, type: :controller do
       expect(Shared::Category.last.name).to eql('unknown')
     end
 
-    it 'does not create new category and context if already exist' do
+    it 'does not create new category and context if they already exist' do
       sign_in user
 
-      Shared::Category.create(name: 'context', uuid: 1)
-      Shared::Category.create(name: 'category-hash', lti_id: 'category-hash')
+      post :show, @params
 
       before_count = Shared::Category.all.count
 
@@ -61,7 +60,7 @@ describe Mooc::UnitsController, type: :controller do
 
       after_count = Shared::Category.all.count
 
-      expect(after_count).to eql(before_count + 1)
+      expect(after_count).to eql(before_count)
     end
   end
 
