@@ -78,7 +78,7 @@ edx_production:
   username: postgres
   password: postgres
 
-edx_production:
+lugano_production:
   adapter: postgresql
   encoding: unicode
   database: askalot_lugano_production
