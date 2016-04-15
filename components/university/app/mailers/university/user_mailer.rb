@@ -28,7 +28,7 @@ class UserMailer < ActionMailer::Base
   def notifications(user, from:)
     @from = from
     @user = user
-    @notifications = @user.notifications.where('created_at >= ?', @from)
+    @notifications = @user.notifications.unread.where('created_at >= ?', @from)
 
     return if @notifications.empty?
 

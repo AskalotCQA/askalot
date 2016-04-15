@@ -28,7 +28,7 @@ class UserMailer < ActionMailer::Base
     @user = user
     @contexts = @user.contexts
     @contexts_by_id = Hash[@contexts.map { |c| [c.id, c] }]
-    @notifications_in_contexts = @contexts.map{ |context| @user.notifications.in_context(context.id).where('created_at >= ?', @from) }
+    @notifications_in_contexts = @contexts.map{ |context| @user.notifications.unread.in_context(context.id).where('created_at >= ?', @from) }
     @notifications_in_contexts = @notifications_in_contexts.select { |n| n.count > 0 } unless @notifications_in_contexts.nil?
 
     return if @notifications_in_contexts.empty?
