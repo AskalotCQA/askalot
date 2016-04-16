@@ -1,0 +1,57 @@
+.dashboard {
+  margin-top: 40px;
+
+  .headline {
+    margin-bottom: 20px;
+
+    h1 {
+      font-variant: small-caps;
+    }
+
+    p {
+      @extend .text-muted;
+
+      font-style: italic;
+    }
+  }
+
+  .links {
+    a {
+      vertical-align: middle;
+      background-color: #37bd9c;
+      color: #fff;
+      float: left;
+      position: relative;
+      height: 80px;
+      display: table-cell;
+      width: 100%;
+      margin: 10px 0;
+      text-decoration: none;
+
+      .link-icon {
+        text-align: center;
+        background-color: #2a9579;
+        position: absolute;
+        width: 50px;
+        height: 100%;
+        line-height: 80px;
+        font-size: 2em;
+      }
+
+      .link-text {
+        text-align: left;
+        margin-left: 60px;
+        height: 100%;
+
+        .number {
+          font-size: 1.8em;
+        }
+
+        .description {
+          text-transform: uppercase;
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+}

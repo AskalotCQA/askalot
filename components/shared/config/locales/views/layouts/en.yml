@@ -16,6 +16,16 @@ en:
     sign_up: "Sign up"
     sign_in: "Sign in"
 
+    dashboard:
+      activities: Activities
+      news: News
+      new_questions: new questions
+      new_answers: new answers
+      new_comments: new comments
+      new_questions: new questions in watched categories
+      new_answers_in_watched_categories: new answers in watched categories
+      new_comments_in_watched_categories: new comments in watched categories
+
     step:
       first: "Ask questions"
       second: "Answer and discuss"

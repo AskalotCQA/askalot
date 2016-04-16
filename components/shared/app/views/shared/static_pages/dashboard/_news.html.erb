@@ -1,0 +1,21 @@
+<% if news.any? %>
+  <ol class="list-unstyled">
+    <% news.each do |news| %>
+      <li>
+        <h4>
+          <%= link_to news.title, news_index_path(tab: :'news')+"#news-#{news.id}" %>
+        </h4>
+        <div class="news-date">
+          <small>
+            <%= time_tag news.created_at.to_date, format: :default %>
+          </small>
+        </div>
+        <%= render_markdown news.description %>
+      </li>
+    <% end %>
+  </ol>
+<% else %>
+  <div class="alert alert-info">
+    <%= t('news.none') %>
+  </div>
+<% end %>

@@ -1,0 +1,57 @@
+<% use_container true %>
+
+<div class="dashboard">
+  <div class="pull-right">
+    <ul class="list list-inline">
+      <li>
+        <%= icon_link_to 'question-circle', t('home.ask'), shared.new_question_path, class: 'btn btn-primary' %>
+        <%= icon_link_to :comment, t('home.answer'), shared.questions_path(@question), class: 'btn btn-success' %>
+        <%= icon_link_to :tasks, t('home.questions'), shared.questions_path, class: 'btn btn-info' %>
+      </li>
+    </ul>
+  </div>
+
+  <div class="headline">
+    <h1>Askalot</h1>
+
+    <p><%= t 'home.headline' %></p>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+        <div class="links row">
+          <%= dashboard_link 'question-circle', @new_questions, t('home.dashboard.new_questions'), new_question_path %>
+          <%= dashboard_link 'question-circle', @new_questions_watched, t('home.dashboard.new_questions'), new_question_path %>
+
+          <%= dashboard_link 'envelope-o', @new_answers, t('home.dashboard.new_answers'), new_question_path %>
+          <%= dashboard_link 'envelope-o', @new_answers_watched, t('home.dashboard.new_answers_in_watched_categories'), new_question_path %>
+
+          <%= dashboard_link 'comment', @new_comments, t('home.dashboard.new_comments'), new_question_path %>
+          <%= dashboard_link 'comment', @new_comments_watched, t('home.dashboard.new_comments_in_watched_categories'), new_question_path %>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+      <div>
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active">
+            <a href="#activities" aria-controls="activities" role="tab" data-toggle="tab"><%= t 'home.dashboard.activities' %></a>
+          </li>
+          <li role="presentation">
+            <a href="#news" aria-controls="news" role="tab" data-toggle="tab"><%= t 'home.dashboard.news' %></a>
+          </li>
+        </ul>
+
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="activities">
+            <%= render 'shared/static_pages/dashboard/activities', activities: @activities %>
+          </div>
+
+          <div role="tabpanel" class="tab-pane" id="news">
+            <%= render 'shared/static_pages/dashboard/news', news: @news %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

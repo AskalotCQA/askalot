@@ -16,6 +16,16 @@ sk:
     sign_up: "Vytvoriť si účet"
     sign_in: "Prihlásiť sa"
 
+    dashboard:
+      activities: Aktivita
+      news: Novinky
+      new_questions: nových otázok
+      new_answers: nových odpovedí
+      new_comments: nových komentárov
+      new_questions: nových otázok v sledovaných kategóriach
+      new_answers_in_watched_categories: nových odpovedí v sledovaných kategóriach
+      new_comments_in_watched_categories: nových komentárov v sledovaných kategóriach
+
     step:
       first: "Pýtajte sa otázky"
       second: "Odpovedajte a diskutujte"

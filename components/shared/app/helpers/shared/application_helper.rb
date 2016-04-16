@@ -2,6 +2,8 @@ module Shared
 module ApplicationHelper
   include FontAwesome::Rails::IconHelper
 
+  @@use_container = false
+
   def default_title
     'Askalot'
   end
@@ -37,8 +39,12 @@ module ApplicationHelper
     url_to_organization "askalot/#{path}"
   end
 
+  def use_container(value)
+    @@use_container = value
+  end
+
   def use_container?
-    [DeviseController, ErrorsController, Shared::StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
+    @@use_container || [DeviseController, ErrorsController, Shared::StaticPagesController].inject(true) { |result, type| result &&= !controller.is_a?(type) }
   end
 end
 end

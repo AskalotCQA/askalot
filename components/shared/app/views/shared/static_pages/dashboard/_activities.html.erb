@@ -1,0 +1,11 @@
+<% if activities.any? %>
+  <ol class="activities">
+    <% activities.each do |activity| %>
+      <%= render 'shared/activities/activity', activity: activity %>
+    <% end %>
+  </ol>
+<% else %>
+  <div class="alert alert-info">
+    <%= t('activity.none.global') %>
+  </div>
+<% end %>

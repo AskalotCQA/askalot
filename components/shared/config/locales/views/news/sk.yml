@@ -15,3 +15,5 @@ sk:
     delete:
       success: "Novinka bola úspešne zmazaná."
       failure: "Novinku sa nepodarilo zmazať."
+
+    none: "Žiadne novinky."
