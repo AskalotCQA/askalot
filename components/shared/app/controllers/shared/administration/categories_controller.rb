@@ -45,8 +45,8 @@ class Administration::CategoriesController < AdministrationController
 
   def update_settings
     Shared::Category.all.each do |category|
-      shared = params[:askable].includes? category.id
-      askable = params[:askable].includes? category.id
+      shared = params[:shared] ? params[:shared].include?(category.id.to_s) : false
+      askable =  params[:askable] ? params[:askable].include?(category.id.to_s) : false
 
       if category.shared != shared || category.askable != askable
         category.shared = shared
