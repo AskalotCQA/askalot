@@ -5,7 +5,7 @@
     <ul class="list list-inline">
       <li>
         <%= icon_link_to 'question-circle', t('home.ask'), shared.new_question_path, class: 'btn btn-primary' %>
-        <%= icon_link_to :comment, t('home.answer'), shared.questions_path(@question), class: 'btn btn-success' %>
+        <%= icon_link_to :comment, t('home.answer'), shared.question_path(@question), class: 'btn btn-success' %>
         <%= icon_link_to :tasks, t('home.questions'), shared.questions_path, class: 'btn btn-info' %>
       </li>
     </ul>
