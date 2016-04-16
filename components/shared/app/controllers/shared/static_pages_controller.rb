@@ -38,7 +38,7 @@ class StaticPagesController < ApplicationController
     limit = 50
 
     @news = Shared::New.order('news.id DESC').active.limit(limit)
-    @activities = Shared::Activity.in_context(Shared::Context::Manager.current_context).where("activities.created_at >= ?", current_user.current_sign_in_at).order('activities.id DESC').limit(limit)
+    @activities = Shared::Activity.in_context(Shared::Context::Manager.current_context).where("activities.created_at >= ?", current_user.last_sign_in_at).order('activities.id DESC').limit(limit)
   end
 
   def help
