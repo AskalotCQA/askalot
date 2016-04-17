@@ -12,6 +12,7 @@ sk:
     answer: "Skúsiť odpovedať"
     questions: "Všetky položené otázky"
     activities: "Prehľad aktivity v systéme"
+    reset_dashboard_time: "Označiť všetko ako prečítané"
 
     sign_up: "Vytvoriť si účet"
     sign_in: "Prihlásiť sa"

@@ -38,7 +38,7 @@ class StaticPagesController < ApplicationController
     limit = 50
 
     @news = Shared::New.order('news.id DESC').active.limit(limit)
-    @activities = Shared::Activity.in_context(Shared::Context::Manager.current_context).where("activities.created_at >= ?", current_user.last_sign_in_at).order('activities.id DESC').limit(limit)
+    @activities = Shared::Activity.in_context(Shared::Context::Manager.current_context).where("activities.created_at >= ?", current_user.dashboard_last_sign_in_at).order('activities.id DESC').limit(limit)
   end
 
   def help
@@ -54,7 +54,7 @@ class StaticPagesController < ApplicationController
   private
 
   def dashboard_count(query)
-    query.where("#{query.table_name}.created_at >= ?", current_user.last_sign_in_at).count
+    query.where("#{query.table_name}.created_at >= ?", current_user.dashboard_last_sign_in_at).count
   end
 end
 end

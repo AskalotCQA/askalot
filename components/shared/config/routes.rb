@@ -38,6 +38,7 @@ Shared::Engine.routes.draw do
       get   :suggest,  on: :collection
 
       get :follow, on: :member
+      get :reset_dashboard_time, on: :member
 
       concerns :searchable
     end

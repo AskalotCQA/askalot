@@ -96,6 +96,11 @@ class UsersController < ApplicationController
     render json: @users, root: false
   end
 
+  def reset_dashboard_time
+    current_user.update(dashboard_last_sign_in_at: Time.now)
+    redirect_to :back
+  end
+
   private
 
   def user_params
