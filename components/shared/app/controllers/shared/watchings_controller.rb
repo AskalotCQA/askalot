@@ -8,8 +8,18 @@ class WatchingsController < ApplicationController
     count = 20
     @watchings = Shared::Watching.in_context(@context).by(current_user).order(created_at: :desc)
 
-    @questions  = @watchings.of('Shared::Question').page(tab_page :questions).per(count)
-    @categories = @watchings.of('Shared::Category').page(tab_page :categories).per(count)
+    @questions = @watchings.of('Shared::Question').page(tab_page :questions).per(count)
+
+    @categories = @watchings.of('Shared::Category')
+      .includes('category')
+      .reorder(
+        "CASE
+          WHEN (watchable_id IN (#{Category::all_in_contexts(@context).select('id').to_sql})) THEN 1
+          ELSE 2 
+        END",
+        'categories.full_tree_name'
+      ).page(tab_page :categories).per(count)
+
     @tags       = @watchings.of('Shared::Tag').page(tab_page :tags).per(count)
   end
 

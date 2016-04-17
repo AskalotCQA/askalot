@@ -18,7 +18,7 @@ module Shared::WatchingsHelper
 
   def link_to_watchable(watchable, options = {})
     case watchable.class.name
-    when 'Shared::Category' then link_to_category watchable, options.except(:length)
+    when 'Shared::Category' then link_to_category watchable, options.except(:length), watchable.full_tree_name
     when 'Shared::Question' then link_to_question watchable, options
     when 'Shared::Tag'      then link_to_tag watchable, options.except(:length)
     else watchable
@@ -27,7 +27,7 @@ module Shared::WatchingsHelper
 
   def static_watchable(watchable, options = {})
     case watchable.class.name
-      when 'Shared::Category' then watchable.full_public_name
+      when 'Shared::Category' then watchable.full_tree_name
       when 'Shared::Question' then question_title_preview(watchable, options)
       when 'Shared::Tag'      then watchable.value
       else watchable
