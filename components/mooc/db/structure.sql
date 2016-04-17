@@ -2269,13 +2269,6 @@ CREATE INDEX index_categories_on_lti_id ON categories USING btree (lti_id);
 
 
 --
--- Name: index_categories_on_name_and_parent_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE UNIQUE INDEX index_categories_on_name_and_parent_id ON categories USING btree (name, parent_id);
-
-
---
 -- Name: index_categories_on_rgt; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3546,4 +3539,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160307103948');
 INSERT INTO schema_migrations (version) VALUES ('20160313091803');
 
 INSERT INTO schema_migrations (version) VALUES ('20160402191527');
+
+INSERT INTO schema_migrations (version) VALUES ('20160417130646');
 
