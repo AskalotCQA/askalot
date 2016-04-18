@@ -49,7 +49,7 @@ class Administration::CategoriesController < AdministrationController
       askable =  params[:askable] ? params[:askable].include?(category.id.to_s) : false
 
       if category.shared != shared || category.askable != askable
-        category.shared = shared
+        category.shared  = shared
         category.askable = askable
 
         category.save
