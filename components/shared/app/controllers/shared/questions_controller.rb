@@ -24,7 +24,7 @@ class QuestionsController < ApplicationController
 
     @questions = case params[:tab].to_sym
                  when :unanswered then Shared::Question.in_context(@context).unanswered.by_votes
-                 when :answered   then Shared::Question.in_context(@context).answered.by_votes
+                 when :answered   then Shared::Question.in_context(@context).answered_but_not_best.by_votes
                  when :solved     then Shared::Question.in_context(@context).solved.by_votes
                  when :favored    then Shared::Question.in_context(@context).favored.by_votes
                  else Shared::Question.in_context(@context).recent

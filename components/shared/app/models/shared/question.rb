@@ -48,9 +48,9 @@ class Question < ActiveRecord::Base
   scope :unanswered,   lambda { unclosed.with_category.includes(:answers).where(answers: { question_id: nil }) }
   scope :answered,     lambda { with_category.joins(:answers).uniq }
   scope :all_answered, lambda { joins(:answers).uniq }
-  scope :solved,       lambda { with_category.joins(:answers).merge(best_answers).references(:labelings).uniq }
+  scope :solved,       lambda { with_category.where(with_best_answer: true) }
 
-  scope :answered_but_not_best, lambda { with_category.joins(:answers).where('questions.id not in (?)', joins(:answers).merge(best_answers).references(:labeling).uniq.select('questions.id')).uniq }
+  scope :answered_but_not_best, lambda { answered.where(with_best_answer: false) }
 
   scope :by, lambda { |user| where(author: user) }
   scope :in_context, lambda { |context| includes(:related_categories).where(categories: { id: context }) }

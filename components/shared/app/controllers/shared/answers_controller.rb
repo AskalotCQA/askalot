@@ -59,6 +59,8 @@ class AnswersController < ApplicationController
           dispatch_event :delete, labeling, for: answer.question.watchers, anonymous: anonymous
         end
       end
+
+      @question.update(with_best_answer: false)
     when :helpful
       authorize! :label, @question
 
@@ -68,6 +70,8 @@ class AnswersController < ApplicationController
     end
 
     @labeling = @answer.toggle_labeling_by! current_user, params[:value]
+
+    @question.update(with_best_answer: true) if @answer.labels.where(value: 'best').first
 
     dispatch_event dispatch_event_action_for(@labeling), @labeling, for: @question.watchers, anonymous: anonymous
   end
