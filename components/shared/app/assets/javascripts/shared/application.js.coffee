@@ -41,6 +41,7 @@
 #= require ./tree-table
 #= require ./autofocus
 #= require ./analytics
+#= require ./external-links
 #= require ./fixes
 #
 #= require ./facebook
