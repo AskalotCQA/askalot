@@ -50,8 +50,15 @@ module Mooc
     end
 
     def update_settings
-      Shared::Category.in_contexts(contexts_to_administrate).update_all askable: false
-      Shared::Category.in_contexts(contexts_to_administrate).where(id: params[:askable]).update_all askable: true if params[:askable]
+      Shared::Category.in_contexts(contexts_to_administrate).all.each do |category|
+        askable =  params[:askable] ? params[:askable].include?(category.id.to_s) : false
+
+        if category.askable != askable
+          category.askable = askable
+
+          category.save
+        end
+      end
 
       render json: { success: true }
     end
