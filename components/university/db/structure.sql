@@ -1073,7 +1073,7 @@ CREATE TABLE questions (
     closed boolean DEFAULT false NOT NULL,
     closer_id integer,
     closed_at timestamp without time zone,
-    with_best_answer boolean
+    with_best_answer boolean DEFAULT false
 );
 
 
