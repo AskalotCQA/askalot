@@ -9,7 +9,7 @@ class Notification < ActiveRecord::Base
 
   belongs_to :resource, -> { unscope where: :deleted }, polymorphic: true
 
-  default_scope -> { where(resource_type: [Answer, Comment, Evaluation, Favorite, Labeling, Question]) }
+  default_scope -> { where(resource_type: [Shared::Answer, Shared::Comment, Shared::Evaluation, Shared::Favorite, Shared::Labeling, Shared::Question, Shared::Following]) }
 
   scope :for, lambda { |user| where(recipient: user) }
   scope :by,  lambda { |user| where(initiator: user) }

@@ -17,27 +17,33 @@ module Shared::ActivitiesHelper
   end
 
   def activity_content_by_attributes(action, initiator, resource, options = {})
-    question = resource.to_question
-
-    resource_options = options.clone
-    question_options = options.merge(deleted: question.deleted?, length: 50)
-
     content = activity_content_pattern(action, resource)
 
-    resource_body = activity_resource_body(action, resource, resource_options)
-    question_body = activity_question_body(action, question, question_options)
+    if resource.class.name.downcase.to_sym == :following
+      follower_link = link_to_activity action, initiator, resource, options.merge(length: 50)
 
-    # TODO(zbell) note that unlinked content also lacks any struct info about deletion: no muted spans
-    if options.delete(:unlink) || !question.available_in_current_context?
-      options[:mute] = true
+      translate(content, follower: follower_link).html_safe
+    else
+      question = resource.to_question
 
-      return translate content, resource: resource_body, question: question_body
+      resource_options = options.clone
+      question_options = options.merge(deleted: question.deleted?, length: 50)
+
+      resource_body = activity_resource_body(action, resource, resource_options)
+      question_body = activity_question_body(action, question, question_options)
+
+      # TODO(zbell) note that unlinked content also lacks any struct info about deletion: no muted spans
+      if options.delete(:unlink) || !question.available_in_current_context?
+        options[:mute] = true
+
+        return translate content, resource: resource_body, question: question_body
+      end
+
+      resource_link = link_to_activity_by_attributes action, initiator, resource, resource_options.merge(body: resource_body)
+      question_link = link_to_activity_by_attributes action, initiator, resource, question_options.merge(body: question_body)
+
+      translate(content, resource: resource_link, question: question_link).html_safe
     end
-
-    resource_link = link_to_activity_by_attributes action, initiator, resource, resource_options.merge(body: resource_body)
-    question_link = link_to_activity_by_attributes action, initiator, resource, question_options.merge(body: question_body)
-
-    translate(content, resource: resource_link, question: question_link).html_safe
   end
 
   def link_to_activity(activity, options = {}, &block)

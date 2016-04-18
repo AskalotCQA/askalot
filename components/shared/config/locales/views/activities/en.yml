@@ -37,6 +37,7 @@ en:
         comment: "comment"
         evaluation: "evaluation"
         favorite: "favorite"
+        following: "following"
         labeling: "labeling"
         question: "question"
         view: "view"
