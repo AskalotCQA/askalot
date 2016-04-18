@@ -11,21 +11,8 @@
         <%= navbar_link_tag t('question.navigation'), shared.questions_path, active: [shared.questions_path, shared.search_questions_path] %>
         <%= navbar_link_tag t('category.navigation'), shared.categories_path, active: [shared.categories_path, shared.search_categories_path] %>
         <%= navbar_link_tag t('tag.navigation'), shared.tags_path, active: [shared.tags_path, shared.search_tags_path] %>
-        <%= navbar_link_tag t('user.navigation'), shared.users_path, class: :'hidden-sm hidden-md', active: [shared.users_path, shared.search_users_path] %>
-        <%= navbar_link_tag t('activity.navigation'), shared.activities_path, class: :'hidden-sm hidden-md' %>
-        <%= navbar_link_tag t('statistic.navigation'), shared.statistics_path, class: :'hidden-sm hidden-md' if user_signed_in? && can?(:observe, :any) %>
-        <%= navbar_link_tag t('administration.navigation'), shared.administration_root_path, class: :'hidden-sm hidden-md' if user_signed_in? && can?(:administrate, :any) %>
-        <%= navbar_link_tag t('teacher_administration.navigation'), mooc.teacher_administration_root_path, class: :'hidden-sm hidden-md' if user_signed_in? && can?(:teacher_administrate, :any) %>
-        <%= navbar_link_tag t('help.navigation'), shared.help_path, class: :'hidden-sm hidden-md' %>
-        <%= navbar_dropdown_tag :'caret-down', nil, '#', class: :'visible-sm visible-md' do %>
-          <%= content_tag :li, link_to(t('user.navigation'), shared.users_path) %>
-          <%= content_tag :li, link_to(t('activity.navigation'), shared.activities_path) %>
-          <%= content_tag :li, link_to(t('statistic.navigation'), shared.statistics_path) if user_signed_in? && can?(:administrate, :any) %>
-          <%= content_tag :li, link_to(t('administration.navigation'), shared.administration_root_path) if user_signed_in? && can?(:administrate, :any) %>
-          <%= content_tag :li, link_to(t('teacher_administration.navigation'), mooc.teacher_administration_root_path) if user_signed_in? && can?(:teacher_administrate, :any) %>
-          <li class="divider"></li>
-          <%= content_tag :li, link_to(t('help.navigation'), shared.help_path) %>
-        <% end %>
+        <%= navbar_link_tag t('user.navigation'), shared.users_path,  active: [shared.users_path, shared.search_users_path] %>
+        <%= header_items() %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>

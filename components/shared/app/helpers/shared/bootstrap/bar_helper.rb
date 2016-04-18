@@ -3,7 +3,7 @@ module Shared::Bootstrap::BarHelper
     caret = options.delete(:caret)
     body  = icon_tag(caret, label: body, fixed: true, join: :append) if caret
     link  = icon_link_to(type, body, url, class: :'dropdown-toggle', data: { toggle: :dropdown }, fixed: true, join: options.delete(:join))
-    list  = content_tag :ul, capture(&block), class: :'dropdown-menu'
+    list  = content_tag :ul, capture(&block), class: :'dropdown-menu' if block_given? && capture(&block).to_s != ''
     body  = (link << list).html_safe
 
     navbar_li_tag body, options.merge(class: [:dropdown, options.delete(:class)])
