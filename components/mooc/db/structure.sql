@@ -255,7 +255,7 @@ CREATE TABLE categories (
     full_public_name character varying(255),
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     shared boolean DEFAULT true,
-    askable boolean DEFAULT false,
+    askable boolean DEFAULT true,
     lti_id character varying(255),
     description text
 );
@@ -2283,13 +2283,6 @@ CREATE INDEX index_categories_on_slido_username ON categories USING btree (slido
 
 
 --
--- Name: index_categories_questions_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_categories_questions_on_category_id ON categories_questions USING btree (category_id);
-
-
---
 -- Name: index_categories_questions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3545,5 +3538,9 @@ INSERT INTO schema_migrations (version) VALUES ('20160307103948');
 
 INSERT INTO schema_migrations (version) VALUES ('20160313091803');
 
+INSERT INTO schema_migrations (version) VALUES ('20160330210355');
+
 INSERT INTO schema_migrations (version) VALUES ('20160402191527');
+
+INSERT INTO schema_migrations (version) VALUES ('20160417130646');
 
