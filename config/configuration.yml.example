@@ -7,7 +7,7 @@ defaults: &defaults
     application:
       id: '308609915963601'
       secret: TODO
-     enabled: true
+    enabled: true
 
   mailer:
     username: TODO
