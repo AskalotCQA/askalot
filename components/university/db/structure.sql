@@ -255,7 +255,7 @@ CREATE TABLE categories (
     full_public_name character varying(255),
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     shared boolean DEFAULT true,
-    askable boolean DEFAULT false,
+    askable boolean DEFAULT true,
     description text
 );
 
@@ -3471,4 +3471,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160306211255');
 INSERT INTO schema_migrations (version) VALUES ('20160307103948');
 
 INSERT INTO schema_migrations (version) VALUES ('20160313091803');
+
+INSERT INTO schema_migrations (version) VALUES ('20160330210355');
+
+INSERT INTO schema_migrations (version) VALUES ('20160417130646');
 
