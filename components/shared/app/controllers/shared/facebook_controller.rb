@@ -14,8 +14,6 @@ class FacebookController < ApplicationController
     @content = params[:n]
     @link    = params[:r]
 
-    puts @content.inspect
-    puts @link.inspect
     fail unless !@link || @link =~ /\A\//
   end
 

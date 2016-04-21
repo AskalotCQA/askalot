@@ -15,6 +15,10 @@
     <% if use_container? %>
       <div id="unit-view">
         <div id="main" class="container">
+          <% if session[:facebook_modal] %>
+              <%= render 'shared/facebook/joining' %>
+              <%= render 'shared/facebook/restoring' %>
+          <% end %>
           <%= flash_messages -%>
           <%= yield -%>
         </div>
