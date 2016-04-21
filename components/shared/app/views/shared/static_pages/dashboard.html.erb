@@ -3,11 +3,11 @@
 <div class="dashboard">
   <div class="pull-right">
     <ul class="list list-inline">
-      <li>
-        <%= icon_link_to 'check-circle-o', t('home.reset_dashboard_time'), shared.reset_dashboard_time_user_path(current_user), class: 'btn btn-default' %>
-        <%= icon_link_to 'question-circle', t('home.ask'), shared.new_question_path, class: 'btn btn-primary' %>
-        <%= icon_link_to :comment, t('home.answer'), shared.question_path(@question), class: 'btn btn-success' %>
-        <%= icon_link_to :tasks, t('home.questions'), shared.questions_path, class: 'btn btn-info' %>
+      <li class="remove-grid-md">
+        <%= icon_link_to 'check-circle-o', t('home.reset_dashboard_time'), shared.reset_dashboard_time_user_path(current_user), class: 'btn btn-default col-xs-12' %>
+        <%= icon_link_to 'question-circle', t('home.ask'), shared.new_question_path, class: 'btn btn-primary col-xs-6' %>
+        <%= icon_link_to :comment, t('home.answer'), shared.question_path(@question), class: 'btn btn-success col-xs-6' %>
+        <%= icon_link_to :tasks, t('home.questions'), shared.questions_path, class: 'btn btn-info col-xs-12' %>
       </li>
     </ul>
   </div>
@@ -21,14 +21,14 @@
   <div class="row">
     <div class="col-md-6">
         <div class="links row">
-          <%= dashboard_link 'question-circle', @new_questions, t('home.dashboard.new_questions'), new_question_path %>
-          <%= dashboard_link 'question-circle', @new_questions_watched, t('home.dashboard.new_questions'), new_question_path %>
+          <%= dashboard_link 'comments-o', @new_questions, t('home.dashboard.new_questions'), new_question_path %>
+          <%= dashboard_link 'comments-o', @new_questions_watched, t('home.dashboard.new_questions'), new_question_path %>
 
-          <%= dashboard_link 'envelope-o', @new_answers, t('home.dashboard.new_answers'), new_question_path %>
-          <%= dashboard_link 'envelope-o', @new_answers_watched, t('home.dashboard.new_answers_in_watched_categories'), new_question_path %>
+          <%= dashboard_link 'rocket', @new_answers, t('home.dashboard.new_answers'), new_question_path %>
+          <%= dashboard_link 'rocket', @new_answers_watched, t('home.dashboard.new_answers_in_watched_categories'), new_question_path %>
 
-          <%= dashboard_link 'comment', @new_comments, t('home.dashboard.new_comments'), new_question_path %>
-          <%= dashboard_link 'comment', @new_comments_watched, t('home.dashboard.new_comments_in_watched_categories'), new_question_path %>
+          <%= dashboard_link 'user', @new_comments, t('home.dashboard.new_comments'), new_question_path %>
+          <%= dashboard_link 'user', @new_comments_watched, t('home.dashboard.new_comments_in_watched_categories'), new_question_path %>
         </div>
     </div>
 

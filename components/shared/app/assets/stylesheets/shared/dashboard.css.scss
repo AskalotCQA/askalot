@@ -1,3 +1,9 @@
+@media screen and (min-width: $screen-md-min) {
+  .remove-grid-md > * {
+    float: none; width: auto;
+  }
+}
+
 .dashboard {
   margin-top: 40px;
 
@@ -18,11 +24,10 @@
   .links {
     a {
       vertical-align: middle;
-      background-color: #37bd9c;
-      color: #fff;
+      background-color: #eceff4;
       float: left;
       position: relative;
-      height: 80px;
+      height: 110px;
       display: table-cell;
       width: 100%;
       margin: 10px 0;
@@ -30,21 +35,29 @@
 
       .link-icon {
         text-align: center;
+        color: #fff;
         background-color: #2a9579;
         position: absolute;
-        width: 50px;
+        width: 110px;
         height: 100%;
         line-height: 80px;
-        font-size: 2em;
+        font-size: 3em;
+        i {
+          top: 50%;
+          margin-top: -50%;
+        }
       }
 
       .link-text {
+        padding: 7px;
+        color: #877676;
         text-align: left;
-        margin-left: 60px;
+        margin-left: 110px;
         height: 100%;
 
         .number {
-          font-size: 1.8em;
+          text-align: center;
+          font-size: 2.2em;
         }
 
         .description {
