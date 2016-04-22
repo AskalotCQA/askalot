@@ -1,8 +1,6 @@
 class FacebookController < ActionController::Base
   before_action :authenticate_user!
 
-  skip_before_filter :verify_authenticity_token
-
   def facebook
     @auth    = request.env['omniauth.auth']
     @proxy   = FbGraph::User.me(@auth.credentials.token)
