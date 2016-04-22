@@ -4,10 +4,6 @@ class ApplicationController < ActionController::Base
 
   before_action :determine_context
 
-  def default_url_options(options={})
-    Rails.module.mooc? ? { context: Shared::Context::Manager.current_context } : {}
-  end
-
   protected
 
   # concerns order is significant
