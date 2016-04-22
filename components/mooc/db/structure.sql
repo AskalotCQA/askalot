@@ -1105,7 +1105,8 @@ CREATE TABLE questions (
     document_id integer,
     closed boolean DEFAULT false NOT NULL,
     closer_id integer,
-    closed_at timestamp without time zone
+    closed_at timestamp without time zone,
+    with_best_answer boolean DEFAULT false
 );
 
 
@@ -3542,3 +3543,4 @@ INSERT INTO schema_migrations (version) VALUES ('20160402191527');
 
 INSERT INTO schema_migrations (version) VALUES ('20160417130646');
 
+INSERT INTO schema_migrations (version) VALUES ('20160402205422');
