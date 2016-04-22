@@ -1,7 +1,7 @@
 <div id="document-content">
-  <div id="new-question-button" class="btn btn-success" style="margin-bottom: 5px"><%= t 'question.new.title' %></div>
+  <div id="new-question-button" class="btn btn-success"><%= t 'question.new.title' %></div>
 
-  <%= form_for question, url: shared.questions_path, remote: true, html: { style: 'display: none' } do |f| %>
+  <%= form_for question, url: shared.questions_path, remote: true do |f| %>
     <div id="form-messages">
       <%= form_messages_for question %>
     </div>

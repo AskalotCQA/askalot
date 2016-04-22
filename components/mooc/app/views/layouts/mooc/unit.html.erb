@@ -14,7 +14,7 @@
   <body<%= resolve_sidebar(yield :sidebar) %>>
     <% if use_container? %>
       <div id="unit-view">
-        <div id="main" class="container">
+        <div id="main" class="container-fluid simple-view">
           <%= flash_messages -%>
           <%= yield -%>
         </div>
