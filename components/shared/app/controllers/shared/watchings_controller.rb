@@ -14,7 +14,7 @@ class WatchingsController < ApplicationController
       .includes('category')
       .reorder(
         "CASE
-          WHEN (watchable_id IN (#{Category::all_in_contexts(@context).select('id').to_sql})) THEN 1
+          WHEN (watchable_id IN (#{Shared::Category::all_in_contexts(@context).select('id').to_sql})) THEN 1
           ELSE 2 
         END",
         'categories.full_tree_name'
