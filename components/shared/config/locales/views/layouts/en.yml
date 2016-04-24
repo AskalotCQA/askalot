@@ -25,6 +25,8 @@ en:
       new_questions: new questions in watched categories
       new_answers_in_watched_categories: new answers in watched categories
       new_comments_in_watched_categories: new comments in watched categories
+      show_activities: Show all activities
+      no_activity: "No activity from %{date}."
 
     step:
       first: "Ask questions"

@@ -46,6 +46,8 @@
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="activities">
             <%= render 'shared/static_pages/dashboard/activities', activities: @activities %>
+            <br>
+            <%= link_to t('home.dashboard.show_activities'), activities_path %>
           </div>
 
           <div role="tabpanel" class="tab-pane" id="news">
