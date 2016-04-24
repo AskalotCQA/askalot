@@ -6,6 +6,6 @@
   </ol>
 <% else %>
   <div class="alert alert-info">
-    <%= t('home.dashboard.no_activity', date: l(current_user.dashboard_last_sign_in_at, format: :default)) %>
+    <%= t('home.dashboard.no_activity', date: l(current_user.dashboard_last_sign_in_at, format: :dashboard)) %>
   </div>
 <% end %>

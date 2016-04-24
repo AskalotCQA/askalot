@@ -27,7 +27,7 @@ sk:
       new_answers_in_watched_categories: nových odpovedí v sledovaných kategóriach
       new_comments_in_watched_categories: nových komentárov v sledovaných kategóriach
       show_activities: Zobraziť všetky aktivity
-      no_activity: "Žiadna aktivita od %{date}."
+      no_activity: "Nebola zaznamenaná žiadna aktivita od posledného prihlásenia %{date}."
 
     step:
       first: "Pýtajte sa otázky"
