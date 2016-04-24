@@ -115,4 +115,35 @@ describe 'Editing', type: :feature do
       expect(page).not_to have_css("#comment-#{comment.id}-edit-modal")
     end
   end
+
+  context 'when edit question category' do
+    let(:user_watcher)    { create :user }
+    let!(:category)       { create :category, name: 'Ostatné' }
+    let!(:watching)       { create :watching, watcher: user_watcher, watchable: category }
+
+    it 'sends notification to new watchers' do
+      login_as question.author
+
+      visit shared.question_path question
+
+      click_link "question-#{question.id}-edit-modal"
+
+      within "#question-#{question.id}-editing" do
+        select category.name, from: 'question_category_id'
+        click_button 'Uložiť'
+      end
+
+      click_link 'Odhlásiť', match: :first
+
+      login_as user_watcher
+
+      visit shared.root_path
+
+      click_link 'Zobraziť viac'
+
+      within "#unread" do
+        expect(page).to have_content("Upravenie otázky #{question.title}")
+      end
+    end
+  end
 end
