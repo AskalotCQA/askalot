@@ -20,7 +20,7 @@
 
   <div class="row">
     <div class="col-md-6">
-      <p class="dashboard-description"><%= t('home.dashboard.description', date: l(current_user.dashboard_last_sign_in_at, format: :dashboard)) %></p>
+      <p class="dashboard-description"><%= t('home.dashboard.description', date: l(current_user.dashboard_last_sign_in_at, format: :dashboard)).html_safe %></p>
     </div>
   </div>
   <div class="row">
