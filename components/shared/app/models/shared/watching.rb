@@ -9,6 +9,8 @@ class Watching < ActiveRecord::Base
 
   belongs_to :watchable, -> { unscope where: :deleted }, polymorphic: true
 
+  belongs_to :category, class_name: 'Shared::Category', foreign_key: 'watchable_id'
+
   scope :by, lambda { |user| where(watcher: user) }
   scope :of, lambda { |model| where(watchable_type: model.to_s.classify) }
   scope :in_context, lambda { |context| where(context: context) if Rails.module.mooc? }

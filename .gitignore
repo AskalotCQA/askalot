@@ -3,9 +3,12 @@
 .project
 .sass-cache
 .tags
+.vim
 
 .~lock.*
 *.*~
+*.swo
+*.swp
 
 /tags
 
