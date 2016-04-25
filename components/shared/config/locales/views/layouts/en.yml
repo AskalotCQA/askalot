@@ -27,6 +27,7 @@ en:
       new_comments_in_watched_categories: new comments in watched categories
       show_activities: Show all activities
       no_activity: "No activity has happened since your last login %{date}."
+      description: "Since your last login %{date}, these activities have happened in Askalot."
 
     step:
       first: "Ask questions"

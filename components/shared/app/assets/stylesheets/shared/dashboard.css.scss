@@ -4,6 +4,10 @@
   }
 }
 
+.dashboard-description{
+  margin-bottom: 20px !important;
+}
+
 .dashboard {
   margin-top: 40px;
 
@@ -30,7 +34,7 @@
       height: 110px;
       display: table-cell;
       width: 100%;
-      margin: 10px 0;
+      margin-bottom: 20px;
       text-decoration: none;
 
       .link-icon {
