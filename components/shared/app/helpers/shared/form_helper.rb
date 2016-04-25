@@ -1,4 +1,11 @@
 module Shared::FormHelper
+  def user_collection_select(id, collection = Shared::User.order(:login).all, value = :id, label = :login, options = {}, html_options = {})
+    options.merge(options)
+    html_options.deep_merge! class: :'form-control', data: { as: :select2 }
+
+    collection_select(id, collection, value, label, options, html_options)
+  end
+
   def category_collection_select(id, collection = Shared::Category.askable.includes(:assignments).order(:name), value = :id, label = :name_with_teacher_supported, options = {}, html_options = {})
     tags = collection.inject({}) do |hash, category|
       hash[category.send :id] = category.effective_tags

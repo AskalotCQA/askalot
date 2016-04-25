@@ -5,6 +5,7 @@
 .tags
 .vim
 
+.vim
 .~lock.*
 *.*~
 *.swo

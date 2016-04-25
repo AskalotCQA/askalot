@@ -1,0 +1,14 @@
+<div class="form-group">
+  <%= f.label :category_id %>
+  <%= f.category_collection_select :category_id, @categories, :id, :full_tree_name %>
+</div>
+
+<div class="form-group">
+  <%= f.label :user_nick %>
+  <%= f.user_collection_select :user_nick, @users, :nick %>
+</div>
+
+<div class="form-group">
+  <%= f.label :role_id %>
+  <%= f.role_collection_select :role_id %>
+</div>

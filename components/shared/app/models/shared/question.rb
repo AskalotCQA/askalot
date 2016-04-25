@@ -71,7 +71,8 @@ class Question < ActiveRecord::Base
   end
 
   def labels
-    category ? [category] + tags : tags
+    sorted_tags = tags.sort_by(&:name)
+    [category] + sorted_tags if category
   end
 
   def to_question

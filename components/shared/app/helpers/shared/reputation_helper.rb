@@ -8,7 +8,7 @@ module Shared::ReputationHelper
         gold:     { class: 'gold',     title: t('user.reputation.gold'),     icon: 'star-o' },
     }
 
-    return reputation_icon_map[:zero] if user == :anonymous
+    return reputation_icon_map[:zero] if user == :anonymous || user.profiles.of('reputation').first.nil?
 
     reputation = user.profiles.of('reputation').first.value
 

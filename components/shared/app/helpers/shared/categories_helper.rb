@@ -31,31 +31,44 @@ module Shared::CategoriesHelper
 
     return '' if objects.empty?
 
-    parents = objects.group_by(&:parent_id)
+    root = nil
+    parents = {}
+    objects.group_by(&:parent_id).each do |key, item|
+      key = key.nil? ? 0 : key
+      root = root.nil? ? key : [root, key].min
+
+      parents[key] = item.sort_by(&:name).reverse!
+    end
+    
+    nodes = [parents[root]]
+
     output  = '<table class="treetable table">'
+    output << "<tr>#{header}</tr>" unless header.blank?
 
-    output << '<tr>' << header << '</tr>' unless header.blank?
+    indent_span = '<span class="treetable-indent"></span>'
+    path = [nil]
 
-    path    = [nil]
+    while not nodes.empty? do
+      while not nodes.last.empty? do
+        node = nodes.last.pop()
+        indent = indent_span * (path.size)
+        tr_class = path.map { |id| "treetable-parent-#{id}" unless id.nil? }.join(' ')
 
-    objects.each do |o|
-      if o.parent_id != path.last
-        if path.include?(o.parent_id)
-          while path.last != o.parent_id
-            path.pop
-          end
+        if parents.include?(node.id)
+          expander = "<span class=\"treetable-expander treetable-expander-expanded\" data-id=\"#{node.id}\"></span>"
+          nodes.push(parents[node.id])
+          path.push(node.id)
         else
-          path << o.parent_id
+          expander = indent_span
         end
+
+        output << "<tr class=\"#{tr_class}\">"
+        output << capture(node, path.size - 1, &block).sub('<td>', '<td>' + indent + expander)
+        output << '</tr>'
       end
 
-      ident_span = '<span class="treetable-indent"></span>'
-      expander = parents[o.id] ? '<span class="treetable-expander treetable-expander-expanded" data-id="'+ o.id.to_s + '"></span>' : ident_span
-      indent   = ident_span * (path.size - 1)
-
-      output << '<tr class="' << path.map { |id| 'treetable-parent-' + id.to_s unless id.nil? }.join(' ') << '">'
-      output << capture(o, path.size - 1, &block).sub('<td>', '<td>' + indent + expander)
-      output << '</tr>'
+      nodes.pop()
+      path.pop()
     end
 
     output << '</table>'
