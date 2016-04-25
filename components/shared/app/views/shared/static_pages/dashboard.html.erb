@@ -44,7 +44,14 @@
             <a href="#activities" aria-controls="activities" role="tab" data-toggle="tab"><%= t 'home.dashboard.activities' %></a>
           </li>
           <li role="presentation">
-            <a href="#news" aria-controls="news" role="tab" data-toggle="tab"><%= t 'home.dashboard.news' %></a>
+            <a href="#news" aria-controls="news" role="tab" data-toggle="tab"><%= t 'home.dashboard.news' %>
+              <% if current_user.dashboard_last_sign_in_at < @news.first.created_at %>
+                  <div class="label label-success label-new-news">
+                    <%= t('home.dashboard.more_new_news') %>
+                  </div>
+              <% end %>
+            </a>
+
           </li>
         </ul>
 

@@ -20,7 +20,8 @@ en:
     dashboard:
       activities: Activities
       news: News
-      new-news: New
+      new_news: New
+      more_new_news: New
       new_questions: new questions
       new_answers: new answers
       new_comments: new comments
