@@ -12,6 +12,7 @@ en:
     answer: "Try to answer"
     questions: "Browse questions"
     activities: "Activity feed"
+    reset_dashboard_time: "Mark all as read"
 
     sign_up: "Sign up"
     sign_in: "Sign in"
