@@ -1,5 +1,7 @@
 module Shared
 class StaticPagesController < ApplicationController
+  include Shared::Dashboard::Questions
+
   skip_before_filter :login_required, only: :home
 
   def home
@@ -16,20 +18,21 @@ class StaticPagesController < ApplicationController
 
   def dashboard
     @question = Shared::Questions::ToAnswerRecommender.next
+    @context = Shared::Context::Manager.current_context
 
-    context_questions = Shared::Question.in_context(Shared::Context::Manager.current_context)
-    context_answers = Shared::Answer.in_context(Shared::Context::Manager.current_context)
-    context_question_comments = Shared::Comment.for(:question).where("commentable_id IN (?)", context_questions.pluck(:id))
-    context_question_answers = Shared::Comment.for(:answer).where("commentable_id IN (?)", context_answers.pluck(:id))
+    context_questions = new_questions(@context)
+    context_answers = new_answers(@context)
+    context_question_comments = new_question_comments(context_questions)
+    context_question_answers = new_answer_comments(context_answers)
 
     @new_questions = dashboard_count context_questions
     @new_answers = dashboard_count context_answers
     @new_comments = dashboard_count(context_question_comments) + dashboard_count(context_question_answers)
 
-    context_questions = context_questions.joins(:watchings).where("watcher_id = ?", current_user.id)
-    context_answers = context_answers.where("answers.question_id IN (?)", context_questions.pluck(:id))
-    context_question_comments = Shared::Comment.for(:question).where("commentable_id IN (?)", context_questions.pluck(:id))
-    context_question_answers = Shared::Comment.for(:answer).where("commentable_id IN (?)", context_answers.pluck(:id))
+    context_questions = new_questions_watched(context_questions, current_user)
+    context_answers = new_answers_watched(context_answers, context_questions)
+    context_question_comments = new_question_comments_watched(context_questions)
+    context_question_answers = new_answer_comments_watched(context_answers)
 
     @new_questions_watched = dashboard_count context_questions
     @new_answers_watched = dashboard_count context_answers

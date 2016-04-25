@@ -22,7 +22,7 @@ en:
       new_questions: new questions
       new_answers: new answers
       new_comments: new comments
-      new_questions: new questions in watched categories
+      new_questions_in_watched_categories: new questions in watched categories
       new_answers_in_watched_categories: new answers in watched categories
       new_comments_in_watched_categories: new comments in watched categories
       show_activities: Show all activities
