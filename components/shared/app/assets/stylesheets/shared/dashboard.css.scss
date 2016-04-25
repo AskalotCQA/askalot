@@ -40,16 +40,42 @@
       .link-icon {
         text-align: center;
         color: #fff;
-        background-color: #2a9579;
+        background-color: $dashboard-link-bg-color;
         position: absolute;
         width: 110px;
-        height: 100%;
-        line-height: 80px;
+        height: 110px;
+        line-height: 110px;
         font-size: 3em;
         i {
+          margin: 0;
+          padding: 0;
           top: 50%;
           margin-top: -50%;
         }
+      }
+
+      .link-icon-questions {
+        background-color: $dashboard-link-questions-bg-color;
+      }
+
+      .link-icon-questions-followed {
+        background-color: $dashboard-link-questions-followed-bg-color;
+      }
+
+      .link-icon-answers {
+        background-color: $dashboard-link-answers-bg-color;
+      }
+
+      .link-icon-answers-followed {
+        background-color: $dashboard-link-answers-followed-bg-color;
+      }
+
+      .link-icon-comments {
+        background-color: $dashboard-link-comments-bg-color;
+      }
+
+      .link-icon-comments-followed {
+        background-color: $dashboard-link-comments-followed-bg-color;
       }
 
       .link-text {
@@ -66,7 +92,9 @@
 
         .description {
           text-transform: uppercase;
+          text-align: center;
           font-size: 0.8em;
+          margin-top: 10px;
         }
       }
     }
