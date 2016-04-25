@@ -248,5 +248,9 @@ class Category < ActiveRecord::Base
   def visible?
     Shared::CategoryDepth.visible_depths.include? self.depth
   end
+
+  def parent_watchers
+    self_and_ancestors.map(&:watchers).flatten
+  end
 end
 end

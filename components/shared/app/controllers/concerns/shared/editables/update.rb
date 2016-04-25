@@ -15,6 +15,8 @@ module Shared::Editables::Update
     @editable.assign_attributes(update_params)
 
     if @editable.changed?
+      old_category_id = @editable.changes['category_id'].first if @editable.changed.include?('category_id')
+
       if @editable.update_attributes_by_revision(@revision)
 
         if @editable.respond_to? :text
@@ -25,7 +27,14 @@ module Shared::Editables::Update
 
         # TODO (jharinek) refactor after making G,D watchable, notifiable
         if @editable.respond_to? :to_question
-          dispatch_event :update, @editable, for: @editable.to_question.watchers, anonymous: (@editable.is_a?(Shared::Question) && @editable.anonymous)
+          watchers = @editable.to_question.watchers
+
+          if @editable.is_a?(Shared::Question)
+            watchers += @editable.parent_watchers
+            watchers += Shared::Category.find(old_category_id).parent_watchers if defined?(old_category_id) && old_category_id
+          end
+
+          dispatch_event :update, @editable, for: watchers, anonymous: (@editable.is_a?(Shared::Question) && @editable.anonymous)
         end
 
         flash[:notice] = t "#{@model}.update.success"
