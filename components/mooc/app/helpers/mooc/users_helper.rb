@@ -9,7 +9,7 @@ module Mooc::UsersHelper
 
     return content_tag :span, t('user.anonymous'), options if user == :anonymous
 
-    href = (page_url ? page_url + '?redirect=' : '') + shared.user_path(user.nick)
+    href = (page_url ? page_url + '#' : '') + shared.user_path(user.nick)
     link_to user.nick, href, options
   end
 end

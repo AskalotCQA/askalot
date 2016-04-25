@@ -12,7 +12,7 @@ module Mooc::QuestionsHelper
     if label.class.to_s == 'Shared::Category'
       href = (in_questions_index) ? '#' : mooc.unit_path(id: label.id)
     else
-      href = (page_url ? page_url + '?redirect=' : '') + shared.questions_path(tags: filter)
+      href = (page_url ? page_url + '#' : '') + shared.questions_path(tags: filter)
       options.merge!(target: '_parent')
     end
 
