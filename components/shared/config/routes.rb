@@ -47,9 +47,8 @@ Shared::Engine.routes.draw do
     get :welcome,    to: 'static_pages#welcome'
     get :welcome2,    to: 'static_pages#welcome_without_confirmation'
 
+    # path definition so it can be referenced in views ("overriden" by parent application)
     get 'auth/facebook'
-    get 'auth/facebook/callback', to: 'users#facebook'
-    get 'auth/failure',           to: redirect('/')
 
     post 'facebook',              to: 'facebook#index'
     post 'facebook/notification', to: 'facebook#notification'

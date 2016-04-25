@@ -75,7 +75,7 @@ class UsersController < ApplicationController
 
   def followings
     @user = Shared::User.by(nick: params[:nick])
-    
+
     @followees = @user.followees.in_context(@context).order(:nick).page(tab_page :followees).per(20)
     @followers = @user.followers.in_context(@context).order(:nick).page(tab_page :followers).per(20)
   end

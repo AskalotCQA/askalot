@@ -31,63 +31,63 @@ defaults: &defaults
   facebook:
     icon: facebook
     name: Facebook
-    placeholder: 'http://facebook.com/username'
-    pattern: 'http://facebook.com/username|http://facebook.com/app_scoped_user_id/userid'
+    placeholder: 'https://facebook.com/username'
+    pattern: 'facebook.com/username|(http|https)://facebook.com/app_scoped_user_id/userid'
 
   flickr:
     icon: flickr
     name: Flickr
-    placeholder: 'http://flickr.com/photos/username'
+    placeholder: 'https://flickr.com/photos/username'
 
   foursquare:
     icon: foursquare
     name: Foursquare
-    placeholder: 'http://foursquare.com/username'
+    placeholder: 'https://foursquare.com/username'
 
   github:
     icon: github-alt
     name: GitHub
-    placeholder: 'http://github.com/username'
+    placeholder: 'https://github.com/username'
 
   google_plus:
     icon: google-plus
     name: Google +
-    placeholder: 'http://plus.google.com/userid'
+    placeholder: 'https://plus.google.com/userid'
 
   instagram:
     icon: instagram
     name: Instagram
-    placeholder: 'http://instagram.com/username'
+    placeholder: 'https://instagram.com/username'
 
   linkedin:
     icon: linkedin
     name: LinkedIn
-    placeholder: 'http://linkedin.com/in/username'
+    placeholder: 'https://linkedin.com/in/username'
 
   pinterest:
     icon: pinterest
     name: Pinterest
-    placeholder: 'http://pinterest.com/username'
+    placeholder: 'https://pinterest.com/username'
 
   stack_overflow:
     icon: stack-overflow
     name: Stack Overflow
-    placeholder: 'http://stackoverflow.com/users/userid'
+    placeholder: 'https://stackoverflow.com/users/userid'
 
   tumblr:
     icon: tumblr
     name: Tumblr
-    placeholder: 'http://username.tumblr.com'
+    placeholder: 'https://username.tumblr.com'
 
   twitter:
     icon: twitter
     name: Twitter
-    placeholder: 'http://twitter.com/username'
+    placeholder: 'https://twitter.com/username'
 
   youtube:
     icon: youtube-play
     name: YouTube
-    placeholder: 'http://youtube.com/username'
+    placeholder: 'https://youtube.com/username'
 
 fiit_development:
   <<: *defaults
