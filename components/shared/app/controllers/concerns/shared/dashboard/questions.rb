@@ -17,12 +17,12 @@ module Shared::Dashboard::Questions
     Shared::Comment.for(:answer).where("commentable_id IN (?)", answers.pluck(:id))
   end
 
-  def dashboard_questions_watched(questions, user)
-    questions.joins(:watchings).where("watcher_id = ?", user.id)
+  def dashboard_questions_watched(user)
+    Shared::Question.in_context(categories_in_watched_contexts(user).pluck(:id))
   end
 
-  def dashboard_answers_watched(answers, questions)
-    answers.where("answers.question_id IN (?)", questions.pluck(:id))
+  def dashboard_answers_watched(user)
+    Shared::Answer.in_context(categories_in_watched_contexts(user).pluck(:id))
   end
 
   def dashboard_question_comments_watched(questions)
@@ -31,6 +31,10 @@ module Shared::Dashboard::Questions
 
   def dashboard_answer_comments_watched(answers)
     Shared::Comment.for(:answer).where("commentable_id IN (?)", answers.pluck(:id))
+  end
+
+  def categories_in_watched_contexts(user)
+    Shared::Category.all_in_contexts(user.watchings.where(watchable_type: 'Shared::Category').pluck(:watchable_id))
   end
 
   def questions_by_dashboard_param(from_dashboard, context, user)
@@ -43,14 +47,10 @@ module Shared::Dashboard::Questions
         context_answers = only_new(context_answers, user)
         questions_by_answers(context_answers)
       when :new_questions_in_watched_categories
-        context_questions = dashboard_questions(context)
-        context_questions = dashboard_questions_watched(context_questions, user)
+        context_questions = dashboard_questions_watched(user)
         only_new(context_questions, user)
       when :new_answers_in_watched_categories
-        context_questions = dashboard_questions(context)
-        context_answers = dashboard_answers(context)
-        context_questions = dashboard_questions_watched(context_questions, user)
-        context_answers = dashboard_answers_watched(context_answers, context_questions)
+        context_answers = dashboard_answers_watched(user)
         context_answers = only_new(context_answers, user)
         questions_by_answers(context_answers)
       else
