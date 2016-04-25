@@ -60,7 +60,7 @@ module Shared::Dashboard::Questions
   end
 
   def questions_by_answers(answers)
-    Shared::Question.joins(:answers).where(answers: {id: answers.pluck(:id) })
+    Shared::Question.joins(:answers).where(answers: {id: answers.pluck(:id) }).uniq
   end
 
   def only_new(query, user)

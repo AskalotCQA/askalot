@@ -29,6 +29,7 @@ class QuestionsController < ApplicationController
       @questions = Shared::Question.in_context(@context)
     end
 
+    @questions_controls_scope = @questions
     @questions = case params[:tab].to_sym
                  when :unanswered then @questions.unanswered.by_votes
                  when :answered   then @questions.answered.by_votes
