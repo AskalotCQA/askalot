@@ -15,4 +15,17 @@ module Shared::DashboardHelper
     html.html_safe
   end
 
+  def active_tab_class(news, user, tab)
+    if user.dashboard_last_sign_in_at < news.first.created_at
+      if tab == :news
+        return 'active'
+      end
+    else
+      if tab == :activites
+        return 'active'
+      end
+    end
+    return ''
+  end
+
 end

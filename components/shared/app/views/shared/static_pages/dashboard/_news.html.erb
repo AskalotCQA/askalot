@@ -5,9 +5,11 @@
         <h4>
           <%= link_to news.title, news_index_path(tab: :'news')+"#news-#{news.id}" %>
           <% if current_user.dashboard_last_sign_in_at < news.created_at %>
-              <div class="label label-success label-new-news">
-                <%= t('home.dashboard.new_news') %>
-              </div>
+              <sup>
+                <div class="label label-success label-new-news">
+                  <%= t('home.dashboard.new_news') %>
+                </div>
+              </sup>
           <% end %>
         </h4>
 
