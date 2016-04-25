@@ -22,8 +22,8 @@ class StaticPagesController < ApplicationController
 
     context_questions = dashboard_questions(@context)
     context_answers = dashboard_answers(@context)
-    context_question_comments = dashboard_question_comments(context_questions)
-    context_question_answers = dashboard_answer_comments(context_answers)
+    context_question_comments = dashboard_question_comments
+    context_question_answers = dashboard_answer_comments
 
     @new_questions = dashboard_count context_questions
     @new_answers = dashboard_count context_answers
