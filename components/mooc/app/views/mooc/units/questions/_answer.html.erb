@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-9 col-sm-10 col-md-10">
       <div class="answer-content">
-        <%= render_markdown answer.text %>
+        <%= render_markdown answer.text, page_url: @page_url %>
       </div>
 
       <div class="answer-details">

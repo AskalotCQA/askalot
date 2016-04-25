@@ -29,6 +29,7 @@ module Shared::MarkdownHelper
     mailer   = ActionMailer::Base.default_url_options
     hostname = "#{mailer[:host]}#{":#{mailer[:port]}" if mailer[:port]}"
     context_prefix = Shared::Context::Manager.regex_context_url_prefix
+    page_url = options.delete :page_url
 
     options.deep_merge! :'user-link' => {
       regex: /#{hostname}#{context_prefix}\/users\/\w+/,
@@ -41,12 +42,12 @@ module Shared::MarkdownHelper
     }
 
     options.deep_merge! user: {
-      linker: lambda { |match| markdown_link_to_user(match) },
+      linker: lambda { |match| page_url ? markdown_unit_link_to_user(match, page_url) : markdown_link_to_user(match) },
       regex: /(^|\s)(@\d+)/
     }
 
     options.deep_merge! question: {
-      linker: lambda { |match| markdown_link_to_question(match) },
+      linker: lambda { |match| page_url ? markdown_unit_link_to_question(match, page_url) : markdown_link_to_question(match) },
       regex: /(^|\s)(#\d+)/
     }
 

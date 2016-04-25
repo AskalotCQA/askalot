@@ -16,7 +16,7 @@
 
         <div id="question-data">
           <div class="question-content">
-            <%= render_markdown @question.text %>
+            <%= render_markdown @question.text, page_url: @page_url %>
           </div>
 
           <div class="question-details">
