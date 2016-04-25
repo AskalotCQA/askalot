@@ -20,6 +20,7 @@ sk:
     dashboard:
       activities: Aktivita
       news: Novinky
+      new-news: Nová
       new_questions: nových otázok
       new_answers: nových odpovedí
       new_comments: nových komentárov
