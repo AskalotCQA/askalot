@@ -10,7 +10,7 @@ class ActivitiesController < ApplicationController
     @global    = Shared::Activity.in_context(@context).global.order(created_at: :desc)
     @followees = Shared::Activity.in_context(@context).by_followees_of(current_user).order(created_at: :desc)
 
-    @global    = @global.page(tab_page :global).per(count)
+    @global    = @global.page(tab_page :all).per(count)
     @followees = @followees.page(tab_page :followees).per(count)
   end
 end
