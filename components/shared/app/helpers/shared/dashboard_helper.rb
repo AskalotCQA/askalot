@@ -20,8 +20,8 @@ module Shared::DashboardHelper
   end
 
   def active_tab_class(news, user, tab)
-    if news.first && user.dashboard_last_sign_in_at < news.first.created_at && tab == :news
-      return 'active'
+    if news.first && user.dashboard_last_sign_in_at < news.first.created_at
+      return 'active' if tab == :news
     elsif tab == :activites
       return 'active'
     end

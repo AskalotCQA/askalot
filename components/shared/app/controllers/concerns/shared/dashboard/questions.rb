@@ -40,7 +40,7 @@ module Shared::Dashboard::Questions
         context_answers = fresh(context_answers, user)
 
         questions_by_answers(context_answers)
-    when :new_comments
+      when :new_comments
         context_questions = dashboard_questions(context)
         context_answers = dashboard_answers(context)
 
