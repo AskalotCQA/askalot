@@ -1,7 +1,7 @@
 <% if activities.any? %>
   <ol class="activities">
     <% activities.each do |activity| %>
-      <%= render 'shared/activities/activity', activity: activity %>
+      <%= render 'shared/static_pages/dashboard/activity', activity: activity %>
     <% end %>
   </ol>
 <% else %>
