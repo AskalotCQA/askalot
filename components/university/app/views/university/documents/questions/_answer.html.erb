@@ -7,19 +7,19 @@
 
       <div class="answer-details">
         <%= render 'shared/answers/details', answer: answer %>
-        <%= render 'university/documents/answers/editing', answer: answer, remote: true %>
-        <%= render 'university/documents/answers/deleting', answer: answer, remote: true %>
+        <%= render 'university/documents/answers/editing', answer: answer, remote: remote %>
+        <%= render 'university/documents/answers/deleting', answer: answer, remote: remote %>
       </div>
 
       <%= render 'shared/answers/evaluations', answer: answer %>
-      <%= render 'university/documents/answers/comments', answer: answer, remote: true %>
-      <%= render 'university/documents/comments/form', commentable: answer, remote: true %>
+      <%= render 'university/documents/answers/comments', answer: answer, remote: remote %>
+      <%= render 'university/documents/comments/form', commentable: answer, remote: remote %>
     </div>
 
     <div class="col-xs-3 col-sm-2">
       <%= render 'shared/answers/voting', answer: answer %>
       <%= render 'shared/answers/labeling', answer: answer %>
-      <%= render 'university/documents/answers/evaluating', answer: answer, remote: true %>
+      <%= render 'university/documents/answers/evaluating', answer: answer, remote: remote %>
     </div>
   </div>
 </li>

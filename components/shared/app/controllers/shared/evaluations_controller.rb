@@ -29,7 +29,7 @@ class EvaluationsController < ApplicationController
       flash_error_messages_for @evaluation
     end
 
-    if params[:evaluation][:from_unit_view]
+    if params[:evaluation][:from_unit_view] || request.referrer.include?('third_party')
       redirect_to :back
     else
       respond_to do |format|

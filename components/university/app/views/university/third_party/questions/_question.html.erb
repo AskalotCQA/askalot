@@ -1,0 +1,51 @@
+<li>
+  <div class="row">
+    <div class="col-xs-12 col-sm-push-3 col-sm-9">
+      <div class="question-preview">
+        <h4>
+          <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
+          <%= link_to question.title, university.third_party_question_path(id: question.id, hash: question.category.parent.third_party_hash, name: question.category.name)%>
+          <small class="pull-right"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
+        </h4>
+
+        <%= render 'shared/questions/labels', labels: question.labels %>
+
+        <div class="question-content">
+          <%= question_text_preview question, length: 250 %>
+        </div>
+        <div class="question-details">
+          <%= render 'shared/questions/details', question: question %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-pull-9 col-sm-3">
+      <div class="row">
+        <div class="col-xs-3 col-sm-6">
+          <%= content_tag :span, class: [:'question-metric', question_votes_coloring(question)] do %>
+            <span class="question-metric-value"><%= question.favorites.size %></span>
+            <%= t('count.favorite', count: question.favorites.size) %>
+          <% end %>
+        </div>
+        <div class="col-xs-3 col-sm-6">
+          <%= content_tag :span, class: [:'question-metric', question_votes_coloring(question)] do %>
+            <span class="question-metric-value"><%= votes_difference(question) %></span>
+            <%= t('count.vote', count: question.votes_difference) %>
+          <% end %>
+        </div>
+        <div class="col-xs-3 col-sm-6">
+          <%= link_to university.third_party_question_path(id: question.id, hash: question.category.parent.third_party_hash, name: question.category.name, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
+            <span class="question-metric-value"><%= question.answers.size %></span>
+            <%= t('count.answer', count: question.answers.size) %>
+          <% end %>
+        </div>
+        <div class="col-xs-3 col-sm-6">
+          <%= content_tag :span, class: [:'question-metric', question_views_coloring(question)] do %>
+            <span class="question-metric-value"><%= question.views_total %></span>
+            <%= t('count.view', count: question.views_total) %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

@@ -1,36 +1,23 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title><%= resolve_title(yield :title) %></title>
     <meta name="viewport" content="width=device-width, initial-scale=0.8"/>
-    <%= render 'layouts/mooc/meta' %>
     <%= render 'layouts/shared/description' -%>
     <%= render 'layouts/shared/social' -%>
     <%= render 'layouts/shared/styles' -%>
-    <%= render 'layouts/mooc/styles' -%>
     <%= csrf_meta_tags -%>
   </head>
-  <body<%= resolve_sidebar(yield :sidebar) %>>
-    <% if use_container? %>
-      <div id="unit-view">
-        <div id="main" class="container-fluid simple-view">
-          <% if session[:facebook_modal] %>
-              <%= render 'shared/facebook/joining' %>
-              <%= render 'shared/facebook/restoring' %>
-          <% end %>
-
-          <%= flash_messages -%>
-          <%= yield -%>
-        </div>
-      </div>
-    <% else %>
+  <body>
+    <div class="container-fluid simple-view">
+      <%= flash_messages -%>
       <%= yield -%>
-    <% end %>
+    </div>
     <%= render 'shared/shared/fixes' -%>
     <%= render 'shared/shared/locales' -%>
     <%= javascript_include_tag 'shared/application' -%>
-    <%= javascript_include_tag 'mooc/application' -%>
+    <%= javascript_include_tag 'university/third_party' -%>
     <%= yield :scripts -%>
     <%= Garelic.monitoring 'UA-47906233-1' if Rails.env_type.production? -%>
   </body>

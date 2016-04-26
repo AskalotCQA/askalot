@@ -1,1 +1,1 @@
-<%= render 'shared/evaluables/evaluating', model: :question, evaluable: question, remote: remote ||= true %>
+<%= render 'shared/evaluables/evaluating', model: :question, evaluable: question, remote: defined?(remote) ? remote : true %>

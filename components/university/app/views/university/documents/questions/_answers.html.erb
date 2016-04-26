@@ -16,7 +16,7 @@
 <% if answers.any? %>
   <ol class="question-answers">
     <% answers.each do |answer| %>
-      <%= render 'university/documents/questions/answer', answer: answer %>
+      <%= render 'university/documents/questions/answer', answer: answer, remote: defined?(remote) ? remote : true %>
     <% end %>
   </ol>
 

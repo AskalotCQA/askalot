@@ -1,0 +1,53 @@
+<div id="document-content">
+  <div id="new-question-button" class="btn btn-success"><%= t 'question.new.title' %></div>
+
+  <%= form_for question, url: shared.questions_path, remote: true do |f| %>
+    <div id="form-messages">
+      <%= form_messages_for question %>
+    </div>
+
+    <%= f.hidden_field :category_id, value: category.id %>
+
+    <div class="form-group">
+      <%= f.label :category_id %>
+      <%= f.text_field :category_name, value: category.full_public_name, class: :'form-control', disabled: true %>
+    </div>
+
+    <div class="category-description">
+      <%= @question.category.description if @question.category %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: :'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= markdown_editor_for question do %>
+        <%= f.text_area :text, class: :'form-control', rows: 5 %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :tag_list %>
+        <ul id="question-category-tags" class="category-tags nav nav-labels">
+          <% if question.category %>
+            <% question.category.effective_tags.each do |category| %>
+              <li>
+                <span class="label label-info"><%= category %></span>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+        <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
+    </div>
+
+    <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
+
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primitive btn-sm">
+        <%= f.check_box :anonymous %> <%= Shared::Question.human_attribute_name :anonymous %> <%= icon_tag :blank %>
+      </label>
+    </div>
+  <% end %>
+</div>

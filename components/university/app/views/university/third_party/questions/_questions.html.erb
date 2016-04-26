@@ -1,0 +1,15 @@
+<div id="questions">
+  <% if questions.any? %>
+      <ol class="user-questions">
+        <% questions.each do |question| %>
+            <%= render 'university/third_party/questions/question', question: question %>
+        <% end %>
+      </ol>
+
+      <%= paginate questions, params: { tab: :questions }, remote: false %>
+  <% else %>
+      <div class="alert alert-warning">
+        <%= t('question.no_records') %>
+      </div>
+  <% end %>
+</div>

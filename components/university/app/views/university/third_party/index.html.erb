@@ -1,0 +1,9 @@
+<% provide :title, @category.name %>
+
+<div class="pull-right">
+  <%= render 'university/third_party/notifications', notifications: current_user.notifications.unread %>
+</div>
+
+<%= render 'university/third_party/questions/new', category: @category, question: @question %>
+
+<%= render 'university/third_party/questions/questions', category: @category, questions: @questions%>
