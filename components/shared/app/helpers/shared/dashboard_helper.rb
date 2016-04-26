@@ -5,8 +5,12 @@ module Shared::DashboardHelper
         <a href="#{path}">
           <div class="link-icon #{type}">#{fa_icon icon}</div>
           <div class="link-text">
-            <div class="number">#{number}</div>
-            <div class="description">#{description}</div>
+              <div class="vertical-table">
+                <div class="vertical-cell">
+                  <div class="number">#{number}</div>
+                  <div class="description">#{description}</div>
+                </div>
+              </div>
           </div>
         </a>
       </div>

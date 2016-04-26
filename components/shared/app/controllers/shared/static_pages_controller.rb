@@ -57,7 +57,7 @@ class StaticPagesController < ApplicationController
   private
 
   def dashboard_count(query)
-    query.where("#{query.table_name}.created_at >= ?", current_user.dashboard_last_sign_in_at).count
+    fresh(query, current_user).count
   end
 end
 end

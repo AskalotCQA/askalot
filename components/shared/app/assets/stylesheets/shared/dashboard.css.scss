@@ -83,11 +83,20 @@
       }
 
       .link-text {
-        padding: 7px;
         color: #877676;
-        text-align: left;
         margin-left: 110px;
         height: 100%;
+
+        .vertical-table {
+          width: 100%;
+          height: 100%;
+          display: table;
+
+          .vertical-cell {
+            display: table-cell;
+            vertical-align: middle;
+          }
+        }
 
         .number {
           text-align: center;
