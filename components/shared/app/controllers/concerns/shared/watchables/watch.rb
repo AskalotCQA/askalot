@@ -9,9 +9,13 @@ module Shared::Watchables::Watch
 
     @watching = @watchable.toggle_watching_by! current_user
 
-    if @watchable.watched_by? current_user
-      dispatch_event dispatch_event_action_for(@watching), @watching, for: @watchable.watchers
+    case @watching.watchable_type
+    when 'Shared::Category' then recipient = @watchable.teachers
+    when 'Shared::Question' then recipient = @watchable.author
+    else recipient = @watchable.watchers
     end
+
+    dispatch_event dispatch_event_action_for(@watching), @watching, for: recipient
 
     render 'shared/watchables/watch', formats: :js
   end

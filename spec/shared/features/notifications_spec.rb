@@ -343,26 +343,4 @@ describe 'Notifications', type: :feature do
       expect(last_notification.action).to eql(:create)
     end
   end
-
-  context 'when watching' do
-    let!(:followee) { create :user }
-
-    it 'notifies folowee about new follower' do
-      visit shared.root_path
-
-      all(:link, text: 'Používatelia').first.click
-      all(:link, text: followee.nick).first.click
-
-      click_link 'Nasledovať'
-
-      expect(notifications.size).to eql(1)
-
-      following = Shared::Following.last
-
-      expect(last_notification.resource).to eql(following)
-      expect(last_notification.recipient).to eql(followee)
-      expect(last_notification.initiator).to eql(user)
-      expect(last_notification.action).to eql(:create)
-    end
-  end
 end

@@ -82,6 +82,10 @@ en:
         create: "Addition of %{resource} to answer of question %{question}"
         delete: "Deletion of %{resource} from answer of question %{question}"
 
+      following:
+        create: "%{follower} started following you"
+        delete: "%{follower} stopped following you"
+
       question:
         create: "Addition of question %{question}"
         update: "Update of question %{question}"
