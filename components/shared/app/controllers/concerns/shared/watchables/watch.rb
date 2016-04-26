@@ -1,6 +1,8 @@
 module Shared::Watchables::Watch
   extend ActiveSupport::Concern
 
+  include Shared::Events::Dispatch
+
   def watch
     @model     = controller_name.classify.downcase
     @watchable = controller_path.classify.constantize.find(params[:id])

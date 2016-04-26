@@ -82,6 +82,10 @@ sk:
         create: "Pridanie %{resource} odpovede k otázke %{question}"
         delete: "Zrušenie %{resource} odpovede k otázke %{question}"
 
+      following:
+        create: "%{follower} začal sledovať vašu aktivitu"
+        delete: "%{follower} prestal sledovať vašu aktivitu"
+
       question:
         create: "Pridanie otázky %{question}"
         update: "Upravenie otázky %{question}"

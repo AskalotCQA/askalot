@@ -19,8 +19,8 @@ module Shared::ActivitiesHelper
   def activity_content_by_attributes(action, initiator, resource, options = {})
     content = activity_content_pattern(action, resource)
 
-    if resource.class.name.downcase.to_sym == :following
-      follower_link = link_to_activity action, initiator, resource, options.merge(length: 50)
+    if resource.class.name == 'Shared::Following'
+      follower_link = link_to_activity_by_attributes action, initiator, resource, options.merge(length: 50)
 
       translate(content, follower: follower_link).html_safe
     else
@@ -59,7 +59,7 @@ module Shared::ActivitiesHelper
     when :comment    then link_to_comment resource, options
     when :evaluation then link_to_evaluation resource, options
     when :favorite   then link_to_favorite resource, options
-    when :following  then fail
+    when :following  then link_to_following resource, options
     when :labeling   then link_to_labeling resource, options
     when :question   then link_to_question resource, options
     when :tagging    then fail
