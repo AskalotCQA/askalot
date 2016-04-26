@@ -45,7 +45,7 @@
           </li>
           <li role="presentation" class="<%= active_tab_class(@news, current_user, :news) %>">
             <a href="#news" aria-controls="news" role="tab" data-toggle="tab"><%= t 'home.dashboard.news' %>
-              <% if current_user.dashboard_last_sign_in_at < @news.first.created_at %>
+              <% if @news.first && current_user.dashboard_last_sign_in_at < @news.first.created_at %>
                   <div class="label label-success label-new-news">
                     <%= t('home.dashboard.more_new_news') %>
                   </div>

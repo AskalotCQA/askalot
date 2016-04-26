@@ -20,28 +20,28 @@ class StaticPagesController < ApplicationController
     @question = Shared::Questions::ToAnswerRecommender.next
     @context = Shared::Context::Manager.current_context
 
-    context_questions = dashboard_questions(@context)
-    context_answers = dashboard_answers(@context)
-    context_question_comments = dashboard_question_comments
-    context_question_answers = dashboard_answer_comments
+    context_questions = dashboard_questions @context
+    context_answers = dashboard_answers @context
+    context_question_comments = dashboard_question_comments context_questions
+    context_question_answers = dashboard_answer_comments context_answers
 
     @new_questions = dashboard_count context_questions
     @new_answers = dashboard_count context_answers
     @new_comments = dashboard_count(context_question_comments) + dashboard_count(context_question_answers)
 
-    context_questions = dashboard_questions_watched(current_user)
-    context_answers = dashboard_answers_watched(current_user)
-    context_question_comments = dashboard_question_comments_watched(context_questions)
-    context_question_answers = dashboard_answer_comments_watched(context_answers)
+    context_questions = dashboard_questions_watched current_user
+    context_answers = dashboard_answers_watched current_user
+    context_question_comments = dashboard_question_comments context_questions
+    context_question_answers = dashboard_answer_comments context_answers
 
     @new_questions_watched = dashboard_count context_questions
     @new_answers_watched = dashboard_count context_answers
     @new_comments_watched = dashboard_count(context_question_comments) + dashboard_count(context_question_answers)
 
-    limit = 50
+    limit = 20
 
     @news = Shared::New.order('news.id DESC').active.limit(limit)
-    @activities = Shared::Activity.in_context(Shared::Context::Manager.current_context).where("activities.created_at >= ?", current_user.dashboard_last_sign_in_at).order('activities.id DESC').limit(limit)
+    @activities = Shared::Activity.in_context(@context).where("activities.created_at >= ?", current_user.dashboard_last_sign_in_at).order('activities.id DESC').limit(limit)
   end
 
   def help

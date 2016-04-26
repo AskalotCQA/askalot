@@ -9,12 +9,12 @@ module Shared::Dashboard::Questions
     Shared::Answer.in_context(context)
   end
 
-  def dashboard_question_comments
-    Shared::Comment.for('Shared::Question')
+  def dashboard_question_comments(questions)
+    Shared::Comment.for('Shared::Question').where(commentable_id: questions.pluck(:id))
   end
 
-  def dashboard_answer_comments
-    Shared::Comment.for('Shared::Answer')
+  def dashboard_answer_comments(answers)
+    Shared::Comment.for('Shared::Answer').where(commentable_id: answers.pluck(:id))
   end
 
   def dashboard_questions_watched(user)
@@ -23,14 +23,6 @@ module Shared::Dashboard::Questions
 
   def dashboard_answers_watched(user)
     Shared::Answer.in_context(categories_in_watched_contexts(user).pluck(:id))
-  end
-
-  def dashboard_question_comments_watched(questions)
-    Shared::Comment.for(:question).where("commentable_id IN (?)", questions.pluck(:id))
-  end
-
-  def dashboard_answer_comments_watched(answers)
-    Shared::Comment.for(:answer).where("commentable_id IN (?)", answers.pluck(:id))
   end
 
   def categories_in_watched_contexts(user)
@@ -42,30 +34,37 @@ module Shared::Dashboard::Questions
       when :new_questions
         questions = dashboard_questions(context)
 
-        only_new(questions, user)
+        fresh(questions, user)
       when :new_answers
         context_answers = dashboard_answers(context)
-        context_answers = only_new(context_answers, user)
+        context_answers = fresh(context_answers, user)
 
         questions_by_answers(context_answers)
-      when :new_comments
-        context_questions_comments = only_new(dashboard_question_comments, user)
-        context_answers_comments = only_new(dashboard_answer_comments, user)
+    when :new_comments
+        context_questions = dashboard_questions(context)
+        context_answers = dashboard_answers(context)
+
+        context_questions_comments = fresh(dashboard_question_comments(context_questions), user)
+        context_answers_comments = fresh(dashboard_answer_comments(context_answers), user)
 
         questions_by_comments(context_questions_comments, context_answers_comments)
       when :new_questions_in_watched_categories
         context_questions = dashboard_questions_watched(user)
 
-        only_new(context_questions, user)
+        fresh(context_questions, user)
       when :new_answers_in_watched_categories
         context_answers = dashboard_answers_watched(user)
-        context_answers = only_new(context_answers, user)
+        context_answers = fresh(context_answers, user)
 
         questions_by_answers(context_answers)
-      else
-        questions = dashboard_questions(context)
+      when :new_comments_in_watched_categories
+        context_questions = dashboard_questions_watched(user)
+        context_answers = dashboard_answers_watched(user)
 
-        only_new(questions, user)
+        context_questions_comments = fresh(dashboard_question_comments(context_questions), user)
+        context_answers_comments = fresh(dashboard_answer_comments(context_answers), user)
+
+        questions_by_comments(context_questions_comments, context_answers_comments)
     end
   end
 
@@ -75,10 +74,11 @@ module Shared::Dashboard::Questions
 
   def questions_by_comments(question_comments, answer_comments)
     answers = Shared::Answer.where(id: answer_comments.pluck(:commentable_id))
+
     Shared::Question.where(id: question_comments.pluck(:commentable_id) + answers.pluck(:question_id))
   end
 
-  def only_new(query, user)
+  def fresh(query, user)
     query.where("#{query.table_name}.created_at >= ?", user.dashboard_last_sign_in_at)
   end
 end
