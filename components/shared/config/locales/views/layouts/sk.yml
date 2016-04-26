@@ -22,12 +22,30 @@ sk:
       news: Novinky
       new_news: Nová
       more_new_news: Nové
-      new_questions: nových otázok
-      new_answers: nových odpovedí
-      new_comments: nových komentárov
-      new_questions_in_watched_categories: nových otázok v sledovaných kategóriach
-      new_answers_in_watched_categories: nových odpovedí v sledovaných kategóriach
-      new_comments_in_watched_categories: nových komentárov v sledovaných kategóriach
+      new_questions:
+        one: nová otázka
+        few: nové otázky
+        other: nových otázok
+      new_answers:
+        one: nová odpoveď
+        few: nové odpovede
+        other: nových odpovedí
+      new_comments:
+        one: nový komentár
+        few: nové komentáre
+        other: nových komentárov
+      new_questions_in_watched_categories:
+        one: nová otázka v sledovaných kategóriach
+        few: nové otázok v sledovaných kategóriach
+        other: nových otázok v sledovaných kategóriach
+      new_answers_in_watched_categories:
+        one: nová odpoveď v sledovaných kategóriach
+        few: nové odpovede v sledovaných kategóriach
+        other: nových odpovedí v sledovaných kategóriach
+      new_comments_in_watched_categories:
+        one: nový komentár v sledovaných kategóriach
+        few: nové komentáre v sledovaných kategóriach
+        other: nových komentárov v sledovaných kategóriach
       show_activities: Zobraziť všetky aktivity
       no_activity: "Nebola zaznamenaná žiadna aktivita od vášho posledného prihlásenia %{date}."
       description: "Tieto aktivity sa udiali v Askalote od vášho posledného prihlásenia %{date}."

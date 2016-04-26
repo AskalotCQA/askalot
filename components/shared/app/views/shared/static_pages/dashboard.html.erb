@@ -26,14 +26,14 @@
   <div class="row">
     <div class="col-md-6">
         <div class="links row">
-          <%= dashboard_link 'question-circle fa-fw', @new_questions, t('home.dashboard.new_questions'), questions_path(from_dashboard: 'new_questions'), 'link-icon-questions' %>
-          <%= dashboard_link 'question-circle  fa-fw', @new_questions_watched, t('home.dashboard.new_questions_in_watched_categories'), questions_path(from_dashboard: 'new_questions_in_watched_categories'), 'link-icon-questions-followed' %>
+          <%= dashboard_link 'question-circle fa-fw', @new_questions, t('home.dashboard.new_questions', count: @new_questions), questions_path(from_dashboard: 'new_questions'), 'link-icon-questions' %>
+          <%= dashboard_link 'question-circle  fa-fw', @new_questions_watched, t('home.dashboard.new_questions_in_watched_categories', count: @new_questions_watched), questions_path(from_dashboard: 'new_questions_in_watched_categories'), 'link-icon-questions-followed' %>
 
-          <%= dashboard_link 'exclamation-circle fa-fw', @new_answers, t('home.dashboard.new_answers'), questions_path(from_dashboard: 'new_answers'), 'link-icon-answers' %>
-          <%= dashboard_link 'exclamation-circle fa-fw', @new_answers_watched, t('home.dashboard.new_answers_in_watched_categories'), questions_path(from_dashboard: 'new_answers_in_watched_categories'), 'link-icon-answers-followed' %>
+          <%= dashboard_link 'exclamation-circle fa-fw', @new_answers, t('home.dashboard.new_answers', count: @new_answers), questions_path(from_dashboard: 'new_answers'), 'link-icon-answers' %>
+          <%= dashboard_link 'exclamation-circle fa-fw', @new_answers_watched, t('home.dashboard.new_answers_in_watched_categories', count: @new_answers_watched), questions_path(from_dashboard: 'new_answers_in_watched_categories'), 'link-icon-answers-followed' %>
 
-          <%= dashboard_link 'comments-o fa-fw', @new_comments, t('home.dashboard.new_comments'), questions_path(from_dashboard: 'new_comments'), 'link-icon-comments' %>
-          <%= dashboard_link 'comments-o fa-fw', @new_comments_watched, t('home.dashboard.new_comments_in_watched_categories'), questions_path(from_dashboard: 'new_comments_in_watched_categories'), 'link-icon-comments-followed' %>
+          <%= dashboard_link 'comments-o fa-fw', @new_comments, t('home.dashboard.new_comments', count: @new_comments), questions_path(from_dashboard: 'new_comments'), 'link-icon-comments' %>
+          <%= dashboard_link 'comments-o fa-fw', @new_comments_watched, t('home.dashboard.new_comments_in_watched_categories', count: @new_comments_watched), questions_path(from_dashboard: 'new_comments_in_watched_categories'), 'link-icon-comments-followed' %>
         </div>
     </div>
 
