@@ -11,6 +11,10 @@
 *.swo
 *.swp
 
+.vim
+*.swo
+*.swp
+
 /tags
 
 Gemfile.lock.tags

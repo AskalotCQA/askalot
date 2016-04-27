@@ -8,10 +8,10 @@
   </div>
 
   <ul class="nav nav-tabs">
-    <%= tab_link_tag_with_count t('question.tab.recent'), :recent, shared.questions_path(params.except(:page).merge tab: :recent), filter_questions(Shared::Question.in_context(@context).recent).size, analytics_attributes(:questions, :switch, :recent).merge(remote: true) %>
-    <%= tab_link_tag_with_count t('question.tab.unanswered'), :unanswered, shared.questions_path(params.except(:page).merge tab: :unanswered), filter_questions(Shared::Question.in_context(@context).unanswered).size, analytics_attributes(:questions, :switch, :unanswered).merge(remote: true) %>
-    <%= tab_link_tag_with_count t('question.tab.answered'), :answered, shared.questions_path(params.except(:page).merge tab: :answered), filter_questions(Shared::Question.in_context(@context).answered_but_not_best).size, analytics_attributes(:questions, :switch, :answered).merge(remote: true) %>
-    <%= tab_link_tag_with_count t('question.tab.solved'), :solved, shared.questions_path(params.except(:page).merge tab: :solved), filter_questions(Shared::Question.in_context(@context).solved).size, analytics_attributes(:questions, :switch, :solved).merge(remote: true) %>
-    <%= tab_link_tag_with_count t('question.tab.favored'), :favored, shared.questions_path(params.except(:page).merge tab: :favored), filter_questions(Shared::Question.in_context(@context).favored).size, analytics_attributes(:questions, :switch, :favored).merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.recent'), :recent, shared.questions_path(params.except(:page).merge tab: :recent), filter_questions(@questions_controls_scope.recent).size, analytics_attributes(:questions, :switch, :recent).merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.unanswered'), :unanswered, shared.questions_path(params.except(:page).merge tab: :unanswered), filter_questions(@questions_controls_scope.unanswered).size, analytics_attributes(:questions, :switch, :unanswered).merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.answered'), :answered, shared.questions_path(params.except(:page).merge tab: :answered), filter_questions(@questions_controls_scope.answered).size, analytics_attributes(:questions, :switch, :answered).merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.solved'), :solved, shared.questions_path(params.except(:page).merge tab: :solved), filter_questions(@questions_controls_scope.solved).size, analytics_attributes(:questions, :switch, :solved).merge(remote: true) %>
+    <%= tab_link_tag_with_count t('question.tab.favored'), :favored, shared.questions_path(params.except(:page).merge tab: :favored), filter_questions(@questions_controls_scope.favored).size, analytics_attributes(:questions, :switch, :favored).merge(remote: true) %>
   </ul>
 </div>

@@ -25,6 +25,10 @@ Shared::Engine.routes.draw do
       get :watch, on: :member
     end
 
+    authenticated do
+      root to: 'static_pages#dashboard', as: :authenticated
+    end
+
     root 'static_pages#home'
 
     devise_for :users, class_name: 'Shared::User', controllers: { sessions: 'shared/sessions', registrations: 'shared/registrations' }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }, module: :devise
@@ -34,6 +38,7 @@ Shared::Engine.routes.draw do
       get   :suggest,  on: :collection
 
       get :follow, on: :member
+      get :reset_dashboard_time, on: :member
 
       concerns :searchable
     end

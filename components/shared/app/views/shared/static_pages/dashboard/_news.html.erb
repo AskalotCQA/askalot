@@ -1,0 +1,31 @@
+<% if news.any? %>
+  <ol class="list-unstyled">
+    <% news.each do |news| %>
+      <li>
+        <h4>
+          <%= link_to news.title, news_index_path(tab: :'news')+"#news-#{news.id}" %>
+          <% if current_user.dashboard_last_sign_in_at < news.created_at %>
+              <sup>
+                <div class="label label-success label-new-news">
+                  <%= t('home.dashboard.new_news') %>
+                </div>
+              </sup>
+          <% end %>
+        </h4>
+
+        <div class="news-date">
+          <small>
+            <%= time_tag news.created_at.to_date, format: :default %>
+          </small>
+        </div>
+        <div style="word-wrap: break-word">
+          <%= render_markdown news.description %>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+<% else %>
+  <div class="alert alert-info">
+    <%= t('news.none') %>
+  </div>
+<% end %>

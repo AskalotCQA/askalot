@@ -3,7 +3,7 @@ module Shared::Questions
     extend self
 
     def next
-      Shared::Question.unanswered.random.first || Shared::Question.random.first
+      Shared::Question.in_context(Shared::Context::Manager.current_context).unanswered.random.first || Shared::Question.in_context(Shared::Context::Manager.current_context).random.first
     end
   end
 end

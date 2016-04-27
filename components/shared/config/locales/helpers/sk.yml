@@ -92,6 +92,7 @@ sk:
       short: "%-d. %b %Y o %-H:%M"
       normal: "%-d. %B %Y o %-H:%M"
       long: "%A %-d. %B %Y o %-H:%M:%S"
+      dashboard: "(%-d.&nbsp;%-m.&nbsp;%Y,&nbsp;%-H:%M)"
 
   datetime:
     distance_in_words:
