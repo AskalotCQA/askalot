@@ -6,7 +6,9 @@
       <li class="remove-grid-md">
         <%= icon_link_to 'check-circle-o', t('home.reset_dashboard_time'), shared.reset_dashboard_time_user_path(current_user), class: 'btn btn-default col-xs-12' %>
         <%= icon_link_to 'question-circle', t('home.ask'), shared.new_question_path, class: 'btn btn-primary col-xs-6' %>
-        <%= icon_link_to :comment, t('home.answer'), shared.question_path(@question), class: 'btn btn-success col-xs-6' %>
+        <% if @question %>
+          <%= icon_link_to :comment, t('home.answer'), shared.question_path(@question), class: 'btn btn-success col-xs-6' %>
+        <% end %>
         <%= icon_link_to :tasks, t('home.questions'), shared.questions_path, class: 'btn btn-info col-xs-12' %>
       </li>
     </ul>
