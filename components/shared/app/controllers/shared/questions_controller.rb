@@ -23,11 +23,8 @@ class QuestionsController < ApplicationController
       @context = @category.id
     end
 
-    if params[:from_dashboard]
-      @questions = questions_by_dashboard_param(params[:from_dashboard].to_sym, @context, current_user)
-    else
-      @questions = Shared::Question.in_context(@context)
-    end
+    @questions = questions_by_dashboard_param(params[:from_dashboard].to_sym, @context, current_user) if params[:from_dashboard]
+    @questions = Shared::Question.in_context(@context) unless params[:from_dashboard]
 
     @questions_controls_scope = @questions
     @questions = case params[:tab].to_sym

@@ -31,40 +31,40 @@ module Shared::Dashboard::Questions
 
   def questions_by_dashboard_param(from_dashboard, context, user)
     case from_dashboard
-      when :new_questions
-        questions = dashboard_questions(context)
+    when :new_questions
+      questions = dashboard_questions(context)
 
-        fresh(questions, user)
-      when :new_answers
-        context_answers = dashboard_answers(context)
-        context_answers = fresh(context_answers, user)
+      fresh(questions, user)
+    when :new_answers
+      context_answers = dashboard_answers(context)
+      context_answers = fresh(context_answers, user)
 
-        questions_by_answers(context_answers)
-      when :new_comments
-        context_questions = dashboard_questions(context)
-        context_answers = dashboard_answers(context)
+      questions_by_answers(context_answers)
+    when :new_comments
+      context_questions = dashboard_questions(context)
+      context_answers = dashboard_answers(context)
 
-        context_questions_comments = fresh(dashboard_question_comments(context_questions), user)
-        context_answers_comments = fresh(dashboard_answer_comments(context_answers), user)
+      context_questions_comments = fresh(dashboard_question_comments(context_questions), user)
+      context_answers_comments = fresh(dashboard_answer_comments(context_answers), user)
 
-        questions_by_comments(context_questions_comments, context_answers_comments)
-      when :new_questions_in_watched_categories
-        context_questions = dashboard_questions_watched(user)
+      questions_by_comments(context_questions_comments, context_answers_comments)
+    when :new_questions_in_watched_categories
+      context_questions = dashboard_questions_watched(user)
 
-        fresh(context_questions, user)
-      when :new_answers_in_watched_categories
-        context_answers = dashboard_answers_watched(user)
-        context_answers = fresh(context_answers, user)
+      fresh(context_questions, user)
+    when :new_answers_in_watched_categories
+      context_answers = dashboard_answers_watched(user)
+      context_answers = fresh(context_answers, user)
 
-        questions_by_answers(context_answers)
-      when :new_comments_in_watched_categories
-        context_questions = dashboard_questions_watched(user)
-        context_answers = dashboard_answers_watched(user)
+      questions_by_answers(context_answers)
+    when :new_comments_in_watched_categories
+      context_questions = dashboard_questions_watched(user)
+      context_answers = dashboard_answers_watched(user)
 
-        context_questions_comments = fresh(dashboard_question_comments(context_questions), user)
-        context_answers_comments = fresh(dashboard_answer_comments(context_answers), user)
+      context_questions_comments = fresh(dashboard_question_comments(context_questions), user)
+      context_answers_comments = fresh(dashboard_answer_comments(context_answers), user)
 
-        questions_by_comments(context_questions_comments, context_answers_comments)
+      questions_by_comments(context_questions_comments, context_answers_comments)
     end
   end
 
