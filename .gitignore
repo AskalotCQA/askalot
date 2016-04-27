@@ -5,15 +5,14 @@
 .tags
 .vim
 
-.vim
 .~lock.*
 *.*~
+~*
+~*
 *.swo
 *.swp
-
-.vim
-*.swo
-*.swp
+**/*.swo
+**/*.swp
 
 /tags
 
