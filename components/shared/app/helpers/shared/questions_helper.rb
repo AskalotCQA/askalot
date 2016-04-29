@@ -1,6 +1,6 @@
 module Shared::QuestionsHelper
   def question_title_preview(question, options = {})
-    html_escape truncate(question.title, default_truncate_options.merge(length: 120).merge(options))
+    html_escape truncate(html_escape(question.title), default_truncate_options.merge(length: 120).merge(options))
   end
 
   def question_text_preview(question, options = {})
