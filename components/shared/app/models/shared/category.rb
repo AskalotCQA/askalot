@@ -2,9 +2,8 @@ module Shared
 class Category < ActiveRecord::Base
   acts_as_nested_set
 
-  include Shared::Watchable
-
   include Shared::Categories::Searchable
+  include Shared::Watchable
 
   has_many :questions, dependent: :restrict_with_exception
   has_many :answers, through: :questions

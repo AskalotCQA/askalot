@@ -1,5 +1,6 @@
 module Shared
 class UsersController < ApplicationController
+  include Events::Dispatch
   include Searchables::Search
 
   default_tab :all, only: :index
@@ -85,7 +86,9 @@ class UsersController < ApplicationController
 
     authorize! :follow, @followee
 
-    current_user.toggle_following_by! @followee
+    @following = current_user.toggle_following_by! @followee
+
+    dispatch_event dispatch_event_action_for(@following), @following, for: @followee
 
     params[:profile] ? redirect_to(:back) : render('follow', formats: :js)
   end
