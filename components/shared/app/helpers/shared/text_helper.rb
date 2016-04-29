@@ -9,6 +9,6 @@ module Shared::TextHelper
 
   def preview_content(content, options = {})
     # TODO(zbell) to enable MD here, the whole MD processing must be refactored, render_stripdown(render_markdown(truncate content, default_truncate_options.merge(length: 200).merge(options)))
-    truncate html_escape(content), default_truncate_options.merge(length: 200).merge(options)
+    truncate content, default_truncate_options.merge(length: 200).merge(options)
   end
 end

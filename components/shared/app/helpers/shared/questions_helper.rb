@@ -4,7 +4,7 @@ module Shared::QuestionsHelper
   end
 
   def question_text_preview(question, options = {})
-    html_escape preview_content question.text, options.reverse_merge(length: 200)
+    html_escape preview_content(html_escape(question.text), options.reverse_merge(length: 200))
   end
 
   def question_answers_coloring(question)
