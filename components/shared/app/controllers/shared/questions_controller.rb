@@ -29,7 +29,7 @@ class QuestionsController < ApplicationController
     @questions_controls_scope = @questions
     @questions = case params[:tab].to_sym
                  when :unanswered then @questions.unanswered.by_votes
-                 when :answered   then @questions.answered.by_votes
+                 when :answered   then @questions.answered_but_not_best.by_votes
                  when :solved     then @questions.solved.by_votes
                  when :favored    then @questions.favored.by_votes
                  else @questions.recent
