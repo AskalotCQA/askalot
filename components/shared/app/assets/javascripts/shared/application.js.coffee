@@ -26,6 +26,8 @@
 #= require d3
 #= require cal-heatmap
 #
+#= require ./dashboard
+#= require ./fb-popup
 #= require ./gemoji
 #= require ./form
 #= require ./table
