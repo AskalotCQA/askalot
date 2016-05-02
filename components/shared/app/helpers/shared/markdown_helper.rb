@@ -51,10 +51,10 @@ module Shared::MarkdownHelper
       regex: /(^|\s)(#\d+)/
     }
 
-    ::Redcurtain::Markdown.render(text, options)
+    ::Redcurtain::Markdown.render(html_escape(text), options)
   end
 
   def render_stripdown(text, options = {})
-    ::Redcurtain::Markdown.strip(text, options)
+    ::Redcurtain::Markdown.strip(html_escape(text), options)
   end
 end

@@ -1,10 +1,10 @@
 module Shared::QuestionsHelper
   def question_title_preview(question, options = {})
-    html_escape truncate(question.title, default_truncate_options.merge(length: 120).merge(options))
+    html_escape truncate(html_escape(question.title), default_truncate_options.merge(length: 120).merge(options))
   end
 
   def question_text_preview(question, options = {})
-    html_escape preview_content question.text, options.reverse_merge(length: 200)
+    html_escape preview_content(html_escape(question.text), options.reverse_merge(length: 200))
   end
 
   def question_answers_coloring(question)

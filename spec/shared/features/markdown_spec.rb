@@ -256,4 +256,62 @@ describe 'Markdown', type: :feature do
       expect(last_notification.action).to    eql(:mention)
     end
   end
+
+  context 'with xss script' do
+    it 'escapes html in question, answer, comment' do
+      visit shared.root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select  category.name,    from: 'question_category_id'
+      fill_in 'question_title', with: "<script>alert('hello')</script><img src=# onerror=alert('hellot');>"
+      fill_in 'question_text',  with: "<script>alert('hello')</script><img src=# onerror=alert('hellot');>"
+
+      click_button 'Opýtať'
+
+      within 'h1' do
+        expect(page).to have_content("<script>alert('hello')</script><img src=# onerror=alert('hellot');>")
+      end
+
+      within '.question-content' do
+        expect(page).to have_content("<script>alert('hello')</script><img src=# onerror=alert('hellot');>")
+      end
+
+      click_link 'Pridať komentár'
+
+      fill_in 'comment[text]', with: "<script>alert('hello')</script><img src=# onerror=alert('hellot');>"
+
+      click_button 'Komentovať'
+
+      within '.comment-content' do
+        expect(page).to have_content("<script>alert('hello')</script><img src=# onerror=alert('hellot');>")
+      end
+
+      fill_in 'answer[text]', with: "<script>alert('hello')</script><img src=# onerror=alert('hellot');>"
+
+      click_button 'Odpovedať'
+
+      within '.answer-content' do
+        expect(page).to have_content("<script>alert('hello')</script><img src=# onerror=alert('hellot');>")
+      end
+    end
+
+    it 'escapes html in users profile' do
+      click_link user.nick
+
+      click_link 'Upraviť profil'
+
+      fill_in 'user[about]', with: "<script>alert('hello')</script><img src=# onerror=alert('hellot');>"
+
+      within '#profile' do
+        click_button 'Uložiť'
+      end
+
+      click_link user.nick
+
+      within '.user-profile-about' do
+        expect(page).to have_content("<script>alert('hello')</script><img src=# onerror=alert('hellot');>")
+      end
+    end
+  end
 end
