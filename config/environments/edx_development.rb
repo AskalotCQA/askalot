@@ -28,7 +28,7 @@ Askalot::Application.configure do
   config.assets.debug = true
 
   # Default url options for ActionMailer
-  config.action_mailer.default_url_options = { host: 'http://localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'http://localhost', port: 3000, script_name: '/askalot' }
   config.action_mailer.delivery_method = :letter_opener
 
   # Default locate
