@@ -21,7 +21,6 @@ class TagsController < ApplicationController
   # * consider pagination
 
   def suggest
-    # TODO (huna) search in context
     @tags = Shared::Tag.search_by(q: params[:q]).first(10)
 
     render json: {

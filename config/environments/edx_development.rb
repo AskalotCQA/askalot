@@ -38,4 +38,13 @@ Askalot::Application.configure do
   config.assets.initialize_on_precompile = true
 
   config.relative_url_root = '/askalot'
+
+  # Allow displaying in an iFrame
+  config.action_dispatch.default_headers = {
+    'X-Frame-Options' => 'ALLOWALL',
+    'Access-Control-Allow-Origin' => '*',
+    'Access-Control-Request-Methods' => '*',
+    'Access-Control-Allow-Methods' => 'POST, GET, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers' => 'X-CSRFToken'
+  }
 end

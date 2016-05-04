@@ -97,4 +97,13 @@ Askalot::Application.configure do
       sender_address: %{'Askalot' <askalot@fiit.stuba.sk>},
       exception_recipients: %w{askalot@fiit.stuba.sk}
   }
+
+  # Allow displaying in an iFrame
+  config.action_dispatch.default_headers = {
+    'X-Frame-Options' => 'ALLOWALL',
+    'Access-Control-Allow-Origin' => '*',
+    'Access-Control-Request-Methods' => '*',
+    'Access-Control-Allow-Methods' => 'POST, GET, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Headers' => 'X-CSRFToken'
+  }
 end

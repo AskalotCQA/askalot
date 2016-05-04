@@ -6,6 +6,8 @@ class SessionsController < Devise::SessionsController
 
   skip_before_filter :login_required
 
+  after_action :allow_inline_frame, only: :new
+
   def create
     service = Shared::Users::Authentication.new Shared::Stuba::AIS, login_params
 
@@ -35,6 +37,16 @@ class SessionsController < Devise::SessionsController
 
   def login_params
     params.require(:user).permit(:login, :password, :remember_me)
+  end
+
+  private
+
+  def allow_inline_frame
+    response.headers['X-Frame-Options'] = 'ALLOWALL'
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Request-Methods'] = '*'
+    response.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
+    response.headers['Access-Control-Allow-Headers'] = 'X-CSRFToken'
   end
 end
 end

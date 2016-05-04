@@ -15,6 +15,7 @@ module Mooc::QuestionsHelper
       href = mooc.unit_path(id: label.id)
     else
       href = (page_url ? page_url + '#' : '') + shared.questions_path(tags: filter)
+
       options.merge!(target: '_parent')
     end
 

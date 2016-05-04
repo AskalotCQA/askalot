@@ -12,7 +12,7 @@
         <%= navbar_link_tag t('category.navigation'), shared.categories_path, active: [shared.categories_path, shared.search_categories_path] %>
         <%= navbar_link_tag t('tag.navigation'), shared.tags_path, active: [shared.tags_path, shared.search_tags_path] %>
         <%= navbar_link_tag t('user.navigation'), shared.users_path,  active: [shared.users_path, shared.search_users_path] %>
-        <%= header_items() %>
+        <%= header_items %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>

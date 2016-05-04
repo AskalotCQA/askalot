@@ -13,12 +13,9 @@ class User < ActiveRecord::Base
 
          authentication_keys: [:login]
 
-  if Rails.module.mooc?
-    # TODO (ladislav.gallay) Move to mooc user model
-    ROLES = [:student, :teacher, :teacher_assistant, :administrator]
-  else
-    ROLES = [:student, :teacher, :administrator]
-  end
+  # TODO (ladislav.gallay) Move to mooc user model
+  ROLES = [:student, :teacher, :teacher_assistant, :administrator] if Rails.module.mooc?
+  ROLES = [:student, :teacher, :administrator] unless Rails.module.mooc?
 
   has_many :documents,   class_name: :'University::Document', foreign_key: :author_id, dependent: :destroy
   has_many :questions,   foreign_key: :author_id, dependent: :destroy

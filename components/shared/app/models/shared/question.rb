@@ -127,11 +127,8 @@ class Question < ActiveRecord::Base
   end
 
   def parent_watchers
-    if parent.class == Shared::Category
-      parent.parent_watchers
-    else
-      parent.watchers
-    end
+    return parent.parent_watchers if parent.class == Shared::Category
+    parent.watchers
   end
 
   def mode

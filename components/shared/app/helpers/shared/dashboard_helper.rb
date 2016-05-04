@@ -28,5 +28,4 @@ module Shared::DashboardHelper
 
     return ''
   end
-
 end

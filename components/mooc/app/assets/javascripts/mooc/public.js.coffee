@@ -126,6 +126,6 @@ $(document).ready ->
       dataType: 'json'
       data: infoParser()
       success: (data) ->
-        console.dir data
+        console.dir data # TODO (zuffa) remove loging?
       error: (data) ->
         console.dir data

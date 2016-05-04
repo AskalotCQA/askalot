@@ -1,4 +1,5 @@
 module Shared
+  # TODO (hnilicova) refactor to 'News'
   class New < ActiveRecord::Base
     scope :active, lambda { where(show: true) }
 
