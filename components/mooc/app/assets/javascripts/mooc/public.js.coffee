@@ -125,7 +125,3 @@ $(document).ready ->
       url: host + courseUuid() +  '/parser'
       dataType: 'json'
       data: infoParser()
-      success: (data) ->
-        console.dir data # TODO (zuffa) remove loging?
-      error: (data) ->
-        console.dir data
