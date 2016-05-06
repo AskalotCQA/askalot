@@ -230,7 +230,7 @@ en:
       group: "Group"
       question: "Question"
       question_type: "Question type"
-      new: "News"
+      news: "News"
       notification: "Notification"
       tag: "Tag"
       user: "User"
@@ -265,7 +265,7 @@ en:
         title: "Title"
         version: "Version"
 
-      shared/new:
+      shared/news:
         title: "Title"
         description: "Description"
         active: "Show on home page"

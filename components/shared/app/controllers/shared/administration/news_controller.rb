@@ -1,16 +1,16 @@
 module Shared
   class Administration::NewsController < AdministrationController
-    authorize_resource class: Shared::New
+    authorize_resource class: Shared::News
 
     def index
-      @news = Shared::New.order('news.id DESC')
-      @new ||= Shared::New.new
+      @all_news = Shared::News.order('news.id DESC')
+      @news ||= Shared::News.new
     end
 
     def create
-      @new = Shared::New.new(new_params)
+      @news = Shared::News.new(news_params)
 
-      if @new.save
+      if @news.save
         form_message :notice, t('news.create.success')
 
         redirect_to shared.administration_news_index_path
@@ -22,9 +22,9 @@ module Shared
     end
 
     def update
-      @new = Shared::New.find(params[:id])
+      @news = Shared::News.find(params[:id])
 
-      if @new.update_attributes(new_params)
+      if @news.update_attributes(news_params)
         form_message :notice, t('news.update.success')
 
         redirect_to shared.administration_news_index_path
@@ -36,9 +36,9 @@ module Shared
     end
 
     def destroy
-      @new = Shared::New.find(params[:id])
+      @news = Shared::News.find(params[:id])
 
-      if @new.destroy
+      if @news.destroy
         form_message :notice, t('news.delete.success')
       else
         form_error_message t('news.delete.failure')
@@ -49,8 +49,8 @@ module Shared
 
     private
 
-    def new_params
-      params.require(:new).permit(:title, :description, :show)
+    def news_params
+      params.require(:news).permit(:title, :description, :show)
     end
   end
 end

@@ -1,6 +1,5 @@
 module Shared
-  # TODO (hnilicova) refactor to 'News'
-  class New < ActiveRecord::Base
+  class News < ActiveRecord::Base
     scope :active, lambda { where(show: true) }
 
     default_scope -> { order(created_at: :desc) }

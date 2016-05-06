@@ -71,7 +71,7 @@ en:
         submit: "Delete"
         cancel: "Cancel"
 
-    new:
+    news:
       create:
         action: "Add news"
         show: "Show on homepage"

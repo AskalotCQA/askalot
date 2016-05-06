@@ -49,12 +49,12 @@
     <div class="col-md-6">
       <div>
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="<%= active_tab_class(@news, current_user, :activites) %>">
+          <li role="presentation" class="<%= active_tab_class(@all_news, current_user, :activites) %>">
             <a href="#activities" aria-controls="activities" role="tab" data-toggle="tab"><%= t 'home.dashboard.activities' %></a>
           </li>
-          <li role="presentation" class="<%= active_tab_class(@news, current_user, :news) %>">
+          <li role="presentation" class="<%= active_tab_class(@all_news, current_user, :news) %>">
             <a href="#news" aria-controls="news" role="tab" data-toggle="tab"><%= t 'home.dashboard.news' %>
-              <% if @news.first && current_user.dashboard_last_sign_in_at < @news.first.created_at %>
+              <% if @all_news.first && current_user.dashboard_last_sign_in_at < @all_news.first.created_at %>
                   <div class="label label-success label-new-news">
                     <%= t('home.dashboard.more_new_news') %>
                   </div>
@@ -65,14 +65,14 @@
         </ul>
 
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane <%= active_tab_class(@news, current_user, :activites) %>" id="activities">
+          <div role="tabpanel" class="tab-pane <%= active_tab_class(@all_news, current_user, :activites) %>" id="activities">
             <%= render 'shared/static_pages/dashboard/activities', activities: @activities %>
             <br>
             <%= link_to t('home.dashboard.show_activities'), activities_path %>
           </div>
 
-          <div role="tabpanel" class="tab-pane <%= active_tab_class(@news, current_user, :news) %>" id="news">
-            <%= render 'shared/static_pages/dashboard/news', news: @news %>
+          <div role="tabpanel" class="tab-pane <%= active_tab_class(@all_news, current_user, :news) %>" id="news">
+            <%= render 'shared/static_pages/dashboard/news', news: @all_news %>
           </div>
         </div>
       </div>

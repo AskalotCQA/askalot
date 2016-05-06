@@ -7,18 +7,18 @@
 
     <p class="lead"><%= t 'news.index.introduction' %></p>
 
-    <%= render 'shared/news/news', news: @news %>
+    <%= render 'shared/news/news', all_news: @all_news %>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm hidden-print">
     <%= sidebar_tag do %>
       <ul class="nav">
-        <% @news.each do |new| %>
+        <% @all_news.each do |news| %>
           <li>
             <ul class="nav">
               <li>
-                <%= new.title %>
-                <%= new.description %>
+                <%= news.title %>
+                <%= news.description %>
               </li>
             </ul>
           </li>

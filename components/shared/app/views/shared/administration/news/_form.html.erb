@@ -1,5 +1,5 @@
-<%= form_for @new, url: administration_news_index_path(@new), method: :post do |f| %>
-  <%= form_messages_for @new %>
+<%= form_for @news, url: administration_news_index_path(@news), method: :post do |f| %>
+  <%= form_messages_for @news %>
 
   <div class="form-group">
     <%= f.label :title %>
@@ -7,7 +7,7 @@
   </div>
 
   <div class="form-group">
-    <%= markdown_editor_for @new do %>
+    <%= markdown_editor_for @news do %>
       <%= f.text_area :description, class: :'form-control', rows: 5 %>
     <% end %>
   </div>
@@ -15,9 +15,9 @@
   <div class="checkbox">
     <label>
       <%= f.check_box :show %>
-      <%= t('administration.new.create.show') %>
+      <%= t('administration.news.create.show') %>
     </label>
   </div>
 
-  <button type="submit" class="btn btn-success"><%= t('administration.new.create.action') %></button>
+  <button type="submit" class="btn btn-success"><%= t('administration.news.create.action') %></button>
 <% end %>

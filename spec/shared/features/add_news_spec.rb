@@ -15,8 +15,8 @@ describe 'Add News', type: :feature do
       click_link 'Administrácia', match: :first
       click_link 'Novinky', match: :first
 
-      fill_in 'new[title]', with: 'Test news'
-      fill_in 'new[description]', with: 'News'
+      fill_in 'news[title]', with: 'Test news'
+      fill_in 'news[description]', with: 'News'
       check 'Zobraziť na domovskej stránke'
       date = Date.today.strftime('%-d. %-m. %Y')
 

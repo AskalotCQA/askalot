@@ -1,22 +1,22 @@
-<a href="#" id="new-<%= new.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#new-<%= new.id %>-deleting">
-  <%= tooltip_icon_tag :'trash-o', t('administration.new.delete.action'), placement: :top %>
+<a href="#" id="news-<%= news.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#news-<%= news.id %>-deleting">
+  <%= tooltip_icon_tag :'trash-o', t('administration.news.delete.action'), placement: :top %>
 </a>
 
-<div id="new-<%= new.id %>-deleting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="news-<%= news.id %>-deleting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h3 class="modal-title"><%= t 'administration.new.delete.title' %></h3>
+        <h3 class="modal-title"><%= t 'administration.news.delete.title' %></h3>
       </div>
 
       <div class="modal-body">
-        <%= t 'administration.new.delete.text' %>
+        <%= t 'administration.news.delete.text' %>
       </div>
 
       <div class="modal-footer">
-        <%= form_for new, method: :delete, html: { id: nil, class: nil }, url: shared.administration_news_path(new) do %>
-            <a href="#" class="btn btn-default" data-dismiss="modal"><%= t 'administration.new.delete.cancel' %></a>
-            <button id="<%= "new-delete" %>" class="btn btn-danger"><%= t 'administration.new.delete.submit' %></button>
+        <%= form_for news, method: :delete, html: { id: nil, class: nil }, url: shared.administration_news_path(news) do %>
+            <a href="#" class="btn btn-default" data-dismiss="modal"><%= t 'administration.news.delete.cancel' %></a>
+            <button id="<%= "news-delete" %>" class="btn btn-danger"><%= t 'administration.news.delete.submit' %></button>
         <% end %>
       </div>
     </div>
