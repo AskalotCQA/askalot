@@ -1,0 +1,22 @@
+<li id="dropdown-notification-<%= notification.id %>" class="dropdown-notification">
+  <div class="row">
+    <div class="col-xs-12">
+      <%= link_to_notification(notification, delete: lambda { |body, _, _| link_to body, notifications_path(anchor: "notification-#{notification.id}") }) do %>
+          <%= notification_icon_tag notification %>
+          <span class="text-muted">&middot;</span>
+          <%= user_icon_tag notification.initiator_or_anonymous, tooltip_attributes(user_nick(notification.initiator_or_anonymous), placement: :bottom).merge(link: false) %>
+          <span class="text-muted">&middot;</span>
+          <%= tooltip_time_tag notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
+      <% end %>
+      <% if notification.unread? %>
+          <%= link_to read_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.read.submit'), placement: :bottom).merge(class: 'btn btn-default btn-xs pull-right', data: { remote: true }) do %>
+              <%= icon_tag :check %>
+          <% end %>
+      <% else %>
+          <%= link_to unread_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.unread.submit'), placement: :bottom).merge(class: 'btn btn-primitive btn-xs pull-right text-muted', data: { remote: true }) do %>
+              <%= icon_tag :check %>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+</li>

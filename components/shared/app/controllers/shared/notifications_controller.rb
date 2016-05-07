@@ -44,7 +44,10 @@ class NotificationsController < ApplicationController
       form_error_message t("notification.#{status}.failure"), key: params[:tab]
     end
 
-    redirect_to(params[:r] ? params[:r] : :back)
+    respond_to do |format|
+      format.html { redirect_to(params[:r] ? params[:r] : :back) }
+      format.js   { render 'shared/shared/notification', format: :js }
+    end
   end
 end
 end
