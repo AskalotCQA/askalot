@@ -218,6 +218,7 @@ sk:
       favorite: "Obľúbenie"
       group: "Skupina"
       question: "Otázka"
+      question_type: "Typ otázky"
       new: "Novinka"
       notification: "Notifikácia"
       tag: "Tag"
@@ -280,6 +281,12 @@ sk:
         tag_list: "Tagy"
         text: "Text"
         title: "Nadpis"
+
+      shared/question_type:
+        mode: "Typ"
+        name: "Názov"
+        description: "Popis"
+        icon: "Ikona"
 
       shared/user:
         email: "E-mail"

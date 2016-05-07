@@ -5,6 +5,7 @@
         <h4>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
           <%= link_to question.title, university.third_party_question_path(id: question.id, hash: question.category.parent.third_party_hash, name: question.category.name)%>
+          <%= render 'shared/questions/question_type', question_type: question.question_type %>
           <small class="pull-right"><%= tooltip_time_tag question.created_at, format: :normal, placement: :bottom %></small>
         </h4>
 

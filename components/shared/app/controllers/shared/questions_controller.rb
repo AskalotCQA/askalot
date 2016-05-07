@@ -36,6 +36,7 @@ class QuestionsController < ApplicationController
                  end
 
     @questions = filter_questions(@questions)
+    @questions = @questions.includes(:question_type)
     @questions = @questions.page(params[:page]).per(20)
 
     initialize_polling
@@ -99,6 +100,8 @@ class QuestionsController < ApplicationController
     @question.increment :views_count
 
     dispatch_event :create, @view, for: @question.watchers
+
+    render :show_forum if @question.mode.forum?
   end
 
   def favor

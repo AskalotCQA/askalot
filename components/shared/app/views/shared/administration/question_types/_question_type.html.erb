@@ -1,0 +1,27 @@
+<li>
+  <div class="row">
+    <div class="col-xs-1">
+      <%= question_type.mode %>
+    </div>
+
+    <div class="col-xs-4">
+      <%= question_type.name %>
+    </div>
+
+    <div class="col-xs-1">
+      <%= question_type.icon %>
+    </div>
+
+    <div class="col-xs-5">
+      <%= question_type.description %>
+    </div>
+
+    <div class="col-xs-1">
+      <div class="pull-right">
+        <%= render 'shared/administration/question_types/editing', question_type: question_type %>
+        <span class="text-muted">&middot;</span>
+        <%= render 'shared/administration/question_types/deleting', question_type: question_type %>
+      </div>
+    </div>
+  </div>
+</li>

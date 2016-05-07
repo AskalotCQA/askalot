@@ -1,0 +1,22 @@
+<a href="#" id="question-type-<%= question_type.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#question-type-<%= question_type.id %>-deleting">
+  <%= tooltip_icon_tag :'trash-o', t('administration.question_type.delete.action'), placement: :top %>
+</a>
+
+<div id="question-type-<%= question_type.id %>-deleting" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title"><%= t 'administration.question_type.delete.title' %></h3>
+      </div>
+      <div class="modal-body">
+        <%= t 'administration.question_type.delete.text' %>
+      </div>
+      <div class="modal-footer">
+        <%= form_for question_type, method: :delete, html: { id: nil, class: nil }, url: shared.administration_question_type_path(question_type) do %>
+          <a href="#" class="btn btn-default" data-dismiss="modal"><%= t 'administration.question_type.delete.cancel' %></a>
+          <button id="<%= "question-type-delete" %>" class="btn btn-danger"><%= t 'administration.question_type.delete.submit' %></button>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

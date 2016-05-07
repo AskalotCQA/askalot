@@ -8,6 +8,7 @@ sk:
       changelogs: "Protokoly zmien"
       news: "Novinky"
       emails: "Hromadný e-mail"
+      question_types: "Typy otázok"
 
     assignment:
       create:
@@ -109,3 +110,19 @@ sk:
         submit: "Zmazať"
         cancel: "Zrušiť"
 
+    question_type:
+      create:
+        action: "Pridať typ otázky"
+
+      edit:
+        action: "Upraviť"
+        title: "Upraviť typ otázky"
+        submit: "Uložiť"
+        cancel: "Zrušiť"
+
+      delete:
+        action: "Zmazať"
+        title: "Pozor!"
+        text: "Naozaj chcete zmazať tento typ otázky?"
+        submit: "Zmazať"
+        cancel: "Zrušiť"

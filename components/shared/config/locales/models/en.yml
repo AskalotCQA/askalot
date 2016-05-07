@@ -206,6 +206,7 @@ en:
       favorite: "Favorite"
       group: "Group"
       question: "Question"
+      question_type: "Question type"
       new: "News"
       notification: "Notification"
       tag: "Tag"
@@ -268,6 +269,12 @@ en:
         tag_list: "Tags"
         text: "Text"
         title: "Title"
+
+      shared/question_type:
+        mode: "Type"
+        name: "Name"
+        description: "Descriptison"
+        icon: "Icon"
 
       shared/user:
         email: "E-mail"

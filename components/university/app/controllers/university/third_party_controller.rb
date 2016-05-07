@@ -33,6 +33,7 @@ module University
 
       dispatch_event :create, @view, for: @question.watchers
 
+      render 'university/third_party/questions/show_forum' if @question.mode.forum?
       render 'university/third_party/questions/show'
     end
   end

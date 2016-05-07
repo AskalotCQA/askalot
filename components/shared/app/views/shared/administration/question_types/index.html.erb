@@ -1,0 +1,9 @@
+<%= render layout: 'shared/administration/layout' do %>
+  <%= render 'shared/administration/question_types/form' %>
+
+  <ol class="administration-question-types">
+    <% @question_types.each do |question_type| %>
+      <%= render 'shared/administration/question_types/question_type', question_type: question_type %>
+    <% end %>
+  </ol>
+<% end %>

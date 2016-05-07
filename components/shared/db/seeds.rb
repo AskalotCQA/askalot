@@ -26,3 +26,25 @@ slido.update_attributes(
 )
 
 slido.save!
+
+unless Shared::QuestionType.find_by mode: :question
+  type = Shared::QuestionType.create mode: :question, name: 'Question', icon: 'fa-question'
+
+  Shared::Question.where(question_type_id: nil, document_id: nil).update_all question_type_id: type.id
+
+  puts "Question type 'question' created"
+end
+
+unless Shared::QuestionType.find_by mode: :document
+  type = Shared::QuestionType.create mode: :document, name: 'Document question', icon: 'fa-file-o'
+
+  Shared::Question.where(question_type_id: nil).where('document_id IS NOT NULL').update_all question_type_id: type.id
+
+  puts "Question type 'document' created"
+end
+
+unless Shared::QuestionType.find_by mode: :forum
+  Shared::QuestionType.create mode: :forum, name: 'Discussion', icon: 'fa-comments-o'
+
+  puts "Question type 'forum' created"
+end
