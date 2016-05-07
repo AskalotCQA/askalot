@@ -6,7 +6,7 @@
       <%= render 'shared/shared/notification', notification: notification %>
     <% end %>
     <li class="divider"></li>
-    <li><%= link_to t('notification.clean.submit'), clean_notifications_path %></li>
+    <li><%= link_to t('notification.clean.submit'), clean_notifications_path, { data: { remote: true } } %></li>
     <li class="divider"></li>
     <li><%= link_to_notifications notifications, body: t('notification.more') %></li>
   <% end %>
