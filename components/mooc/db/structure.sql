@@ -129,8 +129,8 @@ CREATE TABLE answer_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -165,17 +165,17 @@ CREATE TABLE answers (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
+    stack_exchange_uuid integer,
     comments_count integer DEFAULT 0 NOT NULL,
     votes_count integer DEFAULT 0 NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
     votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    stack_exchange_uuid integer
+    evaluations_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -234,160 +234,6 @@ ALTER SEQUENCE assignments_id_seq OWNED BY assignments.id;
 
 
 --
--- Name: badge_activities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE badge_activities (
-    id integer NOT NULL,
-    name character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: badge_activities_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE badge_activities_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: badge_activities_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE badge_activities_id_seq OWNED BY badge_activities.id;
-
-
---
--- Name: badge_collections; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE badge_collections (
-    id integer NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    name character varying(255),
-    deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
-    deleted_at timestamp without time zone
-);
-
-
---
--- Name: badge_collections_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE badge_collections_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: badge_collections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE badge_collections_id_seq OWNED BY badge_collections.id;
-
-
---
--- Name: badge_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE badge_revisions (
-    id integer NOT NULL,
-    badge_id integer NOT NULL,
-    editor_id integer NOT NULL,
-    title character varying(255) NOT NULL,
-    icon character varying(255) NOT NULL,
-    note text NOT NULL,
-    reward text NOT NULL,
-    badge_collection character varying(255),
-    time_scope character varying(255),
-    scope_start character varying(255),
-    rank integer,
-    "limit" integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: badge_revisions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE badge_revisions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: badge_revisions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE badge_revisions_id_seq OWNED BY badge_revisions.id;
-
-
---
--- Name: badges; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE badges (
-    id integer NOT NULL,
-    title character varying(255),
-    note text,
-    active boolean,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    reward character varying(255),
-    badge_collection_id integer,
-    time_scope_id integer,
-    scope_start date,
-    "limit" integer,
-    rank integer,
-    deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
-    deleted_at timestamp without time zone,
-    icon character varying(255),
-    edited boolean DEFAULT false NOT NULL,
-    edited_at timestamp without time zone,
-    editor_id integer,
-    scope_end date,
-    color character varying(255)
-);
-
-
---
--- Name: badges_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE badges_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: badges_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE badges_id_seq OWNED BY badges.id;
-
-
---
 -- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -410,8 +256,8 @@ CREATE TABLE categories (
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     shared boolean DEFAULT true,
     askable boolean DEFAULT true,
-    description text,
     lti_id character varying(255),
+    description text,
     third_party_hash character varying(255)
 );
 
@@ -517,8 +363,8 @@ CREATE TABLE comment_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -553,13 +399,13 @@ CREATE TABLE comments (
     text text NOT NULL,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
+    stack_exchange_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
-    edited boolean DEFAULT false NOT NULL,
-    stack_exchange_uuid integer
+    deleted_at timestamp without time zone,
+    edited boolean DEFAULT false NOT NULL
 );
 
 
@@ -580,43 +426,6 @@ CREATE SEQUENCE comments_id_seq
 --
 
 ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
-
-
---
--- Name: conditions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE conditions (
-    id integer NOT NULL,
-    count integer,
-    badge_id integer,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    badge_activity_id integer,
-    tag_id integer,
-    deleted boolean DEFAULT false NOT NULL,
-    deletor_id integer,
-    deleted_at timestamp without time zone
-);
-
-
---
--- Name: conditions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE conditions_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: conditions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE conditions_id_seq OWNED BY conditions.id;
 
 
 --
@@ -810,8 +619,8 @@ CREATE TABLE evaluations (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer
@@ -878,8 +687,8 @@ CREATE TABLE favorites (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -1026,8 +835,8 @@ CREATE TABLE labelings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -1236,8 +1045,8 @@ CREATE TABLE question_revisions (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     document_id integer
 );
 
@@ -1262,6 +1071,40 @@ ALTER SEQUENCE question_revisions_id_seq OWNED BY question_revisions.id;
 
 
 --
+-- Name: question_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE question_types (
+    id integer NOT NULL,
+    mode character varying(255),
+    icon character varying(255),
+    name character varying(255),
+    description character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: question_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE question_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: question_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE question_types_id_seq OWNED BY question_types.id;
+
+
+--
 -- Name: questions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1275,6 +1118,7 @@ CREATE TABLE questions (
     updated_at timestamp without time zone NOT NULL,
     votes_difference integer DEFAULT 0 NOT NULL,
     anonymous boolean DEFAULT false NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -1283,22 +1127,22 @@ CREATE TABLE questions (
     slido_question_uuid integer,
     slido_event_uuid integer,
     deleted boolean DEFAULT false NOT NULL,
-    votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     touched_at timestamp without time zone NOT NULL,
+    votes_lb_wsci_bp numeric(13,12) DEFAULT 0 NOT NULL,
     edited_at timestamp without time zone,
     editor_id integer,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     edited boolean DEFAULT false NOT NULL,
-    evaluations_count integer DEFAULT 0 NOT NULL,
-    document_id integer,
-    stack_exchange_uuid integer,
     stack_exchange_duplicate boolean,
     stack_exchange_questions_uuids integer[],
+    evaluations_count integer DEFAULT 0 NOT NULL,
+    document_id integer,
     closed boolean DEFAULT false NOT NULL,
     closer_id integer,
     closed_at timestamp without time zone,
-    with_best_answer boolean DEFAULT false
+    with_best_answer boolean DEFAULT false,
+    question_type_id integer
 );
 
 
@@ -1409,8 +1253,8 @@ CREATE TABLE taggings (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     author_id integer NOT NULL
 );
 
@@ -1467,70 +1311,6 @@ CREATE SEQUENCE tags_id_seq
 --
 
 ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
-
-
---
--- Name: time_scopes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE time_scopes (
-    id integer NOT NULL,
-    name character varying(255),
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone
-);
-
-
---
--- Name: time_scopes_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE time_scopes_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: time_scopes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE time_scopes_id_seq OWNED BY time_scopes.id;
-
-
---
--- Name: user_badges; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE user_badges (
-    id integer NOT NULL,
-    created_at timestamp without time zone,
-    updated_at timestamp without time zone,
-    user_id integer,
-    badge_id integer,
-    week integer
-);
-
-
---
--- Name: user_badges_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE user_badges_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: user_badges_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE user_badges_id_seq OWNED BY user_badges.id;
 
 
 --
@@ -1621,6 +1401,7 @@ CREATE TABLE users (
     tumblr character varying(255),
     youtube character varying(255),
     role character varying(255) DEFAULT 'student'::character varying NOT NULL,
+    stack_exchange_uuid integer,
     answers_count integer DEFAULT 0 NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
     favorites_count integer DEFAULT 0 NOT NULL,
@@ -1638,7 +1419,6 @@ CREATE TABLE users (
     facebook_friends text,
     facebook_likes text,
     documents_count integer DEFAULT 0 NOT NULL,
-    stack_exchange_uuid integer,
     send_email_notifications boolean DEFAULT true NOT NULL,
     read_notifications_thread boolean DEFAULT true NOT NULL,
     alumni boolean DEFAULT false NOT NULL,
@@ -1675,8 +1455,8 @@ CREATE TABLE views (
     viewer_id integer NOT NULL,
     created_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
-    deletor_id integer
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -1712,8 +1492,8 @@ CREATE TABLE votes (
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    deleted_at timestamp without time zone,
     deletor_id integer,
+    deleted_at timestamp without time zone,
     stack_exchange_uuid integer
 );
 
@@ -1813,34 +1593,6 @@ ALTER TABLE ONLY assignments ALTER COLUMN id SET DEFAULT nextval('assignments_id
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY badge_activities ALTER COLUMN id SET DEFAULT nextval('badge_activities_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY badge_collections ALTER COLUMN id SET DEFAULT nextval('badge_collections_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY badge_revisions ALTER COLUMN id SET DEFAULT nextval('badge_revisions_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY badges ALTER COLUMN id SET DEFAULT nextval('badges_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
 
 
@@ -1870,13 +1622,6 @@ ALTER TABLE ONLY comment_revisions ALTER COLUMN id SET DEFAULT nextval('comment_
 --
 
 ALTER TABLE ONLY comments ALTER COLUMN id SET DEFAULT nextval('comments_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY conditions ALTER COLUMN id SET DEFAULT nextval('conditions_id_seq'::regclass);
 
 
 --
@@ -2009,6 +1754,13 @@ ALTER TABLE ONLY question_revisions ALTER COLUMN id SET DEFAULT nextval('questio
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY question_types ALTER COLUMN id SET DEFAULT nextval('question_types_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY questions ALTER COLUMN id SET DEFAULT nextval('questions_id_seq'::regclass);
 
 
@@ -2038,20 +1790,6 @@ ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq':
 --
 
 ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY time_scopes ALTER COLUMN id SET DEFAULT nextval('time_scopes_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY user_badges ALTER COLUMN id SET DEFAULT nextval('user_badges_id_seq'::regclass);
 
 
 --
@@ -2130,38 +1868,6 @@ ALTER TABLE ONLY assignments
 
 
 --
--- Name: badge_activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY badge_activities
-    ADD CONSTRAINT badge_activities_pkey PRIMARY KEY (id);
-
-
---
--- Name: badge_collections_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY badge_collections
-    ADD CONSTRAINT badge_collections_pkey PRIMARY KEY (id);
-
-
---
--- Name: badge_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY badge_revisions
-    ADD CONSTRAINT badge_revisions_pkey PRIMARY KEY (id);
-
-
---
--- Name: badges_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY badges
-    ADD CONSTRAINT badges_pkey PRIMARY KEY (id);
-
-
---
 -- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2199,14 +1905,6 @@ ALTER TABLE ONLY comment_revisions
 
 ALTER TABLE ONLY comments
     ADD CONSTRAINT comments_pkey PRIMARY KEY (id);
-
-
---
--- Name: conditions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY conditions
-    ADD CONSTRAINT conditions_pkey PRIMARY KEY (id);
 
 
 --
@@ -2354,6 +2052,14 @@ ALTER TABLE ONLY question_revisions
 
 
 --
+-- Name: question_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY question_types
+    ADD CONSTRAINT question_types_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2391,22 +2097,6 @@ ALTER TABLE ONLY taggings
 
 ALTER TABLE ONLY tags
     ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
-
-
---
--- Name: time_scopes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY time_scopes
-    ADD CONSTRAINT time_scopes_pkey PRIMARY KEY (id);
-
-
---
--- Name: user_badges_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY user_badges
-    ADD CONSTRAINT user_badges_pkey PRIMARY KEY (id);
 
 
 --
@@ -2618,34 +2308,6 @@ CREATE UNIQUE INDEX index_assignments_on_user_id_and_category_id ON assignments 
 
 
 --
--- Name: index_badge_collections_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_badge_collections_on_deletor_id ON badge_collections USING btree (deletor_id);
-
-
---
--- Name: index_badges_on_badge_collection_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_badges_on_badge_collection_id ON badges USING btree (badge_collection_id);
-
-
---
--- Name: index_badges_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_badges_on_deletor_id ON badges USING btree (deletor_id);
-
-
---
--- Name: index_badges_on_time_scope_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_badges_on_time_scope_id ON badges USING btree (time_scope_id);
-
-
---
 -- Name: index_categories_on_lft; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2762,34 +2424,6 @@ CREATE INDEX index_comments_on_edited ON comments USING btree (edited);
 --
 
 CREATE UNIQUE INDEX index_comments_on_stack_exchange_uuid ON comments USING btree (stack_exchange_uuid);
-
-
---
--- Name: index_conditions_on_badge_activity_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_conditions_on_badge_activity_id ON conditions USING btree (badge_activity_id);
-
-
---
--- Name: index_conditions_on_badge_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_conditions_on_badge_id ON conditions USING btree (badge_id);
-
-
---
--- Name: index_conditions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_conditions_on_deletor_id ON conditions USING btree (deletor_id);
-
-
---
--- Name: index_conditions_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_conditions_on_tag_id ON conditions USING btree (tag_id);
 
 
 --
@@ -3255,6 +2889,13 @@ CREATE INDEX index_questions_on_edited ON questions USING btree (edited);
 
 
 --
+-- Name: index_questions_on_question_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_questions_on_question_type_id ON questions USING btree (question_type_id);
+
+
+--
 -- Name: index_questions_on_slido_question_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3385,20 +3026,6 @@ CREATE UNIQUE INDEX index_tags_on_name ON tags USING btree (name);
 --
 
 CREATE INDEX index_tags_on_stack_exchange_uuid ON tags USING btree (stack_exchange_uuid);
-
-
---
--- Name: index_user_badges_on_badge_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_badges_on_badge_id ON user_badges USING btree (badge_id);
-
-
---
--- Name: index_user_badges_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE INDEX index_user_badges_on_user_id ON user_badges USING btree (user_id);
 
 
 --
@@ -3947,25 +3574,9 @@ INSERT INTO schema_migrations (version) VALUES ('20151207221041');
 
 INSERT INTO schema_migrations (version) VALUES ('20151213225917');
 
-INSERT INTO schema_migrations (version) VALUES ('20160130130947');
-
-INSERT INTO schema_migrations (version) VALUES ('20160130154342');
-
-INSERT INTO schema_migrations (version) VALUES ('20160131200703');
-
 INSERT INTO schema_migrations (version) VALUES ('20160220170558');
 
 INSERT INTO schema_migrations (version) VALUES ('20160221111744');
-
-INSERT INTO schema_migrations (version) VALUES ('20160223121826');
-
-INSERT INTO schema_migrations (version) VALUES ('20160223123743');
-
-INSERT INTO schema_migrations (version) VALUES ('20160223124517');
-
-INSERT INTO schema_migrations (version) VALUES ('20160223124649');
-
-INSERT INTO schema_migrations (version) VALUES ('20160223125111');
 
 INSERT INTO schema_migrations (version) VALUES ('20160224152624');
 
@@ -3977,28 +3588,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160228103010');
 
 INSERT INTO schema_migrations (version) VALUES ('20160229115039');
 
-INSERT INTO schema_migrations (version) VALUES ('20160229140808');
-
-INSERT INTO schema_migrations (version) VALUES ('20160229140911');
-
-INSERT INTO schema_migrations (version) VALUES ('20160229150902');
-
-INSERT INTO schema_migrations (version) VALUES ('20160229231940');
-
-INSERT INTO schema_migrations (version) VALUES ('20160301093811');
-
-INSERT INTO schema_migrations (version) VALUES ('20160301094131');
-
-INSERT INTO schema_migrations (version) VALUES ('20160303195530');
-
-INSERT INTO schema_migrations (version) VALUES ('20160303233050');
-
-INSERT INTO schema_migrations (version) VALUES ('20160303233714');
-
-INSERT INTO schema_migrations (version) VALUES ('20160304193234');
-
-INSERT INTO schema_migrations (version) VALUES ('20160305004930');
-
 INSERT INTO schema_migrations (version) VALUES ('20160306150418');
 
 INSERT INTO schema_migrations (version) VALUES ('20160306194117');
@@ -4009,33 +3598,11 @@ INSERT INTO schema_migrations (version) VALUES ('20160307103948');
 
 INSERT INTO schema_migrations (version) VALUES ('20160313091803');
 
-INSERT INTO schema_migrations (version) VALUES ('20160313162100');
-
-INSERT INTO schema_migrations (version) VALUES ('20160314174638');
-
-INSERT INTO schema_migrations (version) VALUES ('20160314175716');
-
-INSERT INTO schema_migrations (version) VALUES ('20160318011811');
-
-INSERT INTO schema_migrations (version) VALUES ('20160318012209');
-
-INSERT INTO schema_migrations (version) VALUES ('20160325223640');
-
-INSERT INTO schema_migrations (version) VALUES ('20160326140507');
-
-INSERT INTO schema_migrations (version) VALUES ('20160326155724');
-
-INSERT INTO schema_migrations (version) VALUES ('20160328185053');
-
-INSERT INTO schema_migrations (version) VALUES ('20160330102705');
-
 INSERT INTO schema_migrations (version) VALUES ('20160330210355');
 
 INSERT INTO schema_migrations (version) VALUES ('20160402191527');
 
 INSERT INTO schema_migrations (version) VALUES ('20160402205422');
-
-INSERT INTO schema_migrations (version) VALUES ('20160407150925');
 
 INSERT INTO schema_migrations (version) VALUES ('20160409094926');
 
@@ -4043,5 +3610,9 @@ INSERT INTO schema_migrations (version) VALUES ('20160417130646');
 
 INSERT INTO schema_migrations (version) VALUES ('20160417135429');
 
+<<<<<<< HEAD
 INSERT INTO schema_migrations (version) VALUES ('20160503083015');
+=======
+INSERT INTO schema_migrations (version) VALUES ('20160507084030');
+>>>>>>> Fix administration for question type and add the select to questions
 

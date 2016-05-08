@@ -328,3 +328,10 @@ sk:
 
         read_notifications_thread: "Označiť súvisiace ako prečítané"
         send_email_notifications: "Zasielať e-mailové notifikácie"
+
+    symbolizes:
+      shared/question_type:
+        mode:
+          question: Otázka
+          forum: Fórum
+          document: Otázka k dokumentom

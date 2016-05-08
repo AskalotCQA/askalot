@@ -3,7 +3,7 @@
 
   <div class="form-group">
     <%= f.label :mode %>
-    <%= f.select :mode, Shared::QuestionType.get_mode_values, class: :'form-control' %>
+    <%= f.select :mode, Shared::QuestionType.get_mode_values, {}, class: :'form-control', data: { as: :select2 } %>
   </div>
 
   <div class="form-group">

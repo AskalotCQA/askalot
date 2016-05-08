@@ -5,7 +5,7 @@
         <h4>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
           <%= link_to_question question, length: 120 %>
-          <%= render 'shared/questions/question_type', question_type: question.question_type %>
+          <%= question_type_icon question.question_type %>
         </h4>
 
         <%= render 'shared/questions/labels', labels: question.labels %>

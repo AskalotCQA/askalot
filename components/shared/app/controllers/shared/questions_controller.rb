@@ -48,6 +48,8 @@ class QuestionsController < ApplicationController
     @question.document = University::Document.find(params[:document_id]) if params[:document_id]
     @question.category = Shared::Category.find(params[:category_id]) if params[:category_id]
     @question.category = nil if @question.category && @question.category.children.any?
+    @question.question_type = Shared::QuestionType.forums.first if params[:mode] == 'forum'
+    @question.question_type = Shared::QuestionType.questions.first unless params[:mode]
 
     respond_to do |format|
       format.html { render :new }

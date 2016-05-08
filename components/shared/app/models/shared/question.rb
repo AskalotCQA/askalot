@@ -131,7 +131,7 @@ class Question < ActiveRecord::Base
   def mode
     mode = self.question_type ? self.question_type.mode : 'question'
 
-    ActiveSupport::StringInquirer.new mode
+    ActiveSupport::StringInquirer.new mode.to_s
   end
 end
 end

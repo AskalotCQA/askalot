@@ -1,27 +1,21 @@
-<li>
-  <div class="row">
-    <div class="col-xs-1">
-      <%= question_type.mode %>
-    </div>
+<td>
+  <%= question_type.mode %>
+</td>
 
-    <div class="col-xs-4">
-      <%= question_type.name %>
-    </div>
+<td>
+  <%= question_type.name %>
+</td>
 
-    <div class="col-xs-1">
-      <%= question_type.icon %>
-    </div>
+<td>
+  <%= question_type.icon %>
+</td>
 
-    <div class="col-xs-5">
-      <%= question_type.description %>
-    </div>
+<td>
+  <%= question_type.description %>
+</td>
 
-    <div class="col-xs-1">
-      <div class="pull-right">
-        <%= render 'shared/administration/question_types/editing', question_type: question_type %>
-        <span class="text-muted">&middot;</span>
-        <%= render 'shared/administration/question_types/deleting', question_type: question_type %>
-      </div>
-    </div>
-  </div>
-</li>
+<td>
+  <%= render 'shared/administration/question_types/editing', question_type: question_type %>
+  <span class="text-muted">&middot;</span>
+  <%= render 'shared/administration/question_types/deleting', question_type: question_type %>
+</td>

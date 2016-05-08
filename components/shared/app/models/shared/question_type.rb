@@ -7,7 +7,10 @@ module Shared
 
     MODES = [:question, :forum, :document]
 
-    symbolize :mode, in: MODE
+    symbolize :mode, in: MODES
 
+    scope :public_types, -> { where(mode: [:question, :forum]).order(:mode, :name) }
+    scope :questions, -> { where(mode: :question) }
+    scope :forums, -> { where(mode: :forum) }
   end
 end

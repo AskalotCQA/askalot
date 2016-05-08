@@ -1,5 +1,11 @@
 # How to write a good question?
 
+##### Type
+
+- Slúži na určenie, či sa jedná skutočne o otázku alebo o diskusný príspevok.
+- Na otázku zväčša existuje jednoznačná správna odpoveď.
+- Diskusné príspevky očakávajú rôzne názory, postoje a subjektívne reakcie.
+
 ##### Category
 
 - It is used for inclusion of issues to topics.

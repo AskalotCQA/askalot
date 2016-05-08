@@ -13,11 +13,14 @@
   <% end %>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-2">
-      <%= icon_link_to :plus, t('question.new.feature'), shared.new_question_path(category_id: @context), analytics_attributes(:questions, :'open-new-form', :list).merge(class: 'btn btn-success') %>
+    <div class="col-xs-12 col-sm-4">
+      <ul class="list list-inline">
+        <li><%= icon_link_to :plus, t('question.new.feature'), shared.new_question_path(category_id: @context), analytics_attributes(:questions, :'open-new-form', :list).merge(class: 'btn btn-success') %>
+        <li><%= icon_link_to 'comments-o', t('question.new.forum'), shared.new_question_path(category_id: @context, mode: :forum), analytics_attributes(:questions, :'open-new-forum-form', :list).merge(class: 'btn btn-success') %>
+      </ul>
     </div>
 
-    <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-6">
+    <div class="col-xs-12 col-sm-8 col-md-offset-2 col-md-6">
       <div id="fulltext-search">
         <%= form_tag shared.search_questions_path, id: :fulltext_search, method: :get do %>
           <%= hidden_field_tag :poll, params[:poll] %>

@@ -16,6 +16,7 @@ en:
       submit: "Ask question"
       submit_anonymously: "Ask anonymously"
       feature: "Ask a question"
+      forum: "Start a discussion"
       same_category_link: "ask a question in the same category."
       same_category: "Browse questions tagged"
 

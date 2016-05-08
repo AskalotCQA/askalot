@@ -316,3 +316,10 @@ en:
 
         read_notifications_thread: "Mark whole thread as read"
         send_email_notifications: "Send e-mail notifications"
+
+    symbolizes:
+      shared/question_type:
+        mode:
+          question: Question
+          forum: Forum
+          document: Document question

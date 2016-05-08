@@ -1,0 +1,11 @@
+sk:
+  question_type:
+    create:
+      success: "Typ otázky bol úspešne vytvorený"
+
+    update:
+      success: "Typ otázky bol úspešne upravený"
+
+    delete:
+      success: "Typ otázky bol úspešne zmazaný"
+      failure: "Zmazanie typu otázky zlyhalo"

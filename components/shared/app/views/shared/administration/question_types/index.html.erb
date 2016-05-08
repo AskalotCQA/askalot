@@ -1,9 +1,22 @@
 <%= render layout: 'shared/administration/layout' do %>
   <%= render 'shared/administration/question_types/form' %>
 
-  <ol class="administration-question-types">
-    <% @question_types.each do |question_type| %>
-      <%= render 'shared/administration/question_types/question_type', question_type: question_type %>
-    <% end %>
-  </ol>
+  <table class="table table-bordered administration-question-types">
+    <thead>
+      <tr>
+        <th><%= t 'activerecord.attributes.shared/question_type.mode' %></th>
+        <th><%= t 'activerecord.attributes.shared/question_type.name' %></th>
+        <th><%= t 'activerecord.attributes.shared/question_type.icon' %></th>
+        <th><%= t 'activerecord.attributes.shared/question_type.description' %></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @question_types.each do |question_type| %>
+        <tr>
+          <%= render 'shared/administration/question_types/question_type', question_type: question_type %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>

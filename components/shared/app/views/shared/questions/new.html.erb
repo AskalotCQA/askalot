@@ -8,6 +8,11 @@
       <%= form_messages_for @question %>
 
       <div class="form-group">
+        <%= f.label :question_type_id %>
+        <%= f.collection_select :question_type_id, Shared::QuestionType.public_types, :id, :name, {}, class: :'form-control', data: {as: :select2} %>
+      </div>
+
+      <div class="form-group">
         <%= f.label :category_id %>
         <%= f.category_collection_select :category_id, askable_leaves_categories(@context) %>
       </div>

@@ -1,0 +1,11 @@
+sk:
+  question_type:
+    create:
+      success: "Question type successfully created"
+
+    update:
+      success: "Question type successfully edited"
+
+    delete:
+      success: "Question type successfully deleted"
+      failure: "Question type deletion failed"

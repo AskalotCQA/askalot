@@ -11,18 +11,18 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <%= f.label :version %>
-            <%= f.text_field :version, class: :'form-control' %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :icon %>
-            <%= f.text_field :icon, class: :'form-control' %>
+            <%= f.label :mode %>
+            <%= f.select :mode, Shared::QuestionType.get_mode_values, {}, class: :'form-control', data: { as: :select2 } %>
           </div>
 
           <div class="form-group">
             <%= f.label :name %>
             <%= f.text_field :name, class: :'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :icon %>
+            <%= f.text_field :icon, class: :'form-control' %>
           </div>
 
           <div class="form-group">
