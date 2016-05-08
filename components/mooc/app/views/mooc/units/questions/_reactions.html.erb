@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-xs-7 col-sm-9 col-md-9 col-lg-8">
+    <h4>
+      <%= t 'count_x.reaction', count: answers.size %>
+    </h4>
+  </div>
+  <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2">
+    <div class="new-answer">
+      <%= icon_link_to :plus, t('answer.forum.new.action'), '#answer', analytics_attributes(:answer, :'scroll-to-new-form').merge(class: 'btn btn-success', :'data-click-focus' => '#answer_text') %>
+    </div>
+  </div>
+</div>
+
+<hr/>
+
+<% if answers.any? %>
+  <ol class="question-answers">
+    <% answers.each do |answer| %>
+      <%= render 'mooc/units/questions/reaction', answer: answer, page_url: @page_url %>
+    <% end %>
+  </ol>
+
+  <hr/>
+<% end %>

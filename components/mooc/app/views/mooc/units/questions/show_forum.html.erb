@@ -47,10 +47,10 @@
   </div>
 
   <div id="question-answers">
-    <%= render 'mooc/units/questions/answers', answers: @answers, page_url: @page_url %>
+    <%= render 'mooc/units/questions/reactions', answers: @answers, page_url: @page_url %>
   </div>
 
   <div id="question-answer" class="new-answer-form">
-    <%= render 'mooc/units/answers/form', question: @question, answer: @answer, page_url: @page_url, remote: true %>
+    <%= render 'mooc/units/answers/reaction_form', question: @question, answer: @answer, page_url: @page_url, remote: true %>
   </div>
 </div>
