@@ -6,8 +6,6 @@ class Ability
   include (Rails.module.classify + '::Ability').constantize
 
   def initialize(user)
-    # TODO(zbell) refactor to use only actions :read, :create, :update and :destroy on models
-
     can(:edit,   Shared::User) { |resource| resource == user }
     can(:follow, Shared::User) { |resource| resource != user }
 

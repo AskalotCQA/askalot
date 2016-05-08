@@ -13,7 +13,6 @@ class User < ActiveRecord::Base
 
          authentication_keys: [:login]
 
-  # TODO (ladislav.gallay) Move to mooc user model
   ROLES = [:student, :teacher, :teacher_assistant, :administrator] if Rails.module.mooc?
   ROLES = [:student, :teacher, :administrator] unless Rails.module.mooc?
 
