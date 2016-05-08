@@ -74,6 +74,7 @@ gem 'tf_idf'
 gem 'timecop'
 gem 'awesome_nested_set'
 gem 'ims-lti', :git => "https://github.com/instructure/ims-lti.git"
+gem "non-stupid-digest-assets"
 
 # search
 gem 'elasticsearch'
@@ -138,5 +139,4 @@ end
 
 group :mooc do
   gem 'mooc', path: 'components/mooc'
-  gem "non-stupid-digest-assets"
 end
