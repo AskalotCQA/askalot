@@ -1,5 +1,5 @@
 <li id="dropdown-notification-<%= notification.id %>" class="dropdown-notification">
-  <div class="row">
+  <div class="row <%= notification.read? ? 'notification-read' : '' %>">
     <div class="col-xs-12">
       <%= link_to_notification(notification, delete: lambda { |body, _, _| link_to body, notifications_path(anchor: "notification-#{notification.id}") }) do %>
           <%= notification_icon_tag notification %>

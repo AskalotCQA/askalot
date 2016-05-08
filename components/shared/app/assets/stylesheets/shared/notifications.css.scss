@@ -4,6 +4,10 @@
   @extend .activities;
 }
 
-.dropdown-notification{
+.dropdown-notification {
   margin: 10px;
+}
+
+.notification-read {
+  opacity: 0.5;
 }
