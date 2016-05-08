@@ -1,6 +1,5 @@
 module Shared
   class QuestionType < ActiveRecord::Base
-
     has_many :questions
 
     self.table_name = 'question_types'

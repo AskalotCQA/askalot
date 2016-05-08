@@ -17,7 +17,7 @@ module Mooc
 
       dispatch_event :create, @view, for: @question.watchers
 
-      render 'mooc/units/question/show_forum' if @question.mode.forum?
+      render 'mooc/units/questions/show_forum' if @question.mode.forum?
       render 'mooc/units/questions/show' unless @question.mode.forum?
     end
   end

@@ -1,7 +1,7 @@
 <div id="answer-<%= answer.id %>-labeling" class="answer-labeling">
   <div class="answer-labeling-best">
     <% if can? :label, answer.question %>
-      <% if answer. best? %>
+      <% if answer.best? %>
         <%= icon_link_to :'check-circle', nil, shared.label_answer_path(answer, value: :best), data: { remote: true }, class: :'answer-labeled-best' %>
       <% else %>
         <%= icon_link_to :'check-circle', nil, shared.label_answer_path(answer, value: :best), tooltip_attributes(t('answer.label.best'), placement: :right).deep_merge(data: { remote: true }) %>
