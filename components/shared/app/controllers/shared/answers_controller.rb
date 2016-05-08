@@ -24,7 +24,7 @@ class AnswersController < ApplicationController
       dispatch_event :create, @answer, for: @question.watchers
       register_watching_for @question
 
-      flash[:notice] = t('answer.create.success')
+      flash[:notice] = t("answer.#{@question.mode}.create.success")
     else
       form_error_messages_for @answer
     end

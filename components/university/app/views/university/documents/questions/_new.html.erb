@@ -10,6 +10,8 @@
 
     <%= f.hidden_field :document_id %>
 
+    <%= f.hidden_field :question_type_id, value: Shared::QuestionType.documents.first.id if Shared::QuestionType.documents.first %>
+
     <div class="form-group">
       <%= f.label :title %>
       <%= f.text_field :title, class: :'form-control' %>

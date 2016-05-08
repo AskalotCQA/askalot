@@ -7,10 +7,18 @@
     <%= form_for @question do |f| %>
       <%= form_messages_for @question %>
 
-      <div class="form-group">
-        <%= f.label :question_type_id %>
-        <%= f.collection_select :question_type_id, Shared::QuestionType.public_types, :id, :name, {}, class: :'form-control', data: {as: :select2} %>
-      </div>
+      <% if Shared::QuestionType.public_types.size > 1 %>
+        <div class="form-group">
+          <%= f.label :question_type_id %>
+          <%= f.question_type_collection_select :question_type_id, Shared::QuestionType.public_types %>
+        </div>
+
+        <div class="question-type-description">
+          <%= @question.question_type.description if @question.question_type %>
+        </div>
+      <% elsif Shared::QuestionType.public_types.present? %>
+        <%= f.hidden_field :question_type_id, value: Shared::QuestionType.public_types.first.id %>
+      <% end %>
 
       <div class="form-group">
         <%= f.label :category_id %>

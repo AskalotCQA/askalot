@@ -1,5 +1,16 @@
 sk:
   answer:
+    question:
+      create:
+        success: "Odpoveď bola úspešne pridaná."
+
+    forum:
+      create:
+        success: "Príspevok bola úspešne pridaný."
+      new:
+        action: "Pridať príspevok"
+        submit: "Odoslať"
+
     new:
       action: "Pridať odpoveď"
       submit: "Odpovedať"

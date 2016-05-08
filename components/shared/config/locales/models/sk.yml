@@ -6,6 +6,23 @@ sk:
       few: "odpovede"
       other: "odpovedí"
 
+    reaction:
+      question:
+        zero: "odpovedí"
+        one: "odpoveď"
+        few: "odpovede"
+        other: "odpovedí"
+      document:
+        zero: "odpovedí"
+        one: "odpoveď"
+        few: "odpovede"
+        other: "odpovedí"
+      forum:
+        zero: "príspevkov"
+        one: "príspevok"
+        few: "príspevky"
+        other: "príspevkov"
+
     author:
       zero: "autorov"
       one: "autor"
@@ -114,6 +131,12 @@ sk:
       one: "1 odpoveď"
       few: "%{count} odpovede"
       other: "%{count} odpovedí"
+
+    reaction:
+      zero: "žiadny príspevok"
+      one: "1 príspevok"
+      few: "%{count} príspevky"
+      other: "%{count} príspevkov"
 
     author:
       zero: "žiaden autor"
@@ -230,6 +253,7 @@ sk:
     attributes:
       shared/answer:
         text: "Odpoveď"
+        reaction: "Príspevok"
 
       shared/assignment:
         category: "Kategória"
@@ -275,6 +299,7 @@ sk:
         visibility: "Viditeľnosť"
 
       shared/question:
+        question_type_id: "Typ"
         anonymous: "Opýtať sa anonymne"
         category: "Kategória"
         category_id: "Kategória"

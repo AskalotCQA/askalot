@@ -1,5 +1,16 @@
 en:
   answer:
+    question:
+      create:
+        success: "Answer was successfully added."
+
+    forum:
+      create:
+        success: "Message was successfully added."
+      new:
+        action: "Add message"
+        submit: "Submit"
+
     new:
       action: "Add answer"
       submit: "Answer"

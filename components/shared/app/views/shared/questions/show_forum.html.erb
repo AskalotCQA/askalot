@@ -11,7 +11,7 @@
         <h1 class="question-title">
           <%= html_escape @question.title %>
           <%= fa_icon :archive, tooltip_attributes(t 'question.close.closed') if @question.closed %>
-          <%= evaluation_badge_tag @question if @question.evaluations.any? %>
+          <%= question_type_icon @question.question_type %>
         </h1>
         <%= render 'shared/questions/labels', labels: @labels %>
       </div>
@@ -28,10 +28,6 @@
           <%= render 'shared/questions/closing', question: @question %>
         </div>
 
-        <div id="question-evaluations">
-          <%= render 'shared/questions/evaluations', question: @question %>
-        </div>
-
         <div id="question-comments">
           <%= render 'shared/questions/comments', question: @question %>
           <%= render 'shared/comments/form', commentable: @question %>
@@ -43,20 +39,19 @@
       <%= render 'shared/questions/voting', question: @question %>
       <%= render 'shared/questions/favoring', question: @question %>
       <%= render 'shared/questions/watching', question: @question %>
-      <%= render 'shared/questions/evaluating', question: @question %>
     </div>
   </div>
 </div>
 
 <div id="question-answers">
-  <%= render 'shared/questions/answers', answers: @answers %>
+  <%= render 'shared/questions/reactions', answers: @answers %>
 </div>
 
 <div id="same-category">
-  <%= render 'shared/questions/same_category', question: @question %>
+  <%= render 'shared/questions/same_category_reactions', question: @question %>
 </div>
 
 <div id="question-answer" class="new-answer-form">
-  <%= render 'shared/answers/form', question: @question, answer: @answer %>
+  <%= render 'shared/answers/reaction_form', question: @question, answer: @answer %>
 </div>
 

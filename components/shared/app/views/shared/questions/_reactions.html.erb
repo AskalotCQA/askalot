@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-xs-7 col-sm-offset-3 col-sm-6 col-md-offset-2 col-md-7 col-lg-8">
+    <h2>
+      <%= t 'count_x.reaction', count: answers.size %>
+    </h2>
+  </div>
+  <div class="col-xs-5 col-sm-3 col-md-3 col-lg-2">
+    <div class="new-answer">
+      <%= icon_link_to :plus, t('answer.forum.new.action'), '#answer', analytics_attributes(:answer, :'scroll-to-new-form').merge(class: 'btn btn-success', :'data-click-focus' => '#answer_text') %>
+    </div>
+  </div>
+</div>
+
+<hr/>
+
+<% if answers.any? %>
+  <ol class="question-answers">
+    <% answers.each do |answer| %>
+      <%= render 'shared/questions/reaction', answer: answer %>
+    <% end %>
+  </ol>
+
+  <hr/>
+<% end %>

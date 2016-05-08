@@ -2,6 +2,22 @@ en:
   question:
     navigation: "Questions"
 
+    question:
+      create:
+        success: "Question was successfully added."
+
+    document:
+      create:
+        success: "Question was successfully added."
+
+    forum:
+      create:
+        success: "Message was successfully added."
+
+      new:
+        same_category_link: "start new discussion in the same category."
+        same_category: "Browse discussions tagged"
+
     index:
       title: "Questions"
       new: "New question"

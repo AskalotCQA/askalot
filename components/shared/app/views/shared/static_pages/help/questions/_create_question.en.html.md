@@ -2,9 +2,9 @@
 
 ##### Type
 
-- Slúži na určenie, či sa jedná skutočne o otázku alebo o diskusný príspevok.
-- Na otázku zväčša existuje jednoznačná správna odpoveď.
-- Diskusné príspevky očakávajú rôzne názory, postoje a subjektívne reakcie.
+- It is used to determine whether the post is a question or a discussion message.
+- The question can be answered usually by one correct answer.
+- Discussion messages expect various reactions, opinions and subjective responses.
 
 ##### Category
 

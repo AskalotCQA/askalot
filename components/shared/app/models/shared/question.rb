@@ -64,6 +64,12 @@ class Question < ActiveRecord::Base
     Answer.labeled_with(Label.where(value: :best).first)
   end
 
+  def ordered_reactions
+    return answers.order(created_at: :asc) if mode.forum?
+
+    ordered_answers
+  end
+
   def ordered_answers
     best  = answers.labeled_with(:best).first
     other = answers.by_votes.order(created_at: :desc)

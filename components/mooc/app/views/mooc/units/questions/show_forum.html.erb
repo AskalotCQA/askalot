@@ -10,6 +10,7 @@
           <h3 class="question-title">
             <%= @question.title %>
             <%= evaluation_badge_tag @question if @question.evaluations.any? %>
+            <%= question_type_icon @question.question_type %>
           </h3>
           <%= render 'mooc/units/questions/labels', labels: @question.labels, page_url: @page_url, in_questions_index: false %>
         </div>

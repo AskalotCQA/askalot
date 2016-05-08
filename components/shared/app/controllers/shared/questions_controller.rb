@@ -45,11 +45,11 @@ class QuestionsController < ApplicationController
   def new
     @question = Shared::Question.new
 
-    @question.document = University::Document.find(params[:document_id]) if params[:document_id]
-    @question.category = Shared::Category.find(params[:category_id]) if params[:category_id]
-    @question.category = nil if @question.category && @question.category.children.any?
-    @question.question_type = Shared::QuestionType.forums.first if params[:mode] == 'forum'
-    @question.question_type = Shared::QuestionType.questions.first unless params[:mode]
+    @question.document      = University::Document.find(params[:document_id]) if params[:document_id]
+    @question.category      = Shared::Category.find(params[:category_id]) if params[:category_id]
+    @question.category      = nil if @question.category && @question.category.children.any?
+    @question.question_type = Shared::QuestionType.find(params[:question_type_id]) if params[:question_type_id]
+    @question.question_type = Shared::QuestionType.questions.first unless params[:question_type_id]
 
     respond_to do |format|
       format.html { render :new }
@@ -71,7 +71,7 @@ class QuestionsController < ApplicationController
       dispatch_event :create, @question, for: @question.parent_watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
       register_watching_for @question
 
-      flash[:notice] = t('question.create.success')
+      flash[:notice] = t("question.#{@question.mode}.create.success")
 
       @params = { unit_id: params[:question][:category_id], id: @question.id, page_url: params[:question][:page_url] }
 
@@ -95,7 +95,7 @@ class QuestionsController < ApplicationController
     authorize! :view, @question
 
     @labels  = @question.labels
-    @answers = @question.ordered_answers
+    @answers = @question.ordered_reactions
     @answer  = Shared::Answer.new(question: @question)
     @view    = @question.views.create! viewer: current_user
 
@@ -145,11 +145,11 @@ class QuestionsController < ApplicationController
   end
 
   def create_params
-    params.require(:question).permit(:title, :text, :category_id, :document_id, :tag_list, :anonymous).merge(author: current_user)
+    params.require(:question).permit(:title, :text, :category_id, :document_id, :tag_list, :anonymous, :question_type_id).merge(author: current_user)
   end
 
   def update_params
-    params.require(:question).permit(:title, :text, :category_id, :tag_list)
+    params.require(:question).permit(:title, :text, :category_id, :tag_list, :question_type_id)
   end
 
   protected

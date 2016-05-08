@@ -2,6 +2,22 @@ sk:
   question:
     navigation: "Otázky"
 
+    question:
+      create:
+        success: "Otázka bola úspešne pridaná."
+
+    document:
+      create:
+        success: "Otázka bola úspešne pridaná."
+
+    forum:
+      create:
+        success: "Príspevok bol úspešne pridaný."
+
+      new:
+        same_category_link: "začnite diskusiu v rovnakej kategórii."
+        same_category: "Prezeraj diskusné príspevky s týmito tagmi"
+
     index:
       title: "Otázky"
       new: "Nová otázka"
@@ -16,7 +32,7 @@ sk:
       submit: "Opýtať"
       submit_anonymously: "Opýtať sa anonymne"
       feature: "Pridať otázku"
-      forum: "Pridať diskusiu"
+      forum: "Pridať príspevok"
       same_category_link: "sa opýtaj otázku v rovnakej kategórii."
       same_category: "Prezeraj otázky s týmito tagmi"
 
