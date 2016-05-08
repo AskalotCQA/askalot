@@ -124,9 +124,12 @@
 .question-title {
   margin-top: 20px;
 
-  * {
+  .label, i {
     vertical-align: middle;
-    font-size: 16px;
+  }
+
+  .label {
+    font-size: 0.44em;
   }
 }
 

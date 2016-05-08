@@ -25,7 +25,7 @@ module University
       authorize! :view, @question
 
       @labels  = @question.labels
-      @answers = @question.ordered_answers
+      @answers = @question.ordered_reactions
       @answer  = Shared::Answer.new(question: @question)
       @view    = @question.views.create! viewer: current_user
 
@@ -34,7 +34,7 @@ module University
       dispatch_event :create, @view, for: @question.watchers
 
       render 'university/third_party/questions/show_forum' if @question.mode.forum?
-      render 'university/third_party/questions/show'
+      render 'university/third_party/questions/show' unless @question.mode.forum?
     end
   end
 end

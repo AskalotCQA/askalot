@@ -1,5 +1,6 @@
 <div id="document-content">
-  <div id="new-question-button" class="btn btn-success"><%= t 'question.new.title' %></div>
+  <div id="new-question-button" class="btn btn-success" data-default-question-type-id="<%= Shared::QuestionType.questions.first.id if Shared::QuestionType.questions.first %>"><%= t 'question.new.title' %></div>
+  <div id="new-forum-button" class="btn btn-success" data-default-question-type-id="<%= Shared::QuestionType.forums.first.id if Shared::QuestionType.forums.first %>"><%= t 'question.new.forum' %></div>
 
   <%= form_for question, url: shared.questions_path, remote: true do |f| %>
     <div id="form-messages">

@@ -17,12 +17,14 @@
         </div>
       </div>
 
+      <%= render 'shared/answers/evaluations', answer: answer %>
       <%= render 'shared/answers/comments', answer: answer %>
       <%= render 'shared/comments/form', commentable: answer %>
     </div>
 
     <div class="col-xs-3 col-sm-2">
       <%= render 'shared/answers/voting', answer: answer %>
+      <%= render 'shared/answers/evaluating', answer: answer %>
     </div>
   </div>
 </li>

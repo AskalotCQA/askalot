@@ -11,6 +11,7 @@
         <h1 class="question-title">
           <%= html_escape @question.title %>
           <%= fa_icon :archive, tooltip_attributes(t 'question.close.closed') if @question.closed %>
+          <%= evaluation_badge_tag @question if @question.evaluations.any? %>
           <%= question_type_icon @question.question_type %>
         </h1>
         <%= render 'shared/questions/labels', labels: @labels %>
@@ -28,6 +29,10 @@
           <%= render 'shared/questions/closing', question: @question %>
         </div>
 
+        <div id="question-evaluations">
+          <%= render 'shared/questions/evaluations', question: @question %>
+        </div>
+
         <div id="question-comments">
           <%= render 'shared/questions/comments', question: @question %>
           <%= render 'shared/comments/form', commentable: @question %>
@@ -39,6 +44,7 @@
       <%= render 'shared/questions/voting', question: @question %>
       <%= render 'shared/questions/favoring', question: @question %>
       <%= render 'shared/questions/watching', question: @question %>
+      <%= render 'shared/questions/evaluating', question: @question %>
     </div>
   </div>
 </div>

@@ -14,6 +14,7 @@
           <h3 class="question-title">
             <%= @question.title %>
             <%= evaluation_badge_tag @question if @question.evaluations.any? %>
+            <%= question_type_icon @question.question_type %>
           </h3>
           <%= render 'shared/questions/labels', labels: @question.labels %>
         </div>
@@ -50,10 +51,10 @@
   </div>
 
   <div id="question-answers">
-    <%= render 'university/documents/questions/answers', answers: @answers, remote: false %>
+    <%= render 'university/third_party/questions/reactions', answers: @answers, remote: false %>
   </div>
 
   <div id="question-answer" class="new-answer-form">
-    <%= render 'university/documents/answers/form', question: @question, answer: @answer, remote: false %>
+    <%= render 'university/third_party/answers/reaction_form', question: @question, answer: @answer, remote: false %>
   </div>
 </div>
