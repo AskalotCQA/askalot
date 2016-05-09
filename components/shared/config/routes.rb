@@ -123,6 +123,7 @@ Shared::Engine.routes.draw do
       resources :news, only: [:index, :create, :update, :destroy]
 
       resources :categories, except: [:show] do
+        post 'copy'     => 'categories#copy', on: :collection
         post 'settings' => 'categories#update_settings', on: :collection
       end
 

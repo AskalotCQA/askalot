@@ -59,6 +59,44 @@ class Administration::CategoriesController < AdministrationController
     render json: { success: true }
   end
 
+  def copy
+    parent_category = Category.find_by full_tree_name: params[:parent_name]
+    categories =  Category.where(id: params[:copied]).order(:lft).includes(:assignments) if params[:copied] && params[:copied].any?
+    category_ids = {}
+    assignment_ids = {}
+
+    if categories
+      categories.each do |category|
+        category_copy = category.copy(parent_category, category_ids[category.parent_id])
+        category_ids[category.id] = category_copy.id
+
+        assignments = category.assignments
+
+        if assignments
+          assignments.each do |assignment|
+            assignment_copy = assignment.copy category_copy.id
+            if assignment_copy
+              assignment_ids[assignment.id] = assignment_copy.id
+            end
+          end
+        end
+
+        watchings = Shared::Watching.where(watchable_id: category.id, watchable_type: 'Shared::Category')
+
+        if watchings
+          watchings.each do |watching|
+            if watching.watcher.role.name == 'teacher' || category.teachers.include?(watching.watcher) ||
+                category.full_tree_name.include?('Všeobecné')
+              watching.copy(assignment_copy.id, category_copy.ancestors[1].id)
+            end
+          end
+        end
+      end
+    end
+
+    render json: { success: true }
+  end
+
   # TODO(zbell) add destroy?
 
   private

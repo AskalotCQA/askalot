@@ -125,4 +125,24 @@ describe Shared::Category, type: :model do
       expect(questions).to      include(question)
     end
   end
+
+  describe 'copy category' do
+    let!(:a) { create :category, name: 'A', parent: nil }
+    let!(:b) { create :category, name: 'B', parent: a }
+    let!(:c) { create :category, name: 'C', parent: b }
+    let!(:d) { create :category, name: 'D', parent: nil }
+
+    it 'copy category with no specified parent id' do
+      expect(b.parent_id).to eql(a.id)
+
+      b_copy = b.copy(d,nil)
+      expect(b_copy.parent_id).to eql(d.id)
+    end
+
+    it 'copy category with specified parent id' do
+      a_copy = a.copy(d,nil)
+      expect(a_copy.parent_id).to eql(d.id)
+      expect(a_copy.full_tree_name).to eql('D - A')
+    end
+  end
 end

@@ -22,5 +22,14 @@ class Watching < ActiveRecord::Base
   def default_values
     self.context ||= Shared::Context::Manager.current_context if Shared::Watching.column_names.include? 'context'
   end
+
+  def copy(assingment_id, context)
+    watching_copy = self.dup
+    watching_copy.watchable_id = assingment_id
+    watching_copy.context = context
+    watching_copy.save
+
+    return watching_copy
+  end
 end
 end

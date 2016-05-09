@@ -38,6 +38,7 @@ class Category < ActiveRecord::Base
   scope :shared, -> { where(shared: true) }
   scope :in_contexts, lambda { |contexts| Category.all_in_contexts(contexts, self) }
 
+  attr_accessor :copied
   attr_reader :what_changed
 
   self.table_name = 'categories'
@@ -250,6 +251,23 @@ class Category < ActiveRecord::Base
 
   def parent_watchers
     self_and_ancestors.map(&:watchers).flatten
+  end
+
+  def copy(parent_cat, parent_id)
+    category_copy = self.dup
+    category_copy.save
+
+    category_copy.questions_count = 0
+
+    if parent_id
+      category_copy.parent_id = parent_id
+    else
+      category_copy.parent_id = parent_cat.id
+    end
+
+    category_copy.save
+
+    return category_copy
   end
 end
 end

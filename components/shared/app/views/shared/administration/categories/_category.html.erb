@@ -17,6 +17,10 @@
 </td>
 
 <td>
+  <%= check_box_tag 'copied[]', category.id, category.copied, tooltip_attributes(t 'activerecord.attributes.shared/category.copy').merge({class: 'treetable-checkbox'}) %>
+</td>
+
+<td>
   <div class="pull-right">
     <a href="<%= shared.new_administration_category_path({ parent_id: category.id, uuid: category.uuid }) %>" class="text-success text-undecorated">
       <%= tooltip_icon_tag 'plus-circle', t('administration.category.create.action') %>
