@@ -9,11 +9,11 @@
           <%= tooltip_time_tag notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
       <% end %>
       <% if notification.unread? %>
-          <%= link_to read_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.read.submit'), placement: :bottom).merge(class: 'btn btn-default btn-xs pull-right', data: { remote: true }) do %>
+          <%= link_to read_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.read.submit'), placement: :bottom).deep_merge(class: 'btn btn-default btn-xs pull-right', data: { remote: true }) do %>
               <%= icon_tag :check %>
           <% end %>
       <% else %>
-          <%= link_to unread_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.unread.submit'), placement: :bottom).merge(class: 'btn btn-primitive btn-xs pull-right text-muted', data: { remote: true }) do %>
+          <%= link_to unread_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.unread.submit'), placement: :bottom).deep_merge(class: 'btn btn-primitive btn-xs pull-right text-muted', data: { remote: true }) do %>
               <%= icon_tag :check %>
           <% end %>
       <% end %>

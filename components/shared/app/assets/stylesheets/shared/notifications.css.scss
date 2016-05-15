@@ -5,9 +5,20 @@
 }
 
 .dropdown-notification {
-  margin: 10px;
+  margin: 5px;
+  padding: 5px;
 }
 
 .notification-read {
   opacity: 0.5;
+}
+
+.dropdown-notification:hover {
+  text-decoration: none;
+  color: #262626;
+  background-color: whitesmoke;
+}
+
+.dropdown-notification > div > div > a {
+  text-decoration: none;
 }
