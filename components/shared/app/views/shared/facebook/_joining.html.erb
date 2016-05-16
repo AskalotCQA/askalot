@@ -11,7 +11,7 @@
           <small class="text-muted"><%= t('facebook.join.note') %></small>
         </div>
         <div class="modal-footer">
-          <%= link_to t('facebook.join.submit'), shared.auth_facebook_path, class: 'btn btn-success' %>
+          <%= link_to t('facebook.join.submit'), shared.auth_facebook_path, class: 'btn btn-success popup', data: { width: 600, height: 400 } %>
           <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('facebook.join.close') %></button>
         </div>
       </div>
