@@ -20,9 +20,9 @@ module Mooc::HeaderHelper
     output  = ''
 
     output << navbar_link_tag(t('activity.navigation'), shared.activities_path, class: :'hidden-sm')
-    output << navbar_link_tag(t('statistic.navigation'), shared.statistics_path, class: :'hidden-sm hidden md') if user_signed_in? && can?(:administrate, :any)
-    output << navbar_link_tag(t('administration.navigation'), shared.administration_root_path, class: :'hidden-sm hidden md') if user_signed_in? && can?(:administrate, :any)
-    output << navbar_link_tag(t('teacher_administration.navigation'), mooc.teacher_administration_root_path, class: :'hidden-sm hidden md') if user_signed_in? && can?(:teacher_administrate, :any)
+    output << navbar_link_tag(t('statistic.navigation'), shared.statistics_path, class: :'hidden-sm hidden-md') if user_signed_in? && can?(:administrate, :any)
+    output << navbar_link_tag(t('administration.navigation'), shared.administration_root_path, class: :'hidden-sm hidden-md') if user_signed_in? && can?(:administrate, :any)
+    output << navbar_link_tag(t('teacher_administration.navigation'), mooc.teacher_administration_root_path, class: :'hidden-sm hidden-md') if user_signed_in? && can?(:teacher_administrate, :any)
     output << navbar_link_tag(t('help.navigation'), shared.help_path, class: :'hidden-xs')
     output << dropdown_tag('visible-sm') do
       concat content_tag(:li, link_to(t('activity.navigation'), shared.activities_path))
