@@ -3,16 +3,10 @@
     <li><%= link_to_notifications notifications %></li>
     <li class="divider"></li>
     <% notifications.each do |notification| %>
-      <li>
-        <%= link_to_notification(notification, delete: lambda { |body, _, _| link_to body, notifications_path(anchor: "notification-#{notification.id}") }) do %>
-          <%= notification_icon_tag notification %>
-          <span class="text-muted">&middot;</span>
-          <%= user_icon_tag notification.initiator_or_anonymous, tooltip_attributes(user_nick(notification.initiator_or_anonymous), placement: :bottom).merge(link: false) %>
-          <span class="text-muted">&middot;</span>
-          <%= tooltip_time_tag notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
-        <% end %>
-      </li>
+      <%= render 'shared/shared/notification', notification: notification %>
     <% end %>
+    <li class="divider"></li>
+    <li><%= link_to t('notification.clean.submit'), clean_notifications_path, { data: { remote: true } } %></li>
     <li class="divider"></li>
     <li><%= link_to_notifications notifications, body: t('notification.more') %></li>
   <% end %>

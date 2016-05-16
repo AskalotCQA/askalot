@@ -22,15 +22,20 @@ class NotificationsController < ApplicationController
   end
 
   def clean
-    @notifications = Shared::Notification.in_context(@context).where(recipient: current_user).unread
+    @update_notifications = Shared::Notification.in_context(@context).where(recipient: current_user).unread
+    @notifications        = @update_notifications.each { |notification| notification.unread = false }
 
-    if @notifications.update_all(unread: false, read_at: nil)
+    if @update_notifications.update_all(unread: false, read_at: nil)
       form_message :notice, t('notification.clean.success'), key: params[:tab]
     else
       form_error_message t('notification.clean.failure'), key: params[:tab]
     end
 
-    redirect_to :back
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js   { render 'shared/shared/clear_notifications', format: :js }
+    end
+
   end
 
   private
@@ -44,7 +49,10 @@ class NotificationsController < ApplicationController
       form_error_message t("notification.#{status}.failure"), key: params[:tab]
     end
 
-    redirect_to(params[:r] ? params[:r] : :back)
+    respond_to do |format|
+      format.html { redirect_to(params[:r] ? params[:r] : :back) }
+      format.js   { render 'shared/shared/notification', format: :js }
+    end
   end
 end
 end
