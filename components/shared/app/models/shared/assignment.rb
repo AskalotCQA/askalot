@@ -50,9 +50,9 @@ class Assignment < ActiveRecord::Base
   end
 
   def copy(category_id)
-    if self.parent != nil && self.admin_visible
+    if self.parent == nil && self.admin_visible
       assignment_copy = self.dup
-      assignment_copy.category_id = category_copy.id
+      assignment_copy.category_id = category_id
       assignment_copy.save
 
       return assignment_copy

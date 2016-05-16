@@ -74,7 +74,7 @@ class Administration::CategoriesController < AdministrationController
 
         if assignments
           assignments.each do |assignment|
-            assignment_copy = assignment.copy category_copy.id
+            assignment_copy = assignment.copy(category_copy.id)
             if assignment_copy
               assignment_ids[assignment.id] = assignment_copy.id
             end
@@ -85,7 +85,8 @@ class Administration::CategoriesController < AdministrationController
 
         if watchings
           watchings.each do |watching|
-            if watching.watcher.role.name == 'teacher' || category.teachers.include?(watching.watcher) ||
+            # TODO add to copy function
+            if watching.watcher.role == :teacher || category.teachers.include?(watching.watcher) ||
                 category.full_tree_name.include?('Všeobecné')
               watching.copy(assignment_copy.id, category_copy.ancestors[1].id)
             end
