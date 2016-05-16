@@ -15,7 +15,7 @@ class WatchingsController < ApplicationController
       .reorder(
         "CASE
           WHEN (watchable_id IN (#{Shared::Category::all_in_contexts(@context).select('id').to_sql})) THEN 1
-          ELSE 2 
+          ELSE 2
         END",
         'categories.full_tree_name'
       ).page(tab_page :categories).per(count)
@@ -38,7 +38,7 @@ class WatchingsController < ApplicationController
   end
 
   def clean
-    @watchings = Shared::Watching.in_context(@context).where(watcher: current_user, watchable_type: params[:type].classify)
+    @watchings = Shared::Watching.in_context(@context).where(watcher: current_user, watchable_type: "Shared::#{params[:type].classify.capitalize}")
 
     begin
       @watchings.each { |watching| watching.mark_as_deleted_by! current_user }
