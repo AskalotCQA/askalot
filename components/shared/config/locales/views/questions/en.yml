@@ -9,7 +9,9 @@ en:
     search:
       title: "Search in questions"
       submit: "Search"
-      placeholder: "e.g. NoSQL databases, design patterns, …"
+      placeholder: "e.g. midterm exam, …"
+      fulltext: "Search by text"
+      tags: "Search by tags"
 
     new:
       title: "New question"
@@ -64,7 +66,7 @@ en:
       new: "new"
       searching: "Searching…"
       no_matches: "No results found"
-      placeholder: "e.g. elasticsearch, linux-server, use-case"
+      placeholder: "e.g. lectures, ..."
 
     poll:
       start: "Refresh automatically"

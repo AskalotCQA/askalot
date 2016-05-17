@@ -7,7 +7,7 @@
 .questions-filter {
   margin: $navbar-height 0 0;
 
-  .btn, .form-group {
+  #question-search {
     margin-bottom: 20px;
   }
 
@@ -33,8 +33,6 @@
   }
 
   #fulltext-search {
-    display: none;
-
     #fulltext {
       border-right: none;
     }

@@ -32,16 +32,3 @@ $(document).ready ->
 
     descriptions = JSON.parse(select.attr('data-descriptions'))
     $('.category-description').html(descriptions[value])
-
-  ##
-  # Filter form
-  $('.fulltext-switch').click (event) ->
-    event.preventDefault()
-    $('#fulltext-search').show()
-    $('#tag-search').hide()
-
-  $('.tag-switch').click (event) ->
-    event.preventDefault()
-    $('#fulltext-search').hide()
-    $('#tag-search').show()
-

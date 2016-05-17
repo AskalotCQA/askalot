@@ -9,7 +9,9 @@ sk:
     search:
       title: "Vyhľadávanie v otázkach"
       submit: "Vyhľadať"
-      placeholder: "napr. NoSQL databázy, návrhové vzory, …"
+      placeholder: "napr. zápočet, …"
+      fulltext: "Hľadaj podľa textu"
+      tags: "Hľadaj podľa tagov"
 
     new:
       title: "Nová otázka"
@@ -64,7 +66,7 @@ sk:
       new: "nový"
       searching: "Hľadám…"
       no_matches: "Nenájdený žiadny výsledok"
-      placeholder: "napr. elasticsearch, linux-server, use-case"
+      placeholder: "napr. prednášky, ..."
 
     poll:
       start: "Aktualizovať automaticky"
