@@ -258,7 +258,8 @@ CREATE TABLE categories (
     askable boolean DEFAULT true,
     lti_id character varying(255),
     description text,
-    third_party_hash character varying(255)
+    third_party_hash character varying(255),
+    askalot_page_url character varying(255)
 );
 
 
@@ -3555,3 +3556,4 @@ INSERT INTO schema_migrations (version) VALUES ('20160417135429');
 
 INSERT INTO schema_migrations (version) VALUES ('20160503083015');
 
+INSERT INTO schema_migrations (version) VALUES ('20160516203213');

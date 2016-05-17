@@ -1,1 +1,6 @@
-<%= facebook_notification_path(params: { n: content, r: find_tag(link_to_notification(notification), :a) { |a| a[0][:href] if a.present? }}).sub(/\A\/.+\//, '') %>
+<%
+  u = find_tag(link_to_notification(notification), :a) { |a| a[0][:href] if a.present? }
+  u = Shared::Category.find(Shared::Context::Manager.current_context).askalot_page_url + '#' + u if Rails.module.mooc?
+%>
+
+<%= facebook_notification_path(params: { n: content, r: u}).sub(/\A\/.+\//, '') %>
