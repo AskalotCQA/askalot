@@ -17,8 +17,6 @@ describe 'Search Questions', type: :feature do
   it 'searches questions by title' do
     visit shared.questions_path
 
-    all('.fulltext-switch a').first.click
-
     within '#fulltext-search' do
       fill_in 'q', with: 'Elasticsearch'
 
@@ -37,8 +35,6 @@ describe 'Search Questions', type: :feature do
 
   it 'searches questions by texts' do
     visit shared.questions_path
-
-    all('.fulltext-switch a').first.click
 
     within '#fulltext-search' do
       fill_in 'q', with: 'extension'
