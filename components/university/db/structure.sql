@@ -1048,7 +1048,8 @@ CREATE TABLE question_types (
     name character varying(255),
     description character varying(255),
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    color character varying(255) DEFAULT '#000000'::character varying
 );
 
 
@@ -3545,4 +3546,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160417135429');
 INSERT INTO schema_migrations (version) VALUES ('20160503083015');
 
 INSERT INTO schema_migrations (version) VALUES ('20160507084030');
+
+INSERT INTO schema_migrations (version) VALUES ('20160509144416');
 

@@ -1,4 +1,4 @@
-module Shared
+amodule Shared
 class User < ActiveRecord::Base
   include Followable
   include Users::Searchable

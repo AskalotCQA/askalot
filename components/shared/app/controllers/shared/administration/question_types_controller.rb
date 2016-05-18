@@ -48,7 +48,7 @@ module Shared
     private
 
     def question_type_params
-      params.require(:question_type).permit(:mode, :name, :description, :icon)
+      params.require(:question_type).permit(:mode, :name, :description, :icon, :color)
     end
   end
 end

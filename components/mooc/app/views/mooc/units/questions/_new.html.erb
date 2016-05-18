@@ -1,5 +1,4 @@
-<div id="new-unit-question-title" class="btn btn-success" data-default-question-type-id="<%= Shared::QuestionType.questions.first.id if Shared::QuestionType.questions.first %>"><%= t 'question.new.title' %></div>
-<div id="new-unit-forum-title" class="btn btn-success" data-default-question-type-id="<%= Shared::QuestionType.forums.first.id if Shared::QuestionType.forums.first %>"><%= t 'question.new.forum' %></div>
+<div id="new-unit-question-title" class="btn btn-success"><%= t 'question.new.title' %></div>
 
 <%= form_for question, remote: true, url: shared.questions_path do |f| %>
   <div id="form-messages">

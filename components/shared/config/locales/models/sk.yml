@@ -306,6 +306,7 @@ sk:
         tag_list: "Tagy"
         text: "Text"
         title: "Nadpis"
+        color: "Farba"
 
       shared/question_type:
         mode: "Typ"

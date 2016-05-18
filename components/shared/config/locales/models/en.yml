@@ -294,6 +294,7 @@ en:
         tag_list: "Tags"
         text: "Text"
         title: "Title"
+        color: "Color"
 
       shared/question_type:
         mode: "Type"
