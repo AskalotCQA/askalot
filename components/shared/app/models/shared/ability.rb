@@ -85,6 +85,7 @@ class Ability
       can :update,          [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::New]
       can :destroy,         [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::New]
       can :update_settings, [Shared::Category]
+      can :copy,            [Shared::Category]
 
       can :vote, :all
     end

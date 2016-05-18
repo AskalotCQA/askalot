@@ -2,7 +2,7 @@
   <div class="text-right">
     <%= link_to t('administration.category.create.action'), shared.new_administration_category_path, class: 'btn btn-primary' %>
   </div>
-  
+
   <% content_for :categories_header do %>
     <th></th>
     <th></th>
@@ -12,16 +12,26 @@
     <th>
       <%= fa_icon :question, tooltip_attributes(t 'activerecord.attributes.shared/category.askable') %>
     </th>
+    <th>
+      <%= fa_icon :copy, tooltip_attributes(t 'activerecord.attributes.shared/category.copy') %>
+    </th>
     <th></th>
   <% end %>
-  
+
   <div class="administration-categories">
-    <%= render 'shared/administration/categories/update_settings' %>
-  
+    <div class="row">
+      <div class="col-sm-9 col-md-9 col-lg-9">
+        <%= render 'shared/administration/categories/copy_category' %>
+      </div>
+      <div class="col-sm-3 col-md-3 col-lg-3">
+        <%= render 'shared/administration/categories/update_settings' %>
+      </div>
+    </div>
     <%= tree_table(@categories, yield(:categories_header)) do |category| %>
       <%= render 'shared/administration/categories/category', category: category %>
     <% end %>
-  
-    <%= render 'shared/administration/categories/update_settings' %>
+    <div class="text-right">
+      <%= render 'shared/administration/categories/update_settings' %>
+    </div>
   </div>
 <% end %>

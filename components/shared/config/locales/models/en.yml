@@ -233,6 +233,7 @@ en:
         shared: "Show questions also in other related categories"
         askable: "Questions can be asked directly in this category"
         teacher_assistants: "Teacher assistants"
+        copy: "Category will be copied to specified category"
 
       shared/changelog:
         text: "Text"

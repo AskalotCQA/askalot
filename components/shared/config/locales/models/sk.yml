@@ -245,6 +245,7 @@ sk:
         shared: "Zobraziť otázky aj v ostatných súvisiacich kategóriach"
         askable: "Otázky môžu byť položené priamo v tejto kategórii"
         teacher_assistants: "Asistenti učiteľa"
+        copy: "Kategória bude skopírovaná do vybranej rodičovskej kateǵorie"
 
       shared/changelog:
         text: "Text"

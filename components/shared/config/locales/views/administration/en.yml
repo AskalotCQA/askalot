@@ -31,6 +31,8 @@ en:
         update_settings: "Update settings"
         wait: "Wait, please..."
         success: "Categories were updated successfully"
+        copy_categories: "Copy categories"
+        empty: "No parent category chosen"
 
       create:
         action: "Add category"

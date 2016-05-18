@@ -31,6 +31,8 @@ sk:
         update_settings: "Upraviť nastavenia"
         wait: "Čakajte, prosím..."
         success: "Kategórie boli úspešne upravené"
+        copy_categories: "Kopírovať kategórie"
+        empty: "Nie je vybratá rodičovská kategória"
 
       create:
         action: "Pridať kategóriu"
