@@ -5,7 +5,8 @@ module Mooc::Application
     layout 'mooc/application'
     prepend_view_path 'components/mooc/app/views'
 
-    before_action :login_required, :redirect_if_params
+    # order is significant
+    before_action :login_required, :check_askalot_page_url, :redirect_if_params
 
     private
 
@@ -20,6 +21,18 @@ module Mooc::Application
 
     def redirect_if_params
       redirect_to params[:redirect] if params[:redirect]
+    end
+
+    def check_askalot_page_url
+      return if Shared::Context::Manager.current_context == 'default'
+
+      category = Shared::Category.find(Shared::Context::Manager.current_context)
+
+      return unless category.askalot_page_url.nil?
+
+      category.askalot_page_url = params[:page_url]
+
+      category.save!
     end
   end
 end

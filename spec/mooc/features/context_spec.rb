@@ -1,9 +1,10 @@
 require 'spec_helper'
 
 describe 'Context filtering', type: :feature do
-  let(:user)      { create :user }
-  let(:user2)     { create :user }
-  let!(:category) { create :category }
+  let(:user)           { create :user }
+  let(:user2)          { create :user }
+  let!(:category)      { create :category }
+  let!(:other_context) { create :category }
 
   before :each do
     login_as user
@@ -62,10 +63,10 @@ describe 'Context filtering', type: :feature do
 
       login_as user2
 
-      visit shared.root_path context: 7
+      visit shared.root_path context: other_context.id
       expect(page).to have_xpath('//a[@data-track-label="0-unread"]')
 
-      visit shared.notifications_path context: 7
+      visit shared.notifications_path context: other_context.id
 
       expect(page).to have_content('Žiadne notifikácie.')
 
@@ -86,7 +87,7 @@ describe 'Context filtering', type: :feature do
 
       question.toggle_watching_by!(user)
 
-      visit shared.watchings_path context: 7
+      visit shared.watchings_path context: other_context.id
 
       expect(page).to have_content('Žiadne sledovania.')
 

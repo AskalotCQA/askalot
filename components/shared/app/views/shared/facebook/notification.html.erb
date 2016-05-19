@@ -19,12 +19,14 @@
       </div>
     <% end %>
 
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="text-center">
-          <%= icon_link_to :tasks, t('facebook.notification.browse'), notifications_path, analytics_attributes(:notification, :list, :facebook).merge(class: 'btn btn-info', fixed: true, target: :_blank) %>
+    <% if Rails.module.university? # TODO(huna) pass link the same way as @link? %>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="text-center">
+            <%= icon_link_to :tasks, t('facebook.notification.browse'), notifications_path, analytics_attributes(:notification, :list, :facebook).merge(class: 'btn btn-info', fixed: true, target: :_blank) %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>

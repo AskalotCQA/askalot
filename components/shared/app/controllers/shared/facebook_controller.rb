@@ -1,6 +1,7 @@
 module Shared
 class FacebookController < ApplicationController
   skip_before_action :verify_authenticity_token
+  skip_before_action :login_required if Rails.module.mooc?
 
   after_action :allow_inline_frame
 
@@ -14,7 +15,10 @@ class FacebookController < ApplicationController
     @content = params[:n]
     @link    = params[:r]
 
-    fail unless !@link || @link =~ /\A\//
+    if Rails.module.university?
+      fail unless !@link || @link =~ /\A\//
+    end
+    # TODO (huna) validate edx link
   end
 
   private
