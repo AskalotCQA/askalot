@@ -70,7 +70,7 @@ $(document).ready ->
     a_src += '&amp;redirect=' + redirect_url.substring(1)
 
   a_src += '&amp;login_url=' + login_url if login_url != ''
-  a_src += '&page_url=' + location.protocol + '//' + location.host+location.pathname
+  a_src += '&page_url=' + location.protocol + '//' + location.host + location.pathname
 
   $("#askalot-wrapper").css("margin", "-32px -40px 0px -40px")
 

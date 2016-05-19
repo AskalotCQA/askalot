@@ -15,7 +15,10 @@ class FacebookController < ApplicationController
     @content = params[:n]
     @link    = params[:r]
 
-    fail unless !@link || @link =~ /\A\// if Rails.module.university?
+    if Rails.module.university?
+      fail unless !@link || @link =~ /\A\//
+    end
+    # TODO (huna) validate edx link
   end
 
   private

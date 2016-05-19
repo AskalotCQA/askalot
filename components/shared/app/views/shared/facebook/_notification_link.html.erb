@@ -3,4 +3,4 @@
   u = Shared::Category.find(Shared::Context::Manager.current_context).askalot_page_url + '#' + u if Rails.module.mooc?
 %>
 
-<%= facebook_notification_path(params: { n: content, r: u}).sub(/\A\/.+\//, '') %>
+<%= facebook_notification_path(params: { n: content, r: u }).sub(/\A\/.+\//, '') %>
