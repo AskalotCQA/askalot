@@ -17,18 +17,16 @@
       <%= icon_link_to :plus, t('question.new.feature'), shared.new_question_path(category_id: @context), analytics_attributes(:questions, :'open-new-form', :list).merge(class: 'btn btn-success') %>
     </div>
 
-    <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-4 col-md-6">
-      <div id="fulltext-search">
+    <div id="question-search" class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-4 col-lg-6">
+      <div class="row">
+      <div id="fulltext-search" class="col-md-7">
         <%= form_tag shared.search_questions_path, id: :fulltext_search, method: :get do %>
           <%= hidden_field_tag :poll, params[:poll] %>
           <div class="form-group">
             <div class="input-group select2-bootstrap-prepend">
-              <span class="input-group-btn fulltext-switch">
-                <%= icon_link_to :search, nil, '#', class: 'btn btn-default active' %>
-              </span>
-              <span class="input-group-btn tag-switch">
-                <%= icon_link_to :tags, nil, '#', class: 'btn btn-default inactive' %>
-              </span>
+              <div class="input-group-addon">
+                <%= tooltip_icon_tag :search, t('question.search.fulltext'), placement: :bottom %>
+              </div>
               <%= text_field_tag :q, params[:q], id: :fulltext, class: :'form-control', placeholder: t('question.search.placeholder') %>
               <span class="input-group-btn">
                 <%= button_tag t('question.search.submit'), name: nil, id: :'fulltext-search-submit', class: 'btn btn-primary' %>
@@ -38,23 +36,21 @@
         <% end %>
       </div>
 
-      <div id="tag-search">
+      <div id="tag-search" class="col-md-5">
         <%= form_tag shared.questions_path, id: :filter_questions, method: :get, remote: true, data: { state: true } do %>
           <%= hidden_field_tag :tab, params[:tab] %>
           <%= hidden_field_tag :poll, params[:poll] %>
           <%= hidden_field_tag :category, params[:category] if params[:category] %>
           <div class="form-group">
             <div class="input-group select2-bootstrap-prepend">
-              <span class="input-group-btn fulltext-switch">
-                <%= icon_link_to :search, nil, '#', class: 'btn btn-default inactive' %>
-              </span>
-              <span class="input-group-btn tag-switch">
-                <%= icon_link_to :tags, nil, '#', class: 'btn btn-default active' %>
-              </span>
+              <div class="input-group-addon">
+                <%= tooltip_icon_tag :tags, t('question.search.tags'), placement: :bottom %>
+              </div>
               <%= text_field_tag :tags, params[:tags], id: :question_tags, class: :'form-control', placeholder: t('question.tag.placeholder'), data: { as: :select2, role: [:tags, :filter].join(',') } %>
             </div>
           </div>
         <% end %>
+      </div>
       </div>
     </div>
   </div>
