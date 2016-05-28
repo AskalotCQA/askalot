@@ -25,10 +25,13 @@ $(document).ready ->
   question_type_select = new Select.of('#question_question_type_id')
   question_type_select.on 'change', (event) ->
     value = event.added.id
-
     descriptions = JSON.parse(question_type_select.attr('data-descriptions'))
-    console.log value, descriptions
+    icons = JSON.parse(question_type_select.attr('data-icons'))
+    colors = JSON.parse(question_type_select.attr('data-colors'))
+    icon = $('<i/>').addClass('fa').addClass(icons[value]).css('color', colors[value])
+
     $('.question-type-description').html(descriptions[value])
+    $(this).closest('.input-group').find('.input-group-addon').html(icon)
 
   ##
   # Callbacks for default category tags

@@ -11,7 +11,12 @@
     <% if Shared::QuestionType.public_types.size > 1 %>
       <div class="form-group">
         <%= f.label :question_type_id %>
-        <%= f.question_type_collection_select :question_type_id, Shared::QuestionType.public_types %>
+        <div class="input-group">
+          <span class="input-group-addon">
+            <%= question_type_icon_force @question.question_type %>
+          </span>
+          <%= f.question_type_collection_select :question_type_id, Shared::QuestionType.public_types %>
+        </div>
       </div>
 
       <div class="question-type-description">

@@ -7,13 +7,18 @@ module Shared::FormHelper
   end
 
   def question_type_collection_select(id, collection = Shared::QuestionType.public_types, value = :id, label = :name, options = {}, html_options = {})
-    descriptions = collection.inject({}) do |hash, question_type|
-      hash[question_type.send :id] = question_type.description
-      hash
+    descriptions = {}
+    icons = {}
+    colors = {}
+
+    collection.each do |question_type|
+      descriptions[question_type.send :id] = question_type.description
+      icons[question_type.send :id] = question_type.icon
+      colors[question_type.send :id] = question_type.color
     end
 
     options.merge! include_blank: true
-    html_options.deep_merge! class: :'form-control', data: { as: :select2, descriptions: descriptions }
+    html_options.deep_merge! class: :'form-control', data: { as: :select2, descriptions: descriptions, icons: icons, colors: colors }
 
     collection_select(id, collection, value, label, options, html_options)
   end

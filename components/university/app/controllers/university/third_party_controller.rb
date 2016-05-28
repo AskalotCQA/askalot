@@ -10,8 +10,9 @@ module University
       @parent    = Shared::Category.find_by_third_party_hash! params[:hash]
       @category  = Shared::Category.find_or_create_by! name: params[:name], parent_id: @parent.id
 
-      @question  = Shared::Question.new
-      @question.category = @category
+      @question               = Shared::Question.new
+      @question.category      = @category
+      @question.question_type = Shared::QuestionType.questions.first
 
       @questions = @category.questions.order(touched_at: :desc)
       @questions = @questions.page(params[:page]).per(20)
