@@ -16,7 +16,7 @@ module Shared::QuestionTypesHelper
     class_type = 'warning' if mode == 'forum'
     class_type = 'info' if mode == 'document'
 
-    options = {class: "fa #{icon}", style: "color: #{color};"}
+    options = {class: "fa fa-fw #{icon}", style: "color: #{color};"}
     options = options.deep_merge tooltip_attributes(name)
 
     content_tag :i, nil, options

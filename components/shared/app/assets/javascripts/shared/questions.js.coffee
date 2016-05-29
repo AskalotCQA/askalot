@@ -28,7 +28,7 @@ $(document).ready ->
     descriptions = JSON.parse(question_type_select.attr('data-descriptions'))
     icons = JSON.parse(question_type_select.attr('data-icons'))
     colors = JSON.parse(question_type_select.attr('data-colors'))
-    icon = $('<i/>').addClass('fa').addClass(icons[value]).css('color', colors[value])
+    icon = $('<i/>').addClass('fa fa-fw').addClass(icons[value]).css('color', colors[value])
 
     $('.question-type-description').html(descriptions[value])
     $(this).closest('.input-group').find('.input-group-addon').html(icon)
