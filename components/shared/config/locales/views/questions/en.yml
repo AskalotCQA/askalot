@@ -2,6 +2,22 @@ en:
   question:
     navigation: "Questions"
 
+    question:
+      create:
+        success: "Question was successfully added."
+
+    document:
+      create:
+        success: "Question was successfully added."
+
+    forum:
+      create:
+        success: "Message was successfully added."
+
+      new:
+        same_category_link: "start new discussion in the same category."
+        same_category: "Browse discussions tagged"
+
     index:
       title: "Questions"
       new: "New question"
@@ -18,6 +34,7 @@ en:
       submit: "Ask question"
       submit_anonymously: "Ask anonymously"
       feature: "Ask a question"
+      forum: "Start a discussion"
       same_category_link: "ask a question in the same category."
       same_category: "Browse questions tagged"
 

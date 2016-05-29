@@ -1,5 +1,11 @@
 # Ako napísať dobrú otázku?
 
+##### Typ
+
+- Slúži na určenie, či sa jedná skutočne o otázku alebo o diskusný príspevok.
+- Na otázku zväčša existuje jednoznačná správna odpoveď.
+- Diskusné príspevky očakávajú rôzne názory, postoje a subjektívne reakcie.
+
 ##### Kategória
 
 - Slúži na rámcové zaradenie otázok do okruhov.

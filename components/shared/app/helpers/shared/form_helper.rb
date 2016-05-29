@@ -6,6 +6,23 @@ module Shared::FormHelper
     collection_select(id, collection, value, label, options, html_options)
   end
 
+  def question_type_collection_select(id, collection = Shared::QuestionType.public_types, value = :id, label = :name, options = {}, html_options = {})
+    descriptions = {}
+    icons = {}
+    colors = {}
+
+    collection.each do |question_type|
+      descriptions[question_type.send :id] = question_type.description
+      icons[question_type.send :id] = question_type.icon
+      colors[question_type.send :id] = question_type.color
+    end
+
+    options.merge! include_blank: true
+    html_options.deep_merge! class: :'form-control', data: { as: :select2, descriptions: descriptions, icons: icons, colors: colors }
+
+    collection_select(id, collection, value, label, options, html_options)
+  end
+
   def category_collection_select(id, collection = Shared::Category.askable.includes(:assignments).order(:name), value = :id, label = :name_with_teacher_supported, options = {}, html_options = {})
     tags = collection.inject({}) do |hash, category|
       hash[category.send :id] = category.effective_tags

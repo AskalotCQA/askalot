@@ -1,0 +1,30 @@
+<%= form_for @question_type, url: [:administration, @question_type] do |f| %>
+  <%= form_messages_for @question_type %>
+
+  <div class="form-group">
+    <%= f.label :mode %>
+    <%= f.select :mode, Shared::QuestionType.get_mode_values, {}, class: :'form-control', data: { as: :select2 } %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: :'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :icon %>
+    <%= f.text_field :icon, class: :'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :color %>
+    <%= f.text_field :color, class: :'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_area :description, class: :'form-control', rows: 5 %>
+  </div>
+
+  <button type="submit" class="btn btn-success"><%= t('administration.question_type.create.action') %></button>
+<% end %>

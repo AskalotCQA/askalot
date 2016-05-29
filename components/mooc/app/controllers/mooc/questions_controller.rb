@@ -7,7 +7,7 @@ module Mooc
 
       authorize! :view, @question
 
-      @answers = @question.ordered_answers
+      @answers = @question.ordered_reactions
       @answer  = Shared::Answer.new(question: @question)
       @view    = @question.views.create! viewer: current_user
 
@@ -16,7 +16,9 @@ module Mooc
       @page_url = params[:page_url] || ''
 
       dispatch_event :create, @view, for: @question.watchers
-      render 'mooc/units/questions/show'
+
+      render 'mooc/units/questions/show_forum' if @question.mode.forum?
+      render 'mooc/units/questions/show' unless @question.mode.forum?
     end
   end
 end

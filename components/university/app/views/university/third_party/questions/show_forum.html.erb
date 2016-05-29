@@ -1,0 +1,60 @@
+<div id="document-content">
+  <a href="<%= university.third_party_index_path(hash: @question.category.parent.third_party_hash, name: @question.category.name)%>" class="btn btn-sm btn-default">
+    <%= icon_tag :list, label: t('question.list') %>
+  </a>
+
+  <div class="pull-right">
+    <%= render 'university/third_party/notifications', notifications: current_user.notifications.unread %>
+  </div>
+
+  <div id="question">
+    <div class="row">
+      <div class="col-xs-9 col-sm-10 col-md-10">
+        <div id="question-title">
+          <h3 class="question-title">
+            <%= @question.title %>
+            <%= evaluation_badge_tag @question if @question.evaluations.any? %>
+            <%= question_type_icon @question.question_type %>
+          </h3>
+          <%= render 'shared/questions/labels', labels: @question.labels %>
+        </div>
+
+        <div id="question-data">
+          <div class="question-content">
+            <%= render_markdown @question.text %>
+          </div>
+
+          <div class="question-details">
+            <%= render 'shared/questions/details', question: @question, page_url: @page_url%>
+            <%= render 'university/documents/questions/editing', question: @question, remote: false %>
+            <%= render 'university/documents/questions/deleting', question: @question, remote: false %>
+            <%= render 'shared/questions/closing', question: @question %>
+          </div>
+
+          <div id="question-evaluations">
+            <%= render 'shared/questions/evaluations', question: @question %>
+          </div>
+
+          <div id="question-comments">
+            <%= render 'university/documents/questions/comments', question: @question, remote: false %>
+            <%= render 'university/documents/comments/form', commentable: @question,  remote: false %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-3 col-sm-2">
+        <%= render 'shared/questions/voting', question: @question %>
+        <%= render 'shared/questions/watching', question: @question %>
+        <%= render 'university/documents/questions/evaluating', question: @question, remote: false %>
+      </div>
+    </div>
+  </div>
+
+  <div id="question-answers">
+    <%= render 'university/third_party/questions/reactions', answers: @answers, remote: false %>
+  </div>
+
+  <div id="question-answer" class="new-answer-form">
+    <%= render 'university/third_party/answers/reaction_form', question: @question, answer: @answer, remote: false %>
+  </div>
+</div>

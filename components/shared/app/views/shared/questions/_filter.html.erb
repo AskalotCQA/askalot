@@ -1,4 +1,4 @@
-<div id="questions-filter" class="questions-filter">
+<div id="questions-filter" class="questions-filter <%= 'no-margin' if category %>">
   <% if category %>
     <div class="row">
       <div class="col-xs-12">
@@ -13,8 +13,10 @@
   <% end %>
 
   <div class="row">
-    <div class="col-xs-12 col-sm-2">
-      <%= icon_link_to :plus, t('question.new.feature'), shared.new_question_path(category_id: @context), analytics_attributes(:questions, :'open-new-form', :list).merge(class: 'btn btn-success') %>
+    <div class="col-xs-12 col-sm-4">
+      <ul class="list list-inline">
+        <li><%= icon_link_to :plus, t('question.new.feature'), shared.new_question_path(category_id: @context), analytics_attributes(:questions, :'open-new-form', :list).merge(class: 'btn btn-success') %>
+      </ul>
     </div>
 
     <div id="question-search" class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8 col-lg-offset-4 col-lg-6">

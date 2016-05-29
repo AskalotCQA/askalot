@@ -6,6 +6,23 @@ sk:
       few: "odpovede"
       other: "odpovedí"
 
+    reaction:
+      question:
+        zero: "odpovedí"
+        one: "odpoveď"
+        few: "odpovede"
+        other: "odpovedí"
+      document:
+        zero: "odpovedí"
+        one: "odpoveď"
+        few: "odpovede"
+        other: "odpovedí"
+      forum:
+        zero: "príspevkov"
+        one: "príspevok"
+        few: "príspevky"
+        other: "príspevkov"
+
     author:
       zero: "autorov"
       one: "autor"
@@ -115,6 +132,12 @@ sk:
       few: "%{count} odpovede"
       other: "%{count} odpovedí"
 
+    reaction:
+      zero: "žiadny príspevok"
+      one: "1 príspevok"
+      few: "%{count} príspevky"
+      other: "%{count} príspevkov"
+
     author:
       zero: "žiaden autor"
       one: "1 autor"
@@ -218,6 +241,7 @@ sk:
       favorite: "Obľúbenie"
       group: "Skupina"
       question: "Otázka"
+      question_type: "Typ otázky"
       new: "Novinka"
       notification: "Notifikácia"
       tag: "Tag"
@@ -229,6 +253,7 @@ sk:
     attributes:
       shared/answer:
         text: "Odpoveď"
+        reaction: "Príspevok"
 
       shared/assignment:
         category: "Kategória"
@@ -274,12 +299,20 @@ sk:
         visibility: "Viditeľnosť"
 
       shared/question:
+        question_type_id: "Typ"
         anonymous: "Opýtať sa anonymne"
         category: "Kategória"
         category_id: "Kategória"
         tag_list: "Tagy"
         text: "Text"
         title: "Nadpis"
+        color: "Farba"
+
+      shared/question_type:
+        mode: "Typ"
+        name: "Názov"
+        description: "Popis"
+        icon: "Ikona"
 
       shared/user:
         email: "E-mail"
@@ -321,3 +354,10 @@ sk:
 
         read_notifications_thread: "Označiť súvisiace ako prečítané"
         send_email_notifications: "Zasielať e-mailové notifikácie"
+
+    symbolizes:
+      shared/question_type:
+        mode:
+          question: Otázka
+          forum: Fórum
+          document: Otázka k dokumentom

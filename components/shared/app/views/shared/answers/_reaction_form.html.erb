@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <h2 id="answer" class="form-title"><%= Shared::Answer.human_attribute_name :reaction %></h2>
+
+    <%= form_for [question, answer] do |f| %>
+      <%= form_messages_for answer %>
+
+      <div class="form-group">
+        <%= markdown_editor_for answer do %>
+          <%= f.text_area :text, class: :'form-control', rows: 5 %>
+        <% end %>
+      </div>
+
+      <button type="submit" class="btn btn-primary"><%= t 'answer.forum.new.submit' %></button>
+    <% end %>
+  </div>
+</div>

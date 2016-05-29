@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <%= t 'question.forum.new.same_category' %>
+
+    &nbsp;
+
+    <div class="question-same-category">
+      <%= render 'shared/questions/labels', labels: @labels %>
+    </div>
+
+    <br>
+    <%= t 'coupling.or' %>
+    <%= link_to (t 'question.forum.new.same_category_link'), new_question_path({category_id: @question.category_id, question_type_id: @question.question_type_id}), analytics_attributes(:questions, :'open-new-form', :list) %>
+  </div>
+</div>
+
+<hr/>

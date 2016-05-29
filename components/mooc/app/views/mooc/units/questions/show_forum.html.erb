@@ -1,0 +1,56 @@
+<div>
+  <a href="<%= mooc.unit_path(id: @question.category.id, page_url: @page_url)%>" class="btn btn-sm btn-default">
+    <%= icon_tag :list, label: t('question.list') %>
+  </a>
+
+  <div id="question">
+    <div class="row">
+      <div class="col-xs-9 col-sm-10 col-md-10">
+        <div id="question-title">
+          <h3 class="question-title">
+            <%= @question.title %>
+            <%= evaluation_badge_tag @question if @question.evaluations.any? %>
+            <%= question_type_icon @question.question_type %>
+          </h3>
+          <%= render 'mooc/units/questions/labels', labels: @question.labels, page_url: @page_url, in_questions_index: false %>
+        </div>
+
+        <div id="question-data">
+          <div class="question-content">
+            <%= render_markdown @question.text, page_url: @page_url %>
+          </div>
+
+          <div class="question-details">
+            <%= render 'mooc/units/questions/details', question: @question, page_url: @page_url%>
+            <%= render 'mooc/units/questions/editing', question: @question, remote: true %>
+            <%= render 'mooc/units/questions/deleting', question: @question,  page_url: @page_url, remote: true %>
+            <%= render 'shared/questions/closing', question: @question %>
+          </div>
+
+          <div id="question-evaluations">
+            <%= render 'shared/questions/evaluations', question: @question %>
+          </div>
+
+          <div id="question-comments">
+            <%= render 'mooc/units/questions/comments', question: @question, remote: true %>
+            <%= render 'mooc/units/comments/form', model: :question, commentable: @question, page_url: @page_url, remote: true %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-3 col-sm-2">
+        <%= render 'shared/questions/voting', question: @question %>
+        <%= render 'shared/questions/watching', question: @question %>
+        <%= render 'mooc/units/questions/evaluating', question: @question, remote: false %>
+      </div>
+    </div>
+  </div>
+
+  <div id="question-answers">
+    <%= render 'mooc/units/questions/reactions', answers: @answers, page_url: @page_url %>
+  </div>
+
+  <div id="question-answer" class="new-answer-form">
+    <%= render 'mooc/units/answers/reaction_form', question: @question, answer: @answer, page_url: @page_url, remote: true %>
+  </div>
+</div>

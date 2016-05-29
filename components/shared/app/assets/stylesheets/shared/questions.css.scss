@@ -7,6 +7,10 @@
 .questions-filter {
   margin: $navbar-height 0 0;
 
+  &.no-margin {
+    margin-top: 0 !important;
+  }
+
   #question-search {
     margin-bottom: 20px;
   }
@@ -117,6 +121,14 @@
 
 .question-title {
   margin-top: 20px;
+
+  .label, i {
+    vertical-align: middle;
+  }
+
+  .label {
+    font-size: 0.44em;
+  }
 }
 
 .question-content {
@@ -182,4 +194,11 @@
   .nav-labels > li {
       margin-bottom: 0px;
   }
+}
+
+.question-type-description {
+  color: $gray;
+  font-style: italic;
+  margin-top: -10px;
+  padding-bottom: 15px;
 }

@@ -1,5 +1,11 @@
 # How to write a good question?
 
+##### Type
+
+- It is used to determine whether the post is a question or a discussion message.
+- The question can be answered usually by one correct answer.
+- Discussion messages expect various reactions, opinions and subjective responses.
+
 ##### Category
 
 - It is used for inclusion of issues to topics.

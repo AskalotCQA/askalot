@@ -1072,6 +1072,41 @@ ALTER SEQUENCE question_revisions_id_seq OWNED BY question_revisions.id;
 
 
 --
+-- Name: question_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE question_types (
+    id integer NOT NULL,
+    mode character varying(255),
+    icon character varying(255),
+    name character varying(255),
+    description character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    color character varying(255) DEFAULT '#000000'::character varying
+);
+
+
+--
+-- Name: question_types_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE question_types_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: question_types_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE question_types_id_seq OWNED BY question_types.id;
+
+
+--
 -- Name: questions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1108,7 +1143,8 @@ CREATE TABLE questions (
     closed boolean DEFAULT false NOT NULL,
     closer_id integer,
     closed_at timestamp without time zone,
-    with_best_answer boolean DEFAULT false
+    with_best_answer boolean DEFAULT false,
+    question_type_id integer
 );
 
 
@@ -1720,6 +1756,13 @@ ALTER TABLE ONLY question_revisions ALTER COLUMN id SET DEFAULT nextval('questio
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY question_types ALTER COLUMN id SET DEFAULT nextval('question_types_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY questions ALTER COLUMN id SET DEFAULT nextval('questions_id_seq'::regclass);
 
 
@@ -2008,6 +2051,14 @@ ALTER TABLE ONLY question_profiles
 
 ALTER TABLE ONLY question_revisions
     ADD CONSTRAINT question_revisions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: question_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY question_types
+    ADD CONSTRAINT question_types_pkey PRIMARY KEY (id);
 
 
 --
@@ -2840,6 +2891,13 @@ CREATE INDEX index_questions_on_edited ON questions USING btree (edited);
 
 
 --
+-- Name: index_questions_on_question_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_questions_on_question_type_id ON questions USING btree (question_type_id);
+
+
+--
 -- Name: index_questions_on_slido_question_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3554,7 +3612,13 @@ INSERT INTO schema_migrations (version) VALUES ('20160417130646');
 
 INSERT INTO schema_migrations (version) VALUES ('20160417135429');
 
+<<<<<<< HEAD
 INSERT INTO schema_migrations (version) VALUES ('20160503083015');
+=======
+INSERT INTO schema_migrations (version) VALUES ('20160507084030');
+>>>>>>> Fix administration for question type and add the select to questions
+
+INSERT INTO schema_migrations (version) VALUES ('20160509144416');
 
 INSERT INTO schema_migrations (version) VALUES ('20160516203213');
 

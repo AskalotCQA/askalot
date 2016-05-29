@@ -6,6 +6,23 @@ en:
       few: "answers"
       other: "answers"
 
+    reaction:
+      question:
+        zero: "answers"
+        one: "answer"
+        few: "answers"
+        other: "answers"
+      document:
+        zero: "answers"
+        one: "answer"
+        few: "answers"
+        other: "answers"
+      forum:
+        zero: "reactions"
+        one: "reaction"
+        few: "reactions"
+        other: "reactions"
+
     author:
       zero: "authors"
       one: "author"
@@ -109,6 +126,12 @@ en:
       few: "%{count} answers"
       other: "%{count} answers"
 
+    reaction:
+      zero: "no messages"
+      one: "1 message"
+      few: "%{count} messages"
+      other: "%{count} messages"
+
     author:
       zero: "no authors"
       one: "1 author"
@@ -206,6 +229,7 @@ en:
       favorite: "Favorite"
       group: "Group"
       question: "Question"
+      question_type: "Question type"
       new: "News"
       notification: "Notification"
       tag: "Tag"
@@ -217,6 +241,7 @@ en:
     attributes:
       shared/answer:
         text: "Answer"
+        reaction: "Message"
 
       shared/assignment:
         category: "Category"
@@ -262,12 +287,20 @@ en:
         visbility: "Visibility"
 
       shared/question:
+        question_type_id: "Type"
         anonymous: "Ask anonymously"
         category: "Category"
         category_id: "Category"
         tag_list: "Tags"
         text: "Text"
         title: "Title"
+        color: "Color"
+
+      shared/question_type:
+        mode: "Type"
+        name: "Name"
+        description: "Descriptison"
+        icon: "Icon"
 
       shared/user:
         email: "E-mail"
@@ -309,3 +342,10 @@ en:
 
         read_notifications_thread: "Mark whole thread as read"
         send_email_notifications: "Send e-mail notifications"
+
+    symbolizes:
+      shared/question_type:
+        mode:
+          question: Question
+          forum: Forum
+          document: Document question

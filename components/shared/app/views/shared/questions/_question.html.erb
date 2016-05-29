@@ -5,6 +5,7 @@
         <h4>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
           <%= link_to_question question, length: 120 %>
+          <%= question_type_icon   question.question_type %>
         </h4>
 
         <%= render 'shared/questions/labels', labels: question.labels %>
@@ -26,7 +27,7 @@
         <div class="col-xs-4 col-sm-12 col-md-4">
           <%= link_to shared.question_path(question, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
             <span class="question-metric-value"><%= question.answers.size %></span>
-            <%= t('count.answer', count: question.answers.size) %>
+            <%= t('count.reaction.' + question.mode, count: question.answers.size) %>
           <% end %>
         </div>
         <div class="col-xs-4 col-sm-12 col-md-4">

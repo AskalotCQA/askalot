@@ -33,7 +33,7 @@
         <div class="col-xs-3 col-sm-6">
           <%= link_to shared.question_path(question, anchor: :'question-answers'), class: [:'question-metric', question_answers_coloring(question)] do %>
             <span class="question-metric-value"><%= question.answers.size %></span>
-            <%= t('count.answer', count: question.answers.size) %>
+            <%= t('count.reaction.' + question.mode, count: question.answers.size) %>
           <% end %>
         </div>
         <div class="col-xs-3 col-sm-6">

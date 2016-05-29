@@ -1,0 +1,25 @@
+<td>
+  <%= question_type.mode %>
+</td>
+
+<td>
+  <%= question_type.name %>
+</td>
+
+<td>
+  <%= question_type.icon %>
+</td>
+
+<td>
+  <%= question_type.color %>
+</td>
+
+<td>
+  <%= question_type.description %>
+</td>
+
+<td>
+  <%= render 'shared/administration/question_types/editing', question_type: question_type %>
+  <span class="text-muted">&middot;</span>
+  <%= render 'shared/administration/question_types/deleting', question_type: question_type %>
+</td>

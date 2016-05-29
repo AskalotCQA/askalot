@@ -25,6 +25,7 @@ class Question < ActiveRecord::Base
 
   belongs_to :category, counter_cache: true
   belongs_to :document, class_name: :'University::Document', counter_cache: true
+  belongs_to :question_type
 
   has_many :answers, dependent: :destroy
 
@@ -61,6 +62,12 @@ class Question < ActiveRecord::Base
 
   def self.best_answers
     Answer.labeled_with(Label.where(value: :best).first)
+  end
+
+  def ordered_reactions
+    return answers.order(created_at: :asc) if mode.forum?
+
+    ordered_answers
   end
 
   def ordered_answers
@@ -125,6 +132,12 @@ class Question < ActiveRecord::Base
     else
       parent.watchers
     end
+  end
+
+  def mode
+    mode = self.question_type ? self.question_type.mode : 'question'
+
+    ActiveSupport::StringInquirer.new mode.to_s
   end
 end
 end

@@ -8,6 +8,7 @@ en:
       changelogs: "Changelogs"
       news: "News"
       emails: "Community e-mail"
+      question_types: "Question types"
 
     assignment:
       create:
@@ -106,5 +107,22 @@ en:
         action: "Delete"
         title: "Warning!"
         text: "Are you sure you want to delete this community e-mail?"
+        submit: "Delete"
+        cancel: "Cancel"
+
+    question_type:
+      create:
+        action: "Add question type"
+
+      edit:
+        action: "Edit"
+        title: "Edit question type"
+        submit: "Save"
+        cancel: "Cancel"
+
+      delete:
+        action: "Delete"
+        title: "Warning!"
+        text: "Are you sure you want to delete this question type?"
         submit: "Delete"
         cancel: "Cancel"

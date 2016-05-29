@@ -1,0 +1,45 @@
+<a href="#" id="question-type-<%= question_type.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#question-type-<%= question_type.id %>-editing">
+  <%= tooltip_icon_tag :edit, t('administration.category.edit.action'), placement: :top %>
+</a>
+
+<div id="question-type-<%= question_type.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <%= form_for question_type, url: shared.administration_question_type_path(question_type) do |f| %>
+        <div class="modal-header">
+          <h3 class="modal-title"><%= t 'administration.question_type.edit.title' %></h3>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <%= f.label :mode %>
+            <%= f.select :mode, Shared::QuestionType.get_mode_values, {}, class: :'form-control', data: { as: :select2 } %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: :'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :icon %>
+            <%= f.text_field :icon, class: :'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :color %>
+            <%= f.text_field :color, class: :'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :description %>
+            <%= f.text_area :description, class: :'form-control', rows: 5 %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'administration.question_type.edit.cancel' %></button>
+          <button type="submit" class="btn btn-primary"><%= t 'administration.question_type.edit.submit' %></button>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
