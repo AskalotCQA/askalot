@@ -36,5 +36,16 @@ module Shared::Context
 
       context
     end
+
+    def self.context_category
+      @context_category || Shared::NullContextCategory.new
+    end
+
+    def self.context_category_by_id(id)
+      return if !@context_category.nil? && @context_category.id == id
+
+      @context_category = Shared::NullContextCategory.new if id == 'default'
+      @context_category = Shared::Category.find(id) unless id == 'default'
+    end
   end
 end

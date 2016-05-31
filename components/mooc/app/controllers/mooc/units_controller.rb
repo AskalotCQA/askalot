@@ -19,8 +19,6 @@ module Mooc
     end
 
     def show
-      params[:page_url] = params[:custom_page_url] || params[:page_url]
-
       redirect_to mooc.units_error_path(exception: @exception) and return unless signed_in? || login
 
       if params[:resource_link_id] && params[:context_id]
@@ -46,7 +44,7 @@ module Mooc
       @question.question_type = Shared::QuestionType.questions.first
 
       @questions = @unit.related_questions.order(created_at: :desc).page(params[:page]).per(20)
-      @page_url = params[:page_url] || ''
+      @page_url = Shared::Context::Manager.context_category.askalot_page_url
     end
 
     protected
