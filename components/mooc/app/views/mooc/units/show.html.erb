@@ -1,5 +1,5 @@
 <% provide :title, @unit.name %>
 
-<%= render 'mooc/units/questions/new', unit: @unit, question: @question, page_url: @page_url if @unit.askable %>
+<%= render 'mooc/units/questions/new', unit: @unit, question: @question if @unit.askable %>
 
-<%= render 'mooc/units/questions/questions', unit: @unit, questions: @questions, page_url: @page_url %>
+<%= render 'mooc/units/questions/questions', unit: @unit, questions: @questions %>

@@ -30,7 +30,7 @@ class CommentsController < ApplicationController
     end
 
     # TODO (filip jandura) move logic to mooc module
-    return redirect_to mooc.unit_question_path(unit_id: @question.category.id, id: @question.id, page_url: params[:page_url]) if params[:page_url]
+    return redirect_to mooc.unit_question_path(unit_id: @question.category.id, id: @question.id) if params[:unit_view]
     return redirect_to university.third_party_question_path(hash: @question.category.parent.third_party_hash, name: @question.category.name, id: @question.id) if request.referrer.include? 'third_party'
 
     respond_to do |format|

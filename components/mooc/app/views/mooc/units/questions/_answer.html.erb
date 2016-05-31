@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-9 col-sm-10 col-md-10">
       <div class="answer-content">
-        <%= render_markdown answer.text, page_url: @page_url %>
+        <%= render_markdown answer.text, page_url: Shared::Context::Manager.context_category.askalot_page_url %>
       </div>
 
       <div class="answer-details">
@@ -13,7 +13,7 @@
 
       <%= render 'shared/answers/evaluations', answer: answer %>
       <%= render 'mooc/units/answers/comments', answer: answer, remote: true %>
-      <%= render 'mooc/units/comments/form', model: :answer, commentable: answer, page_url: @page_url, remote: true %>
+      <%= render 'mooc/units/comments/form', model: :answer, commentable: answer, remote: true %>
     </div>
 
     <div class="col-xs-3 col-sm-2">

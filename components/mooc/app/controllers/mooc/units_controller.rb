@@ -44,7 +44,6 @@ module Mooc
       @question.question_type = Shared::QuestionType.questions.first
 
       @questions = @unit.related_questions.order(created_at: :desc).page(params[:page]).per(20)
-      @page_url = Shared::Context::Manager.context_category.askalot_page_url
     end
 
     protected

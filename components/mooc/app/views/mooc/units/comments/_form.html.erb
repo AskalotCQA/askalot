@@ -4,7 +4,7 @@
   </a>
 
   <div id="<%= identify commentable, :comment %>" class="collapse" data-markdown="true">
-    <%= form_for [commentable, Shared::Comment.new], url: Shared::ApplicationController.config.relative_url_root.to_s + engine_url_helpers(commentable).public_send("#{model}_comments_path", commentable, page_url: @page_url), html: { id: nil, class: :'new-comment' } do |f| %>
+    <%= form_for [commentable, Shared::Comment.new], url: Shared::ApplicationController.config.relative_url_root.to_s + engine_url_helpers(commentable).public_send("#{model}_comments_path", commentable, unit_view: true), html: { id: nil, class: :'new-comment' } do |f| %>
 
       <div id="<%= identify commentable, :comment %>-text" class="form-group">
         <%= f.text_area :text, id: nil, class: :'form-control', rows: 2 %>

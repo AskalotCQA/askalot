@@ -2,13 +2,13 @@
   <div class="col-md-10">
     <h4 id="answer" class="form-title"><%= Shared::Answer.human_attribute_name :reaction %></h4>
 
-    <%= form_for [question, answer], url: shared.question_answers_path(question_id: question.id, page_url: page_url) do |f| %>
+    <%= form_for [question, answer], url: shared.question_answers_path(question_id: question.id, unit_view: true) do |f| %>
       <%= form_messages_for answer %>
 
       <%= hidden_field_tag :question_id, @question.id %>
 
       <div class="form-group">
-        <%= markdown_editor_for_unit answer, page_url do %>
+        <%= markdown_editor_for_unit answer, Shared::Context::Manager.context_category.askalot_page_url do %>
           <%= f.text_area :text, class: :'form-control', rows: 5 %>
         <% end %>
       </div>

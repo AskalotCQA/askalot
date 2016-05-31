@@ -8,8 +8,6 @@
   <%= f.hidden_field :category_id, value: unit.id %>
   <%= f.hidden_field :unit_view, value: true %>
 
-  <%= f.hidden_field :page_url, value: page_url %>
-
   <% if Shared::QuestionType.public_types.size > 1 %>
     <div class="form-group">
       <%= f.label :question_type_id %>

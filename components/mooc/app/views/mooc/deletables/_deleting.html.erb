@@ -15,7 +15,7 @@
           <%= t "#{model}.delete.text" %>
         </div>
         <div class="modal-footer">
-          <%= form_for deletable, method: :delete, html: { id: nil, class: nil }, url: Shared::ApplicationController.config.relative_url_root.to_s + engine_url_helpers(deletable).public_send("#{model}_path", deletable, page_url: @page_url), remote: remote ||= false do %>
+          <%= form_for deletable, method: :delete, html: { id: nil, class: nil }, url: Shared::ApplicationController.config.relative_url_root.to_s + engine_url_helpers(deletable).public_send("#{model}_path", deletable), remote: remote ||= false do %>
             <a href="#" class="btn btn-default" data-dismiss="modal"><%= t "#{model}.delete.cancel" %></a>
             <button id="<%= "#{model}-#{deletable.id}-delete" %>" class="btn btn-danger"><%= t "#{model}.delete.submit" %></button>
           <% end %>

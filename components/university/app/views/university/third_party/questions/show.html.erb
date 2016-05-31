@@ -25,7 +25,7 @@
           </div>
 
           <div class="question-details">
-            <%= render 'shared/questions/details', question: @question, page_url: @page_url%>
+            <%= render 'shared/questions/details', question: @question %>
             <%= render 'university/documents/questions/editing', question: @question, remote: false %>
             <%= render 'university/documents/questions/deleting', question: @question, remote: false %>
             <%= render 'shared/questions/closing', question: @question %>
