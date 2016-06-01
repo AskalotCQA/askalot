@@ -12,7 +12,7 @@
           <%= f.label :question_type_id %>
           <div class="input-group">
             <span class="input-group-addon">
-              <%= question_type_icon_force @question.question_type %>
+              <%= question_type_icon @question.question_type %>
             </span>
             <%= f.question_type_collection_select :question_type_id, Shared::QuestionType.public_types %>
           </div>

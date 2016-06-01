@@ -1,13 +1,5 @@
 module Shared::QuestionTypesHelper
   def question_type_icon(type)
-    mode = type ? type.mode.to_s : 'question'
-
-    return if mode == 'question'
-
-    question_type_icon_force type
-  end
-
-  def question_type_icon_force(type)
     mode  = type ? type.mode.to_s : 'question'
     icon  = type ? type.icon : 'fa-question'
     color = type ? type.color : '#000000'
