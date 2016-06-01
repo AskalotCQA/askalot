@@ -3,9 +3,9 @@
     <div class="col-xs-12 col-sm-push-2 col-sm-8 col-md-push-3 col-md-7">
       <div class="question-preview">
         <h4>
+          <%= question_type_icon   question.question_type %>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
           <%= link_to_question question, length: 120 %>
-          <%= question_type_icon   question.question_type %>
         </h4>
 
         <%= render 'shared/questions/labels', labels: question.labels %>

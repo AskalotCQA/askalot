@@ -12,6 +12,7 @@
       <div class="col-xs-9 col-sm-10 col-md-10">
         <div id="question-title">
           <h3 class="question-title">
+            <%= question_type_icon @question.question_type %>
             <%= @question.title %>
             <%= evaluation_badge_tag @question if @question.evaluations.any? %>
           </h3>
