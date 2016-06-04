@@ -3,7 +3,7 @@
 <div class="tab-navigation">
   <% if @unread.any? %>
     <div class="pull-right">
-      <%= link_to clean_notifications_path, class: 'btn btn-default' do %>
+      <%= link_to shared.clean_notifications_path, class: 'btn btn-default' do %>
         <%= icon_tag :check %>
         <%= t 'notification.clean.submit' %>
       <% end %>
@@ -11,7 +11,7 @@
   <% end %>
 
   <ul class="nav nav-tabs">
-    <li class="active"><%= link_to t('notification.navigation'), notifications_path %></li>
+    <li class="active"><%= link_to t('notification.navigation'), shared.notifications_path %></li>
     <li><%= link_to t('watching.navigation'), watchings_path %></li>
   </ul>
 </div>
@@ -19,8 +19,8 @@
 <div class="row">
   <div class="col-md-3">
     <ul class="nav nav-pills nav-stacked pill-navigation">
-      <%= pill_link_tag_with_count t('notification.tab.unread'), :unread, notifications_path(tab: :unread), badge_tag(Shared::Notification.in_context(@context).for(current_user).unread.size, class: :'pull-right'), analytics_attributes(:notifications, :switch, :unread) %>
-      <%= pill_link_tag_with_count t('notification.tab.all'), :all, notifications_path(tab: :all), badge_tag(Shared::Notification.in_context(@xontext).for(current_user).size, class: :'pull-right'), analytics_attributes(:notifications, :switch, :all) %>
+      <%= pill_link_tag_with_count t('notification.tab.unread'), :unread, shared.notifications_path(tab: :unread), badge_tag(Shared::Notification.in_context(@context).for(current_user).unread.size, class: :'pull-right'), analytics_attributes(:notifications, :switch, :unread) %>
+      <%= pill_link_tag_with_count t('notification.tab.all'), :all, shared.notifications_path(tab: :all), badge_tag(Shared::Notification.in_context(@xontext).for(current_user).size, class: :'pull-right'), analytics_attributes(:notifications, :switch, :all) %>
     </ul>
   </div>
   <div class="col-md-9">

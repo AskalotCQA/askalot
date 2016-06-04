@@ -10,11 +10,11 @@
     </div>
     <div class="col-xs-1">
       <% if notification.unread? %>
-        <%= link_to read_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.read.submit'), placement: :bottom).merge(class: 'btn btn-default btn-xs pull-right') do %>
+        <%= link_to shared.read_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.read.submit'), placement: :bottom).merge(class: 'btn btn-default btn-xs pull-right') do %>
           <%= icon_tag :check %>
         <% end %>
       <% else %>
-        <%= link_to unread_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.unread.submit'), placement: :bottom).merge(class: 'btn btn-primitive btn-xs pull-right text-muted') do %>
+        <%= link_to shared.unread_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.unread.submit'), placement: :bottom).merge(class: 'btn btn-primitive btn-xs pull-right text-muted') do %>
           <%= icon_tag :check %>
         <% end %>
       <% end %>

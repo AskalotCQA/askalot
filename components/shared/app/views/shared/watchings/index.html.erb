@@ -1,16 +1,16 @@
 <% provide :title, t('watching.index.title') %>
 
 <ul class="nav nav-tabs tab-navigation">
-  <li><%= link_to t('notification.navigation'), notifications_path %></li>
-  <li class="active"><%= link_to t('watching.navigation'), watchings_path %></li>
+  <li><%= link_to t('notification.navigation'), shared.notifications_path %></li>
+  <li class="active"><%= link_to t('watching.navigation'), shared.watchings_path %></li>
 </ul>
 
 <div class="row">
   <div class="col-md-3">
     <ul class="nav nav-pills nav-stacked pill-navigation">
-      <%= pill_link_tag_with_count t('watching.tab.questions'), :questions, watchings_path(tab: :questions), badge_tag(Shared::Watching.in_context(@context).of('Shared::Question').by(current_user).size, class: :'pull-right'), analytics_attributes(:watchings, :switch, :questions) %>
-      <%= pill_link_tag_with_count t('watching.tab.categories'), :categories, watchings_path(tab: :categories), badge_tag(Shared::Watching.in_context(@context).of('Shared::Category').by(current_user).size, class: :'pull-right'), analytics_attributes(:watchings, :switch, :categories) %>
-      <%= pill_link_tag_with_count t('watching.tab.tags'), :tags, watchings_path(tab: :tags), badge_tag(Shared::Watching.in_context(@context).of('Shared::Tag').by(current_user).size, class: :'pull-right'), analytics_attributes(:watchings, :switch, :tags) %>
+      <%= pill_link_tag_with_count t('watching.tab.questions'), :questions, shared.watchings_path(tab: :questions), badge_tag(Shared::Watching.in_context(@context).of('Shared::Question').by(current_user).size, class: :'pull-right'), analytics_attributes(:watchings, :switch, :questions) %>
+      <%= pill_link_tag_with_count t('watching.tab.categories'), :categories, shared.watchings_path(tab: :categories), badge_tag(Shared::Watching.in_context(@context).of('Shared::Category').by(current_user).size, class: :'pull-right'), analytics_attributes(:watchings, :switch, :categories) %>
+      <%= pill_link_tag_with_count t('watching.tab.tags'), :tags, shared.watchings_path(tab: :tags), badge_tag(Shared::Watching.in_context(@context).of('Shared::Tag').by(current_user).size, class: :'pull-right'), analytics_attributes(:watchings, :switch, :tags) %>
     </ul>
   </div>
   <div class="col-md-9">
