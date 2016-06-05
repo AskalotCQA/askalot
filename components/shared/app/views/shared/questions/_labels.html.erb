@@ -1,4 +1,5 @@
 <ul class="nav nav-labels">
+  <% return if labels.nil? %>
   <% labels.each do |label| %>
     <li>
       <%= question_label label %>
