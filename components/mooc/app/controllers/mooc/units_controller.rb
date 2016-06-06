@@ -39,6 +39,8 @@ module Mooc
         @unit = Shared::Category.find params[:id]
       end
 
+      redirect_to unit_path(id: @unit.id, context: Shared::Context::Manager.current_context) and return if request.request_method == 'POST'
+
       @question               = Shared::Question.new
       @question.category      = @unit
       @question.question_type = Shared::QuestionType.questions.first
