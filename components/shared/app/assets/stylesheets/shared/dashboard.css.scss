@@ -40,6 +40,35 @@
       width: 100%;
       margin-bottom: 20px;
       text-decoration: none;
+      @include transition(background-color 1s 0s);
+
+      &:hover {
+        background-color: darken(#eceff4, 5%);
+
+        .link-icon-questions {
+          background-color: $dashboard-link-questions-bg-color-hover;
+        }
+
+        .link-icon-questions-followed {
+          background-color: $dashboard-link-questions-followed-bg-color-hover;
+        }
+
+        .link-icon-answers {
+          background-color: $dashboard-link-answers-bg-color-hover;
+        }
+
+        .link-icon-answers-followed {
+          background-color: $dashboard-link-answers-followed-bg-color-hover;
+        }
+
+        .link-icon-comments {
+          background-color: $dashboard-link-comments-bg-color-hover;
+        }
+
+        .link-icon-comments-followed {
+          background-color: $dashboard-link-comments-followed-bg-color-hover;
+        }
+      }
 
       .link-icon {
         text-align: center;
@@ -50,6 +79,7 @@
         height: 110px;
         line-height: 110px;
         font-size: 3em;
+        @include transition(background-color 1s 0s);
 
         i {
           margin: 0;
@@ -61,26 +91,50 @@
 
       .link-icon-questions {
         background-color: $dashboard-link-questions-bg-color;
+
+        &:hover {
+          background-color: $dashboard-link-questions-bg-color-hover;
+        }
       }
 
       .link-icon-questions-followed {
         background-color: $dashboard-link-questions-followed-bg-color;
+
+        &:hover {
+          background-color: $dashboard-link-questions-followed-bg-color-hover;
+        }
       }
 
       .link-icon-answers {
         background-color: $dashboard-link-answers-bg-color;
+
+        &:hover {
+          background-color: $dashboard-link-answers-bg-color-hover;
+        }
       }
 
       .link-icon-answers-followed {
         background-color: $dashboard-link-answers-followed-bg-color;
+
+        &:hover {
+          background-color: $dashboard-link-answers-followed-bg-color-hover;
+        }
       }
 
       .link-icon-comments {
         background-color: $dashboard-link-comments-bg-color;
+
+        &:hover {
+          background-color: $dashboard-link-comments-bg-color-hover;
+        }
       }
 
       .link-icon-comments-followed {
         background-color: $dashboard-link-comments-followed-bg-color;
+
+        &:hover {
+          background-color: $dashboard-link-comments-followed-bg-color-hover;
+        }
       }
 
       .link-text {
