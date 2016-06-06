@@ -2,6 +2,8 @@ module Shared
 class StaticPagesController < ApplicationController
   include Shared::Dashboard::Questions
 
+  skip_before_filter :login_required, only: :home if Rails.module.mooc? && Rails.env_type.test?
+
   def home
     count = 4
 
