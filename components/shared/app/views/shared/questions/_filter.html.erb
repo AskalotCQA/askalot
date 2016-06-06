@@ -1,17 +1,4 @@
-<div id="questions-filter" class="questions-filter <%= 'no-margin' if category %>">
-  <% if category %>
-    <div class="row">
-      <div class="col-xs-12">
-        <h1 class="question-title">
-          <%= category.full_public_name if category.full_public_name != 'root' %>
-        </h1>
-        <div class="category-description">
-          <%= category.description %>
-        </div>
-      </div>
-    </div>
-  <% end %>
-
+<div id="questions-filter" class="questions-filter">
   <div class="row">
     <div class="col-xs-12 col-sm-4">
       <ul class="list list-inline">
@@ -56,4 +43,17 @@
       </div>
     </div>
   </div>
+
+  <% if category %>
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="question-title">
+            <%= category.full_public_name if category.full_public_name != 'root' %>
+          </h1>
+          <div class="category-description">
+            <%= category.description %>
+          </div>
+        </div>
+      </div>
+  <% end %>
 </div>

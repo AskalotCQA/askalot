@@ -5,14 +5,10 @@
 }
 
 .questions-filter {
-  margin: $navbar-height 0 0;
-
-  &.no-margin {
-    margin-top: 0 !important;
-  }
+  margin: 20px 0 0;
 
   #question-search {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 
   .input-group-btn {
@@ -44,6 +40,19 @@
     #fulltext-search-submit {
       margin-left: 0;
     }
+  }
+
+  .question-title {
+    margin-top: 0;
+  }
+
+  .category-description {
+    padding: 0;
+    margin-bottom: 20px;
+  }
+
+  .list {
+    margin-bottom: 5px;
   }
 }
 
