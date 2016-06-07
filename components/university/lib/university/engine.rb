@@ -2,6 +2,8 @@ module University
   class Engine < ::Rails::Engine
     isolate_namespace University
 
+    config.assets.precompile += %w( university/iframe_resize.js university/third_party.js )
+
     config.to_prepare do
       helpers = Shared.constants.select { |c| c.to_s.ends_with? 'Helper' }
 
