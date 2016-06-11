@@ -32,5 +32,9 @@ FactoryGirl.define do
       sequence(:slido_question_uuid) { |n| n }
       sequence(:slido_event_uuid) { |n| n + 2 }
     end
+
+    trait :discussion do
+      question_type_id 3
+    end
   end
 end

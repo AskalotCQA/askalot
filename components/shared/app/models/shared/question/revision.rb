@@ -18,6 +18,7 @@ class Question
       revision.tags     = question.labels.map(&:name)
       revision.title    = question.title
       revision.text     = question.text
+      revision.question_type = question.mode
 
       revision.save!
       revision

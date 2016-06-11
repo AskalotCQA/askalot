@@ -14,7 +14,8 @@ describe Shared::Reputation::Notifier do
   let!(:tag1) { create :tag, name: 'tag1' }
   let!(:tag2) { create :tag, name: 'tag2' }
 
-  let!(:question) { create :question, author: asker, tag_list: [:tag1, :tag2] }
+  let!(:question)   { create :question, author: asker, tag_list: [:tag1, :tag2] }
+  let!(:discussion) { create :question, :discussion, author: asker }
 
   describe 'a question without answers' do
     it 'does not change reputation for voting unanswered question' do
@@ -204,6 +205,94 @@ describe Shared::Reputation::Notifier do
       expect(answerer_rep.value).to be < old_answerer_rep
       expect(answerer_2_rep.value).not_to eq(old_answerer_2_rep)
       expect(answerer_3_rep.value).not_to eq(old_answerer_3_rep)
+    end
+  end
+
+  describe 'a discussion with an answer' do
+    let!(:asker_rep) { asker.profiles.of('reputation').first }
+    let!(:old_asker_rep) { asker_rep.value }
+    let!(:answerer_rep) { answerer.profiles.of('reputation').first }
+    let!(:old_answerer_rep) { answerer_rep.value }
+
+    let!(:answer) { Shared::Answer.create(question: discussion, author: answerer, created_at: Time.now + 5.hours, text: 'Lorem') }
+
+    it 'does not change reputation upon first answer creation and deletion' do
+      Shared::Reputation::Notifier.publish(:create, answerer, answer)
+      asker_rep.reload
+      expect(asker_rep.value).to eq(old_asker_rep)
+      answerer_rep.reload
+      expect(answerer_rep.value).to eq(old_answerer_rep)
+
+      answer.mark_as_deleted_by!(answerer)
+      Shared::Reputation::Notifier.publish(:delete, answerer, answer)
+      asker_rep.reload
+      expect(asker_rep.value).to eq(0.0)
+      answerer_rep.reload
+      expect(answerer_rep.value).to eq(0.0)
+    end
+
+    it 'does not change askers reputation upon voting' do
+      vote                  = question.toggle_voteup_by!(user)
+      asker_rep.probability = 1
+
+      asker_rep.save
+
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
+      asker_rep.reload
+      expect(asker_rep.value).to eq(old_asker_rep)
+
+      after_voteup = asker_rep.value
+      vote         = question.toggle_voteup_by!(user)
+
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
+      asker_rep.reload
+      expect(asker_rep.value).to eq(after_voteup)
+
+      old_asker_rep = asker_rep.value
+      vote          = question.toggle_votedown_by!(user)
+
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
+      asker_rep.reload
+      expect(asker_rep.value).to eq(old_asker_rep)
+
+      vote = question.toggle_voteup_by!(user)
+
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
+      asker_rep.reload
+      expect(asker_rep.value).to eq(after_voteup)
+    end
+
+    it 'does not change answerers reputation upon voting' do
+      answerer_rep.probability = 1
+
+      answerer_rep.save
+
+      vote = answer.toggle_voteup_by!(user)
+
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
+      answerer_rep.reload
+      expect(answerer_rep.value).to eq(old_answerer_rep)
+
+      after_voteup = answerer_rep.value
+      vote         = answer.toggle_voteup_by!(user)
+
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
+      answerer_rep.reload
+      expect(answerer_rep.value).to eq(after_voteup)
+
+      old_answerer_rep = answerer_rep.value
+      vote             = answer.toggle_votedown_by!(user)
+
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
+      answerer_rep.reload
+      expect(answerer_rep.value).to eq(after_voteup)
+      expect(answerer_rep.value).to eq(old_answerer_rep)
+
+      vote = answer.toggle_voteup_by!(user)
+
+      Shared::Reputation::Notifier.publish(:create, :user, vote)
+      answerer_rep.reload
+      expect(answerer_rep.value).to eq(after_voteup)
     end
   end
 end
