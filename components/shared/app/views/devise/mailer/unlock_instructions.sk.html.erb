@@ -7,7 +7,7 @@
   <%= link_to 'Odomknúť účet', unlock_url(@resource, reset_password_token: @token) %>.
 </p>
 <p>
-  V prípade akýchkoľvek problémov s prihlásením nás <a href="mailto:askalot@fiit.stuba.sk">kontaktujte</a>.
+  V prípade akýchkoľvek problémov s prihlásením nás <%= mail_to 'askalot@fiit.stuba.sk', 'kontaktujte' %>.
 </p>
 <p>
   Ďakujeme za pochopenie.
