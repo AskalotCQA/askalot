@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <%= navbar_link_tag t('question.navigation'), shared.questions_path, active: [shared.questions_path, shared.search_questions_path] %>
-        <%= navbar_link_tag t('group.navigation'), university.groups_path %>
+        <%= navbar_link_tag t('group.navigation'), university.groups_path if Shared::Configuration.enable.groups? %>
         <%= navbar_link_tag t('category.navigation'), shared.categories_path, active: [shared.categories_path, shared.search_categories_path] %>
         <%= navbar_link_tag t('tag.navigation'), shared.tags_path, active: [shared.tags_path, shared.search_tags_path] %>
         <%= navbar_link_tag t('user.navigation'), shared.users_path, class: :'hidden-sm hidden-md', active: [shared.users_path, shared.search_users_path] %>
