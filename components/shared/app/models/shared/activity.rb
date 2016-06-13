@@ -12,6 +12,7 @@ class Activity < ActiveRecord::Base
 
   scope :global,          lambda { unscope(where: :anonymous) }
   scope :of,              lambda { |user| where(initiator: user) }
+  scope :not_of,          lambda { |user| where.not(initiator: user) }
   scope :by_followees_of, lambda { |user| where(initiator: user.followees.pluck(:followee_id)) }
   scope :in_context,      lambda { |context| where(context: context) if Rails.module.mooc? }
 
