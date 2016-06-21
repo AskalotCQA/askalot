@@ -1,5 +1,5 @@
 <p>
-  Welcome to <%= link_to 'Askalot', 'http://askalot.fiit.stuba.sk' %>,
+  Welcome to <%= link_to 'Askalot', root_url %>,
 </p>
 <p>
   In order to confirm your account, please click on the following link:
@@ -9,7 +9,7 @@
   You have to confirm your registration in next two days, otherwise you'll not be able to log in again.
 </p>
 <p>
-  In case of any questions, do not hasitate to <a href="mailto:askalot@fiit.stuba.sk">contact us</a>.
+  In case of any questions, do not hasitate to <%= mail_to 'askalot@fiit.stuba.sk', 'contact us' %>.
 </p>
 <p>
   Thank you for joing Askalot and we're happy to see you like our project.
