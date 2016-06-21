@@ -9,7 +9,7 @@ Redcurtain::Markdown.renderers.unshift(*[
   Redcurtain::Renderer::Linker.new(:question)
 ])
 
-[:autolink, :no_images, :no_styles].each do |flag|
+[:autolink, :no_styles, :tables].each do |flag|
   Redcurtain::Renderer::Redcarpet.defaults[flag] = true
 end
 
@@ -22,12 +22,16 @@ Redcurtain::Renderer::Redcarpet.defaults[:tags] &= [
   :emphasis,
   :header,
   :hrule,
+  :image,
   :linebreak,
   :link,
   :list,
   :list_item,
   :normal_text,
   :paragraph,
+  :table,
+  :table_row,
+  :table_cell,
   :quote,
   :striketrough,
   :superscript,
