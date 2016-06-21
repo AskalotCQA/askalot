@@ -50,9 +50,18 @@ $state-danger-text:  $brand-danger;
 
 // dashboard icon
 $dashboard-link-bg-color: #2a9579;
+
 $dashboard-link-questions-bg-color:           darken(#29B7D3, 10%);
 $dashboard-link-questions-followed-bg-color:  #29B7D3;
+$dashboard-link-questions-bg-color-hover:           darken(#29B7D3, 20%);
+$dashboard-link-questions-followed-bg-color-hover:  darken(#29B7D3, 10%);
+
 $dashboard-link-answers-bg-color:             darken(#3CBC8D, 10%);
 $dashboard-link-answers-followed-bg-color:    #3CBC8D;
+$dashboard-link-answers-bg-color-hover:             darken(#3CBC8D, 20%);
+$dashboard-link-answers-followed-bg-color-hover:    darken(#3CBC8D, 10%);
+
 $dashboard-link-comments-bg-color:            darken(#FAC552, 10%);
 $dashboard-link-comments-followed-bg-color:   #FAC552;
+$dashboard-link-comments-bg-color-hover:            darken(#FAC552, 20%);
+$dashboard-link-comments-followed-bg-color-hover:   darken(#FAC552, 10%);
