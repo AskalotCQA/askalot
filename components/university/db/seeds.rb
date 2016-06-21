@@ -6,5 +6,5 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-root = Shared::Category.find_or_create_by! name: :root, uuid: :root_uuid
+root = Shared::Category.find_or_create_by! name: :root, uuid: :root_uuid, full_tree_name: :Root
 Shared::Category.find_or_create_by! name: Shared::Tag.current_academic_year_value, parent_id: root.id
