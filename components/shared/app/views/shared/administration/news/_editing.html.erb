@@ -1,13 +1,13 @@
-<a href="#" id="new-<%= new.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#new-<%= new.id %>-editing">
+<a href="#" id="news-<%= news.id %>-edit-modal" class="text-muted text-undecorated" data-toggle="modal" data-target="#news-<%= news.id %>-editing">
   <%= tooltip_icon_tag :edit, t('administration.category.edit.action'), placement: :top %>
 </a>
 
-<div id="new-<%= new.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="news-<%= news.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <%= form_for new, url: shared.administration_news_path(new) do |f| %>
+      <%= form_for news, url: shared.administration_news_path(news) do |f| %>
         <div class="modal-header">
-          <h3 class="modal-title"><%= t 'administration.new.edit.title' %></h3>
+          <h3 class="modal-title"><%= t 'administration.news.edit.title' %></h3>
         </div>
 
         <div class="modal-body">
@@ -24,14 +24,14 @@
           <div class="checkbox">
             <label>
               <%= f.check_box :show %>
-              <%= t('administration.new.create.show') %>
+              <%= t('administration.news.create.show') %>
             </label>
           </div>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'administration.new.edit.cancel' %></button>
-          <button type="submit" class="btn btn-primary"><%= t 'administration.new.edit.submit' %></button>
+          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t 'administration.news.edit.cancel' %></button>
+          <button type="submit" class="btn btn-primary"><%= t 'administration.news.edit.submit' %></button>
         </div>
       <% end %>
     </div>

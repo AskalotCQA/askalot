@@ -67,11 +67,13 @@ class Category < ActiveRecord::Base
 
     if !full_tree_name_changed && (name_changed || parent_id_changed)
       self.refresh_full_tree_name
+
       refresh_descs = true
     end
 
     if !full_public_name_changed && (name_changed || parent_id_changed)
       self.refresh_full_public_name
+
       refresh_descs = true
     end
 
@@ -89,7 +91,6 @@ class Category < ActiveRecord::Base
   end
 
   def refresh_full_tree_name
-    # TODO (ladislav.gallay) Remove the filtering of 'root' node
     self.full_tree_name = self.self_and_ancestors.select { |item| item.name != 'root' }.map { |item| item.name }.join(' - ')
   end
 
@@ -234,7 +235,7 @@ class Category < ActiveRecord::Base
   end
 
   def can_have_subcategories?
-     self.questions_count == 0
+    self.questions_count == 0
   end
 
   def custom?

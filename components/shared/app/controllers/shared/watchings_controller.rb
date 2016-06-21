@@ -6,10 +6,10 @@ class WatchingsController < ApplicationController
 
   def index
     count = 20
-    @watchings = Shared::Watching.in_context(@context).by(current_user).order(created_at: :desc)
 
-    @questions = @watchings.of('Shared::Question').page(tab_page :questions).per(count)
-
+    @watchings  = Shared::Watching.in_context(@context).by(current_user).order(created_at: :desc)
+    @questions  = @watchings.of('Shared::Question').page(tab_page :questions).per(count)
+    @tags       = @watchings.of('Shared::Tag').page(tab_page :tags).per(count)
     @categories = @watchings.of('Shared::Category')
       .includes('category')
       .reorder(
@@ -19,8 +19,6 @@ class WatchingsController < ApplicationController
         END",
         'categories.full_tree_name'
       ).page(tab_page :categories).per(count)
-
-    @tags       = @watchings.of('Shared::Tag').page(tab_page :tags).per(count)
   end
 
   def destroy

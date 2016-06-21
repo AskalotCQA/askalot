@@ -242,7 +242,7 @@ sk:
       group: "Skupina"
       question: "Otázka"
       question_type: "Typ otázky"
-      new: "Novinka"
+      news: "Novinka"
       notification: "Notifikácia"
       tag: "Tag"
       user: "Používateľ"
@@ -277,7 +277,7 @@ sk:
         title: "Názov"
         version: "Verzia"
 
-      shared/new:
+      shared/news:
         title: "Názov"
         description: "Popis"
         active: "Zobraziť na domovskej stránke"

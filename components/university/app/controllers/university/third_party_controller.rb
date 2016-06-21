@@ -6,6 +6,8 @@ module University
 
     before_action :authenticate_user!
 
+    after_action :allow_inline_frame
+
     def index
       @parent    = Shared::Category.find_by_third_party_hash! params[:hash]
       @category  = Shared::Category.find_or_create_by! name: params[:name], parent_id: @parent.id
@@ -36,6 +38,16 @@ module University
 
       render 'university/third_party/questions/show_forum' if @question.mode.forum?
       render 'university/third_party/questions/show' unless @question.mode.forum?
+    end
+
+    private
+
+    def allow_inline_frame
+      response.headers['X-Frame-Options'] = 'ALLOWALL'
+      response.headers['Access-Control-Allow-Origin'] = '*'
+      response.headers['Access-Control-Request-Methods'] = '*'
+      response.headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
+      response.headers['Access-Control-Allow-Headers'] = 'X-CSRFToken'
     end
   end
 end

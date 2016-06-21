@@ -16,7 +16,7 @@ module Mooc::HeaderHelper
     (output.include? 'dropdown-menu') ? output.html_safe : ''
   end
 
-  def header_items()
+  def header_items
     output  = ''
 
     output << navbar_link_tag(t('activity.navigation'), shared.activities_path, class: :'hidden-sm')

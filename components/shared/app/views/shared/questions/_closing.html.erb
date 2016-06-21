@@ -1,26 +1,26 @@
 <% if can? :close, question %>
-    &middot;
+  &middot;
 
-    <a href="#" id="<%= "question-#{question.id}-close-modal" %>" class="text-muted text-undecorated" data-toggle="modal" data-target="#<%= identify question, :closing %>">
-      <%= tooltip_icon_tag :archive, t('question.close.action'), placement: :top %>
-    </a>
+  <a href="#" id="<%= "question-#{question.id}-close-modal" %>" class="text-muted text-undecorated" data-toggle="modal" data-target="#<%= identify question, :closing %>">
+    <%= tooltip_icon_tag :archive, t('question.close.action'), placement: :top %>
+  </a>
 
-    <div id="<%= identify question, :closing %>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h3 class="modal-title"><%= t "question.close.title" %></h3>
-          </div>
-          <div class="modal-body">
-            <%= t "question.close.text" %>
-          </div>
-          <div class="modal-footer">
-            <%= form_for [:close, question], url: shared.close_question_path, method: :post, html: { id: nil, class: nil }, remote: remote ||= false do %>
-                <a href="#" class="btn btn-default" data-dismiss="modal"><%= t "question.close.cancel" %></a>
-                <button id="<%= "question-#{question.id}-close" %>" class="btn btn-danger"><%= t "question.close.submit" %></button>
-            <% end %>
-          </div>
+  <div id="<%= identify question, :closing %>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title"><%= t "question.close.title" %></h3>
+        </div>
+        <div class="modal-body">
+          <%= t "question.close.text" %>
+        </div>
+        <div class="modal-footer">
+          <%= form_for [:close, question], url: shared.close_question_path, method: :post, html: { id: nil, class: nil }, remote: remote ||= false do %>
+              <a href="#" class="btn btn-default" data-dismiss="modal"><%= t "question.close.cancel" %></a>
+              <button id="<%= "question-#{question.id}-close" %>" class="btn btn-danger"><%= t "question.close.submit" %></button>
+          <% end %>
         </div>
       </div>
     </div>
+  </div>
 <% end %>

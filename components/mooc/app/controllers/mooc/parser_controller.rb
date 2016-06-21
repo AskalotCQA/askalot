@@ -17,20 +17,16 @@ module Mooc
         unit.update({ uuid: params[:unit_id], name: params[:unit_name], parent: subsection })
         unit.save
 
-        status_case        = 'unit_updated'
+        status_case = 'unit_updated'
 
         Mooc::CategoryContent.create(category: unit, content: params[:content]) unless Mooc::CategoryContent.where(category: unit).exists?
       end
 
-      render json: {
-                 status: 'success',
-                 case: status_case,
-                 flags: saved_flags
-             }
+      render json: { status: 'success', case: status_case, flags: saved_flags }
     end
 
     def options
-      render :nothing => true, :status => 200, :content_type => 'text/html'
+      render nothing: true, status: 200, content_type: 'text/html'
     end
 
     private

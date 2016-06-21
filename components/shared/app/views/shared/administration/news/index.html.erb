@@ -2,8 +2,8 @@
   <%= render 'shared/administration/news/form' %>
 
   <ol class="administration-changelogs">
-    <% @news.each do |new| %>
-      <%= render 'shared/administration/news/new', new: new %>
+    <% @all_news.each do |news| %>
+      <%= render 'shared/administration/news/news', news: news %>
     <% end %>
   </ol>
 <% end %>

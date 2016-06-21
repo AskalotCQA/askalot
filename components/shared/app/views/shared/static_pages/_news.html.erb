@@ -1,6 +1,6 @@
-<% if news.any? %>
+<% if all_news.any? %>
   <ol class="list-unstyled">
-    <% news.each do |news| %>
+    <% all_news.each do |news| %>
       <li>
         <h4>
           <%= link_to news.title, news_index_path(tab: :'news')+"#news-#{news.id}" %>

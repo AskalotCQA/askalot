@@ -4,11 +4,8 @@ class Administration::AssignmentsController < AdministrationController
 
   def index
     @assignments  = Shared::Assignment.includes(:user, :category, :role).order('categories.full_public_name', 'users.nick')
-
-    @categories = Shared::Category.order(:depth, :full_public_name).all
-
-    @users = Shared::User::order(:login).all
-
+    @categories   = Shared::Category.order(:depth, :full_public_name).all
+    @users        = Shared::User::order(:login).all
     @assignment ||= Shared::Assignment.new
 
     @assignments.each { |a| a.category.name = a.category.parent.name + ' - ' + a.category.name unless a.category.root? }

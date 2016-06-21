@@ -20,6 +20,7 @@ module Mooc
         ActiveRecord::Migrator.migrations_paths = ActiveRecord::Migrator.migrations_paths | app.config.paths['db/migrate'].to_a
 
         app.config.paths['db'] = config.paths['db'].expanded
+
         ActiveRecord::Tasks::DatabaseTasks.db_dir = app.config.paths['db'].first
       end
     end

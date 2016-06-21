@@ -6,8 +6,6 @@ class Ability
   include (Rails.module.classify + '::Ability').constantize
 
   def initialize(user)
-    # TODO(zbell) refactor to use only actions :read, :create, :update and :destroy on models
-
     can(:edit,   Shared::User) { |resource| resource == user }
     can(:follow, Shared::User) { |resource| resource != user }
 
@@ -77,13 +75,12 @@ class Ability
       can :observe, :all
 
       can(:close,  [Shared::Question]) { |resource| resource.answers.empty? && !resource.closed }
-
-      can :index,           [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::Email, Shared::New, Shared::QuestionType]
+      can :index,           [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::Email, Shared::News, Shared::QuestionType]
       can :new,             [Shared::Category]
       can :edit,            [Shared::Category]
-      can :create,          [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::Email, Shared::New, Shared::QuestionType]
-      can :update,          [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::New, Shared::QuestionType]
-      can :destroy,         [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::New, Shared::QuestionType]
+      can :create,          [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::Email, Shared::News, Shared::QuestionType]
+      can :update,          [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::News, Shared::QuestionType]
+      can :destroy,         [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::News, Shared::QuestionType]
       can :update_settings, [Shared::Category]
       can :copy,            [Shared::Category]
 

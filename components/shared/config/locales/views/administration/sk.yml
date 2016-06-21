@@ -71,7 +71,7 @@ sk:
         submit: "Zmazať"
         cancel: "Zrušiť"
 
-    new:
+    news:
       create:
         action: "Pridať novinku"
         show: "Zobraziť na domovskej stránke"

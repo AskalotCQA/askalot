@@ -901,13 +901,13 @@ namespace :sample_data do
 
   desc 'Fills database with sample news'
   task news: :environment do
-    news = [
+    all_news = [
         { title: "Try university version of CQA system Askalot!", description: "#### Demo teacher account\nCredentials: askalotteacher / password\n\n#### Demo student account\nCredentials: askalotstudent / password", time: 0 },
      ]
 
-    news.each do |input|
+    all_news.each do |input|
       Timecop.freeze(Time.now - input[:time].days) do
-        new = Shared::New.create!(
+        news = Shared::News.create!(
             title: input[:title],
             description: input[:description],
             show: true,

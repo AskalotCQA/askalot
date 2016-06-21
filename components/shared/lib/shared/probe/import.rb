@@ -22,7 +22,6 @@ module Shared::Probe
     end
 
     def document_for_import(document)
-      # TODO refactor
       case action
       when :index  then document.to_mapping
       when :update then { index.type => document.to_mapping }
