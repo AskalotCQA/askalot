@@ -2,27 +2,27 @@ module Shared::Dashboard::Questions
   extend ActiveSupport::Concern
 
   def dashboard_questions(context)
-    Shared::Question.in_context(context)
+    Shared::Question.in_context(context).where.not(author: current_user)
   end
 
   def dashboard_answers(context)
-    Shared::Answer.in_context(context)
+    Shared::Answer.in_context(context).where.not(author: current_user)
   end
 
   def dashboard_question_comments(questions)
-    Shared::Comment.for('Shared::Question').where(commentable_id: questions.pluck(:id))
+    Shared::Comment.for('Shared::Question').where(commentable_id: questions.pluck(:id)).where.not(author: current_user)
   end
 
   def dashboard_answer_comments(answers)
-    Shared::Comment.for('Shared::Answer').where(commentable_id: answers.pluck(:id))
+    Shared::Comment.for('Shared::Answer').where(commentable_id: answers.pluck(:id)).where.not(author: current_user)
   end
 
   def dashboard_questions_watched(user)
-    Shared::Question.in_context(categories_in_watched_contexts(user).pluck(:id))
+    Shared::Question.in_context(categories_in_watched_contexts(user).pluck(:id)).where.not(author: current_user)
   end
 
   def dashboard_answers_watched(user)
-    Shared::Answer.in_context(categories_in_watched_contexts(user).pluck(:id))
+    Shared::Answer.in_context(categories_in_watched_contexts(user).pluck(:id)).where.not(author: current_user)
   end
 
   def categories_in_watched_contexts(user)
