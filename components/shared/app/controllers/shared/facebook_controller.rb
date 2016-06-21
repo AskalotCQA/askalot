@@ -12,8 +12,9 @@ class FacebookController < ApplicationController
   end
 
   def notification
-    @content = params[:n]
-    @link    = params[:r]
+    @content  = params[:n]
+    @link     = params[:r]
+    @all_link = params[:a]
 
     if Rails.module.university?
       fail unless !@link || @link =~ /\A\//
