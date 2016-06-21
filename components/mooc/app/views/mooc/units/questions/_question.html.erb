@@ -4,8 +4,8 @@
       <div class="question-preview">
         <h4>
           <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
-          <%= link_to question.title, mooc.unit_question_path(id: question.id, unit_id: @unit.id)%>
           <%= question_type_icon question.question_type %>
+          <%= link_to question.title, mooc.unit_question_path(id: question.id, unit_id: @unit.id)%>
         </h4>
 
         <%= render 'mooc/units/questions/labels', labels: question.labels, in_questions_index: true %>
