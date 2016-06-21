@@ -11,6 +11,7 @@ class GroupsController < Shared::ApplicationController
   default_tab :all, only: :index
 
   before_action :authenticate_user!
+  before_action :determine_groups_enabled
 
   def create
     @group = University::Group.new(create_params)
@@ -54,6 +55,10 @@ class GroupsController < Shared::ApplicationController
 
   def destroy_callback(deletable)
     redirect_to groups_path
+  end
+
+  def determine_groups_enabled
+    redirect_to shared.root_path unless Shared::Configuration.enable.groups?
   end
 end
 end

@@ -17,6 +17,7 @@ defaults: &defaults
   secret_token: TODO
 
   enable:
+    groups: true
     registrations: true
     passwords: true
     confirmations: true
