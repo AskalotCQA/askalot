@@ -40,7 +40,7 @@ class StaticPagesController < ApplicationController
 
     limit = 20
 
-    @news = Shared::New.order('news.id DESC').active.limit(limit)
+    @all_news = Shared::News.order('news.id DESC').active.limit(limit)
     @activities = Shared::Activity.in_context(@context).global.not_of(current_user).where("activities.created_at >= ?", current_user.dashboard_last_sign_in_at).order('activities.id DESC').limit(limit)
   end
 
