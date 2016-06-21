@@ -1048,7 +1048,8 @@ CREATE TABLE question_revisions (
     deleted boolean DEFAULT false NOT NULL,
     deletor_id integer,
     deleted_at timestamp without time zone,
-    document_id integer
+    document_id integer,
+    question_type character varying(255)
 );
 
 
@@ -3612,13 +3613,13 @@ INSERT INTO schema_migrations (version) VALUES ('20160417130646');
 
 INSERT INTO schema_migrations (version) VALUES ('20160417135429');
 
-<<<<<<< HEAD
 INSERT INTO schema_migrations (version) VALUES ('20160503083015');
-=======
+
 INSERT INTO schema_migrations (version) VALUES ('20160507084030');
->>>>>>> Fix administration for question type and add the select to questions
 
 INSERT INTO schema_migrations (version) VALUES ('20160509144416');
 
 INSERT INTO schema_migrations (version) VALUES ('20160516203213');
+
+INSERT INTO schema_migrations (version) VALUES ('20160611205335');
 

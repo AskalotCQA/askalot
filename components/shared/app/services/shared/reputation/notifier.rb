@@ -6,6 +6,7 @@ module Shared::Reputation
 
     def publish(action, initiator, resource, options = {})
       return unless [Shared::Answer, Shared::Vote, Shared::Question, Shared::Tagging, Shared::Labeling].include?(resource.class)
+      return if resource.to_question.mode != 'question' && action != :update
 
       send resource.class.name.demodulize.downcase, resource, action
     end
@@ -25,9 +26,8 @@ module Shared::Reputation
     end
 
     def question(question, action)
-      return unless action == :delete
-
-      @manager.question_delete(question)
+      @manager.question_delete(question) if action == :delete
+      @manager.question_update(question) if action == :update
     end
 
     def tagging(tagging, action)

@@ -1205,7 +1205,8 @@ CREATE TABLE question_revisions (
     deleted boolean DEFAULT false NOT NULL,
     deleted_at timestamp without time zone,
     deletor_id integer,
-    document_id integer
+    document_id integer,
+    question_type character varying(255)
 );
 
 
@@ -4038,4 +4039,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160503083015');
 INSERT INTO schema_migrations (version) VALUES ('20160507084030');
 
 INSERT INTO schema_migrations (version) VALUES ('20160509144416');
+
+INSERT INTO schema_migrations (version) VALUES ('20160611205335');
 
