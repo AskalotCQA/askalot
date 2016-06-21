@@ -25,17 +25,20 @@ class ApplicationController < ActionController::Base
   end
 
   def determine_context
-    Rails.application.routes.default_url_options[:context] = Shared::Context::Manager.current_context if Rails.module.mooc?
-
     context = params[:context] ? context_from_params : Shared::Context::Manager.default_context(current_user)
+
+    Rails.application.routes.default_url_options[:context] = Shared::Context::Manager.current_context if Rails.module.mooc?
 
     if Rails.module.mooc?
       redirect_to "#{relative_url_root}/#{context}" if !params[:context]
       redirect_to request.fullpath.sub('default', context.to_s) if !request.post? && params[:context] == 'default' && context != 'default'
     end
 
-    @context = context
     Shared::Context::Manager.current_context = context
+    Shared::Context::Manager.context_category_by_id context
+
+    @context_category = Shared::Context::Manager.context_category
+    @context = context
   end
 
   def contexts

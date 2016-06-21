@@ -19,8 +19,6 @@ module Mooc
     end
 
     def show
-      params[:page_url] = params[:custom_page_url] || params[:page_url]
-
       redirect_to mooc.units_error_path(exception: @exception) and return unless signed_in? || login
 
       if params[:resource_link_id] && params[:context_id]
@@ -41,12 +39,13 @@ module Mooc
         @unit = Shared::Category.find params[:id]
       end
 
+      redirect_to unit_path(id: @unit.id, context: Shared::Context::Manager.current_context) and return if request.request_method == 'POST'
+
       @question               = Shared::Question.new
       @question.category      = @unit
       @question.question_type = Shared::QuestionType.questions.first
 
       @questions = @unit.related_questions.order(created_at: :desc).page(params[:page]).per(20)
-      @page_url = params[:page_url] || ''
     end
 
     protected

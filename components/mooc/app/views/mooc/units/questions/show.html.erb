@@ -1,5 +1,5 @@
 <div>
-  <a href="<%= mooc.unit_path(id: @question.category.id, page_url: @page_url)%>" class="btn btn-sm btn-default">
+  <a href="<%= mooc.unit_path(id: @question.category.id)%>" class="btn btn-sm btn-default">
     <%= icon_tag :list, label: t('question.list') %>
   </a>
 
@@ -11,18 +11,18 @@
             <%= @question.title %>
             <%= evaluation_badge_tag @question if @question.evaluations.any? %>
           </h3>
-          <%= render 'mooc/units/questions/labels', labels: @question.labels, page_url: @page_url, in_questions_index: false %>
+          <%= render 'mooc/units/questions/labels', labels: @question.labels, in_questions_index: false %>
         </div>
 
         <div id="question-data">
           <div class="question-content">
-            <%= render_markdown @question.text, page_url: @page_url %>
+            <%= render_markdown @question.text, page_url: Shared::Context::Manager.context_category.askalot_page_url %>
           </div>
 
           <div class="question-details">
-            <%= render 'mooc/units/questions/details', question: @question, page_url: @page_url%>
+            <%= render 'mooc/units/questions/details', question: @question %>
             <%= render 'mooc/units/questions/editing', question: @question, remote: true %>
-            <%= render 'mooc/units/questions/deleting', question: @question,  page_url: @page_url, remote: true %>
+            <%= render 'mooc/units/questions/deleting', question: @question, remote: true %>
             <%= render 'shared/questions/closing', question: @question %>
           </div>
 
@@ -32,7 +32,7 @@
 
           <div id="question-comments">
             <%= render 'mooc/units/questions/comments', question: @question, remote: true %>
-            <%= render 'mooc/units/comments/form', model: :question, commentable: @question, page_url: @page_url, remote: true %>
+            <%= render 'mooc/units/comments/form', model: :question, commentable: @question, remote: true %>
           </div>
         </div>
       </div>
@@ -46,10 +46,10 @@
   </div>
 
   <div id="question-answers">
-    <%= render 'mooc/units/questions/answers', answers: @answers, page_url: @page_url %>
+    <%= render 'mooc/units/questions/answers', answers: @answers %>
   </div>
 
   <div id="question-answer" class="new-answer-form">
-    <%= render 'mooc/units/answers/form', question: @question, answer: @answer, page_url: @page_url, remote: true %>
+    <%= render 'mooc/units/answers/form', question: @question, answer: @answer, remote: true %>
   </div>
 </div>

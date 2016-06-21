@@ -16,7 +16,7 @@
 <% if answers.any? %>
   <ol class="question-answers">
     <% answers.each do |answer| %>
-      <%= render 'mooc/units/questions/reaction', answer: answer, page_url: @page_url %>
+      <%= render 'mooc/units/questions/reaction', answer: answer %>
     <% end %>
   </ol>
 
