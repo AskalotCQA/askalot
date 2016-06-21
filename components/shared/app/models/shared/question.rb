@@ -51,7 +51,7 @@ class Question < ActiveRecord::Base
   scope :all_answered, lambda { joins(:answers).uniq }
   scope :solved,       lambda { with_category.where(with_best_answer: true) }
 
-  scope :of_type,      lambda { |type| joins(:question_type).where('question_types.mode' => type )}
+  scope :of_type,      lambda { |type| joins(:question_type).where('question_types.mode' => type) }
 
   scope :answered_but_not_best, lambda { answered.where(with_best_answer: false) }
 
