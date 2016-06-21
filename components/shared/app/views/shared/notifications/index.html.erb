@@ -20,7 +20,7 @@
   <div class="col-md-3">
     <ul class="nav nav-pills nav-stacked pill-navigation">
       <%= pill_link_tag_with_count t('notification.tab.unread'), :unread, shared.notifications_path(tab: :unread), badge_tag(Shared::Notification.in_context(@context).for(current_user).unread.size, class: :'pull-right'), analytics_attributes(:notifications, :switch, :unread) %>
-      <%= pill_link_tag_with_count t('notification.tab.all'), :all, shared.notifications_path(tab: :all), badge_tag(Shared::Notification.in_context(@xontext).for(current_user).size, class: :'pull-right'), analytics_attributes(:notifications, :switch, :all) %>
+      <%= pill_link_tag_with_count t('notification.tab.all'), :all, shared.notifications_path(tab: :all), badge_tag(Shared::Notification.in_context(@context).for(current_user).size, class: :'pull-right'), analytics_attributes(:notifications, :switch, :all) %>
     </ul>
   </div>
   <div class="col-md-9">
