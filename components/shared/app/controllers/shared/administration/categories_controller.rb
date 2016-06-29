@@ -85,7 +85,6 @@ class Administration::CategoriesController < AdministrationController
 
         if watchings
           watchings.each do |watching|
-            # TODO add to copy function
             if watching.watcher.role == :teacher || category.teachers.include?(watching.watcher) ||
                 category.full_tree_name.include?('Všeobecné')
               watching.copy(assignment_copy.id, category_copy.ancestors[1].id)

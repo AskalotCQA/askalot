@@ -137,6 +137,7 @@ describe Shared::Category, type: :model do
 
       b_copy = b.copy(d,nil)
       expect(b_copy.parent_id).to eql(d.id)
+      expect(b_copy.full_tree_name).to eql('D - B')
     end
 
     it 'copy category with specified parent id' do
