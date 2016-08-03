@@ -75,9 +75,8 @@ class Administration::CategoriesController < AdministrationController
         if assignments
           assignments.each do |assignment|
             assignment_copy = assignment.copy(category_copy.id)
-            if assignment_copy
-              assignment_ids[assignment.id] = assignment_copy.id
-            end
+
+            assignment_ids[assignment.id] = assignment_copy.id if assignment_copy
           end
         end
 

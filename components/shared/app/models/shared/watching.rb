@@ -27,9 +27,10 @@ class Watching < ActiveRecord::Base
     watching_copy = self.dup
     watching_copy.watchable_id = assingment_id
     watching_copy.context = context
+
     watching_copy.save
 
-    return watching_copy
+    watching_copy
   end
 end
 end

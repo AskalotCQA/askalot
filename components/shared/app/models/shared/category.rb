@@ -255,20 +255,20 @@ class Category < ActiveRecord::Base
   end
 
   def copy(parent_cat, parent_id)
-    category_copy = self.dup
-    category_copy.save
+    category_copy = self.duplicate
 
-    category_copy.questions_count = 0
-
-    if parent_id
-      category_copy.parent_id = parent_id
-    else
-      category_copy.parent_id = parent_cat.id
-    end
+    category_copy.parent_id = parent_id if parent_id
+    category_copy.parent_id = parent_cat.id unless parent_id
 
     category_copy.save
 
-    return category_copy
+    category_copy
+  end
+
+  def duplicate
+    duplicated_attributes = attributes.slice('name', 'tags', 'uuid', 'public_tags', 'shared', 'askable', 'description')
+
+    Shared::Category.new(duplicated_attributes)
   end
 end
 end

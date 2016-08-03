@@ -136,6 +136,7 @@ describe Shared::Category, type: :model do
       expect(b.parent_id).to eql(a.id)
 
       b_copy = b.copy(d,nil)
+
       expect(b_copy.parent_id).to eql(d.id)
       expect(b_copy.full_tree_name).to eql('D - B')
     end
@@ -144,6 +145,10 @@ describe Shared::Category, type: :model do
       a_copy = a.copy(d,nil)
       expect(a_copy.parent_id).to eql(d.id)
       expect(a_copy.full_tree_name).to eql('D - A')
+
+      b_copy = b.copy(d,a_copy.id)
+      expect(b_copy.parent_id).to eql(a_copy.id)
+      expect(b_copy.full_tree_name).to eql('D - A - B')
     end
   end
 end
