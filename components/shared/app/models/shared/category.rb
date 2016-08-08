@@ -262,13 +262,36 @@ class Category < ActiveRecord::Base
 
     category_copy.save
 
+    duplicate_watchings(category_copy)
+    duplicate_assignments(category_copy)
+
     category_copy
   end
+
+  protected
 
   def duplicate
     duplicated_attributes = attributes.slice('name', 'tags', 'uuid', 'public_tags', 'shared', 'askable', 'description')
 
     Shared::Category.new(duplicated_attributes)
+  end
+
+  def duplicate_watchings(category_copy)
+    watchings = Shared::Watching.where(watchable_id: self.id, watchable_type: 'Shared::Category')
+
+    return unless watchings
+
+    watchings.each do |watching|
+      watching.copy(category_copy.id, category_copy.root.id) if watching.watcher.role == :teacher || self.teachers.include?(watching.watcher) || self.full_tree_name.include?('Všeobecné')
+    end
+  end
+
+  def duplicate_assignments(category_copy)
+    assignments = self.assignments
+
+    return unless assignments
+
+    assignments.each { |assignment| assignment.copy(category_copy.id)}
   end
 end
 end
