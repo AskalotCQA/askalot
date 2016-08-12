@@ -10,7 +10,7 @@ module Shared::Facebook::Modal
       if session[:facebook_modal] == nil && Shared::Configuration.facebook.enabled &&
           Shared::Configuration.facebook.application.id != 'TODO' && Shared::Configuration.facebook.application.secret != 'TODO'
         session[:facebook_modal] = true
-      elsif session[:facebook_modal] == true
+      elsif session[:facebook_modal] == true && controller_name != 'units'
         session[:facebook_modal] = false
       end
     end

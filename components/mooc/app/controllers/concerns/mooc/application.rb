@@ -6,7 +6,7 @@ module Mooc::Application
     prepend_view_path 'components/mooc/app/views'
 
     # order is significant
-    before_action :login_required, :check_askalot_page_url, :redirect_if_params
+    before_action :check_askalot_page_url, :login_required, :redirect_if_params
 
     private
 
