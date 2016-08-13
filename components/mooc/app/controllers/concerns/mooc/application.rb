@@ -31,6 +31,7 @@ module Mooc::Application
       redirect_to controller: :units, action: :error, exception: 'Askalot page url is not set up. Please visit global view first.' and return if category.askalot_page_url.nil? && params[:controller] == 'mooc/units' && params[:action] == 'show'
 
       return unless category.askalot_page_url.nil?
+      return unless params[:page_url]
 
       category.askalot_page_url = params[:page_url].gsub ' ', '+'
 
