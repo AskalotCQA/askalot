@@ -32,7 +32,7 @@ module Mooc::Application
 
       return unless category.askalot_page_url.nil?
 
-      category.askalot_page_url = params[:page_url]
+      category.askalot_page_url = params[:page_url].gsub ' ', '+'
 
       category.save!
     end

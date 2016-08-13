@@ -1,0 +1,17 @@
+<% if comment.edited? %>
+  <%= t('comment.details.updated').downcase_first %>
+  <%= link_to_user_unit comment.editor, Shared::Context::Manager.context_category.askalot_page_url, authorable: comment %>
+    &middot;
+  <%= tooltip_time_tag comment.edited_at, format: :normal, placement: :top %>
+<% end %>
+
+<% if comment.editor != comment.author %>
+  <% if comment.edited? %>
+    <%= '&middot;'.html_safe %>
+    <%= t('comment.details.created').downcase_first %>
+  <% end %>
+
+  <%= link_to_user_unit comment.author, Shared::Context::Manager.context_category.askalot_page_url, authorable: comment %>
+    &middot;
+  <%= tooltip_time_tag comment.created_at, format: :normal, placement: :top %>
+<% end %>

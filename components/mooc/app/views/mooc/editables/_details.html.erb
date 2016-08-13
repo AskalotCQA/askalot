@@ -1,6 +1,6 @@
 <% if editable.edited? %>
   <%= t "#{model}.details.updated" %>
-  <%= link_to_user editable.editor, authorable: editable %>
+  <%= link_to_user_unit editable.editor, Shared::Context::Manager.context_category.askalot_page_url, authorable: editable %>
   <%= tooltip_time_tag editable.edited_at, format: :normal, placement: :top %>
 <% end %>
 

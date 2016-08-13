@@ -8,7 +8,7 @@
   <div id="comment-<%= comment.id %>-editing" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <%= form_for comment, remote: remote do |f| %>
+        <%= form_for comment, url: shared.comment_path(comment), remote: remote do |f| %>
           <div class="modal-header">
             <h3 class="modal-title"><%= t 'comment.edit.title' %></h3>
           </div>

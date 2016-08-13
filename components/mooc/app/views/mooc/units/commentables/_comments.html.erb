@@ -1,0 +1,13 @@
+<% if comments.any? %>
+  <div class="comments-section">
+    <p class="text-muted">
+      <%= t 'count_x.comment', count: comments.size %>
+    </p>
+
+    <ol class="<%= model %>-comments">
+      <% comments.order(:created_at).each do |comment| %>
+        <%= render 'mooc/units/commentables/comment', commentable: commentable, comment: comment, remote: remote ||= false %>
+      <% end %>
+    </ol>
+  </div>
+<% end %>
