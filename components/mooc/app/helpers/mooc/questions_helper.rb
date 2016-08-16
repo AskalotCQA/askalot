@@ -10,7 +10,7 @@ module Mooc::QuestionsHelper
     options.deep_merge! class: classes, data: { id: filter } unless filter.blank?
 
     if label.class.to_s == 'Shared::Category'
-      return content_tag(:div, label.name, :class => 'label label-primary') if in_questions_index
+      return content_tag(:div, label.full_public_name, :class => 'label label-primary') if in_questions_index
 
       href = mooc.unit_path(id: label.id)
     else
