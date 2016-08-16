@@ -33,7 +33,8 @@ infoParser = ->
 
   unit_name = unit_element.getAttribute('data-path').substr(unit_element.getAttribute('data-path').lastIndexOf('>') + 2)
 
-  lti_id = document.getElementsByClassName('lti')[document.getElementsByClassName('lti').length-1].getAttribute('id')
+  lti_id = document.getElementsByClassName('lti')[document.getElementsByClassName('lti').length-1].getAttribute('id') if window.location.hostname.indexOf('edge') != -1
+  lti_id = document.getElementsByClassName("lti_consumer")[document.getElementsByClassName("lti_consumer").length-1].getAttribute("id") if window.location.hostname.indexOf('edge') == -1
 
   data =
     course_id: course_id
