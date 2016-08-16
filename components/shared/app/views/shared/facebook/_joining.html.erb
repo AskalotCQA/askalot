@@ -6,7 +6,7 @@
           <h2 class="modal-title"><%= icon_tag :facebook, fixed: true %> <%= t('facebook.join.title') %></h2>
         </div>
         <div class="modal-body">
-          <%= link_to t('facebook.join.message'), shared.auth_facebook_path %>
+          <%= link_to t('facebook.join.message'), shared.auth_facebook_path, class: 'popup', data: { width: 600, height: 400 } %>
           <%= t('facebook.join.benefit') %><br/>
           <small class="text-muted"><%= t('facebook.join.note') %></small>
         </div>
