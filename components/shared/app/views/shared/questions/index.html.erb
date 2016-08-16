@@ -1,5 +1,6 @@
 <% provide :title, t('question.index.title') %>
 
-<%= render 'filter', category: @category %>
+<%= render 'filter' %>
+<%= render 'index_header', category: @category %>
 <%= render 'controls' %>
 <%= render 'questions', questions: @questions, remote: true %>

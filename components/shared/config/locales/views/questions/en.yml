@@ -104,3 +104,22 @@ en:
     list: "Questions list"
 
     no_records: "No questions found."
+
+    from_dashboard:
+      new_questions: "New questions"
+      new_questions_description: "The list contains questions created since your last login."
+
+      new_answers: "Questions with new answers"
+      new_answers_description: "The list contains questions with new answers created since your last login."
+
+      new_comments: "Questions with new comments"
+      new_comments_description: "The list contains questions with new comments created since your last login."
+
+      new_questions_in_watched_categories: "New questions in watched categories"
+      new_questions_in_watched_categories_description: "The list contains questions created since your last login. Only questions from watched categories are shown."
+
+      new_answers_in_watched_categories: "Questions in watched categories with new answers"
+      new_answers_in_watched_categories_description: "The list contains questions with new answers created since your last login in. Only questions from watched categories are shown."
+
+      new_comments_in_watched_categories: "Questions in watched categories with new comments"
+      new_comments_in_watched_categories_description: "The list contains questions with new comments created since your last login. Only questions from watched categories are shown."

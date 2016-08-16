@@ -43,17 +43,4 @@
       </div>
     </div>
   </div>
-
-  <% if category %>
-      <div class="row">
-        <div class="col-xs-12">
-          <h1 class="question-title">
-            <%= category.full_public_name if category.full_public_name != 'root' %>
-          </h1>
-          <div class="category-description">
-            <%= category.description %>
-          </div>
-        </div>
-      </div>
-  <% end %>
 </div>
