@@ -21,7 +21,9 @@ window.fixes = ->
   Hash.bind()
   Analytics.bind()
 
-  moment.locale('sk')
+  moment_locale = if (window.navigator.userLanguage || window.navigator.language == 'sk') then 'sk' else 'en_gb'
+
+  moment.locale(moment_locale)
 
   $('.popover').remove()
   $('.tooltip').remove()

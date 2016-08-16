@@ -21,6 +21,7 @@
 #= require locales/jquery.timeago.sk.js
 #= require moment
 #= require moment/sk.js
+#= require moment/en-gb.js
 #= require jquery-textcomplete
 #
 #= require d3
