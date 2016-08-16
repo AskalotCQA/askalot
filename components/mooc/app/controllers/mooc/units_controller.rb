@@ -29,6 +29,8 @@ module Mooc
           Shared::Context::Manager.current_context = context.id
         end
 
+        teacher_context_assignment(@context) if params['roles'].in? ['Instructor', 'Administrator', :teacher, :teacher_assistant]
+
         lti_id = params[:resource_link_id].split('-', 2).last
 
         @unit = Shared::Category.in_contexts(Shared::Context::Manager.current_context).find_by lti_id: lti_id
@@ -104,6 +106,13 @@ module Mooc
 
       # FIXME (huna|jandura) check if oauth nonce was used in the last x minutes
       true
+    end
+
+    def teacher_context_assignment(context_category_id)
+      role = params['roles'] if params['roles'].is_a? Symbol
+      role = params['roles'] == 'Instructor' ? :teacher : :teacher_assistant unless params['roles'].is_a? Symbol
+
+      Shared::Assignment.find_or_create_by!(role: Shared::Role.find_by(name: role), user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
     end
   end
 end
