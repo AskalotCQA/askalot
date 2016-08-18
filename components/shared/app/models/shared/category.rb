@@ -255,20 +255,41 @@ class Category < ActiveRecord::Base
   end
 
   def copy(parent_cat, parent_id)
-    category_copy = self.dup
+    category_copy = self.duplicate
+    category_copy.parent_id = parent_id ? parent_id : parent_cat.id
+
     category_copy.save
 
-    category_copy.questions_count = 0
+    duplicate_watchings(category_copy)
+    duplicate_assignments(category_copy)
 
-    if parent_id
-      category_copy.parent_id = parent_id
-    else
-      category_copy.parent_id = parent_cat.id
+    category_copy
+  end
+
+  protected
+
+  def duplicate
+    duplicated_attributes = attributes.slice('name', 'tags', 'uuid', 'public_tags', 'shared', 'askable', 'description')
+
+    Shared::Category.new(duplicated_attributes)
+  end
+
+  def duplicate_watchings(category_copy)
+    watchings = Shared::Watching.where(watchable_id: self.id, watchable_type: 'Shared::Category')
+
+    return unless watchings
+
+    watchings.each do |watching|
+      watching.copy(category_copy.id, category_copy.root.id) if watching.watcher.role == :teacher || self.teachers.include?(watching.watcher) || self.full_tree_name.include?('Všeobecné')
     end
+  end
 
-    category_copy.save
+  def duplicate_assignments(category_copy)
+    assignments = self.assignments
 
-    return category_copy
+    return unless assignments
+
+    assignments.each { |assignment| assignment.copy(category_copy.id) }
   end
 end
 end

@@ -126,23 +126,69 @@ describe Shared::Category, type: :model do
     end
   end
 
-  describe 'copy category' do
-    let!(:a) { create :category, name: 'A', parent: nil }
-    let!(:b) { create :category, name: 'B', parent: a }
-    let!(:c) { create :category, name: 'C', parent: b }
-    let!(:d) { create :category, name: 'D', parent: nil }
+  describe 'when copying a category' do
+    let!(:category_a) { create :category, name: 'A', parent: nil }
+    let!(:category_b) { create :category, name: 'B', parent: category_a }
+    let!(:category_c) { create :category, name: 'C', parent: category_b }
+    let!(:category_d) { create :category, name: 'D', parent: nil }
 
-    it 'copy category with no specified parent id' do
-      expect(b.parent_id).to eql(a.id)
+    it 'copies category with no specified parent id' do
+      expect(category_b.parent_id).to eql(category_a.id)
 
-      b_copy = b.copy(d,nil)
-      expect(b_copy.parent_id).to eql(d.id)
+      category_b_copy = category_b.copy(category_d, nil)
+
+      expect(category_b_copy.parent_id).to eql(category_d.id)
+      expect(category_b_copy.full_tree_name).to eql('D - B')
     end
 
-    it 'copy category with specified parent id' do
-      a_copy = a.copy(d,nil)
-      expect(a_copy.parent_id).to eql(d.id)
-      expect(a_copy.full_tree_name).to eql('D - A')
+    it 'copies category with specified parent id' do
+      category_a_copy = category_a.copy(category_d, nil)
+      expect(category_a_copy.parent_id).to eql(category_d.id)
+      expect(category_a_copy.full_tree_name).to eql('D - A')
+
+      category_b_copy = category_b.copy(category_d, category_a_copy.id)
+      expect(category_b_copy.parent_id).to eql(category_a_copy.id)
+      expect(category_b_copy.full_tree_name).to eql('D - A - B')
+    end
+
+    describe 'copy associations' do
+      let!(:teacher) { create :teacher }
+      let!(:student) { create :student }
+      let!(:category_e) { create :category, name: 'E', parent: category_a }
+      let!(:watching) { create :watching, watcher: teacher, watchable: category_e }
+      let!(:watching2) { create :watching, watcher: student, watchable: category_e }
+
+      it 'always copies associated watchings for teachers' do
+        expect(category_e.watchings.count).to eql(2)
+
+        copy = category_e.copy(category_a, nil)
+        expect(copy.parent_id).to eql(category_a.id)
+        expect(copy.full_tree_name).to eql('A - E')
+        expect(copy.watchings.count).to eql(1)
+      end
+
+      it 'copies associated watching if the category is "Všeobecné"' do
+        expect(category_e.watchings.count).to eql(2)
+
+        category_e.update_attributes(name: 'Všeobecné')
+
+        copy = category_e.copy(category_a, nil)
+        expect(copy.parent_id).to eql(category_a.id)
+        expect(copy.full_tree_name).to eql('A - Všeobecné')
+        expect(copy.watchings.count).to eql(2)
+      end
+
+      it 'copies associated assignments' do
+        create :assignment, user: student, category: category_e, role: Shared::Role.find_by(name: :teacher)
+
+        expect(category_e.assignments.count).to eql(1)
+
+        copy = category_e.copy(category_a, nil)
+
+        expect(copy.parent_id).to eql(category_a.id)
+        expect(copy.full_tree_name).to eql('A - E')
+        expect(copy.assignments.count).to eql(1)
+      end
     end
   end
 end
