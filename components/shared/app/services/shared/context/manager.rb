@@ -11,17 +11,25 @@ module Shared::Context
     end
 
     def self.determine_context_id(context)
-      category = Shared::Category.find_by(parent_id: nil, uuid: context)
+      category = Shared::Category.find_by(parent_id: nil, id: context) if context.is_number?
+      category = Shared::Category.find_by(parent_id: nil, uuid: context) unless context.is_number?
 
       category ? category.id : default_context
     end
 
     def self.current_context=(context)
       @context = context
+
+      @context_category = Shared::NullContextCategory.new if context == 'default'
+      @context_category = Shared::Category.find(context) unless context == 'default'
     end
 
     def self.current_context
       @context || default_context
+    end
+
+    def self.context_category
+      @context_category || Shared::NullContextCategory.new
     end
 
     def self.default_context(current_user = nil)
@@ -32,20 +40,7 @@ module Shared::Context
 
       context  = category ? category.id : 'default'
 
-      @context ||= context
-
       context
-    end
-
-    def self.context_category
-      @context_category || Shared::NullContextCategory.new
-    end
-
-    def self.context_category_by_id(id)
-      return if !@context_category.nil? && @context_category.id == id
-
-      @context_category = Shared::NullContextCategory.new if id == 'default'
-      @context_category = Shared::Category.find(id) unless id == 'default'
     end
   end
 end

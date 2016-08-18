@@ -25,20 +25,23 @@ class ApplicationController < ActionController::Base
   end
 
   def determine_context
-    context = params[:context] ? context_from_params : Shared::Context::Manager.default_context(current_user)
-
-    Rails.application.routes.default_url_options[:context] = Shared::Context::Manager.current_context if Rails.module.mooc?
-
-    if Rails.module.mooc?
-      redirect_to "#{relative_url_root}/#{context}" if !params[:context]
-      redirect_to request.fullpath.sub('default', context.to_s) if !request.post? && params[:context] == 'default' && context != 'default'
+    if params[:context_id]
+      context = Shared::Context::Manager.determine_context_id(params[:context_id].gsub '/', '-')
+    elsif params[:context] && params[:context] != 'default'
+      context = Shared::Context::Manager.determine_context_id(params[:context].gsub ' ', '+')
+    else
+      context = Shared::Context::Manager.default_context(current_user)
     end
 
-    Shared::Context::Manager.current_context = context
-    Shared::Context::Manager.context_category_by_id context
-
-    @context_category = Shared::Context::Manager.context_category
     @context = context
+    Shared::Context::Manager.current_context = context
+
+    if Rails.module.mooc?
+      Rails.application.routes.default_url_options[:context] = context
+
+      redirect_to "#{relative_url_root}/#{Shared::Context::Manager.context_category.uuid}" and return if !params[:context]
+      redirect_to request.fullpath.gsub(/#{Regexp.escape(params[:context])}/, Shared::Context::Manager.context_category.uuid) if !request.post? && params[:context] != Shared::Context::Manager.context_category.uuid
+    end
   end
 
   def contexts
@@ -49,16 +52,6 @@ class ApplicationController < ActionController::Base
     else
       @contexts ||= current_user.assigned_categories(:teacher).select { |t| t.parent_id.nil? }
     end
-  end
-
-  private
-
-  def context_from_params
-    return Shared::Context::Manager.determine_context_id(params[:context_id].gsub '/', '-') if params[:context_id]
-    return params[:context] unless params[:context].is_a?(String)
-    return params[:context].to_i if params[:context].is_number?
-    return Shared::Context::Manager.default_context(current_user) if params[:context] == 'default'
-    return Shared::Context::Manager.determine_context_id(params[:context]) if params[:context].is_a?(String)
   end
 end
 end
