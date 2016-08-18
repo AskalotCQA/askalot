@@ -33,8 +33,11 @@ infoParser = ->
 
   unit_name = unit_element.getAttribute('data-path').substr(unit_element.getAttribute('data-path').lastIndexOf('>') + 2)
 
-  lti_id = document.getElementsByClassName('lti')[document.getElementsByClassName('lti').length-1].getAttribute('id') if window.location.hostname.indexOf('edge') != -1
-  lti_id = document.getElementsByClassName("lti_consumer")[document.getElementsByClassName("lti_consumer").length-1].getAttribute("id") if window.location.hostname.indexOf('edge') == -1
+  if document.getElementsByClassName('lti').length > 0
+    lti_id = document.getElementsByClassName('lti')[document.getElementsByClassName('lti').length-1].getAttribute('id')
+
+  if document.getElementsByClassName('lti_consumer').length > 0
+    lti_id = document.getElementsByClassName("lti_consumer")[document.getElementsByClassName("lti_consumer").length-1].getAttribute("id")
 
   data =
     course_id: course_id
@@ -48,7 +51,7 @@ infoParser = ->
     lti_id: lti_id
     content: unit_content.innerHTML
 
-$('nav .course-tabs li:contains(Discussion)').hide()
+#$('nav .course-tabs li:contains(Discussion)').hide()
 
 ignore_hash_change = false
 
@@ -61,16 +64,13 @@ url_domain = (url) ->
   matches[1]
 
 $(document).ready ->
-  redirect_url = window.location.hash
+  if window.location.hash == ''
+    a_src = host + courseUuid() + '/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
+  else
+    a_src = url_domain(host) + window.location.hash.replace('/default/', '/' + courseUuid() + '/').substring(2)
+
   login_url = $('#login-url').text()
-
-  a_src = host + courseUuid() + '/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
-
-  if redirect_url
-    redirect_url = redirect_url.replace('/default/', '/' + courseUuid() + '/')
-    a_src += '&redirect=' + redirect_url.substring(1)
-
-  a_src += '&login_url=' + login_url if login_url != ''
+  a_src += '?login_url=' + login_url if login_url != ''
   a_src += '&page_url=' + location.protocol + '//' + location.host + location.pathname
 
   $("#askalot-wrapper").css("margin", "-32px -40px 0px -40px")

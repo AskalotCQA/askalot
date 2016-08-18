@@ -6,7 +6,7 @@ module Mooc::Application
     prepend_view_path 'components/mooc/app/views'
 
     # order is significant
-    before_action :check_askalot_page_url, :login_required, :redirect_if_params
+    before_action :check_askalot_page_url, :login_required
 
     private
 
@@ -17,10 +17,6 @@ module Mooc::Application
         render '/mooc/page/to_login_redirect' if params[:login_url]
         render '/mooc/page/no_login_url' unless params[:login_url]
       end
-    end
-
-    def redirect_if_params
-      redirect_to params[:redirect] if params[:redirect]
     end
 
     def check_askalot_page_url
