@@ -7,19 +7,19 @@ There is implemented searching functionality in Askalot. You can find it at the 
 * you start write some of the tags and select those which you find interesting.
 * Click on tag or category next to questions and tag will be filled into search bar automatically.
 
-<%= help_image_tag 'tag-filter.png' %>
+<%= help_image_tag 'tag-filter-en.png' %>
 
 ### Filters
 
 In the list of all questions you can filter in these ways:
 
-* Actual – all questions, sorted by time of the last interaction,
-* Not answered – questions with no answers,
+* Recent – all questions, sorted by time of the last interaction,
+* Unanswered – questions with no answers,
 * Answered – questions with answers, but the best answer was not choosen yet,
-* Resolved – question with an answer marked as the best,
-* Favourite – questions marked by users as favourite.
+* Solved – question with an answer marked as the best,
+* Favored – questions marked by users as favourite.
 
-<%= help_image_tag 'filter-questions.png' %>
+<%= help_image_tag 'filter-questions-en.png' %>
 
 ### Watching users, questions, tag, categories
 
@@ -35,10 +35,10 @@ If you like a question, answer or you do not like it, you can vote for it and in
 
 You can mark questions as favourite if you like them. This will also result in receiving notification about any activity that happens in the question.
 
-<%= help_image_tag 'favor-question.png' %>
+<%= help_image_tag 'favor-question-en.png' %>
 
 ### Teacher engagement
 
 In Askalot, teacher is a tutor. His questions and answers are highlighted in color. He can also evaluate quality of questions and answers.
 
-<%= help_image_tag 'teachers-answer.png' %>
+<%= help_image_tag 'teachers-answer-en.png' %>
