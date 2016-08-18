@@ -256,9 +256,7 @@ class Category < ActiveRecord::Base
 
   def copy(parent_cat, parent_id)
     category_copy = self.duplicate
-
-    category_copy.parent_id = parent_id if parent_id
-    category_copy.parent_id = parent_cat.id unless parent_id
+    category_copy.parent_id = parent_id ? parent_id : parent_cat.id
 
     category_copy.save
 
@@ -291,7 +289,7 @@ class Category < ActiveRecord::Base
 
     return unless assignments
 
-    assignments.each { |assignment| assignment.copy(category_copy.id)}
+    assignments.each { |assignment| assignment.copy(category_copy.id) }
   end
 end
 end

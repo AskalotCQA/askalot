@@ -19,8 +19,11 @@ class Watching < ActiveRecord::Base
 
   def copy(watchable_id, context)
     watching_copy = self.dup
+    watching_copy.watchable_id = watchable_id
+    watching_copy.context = context
+    watching_copy.save
 
-    watching_copy.update(watchable_id: watchable_id, context: context)
+    watching_copy
   end
 
   private
