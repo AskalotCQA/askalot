@@ -9,7 +9,7 @@ describe Mooc::UnitsController, type: :controller do
 
   before :each do
     @params = {
-        context: 'default',
+        context_uuid: 'default',
         context_id: '1',
         resource_link_id: '-category-hash',
         roles: 'student',
@@ -41,6 +41,8 @@ describe Mooc::UnitsController, type: :controller do
 
       before_count = Shared::Category.all.count
 
+      @params[:context_id] = 'another-course-uuid'
+
       post :show, @params
 
       after_count = Shared::Category.all.count
@@ -66,7 +68,7 @@ describe Mooc::UnitsController, type: :controller do
 
   describe 'GET error' do
     it 'shows error page with descriptive error' do
-      get :error, context: 1, exception: 'LTI secret does not match'
+      get :error, context_uuid: 'default', exception: 'LTI secret does not match'
 
       expect(response).to render_template('error')
 

@@ -19,7 +19,7 @@ describe Shared::TagsController, type: :controller do
     end
 
     it 'suggests tags' do
-      get :suggest, q: 'test', format: :json, context: Shared::Context::Manager.current_context
+      get :suggest, q: 'test', format: :json, context_uuid: Shared::Context::Manager.context_category.uuid
 
       tags = assigns(:tags)
 
@@ -41,7 +41,7 @@ describe Shared::TagsController, type: :controller do
       20.times { |n| tags_string += "tag-##{n}," }
       create :question, tag_list: tags_string[0..-2]
 
-      get :suggest, q: 'tag', format: :json, context: Shared::Context::Manager.current_context
+      get :suggest, q: 'tag', format: :json, context_uuid: Shared::Context::Manager.context_category.uuid
 
       tags = assigns(:tags)
 

@@ -84,7 +84,7 @@ module Shared::Categories
     end
 
     module ClassMethods
-      def search_by(params, context = Shared::Context::Manager.current_context)
+      def search_by(params, context = Shared::Context::Manager.current_context_id)
         search(
           query: {
             query_string: {

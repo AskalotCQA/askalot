@@ -7,8 +7,8 @@
             <%= link_to_tag tag, analytics_attributes(:tag, :click, tag.name) %>
           </h4>
           <div class="tag-details">
-            <%= t('count.question', count: tag.questions.in_context(@context).size).upcase_first %> <%= tag.questions.in_context(@context).size %> &middot;
-            <%= t('count.answer', count: tag.questions.in_context(@context).map { |q| q.answers.size }.sum).upcase_first %> <%= tag.questions.in_context(@context).map { |q| q.answers.size }.sum %> &middot;
+            <%= t('count.question', count: tag.questions.in_context(@context_id).size).upcase_first %> <%= tag.questions.in_context(@context_id).size %> &middot;
+            <%= t('count.answer', count: tag.questions.in_context(@context_id).map { |q| q.answers.size }.sum).upcase_first %> <%= tag.questions.in_context(@context_id).map { |q| q.answers.size }.sum %> &middot;
             <%= render 'watching', tag: tag %>
           </div>
         </div>

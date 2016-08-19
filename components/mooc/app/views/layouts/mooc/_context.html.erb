@@ -1,5 +1,5 @@
 <% if user_signed_in? && contexts.size > 1 %>
-  <div id="context-change" data-current="<%= @context %>">
-    <%= select_tag :context, options_for_select(contexts.map { |t| [t.name, t.id, {'data-url' => url_for(params.merge(context: t.id))}] }, @context) %>
+  <div id="context-change" data-current="<%= Shared::Context::Manager.context_category.uuid %>">
+    <%= select_tag :context, options_for_select(contexts.map { |t| [t.name, t.uuid] }, Shared::Context::Manager.context_category.uuid) %>
   </div>
 <% end %>

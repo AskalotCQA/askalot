@@ -30,7 +30,7 @@ class Tag < ActiveRecord::Base
     self.name = name.to_s.downcase.gsub(/[^[:alnum:]#\-\+\.]+/, '-').gsub(/\A-|-\z/, '')
   end
 
-  def count(context = Shared::Context::Manager.current_context)
+  def count(context = Shared::Context::Manager.current_context_id)
     questions.in_context(context).size
   end
 
@@ -41,7 +41,7 @@ class Tag < ActiveRecord::Base
   end
 
   def available_in_current_context?
-    self.related_contexts.where(id: Shared::Context::Manager.current_context).count > 0
+    self.related_contexts.where(id: Shared::Context::Manager.current_context_id).count > 0
   end
 end
 end

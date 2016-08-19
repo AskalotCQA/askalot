@@ -36,7 +36,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
-Rails.application.routes.default_url_options[:context] = 1 if Rails.module.mooc?
+Rails.application.routes.default_url_options[:context_uuid] = 'course_uuid' if Rails.module.mooc?
 
 RSpec.configure do |config|
   # ## Mock Framework
@@ -108,7 +108,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    Shared::Context::Manager.current_context = 2 if Rails.module.university?
-    Shared::Context::Manager.current_context = 1 if Rails.module.mooc?
+    Shared::Context::Manager.current_context_id = 2 if Rails.module.university?
+    Shared::Context::Manager.current_context_id = 1 if Rails.module.mooc?
   end
 end

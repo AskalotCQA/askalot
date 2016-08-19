@@ -20,7 +20,7 @@ class Activity < ActiveRecord::Base
 
   self.table_name = 'activities'
 
-  def self.data(user, period: nil, from: nil, to: nil, time: Time.now, context: Shared::Context::Manager.current_context)
+  def self.data(user, period: nil, from: nil, to: nil, time: Time.now, context: Shared::Context::Manager.current_context_id)
     period ||= (from || time - 1.year)..(to || time)
 
     data = unscope(:where).in_context(context).of(user).where(created_on: period).group(:created_on).count

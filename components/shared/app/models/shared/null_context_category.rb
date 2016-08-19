@@ -5,6 +5,10 @@ module Shared
     end
 
     def id
+      -1
+    end
+
+    def uuid
       'default'
     end
 

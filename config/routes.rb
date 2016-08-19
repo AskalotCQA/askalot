@@ -1,5 +1,5 @@
 Askalot::Application.routes.draw do
-  scope = Rails.module.mooc? ? '/(:context)/' : '/'
+  scope = Rails.module.mooc? ? '/(:context_uuid)/' : '/'
 
   get '/404', to: 'errors#show', as: 'error_404'
   get '/500', to: 'errors#show', as: 'error_500'

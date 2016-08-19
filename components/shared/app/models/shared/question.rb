@@ -120,7 +120,7 @@ class Question < ActiveRecord::Base
   end
 
   def available_in_current_context?
-    self.related_contexts.where(id: Shared::Context::Manager.current_context).count > 0
+    self.related_contexts.where(id: Shared::Context::Manager.current_context_id).count > 0
   end
 
   # TODO (jharinek) delete when refactoring watchings

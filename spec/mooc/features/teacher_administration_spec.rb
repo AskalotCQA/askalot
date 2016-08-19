@@ -25,13 +25,13 @@ describe 'Teacher administration', type: :feature do
 
       login_as teacher
 
-      visit mooc.teacher_administration_root_path(context: category.id)
+      visit mooc.teacher_administration_root_path(context_uuid: category.uuid)
 
       expect(page).to have_content('Administrácia kategórií')
       expect(find('.administration-categories')).to have_content(category.name)
       expect(find('.administration-categories')).not_to have_content(category_lti.name)
 
-      category_edit_link     = mooc.edit_teacher_administration_category_path(category, context: category.id)
+      category_edit_link     = mooc.edit_teacher_administration_category_path(category, context_uuid: category.uuid)
 
       find(:xpath, "//a[@href='#{category_edit_link}']").click
 

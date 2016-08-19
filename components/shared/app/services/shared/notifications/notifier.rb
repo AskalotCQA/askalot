@@ -6,7 +6,7 @@ module Shared::Notifications
 
     def publish(action, initiator, resource, options = {})
       recipients = (Array.wrap(options[:for] || resource.watchers) - [initiator]).uniq
-      context = Shared::Context::Manager.current_context
+      context = Shared::Context::Manager.current_context_id
       notifications = []
 
       recipients.each do |recipient|
