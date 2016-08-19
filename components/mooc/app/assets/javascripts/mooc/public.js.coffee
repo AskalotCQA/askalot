@@ -51,8 +51,6 @@ infoParser = ->
     lti_id: lti_id
     content: unit_content.innerHTML
 
-#$('nav .course-tabs li:contains(Discussion)').hide()
-
 ignore_hash_change = false
 
 changeIframeSrc = ->
