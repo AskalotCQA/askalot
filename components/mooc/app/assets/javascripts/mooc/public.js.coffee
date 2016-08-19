@@ -63,7 +63,7 @@ url_domain = (url) ->
 
 $(document).ready ->
   if window.location.hash == ''
-    a_src = host + courseUuid() + '/questions?utf8=%E2%9C%93&amp;tab=recent&amp;poll=true'
+    a_src = host + courseUuid()
   else
     a_src = url_domain(host) + window.location.hash.replace('/default/', '/' + courseUuid() + '/').substring(2)
 
