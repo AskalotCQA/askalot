@@ -78,23 +78,21 @@ en:
       - :month
       - :day
 
-    # TODO use EN date formats
     formats:
-      default: "%-d. %-m. %Y"
+      default: "%b %-d, %Y"
       numeric: "%-d. %-m."
-      short: "%-d. %b %Y"
-      normal: "%-d. %B %Y"
-      long: "%A %-d. %B %Y"
+      short: "%b %-d, %Y"
+      normal: "%B %-d, %Y"
+      long: "%A %B %-d, %Y"
 
   time:
-    # TODO use EN time formats
     formats:
-      default: "%-d. %-m. %Y o %-H:%M:%S"
-      numeric: "%-d. %-m. o %-H:%M"
-      short: "%-d. %b %Y o %-H:%M"
-      normal: "%-d. %B %Y o %-H:%M"
-      long: "%A %-d. %B %Y o %-H:%M:%S"
-      dashboard: "(%-d.&nbsp;%-m.&nbsp;%Y,&nbsp;%-H:%M)"
+      default: "%b %-d, %Y at %-H:%M:%S %Z"
+      numeric: "%-d. %-m. at %-H:%M %Z"
+      short: "%b %-d, %Y at %-H:%M %Z"
+      normal: "%B %-d, %Y at %-H:%M %Z"
+      long: "%A %B %-d, %Y at %-H:%M:%S %Z"
+      dashboard: "(%b&nbsp;%-d,&nbsp;%Y&nbsp;at&nbsp;%-H:%M&nbsp;%Z)"
 
   datetime:
     distance_in_words:

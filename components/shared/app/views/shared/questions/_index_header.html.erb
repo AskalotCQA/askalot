@@ -1,0 +1,29 @@
+<% if category || params[:from_dashboard] %>
+  <div class="questions-index-header">
+  <% if category %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="title">
+          <%= category.full_public_name if category.full_public_name != 'root' %>
+        </h1>
+        <div class="category-description">
+          <%= category.description %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <% if params[:from_dashboard] %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h1 class="title">
+          <%= t("question.from_dashboard.#{params[:from_dashboard]}") %>
+        </h1>
+        <div class="category-description">
+          <%= t("question.from_dashboard.#{params[:from_dashboard]}_description") %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </div>
+<% end %>
