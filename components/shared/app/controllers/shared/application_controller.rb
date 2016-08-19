@@ -27,8 +27,8 @@ class ApplicationController < ActionController::Base
   def determine_context
     if params[:context_id]
       context = Shared::Context::Manager.determine_context_id(params[:context_id].gsub '/', '-')
-    elsif params[:context] && params[:context] != 'default'
-      context = Shared::Context::Manager.determine_context_id(params[:context].gsub ' ', '+')
+    elsif params[:context_uuid] && params[:context_uuid] != 'default'
+      context = Shared::Context::Manager.determine_context_id(params[:context_uuid].gsub ' ', '+')
     else
       context = Shared::Context::Manager.default_context(current_user)
     end
@@ -39,8 +39,8 @@ class ApplicationController < ActionController::Base
     if Rails.module.mooc?
       Rails.application.routes.default_url_options[:context] = context
 
-      redirect_to "#{relative_url_root}/#{Shared::Context::Manager.context_category.uuid}" and return if !params[:context]
-      redirect_to request.fullpath.gsub(/#{Regexp.escape(params[:context])}/, Shared::Context::Manager.context_category.uuid) if !request.post? && params[:context] != Shared::Context::Manager.context_category.uuid
+      redirect_to "#{relative_url_root}/#{Shared::Context::Manager.context_category.uuid}" and return if !params[:context_uuid]
+      redirect_to request.fullpath.gsub(/#{Regexp.escape(params[:context_uuid])}/, Shared::Context::Manager.context_category.uuid) if !request.post? && params[:context_uuid] != Shared::Context::Manager.context_category.uuid
     end
   end
 
