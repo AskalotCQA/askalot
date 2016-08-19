@@ -67,8 +67,11 @@ $(document).ready ->
   else
     a_src = url_domain(host) + window.location.hash.replace('/default/', '/' + courseUuid() + '/').substring(2)
 
+  if a_src.indexOf('?') == -1
+    a_src += '?'
+
   login_url = $('#login-url').text()
-  a_src += '?login_url=' + login_url if login_url != ''
+  a_src += '&login_url=' + login_url if login_url != ''
   a_src += '&page_url=' + location.protocol + '//' + location.host + location.pathname
 
   $("#askalot-wrapper").css("margin", "-32px -40px 0px -40px")
