@@ -1,10 +1,5 @@
 module Shared::Context
   module Manager
-    def self.context_url_prefix
-      return '' if Rails.module.university?
-      "/#{self.context_category.uuid}"
-    end
-
     def self.regex_context_url_prefix
       return '' if Rails.module.university?
       "\\/#{self.context_category.uuid}"
