@@ -20,9 +20,9 @@ module Mooc::Application
     end
 
     def check_askalot_page_url
-      return if Shared::Context::Manager.current_context == 'default'
+      return if Shared::Context::Manager.current_context_id == -1
 
-      category = Shared::Category.find(Shared::Context::Manager.current_context)
+      category = Shared::Category.find(Shared::Context::Manager.current_context_id)
 
       redirect_to controller: :units, action: :error, exception: 'Askalot page url is not set up. Please visit global view first.' and return if category.askalot_page_url.nil? && params[:controller] == 'mooc/units' && params[:action] == 'show'
 

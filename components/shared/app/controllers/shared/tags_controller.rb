@@ -10,9 +10,9 @@ class TagsController < ApplicationController
 
   def index
     @tags = case params[:tab].to_sym
-            when :recent then Shared::Tag.in_context(@context).recent
-            when :popular then Shared::Tag.in_context(@context).popular
-            else Shared::Tag.in_context(@context).order(:name)
+            when :recent then Shared::Tag.in_context(@context_id).recent
+            when :popular then Shared::Tag.in_context(@context_id).popular
+            else Shared::Tag.in_context(@context_id).order(:name)
             end
   end
 

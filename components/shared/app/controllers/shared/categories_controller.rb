@@ -9,8 +9,8 @@ class CategoriesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @context_categories = Shared::Category.in_contexts(@context).includes(:assignments, :watchers).order('full_tree_name')
-    category_ids        = Shared::Category.in_contexts(@context).pluck(:id)
+    @context_categories = Shared::Category.in_contexts(@context_id).includes(:assignments, :watchers).order('full_tree_name')
+    category_ids        = Shared::Category.in_contexts(@context_id).pluck(:id)
     @questions_counts   = Shared::CategoryQuestion.where(category_id: category_ids).group(:category_id).pluck('category_id AS id, count(*) AS count').to_h
     @answers_counts     = Shared::CategoryQuestion.where(category_id: category_ids).joins(question: :answers).group('categories_questions.category_id').pluck('categories_questions.category_id AS id, count(*) AS count').to_h
   end

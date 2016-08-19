@@ -20,11 +20,11 @@ class QuestionsController < ApplicationController
   def index
     if params[:category]
       @category = Shared::Category.find(params[:category])
-      @context = @category.id
+      @context_id = @category.id
     end
 
-    @questions = questions_by_dashboard_param(params[:from_dashboard].to_sym, @context, current_user) if params[:from_dashboard]
-    @questions = Shared::Question.in_context(@context) unless params[:from_dashboard]
+    @questions = questions_by_dashboard_param(params[:from_dashboard].to_sym, @context_id, current_user) if params[:from_dashboard]
+    @questions = Shared::Question.in_context(@context_id) unless params[:from_dashboard]
 
     @questions_controls_scope = @questions
     @questions = case params[:tab].to_sym
@@ -117,7 +117,7 @@ class QuestionsController < ApplicationController
   end
 
   def suggest
-    @questions = Shared::Question.in_context(@context).where('questions.id = ? or questions.title like ?', params[:q].to_i, "#{params[:q]}%")
+    @questions = Shared::Question.in_context(@context_id).where('questions.id = ? or questions.title like ?', params[:q].to_i, "#{params[:q]}%")
 
     render json: @questions, root: false
   end

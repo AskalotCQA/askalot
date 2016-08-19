@@ -12,6 +12,6 @@ slido = Shared::User.find_by login: :slido
 
 Shared::ContextUser.create user: slido, context_id: 1
 
-course = Shared::Category.find_or_create_by! name: :course, uuid: :course_uuid if Rails.env_type.test?
+course = Shared::Category.find_or_create_by! name: :course, uuid: :course_uuid, askalot_page_url: :page_url if Rails.env_type.test?
 
 Shared::Category.find_or_create_by! name: :section, uuid: :section_uuid, parent_id: course.id if Rails.env_type.test?

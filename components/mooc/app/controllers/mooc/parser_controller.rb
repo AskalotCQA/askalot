@@ -7,7 +7,7 @@ module Mooc
       status_case = 'nothing'
       saved_flags = { course: false, section: false, subsection: false, unit: false }
 
-      unit = Shared::Category.in_contexts(Shared::Context::Manager.current_context).where({ lti_id: params[:lti_id] }).first
+      unit = Shared::Category.in_contexts(Shared::Context::Manager.current_context_id).where({ lti_id: params[:lti_id] }).first
 
       if !unit.nil? && unit.name == 'unknown'
         course, saved_flags[:course]         = create_category_if_not_exist(params[:course_id], params[:course_name], nil)
@@ -32,7 +32,7 @@ module Mooc
     private
 
     def create_category_if_not_exist(uuid, name, parent)
-      category = Shared::Category.in_contexts(Shared::Context::Manager.current_context).where({ uuid: uuid }).first
+      category = Shared::Category.in_contexts(Shared::Context::Manager.current_context_id).where({ uuid: uuid }).first
 
       if category.nil?
         category = Shared::Category.create({ uuid: uuid, name: name, parent: parent })

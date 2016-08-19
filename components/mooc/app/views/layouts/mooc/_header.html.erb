@@ -16,7 +16,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <%= render 'shared/shared/notifications', notifications: current_user.notifications.in_context(@context).unread.order(created_at: :desc).limit(5) %>
+          <%= render 'shared/shared/notifications', notifications: current_user.notifications.in_context(@context_id).unread.order(created_at: :desc).limit(5) %>
           <li class="hidden-xs"><%= link_to current_user.nick, shared.user_path(current_user.nick) %></li>
           <%= navbar_dropdown_tag :cog, nil, '#', class: :'hidden-xs' do %>
             <li><%= link_to t('user.edit.profile'), shared.edit_user_registration_path(tab: :profile) %></li>

@@ -29,7 +29,7 @@ class Watching < ActiveRecord::Base
   private
 
   def default_values
-    self.context ||= Shared::Context::Manager.current_context if Shared::Watching.column_names.include? 'context'
+    self.context ||= Shared::Context::Manager.current_context_id if Shared::Watching.column_names.include? 'context'
   end
 end
 end

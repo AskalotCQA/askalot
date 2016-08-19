@@ -13,6 +13,6 @@ module Shared::Watchable
   end
 
   def toggle_watching_by!(user)
-    watchings.deleted_or_new(watcher: user, watchable: self, context: Shared::Context::Manager.current_context).toggle_deleted_by! user
+    watchings.deleted_or_new(watcher: user, watchable: self, context: Shared::Context::Manager.current_context_id).toggle_deleted_by! user
   end
 end

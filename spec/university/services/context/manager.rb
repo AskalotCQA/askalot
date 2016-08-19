@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Shared::Context::Manager do
   after :each do
-    Shared::Context::Manager.current_context = Shared::Context::Manager.default_context
+    Shared::Context::Manager.current_context_id = Shared::Context::Manager.default_context_id
   end
 
   describe 'self.context_url_prefix' do
@@ -11,8 +11,8 @@ describe Shared::Context::Manager do
 
       expect(url_prefix).to eql('')
 
-      Shared::Context::Manager.current_context = 'test'
-      url_prefix = Shared::Context::Manager.context_url_prefix
+      Shared::Context::Manager.current_context_id = 'test'
+      url_prefix                                  = Shared::Context::Manager.context_url_prefix
 
       expect(url_prefix).to eql('')
     end
@@ -24,8 +24,8 @@ describe Shared::Context::Manager do
 
       expect(url_prefix).to eql('')
 
-      Shared::Context::Manager.current_context = 'test'
-      url_prefix = Shared::Context::Manager.regex_context_url_prefix
+      Shared::Context::Manager.current_context_id = 'test'
+      url_prefix                                  = Shared::Context::Manager.regex_context_url_prefix
 
       expect(url_prefix).to eql('')
     end
@@ -33,7 +33,7 @@ describe Shared::Context::Manager do
 
   describe 'self.question_context' do
     it 'returns different context for questions and page context' do
-      context = Shared::Context::Manager.default_context
+      context = Shared::Context::Manager.default_context_id
       question_context = Shared::Context::Manager.default_question_context
       academic_year = Shared::Tag.current_academic_year_value
       category = Shared::Category.find_by(name: academic_year)

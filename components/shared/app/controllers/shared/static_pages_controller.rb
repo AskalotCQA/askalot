@@ -18,10 +18,10 @@ class StaticPagesController < ApplicationController
 
   def dashboard
     @question = Shared::Questions::ToAnswerRecommender.next
-    @context = Shared::Context::Manager.current_context
+    @context_id = Shared::Context::Manager.current_context_id
 
-    context_questions = dashboard_questions @context
-    context_answers = dashboard_answers @context
+    context_questions = dashboard_questions @context_id
+    context_answers = dashboard_answers @context_id
     context_question_comments = dashboard_question_comments context_questions
     context_question_answers = dashboard_answer_comments context_answers
 
@@ -41,7 +41,7 @@ class StaticPagesController < ApplicationController
     limit = 20
 
     @all_news = Shared::News.order('news.id DESC').active.limit(limit)
-    @activities = Shared::Activity.in_context(@context).global.not_of(current_user).where("activities.created_at >= ?", current_user.dashboard_last_sign_in_at).order('activities.id DESC').limit(limit)
+    @activities = Shared::Activity.in_context(@context_id).global.not_of(current_user).where("activities.created_at >= ?", current_user.dashboard_last_sign_in_at).order('activities.id DESC').limit(limit)
   end
 
   def help

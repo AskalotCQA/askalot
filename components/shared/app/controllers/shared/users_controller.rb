@@ -12,9 +12,9 @@ class UsersController < ApplicationController
 
   def index
     @users = case params[:tab].to_sym
-             when :recent then Shared::User.in_context(@context).recent.order(created_at: :desc)
-             when :alumni then Shared::User.in_context(@context).alumni.order(:nick)
-             else Shared::User.in_context(@context).order(:nick)
+             when :recent then Shared::User.in_context(@context_id).recent.order(created_at: :desc)
+             when :alumni then Shared::User.in_context(@context_id).alumni.order(:nick)
+             else Shared::User.in_context(@context_id).order(:nick)
              end
 
     @users = @users.page(params[:page]).per(60)
@@ -23,12 +23,12 @@ class UsersController < ApplicationController
   def show
     @user = Shared::User.by(nick: params[:nick])
 
-    @questions  = Shared::Question.in_context(@context).by(@user).where(anonymous: false).order(created_at: :desc)
-    @anonymous  = Shared::Question.in_context(@context).by(@user).where(anonymous: true).order(created_at: :desc)
-    @answers    = Shared::Answer.in_context(@context).by(@user).order(created_at: :desc)
-    @favorites  = Shared::Favorite.in_context(@context).by(@user).order(created_at: :desc)
-    @activities = Shared::Activity.in_context(@context).of(@user).global.order(created_at: :desc) if current_user == @user
-    @activities = Shared::Activity.in_context(@context).of(@user).order(created_at: :desc) unless current_user == @user
+    @questions  = Shared::Question.in_context(@context_id).by(@user).where(anonymous: false).order(created_at: :desc)
+    @anonymous  = Shared::Question.in_context(@context_id).by(@user).where(anonymous: true).order(created_at: :desc)
+    @answers    = Shared::Answer.in_context(@context_id).by(@user).order(created_at: :desc)
+    @favorites  = Shared::Favorite.in_context(@context_id).by(@user).order(created_at: :desc)
+    @activities = Shared::Activity.in_context(@context_id).of(@user).global.order(created_at: :desc) if current_user == @user
+    @activities = Shared::Activity.in_context(@context_id).of(@user).order(created_at: :desc) unless current_user == @user
 
     @questions  = @questions.page(tab_page :questions).per(10)
     @anonymous  = @anonymous.page(tab_page :anonymous).per(10)
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
     @favorites  = @favorites.page(tab_page :favorites).per(10)
     @activities = @activities.page(tab_page :activities).per(20)
 
-    @question = Shared::Question.in_context(@context).unanswered.random.first || Shared::Question.in_context(@context).random.first
+    @question = Shared::Question.in_context(@context_id).unanswered.random.first || Shared::Question.in_context(@context_id).random.first
   end
 
   def update
@@ -58,7 +58,7 @@ class UsersController < ApplicationController
     from, to = to, from if from > to
 
     @user = Shared::User.by(nick: params[:nick])
-    @data = Shared::Activity.data(@user, from: from, to: to, context: @context)
+    @data = Shared::Activity.data(@user, from: from, to: to, context: @context_id)
 
     render json: @data
   end
@@ -66,8 +66,8 @@ class UsersController < ApplicationController
   def followings
     @user = Shared::User.by(nick: params[:nick])
 
-    @followees = @user.followees.in_context(@context).order(:nick).page(tab_page :followees).per(20)
-    @followers = @user.followers.in_context(@context).order(:nick).page(tab_page :followers).per(20)
+    @followees = @user.followees.in_context(@context_id).order(:nick).page(tab_page :followees).per(20)
+    @followers = @user.followers.in_context(@context_id).order(:nick).page(tab_page :followers).per(20)
   end
 
   def follow
@@ -83,7 +83,7 @@ class UsersController < ApplicationController
   end
 
   def suggest
-    @users = Shared::User.in_context(@context).where('nick like ?', "#{params[:q]}%")
+    @users = Shared::User.in_context(@context_id).where('nick like ?', "#{params[:q]}%")
 
     render json: @users, root: false
   end

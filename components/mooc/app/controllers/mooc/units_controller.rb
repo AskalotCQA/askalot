@@ -22,21 +22,21 @@ module Mooc
       redirect_to mooc.units_error_path(exception: @exception) and return unless signed_in? || login
 
       if params[:resource_link_id] && params[:context_id]
-        if @context == 'default'
+        if @context_id == -1
           context = Shared::Category.create({ name: 'unknown', uuid: params[:context_id].gsub('/', '-') })
 
-          @context = context.id
-          Shared::Context::Manager.current_context = context.id
+          @context_id = context.id
+          Shared::Context::Manager.current_context_id = context.id
         end
 
-        teacher_context_assignment(@context) if params['roles'].in? ['Instructor', 'Administrator', :teacher, :teacher_assistant]
+        teacher_context_assignment(@context_id) if params['roles'].in? ['Instructor', 'Administrator', :teacher, :teacher_assistant]
 
         lti_id = params[:resource_link_id].split('-', 2).last
 
-        @unit = Shared::Category.in_contexts(Shared::Context::Manager.current_context).find_by lti_id: lti_id
-        @unit = Shared::Category.create(name: 'unknown', uuid: 'unknown', lti_id: lti_id, parent_id: Shared::Context::Manager.current_context, askable: true) if @unit.nil?
+        @unit = Shared::Category.in_contexts(Shared::Context::Manager.current_context_id).find_by lti_id: lti_id
+        @unit = Shared::Category.create(name: 'unknown', uuid: 'unknown', lti_id: lti_id, parent_id: Shared::Context::Manager.current_context_id, askable: true) if @unit.nil?
 
-        Shared::ContextUser.find_or_create_by!(user: current_user, context_id: Shared::Context::Manager.current_context) unless @unit.parent_id.nil?
+        Shared::ContextUser.find_or_create_by!(user: current_user, context_id: Shared::Context::Manager.current_context_id) unless @unit.parent_id.nil?
       else
         @unit = Shared::Category.find params[:id]
       end
