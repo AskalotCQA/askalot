@@ -41,6 +41,8 @@ module Mooc
         @unit = Shared::Category.find params[:id]
       end
 
+      redirect_to mooc.units_error_path(exception: t('unit.error.unknown_category_uuid')) if @unit.uuid == 'unknown'
+
       @question               = Shared::Question.new
       @question.category      = @unit
       @question.question_type = Shared::QuestionType.questions.first
@@ -110,7 +112,7 @@ module Mooc
       role = params['roles'] if params['roles'].is_a? Symbol
       role = params['roles'] == 'Instructor' ? :teacher : :teacher_assistant unless params['roles'].is_a? Symbol
 
-      Shared::Assignment.find_or_create_by!(role: Shared::Role.find_by(name: role), user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
+      Shared::Assignment.find_or_create_by!(role: Shared::Role.find_by!(name: role), user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
     end
   end
 end

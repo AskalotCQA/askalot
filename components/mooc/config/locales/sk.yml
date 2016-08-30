@@ -10,4 +10,5 @@ sk:
   or: "alebo"
   unit:
     error:
-      account_not_created_yet: 'Váš používateľský účet ešte nebol zaregistrovaný a informácie o používateľovi nie sú dostuné v tejto požiadavke na zobrazenie stránky (pravdedpodobne pristupujete po prvý krát k Askalotu z Unit pohľadu v edX štúdiu). Prosím, navštívte Unit priamo z edX kurzu, aby Vám bol automaticky vytvorený účet.'
+      account_not_created_yet: "Váš používateľský účet ešte nebol zaregistrovaný a informácie o používateľovi nie sú dostuné v tejto požiadavke na zobrazenie stránky (pravdedpodobne pristupujete po prvý krát k Askalotu z Unit pohľadu v edX štúdiu). Prosím, navštívte Unit priamo z edX kurzu, aby Vám bol automaticky vytvorený účet."
+      unknown_category_uuid: "Nastavenie Askalotu v tomto unite ešte nebolo dokončené. Pokračujte obnovením aktuálnej stránky. Ak sa vám stále zobrazuje tento text, pravdepodobne ste zle nastavili Askalot (možno ste zabudli pridať 'raw html' komponent okrem LTI komponentu Askalotu?)"

@@ -10,4 +10,5 @@ en:
   or: "or"
   unit:
     error:
-      account_not_created_yet: 'Your user account is not registered yet and user information are not provided in this request (probably you are accessing Askalot unit view for the first time from edX Studio). Please, visit this unit directly from edX course to automatically register your account.'
+      account_not_created_yet: "Your user account is not registered yet and user information are not provided in this request (probably you are accessing Askalot unit view for the first time from edX Studio). Please, visit this unit directly from edX course to automatically register your account."
+      unknown_category_uuid: "Setup of Askalot in this unit has not been completed yet. Advance the process by reloading the current page. If you still continue to see this text in this unit, you probably did not setup Askalot correctly (maybe you just forgot to add raw html component besides Askalot's LTI component?)"
