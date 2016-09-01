@@ -14,7 +14,7 @@ describe 'User Profile', type: :feature do
       click_link 'Účet'
 
       fill_in 'user_email', with: 'nicky.nickmangmail.com'
-      fill_in 'user_current_password', with: user.password if Rails.module.university?
+      fill_in 'user_current_password', with: user.password
 
       click_button 'Uložiť'
 
@@ -22,14 +22,12 @@ describe 'User Profile', type: :feature do
 
       fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
 
-      if Rails.module.university?
-        click_button 'Uložiť'
+      click_button 'Uložiť'
 
-        expect(page).to have_content('Aktuálne heslo – je povinná položka')
+      expect(page).to have_content('Aktuálne heslo – je povinná položka')
 
-        fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
-        fill_in 'user_current_password', with: user.password
-      end
+      fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
+      fill_in 'user_current_password', with: user.password
 
       click_button 'Uložiť'
 
@@ -268,13 +266,11 @@ describe 'User Profile', type: :feature do
 
       fill_in 'user_email', with: 'nicky.nickmann@gmail.com'
 
-      if Rails.module.university?
-        click_button 'Uložiť'
+      click_button 'Uložiť'
 
-        expect(page).to have_content('Aktuálne heslo – je povinná položka')
+      expect(page).to have_content('Aktuálne heslo – je povinná položka')
 
-        fill_in 'user_current_password', with: 'password'
-      end
+      fill_in 'user_current_password', with: 'password'
 
       click_button 'Uložiť'
 
