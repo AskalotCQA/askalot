@@ -61,6 +61,7 @@ class window.Markdown
 
     @render (html) =>
       $("##{@id}-preview .form-control").html(html)
+      MathJax.Hub.Queue(["Typeset",MathJax.Hub])
 
   text: ->
     $("##{@id}-text textarea").val()

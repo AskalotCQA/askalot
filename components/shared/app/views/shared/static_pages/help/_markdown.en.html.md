@@ -11,3 +11,7 @@ In Markdown texts you can refer to other users. After typing `@` start writing a
 ### Gemoji icons
 
 In Markdown texts it is possible to add funny icons Gemoji. After typing `:` you will see a list of Gemojis icons that you can search by name (e.g. `:beer:` :beer:). You can find complete list of Gemojis here: [Emoji cheat sheet](http://www.emoji-cheat-sheet.com).
+
+## MathJax
+
+Additionally, you can use [TeX syntax](https://en.wikibooks.org/wiki/LaTeX/Mathematics) to embed math formulas. Use `$formula$`, `\\(formula\\)`, or `[mathjaxinline]formula[/mathjaxinline]` syntax to include inline math expressions, and `$$formula$$`, `\\[formula\\]`, or `[mathjax]formula[/mathjax]` to include block level math expressions.

@@ -11,3 +11,7 @@ V Markdown textoch je možné odkazovať sa na iných používateľov. Po napís
 ### Gemoji ikony
 
 V Markdown textoch je možné pridávať aj veselé ikony Gemoji. Po napísaní `:` sa zobrazí ponuka Gemojis, vyhľadávaj v nich je podľa názvu (napr. `:beer:` :beer:). Pre kompletný zoznam Gemojis pozri [Emoji cheat sheet](http://www.emoji-cheat-sheet.com).
+
+## MathJax
+
+Na pridávanie matematických výrazov môžete využiť [TeX syntax](https://en.wikibooks.org/wiki/LaTeX/Mathematics). Použite tvar `$formula$`, `\\(formula\\)` alebo `[mathjaxinline]formula[/mathjaxinline]` ak chcete vložiť výraz v riadku a formát `$$formula$$`, `\\[formula\\]` alebo `[mathjax]formula[/mathjax]` ak chcete vložiť matematický výraz v blokovom formáte.

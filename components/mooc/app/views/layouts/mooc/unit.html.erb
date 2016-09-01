@@ -26,6 +26,7 @@
     <%= render 'shared/shared/locales' -%>
     <%= javascript_include_tag 'shared/application' -%>
     <%= javascript_include_tag 'mooc/application' -%>
+    <%= render 'layouts/shared/mathjax' -%>
     <%= yield :scripts -%>
     <%= Garelic.monitoring 'UA-47906233-1' if Rails.env_type.production? -%>
   </body>
