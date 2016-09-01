@@ -7,7 +7,7 @@ describe Shared::User, type: :model do
     user = build :user, login: ''
     expect(user).not_to be_valid
 
-    user = build :user, login: 'tra-lala'
+    user = build :user, login: 'tra-lala?'
     expect(user).not_to be_valid
 
     user = build :user, login: 'userlogin'
