@@ -247,7 +247,6 @@ describe 'User Profile', type: :feature do
       expect(page).to have_content('Aktuálne heslo – je povinná položka')
 
       fill_in 'user_current_password', with: 'password'
-      save_screenshot
 
       click_button 'Uložiť'
 

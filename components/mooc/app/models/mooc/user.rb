@@ -9,7 +9,6 @@ module Mooc
 
       user.skip_confirmation!
       user.save!
-      puts 'saved'
       user
     end
 
