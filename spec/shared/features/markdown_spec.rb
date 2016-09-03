@@ -4,6 +4,9 @@ describe 'Markdown', type: :feature do
   let(:user) { create :user }
   let!(:question) { create :question, :with_tags }
   let!(:category) { create :category }
+  let(:text) { '\\\\(20 + 1_x/x_2^{2} \\\\), \\\\[ \frac{1}{n^{2}} \\\\],'\
+               '[mathjaxinline]1/x^{2}@20[/mathjaxinline], [mathjax]\\frac{1@10}{n^{2}}[/mathjax],'\
+               '$\\frac{1@10}{n^{2}}$ , $$\\frac{1@10}{n^{2}}$$' }
 
   before :each do
     login_as user
@@ -25,6 +28,23 @@ describe 'Markdown', type: :feature do
       within '.markdown-panes' do
         expect(page).to have_css('h1', count: 1)
         expect(page).to have_content('Lorem ipsum')
+      end
+    end
+
+    it 'renders MathJax in preview', js: true do
+      visit shared.root_path
+
+      click_link 'Opýtať sa otázku'
+
+      fill_in 'question_title', with: 'Lorem ipsum title?'
+      fill_in 'question_text',  with: text
+
+      click_link 'Náhľad'
+
+      wait_for_remote
+
+      within '.markdown-panes' do
+        expect(page).to have_selector('span.MathJax_SVG', count: 6)
       end
     end
 
@@ -86,6 +106,22 @@ describe 'Markdown', type: :feature do
 
       within '.question-content' do
         expect(page).to have_link("##{question.id}", href: shared.question_path(question))
+      end
+    end
+
+    it 'embeds MathJax', js: true do
+      visit shared.root_path
+
+      click_link 'Opýtať sa otázku'
+
+      select2  category.name,    from: 'question_category_id'
+      fill_in 'question_title', with: 'Lorem ipsum?'
+      fill_in 'question_text',  with: text
+
+      click_button 'Opýtať'
+
+      within '.question-content' do
+        expect(page).to have_selector('span.MathJax_SVG', count: 6)
       end
     end
 
@@ -219,6 +255,23 @@ describe 'Markdown', type: :feature do
       expect(last_notification.initiator).to eql(user)
       expect(last_notification.action).to    eql(:mention)
     end
+
+    it 'embeds MathJax', js: true do
+      visit shared.root_path
+
+      click_link 'Otázky'
+      click_link question.title
+
+      fill_in 'answer_text', with: text
+
+      click_button 'Odpovedať'
+
+      expect(page).to have_content('Odpoveď bola úspešne pridaná.')
+
+      within '#question-answers' do
+        expect(page).to have_selector('span.MathJax_SVG', count: 6)
+      end
+    end
   end
 
   context 'for comment' do
@@ -254,6 +307,25 @@ describe 'Markdown', type: :feature do
       expect(last_notification.recipient).to eql(other)
       expect(last_notification.initiator).to eql(user)
       expect(last_notification.action).to    eql(:mention)
+    end
+
+    it 'embeds MathJax', js: true do
+      visit shared.root_path
+
+      click_link 'Otázky'
+      click_link question.title
+
+      within '#question-comments' do
+        click_link 'Pridať komentár'
+
+        fill_in 'comment[text]', with: text
+
+        click_button 'Komentovať'
+      end
+
+      within '#question-comments' do
+        expect(page).to have_selector('span.MathJax_SVG', count: 6)
+      end
     end
   end
 

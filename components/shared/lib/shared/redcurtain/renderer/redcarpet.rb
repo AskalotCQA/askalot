@@ -12,7 +12,7 @@ module Redcurtain::Renderer
     end
 
     def defaults
-      @defaults ||= { tags: Factory::TAGS.clone, space_after_headers: true, fenced_code_blocks: true }
+      @defaults ||= { tags: Factory::TAGS.clone, space_after_headers: true, fenced_code_blocks: true, no_intra_emphasis: true }
     end
 
     class Factory < ::Redcarpet::Render::HTML
