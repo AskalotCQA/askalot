@@ -28,6 +28,7 @@ class Category < ActiveRecord::Base
   before_save  :update_changed
   before_save  :update_uuid
   after_create :save_parent_tags
+  after_create :save_assignments
   after_save   :update_categories_questions
   after_save   :update_public_tags
   after_save   :refresh_names
@@ -179,6 +180,14 @@ class Category < ActiveRecord::Base
 
     self.save!
     true
+  end
+
+  def save_assignments
+    return if self.parent_id.nil?
+
+    self.ancestors.each do |ancestor|
+      ancestor.assignments.map{ |assignment| assignment.add_assignments_to_descendants }
+    end
   end
 
   def update_public_tags
