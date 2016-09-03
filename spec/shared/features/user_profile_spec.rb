@@ -237,14 +237,20 @@ describe 'User Profile', type: :feature do
     it 'disallows editing of password', js: true do
       visit shared.edit_user_registration_path
 
-      click_link 'Profil'
+      click_link 'Účet'
 
-      expect(page).not_to have_field('user_password')
-      expect(page).not_to have_field('user_password_confirmation')
+      expect(page).to have_field('user_password', disabled: true)
+      expect(page).to have_field('user_password_confirmation', disabled: true)
 
       click_button 'Uložiť'
 
-      expect(page).to have_content('Úspešne ste aktualizovali Váš profil.')
+      expect(page).to have_content('Aktuálne heslo – je povinná položka')
+
+      fill_in 'user_current_password', with: 'password'
+
+      click_button 'Uložiť'
+
+      expect(page).to have_content('Úspešne ste aktualizovali Váš účet.')
       expect(page.current_path).to eql(shared.edit_user_registration_path)
 
       # TODO (Filip Jandura) separate to modules

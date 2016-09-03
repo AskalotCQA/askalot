@@ -32,7 +32,7 @@ class RegistrationsController < Devise::RegistrationsController
   def update_resource(resource, params)
     service = Shared::Users::Authentication.new Shared::Stuba::AIS, login: current_user.login, password: params[:current_password]
 
-    if service.authorized?
+    if service.authorized? || (Rails.module.mooc? && resource.encrypted_password.nil? && resource.ais_login.nil?)
       resource.update_without_password(params.except(:current_password))
     else
       resource.update_with_password(params)

@@ -13,6 +13,7 @@
     <%= f.text_field :email, class: :'form-control' %>
   </div>
 
+  <% if (Rails.module.university? || resource.encrypted_password.present? || resource.ais_login?) %>
   <div class="form-group">
     <%= f.label :password %> <em>(<%= t('user.leave_current_password') %>)</em>
     <%= f.password_field :password, autocomplete: :off, class: :'form-control', disabled: cannot?(:change_password, resource) %>
@@ -27,6 +28,7 @@
     <%= f.label :current_password %> <em>(<%= t('user.enter_current_password') %>)</em>
     <%= f.password_field :current_password, autocomplete: :off, class: :'form-control' %>
   </div>
+  <% end %>
 
   <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
 <% end %>

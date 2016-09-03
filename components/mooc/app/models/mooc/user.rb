@@ -1,5 +1,7 @@
 module Mooc
   class User < Shared::User
+    before_create :hide_email
+
     protected
 
     def self.create_without_confirmation!(attributes)
@@ -12,6 +14,10 @@ module Mooc
 
     def password_required?
       false
+    end
+
+    def hide_email
+      self.show_email = false
     end
   end
 end
