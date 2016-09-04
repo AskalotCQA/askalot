@@ -44,6 +44,8 @@ module Shared::Events
     end
 
     def put_params(hash, params)
+      params[:content] = '[removed]' if hash[:action] == 'mooc/parser.parser' && !params[:content].nil?
+
       hash[:params] = params
     end
 
