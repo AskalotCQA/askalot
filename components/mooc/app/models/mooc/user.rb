@@ -18,6 +18,8 @@ module Mooc
 
     def hide_email
       self.show_email = false
+
+      true
     end
   end
 end
