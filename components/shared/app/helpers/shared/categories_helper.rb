@@ -23,7 +23,7 @@ module Shared::CategoriesHelper
   def names_for_teachers(teachers)
     text = teachers.length == 1 ? t('user.teacher_followed_category.one') : t('user.teacher_followed_category.more')
 
-    text << teachers.map { |t| t.name }.join(', ')
+    text << teachers.map { |t| t.name.nil? ? t.nick : t.name }.join(', ')
   end
 
   def tree_table(objects, header = '', &block)
