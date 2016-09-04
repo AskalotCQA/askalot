@@ -183,7 +183,7 @@ class Category < ActiveRecord::Base
   end
 
   def save_assignments
-    return if self.parent_id.nil?
+    return if self.parent.nil?
 
     self.ancestors.each do |ancestor|
       ancestor.assignments.map{ |assignment| assignment.add_assignments_to_descendants }

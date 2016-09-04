@@ -126,6 +126,23 @@ describe Shared::Category, type: :model do
     end
   end
 
+  describe '#save_assignments' do
+    let!(:category) { create :category, name: 'Context Category', parent: nil }
+    let!(:teacher) { create :teacher }
+
+    it 'copies assignments from parent category' do
+      expect(category.assignments.count).to eql(0)
+
+      create :assignment, user: teacher, category: category, role: Shared::Role.find_by(name: :teacher)
+
+      expect(category.assignments.count).to eql(1)
+
+      new_category = create :category, parent: category
+
+      expect(new_category.assignments.count).to eql(1)
+    end
+  end
+
   describe 'when copying a category' do
     let!(:category_a) { create :category, name: 'A', parent: nil }
     let!(:category_b) { create :category, name: 'B', parent: category_a }
