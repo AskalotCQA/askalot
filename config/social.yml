@@ -121,3 +121,6 @@ edx_production:
 
 lugano_production:
   <<: *defaults
+
+novisad_production:
+  <<: *defaults
