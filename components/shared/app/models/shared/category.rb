@@ -206,16 +206,13 @@ class Category < ActiveRecord::Base
 
   def update_categories_questions
     if @what_changed.include? 'parent_id'
+      self.category_questions.delete_all
       self.reload_categories_questions
-    elsif @what_changed.include? 'shared'
+    end
+
+    if @what_changed.include? 'shared'
       if self.shared
-        self.all_versions.each do |shared_category|
-          shared_category.questions.each do |question|
-            self.self_and_ancestors.each do |ancestor|
-              CategoryQuestion.create question_id: question.id, category_id: ancestor.id, shared: true, shared_through_category: self
-            end
-          end
-        end
+        self.reload_categories_questions
       else
         self.category_questions_shared_through_me.destroy_all
       end
@@ -225,8 +222,16 @@ class Category < ActiveRecord::Base
   end
 
   def reload_categories_questions
+    # register my questions to my ascendants and shared categories
     self.self_and_descendants.each do |category|
       category.questions.each do |question|
+        question.register_question
+      end
+    end
+
+    # register questions from shared categories to me and my ascendants
+    self.all_versions.each do |shared_category|
+      shared_category.questions.each do |question|
         question.register_question
       end
     end
