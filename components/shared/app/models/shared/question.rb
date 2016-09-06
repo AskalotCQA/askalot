@@ -100,17 +100,18 @@ class Question < ActiveRecord::Base
     return unless self.category
     return unless Shared::CategoryQuestion.table_exists?
 
-    self.category_questions.delete_all
-
     self.category.self_and_ancestors.each do |ancestor|
-      Shared::CategoryQuestion.create question_id: self.id, category_id: ancestor.id, shared: false
+      Shared::CategoryQuestion.find_or_create_by! question_id: self.id, category_id: ancestor.id, shared: false
     end
 
     self.category.all_versions.shared.each do |shared|
       shared.self_and_ancestors.each do |c|
-        Shared::CategoryQuestion.create question_id: self.id, category_id: c.id, shared: true, shared_through_category: shared
+        Shared::CategoryQuestion.find_or_create_by! question_id: self.id, category_id: c.id, shared: true, shared_through_category: shared
       end
     end
+
+    Shared::Question.probe.index.import self
+    Shared::Tag.probe.index.import self.tags
   end
 
   def related_contexts
