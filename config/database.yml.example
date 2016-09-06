@@ -85,3 +85,11 @@ lugano_production:
   pool: 5
   username: postgres
   password: postgres
+
+novisad_production:
+  adapter: postgresql
+  encoding: unicode
+  database: askalot_novisad_production
+  pool: 5
+  username: postgres
+  password: postgres
