@@ -42,6 +42,7 @@ gem 'cal-heatmap-rails', '~> 0.0.1'
 gem 'redcarpet'
 gem 'pygments.rb'
 gem 'gemoji', '~> 1.5.0'
+gem 'loofah'
 
 # mailer
 gem 'roadie'

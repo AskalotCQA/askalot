@@ -1,6 +1,6 @@
 <li id="comment-<%= comment.id %>" class="comment-teacher<%= ' bg-warning' if comment_highlighted? comment %>">
   <div class="comment-content">
-    <%= render_markdown comment.text, redcarpet: { tags: [:autolink, :codespan, :emphasis, :link, :striketrough, :underline] } %>
+    <%= render_markdown comment.text, redcarpet: { tags: [:autolink, :block_quote, :codespan, :emphasis, :linebreak, :link, :list, :list_item, :paragraph, :quote, :striketrough, :underline] } %>
   </div>
 
   <div>
