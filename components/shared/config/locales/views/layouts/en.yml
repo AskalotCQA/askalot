@@ -1,12 +1,12 @@
 en:
   head:
     authors: "Rastislav Dobšovič, Marek Grznár, Jozef Harinek, Samuel Molnár, Peter Páleník, Dušan Poizl, Ivan Srba, Pavol Zbell"
-    description: "Community question answering system of next generation."
+    description: "Next generation community question answering system."
     keywords: "CQA, FIIT, STU, question, answer, community"
-    content: "Community question answering system of next generation for students of Faculty of Informatics and Information Technologies at Slovak University of Technology in Bratislava."
+    content: "Next generation community question answering system for students of Faculty of Informatics and Information Technologies at Slovak University of Technology in Bratislava."
 
   home:
-    headline: "Community question answering system of next generation"
+    headline: "Next generation community question answering system"
 
     ask: "Ask a question"
     answer: "Try to answer"
