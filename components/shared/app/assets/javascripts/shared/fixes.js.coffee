@@ -59,6 +59,9 @@ window.fixes = ->
   $('a[data-fade]').click ->
     Effects.fadeOnFilter($(this).attr('data-fade'))
 
+  $('form:not([data-remote="true"])').submit (event) ->
+    $(this).find('[type=submit]').prop('disabled', true);
+
 $(document).ready ->
   fixes()
 
