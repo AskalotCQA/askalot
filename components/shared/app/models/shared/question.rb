@@ -21,6 +21,7 @@ class Question < ActiveRecord::Base
   before_save { self.tag_list += (new_record? ? category.effective_tags : category.tags) if category }
 
   after_create { self.register_question }
+  after_update { self.category_questions.delete_all if changed.include? 'category_id' }
   after_update { self.register_question if changed.include? 'category_id' }
 
   belongs_to :category, counter_cache: true
