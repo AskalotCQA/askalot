@@ -57,6 +57,8 @@ module Redcurtain::Renderer
         renderer = Class.new(parent)
 
         renderer.instance_eval do
+          define_method('postprocess') { |*args| Loofah.fragment(args.first).scrub!(:strip).to_s }
+
           TAGS.each do |tag|
             next if options[:tags].include?(tag)
 

@@ -330,12 +330,12 @@ describe 'Markdown', type: :feature do
   end
 
   context 'with xss script' do
-    it 'escapes html in question, answer, comment' do
+    it 'strips unsafe html in question, answer, comment', js: true do
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
-      select  category.name,    from: 'question_category_id'
+      select2 category.name,    from: 'question_category_id'
       fill_in 'question_title', with: "<script>alert('hello')</script><img src=# onerror=alert('hellot');>"
       fill_in 'question_text',  with: "<script>alert('hello')</script><img src=# onerror=alert('hellot');>"
 
@@ -345,9 +345,9 @@ describe 'Markdown', type: :feature do
         expect(page).to have_content("<script>alert('hello')</script><img src=# onerror=alert('hellot');>")
       end
 
-      within '.question-content' do
-        expect(page).to have_content("<script>alert('hello')</script><img src=# onerror=alert('hellot');>")
-      end
+      html = page.evaluate_script("document.getElementsByClassName('question-content')[0].innerHTML.trim()")
+
+      expect(html).to include("<p>alert('hello')<img src=\"#\"></p>")
 
       click_link 'Pridať komentár'
 
@@ -355,20 +355,22 @@ describe 'Markdown', type: :feature do
 
       click_button 'Komentovať'
 
-      within '.comment-content' do
-        expect(page).to have_content("<script>alert('hello')</script><img src=# onerror=alert('hellot');>")
-      end
+      html = page.evaluate_script("document.getElementsByClassName('comment-content')[0].innerHTML.trim()")
+
+      expect(html).to include("<p>alert('hello')<img src=\"#\"></p>")
 
       fill_in 'answer[text]', with: "<script>alert('hello')</script><img src=# onerror=alert('hellot');>"
 
       click_button 'Odpovedať'
 
-      within '.answer-content' do
-        expect(page).to have_content("<script>alert('hello')</script><img src=# onerror=alert('hellot');>")
-      end
+      html = page.evaluate_script("document.getElementsByClassName('answer-content')[0].innerHTML.trim()")
+
+      expect(html).to include("<p>alert('hello')<img src=\"#\"></p>")
     end
 
-    it 'escapes html in users profile' do
+    it 'strips unsafe html in users profile', js: true do
+      visit shared.root_path
+
       click_link user.nick
 
       click_link 'Upraviť profil'
@@ -381,9 +383,9 @@ describe 'Markdown', type: :feature do
 
       click_link user.nick
 
-      within '.user-profile-about' do
-        expect(page).to have_content("<script>alert('hello')</script><img src=# onerror=alert('hellot');>")
-      end
+      html = page.evaluate_script("document.getElementsByClassName('user-profile-about')[0].innerHTML.trim()")
+
+      expect(html).to include("<p>alert('hello')<img src=\"#\"></p>")
     end
   end
 end

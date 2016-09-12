@@ -117,10 +117,6 @@
 
 @mixin block-comments {
   @include nested-block-listing;
-
-  p {
-    display: inline;
-  }
 }
 
 @mixin block-labeling($action-class, $default-color, $action-color) {
