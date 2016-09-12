@@ -19,6 +19,8 @@ namespace :reputation do
     ActiveRecord::Base.connection.execute('UPDATE user_profiles SET value = 0, probability = 0')
 
     Shared::Question.all_answered.each do |q|
+      next if q.mode != 'question'
+
       manager.add_for_asker(q)
       q.answers.each { |a| manager.add_for_answerer(a) }
     end
