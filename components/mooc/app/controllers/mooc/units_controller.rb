@@ -29,14 +29,17 @@ module Mooc
           Shared::Context::Manager.current_context_id = context.id
         end
 
-        teacher_context_assignment(@context_id) if params['roles'].in? ['Instructor', 'Administrator', :teacher, :teacher_assistant]
-
         lti_id = params[:resource_link_id].split('-', 2).last
 
         @unit = Shared::Category.in_contexts(Shared::Context::Manager.current_context_id).find_by lti_id: lti_id
         @unit = Shared::Category.create(name: 'unknown', uuid: 'unknown', lti_id: lti_id, parent_id: Shared::Context::Manager.current_context_id, askable: true) if @unit.nil?
 
-        Shared::ContextUser.find_or_create_by!(user: current_user, context_id: Shared::Context::Manager.current_context_id) unless @unit.parent_id.nil?
+        context_user = Shared::ContextUser.find_by(user: current_user, context_id: Shared::Context::Manager.current_context_id)
+
+        if context_user.nil?
+          Shared::ContextUser.create!(user: current_user, context_id: Shared::Context::Manager.current_context_id)
+          teacher_context_assignment(@context_id) if params['roles'].in? ['Instructor', 'Administrator']
+        end
       else
         @unit = Shared::Category.find params[:id]
       end
@@ -55,29 +58,15 @@ module Mooc
     def login
       return false unless authorize!
 
-      # In admin UI: Admin
-      # In LTI request: Instructor
-      # In Askalot: :teacher
-
-      # In admin UI: Staff
-      # In LTI request: Administrator
-      # In Askalot: :teacher_assistant
-
-      # Course team members with the Admin role help you manage your course. They can do all of the tasks that Staff can do, and can also add and remove the Staff and Admin roles, discussion moderation roles, and the beta tester role to manage course team membership. You can only give course team roles to enrolled users.
-      # In admin UI: Administrator > Staff > everybody else
-      # In LTI: Instructor > Administrator > everybody else
-
-      params['roles'] = :teacher if params['roles'] == 'Instructor'
-      params['roles'] = :teacher_assistant if params['roles'] == 'Administrator'
-
       begin
         user = User.find_by(login: params['user_id'])
 
         raise t('unit.error.account_not_created_yet') if user.nil? && (!params['lis_person_sourcedid'] || !params['lis_person_contact_email_primary'])
 
-        user_attributes = { login: params['user_id'], nick: params['lis_person_sourcedid'],
-            email: params['lis_person_contact_email_primary'], role: params['roles'].downcase }
-        user = User.create_without_confirmation! user_attributes if user.nil?
+        if user.nil?
+          user_attributes = { login: params['user_id'], nick: params['lis_person_sourcedid'], email: params['lis_person_contact_email_primary'] }
+          user = User.create_without_confirmation! user_attributes
+        end
 
         sign_in(:user, user)
       rescue => e
@@ -109,10 +98,22 @@ module Mooc
     end
 
     def teacher_context_assignment(context_category_id)
-      role = params['roles'] if params['roles'].is_a? Symbol
-      role = params['roles'] == 'Instructor' ? :teacher : :teacher_assistant unless params['roles'].is_a? Symbol
+      # In admin UI: Admin
+      # In LTI request: Instructor
+      # In Askalot: :teacher
 
-      Shared::Assignment.find_or_create_by!(role: Shared::Role.find_by!(name: role), user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
+      # In admin UI: Staff
+      # In LTI request: Administrator
+      # In Askalot: :teacher_assistant
+
+      # Course team members with the Admin role help you manage your course. They can do all of the tasks that Staff can do, and can also add and remove the Staff and Admin roles, discussion moderation roles, and the beta tester role to manage course team membership. You can only give course team roles to enrolled users.
+      # In admin UI: Administrator > Staff > everybody else
+      # In LTI: Instructor > Administrator > everybody else
+
+      params['roles'] = :teacher if params['roles'] == 'Instructor'
+      params['roles'] = :teacher_assistant if params['roles'] == 'Administrator'
+
+      Shared::Assignment.find_or_create_by!(role: Shared::Role.find_by!(name: params['roles']), user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
     end
   end
 end
