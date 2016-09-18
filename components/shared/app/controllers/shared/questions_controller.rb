@@ -62,6 +62,10 @@ class QuestionsController < ApplicationController
 
     authorize! :ask, @question
 
+    if params[:attachments]
+      params[:attachments].each { |a| @question.attachments.new(file: a, author: current_user) }
+    end
+
     if @question.save
       process_markdown_for @question do |user|
         dispatch_event :mention, @question, for: user

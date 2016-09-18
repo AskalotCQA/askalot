@@ -30,7 +30,7 @@ class Ability
 
     # only author can edit or delete document, question, answer, comment or evaluation
     can(:edit,   [Shared::Question, Shared::Answer, Shared::Comment, Shared::Evaluation]) { |resource| resource.author == user }
-    can(:delete, [Shared::Question, Shared::Answer, Shared::Comment, Shared::Evaluation]) { |resource| resource.author == user }
+    can(:delete, [Shared::Question, Shared::Answer, Shared::Comment, Shared::Evaluation, Shared::Attachment]) { |resource| resource.author == user }
 
     # but only if question or answer has no evaluations, and answer has no labelings
     cannot(:edit, [Shared::Question, Shared::Answer]) { |resource| resource.evaluations.any? }
@@ -80,7 +80,7 @@ class Ability
       can :edit,            [Shared::Category]
       can :create,          [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::Email, Shared::News, Shared::QuestionType]
       can :update,          [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::News, Shared::QuestionType]
-      can :destroy,         [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::News, Shared::QuestionType]
+      can :destroy,         [Shared::Assignment, Shared::Category, Shared::Changelog, Shared::News, Shared::QuestionType, Shared::Attachment]
       can :update_settings, [Shared::Category]
       can :copy,            [Shared::Category]
 

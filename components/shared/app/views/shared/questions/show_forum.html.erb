@@ -22,6 +22,12 @@
           <%= render_markdown @question.text %>
         </div>
 
+        <% if @question.attachments.any? %>
+          <div class="question-attachments-section">
+            <%= render 'shared/questions/attachments', question: @question %>
+          </div>
+        <% end %>
+
         <div class="question-details">
           <%= render 'shared/questions/details', question: @question %>
           <%= render 'shared/questions/editing', question: @question %>

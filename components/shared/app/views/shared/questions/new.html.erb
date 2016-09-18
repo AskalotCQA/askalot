@@ -4,7 +4,7 @@
   <div class="col-md-6">
     <h1 class="form-title"><%= t 'question.new.title' %></h1>
 
-    <%= form_for @question do |f| %>
+    <%= form_for @question, html: { multipart: true } do |f| %>
       <%= form_messages_for @question %>
 
       <% if Shared::QuestionType.public_types.size > 1 %>
@@ -59,11 +59,17 @@
         <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
       </div>
 
+      <div class="form-group">
+        <%= f.label :attachments %>
+        <%= file_field_tag "attachments[]", class: :'form-control', type: :file, multiple: true %>
+        <div class="help-block"><%= t 'attachment.help_block' %></div>
+      </div>
+
       <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
 
       <div class="btn-group" data-toggle="buttons">
         <label class="btn btn-primitive btn-sm">
-          <%= f.check_box :anonymous %> <%= Shared::Question.human_attribute_name :anonymous %> <%= icon_tag :blank %>
+          <%= f.check_box :anonymous %> <%= Shared::Question.human_attribute_name :anonymous %> <%= icon_tag :'square-o' %>
         </label>
       </div>
     <% end %>

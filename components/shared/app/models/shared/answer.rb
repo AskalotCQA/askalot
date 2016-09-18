@@ -1,6 +1,7 @@
 module Shared
 class Answer < ActiveRecord::Base
   include Authorable
+  include Attachmentable
   include Commentable
   include Deletable
   include Editable

@@ -1,6 +1,7 @@
 module Shared
 class Question < ActiveRecord::Base
   include Shared::Authorable
+  include Shared::Attachmentable
   include Shared::Closeable
   include Shared::Commentable
   include Shared::Deletable

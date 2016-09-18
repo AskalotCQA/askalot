@@ -1,0 +1,6 @@
+<li id="attachment-<%= attachment.id %>" class="attachment">
+  <%= attachment_info attachment.file %>
+
+  <%= render 'shared/attachments/details',  attachment: attachment %>
+  <%= render 'shared/attachments/deleting',  attachment: attachment, remote: remote %>
+</li>

@@ -31,5 +31,7 @@ db/*.sqlite3
 log/*.log
 
 public/javascripts
+public/attachments/*
+!public/attachments/.gitkeep
 
 tmp

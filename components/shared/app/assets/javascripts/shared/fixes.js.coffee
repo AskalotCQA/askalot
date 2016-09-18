@@ -41,9 +41,9 @@ window.fixes = ->
     icon = $(this).find('.fa')
 
     if $(this).hasClass('active')
-      icon.removeClass('fa-check').addClass('fa-blank')
+      icon.removeClass('fa-check-square-o').addClass('fa-square-o')
     else
-      icon.removeClass('fa-blank').addClass('fa-check')
+      icon.removeClass('fa-square-o').addClass('fa-check-square-o')
 
   $('a[data-toggle="tooltip"]').on 'click', ->
     $(this).tooltip(container: false, delay: { hide: 0 })

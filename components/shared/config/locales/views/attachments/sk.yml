@@ -1,0 +1,26 @@
+sk:
+  attachment:
+    new:
+      action: "Pridať prílohu"
+      submit: "Odoslať"
+
+    create:
+      success: "Príloha bola úspešne pridaný."
+
+    delete:
+      action: "Zmazať"
+      title: "Pozor!"
+      text: "Naozaj chcete zmazať túto prílohu?"
+      submit: "Zmazať"
+      cancel: "Spať"
+      success: "Príloha bola úspešne zmazaný."
+      failure: "Prílohu sa nepodarilo zmazať."
+
+    details:
+      created: "Pridal"
+      updated: "Upravil"
+      deleted: "Zmazal"
+
+    deleted: "Príloha bola zmazaná"
+
+    help_block: "Povolené sú len obrázky a textové súbory do veľkosti 2 MB"

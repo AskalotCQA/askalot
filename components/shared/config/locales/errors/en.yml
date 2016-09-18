@@ -19,6 +19,7 @@ en:
 
     messages:
       accepted: "must be accepted"
+      attachment_content_type: "must be image or text"
       blank: "can't be blank"
       confirmation: "doesn't match %{attribute}"
       empty: "can't be empty"
@@ -35,6 +36,7 @@ en:
       not_an_integer: "must be an integer"
       odd: "must be odd"
       record_invalid: "Validation failed: %{errors}"
+      spoofed_media_type: "has contents that are not what they are reported to be"
       taken: "has already been taken"
       too_long: "is too long, max. length is %{count}"
       too_short: "is too short, min. length is %{count}"
