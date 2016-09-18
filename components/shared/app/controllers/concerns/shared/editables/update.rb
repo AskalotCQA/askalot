@@ -12,6 +12,16 @@ module Shared::Editables::Update
 
     @revision = "#{@engine}::#{controller_name.classify}::Revision".constantize.create_revision!(current_user, @editable)
 
+    if params[:attachments]
+      params[:attachments].each { |a| @editable.attachments.new(file: a, author: current_user) }
+
+      if @editable.save
+        flash[:notice] = t "attachment.create.success"
+      else
+        flash_error_messages_for @editable
+      end
+    end
+
     @editable.assign_attributes(update_params)
 
     if @editable.changed?

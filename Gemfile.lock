@@ -563,3 +563,6 @@ DEPENDENCIES
   unicorn
   university!
   whenever
+
+BUNDLED WITH
+   1.12.5
