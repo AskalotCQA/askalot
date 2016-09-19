@@ -38,7 +38,7 @@ describe 'Add Attachment', type: :feature do
 
     expect(page).to have_content('Otázka bola úspešne pridaná.')
 
-    expect(Shared::Question.count).to eq(2)
+    expect(Shared::Attachment.count).to eq(1)
 
     within '.question-attachments' do
       expect(page).to have_content('image.jpg')
@@ -63,6 +63,7 @@ describe 'Add Attachment', type: :feature do
     expect(page).to have_content('Odpoveď bola úspešne pridaná.')
 
     expect(Shared::Answer.count).to eq(1)
+    expect(Shared::Attachment.count).to eq(1)
 
     within '.answer-attachments' do
       expect(page).to have_content('image.jpg')

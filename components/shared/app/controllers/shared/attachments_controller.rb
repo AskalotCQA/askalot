@@ -2,9 +2,6 @@ module Shared
   class AttachmentsController < ApplicationController
     include Shared::Deletables::Destroy
 
-    include Shared::Events::Dispatch
-    include Shared::Watchings::Register
-
     before_action :authenticate_user!
 
     protected

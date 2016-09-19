@@ -18,7 +18,6 @@ class CreateAttachmentsTable < ActiveRecord::Migration
     add_column :users, :attachments_count, :integer
   end
 
-  # This is assuming you are only using the users table for Paperclip attachment. Drop with care!
   def down
     drop_table :attachments
 
