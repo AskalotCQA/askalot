@@ -19,7 +19,7 @@ en:
 
     messages:
       accepted: "must be accepted"
-      attachment_content_type: "must be image or text"
+      attachment_content_type: "must be image, plain text, PDF, or PPT"
       blank: "can't be blank"
       confirmation: "doesn't match %{attribute}"
       empty: "can't be empty"

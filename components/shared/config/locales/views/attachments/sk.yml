@@ -23,4 +23,4 @@ sk:
 
     deleted: "Príloha bola zmazaná"
 
-    help_block: "Povolené sú len obrázky a textové súbory do veľkosti 2 MB"
+    help_block: "Povolené sú len obrázky, čistý text, PDF a PPT do veľkosti 5 MB"

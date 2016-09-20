@@ -21,11 +21,11 @@ describe 'Add Attachment', type: :feature do
 
     click_link 'Opýtať sa otázku'
 
-    attach_file('attachments[]', test_fixture_path('shared/attachments/image.pdf'))
+    attach_file('attachments[]', test_fixture_path('shared/attachments/image.ps'))
 
     click_button 'Opýtať'
 
-    expect(page).to have_content('Prílohy – Súbor – musí byť obrázok alebo text')
+    expect(page).to have_content('Prílohy – Súbor – musí byť obrázok, čistý text, PDF alebo PPT')
 
     fill_in 'question_title', with: 'Lorem ipsum title?'
     fill_in 'question_text',  with: 'Lorem ipsum'
@@ -48,11 +48,11 @@ describe 'Add Attachment', type: :feature do
   it 'adds new answer with attachment' do
     visit shared.question_path(question)
 
-    attach_file('attachments[]', test_fixture_path('shared/attachments/image.pdf'))
+    attach_file('attachments[]', test_fixture_path('shared/attachments/image.ps'))
 
     click_button 'Odpovedať'
 
-    expect(page).to have_content('Prílohy – Súbor – musí byť obrázok alebo text')
+    expect(page).to have_content('Prílohy – Súbor – musí byť obrázok, čistý text, PDF alebo PPT')
 
     fill_in 'answer_text',  with: 'Lorem ipsum'
 

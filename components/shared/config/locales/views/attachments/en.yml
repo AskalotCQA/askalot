@@ -23,4 +23,4 @@ en:
 
     deleted: "Attachment was deleted"
 
-    help_block: "Only image and text files up to 2 MB are allowed"
+    help_block: "Only image, plain text, PDF and PPT files up to 5 MB are allowed"
