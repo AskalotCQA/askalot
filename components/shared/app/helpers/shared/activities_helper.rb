@@ -33,7 +33,7 @@ module Shared::ActivitiesHelper
       question_body = activity_question_body(action, question, question_options)
 
       # TODO(zbell) note that unlinked content also lacks any struct info about deletion: no muted spans
-      if options.delete(:unlink) || !question.available_in_current_context?
+      if options.delete(:unlink)
         options[:mute] = true
 
         return translate content, resource: resource_body, question: question_body

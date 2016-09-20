@@ -43,7 +43,7 @@ module Shared::UsersHelper
 
     body = options.delete(:body) || user.nick
     url  = options.delete(:url)
-    path = shared.user_path(user.nick)
+    path = options.delete(:absolute_url) ? shared.user_url(user.nick) : shared.user_path(user.nick)
 
     url = url.is_a?(Proc) ? url.call(path) : path
 
