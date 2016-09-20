@@ -6,7 +6,7 @@ module Mooc::Application
     prepend_view_path 'components/mooc/app/views'
 
     # order is significant
-    before_action :check_askalot_page_url, :login_required
+    before_action :check_askalot_page_url, :login_required, :set_cache_headers
 
     private
 
@@ -32,6 +32,12 @@ module Mooc::Application
       category.askalot_page_url = params[:page_url].gsub ' ', '+'
 
       category.save!
+    end
+
+    def set_cache_headers
+      response.headers["Cache-Control"] = "no-cache, no-store"
+      response.headers["Pragma"] = "no-cache"
+      response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
     end
   end
 end
