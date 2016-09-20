@@ -373,7 +373,8 @@ namespace :sample_data do
       tag_list: ["minimal-requirements", "project"],
       mention: nil,
       editor: "Archie",
-      edited_at: 48
+      edited_at: 48,
+      question_type_id: 1
     }, {
       category: "Demo of Community Question Answering Tool AskALot - Machine learning - Welcome Video - Welcome Video",
       user: "Sophia",
@@ -383,7 +384,8 @@ namespace :sample_data do
       tag_list: ["clustering", "categorization"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: "Demo of Community Question Answering Tool AskALot - Machine learning - Welcome Video - Welcome Video",
       user: "Sophia",
@@ -393,7 +395,8 @@ namespace :sample_data do
       tag_list: ["octave", "project", "version"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Linear Regression - Definition of Linear Regression",
       user: "Ben",
@@ -403,7 +406,8 @@ namespace :sample_data do
       tag_list: ["linear", "logistic", "regression"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Support Vector Machines - Definition of SVM",
       user: "Ivan",
@@ -413,7 +417,8 @@ namespace :sample_data do
       tag_list: ["svm", "r-language",],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Support Vector Machines - Definition of SVM",
       user: "Adam",
@@ -423,7 +428,8 @@ namespace :sample_data do
       tag_list: ["uml"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Neural Networks - Definition of Neural Networks",
       user: "Tom",
@@ -433,7 +439,8 @@ namespace :sample_data do
       tag_list: ["hidden-layer", "computation"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: "Demo of Community Question Answering Tool AskALot - Supervised Learning - Neural Networks - Definition of Neural Networks",
       user: "Adam",
@@ -443,7 +450,8 @@ namespace :sample_data do
       tag_list: ["deep-learning"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }]
 
     questions.each do |input|
@@ -461,6 +469,7 @@ namespace :sample_data do
           tag_list: input[:tag_list],
           editor_id: editor.nil? ? nil : editor.id,
           edited_at: input[:edited_at].nil? ? nil : Time.now - input[:edited_at].days,
+          question_type_id: input[:question_type_id],
         )
 
         Shared::Events::Dispatcher.dispatch :mention, user, question, for: mention unless mention.nil?

@@ -432,7 +432,8 @@ namespace :sample_data do
       tag_list: ["model", "diagram"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Project",
       user: "Archie",
@@ -442,7 +443,8 @@ namespace :sample_data do
       tag_list: ["minimal-requirements", "project"],
       mention: nil,
       editor: "Archie",
-      edited_at: 48
+      edited_at: 48,
+      question_type_id: 1
     }, {
       category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Lectures",
       user: "Sophia",
@@ -452,7 +454,8 @@ namespace :sample_data do
       tag_list: ["include", "extend"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Database systems - Lectures",
       user: "Tom",
@@ -462,7 +465,8 @@ namespace :sample_data do
       tag_list: ["count"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Database systems - Lectures",
       user: "Sophia",
@@ -472,7 +476,8 @@ namespace :sample_data do
       tag_list: ["postgresql", "project", "database"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Lectures",
       user: "Ivan",
@@ -482,7 +487,8 @@ namespace :sample_data do
       tag_list: ["singleton", "java", "serialization"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Lectures",
       user: "Adam",
@@ -492,7 +498,8 @@ namespace :sample_data do
       tag_list: ["uml"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }, {
       category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Exercises",
       user: "Ruby",
@@ -502,7 +509,8 @@ namespace :sample_data do
       tag_list: ["anonymous-class", "java", "condition"],
       mention: nil,
       editor: "Ruby",
-      edited_at: 10
+      edited_at: 10,
+      question_type_id: 1
     }, {
       document: "Topic 1: Data definition language (DDL)",
       user: "Adam",
@@ -512,7 +520,8 @@ namespace :sample_data do
       tag_list: ["mysql", "create", "autoincrement"],
       mention: nil,
       editor: nil,
-      edited_at: nil
+      edited_at: nil,
+      question_type_id: 1
     }]
 
     questions.each do |input|
@@ -532,6 +541,7 @@ namespace :sample_data do
           tag_list: input[:tag_list],
           editor_id: editor.nil? ? nil : editor.id,
           edited_at: input[:edited_at].nil? ? nil : Time.now - input[:edited_at].days,
+          question_type_id: input[:question_type_id],
         )
 
         Shared::Events::Dispatcher.dispatch :mention, user, question, for: mention unless mention.nil?
