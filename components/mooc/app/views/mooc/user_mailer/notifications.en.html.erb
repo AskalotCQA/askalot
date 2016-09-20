@@ -10,11 +10,11 @@
     <ol class="notifications">
       <% notifications.each do |notification| %>
         <li>
-          <%= notification_content notification %>
+          <%= notification_content notification, absolute_url: true %>
 
           <span class="text-muted">&middot;</span>
 
-          <%= link_to_user notification.initiator_or_anonymous %>
+          <%= link_to_user notification.initiator_or_anonymous, absolute_url: true %>
           <span class="text-muted">&middot;</span>
           <%= tooltip_time_tag notification.created_at, class: 'text-muted', format: :normal, placement: :bottom %>
         </li>
@@ -25,9 +25,9 @@
 </ul>
 
 <p>
-  <%= link_to "Show unread notifications", shared.notifications_path(tab: :unread) %>
+  <%= link_to "Show unread notifications", shared.notifications_url(tab: :unread) %>
   <span class="text-muted">&middot;</span>
-  <%= link_to "Cancel e-mail notifications", shared.edit_user_registration_path(tab: :notifications) %>
+  <%= link_to "Cancel e-mail notifications", shared.edit_user_registration_url(tab: :notifications) %>
 </p>
 
 <%= render 'shared/user_mailer/footer' %>

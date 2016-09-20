@@ -78,7 +78,7 @@ Askalot::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  config.action_mailer.default_url_options = { host: 'https://askalot.fiit.stuba.sk', script_name: '/edx' }
+  config.action_mailer.default_url_options = { host: 'https://askalot.fiit.stuba.sk', script_name: '/edx/default' }
 
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
