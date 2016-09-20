@@ -2,6 +2,7 @@
 #
 #= require jquery
 #= require jquery_ujs
+#= require jquery.remotipart
 #= require bootstrap
 #= require jquery-ui/effect.all
 #= require handlebars.runtime

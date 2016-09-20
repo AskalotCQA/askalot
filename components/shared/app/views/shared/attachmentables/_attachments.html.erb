@@ -1,0 +1,9 @@
+<% if attachments.any? %>
+  <div class="attachments-section">
+    <ul class="<%= model %>-attachments">
+      <% attachments.order(:created_at).each do |attachment| %>
+        <%= render 'shared/attachmentables/attachment', attachmentable: attachmentable, attachment: attachment, remote: remote ||= false %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

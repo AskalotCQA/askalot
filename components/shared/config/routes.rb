@@ -95,6 +95,8 @@ Shared::Engine.routes.draw do
 
     resources :evaluations, only: [:update]
 
+    resources :attachments, only: [:destroy]
+
     resources :markdown, only: [] do
       post :preview, on: :collection
     end

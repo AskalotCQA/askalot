@@ -15,6 +15,8 @@ set :user,           'deploy'
 set(:branch)         { rails_env }
 set(:deploy_to)      { "/home/deploy/projects/#{application}-#{rails_env.dasherize}" }
 
+set :shared_children, shared_children + ['public/attachments']
+
 set :use_sudo, false
 
 set :rvm_ruby_string, :local              # use the same ruby as used locally for deployment

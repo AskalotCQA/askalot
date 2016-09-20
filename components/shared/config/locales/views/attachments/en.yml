@@ -1,0 +1,26 @@
+en:
+  attachment:
+    new:
+      action: "Add attachment"
+      submit: "Submit"
+
+    create:
+      success: "Attachment was successfully added."
+
+    delete:
+      action: "Delete"
+      title: "Warning!"
+      text: "Are you sure you want to delete this attachment?"
+      submit: "Delete"
+      cancel: "Back"
+      success: "Attachment was successfully deleted."
+      failure: "Attachment could not be deleted"
+
+    details:
+      created: "Added by"
+      updated: "Updated by"
+      deleted: "deleted by"
+
+    deleted: "Attachment was deleted"
+
+    help_block: "Only image, plain text, PDF and PPT files up to 5 MB are allowed"

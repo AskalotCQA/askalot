@@ -221,6 +221,7 @@ en:
       activity: "Activity"
       answer: "Answer"
       assignment: "Assignment"
+      attachment: "Attachment"
       category: "Category"
       changelog: "Changelog"
       comment: "Comment"
@@ -242,6 +243,7 @@ en:
       shared/answer:
         text: "Answer"
         reaction: "Message"
+        attachments: "Attachments"
 
       shared/assignment:
         category: "Category"
@@ -250,6 +252,9 @@ en:
         role_id: "Role"
         user: "User"
         user_nick: "User"
+
+      shared/attachment:
+        file: "File"
 
       shared/category:
         name: "Name"
@@ -295,6 +300,7 @@ en:
         text: "Text"
         title: "Title"
         color: "Color"
+        attachments: "Attachments"
 
       shared/question_type:
         mode: "Type"

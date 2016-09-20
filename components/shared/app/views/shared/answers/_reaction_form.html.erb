@@ -2,13 +2,19 @@
   <div class="col-md-offset-2 col-md-8">
     <h2 id="answer" class="form-title"><%= Shared::Answer.human_attribute_name :reaction %></h2>
 
-    <%= form_for [question, answer] do |f| %>
+    <%= form_for [question, answer], html: { multipart: true } do |f| %>
       <%= form_messages_for answer %>
 
       <div class="form-group">
         <%= markdown_editor_for answer do %>
           <%= f.text_area :text, class: :'form-control', rows: 5 %>
         <% end %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :attachments %>
+        <%= file_field_tag "attachments[]", class: :'form-control', type: :file, multiple: true %>
+        <div class="help-block"><%= t 'attachment.help_block' %></div>
       </div>
 
       <button type="submit" class="btn btn-primary"><%= t 'answer.forum.new.submit' %></button>

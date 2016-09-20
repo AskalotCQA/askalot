@@ -19,6 +19,7 @@ sk:
 
     messages:
       accepted: "musí byť potvrdené"
+      attachment_content_type: "musí byť obrázok, čistý text, PDF alebo PPT"
       blank: "je povinná položka"
       confirmation: "nebolo potvrdené"
       empty: "atribút nesmie byť prázdny"
@@ -35,6 +36,7 @@ sk:
       not_an_integer: "musí byť celé číslo"
       odd: "musí byť nepárne číslo"
       record_invalid: "Validácia neúspešná: %{errors}"
+      spoofed_media_type: "má obsah, ktorý je iného typu než je deklarované"
       taken: "ste už použili"
       too_long: "atribút je príliš dlhý, max. dĺžka %{count}"
       too_short: "atribút je príliš krátky, min. dĺžka %{count}"

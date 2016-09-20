@@ -20,6 +20,12 @@
             <%= render_markdown @question.text, page_url: Shared::Context::Manager.context_category.askalot_page_url %>
           </div>
 
+          <% if @question.attachments.any? %>
+            <div class="question-attachments-section">
+              <%= render 'shared/questions/attachments', question: @question %>
+            </div>
+          <% end %>
+
           <div class="question-details">
             <%= render 'mooc/units/questions/details', question: @question %>
             <%= render 'mooc/units/questions/editing', question: @question, remote: true %>

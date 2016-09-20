@@ -1,0 +1,14 @@
+.attachments-section {
+  margin-bottom: 10px;
+  padding-left: 20px;
+
+  .attachment-details {
+    font-size: 13px;
+    color: $text-muted;
+  }
+
+  > ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+}

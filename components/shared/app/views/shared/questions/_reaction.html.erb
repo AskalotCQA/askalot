@@ -10,6 +10,12 @@
           <%= render_markdown answer.text %>
         </div>
 
+        <% if answer.attachments.any? %>
+          <div class="answer-attachments">
+            <%= render 'shared/answers/attachments', answer: answer %>
+          </div>
+        <% end %>
+
         <div class="answer-details">
           <%= render 'shared/answers/details', answer: answer %>
           <%= render 'shared/answers/editing', answer: answer %>

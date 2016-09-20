@@ -80,6 +80,11 @@ gem "non-stupid-digest-assets"
 # search
 gem 'elasticsearch'
 
+# file upload
+gem 'paperclip', '~> 4.3'
+gem 'activesupport-json_encoder'
+gem 'remotipart', '~> 1.2'
+
 group :doc do
   gem 'sdoc', require: false
 end

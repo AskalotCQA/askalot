@@ -234,6 +234,46 @@ ALTER SEQUENCE assignments_id_seq OWNED BY assignments.id;
 
 
 --
+-- Name: attachments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE attachments (
+    id integer NOT NULL,
+    file_file_name character varying(255),
+    file_content_type character varying(255),
+    file_file_size integer,
+    file_updated_at timestamp without time zone,
+    attachmentable_id integer NOT NULL,
+    attachmentable_type character varying(255) NOT NULL,
+    author_id integer NOT NULL,
+    deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer,
+    deleted_at timestamp without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: attachments_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE attachments_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: attachments_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE attachments_id_seq OWNED BY attachments.id;
+
+
+--
 -- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1425,7 +1465,8 @@ CREATE TABLE users (
     send_email_notifications boolean DEFAULT true NOT NULL,
     read_notifications_thread boolean DEFAULT true NOT NULL,
     alumni boolean DEFAULT false NOT NULL,
-    dashboard_last_sign_in_at timestamp without time zone DEFAULT now()
+    dashboard_last_sign_in_at timestamp without time zone DEFAULT now(),
+    attachments_count integer
 );
 
 
@@ -1590,6 +1631,13 @@ ALTER TABLE ONLY answers ALTER COLUMN id SET DEFAULT nextval('answers_id_seq'::r
 --
 
 ALTER TABLE ONLY assignments ALTER COLUMN id SET DEFAULT nextval('assignments_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY attachments ALTER COLUMN id SET DEFAULT nextval('attachments_id_seq'::regclass);
 
 
 --
@@ -1868,6 +1916,14 @@ ALTER TABLE ONLY answers
 
 ALTER TABLE ONLY assignments
     ADD CONSTRAINT assignments_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY attachments
+    ADD CONSTRAINT attachments_pkey PRIMARY KEY (id);
 
 
 --
@@ -2308,6 +2364,20 @@ CREATE INDEX index_assignments_on_user_id ON assignments USING btree (user_id);
 --
 
 CREATE UNIQUE INDEX index_assignments_on_user_id_and_category_id ON assignments USING btree (user_id, category_id);
+
+
+--
+-- Name: index_attachments_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_attachments_on_author_id ON attachments USING btree (author_id);
+
+
+--
+-- Name: index_attachments_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_attachments_on_deletor_id ON attachments USING btree (deletor_id);
 
 
 --
@@ -3622,4 +3692,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160509144416');
 INSERT INTO schema_migrations (version) VALUES ('20160516203213');
 
 INSERT INTO schema_migrations (version) VALUES ('20160611205335');
+
+INSERT INTO schema_migrations (version) VALUES ('20160913174811');
 

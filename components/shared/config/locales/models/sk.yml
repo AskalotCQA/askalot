@@ -233,6 +233,7 @@ sk:
       activity: "Aktivita"
       answer: "Odpoveď"
       assignment: "Priradenie"
+      attachment: "Príloha"
       category: "Kategória"
       changelog: "Protokol zmien"
       comment: "Komentár"
@@ -254,6 +255,7 @@ sk:
       shared/answer:
         text: "Odpoveď"
         reaction: "Príspevok"
+        attachments: "Prílohy"
 
       shared/assignment:
         category: "Kategória"
@@ -262,6 +264,9 @@ sk:
         role_id: "Rola"
         user: "Používateľ"
         user_nick: "Používateľ"
+
+      shared/attachment:
+        file: "Súbor"
 
       shared/category:
         name: "Názov"
@@ -307,6 +312,7 @@ sk:
         text: "Text"
         title: "Nadpis"
         color: "Farba"
+        attachments: "Prílohy"
 
       shared/question_type:
         mode: "Typ"
