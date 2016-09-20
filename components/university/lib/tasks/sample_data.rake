@@ -268,36 +268,36 @@ namespace :sample_data do
   task categories: :environment do
     categories = [
         # Academic years
-        { name: "2014-15", tags: ["2014-15"], uuid: "2014-15", parent_name: "", shared: true, askable: false, time: 385 },
-        { name: "2015-16", tags: ["2015-16"], uuid: "2015-16", parent_name: "", shared: true, askable: true, time: 65 },
+        { name: Shared::Tag.previous_academic_year_value, tags: [Shared::Tag.previous_academic_year_value], uuid: Shared::Tag.previous_academic_year_value, parent_name: "Root", shared: true, askable: false, time: 385 },
+        { name: Shared::Tag.current_academic_year_value, tags: [Shared::Tag.current_academic_year_value], uuid: Shared::Tag.current_academic_year_value, parent_name: "Root", shared: true, askable: true, time: 65 },
 
         # Grades
-        { name: "Bachelor study: 1st grade", tags: ["bachelor-1st"], uuid: "bachelor-1st", parent_name: "2014-15", shared: true, askable: false, time: 385 },
-        { name: "Bachelor study: 1st grade", tags: ["bachelor-1st"], uuid: "bachelor-1st", parent_name: "2015-16", shared: true, askable: true, time: 65 },
-        { name: "Bachelor study: 2nd grade", tags: ["bachelor-2nd"], uuid: "bachelor-2ndt", parent_name: "2014-15", shared: true, askable: false, time: 385 },
-        { name: "Bachelor study: 2nd grade", tags: ["bachelor-2nd"], uuid: "bachelor-2ndt", parent_name: "2015-16", shared: true, askable: true, time: 65 },
+        { name: "Bachelor study: 1st grade", tags: ["bachelor-1st"], uuid: "bachelor-1st", parent_name: Shared::Tag.previous_academic_year_value, shared: true, askable: false, time: 385 },
+        { name: "Bachelor study: 1st grade", tags: ["bachelor-1st"], uuid: "bachelor-1st", parent_name: Shared::Tag.current_academic_year_value, shared: true, askable: true, time: 65 },
+        { name: "Bachelor study: 2nd grade", tags: ["bachelor-2nd"], uuid: "bachelor-2ndt", parent_name: Shared::Tag.previous_academic_year_value, shared: true, askable: false, time: 385 },
+        { name: "Bachelor study: 2nd grade", tags: ["bachelor-2nd"], uuid: "bachelor-2ndt", parent_name: Shared::Tag.current_academic_year_value, shared: true, askable: true, time: 65 },
 
         # Subjects
-        { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", parent_name: "2014-15 - Bachelor study: 1st grade", shared: true, askable: false, time: 385 },
-        { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", parent_name: "2015-16 - Bachelor study: 1st grade", shared: true, askable: true, time: 65 },
-        { name: "Principles of software engineering", tags: ["pse"], uuid: "pse", parent_name: "2014-15 - Bachelor study: 2nd grade", shared: true, askable: false, time: 385 },
-        { name: "Principles of software engineering", tags: ["pse"], uuid: "pse", parent_name: "2015-16 - Bachelor study: 2nd grade", shared: true, askable: false, time: 65 },
-        { name: "Database systems", tags: ["dbs"], uuid: "dbs", parent_name: "2014-15 - Bachelor study: 2nd grade", shared: true, askable: false, time: 385 },
-        { name: "Database systems", tags: ["dbs"], uuid: "dbs", parent_name: "2015-16 - Bachelor study: 2nd grade", shared: true, askable: true, time: 65 },
+        { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", parent_name: Shared::Tag.previous_academic_year_value + " - Bachelor study: 1st grade", shared: true, askable: false, time: 385 },
+        { name: "Object-oriented programming", tags: ["oop"], uuid: "oop", parent_name: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade", shared: true, askable: true, time: 65 },
+        { name: "Principles of software engineering", tags: ["pse"], uuid: "pse", parent_name: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade", shared: true, askable: false, time: 385 },
+        { name: "Principles of software engineering", tags: ["pse"], uuid: "pse", parent_name: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade", shared: true, askable: false, time: 65 },
+        { name: "Database systems", tags: ["dbs"], uuid: "dbs", parent_name: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade", shared: true, askable: false, time: 385 },
+        { name: "Database systems", tags: ["dbs"], uuid: "dbs", parent_name: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade", shared: true, askable: true, time: 65 },
 
         # Subject parts
-        { name: "Lectures", tags: ["lectures"], uuid: "oop-lectures", parent_name: "2014-15 - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: false, time: 385 },
-        { name: "Lectures", tags: ["lectures"], uuid: "oop-lectures", parent_name: "2015-16 - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: true, time: 65 },
-        { name: "Exercises", tags: ["exercises"], uuid: "oop-exercise", parent_name: "2014-15 - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: false, time: 385 },
-        { name: "Exercises", tags: ["exercises"], uuid: "oop-exercise", parent_name: "2015-16 - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: true, time: 65 },
+        { name: "Lectures", tags: ["lectures"], uuid: "oop-lectures", parent_name: Shared::Tag.previous_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: false, time: 385 },
+        { name: "Lectures", tags: ["lectures"], uuid: "oop-lectures", parent_name: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: true, time: 65 },
+        { name: "Exercises", tags: ["exercises"], uuid: "oop-exercise", parent_name: Shared::Tag.previous_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: false, time: 385 },
+        { name: "Exercises", tags: ["exercises"], uuid: "oop-exercise", parent_name: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming", shared: true, askable: true, time: 65 },
 
-        { name: "Lectures", tags: ["lectures"], uuid: "pse-project", parent_name: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: false, time: 385 },
-        { name: "Lectures", tags: ["lectures"], uuid: "pse-project", parent_name: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: true, time: 65 },
-        { name: "Project", tags: ["project"], uuid: "pse-exercise", parent_name: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: false, time: 385 },
-        { name: "Project", tags: ["project"], uuid: "pse-exercise", parent_name: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: true, time: 65 },
+        { name: "Lectures", tags: ["lectures"], uuid: "pse-project", parent_name: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: false, time: 385 },
+        { name: "Lectures", tags: ["lectures"], uuid: "pse-project", parent_name: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: true, time: 65 },
+        { name: "Project", tags: ["project"], uuid: "pse-exercise", parent_name: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: false, time: 385 },
+        { name: "Project", tags: ["project"], uuid: "pse-exercise", parent_name: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering", shared: true, askable: true, time: 65 },
 
-        { name: "Lectures", tags: ["lectures"], uuid: "dbs-lectures", parent_name: "2014-15 - Bachelor study: 2nd grade - Database systems", shared: true, askable: false, time: 385 },
-        { name: "Lectures", tags: ["lectures"], uuid: "dbs-lectures", parent_name: "2015-16 - Bachelor study: 2nd grade - Database systems", shared: true, askable: true, time: 65 },
+        { name: "Lectures", tags: ["lectures"], uuid: "dbs-lectures", parent_name: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Database systems", shared: true, askable: false, time: 385 },
+        { name: "Lectures", tags: ["lectures"], uuid: "dbs-lectures", parent_name: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Database systems", shared: true, askable: true, time: 65 },
     ]
 
     categories.each do |input|
@@ -324,8 +324,8 @@ namespace :sample_data do
   desc 'Fills database with sample assignments'
   task assignments: :environment do
     assignments = [
-        { user: "Andrew", category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming", role: "teacher", time: 25 },
-        { user: "Andrew", category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering", role: "teacher", time: 25 },
+        { user: "Andrew", category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming", role: "teacher", time: 25 },
+        { user: "Andrew", category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering", role: "teacher", time: 25 },
     ]
 
     assignments.each do |input|
@@ -384,34 +384,34 @@ namespace :sample_data do
   desc 'Fills database with sample watchings'
   task watchings: :environment do
     watchings = [
-      { category: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Ivan", time: 54 },
-      { category: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Ivan", time: 54 },
-      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Ivan", time: 54 },
-      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Ivan", time: 54 },
-      { category: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Ben", time: 32 },
-      { category: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Ben", time: 32 },
-      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "John", time: 25 },
-      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "John", time: 25 },
-      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Samantha", time: 15 },
-      { category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Samantha", time: 15 },
-      { category: "2014-15 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Andrew", time: 44 },
-      { category: "2015-16 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Andrew", time: 44 },
-      { category: "2015-16 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Tom", time: 12 },
-      { category: "2014-15 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Lauren", time: 11 },
-      { category: "2015-16 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Lauren", time: 11 },
-      { category: "2015-16 - Bachelor study: 2nd grade - Database systems - Lectures", user: "Ella", time: 10 },
-      { category: "2014-15 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Ella", time: 60 },
-      { category: "2014-15 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Ella", time: 60 },
-      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Ella", time: 60 },
-      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Ella", time: 60 },
-      { category: "2014-15 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Archie", time: 10 },
-      { category: "2014-15 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Archie", time: 10 },
-      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Archie", time: 60 },
-      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Archie", time: 60 },
-      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Adam", time: 60 },
-      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Adam", time: 60 },
-      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Ben", time: 60 },
-      { category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Ben", time: 60 },
+      { category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Ivan", time: 54 },
+      { category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Ivan", time: 54 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Ivan", time: 54 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Ivan", time: 54 },
+      { category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Ben", time: 32 },
+      { category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Ben", time: 32 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "John", time: 25 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "John", time: 25 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Lectures", user: "Samantha", time: 15 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Project", user: "Samantha", time: 15 },
+      { category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Database systems - Lectures", user: "Andrew", time: 44 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Database systems - Lectures", user: "Andrew", time: 44 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Database systems - Lectures", user: "Tom", time: 12 },
+      { category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Database systems - Lectures", user: "Lauren", time: 11 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Database systems - Lectures", user: "Lauren", time: 11 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Database systems - Lectures", user: "Ella", time: 10 },
+      { category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Ella", time: 60 },
+      { category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Ella", time: 60 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Ella", time: 60 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Ella", time: 60 },
+      { category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Archie", time: 10 },
+      { category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Archie", time: 10 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Archie", time: 60 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Archie", time: 60 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Adam", time: 60 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Adam", time: 60 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Lectures", user: "Ben", time: 60 },
+      { category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Exercises", user: "Ben", time: 60 },
     ]
 
     watchings.each do |input|
@@ -424,7 +424,7 @@ namespace :sample_data do
   desc 'Fills database with sample questions'
   task questions: :environment do
     questions = [{
-      category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Lectures",
+      category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Lectures",
       user: "Ben",
       time: 53,
       title: "Model vs Diagram",
@@ -434,7 +434,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Project",
+      category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Project",
       user: "Archie",
       time: 49,
       title: "Minimal requirements on project",
@@ -444,7 +444,7 @@ namespace :sample_data do
       editor: "Archie",
       edited_at: 48
     }, {
-      category: "2015-16 - Bachelor study: 2nd grade - Principles of software engineering - Lectures",
+      category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Lectures",
       user: "Sophia",
       time: 45,
       title: "What's is the difference between include and extend?",
@@ -454,7 +454,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2014-15 - Bachelor study: 2nd grade - Database systems - Lectures",
+      category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Database systems - Lectures",
       user: "Tom",
       time: 31,
       title: "Function COUNT()",
@@ -464,7 +464,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015-16 - Bachelor study: 2nd grade - Database systems - Lectures",
+      category: Shared::Tag.current_academic_year_value + " - Bachelor study: 2nd grade - Database systems - Lectures",
       user: "Sophia",
       time: 26,
       title: "PostgreSQL version",
@@ -474,7 +474,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Lectures",
+      category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Lectures",
       user: "Ivan",
       time: 18,
       title: "Singleton in Java",
@@ -484,7 +484,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2014-15 - Bachelor study: 2nd grade - Principles of software engineering - Lectures",
+      category: Shared::Tag.previous_academic_year_value + " - Bachelor study: 2nd grade - Principles of software engineering - Lectures",
       user: "Adam",
       time: 7,
       title: "What an abreviation UML stands for?",
@@ -494,7 +494,7 @@ namespace :sample_data do
       editor: nil,
       edited_at: nil
     }, {
-      category: "2015-16 - Bachelor study: 1st grade - Object-oriented programming - Exercises",
+      category: Shared::Tag.current_academic_year_value + " - Bachelor study: 1st grade - Object-oriented programming - Exercises",
       user: "Ruby",
       time: 10,
       title: "Anonymous class in always true condition",

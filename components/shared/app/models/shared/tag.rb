@@ -22,6 +22,12 @@ class Tag < ActiveRecord::Base
     "#{year}-#{(year + 1).to_s[-2..-1]}"
   end
 
+  def self.previous_academic_year_value
+    year = (now = Time.now).month >= 9 ? now.year : (now.year - 1)
+
+    "#{year - 1}-#{(year).to_s[-2..-1]}"
+  end
+
   def value
     read_attribute(:name)
   end
