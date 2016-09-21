@@ -90,7 +90,7 @@ namespace :deploy do
   task :symlink_shared, roles: :app do
     run "ln -nfs #{shared_path} #{release_path}/shared"
     run "for file in #{shared_path}/config/*.yml; do ln -nfs $file #{release_path}/config; done"
-    run "mkdir #{shared_path}/attachments"
+    run "mkdir -p #{shared_path}/attachments"
     run "chmod 775 #{shared_path}/attachments"
   end
 
