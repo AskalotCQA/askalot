@@ -12,6 +12,7 @@ class UserMailer < ActionMailer::Base
   helper University::DocumentsHelper
   helper Shared::EvaluationsHelper
   helper Shared::FavoritesHelper
+  helper Shared::FollowingsHelper
   helper University::GroupsHelper
   helper Shared::LabelingsHelper
   helper Shared::NotificationsHelper

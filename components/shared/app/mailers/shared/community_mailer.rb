@@ -11,6 +11,7 @@ class CommunityMailer < ActionMailer::Base
   helper Shared::DeletablesHelper
   helper University::DocumentsHelper if Rails.module.university?
   helper Shared::FavoritesHelper
+  helper Shared::FollowingsHelper
   helper University::GroupsHelper if Rails.module.university?
   helper Shared::LabelingsHelper
   helper Shared::NotificationsHelper

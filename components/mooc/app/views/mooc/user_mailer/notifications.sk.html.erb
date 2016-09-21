@@ -10,11 +10,11 @@
     <ol class="notifications">
       <% notifications.each do |notification| %>
         <li>
-          <%= notification_content notification, absolute_url: true %>
+          <%= notification_content notification, page_url_prefix: true, current_user: @user %>
 
           <span class="text-muted">&middot;</span>
 
-          <%= link_to_user notification.initiator_or_anonymous, absolute_url: true %>
+          <%= link_to_user notification.initiator_or_anonymous, page_url_prefix: true, current_user: @user %>
           <span class="text-muted">&middot;</span>
           <%= tooltip_time_tag notification.created_at, class: 'text-muted', format: :normal, placement: :bottom %>
         </li>
@@ -25,9 +25,9 @@
 </ul>
 
 <p>
-  <%= link_to "Zobraziť neprečítané notifikácie", shared.notifications_url(tab: :unread) %>
+  <%= link_to "Zobraziť neprečítané notifikácie", @contexts[0].try(:askalot_page_url) + '#' + shared.notifications_url(tab: :unread) %>
   <span class="text-muted">&middot;</span>
-  <%= link_to "Zrušiť odoberanie notifikácii", shared.edit_user_registration_url(tab: :notifications) %>
+  <%= link_to "Zrušiť odoberanie notifikácii", @contexts[0].try(:askalot_page_url) + '#' + shared.edit_user_registration_url(tab: :notifications) %>
 </p>
 
 <%= render 'shared/user_mailer/footer' %>

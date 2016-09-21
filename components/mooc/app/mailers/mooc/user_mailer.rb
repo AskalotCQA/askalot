@@ -11,6 +11,7 @@ class UserMailer < ActionMailer::Base
   helper Shared::DeletablesHelper
   helper Shared::EvaluationsHelper
   helper Shared::FavoritesHelper
+  helper Shared::FollowingsHelper
   helper Shared::LabelingsHelper
   helper Shared::NotificationsHelper
   helper Shared::QuestionsHelper
