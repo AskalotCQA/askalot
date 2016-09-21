@@ -5,7 +5,7 @@ class Administration::CategoriesController < AdministrationController
   include CategoriesHelper
 
   def index
-    @categories = Shared::Category.unscoped.includes(:assignments).order(:lft)
+    @categories = Shared::Category.includes(:assignments).order(:lft)
     @category ||= Shared::Category.new
   end
 
