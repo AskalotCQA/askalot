@@ -43,6 +43,10 @@ module Shared::QuestionsHelper
     link_to_resource question, options
   end
 
+  def question_highlighted?(question)
+    question.author.assigned?(question.category, :teacher) || question.author.assigned?(question.category, :teacher_assistant)
+  end
+
   private
 
   def question_label_attributes(label)
