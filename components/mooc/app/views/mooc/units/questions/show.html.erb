@@ -16,25 +16,27 @@
         </div>
 
         <div id="question-data">
-          <div class="question-content">
-            <%= render_markdown @question.text, page_url: Shared::Context::Manager.context_category.askalot_page_url %>
-          </div>
-
-          <% if @question.attachments.any? %>
-            <div class="question-attachments-section">
-              <%= render 'shared/questions/attachments', question: @question %>
+          <div class="question-main-content<%= ' bg-warning' if question_highlighted? @question %>">
+            <div class="question-content">
+              <%= render_markdown @question.text, page_url: Shared::Context::Manager.context_category.askalot_page_url %>
             </div>
-          <% end %>
 
-          <div class="question-details">
-            <%= render 'mooc/units/questions/details', question: @question %>
-            <%= render 'mooc/units/questions/editing', question: @question, remote: true %>
-            <%= render 'mooc/units/questions/deleting', question: @question, remote: true %>
-            <%= render 'shared/questions/closing', question: @question %>
-          </div>
+            <% if @question.attachments.any? %>
+              <div class="question-attachments-section">
+                <%= render 'shared/questions/attachments', question: @question %>
+              </div>
+            <% end %>
 
-          <div id="question-evaluations">
-            <%= render 'shared/questions/evaluations', question: @question %>
+            <div class="question-details">
+              <%= render 'mooc/units/questions/details', question: @question %>
+              <%= render 'mooc/units/questions/editing', question: @question, remote: true %>
+              <%= render 'mooc/units/questions/deleting', question: @question, remote: true %>
+              <%= render 'shared/questions/closing', question: @question %>
+            </div>
+
+            <div id="question-evaluations">
+              <%= render 'shared/questions/evaluations', question: @question %>
+            </div>
           </div>
 
           <div id="question-comments">

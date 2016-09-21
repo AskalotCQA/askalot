@@ -1,20 +1,22 @@
-<li id="answer-<%= answer.id %>" class="question-answer<%= ' bg-warning' if answer_highlighted? answer %>">
+<li id="answer-<%= answer.id %>" class="question-answer">
   <div class="row">
     <div class="col-xs-9 col-sm-10 col-md-10">
-      <div class="answer-content">
-        <%= render_markdown answer.text, page_url: Shared::Context::Manager.context_category.askalot_page_url %>
-      </div>
-
-      <% if answer.attachments.any? %>
-        <div class="answer-attachments">
-          <%= render 'shared/answers/attachments', answer: answer %>
+      <div class="answer-teacher<%= ' bg-warning' if answer_highlighted? answer %>">
+        <div class="answer-content">
+          <%= render_markdown answer.text, page_url: Shared::Context::Manager.context_category.askalot_page_url %>
         </div>
-      <% end %>
 
-      <div class="answer-details">
-        <%= render 'shared/answers/details', answer: answer %>
-        <%= render 'mooc/units/answers/editing', answer: answer, remote: true %>
-        <%= render 'mooc/units/answers/deleting', answer: answer, remote: true %>
+        <% if answer.attachments.any? %>
+          <div class="answer-attachments">
+            <%= render 'shared/answers/attachments', answer: answer %>
+          </div>
+        <% end %>
+
+        <div class="answer-details">
+          <%= render 'shared/answers/details', answer: answer %>
+          <%= render 'mooc/units/answers/editing', answer: answer, remote: true %>
+          <%= render 'mooc/units/answers/deleting', answer: answer, remote: true %>
+        </div>
       </div>
 
       <%= render 'shared/answers/evaluations', answer: answer %>

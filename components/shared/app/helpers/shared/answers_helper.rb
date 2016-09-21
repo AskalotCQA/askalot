@@ -1,6 +1,6 @@
 module Shared::AnswersHelper
   def answer_highlighted?(answer)
-    answer.author.assigned?(answer.to_question.category, :teacher)
+    answer.author.assigned?(answer.to_question.category, :teacher) || answer.author.assigned?(answer.to_question.category, :teacher_assistant)
   end
 
   def answer_text_preview(answer, options = {})
