@@ -13,11 +13,14 @@ module Shared::ResourcesHelper
       path ||= options[:absolute_url] ? shared.question_url(question, url_options) : shared.question_path(question, url_options)
 
       url = url.is_a?(Proc) ? url.call(path) : path
+      url = question.page_url_prefix + url if options.delete(:page_url_prefix)
     end
 
     if resource.is_a? Shared::Deletable
       link_to_deletable resource, body, url, options
     else
+      url = options[:current_user].default_askalot_page_url + '#' + url if options[:page_url_prefix] && options[:current_user]
+
       link_to body, url, options
     end
   end

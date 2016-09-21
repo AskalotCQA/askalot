@@ -1,7 +1,7 @@
 module Mooc::Mailers
   class UserMailerService
     def self.users
-      Shared::User.where(send_email_notifications: true)
+      Mooc::User.where(send_email_notifications: true)
     end
 
     def self.deliver_notifications!

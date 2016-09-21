@@ -9,5 +9,11 @@ module Shared::Authorable
 
       self.anonymous ? :anonymous : author
     end
+
+    def page_url_prefix
+      return '' unless self.respond_to? :to_question
+
+      self.to_question.category.root.askalot_page_url + '#'
+    end
   end
 end

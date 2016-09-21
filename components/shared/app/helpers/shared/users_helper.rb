@@ -46,6 +46,8 @@ module Shared::UsersHelper
     path = options.delete(:absolute_url) ? shared.user_url(user.nick) : shared.user_path(user.nick)
 
     url = url.is_a?(Proc) ? url.call(path) : path
+    url = authorable.page_url_prefix + url if options[:page_url_prefix] && authorable
+    url = options[:current_user].default_askalot_page_url + '#' + url if options[:page_url_prefix] && ! authorable
 
     link_to body, url, options
   end

@@ -2,6 +2,10 @@ module Mooc
   class User < Shared::User
     before_create :hide_email
 
+    def default_askalot_page_url
+      self.context_users.first.context.askalot_page_url
+    end
+
     protected
 
     def self.create_without_confirmation!(attributes)
