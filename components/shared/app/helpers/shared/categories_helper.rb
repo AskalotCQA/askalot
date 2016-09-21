@@ -39,7 +39,7 @@ module Shared::CategoriesHelper
 
       parents[key] = item.sort_by(&:name).reverse!
     end
-    
+
     nodes = [parents[root]]
 
     output  = '<table class="treetable table">'
@@ -111,6 +111,6 @@ module Shared::CategoriesHelper
   end
 
   def askable_leaves_categories(context)
-    Shared::Category.find(context).leaves.where(askable: true).unscope(:order).order(:full_public_name)
+    Shared::Category.find(context).leaves.where(askable: true).not_unknown.unscope(:order).order(:full_public_name)
   end
 end

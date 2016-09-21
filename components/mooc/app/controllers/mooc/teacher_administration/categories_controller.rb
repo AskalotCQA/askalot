@@ -4,7 +4,7 @@ module Mooc
     before_action :check_parent, only: [:new, :create]
 
     def index
-      @categories = Shared::Category.in_contexts(contexts_to_administrate).includes(:assignments).order(:lft)
+      @categories = Shared::Category.in_contexts(contexts_to_administrate).unscoped.includes(:assignments).order(:lft)
     end
 
     def new
