@@ -4,9 +4,9 @@ describe Mooc::Mailers::UserMailerService do
   describe '.deliver_notifications!' do
     it 'delivers notifications' do
       users = [
-        create(:user, send_email_notifications: false),
-        create(:user),
-        create(:user)
+        create(:mooc_user, send_email_notifications: false),
+        create(:mooc_user),
+        create(:mooc_user)
       ]
 
       Timecop.freeze do

@@ -27,6 +27,8 @@ FactoryGirl.define do
       role :administrator
     end
 
+    factory :mooc_user, class: Mooc::User if Rails.module.mooc?
+
     after :create do |user|
       user.confirm!
 

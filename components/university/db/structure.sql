@@ -210,8 +210,7 @@ CREATE TABLE assignments (
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
     admin_visible boolean DEFAULT true,
-    parent integer,
-    offered_watching boolean DEFAULT false
+    parent integer
 );
 
 
@@ -1444,48 +1443,6 @@ ALTER SEQUENCE slido_events_id_seq OWNED BY slido_events.id;
 
 
 --
--- Name: subject_students; Type: TABLE; Schema: public; Owner: -; Tablespace: 
---
-
-CREATE TABLE subject_students (
-    id integer NOT NULL,
-    ais_uid character varying(255),
-    first character varying(255),
-    last character varying(255),
-    program character varying(255),
-    year integer,
-    semester integer,
-    context_id integer,
-    subject_uid character varying(255),
-    subject_code character varying(255),
-    subject_name character varying(255),
-    category_uid character varying(255),
-    period character varying(255),
-    vsp double precision,
-    credits integer
-);
-
-
---
--- Name: subject_students_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE subject_students_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: subject_students_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE subject_students_id_seq OWNED BY subject_students.id;
-
-
---
 -- Name: taggings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2125,13 +2082,6 @@ ALTER TABLE ONLY slido_events ALTER COLUMN id SET DEFAULT nextval('slido_events_
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY subject_students ALTER COLUMN id SET DEFAULT nextval('subject_students_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
---
-
 ALTER TABLE ONLY taggings ALTER COLUMN id SET DEFAULT nextval('taggings_id_seq'::regclass);
 
 
@@ -2485,14 +2435,6 @@ ALTER TABLE ONLY roles
 
 ALTER TABLE ONLY slido_events
     ADD CONSTRAINT slido_events_pkey PRIMARY KEY (id);
-
-
---
--- Name: subject_students_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
---
-
-ALTER TABLE ONLY subject_students
-    ADD CONSTRAINT subject_students_pkey PRIMARY KEY (id);
 
 
 --
@@ -4162,8 +4104,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160417130646');
 
 INSERT INTO schema_migrations (version) VALUES ('20160417135429');
 
-INSERT INTO schema_migrations (version) VALUES ('20160425114456');
-
 INSERT INTO schema_migrations (version) VALUES ('20160503083015');
 
 INSERT INTO schema_migrations (version) VALUES ('20160507084030');
@@ -4171,8 +4111,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160507084030');
 INSERT INTO schema_migrations (version) VALUES ('20160509144416');
 
 INSERT INTO schema_migrations (version) VALUES ('20160611205335');
-
-INSERT INTO schema_migrations (version) VALUES ('20160612160359');
 
 INSERT INTO schema_migrations (version) VALUES ('20160913174811');
 

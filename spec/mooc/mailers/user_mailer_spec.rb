@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Mooc::UserMailer, type: :mailer do
   describe '.notifications' do
     it 'sends notifications summary for day' do
-      user = create :user
-      user2 = create :user
+      user = create :mooc_user
+      user2 = create :mooc_user
 
       @context  = 1
       @category = Shared::Category.find(@context).leaves.first
@@ -28,7 +28,7 @@ describe Mooc::UserMailer, type: :mailer do
 
     context 'when user has not notifications' do
       it 'does not deliver email' do
-        user = create :user
+        user = create :mooc_user
 
         mail = Mooc::UserMailer.notifications(user, from: 1.day.ago)
 
