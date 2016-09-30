@@ -1,3 +1,7 @@
 if window.opener
-  window.opener.location.reload true
-  window.close()
+  location = window.opener.location.href
+  whitelisted = location.indexOf('/third_party') != -1 || location.indexOf('/administration') != -1
+
+  unless whitelisted
+    window.opener.location.reload true
+    window.close()
