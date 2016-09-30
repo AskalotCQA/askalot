@@ -244,6 +244,7 @@ en:
         text: "Answer"
         reaction: "Message"
         attachments: "Attachments"
+        anonymous: "Add anonymously"
 
       shared/assignment:
         category: "Category"
@@ -277,6 +278,7 @@ en:
 
       shared/comment:
         text: "Comment"
+        anonymous: "Add anonymously"
 
       university/document:
         text: "Text"

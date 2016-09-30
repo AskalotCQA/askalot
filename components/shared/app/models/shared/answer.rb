@@ -50,6 +50,12 @@ class Answer < ActiveRecord::Base
     end
   end
 
+  def original_anonymous_author?(user)
+    question = self.to_question
+
+    question.anonymous? && question.author == user
+  end
+
   private
 
   def slido_label_with_best!

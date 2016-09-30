@@ -1,7 +1,7 @@
 <li id="answer-<%= answer.id %>" class="question-answer">
   <div class="row">
     <div class="col-sm-3 col-md-2 hidden-xs">
-      <%= render 'shared/users/square', user: answer.author %>
+      <%= render 'shared/users/square', user: answer.author_or_anonymous %>
     </div>
 
     <div class="col-xs-9 col-sm-7 col-md-8">

@@ -25,7 +25,7 @@ class AnswersController < ApplicationController
         dispatch_event :mention, @answer, for: user
       end
 
-      dispatch_event :create, @answer, for: @question.watchers
+      dispatch_event :create, @answer, for: @question.watchers, anonymous: @answer.anonymous
       register_watching_for @question
 
       flash[:notice] = t("answer.#{@question.mode}.create.success")
@@ -84,7 +84,7 @@ class AnswersController < ApplicationController
   private
 
   def create_params
-    params.require(:answer).permit(:text).merge(question: @question, author: current_user)
+    params.require(:answer).permit(:text, :anonymous).merge(question: @question, author: current_user)
   end
 
   def update_params

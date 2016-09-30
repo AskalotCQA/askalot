@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
         dispatch_event :mention, @comment, for: user
       end
 
-      dispatch_event :create, @comment, for: @question.watchers
+      dispatch_event :create, @comment, for: @question.watchers, anonymous: @comment.anonymous
       register_watching_for @question
 
       flash[:notice] = t('comment.create.success')
@@ -46,7 +46,7 @@ class CommentsController < ApplicationController
   end
 
   def create_params
-    params.require(:comment).permit(:text).merge(commentable: @commentable, author: current_user)
+    params.require(:comment).permit(:text, :anonymous).merge(commentable: @commentable, author: current_user)
   end
 
   def update_params

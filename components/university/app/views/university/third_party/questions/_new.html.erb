@@ -1,7 +1,7 @@
 <div id="document-content">
   <div id="new-question-button" class="btn btn-success"><%= t 'question.new.title' %></div>
 
-  <%= form_for question, url: shared.questions_path, remote: true do |f| %>
+  <%= form_for question, url: shared.questions_path, remote: true, html: { multipart: true } do |f| %>
     <div id="form-messages">
       <%= form_messages_for question %>
     </div>
@@ -58,6 +58,12 @@
           <% end %>
         </ul>
         <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :attachments %>
+      <%= file_field_tag "attachments[]", class: :'form-control', type: :file, multiple: true %>
+      <div class="help-block"><%= t 'attachment.help_block' %></div>
     </div>
 
     <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>

@@ -31,6 +31,53 @@ describe 'Add Answer', type: :feature do
     end
   end
 
+  context 'with anonymous question' do
+    let(:user)      { create :user, login: 'john' }
+    let!(:question) { create :question, :anonymous, author: user }
+
+    before :each do
+      login_as user
+    end
+
+    it 'adds new answer anonymously' do
+      visit shared.root_path
+
+      click_link 'Otázky'
+      click_link question.title
+
+      fill_in 'answer_text', with: 'My anonymous answer'
+
+      click_button 'Odpovedať'
+
+      expect(page).to have_content('Odpoveď bola úspešne pridaná.')
+
+      within '#question-answers' do
+        expect(page).to have_content('My anonymous answer')
+        expect(page).to have_content('Pridal Anonym')
+      end
+    end
+
+    it 'adds new answer not anonymously', js: true do
+      visit shared.root_path
+
+      click_link 'Otázky'
+      click_link question.title
+
+      fill_in 'answer_text', with: 'My answer'
+
+      find('label', text: 'Pridať anonymne').click
+
+      click_button 'Odpovedať'
+
+      expect(page).to have_content('Odpoveď bola úspešne pridaná.')
+
+      within '#question-answers' do
+        expect(page).to have_content('My answer')
+        expect(page).to have_content('Pridal john')
+      end
+    end
+  end
+
   context 'with question from slido' do
     let!(:teacher) { create :teacher }
     let!(:student) { create :user }

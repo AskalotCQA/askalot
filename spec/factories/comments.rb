@@ -4,6 +4,10 @@ FactoryGirl.define do
 
     text 'Lorem ipsum'
 
+    trait :anonymous do
+      anonymous true
+    end
+
     trait :deleted do
       deleted true
       deletor { self.author }
