@@ -19,26 +19,9 @@
   }
 }
 
-.markdown-tabs {
-  border-bottom: none;
-
-  > li > a {
-    color: $text-muted;
-  }
-
-  > li.active > a,
-  > li.active > a:hover,
-  > li.active > a:focus {
-    border-color: $input-border !important;
-    border-bottom-color: #fff !important;
-
-    color: $text-color;
-  }
-}
-
 .markdown-help {
   margin: 0;
-  padding: 10px 15px 10px 0;
+  padding: 0px 15px 0px 0;
 
   color: $text-muted;
 
@@ -48,7 +31,19 @@
   @include text-overflow;
 }
 
-.markdown-panes {
+.markdown-preview-text {
+  color: $text-muted;
+  font-size: $font-size-small;
+}
+
+.markdown-preview {
+  .form-control {
+    background-color: $gray-lighter;
+  }
+}
+
+
+.markdown-output {
   @include markdown-content;
 
   padding-top: 0 !important;

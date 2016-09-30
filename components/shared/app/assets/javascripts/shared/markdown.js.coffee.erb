@@ -46,8 +46,14 @@ class window.Markdown
 
       markdown = new Markdown(id)
 
-      $(this).find('.markdown-preview').click (event) ->
-        markdown.preview()
+      $.each($(this).find('textarea'), (key, obj) ->
+        markdown.preview() if ($(obj).val() != '')
+      )
+
+      $(this).find('textarea').keyup (event) ->
+        markdown.delay (->
+          markdown.preview()
+        ), 500
 
   constructor: (id) ->
     @id = id
@@ -55,10 +61,6 @@ class window.Markdown
     @bindTextcomplete()
 
   preview: ->
-    content = templates['markdown/preview'](translation: I18n.t('markdown.loading_preview'))
-
-    $("##{@id}-preview .form-control").html(content)
-
     @render (html) =>
       $("##{@id}-preview .form-control").html(html)
       MathJax.Hub.Queue(["Typeset",MathJax.Hub])
@@ -79,3 +81,10 @@ class window.Markdown
   bindTextcomplete: ->
     for _, options of @textcomplete.strategies
       $("##{@id}-text textarea").textcomplete(options)
+
+  delay: do ->
+    timer = 0;
+
+    (callback, ms) ->
+      clearTimeout (timer);
+      timer = setTimeout(callback, ms);

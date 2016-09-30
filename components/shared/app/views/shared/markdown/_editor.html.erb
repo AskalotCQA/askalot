@@ -1,28 +1,21 @@
-<div class="row">
-  <div class="col-xs-<%= help ? 5 : 12 %>">
-    <ul id="<%= id %>" class="nav nav-tabs markdown-tabs" data-markdown="true">
-      <li class="active">
-        <a class="markdown-text" href="#<%= id %>-text" data-toggle="tab" data-track-category="markdown" data-track-action="text"><%= text ? text : t('markdown.text') %></a>
-      </li>
-      <li>
-        <a class="markdown-preview" href="#<%= id %>-preview" data-toggle="tab" data-track-category="markdown" data-track-action="preview"><%= t('markdown.preview') %></a>
-      </li>
-    </ul>
-  </div>
-  <% if help %>
-    <div class="col-xs-7">
-      <div class="markdown-help">
-        <%= t('markdown.documentation', link: link_to('Markdown', shared.help_path(anchor: :markdown), analytics_attributes(:markdown, :help))).html_safe %>
-      </div>
+<div id="<%= id %>" data-markdown="true">
+  <div class="row">
+    <div class="col-xs-<%= help ? 5 : 12 %>">
+      <label><%= text ? text : t('markdown.text') %></label>
     </div>
-  <% end %>
-</div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <div id="<%= id %>-content" class="tab-content markdown-panes">
-      <div id="<%= id %>-text" class="tab-pane active"><%= content.call %></div>
-      <div id="<%= id %>-preview" class="tab-pane"><div class="form-control"></div></div>
-    </div>
+    <% if help %>
+      <div class="col-xs-7">
+        <div class="markdown-help">
+          <%= t('markdown.documentation', link: link_to('Markdown', shared.help_path(anchor: :markdown), analytics_attributes(:markdown, :help))).html_safe %>
+        </div>
+      </div>
+    <% end %>
   </div>
+
+  <div id="<%= id %>-text" class="markdown-output"><%= content.call %></div>
+
+  <span class="markdown-preview-text"><%= t('markdown.preview') %></span>
+
+  <div id="<%= id %>-preview" class="markdown-preview markdown-output"><div class="form-control"></div></div>
 </div>

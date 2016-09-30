@@ -21,11 +21,9 @@ describe 'Markdown', type: :feature do
       fill_in 'question_title', with: 'Lorem ipsum title?'
       fill_in 'question_text',  with: '# Lorem ipsum'
 
-      click_link 'Náhľad'
-
       wait_for_remote
 
-      within '.markdown-panes' do
+      within '.markdown-preview' do
         expect(page).to have_css('h1', count: 1)
         expect(page).to have_content('Lorem ipsum')
       end
@@ -39,11 +37,9 @@ describe 'Markdown', type: :feature do
       fill_in 'question_title', with: 'Lorem ipsum title?'
       fill_in 'question_text',  with: text
 
-      click_link 'Náhľad'
-
       wait_for_remote
 
-      within '.markdown-panes' do
+      within '.markdown-preview' do
         expect(page).to have_selector('span.MathJax_SVG', count: 6)
       end
     end
@@ -199,11 +195,7 @@ describe 'Markdown', type: :feature do
 
       fill_in 'answer_text', with: '# My neat solution'
 
-      click_link 'Náhľad'
-
-      wait_for_remote
-
-      within '.markdown-panes' do
+      within '.markdown-preview' do
         expect(page).to have_css('h1', count: 1)
         expect(page).to have_content('My neat solution')
       end
