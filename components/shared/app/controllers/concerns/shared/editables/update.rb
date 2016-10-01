@@ -44,7 +44,7 @@ module Shared::Editables::Update
             watchers += Shared::Category.find(old_category_id).parent_watchers if defined?(old_category_id) && old_category_id
           end
 
-          dispatch_event :update, @editable, for: watchers, anonymous: (@editable.is_a?(Shared::Question) && @editable.anonymous)
+          dispatch_event :update, @editable, for: watchers, anonymous: ([Shared::Question, Shared::Answer, Shared::Comment].member?(@editable.class) && @editable.anonymous)
         end
 
         flash[:notice] = t "#{@model}.update.success"
