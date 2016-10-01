@@ -267,3 +267,11 @@ end
 
 Devise::ConfirmationsController.skip_before_filter :login_required
 Devise::PasswordsController.skip_before_filter :login_required
+
+Warden::Manager.after_set_user do |user,auth,opts|
+  auth.cookies[:askalot_signed_in] = 1
+end
+
+Warden::Manager.before_logout do |user,auth,opts|
+  auth.cookies[:askalot_signed_in] = 0
+end

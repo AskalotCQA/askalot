@@ -1,5 +1,7 @@
 <% provide :title, @unit.name %>
 
+<%= render 'mooc/units/cookies_not_enabled' %>
+
 <%= render 'mooc/units/questions/new', unit: @unit, question: @question if @unit.askable %>
 
 <%= render 'mooc/units/questions/questions', unit: @unit, questions: @questions %>
