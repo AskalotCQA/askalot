@@ -1,5 +1,7 @@
 module Shared::AnswersHelper
   def answer_highlighted?(answer)
+    return false if answer.anonymous?
+
     answer.author.assigned?(answer.to_question.category, :teacher) || answer.author.assigned?(answer.to_question.category, :teacher_assistant)
   end
 

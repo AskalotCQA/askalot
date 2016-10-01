@@ -256,6 +256,7 @@ sk:
         text: "Odpoveď"
         reaction: "Príspevok"
         attachments: "Prílohy"
+        anonymous: "Pridať anonymne"
 
       shared/assignment:
         category: "Kategória"
@@ -289,6 +290,7 @@ sk:
 
       shared/comment:
         text: "Komentár"
+        anonymous: "Pridať anonymne"
 
       university/document:
         text: "Text"

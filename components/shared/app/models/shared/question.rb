@@ -141,5 +141,9 @@ class Question < ActiveRecord::Base
 
     ActiveSupport::StringInquirer.new mode.to_s
   end
+
+  def original_anonymous_author?(user)
+    self.anonymous? && self.author == user
+  end
 end
 end

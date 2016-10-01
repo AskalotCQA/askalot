@@ -44,6 +44,8 @@ module Shared::QuestionsHelper
   end
 
   def question_highlighted?(question)
+    return false if question.anonymous?
+
     question.author.assigned?(question.category, :teacher) || question.author.assigned?(question.category, :teacher_assistant)
   end
 

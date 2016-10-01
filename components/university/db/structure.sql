@@ -175,7 +175,8 @@ CREATE TABLE answers (
     deletor_id integer,
     edited boolean DEFAULT false NOT NULL,
     evaluations_count integer DEFAULT 0 NOT NULL,
-    stack_exchange_uuid integer
+    stack_exchange_uuid integer,
+    anonymous boolean DEFAULT false
 );
 
 
@@ -598,7 +599,8 @@ CREATE TABLE comments (
     deleted_at timestamp without time zone,
     deletor_id integer,
     edited boolean DEFAULT false NOT NULL,
-    stack_exchange_uuid integer
+    stack_exchange_uuid integer,
+    anonymous boolean DEFAULT false
 );
 
 
@@ -4113,4 +4115,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160509144416');
 INSERT INTO schema_migrations (version) VALUES ('20160611205335');
 
 INSERT INTO schema_migrations (version) VALUES ('20160913174811');
+
+INSERT INTO schema_migrations (version) VALUES ('20160930145553');
 

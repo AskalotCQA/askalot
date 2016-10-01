@@ -25,7 +25,7 @@ class UsersController < ApplicationController
 
     @questions  = Shared::Question.in_context(@context_id).by(@user).where(anonymous: false).order(created_at: :desc)
     @anonymous  = Shared::Question.in_context(@context_id).by(@user).where(anonymous: true).order(created_at: :desc)
-    @answers    = Shared::Answer.in_context(@context_id).by(@user).order(created_at: :desc)
+    @answers    = Shared::Answer.in_context(@context_id).by(@user).where(anonymous: false).order(created_at: :desc)
     @favorites  = Shared::Favorite.in_context(@context_id).by(@user).order(created_at: :desc)
     @activities = Shared::Activity.in_context(@context_id).of(@user).global.order(created_at: :desc) if current_user == @user
     @activities = Shared::Activity.in_context(@context_id).of(@user).order(created_at: :desc) unless current_user == @user

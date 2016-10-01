@@ -11,6 +11,14 @@
       </div>
 
       <button type="submit" class="btn btn-primary"><%= t 'comment.new.submit' %></button>
+
+      <% if commentable.original_anonymous_author? current_user %>
+        <div class="btn-group" data-toggle="buttons">
+          <label class="btn btn-primitive btn-sm">
+            <%= f.check_box :anonymous, checked: true %> <%= Shared::Answer.human_attribute_name :anonymous %> <%= icon_tag :'check-square-o' %>
+          </label>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

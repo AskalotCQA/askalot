@@ -4,6 +4,8 @@ module Shared::CommentsHelper
   end
 
   def comment_highlighted?(comment)
+    return false if comment.anonymous?
+
     comment.author.assigned?(comment.to_question.category, :teacher) || comment.author.assigned?(comment.to_question.category, :teacher_assistant)
   end
 end
