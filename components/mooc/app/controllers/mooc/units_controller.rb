@@ -36,10 +36,9 @@ module Mooc
 
         context_user = Shared::ContextUser.find_by(user: current_user, context_id: Shared::Context::Manager.current_context_id)
 
-        if context_user.nil?
-          Shared::ContextUser.create!(user: current_user, context_id: Shared::Context::Manager.current_context_id)
-          teacher_context_assignment(@context_id) if params['roles'].in? ['Instructor', 'Administrator']
-        end
+        Shared::ContextUser.create!(user: current_user, context_id: Shared::Context::Manager.current_context_id) if context_user.nil?
+
+        teacher_context_assignment(@context_id) if params['roles'].in?(['Instructor', 'Administrator']) && current_user.role != :administrator
       else
         @unit = Shared::Category.find params[:id]
       end
