@@ -112,7 +112,17 @@ module Mooc
       params['roles'] = :teacher if params['roles'] == 'Instructor'
       params['roles'] = :teacher_assistant if params['roles'] == 'Administrator'
 
-      Shared::Assignment.find_or_create_by!(role: Shared::Role.find_by!(name: params['roles']), user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
+      assignment = Shared::Assignment.find_by(user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
+
+      unless assignment
+        return Shared::Assignment.create!(role: Shared::Role.find_by!(name: params['roles']), user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
+      end
+
+      return if assignment.role.name.to_sym == params['roles']
+
+      assignment.destroy
+
+      Shared::Assignment.create!(role: Shared::Role.find_by!(name: params['roles']), user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
     end
   end
 end
