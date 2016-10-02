@@ -21,6 +21,7 @@
         <li><a class="text-capital" href="<%= url_to_site "teamnaruby" %>">na&#x042f;uby</a></li>
         <li><a class="text-capital" href="<%= url_to_site "teamasked" %>">AskEd</a></li>
         <li><%= link_to Askalot::VERSION::STRING, url_to_repository("releases/tag/v#{Askalot::VERSION::STRING}") %></li>
+        <li><%= mail_to 'askalot@fiit.stuba.sk' %></li>
       </ul>
     </div>
   </div>

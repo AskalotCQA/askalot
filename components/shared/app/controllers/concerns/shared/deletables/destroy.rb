@@ -12,7 +12,7 @@ module Shared::Deletables::Destroy
     if @deletable.mark_as_deleted_by! current_user
       # TODO (jharinek) refactor after making G,D watchable, notifiable
       if @deletable.respond_to? :to_question
-        dispatch_event :delete, @deletable, for: @deletable.to_question.watchers, anonymous: (@deletable.is_a?(Shared::Question) && @deletable.anonymous)
+        dispatch_event :delete, @deletable, for: @deletable.to_question.watchers, anonymous: ([Shared::Question, Shared::Answer, Shared::Comment].member?(@deletable.class) && @deletable.anonymous)
       end
 
       flash[:notice] = t "#{@model}.delete.success"
