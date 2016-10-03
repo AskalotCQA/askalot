@@ -2,17 +2,17 @@ require 'shared/yeast/example_feeder'
 
 module Shared::Yeast
   def self.run
-    [Question, Answer, Comment, Labeling].each do |model|
+    [Shared::Question, Shared::Answer, Shared::Comment, Shared::Labeling].each do |model|
       model.class_eval do
         alias :initiator :author
       end
     end
 
-    Vote.class_eval do
+    Shared::Vote.class_eval do
       alias :initiator :voter
     end
 
-    View.class_eval do
+    Shared::View.class_eval do
       alias :initiator :viewer
     end
 

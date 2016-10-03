@@ -12,7 +12,7 @@ namespace :yeast do
     raise ArgumentError.new('You have to specify at least one feeder.') unless ENV['FEEDERS']
 
     feeders = ENV['FEEDERS'].split(',').map do |name|
-      "Yeast::#{name}".constantize
+      "Shared::Yeast::#{name}".constantize
     end
 
     feeders.each do |feeder|
