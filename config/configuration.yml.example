@@ -125,6 +125,10 @@ fiit_test:
   poll:
     default: 5
 
+  oauth:
+    consumer_key: key
+    consumer_secret: secret
+
 fiit_staging:
   <<: *defaults
   <<: *university

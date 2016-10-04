@@ -9,60 +9,77 @@ describe Mooc::UnitsController, type: :controller do
 
   before :each do
     @params = {
-        context_uuid: 'default',
-        context_id: '1',
-        resource_link_id: '-category-hash',
-        roles: 'student',
-        user_id: '1000',
-        lis_person_sourcedid: 'John Doe',
-        lis_person_contact_email_primary: 'john.doe@example.com',
-        lti_version: 'LTI-1p0',
-        lti_message_type: 'basic-lti-launch-request'
+      context_uuid: 'default',
+      context_id: '1',
+      resource_link_id: '-category-hash',
+      roles: 'student',
+      user_id: '1000',
+      lis_person_sourcedid: 'JohnDoe',
+      lis_person_contact_email_primary: 'john.doe@example.com',
+      lti_version: 'LTI-1p0',
+      lti_message_type: 'basic-lti-launch-request',
+      oauth_consumer_key: 'key'
     }
   end
 
   describe 'POST show' do
-    it 'redirects to error page when consumer secret is not set' do
-      post :show, @params
+    context 'with invalid LTI request' do
+      it 'redirects to error page when consumer secret is not set' do
+        @params.delete(:oauth_consumer_key)
 
-      expect(response).to redirect_to(units_error_path(exception: 'LTI consumer key not provided'))
+        post :show, @params
+
+        expect(response).to redirect_to(units_error_path(exception: 'LTI consumer key not provided'))
+      end
+
+      it 'redirects to error page when consumer secret is not correct' do
+        @params[:oauth_consumer_key] = 'incorrect'
+
+        post :show, @params
+
+        expect(response).to redirect_to(units_error_path(exception: 'LTI secret does not match'))
+      end
+
+      it 'redirects to error page when request is not valid' do
+        IMS::LTI::ToolProvider.any_instance.stub(:valid_request?).and_return(false)
+
+        post :show, @params
+
+        expect(response).to redirect_to(units_error_path(exception: 'LTI request is not valid'))
+      end
     end
 
-    it 'redirects to error page when consumer secret is not correct' do
-      @params[:oauth_consumer_key] = 'key'
+    context 'with valid LTI request' do
+      before :each do
+        IMS::LTI::ToolProvider.any_instance.stub(:valid_request?).and_return(true)
+      end
 
-      post :show, @params
+      it 'redirects to error page when request is too old' do
+        IMS::LTI::ToolProvider.any_instance.stub(:request_oauth_timestamp).and_return(0)
 
-      expect(response).to redirect_to(units_error_path(exception: 'LTI secret does not match'))
-    end
+        post :show, @params
 
-    it 'creates new category and context category if does not exist' do
-      sign_in user
+        expect(response).to redirect_to(units_error_path(exception: 'LTI request is too old'))
+      end
 
-      before_count = Shared::Category.all.count
+      it 'redirects to error page when unit is not parsed' do
+        IMS::LTI::ToolProvider.any_instance.stub(:request_oauth_timestamp).and_return(Time.now.utc)
 
-      @params[:context_id] = 'another-course-uuid'
+        post :show, @params
 
-      post :show, @params
+        expect(response).to redirect_to(units_error_path(exception: "Nastavenie Askalotu v tomto unite ešte nebolo dokončené. Pokračujte obnovením aktuálnej stránky. Ak sa vám stále zobrazuje tento text, pravdepodobne ste zle nastavili Askalot (možno ste zabudli pridať 'raw html' komponent okrem LTI komponentu Askalotu?)"))
+      end
 
-      after_count = Shared::Category.all.count
+      it 'redirects to error page if user data are not provided' do
+        IMS::LTI::ToolProvider.any_instance.stub(:request_oauth_timestamp).and_return(Time.now.utc)
 
-      expect(after_count).to eql(before_count + 2)
-      expect(Shared::Category.last.name).to eql('unknown')
-    end
+        @params.delete(:lis_person_sourcedid)
+        @params.delete(:lis_person_contact_email_primary)
 
-    it 'does not create new category and context if they already exist' do
-      sign_in user
+        post :show, @params
 
-      post :show, @params
-
-      before_count = Shared::Category.all.count
-
-      post :show, @params
-
-      after_count = Shared::Category.all.count
-
-      expect(after_count).to eql(before_count)
+        expect(response).to redirect_to(units_error_path(exception: "Váš používateľský účet ešte nebol zaregistrovaný a informácie o používateľovi nie sú dostuné v tejto požiadavke na zobrazenie stránky (pravdedpodobne pristupujete po prvý krát k Askalotu z Unit pohľadu v edX štúdiu). Prosím, navštívte Unit priamo z edX kurzu, aby Vám bol automaticky vytvorený účet."))
+      end
     end
   end
 
