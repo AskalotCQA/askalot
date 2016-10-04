@@ -2,6 +2,7 @@ module Shared
 class Category < ActiveRecord::Base
   acts_as_nested_set
 
+  include Shared::Listable
   include Shared::Categories::Searchable
   include Shared::Watchable
 

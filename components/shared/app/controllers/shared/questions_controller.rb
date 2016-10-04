@@ -19,8 +19,11 @@ class QuestionsController < ApplicationController
 
   def index
     if params[:category]
-      @category = Shared::Category.find(params[:category])
+      @category   = Shared::Category.find(params[:category])
       @context_id = @category.id
+      @list       = @category.lists.create! lister: current_user
+
+      dispatch_event :create, @list, for: @category.watchers
     end
 
     @questions = questions_by_dashboard_param(params[:from_dashboard].to_sym, @context_id, current_user) if params[:from_dashboard]

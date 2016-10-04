@@ -300,7 +300,8 @@ CREATE TABLE categories (
     lti_id character varying(255),
     description text,
     third_party_hash character varying(255),
-    askalot_page_url character varying(255)
+    askalot_page_url character varying(255),
+    lists_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -935,6 +936,41 @@ ALTER SEQUENCE labels_id_seq OWNED BY labels.id;
 
 
 --
+-- Name: lists; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE lists (
+    id integer NOT NULL,
+    category_id integer NOT NULL,
+    lister_id integer NOT NULL,
+    unit_view boolean DEFAULT false NOT NULL,
+    deletor_id integer,
+    deleted boolean DEFAULT false NOT NULL,
+    created_at timestamp without time zone,
+    deleted_at timestamp without time zone
+);
+
+
+--
+-- Name: lists_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE lists_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: lists_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE lists_id_seq OWNED BY lists.id;
+
+
+--
 -- Name: mooc_category_contents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1468,7 +1504,8 @@ CREATE TABLE users (
     read_notifications_thread boolean DEFAULT true NOT NULL,
     alumni boolean DEFAULT false NOT NULL,
     dashboard_last_sign_in_at timestamp without time zone DEFAULT now(),
-    attachments_count integer
+    attachments_count integer,
+    lists_count integer DEFAULT 0 NOT NULL
 );
 
 
@@ -1766,6 +1803,13 @@ ALTER TABLE ONLY labelings ALTER COLUMN id SET DEFAULT nextval('labelings_id_seq
 --
 
 ALTER TABLE ONLY labels ALTER COLUMN id SET DEFAULT nextval('labels_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY lists ALTER COLUMN id SET DEFAULT nextval('lists_id_seq'::regclass);
 
 
 --
@@ -2070,6 +2114,14 @@ ALTER TABLE ONLY labelings
 
 ALTER TABLE ONLY labels
     ADD CONSTRAINT labels_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: lists_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY lists
+    ADD CONSTRAINT lists_pkey PRIMARY KEY (id);
 
 
 --
@@ -2800,6 +2852,34 @@ CREATE UNIQUE INDEX index_labelings_on_unique_key ON labelings USING btree (answ
 --
 
 CREATE UNIQUE INDEX index_labels_on_value ON labels USING btree (value);
+
+
+--
+-- Name: index_lists_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_lists_on_category_id ON lists USING btree (category_id);
+
+
+--
+-- Name: index_lists_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_lists_on_deleted ON lists USING btree (deleted);
+
+
+--
+-- Name: index_lists_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_lists_on_deletor_id ON lists USING btree (deletor_id);
+
+
+--
+-- Name: index_lists_on_lister_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_lists_on_lister_id ON lists USING btree (lister_id);
 
 
 --
@@ -3698,4 +3778,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160611205335');
 INSERT INTO schema_migrations (version) VALUES ('20160913174811');
 
 INSERT INTO schema_migrations (version) VALUES ('20160930145553');
+
+INSERT INTO schema_migrations (version) VALUES ('20161004171530');
 
