@@ -14,7 +14,7 @@ module Shared::Users
     def authenticate!
       fail 'Unauthorized access' unless authorized?
 
-      @user ||= factory.where('lower(login) = ?', @params[:login].downcase).first
+      @user ||= factory.where('lower(login) = ?', @params[:login].downcase.strip).first
 
       create_user! unless @user
 
