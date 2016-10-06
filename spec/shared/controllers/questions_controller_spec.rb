@@ -14,6 +14,10 @@ describe Shared::QuestionsController, type: :controller do
 
       expect(Shared::List.all.count).to eq(1)
       expect(Shared::List.last.unit_view).to eql(false)
+
+      category.reload
+
+      expect(category.lists_count).to eql(1)
     end
   end
 end
