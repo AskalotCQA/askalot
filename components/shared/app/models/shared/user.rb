@@ -27,6 +27,7 @@ class User < ActiveRecord::Base
 
   has_many :activities,    foreign_key: :initiator_id, dependent: :destroy
   has_many :favorites,     foreign_key: :favorer_id,   dependent: :destroy
+  has_many :lists,         foreign_key: :lister_id,    dependent: :destroy
   has_many :notifications, foreign_key: :recipient_id, dependent: :destroy
   has_many :views,         foreign_key: :viewer_id,    dependent: :destroy
   has_many :votes,         foreign_key: :voter_id,     dependent: :destroy

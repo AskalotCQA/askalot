@@ -76,6 +76,12 @@ describe 'LTI request communication', type: :request do
       expect(after_count).to eql(before_count)
     end
 
+    it 'stores activity about visited unit' do
+      expect(Shared::List.count).to eql(1)
+      expect(Shared::List.last.unit_view).to eql(true)
+      expect(Shared::Category.last.lists_count).to eql(1)
+    end
+
     context 'with already registered user' do
       before :each do
         @params['roles'] = 'Administrator'

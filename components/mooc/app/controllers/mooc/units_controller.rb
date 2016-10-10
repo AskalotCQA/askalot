@@ -45,6 +45,10 @@ module Mooc
 
       redirect_to mooc.units_error_path(exception: t('unit.error.unknown_category_uuid')) if @unit.uuid == 'unknown'
 
+      @list = @unit.lists.create! lister: current_user, unit_view: true
+
+      dispatch_event :create, @list, for: @unit.watchers
+
       @question               = Shared::Question.new
       @question.category      = @unit
       @question.question_type = Shared::QuestionType.questions.first
