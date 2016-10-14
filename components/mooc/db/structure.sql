@@ -292,8 +292,8 @@ CREATE TABLE categories (
     rgt integer,
     uuid character varying(255),
     depth integer,
-    full_tree_name character varying(255),
-    full_public_name character varying(255),
+    full_tree_name text,
+    full_public_name text,
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     shared boolean DEFAULT true,
     askable boolean DEFAULT true,
@@ -3785,4 +3785,5 @@ INSERT INTO schema_migrations (version) VALUES ('20161004171530');
 INSERT INTO schema_migrations (version) VALUES ('20161014154617');
 
 INSERT INTO schema_migrations (version) VALUES ('20161014155314');
+
 
