@@ -145,11 +145,12 @@
 .question-title {
   margin-top: 20px;
 
-  .label, i {
-    vertical-align: middle;
+  i {
+    vertical-align: top;
   }
 
   .label {
+    vertical-align: middle;
     font-size: 0.44em;
   }
 }

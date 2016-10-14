@@ -42,6 +42,21 @@
   }
 }
 
+.md-editor {
+  border: none;
+
+  .md-header {
+    border: 1px solid #ddd;
+    border-bottom: none;
+    padding: 2px 0;
+  }
+
+  textarea {
+    background: none;
+    border: 1px solid $btn-default-border;
+  }
+}
+
 
 .markdown-output {
   @include markdown-content;
