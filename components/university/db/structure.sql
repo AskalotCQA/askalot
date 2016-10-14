@@ -453,7 +453,8 @@ CREATE TABLE categories (
     askable boolean DEFAULT true,
     description text,
     third_party_hash character varying(255),
-    lists_count integer DEFAULT 0 NOT NULL
+    lists_count integer DEFAULT 0 NOT NULL,
+    visible boolean DEFAULT true NOT NULL
 );
 
 
@@ -4199,4 +4200,8 @@ INSERT INTO schema_migrations (version) VALUES ('20160913174811');
 INSERT INTO schema_migrations (version) VALUES ('20160930145553');
 
 INSERT INTO schema_migrations (version) VALUES ('20161004171530');
+
+INSERT INTO schema_migrations (version) VALUES ('20161014154617');
+
+INSERT INTO schema_migrations (version) VALUES ('20161014155314');
 

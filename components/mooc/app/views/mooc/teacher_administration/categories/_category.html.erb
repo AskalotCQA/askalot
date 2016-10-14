@@ -12,6 +12,10 @@
   <%= check_box_tag 'askable[]', category.id, category.askable, tooltip_attributes(t 'activerecord.attributes.shared/category.askable').merge({class: 'treetable-checkbox'}) %>
 </td>
 
+<td>
+  <%= check_box_tag 'visible[]', category.id, category.visible, tooltip_attributes(t 'activerecord.attributes.shared/category.visible').merge({class: 'treetable-checkbox'}) %>
+</td>
+
 <td class="text-center">
   <% if category.can_have_subcategories? %>
     <a href="<%= mooc.new_teacher_administration_category_path parent_id: category.id %>" class="text-muted text-undecorated">

@@ -40,6 +40,7 @@ class Category < ActiveRecord::Base
   scope :shared, -> { where(shared: true) }
   scope :in_contexts, lambda { |contexts| Category.all_in_contexts(contexts, self) }
   scope :not_unknown, -> { where.not(name: 'unknown') }
+  scope :visible, -> { where(visible: true) }
 
   attr_accessor :copied
   attr_reader :what_changed

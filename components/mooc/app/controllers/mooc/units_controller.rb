@@ -32,13 +32,14 @@ module Mooc
         lti_id = params[:resource_link_id].split('-', 2).last
 
         @unit = Shared::Category.in_contexts(Shared::Context::Manager.current_context_id).find_by lti_id: lti_id
-        @unit = Shared::Category.create(name: 'unknown', uuid: 'unknown', lti_id: lti_id, parent_id: Shared::Context::Manager.current_context_id, askable: true) if @unit.nil?
+        @unit = Shared::Category.create(name: 'unknown', uuid: 'unknown', lti_id: lti_id, parent_id: Shared::Context::Manager.current_context_id, askable: true, visible: false) if @unit.nil?
 
         context_user = Shared::ContextUser.find_by(user: current_user, context_id: Shared::Context::Manager.current_context_id)
 
         Shared::ContextUser.create!(user: current_user, context_id: Shared::Context::Manager.current_context_id) if context_user.nil?
 
         teacher_context_assignment(@context_id) if params['roles'].in?(['Instructor', 'Administrator']) && current_user.role != :administrator
+        update_category_visiblity(@unit) if ! @unit.visible && current_user.assignments.empty?
       else
         @unit = Shared::Category.find params[:id]
       end
@@ -118,15 +119,19 @@ module Mooc
 
       assignment = Shared::Assignment.find_by(user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
 
-      unless assignment
-        return Shared::Assignment.create!(role: Shared::Role.find_by!(name: params['roles']), user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
-      end
-
+      return create_assignment(context_category_id) unless assignment
       return if assignment.role.name.to_sym == params['roles']
 
       assignment.destroy
+      create_assignment(context_category_id)
+    end
 
+    def create_assignment(context_category_id)
       Shared::Assignment.create!(role: Shared::Role.find_by!(name: params['roles']), user: current_user, category_id: context_category_id, admin_visible: true, parent: nil)
+    end
+
+    def update_category_visiblity(category)
+      category.self_and_ancestors.each { |c| c.update(visible: true) unless c.visible }
     end
   end
 end
