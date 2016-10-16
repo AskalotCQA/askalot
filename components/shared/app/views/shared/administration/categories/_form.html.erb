@@ -52,5 +52,12 @@
     </label>
   </div>
 
+  <div class="checkbox">
+    <label>
+      <%= f.check_box :visible %>
+      <%= t 'activerecord.attributes.shared/category.visible' %>
+    </label>
+  </div>
+
   <button type="submit" class="btn btn-success"><%= button %></button>
 <% end %>
