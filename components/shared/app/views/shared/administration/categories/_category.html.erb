@@ -17,6 +17,10 @@
 </td>
 
 <td>
+  <%= check_box_tag 'visible[]', category.id, category.visible, tooltip_attributes(t 'activerecord.attributes.shared/category.visible').merge({class: 'treetable-checkbox'}) %>
+</td>
+
+<td>
   <%= check_box_tag 'copied[]', category.id, category.copied, tooltip_attributes(t 'activerecord.attributes.shared/category.copy').merge({class: 'treetable-checkbox'}) %>
 </td>
 

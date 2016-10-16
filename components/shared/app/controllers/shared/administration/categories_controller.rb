@@ -45,12 +45,14 @@ class Administration::CategoriesController < AdministrationController
 
   def update_settings
     Shared::Category.all.each do |category|
-      shared = params[:shared] ? params[:shared].include?(category.id.to_s) : false
-      askable =  params[:askable] ? params[:askable].include?(category.id.to_s) : false
+      shared  = params[:shared] ? params[:shared].include?(category.id.to_s) : false
+      askable = params[:askable] ? params[:askable].include?(category.id.to_s) : false
+      visible = params[:visible] ? params[:visible].include?(category.id.to_s) : false
 
-      if category.shared != shared || category.askable != askable
+      if category.shared != shared || category.askable != askable || category.visible != visible
         category.shared  = shared
         category.askable = askable
+        category.visible = visible
 
         category.save
       end
@@ -79,7 +81,7 @@ class Administration::CategoriesController < AdministrationController
   private
 
   def category_params
-    params.require(:category).permit(:name, :description, :tags, :parent_id, :uuid, :shared, :askable, :third_party_hash, :teacher_assistant_ids => [])
+    params.require(:category).permit(:name, :description, :tags, :parent_id, :uuid, :shared, :askable, :visible, :third_party_hash, :teacher_assistant_ids => [])
   end
 end
 end
