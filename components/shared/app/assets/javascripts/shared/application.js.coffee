@@ -25,6 +25,9 @@
 #= require moment/en-gb.js
 #= require jquery-textcomplete
 #
+#= require bootstrap-markdown
+#= require ./markdown-editor-buttons
+#
 #= require d3
 #= require cal-heatmap
 #
