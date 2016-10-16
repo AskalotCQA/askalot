@@ -28,7 +28,7 @@ post_data = (starter) ->
   starter.prop 'disabled', true
 
   parent_name = $('#copy-categories-parent-id').find('.select2-chosen').text();
-  data = { 'shared[]': [], 'askable[]': [], 'copied[]' : [], 'parent_name': parent_name }
+  data = { 'shared[]': [], 'askable[]': [], 'copied[]' : [], 'visible[]' : [], 'parent_name': parent_name }
 
   $(".treetable-checkbox:checked").each ->
     data[$(this).attr('name')].push $(this).val()

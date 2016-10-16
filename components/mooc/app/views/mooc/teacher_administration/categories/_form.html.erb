@@ -16,7 +16,7 @@
     <%= f.label :tags %>
     <%= f.text_field :tags, value: @category.tags.join(','), class: :'form-control', data: { as: :select2, role: :tags } %>
   </div>
-    
+
   <div class="form-group">
     <%= f.label :teacher_assistants %>
     <% if @category.id %>
@@ -32,6 +32,13 @@
     <label>
       <%= f.check_box :askable %>
       <%= t 'activerecord.attributes.shared/category.askable' %>
+    </label>
+  </div>
+
+  <div class="checkbox">
+    <label>
+      <%= f.check_box :visible %>
+      <%= t 'activerecord.attributes.shared/category.visible' %>
     </label>
   </div>
 

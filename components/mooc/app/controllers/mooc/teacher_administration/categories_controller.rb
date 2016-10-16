@@ -51,10 +51,12 @@ module Mooc
 
     def update_settings
       Shared::Category.in_contexts(contexts_to_administrate).all.each do |category|
-        askable =  params[:askable] ? params[:askable].include?(category.id.to_s) : false
+        askable = params[:askable] ? params[:askable].include?(category.id.to_s) : false
+        visible = params[:visible] ? params[:visible].include?(category.id.to_s) : false
 
-        if category.askable != askable
+        if category.askable != askable || category.visible != visible
           category.askable = askable
+          category.visible = visible
 
           category.save
         end
@@ -72,7 +74,7 @@ module Mooc
     end
 
     def category_params
-      params.require(:category).permit(:name, :tags, :askable, :teacher_assistant_ids => [])
+      params.require(:category).permit(:name, :tags, :askable, :visible, :teacher_assistant_ids => [])
     end
 
     def check_parent

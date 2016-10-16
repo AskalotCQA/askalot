@@ -111,6 +111,6 @@ module Shared::CategoriesHelper
   end
 
   def askable_leaves_categories(context)
-    Shared::Category.find(context).leaves.where(askable: true).not_unknown.unscope(:order).order(:full_public_name)
+    Shared::Category.find(context).leaves.where(askable: true).visible.not_unknown.unscope(:order).order(:full_public_name)
   end
 end

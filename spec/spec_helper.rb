@@ -73,6 +73,7 @@ RSpec.configure do |config|
     c.syntax = :expect # Allow only usage of expect syntax
   end
 
+
   # In order to make example reference yield inside it, before, each blocks
   config.expose_current_running_example_as :example
 
@@ -87,6 +88,7 @@ RSpec.configure do |config|
   config.include "#{Rails.module.capitalize}::Engine".constantize.routes.url_helpers, type: :feature
 
   # Include support
+  config.include Warden::Test::Helpers,        type: :request
   config.include Shared::AuthenticationHelper, type: :feature
   config.include Shared::CapybaraHelpers,      type: :feature
   config.include Devise::TestHelpers,  type: :controller

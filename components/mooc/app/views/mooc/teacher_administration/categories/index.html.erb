@@ -1,10 +1,14 @@
 <h1><%= t 'teacher_administration.category.index.title' %></h1>
+<div id="copy-categories-parent-id"></div>
 
 <% content_for :categories_header do %>
   <th></th>
   <th></th>
   <th>
     <%= fa_icon :question, tooltip_attributes(t 'activerecord.attributes.shared/category.askable') %>
+  </th>
+  <th>
+    <%= fa_icon :eye, tooltip_attributes(t 'activerecord.attributes.shared/category.visible') %>
   </th>
   <th class="text-center"><%= t 'teacher_administration.category.create.action' %></th>
   <th class="text-center"><%= t 'teacher_administration.category.edit.action' %></th>

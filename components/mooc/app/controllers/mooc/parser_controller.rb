@@ -35,7 +35,7 @@ module Mooc
       category = Shared::Category.in_contexts(Shared::Context::Manager.current_context_id).where({ uuid: uuid }).first
 
       if category.nil?
-        category = Shared::Category.create({ uuid: uuid, name: name, parent: parent })
+        category = Shared::Category.create({ uuid: uuid, name: name, parent: parent, visible: false })
         saved_category = category.save
       elsif category.name == 'unknown'
         category.update({ name: name, parent: parent })

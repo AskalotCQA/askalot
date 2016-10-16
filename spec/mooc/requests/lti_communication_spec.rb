@@ -57,6 +57,28 @@ describe 'LTI request communication', type: :request do
     expect(Shared::User.last.assignments.first.role.name).to eql('teacher_assistant')
   end
 
+  it 'creates new category as not visible if user is instructor' do
+    @params['roles'] = 'Instructor'
+
+    post '/default/units', @params
+
+    expect(Shared::Category.last.visible).to eql(false)
+  end
+
+  it 'creates new category as not visible if user is TA' do
+    @params['roles'] = 'Administrator'
+
+    post '/default/units', @params
+
+    expect(Shared::Category.last.visible).to eql(false)
+  end
+
+  it 'creates new category as visible if user is student' do
+    post '/default/units', @params
+
+    expect(Shared::Category.last.visible).to eql(true)
+  end
+
   context 'with unit view correctly setup' do
     before :each do
       post '/default/units', @params
@@ -100,6 +122,33 @@ describe 'LTI request communication', type: :request do
         expect(Shared::User.last.assignments.first.role.name).to eql('teacher')
         expect(Shared::User.last.assignments.count).to eql(2)
       end
+    end
+  end
+
+  context 'with unit view setup by teaacher' do
+    before :each do
+      @params['roles'] = 'Instructor'
+
+      post '/default/units', @params
+
+      # simulate successful setup by public JS
+      Shared::Context::Manager.context_category.update(askalot_page_url: 'correctly set up url')
+      Shared::Category.last.update(name: 'Parsed Name', uuid: 'parsed_uuid')
+
+      logout(:user)
+    end
+
+    it 'updates category visiblity when student arrives' do
+      expect(Shared::Category.last.visible).to eql(false)
+
+      @params['roles'] = 'student'
+      @params['user_id'] = 'abcde'
+      @params['lis_person_sourcedid'] = 'JaneDoe'
+      @params['lis_person_contact_email_primary'] = 'jane.doe@example.com'
+
+      post '/default/units', @params
+
+      expect(Shared::Category.last.visible).to eql(true)
     end
   end
 end
