@@ -30,5 +30,6 @@ $('.markdown-editor-buttons').markdown
   fullscreen: false
   hiddenButtons: 'cmdPreview'
   language: lang
+  resize: 'vertical'
   onSelect: (e) =>
     $(e.$textarea[0]).trigger('propertychange')
