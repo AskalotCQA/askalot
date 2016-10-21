@@ -17,6 +17,10 @@ module Redcurtain::Renderer
 
       matches.each { |match| content = replace(content, match[1]) }
 
+      matches = content.scan(/(?<!\\)(\[mathjax\]|\[mathjaxinline\])(.+?)(\[\/mathjax\]|\[\/mathjaxinline\])/)
+
+      matches.each { |match| content = replace(content, match[1]) }
+
       content.html_safe
     end
 

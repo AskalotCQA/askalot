@@ -5,6 +5,7 @@ describe 'Markdown', type: :feature do
   let!(:question) { create :question, :with_tags }
   let!(:category) { create :category }
   let(:text) { '\\\\(20 + 1_x/x_2^{2} \\\\), \\\\[ \frac{1}{n^{2}} \\\\],'\
+               '[mathjaxinline]1/x^{2}@20[/mathjaxinline], [mathjax]\\frac{1@10}{n^{2}}[/mathjax],'\
                '$\\frac{1@10}{n^{2}}$ , $$\\frac{1@10}{n^{2}}$$' }
 
   before :each do
@@ -39,7 +40,7 @@ describe 'Markdown', type: :feature do
       wait_for_remote
 
       within '.markdown-preview' do
-        expect(page).to have_selector('span.MathJax_SVG', count: 4)
+        expect(page).to have_selector('span.MathJax_SVG', count: 6)
       end
     end
 
@@ -116,7 +117,7 @@ describe 'Markdown', type: :feature do
       click_button 'Opýtať'
 
       within '.question-content' do
-        expect(page).to have_selector('span.MathJax_SVG', count: 4)
+        expect(page).to have_selector('span.MathJax_SVG', count: 6)
       end
     end
 
@@ -260,7 +261,7 @@ describe 'Markdown', type: :feature do
       expect(page).to have_content('Odpoveď bola úspešne pridaná.')
 
       within '#question-answers' do
-        expect(page).to have_selector('span.MathJax_SVG', count: 4)
+        expect(page).to have_selector('span.MathJax_SVG', count: 6)
       end
     end
   end
@@ -315,7 +316,7 @@ describe 'Markdown', type: :feature do
       end
 
       within '#question-comments' do
-        expect(page).to have_selector('span.MathJax_SVG', count: 4)
+        expect(page).to have_selector('span.MathJax_SVG', count: 6)
       end
     end
   end

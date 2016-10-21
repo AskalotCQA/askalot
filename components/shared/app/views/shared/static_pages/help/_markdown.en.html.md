@@ -14,4 +14,4 @@ In Markdown texts it is possible to add funny icons Gemoji. After typing `:` you
 
 ## MathJax
 
-Additionally, you can use [TeX syntax](https://en.wikibooks.org/wiki/LaTeX/Mathematics) to embed math formulas. Use `$formula$` or `\\(formula\\)` syntax to include inline math expressions, and `$$formula$$` or `\\[formula\\]` to include block level math expressions.
+Additionally, you can use [TeX syntax](https://en.wikibooks.org/wiki/LaTeX/Mathematics) to embed math formulas. Use `$formula$`, `\\(formula\\)`, or `[mathjaxinline]formula[/mathjaxinline]` syntax to include inline math expressions, and `$$formula$$`, `\\[formula\\]`, or `[mathjax]formula[/mathjax]` to include block level math expressions.
