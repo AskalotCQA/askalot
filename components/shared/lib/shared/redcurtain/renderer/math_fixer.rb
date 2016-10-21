@@ -23,7 +23,7 @@ module Redcurtain::Renderer
     private
 
     def replace(content, match)
-      m = match.gsub('\\\\', '\\\\\\\\\\\\\\\\\\').gsub(/[^\\]_/, '\_').gsub(/[^\\]\*/, '\\*')
+      m = match.gsub('\\\\', '\\\\\\\\\\\\\\\\\\').gsub(/(?<!\\)_/, '\_').gsub(/(?<!\\)\*/, '\\*')
 
       content.gsub(/#{Regexp.escape(match)}/, m)
     end
