@@ -6,6 +6,7 @@ module Redcurtain
 
     def renderers
       @renderers ||= [
+        Renderer::MathFixer,
         Renderer::Gemoji,
         Renderer::Redcarpet,
         Renderer::Pygments
