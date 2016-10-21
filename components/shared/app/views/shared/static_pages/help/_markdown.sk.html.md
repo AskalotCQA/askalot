@@ -14,4 +14,4 @@ V Markdown textoch je možné pridávať aj veselé ikony Gemoji. Po napísaní 
 
 ## MathJax
 
-Na pridávanie matematických výrazov môžete využiť [TeX syntax](https://en.wikibooks.org/wiki/LaTeX/Mathematics). Použite tvar `$formula$` alebo `\\(formula\\)` ak chcete vložiť výraz v riadku a formát `$$formula$$` or `\\[formula\\]` ak chcete vložiť matematický výraz v blokovom formáte.
+Na pridávanie matematických výrazov môžete využiť [TeX syntax](https://en.wikibooks.org/wiki/LaTeX/Mathematics). Použite tvar `$formula$`, `\\(formula\\)` alebo `[mathjaxinline]formula[/mathjaxinline]` ak chcete vložiť výraz v riadku a formát `$$formula$$`, `\\[formula\\]` alebo `[mathjax]formula[/mathjax]` ak chcete vložiť matematický výraz v blokovom formáte.
