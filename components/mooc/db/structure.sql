@@ -94,7 +94,8 @@ CREATE TABLE answer_profiles (
     probability double precision,
     source character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    text_value text
 );
 
 
@@ -1087,7 +1088,8 @@ CREATE TABLE question_profiles (
     probability double precision,
     source character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    text_value text
 );
 
 
@@ -1409,7 +1411,8 @@ CREATE TABLE user_profiles (
     probability double precision,
     source character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    text_value text
 );
 
 
@@ -3782,8 +3785,9 @@ INSERT INTO schema_migrations (version) VALUES ('20160930145553');
 
 INSERT INTO schema_migrations (version) VALUES ('20161004171530');
 
+INSERT INTO schema_migrations (version) VALUES ('20161006214540');
+
 INSERT INTO schema_migrations (version) VALUES ('20161014154617');
 
 INSERT INTO schema_migrations (version) VALUES ('20161014155314');
-
 

@@ -35,3 +35,6 @@ public/attachments/*
 !public/attachments/.gitkeep
 
 tmp
+
+*.dat
+*.pyc

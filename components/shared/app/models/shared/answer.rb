@@ -24,6 +24,7 @@ class Answer < ActiveRecord::Base
   scope :by,  lambda { |user| where(author: user) }
   scope :for, lambda { |question| where(question: question) }
   scope :in_context, lambda { |context| includes(:related_categories).where(categories: { id: context }) }
+  scope :older, lambda { |date| where('answers.created_at < ?', date) }
 
   Hash[Label.value_enum].values.each { |label| scope label, -> { labeled_with label } }
 

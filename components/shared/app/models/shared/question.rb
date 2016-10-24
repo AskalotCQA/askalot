@@ -59,6 +59,7 @@ class Question < ActiveRecord::Base
 
   scope :by, lambda { |user| where(author: user) }
   scope :in_context, lambda { |context| includes(:related_categories).where(categories: { id: context }) }
+  scope :older,        lambda { |date| where('questions.created_at < ?', date) }
 
   self.updated_timestamp = [:updated_at, :touched_at]
 
