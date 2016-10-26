@@ -2,24 +2,29 @@
   .remove-grid-md > * {
     float: none; width: auto;
   }
+
+  .dashboard {
+    #fulltext-search {
+      max-width: 300px;
+    }
+  }
 }
 
-.dashboard-description{
-  margin-bottom: 20px !important;
+.dashboard-description {
+  margin-bottom: 10px !important;
 }
 
-.label-new-news{
+.label-new-news {
   margin-left: 10px !important;
 }
 
 .dashboard {
-  margin-top: 40px;
-
   .headline {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 
     h1 {
       font-variant: small-caps;
+      margin-top: 25px;
     }
 
     p {
@@ -27,6 +32,10 @@
 
       font-style: italic;
     }
+  }
+
+  #reset_dashboard {
+    margin-bottom: 10px;
   }
 
   .links {
