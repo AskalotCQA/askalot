@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Add News', type: :feature do
+describe 'News', type: :feature do
   context 'when logged in as administrator' do
     let(:administrator)   { create :administrator}
     let(:news)            { create :news}
@@ -45,6 +45,28 @@ describe 'Add News', type: :feature do
         expect(page).to have_content(date)
         expect(page).to have_content('News')
       end
+    end
+
+    it 'updates news', js: true do
+      news = create :news
+
+      visit shared.administration_news_index_path
+
+      find(:css, "a#news-#{news.id}-edit-modal").click
+
+      within "#news-#{news.id}-editing" do
+        fill_in 'news[title]', with: 'Something else'
+        fill_in 'news[description]', with: 'This is something else'
+
+        click_button 'Uložiť'
+      end
+
+      expect(page).to have_content('Novinka bola úspešne aktualizovaná.')
+
+      news.reload
+
+      expect(news.title).to eql('Something else')
+      expect(news.description).to eql('This is something else')
     end
   end
 end
