@@ -1,16 +1,9 @@
-module ExtractFeatures
+module Recommendation
   extend self
 
-  # Common features
-
-
+  # Helpers
   def is_student(user)
     user.assignments.count == 0 && user.role == :student
-  end
-
-  def portion_of_seen_categories(resource, category, user)
-    user.lists.where(category: category.leaves).where('created_at > ?', resource.created_at)
-        .select('DISTINCT(category_id)').count / category.leaves.count.to_f
   end
 
   def user_answers_older_than_resource(resource, user)

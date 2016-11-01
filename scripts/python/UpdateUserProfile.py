@@ -19,7 +19,7 @@ def update_user_profile(textual_dictionary, answer):
     bow = textual_dictionary.vocabulary.doc2bow(text, allow_update=True)
 
     # Load and update user profile if exist
-    user_profile = DataManager.get_user_profile(answer.author_id, 'BoW')
+    user_profile = DataManager.get_user_profile_property(answer.author_id, 'BoW')
 
     if user_profile:
         print 'Found user profile'

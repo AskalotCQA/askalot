@@ -1,5 +1,6 @@
 from gensim import corpora
 import math
+import datetime
 
 def sum_bows(bow1, bow2):
     '''
@@ -45,3 +46,4 @@ def print_bow(vocabulary, bow):
     assert isinstance(vocabulary, corpora.Dictionary)
     for word in bow:
         print str(word[0])+" : "+str(vocabulary[word[0]])+" : " + str(word[1])
+

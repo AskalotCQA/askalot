@@ -67,20 +67,19 @@ def update_user_profile(user_id, property, value):
                           "WHERE user_id = %s AND targetable_id = %s", (value, str(user_id), targetable_id))
 
 
-def get_user_profile(user_id, property):
-    targetable_id = get_targetable_id(property)
-    cursor.execute("SELECT * FROM user_profiles WHERE user_id = %s AND targetable_id= %s", (str(user_id), targetable_id))
+def get_user_profile_property(user_id, property):
+    cursor.execute("SELECT * FROM user_profiles WHERE user_id = %s AND property = %s", (str(user_id), property))
     row = cursor.fetchone()
     return DbObject(cursor, row) if row else None
 
+
 def get_question_profile(question_id, property):
-    targetable_id = get_targetable_id(property)
     cursor.execute("SELECT * FROM question_profiles WHERE question_id = %s AND property = %s", (str(question_id), property))
     # TODO add targetable id to not compare strings
 
 
-def get_all_user_profiles(property):
-    yeild_cursor.execute("SELECT * FROM user_profiles WHERE targetable_id= %s", str(get_targetable_id(property)))
+def get_all_user_profiles_property(property):
+    yeild_cursor.execute("SELECT * FROM user_profiles WHERE property = %s", (property))
     for user_profile in yeild_cursor:
         yield DbObject(yeild_cursor, user_profile)
 
@@ -89,6 +88,48 @@ def get_answer(answer_id):
     cursor.execute("SELECT * FROM answers WHERE id = " + str(answer_id))
     row = cursor.fetchone()
     return DbObject(cursor, row) if row else None
+
+
+def get_user_profile(user_id, category_id):
+    '''
+    Get user profile properties. In case of categories, filter only properties which is category and it's
+    ancestors.
+    :param user_id: specifies user's id to find
+    :param category_id: id of category
+    :return: User profile - general properties related to user and user properties related to specified categories.
+    '''
+    yeild_cursor.execute("SELECT * FROM user_profiles WHERE user_id = %s AND (targetable_type != 'Shared::Category' "
+                         "OR (targetable_type = 'Shared::Category' AND targetable_id IN (SELECT id FROM categories as c, "
+		                 "(SELECT lft, rgt FROM categories WHERE id = %s) as a "
+	                     "WHERE c.lft <= a.lft AND c.rgt >= a.rgt)))", (user_id, category_id))
+    users = [DbObject(yeild_cursor, profile) for profile in yeild_cursor]
+    return users
+    #for user_profile in yeild_cursor:
+    #    yield DbObject(yeild_cursor, user_profile)
+
+
+
+
+def get_users_with_views():
+    cursor.execute("SELECT id FROM users WHERE views_count > 0")
+    users = cursor.fetchall()
+    users = [user[0] for user in users]
+    return users
+
+
+def get_category(id):
+    cursor.execute("SELECT * FROM categories WHERE id = %s", (id, ))
+    row = cursor.fetchone()
+    return DbObject(cursor, row) if row else None
+
+
+def category_leaves(category_id):
+    cursor.execute( "SELECT * FROM categories as c,(SELECT lft, rgt FROM categories WHERE id = "+str(category_id)+") as a "
+                    "WHERE (c.lft >= a.lft) AND (c.rgt < a.rgt) AND (c.rgt - c.lft = 1)")
+    categories = cursor.fetchall()
+    categories = [DbObject(cursor, category) for category in categories]
+    return categories
+
 
 
 def close_connection():

@@ -18,13 +18,15 @@ class BinaryClassifier(object):
         self.clf = Pipeline([('scaler', scaler), ('clf', self.base_clf)])
         self.X = np.array(self.X)
         self.Y = np.array(self.Y)
-        sampler = RandomOverSampler(random_state=42)
-        self.X, self.Y = sampler.fit_sample(self.X, self.Y)
+        self.sampler = RandomOverSampler(random_state=42)
 
 
-    def fit(self, param_grid, cv=4):
-        self.clf = Classifier.grid_searching(self.clf, self.X, self.Y, param_grid, cv=cv)
-        Classifier.kfold_validation(self.clf, self.X, self.Y, splits_count=cv, threshold=0.50)
+    def fit(self, cv=4):
+        #self.clf = Classifier.grid_searching(self.clf, self.X, self.Y, param_grid, cv=cv)
+        Classifier.kfold_validation(self.clf, self.X, self.Y, self.sampler, splits_count=cv, threshold=0.50)
+        self.X, self.Y = self.sampler.fit_sample(self.X, self.Y)
+        self.clf.fit(self.X, self.Y)
+
         self.save_as_file()
 
 

@@ -18,10 +18,20 @@ module Shared::Yeast
       alias :initiator :viewer
     end
 
+    Shared::List.class_eval do
+      alias :initiator :lister
+    end
+
+    Shared::User.class_eval do
+      # TODO initiator self?
+      alias :initiator :role
+    end
+
     interval = 1.hour
 
     # TODO (smolnar) consider View
-    models = [Shared::Question, Shared::Answer, Shared::Vote, Shared::Comment, Shared::Labeling]
+    models = [Shared::Question, Shared::Answer, Shared::Vote, Shared::Comment,
+              Shared::View, Shared::List, Shared::User]
     date   = Shared::Question.order(:created_at).first.created_at
 
     until date > Time.now

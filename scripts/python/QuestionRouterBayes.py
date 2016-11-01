@@ -34,7 +34,7 @@ if __name__ == '__main__':
 
     # Filter users - all users that have user profile
     print 'Computing similarity index for all user profiles'
-    user_profiles = DataManager.get_all_user_profiles('BoW')
+    user_profiles = DataManager.get_all_user_profiles_property('BoW')
     user_profiles_matrix = []
     user_ids = []   # mapping user profiles id to user_id
     for user_profile in user_profiles:

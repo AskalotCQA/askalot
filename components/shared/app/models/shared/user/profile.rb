@@ -8,6 +8,9 @@ class User
     symbolize :source
 
     scope :of, lambda { |type| where(property: type.to_s.camelize) }
+    scope :get_feature, lambda { |type| of(type).first_or_create(targetable_id: -1,
+                                                                 targetable_type: type,
+                                                                 property: type) }
 
     self.table_name = 'user_profiles'
   end
