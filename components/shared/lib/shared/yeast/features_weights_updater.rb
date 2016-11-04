@@ -1,10 +1,6 @@
-require './scripts/online_features_manager'
-
 module Shared::Yeast
   module FeaturesWeightsUpdater
     extend self
-
-    @manager = Recommendation::OnlineFeaturesManager.new
 
     def publish(action, initiator, resource, options = {})
       puts "Feeding for #{action} '#{action}' on #{resource} by #{initiator.try(:nick) || 'no one'} ..."

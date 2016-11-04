@@ -1,6 +1,3 @@
-require './scripts/extract_features'
-require './scripts/offline_features_manager'
-
 module Shared::Yeast
   module NewQuestionRouter
     extend self
@@ -19,12 +16,10 @@ module Shared::Yeast
       puts "Feeding for #{action} '#{action}' on #{resource} by #{initiator.try(:nick) || 'no one'} ..."
 
       if resource.is_a? Shared::Question
-        #`python scripts/python/NewQuestionRouter.py #{resource.id}`
+        puts `python scripts/python/QuestionRouterEnsemble.py #{resource.id} #{resource.answers.first
+                                                                                     .try(:author).try(:id)}`
       end
 
-      if resource.is_a? Shared::Answer
-        `python scripts/python/UpdateUserProfile.py #{resource.id}`
-      end
     end
 
   end

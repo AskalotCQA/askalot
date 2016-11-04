@@ -73,8 +73,8 @@ class TextualDictionary(object):
 
     def load_vocabulary_from_file(self):
         if os.path.isfile(VOCABULARY_FILENAME):
-            print("===============================================================")
-            print("Loading vocabulary from file.\n")
+            #print("===============================================================")
+            #print("Loading vocabulary from file.\n")
             self.vocabulary = corpora.Dictionary.load(VOCABULARY_FILENAME)
             assert isinstance(self.vocabulary, corpora.Dictionary)
             return True

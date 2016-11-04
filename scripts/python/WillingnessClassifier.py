@@ -1,27 +1,28 @@
 import PlaygroundClassifier
 from sklearn import preprocessing
 import numpy as np
+from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
-from imblearn.over_sampling import RandomOverSampler
+from imblearn.under_sampling import RandomUnderSampler
 from Classifier import Classifier
-from sklearn.linear_model import SGDClassifier
 
 
-class ExpertiseClassifier(Classifier):
-    base_clf = RandomForestClassifier(class_weight="balanced", n_jobs=-1, n_estimators=30, max_depth=4,
+class WillignessClassifier(Classifier):
+    base_clf = RandomForestClassifier(class_weight="balanced", n_jobs=-1, n_estimators=100, max_depth=5,
                                       criterion="entropy")
     scaler = preprocessing.RobustScaler()
-    sampler = RandomOverSampler(random_state=42)
+    sampler = RandomUnderSampler(random_state=42)
 
-    save_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/expertise-classifier.pkl'
-    data_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/expertise-train.dat'
+    save_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/willingness-classifier.pkl'
+    data_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/willingness-train.dat'
 
     def __init__(self):
-        super(ExpertiseClassifier, self).__init__()
+        super(WillignessClassifier, self).__init__()
         #self.X, self.Y = self.sampler.fit_sample(self.X, self.Y)
 
 
-    def fit(self, cv=10):
+
+    def fit(self, cv=5):
         self.clf.named_steps['clf'] = PlaygroundClassifier.grid_searching(self.clf.named_steps['clf'], self.X, self.Y, cv=cv)
 
         # Compute cv results
@@ -31,4 +32,5 @@ class ExpertiseClassifier(Classifier):
         self.X, self.Y = self.sampler.fit_sample(self.X, self.Y)
         self.clf.fit(self.X, self.Y)
         #self.save_as_file()
+
 

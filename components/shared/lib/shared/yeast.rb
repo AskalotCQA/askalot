@@ -32,9 +32,12 @@ module Shared::Yeast
     # TODO (smolnar) consider View
     models = [Shared::Question, Shared::Answer, Shared::Vote, Shared::Comment,
               Shared::View, Shared::List, Shared::User]
-    date   = Shared::Question.order(:created_at).first.created_at
+    #date   = Shared::Question.order(:created_at).first.created_at
+    date  = Date.new(2016, 11, 02)
+    #till_date = date + 1.day
+    till_date = Time.now
 
-    until date > Time.now
+    until date > till_date
       resources = models.map { |model| model.where('created_at >= ? AND created_at < ?', date, date + interval) }.flatten.compact
 
       resources.sort_by!(&:created_at)
