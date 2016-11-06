@@ -10,12 +10,10 @@ class Classifier(object):
     threshold = 0.5
 
     def __init__(self):
-        print 'Classifier'
         self.X, self.Y = PlaygroundClassifier.get_training_data(self.data_filename)
         self.clf = Pipeline([('scaler', self.scaler), ('clf', self.base_clf)])
         self.X = np.array(self.X)
         self.Y = np.array(self.Y)
-        self.load_from_file()
 
     def predict(self, input):
         predictions = self.clf.predict_proba(input)[:, 1]

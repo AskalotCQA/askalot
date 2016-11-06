@@ -131,6 +131,19 @@ def category_leaves(category_id):
     return categories
 
 
+def user_recommendation_count(user_id):
+    cursor.execute("SELECT COUNT(*) FROM recommendations WHERE user_id = " + str(user_id)+" AND clicked_at IS NULL")
+    return cursor.fetchone()[0]
+
+
+
+def insert_recommendation(question_id, user_id):
+    cursor.execute("INSERT INTO recommendations (question_id, user_id, created_at, updated_at)"
+                        "VALUES(%s, %s, now(), now());",
+                   (str(question_id), str(user_id)))
+
+
+
 
 def close_connection():
     connection.commit()

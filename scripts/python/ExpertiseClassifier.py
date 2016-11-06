@@ -22,6 +22,8 @@ class ExpertiseClassifier(Classifier):
 
 
     def fit(self, cv=10):
+        if self.load_from_file():
+            return
         self.clf.named_steps['clf'] = PlaygroundClassifier.grid_searching(self.clf.named_steps['clf'], self.X, self.Y, cv=cv)
 
         # Compute cv results
@@ -30,5 +32,5 @@ class ExpertiseClassifier(Classifier):
         # Train on whole dataset
         self.X, self.Y = self.sampler.fit_sample(self.X, self.Y)
         self.clf.fit(self.X, self.Y)
-        #self.save_as_file()
+        self.save_as_file()
 

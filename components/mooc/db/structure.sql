@@ -45,6 +45,69 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: ab_groupings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ab_groupings (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    ab_group_id integer NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: ab_groupings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ab_groupings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ab_groupings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE ab_groupings_id_seq OWNED BY ab_groupings.id;
+
+
+--
+-- Name: ab_groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE ab_groups (
+    id integer NOT NULL,
+    value character varying(255) NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: ab_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ab_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ab_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE ab_groups_id_seq OWNED BY ab_groups.id;
+
+
+--
 -- Name: activities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1250,6 +1313,39 @@ ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
 
 
 --
+-- Name: recommendations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE TABLE recommendations (
+    id integer NOT NULL,
+    question_id integer NOT NULL,
+    user_id integer NOT NULL,
+    clicked_at timestamp without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: recommendations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE recommendations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: recommendations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE recommendations_id_seq OWNED BY recommendations.id;
+
+
+--
 -- Name: roles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1645,6 +1741,20 @@ ALTER SEQUENCE watchings_id_seq OWNED BY watchings.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY ab_groupings ALTER COLUMN id SET DEFAULT nextval('ab_groupings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ab_groups ALTER COLUMN id SET DEFAULT nextval('ab_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_seq'::regclass);
 
 
@@ -1869,6 +1979,13 @@ ALTER TABLE ONLY questions ALTER COLUMN id SET DEFAULT nextval('questions_id_seq
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY recommendations ALTER COLUMN id SET DEFAULT nextval('recommendations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regclass);
 
 
@@ -1926,6 +2043,22 @@ ALTER TABLE ONLY votes ALTER COLUMN id SET DEFAULT nextval('votes_id_seq'::regcl
 --
 
 ALTER TABLE ONLY watchings ALTER COLUMN id SET DEFAULT nextval('watchings_id_seq'::regclass);
+
+
+--
+-- Name: ab_groupings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ab_groupings
+    ADD CONSTRAINT ab_groupings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ab_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY ab_groups
+    ADD CONSTRAINT ab_groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -2185,6 +2318,14 @@ ALTER TABLE ONLY questions
 
 
 --
+-- Name: recommendations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+--
+
+ALTER TABLE ONLY recommendations
+    ADD CONSTRAINT recommendations_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -2254,6 +2395,20 @@ ALTER TABLE ONLY votes
 
 ALTER TABLE ONLY watchings
     ADD CONSTRAINT watchings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_ab_groupings_on_ab_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ab_groupings_on_ab_group_id ON ab_groupings USING btree (ab_group_id);
+
+
+--
+-- Name: index_ab_groupings_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_ab_groupings_on_user_id ON ab_groupings USING btree (user_id);
 
 
 --
@@ -3097,6 +3252,20 @@ CREATE INDEX index_questions_on_votes_lb_wsci_bp ON questions USING btree (votes
 
 
 --
+-- Name: index_recommendations_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_recommendations_on_question_id ON recommendations USING btree (question_id);
+
+
+--
+-- Name: index_recommendations_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_recommendations_on_user_id ON recommendations USING btree (user_id);
+
+
+--
 -- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3790,4 +3959,10 @@ INSERT INTO schema_migrations (version) VALUES ('20161006214540');
 INSERT INTO schema_migrations (version) VALUES ('20161014154617');
 
 INSERT INTO schema_migrations (version) VALUES ('20161014155314');
+
+INSERT INTO schema_migrations (version) VALUES ('20161106125632');
+
+INSERT INTO schema_migrations (version) VALUES ('20161106171609');
+
+INSERT INTO schema_migrations (version) VALUES ('20161106171728');
 

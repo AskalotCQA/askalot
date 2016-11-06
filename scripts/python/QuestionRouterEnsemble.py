@@ -107,6 +107,9 @@ def user_profile_to_hash(user_profile):
 
 
 
+MAX_ROUTED_QUESTIONS = 3
+ROUTE_TO_MAX = 5
+
 if __name__ == '__main__':
     textual_dictionary = TextualDictionary()
     if not textual_dictionary.load_vocabulary_from_file():
@@ -132,17 +135,26 @@ if __name__ == '__main__':
     rec_users, exp_prob, will_prob = ensemble.predict(expertise, willingness)
 
     #print 'Recommendation'
+    route_to_counter = 0
     for i in rec_users:
-        print i,':\t\t',users_ids[i], '\t\texp:\t', exp_prob[i], '\t\twill:\t', will_prob[i]
+        print users_ids[i], '\t\texp:\t', exp_prob[i], '\t\twill:\t', will_prob[i]
+        if DataManager.user_recommendation_count(users_ids[i]) <= MAX_ROUTED_QUESTIONS:
+            DataManager.insert_recommendation(question_id, users_ids[i])
+            print 'Routed to:\t', users_ids[i]
+            route_to_counter += 1
+        if route_to_counter == ROUTE_TO_MAX:
+            break
 
     users_ids = np.array(users_ids)
     users_ids = np.take(users_ids, rec_users)
 
     if len(sys.argv) == 3:
-        print sys.argv[2]
+        #print sys.argv[2]
         true_user_id = int(sys.argv[2])
         print 'User id:\t', true_user_id
         print 'Rank:\t', Evaluation.true_rank(users_ids, true_user_id)
         print 'Sucess@10:\t', Evaluation.success(users_ids, true_user_id)
+
+    DataManager.close_connection()
 
 
