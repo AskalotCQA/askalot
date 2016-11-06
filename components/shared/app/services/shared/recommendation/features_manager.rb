@@ -1,7 +1,7 @@
 module Shared::Recommendation
   class FeaturesManager
-    @@n_days = 7.days
-    @@python_input_f = "/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/return-values.dat"
+    N_DAYS = 7.days
+    PYTHON_SIM_RETURN_FILE = "/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/sim-values.dat"
 
     # Helpers
     def is_student(user)
@@ -226,7 +226,7 @@ module Shared::Recommendation
 
     def save_expertise_features(file, resource, category, question, user, class_id)
       cosine_sim(user, question)
-      cos_sim_f = File.open(@@python_input_f, "r") {|f| f.readline}
+      cos_sim_f = File.open(PYTHON_SIM_RETURN_FILE, "r") {|f| f.readline}
       answers_in_week_f = answers_in_category(user, resource, category.parent.parent)
       answers_in_topic_f = answers_in_category(user, resource, category.parent)
       votes_in_topic_f = votes_in_category(user, resource, category.parent)

@@ -3,7 +3,7 @@ module Shared::Yeast
     extend self
 
     def publish(action, initiator, resource, options = {})
-      puts "Feeding for #{action} '#{action}' on #{resource} by #{initiator.try(:nick) || 'no one'} ..."
+      #puts "Feeding for #{action} '#{action}' on #{resource} by #{initiator.try(:nick) || 'no one'} ..."
 
       if resource.is_a? Shared::Answer
         update_answer_features(resource)

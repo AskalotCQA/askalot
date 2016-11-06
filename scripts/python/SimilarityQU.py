@@ -8,7 +8,7 @@ import Utils
 # Set up gensim logging
 logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/return-values.dat'
+filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/sim-values.dat'
 
 
 def compute_question_bow(question, textual_dictionary):
