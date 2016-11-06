@@ -343,4 +343,56 @@ describe 'Notifications', type: :feature do
       expect(last_notification.action).to eql(:create)
     end
   end
+
+  context 'notification marking' do
+    it 'marks notification as read/unread using AJAX', js: true do
+      notification_1 = create :notification, recipient: user, action: :create, resource: question, context: Shared::Context::Manager.current_context_id
+      notification_2 = create :notification, recipient: user, action: :create, resource: question, context: Shared::Context::Manager.current_context_id
+
+      visit shared.root_path
+
+      within '.navbar-right .dropdown', match: :first do
+        click_link '2'
+      end
+
+      notifications = all('.dropdown-notification')
+      expect(notifications.size).to eq(2)
+
+      within "#dropdown-notification-#{notification_1.id}" do
+        all('.btn-xs.pull-right')[0].click
+      end
+
+      expect(page).to have_css('.notification-read')
+
+      notification_1.reload
+      notification_2.reload
+
+      expect(notification_1.read).to eql(true)
+      expect(notification_2.read).to eql(false)
+
+      within "#dropdown-notification-#{notification_1.id}" do
+        all('.btn-xs.pull-right')[0].click
+      end
+
+      expect(page).not_to have_css('.notification-read')
+
+      notification_1.reload
+      notification_2.reload
+
+      expect(notification_1.read).to eql(false)
+      expect(notification_2.read).to eql(false)
+
+      within '.navbar-right .dropdown', match: :first do
+        click_link 'Označiť všetky ako prečítané'
+      end
+
+      expect(page).to have_css('.notification-read')
+
+      notification_1.reload
+      notification_2.reload
+
+      expect(notification_1.read).to eql(true)
+      expect(notification_2.read).to eql(true)
+    end
+  end
 end
