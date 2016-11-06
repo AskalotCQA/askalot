@@ -1,11 +1,18 @@
 <li id="comment-<%= comment.id %>" class="comment-teacher<%= ' bg-warning' if comment_highlighted? comment %>">
-  <div class="comment-content">
-    <%= render_markdown comment.text, redcarpet: { tags: [:autolink, :block_quote, :codespan, :double_emphasis, :emphasis, :linebreak, :link, :list, :list_item, :paragraph, :quote, :striketrough, :underline] } %>
-  </div>
+  <div class="row">
+    <div class="col-md-2 hidden-sm hidden-xs">
+      <%= render 'shared/users/comments_square', user: comment.author_or_anonymous %>
+    </div>
 
-  <div>
-    <%= render 'mooc/units/comments/details',  comment: comment %>
-    <%= render 'mooc/units/comments/editing',  comment: comment, remote: remote %>
-    <%= render 'mooc/units/comments/deleting', comment: comment, remote: remote %>
+    <div class="col-sm-12 col-md-10 comments-column">
+      <div class="comment-content">
+        <%= render_markdown comment.text, redcarpet: { tags: [:autolink, :block_quote, :codespan, :double_emphasis, :emphasis, :linebreak, :link, :list, :list_item, :paragraph, :quote, :striketrough, :underline] } %>
+      </div>
+      <div class="comment-details">
+        <%= render 'shared/comments/details',  comment: comment %>
+        <%= render 'shared/comments/editing',  comment: comment, remote: remote %>
+        <%= render 'shared/comments/deleting', comment: comment, remote: remote %>
+      </div>
+    </div>
   </div>
 </li>

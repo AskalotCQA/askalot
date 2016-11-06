@@ -23,7 +23,7 @@
 
   <div class="form-group">
     <%= f.label :description %>
-    <%= f.text_area :description, class: :'form-control', rows: 5 %>
+    <%= f.text_area :description, class: :'form-control', rows: Shared::Configuration.textarea_rows.general %>
   </div>
 
   <button type="submit" class="btn btn-success"><%= t('administration.question_type.create.action') %></button>

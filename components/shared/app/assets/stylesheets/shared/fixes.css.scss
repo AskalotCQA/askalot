@@ -91,6 +91,7 @@ a .fa {
 
 .modal-dialog {
   min-width: $screen-xs-min - 20px;
+  width: 650px;
 
   color: $text-color !important;
 }
@@ -119,6 +120,7 @@ a .fa {
     > a {
       display: inline;
       padding: 0.2em 0.6em 0.3em;
+      white-space: pre-wrap;
     }
   }
 }

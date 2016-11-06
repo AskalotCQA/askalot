@@ -41,6 +41,14 @@ defaults: &defaults
     gold: 20
     silver: 55
 
+  textarea_rows:
+    modal: 5
+    answer: 5
+    question: 5
+    comment: 2
+    email: 15
+    general: 5
+
 university: &university
   category_depths:
     -

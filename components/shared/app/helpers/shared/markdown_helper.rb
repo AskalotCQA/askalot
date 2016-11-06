@@ -3,6 +3,7 @@ require 'shared/redcurtain/markdown'
 module Shared::MarkdownHelper
   def markdown_editor_for(resource, options = {}, &block)
     id = "markdown-#{resource.class.name.demodulize.underscore}-#{resource.new_record? ? :new : resource.id}"
+    id = id.concat("-#{options[:append_id]}") if options[:append_id]
 
     render 'shared/markdown/editor', id: id, content: block, help: options[:help].nil? || options[:help], text: options[:text]
   end
