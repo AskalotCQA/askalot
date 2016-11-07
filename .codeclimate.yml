@@ -30,3 +30,9 @@ exclude_paths:
 - components/mooc/db/
 - components/university/db/
 - components/shared/vendor/
+ratings:
+  paths:
+    - app/**
+    - components/**
+    - lib/**
+    - "**.rb"

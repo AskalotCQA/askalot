@@ -33,7 +33,7 @@ class Tag < ActiveRecord::Base
   end
 
   def normalize
-    self.name = name.to_s.downcase.gsub(/[^[:alnum:]#\-\+\.]+/, '-').gsub(/\A-|-\z/, '')
+    self.name = name.to_s.downcase.strip.gsub(/[^[:alnum:]#\-\+\.]+/, '-').gsub(/\A-|-\z/, '')
   end
 
   def count(context = Shared::Context::Manager.current_context_id)

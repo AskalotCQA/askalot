@@ -24,6 +24,22 @@
   .user-following {
     display: inline;
   }
+
+  &.comments-user-square {
+    margin: 0;
+
+    .user-link, .user-nick {
+      font-size: $font-size-small;
+    }
+
+    .user-link {
+      margin-top: 5px;
+    }
+
+    .user-link, .user-nick {
+      height: 15px;
+    }
+  }
 }
 
 .user-avatar {

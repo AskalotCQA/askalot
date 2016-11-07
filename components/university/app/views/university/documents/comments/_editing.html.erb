@@ -15,7 +15,7 @@
           <div class="modal-body">
             <div class="form-group">
               <%= markdown_editor_for comment do %>
-                <%= f.text_area :text, id: nil, class: :'form-control markdown-editor-buttons', rows: 5 %>
+                <%= f.text_area :text, id: nil, class: :'form-control markdown-editor-buttons', rows: Shared::Configuration.textarea_rows.comment %>
               <% end %>
             </div>
           </div>

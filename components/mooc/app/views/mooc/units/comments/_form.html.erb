@@ -1,5 +1,5 @@
 <div class="wrap-new-comment">
-  <a href="#" data-toggle="collapse" data-target="#<%= identify commentable, :comment %>" data-collapse-autofocus="true">
+  <a href="#" data-toggle="collapse" class="btn btn-default btn-sm" data-target="#<%= identify commentable, :comment %>" data-collapse-autofocus="true">
     <%= t('comment.new.action') %>
   </a>
 
@@ -7,7 +7,9 @@
     <%= form_for [commentable, Shared::Comment.new], url: Shared::ApplicationController.config.relative_url_root.to_s + engine_url_helpers(commentable).public_send("#{model}_comments_path", commentable, unit_view: true), html: { id: nil, class: :'new-comment' } do |f| %>
 
       <div id="<%= identify commentable, :comment %>-text" class="form-group">
-        <%= f.text_area :text, id: nil, class: :'form-control', rows: 2 %>
+        <%= markdown_editor_for Shared::Comment.new, append_id: identify(commentable) do %>
+          <%= f.text_area :text, id: nil, class: :'form-control markdown-editor-buttons', rows: Shared::Configuration.textarea_rows.comment %>
+        <% end %>
       </div>
 
       <button type="submit" class="btn btn-primary"><%= t 'comment.new.submit' %></button>

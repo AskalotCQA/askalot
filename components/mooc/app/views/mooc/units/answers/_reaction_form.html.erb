@@ -9,7 +9,7 @@
 
       <div class="form-group">
         <%= markdown_editor_for_unit answer, Shared::Context::Manager.context_category.askalot_page_url do %>
-          <%= f.text_area :text, class: :'form-control markdown-editor-buttons', rows: 5 %>
+          <%= f.text_area :text, class: :'form-control markdown-editor-buttons', rows: Shared::Configuration.textarea_rows.answer %>
         <% end %>
       </div>
 

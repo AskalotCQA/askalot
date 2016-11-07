@@ -4,15 +4,6 @@
   margin-top: 15px;
 }
 
-.wrap-new-comment {
-  margin-bottom: 10px;
-  margin-left: 30px;
-}
-
-.comments-section {
-  margin-left: 30px;
-}
-
 .comment-teacher {
   margin-left: -10px;
   margin-right: -10px;
@@ -27,4 +18,26 @@
 
   display: inline;
   color: $gray;
+  margin: 10px 0;
+}
+
+.comment-details {
+  margin: 5px 0;
+}
+
+@media (min-width: $screen-md-min + 1) {
+  .comments-column {
+    padding-left: 0;
+  }
+}
+
+@media (max-width: $screen-md-min - 1) {
+  .comments-column {
+    padding-left: 40px;
+  }
+
+  .wrap-new-comment {
+    margin-bottom: 10px;
+    margin-left: 25px;
+  }
 }

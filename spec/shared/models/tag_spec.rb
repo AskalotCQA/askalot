@@ -16,6 +16,12 @@ describe Shared::Tag, type: :model do
 
       expect(tag.name).to eql('elasticsearch')
     end
+
+    it 'correctly strips whitespace' do
+      tag = create :tag, name: 'ma '
+
+      expect(tag.name).to eql('ma')
+    end
   end
 
   describe '#count' do

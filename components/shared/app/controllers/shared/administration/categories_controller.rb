@@ -21,7 +21,7 @@ class Administration::CategoriesController < AdministrationController
     @category = Shared::Category.new(category_params)
 
     if @category.save
-      form_message :notice, t('category.create.success')
+      flash[:notice] = t('category.create.success')
 
       redirect_to shared.administration_categories_path
     else
