@@ -27,6 +27,10 @@ slido.update_attributes(
 
 slido.save!
 
+Shared::AbGroup.find_or_create_by value: 'Question routing full'
+Shared::AbGroup.find_or_create_by value: 'Question routing baseline'
+Shared::AbGroup.find_or_create_by value: 'Control group for question routing'
+
 unless Shared::QuestionType.find_by mode: :question
   type = Shared::QuestionType.create mode: :question, name: 'Question', icon: 'fa-question'
 

@@ -1,5 +1,5 @@
 from nltk.corpus import stopwords
-from nltk.stem.snowball import PorterStemmer
+from nltk.stem.snowball import SnowballStemmer
 from gensim import corpora, utils
 import os
 
@@ -13,7 +13,7 @@ class TextualDictionary(object):
     Class represents corpus dictionary.
     '''
 
-    p_stemmer = PorterStemmer()
+    stemmer = SnowballStemmer('english')
     stop = stopwords.words('english')
 
     vocabulary = corpora.Dictionary()
@@ -43,7 +43,6 @@ class TextualDictionary(object):
         print self.vocabulary
         self.save_vocabulary_as_file()
 
-
     def preprocess_document(self, text):
         words = [self.preprocess_word(word) for word in utils.tokenize(text, lowercase=True, deacc= True)]
         return [word for word in words if self.is_valid_word(word)]
@@ -54,7 +53,7 @@ class TextualDictionary(object):
         :param word:
         :return:
         '''
-        return self.p_stemmer.stem(word)
+        return self.stemmer.stem(word)
 
     def is_valid_word(self, word):
         '''

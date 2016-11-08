@@ -4,7 +4,6 @@ import Utils
 import DataManager
 from TextualDictionary import TextualDictionary
 from gensim import corpora, similarities
-from PriorProbability import PriorProbability
 import RoutingOptimization
 import numpy as np
 
@@ -57,8 +56,6 @@ if __name__ == '__main__':
         probabilities.append(sim[1])
         user = DataManager.get_author(user_ids[sim[0]])
         chosen_users.append(user)
-        prior_prob = PriorProbability(user)
-        print prior_prob.get_probability()
         optimization_value = RoutingOptimization.optimization_value(user, question)
         optimization_values.append(optimization_value)
         print optimization_value

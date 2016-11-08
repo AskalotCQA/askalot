@@ -1,10 +1,7 @@
 import DataManager
 
 def recommended_questions_count(user):
-    # Delete all recommendations older than X days
-
     # Return number of recommendations
-    #return len(DataManager.get_user_profile(user.id, 'recommendation'))
     return 0
 
 def user_expertise(user):

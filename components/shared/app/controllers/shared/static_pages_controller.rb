@@ -45,6 +45,12 @@ class StaticPagesController < ApplicationController
                   .where(resource_type: [Shared::Answer, Shared::Comment, Shared::Evaluation, Shared::Question])
                   .where(action: 'create')
                   .where('activities.created_at >= ?', current_user.dashboard_last_sign_in_at).order('activities.id DESC').limit(limit)
+
+    @rec_questions_notifications =  Shared::Notification.in_context(@context_id)
+                                    .where(resource_type: Shared::Question)
+                                    .where(action: :recommendation)
+                                    .where(recipient_id: current_user).where(unread: :true)
+                                    .order('notifications.created_at DESC')
   end
 
   def help

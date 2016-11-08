@@ -1,6 +1,5 @@
 from gensim import corpora
 import math
-import datetime
 
 def sum_bows(bow1, bow2):
     '''

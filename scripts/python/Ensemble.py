@@ -2,16 +2,17 @@ from ExpertiseClassifier import ExpertiseClassifier
 from WillingnessClassifier import WillignessClassifier
 import numpy as np
 
-
-
 class Ensemble(object):
-    exp_clf = ExpertiseClassifier()
-    will_clf = WillignessClassifier()
+
+    def __init__(self, exp_model_filename, will_model_filename, baseline):
+        self.baseline = baseline
+        self.exp_clf = ExpertiseClassifier(exp_model_filename)
+        self.will_clf = WillignessClassifier(will_model_filename)
 
 
     def fit(self):
-        self.exp_clf.fit(cv=10)
-        self.will_clf.fit(cv=6)
+        self.exp_clf.fit(self.baseline, cv=10)
+        self.will_clf.fit(self.baseline, cv=6)
 
     def predict(self, X_exp, X_will):
         exp_predictions = self.exp_clf.predict(X_exp)
@@ -26,7 +27,7 @@ class Ensemble(object):
 
 
         indices = [ind for ind, (i, j) in enumerate(zip(exp_predictions, will_predictions))]
-        suma = exp_predictions[indices] + 2*will_predictions[indices]
+        suma = exp_predictions[indices] * will_predictions[indices]
         i = np.array(suma).argsort()[-200:][::-1]
         indices = np.array(indices)[i]
         #suma, indices = zip(*sorted(zip(suma, indices)))

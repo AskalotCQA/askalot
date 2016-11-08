@@ -2,7 +2,7 @@ module Shared
 class Activity < ActiveRecord::Base
   include Initiable
 
-  ACTIONS = [:create, :update, :delete, :mention]
+  ACTIONS = [:create, :update, :delete, :mention, :recommendation]
 
   belongs_to :initiator, class_name: :'Shared::User'
 

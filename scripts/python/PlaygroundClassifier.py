@@ -11,7 +11,6 @@ from imblearn.under_sampling import RandomUnderSampler, ClusterCentroids, TomekL
 from imblearn.over_sampling import RandomOverSampler
 from imblearn.combine import SMOTEENN
 import matplotlib.pyplot as plt
-from scipy.stats import pearsonr
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.externals import joblib
@@ -204,6 +203,18 @@ def validation_curves(clf, X, Y):
     print 'Validation scores: ', np.mean(test_scores, axis=1), np.std(test_scores, axis=1)
 
 
+def discard_expertise_features(X):
+    # knowledge gap: topic - 5, week -6, total -7
+    # seen units: week -8, topic - 9
+    return np.delete(X, [5, 6, 7, 8, 9], axis=1)
+
+
+def discard_willigness_features(X):
+    # seen units: week - 5, topic - 6
+    # fresh unit - 7
+    # avg activity: course - 9
+    # seen questions: week - 10, topic - 11
+    return np.delete(X, [5, 6, 7, 9, 10, 11], axis=1)
 
 
 
@@ -212,7 +223,7 @@ if __name__ == '__main__':
     #classifier = SGDClassifier(alpha=0.1, loss='log', penalty='l2', n_jobs=-1,
     #                        shuffle=True, n_iter=10, #average=True,
     #                        verbose=0, class_weight="balanced", random_state=42)
-    classifier = RandomForestClassifier(n_estimators=100, max_depth=6, class_weight="balanced", n_jobs=-1,
+    classifier = RandomForestClassifier(n_estimators=60, max_depth=4, class_weight="balanced", n_jobs=-1,
                                         random_state=42, criterion="entropy")
     #classifier = svm.SVC(class_weight="balanced", kernel="linear", probability=True, random_state=42)
     #classifier = svm.LinearSVC(class_weight="balanced")    # no predict_proba method
@@ -221,6 +232,10 @@ if __name__ == '__main__':
     X, Y = get_training_data(filename)
     X = np.array(X)
     Y = np.array(Y)
+
+    # Filter features - baseline
+    #X = discard_expertise_features(X)
+    #X = discard_willigness_features(X)
 
     # Build pipeline for processing
     scaler = preprocessing.RobustScaler()
@@ -243,8 +258,8 @@ if __name__ == '__main__':
     #X_sampled, Y_sampled = sampler.fit_sample(X, Y)
     #describe_dataset(X, Y)
 
-    pipelined_clf.named_steps['Classifier'] = grid_searching(RandomForestClassifier(class_weight="balanced",
-                                                                                    n_jobs=-1, random_state=42,), X, Y, cv=10)
+    #pipelined_clf.named_steps['Classifier'] = grid_searching(RandomForestClassifier(class_weight="balanced",
+    #                                                                                n_jobs=-1, random_state=42,), X, Y, cv=10)
 
     # K-fold validation
     kfold_validation(pipelined_clf, X, Y, sampler, splits_count=10)

@@ -51,4 +51,4 @@ if __name__ == '__main__':
         #textualDictionary.save_vocabulary_as_file()
 
     textualDictionary.save_vocabulary_as_file()
-    DataManager.close_connection()
+    DataManager.commit_and_close_connection()

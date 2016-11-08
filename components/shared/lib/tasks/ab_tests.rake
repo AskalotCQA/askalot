@@ -1,16 +1,26 @@
 namespace :ab_tests do
   desc 'Split users into 3 groups'
   task split_users: :environment do
-    users_ids = Shared::User.order('(answers_count + questions_count + comments_count) DESC')
+    users_ids = Shared::User.order('answers_count DESC')
                     .pluck(:id)
-    first_group = get_nth_elements(users_ids, 0)
-    second_group = get_nth_elements(users_ids, 1)
-    third_group = get_nth_elements(users_ids, 2)
+
+    first_group = []
+    second_group = []
+    third_group = []
+    users_ids.each_with_index do |val, index|
+      if index % 3 == 0
+        first_group << val
+      elsif index % 3 == 1
+        second_group << val
+      elsif index % 3 == 2
+        third_group << val
+      end
+    end
 
     Shared::AbGrouping.destroy_all
-    insert_into_table(first_group, Shared::AbGroup.find_by(value: 'Question routing full'))
-    insert_into_table(second_group, Shared::AbGroup.find_by(value: 'Control group for question routing'))
-    insert_into_table(third_group, Shared::AbGroup.find_by(value: 'Question routing baseline'))
+    insert_into_table(first_group, Shared::AbGroup.find_by(value: 'Question routing full')) # Viddick
+    insert_into_table(second_group, Shared::AbGroup.find_by(value: 'Question routing baseline')) # kdgoodenough
+    insert_into_table(third_group, Shared::AbGroup.find_by(value: 'Control group for question routing'))
 
     puts '#1 size:', first_group.size
     puts '#2 size:', second_group.size
@@ -47,8 +57,4 @@ def sum_feature_stats(group_ids, feature)
     suma += Shared::User.find(i)[feature] if Shared::User.exists?(i)
   end
   return suma
-end
-
-def get_nth_elements(array, n)
-  array.select {|x| x % 3 == n}
 end

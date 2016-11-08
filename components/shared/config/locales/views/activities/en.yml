@@ -26,6 +26,7 @@ en:
       update: "Editation of"
       delete: "Deletion of"
       mention: "Mention of"
+      recommendation: "You may be interested to help answer new"
 
     icon:
       persistence: "%{action} %{resource}"
@@ -42,6 +43,7 @@ en:
         question: "question"
         view: "view"
         vote: "vote"
+        recommendation: "recommendation"
 
       mention:
         answer: "answer"
@@ -91,3 +93,5 @@ en:
         update: "Update of question %{question}"
         delete: "Deletion of question %{question}"
         mention: "Mention in question %{question}"
+        recommendation: "New question you may be interested to answer %{question}"
+

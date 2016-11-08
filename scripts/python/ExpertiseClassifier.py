@@ -6,6 +6,17 @@ from imblearn.over_sampling import RandomOverSampler
 from Classifier import Classifier
 from sklearn.linear_model import SGDClassifier
 
+PARAM_GRID = {
+            "clf__n_estimators": [20, 60, 100],
+            "clf__criterion": ["gini", "entropy"],
+            "clf__max_depth": [2, 3, 4, 5, 6]
+}
+
+PARAM_GRID_BASELINE = {
+            "clf__n_estimators": [20, 60, 100],
+            "clf__criterion": ["gini", "entropy"],
+            "clf__max_depth": [2, 3, 4]
+}
 
 class ExpertiseClassifier(Classifier):
     base_clf = RandomForestClassifier(class_weight="balanced", n_jobs=-1, n_estimators=30, max_depth=4,
@@ -13,24 +24,30 @@ class ExpertiseClassifier(Classifier):
     scaler = preprocessing.RobustScaler()
     sampler = RandomOverSampler(random_state=42)
 
-    save_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/expertise-classifier.pkl'
     data_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/expertise-train.dat'
 
-    def __init__(self):
+    def __init__(self, model_filename):
+        self.model_filename = model_filename
         super(ExpertiseClassifier, self).__init__()
+
+
+    def fit(self, baseline=False, cv=10):
         #self.X, self.Y = self.sampler.fit_sample(self.X, self.Y)
+        self.load_training_data()
 
+        if baseline:
+            self.X = PlaygroundClassifier.discard_expertise_features(self.X)
+            param_grid = PARAM_GRID_BASELINE
+        else:
+            param_grid = PARAM_GRID
 
-    def fit(self, cv=10):
-        if self.load_from_file():
-            return
-        self.clf.named_steps['clf'] = PlaygroundClassifier.grid_searching(self.clf.named_steps['clf'], self.X, self.Y, cv=cv)
+        # Grid searching of best parameters
+        self.grid_searching(param_grid, cv)
 
-        # Compute cv results
-        PlaygroundClassifier.kfold_validation(self.clf, self.X, self.Y, self.sampler, splits_count=cv)
+        # Report cv results
+        self.kfold_validation(cv)
 
         # Train on whole dataset
-        self.X, self.Y = self.sampler.fit_sample(self.X, self.Y)
         self.clf.fit(self.X, self.Y)
         self.save_as_file()
 

@@ -64,6 +64,31 @@
           <%= dashboard_link 'comments-o fa-fw', @new_comments, t('home.dashboard.new_comments', count: @new_comments), questions_path(from_dashboard: 'new_comments'), 'link-icon-comments' %>
           <%= dashboard_link 'comments-o fa-fw', @new_comments_watched, t('home.dashboard.new_comments_in_watched_categories', count: @new_comments_watched), questions_path(from_dashboard: 'new_comments_in_watched_categories'), 'link-icon-comments-followed' %>
         </div>
+
+      <div class="recommendation">
+        <% if @rec_questions_notifications.any? %>
+            <h4><b><%= t('home.dashboard.recommendation.title') %></b></h4>
+            <p><%= t('home.dashboard.recommendation.subtitle') %></p>
+            <ol class="list">
+              <% @rec_questions_notifications.each do |rec_notification| %>
+                  <% question = rec_notification.resource %>
+                  <li>
+                    <div class="row">
+                      <div class="col-xs-8">
+                        <%= link_to question.title, question_path(question, rec: 1) %>
+                      </div>
+                      <div class="col-xs-4">
+                        <%= user_icon_tag question.author_or_anonymous, tooltip_attributes(user_nick(question.author_or_anonymous), placement: :bottom) %>
+                        <small>
+                          <%= tooltip_time_tag rec_notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
+                        </small>
+                      </div>
+                    </div>
+                  </li>
+              <% end %>
+            </ol>
+        <% end %>
+      </div>
     </div>
 
     <div class="col-md-6">

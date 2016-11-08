@@ -6,6 +6,10 @@ connection = pg.connect(database="askalot_edx_development", user="postgres", por
 yeild_cursor = connection.cursor()
 cursor = connection.cursor()
 
+QR_FULL_NAME = 'Question routing full'
+QR_BASELINE_NAME = 'Question routing baseline'
+QR_CONTROL_NAME = 'Control group for question routing'
+
 def get_questions_for_course(course_id):
     '''
     Get questions from DB.
@@ -62,9 +66,8 @@ def insert_user_profile(user_id, property, value, prob=100):
 
 
 def update_user_profile(user_id, property, value):
-    targetable_id = get_targetable_id(property)
     cursor.execute("UPDATE user_profiles SET text_value=%s "
-                          "WHERE user_id = %s AND targetable_id = %s", (value, str(user_id), targetable_id))
+                          "WHERE user_id = %s AND property = %s", (value, str(user_id), property))
 
 
 def get_user_profile_property(user_id, property):
@@ -75,7 +78,6 @@ def get_user_profile_property(user_id, property):
 
 def get_question_profile(question_id, property):
     cursor.execute("SELECT * FROM question_profiles WHERE question_id = %s AND property = %s", (str(question_id), property))
-    # TODO add targetable id to not compare strings
 
 
 def get_all_user_profiles_property(property):
@@ -108,10 +110,24 @@ def get_user_profile(user_id, category_id):
     #    yield DbObject(yeild_cursor, user_profile)
 
 
-
-
 def get_users_with_views():
     cursor.execute("SELECT id FROM users WHERE views_count > 0")
+    users = cursor.fetchall()
+    users = [user[0] for user in users]
+    return users
+
+
+def get_users_full_group():
+    cursor.execute( "SELECT id from users u JOIN ab_groupings a ON u.id = a.user_id WHERE u.views_count > 0 "
+                    "AND a.ab_group_id = (SELECT id FROM ab_groups WHERE value = "+QR_FULL_NAME+")")
+    users = cursor.fetchall()
+    users = [user[0] for user in users]
+    return users
+
+
+def get_users_baseline_group():
+    cursor.execute( "SELECT id from users u JOIN ab_groupings a ON u.id = a.user_id WHERE u.views_count > 0 "
+                    "AND a.ab_group_id = (SELECT id FROM ab_groups WHERE value = "+QR_BASELINE_NAME+")")
     users = cursor.fetchall()
     users = [user[0] for user in users]
     return users
@@ -132,9 +148,9 @@ def category_leaves(category_id):
 
 
 def user_recommendation_count(user_id):
-    cursor.execute("SELECT COUNT(*) FROM recommendations WHERE user_id = " + str(user_id)+" AND clicked_at IS NULL")
+    cursor.execute("SELECT COUNT(*) FROM notifications WHERE recipient_id = " + str(user_id)
+                   +" AND resource_type = 'Shared::Recommendation' AND unread = TRUE")
     return cursor.fetchone()[0]
-
 
 
 def insert_recommendation(question_id, user_id):
@@ -143,25 +159,9 @@ def insert_recommendation(question_id, user_id):
                    (str(question_id), str(user_id)))
 
 
-
-
-def close_connection():
+def commit_and_close_connection():
     connection.commit()
     connection.close()
-
-
-def get_targetable_id(property):
-    '''
-    Property name to targetable_id mapping table.
-    :param property:
-    :return:
-    '''
-    if property == 'BoW':
-        return 2
-    elif property == 'LDA':
-        return 3
-    elif property == 'recommendation':
-        return 4
 
 
 def load_bow_json(json_string):

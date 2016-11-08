@@ -29,4 +29,4 @@ if __name__ == '__main__':
 
     #print BowBuilder.sum_bows([(1, 3), (2,1), (3,2)], [(1,2), (2,1),(4,1)])    # test sum bows
 
-    DataManager.close_connection()
+    DataManager.commit_and_close_connection()

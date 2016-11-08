@@ -1,15 +1,11 @@
 import sys
 import DataManager
-from ExpertiseClassifier import ExpertiseClassifier
-from WillingnessClassifier import WillignessClassifier
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-import Utils
 import SimilarityQU
-from Classifier import Classifier
 from Ensemble import Ensemble
 import Evaluation
 from TextualDictionary import TextualDictionary
+import Training
 
 
 def get_features(users_ids, question, category, textual_dictionary):
@@ -75,10 +71,6 @@ def get_features(users_ids, question, category, textual_dictionary):
 
         willingness.append(will_features)
         expertise.append(exp_features)
-
-
-    #print willingness
-    #print expertise
     return willingness, expertise
 
 
@@ -100,15 +92,44 @@ def user_profile_to_hash(user_profile):
     return hash
 
 
-    #return dict((profile.property, profile.value if profile.value else profile.updated_at)
-    #            if profile.targetable_type != 'Shared::Category' else
-    #            (profile.property+str(profile.targetable_id), profile.value if profile.value else profile.updated_at)
-    #            for profile in user_profile)
+def recommend(classifier, users_ids):
+    '''
+    Recommend by classifier and take into account only users_ids.
+    :param classifier:
+    :param users_ids:
+    :return:
+    '''
+    willingness, expertise = get_features(users_ids, question, category, textual_dictionary)
+    willingness = np.array(willingness)
+    expertise = np.array(expertise)
+
+    all_rec_users, exp_prob, will_prob = ensemble.predict(expertise, willingness)
+
+    final_rec_users = []
+    route_to_counter = 0
+    for i in all_rec_users:
+        print users_ids[i], '\t\texp:\t', exp_prob[i], '\t\twill:\t', will_prob[i]
+        if DataManager.user_recommendation_count(users_ids[i]) <= MAX_ROUTED_QUESTIONS:
+            print 'Routed to:\t', users_ids[i]
+            final_rec_users.append(users_ids[i])
+            route_to_counter += 1
+        if route_to_counter == ROUTE_TO_MAX:
+            break
+
+    users_ids = np.array(users_ids)
+    users_ids = np.take(users_ids, all_rec_users)
+    return users_ids
+
+
+def evaluate(users_ids, true_user_id):
+    print 'Ground turuth user id:\t', true_user_id
+    print 'Rank:\t', Evaluation.true_rank(users_ids, true_user_id)
+    print 'Sucess@10:\t', Evaluation.success(users_ids, true_user_id)
 
 
 
 MAX_ROUTED_QUESTIONS = 3
-ROUTE_TO_MAX = 5
+ROUTE_TO_MAX = 10
 RUBY_RETURN_FILE = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/rec-users.dat'
 
 if __name__ == '__main__':
@@ -123,45 +144,30 @@ if __name__ == '__main__':
     #self_and_ancestor_categories = DataManager.category_self_and_ancestors(question.category_id)
 
     # Filter users
-    users_ids = DataManager.get_users_with_views()
+    users_ids_full = DataManager.get_users_full_group()
+    users_ids_baseline = DataManager.get_users_baseline_group()
 
+    # Create ensemble
+    ensemble = Ensemble(Training.exp_model_f, Training.will_model_f, baseline=False)
+    ensemble_baseline = Ensemble(Training.exp_baseline_model_f, Training.will_baseline_model_f, baseline=True)
 
-    # Create willingness matrix
-    willingness, expertise = get_features(users_ids, question, category, textual_dictionary)
-    willingness = np.array(willingness)
-    expertise = np.array(expertise)
+    # Recommendation
+    rec_to_users_full = recommend(ensemble, users_ids_full)
+    rec_to_users_baseline = recommend(ensemble_baseline, users_ids_baseline)
 
-    ensemble = Ensemble()
-    ensemble.fit()
-    all_rec_users, exp_prob, will_prob = ensemble.predict(expertise, willingness)
-
-    #print 'Recommendation'
-    final_rec_users = []
-    route_to_counter = 0
-    for i in all_rec_users:
-        print users_ids[i], '\t\texp:\t', exp_prob[i], '\t\twill:\t', will_prob[i]
-        if DataManager.user_recommendation_count(users_ids[i]) <= MAX_ROUTED_QUESTIONS:
-            #DataManager.insert_recommendation(question_id, users_ids[i])
-            print 'Routed to:\t', users_ids[i]
-            final_rec_users.append(users_ids[i])
-            route_to_counter += 1
-        if route_to_counter == ROUTE_TO_MAX:
-            break
-
-    users_ids = np.array(users_ids)
-    users_ids = np.take(users_ids, all_rec_users)
-
+    # Evaluation
     if len(sys.argv) == 3:
-        #print sys.argv[2]
-        true_user_id = int(sys.argv[2])
-        print 'User id:\t', true_user_id
-        print 'Rank:\t', Evaluation.true_rank(users_ids, true_user_id)
-        print 'Sucess@10:\t', Evaluation.success(users_ids, true_user_id)
+        print 'Evaluating FULL ensemble'
+        evaluate(rec_to_users_full, int(sys.argv[2]))
+        print 'Evaluating BASELINE ensemble'
+        evaluate(rec_to_users_baseline, int(sys.argv[2]))
 
+    # Save to file for Ruby to read
+    final_rec_users = np.concatenate([rec_to_users_full, rec_to_users_baseline])
     with open(RUBY_RETURN_FILE, 'w') as f:
         for user_id in final_rec_users:
             f.write(str(user_id)+'\n')
 
-    #DataManager.close_connection()
+    #DataManager.commit_and_close_connection()
 
 

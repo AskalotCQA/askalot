@@ -24,14 +24,15 @@ module Shared::Yeast
         File.open(PYTHON_RETURN_FILE, "r") do |f|
           f.each_line do |user_id|
             # Save recommendations
-            recommendation = Shared::Recommendation.create(question: resource, user_id: user_id)
-            recommendation.save
+            #recommendation = Shared::Recommendation.create(question: resource, user_id: user_id)
+            #recommendation.save
             # Send notification
             # TODO initiator_id ?
             Shared::Notification.create(recipient_id: user_id, initiator_id: 0,
-                                        resource: recommendation,
+                                        resource: resource,
                                         action: :create,
-                                        context: Shared::Context::Manager.current_context_id)
+                                        anonymous: :true,
+                                        context: Shared::Context::Manager.default_context_id)
           end
         end
       end

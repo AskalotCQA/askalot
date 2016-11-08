@@ -204,8 +204,8 @@ module Shared::Recommendation
       answers_count_last_days_f = answers_count_in_last_days(resource, user)
       votes_count_f = votes_count(resource, user)
       last_answer_before_f = last_answer_before(resource, user)
-      seen_week_categories_f = seen_units(resource, category.parent.parent, user)
-      seen_topic_categories_f = seen_units(resource, category.parent, user)
+      seen_week_units_f = seen_units(resource, category.parent.parent, user)
+      seen_topic_units_f = seen_units(resource, category.parent, user)
       fresh_unit_f = is_unit_fresh(resource, category, user)
       #between_cqa_activity_f = between_cqa_activity_time(user, resource)
       avg_cqa_activity_f = avg_cqa_activity(user, resource)
@@ -215,10 +215,10 @@ module Shared::Recommendation
       seen_topic_questions_f = seen_questions_in_category(resource, category.parent, user)
       questions_count_f = questions_count(user, resource)
       user_registration_date_f = user_registration_date(user, resource)
-      rec_questions_count_f = recommended_questions_count(resource)
-      rec_ctr_f = rec_ctr()
+      #rec_questions_count_f = recommended_questions_count(resource)
+      #rec_ctr_f = rec_ctr()
       file << "#{class_id} #{answers_count_f} #{comments_count_f} #{answers_count_last_days_f} #{votes_count_f} "\
-                  "#{last_answer_before_f} #{seen_week_categories_f} #{seen_topic_categories_f} #{fresh_unit_f} "\
+                  "#{last_answer_before_f} #{seen_week_units_f} #{seen_topic_units_f} #{fresh_unit_f} "\
                   "#{avg_cqa_activity_f} #{avg_course_activity_f} "\
                   "#{seen_week_questions_f} #{seen_topic_questions_f} "\
                   "#{questions_count_f} #{user_registration_date_f} #{rec_questions_count_f} #{rec_ctr_f}\n"

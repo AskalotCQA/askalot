@@ -1,4 +1,6 @@
 namespace :recommendation do
+  expertise_dataset_f = "/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/expertise-train.dat"
+  willingness_dataset_f = "/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/willingness-train.dat"
 
   desc 'Update features for question recommendation'
   task update_features: :environment do
@@ -9,63 +11,67 @@ namespace :recommendation do
 
   desc 'Append new data from last day to expertise dataset'
   task append_expertise_dataset: :environment do
-    last_update = Date.yesterday
-    build_expertise_dataset(last_update)
+    last_update = Date.today - 3.days
+    till = Date.today - 2.days
+    build_expertise_dataset(expertise_dataset_f, last_update, till)
   end
 
   desc 'Create expertise dataset'
   task create_expertise_dataset: :environment do
     last_update =  Shared::Question.order(:created_at).first.created_at
-    build_expertise_dataset(last_update, append=false)
+    till = Date.today - 3.days
+    build_expertise_dataset(expertise_dataset_f, last_update, till, append=false)
   end
 
   desc 'Append new data from last day to willingness dataset'
   task append_willingness_dataset: :environment do
     last_update = Date.yesterday
-    build_willigness_dataset(last_update)
+    build_willigness_dataset(willingness_dataset_f, last_update)
   end
 
   desc 'Create willigness dataset'
   task create_willingness_dataset: :environment do
     last_update =  Shared::Question.order(:created_at).first.created_at
-    build_willigness_dataset(last_update, append=false)
+    build_willigness_dataset(willingness_dataset_f, last_update, append=false)
+  end
+
+  desc 'Train classifiers'
+  task train: :environment do
+    `python scripts/python/Training.py`
   end
 end
 
-def build_expertise_dataset(last_update, append=true)
+def build_expertise_dataset(filename, last_update, till, append=true)
   if append
-    f = File.open("/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/expertise-train.dat", "a")
+    f = File.open(filename, "a")
   else
-    f = File.open("/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/expertise-train.dat", "w")
+    f = File.open(filename, "w")
   end
   manager = Shared::Recommendation::FeaturesManager.new
 
   # Add all answers.
-  answers = Shared::Answer.where('created_at > ?', last_update)
+  answers = Shared::Answer.where('created_at > ?', last_update).where('created_at < ?', till)
   correct_count = 0
   skip_count = 0
   answers.each do |answer|
     skip_flag = true
 
-    unless manager.is_student(answer.author)
-      # 1 - positive votes, BA or positive vote by staff
-      if answer.votes_difference > 0 || answer.labels.count > 0 || answer.evaluations.where('value > 0').count > 0
+    #unless manager.is_student(answer.author)
+    # 1 - positive votes, BA or positive vote by staff
+    if answer.votes_difference > 0 || answer.labels.count > 0 || answer.evaluations.where('value > 0').count > 0
         class_id = 1
         skip_flag = false
         puts 'Class 1'
         # 0 - neutral votes and newer answer added
-      elsif answer.votes_difference == 0 && answer.question.answers.where('created_at > ?', answer.created_at).count > 0
+    elsif answer.votes_difference == 0 && answer.question.answers.where('created_at > ?', answer.created_at).count > 0
         class_id = 0
         skip_flag = false
         puts 'Newer answer added'
         # 0 - negative votes or negative vote from staff
-      elsif answer.votes_difference < 0 || answer.evaluations.where('value < 0').count > 0
+    elsif answer.votes_difference < 0 || answer.evaluations.where('value < 0').count > 0
         class_id = 0
         skip_flag = false
         puts 'Negative votes score or negative votes from teacher'
-      end
-    else
-      puts 'Answerer is not student'
     end
 
     if skip_flag
@@ -82,25 +88,25 @@ def build_expertise_dataset(last_update, append=true)
   f.close()
 end
 
-def build_willigness_dataset(last_update, append=true)
+def build_willigness_dataset(filename, last_update, append=true)
   if append
-    f = File.open("/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/willingness-train.dat", "a")
+    f = File.open(filename, "a")
   else
-    f = File.open("/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/willingness-train.dat", "w")
+    f = File.open(filename, "w")
   end
   manager = Shared::Recommendation::FeaturesManager.new
 
   # Answering is positive example
   answers = Shared::Answer.where('created_at > ?', last_update)
   answers.each do |answer|
-    next unless manager.is_student(answer.author)
+    #next unless manager.is_student(answer.author)
     manager.save_willingness_features(f, answer, answer.question.category, answer.author, 1)
   end
 
   # Commenting is positive example
   comments = Shared::Comment.where('created_at > ?', last_update)
   comments.each do |comment|
-    next unless manager.is_student(comment.author)
+    #next unless manager.is_student(comment.author)
     category = comment.commentable.try(:category) || comment.commentable.question.category
     manager.save_willingness_features(f, comment, category, comment.author, 1)
   end
@@ -110,7 +116,7 @@ def build_willigness_dataset(last_update, append=true)
   filtered_count = 0
   views = Shared::View.where('created_at > ?', last_update)
   views.each do |view|
-    next unless manager.is_student(view.viewer)
+    #next unless manager.is_student(view.viewer)
     if view.question.answers.find_by(author: view.viewer).nil? &&
         view.question.votes.by(view.viewer).count == 0 &&
         Shared::Vote.where(votable_type: Shared::Answer, voter_id: view.viewer,
@@ -124,21 +130,6 @@ def build_willigness_dataset(last_update, append=true)
 
   puts 'Filtered class 0 count: ', filtered_count
   f.close()
-end
-
-def compute_seen_units()
-  manager = Shared::Recommendation::FeaturesManager.new
-  users = Shared::User.where('views_count > 0')
-  categories = Shared::Category.where(depth: [1, 2])
-  users.each do |user|
-    categories.each do |category|
-      value = manager.seen_units(category, user)
-      Shared::User::Profile.of('SeenUnits').where(user: user,
-                                                  targetable: category,
-                                                  property: 'SeenUnits')
-          .first_or_create.update(value: value) unless value == 0
-    end
-  end
 end
 
 def compute_activity()

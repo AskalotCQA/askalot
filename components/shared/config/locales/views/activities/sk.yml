@@ -26,6 +26,7 @@ sk:
       update: "Upravenie"
       delete: "Zmazanie"
       mention: "Spomenutie"
+      recommendation: "Odporúčanie novej"
 
     icon:
       persistence: "%{action} %{resource}"
@@ -91,3 +92,4 @@ sk:
         update: "Upravenie otázky %{question}"
         delete: "Zmazanie otázky %{question}"
         mention: "Spomenutie v otázke %{question}"
+        recommendation: "Nová otázka ktorá môže byť pre teba zaujímavá na odpovedanie %{question}"

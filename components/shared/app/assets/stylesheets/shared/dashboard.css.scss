@@ -34,6 +34,28 @@
     }
   }
 
+  .recommendation {
+    h4 {
+      font-variant: small-caps;
+      margin-top: 5px;
+    }
+
+    p {
+      @extend .text-muted;
+
+      font-style: italic;
+    }
+
+    .list {
+      @extend .list-unstyled;
+      @include block-listing;
+
+      time {
+        vertical-align: middle;
+      }
+    }
+  }
+
   #reset_dashboard {
     margin-bottom: 10px;
   }

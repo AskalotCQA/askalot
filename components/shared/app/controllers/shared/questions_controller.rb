@@ -106,6 +106,14 @@ class QuestionsController < ApplicationController
 
     @question.increment :views_count
 
+    context_id = Shared::Context::Manager.current_context_id
+    if params[:rec]
+      Shared::Notification.in_context(@context_id)
+          .where(resource: @question)
+          .where(action: :recommendation)
+          .where(recipient_id: current_user).first.mark_as_read
+    end
+
     dispatch_event :create, @view, for: @question.watchers
 
     render :show_forum if @question.mode.forum?
