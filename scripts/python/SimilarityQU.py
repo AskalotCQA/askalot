@@ -6,9 +6,9 @@ from gensim import corpora, similarities
 import Utils
 
 # Set up gensim logging
-logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+#logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
 
-filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/sim-values.dat'
+filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/sim-values.dat'
 
 
 def compute_question_bow(question, textual_dictionary):
@@ -58,7 +58,7 @@ if __name__ == '__main__':
     if user_profile:
         similarity = compute_similarity(user_profile.text_value, question, textual_dictionary)
 
-    print 'Writing similarity: ', similarity
+    #print 'Writing similarity: ', similarity
     with open(filename, 'w') as f:
         f.write(str(similarity))
 

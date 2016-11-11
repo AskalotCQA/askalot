@@ -3,7 +3,6 @@ from sklearn import preprocessing
 import numpy as np
 from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
-from imblearn.under_sampling import RandomUnderSampler
 from Classifier import Classifier
 
 PARAM_GRID = {
@@ -18,14 +17,15 @@ PARAM_GRID_BASELINE = {
             "clf__max_depth": [2, 3, 4, 6]
 }
 
+
 class WillignessClassifier(Classifier):
     base_clf = RandomForestClassifier(class_weight="balanced", n_jobs=-1, n_estimators=100, max_depth=5,
                                       criterion="entropy")
     scaler = preprocessing.RobustScaler()
-    sampler = RandomUnderSampler(random_state=42)
+    #sampler = RandomUnderSampler(random_state=42)
     param_grid = PARAM_GRID
 
-    data_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/willingness-train.dat'
+    data_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/willingness-train.dat'
 
     def __init__(self, model_filename):
         self.model_filename = model_filename

@@ -1,10 +1,7 @@
 import PlaygroundClassifier
 from sklearn import preprocessing
-import numpy as np
 from sklearn.ensemble import RandomForestClassifier
-from imblearn.over_sampling import RandomOverSampler
 from Classifier import Classifier
-from sklearn.linear_model import SGDClassifier
 
 PARAM_GRID = {
             "clf__n_estimators": [20, 60, 100],
@@ -18,13 +15,14 @@ PARAM_GRID_BASELINE = {
             "clf__max_depth": [2, 3, 4]
 }
 
+
 class ExpertiseClassifier(Classifier):
     base_clf = RandomForestClassifier(class_weight="balanced", n_jobs=-1, n_estimators=30, max_depth=4,
                                       criterion="entropy")
     scaler = preprocessing.RobustScaler()
-    sampler = RandomOverSampler(random_state=42)
+    #sampler = RandomOverSampler(random_state=42)
 
-    data_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/expertise-train.dat'
+    data_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/expertise-train.dat'
 
     def __init__(self, model_filename):
         self.model_filename = model_filename

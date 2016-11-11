@@ -10,7 +10,8 @@ logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=lo
 if __name__ == '__main__':
     # Idea:
     # Process all of posts - create dictionary - later it will be called with add_documents
-    # Create BOW for every user of all his posts and every question
+    # Create BOW for every user of all his posts and every question he answered.
+    # Create BOW for every question.
 
     questions_yield = DataManager.get_questions_for_course(sys.argv[1])
     answers_yield = DataManager.get_answers_for_course(sys.argv[1])

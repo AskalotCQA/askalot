@@ -4,6 +4,21 @@ module Shared::Yeast
 
     def publish(action, initiator, resource, options = {})
       #puts "Feeding for #{action} '#{action}' on #{resource} by #{initiator.try(:nick) || 'no one'} ..."
+      
+      # Only for development
+      #@current_date ||= resource.created_at.to_date
+      #if action == :create && resource.created_at.to_date != @current_date
+      #  @current_date = resource.created_at.to_date
+      #  Rake::Task['recommendation:update_features'].invoke
+      #  Rake::Task['recommendation:update_features'].reenable
+      #  Rake::Task['recommendation:append_expertise_dataset'].invoke
+      #  Rake::Task['recommendation:append_expertise_dataset'].reenable
+      #  Rake::Task['recommendation:append_willingness_dataset'].invoke
+      #  Rake::Task['recommendation:append_willingness_dataset'].reenable
+      #  #Rake::Task['recommendation:train'].invoke
+      #  #Rake::Task['recommendation:train'].reenable
+      #end
+      # Only for development
 
       if resource.is_a? Shared::Answer
         update_answer_features(resource)

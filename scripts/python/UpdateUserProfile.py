@@ -7,7 +7,7 @@ import sys
 
 def update_user_profile(textual_dictionary, answer):
     '''
-    Update user profile based on answer and answered question.
+    Update user profile based on answer and answered question and updates total vocabulary.
     :param textual_dictionary:
     :param answer:
     :return:
@@ -15,6 +15,7 @@ def update_user_profile(textual_dictionary, answer):
     assert isinstance(textual_dictionary, TextualDictionary)
     question = DataManager.get_question(answer.question_id)
     text = textual_dictionary.preprocess_document(answer.text + question.title + question.text)
+
     # Allow update set to true/false
     bow = textual_dictionary.vocabulary.doc2bow(text, allow_update=True)
 
@@ -46,7 +47,7 @@ if __name__ == '__main__':
 
     # Update user profile based on answer and question.
     if answer:
-        print 'Updating user profile based on answer'
+        #print 'Updating user profile based on answer'
         update_user_profile(textualDictionary, answer)
         #textualDictionary.save_vocabulary_as_file()
 

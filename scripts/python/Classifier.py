@@ -32,7 +32,7 @@ class Classifier(object):
         grid_search = GridSearchCV(self.clf, param_grid=param_grid, cv=cv,
                                    scoring=metrics.make_scorer(metrics.roc_auc_score, average='weighted'))
         grid_search.fit(self.X, self.Y)
-        print PlaygroundClassifier.report(grid_search.cv_results_)
+        PlaygroundClassifier.report(grid_search.cv_results_)
         # Use best estimator
         self.clf = grid_search.best_estimator_
 

@@ -111,7 +111,7 @@ class QuestionsController < ApplicationController
       Shared::Notification.in_context(@context_id)
           .where(resource: @question)
           .where(action: :recommendation)
-          .where(recipient_id: current_user).first.mark_as_read
+          .where(recipient_id: current_user).first.try(:mark_as_read)
     end
 
     dispatch_event :create, @view, for: @question.watchers

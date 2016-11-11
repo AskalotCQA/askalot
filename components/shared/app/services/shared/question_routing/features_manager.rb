@@ -1,7 +1,7 @@
-module Shared::Recommendation
+module Shared::QuestionRouting
   class FeaturesManager
     N_DAYS = 7.days
-    PYTHON_SIM_RETURN_FILE = "/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/sim-values.dat"
+    PYTHON_SIM_RETURN_FILE = "/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/sim-values.dat"
 
     # Helpers
     def is_student(user)
@@ -31,15 +31,15 @@ module Shared::Recommendation
     end
 
     def answers_count_in_last_days_now(user)
-      return user.answers.where('created_at > ?', Time.now-@@n_days)
-                 .count + user.comments.where('created_at > ?', Time.now-@@n_days).count
+      return user.answers.where('created_at > ?', Time.now-N_DAYS)
+                 .count + user.comments.where('created_at > ?', Time.now-N_DAYS).count
     end
 
     def answers_count_in_last_days(resource, user)
       return user_answers_older_than_resource(resource, user)
-                 .where('created_at > ?', resource.created_at-@@n_days)
+                 .where('created_at > ?', resource.created_at-N_DAYS)
                  .count + user_comments_older_than_resource(resource, user)
-                              .where('created_at > ?', resource.created_at-@@n_days).count
+                              .where('created_at > ?', resource.created_at-N_DAYS).count
     end
 
     def recommended_questions_count(resource)
@@ -109,7 +109,7 @@ module Shared::Recommendation
       activity_dates = user.activities.where('created_at < ?', older_than)
                            .unscope(where: :resource_type).where.not(resource_type: Shared::List)
                            .group_by { |c| c.created_at.to_date }.keys
-      total_course_days = (older_than - Shared::User.first.created_at).to_i / 1.day
+      total_course_days = (older_than - (Shared::User.first.created_at-1.day)).to_i / 1.day
       if activity_dates.length > 0
         return activity_dates.count.to_f / total_course_days
       else
@@ -127,7 +127,7 @@ module Shared::Recommendation
       activity_dates = Shared::List.where(lister_id: user)
                            .where('created_at < ?', older_than)
                            .group_by { |c| c.created_at.to_date }.keys
-      total_course_days = (older_than - Shared::User.first.created_at).to_i / 1.day
+      total_course_days = (older_than - (Shared::User.first.created_at-1.day)).to_i / 1.day
       if activity_dates.length > 0
         return activity_dates.count.to_f / total_course_days
       else
@@ -148,16 +148,17 @@ module Shared::Recommendation
     end
 
     def seen_units(resource, category, user)
-      total_categories_count = 1
-      categories = category
-      unless category.leaf?
+      if category.depth == 1 || category.depth == 2
         # because category.count returns counter of question if leaf
         total_categories_count = category.leaves.count
         categories = category.leaves
+        #.select('DISTINCT(category_id)')
+        return user.lists.where(category: categories).where('created_at < ?', resource.created_at)
+            .count / total_categories_count.to_f
+      else
+        return 0
       end
-      #.select('DISTINCT(category_id)')
-      user.lists.where(category: categories).where('created_at < ?', resource.created_at)
-          .count / total_categories_count.to_f
+
     end
 
     def seen_questions_in_category(resource, category, user)
@@ -170,10 +171,6 @@ module Shared::Recommendation
 
     def cosine_sim(user, question)
       `python scripts/python/SimilarityQU.py #{question.id} #{user.id}`
-    end
-
-    def update_bow(answer)
-      `python scripts/python/UpdateUserProfile.py #{answer.id}`
     end
 
     def answers_in_category(user, resource, category)
@@ -221,7 +218,7 @@ module Shared::Recommendation
                   "#{last_answer_before_f} #{seen_week_units_f} #{seen_topic_units_f} #{fresh_unit_f} "\
                   "#{avg_cqa_activity_f} #{avg_course_activity_f} "\
                   "#{seen_week_questions_f} #{seen_topic_questions_f} "\
-                  "#{questions_count_f} #{user_registration_date_f} #{rec_questions_count_f} #{rec_ctr_f}\n"
+                  "#{questions_count_f} #{user_registration_date_f}\n"
     end
 
     def save_expertise_features(file, resource, category, question, user, class_id)

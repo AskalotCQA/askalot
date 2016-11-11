@@ -31,7 +31,7 @@ def get_features(users_ids, question, category, textual_dictionary):
         #print 'User id: ', user_id
         user_profile_properties = DataManager.get_user_profile(user_id, category.id)
         profile_dict = user_profile_to_hash(user_profile_properties)
-        will_features = [None] * 16
+        will_features = [None] * 14
         exp_features = [None] * 10
 
         will_features[0] = profile_dict.get('AnswersCount', 0)
@@ -52,8 +52,8 @@ def get_features(users_ids, question, category, textual_dictionary):
         will_features[12] = profile_dict.get('QuestionCount', 0)
         will_features[13] = int((question.created_at - profile_dict['RegistrationDate'])
                                 .total_seconds()) if profile_dict.get('RegistrationDate', None) else 0
-        will_features[14] = profile_dict.get('RecommendedCount', 0)
-        will_features[15] = profile_dict.get('RecCTR', 0)
+        #will_features[14] = profile_dict.get('RecommendedCount', 0)
+        #will_features[15] = profile_dict.get('RecCTR', 0)
 
         exp_features[0] = SimilarityQU.compute_similarity(profile_dict.get('BoW', None), question, textual_dictionary)
         exp_features[1] = profile_dict.get('AnswersCountCategory'+str(week_category_id), 0)
@@ -106,18 +106,22 @@ def recommend(classifier, users_ids):
     all_rec_users, exp_prob, will_prob = ensemble.predict(expertise, willingness)
 
     final_rec_users = []
+    final_rec_users_id_in_array = []
     route_to_counter = 0
     for i in all_rec_users:
         print users_ids[i], '\t\texp:\t', exp_prob[i], '\t\twill:\t', will_prob[i]
         if DataManager.user_recommendation_count(users_ids[i]) <= MAX_ROUTED_QUESTIONS:
-            print 'Routed to:\t', users_ids[i]
             final_rec_users.append(users_ids[i])
+            final_rec_users_id_in_array.append(i)
             route_to_counter += 1
-        if route_to_counter == ROUTE_TO_MAX:
+        else:
+            print '=>Skipped'
+
+        if route_to_counter >= ROUTE_TO_MAX:
             break
 
     users_ids = np.array(users_ids)
-    users_ids = np.take(users_ids, all_rec_users)
+    users_ids = np.take(users_ids, final_rec_users_id_in_array)
     return users_ids
 
 
@@ -130,7 +134,7 @@ def evaluate(users_ids, true_user_id):
 
 MAX_ROUTED_QUESTIONS = 3
 ROUTE_TO_MAX = 10
-RUBY_RETURN_FILE = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/rec-users.dat'
+RUBY_RETURN_FILE = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/rec-users.dat'
 
 if __name__ == '__main__':
     textual_dictionary = TextualDictionary()
@@ -153,14 +157,22 @@ if __name__ == '__main__':
 
     # Recommendation
     rec_to_users_full = recommend(ensemble, users_ids_full)
+    print '-----------------------'
+    print 'Baseline'
+    print '-----------------------'
     rec_to_users_baseline = recommend(ensemble_baseline, users_ids_baseline)
 
     # Evaluation
     if len(sys.argv) == 3:
-        print 'Evaluating FULL ensemble'
-        evaluate(rec_to_users_full, int(sys.argv[2]))
-        print 'Evaluating BASELINE ensemble'
-        evaluate(rec_to_users_baseline, int(sys.argv[2]))
+        true_user_id = int(sys.argv[2])
+        if true_user_id in users_ids_full:
+            print 'Evaluating FULL ensemble'
+            evaluate(rec_to_users_full, true_user_id)
+        elif true_user_id in users_ids_baseline:
+            print 'Evaluating BASELINE ensemble'
+            evaluate(rec_to_users_baseline, true_user_id)
+        else:
+            print 'User from control group answered'
 
     # Save to file for Ruby to read
     final_rec_users = np.concatenate([rec_to_users_full, rec_to_users_baseline])

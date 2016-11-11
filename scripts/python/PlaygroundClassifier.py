@@ -7,9 +7,9 @@ from sklearn import preprocessing, feature_selection
 from sklearn.model_selection import StratifiedKFold, cross_val_score, train_test_split, validation_curve
 from scipy import stats
 from collections import Counter
-from imblearn.under_sampling import RandomUnderSampler, ClusterCentroids, TomekLinks
-from imblearn.over_sampling import RandomOverSampler
-from imblearn.combine import SMOTEENN
+#from imblearn.under_sampling import RandomUnderSampler, ClusterCentroids, TomekLinks
+#from imblearn.over_sampling import RandomOverSampler
+#from imblearn.combine import SMOTEENN
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
@@ -17,8 +17,8 @@ from sklearn.externals import joblib
 from sklearn.calibration import CalibratedClassifierCV
 
 
-#filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/expertise-train.dat'
-filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/tmp/willingness-train.dat'
+#filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/expertise-train.dat'
+filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/willingness-train.dat'
 
 def get_training_data(filename):
 
@@ -245,7 +245,7 @@ if __name__ == '__main__':
     # Feature selection
     select_features(X, Y)
     describe_dataset(X, Y)
-    sampler = RandomUnderSampler(random_state=42)
+    #sampler = RandomUnderSampler(random_state=42)
     #X, Y = sampler.fit_sample(X, Y)
     #describe_dataset(X, Y)
 

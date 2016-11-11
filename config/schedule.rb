@@ -53,5 +53,16 @@ if env_type != 'staging'
     every 1.day, at: '5:32am' do
       runner 'Mooc::Mailers::UserMailerService.deliver_notifications!'
     end
+
+    every 1.day, at: '00:05am' do
+      runner 'recommendation:update_features'
+    end
+
+    every 1.day, at: '01:00am' do
+      runner 'recommendation:append_expertise_dataset'
+      runner 'recommendation:append_willingness_dataset'
+      runner 'recommendation:train'
+    end
+
   end
 end

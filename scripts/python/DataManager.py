@@ -94,7 +94,7 @@ def get_answer(answer_id):
 
 def get_user_profile(user_id, category_id):
     '''
-    Get user profile properties. In case of categories, filter only properties which is category and it's
+    Get user profile properties. In case of categories, filter only properties which is for category and it's
     ancestors.
     :param user_id: specifies user's id to find
     :param category_id: id of category
@@ -118,16 +118,16 @@ def get_users_with_views():
 
 
 def get_users_full_group():
-    cursor.execute( "SELECT id from users u JOIN ab_groupings a ON u.id = a.user_id WHERE u.views_count > 0 "
-                    "AND a.ab_group_id = (SELECT id FROM ab_groups WHERE value = "+QR_FULL_NAME+")")
+    cursor.execute( "SELECT u.id from users u JOIN ab_groupings a ON u.id = a.user_id WHERE u.views_count > 0 "
+                    "AND a.ab_group_id = (SELECT id FROM ab_groups WHERE value = '"+QR_FULL_NAME+"')")
     users = cursor.fetchall()
     users = [user[0] for user in users]
     return users
 
 
 def get_users_baseline_group():
-    cursor.execute( "SELECT id from users u JOIN ab_groupings a ON u.id = a.user_id WHERE u.views_count > 0 "
-                    "AND a.ab_group_id = (SELECT id FROM ab_groups WHERE value = "+QR_BASELINE_NAME+")")
+    cursor.execute( "SELECT u.id from users u JOIN ab_groupings a ON u.id = a.user_id WHERE u.views_count > 0 "
+                    "AND a.ab_group_id = (SELECT id FROM ab_groups WHERE value = '"+QR_BASELINE_NAME+"')")
     users = cursor.fetchall()
     users = [user[0] for user in users]
     return users
@@ -149,7 +149,7 @@ def category_leaves(category_id):
 
 def user_recommendation_count(user_id):
     cursor.execute("SELECT COUNT(*) FROM notifications WHERE recipient_id = " + str(user_id)
-                   +" AND resource_type = 'Shared::Recommendation' AND unread = TRUE")
+                   +" AND resource_type = 'Shared::Question' AND unread = TRUE")
     return cursor.fetchone()[0]
 
 
