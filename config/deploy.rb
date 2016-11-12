@@ -15,7 +15,7 @@ set :user,           'deploy'
 set(:branch)         { rails_env }
 set(:deploy_to)      { "/home/deploy/projects/#{application}-#{rails_env.dasherize}" }
 
-set :shared_children, shared_children + ['public/attachments']
+set :shared_children, shared_children + ['public/attachments', 'recommendation']
 
 set :use_sudo, false
 
@@ -92,6 +92,8 @@ namespace :deploy do
     run "for file in #{shared_path}/config/*.yml; do ln -nfs $file #{release_path}/config; done"
     run "mkdir -p #{shared_path}/attachments"
     run "chmod 775 #{shared_path}/attachments"
+    run "mkdir -p #{shared_path}/recommendation"
+    run "chmod 775 #{shared_path}/recommendation"
   end
 
   after 'deploy', 'deploy:cleanup'
