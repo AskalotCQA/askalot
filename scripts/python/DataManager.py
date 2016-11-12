@@ -149,7 +149,7 @@ def category_leaves(category_id):
 
 def user_recommendation_count(user_id):
     cursor.execute("SELECT COUNT(*) FROM notifications WHERE recipient_id = " + str(user_id)
-                   +" AND resource_type = 'Shared::Question' AND unread = TRUE")
+                   +" AND resource_type = 'Shared::Question' AND unread = TRUE AND action = 'recommendation'")
     return cursor.fetchone()[0]
 
 

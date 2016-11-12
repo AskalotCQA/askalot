@@ -33,6 +33,7 @@ class WillignessClassifier(Classifier):
 
 
     def fit(self, baseline=False, cv=5):
+        print 'Willingness classifier training, baseline: ', baseline
         self.load_training_data()
 
         if baseline:

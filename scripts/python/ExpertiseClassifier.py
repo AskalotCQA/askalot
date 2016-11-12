@@ -30,6 +30,7 @@ class ExpertiseClassifier(Classifier):
 
 
     def fit(self, baseline=False, cv=10):
+        print 'Expertise classifier training, baseline: ', baseline
         #self.X, self.Y = self.sampler.fit_sample(self.X, self.Y)
         self.load_training_data()
 

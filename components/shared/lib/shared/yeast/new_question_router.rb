@@ -19,8 +19,10 @@ module Shared::Yeast
 
       if resource.is_a? Shared::Question
         # puts to see the output
-        `python scripts/python/QuestionRouterEnsemble.py #{resource.id} #{resource.answers.first
-                                                                                     .try(:author).try(:id)}`
+        `python scripts/python/QuestionRouterEnsemble.py #{resource.id}`
+        #puts `python scripts/python/QuestionRouterEnsemble.py #{resource.id} #{resource.answers.first
+        #                                                                             .try(:author).try(:id)}`
+
         File.open(PYTHON_RETURN_FILE, "r") do |f|
           f.each_line do |user_id|
             # Save recommendations
@@ -31,7 +33,7 @@ module Shared::Yeast
             # TODO initiator_id ?
             Shared::Notification.create(recipient_id: user_id, initiator_id: 0,
                                         resource: resource,
-                                        action: :create,
+                                        action: :recommendation,
                                         anonymous: :true,
                                         context: Shared::Context::Manager.default_context_id)
           end

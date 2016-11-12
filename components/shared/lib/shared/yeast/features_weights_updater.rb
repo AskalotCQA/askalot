@@ -4,7 +4,7 @@ module Shared::Yeast
 
     def publish(action, initiator, resource, options = {})
       #puts "Feeding for #{action} '#{action}' on #{resource} by #{initiator.try(:nick) || 'no one'} ..."
-      
+
       # Only for development
       #@current_date ||= resource.created_at.to_date
       #if action == :create && resource.created_at.to_date != @current_date
