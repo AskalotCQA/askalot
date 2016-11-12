@@ -34,7 +34,7 @@ module Shared::QuestionRouting
             Shared::Notification.create(recipient_id: user_id, initiator_id: 0,
                                         resource: resource,
                                         action: :recommendation,
-                                        anonymous: :true,
+                                        anonymous: true,
                                         context: Shared::Context::Manager.default_context_id)
           end
         end

@@ -112,6 +112,7 @@ class QuestionsController < ApplicationController
           .where(resource: @question)
           .where(action: :recommendation)
           .where(recipient_id: current_user).first.try(:mark_as_read)
+      flash.now[:notice] = t("question.recommendation")
     end
 
     dispatch_event :create, @view, for: @question.watchers

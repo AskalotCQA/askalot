@@ -128,12 +128,12 @@ def recommend(classifier, users_ids):
 def evaluate(users_ids, true_user_id):
     print 'Ground turuth user id:\t', true_user_id
     print 'Rank:\t', Evaluation.true_rank(users_ids, true_user_id)
-    print 'Sucess@10:\t', Evaluation.success(users_ids, true_user_id)
+    print 'Sucess@20:\t', Evaluation.success(users_ids, true_user_id, n=20)
 
 
 
 MAX_ROUTED_QUESTIONS = 3
-ROUTE_TO_MAX = 10
+ROUTE_TO_MAX = 20
 RUBY_RETURN_FILE = 'recommendation/rec-users.dat'
 
 if __name__ == '__main__':

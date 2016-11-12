@@ -47,6 +47,7 @@ module Shared::ActivitiesHelper
   end
 
   def link_to_activity(activity, options = {}, &block)
+    options[:params] = ActionController::Parameters.new(rec: 1) if (activity.resource is_a? Shared::Question) and (activity.action == :recommendation)
     link_to_activity_by_attributes(activity.action, activity.initiator, activity.resource, options, &block)
   end
 

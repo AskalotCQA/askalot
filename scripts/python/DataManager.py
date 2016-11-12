@@ -1,8 +1,10 @@
 import psycopg2 as pg
 import json
+import os
 
-connection = pg.connect(database="askalot_edx_development", user="postgres", port=5432,
-                        host="localhost", password="")
+connection = pg.connect(database=os.environ.get('REC_PYTHON_DB_NAME','askalot_edx_development'),
+                        user=os.environ.get('REC_PYTHON_DB_USER','postgres'),
+                        port=5432, host="localhost", password=os.environ.get('REC_PYTHON_DB_PASSWORD',''))
 yeild_cursor = connection.cursor()
 cursor = connection.cursor()
 

@@ -123,3 +123,5 @@ sk:
 
       new_comments_in_watched_categories: "Otázky v sledovaných kategóriách s pridanými komentármi"
       new_comments_in_watched_categories_description: "Zoznam obsahuje otázky, v ktorých pribudli komentáre od Vášho posledného prihlásenia. V zozname sa zobrazujú otázky len zo sledovaných kategórií."
+
+    recommendation: "Odporúčanie novej otázky na ktorú by si mohol pomôcť odpovedať."
