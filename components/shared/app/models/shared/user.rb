@@ -75,6 +75,7 @@ class User < ActiveRecord::Base
   before_validation :resolve_nick, on: :create
 
   after_create :create_reputation_profile
+  after_create :create_user_profile
 
   self.table_name = 'users'
 
@@ -185,5 +186,10 @@ class User < ActiveRecord::Base
   def create_reputation_profile
     User::Profile.create(user: self, targetable_id: 1, targetable_type: 'Reputation', property: 'Reputation', value: 0, probability: 0.0)
   end
+
+  def create_user_profile
+    self.profiles.get_feature('RegistrationDate').touch
+  end
+
 end
 end

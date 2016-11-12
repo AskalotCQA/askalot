@@ -1,7 +1,7 @@
 module Shared::QuestionRouting
   class FeaturesManager
     N_DAYS = 7.days
-    PYTHON_SIM_RETURN_FILE = "/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/sim-values.dat"
+    PYTHON_SIM_RETURN_FILE = "recommendation/sim-values.dat"
 
     # Helpers
     def is_student(user)
@@ -43,6 +43,7 @@ module Shared::QuestionRouting
     end
 
     def recommended_questions_count(resource)
+      # TODO
       return 0
     end
 
@@ -65,6 +66,7 @@ module Shared::QuestionRouting
 
     def is_unit_fresh(resource, category, user)
       # TODO maybe topic or week
+      # TODO beta testers
       view = user.lists.where(category: category).where('created_at < ?', resource.created_at).first
       if view.nil?
         return 0
@@ -80,7 +82,7 @@ module Shared::QuestionRouting
       activity_dates = activity_dates.where('created_at < ?', resource.created_at) if resource
       activity_dates = activity_dates.group_by { |c| c.created_at.to_date }.keys
       if activity_dates.length > 0
-        return (activity_dates.each_cons(2).map { |a,b| b-a }.sum() / activity_dates.length).to_f
+        return activity_dates.each_cons(2).map { |a,b| b-a }.sum() / activity_dates.length.to_f
       else
         return 0
       end
@@ -93,7 +95,7 @@ module Shared::QuestionRouting
       activity_dates = activity_dates.where('created_at < ?', resource.created_at) if resource
       activity_dates = activity_dates.group_by { |c| c.created_at.to_date }.keys
       if activity_dates.length > 0
-        return (activity_dates.each_cons(2).map { |a,b| b-a }.sum() / activity_dates.length).to_f
+        return activity_dates.each_cons(2).map { |a,b| b-a }.sum() / activity_dates.length.to_f
       else
         return 0
       end

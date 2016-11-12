@@ -1,8 +1,8 @@
-module Shared::Yeast
+module Shared::QuestionRouting
   module NewQuestionRouter
     extend self
 
-    PYTHON_RETURN_FILE = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/rec-users.dat'
+    PYTHON_RETURN_FILE = 'recommendation/rec-users.dat'
 
     # get new question, compute user probabilites, route new questions
     # question - preprocess and create BOW

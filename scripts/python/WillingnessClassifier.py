@@ -25,7 +25,7 @@ class WillignessClassifier(Classifier):
     #sampler = RandomUnderSampler(random_state=42)
     param_grid = PARAM_GRID
 
-    data_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/willingness-train.dat'
+    data_filename = 'recommendation/willingness-train.dat'
 
     def __init__(self, model_filename):
         self.model_filename = model_filename

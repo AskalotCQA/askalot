@@ -1,6 +1,6 @@
 namespace :recommendation do
-  EXPERTISE_DATASET_F = "/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/expertise-train.dat"
-  WILLINGNESS_DATASET_F = "/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/willingness-train.dat"
+  EXPERTISE_DATASET_F = "recommendation/expertise-train.dat"
+  WILLINGNESS_DATASET_F = "recommendation/willingness-train.dat"
   N_DAYS_OLD = 7.days
 
   desc 'Update features for question recommendation'
@@ -118,7 +118,7 @@ def build_willigness_dataset(filename, last_update, till, append=true)
   comments = Shared::Comment.where('created_at > ?', last_update).where('created_at < ?', till)
   comments.each do |comment|
     #next unless manager.is_student(comment.author)
-    category = comment.commentable.try(:category) || comment.commentable.question.category
+    category = comment.commentable.to_question.category
     manager.save_willingness_features(f, comment, category, comment.author, 1)
   end
 

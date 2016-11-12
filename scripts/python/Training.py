@@ -1,9 +1,9 @@
 from Ensemble import Ensemble
 
-exp_model_f = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/expertise-classifier.pkl'
-exp_baseline_model_f = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/expertise-baseline-classifier.pkl'
-will_model_f = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/willingness-classifier.pkl'
-will_baseline_model_f = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/willingness-baseline-classifier.pkl'
+exp_model_f = 'recommendation/expertise-classifier.pkl'
+exp_baseline_model_f = 'recommendation/expertise-baseline-classifier.pkl'
+will_model_f = 'recommendation/willingness-classifier.pkl'
+will_baseline_model_f = 'recommendation/willingness-baseline-classifier.pkl'
 
 
 if __name__ == '__main__':

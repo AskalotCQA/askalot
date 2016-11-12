@@ -5,7 +5,7 @@ import os
 
 MIN_APPEARANCE = 1
 MIN_WORD_LENGTH = 3
-VOCABULARY_FILENAME = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/vocabulary.dat'
+VOCABULARY_FILENAME = 'recommendation/vocabulary.dat'
 
 
 class TextualDictionary(object):

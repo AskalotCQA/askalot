@@ -22,7 +22,7 @@ class ExpertiseClassifier(Classifier):
     scaler = preprocessing.RobustScaler()
     #sampler = RandomOverSampler(random_state=42)
 
-    data_filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/expertise-train.dat'
+    data_filename = 'recommendation/expertise-train.dat'
 
     def __init__(self, model_filename):
         self.model_filename = model_filename

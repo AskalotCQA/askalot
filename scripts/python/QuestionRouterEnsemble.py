@@ -134,7 +134,7 @@ def evaluate(users_ids, true_user_id):
 
 MAX_ROUTED_QUESTIONS = 3
 ROUTE_TO_MAX = 10
-RUBY_RETURN_FILE = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/rec-users.dat'
+RUBY_RETURN_FILE = 'recommendation/rec-users.dat'
 
 if __name__ == '__main__':
     textual_dictionary = TextualDictionary()

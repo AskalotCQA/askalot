@@ -1,4 +1,4 @@
-module Shared::Yeast
+module Shared::QuestionRouting
   module FeaturesWeightsUpdater
     extend self
 
@@ -103,19 +103,19 @@ def update_vote_features(vote)
   end
 
   voted_for_user = vote.votable.author
-  category = vote.votable.try(:category) || vote.votable.question.category
+  category = vote.votable.to_question.category
 
   week_category = category.parent.parent
   Shared::User::Profile.of('VotesCountCategory').where(user: voted_for_user,
                                                      targetable: week_category,
                                                      property: 'VotesCountCategory')
-      .first_or_create.increment!(:value)
+      .first_or_create.increment!(:value) unless week_category.nil?
 
   topic_category = category.parent
   Shared::User::Profile.of('VotesCountCategory').where(user: voted_for_user,
                                                      targetable: topic_category,
                                                      property: 'VotesCountCategory')
-      .first_or_create.increment!(:value)
+      .first_or_create.increment!(:value) unless topic_category.nil?
 end
 
 def add_user_knowledge(user)
@@ -129,7 +129,7 @@ end
 def update_seen_units(list)
   category = list.category
   user = list.lister
-  if user.views_count > 0
+  if user.lists_count > 0
     Shared::User::Profile.of('FreshUnitTime').where(user: user,
                                                   targetable: category,
                                                   property: 'FreshUnitTime').first_or_create.touch
