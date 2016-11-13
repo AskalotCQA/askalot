@@ -24,7 +24,7 @@ module Shared::QuestionRouting
         update_answer_features(resource)
         add_user_knowledge(resource.author)
         update_last_answer_time(resource.author)
-        `python scripts/python/UpdateUserProfile.py #{resource.id}`
+        `python scripts/python/UpdateUserProfile.py #{resource.id} >> recommendation/update-profile.log 2>&1`
       end
 
       if resource.is_a? Shared::Comment

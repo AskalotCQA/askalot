@@ -1,15 +1,8 @@
-import logging
 import sys
 import DataManager
 from TextualDictionary import TextualDictionary
 from gensim import corpora, similarities
 import Utils
-
-# Set up gensim logging
-#logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
-
-filename = 'recommendation/sim-values.dat'
-
 
 def compute_question_bow(question, textual_dictionary):
     # Preprocess question to BoW
@@ -58,8 +51,5 @@ if __name__ == '__main__':
     if user_profile:
         similarity = compute_similarity(user_profile.text_value, question, textual_dictionary)
 
-    #print 'Writing similarity: ', similarity
-    with open(filename, 'w') as f:
-        f.write(str(similarity))
-
+    print similarity
 

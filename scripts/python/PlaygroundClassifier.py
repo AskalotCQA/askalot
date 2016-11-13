@@ -206,7 +206,8 @@ def validation_curves(clf, X, Y):
 def discard_expertise_features(X):
     # knowledge gap: topic - 5, week -6, total -7
     # seen units: week -8, topic - 9
-    return np.delete(X, [5, 6, 7, 8, 9], axis=1)
+    # grade: 10
+    return np.delete(X, [5, 6, 7, 8, 9, 10], axis=1)
 
 
 def discard_willigness_features(X):

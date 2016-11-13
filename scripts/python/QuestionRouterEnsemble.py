@@ -32,7 +32,7 @@ def get_features(users_ids, question, category, textual_dictionary):
         user_profile_properties = DataManager.get_user_profile(user_id, category.id)
         profile_dict = user_profile_to_hash(user_profile_properties)
         will_features = [None] * 14
-        exp_features = [None] * 10
+        exp_features = [None] * 11
 
         will_features[0] = profile_dict.get('AnswersCount', 0)
         will_features[1] = profile_dict.get('CommentsCount', 0)
@@ -68,6 +68,7 @@ def get_features(users_ids, question, category, textual_dictionary):
                            + profile_dict.get('AnswersVotesCount', 0)) - asker_total_knowledge
         exp_features[8] = profile_dict.get('SeenUnits'+str(week_category_id), 0) / week_category_leaves_c
         exp_features[9] = profile_dict.get('SeenUnits'+str(topic_category_id), 0) / topic_category_leaves_c
+        exp_features[10] = profile_dict.get('Grade', 0)
 
         willingness.append(will_features)
         expertise.append(exp_features)
@@ -109,13 +110,13 @@ def recommend(classifier, users_ids):
     final_rec_users_id_in_array = []
     route_to_counter = 0
     for i in all_rec_users:
-        print users_ids[i], '\t\texp:\t', exp_prob[i], '\t\twill:\t', will_prob[i]
+        #print users_ids[i], '\t\texp:\t', exp_prob[i], '\t\twill:\t', will_prob[i]
         if DataManager.user_recommendation_count(users_ids[i]) <= MAX_ROUTED_QUESTIONS:
             final_rec_users.append(users_ids[i])
             final_rec_users_id_in_array.append(i)
             route_to_counter += 1
-        else:
-            print '=>Skipped'
+        #else:
+            #print '=>Skipped'
 
         if route_to_counter >= ROUTE_TO_MAX:
             break
@@ -133,8 +134,8 @@ def evaluate(users_ids, true_user_id):
 
 
 MAX_ROUTED_QUESTIONS = 3
-ROUTE_TO_MAX = 20
-RUBY_RETURN_FILE = 'recommendation/rec-users.dat'
+ROUTE_TO_MAX = 10
+#RUBY_RETURN_FILE = 'recommendation/rec-users.dat'
 
 if __name__ == '__main__':
     textual_dictionary = TextualDictionary()
@@ -157,9 +158,9 @@ if __name__ == '__main__':
 
     # Recommendation
     rec_to_users_full = recommend(ensemble, users_ids_full)
-    print '-----------------------'
-    print 'Baseline'
-    print '-----------------------'
+    #print '-----------------------'
+    #print 'Baseline'
+    #print '-----------------------'
     rec_to_users_baseline = recommend(ensemble_baseline, users_ids_baseline)
 
     # Evaluation
@@ -176,10 +177,12 @@ if __name__ == '__main__':
 
     # Save to file for Ruby to read
     final_rec_users = np.concatenate([rec_to_users_full, rec_to_users_baseline])
-    with open(RUBY_RETURN_FILE, 'w') as f:
-        for user_id in final_rec_users:
-            f.write(str(user_id)+'\n')
 
-    #DataManager.commit_and_close_connection()
+    #with open(RUBY_RETURN_FILE, 'w') as f:
+    #    for user_id in final_rec_users:
+    #        f.write(str(user_id)+'\n')
+
+    for user_id in final_rec_users:
+        print user_id
 
 

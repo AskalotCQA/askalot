@@ -1,7 +1,7 @@
 module Shared::QuestionRouting
   class FeaturesManager
     N_DAYS = 7.days
-    PYTHON_SIM_RETURN_FILE = "recommendation/sim-values.dat"
+    GRADE_REPORT_FILE = "recommendation/grades.csv"
 
     # Helpers
     def is_student(user)
@@ -172,7 +172,7 @@ module Shared::QuestionRouting
     end
 
     def cosine_sim(user, question)
-      `python scripts/python/SimilarityQU.py #{question.id} #{user.id}`
+      return `python scripts/python/SimilarityQU.py #{question.id} #{user.id} 2>> recommendation/qrouting-error.log`.to_f
     end
 
     def answers_in_category(user, resource, category)
@@ -196,6 +196,30 @@ module Shared::QuestionRouting
       asker_knowledge = answers_count(resource, asker) + votes_count(resource, asker)
       return answerer_knowledge - asker_knowledge
     end
+
+    def grade(user, answer)
+      grades = CSV.read(GRADE_REPORT_FILE, headers: true)
+
+      row = grades.find {|row| row['email'] == user.email}
+      # Find first number in full name - it is week number.
+      week_number = answer.question.category.full_tree_name[/\d+/].try(:to_i)
+
+      if row.nil? || week_number.nil? || week_number == 0
+        return 0
+      end
+
+      hw_grades = 0
+      lab_grades = 0
+      (1..week_number).each do |current_week_number|
+        hw_grades += row[('HW '+'%.2d' % current_week_number)].to_f
+        lab_grades += row[('L '+'%.2d' % current_week_number)].to_f
+      end
+      hw_grades = hw_grades / week_number.to_f
+      lab_grades = lab_grades / week_number.to_f
+
+      return (hw_grades + lab_grades) / 2
+    end
+
 
     def save_willingness_features(file, resource, category, user, class_id)
       answers_count_f = answers_count(resource, user)
@@ -224,8 +248,7 @@ module Shared::QuestionRouting
     end
 
     def save_expertise_features(file, resource, category, question, user, class_id)
-      cosine_sim(user, question)
-      cos_sim_f = File.open(PYTHON_SIM_RETURN_FILE, "r") {|f| f.readline}
+      cos_sim_f = cosine_sim(user, question)
       answers_in_week_f = answers_in_category(user, resource, category.parent.parent)
       answers_in_topic_f = answers_in_category(user, resource, category.parent)
       votes_in_topic_f = votes_in_category(user, resource, category.parent)
@@ -237,10 +260,11 @@ module Shared::QuestionRouting
       knowledge_gap_total_f = knowledge_gap_total(user, question.author, resource)
       seen_week_units_f = seen_units(resource, category.parent.parent, user)
       seen_topic_units_f = seen_units(resource, category.parent, user)
+      grade_f = grade(user, resource)
       if cos_sim_f.to_f > 0
         file << "#{class_id} #{cos_sim_f} #{answers_in_week_f} #{answers_in_topic_f} #{votes_in_topic_f} #{votes_in_week_f} "\
                     "#{knowledge_gap_topic_f} #{knowledge_gap_week_f} #{knowledge_gap_total_f} "\
-                    "#{seen_week_units_f} #{seen_topic_units_f}\n"
+                    "#{seen_week_units_f} #{seen_topic_units_f} #{grade_f}\n"
       end
     end
 

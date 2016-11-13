@@ -23,13 +23,13 @@ def update_user_profile(textual_dictionary, answer):
     user_profile = DataManager.get_user_profile_property(answer.author_id, 'BoW')
 
     if user_profile:
-        print 'Found user profile'
+        print 'Found'
         user_bow = DataManager.load_bow_json(user_profile.text_value)
         bow = Utils.sum_bows(user_bow, bow)
         DataManager.update_user_profile(answer.author_id, 'BoW', json.dumps(dict(bow)))
         #Utils.print_bow(textual_dictionary.vocabulary, bow)
     else:
-        print 'Creating user profile'
+        print 'Creating'
         DataManager.insert_user_profile(answer.author_id, 'BoW', json.dumps(dict(bow)))
         #Utils.print_bow(textual_dictionary.vocabulary, bow)
 

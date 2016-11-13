@@ -1,6 +1,9 @@
+require 'csv'
+
 namespace :recommendation do
   EXPERTISE_DATASET_F = "recommendation/expertise-train.dat"
   WILLINGNESS_DATASET_F = "recommendation/willingness-train.dat"
+  GRADE_REPORT_FILE = "recommendation/grades.csv"
   N_DAYS_OLD = 7.days
 
   desc 'Update features for question recommendation'
@@ -40,7 +43,22 @@ namespace :recommendation do
 
   desc 'Train classifiers'
   task train: :environment do
-    `python scripts/python/Training.py`
+    `python scripts/python/Training.py >> recommendation/training.log 2>&1`
+  end
+
+  desc 'Updates students grades from grade report.'
+  task update_grades: :environment do
+    users = Shared::User.all
+
+    grades = CSV.read(GRADE_REPORT_FILE, headers: true)
+
+    users.each do |user|
+      row = grades.find {|row| row['email'] == user.email}
+      next if row.nil?
+
+      grade = (row['L Avg'].to_f + row['HW Avg'].to_f) / 2
+      user.profiles.get_feature('Grade').update(value: grade) if grade > 0
+    end
   end
 end
 

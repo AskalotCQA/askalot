@@ -66,7 +66,7 @@ class TextualDictionary(object):
         return True
 
     def save_vocabulary_as_file(self):
-        print("Saving vocabulary to file.\n")
+        #print("Saving vocabulary to file.\n")
         self.vocabulary.save(VOCABULARY_FILENAME)
 
 
