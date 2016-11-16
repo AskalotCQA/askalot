@@ -93,7 +93,7 @@ def user_profile_to_hash(user_profile):
     return hash
 
 
-def recommend(classifier, users_ids):
+def recommend(classifier, users_ids, author_id):
     '''
     Recommend by classifier and take into account only users_ids.
     :param classifier:
@@ -111,7 +111,7 @@ def recommend(classifier, users_ids):
     route_to_counter = 0
     for i in all_rec_users:
         #print users_ids[i], '\t\texp:\t', exp_prob[i], '\t\twill:\t', will_prob[i]
-        if DataManager.user_recommendation_count(users_ids[i]) <= MAX_ROUTED_QUESTIONS:
+        if DataManager.user_recommendation_count(users_ids[i]) <= MAX_ROUTED_QUESTIONS and users_ids[i] != author_id:
             final_rec_users.append(users_ids[i])
             final_rec_users_id_in_array.append(i)
             route_to_counter += 1
@@ -157,11 +157,11 @@ if __name__ == '__main__':
     ensemble_baseline = Ensemble(Training.exp_baseline_model_f, Training.will_baseline_model_f, baseline=True)
 
     # Recommendation
-    rec_to_users_full = recommend(ensemble, users_ids_full)
+    rec_to_users_full = recommend(ensemble, users_ids_full, question.author_id)
     #print '-----------------------'
     #print 'Baseline'
     #print '-----------------------'
-    rec_to_users_baseline = recommend(ensemble_baseline, users_ids_baseline)
+    rec_to_users_baseline = recommend(ensemble_baseline, users_ids_baseline, question.author_id)
 
     # Evaluation
     if len(sys.argv) == 3:

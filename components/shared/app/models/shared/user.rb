@@ -188,7 +188,9 @@ class User < ActiveRecord::Base
   end
 
   def create_user_profile
-    self.profiles.get_feature('RegistrationDate').touch
+    Shared::User::Profile.create(user: self, targetable_id: -1,
+                                 targetable_type: 'RegistrationDate',
+                                 property: 'RegistrationDate')
   end
 
 end
