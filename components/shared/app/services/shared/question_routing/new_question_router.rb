@@ -16,24 +16,27 @@ module Shared::QuestionRouting
       #puts "Feeding for #{action} '#{action}' on #{resource} by #{initiator.try(:nick) || 'no one'} ..."
 
       if resource.is_a? Shared::Question
-        # puts to see the output
-        users_ids = `python scripts/python/QuestionRouterEnsemble.py #{resource.id} 2>> recommendation/qrouting-error.log`
-        #puts `python scripts/python/QuestionRouterEnsemble.py #{resource.id} #{resource.answers.first
-        #                                                                             .try(:author).try(:id)}`
+        Thread.new do
+          # puts to see the output
+          users_ids = `python scripts/python/QuestionRouterEnsemble.py #{resource.id} 2>> recommendation/qrouting-error.log`
+          #puts `python scripts/python/QuestionRouterEnsemble.py #{resource.id} #{resource.answers.first
+          #                                                                             .try(:author).try(:id)}`
 
-        users_ids = users_ids.split("\n")
-        users_ids.each do |user_id|
-          # Save recommendations
-          #recommendation = Shared::Recommendation.create(question: resource, user_id: user_id)
-          #recommendation.save
+          users_ids = users_ids.split("\n")
+          users_ids.each do |user_id|
+            # Save recommendations
+            #recommendation = Shared::Recommendation.create(question: resource, user_id: user_id)
+            #recommendation.save
 
-          # Send notification
-          # TODO initiator_id ?
-          Shared::Notification.create(recipient_id: user_id, initiator_id: 0,
-                                      resource: resource,
-                                      action: :recommendation,
-                                      anonymous: true,
-                                      context: Shared::Context::Manager.default_context_id)
+            # Send notification
+            # TODO initiator_id ?
+            Shared::Notification.create(recipient_id: user_id, initiator_id: 0,
+                                        resource: resource,
+                                        action: :recommendation,
+                                        anonymous: true,
+                                        context: Shared::Context::Manager.current_context_id)
+          end
+          ActiveRecord::Base.connection.close
         end
       end
     end
