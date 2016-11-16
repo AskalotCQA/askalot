@@ -4,6 +4,6 @@ server domain, :app, :web, :db, primary: true
 
 set :user,      'deploy'
 set :rails_env, 'edx_production'
-set :branch,    'master'
+set :branch,    'question-routing-gama-feature'
 
 role :db, domain, primary: true
