@@ -1,4 +1,3 @@
-import PlaygroundClassifier
 from sklearn import preprocessing
 import numpy as np
 from sklearn.pipeline import Pipeline
@@ -37,7 +36,7 @@ class WillignessClassifier(Classifier):
         self.load_training_data()
 
         if baseline:
-            self.X = PlaygroundClassifier.discard_willigness_features(self.X)
+            self.X = self.discard_willigness_features(self.X)
             param_grid = PARAM_GRID_BASELINE
         else:
             param_grid = PARAM_GRID

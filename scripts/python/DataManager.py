@@ -1,6 +1,7 @@
 import psycopg2 as pg
 import json
 import os
+from datetime import date,timedelta
 
 connection = pg.connect(database=os.environ.get('REC_PYTHON_DB_NAME','askalot_edx_development'),
                         user=os.environ.get('REC_PYTHON_DB_USER','postgres'),
@@ -151,7 +152,8 @@ def category_leaves(category_id):
 
 def user_recommendation_count(user_id):
     cursor.execute("SELECT COUNT(*) FROM notifications WHERE recipient_id = " + str(user_id)
-                   +" AND resource_type = 'Shared::Question' AND unread = TRUE AND action = 'recommendation'")
+                   +" AND resource_type = 'Shared::Question' AND created_at > %s "
+                   +" AND action = 'recommendation'", [date.today() - timedelta(days=7)])
     return cursor.fetchone()[0]
 
 

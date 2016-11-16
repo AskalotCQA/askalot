@@ -1,4 +1,3 @@
-import PlaygroundClassifier
 from sklearn import preprocessing
 from sklearn.ensemble import RandomForestClassifier
 from Classifier import Classifier
@@ -35,7 +34,7 @@ class ExpertiseClassifier(Classifier):
         self.load_training_data()
 
         if baseline:
-            self.X = PlaygroundClassifier.discard_expertise_features(self.X)
+            self.X = self.discard_expertise_features(self.X)
             param_grid = PARAM_GRID_BASELINE
         else:
             param_grid = PARAM_GRID

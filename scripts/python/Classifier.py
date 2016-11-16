@@ -1,12 +1,13 @@
 from sklearn.externals import joblib
 import numpy as np
-import PlaygroundClassifier
 from sklearn.pipeline import Pipeline
 import os
 from sklearn.model_selection import GridSearchCV
 from sklearn import metrics
 from sklearn import base
 from sklearn.model_selection import StratifiedKFold
+import Utils
+from collections import Counter
 
 
 class Classifier(object):
@@ -17,7 +18,7 @@ class Classifier(object):
         self.load_from_file()
 
     def load_training_data(self):
-        self.X, self.Y = PlaygroundClassifier.get_training_data(self.data_filename)
+        self.X, self.Y = self.get_training_data()
         self.X = np.array(self.X)
         self.Y = np.array(self.Y)
 
@@ -32,7 +33,7 @@ class Classifier(object):
         grid_search = GridSearchCV(self.clf, param_grid=param_grid, cv=cv,
                                    scoring=metrics.make_scorer(metrics.roc_auc_score, average='weighted'))
         grid_search.fit(self.X, self.Y)
-        PlaygroundClassifier.report(grid_search.cv_results_)
+        Utils.report(grid_search.cv_results_)
         # Use best estimator
         self.clf = grid_search.best_estimator_
 
@@ -43,7 +44,7 @@ class Classifier(object):
         auc_scores = []
         f1_scores = []
         for train, test in k_fold.split(self.X, self.Y):
-            PlaygroundClassifier.describe_dataset(self.X[train], self.Y[train])
+            print('Dataset shape {}'.format(Counter(self.Y[train])))
             clf.fit(self.X[train], self.Y[train])
             predictions = clf.predict_proba(self.X[test])[:, 1]
             threshold = self.find_threshold_auc(self.Y[test], predictions)
@@ -70,6 +71,30 @@ class Classifier(object):
                 maximum = current_auc
                 best_threshold = t
         return best_threshold
+
+    def discard_expertise_features(self, X):
+        # knowledge gap: topic - 5, week -6, total -7
+        # seen units: week -8, topic - 9
+        # grade: 10
+        return np.delete(X, [5, 6, 7, 8, 9, 10], axis=1)
+
+    def discard_willigness_features(self, X):
+        # seen units: week - 5, topic - 6
+        # fresh unit - 7
+        # avg activity: course - 9
+        # seen questions: week - 10, topic - 11
+        return np.delete(X, [5, 6, 7, 9, 10, 11], axis=1)
+
+    def get_training_data(self):
+        f = open(self.data_filename, "r")
+        X = []
+        Y = []
+        for line in f:
+            line_list = line.split()
+            Y.append(int(line_list.pop(0)))
+            X.append([float(i) for i in line_list])
+        return X, Y
+
 
     def save_as_file(self):
         joblib.dump(self.clf, self.model_filename)

@@ -15,6 +15,7 @@ from sklearn.model_selection import GridSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.externals import joblib
 from sklearn.calibration import CalibratedClassifierCV
+import Utils
 
 
 #filename = '/media/dmacjam/Data disc1/git/Askalot-dev/askalot/recommendation/expertise-train.dat'
@@ -32,19 +33,6 @@ def get_training_data(filename):
     return X, Y
 
 
-# Utility function to report best scores
-def report(results, n_top=3):
-    for i in range(1, n_top + 1):
-        candidates = np.flatnonzero(results['rank_test_score'] == i)
-        for candidate in candidates:
-            print("Model with rank: {0}".format(i))
-            print("Mean validation score: {0:.3f} (std: {1:.3f})".format(
-                  results['mean_test_score'][candidate],
-                  results['std_test_score'][candidate]))
-            print("Parameters: {0}".format(results['params'][candidate]))
-            print("")
-
-
 def grid_searching(clf, X , Y, cv=6):
     param_grid = {
         "n_estimators": [20, 60, 100 ],
@@ -55,7 +43,7 @@ def grid_searching(clf, X , Y, cv=6):
     grid_search = GridSearchCV(clf, param_grid=param_grid, cv=cv, scoring=metrics.make_scorer(metrics.roc_auc_score,
                                                                                               average='weighted'))
     grid_search.fit(X, Y)
-    print report(grid_search.cv_results_)
+    print Utils.report(grid_search.cv_results_)
     return grid_search.best_estimator_
 
 
