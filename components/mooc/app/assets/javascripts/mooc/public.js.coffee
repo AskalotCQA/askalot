@@ -122,6 +122,8 @@ $(document).ready ->
     window.addEventListener 'hashchange', changeIframeSrc
 
   if (!is_global)
+    $('#iFrameResizer0').parent().css({ 'height': 'auto' })
+
     $.ajax
       type: 'POST'
       url: host + courseUuid() +  '/parser'
