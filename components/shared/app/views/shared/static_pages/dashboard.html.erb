@@ -66,16 +66,16 @@
         </div>
 
       <div class="recommendation">
+        <h4><b><%= t('home.dashboard.recommendation.title') %></b></h4>
+        <p><%= t('home.dashboard.recommendation.subtitle') %></p>
         <% if @rec_questions_notifications.any? %>
-            <h4><b><%= t('home.dashboard.recommendation.title') %></b></h4>
-            <p><%= t('home.dashboard.recommendation.subtitle') %></p>
             <ol class="list">
               <% @rec_questions_notifications.each do |rec_notification| %>
                   <% question = rec_notification.resource %>
                   <li>
                     <div class="row">
                       <div class="col-xs-8">
-                        <%= link_to question.title, question_path(question, rec: 1) %>
+                        <%= link_to question.title, question_path(question, rec: 1, dashboard: true) %>
                       </div>
                       <div class="col-xs-4">
                         <%= user_icon_tag question.author_or_anonymous, tooltip_attributes(user_nick(question.author_or_anonymous), placement: :bottom) %>
@@ -87,6 +87,8 @@
                   </li>
               <% end %>
             </ol>
+        <% else %>
+            <i><%= t('home.dashboard.recommendation.nothing') %></i>
         <% end %>
       </div>
     </div>

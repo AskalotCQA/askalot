@@ -55,13 +55,23 @@ if env_type != 'staging'
     end
 
     every 1.day, at: '00:05am' do
-      runner 'recommendation:update_features'
+      rake 'recommendation:update_features'
+    end
+
+    every 1.day, at: '00:25am' do
+      rake 'backup:recommendation'
     end
 
     every 1.day, at: '01:00am' do
-      runner 'recommendation:append_expertise_dataset'
-      runner 'recommendation:append_willingness_dataset'
-      runner 'recommendation:train'
+      rake 'recommendation:create_expertise_dataset'
+    end
+
+    every 1.day, at: '02:00am' do
+      rake 'recommendation:append_willingness_dataset'
+    end
+
+    every 1.day, at: '04:00am' do
+      rake 'recommendation:train'
     end
 
   end

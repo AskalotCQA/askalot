@@ -49,6 +49,10 @@ sk:
       show_activities: Zobraziť všetky aktivity
       no_activity: "Nebola zaznamenaná žiadna aktivita od vášho posledného prihlásenia %{date}."
       description: "Tieto aktivity sa udiali v Askalote od vášho posledného prihlásenia %{date}."
+      recommendation:
+        title: Recommended questions to answer
+        subtitle: New questions you may be interested to answer. Help others by sharing what you have learned.
+        nothing: There is no recommendation for you now.
 
     step:
       first: "Pýtajte sa otázky"

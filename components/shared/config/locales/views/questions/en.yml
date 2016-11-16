@@ -124,4 +124,4 @@ en:
       new_comments_in_watched_categories: "Questions in watched categories with new comments"
       new_comments_in_watched_categories_description: "The list contains questions with new comments created since your last login. Only questions from watched categories are shown."
 
-    recommendation: "Recommendation for you. Askalot thinks you are the right person with good knowledge to answer the new question below. Can you do it?"
+    recommendation: "Recommendation for you. Askalot thinks you are the right person with good knowledge to answer the new question below. Can you answer it?"

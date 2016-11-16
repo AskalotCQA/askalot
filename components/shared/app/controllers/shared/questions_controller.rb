@@ -108,11 +108,15 @@ class QuestionsController < ApplicationController
 
     context_id = Shared::Context::Manager.current_context_id
     if params[:rec]
-      Shared::Notification.in_context(@context_id)
-          .where(resource: @question)
-          .where(action: :recommendation)
-          .where(recipient_id: current_user).first.try(:mark_as_read)
+      notification = Shared::Notification.in_context(@context_id)
+                      .where(resource: @question)
+                      .where(action: :recommendation)
+                      .where(recipient_id: current_user).first
+      notification.try(:mark_as_read)
       flash.now[:notice] = t("question.recommendation")
+      if params[:dashboard]
+        notification.update(from_dashboard: true) unless notification.nil?
+      end
     end
 
     dispatch_event :create, @view, for: @question.watchers
