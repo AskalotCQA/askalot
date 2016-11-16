@@ -510,8 +510,8 @@ CREATE TABLE categories (
     rgt integer,
     uuid character varying(255),
     depth integer,
-    full_tree_name text,
-    full_public_name text,
+    full_tree_name character varying(255),
+    full_public_name character varying(255),
     public_tags character varying(255)[] DEFAULT '{}'::character varying[],
     shared boolean DEFAULT true,
     askable boolean DEFAULT true,
@@ -1273,7 +1273,8 @@ CREATE TABLE notifications (
     updated_at timestamp without time zone NOT NULL,
     read_at timestamp without time zone,
     anonymous boolean DEFAULT false NOT NULL,
-    context integer
+    context integer,
+    from_dashboard boolean DEFAULT false
 );
 
 
@@ -4384,4 +4385,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161106125632');
 INSERT INTO schema_migrations (version) VALUES ('20161106171609');
 
 INSERT INTO schema_migrations (version) VALUES ('20161106171728');
+
+INSERT INTO schema_migrations (version) VALUES ('20161115200549');
 
