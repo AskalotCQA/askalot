@@ -20,6 +20,6 @@ namespace :backup do
 
     FileUtils.mkdir_p(path) unless File.exists?(path)
 
-    `tar czf #{name}.tar.gz '#{recommendation_folder}' && mv #{name}.tar.gz '#{path}'`
+    `cd '#{recommendation_folder}' && tar czf #{name}.tar.gz * && mv #{name}.tar.gz '#{path}'`
   end
 end

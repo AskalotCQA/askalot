@@ -10,8 +10,8 @@ class Ensemble(object):
         self.will_clf = WillignessClassifier(will_model_filename)
 
     def fit(self):
-        self.exp_clf.fit(self.baseline, cv=10)
-        self.will_clf.fit(self.baseline, cv=6)
+        self.exp_clf.fit(self.baseline, cv=6)
+        self.will_clf.fit(self.baseline, cv=10)
 
     def predict(self, X_exp, X_will):
         exp_predictions = self.exp_clf.predict(X_exp)
