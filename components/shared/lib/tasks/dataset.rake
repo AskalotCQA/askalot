@@ -106,7 +106,7 @@ namespace :dataset do
       puts 'Using default output level: 2'
       level = 2
     else
-      level = ENV['LEVEL']
+      level = ENV['LEVEL'].to_i
     end
 
     FileUtils.mkdir_p 'tmp/export'
@@ -114,9 +114,10 @@ namespace :dataset do
     puts 'Export location: tmp/export'
 
     ActiveRecord::Base.establish_connection(
-      adapter: db_config[:adapter],
+      adapter:  db_config[:adapter],
       database: db_config[:database],
-      pool: db_config[:pool],
+      pool:     db_config[:pool],
+      encoding: db_config[:encoding],
       username: db_config[:username],
       password: db_config[:password],
     )
@@ -129,7 +130,7 @@ namespace :dataset do
 
     models.flatten!
 
-    models << [Shared::Answer::Revision, Shared::Comment::Revision, Shared::Evaluation::Revision, Shared::Question::Revision, Shared::News] if level >= 2
+    models << [Shared::Answer::Revision, Shared::Comment::Revision, Shared::Evaluation::Revision, Shared::Question::Revision] if level >= 2
 
     models.flatten!
 
@@ -144,12 +145,12 @@ namespace :dataset do
     models.each do |model|
       filename = model.name.downcase.pluralize.sub('shared::', '').sub('::', '_')
 
-      puts "Exporting #{filename}"
+      puts "Exporting #{filename} (#{model.all.count} records)"
 
       CSV.open("tmp/export/#{filename}.csv", 'wb') do |csv|
         csv << model.attribute_names
 
-        model.find_each(batch_size: BATCH_SIZE).each { |record| csv << record.attributes.values }
+        model.unscoped.find_each(batch_size: BATCH_SIZE).each { |record| csv << record.attributes.values }
       end
     end
 
@@ -163,7 +164,7 @@ namespace :dataset do
       CSV.open("tmp/export/#{filename}.csv", 'wb') do |csv|
         csv << model.attribute_names - ['stack_exchange_uuid']
 
-        Shared::Answer.find_each(batch_size: BATCH_SIZE).each { |record| csv << record.attributes.except('stack_exchange_uuid').values }
+        Shared::Answer.unscoped.find_each(batch_size: BATCH_SIZE).each { |record| csv << record.attributes.except('stack_exchange_uuid').values }
       end
     end
 
@@ -178,7 +179,7 @@ namespace :dataset do
 
       csv << Shared::Category.attribute_names - not_included
 
-      Shared::Category.find_each(batch_size: BATCH_SIZE).each { |e| csv << e.attributes.except(*not_included).values }
+      Shared::Category.unscoped.find_each(batch_size: BATCH_SIZE).each { |e| csv << e.attributes.except(*not_included).values }
     end
 
     puts 'Exporting questions'
@@ -191,7 +192,7 @@ namespace :dataset do
 
       csv << Shared::Question.attribute_names - not_included
 
-      Shared::Question.find_each(batch_size: BATCH_SIZE).each { |e| csv << e.attributes.except(*not_included).values }
+      Shared::Question.unscoped.find_each(batch_size: BATCH_SIZE).each { |e| csv << e.attributes.except(*not_included).values }
     end
 
     puts 'Exporting tags'
@@ -201,7 +202,7 @@ namespace :dataset do
 
       csv << Shared::Tag.attribute_names - not_included
 
-      Shared::Tag.find_each(batch_size: BATCH_SIZE).each { |e| csv << e.attributes.except(*not_included).values }
+      Shared::Tag.unscoped.find_each(batch_size: BATCH_SIZE).each { |e| csv << e.attributes.except(*not_included).values }
     end
 
     puts 'Exporting users'
@@ -218,7 +219,7 @@ namespace :dataset do
 
       csv << Shared::User.attribute_names - not_included
 
-      Shared::User.find_each(batch_size: BATCH_SIZE).each { |e| csv << e.attributes.except(*not_included).values }
+      Shared::User.unscoped.find_each(batch_size: BATCH_SIZE).each { |e| csv << e.attributes.except(*not_included).values }
     end
 
     puts 'Exporting finished'
