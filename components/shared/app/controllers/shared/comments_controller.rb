@@ -16,6 +16,10 @@ class CommentsController < ApplicationController
 
     authorize! :comment, @commentable
 
+    if params[:attachments]
+      params[:attachments].each { |a| @comment.attachments.new(file: a, author: current_user) }
+    end
+
     if @comment.save
       process_markdown_for @comment do |user|
         dispatch_event :mention, @comment, for: user

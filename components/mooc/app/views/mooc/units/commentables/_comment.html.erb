@@ -8,6 +8,13 @@
       <div class="comment-content">
         <%= render_markdown comment.text, redcarpet: { tags: [:autolink, :block_quote, :codespan, :double_emphasis, :emphasis, :linebreak, :link, :list, :list_item, :paragraph, :quote, :striketrough, :underline] } %>
       </div>
+
+      <% if comment.attachments.any? %>
+        <div class="comment-attachments-section">
+          <%= render 'shared/comments/attachments', comment: comment %>
+        </div>
+      <% end %>
+
       <div class="comment-details">
         <%= render 'shared/comments/details',  comment: comment %>
         <%= render 'shared/comments/editing',  comment: comment, remote: remote %>
