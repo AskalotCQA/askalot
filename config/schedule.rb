@@ -44,7 +44,7 @@ if env_type != 'staging'
       runner 'Shared::Mailers::CommunityMailerService.deliver_all_emails!'
     end
 
-    every 6.months do
+    every 1.month do
       rake 'users:alumni'
     end
   end
