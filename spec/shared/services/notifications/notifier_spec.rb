@@ -12,6 +12,9 @@ describe Shared::Notifications::Notifier do
       factory  = double(:factory)
       context  = Shared::Context::Manager.current_context_id
 
+      expect(watchers.first).to receive(:alumni?).and_return(false)
+      expect(watchers.second).to receive(:alumni?).and_return(false)
+
       expect(factory).to receive(:create!).with(action: :edit, recipient: watchers.first,  initiator: :user, resource: resource, anonymous: false, context: context)
       expect(factory).to receive(:create!).with(action: :edit, recipient: watchers.second, initiator: :user, resource: resource, anonymous: false, context: context)
 
@@ -25,6 +28,7 @@ describe Shared::Notifications::Notifier do
       factory  = double(:factory)
       context  = Shared::Context::Manager.current_context_id
 
+      expect(watcher).to receive(:alumni?).and_return(false)
       expect(factory).to receive(:create!).with(action: :edit, recipient: watcher, initiator: :user, resource: resource, anonymous: false, context: context)
 
       Shared::Notifications::Notifier.factory = factory
@@ -38,6 +42,7 @@ describe Shared::Notifications::Notifier do
         factory  = double(:factory)
         context  = Shared::Context::Manager.current_context_id
 
+        expect(watcher).to receive(:alumni?).and_return(false)
         expect(factory).to receive(:create!).with(action: :edit, recipient: watcher, initiator: :user, resource: resource, anonymous: false, context: context).once
 
         Shared::Notifications::Notifier.factory = factory
