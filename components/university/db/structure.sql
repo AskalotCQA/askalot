@@ -880,7 +880,10 @@ CREATE TABLE evaluation_revisions (
     text text,
     value integer NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer,
+    deleted_at timestamp without time zone
 );
 
 
@@ -3137,6 +3140,20 @@ CREATE INDEX index_documents_on_title ON documents USING btree (title);
 
 
 --
+-- Name: index_evaluation_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_evaluation_revisions_on_deleted ON evaluation_revisions USING btree (deleted);
+
+
+--
+-- Name: index_evaluation_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_evaluation_revisions_on_deletor_id ON evaluation_revisions USING btree (deletor_id);
+
+
+--
 -- Name: index_evaluation_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -4387,4 +4404,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161106171609');
 INSERT INTO schema_migrations (version) VALUES ('20161106171728');
 
 INSERT INTO schema_migrations (version) VALUES ('20161115200549');
+
+INSERT INTO schema_migrations (version) VALUES ('20161119140437');
 

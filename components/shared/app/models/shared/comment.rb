@@ -1,6 +1,7 @@
 module Shared
 class Comment < ActiveRecord::Base
   include Authorable
+  include Attachmentable
   include Deletable
   include Editable
   include Notifiable

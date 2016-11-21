@@ -10,6 +10,8 @@ module Shared::Notifications
       notifications = []
 
       recipients.each do |recipient|
+        next if recipient.alumni?
+
         notifications << factory.create!(action: action, initiator: initiator, recipient: recipient, resource: resource, anonymous: !!options[:anonymous], context: context) if Shared::Notification.column_names.include? 'context'
         notifications << factory.create!(action: action, initiator: initiator, recipient: recipient, resource: resource, anonymous: !!options[:anonymous]) unless Shared::Notification.column_names.include? 'context'
       end

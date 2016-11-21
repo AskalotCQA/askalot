@@ -27,11 +27,12 @@ if env_type != 'staging'
     rake 'backup:database'
   end
 
-  every 1.day, at: '4:32am' do
-    rake 'reputation:adjust'
-  end
 
   if env_name == 'fiit'
+    every 1.day, at: '4:32am' do
+      rake 'reputation:adjust'
+    end
+
     every 5.minutes do
       rake 'slido:questions'
     end
@@ -44,7 +45,7 @@ if env_type != 'staging'
       runner 'Shared::Mailers::CommunityMailerService.deliver_all_emails!'
     end
 
-    every 6.months do
+    every 1.month do
       rake 'users:alumni'
     end
   end
