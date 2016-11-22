@@ -5,21 +5,21 @@ module Redcurtain::Renderer
     extend self
 
     def render(content, options = {})
-      matches = content.to_s.scan(/(?<!\\)(\$\$?)(.+?)\1/)
+      matches = content.to_s.scan(/(?<!\\)(\$\$?)(.+?)(\$\$?)/)
 
-      matches.each { |match| content = replace(content, match[1]) }
+      matches.each { |match| content = replace(content, match[0] + match[1] + match[2]) }
 
       matches = content.scan(/(?<!\\)(\\\\\[)(.+?)(\\\\\])/)
 
-      matches.each { |match| content = replace(content, match[1]) }
+      matches.each { |match| content = replace(content, match[0] + match[1] + match[2]) }
 
       matches = content.scan(/(?<!\\)(\\\\\()(.+?)(\\\\\))/)
 
-      matches.each { |match| content = replace(content, match[1]) }
+      matches.each { |match| content = replace(content, match[0] + match[1] + match[2]) }
 
       matches = content.scan(/(?<!\\)(\[mathjax\]|\[mathjaxinline\])(.+?)(\[\/mathjax\]|\[\/mathjaxinline\])/)
 
-      matches.each { |match| content = replace(content, match[1]) }
+      matches.each { |match| content = replace(content, match[0] + match[1] + match[2]) }
 
       content.html_safe
     end
