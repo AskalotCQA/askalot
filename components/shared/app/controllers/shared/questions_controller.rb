@@ -42,6 +42,9 @@ class QuestionsController < ApplicationController
     @questions = @questions.includes(:question_type)
     @questions = @questions.page(params[:page]).per(20)
 
+    @recommended_question_ids = Shared::Notification.for(current_user)
+                                    .where(action: :recommendation).pluck(:resource_id)
+
     initialize_polling
   end
 
