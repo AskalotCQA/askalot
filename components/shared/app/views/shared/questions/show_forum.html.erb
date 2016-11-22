@@ -1,5 +1,9 @@
 <% provide :title, @question.title %>
 
+<% unless @notification.nil? %>
+    <%= render 'shared/questions/recommendation_feedback', notification: @notification %>
+<% end %>
+
 <div id="question">
   <div class="row">
     <div class="col-sm-3 col-md-2 hidden-xs">

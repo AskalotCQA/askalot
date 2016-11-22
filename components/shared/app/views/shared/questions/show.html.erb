@@ -1,53 +1,8 @@
 <% provide :title, @question.title %>
 
 <% unless @notification.nil? %>
-    <div class="flash">
-      <div class="alert alert-success alert-dismissible">
-        <div class="recommendation-feedback">
-          <b><%= t("question.recommendation.headline")%></b>
-          <%= t("question.recommendation.info")%><br><br>
-          <i><%= t("question.recommendation.feedback.info")%></i>
-          <br>
-          <%= form_for(@notification, url: feedback_notification_path(@notification), format: :json,
-                       method: "post", remote: true, html:{id: "recommendation-feedback-form"}) do |f| %>
-              I
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-default">
-                  <%= f.radio_button :feedback_willigness, "1", checked:true %>
-                  &nbsp;would&nbsp;
-                </label>
-                <label class="btn btn-default">
-                  <%= f.radio_button :feedback_willigness, "0", checked:false %>
-                  &nbsp;wouldn't&nbsp;
-                </label>
-              </div>
-              <%= t("question.recommendation.feedback.willigness")%>
-              <br>
-              I
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-default">
-                  <%= f.radio_button :feedback_expertise, "1", checked:true %>
-                  &nbsp;have&nbsp;
-                </label>
-                <label class="btn btn-default">
-                  <%= f.radio_button :feedback_expertise, "0", checked:false %>
-                  &nbsp;haven't&nbsp;
-                </label>
-              </div>
-              <%= t("question.recommendation.feedback.expertise")%>
-              <br>
-              <%= f.submit("Submit feedback", class: "btn btn-success",  onclick: "$('#feedback-thanks').show();") %>
-              <span id="feedback-thanks">
-                Thank you!
-              </span>
-            </div>
-        <% end %>
-
-      </div>
-    </div>
+    <%= render 'shared/questions/recommendation_feedback', notification: @notification %>
 <% end %>
-
-
 
 <div id="question">
   <div class="row">
