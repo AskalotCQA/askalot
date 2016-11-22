@@ -108,11 +108,14 @@ Shared::Engine.routes.draw do
 
       get :read,   on: :member
       get :unread, on: :member
+
+      post :feedback, on: :member
     end
 
     resources :watchings, only: [:index, :destroy] do
       delete :clean, on: :collection
     end
+
 
     namespace :administration do
       root 'categories#index'

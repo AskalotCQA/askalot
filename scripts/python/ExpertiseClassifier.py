@@ -3,21 +3,25 @@ from sklearn.ensemble import RandomForestClassifier
 from Classifier import Classifier
 
 PARAM_GRID = {
-            "clf__n_estimators": [20, 60, 100],
+            "clf__n_estimators": [60, 100, 200],
             "clf__criterion": ["gini", "entropy"],
-            "clf__max_depth": [2, 3, 4, 5, 6]
+            "clf__max_depth": [2, 3, 4, 5, 6],
+            "clf__oob_score": [True],
+            "clf__class_weight": ["balanced"]
 }
 
 PARAM_GRID_BASELINE = {
-            "clf__n_estimators": [20, 60, 100],
+            "clf__n_estimators": [60, 100, 200],
             "clf__criterion": ["gini", "entropy"],
-            "clf__max_depth": [2, 3, 4]
+            "clf__max_depth": [2, 3, 4],
+            "clf__oob_score": [True],
+            "clf__class_weight": ["balanced"]
 }
 
 
 class ExpertiseClassifier(Classifier):
     base_clf = RandomForestClassifier(class_weight="balanced", n_jobs=-1, n_estimators=30, max_depth=4,
-                                      criterion="entropy")
+                                      criterion="entropy", oob_score=True)
     scaler = preprocessing.RobustScaler()
     #sampler = RandomOverSampler(random_state=42)
 
@@ -47,5 +51,7 @@ class ExpertiseClassifier(Classifier):
 
         # Train on whole dataset
         self.clf.fit(self.X, self.Y)
+        print 'OOB Score:', self.clf.named_steps['clf'].oob_score_
+        print 'Features importances: ', self.clf.named_steps['clf'].feature_importances_
         self.save_as_file()
 

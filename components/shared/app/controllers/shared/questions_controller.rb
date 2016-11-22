@@ -107,15 +107,14 @@ class QuestionsController < ApplicationController
     @question.increment :views_count
 
     context_id = Shared::Context::Manager.current_context_id
+    @notification = Shared::Notification.in_context(@context_id)
+                        .where(resource: @question)
+                        .where(action: :recommendation)
+                        .where(recipient_id: current_user).first
     if params[:rec]
-      notification = Shared::Notification.in_context(@context_id)
-                      .where(resource: @question)
-                      .where(action: :recommendation)
-                      .where(recipient_id: current_user).first
-      notification.try(:mark_as_read)
-      flash.now[:notice] = t("question.recommendation")
+      @notification.try(:mark_as_read)
       if params[:dashboard]
-        notification.update(from_dashboard: true) unless notification.nil?
+        @notification.update(from_dashboard: true) unless @notification.nil?
       end
     end
 

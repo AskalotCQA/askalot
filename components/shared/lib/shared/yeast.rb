@@ -1,4 +1,6 @@
 require 'shared/yeast/example_feeder'
+require 'shared/yeast/features_weights_updater'
+require 'shared/yeast/new_question_router'
 
 module Shared::Yeast
   def self.run
@@ -32,7 +34,6 @@ module Shared::Yeast
               Shared::View, Shared::List, Shared::User]
     date   = Shared::Question.order(:created_at).first.created_at
     #date  = Date.new(2016, 11, 02)
-    #till_date = date + 1.day
     till_date = Time.now
     #till_date = Date.new(2016, 11, 02)
 

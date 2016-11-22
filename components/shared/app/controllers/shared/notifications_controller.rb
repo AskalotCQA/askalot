@@ -38,6 +38,19 @@ class NotificationsController < ApplicationController
 
   end
 
+  def feedback
+    notification = Shared::Notification.find(params[:id])
+
+    if !notification.nil? && params[:notification][:feedback_willigness].present? && params[:notification][:feedback_expertise].present?
+      notification.update(feedback_willigness: params[:notification][:feedback_willigness])
+      notification.update(feedback_expertise: params[:notification][:feedback_expertise])
+    end
+
+    respond_to do |format|
+      format.json { head :no_content }
+    end
+  end
+
   private
 
   def mark(status)

@@ -35,3 +35,4 @@ sk:
       one: "1 neprečítaná notifikácia"
       few: "%{count} neprečítané notifikácie"
       other: "%{count} neprečítaných notifikácií"
+

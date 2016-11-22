@@ -124,4 +124,10 @@ sk:
       new_comments_in_watched_categories: "Otázky v sledovaných kategóriách s pridanými komentármi"
       new_comments_in_watched_categories_description: "Zoznam obsahuje otázky, v ktorých pribudli komentáre od Vášho posledného prihlásenia. V zozname sa zobrazujú otázky len zo sledovaných kategórií."
 
-    recommendation: "Odporúčanie novej otázky na ktorú by si mohol pomôcť odpovedať."
+    recommendation:
+      headline: "Odporúčanie novej otázky na ktorú by si mohol pomôcť odpovedať."
+      info: "Askalot thinks you are the right person with good knowledge to answer the new question below. Can you answer it?"
+      feedback:
+        info: "Make the recommendation better by completing statements below (consider only the question):"
+        willigness: "like to help in answering this question."
+        expertise: "enough knowledge and skills to answer this question."

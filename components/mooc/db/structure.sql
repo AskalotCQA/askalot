@@ -1120,7 +1120,9 @@ CREATE TABLE notifications (
     read_at timestamp without time zone,
     anonymous boolean DEFAULT false NOT NULL,
     context integer,
-    from_dashboard boolean DEFAULT false
+    from_dashboard boolean DEFAULT false,
+    feedback_expertise integer,
+    feedback_willigness integer
 );
 
 
@@ -3996,3 +3998,5 @@ INSERT INTO schema_migrations (version) VALUES ('20161115200549');
 INSERT INTO schema_migrations (version) VALUES ('20161119140437');
 
 INSERT INTO schema_migrations (version) VALUES ('20161110161857');
+
+INSERT INTO schema_migrations (version) VALUES ('20161122154704');

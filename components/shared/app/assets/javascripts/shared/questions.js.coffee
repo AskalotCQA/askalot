@@ -45,3 +45,4 @@ $(document).ready ->
 
     descriptions = JSON.parse(select.attr('data-descriptions'))
     $('.category-description').html(descriptions[value])
+
