@@ -43,7 +43,16 @@ namespace :recommendation do
       next if row.nil?
 
       grade = (row['L Avg'].to_f + row['HW Avg'].to_f) / 2
-      user.profiles.get_feature('Grade').update(value: grade) if grade > 0
+
+      if grade > 0
+        if Shared::User::Profile.exists?({user: user, targetable_id: -1, targetable_type: 'Grade', property: 'Grade'})
+          Shared::User::Profile.where(user: user, targetable_id: -1, targetable_type: 'Grade',
+                                      property: 'Grade').first.update(value: grade)
+        else
+          Shared::User::Profile.create(user: user, targetable_id: -1, targetable_type: 'Grade',
+                                       property: 'Grade', value: grade)
+        end
+      end
     end
   end
 end

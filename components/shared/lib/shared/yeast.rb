@@ -1,6 +1,4 @@
 require 'shared/yeast/example_feeder'
-require 'shared/yeast/features_weights_updater'
-require 'shared/yeast/new_question_router'
 
 module Shared::Yeast
   def self.run
