@@ -259,8 +259,12 @@
 #feedback-thanks {
   padding-left: 2%;
   display: none;
+  position: relative;
+  top: 6px;
 }
 
 .recommended-question {
-  background-color: rgba(0, 253, 0, 0.46);
+  background-color: #d9edf7;
+  margin: -2px;
+  padding: 2px;
 }

@@ -1,5 +1,5 @@
 <li>
-  <div class="row <%= 'recommended-question' if !@recommended_question_ids.nil? && @recommended_question_ids.include?(question.id) %>">
+  <div class="row">
     <div class="col-xs-12 col-sm-push-2 col-sm-8 col-md-push-3 col-md-7">
       <div class="question-preview">
         <h4>
@@ -10,7 +10,9 @@
 
         <%= render 'shared/questions/labels', labels: question.labels %>
 
-        <div class="question-content">
+        <div class="question-content <%= 'recommended-question' if !@recommended_question_ids.nil? && @recommended_question_ids.include?(question.id) %>"
+             title="<%= 'Recommended question' if !@recommended_question_ids.nil? && @recommended_question_ids.include?(question.id) %>"
+        >
           <%= question_text_preview question, length: 250 %>
         </div>
       </div>

@@ -9,28 +9,26 @@
           <br>
           <%= form_for(notification, url: feedback_notification_path(notification), format: :json,
                    method: "post", remote: true, html:{id: "recommendation-feedback-form"}) do |f| %>
-          I
-          <div class="btn-group">
-            <label class="btn btn-default btn-xs">
+          I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <label class="btn-default btn-xs radio-inline">
               <%= f.radio_button :feedback_willigness, "1", checked: true %>
               &nbsp;would&nbsp;
-            </label>
-            <label class="btn btn-default btn-xs">
+            </label>&nbsp;&nbsp;
+            <label class="btn-default btn-xs radio-inline">
               <%= f.radio_button :feedback_willigness, "0", checked: false %>
               &nbsp;wouldn't&nbsp;
             </label>
-          </div>
           <%= t("question.recommendation.feedback.willigness")%>
           <br>
-          I
+          I&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <div class="btn-group">
-            <label class="btn btn-default btn-xs">
+            <label class="btn-default btn-xs radio-inline">
               <%= f.radio_button :feedback_expertise, "1", checked: true %>
               &nbsp;have&nbsp;
-            </label>
-            <label class="btn btn-default btn-xs">
+            </label>&nbsp;&nbsp;
+            <label class="btn-default btn-xs radio-inline">
               <%= f.radio_button :feedback_expertise, "0", checked: false %>
-              &nbsp;haven't&nbsp;
+              &nbsp;don't have
             </label>
           </div>
           <%= t("question.recommendation.feedback.expertise")%>
