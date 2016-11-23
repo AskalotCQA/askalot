@@ -136,13 +136,15 @@ def update_seen_units(list)
 end
 
 def update_questions_in_category(view)
-  topic_category = view.question.category.parent
-  week_category = view.question.category.parent.parent
-
+  category = view.question.category
   user = view.viewer
 
-  update_feature_with_targetable(user, topic_category, 'CategorySeenQuestions')
-  update_feature_with_targetable(user, week_category, 'CategorySeenQuestions')
+  if category.depth == 3
+    topic_category = category.parent
+    week_category = topic_category.parent
+    update_feature_with_targetable(user, topic_category, 'CategorySeenQuestions')
+    update_feature_with_targetable(user, week_category, 'CategorySeenQuestions')
+  end
 end
 
 def user_created(user)
