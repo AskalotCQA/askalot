@@ -28,7 +28,7 @@ module Shared::Stuba
           begin
             entries = request.search base: treebase, filter: filter, return_result: true rescue nil
 
-            Shared::Stuba::User.new(entries.first) if entries.present?
+            Shared::Stuba::User.new(entries.first) if entries.present? && fiit_user?(entries.first[:accountstatus])
           end
         end
       rescue Timeout::Error
@@ -59,6 +59,14 @@ module Shared::Stuba
       rescue Timeout::Error
         nil
       end
+    end
+
+    def fiit_user?(status)
+      fiit = !status.find { |status| status =~ /fiit/ }.nil?
+
+      raise 'Ľutujeme, ale táto inštancia systému Askalot je určená na vnútrofakultnú komunikáciu, teda pre študentov a zamestnancov FIIT STU. Ak ste z inej fakulty STU a pôsobíte aj na FIIT, kontaktujte nás, prosím, na askalot@fiit.stuba.sk.' unless fiit
+
+      fiit
     end
   end
 end

@@ -11,7 +11,14 @@ class SessionsController < Devise::SessionsController
   def create
     service = Shared::Users::Authentication.new Shared::Stuba::AIS, login_params
 
-    if service.authorized?
+    begin
+      authorized = service.authorized?
+    rescue => e
+      authorized = false
+      flash[:error] = e.message
+    end
+
+    if authorized
       self.resource = service.authenticate!
 
       self.resource.remember_me = login_params[:remember_me]
