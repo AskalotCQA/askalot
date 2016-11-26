@@ -50,7 +50,7 @@ class StaticPagesController < ApplicationController
                                     .where(resource_type: Shared::Question)
                                     .where(action: :recommendation)
                                     .where(recipient_id: current_user).where(unread: :true)
-                                    .order('notifications.created_at DESC')
+                                    .order('notifications.created_at DESC').limit(4)
   end
 
   def help
