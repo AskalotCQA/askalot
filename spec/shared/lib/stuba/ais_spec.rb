@@ -36,7 +36,7 @@ describe Shared::Stuba::AIS do
         expect(ldap).to receive(:build).with(options).and_return(request)
         expect(ldap).to receive(:build_filter).with(:eq, 'uid', 'xuser1').and_return('filter')
 
-        expect(request).to receive(:search).with(query).and_return([{ uid: ['xuser1'] }])
+        expect(request).to receive(:search).with(query).and_return([{ uid: ['xuser1'], accountstatus: ['fiit_student'] }])
 
         user = Shared::Stuba::AIS.authenticate('xuser1', 'password')
 
