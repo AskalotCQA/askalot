@@ -146,10 +146,22 @@ def compute_activity()
   users = Shared::User.where('views_count > 0')
   users.each do |user|
     avg_cqa_activity = manager.avg_cqa_activity(user)
-    user.profiles.get_feature('AvgCqaActivity').update(value: avg_cqa_activity) if avg_cqa_activity > 0
+    update_feature_with_value(user, 'AvgCqaActivity', avg_cqa_activity) if avg_cqa_activity > 0
     avg_course_act = manager.avg_course_activity(user)
-    user.profiles.get_feature('AvgCourseActivity').update(value: avg_course_act) if avg_course_act > 0
+    update_feature_with_value(user, 'AvgCourseActivity', avg_course_act) if avg_course_act > 0
     recent_answers_count = manager.answers_count_in_last_days_now(user)
-    user.profiles.get_feature('RecentAnswersCount').update(value: recent_answers_count) if recent_answers_count > 0
+    update_feature_with_value(user, 'RecentAnswersCount', recent_answers_count) if recent_answers_count > 0
+  end
+end
+
+def update_feature_with_value(user, property, value)
+  if Shared::User::Profile.exists? ({user: user, targetable_id: -1, targetable_type: property, property: property})
+    Shared::User::Profile.where(user: user,
+                                targetable_id: -1, targetable_type: property,
+                                property: property).first.update(value: value)
+  else
+    Shared::User::Profile.create(user: user,
+                                 targetable_id: -1, targetable_type: property,
+                                 property: property, value: value)
   end
 end
