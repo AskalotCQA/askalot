@@ -59,3 +59,7 @@ class WillignessClassifier(Classifier):
         self.save_as_file()
 
 
+    def predict(self, baseline, input):
+        if baseline:
+            input = self.discard_willigness_features(input)
+        return self.clf.predict_proba(input)[:, 1]

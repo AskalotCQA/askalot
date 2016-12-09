@@ -104,7 +104,7 @@ def recommend(classifier, users_ids, author_id):
     willingness = np.array(willingness)
     expertise = np.array(expertise)
 
-    all_rec_users, exp_prob, will_prob = ensemble.predict(expertise, willingness)
+    all_rec_users, exp_prob, will_prob = classifier.predict(expertise, willingness)
 
     final_rec_users = []
     final_rec_users_id_in_array = []
@@ -128,7 +128,7 @@ def recommend(classifier, users_ids, author_id):
 
 def evaluate(users_ids, true_user_id):
     print 'Ground turuth user id:\t', true_user_id
-    print 'Rank:\t', Evaluation.true_rank(users_ids, true_user_id)
+    #print 'Rank:\t', Evaluation.true_rank(users_ids, true_user_id)
     print 'Sucess@20:\t', Evaluation.success(users_ids, true_user_id, n=20)
 
 

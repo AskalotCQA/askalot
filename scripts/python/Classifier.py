@@ -22,12 +22,6 @@ class Classifier(object):
         self.X = np.array(self.X)
         self.Y = np.array(self.Y)
 
-    def predict(self, input):
-        predictions = self.clf.predict_proba(input)[:, 1]
-        #predictions[predictions > self.threshold] = 1
-        #predictions[predictions <= self.threshold] = 0
-        return predictions
-
     def grid_searching(self, param_grid, cv):
         print 'Grid searching...'
         grid_search = GridSearchCV(self.clf, param_grid=param_grid, cv=cv,

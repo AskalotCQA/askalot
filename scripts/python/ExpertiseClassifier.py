@@ -55,3 +55,9 @@ class ExpertiseClassifier(Classifier):
         print 'Features importances: ', self.clf.named_steps['clf'].feature_importances_
         self.save_as_file()
 
+
+    def predict(self, baseline, input):
+        if baseline:
+            input = self.discard_expertise_features(input)
+        return self.clf.predict_proba(input)[:, 1]
+

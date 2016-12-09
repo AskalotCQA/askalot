@@ -14,8 +14,8 @@ class Ensemble(object):
         self.will_clf.fit(self.baseline, cv=10)
 
     def predict(self, X_exp, X_will):
-        exp_predictions = self.exp_clf.predict(X_exp)
-        will_predictions = self.will_clf.predict(X_will)
+        exp_predictions = self.exp_clf.predict(self.baseline, X_exp)
+        will_predictions = self.will_clf.predict(self.baseline, X_will)
 
         indices = [ind for ind, (i, j) in enumerate(zip(exp_predictions, will_predictions))]
         probabilities = exp_predictions[indices] * will_predictions[indices]
