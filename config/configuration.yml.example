@@ -49,6 +49,14 @@ defaults: &defaults
     email: 15
     general: 5
 
+  anonymized_database:
+    adapter: postgresql
+    encoding: unicode
+    database: askalot_anonymized
+    pool: 5
+    username: postgres
+    password: postgres
+
 university: &university
   category_depths:
     -
