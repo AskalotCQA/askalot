@@ -44,9 +44,8 @@ module Shared::Events
     end
 
     def put_params(hash, params)
-      params[:content] = '[removed]' if hash[:action] == 'mooc/parser.parser' && !params[:content].nil?
-
-      hash[:params] = params
+      hash[:params] = params.clone
+      hash[:params][:content] = '[removed]' if hash[:action] == 'mooc/parser.parser' && !params[:content].nil?
     end
 
     def put_user(hash, user)
