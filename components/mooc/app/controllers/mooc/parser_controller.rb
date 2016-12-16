@@ -18,9 +18,12 @@ module Mooc
         unit.save
 
         status_case = 'unit_updated'
-
-        Mooc::CategoryContent.create(category: unit, content: params[:content]) unless Mooc::CategoryContent.where(category: unit).exists?
       end
+
+      category_content = Mooc::CategoryContent.where(category: unit).first
+
+      Mooc::CategoryContent.create(category: unit, content: params[:content]) if category_content.nil?
+      category_content.update(content: params[:content]) if category_content && category_content.content.empty?
 
       render json: { status: 'success', case: status_case, flags: saved_flags }
     end
