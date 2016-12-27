@@ -38,7 +38,7 @@
   <section>
 
     <div class="col-md-8">
-      <div class="featured news">
+      <div class="home-news">
         <h2><%= link_to t('home.news'), news_index_path(tab: :'news') %></h2>
         <%= render 'news', all_news: @all_news %>
       </div>
@@ -46,7 +46,7 @@
 
     <div class="row">
       <div class="col-md-4">
-        <div class="featured">
+        <div class="home-featured-questions">
           <h2><%= link_to t('home.featured.new'), questions_path(tab: :'questions-new'), analytics_attributes(:questions, :list, [:new, :home]) %></h2>
           <%= render 'questions', questions: @new %>
         </div>
