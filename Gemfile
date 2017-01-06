@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0'
+gem 'rails', '~> 4.1.0'
+# http://stackoverflow.com/questions/41207432/expected-string-default-value-for-jbuilder-got-true-boolean-error-in-a
+gem 'thor', '0.19.1'
 
 # database
 gem 'pg'
@@ -100,7 +102,7 @@ end
 group :development, :test do
   # debugging
   gem 'pry'
-  gem 'pry-debugger'
+  #gem 'pry-debugger'
   gem 'hirb'
 
   # testing
@@ -119,6 +121,7 @@ group :development, :test do
 
   # code metrics
   gem 'simplecov', require: false
+  gem 'codeclimate-test-reporter', require: false
 
   # mass import
   gem 'activerecord-import'
@@ -133,9 +136,6 @@ group :demo, :staging, :production, :experimental do
   gem 'garelic'
   gem 'newrelic_rpm'
 end
-
-# TODO(zbell) resolve
-gem 'codeclimate-test-reporter', group: :test, require: nil
 
 gem 'shared', path: 'components/shared'
 
