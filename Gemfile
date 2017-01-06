@@ -64,7 +64,6 @@ gem 'whenever'
 # utilities
 gem 'actionview-encoded_mail_to'
 gem 'active_model_serializers'
-gem 'activerecord-custom_timestamps'
 gem 'forgery'
 gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'

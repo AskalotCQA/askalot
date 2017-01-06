@@ -68,8 +68,6 @@ GEM
       activemodel (= 4.1.16)
       activesupport (= 4.1.16)
       arel (~> 5.0.0)
-    activerecord-custom_timestamps (0.2.0)
-      activerecord (>= 3.1, < 5)
     activerecord-import (0.6.0)
       activerecord (>= 3.0)
     activesupport (4.1.16)
@@ -467,7 +465,6 @@ PLATFORMS
 DEPENDENCIES
   actionview-encoded_mail_to
   active_model_serializers
-  activerecord-custom_timestamps
   activerecord-import
   activesupport-json_encoder
   awesome_nested_set
