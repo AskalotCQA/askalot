@@ -1,19 +1,45 @@
 language: ruby
 rvm:
-  - 2.0.0
+  - 2.1.1
+
+services:
+  - elasticsearch
+
+addons:
+  postgresql: "9.3"
+  code_climate:
+    repo_token:
+      secure: "qGGKazOsim5RO1DKsmX6llrLgAsD8O15M07DPqlqq+YBb1ApRTf5bTvG43qYM9SeUIjg3F112WPw42gYHNB+avPBv/AB54S5mr595t/xqeDylTeEQGCHTf/UlWX2FtXem7BL7TDx8g+iXh84VVoMFJHMLntNP+KtALOwcgPw6IbT9sHfhoEqqW8rwylhsdFDUbQDXiy1f9SWOTEMGNpmwu4DBGtjHMHQlJWdtnFagPAobuD93i61y2+rTJv8NTDsLt4EH3TpqXgXD3RUqz9t+sVNyvr/wkdzJE2+AR8VZCUWFuAmUz1y76dVKU1k8yN+ajk6sU9Xf+qfoDV7pEp2am4LX4uuWav1nvN+QBWsirsPuQKrhE4pokNkLMexGvYwdinMcVvYSWpPSK6eh36AWRxVzmC1MD0Czb8KDuDMJVDuLaZYNiLNDXlHrCkVtB9RIV9psjKxF+ntQPocVNd6IxNqHBkO4YiZxlc3ltc26ML9QYjJo0u+xUFhVqvbfU7I1tgmmxt1Us56mBT8RVyXqWpE/rEv1HKHtdzZXQpVPJgjAjuSYh2Cm3f1ziMiJNSyraeoiNeTeehZDQqAunbnpTIaCbl8KNUBm0BKb0HdZU5cC99g8YsSN+H5QIc8dbBQuyPJIpfufTfDSH79LYgidxXsbLw9xYEDN8eC03Zf/fU="
+
+cache:
+  - bundler: true
+  - directories:
+    - "travis_phantomjs"
+
+sudo: false
 bundler_args: --without development
-env: DRIVER=poltergeist
+
+before_install:
+  - "export PHANTOMJS_VERSION=2.1.1"
+  - "phantomjs --version"
+  - "export PATH=$PWD/travis_phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin:$PATH"
+  - "phantomjs --version"
+  - "if [ $(phantomjs --version) != $PHANTOMJS_VERSION ]; then rm -rf $PWD/travis_phantomjs; mkdir -p $PWD/travis_phantomjs; fi"
+  - "if [ $(phantomjs --version) != $PHANTOMJS_VERSION ]; then wget https://github.com/Medium/phantomjs/releases/download/v$PHANTOMJS_VERSION/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -O $PWD/travis_phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2; fi"
+  - "if [ $(phantomjs --version) != $PHANTOMJS_VERSION ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs; fi"
+  - "phantomjs --version"
+
 before_script:
-  - psql -c 'create database askalot_test;' -U postgres
+  - export TZ='Europe/Bratislava'
   - gem install bundler
   - "cp config/database.yml.example config/database.yml"
   - "cp config/configuration.yml.example config/configuration.yml"
-  - rake db:schema:load
+  - RAILS_ENV=fiit_test bundle exec rake db:create db:structure:load
+  - RAILS_ENV=edx_test bundle exec rake db:create db:structure:load
 
-addons:
-  postgresql: '9.3'
-  code_climate:
-    repo_token:
-      secure: TODO
-services:
-  - elasticsearch
+script:
+  - RAILS_ENV=fiit_test bundle exec rake rspec:test
+  - RAILS_ENV=edx_test bundle exec rake rspec:test
+
+after_success:
+  - bundle exec codeclimate-test-reporter
