@@ -1,6 +1,3 @@
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
-
 if ENV['COVERAGE'] == 'true'
   require 'simplecov'
 
@@ -25,7 +22,7 @@ Capybara.default_selector  = :css
 Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :poltergeist
 
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, window_size: [1600, 1200], inspector: true)
+  Capybara::Poltergeist::Driver.new(app, window_size: [1600, 1200], inspector: true, timeout: 60)
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,

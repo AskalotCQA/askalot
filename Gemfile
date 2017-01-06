@@ -110,9 +110,9 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.2.0'
   gem 'factory_girl_rails'
   gem 'launchy'
-  gem 'capybara', '~> 2.2.1'
+  gem 'capybara'
   gem 'selenium-webdriver', require: false
-  gem 'poltergeist', '~> 1.7.0', require: false
+  gem 'poltergeist', require: false
   gem 'guard-rspec'
 
   # database
