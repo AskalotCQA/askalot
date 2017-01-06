@@ -4,11 +4,11 @@ Askalot is a CQA (Community Question and Answer) system of next generation.
 
 **Latest release**
 
-[![Codeship](https://img.shields.io/codeship/ed259b90-587a-0133-afb6-26e98ecb9625/master.svg)](https://codeship.com/projects/109682)  [![Code Climate](https://codeclimate.com/github/AskalotCQA/askalot/badges/gpa.svg)](https://codeclimate.com/github/AskalotCQA/askalot)
+[![Build Status](https://travis-ci.com/isrba/askalot.svg?token=KiGHuQ2duxZsskaxboZE&branch=master)](https://travis-ci.com/isrba/askalot)  [![Code Climate](https://codeclimate.com/github/AskalotCQA/askalot/badges/gpa.svg)](https://codeclimate.com/github/AskalotCQA/askalot)
 
 **Development**
 
-[![Codeship](https://img.shields.io/codeship/ed259b90-587a-0133-afb6-26e98ecb9625/gama.svg)](https://codeship.com/projects/109682)  [![Code Climate](https://codeclimate.com/repos/5710ad164c2a41314500449b/badges/f0124b8f7e331110e733/gpa.svg)](https://codeclimate.com/repos/5710ad164c2a41314500449b/feed)  [![Test Coverage](https://codeclimate.com/repos/5710ad164c2a41314500449b/badges/f0124b8f7e331110e733/coverage.svg)](https://codeclimate.com/repos/5710ad164c2a41314500449b/coverage)
+[![Build Status](https://travis-ci.com/isrba/askalot.svg?token=KiGHuQ2duxZsskaxboZE&branch=gama)](https://travis-ci.com/isrba/askalot)  [![Code Climate](https://codeclimate.com/repos/5710ad164c2a41314500449b/badges/f0124b8f7e331110e733/gpa.svg)](https://codeclimate.com/repos/5710ad164c2a41314500449b/feed)  [![Test Coverage](https://codeclimate.com/repos/5710ad164c2a41314500449b/badges/f0124b8f7e331110e733/coverage.svg)](https://codeclimate.com/repos/5710ad164c2a41314500449b/coverage)
 
 ## Requirements
 
