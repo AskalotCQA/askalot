@@ -34,8 +34,10 @@ before_script:
   - gem install bundler
   - "cp config/database.yml.example config/database.yml"
   - "cp config/configuration.yml.example config/configuration.yml"
-  - RAILS_ENV=fiit_test bundle exec rake db:create db:structure:load
-  - RAILS_ENV=edx_test bundle exec rake db:create db:structure:load
+  - RAILS_ENV=fiit_test bundle exec rake db:create
+  - RAILS_ENV=fiit_test bundle exec rake db:structure:load DB_STRUCTURE=components/university/db/structure.sql
+  - RAILS_ENV=edx_test bundle exec rake db:create
+  - RAILS_ENV=edx_test bundle exec rake db:structure:load DB_STRUCTURE=components/mooc/db/structure.sql
 
 script:
   - RAILS_ENV=fiit_test bundle exec rake rspec:test
