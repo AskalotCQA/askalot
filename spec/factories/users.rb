@@ -30,7 +30,7 @@ FactoryGirl.define do
     factory :mooc_user, class: Mooc::User if Rails.module.mooc?
 
     after :create do |user|
-      user.confirm!
+      user.confirm
 
       Shared::ContextUser.create user: user, context_id: 1 if Rails.module.mooc?
     end

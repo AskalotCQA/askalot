@@ -6,8 +6,8 @@
   </div>
 
   <ul class="nav nav-tabs">
-    <%= tab_link_tag t('activity.tab.global'), :all, activities_path(params.except(:page).merge tab: :all), analytics_attributes(:activity, :switch, :global) %>
-    <%= tab_link_tag t('activity.tab.followees'), :followees, activities_path(params.except(:page).merge tab: :followees), analytics_attributes(:activity, :switch, :followees) %>
+    <%= tab_link_tag t('activity.tab.global'), :all, activities_path(params.symbolize_keys.except(:page).merge tab: :all), analytics_attributes(:activity, :switch, :global) %>
+    <%= tab_link_tag t('activity.tab.followees'), :followees, activities_path(params.symbolize_keys.except(:page).merge tab: :followees), analytics_attributes(:activity, :switch, :followees) %>
   </ul>
 </div>
 

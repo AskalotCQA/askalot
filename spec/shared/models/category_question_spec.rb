@@ -19,21 +19,21 @@ describe Shared::CategoryQuestion, type: :model do
 
     context 'deleting category' do
       it 'deletes question cache when category is deleted' do
-        expect(Shared::CategoryQuestion.exists?(question_category)).to be_truthy
+        expect(Shared::CategoryQuestion.exists?(question_category.id)).to be_truthy
 
         category.destroy
 
-        expect(Shared::CategoryQuestion.exists?(question_category)).to be_falsey
+        expect(Shared::CategoryQuestion.exists?(question_category.id)).to be_falsey
       end
     end
 
     context 'deleting question' do
       it 'deletes question cache question is deleted by user' do
-        expect(Shared::CategoryQuestion.exists?(question_category)).to be_truthy
+        expect(Shared::CategoryQuestion.exists?(question_category.id)).to be_truthy
 
         question.mark_as_deleted_by! user
 
-        expect(Shared::CategoryQuestion.exists?(question_category)).to be_falsey
+        expect(Shared::CategoryQuestion.exists?(question_category.id)).to be_falsey
       end
     end
   end

@@ -3,9 +3,9 @@
 <%= render 'shared/searchables/search', target: controller_name %>
 
 <ul id="users-tabs" class="nav nav-tabs tab-navigation">
-  <%= tab_link_tag_with_count t('user.tab.all'), :all, users_path(params.except(:page).merge tab: :all), Shared::User.in_context(@context_id).count, analytics_attributes(:users, :switch, :all).merge(remote: true, data: { fade: '#users' }) %>
-  <%= tab_link_tag_with_count t('user.tab.recent'), :recent, users_path(params.except(:page).merge tab: :recent), Shared::User.in_context(@context_id).recent.count, analytics_attributes(:users, :switch, :recent).merge(remote: true, data: { fade: '#users' }) %>
-  <%= tab_link_tag_with_count t('user.tab.alumni'), :alumni, users_path(params.except(:page).merge tab: :alumni), Shared::User.in_context(@context_id).alumni.count, analytics_attributes(:users, :switch, :alumni).merge(remote: true, data: { fade: '#users' }) unless Rails.module.mooc? %>
+  <%= tab_link_tag_with_count t('user.tab.all'), :all, users_path(params.symbolize_keys.except(:page).merge tab: :all), Shared::User.in_context(@context_id).count, analytics_attributes(:users, :switch, :all).merge(remote: true, data: { fade: '#users' }) %>
+  <%= tab_link_tag_with_count t('user.tab.recent'), :recent, users_path(params.symbolize_keys.except(:page).merge tab: :recent), Shared::User.in_context(@context_id).recent.count, analytics_attributes(:users, :switch, :recent).merge(remote: true, data: { fade: '#users' }) %>
+  <%= tab_link_tag_with_count t('user.tab.alumni'), :alumni, users_path(params.symbolize_keys.except(:page).merge tab: :alumni), Shared::User.in_context(@context_id).alumni.count, analytics_attributes(:users, :switch, :alumni).merge(remote: true, data: { fade: '#users' }) unless Rails.module.mooc? %>
 </ul>
 
 <%= render 'users', users: @users, remote: true %>

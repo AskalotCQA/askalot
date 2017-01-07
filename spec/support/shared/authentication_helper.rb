@@ -27,14 +27,14 @@ module Shared::AuthenticationHelper
       accountstatus: ['uis:active']
     }
 
-    Shared::Stuba::AIS.stub(:authenticate).with(user.login, options[:password] || 'password') do
+    allow(Shared::Stuba::AIS).to receive(:authenticate).with(user.login, options[:password] || 'password') do
       Shared::Stuba::User.new(data)
     end
   end
 
   RSpec.configure do |config|
     config.before :each, type: :feature do
-      Shared::Stuba::AIS.stub(:authenticate) { nil }
+      allow(Shared::Stuba::AIS).to receive(:authenticate).and_return(nil)
     end
   end
 end
