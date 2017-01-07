@@ -27,7 +27,6 @@ describe Shared::Users::Authentication do
         user = double(:user)
 
         allow(factory).to receive(:where).and_return([nil])
-        # factory.stub(:where).and_return([nil])
 
         subject.factory = factory
 

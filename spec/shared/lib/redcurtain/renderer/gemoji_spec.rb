@@ -8,7 +8,7 @@ describe Redcurtain::Renderer::Gemoji do
     let(:content) { ":poop:" }
 
     before :each do
-      Emoji.stub(:names) { ['dancer', 'poop'] }
+      allow(Emoji).to receive(:names) { ['dancer', 'poop'] }
     end
 
     it 'renders emoji icons' do

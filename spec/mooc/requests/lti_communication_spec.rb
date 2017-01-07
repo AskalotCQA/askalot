@@ -14,8 +14,8 @@ describe 'LTI request communication', type: :request do
 
     @params = @tc.generate_launch_data
 
-    IMS::LTI::ToolProvider.any_instance.stub(:valid_request?).and_return(true)
-    IMS::LTI::ToolProvider.any_instance.stub(:request_oauth_timestamp).and_return(Time.now.utc)
+    allow_any_instance_of(IMS::LTI::ToolProvider).to receive(:valid_request?).and_return(true)
+    allow_any_instance_of(IMS::LTI::ToolProvider).to receive(:request_oauth_timestamp).and_return(Time.now.utc)
   end
 
   it 'creates new category and context category if does not exist' do

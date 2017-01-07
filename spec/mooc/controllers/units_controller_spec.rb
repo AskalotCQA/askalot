@@ -41,7 +41,7 @@ describe Mooc::UnitsController, type: :controller do
       end
 
       it 'redirects to error page when request is not valid' do
-        IMS::LTI::ToolProvider.any_instance.stub(:valid_request?).and_return(false)
+        allow_any_instance_of(IMS::LTI::ToolProvider).to receive(:valid_request?).and_return(false)
 
         post :show, @params
 
@@ -51,11 +51,11 @@ describe Mooc::UnitsController, type: :controller do
 
     context 'with valid LTI request' do
       before :each do
-        IMS::LTI::ToolProvider.any_instance.stub(:valid_request?).and_return(true)
+        allow_any_instance_of(IMS::LTI::ToolProvider).to receive(:valid_request?).and_return(true)
       end
 
       it 'redirects to error page when request is too old' do
-        IMS::LTI::ToolProvider.any_instance.stub(:request_oauth_timestamp).and_return(0)
+        allow_any_instance_of(IMS::LTI::ToolProvider).to receive(:request_oauth_timestamp).and_return(0)
 
         post :show, @params
 
@@ -63,7 +63,7 @@ describe Mooc::UnitsController, type: :controller do
       end
 
       it 'redirects to error page when unit is not parsed' do
-        IMS::LTI::ToolProvider.any_instance.stub(:request_oauth_timestamp).and_return(Time.now.utc)
+        allow_any_instance_of(IMS::LTI::ToolProvider).to receive(:request_oauth_timestamp).and_return(Time.now.utc)
 
         post :show, @params
 
@@ -71,7 +71,7 @@ describe Mooc::UnitsController, type: :controller do
       end
 
       it 'redirects to error page if user data are not provided' do
-        IMS::LTI::ToolProvider.any_instance.stub(:request_oauth_timestamp).and_return(Time.now.utc)
+        allow_any_instance_of(IMS::LTI::ToolProvider).to receive(:request_oauth_timestamp).and_return(Time.now.utc)
 
         @params.delete(:lis_person_sourcedid)
         @params.delete(:lis_person_contact_email_primary)

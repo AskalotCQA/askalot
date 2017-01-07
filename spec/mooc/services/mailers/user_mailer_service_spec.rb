@@ -16,7 +16,7 @@ describe Mooc::Mailers::UserMailerService do
 
         email = double(:email)
 
-        Mooc::UserMailer.stub(:notifications).with(users[2], from: 1.days.ago) { email }
+        allow(Mooc::UserMailer).to receive(:notifications).with(users[2], from: 1.days.ago) { email }
 
         expect(email).to receive(:deliver_now!)
 
