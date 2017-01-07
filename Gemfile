@@ -106,7 +106,7 @@ group :development, :test do
 
   # testing
   gem 'rspec-rails', '~> 3.5'
-  gem 'database_cleaner', '~> 1.2.0'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'selenium-webdriver', require: false

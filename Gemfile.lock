@@ -143,7 +143,7 @@ GEM
     curb (0.8.8)
     d3_rails (3.4.13)
       railties (>= 3.1.0)
-    database_cleaner (1.2.0)
+    database_cleaner (1.5.3)
     devise (3.5.10)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -501,7 +501,7 @@ DEPENDENCIES
   codeclimate-test-reporter
   coffee-rails (~> 4.0.0)
   d3_rails (~> 3.4.6)
-  database_cleaner (~> 1.2.0)
+  database_cleaner
   elasticsearch
   exception_notification
   factory_girl_rails
