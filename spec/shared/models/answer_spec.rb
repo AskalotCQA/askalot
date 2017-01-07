@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-require_relative 'concerns/editable_spec'
-require_relative 'concerns/deletable_spec'
-require_relative 'concerns/touchable_spec'
+require_relative 'concerns/editable'
+require_relative 'concerns/deletable'
+require_relative 'concerns/touchable'
 
 describe Shared::Answer, type: :model do
   it_behaves_like Shared::Editable

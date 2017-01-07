@@ -3,8 +3,8 @@
 <%= render 'shared/searchables/search', target: controller_name %>
 
 <ul class="nav nav-tabs tab-navigation">
-  <%= tab_link_tag_with_count t('category.tab.all'), :all, categories_path(params.except(:page).merge tab: :all), @context_categories.size, analytics_attributes(:categories, :switch, :all) %>
-  <%= tab_link_tag_with_count t('category.tab.active'), :active, categories_path(params.except(:page).merge tab: :active), active_categories(@context_categories, @questions_counts).size, analytics_attributes(:categories, :switch, :active) %>
+  <%= tab_link_tag_with_count t('category.tab.all'), :all, categories_path(params.symbolize_keys.except(:page).merge tab: :all), @context_categories.size, analytics_attributes(:categories, :switch, :all) %>
+  <%= tab_link_tag_with_count t('category.tab.active'), :active, categories_path(params.symbolize_keys.except(:page).merge tab: :active), active_categories(@context_categories, @questions_counts).size, analytics_attributes(:categories, :switch, :active) %>
 </ul>
 
 <div class="tab-content">

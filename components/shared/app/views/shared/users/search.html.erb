@@ -3,7 +3,7 @@
 <%= render 'shared/searchables/search', target: controller_name %>
 
 <ul id="users-tabs" class="nav nav-tabs tab-navigation">
-  <%= tab_link_tag_with_count t('user.tab.results'), :results, search_users_path(params.slice(:q, :page).merge tab: :results), @results.total_entries, analytics_attributes(:users, :search, :results).merge(remote: true, data: { fade: '#users' }) %>
+  <%= tab_link_tag_with_count t('user.tab.results'), :results, search_users_path(params.symbolize_keys.slice(:q, :page).merge tab: :results), @results.total_entries, analytics_attributes(:users, :search, :results).merge(remote: true, data: { fade: '#users' }) %>
 </ul>
 
 <%= render 'users', users: @results, remote: false %>

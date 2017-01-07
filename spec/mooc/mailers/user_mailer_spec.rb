@@ -33,7 +33,7 @@ describe Mooc::UserMailer, type: :mailer do
         mail = Mooc::UserMailer.notifications(user, from: 1.day.ago)
 
         expect(mail.subject).to be_nil
-        expect(mail.class).to be(ActionMailer::Base::NullMail)
+        expect(mail.message.class).to be(ActionMailer::Base::NullMail)
       end
     end
   end

@@ -12,8 +12,10 @@ describe 'Account Confirmation', type: :feature do
     fill_in 'user_email', with: user.email
     click_button 'Poslať inštrukcie pre potvrdenie registrácie'
 
-    expect(last_email.to).to eql([user.email])
-    expect(last_email.subject).to eql('Potvrdenie registrácie')
+    email = emails.first
+
+    expect(email.to).to eql([user.email])
+    expect(email.subject).to eql('Potvrdenie registrácie')
 
     user.reload
 

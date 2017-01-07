@@ -38,19 +38,19 @@
     <div class="user-profile-metrics">
       <div class="row">
         <div class="col-xs-4 col-sm-12 col-md-4">
-          <%= link_to user_followings_path(params.except(:page).merge(tab: :followers)), analytics_attributes(:profile, :list, :followers).merge(class: :'user-metric') do %>
+          <%= link_to user_followings_path(params.symbolize_keys.except(:page).merge(tab: :followers)), analytics_attributes(:profile, :list, :followers).merge(class: :'user-metric') do %>
             <span class="user-metric-value"><%= user.followers.size %></span>
             <%= t('count.follower', count: user.followers.size) %>
           <% end %>
         </div>
         <div class="col-xs-4 col-sm-12 col-md-4">
-          <%= link_to user_path(params.except(:page).merge(tab: :favorites)), analytics_attributes(:profile, :list, :favorites).merge(class: :'user-metric') do %>
+          <%= link_to user_path(params.symbolize_keys.except(:page).merge(tab: :favorites)), analytics_attributes(:profile, :list, :favorites).merge(class: :'user-metric') do %>
             <span class="user-metric-value"><%= user.favorites.size %></span>
             <%= t('count.favorite', count: user.favorites.size) %>
           <% end %>
         </div>
         <div class="col-xs-4 col-sm-12 col-md-4">
-          <%= link_to user_followings_path(params.except(:page).merge(tab: :followees)), analytics_attributes(:profile, :list, :followees).merge(class: :'user-metric') do %>
+          <%= link_to user_followings_path(params.symbolize_keys.except(:page).merge(tab: :followees)), analytics_attributes(:profile, :list, :followees).merge(class: :'user-metric') do %>
             <span class="user-metric-value"><%= user.followees.size %></span>
             <%= t('count.followee', count: user.followees.size) %>
           <% end %>

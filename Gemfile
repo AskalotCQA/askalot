@@ -13,7 +13,7 @@ gem 'squire', '~> 1.3.6'
 
 # authentification
 # gem 'devise', '~> 3.1.1'
-gem 'cancan', '~> 1.6.9'
+gem 'cancan', '~> 1.6.10'
 gem 'net-ldap'
 
 # facebook
@@ -102,15 +102,12 @@ end
 group :development, :test do
   # debugging
   gem 'pry'
-  #gem 'pry-debugger'
   gem 'hirb'
 
   # testing
-  gem 'rspec-rails', '~> 2.0'
-  gem 'fuubar'
+  gem 'rspec-rails', '~> 3.5'
   gem 'database_cleaner', '~> 1.2.0'
   gem 'factory_girl_rails'
-  gem 'launchy'
   gem 'capybara'
   gem 'selenium-webdriver', require: false
   gem 'poltergeist', require: false
@@ -124,7 +121,7 @@ group :development, :test do
   gem 'codeclimate-test-reporter', require: false
 
   # mass import
-  gem 'activerecord-import'
+  gem 'activerecord-import', '~> 0.10.0'
 end
 
 group :demo, :staging, :production, :experimental do
