@@ -46,6 +46,9 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
+  # RSpec will use this file to store the status of each example the last time it ran.
+  config.example_status_persistence_file_path = "#{Rails.root}/spec/specs_with_statuses_#{Rails.module}.txt"
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
