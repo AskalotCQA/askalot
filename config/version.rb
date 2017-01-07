@@ -1,10 +1,10 @@
 module Askalot
   module VERSION
     MAJOR = 3
-    MINOR = 0
-    PATCH = 6
+    MINOR = 1
+    PATCH = 0
 
-    PRE = 'gama'
+    PRE = 'alpha'
 
     STRING = [MAJOR, MINOR, PATCH, PRE].compact * '.'
   end
