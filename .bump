@@ -1,4 +1,4 @@
---branches=gama,staging,master
---pre=gama
+--branches=development,staging,master
+--pre=alpha
 --schema=rails
 --message="Bump version to %v [skip ci]"
