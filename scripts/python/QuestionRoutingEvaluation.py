@@ -1,0 +1,182 @@
+import sys
+import DataManager
+import numpy as np
+import SimilarityQU
+from Ensemble import Ensemble
+import Evaluation
+from TextualDictionary import TextualDictionary
+import Training
+
+
+def get_features(users_ids, question, category, textual_dictionary):
+    # shape = [n_samples, n_features]
+    week_category_id = DataManager.get_category(category.parent_id).parent_id
+    topic_category_id = category.parent_id
+    week_category_leaves = DataManager.category_leaves(week_category_id)
+    topic_category_leaves = DataManager.category_leaves(topic_category_id)
+    week_category_leaves_c = len(week_category_leaves)
+    topic_category_leaves_c = len(topic_category_leaves)
+    week_questions_c = sum([category.questions_count for category in week_category_leaves])
+    topic_questions_c =  sum([category.questions_count for category in topic_category_leaves])
+
+    asker_profile = DataManager.get_user_profile(question.author_id, category.id)
+    asker_profile = user_profile_to_hash(asker_profile)
+    asker_total_knowledge = asker_profile.get('AnswersCount', 0) + asker_profile.get('QuestionVotesCount', 0) + asker_profile.get('AnswersVotesCount', 0)
+    asker_week_knowledge = asker_profile.get('AnswersCountCategory'+str(week_category_id), 0) + asker_profile.get('VotesCountCategory'+str(week_category_id), 0)
+    asker_topic_knowledge =  asker_profile.get('AnswersCountCategory'+str(topic_category_id), 0) + asker_profile.get('VotesCountCategory'+str(topic_category_id), 0)
+
+    willingness = []
+    expertise = []
+    for user_id in users_ids:
+        #print 'User id: ', user_id
+        user_profile_properties = DataManager.get_user_profile(user_id, category.id)
+        profile_dict = user_profile_to_hash(user_profile_properties)
+        will_features = [None] * 14
+        exp_features = [None] * 11
+
+        will_features[0] = profile_dict.get('AnswersCount', 0)
+        will_features[1] = profile_dict.get('CommentsCount', 0)
+        will_features[2] = profile_dict.get('RecentAnswersCount', 0)
+        will_features[3] = profile_dict.get('QuestionVotesCount', 0) + profile_dict.get('AnswersVotesCount', 0)
+        will_features[4] = int((question.created_at - profile_dict['LastAnswerTime'])
+                                .total_seconds()) if profile_dict.get('LastAnswerTime', None) else 0
+        will_features[5] = profile_dict.get('SeenUnits'+str(week_category_id), 0) / week_category_leaves_c
+        will_features[6] = profile_dict.get('SeenUnits'+str(topic_category_id), 0) / topic_category_leaves_c
+        fresh_unit_key = 'FreshUnitTime'+str(category.id)
+        will_features[7] = int((question.created_at - profile_dict[fresh_unit_key])
+                                .total_seconds()) if profile_dict.get(fresh_unit_key, None) else 0
+        will_features[8] = profile_dict.get('AvgCqaActivity', 0)
+        will_features[9] = profile_dict.get('AvgCourseActivity', 0)
+        will_features[10] = profile_dict.get('CategorySeenQuestions'+str(week_category_id), 0) / week_questions_c
+        will_features[11] = profile_dict.get('CategorySeenQuestions'+str(topic_category_id), 0) / topic_questions_c
+        will_features[12] = profile_dict.get('QuestionCount', 0)
+        will_features[13] = int((question.created_at - profile_dict['RegistrationDate'])
+                                .total_seconds()) if profile_dict.get('RegistrationDate', None) else 0
+        #will_features[14] = profile_dict.get('RecommendedCount', 0)
+        #will_features[15] = profile_dict.get('RecCTR', 0)
+
+        exp_features[0] = SimilarityQU.compute_similarity(profile_dict.get('BoW', None), question, textual_dictionary)
+        exp_features[1] = profile_dict.get('AnswersCountCategory'+str(week_category_id), 0)
+        exp_features[2] = profile_dict.get('AnswersCountCategory'+str(topic_category_id), 0)
+        exp_features[3] = profile_dict.get('VotesCountCategory'+str(topic_category_id), 0)
+        exp_features[4] = profile_dict.get('VotesCountCategory'+str(week_category_id), 0)
+        exp_features[5] = (profile_dict.get('AnswersCountCategory'+str(topic_category_id), 0)
+                           + profile_dict.get('VotesCountCategory'+str(topic_category_id), 0)) - asker_topic_knowledge
+        exp_features[6] = (profile_dict.get('AnswersCountCategory'+str(week_category_id), 0)
+                           + profile_dict.get('VotesCountCategory'+str(week_category_id), 0)) - asker_week_knowledge
+        exp_features[7] = (profile_dict.get('AnswersCount', 0) + profile_dict.get('QuestionVotesCount', 0)
+                           + profile_dict.get('AnswersVotesCount', 0)) - asker_total_knowledge
+        exp_features[8] = profile_dict.get('SeenUnits'+str(week_category_id), 0) / week_category_leaves_c
+        exp_features[9] = profile_dict.get('SeenUnits'+str(topic_category_id), 0) / topic_category_leaves_c
+        exp_features[10] = profile_dict.get('Grade', 0)
+
+        willingness.append(will_features)
+        expertise.append(exp_features)
+    return np.array(willingness), np.array(expertise)
+
+
+
+def user_profile_to_hash(user_profile):
+    '''
+    Create dictionary {key: value}. Key is property or in case of Category it is property+category_id.
+    Value is either value or updated_at column.
+    '''
+    hash = dict()
+    for profile in user_profile:
+        if profile.targetable_type != 'Shared::Category':
+            value = profile.value if profile.value is not None else profile.text_value
+            if value is None:
+                value = profile.updated_at
+            hash[profile.property] = value
+        else:
+            hash[profile.property+str(profile.targetable_id)] = profile.value if profile.value else profile.updated_at
+    return hash
+
+
+def recommend(classifier, users_ids):
+    '''
+    Recommend by classifier and take into account only users_ids.
+    :param classifier:
+    :param users_ids:
+    :return:
+    '''
+    willingness, expertise = get_features(users_ids, question, category, textual_dictionary)
+    willingness = np.array(willingness)
+    expertise = np.array(expertise)
+
+    all_rec_users, exp_prob, will_prob = classifier.predict(expertise, willingness)
+
+    users_ids = np.array(users_ids)
+    users_ids = np.take(users_ids, all_rec_users)
+    return users_ids
+
+
+def evaluate(users_ids, true_user_ids, filename, n=20):
+    s_at_n = Evaluation.success(users_ids, true_user_ids, n)
+    precision_at_k = Evaluation.precision_at_k(true_user_ids, users_ids, n)
+    ap_at_n = Evaluation.apk(true_user_ids, users_ids, n)
+    rr_at_n = Evaluation.reciprocal_rank(true_user_ids, users_ids, n)
+    ndcg = Evaluation.ndcg_score(true_user_ids, users_ids, n)
+    with open(filename, 'a') as f:
+        f.write(str(s_at_n)+'\t'+str(precision_at_k)+'\t'+str(ap_at_n)+'\t'+str(rr_at_n)+'\t'+str(ndcg)+'\n')
+    #print 'Ground truth user id:\t', true_user_ids
+    #print 'Sucess@K:\t', s_at_n
+    #print 'Prec@K\t:', precision_at_k
+    #print 'AP@K\t:', ap_at_n
+    #print 'RR@K\t:', rr_at_n
+    #print 'NDCG@K\t:', ndcg
+
+
+
+MAX_ROUTED_QUESTIONS = 3
+ROUTE_TO_MAX = 10
+
+FULL_EVALUATIONS_F_10 = 'recommendation/full-evaluation-10.dat'
+BASELINE_EVALUATIONS_F_10 = 'recommendation/baseline-evaluation-10.dat'
+FULL_EVALUATIONS_F_100 = 'recommendation/full-evaluation-100.dat'
+BASELINE_EVALUATIONS_F_100 = 'recommendation/baseline-evaluation-100.dat'
+FULL_EVALUATIONS_F_5 = 'recommendation/full-evaluation-5.dat'
+BASELINE_EVALUATIONS_F_5 = 'recommendation/baseline-evaluation-5.dat'
+
+if __name__ == '__main__':
+    textual_dictionary = TextualDictionary()
+    if not textual_dictionary.load_vocabulary_from_file():
+        sys.exit(1)
+
+    # Retrieve new question and it's category.
+    question_id = sys.argv[1]
+    question = DataManager.get_question(question_id)
+    category = DataManager.get_category(question.category_id)
+    #self_and_ancestor_categories = DataManager.category_self_and_ancestors(question.category_id)
+
+    # Filter users
+    users_ids_full = DataManager.get_users_with_views()
+    users_ids_baseline = DataManager.get_users_with_views()
+
+    # Create ensemble
+    ensemble = Ensemble(Training.exp_model_f, Training.will_model_f, baseline=False)
+    ensemble_baseline = Ensemble(Training.exp_baseline_model_f, Training.will_baseline_model_f, baseline=True)
+
+    # Recommendation
+    rec_to_users_full = recommend(ensemble, users_ids_full)
+    print '-----------------------'
+    print 'Baseline'
+    print '-----------------------'
+    rec_to_users_baseline = recommend(ensemble_baseline, users_ids_baseline)
+
+    # Evaluation
+    if len(sys.argv) > 2:
+        i = 2
+        true_user_ids = []
+        while i < len(sys.argv):
+            true_user_ids.append(int(sys.argv[i]))
+            i=i+1
+        evaluate(rec_to_users_full, true_user_ids, FULL_EVALUATIONS_F_10, n=10)
+        evaluate(rec_to_users_baseline, true_user_ids, BASELINE_EVALUATIONS_F_10, n=10)
+        evaluate(rec_to_users_full, true_user_ids, FULL_EVALUATIONS_F_100, n=100)
+        evaluate(rec_to_users_baseline, true_user_ids, BASELINE_EVALUATIONS_F_100, n=100)
+        evaluate(rec_to_users_full, true_user_ids, FULL_EVALUATIONS_F_5, n=5)
+        evaluate(rec_to_users_baseline, true_user_ids, BASELINE_EVALUATIONS_F_5, n=5)
+
+
+

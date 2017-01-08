@@ -130,7 +130,7 @@ end
 def update_seen_units(list)
   category = list.category
   user = list.lister
-  if user.lists_count > 0
+  if user.lists_count > 0 && !category.nil? && category.depth == 3
     update_feature_with_targetable_and_time(user, category, 'FreshUnitTime')
   end
 end
@@ -139,7 +139,7 @@ def update_questions_in_category(view)
   category = view.question.category
   user = view.viewer
 
-  if category.depth == 3
+  if !category.nil? && category.depth == 3
     topic_category = category.parent
     week_category = topic_category.parent
     update_feature_with_targetable(user, topic_category, 'CategorySeenQuestions')
@@ -155,7 +155,7 @@ def update_seen_units_in_category(list)
   category = list.category
   user = list.lister
 
-  if category.depth == 3
+  if !category.nil? && category.depth == 3
     topic_category = category.parent
     week_category = topic_category.parent
     update_feature_with_targetable(user, week_category, 'SeenUnits')

@@ -3,17 +3,17 @@ from sklearn.ensemble import RandomForestClassifier
 from Classifier import Classifier
 
 PARAM_GRID = {
-            "clf__n_estimators": [60, 100, 200],
-            "clf__criterion": ["gini", "entropy"],
-            "clf__max_depth": [2, 3, 4, 5, 6],
+            "clf__n_estimators": [100],
+            "clf__criterion": ["gini"],
+            "clf__max_depth": [4],
             "clf__oob_score": [True],
             "clf__class_weight": ["balanced"]
 }
 
 PARAM_GRID_BASELINE = {
-            "clf__n_estimators": [60, 100, 200],
-            "clf__criterion": ["gini", "entropy"],
-            "clf__max_depth": [2, 3, 4],
+            "clf__n_estimators": [100],
+            "clf__criterion": ["gini"],
+            "clf__max_depth": [4],
             "clf__oob_score": [True],
             "clf__class_weight": ["balanced"]
 }

@@ -192,8 +192,8 @@ module Shared::QuestionRouting
     end
 
     def knowledge_gap_total(answerer, asker, resource)
-      answerer_knowledge = answers_count(resource, answerer) + votes_count(resource, answerer)
-      asker_knowledge = answers_count(resource, asker) + votes_count(resource, asker)
+      answerer_knowledge = answers_count(resource, answerer) + votes_count(resource, answerer) + comments_count(resource, answerer)
+      asker_knowledge = answers_count(resource, asker) + votes_count(resource, asker) + comments_count(resource, asker)
       return answerer_knowledge - asker_knowledge
     end
 
