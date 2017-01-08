@@ -7,11 +7,11 @@ module Shared::Mailers
     def self.deliver_emails!(email)
       users.each.map { |user|
         Shared::CommunityMailer.community_emails(email, user)
-      }.map(&:deliver!)
+      }.map(&:deliver_now!)
     end
 
     def self.deliver_test_email!(email)
-      Shared::CommunityMailer.community_emails(email, email[:user]).deliver!
+      Shared::CommunityMailer.community_emails(email, email[:user]).deliver_now!
     end
 
     def self.deliver_all_emails!

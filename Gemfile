@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.0'
+gem 'rails', '~> 4.2.0'
+# http://stackoverflow.com/questions/41207432/expected-string-default-value-for-jbuilder-got-true-boolean-error-in-a
+gem 'thor', '0.19.1'
+gem 'responders', '~> 2.0'
 
 # database
 gem 'pg'
@@ -10,7 +13,7 @@ gem 'squire', '~> 1.3.6'
 
 # authentification
 # gem 'devise', '~> 3.1.1'
-gem 'cancan', '~> 1.6.9'
+gem 'cancan', '~> 1.6.10'
 gem 'net-ldap'
 
 # facebook
@@ -62,7 +65,6 @@ gem 'whenever'
 # utilities
 gem 'actionview-encoded_mail_to'
 gem 'active_model_serializers'
-gem 'activerecord-custom_timestamps'
 gem 'forgery'
 gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
@@ -101,18 +103,15 @@ end
 group :development, :test do
   # debugging
   gem 'pry'
-  gem 'pry-debugger'
   gem 'hirb'
 
   # testing
-  gem 'rspec-rails', '~> 2.0'
-  gem 'fuubar'
-  gem 'database_cleaner', '~> 1.2.0'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
-  gem 'launchy'
-  gem 'capybara', '~> 2.2.1'
+  gem 'capybara'
   gem 'selenium-webdriver', require: false
-  gem 'poltergeist', '~> 1.7.0', require: false
+  gem 'poltergeist', require: false
   gem 'guard-rspec'
 
   # database
@@ -120,9 +119,10 @@ group :development, :test do
 
   # code metrics
   gem 'simplecov', require: false
+  gem 'codeclimate-test-reporter', require: false
 
   # mass import
-  gem 'activerecord-import'
+  gem 'activerecord-import', '~> 0.10.0'
 end
 
 group :demo, :staging, :production, :experimental do
@@ -134,9 +134,6 @@ group :demo, :staging, :production, :experimental do
   gem 'garelic'
   gem 'newrelic_rpm'
 end
-
-# TODO(zbell) resolve
-gem 'codeclimate-test-reporter', group: :test, require: nil
 
 gem 'shared', path: 'components/shared'
 

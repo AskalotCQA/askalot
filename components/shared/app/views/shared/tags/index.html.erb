@@ -3,9 +3,9 @@
 <%= render 'shared/searchables/search', target: controller_name %>
 
 <ul id="tags-tabs" class="nav nav-tabs tab-navigation">
-  <%= tab_link_tag_with_count t('tag.tab.all'), :all, tags_path(params.except(:page).merge tab: :all), Shared::Tag.in_context(@context_id).count, analytics_attributes(:tags, :switch, :all).merge(remote: true, data: { fade: '#tags' }) %>
-  <%= tab_link_tag_with_count t('tag.tab.recent'), :recent, tags_path(params.except(:page).merge tab: :recent), Shared::Tag.in_context(@context_id).recent.count, analytics_attributes(:tags, :switch, :recent).merge(remote: true, data: { fade: '#tags' }) %>
-  <%= tab_link_tag_with_count t('tag.tab.popular'), :popular, tags_path(params.except(:page).merge tab: :popular), Shared::Tag.in_context(@context_id).popular.load.size, analytics_attributes(:tags, :switch, :popular).merge(remote: true, data: { fade: '#tags' }) %>
+  <%= tab_link_tag_with_count t('tag.tab.all'), :all, tags_path(params.symbolize_keys.except(:page).merge tab: :all), Shared::Tag.in_context(@context_id).count, analytics_attributes(:tags, :switch, :all).merge(remote: true, data: { fade: '#tags' }) %>
+  <%= tab_link_tag_with_count t('tag.tab.recent'), :recent, tags_path(params.symbolize_keys.except(:page).merge tab: :recent), Shared::Tag.in_context(@context_id).recent.count, analytics_attributes(:tags, :switch, :recent).merge(remote: true, data: { fade: '#tags' }) %>
+  <%= tab_link_tag_with_count t('tag.tab.popular'), :popular, tags_path(params.symbolize_keys.except(:page).merge tab: :popular), Shared::Tag.in_context(@context_id).popular.load.size, analytics_attributes(:tags, :switch, :popular).merge(remote: true, data: { fade: '#tags' }) %>
 </ul>
 
 <%= render 'tags', tags: @tags, remote: true %>

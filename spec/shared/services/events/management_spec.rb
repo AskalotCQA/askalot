@@ -78,17 +78,17 @@ describe Shared::Events::Management do
     it 'fails on missing action' do
       data = { snapshot: { request: request, params: params }}
 
-      expect { management.log(data) }.to raise_error
+      expect { management.log(data) }.to raise_error(RuntimeError)
     end
 
     it 'fails on missing snapshot request or params' do
-      expect { management.log({ action: 'hello' }) }.to raise_error
-      expect { management.log({ action: 'hello', snapshot: { request: request }}) }.to raise_error
-      expect { management.log({ action: 'hello', snapshot: { params:  params  }}) }.to raise_error
+      expect { management.log({ action: 'hello' }) }.to raise_error(NoMethodError)
+      expect { management.log({ action: 'hello', snapshot: { request: request }}) }.to raise_error(KeyError)
+      expect { management.log({ action: 'hello', snapshot: { params:  params  }}) }.to raise_error(KeyError)
     end
 
     it 'fails on custom user but no snapshot user' do
-      expect { management.log({ action: 'hello', user: {}, snapshot: { request: request, params: params }}) }.to raise_error
+      expect { management.log({ action: 'hello', user: {}, snapshot: { request: request, params: params }}) }.to raise_error(RuntimeError)
     end
 
     it 'secures passwords and tokens' do

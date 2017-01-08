@@ -7,7 +7,7 @@ describe 'Authentication', type: :feature do
 
   context 'when not registered' do
     it 'does not sign in user successfully' do
-      Shared::Stuba::AIS.stub(:authenticate) { nil }
+      allow(Shared::Stuba::AIS).to receive(:authenticate).and_return(nil)
 
       visit shared.root_path
 
@@ -24,7 +24,7 @@ describe 'Authentication', type: :feature do
 
   context 'when registered' do
     it 'signs in user successfully' do
-      Shared::Stuba::AIS.stub(:authenticate) { nil }
+      allow(Shared::Stuba::AIS).to receive(:authenticate).and_return(nil)
 
       visit shared.root_path
 

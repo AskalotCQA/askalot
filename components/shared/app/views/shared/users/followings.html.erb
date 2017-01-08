@@ -6,8 +6,8 @@
   <%= render 'shared/users/actions', user: @user %>
 
   <ul class="nav nav-tabs">
-    <%= tab_link_tag_with_count t('user.tab.followers'), :followers, user_followings_path(params.except(:page).merge tab: :followers), @followers.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :followers) %>
-    <%= tab_link_tag_with_count t('user.tab.followees'), :followees, user_followings_path(params.except(:page).merge tab: :followees), @followees.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :followees) %>
+    <%= tab_link_tag_with_count t('user.tab.followers'), :followers, user_followings_path(params.symbolize_keys.except(:page).merge tab: :followers), @followers.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :followers) %>
+    <%= tab_link_tag_with_count t('user.tab.followees'), :followees, user_followings_path(params.symbolize_keys.except(:page).merge tab: :followees), @followees.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :followees) %>
   </ul>
 </div>
 

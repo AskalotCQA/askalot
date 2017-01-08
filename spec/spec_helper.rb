@@ -1,6 +1,3 @@
-require 'codeclimate-test-reporter'
-CodeClimate::TestReporter.start
-
 if ENV['COVERAGE'] == 'true'
   require 'simplecov'
 
@@ -11,7 +8,6 @@ ENV["RAILS_ENV"] ||= 'fiit_test'
 
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-require 'rspec/autorun'
 
 # Capybara
 require 'capybara/rspec'
@@ -25,7 +21,7 @@ Capybara.default_selector  = :css
 Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :poltergeist
 
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, window_size: [1600, 1200], inspector: true)
+  Capybara::Poltergeist::Driver.new(app, window_size: [1600, 1200], inspector: true, timeout: 60)
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -49,6 +45,9 @@ RSpec.configure do |config|
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  # RSpec will use this file to store the status of each example the last time it ran.
+  config.example_status_persistence_file_path = "#{Rails.root}/spec/specs_with_statuses_#{Rails.module}.txt"
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false

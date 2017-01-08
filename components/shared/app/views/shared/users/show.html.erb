@@ -9,12 +9,12 @@
       <%= render 'shared/users/actions', user: @user %>
 
       <ul class="nav nav-tabs">
-        <%= tab_link_tag t('user.tab.profile'), :profile, user_path(params.except(:page).merge tab: :profile), analytics_attributes(:profile, :switch, :profile) %>
-        <%= tab_link_tag_with_count t('user.tab.questions'), :questions, user_path(params.except(:page).merge tab: :questions), @questions.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :questions) %>
-        <%= tab_link_tag_with_count t('user.tab.answers'), :answers, user_path(params.except(:page).merge tab: :answers), @answers.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :answers) %>
-        <%= tab_link_tag_with_count t('user.tab.favorites'), :favorites, user_path(params.except(:page).merge tab: :favorites), @favorites.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :favorites) %>
-        <%= tab_link_tag t('user.tab.anonymous'), :anonymous, user_path(params.except(:page).merge tab: :anonymous), analytics_attributes(:profile, :switch, :anonymous) if can? :show_anonymous, @user %>
-        <%= tab_link_tag t('user.tab.activities'), :activities, user_path(params.except(:page).merge tab: :activities), analytics_attributes(:profile, :switch, :activities) %>
+        <%= tab_link_tag t('user.tab.profile'), :profile, user_path(params.symbolize_keys.except(:page).merge tab: :profile), analytics_attributes(:profile, :switch, :profile) %>
+        <%= tab_link_tag_with_count t('user.tab.questions'), :questions, user_path(params.symbolize_keys.except(:page).merge tab: :questions), @questions.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :questions) %>
+        <%= tab_link_tag_with_count t('user.tab.answers'), :answers, user_path(params.symbolize_keys.except(:page).merge tab: :answers), @answers.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :answers) %>
+        <%= tab_link_tag_with_count t('user.tab.favorites'), :favorites, user_path(params.symbolize_keys.except(:page).merge tab: :favorites), @favorites.unscope(:limit, :offset).size, analytics_attributes(:profile, :switch, :favorites) %>
+        <%= tab_link_tag t('user.tab.anonymous'), :anonymous, user_path(params.symbolize_keys.except(:page).merge tab: :anonymous), analytics_attributes(:profile, :switch, :anonymous) if can? :show_anonymous, @user %>
+        <%= tab_link_tag t('user.tab.activities'), :activities, user_path(params.symbolize_keys.except(:page).merge tab: :activities), analytics_attributes(:profile, :switch, :activities) %>
       </ul>
     </div>
 

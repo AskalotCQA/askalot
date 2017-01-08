@@ -16,7 +16,7 @@ class Category < ActiveRecord::Base
   has_many :related_questions, -> { distinct }, through: :category_questions, source: :question
   has_many :related_answers, -> { distinct }, through: :related_questions, source: :answers
 
-  has_many :category_questions_shared_through_me, foreign_key: 'shared_through_category_id', class: Shared::CategoryQuestion
+  has_many :category_questions_shared_through_me, foreign_key: 'shared_through_category_id', class_name: Shared::CategoryQuestion
 
   has_many :context_users, foreign_key: 'context_id'
   has_many :users, through: :context_users, class_name: 'Shared::User', source: :user

@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-require_relative 'concerns/editable_spec'
-require_relative 'concerns/deletable_spec'
-require_relative 'concerns/orderable_spec'
-require_relative 'concerns/searchable_spec'
-require_relative 'concerns/taggable_spec'
-require_relative 'concerns/touchable_spec'
-require_relative 'concerns/watchable_spec'
-require_relative 'concerns/questions/searchable_spec'
+require_relative 'concerns/editable'
+require_relative 'concerns/deletable'
+require_relative 'concerns/orderable'
+require_relative 'concerns/searchable'
+require_relative 'concerns/taggable'
+require_relative 'concerns/touchable'
+require_relative 'concerns/watchable'
+require_relative 'concerns/questions/searchable'
 
 describe Shared::Question, type: :model do
   it_behaves_like Shared::Editable

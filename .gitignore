@@ -35,7 +35,9 @@ public/attachments/*
 !public/attachments/.gitkeep
 
 tmp
-
 *.dat
 *.pyc
 recommendation
+
+spec/specs_with_statuses_mooc.txt
+spec/specs_with_statuses_university.txt

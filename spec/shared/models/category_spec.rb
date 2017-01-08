@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative 'concerns/watchable_spec'
+require_relative 'concerns/watchable'
 
 describe Shared::Category, type: :model do
   it_behaves_like Shared::Watchable

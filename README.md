@@ -4,16 +4,16 @@ Askalot is a CQA (Community Question and Answer) system of next generation.
 
 **Latest release**
 
-[![Codeship](https://img.shields.io/codeship/ed259b90-587a-0133-afb6-26e98ecb9625/master.svg)](https://codeship.com/projects/109682)  [![Code Climate](https://codeclimate.com/github/AskalotCQA/askalot/badges/gpa.svg)](https://codeclimate.com/github/AskalotCQA/askalot)
+[![Build Status](https://travis-ci.com/isrba/askalot.svg?token=KiGHuQ2duxZsskaxboZE&branch=master)](https://travis-ci.com/isrba/askalot)  [![Code Climate](https://codeclimate.com/github/AskalotCQA/askalot/badges/gpa.svg)](https://codeclimate.com/github/AskalotCQA/askalot)
 
 **Development**
 
-[![Codeship](https://img.shields.io/codeship/ed259b90-587a-0133-afb6-26e98ecb9625/gama.svg)](https://codeship.com/projects/109682)  [![Code Climate](https://codeclimate.com/repos/5710ad164c2a41314500449b/badges/f0124b8f7e331110e733/gpa.svg)](https://codeclimate.com/repos/5710ad164c2a41314500449b/feed)  [![Test Coverage](https://codeclimate.com/repos/5710ad164c2a41314500449b/badges/f0124b8f7e331110e733/coverage.svg)](https://codeclimate.com/repos/5710ad164c2a41314500449b/coverage)
+[![Build Status](https://travis-ci.com/isrba/askalot.svg?token=KiGHuQ2duxZsskaxboZE&branch=development)](https://travis-ci.com/isrba/askalot)  [![Code Climate](https://codeclimate.com/repos/5710ad164c2a41314500449b/badges/f0124b8f7e331110e733/gpa.svg)](https://codeclimate.com/repos/5710ad164c2a41314500449b/feed)  [![Test Coverage](https://codeclimate.com/repos/5710ad164c2a41314500449b/badges/f0124b8f7e331110e733/coverage.svg)](https://codeclimate.com/repos/5710ad164c2a41314500449b/coverage)
 
 ## Requirements
 
-* Ruby 2.1
-* Rails 4.1
+* Ruby 2.3
+* Rails 4.2
 * PostgreSQL 9.3
 * Elasticsearch 1.7
 
@@ -47,14 +47,14 @@ RAILS_ENV=edx_development rake db:create db:structure:load db:seed
 
 ## Testing
 
-1. Install [PhantomJS](http://phantomjs.org/) (v2.0).
+1. Install [PhantomJS](http://phantomjs.org/) (v2.1).
 2. Run specs with:
 
 ```
-RAILS_ENV=fiit_test rake db:create db:structure:load
+RAILS_ENV=fiit_test rake db:create db:structure:load DB_STRUCTURE=components/university/db/structure.sql
 RAILS_ENV=fiit_test bundle exec rake rspec:test
 or
-RAILS_ENV=edx_test rake db:create db:structure:load
+RAILS_ENV=edx_test rake db:create db:structure:load DB_STRUCTURE=components/mooc/db/structure.sql
 RAILS_ENV=edx_test bundle exec rake rspec:test
 ```
 

@@ -61,8 +61,6 @@ class Question < ActiveRecord::Base
   scope :in_context, lambda { |context| includes(:related_categories).where(categories: { id: context }) }
   scope :older,        lambda { |date| where('questions.created_at < ?', date) }
 
-  self.updated_timestamp = [:updated_at, :touched_at]
-
   self.table_name = 'questions'
 
   def self.best_answers

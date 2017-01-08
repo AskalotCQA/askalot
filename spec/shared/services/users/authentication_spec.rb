@@ -26,7 +26,7 @@ describe Shared::Users::Authentication do
       it 'authenticates user from service' do
         user = double(:user)
 
-        factory.stub(:where).and_return([nil])
+        allow(factory).to receive(:where).and_return([nil])
 
         subject.factory = factory
 

@@ -65,7 +65,7 @@ module Shared::Deletable
   end
 
   def mark_as_deleted_recursive!(user, time)
-    self.reflections.each do |key, target|
+    self._reflections.each do |key, target|
       if mark_as_deleted? target
         self.send(key.to_s).reload.each do |child|
           child.mark_as_deleted_by!(user, time)
@@ -83,7 +83,7 @@ module Shared::Deletable
   end
 
   def update_counter_caches!(action)
-    self.reflections.each do |key, target|
+    self._reflections.each do |key, target|
       if target.macro == :belongs_to && target.options[:counter_cache]
         owner  = self.send(key.to_s)
         column = target.counter_cache_column.to_sym

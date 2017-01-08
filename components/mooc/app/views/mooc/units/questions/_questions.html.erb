@@ -5,7 +5,7 @@
       <% if @poll %>
         <%= icon_link_to :refresh, t('question.poll.end', time: tooltip_time_tag(Time.now).html_safe), params.merge(poll: false), class: 'btn text-muted', data: { poll: Shared::Configuration.poll.default, remote: true, state: true, rel: index_document_questions_path(params) } %>
       <% else %>
-        <%= icon_link_to :refresh, t('question.poll.start'), mooc.unit_questions_path(params.merge unit_id: unit.id, poll: true), class: 'btn btn-default', data: { remote: true, state: true } %>
+        <%= icon_link_to :refresh, t('question.poll.start'), mooc.unit_questions_path(params.symbolize_keys.merge unit_id: unit.id, poll: true), class: 'btn btn-default', data: { remote: true, state: true } %>
       <% end %>
     </div>
 
