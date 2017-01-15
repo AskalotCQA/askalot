@@ -19,7 +19,12 @@ module Shared::Facebook
         next unless token_validation.is_valid
 
         link = link.gsub('&amp;', '&')
-        FbGraph::User.me(token).fetch.notification! access_token: application.get_access_token, href: link, template: content
+
+        begin
+          FbGraph::User.me(token).fetch.notification! access_token: application.get_access_token, href: link, template: content
+        rescue FbGraph::InvalidRequest
+          nil
+        end
       end
     end
   end
