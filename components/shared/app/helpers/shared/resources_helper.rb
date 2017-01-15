@@ -30,6 +30,7 @@ module Shared::ResourcesHelper
   end
 
   def unread_resource?(resource, user)
+    return false if resource.author.id == user.id
     resource.created_at > user.dashboard_last_sign_in_at
   end
 end
