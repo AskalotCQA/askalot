@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/pavolzbell/bump.git
-  revision: 8b7125e4f539f068b7c038e44a06e75bd12aa50e
+  revision: 136e59f21d8effccd4c259e7b22066f27a904942
   specs:
-    bump (0.0.2)
+    bump (0.3.0)
 
 GIT
   remote: git://github.com/smolnar/scout.git
