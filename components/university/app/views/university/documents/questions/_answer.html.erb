@@ -1,7 +1,8 @@
 <li id="answer-<%= answer.id %>" class="question-answer">
   <div class="row">
     <div class="col-xs-9 col-sm-10 col-md-10">
-      <div class="answer-teacher<%= ' bg-warning' if answer_highlighted? answer %>">
+      <div class="answer-teacher<%= ' bg-warning' if answer_highlighted? answer; ' unread-resource' if unread_resource? answer, current_user %>"
+           <%= tooltip_attributes_string(t('answer.unread'), placement: :right) if unread_resource? answer, current_user %>>
         <div class="answer-content">
           <%= render_markdown answer.text %>
         </div>

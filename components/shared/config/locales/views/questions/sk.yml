@@ -18,6 +18,8 @@ sk:
         same_category_link: "začnite diskusiu v rovnakej kategórii."
         same_category: "Prezeraj diskusné príspevky s týmito tagmi"
 
+      unread: "Diskusia bola pridaná od vášho posledného prihlásenia"
+
     index:
       title: "Otázky"
       new: "Nová otázka"
@@ -123,3 +125,5 @@ sk:
 
       new_comments_in_watched_categories: "Otázky v sledovaných kategóriách s pridanými komentármi"
       new_comments_in_watched_categories_description: "Zoznam obsahuje otázky, v ktorých pribudli komentáre od Vášho posledného prihlásenia. V zozname sa zobrazujú otázky len zo sledovaných kategórií."
+
+    unread: "Otázka bola pridaná od Vášho posledného prihlásenia"
