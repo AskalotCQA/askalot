@@ -72,6 +72,12 @@ module Mooc
           user = User.create_without_confirmation! user_attributes
         end
 
+        if user.email != params['lis_person_contact_email_primary']
+          user.email = params['lis_person_contact_email_primary']
+          user.skip_reconfirmation!
+          user.save
+        end
+
         sign_in(:user, user)
       rescue => e
         @exception = e.message

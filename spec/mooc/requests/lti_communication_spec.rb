@@ -122,6 +122,18 @@ describe 'LTI request communication', type: :request do
         expect(Shared::User.last.assignments.first.role.name).to eql('teacher')
         expect(Shared::User.last.assignments.count).to eql(2)
       end
+
+      it 'reflects changes in user email' do
+        expect(Shared::User.last.email).to eql('john.doe@example.com')
+
+        @params['lis_person_contact_email_primary'] = 'doe.john@example.com'
+
+        logout(:user)
+
+        post '/default/units', @params
+
+        expect(Shared::User.last.email).to eql('doe.john@example.com')
+      end
     end
   end
 
