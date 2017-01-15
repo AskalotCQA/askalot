@@ -20,25 +20,28 @@
         </div>
 
         <div id="question-data">
-          <div class="question-content">
-            <%= render_markdown @question.text %>
-          </div>
-
-          <% if @question.attachments.any? %>
-            <div class="question-attachments-section">
-              <%= render 'shared/questions/attachments', question: @question %>
+          <div class="question-main-content<%= ' bg-warning' if question_highlighted? @question; ' unread-resource' if unread_resource? @question, current_user %>"
+               <%= tooltip_attributes_string(t('question.forum.unread'), placement: :right) if unread_resource? @question, current_user %>>
+            <div class="question-content">
+              <%= render_markdown @question.text %>
             </div>
-          <% end %>
 
-          <div class="question-details">
-            <%= render 'shared/questions/details', question: @question %>
-            <%= render 'university/documents/questions/editing', question: @question, remote: false %>
-            <%= render 'university/documents/questions/deleting', question: @question, remote: false %>
-            <%= render 'shared/questions/closing', question: @question %>
-          </div>
+            <% if @question.attachments.any? %>
+              <div class="question-attachments-section">
+                <%= render 'shared/questions/attachments', question: @question %>
+              </div>
+            <% end %>
 
-          <div id="question-evaluations">
-            <%= render 'shared/questions/evaluations', question: @question %>
+            <div class="question-details">
+              <%= render 'shared/questions/details', question: @question %>
+              <%= render 'university/documents/questions/editing', question: @question, remote: false %>
+              <%= render 'university/documents/questions/deleting', question: @question, remote: false %>
+              <%= render 'shared/questions/closing', question: @question %>
+            </div>
+
+            <div id="question-evaluations">
+              <%= render 'shared/questions/evaluations', question: @question %>
+            </div>
           </div>
 
           <div id="question-comments">

@@ -1,4 +1,5 @@
-<li id="comment-<%= comment.id %>" class="comment-teacher<%= ' bg-warning' if comment_highlighted? comment %>">
+<li id="comment-<%= comment.id %>" class="comment-teacher<%= ' bg-warning' if comment_highlighted? comment; ' unread-resource' if unread_resource? comment, current_user %>"
+    <%= tooltip_attributes_string(t('comment.unread'), placement: :right) if unread_resource? comment, current_user %>>
   <div class="row">
     <div class="col-md-2 hidden-sm hidden-xs">
       <%= render 'shared/users/comments_square', user: comment.author_or_anonymous %>
