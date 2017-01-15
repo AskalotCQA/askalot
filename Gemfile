@@ -76,8 +76,9 @@ gem 'lda-ruby'
 gem 'tf_idf'
 gem 'timecop'
 gem 'awesome_nested_set'
-gem 'ims-lti', :git => "https://github.com/instructure/ims-lti.git"
-gem "non-stupid-digest-assets"
+gem 'ims-lti', :git => 'https://github.com/instructure/ims-lti.git'
+gem 'non-stupid-digest-assets'
+gem 'data-anonymization', '~> 0.6.5'
 
 # search
 gem 'elasticsearch'
