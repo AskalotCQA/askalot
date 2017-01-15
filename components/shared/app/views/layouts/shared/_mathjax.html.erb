@@ -1,3 +1,6 @@
+<% unless (params[:controller] == 'shared/questions' && params[:action] == 'index') ||
+    (params[:controller] == 'university/third_party' && params[:action] == 'index') ||
+    (params[:controller] == 'mooc/units' && params[:action] == 'show') %>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     tex2jax: {
@@ -15,3 +18,4 @@
   });
 </script>
 <script type="text/javascript" src="//cdn.mathjax.org/mathjax/2.6-latest/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<% end %>
