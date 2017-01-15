@@ -4,7 +4,9 @@ require 'csv'
 DataAnon::Utils::Logging.logger.level = Logger::INFO
 
 namespace :dataset do
-  desc 'Anonymizes data in current database'
+
+  # rake dataset:anonymize
+  desc 'Anonymizes data in configured database (anonymized_database in configuration.yml)'
   task anonymize: :environment do
     config = Rails.configuration.database_configuration
 
@@ -97,6 +99,7 @@ namespace :dataset do
     end
   end
 
+  # rake dataset:export LEVELS={1,2,3}
   task export: :environment do
     db_config = Shared::Configuration.anonymized_database
     BATCH_SIZE = 5000
