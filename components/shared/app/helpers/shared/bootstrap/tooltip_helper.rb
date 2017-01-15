@@ -3,6 +3,12 @@ module Shared::Bootstrap::TooltipHelper
     options.deep_merge title: title, data: { toggle: :tooltip, placement: options.delete(:placement) || :top, trigger: options.delete(:trigger) || :hover }
   end
 
+  def tooltip_attributes_string(title, options = {})
+    options = tooltip_attributes title, options
+
+    " title=\"#{title}\" data-toggle=\"#{options[:data][:toggle]}\" data-placement=\"#{options[:data][:placement]}\" data-trigger=\"#{options[:data][:trigger]}\"".html_safe
+  end
+
   def tooltip_tag(body, title, options = {})
     link_to body, '#', tooltip_attributes(title, options)
   end

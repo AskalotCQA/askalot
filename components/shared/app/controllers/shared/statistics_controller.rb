@@ -48,15 +48,15 @@ class StatisticsController < ApplicationController
   helper_method :join_question, :join_questions, :join_questions_through_answers
 
   def join_question(relation, questions)
-    relation.joins(:question).where(question_id: questions)
+    relation.joins(:question).where(question_id: questions.map(&:id))
   end
 
   def join_questions(relation, column, questions)
-    relation.for(Shared::Question).joins("INNER JOIN questions ON questions.id = #{column}_id").where("#{column}_id" => questions).uniq
+    relation.for(Shared::Question).joins("INNER JOIN questions ON questions.id = #{column}_id").where("#{column}_id" => questions.map(&:id)).uniq
   end
 
   def join_questions_through_answers(relation, column, questions)
-    relation.for(Shared::Answer).joins("INNER JOIN answers ON answers.id = #{column}_id INNER JOIN questions ON questions.id = answers.question_id").where(questions: { id: questions }).uniq
+    relation.for(Shared::Answer).joins("INNER JOIN answers ON answers.id = #{column}_id INNER JOIN questions ON questions.id = answers.question_id").where(questions: { id: questions.map(&:id) }).uniq
   end
 end
 end

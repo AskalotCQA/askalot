@@ -769,7 +769,10 @@ CREATE TABLE document_revisions (
     title character varying(255) NOT NULL,
     text text NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    deleted_at timestamp without time zone,
+    deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer
 );
 
 
@@ -1060,7 +1063,10 @@ CREATE TABLE group_revisions (
     description text,
     visibility character varying(255) DEFAULT 'public'::character varying NOT NULL,
     created_at timestamp without time zone,
-    updated_at timestamp without time zone
+    updated_at timestamp without time zone,
+    deleted_at timestamp without time zone,
+    deleted boolean DEFAULT false NOT NULL,
+    deletor_id integer
 );
 
 
@@ -3086,6 +3092,20 @@ CREATE INDEX index_context_users_on_user_id ON context_users USING btree (user_i
 
 
 --
+-- Name: index_document_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_document_revisions_on_deleted ON document_revisions USING btree (deleted);
+
+
+--
+-- Name: index_document_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_document_revisions_on_deletor_id ON document_revisions USING btree (deletor_id);
+
+
+--
 -- Name: index_document_revisions_on_document_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -3293,6 +3313,20 @@ CREATE UNIQUE INDEX index_followings_on_unique_key ON followings USING btree (fo
 --
 
 CREATE INDEX index_for_unique_category_questions ON categories_questions USING btree (question_id, category_id, shared_through_category_id);
+
+
+--
+-- Name: index_group_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_group_revisions_on_deleted ON group_revisions USING btree (deleted);
+
+
+--
+-- Name: index_group_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_group_revisions_on_deletor_id ON group_revisions USING btree (deletor_id);
 
 
 --
@@ -4410,4 +4444,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161115200549');
 INSERT INTO schema_migrations (version) VALUES ('20161119140437');
 
 INSERT INTO schema_migrations (version) VALUES ('20161122154704');
+
+INSERT INTO schema_migrations (version) VALUES ('20170115175555');
 

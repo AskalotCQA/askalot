@@ -10,6 +10,7 @@ namespace :backup do
 
     `pg_dump -U #{config[:username]} #{config[:database]} > #{file}`
     `cd #{path} && tar czf #{name}.tar.gz #{name} && rm #{name}`
+    `find #{path} -maxdepth 1 -type f -mtime +31 -name #{config[:database].gsub(/_/, '-')}-\* -delete`
   end
 
   desc 'Creates recommendation folder backup'

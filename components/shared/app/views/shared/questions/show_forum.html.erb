@@ -22,7 +22,8 @@
       </div>
 
       <div id="question-data">
-        <div class="question-main-content<%= ' bg-warning' if question_highlighted? @question %>">
+        <div class="question-main-content<%= ' bg-warning' if question_highlighted? @question; ' unread-resource' if unread_resource? @question, current_user %>"
+             <%= tooltip_attributes_string(t('question.forum.unread'), placement: :right) if unread_resource? @question, current_user %>>
           <div class="question-content">
             <%= render_markdown @question.text %>
           </div>

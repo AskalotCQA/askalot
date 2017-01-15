@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#install.packages(\"e1071\")\n#install.packages(\"caret\")\n\nrm(list=ls())\n\n# SVM multiclass classification with\n# K-fold cross validation\nlibrary(e1071)\nlibrary(caret)\n\n# Make the results repeatable\nset.seed(7)\n\ndata <- read.csv(\"~/askalot/output.txt\", sep=\",\")\n\ndata$same_category <- as.logical(as.logical(data$same_category))\n\n# ------------------ Normalization ---------------\nnormalize <- function(x) {\n  print(min(x))\n  return ((x - min(x)) / (max(x) - min(x)))\n}\n\ndfNorm <- as.data.frame(lapply(data[c(1:14,16)], normalize))\ndfNorm$same_category = data$same_category\ndfNorm$similar = data$similar\n\ndata <- dfNorm\n# --------------- Normalization end ---------------\n\n\n# ----------- without education specific ----------\ndata <- data[,1:13]\ndata$similar <- dfNorm$similar\n\n# -------- without education specific end --------\n\n\n#cor(data[,3:10])\n\n# train on 90% of the dataset\nsub = sample(nrow(data), floor(nrow(data) * 0.75))\ntrain <- data[sub,]\ntest <- data[-sub,]\n\nxTrain <- train[,3:13]      # relevant attributes\nyTrain <- train$similar  # prediction attribute\n\nxTest <- test[,3:13]        # relevant attributes\nyTest <- test$similar    # prediction attribute\n\n# default cost = 1, epsilon = 0.1\nmodel <- svm(xTrain, yTrain, probability=TRUE, cross = 6, cost=10, epsilon = 0.1)\n\n# build confusion matrix\nprediction <- predict(model,xTest, probability=TRUE)\nmat <- table(prediction,yTest)\nprecision <- diag(mat) / rowSums(mat)\nrecall <- diag(mat) / colSums(mat)\n\nhead(attr(prediction, \"probabilities\"))\n\nprecision\nrecall\n\nconfusionMatrix(mat)\n\n#svm_tune <- tune(svm, train.x=xTrain, train.y=yTrain, ranges=list(cost=10^(-1:2), epsilon=c(.1,.25,.5,.75,1,1.5,2,3,5,10,30,50,70,100)))\n#print(svm_tune)\n\n",
+    "created" : 1480185429177.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "568288865",
+    "id" : "C10FB504",
+    "lastKnownWriteTime" : 1480930759,
+    "last_content_update" : 1480930759,
+    "path" : "~/askalot/r/svm.r",
+    "project_path" : "svm.r",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

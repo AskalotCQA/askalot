@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "#install.packages(\"randomForest\")\n#install.packages(\"dplyr\")\n#install.packages(\"ggplot2\")\n\nrm(list=ls())\n\n# Random forest classification\nlibrary(randomForest)\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(caret)\n\nset.seed(7)\n\ndata <- read.csv(\"~/askalot/output.txt\", header=T, sep=\",\")\ndata <- data[,3:15]\n\n# train on 90% of the dataset\nsubRF = sample(nrow(data), floor(nrow(data) * 0.75))\n\n# train and test dataset from continuous data\ntrain <- data[subRF,]\ntest <- data[-subRF,]\n\n# random forest with first parameter settings mtry=2 and ntree=100\ndata.rf <- randomForest(similar ~ ., data = train, type = 'prob', mtry = 5, ntree = 40, keep.forest = T, importance = T)\npred <- predict(data.rf, test)\n\n# create confusion mat\ncfmat <- table(pred,test$similar)\n\n# metrics precision and recall\nprecision <- diag(cfmat) / rowSums(cfmat)\nrecall <- diag(cfmat) / colSums(cfmat)\nprecision\nrecall\n\nconfusionMatrix(cfmat)\n\nimportance(data.rf)\n\nplot(data.rf, log=\"y\")\n\n\n#data.rf$importance\n\n",
+    "created" : 1480184439806.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "653397157",
+    "id" : "2BD78AB3",
+    "lastKnownWriteTime" : 1480185336,
+    "last_content_update" : 1480185336844,
+    "path" : "~/askalot/r/rf.r",
+    "project_path" : "rf.r",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -32,3 +32,4 @@ en:
       deleted: "deleted by"
 
     deleted: "Comment was deleted"
+    unread: "The comment was added since your last login"

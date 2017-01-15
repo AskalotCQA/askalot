@@ -122,7 +122,7 @@ $(document).ready ->
     window.addEventListener 'hashchange', changeIframeSrc
 
   if (!is_global)
-    $('#iFrameResizer0').parent().css({ 'height': 'auto' })
+    $('iframe').filter(-> @id.match /iFrameResizer[0-9]+/).parent().css 'height': 'auto'
 
     $.ajax
       type: 'POST'

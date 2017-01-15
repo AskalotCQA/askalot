@@ -18,6 +18,8 @@ en:
         same_category_link: "start new discussion in the same category."
         same_category: "Browse discussions tagged"
 
+      unread: "The discussion was added since your last login"
+
     index:
       title: "Questions"
       new: "New question"
@@ -131,3 +133,5 @@ en:
         info: "Make the recommendation better by completing statements below (consider only the question):"
         willigness: "like to help in answering this question."
         expertise: "enough knowledge and skills to answer this question."
+
+    unread: "The question was added since your last login"

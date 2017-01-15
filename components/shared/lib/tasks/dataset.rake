@@ -4,7 +4,9 @@ require 'csv'
 DataAnon::Utils::Logging.logger.level = Logger::INFO
 
 namespace :dataset do
-  desc 'Anonymizes data in current database'
+
+  # rake dataset:anonymize
+  desc 'Anonymizes data in configured database (anonymized_database in configuration.yml)'
   task anonymize: :environment do
     config = Rails.configuration.database_configuration
 
@@ -54,7 +56,7 @@ namespace :dataset do
         anonymize('login').using        FieldStrategy::RandomUserName.new
         anonymize('email').using        FieldStrategy::GmailTemplate.new('username')
         anonymize('encrypted_password') { |_| 'password' }
-        anonymize('ais_uid').using      FieldStrategy::RandomIntegerDelta.new(100000)
+        anonymize('ais_uid').using      FieldStrategy::RandomInteger.new(0, 1000000)
         anonymize('ais_login').using    FieldStrategy::RandomUserName.new
         anonymize('nick').using         FieldStrategy::RandomUserName.new
 
@@ -90,13 +92,14 @@ namespace :dataset do
         anonymize('remember_token') { |_| nil }
         anonymize('omniauth_token') { |_| nil }
 
-        anonymize('facebook_uid').using FieldStrategy::RandomIntegerDelta.new(100000)
+        anonymize('facebook_uid').using FieldStrategy::RandomInteger.new(0, 1000000)
         anonymize('facebook_friends')   { |_| nil }
         anonymize('facebook_likes')     { |_| nil }
       end
     end
   end
 
+  # rake dataset:export LEVELS={1,2,3}
   task export: :environment do
     db_config = Shared::Configuration.anonymized_database
     BATCH_SIZE = 5000
@@ -114,12 +117,12 @@ namespace :dataset do
     puts 'Export location: tmp/export'
 
     ActiveRecord::Base.establish_connection(
-      adapter:  db_config[:adapter],
-      database: db_config[:database],
-      pool:     db_config[:pool],
-      encoding: db_config[:encoding],
-      username: db_config[:username],
-      password: db_config[:password],
+        adapter:  db_config[:adapter],
+        database: db_config[:database],
+        pool:     db_config[:pool],
+        encoding: db_config[:encoding],
+        username: db_config[:username],
+        password: db_config[:password],
     )
 
     models = [Shared::Activity, Shared::Answer::Profile, Shared::Assignment, Shared::Attachment, Shared::ContextUser,
@@ -164,7 +167,7 @@ namespace :dataset do
       CSV.open("tmp/export/#{filename}.csv", 'wb') do |csv|
         csv << model.attribute_names - ['stack_exchange_uuid']
 
-        Shared::Answer.unscoped.find_each(batch_size: BATCH_SIZE).each { |record| csv << record.attributes.except('stack_exchange_uuid').values }
+        model.unscoped.find_each(batch_size: BATCH_SIZE).each { |record| csv << record.attributes.except('stack_exchange_uuid').values }
       end
     end
 

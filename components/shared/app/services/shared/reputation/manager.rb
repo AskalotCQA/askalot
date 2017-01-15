@@ -63,7 +63,6 @@ module Shared::Reputation
       reputation = @question_calculator.reputation(question, time, question.votes_difference)
 
       if question.mode != 'question' && revision.question_type == 'question'
-        puts 'was question'
         update_reputation(question.author, reputation, :remove)
         question.answers.each { |a| update_reputation(a.author, a.reputation.value, :remove) }
       elsif question.mode == 'question'

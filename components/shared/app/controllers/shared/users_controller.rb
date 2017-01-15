@@ -90,7 +90,7 @@ class UsersController < ApplicationController
 
   def reset_dashboard_time
     current_user.update(dashboard_last_sign_in_at: Time.now)
-    redirect_to :back
+    redirect_to url_for(controller: :static_pages, action: :dashboard)
   end
 
   private

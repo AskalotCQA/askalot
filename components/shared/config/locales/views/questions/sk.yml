@@ -18,6 +18,8 @@ sk:
         same_category_link: "začnite diskusiu v rovnakej kategórii."
         same_category: "Prezeraj diskusné príspevky s týmito tagmi"
 
+      unread: "Diskusia bola pridaná od vášho posledného prihlásenia"
+
     index:
       title: "Otázky"
       new: "Nová otázka"
@@ -131,3 +133,5 @@ sk:
         info: "Make the recommendation better by completing statements below (consider only the question):"
         willigness: "like to help in answering this question."
         expertise: "enough knowledge and skills to answer this question."
+
+    unread: "Otázka bola pridaná od Vášho posledného prihlásenia"

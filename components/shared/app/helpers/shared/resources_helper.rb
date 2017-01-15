@@ -28,4 +28,8 @@ module Shared::ResourcesHelper
   def engine_url_helpers(resource)
     "#{resource.class.name.deconstantize}::Engine".constantize.routes.url_helpers
   end
+
+  def unread_resource?(resource, user)
+    resource.created_at > user.dashboard_last_sign_in_at
+  end
 end
