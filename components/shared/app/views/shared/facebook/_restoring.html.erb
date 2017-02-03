@@ -1,4 +1,4 @@
-<% if current_user.facebook_uid && !FbGraph::Application.new(Shared::Configuration.facebook.application.id, secret: Shared::Configuration.facebook.application.secret).debug_token(current_user.omniauth_token).is_valid %>
+<% if current_user.facebook_uid && !FbGraph2::Auth.new(Shared::Configuration.facebook.application.id, Shared::Configuration.facebook.application.secret).debug_token!(current_user.omniauth_token).is_valid %>
   <div id="facebook-restoring" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">

@@ -18,7 +18,7 @@ gem 'net-ldap'
 
 # facebook
 gem 'omniauth-facebook'
-gem 'fb_graph'
+gem 'fb_graph2'
 
 # stylesheets
 gem 'sass-rails', '~> 4.0.3'
