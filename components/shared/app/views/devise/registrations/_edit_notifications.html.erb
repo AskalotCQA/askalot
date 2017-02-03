@@ -4,15 +4,6 @@
   <div class="form-group">
     <div class="btn-group" data-toggle="buttons">
       <label class="btn btn-default">
-        <%= f.check_box :read_notifications_thread, checked: resource.read_notifications_thread %>
-        <%= Shared::User.human_attribute_name :read_notifications_thread %> <%= icon_tag resource.read_notifications_thread ? :check : :blank %>
-      </label>
-    </div>
-  </div>
-
-  <div class="form-group">
-    <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-default">
         <%= f.check_box :send_email_notifications, checked: resource.send_email_notifications %>
         <%= Shared::User.human_attribute_name :send_email_notifications %> <%= icon_tag resource.send_email_notifications ? :check : :blank %>
       </label>

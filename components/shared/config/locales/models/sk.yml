@@ -361,7 +361,6 @@ sk:
         hide_name: "Skryť meno ostatným používateľom"
         hide_email: "Skryť e-mail ostatným používateľom"
 
-        read_notifications_thread: "Označiť súvisiace ako prečítané"
         send_email_notifications: "Zasielať e-mailové notifikácie"
 
     symbolizes:
