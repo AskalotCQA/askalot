@@ -5,8 +5,7 @@
     </div>
 
     <div class="col-xs-9 col-sm-7 col-md-8">
-      <div class="answer-teacher<%= ' bg-warning' if answer_highlighted? answer %><%= ' unread-resource' if unread_resource? answer, current_user %>"
-           <%= tooltip_attributes_string(t('answer.unread'), placement: :right) if unread_resource? answer, current_user %>>
+      <div class="answer-teacher<%= ' bg-warning' if answer_highlighted? answer %>">
         <div class="answer-content">
           <%= render_markdown answer.text %>
         </div>
@@ -22,6 +21,12 @@
           <%= render 'shared/answers/editing', answer: answer %>
           <%= render 'shared/answers/deleting', answer: answer %>
         </div>
+
+        <% if unread_resource? answer, current_user %>
+          <div class="unread-resource-div"
+               <%= tooltip_attributes_string(t('answer.unread'), placement: :right) %>>
+          </div>
+        <% end %>
       </div>
 
       <%= render 'shared/answers/evaluations', answer: answer %>

@@ -160,6 +160,7 @@
   margin-right: -10px;
   margin-bottom: 10px;
   padding: 5px 10px;
+  position: relative;
 }
 
 .question-content {
@@ -235,5 +236,18 @@
 }
 
 .unread-resource {
+  border-right: 2px solid red;
+}
+
+.unread-resource-div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 15px;
+  height: 100%;
   border-right: 2px solid #6099ca;
+}
+
+.row > .unread-resource-div {
+  right: -10px;
 }
