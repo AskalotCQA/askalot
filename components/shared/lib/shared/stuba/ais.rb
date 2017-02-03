@@ -53,7 +53,7 @@ module Shared::Stuba
             user = Shared::Stuba::User.new(entries.first) if entries.present?
 
             return user.alumni? if entries.present?
-            false
+            true
           end
         end
       rescue Timeout::Error
