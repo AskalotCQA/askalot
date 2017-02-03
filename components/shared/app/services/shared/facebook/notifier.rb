@@ -5,6 +5,8 @@ module Shared::Facebook
     def publish(action, initiator, resource, options = {})
       notifications = options[:results][Shared::Notifications::Notifier] || fail
 
+      puts action
+      return unless action == :create
       return unless [Shared::Answer, Shared::Question, Shared::Comment, Shared::Evaluation, Shared::Label].find { |type| resource.is_a? type }
 
       controller  = options.delete(:controller)
