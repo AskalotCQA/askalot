@@ -8,7 +8,7 @@
           <h4>
             <%= link_to_category category, analytics_attributes(:category, :click, category.name) %>
             <% if category.has_teachers? %>
-              <%= fa_icon :university, tooltip_attributes(names_for_teachers(category.teachers)).merge({class: 'supported-category-icon-lg'}) %>
+              <%= fa_icon :'graduation-cap', tooltip_attributes(names_for_teachers(category.teachers)).merge({class: 'supported-category-icon-lg'}) %>
             <% end %>
           </h4>
           <% unless category.description.blank? %>

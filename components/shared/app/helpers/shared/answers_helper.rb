@@ -5,6 +5,12 @@ module Shared::AnswersHelper
     answer.author.assigned?(answer.to_question.category, :teacher) || answer.author.assigned?(answer.to_question.category, :teacher_assistant)
   end
 
+  def answer_from_administrator?(answer)
+    return false if answer.anonymous?
+
+    answer.author.assigned?(answer.to_question.category, :administrator)
+  end
+
   def answer_text_preview(answer, options = {})
     preview_content answer.text, options.reverse_merge(length: 200)
   end

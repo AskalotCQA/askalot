@@ -8,8 +8,12 @@
   <div class="col-xs-7 col-sm-5 col-md-12">
     <h1 class="user-profile-title">
       <%= user.nick %>
-      <% if can? :show_name, user %>
-        <small><%= user.name %></small>
+      <% if can?(:show_name, user) || user.role?(:teacher) || user.role?(:administrator)%>
+        <small>
+          <%= user.name if can? :show_name, user %>
+          <%= fa_icon :'graduation-cap', tooltip_attributes(t 'user.role.teacher') if user.role?(:teacher) %>
+          <%= fa_icon :'diamond', tooltip_attributes(t 'user.role.administrator') if user.role?(:administrator) %>
+        </small>
       <% end %>
     </h1>
 
