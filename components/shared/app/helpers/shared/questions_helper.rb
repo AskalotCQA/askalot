@@ -49,6 +49,12 @@ module Shared::QuestionsHelper
     question.author.assigned?(question.category, :teacher) || question.author.assigned?(question.category, :teacher_assistant)
   end
 
+  def question_from_administrator?(question)
+    return false if question.anonymous?
+
+    question.author.assigned?(question.category, :administrator)
+  end
+
   private
 
   def question_label_attributes(label)
@@ -60,7 +66,7 @@ module Shared::QuestionsHelper
     name = label.name
     name = label.full_public_name unless (label.class.to_s == 'Shared::Tag') || (label.root?)
 
-    return (name + ' ' + fa_icon(:university, tooltip_attributes(names_for_teachers(label.teachers)).merge({ class: 'supported-category-icon-sm' })) + ' ').html_safe if label.is_a?(Shared::Category) && label.has_teachers?
+    return (name + ' ' + fa_icon(:'graduation-cap', tooltip_attributes(names_for_teachers(label.teachers)).merge({ class: 'supported-category-icon-sm' })) + ' ').html_safe if label.is_a?(Shared::Category) && label.has_teachers?
     name
   end
 end

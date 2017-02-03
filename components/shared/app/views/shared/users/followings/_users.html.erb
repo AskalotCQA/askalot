@@ -1,7 +1,7 @@
 <div class="row">
   <% users.each do |user| %>
     <div class="col-xs-6 col-sm-4 col-md-2">
-      <%= render 'square', user: user, following: true %>
+      <%= render 'square', user: user, following: true, teacher: user.role?(:teacher), administrator: user.role?(:administrator) %>
     </div>
   <% end %>
 </div>

@@ -150,3 +150,7 @@ en:
     teacher_followed_category:
       one: "Followed by teacher: "
       more: "Followed by teachers: "
+
+    role:
+      teacher: 'Teacher'
+      administrator: 'Askalot moderator'

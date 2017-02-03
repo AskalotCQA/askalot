@@ -23,7 +23,7 @@ gem 'fb_graph2'
 # stylesheets
 gem 'sass-rails', '~> 4.0.3'
 gem 'bootstrap-sass', '~> 3.1.1'
-gem 'font-awesome-rails', '~> 4.4.0'
+gem 'font-awesome-rails', '~> 4.7.0.1'
 
 # javascripts
 gem 'therubyracer', platforms: :ruby

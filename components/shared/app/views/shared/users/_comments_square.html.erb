@@ -9,5 +9,7 @@
 
   <span class="user-nick">
     <%= user.name if user != :anonymous && user.show_name? && !user.name.blank? %>
+    <%= fa_icon :'graduation-cap', tooltip_attributes(t 'user.role.teacher') if teacher %>
+    <%= fa_icon :'diamond', tooltip_attributes(t 'user.role.administrator') if administrator %>
   </span>
 </div>

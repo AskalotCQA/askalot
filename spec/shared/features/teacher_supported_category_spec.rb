@@ -21,14 +21,14 @@ describe 'Teacher Supported Category', type: :feature, js: true do
 
     click_link 'Kategórie'
 
-    list = all('i.fa-university')
+    list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
     expect(list[0]['data-original-title']).to eql('Podporovaná učiteľom: ' + user.name)
 
     click_link 'Otázky'
 
-    list = all('i.fa-university')
+    list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
     expect(list[0]['data-original-title']).to eql('Podporovaná učiteľom: ' + user.name)
@@ -52,14 +52,14 @@ describe 'Teacher Supported Category', type: :feature, js: true do
 
     click_link 'Kategórie'
 
-    list = all('i.fa-university')
+    list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
     expect(list[0]['data-original-title']).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
 
     click_link 'Otázky'
 
-    list = all('i.fa-university')
+    list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
     expect(list[0]['data-original-title']).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
@@ -83,13 +83,13 @@ describe 'Teacher Supported Category', type: :feature, js: true do
 
     click_link 'Kategórie'
 
-    list = all('i.fa-university')
+    list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(0)
 
     click_link 'Otázky'
 
-    list = all('i.fa-university')
+    list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(0)
 
@@ -108,13 +108,13 @@ describe 'Teacher Supported Category', type: :feature, js: true do
 
     click_link 'Kategórie'
 
-    list = all('i.fa-university')
+    list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(0)
 
     click_link 'Otázky'
 
-    list = all('i.fa-university')
+    list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(0)
 

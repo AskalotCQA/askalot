@@ -1,7 +1,7 @@
 <li id="comment-<%= comment.id %>" class="comment-teacher<%= ' bg-warning' if comment_highlighted? comment %>">
   <div class="row">
     <div class="col-md-2 hidden-sm hidden-xs">
-      <%= render 'shared/users/comments_square', user: comment.author_or_anonymous %>
+      <%= render 'shared/users/comments_square', user: comment.author_or_anonymous, teacher: comment_highlighted?(comment), administrator: comment_from_administrator?(comment) %>
     </div>
 
     <div class="col-sm-12 col-md-10 comments-column">
