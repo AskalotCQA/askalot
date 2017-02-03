@@ -1,20 +1,28 @@
-<li id="answer-<%= answer.id %>" class="question-answer<%= ' bg-warning' if answer_highlighted? answer %>">
+<li id="answer-<%= answer.id %>" class="question-answer">
   <div class="row">
     <div class="col-xs-9 col-sm-10 col-md-10">
-      <div class="answer-content">
-        <%= render_markdown answer.text %>
-      </div>
-
-      <% if answer.attachments.any? %>
-        <div class="answer-attachments">
-          <%= render 'shared/answers/attachments', answer: answer %>
+      <div class="answer-teacher <%= ' bg-warning' if answer_highlighted? answer %>">
+        <div class="answer-content">
+          <%= render_markdown answer.text %>
         </div>
-      <% end %>
 
-      <div class="answer-details">
-        <%= render 'shared/answers/details', answer: answer %>
-        <%= render 'university/documents/answers/editing', answer: answer, remote: remote %>
-        <%= render 'university/documents/answers/deleting', answer: answer, remote: remote %>
+        <% if answer.attachments.any? %>
+          <div class="answer-attachments">
+            <%= render 'shared/answers/attachments', answer: answer %>
+          </div>
+        <% end %>
+
+        <div class="answer-details">
+          <%= render 'shared/answers/details', answer: answer %>
+          <%= render 'university/documents/answers/editing', answer: answer, remote: remote %>
+          <%= render 'university/documents/answers/deleting', answer: answer, remote: remote %>
+        </div>
+
+        <% if unread_resource? answer, current_user %>
+            <div class="unread-resource-div"
+                 <%= tooltip_attributes_string(t('answer.unread'), placement: :right) %>>
+            </div>
+        <% end %>
       </div>
 
       <%= render 'shared/answers/evaluations', answer: answer %>
