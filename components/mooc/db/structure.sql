@@ -1511,7 +1511,6 @@ CREATE TABLE users (
     facebook_likes text,
     documents_count integer DEFAULT 0 NOT NULL,
     send_email_notifications boolean DEFAULT true NOT NULL,
-    read_notifications_thread boolean DEFAULT true NOT NULL,
     alumni boolean DEFAULT false NOT NULL,
     dashboard_last_sign_in_at timestamp without time zone DEFAULT now(),
     attachments_count integer,
@@ -3849,4 +3848,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161110161857');
 INSERT INTO schema_migrations (version) VALUES ('20161119140437');
 
 INSERT INTO schema_migrations (version) VALUES ('20170115175555');
+
+INSERT INTO schema_migrations (version) VALUES ('20170203140643');
 

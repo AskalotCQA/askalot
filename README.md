@@ -41,8 +41,8 @@ You have to use this as suffix to standart development, test, staging, demo and 
 Create database, load schema and seed the database.
 
 ```
-RAILS_ENV=fiit_development rake db:create db:structure:load db:seed
-RAILS_ENV=edx_development rake db:create db:structure:load db:seed
+RAILS_ENV=fiit_development rake db:create db:structure:load DB_STRUCTURE=components/university/db/structure.sql db:seed
+RAILS_ENV=edx_development rake db:create db:structure:load DB_STRUCTURE=components/mooc/db/structure.sql db:seed
 ```
 
 ## Testing
