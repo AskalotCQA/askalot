@@ -6,6 +6,7 @@
     <%= link_to_user user %>
     <%= render 'shared/users/following', user: user if local_assigns.has_key? :following %>
   </span>
+
   <span class="user-nick">
     <%= user.name if user != :anonymous && user.show_name? && !user.name.blank? %>
     <%= fa_icon :'graduation-cap', tooltip_attributes(t 'user.role.teacher') if teacher %>

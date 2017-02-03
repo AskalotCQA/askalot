@@ -3,7 +3,6 @@
 <div id="question">
   <div class="row">
     <div class="col-sm-3 col-md-2 hidden-xs">
-      <% puts question_highlighted?(@question) %>
       <%= render 'shared/users/square', user: @question.author_or_anonymous, teacher: question_highlighted?(@question), administrator: question_from_administrator?(@question) %>
     </div>
 
