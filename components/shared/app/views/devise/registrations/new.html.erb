@@ -1,3 +1,5 @@
+<% return '' unless Shared::Configuration.enable.registrations? %>
+
 <% provide :title, t('user.registration') %>
 
 <div class="container">
