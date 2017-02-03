@@ -3,7 +3,7 @@ class FacebookController < ActionController::Base
 
   def facebook
     @auth    = request.env['omniauth.auth']
-    @proxy   = FbGraph::User.me(@auth.credentials.token)
+    @proxy   = FbGraph2::User.me(@auth.credentials.token)
     @friends = @proxy.friends
     @likes   = @proxy.likes
 
