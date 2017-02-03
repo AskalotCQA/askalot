@@ -2,7 +2,7 @@
     <%= tooltip_attributes_string(t('comment.unread'), placement: :right) if unread_resource? comment, current_user %>>
   <div class="row">
     <div class="col-md-2 hidden-sm hidden-xs">
-      <%= render 'shared/users/comments_square', user: comment.author_or_anonymous %>
+      <%= render 'shared/users/comments_square', user: comment.author_or_anonymous, teacher: comment_highlighted?(comment), administrator: comment_from_administrator?(comment) %>
     </div>
 
     <div class="col-sm-12 col-md-10 comments-column">
