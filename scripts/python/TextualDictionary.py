@@ -4,7 +4,7 @@ from gensim import corpora, utils
 import os
 
 MIN_APPEARANCE = 1
-MIN_WORD_LENGTH = 3
+MIN_WORD_LENGTH = 2
 VOCABULARY_FILENAME = 'recommendation/vocabulary.dat'
 
 
@@ -34,12 +34,6 @@ class TextualDictionary(object):
             text = self.preprocess_document(text)
             corpus.append(text)
         self.vocabulary.add_documents(corpus)
-        #stop_ids = [self.vocabulary.token2id[stopword] for stopword in self.stop if stopword in self.vocabulary.token2id]
-        #once_ids = [tokenid for tokenid, docfreq in self.vocabulary.dfs.iteritems() if docfreq < MIN_APPEARANCE]
-        #short_ids = [tokenid for word,tokenid in self.vocabulary.token2id.iteritems() if len(word) < MIN_WORD_LENGTH]
-        #self.vocabulary.filter_tokens(stop_ids + once_ids + short_ids) # remove stop words, words that appear only once and short words
-        #self.vocabulary.filter_n_most_frequent(10)
-        #self.vocabulary.compactify() # remove gaps in id sequence after words that were removed
         print self.vocabulary
         self.save_vocabulary_as_file()
 

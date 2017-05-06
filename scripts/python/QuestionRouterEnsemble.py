@@ -135,7 +135,6 @@ def evaluate(users_ids, true_user_id):
 
 MAX_ROUTED_QUESTIONS = 3
 ROUTE_TO_MAX = 10
-#RUBY_RETURN_FILE = 'recommendation/rec-users.dat'
 
 if __name__ == '__main__':
     textual_dictionary = TextualDictionary()
@@ -158,29 +157,12 @@ if __name__ == '__main__':
 
     # Recommendation
     rec_to_users_full = recommend(ensemble, users_ids_full, question.author_id)
-    #print '-----------------------'
-    #print 'Baseline'
-    #print '-----------------------'
     rec_to_users_baseline = recommend(ensemble_baseline, users_ids_baseline, question.author_id)
-
-    # Evaluation
-    if len(sys.argv) == 3:
-        true_user_id = int(sys.argv[2])
-        if true_user_id in users_ids_full:
-            print 'Evaluating FULL ensemble'
-            evaluate(rec_to_users_full, true_user_id)
-        elif true_user_id in users_ids_baseline:
-            print 'Evaluating BASELINE ensemble'
-            evaluate(rec_to_users_baseline, true_user_id)
-        else:
-            print 'User from control group answered'
 
     # Save to file for Ruby to read
     final_rec_users = np.concatenate([rec_to_users_full, rec_to_users_baseline])
 
-    #with open(RUBY_RETURN_FILE, 'w') as f:
-    #    for user_id in final_rec_users:
-    #        f.write(str(user_id)+'\n')
+    textual_dictionary.save_vocabulary_as_file()
 
     for user_id in final_rec_users:
         print user_id

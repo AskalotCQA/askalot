@@ -1,6 +1,4 @@
 from sklearn import preprocessing
-import numpy as np
-from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestClassifier
 from Classifier import Classifier
 

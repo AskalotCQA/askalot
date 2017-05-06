@@ -6,9 +6,9 @@ module Shared::QuestionRouting
       #puts "Feeding for #{action} '#{action}' on #{resource} by #{initiator.try(:nick) || 'no one'} ..."
 
       # Only for development
-      #@current_date ||= resource.created_at.to_date
-      #if action == :create && resource.created_at.to_date != @current_date
-      #  @current_date = resource.created_at.to_date
+      #@current_date ||= resource.created_at.to_date # + 1.day
+      #if action == :create && resource.created_at.to_date != @current_date # >=
+      #  @current_date = resource.created_at.to_date # + 1.day
       #  Rake::Task['recommendation:update_features'].invoke
       #  Rake::Task['recommendation:update_features'].reenable
       #  Rake::Task['recommendation:append_expertise_dataset'].invoke
@@ -24,12 +24,13 @@ module Shared::QuestionRouting
         update_answer_features(resource)
         add_user_knowledge(resource.author)
         update_last_answer_time(resource.author)
-        `python scripts/python/UpdateUserProfile.py #{resource.id} >> recommendation/update-profile.log 2>&1`
+        `python scripts/python/UpdateUserProfile.py #{resource.id} -a >> recommendation/update-profile.log 2>&1`
       end
 
       if resource.is_a? Shared::Comment
         update_comment_features(resource)
         add_user_knowledge(resource.author)
+        `python scripts/python/UpdateUserProfile.py #{resource.id} -c >> recommendation/update-profile.log 2>&1`
       end
 
       if resource.is_a? Shared::Vote

@@ -5,7 +5,7 @@ from gensim import corpora
 
 def update_vocabulary(question, textual_dictionary):
     # Preprocess question to BoW
-    text = textual_dictionary.preprocess_document(question.text + question.title)
+    text = textual_dictionary.preprocess_document(question.text +' '+question.title)
     assert isinstance(textual_dictionary.vocabulary, corpora.Dictionary)
     question_bow = textual_dictionary.vocabulary.doc2bow(text, allow_update=True)
 

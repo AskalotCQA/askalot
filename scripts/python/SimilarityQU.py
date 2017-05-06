@@ -3,26 +3,25 @@ import DataManager
 from TextualDictionary import TextualDictionary
 from gensim import corpora, similarities
 import Utils
+from gensim import matutils
 
 def compute_question_bow(question, textual_dictionary):
     # Preprocess question to BoW
     text = textual_dictionary.preprocess_document(question.text + question.title)
     assert isinstance(textual_dictionary.vocabulary, corpora.Dictionary)
-    question_bow = textual_dictionary.vocabulary.doc2bow(text)
-    #print 'TF BoW: ',question_bow
+    question_bow = textual_dictionary.vocabulary.doc2bow(text, allow_update=False)
     question_bow = Utils.compute_tfidf(question_bow, textual_dictionary.vocabulary)
-    #print 'TF-IDF BoW: ', question_bow
     return question_bow
 
 
 def compute_similarity(user_bow, question, textual_dictionary):
-    question_bow = compute_question_bow(question, textual_dictionary)
+    question_bow = matutils.unitvec(compute_question_bow(question, textual_dictionary))
 
     similarity = 0
     if user_bow:
         #print 'Found user profile'
         user_bow = DataManager.load_bow_json(user_bow)
-        #print len(textual_dictionary.vocabulary.keys())
+        user_bow = matutils.unitvec(Utils.compute_tfidf(user_bow, textual_dictionary.vocabulary))
         similarity_index = similarities.MatrixSimilarity([user_bow], num_features=len(textual_dictionary.vocabulary.keys()))
         sims = similarity_index[question_bow]
         similarity = sims[0]

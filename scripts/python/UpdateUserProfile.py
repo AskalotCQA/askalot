@@ -5,6 +5,15 @@ import json
 import sys
 
 
+def process_answer(answer, textual_dictionary):
+    question = DataManager.get_question(answer.question_id)
+    return textual_dictionary.preprocess_document(answer.text +' '+ question.title +' '+ question.text)
+
+
+def process_comment(comment, textual_dictionary):
+    return textual_dictionary.preprocess_document(comment.text)
+
+
 def update_user_profile(textual_dictionary, answer):
     '''
     Update user profile based on answer and answered question and updates total vocabulary.
@@ -13,11 +22,17 @@ def update_user_profile(textual_dictionary, answer):
     :return:
     '''
     assert isinstance(textual_dictionary, TextualDictionary)
-    question = DataManager.get_question(answer.question_id)
-    text = textual_dictionary.preprocess_document(answer.text + question.title + question.text)
+    if hasattr(answer, "question_id"):
+        text = process_answer(answer, textual_dictionary)
+    else:
+        text = process_comment(answer, textual_dictionary)
 
-    # Allow update set to true/false
-    bow = textual_dictionary.vocabulary.doc2bow(text, allow_update=True)
+    # Update with reply text only
+    textual_dictionary.vocabulary.add_documents([textual_dictionary.preprocess_document(answer.text)])
+    bow = textual_dictionary.vocabulary.doc2bow(text, allow_update=False)
+
+    if len(bow) == 0:
+        return
 
     # Load and update user profile if exist
     user_profile = DataManager.get_user_profile_property(answer.author_id, 'BoW')
@@ -40,9 +55,13 @@ if __name__ == '__main__':
     if not textualDictionary.load_vocabulary_from_file():
         sys.exit(1)
 
-    # Retrieve new answer
-    answer_id = sys.argv[1]
-    answer = DataManager.get_answer(answer_id)
+    type = sys.argv[2]
+
+    if type=="-c":
+        answer = DataManager.get_comment(sys.argv[1])
+    elif type =="-a":
+        # Retrieve new answer
+        answer = DataManager.get_answer(sys.argv[1])
 
 
     # Update user profile based on answer and question.

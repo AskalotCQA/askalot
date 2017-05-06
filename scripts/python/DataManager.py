@@ -95,6 +95,12 @@ def get_answer(answer_id):
     return DbObject(cursor, row) if row else None
 
 
+def get_comment(comment_id):
+    cursor.execute("SELECT * FROM comments WHERE id = " + str(comment_id))
+    row = cursor.fetchone()
+    return DbObject(cursor, row) if row else None
+
+
 def get_user_profile(user_id, category_id):
     '''
     Get user profile properties. In case of categories, filter only properties which is for category and it's
