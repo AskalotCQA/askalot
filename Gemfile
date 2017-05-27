@@ -8,6 +8,10 @@ gem 'responders', '~> 2.0'
 # database
 gem 'pg'
 
+# monitoring
+gem 'pghero'
+gem 'pg_query'
+
 # configuration
 gem 'squire', '~> 1.3.6'
 

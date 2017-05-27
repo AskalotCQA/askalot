@@ -15,5 +15,9 @@ Askalot::Application.routes.draw do
     mount Mooc::Engine => '/', as: 'mooc' if Rails.module.mooc?
 
     root 'static_pages#home'
+
+    authenticate :user, -> (user) { user.role?(:administrator) } do
+      mount PgHero::Engine, at: 'pghero'
+    end
   end
 end
