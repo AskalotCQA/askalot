@@ -67,6 +67,29 @@ describe 'Add Question', type: :feature do
     end
   end
 
+  it 'adds new question as slido' do
+    page.driver.submit :delete, '/logout', {}
+    admin = create :administrator
+    login_as admin
+
+    visit shared.root_path
+
+    click_link 'Opýtať sa otázku'
+
+    fill_in 'question_title', with: 'Lorem ipsum title?'
+    fill_in 'question_text',  with: 'Lorem ipsum'
+
+    select category.name, from: 'question_category_id'
+
+    check 'Pridať ako slido'
+
+    click_button 'Opýtať'
+
+    within '#question' do
+      expect(page).to have_content('Automaton Slido')
+    end
+  end
+
   context 'when creating new question from a question\'s page' do
     let!(:question) { create :question, :with_tags }
 

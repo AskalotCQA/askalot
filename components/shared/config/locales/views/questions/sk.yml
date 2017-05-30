@@ -39,6 +39,7 @@ sk:
       forum: "Pridať príspevok"
       same_category_link: "sa opýtaj otázku v rovnakej kategórii."
       same_category: "Prezeraj otázky s týmito tagmi"
+      slido: 'Pridať ako slido'
 
     create:
       success: "Otázka bola úspešne pridaná."

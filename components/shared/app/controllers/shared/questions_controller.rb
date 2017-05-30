@@ -61,6 +61,13 @@ class QuestionsController < ApplicationController
   end
 
   def create
+    if params[:slido]
+      old_user      = current_user
+      slido         = Shared::User.where(login: 'slido').first
+      current_user  = slido
+      @current_user = current_user
+    end
+
     @question = Shared::Question.new(create_params)
 
     authorize! :ask, @question
@@ -85,6 +92,11 @@ class QuestionsController < ApplicationController
       redirect_to shared.question_path(@question)
     else
       prefix = request.referrer.include?('third_party') ? '/third_party' : ''
+
+      if params[:slido]
+        current_user  = old_user
+        @current_user = old_user
+      end
 
       # TODO (filip jandura) refactor different types of rendering for mooc/university
       respond_to do |format|
