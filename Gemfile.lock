@@ -1,18 +1,26 @@
 GIT
+  remote: git://github.com/adrianhuna/scout.git
+  revision: c19db720ecce7d29d4e82fd4bb9485786dcdeff4
+  specs:
+    scout (0.3.1)
+      activesupport (>= 4.0.0)
+      curb (~> 0.8.4)
+      sidekiq (>= 2.15.2)
+      squire (>= 1.2.1)
+
+GIT
   remote: git://github.com/pavolzbell/bump.git
   revision: 136e59f21d8effccd4c259e7b22066f27a904942
   specs:
     bump (0.3.0)
 
 GIT
-  remote: git://github.com/smolnar/scout.git
-  revision: d7c94e47e0f3ef671980c592268fafd303970aa9
+  remote: git://github.com/seuros/capistrano-sidekiq.git
+  revision: 339c42e24f42d8d72173daae832b23504930f941
   specs:
-    scout (0.3.1)
-      activesupport (>= 4.0.0)
-      curb (~> 0.8.4)
-      sidekiq (~> 2.15.2)
-      squire (>= 1.2.1)
+    capistrano-sidekiq (0.10.0)
+      capistrano
+      sidekiq (>= 3.4)
 
 GIT
   remote: https://github.com/instructure/ims-lti.git
@@ -139,7 +147,8 @@ GEM
     coffee-script-source (1.8.0)
     composite_primary_keys (8.1.5)
       activerecord (~> 4.2.0)
-    connection_pool (2.2.0)
+    concurrent-ruby (1.0.5)
+    connection_pool (2.2.1)
     css_parser (1.3.5)
       addressable
     curb (0.8.8)
@@ -342,6 +351,8 @@ GEM
       httpclient (>= 2.4)
       multi_json (>= 1.3.6)
       rack (>= 1.1)
+    rack-protection (2.0.0)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-timeout (0.1.0)
@@ -383,9 +394,7 @@ GEM
     rdoc (4.1.2)
       json (~> 1.4)
     redcarpet (3.2.0)
-    redis (3.2.1)
-    redis-namespace (1.5.2)
-      redis (~> 3.0, >= 3.0.4)
+    redis (3.3.3)
     ref (1.0.5)
     remotipart (1.3.0)
     responders (2.3.0)
@@ -445,12 +454,11 @@ GEM
     shoulda-context (1.2.1)
     shoulda-matchers (2.7.0)
       activesupport (>= 3.0.0)
-    sidekiq (2.15.2)
-      celluloid (>= 0.15.2)
-      connection_pool (>= 1.0.0)
-      json
-      redis (>= 3.0.4)
-      redis-namespace (>= 1.3.1)
+    sidekiq (4.2.10)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      rack-protection (>= 1.5.0)
+      redis (~> 3.2, >= 3.2.1)
     simplecov (0.9.1)
       docile (~> 1.1.0)
       multi_json (~> 1.0)
@@ -520,6 +528,7 @@ DEPENDENCIES
   cancan (~> 1.6.10)
   capistrano (~> 2.15.5)
   capistrano-ext
+  capistrano-sidekiq!
   capybara
   codeclimate-test-reporter
   coffee-rails (~> 4.0.0)
@@ -581,6 +590,7 @@ DEPENDENCIES
   select2-rails (~> 3.4.9)
   selenium-webdriver
   shared!
+  sidekiq (~> 4.2)
   simplecov
   squire (~> 1.3.6)
   statistics2

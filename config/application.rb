@@ -67,5 +67,8 @@ module Askalot
 
     # Raise standard errors in `after_rollback`/`after_commit` callbacks
     config.active_record.raise_in_transactional_callbacks = true
+
+    # use sidekiq for backend jobs
+    config.active_job.queue_adapter = :sidekiq
   end
 end
