@@ -5,6 +5,7 @@ en:
     tab:
       global: "Global"
       followees: "Followed"
+      followed_categories: "Followed categories"
 
     index:
       title: "Activity feed"

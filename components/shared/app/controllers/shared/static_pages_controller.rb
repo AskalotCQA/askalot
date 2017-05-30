@@ -1,7 +1,5 @@
 module Shared
 class StaticPagesController < ApplicationController
-  include Shared::Dashboard::Questions
-
   skip_before_filter :login_required, only: :home if Rails.module.mooc? && Rails.env_type.test?
 
   def home
@@ -20,23 +18,25 @@ class StaticPagesController < ApplicationController
     @question = Shared::Questions::ToAnswerRecommender.next
     @context_id = Shared::Context::Manager.current_context_id
 
-    context_questions = dashboard_questions @context_id
-    context_answers = dashboard_answers @context_id
-    context_question_comments = dashboard_question_comments context_questions
-    context_question_answers = dashboard_answer_comments context_answers
+    service = Shared::Dashboard::DashboardService
 
-    @new_questions = dashboard_count context_questions
-    @new_answers = dashboard_count context_answers
-    @new_comments = dashboard_count(context_question_comments) + dashboard_count(context_question_answers)
+    context_questions         = service.dashboard_questions @context_id, current_user
+    context_answers           = service.dashboard_answers @context_id, current_user
+    context_question_comments = service.dashboard_question_comments context_questions, current_user
+    context_question_answers  = service.dashboard_answer_comments context_answers, current_user
 
-    context_questions = dashboard_questions_watched current_user
-    context_answers = dashboard_answers_watched current_user
-    context_question_comments = dashboard_question_comments context_questions
-    context_question_answers = dashboard_answer_comments context_answers
+    @new_questions = service.dashboard_count context_questions, current_user
+    @new_answers   = service.dashboard_count context_answers, current_user
+    @new_comments  = service.dashboard_count(context_question_comments, current_user) + service.dashboard_count(context_question_answers, current_user)
 
-    @new_questions_watched = dashboard_count context_questions
-    @new_answers_watched = dashboard_count context_answers
-    @new_comments_watched = dashboard_count(context_question_comments) + dashboard_count(context_question_answers)
+    context_questions         = service.dashboard_questions_watched current_user
+    context_answers           = service.dashboard_answers_watched current_user
+    context_question_comments = service.dashboard_question_comments context_questions, current_user
+    context_question_answers  = service.dashboard_answer_comments context_answers, current_user
+
+    @new_questions_watched = service.dashboard_count context_questions, current_user
+    @new_answers_watched   = service.dashboard_count context_answers, current_user
+    @new_comments_watched  = service.dashboard_count(context_question_comments, current_user) + service.dashboard_count(context_question_answers, current_user)
 
     limit = 20
 
@@ -55,12 +55,6 @@ class StaticPagesController < ApplicationController
   end
 
   def welcome_without_confirmation
-  end
-
-  private
-
-  def dashboard_count(query)
-    fresh(query, current_user).count
   end
 end
 end
