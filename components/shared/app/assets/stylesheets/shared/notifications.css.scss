@@ -5,9 +5,10 @@
 }
 
 .dropdown-notification {
-  margin: 5px;
+  margin: 0;
   padding: 5px;
-  min-width: 220px;
+  min-width: 250px;
+  font-size: 13px;
 }
 
 .notification-read {
@@ -22,4 +23,8 @@
 
 .dropdown-notification > div > div > a {
   text-decoration: none;
+}
+
+.dropdown-notification-info {
+  margin-left: 100px;
 }

@@ -2,11 +2,14 @@
   <div class="row <%= notification.read? ? 'notification-read' : '' %>">
     <div class="col-xs-12">
       <%= link_to_notification(notification, delete: lambda { |body, _, _| link_to body, shared.notifications_path(anchor: "notification-#{notification.id}") }) do %>
+          <span class=""></span>
           <%= notification_icon_tag notification %>
-          <span class="text-muted">&middot;</span>
-          <%= user_icon_tag notification.initiator_or_anonymous, tooltip_attributes(user_nick(notification.initiator_or_anonymous), placement: :bottom).merge(link: false) %>
-          <span class="text-muted">&middot;</span>
-          <%= tooltip_time_tag notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
+          <%= strip_links(notification_content notification).html_safe  %>
+          <br>
+          <span class="dropdown-notification-info">
+            <%= user_icon_tag notification.initiator_or_anonymous, tooltip_attributes(user_nick(notification.initiator_or_anonymous), placement: :bottom).merge(link: false) %>
+            <small><span class="text-muted"> &middot; </span><%= tooltip_time_tag notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %></small>
+          </span>
       <% end %>
       <% if notification.unread? %>
           <%= link_to shared.read_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.read.submit'), placement: :bottom).deep_merge(class: 'btn btn-default btn-xs pull-right', data: { remote: true }) do %>
@@ -17,6 +20,8 @@
               <%= icon_tag :check %>
           <% end %>
       <% end %>
+      <br>
+
     </div>
   </div>
 </li>
