@@ -68,25 +68,29 @@ describe 'Add Question', type: :feature do
   end
 
   it 'adds new question as slido' do
-    page.driver.submit :delete, '/logout', {}
-    admin = create :administrator
-    login_as admin
+    if Rails.module.university?
+      page.driver.submit :delete, '/logout', {}
+      admin = create :administrator
+      login_as admin
 
-    visit shared.root_path
+      visit shared.root_path
 
-    click_link 'Opýtať sa otázku'
+      click_link 'Opýtať sa otázku'
 
-    fill_in 'question_title', with: 'Lorem ipsum title?'
-    fill_in 'question_text',  with: 'Lorem ipsum'
+      fill_in 'question_title', with: 'Lorem ipsum title?'
+      fill_in 'question_text',  with: 'Lorem ipsum'
 
-    select category.name, from: 'question_category_id'
+      select category.name, from: 'question_category_id'
 
-    check 'Pridať ako slido'
+      check 'Pridať ako slido'
 
-    click_button 'Opýtať'
+      click_button 'Opýtať'
 
-    within '#question' do
-      expect(page).to have_content('Automaton Slido')
+      within '#question' do
+        expect(page).to have_content('Automaton Slido')
+      end
+    else
+      skip
     end
   end
 
