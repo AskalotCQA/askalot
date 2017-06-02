@@ -1,5 +1,5 @@
 <% if notifications.any? %>
-  <%= navbar_dropdown_tag :'dot-circle-o', notifications.unscope(:limit).size, '#', class: :'hidden-xs', join: :append do %>
+  <%= navbar_dropdown_tag :'dot-circle-o', notifications.unscope(:limit).size, '#', class: :'hidden-xs notifications-dropdown', join: :append do %>
     <li><%= link_to_notifications notifications %></li>
     <li class="divider"></li>
     <% notifications.each do |notification| %>
