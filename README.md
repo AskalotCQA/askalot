@@ -12,7 +12,7 @@ Askalot is a CQA (Community Question and Answer) system of next generation.
 
 ## Requirements
 
-* Ruby 2.3
+* Ruby 2.4
 * Rails 4.2
 * PostgreSQL 9.3
 * Elasticsearch 1.7
