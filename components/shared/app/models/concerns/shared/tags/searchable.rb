@@ -99,6 +99,8 @@ module Shared::Tags
           query: {
             query_string: {
               query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
+              analyzer: :text,
+              analyze_wildcard: true,
               default_operator: :and,
               fields: [:name]
             }
