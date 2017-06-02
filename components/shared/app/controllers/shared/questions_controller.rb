@@ -72,7 +72,7 @@ class QuestionsController < ApplicationController
     authorize! :ask, @question
 
     if params[:attachments]
-      params[:attachments].each { |a| @question.attachments.new(file: a, author: current_user) }
+      params[:attachments].each { |a| @question.attachments.new({file: a}.merge(author: current_user)) }
     end
 
     if @question.save
