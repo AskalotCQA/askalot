@@ -2,12 +2,16 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.5.6
+-- Dumped by pg_dump version 9.5.6
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -45,7 +49,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: activities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: activities; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE activities (
@@ -83,7 +87,7 @@ ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
 
 
 --
--- Name: answer_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: answer_profiles; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE answer_profiles (
@@ -118,7 +122,7 @@ ALTER SEQUENCE answer_profiles_id_seq OWNED BY answer_profiles.id;
 
 
 --
--- Name: answer_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: answer_revisions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE answer_revisions (
@@ -154,7 +158,7 @@ ALTER SEQUENCE answer_revisions_id_seq OWNED BY answer_revisions.id;
 
 
 --
--- Name: answers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: answers; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE answers (
@@ -200,7 +204,7 @@ ALTER SEQUENCE answers_id_seq OWNED BY answers.id;
 
 
 --
--- Name: assignments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: assignments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE assignments (
@@ -235,7 +239,7 @@ ALTER SEQUENCE assignments_id_seq OWNED BY assignments.id;
 
 
 --
--- Name: attachments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: attachments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE attachments (
@@ -275,7 +279,7 @@ ALTER SEQUENCE attachments_id_seq OWNED BY attachments.id;
 
 
 --
--- Name: categories; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: categories; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE categories (
@@ -326,7 +330,7 @@ ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
 
 
 --
--- Name: categories_questions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: categories_questions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE categories_questions (
@@ -363,7 +367,7 @@ ALTER SEQUENCE categories_questions_id_seq OWNED BY categories_questions.id;
 
 
 --
--- Name: changelogs; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: changelogs; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE changelogs (
@@ -396,7 +400,7 @@ ALTER SEQUENCE changelogs_id_seq OWNED BY changelogs.id;
 
 
 --
--- Name: comment_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: comment_revisions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE comment_revisions (
@@ -432,7 +436,7 @@ ALTER SEQUENCE comment_revisions_id_seq OWNED BY comment_revisions.id;
 
 
 --
--- Name: comments; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: comments; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE comments (
@@ -474,7 +478,7 @@ ALTER SEQUENCE comments_id_seq OWNED BY comments.id;
 
 
 --
--- Name: context_users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: context_users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE context_users (
@@ -506,7 +510,7 @@ ALTER SEQUENCE context_users_id_seq OWNED BY context_users.id;
 
 
 --
--- Name: document_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: document_revisions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE document_revisions (
@@ -543,7 +547,7 @@ ALTER SEQUENCE document_revisions_id_seq OWNED BY document_revisions.id;
 
 
 --
--- Name: documents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: documents; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE documents (
@@ -585,7 +589,7 @@ ALTER SEQUENCE documents_id_seq OWNED BY documents.id;
 
 
 --
--- Name: emails; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: emails; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE emails (
@@ -620,7 +624,7 @@ ALTER SEQUENCE emails_id_seq OWNED BY emails.id;
 
 
 --
--- Name: evaluation_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: evaluation_revisions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE evaluation_revisions (
@@ -657,7 +661,7 @@ ALTER SEQUENCE evaluation_revisions_id_seq OWNED BY evaluation_revisions.id;
 
 
 --
--- Name: evaluations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: evaluations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE evaluations (
@@ -698,7 +702,7 @@ ALTER SEQUENCE evaluations_id_seq OWNED BY evaluations.id;
 
 
 --
--- Name: events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: events; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE events (
@@ -728,7 +732,7 @@ ALTER SEQUENCE events_id_seq OWNED BY events.id;
 
 
 --
--- Name: favorites; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: favorites; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE favorites (
@@ -764,7 +768,7 @@ ALTER SEQUENCE favorites_id_seq OWNED BY favorites.id;
 
 
 --
--- Name: followings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: followings; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE followings (
@@ -799,7 +803,7 @@ ALTER SEQUENCE followings_id_seq OWNED BY followings.id;
 
 
 --
--- Name: group_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: group_revisions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE group_revisions (
@@ -837,7 +841,7 @@ ALTER SEQUENCE group_revisions_id_seq OWNED BY group_revisions.id;
 
 
 --
--- Name: groups; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: groups; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE groups (
@@ -878,7 +882,7 @@ ALTER SEQUENCE groups_id_seq OWNED BY groups.id;
 
 
 --
--- Name: labelings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: labelings; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE labelings (
@@ -915,7 +919,7 @@ ALTER SEQUENCE labelings_id_seq OWNED BY labelings.id;
 
 
 --
--- Name: labels; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: labels; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE labels (
@@ -946,7 +950,7 @@ ALTER SEQUENCE labels_id_seq OWNED BY labels.id;
 
 
 --
--- Name: lists; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: lists; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE lists (
@@ -981,7 +985,7 @@ ALTER SEQUENCE lists_id_seq OWNED BY lists.id;
 
 
 --
--- Name: mooc_category_contents; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: mooc_category_contents; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE mooc_category_contents (
@@ -1013,7 +1017,7 @@ ALTER SEQUENCE mooc_category_contents_id_seq OWNED BY mooc_category_contents.id;
 
 
 --
--- Name: news; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: news; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE news (
@@ -1046,7 +1050,7 @@ ALTER SEQUENCE news_id_seq OWNED BY news.id;
 
 
 --
--- Name: notifications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: notifications; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE notifications (
@@ -1085,7 +1089,7 @@ ALTER SEQUENCE notifications_id_seq OWNED BY notifications.id;
 
 
 --
--- Name: question_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: question_profiles; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE question_profiles (
@@ -1120,7 +1124,7 @@ ALTER SEQUENCE question_profiles_id_seq OWNED BY question_profiles.id;
 
 
 --
--- Name: question_revisions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: question_revisions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE question_revisions (
@@ -1161,7 +1165,7 @@ ALTER SEQUENCE question_revisions_id_seq OWNED BY question_revisions.id;
 
 
 --
--- Name: question_types; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: question_types; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE question_types (
@@ -1196,7 +1200,7 @@ ALTER SEQUENCE question_types_id_seq OWNED BY question_types.id;
 
 
 --
--- Name: questions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: questions; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE questions (
@@ -1257,7 +1261,7 @@ ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
 
 
 --
--- Name: roles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: roles; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE roles (
@@ -1288,7 +1292,7 @@ ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE schema_migrations (
@@ -1297,7 +1301,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: slido_events; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: slido_events; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE slido_events (
@@ -1334,7 +1338,7 @@ ALTER SEQUENCE slido_events_id_seq OWNED BY slido_events.id;
 
 
 --
--- Name: taggings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: taggings; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE taggings (
@@ -1370,7 +1374,7 @@ ALTER SEQUENCE taggings_id_seq OWNED BY taggings.id;
 
 
 --
--- Name: tags; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: tags; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE tags (
@@ -1405,7 +1409,7 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 
 --
--- Name: user_profiles; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: user_profiles; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE user_profiles (
@@ -1442,7 +1446,7 @@ ALTER SEQUENCE user_profiles_id_seq OWNED BY user_profiles.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE users (
@@ -1514,7 +1518,8 @@ CREATE TABLE users (
     alumni boolean DEFAULT false NOT NULL,
     dashboard_last_sign_in_at timestamp without time zone DEFAULT now(),
     attachments_count integer,
-    lists_count integer DEFAULT 0 NOT NULL
+    lists_count integer DEFAULT 0 NOT NULL,
+    send_facebook_notifications boolean
 );
 
 
@@ -1538,7 +1543,7 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: views; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: views; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE views (
@@ -1572,7 +1577,7 @@ ALTER SEQUENCE views_id_seq OWNED BY views.id;
 
 
 --
--- Name: votes; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: votes; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE votes (
@@ -1610,7 +1615,7 @@ ALTER SEQUENCE votes_id_seq OWNED BY votes.id;
 
 
 --
--- Name: watchings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
+-- Name: watchings; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE watchings (
@@ -1934,7 +1939,7 @@ ALTER TABLE ONLY watchings ALTER COLUMN id SET DEFAULT nextval('watchings_id_seq
 
 
 --
--- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY activities
@@ -1942,7 +1947,7 @@ ALTER TABLE ONLY activities
 
 
 --
--- Name: answer_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: answer_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY answer_profiles
@@ -1950,7 +1955,7 @@ ALTER TABLE ONLY answer_profiles
 
 
 --
--- Name: answer_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: answer_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY answer_revisions
@@ -1958,7 +1963,7 @@ ALTER TABLE ONLY answer_revisions
 
 
 --
--- Name: answers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: answers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY answers
@@ -1966,7 +1971,7 @@ ALTER TABLE ONLY answers
 
 
 --
--- Name: assignments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: assignments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY assignments
@@ -1974,7 +1979,7 @@ ALTER TABLE ONLY assignments
 
 
 --
--- Name: attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: attachments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY attachments
@@ -1982,7 +1987,7 @@ ALTER TABLE ONLY attachments
 
 
 --
--- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY categories
@@ -1990,7 +1995,7 @@ ALTER TABLE ONLY categories
 
 
 --
--- Name: categories_questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: categories_questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY categories_questions
@@ -1998,7 +2003,7 @@ ALTER TABLE ONLY categories_questions
 
 
 --
--- Name: changelogs_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: changelogs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY changelogs
@@ -2006,7 +2011,7 @@ ALTER TABLE ONLY changelogs
 
 
 --
--- Name: comment_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: comment_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comment_revisions
@@ -2014,7 +2019,7 @@ ALTER TABLE ONLY comment_revisions
 
 
 --
--- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: comments_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY comments
@@ -2022,7 +2027,7 @@ ALTER TABLE ONLY comments
 
 
 --
--- Name: context_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: context_users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY context_users
@@ -2030,7 +2035,7 @@ ALTER TABLE ONLY context_users
 
 
 --
--- Name: document_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: document_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY document_revisions
@@ -2038,7 +2043,7 @@ ALTER TABLE ONLY document_revisions
 
 
 --
--- Name: documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: documents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY documents
@@ -2046,7 +2051,7 @@ ALTER TABLE ONLY documents
 
 
 --
--- Name: emails_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: emails_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY emails
@@ -2054,7 +2059,7 @@ ALTER TABLE ONLY emails
 
 
 --
--- Name: evaluation_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: evaluation_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY evaluation_revisions
@@ -2062,7 +2067,7 @@ ALTER TABLE ONLY evaluation_revisions
 
 
 --
--- Name: evaluations_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: evaluations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY evaluations
@@ -2070,7 +2075,7 @@ ALTER TABLE ONLY evaluations
 
 
 --
--- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY events
@@ -2078,7 +2083,7 @@ ALTER TABLE ONLY events
 
 
 --
--- Name: favourites_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: favourites_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY favorites
@@ -2086,7 +2091,7 @@ ALTER TABLE ONLY favorites
 
 
 --
--- Name: followings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: followings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY followings
@@ -2094,7 +2099,7 @@ ALTER TABLE ONLY followings
 
 
 --
--- Name: group_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: group_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY group_revisions
@@ -2102,7 +2107,7 @@ ALTER TABLE ONLY group_revisions
 
 
 --
--- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY groups
@@ -2110,7 +2115,7 @@ ALTER TABLE ONLY groups
 
 
 --
--- Name: labelings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: labelings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY labelings
@@ -2118,7 +2123,7 @@ ALTER TABLE ONLY labelings
 
 
 --
--- Name: labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: labels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY labels
@@ -2126,7 +2131,7 @@ ALTER TABLE ONLY labels
 
 
 --
--- Name: lists_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: lists_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY lists
@@ -2134,7 +2139,7 @@ ALTER TABLE ONLY lists
 
 
 --
--- Name: mooc_category_contents_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: mooc_category_contents_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY mooc_category_contents
@@ -2142,7 +2147,7 @@ ALTER TABLE ONLY mooc_category_contents
 
 
 --
--- Name: news_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: news_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY news
@@ -2150,7 +2155,7 @@ ALTER TABLE ONLY news
 
 
 --
--- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: notifications_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY notifications
@@ -2158,7 +2163,7 @@ ALTER TABLE ONLY notifications
 
 
 --
--- Name: question_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: question_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY question_profiles
@@ -2166,7 +2171,7 @@ ALTER TABLE ONLY question_profiles
 
 
 --
--- Name: question_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: question_revisions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY question_revisions
@@ -2174,7 +2179,7 @@ ALTER TABLE ONLY question_revisions
 
 
 --
--- Name: question_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: question_types_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY question_types
@@ -2182,7 +2187,7 @@ ALTER TABLE ONLY question_types
 
 
 --
--- Name: questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: questions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY questions
@@ -2190,7 +2195,7 @@ ALTER TABLE ONLY questions
 
 
 --
--- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY roles
@@ -2198,7 +2203,7 @@ ALTER TABLE ONLY roles
 
 
 --
--- Name: slido_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: slido_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY slido_events
@@ -2206,7 +2211,7 @@ ALTER TABLE ONLY slido_events
 
 
 --
--- Name: taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: taggings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY taggings
@@ -2214,7 +2219,7 @@ ALTER TABLE ONLY taggings
 
 
 --
--- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY tags
@@ -2222,7 +2227,7 @@ ALTER TABLE ONLY tags
 
 
 --
--- Name: user_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: user_profiles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY user_profiles
@@ -2230,7 +2235,7 @@ ALTER TABLE ONLY user_profiles
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY users
@@ -2238,7 +2243,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: views_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: views_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY views
@@ -2246,7 +2251,7 @@ ALTER TABLE ONLY views
 
 
 --
--- Name: votes_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: votes_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY votes
@@ -2254,7 +2259,7 @@ ALTER TABLE ONLY votes
 
 
 --
--- Name: watchings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
+-- Name: watchings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY watchings
@@ -2262,1218 +2267,1218 @@ ALTER TABLE ONLY watchings
 
 
 --
--- Name: index_activities_on_action; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_action; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_activities_on_action ON activities USING btree (action);
 
 
 --
--- Name: index_activities_on_anonymous; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_anonymous; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_activities_on_anonymous ON activities USING btree (anonymous);
 
 
 --
--- Name: index_activities_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_activities_on_created_at ON activities USING btree (created_at);
 
 
 --
--- Name: index_activities_on_created_on; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_created_on; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_activities_on_created_on ON activities USING btree (created_on);
 
 
 --
--- Name: index_activities_on_initiator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_initiator_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_activities_on_initiator_id ON activities USING btree (initiator_id);
 
 
 --
--- Name: index_activities_on_resource_id_and_resource_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_resource_id_and_resource_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_activities_on_resource_id_and_resource_type ON activities USING btree (resource_id, resource_type);
 
 
 --
--- Name: index_activities_on_resource_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_activities_on_resource_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_activities_on_resource_type ON activities USING btree (resource_type);
 
 
 --
--- Name: index_answer_profiles_on_answer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answer_profiles_on_answer_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answer_profiles_on_answer_id ON answer_profiles USING btree (answer_id);
 
 
 --
--- Name: index_answer_revisions_on_answer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answer_revisions_on_answer_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answer_revisions_on_answer_id ON answer_revisions USING btree (answer_id);
 
 
 --
--- Name: index_answer_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answer_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answer_revisions_on_deleted ON answer_revisions USING btree (deleted);
 
 
 --
--- Name: index_answer_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answer_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answer_revisions_on_deletor_id ON answer_revisions USING btree (deletor_id);
 
 
 --
--- Name: index_answer_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answer_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answer_revisions_on_editor_id ON answer_revisions USING btree (editor_id);
 
 
 --
--- Name: index_answers_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answers_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answers_on_author_id ON answers USING btree (author_id);
 
 
 --
--- Name: index_answers_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answers_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answers_on_deleted ON answers USING btree (deleted);
 
 
 --
--- Name: index_answers_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answers_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answers_on_deletor_id ON answers USING btree (deletor_id);
 
 
 --
--- Name: index_answers_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answers_on_edited; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answers_on_edited ON answers USING btree (edited);
 
 
 --
--- Name: index_answers_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answers_on_question_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answers_on_question_id ON answers USING btree (question_id);
 
 
 --
--- Name: index_answers_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answers_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_answers_on_stack_exchange_uuid ON answers USING btree (stack_exchange_uuid);
 
 
 --
--- Name: index_answers_on_votes_difference; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answers_on_votes_difference; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answers_on_votes_difference ON answers USING btree (votes_difference);
 
 
 --
--- Name: index_answers_on_votes_lb_wsci_bp; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_answers_on_votes_lb_wsci_bp; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_answers_on_votes_lb_wsci_bp ON answers USING btree (votes_lb_wsci_bp);
 
 
 --
--- Name: index_assignments_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_assignments_on_category_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_assignments_on_category_id ON assignments USING btree (category_id);
 
 
 --
--- Name: index_assignments_on_role_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_assignments_on_role_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_assignments_on_role_id ON assignments USING btree (role_id);
 
 
 --
--- Name: index_assignments_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_assignments_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_assignments_on_user_id ON assignments USING btree (user_id);
 
 
 --
--- Name: index_assignments_on_user_id_and_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_assignments_on_user_id_and_category_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_assignments_on_user_id_and_category_id ON assignments USING btree (user_id, category_id);
 
 
 --
--- Name: index_attachments_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_attachments_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_attachments_on_author_id ON attachments USING btree (author_id);
 
 
 --
--- Name: index_attachments_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_attachments_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_attachments_on_deletor_id ON attachments USING btree (deletor_id);
 
 
 --
--- Name: index_categories_on_lft; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_on_lft; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_categories_on_lft ON categories USING btree (lft);
 
 
 --
--- Name: index_categories_on_lti_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_on_lti_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_categories_on_lti_id ON categories USING btree (lti_id);
 
 
 --
--- Name: index_categories_on_parent_id_and_uuid_and_lti_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_on_parent_id_and_uuid_and_lti_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_categories_on_parent_id_and_uuid_and_lti_id ON categories USING btree (parent_id, uuid, lti_id);
 
 
 --
--- Name: index_categories_on_rgt; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_on_rgt; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_categories_on_rgt ON categories USING btree (rgt);
 
 
 --
--- Name: index_categories_on_slido_username; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_on_slido_username; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_categories_on_slido_username ON categories USING btree (slido_username);
 
 
 --
--- Name: index_categories_questions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_categories_questions_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_categories_questions_on_deletor_id ON categories_questions USING btree (deletor_id);
 
 
 --
--- Name: index_changelogs_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_changelogs_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_changelogs_on_created_at ON changelogs USING btree (created_at);
 
 
 --
--- Name: index_changelogs_on_version; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_changelogs_on_version; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_changelogs_on_version ON changelogs USING btree (version);
 
 
 --
--- Name: index_comment_revisions_on_comment_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comment_revisions_on_comment_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comment_revisions_on_comment_id ON comment_revisions USING btree (comment_id);
 
 
 --
--- Name: index_comment_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comment_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comment_revisions_on_deleted ON comment_revisions USING btree (deleted);
 
 
 --
--- Name: index_comment_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comment_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comment_revisions_on_deletor_id ON comment_revisions USING btree (deletor_id);
 
 
 --
--- Name: index_comment_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comment_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comment_revisions_on_editor_id ON comment_revisions USING btree (editor_id);
 
 
 --
--- Name: index_comments_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comments_on_author_id ON comments USING btree (author_id);
 
 
 --
--- Name: index_comments_on_commentable_id_and_commentable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_commentable_id_and_commentable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comments_on_commentable_id_and_commentable_type ON comments USING btree (commentable_id, commentable_type);
 
 
 --
--- Name: index_comments_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comments_on_deleted ON comments USING btree (deleted);
 
 
 --
--- Name: index_comments_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comments_on_deletor_id ON comments USING btree (deletor_id);
 
 
 --
--- Name: index_comments_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_edited; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_comments_on_edited ON comments USING btree (edited);
 
 
 --
--- Name: index_comments_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_comments_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_comments_on_stack_exchange_uuid ON comments USING btree (stack_exchange_uuid);
 
 
 --
--- Name: index_context_users_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_context_users_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_context_users_on_user_id ON context_users USING btree (user_id);
 
 
 --
--- Name: index_document_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_document_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_document_revisions_on_deleted ON document_revisions USING btree (deleted);
 
 
 --
--- Name: index_document_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_document_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_document_revisions_on_deletor_id ON document_revisions USING btree (deletor_id);
 
 
 --
--- Name: index_document_revisions_on_document_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_document_revisions_on_document_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_document_revisions_on_document_id ON document_revisions USING btree (document_id);
 
 
 --
--- Name: index_document_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_document_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_document_revisions_on_editor_id ON document_revisions USING btree (editor_id);
 
 
 --
--- Name: index_documents_on_anonymous; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_documents_on_anonymous; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_documents_on_anonymous ON documents USING btree (anonymous);
 
 
 --
--- Name: index_documents_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_documents_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_documents_on_deletor_id ON documents USING btree (deletor_id);
 
 
 --
--- Name: index_documents_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_documents_on_edited; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_documents_on_edited ON documents USING btree (edited);
 
 
 --
--- Name: index_documents_on_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_documents_on_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_documents_on_group_id ON documents USING btree (group_id);
 
 
 --
--- Name: index_documents_on_questions_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_documents_on_questions_count; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_documents_on_questions_count ON documents USING btree (questions_count);
 
 
 --
--- Name: index_documents_on_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_documents_on_title; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_documents_on_title ON documents USING btree (title);
 
 
 --
--- Name: index_evaluation_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evaluation_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evaluation_revisions_on_deleted ON evaluation_revisions USING btree (deleted);
 
 
 --
--- Name: index_evaluation_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evaluation_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evaluation_revisions_on_deletor_id ON evaluation_revisions USING btree (deletor_id);
 
 
 --
--- Name: index_evaluation_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evaluation_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evaluation_revisions_on_editor_id ON evaluation_revisions USING btree (editor_id);
 
 
 --
--- Name: index_evaluation_revisions_on_evaluation_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evaluation_revisions_on_evaluation_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evaluation_revisions_on_evaluation_id ON evaluation_revisions USING btree (evaluation_id);
 
 
 --
--- Name: index_evaluations_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evaluations_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evaluations_on_author_id ON evaluations USING btree (author_id);
 
 
 --
--- Name: index_evaluations_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evaluations_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evaluations_on_deleted ON evaluations USING btree (deleted);
 
 
 --
--- Name: index_evaluations_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evaluations_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evaluations_on_deletor_id ON evaluations USING btree (deletor_id);
 
 
 --
--- Name: index_evaluations_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evaluations_on_edited; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evaluations_on_edited ON evaluations USING btree (edited);
 
 
 --
--- Name: index_evaluations_on_evaluable_id_and_evaluable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_evaluations_on_evaluable_id_and_evaluable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_evaluations_on_evaluable_id_and_evaluable_type ON evaluations USING btree (evaluable_id, evaluable_type);
 
 
 --
--- Name: index_events_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_events_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_events_on_created_at ON events USING btree (created_at);
 
 
 --
--- Name: index_favorites_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_favorites_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_favorites_on_deleted ON favorites USING btree (deleted);
 
 
 --
--- Name: index_favorites_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_favorites_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_favorites_on_deletor_id ON favorites USING btree (deletor_id);
 
 
 --
--- Name: index_favorites_on_favorer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_favorites_on_favorer_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_favorites_on_favorer_id ON favorites USING btree (favorer_id);
 
 
 --
--- Name: index_favorites_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_favorites_on_question_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_favorites_on_question_id ON favorites USING btree (question_id);
 
 
 --
--- Name: index_favorites_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_favorites_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_favorites_on_stack_exchange_uuid ON favorites USING btree (stack_exchange_uuid);
 
 
 --
--- Name: index_favorites_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_favorites_on_unique_key; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_favorites_on_unique_key ON favorites USING btree (favorer_id, question_id);
 
 
 --
--- Name: index_followings_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_followings_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_followings_on_deleted ON followings USING btree (deleted);
 
 
 --
--- Name: index_followings_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_followings_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_followings_on_deletor_id ON followings USING btree (deletor_id);
 
 
 --
--- Name: index_followings_on_followee_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_followings_on_followee_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_followings_on_followee_id ON followings USING btree (followee_id);
 
 
 --
--- Name: index_followings_on_follower_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_followings_on_follower_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_followings_on_follower_id ON followings USING btree (follower_id);
 
 
 --
--- Name: index_followings_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_followings_on_unique_key; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_followings_on_unique_key ON followings USING btree (follower_id, followee_id);
 
 
 --
--- Name: index_for_unique_category_questions; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_for_unique_category_questions; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_for_unique_category_questions ON categories_questions USING btree (question_id, category_id, shared_through_category_id);
 
 
 --
--- Name: index_group_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_group_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_group_revisions_on_deleted ON group_revisions USING btree (deleted);
 
 
 --
--- Name: index_group_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_group_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_group_revisions_on_deletor_id ON group_revisions USING btree (deletor_id);
 
 
 --
--- Name: index_group_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_group_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_group_revisions_on_editor_id ON group_revisions USING btree (editor_id);
 
 
 --
--- Name: index_group_revisions_on_group_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_group_revisions_on_group_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_group_revisions_on_group_id ON group_revisions USING btree (group_id);
 
 
 --
--- Name: index_groups_on_creator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_groups_on_creator_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_groups_on_creator_id ON groups USING btree (creator_id);
 
 
 --
--- Name: index_groups_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_groups_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_groups_on_deletor_id ON groups USING btree (deletor_id);
 
 
 --
--- Name: index_groups_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_groups_on_edited; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_groups_on_edited ON groups USING btree (edited);
 
 
 --
--- Name: index_groups_on_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_groups_on_title; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_groups_on_title ON groups USING btree (title);
 
 
 --
--- Name: index_labelings_on_answer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_labelings_on_answer_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_labelings_on_answer_id ON labelings USING btree (answer_id);
 
 
 --
--- Name: index_labelings_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_labelings_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_labelings_on_author_id ON labelings USING btree (author_id);
 
 
 --
--- Name: index_labelings_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_labelings_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_labelings_on_deleted ON labelings USING btree (deleted);
 
 
 --
--- Name: index_labelings_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_labelings_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_labelings_on_deletor_id ON labelings USING btree (deletor_id);
 
 
 --
--- Name: index_labelings_on_label_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_labelings_on_label_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_labelings_on_label_id ON labelings USING btree (label_id);
 
 
 --
--- Name: index_labelings_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_labelings_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_labelings_on_stack_exchange_uuid ON labelings USING btree (stack_exchange_uuid);
 
 
 --
--- Name: index_labelings_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_labelings_on_unique_key; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_labelings_on_unique_key ON labelings USING btree (answer_id, label_id, author_id);
 
 
 --
--- Name: index_labels_on_value; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_labels_on_value; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_labels_on_value ON labels USING btree (value);
 
 
 --
--- Name: index_lists_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_lists_on_category_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_lists_on_category_id ON lists USING btree (category_id);
 
 
 --
--- Name: index_lists_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_lists_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_lists_on_deleted ON lists USING btree (deleted);
 
 
 --
--- Name: index_lists_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_lists_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_lists_on_deletor_id ON lists USING btree (deletor_id);
 
 
 --
--- Name: index_lists_on_lister_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_lists_on_lister_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_lists_on_lister_id ON lists USING btree (lister_id);
 
 
 --
--- Name: index_mooc_category_contents_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_mooc_category_contents_on_category_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_mooc_category_contents_on_category_id ON mooc_category_contents USING btree (category_id);
 
 
 --
--- Name: index_notifications_on_action; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notifications_on_action; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_notifications_on_action ON notifications USING btree (action);
 
 
 --
--- Name: index_notifications_on_anonymous; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notifications_on_anonymous; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_notifications_on_anonymous ON notifications USING btree (anonymous);
 
 
 --
--- Name: index_notifications_on_created_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notifications_on_created_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_notifications_on_created_at ON notifications USING btree (created_at);
 
 
 --
--- Name: index_notifications_on_initiator_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notifications_on_initiator_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_notifications_on_initiator_id ON notifications USING btree (initiator_id);
 
 
 --
--- Name: index_notifications_on_recipient_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notifications_on_recipient_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_notifications_on_recipient_id ON notifications USING btree (recipient_id);
 
 
 --
--- Name: index_notifications_on_resource_id_and_resource_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notifications_on_resource_id_and_resource_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_notifications_on_resource_id_and_resource_type ON notifications USING btree (resource_id, resource_type);
 
 
 --
--- Name: index_notifications_on_resource_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notifications_on_resource_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_notifications_on_resource_type ON notifications USING btree (resource_type);
 
 
 --
--- Name: index_notifications_on_unread; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_notifications_on_unread; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_notifications_on_unread ON notifications USING btree (unread);
 
 
 --
--- Name: index_question_profiles_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_question_profiles_on_question_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_question_profiles_on_question_id ON question_profiles USING btree (question_id);
 
 
 --
--- Name: index_question_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_question_revisions_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_question_revisions_on_deleted ON question_revisions USING btree (deleted);
 
 
 --
--- Name: index_question_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_question_revisions_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_question_revisions_on_deletor_id ON question_revisions USING btree (deletor_id);
 
 
 --
--- Name: index_question_revisions_on_document_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_question_revisions_on_document_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_question_revisions_on_document_id ON question_revisions USING btree (document_id);
 
 
 --
--- Name: index_question_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_question_revisions_on_editor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_question_revisions_on_editor_id ON question_revisions USING btree (editor_id);
 
 
 --
--- Name: index_question_revisions_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_question_revisions_on_question_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_question_revisions_on_question_id ON question_revisions USING btree (question_id);
 
 
 --
--- Name: index_questions_on_anonymous; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_anonymous; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_anonymous ON questions USING btree (anonymous);
 
 
 --
--- Name: index_questions_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_author_id ON questions USING btree (author_id);
 
 
 --
--- Name: index_questions_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_category_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_category_id ON questions USING btree (category_id);
 
 
 --
--- Name: index_questions_on_closer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_closer_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_closer_id ON questions USING btree (closer_id);
 
 
 --
--- Name: index_questions_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_deleted ON questions USING btree (deleted);
 
 
 --
--- Name: index_questions_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_deletor_id ON questions USING btree (deletor_id);
 
 
 --
--- Name: index_questions_on_document_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_document_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_document_id ON questions USING btree (document_id);
 
 
 --
--- Name: index_questions_on_edited; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_edited; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_edited ON questions USING btree (edited);
 
 
 --
--- Name: index_questions_on_question_type_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_question_type_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_question_type_id ON questions USING btree (question_type_id);
 
 
 --
--- Name: index_questions_on_slido_question_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_slido_question_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_questions_on_slido_question_uuid ON questions USING btree (slido_question_uuid);
 
 
 --
--- Name: index_questions_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_questions_on_stack_exchange_uuid ON questions USING btree (stack_exchange_uuid);
 
 
 --
--- Name: index_questions_on_title; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_title; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_title ON questions USING btree (title);
 
 
 --
--- Name: index_questions_on_touched_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_touched_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_touched_at ON questions USING btree (touched_at);
 
 
 --
--- Name: index_questions_on_votes_difference; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_votes_difference; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_votes_difference ON questions USING btree (votes_difference);
 
 
 --
--- Name: index_questions_on_votes_lb_wsci_bp; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_questions_on_votes_lb_wsci_bp; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_questions_on_votes_lb_wsci_bp ON questions USING btree (votes_lb_wsci_bp);
 
 
 --
--- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_roles_on_name ON roles USING btree (name);
 
 
 --
--- Name: index_slido_events_on_category_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_slido_events_on_category_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_slido_events_on_category_id ON slido_events USING btree (category_id);
 
 
 --
--- Name: index_slido_events_on_ended_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_slido_events_on_ended_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_slido_events_on_ended_at ON slido_events USING btree (ended_at);
 
 
 --
--- Name: index_slido_events_on_started_at; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_slido_events_on_started_at; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_slido_events_on_started_at ON slido_events USING btree (started_at);
 
 
 --
--- Name: index_slido_events_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_slido_events_on_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_slido_events_on_uuid ON slido_events USING btree (uuid);
 
 
 --
--- Name: index_taggings_on_author_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_taggings_on_author_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_taggings_on_author_id ON taggings USING btree (author_id);
 
 
 --
--- Name: index_taggings_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_taggings_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_taggings_on_deleted ON taggings USING btree (deleted);
 
 
 --
--- Name: index_taggings_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_taggings_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_taggings_on_deletor_id ON taggings USING btree (deletor_id);
 
 
 --
--- Name: index_taggings_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_taggings_on_question_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_taggings_on_question_id ON taggings USING btree (question_id);
 
 
 --
--- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_taggings_on_tag_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_taggings_on_tag_id ON taggings USING btree (tag_id);
 
 
 --
--- Name: index_taggings_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_taggings_on_unique_key; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_taggings_on_unique_key ON taggings USING btree (question_id, tag_id, author_id);
 
 
 --
--- Name: index_tags_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_tags_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_tags_on_name ON tags USING btree (name);
 
 
 --
--- Name: index_tags_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_tags_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_tags_on_stack_exchange_uuid ON tags USING btree (stack_exchange_uuid);
 
 
 --
--- Name: index_user_profiles_on_targetable_id_and_targetable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_user_profiles_on_targetable_id_and_targetable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_user_profiles_on_targetable_id_and_targetable_type ON user_profiles USING btree (targetable_id, targetable_type);
 
 
 --
--- Name: index_user_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_user_profiles_on_user_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_user_profiles_on_user_id ON user_profiles USING btree (user_id);
 
 
 --
--- Name: index_users_on_ais_login; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_ais_login; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_ais_login ON users USING btree (ais_login);
 
 
 --
--- Name: index_users_on_ais_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_ais_uid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_ais_uid ON users USING btree (ais_uid);
 
 
 --
--- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_confirmation_token; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_confirmation_token ON users USING btree (confirmation_token);
 
 
 --
--- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_email ON users USING btree (email);
 
 
 --
--- Name: index_users_on_facebook_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_facebook_uid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_facebook_uid ON users USING btree (facebook_uid);
 
 
 --
--- Name: index_users_on_first; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_first; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_first ON users USING btree (first);
 
 
 --
--- Name: index_users_on_last; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_last; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_last ON users USING btree (last);
 
 
 --
--- Name: index_users_on_login; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_login; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_login ON users USING btree (login);
 
 
 --
--- Name: index_users_on_middle; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_middle; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_middle ON users USING btree (middle);
 
 
 --
--- Name: index_users_on_name; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_name ON users USING btree (name);
 
 
 --
--- Name: index_users_on_nick; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_nick; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_nick ON users USING btree (nick);
 
 
 --
--- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
 
 
 --
--- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_role; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_users_on_role ON users USING btree (role);
 
 
 --
--- Name: index_users_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_stack_exchange_uuid ON users USING btree (stack_exchange_uuid);
 
 
 --
--- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_users_on_unlock_token; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_users_on_unlock_token ON users USING btree (unlock_token);
 
 
 --
--- Name: index_views_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_views_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_views_on_deleted ON views USING btree (deleted);
 
 
 --
--- Name: index_views_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_views_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_views_on_deletor_id ON views USING btree (deletor_id);
 
 
 --
--- Name: index_views_on_question_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_views_on_question_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_views_on_question_id ON views USING btree (question_id);
 
 
 --
--- Name: index_views_on_viewer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_views_on_viewer_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_views_on_viewer_id ON views USING btree (viewer_id);
 
 
 --
--- Name: index_votes_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_votes_on_deleted ON votes USING btree (deleted);
 
 
 --
--- Name: index_votes_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_votes_on_deletor_id ON votes USING btree (deletor_id);
 
 
 --
--- Name: index_votes_on_positive; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_positive; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_votes_on_positive ON votes USING btree (positive);
 
 
 --
--- Name: index_votes_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_votes_on_stack_exchange_uuid ON votes USING btree (stack_exchange_uuid);
 
 
 --
--- Name: index_votes_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_unique_key; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_votes_on_unique_key ON votes USING btree (voter_id, votable_id, votable_type, stack_exchange_uuid);
 
 
 --
--- Name: index_votes_on_votable_id_and_votable_type_and_positive; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_votable_id_and_votable_type_and_positive; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_votes_on_votable_id_and_votable_type_and_positive ON votes USING btree (votable_id, votable_type, positive);
 
 
 --
--- Name: index_votes_on_voter_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_votes_on_voter_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_votes_on_voter_id ON votes USING btree (voter_id);
 
 
 --
--- Name: index_watchings_on_deleted; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_watchings_on_deleted; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_watchings_on_deleted ON watchings USING btree (deleted);
 
 
 --
--- Name: index_watchings_on_deletor_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_watchings_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_watchings_on_deletor_id ON watchings USING btree (deletor_id);
 
 
 --
--- Name: index_watchings_on_unique_key; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_watchings_on_unique_key; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_watchings_on_unique_key ON watchings USING btree (watcher_id, watchable_id, watchable_type, context);
 
 
 --
--- Name: index_watchings_on_watchable_id_and_watchable_type; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_watchings_on_watchable_id_and_watchable_type; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_watchings_on_watchable_id_and_watchable_type ON watchings USING btree (watchable_id, watchable_type);
 
 
 --
--- Name: index_watchings_on_watcher_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: index_watchings_on_watcher_id; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_watchings_on_watcher_id ON watchings USING btree (watcher_id);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
@@ -3483,7 +3488,7 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user",public;
+SET search_path TO "$user", public;
 
 INSERT INTO schema_migrations (version) VALUES ('20131012150605');
 
@@ -3850,4 +3855,6 @@ INSERT INTO schema_migrations (version) VALUES ('20161119140437');
 INSERT INTO schema_migrations (version) VALUES ('20170115175555');
 
 INSERT INTO schema_migrations (version) VALUES ('20170203140643');
+
+INSERT INTO schema_migrations (version) VALUES ('20170602121937');
 
