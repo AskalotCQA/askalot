@@ -10,7 +10,6 @@ class QuestionsController < ApplicationController
   include Shared::Events::Dispatch
   include Shared::Markdown::Process
   include Shared::Watchings::Register
-  include Shared::Dashboard::Questions
 
   default_tab :recent,  only: :index
   default_tab :results, only: :search
@@ -26,7 +25,7 @@ class QuestionsController < ApplicationController
       dispatch_event :create, @list, for: @category.watchers
     end
 
-    @questions = questions_by_dashboard_param(params[:from_dashboard].to_sym, @context_id, current_user) if params[:from_dashboard]
+    @questions = Shared::Dashboard::DashboardService.questions_by_dashboard_param(params[:from_dashboard].to_sym, @context_id, current_user) if params[:from_dashboard]
     @questions = Shared::Question.in_context(@context_id) unless params[:from_dashboard]
 
     @questions_controls_scope = @questions
