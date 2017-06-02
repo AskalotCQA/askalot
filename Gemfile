@@ -105,13 +105,13 @@ group :development do
   gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
   gem 'rvm-capistrano', require: false
   gem 'bump', github: 'pavolzbell/bump'
-  gem 'byebug'
 end
 
 group :development, :test do
   # debugging
   gem 'pry'
   gem 'hirb'
+  gem 'byebug'
 
   # testing
   gem 'rspec-rails', '~> 3.5'
