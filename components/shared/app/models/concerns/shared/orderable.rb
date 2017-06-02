@@ -7,7 +7,7 @@ module Shared::Orderable
       # TODO allow other attributes
       types = params.values.flatten.map(&:class).uniq
 
-      raise ArgumentError.new('Only numeric data allowed') unless types.empty? || types == [Fixnum]
+      raise ArgumentError.new('Only numeric data allowed') unless types.empty? || types == [Integer]
 
       params.inject(self) do |relation, (attribute, values)|
         next if values.empty?
