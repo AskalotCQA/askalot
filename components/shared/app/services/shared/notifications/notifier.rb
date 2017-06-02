@@ -28,15 +28,17 @@ module Shared::Notifications
     private
 
     def too_new_since_resource_creation?(resource)
-      (Time.current - resource.created_at) < 300 # 300 seconds
+      (Time.now - resource.created_at) < 300 # 300 seconds
     end
 
     def too_new_since_last_notification?(resource)
+      return false if resource.notifications.nil?
+
       last_notification = resource.notifications.where(action: :update).order(created_at: :desc).first
 
       return false if last_notification.nil?
 
-      (Time.current - last_notification.created_at) < 60
+      (Time.now - last_notification.created_at) < 90
     end
   end
 end
