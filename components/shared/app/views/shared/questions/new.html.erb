@@ -71,6 +71,12 @@
         <label class="btn btn-primitive btn-sm">
           <%= f.check_box :anonymous %> <%= Shared::Question.human_attribute_name :anonymous %> <%= icon_tag :'square-o' %>
         </label>
+
+        <% if current_user.role?(:teacher) || current_user.role?(:administrator) && Rails.module.university? %>
+            <label class="btn btn-primitive btn-sm">
+              <%= check_box_tag :slido %> <%= t 'question.new.slido' %> <%= icon_tag :'square-o' %>
+            </label>
+        <% end %>
       </div>
     <% end %>
   </div>

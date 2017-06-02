@@ -39,6 +39,7 @@ en:
       forum: "Start a discussion"
       same_category_link: "ask a question in the same category."
       same_category: "Browse questions tagged"
+      slido: 'Add as slido'
 
     create:
       success: "Question was successfully added."
