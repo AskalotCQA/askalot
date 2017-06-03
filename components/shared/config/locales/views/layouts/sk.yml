@@ -19,9 +19,11 @@ sk:
 
     dashboard:
       activities: Aktivita
+      activities_in_followed: Aktivita v nasledovaných kategóriách
       news: Novinky
-      new_news: Nová
-      more_new_news: Nové
+      all_news: Všetky novinky
+      new_news: Novinka
+      more_new_news: Novinka
       new_questions:
         one: nová otázka
         few: nové otázky
@@ -35,18 +37,19 @@ sk:
         few: nové komentáre
         other: nových komentárov
       new_questions_in_watched_categories:
-        one: nová otázka v sledovaných kategóriach
-        few: nové otázok v sledovaných kategóriach
-        other: nových otázok v sledovaných kategóriach
+        one: nová otázka
+        few: nové otázok
+        other: nových otázok
       new_answers_in_watched_categories:
-        one: nová odpoveď v sledovaných kategóriach
-        few: nové odpovede v sledovaných kategóriach
-        other: nových odpovedí v sledovaných kategóriach
+        one: nová odpoveď
+        few: nové odpovede
+        other: nových odpovedí
       new_comments_in_watched_categories:
-        one: nový komentár v sledovaných kategóriach
-        few: nové komentáre v sledovaných kategóriach
-        other: nových komentárov v sledovaných kategóriach
+        one: nový komentár
+        few: nové komentáre
+        other: nových komentárov
       show_activities: Zobraziť všetky aktivity
+      show_activities_in_followed: Zobraziť všetky aktivity v sledovaných kategóriách
       no_activity: "Nebola zaznamenaná žiadna aktivita od vášho posledného prihlásenia %{date}."
       description: "Tieto aktivity sa udiali v Askalote od vášho posledného prihlásenia %{date}."
 

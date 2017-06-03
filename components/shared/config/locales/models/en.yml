@@ -350,6 +350,7 @@ en:
         hide_email: "Hide e-mail from other users"
 
         send_email_notifications: "Send e-mail notifications"
+        prefered_activity_tab: "Prefered activity tab on dashboard"
 
     symbolizes:
       shared/question_type:

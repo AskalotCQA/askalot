@@ -7,7 +7,7 @@
         <%= pill_link_tag t('user.profile'), :profile, shared.edit_user_registration_path(tab: :profile), analytics_attributes(:account, :switch, :profile) %>
         <%= pill_link_tag t('user.notifications'), :notifications, shared.edit_user_registration_path(tab: :notifications), analytics_attributes(:account, :switch, :notifications) %>
         <%= pill_link_tag t('user.social'),  :social,  shared.edit_user_registration_path(tab: :social),  analytics_attributes(:account, :switch, :social) %>
-        <%= pill_link_tag t('user.privacy'), :privacy, shared.edit_user_registration_path(tab: :privacy), analytics_attributes(:account, :switch, :privacy) %>
+        <%= pill_link_tag t('user.preferences'), :preferences, shared.edit_user_registration_path(tab: :preferences), analytics_attributes(:account, :switch, :preferences) %>
         <%= pill_link_tag t('user.account'), :account, shared.edit_user_registration_path(tab: :account), analytics_attributes(:account, :switch, :account) %>
       </ul>
     </div>
@@ -16,7 +16,7 @@
         <%= render_tab_content 'edit_profile',       :profile %>
         <%= render_tab_content 'edit_notifications', :notifications %>
         <%= render_tab_content 'edit_social',        :social %>
-        <%= render_tab_content 'edit_privacy',       :privacy %>
+        <%= render_tab_content 'edit_preferences',   :preferences %>
         <%= render_tab_content 'edit_account',       :account %>
       </div>
     </div>

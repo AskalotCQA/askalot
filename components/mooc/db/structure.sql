@@ -98,7 +98,8 @@ CREATE TABLE answer_profiles (
     probability double precision,
     source character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    text_value text
 );
 
 
@@ -1065,7 +1066,10 @@ CREATE TABLE notifications (
     updated_at timestamp without time zone NOT NULL,
     read_at timestamp without time zone,
     anonymous boolean DEFAULT false NOT NULL,
-    context integer
+    context integer,
+    from_dashboard boolean DEFAULT false,
+    feedback_expertise integer,
+    feedback_willigness integer
 );
 
 
@@ -1100,7 +1104,8 @@ CREATE TABLE question_profiles (
     probability double precision,
     source character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    text_value text
 );
 
 
@@ -1422,7 +1427,8 @@ CREATE TABLE user_profiles (
     probability double precision,
     source character varying(255),
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    text_value text
 );
 
 
@@ -1520,6 +1526,10 @@ CREATE TABLE users (
     attachments_count integer,
     lists_count integer DEFAULT 0 NOT NULL,
     send_facebook_notifications boolean
+    send_mail_notifications_frequency character varying DEFAULT 'daily'::character varying,
+    last_mail_notification_sent_at timestamp without time zone,
+    mail_notification_delay integer DEFAULT 0,
+    prefered_activity_tab character varying DEFAULT 'all'::character varying
 );
 
 
@@ -3844,17 +3854,35 @@ INSERT INTO schema_migrations (version) VALUES ('20160930145553');
 
 INSERT INTO schema_migrations (version) VALUES ('20161004171530');
 
+INSERT INTO schema_migrations (version) VALUES ('20161006214540');
+
 INSERT INTO schema_migrations (version) VALUES ('20161014154617');
 
 INSERT INTO schema_migrations (version) VALUES ('20161014155314');
 
+INSERT INTO schema_migrations (version) VALUES ('20161106125632');
+
+INSERT INTO schema_migrations (version) VALUES ('20161106171609');
+
+INSERT INTO schema_migrations (version) VALUES ('20161106171728');
+
 INSERT INTO schema_migrations (version) VALUES ('20161110161857');
 
+INSERT INTO schema_migrations (version) VALUES ('20161115200549');
+
 INSERT INTO schema_migrations (version) VALUES ('20161119140437');
+
+INSERT INTO schema_migrations (version) VALUES ('20161122154704');
+
+INSERT INTO schema_migrations (version) VALUES ('20161202180133');
 
 INSERT INTO schema_migrations (version) VALUES ('20170115175555');
 
 INSERT INTO schema_migrations (version) VALUES ('20170203140643');
 
 INSERT INTO schema_migrations (version) VALUES ('20170602121937');
+
+INSERT INTO schema_migrations (version) VALUES ('20170602193255');
+
+INSERT INTO schema_migrations (version) VALUES ('20170603164809');
 

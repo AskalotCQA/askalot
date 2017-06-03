@@ -1,0 +1,21 @@
+<div class="links row">
+  <%= dashboard_link 'question-circle  fa-fw', @new_questions_watched, t('home.dashboard.new_questions_in_watched_categories', count: @new_questions_watched), questions_path(from_dashboard: 'new_questions_in_watched_categories'), 'link-icon-questions-followed' %>
+  <%= dashboard_link 'exclamation-circle fa-fw', @new_answers_watched, t('home.dashboard.new_answers_in_watched_categories', count: @new_answers_watched), questions_path(from_dashboard: 'new_answers_in_watched_categories'), 'link-icon-answers-followed' %>
+  <%= dashboard_link 'comments-o fa-fw', @new_comments_watched, t('home.dashboard.new_comments_in_watched_categories', count: @new_comments_watched), questions_path(from_dashboard: 'new_comments_in_watched_categories'), 'link-icon-comments-followed' %>
+</div>
+
+<% if activities.any? %>
+    <%= render 'shared/static_pages/dashboard/grouped_activities', activities: activities %>
+<% else %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-info">
+        <% if Shared::Activities::ActivitiesFilter.categories_in_watched_contexts(current_user).empty? %>
+          <%= t('activity.none.followed_categories') %>
+        <% else %>
+          <%= t('home.dashboard.no_activity', date: l(current_user.dashboard_last_sign_in_at, format: :dashboard)).html_safe %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

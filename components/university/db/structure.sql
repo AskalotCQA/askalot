@@ -2,6 +2,7 @@
 -- PostgreSQL database dump
 --
 
+
 -- Dumped from database version 9.5.7
 -- Dumped by pg_dump version 9.5.7
 
@@ -1754,7 +1755,11 @@ CREATE TABLE users (
     dashboard_last_sign_in_at timestamp without time zone DEFAULT now(),
     attachments_count integer,
     lists_count integer DEFAULT 0 NOT NULL,
-    send_facebook_notifications boolean
+    send_facebook_notifications boolean,
+    send_mail_notifications_frequency character varying DEFAULT 'daily'::character varying,
+    last_mail_notification_sent_at timestamp without time zone,
+    mail_notification_delay integer DEFAULT 0,
+    prefered_activity_tab character varying DEFAULT 'all'::character varying
 );
 
 
@@ -4281,6 +4286,10 @@ INSERT INTO schema_migrations (version) VALUES ('20170115175555');
 INSERT INTO schema_migrations (version) VALUES ('20170203140643');
 
 INSERT INTO schema_migrations (version) VALUES ('20170602121937');
+
+INSERT INTO schema_migrations (version) VALUES ('20170602193255');
+
+INSERT INTO schema_migrations (version) VALUES ('20170603164809');
 
 INSERT INTO schema_migrations (version) VALUES ('20170602134212');
 

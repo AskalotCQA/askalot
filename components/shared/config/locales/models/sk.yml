@@ -363,6 +363,7 @@ sk:
 
         send_email_notifications: "Zasielať e-mailové notifikácie"
         send_facebook_notifications: "Zasielať facebookové notifikácie"
+        prefered_activity_tab: "Preferovaný zoznam aktivít na nástenke"
 
     symbolizes:
       shared/question_type:

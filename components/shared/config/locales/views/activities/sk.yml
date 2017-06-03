@@ -16,6 +16,7 @@ sk:
     none:
       global: "Žiadna aktivita."
       followees: "Zatiaľ nenasledujete žiadneho používateľa."
+      followed_categories: "Zatiaľ nenasledujete žiadne kategórie."
 
     note:
       global: "Zobrazená aktivita zahŕňa pridania, úpravy a zmazania otázok, odpovedí a ich označení, komentárov a hodnotení všetkými používateľmi."

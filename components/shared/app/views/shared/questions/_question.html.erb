@@ -1,19 +1,7 @@
 <li>
   <div class="row">
     <div class="col-xs-12 col-sm-push-2 col-sm-8 col-md-push-3 col-md-7">
-      <div class="question-preview">
-        <h4>
-          <%= question_type_icon   question.question_type %>
-          <%= evaluation_badge_tag question, placement: :bottom if question.evaluations.any? %>
-          <%= link_to_question question, length: 120 %>
-        </h4>
-
-        <%= render 'shared/questions/labels', labels: question.labels %>
-
-        <div class="question-content">
-          <%= question_text_preview question, length: 250 %>
-        </div>
-      </div>
+      <%= render 'shared/questions/question_preview', question: question %>
     </div>
 
     <div class="col-xs-8 col-sm-pull-8 col-sm-2 col-md-pull-7 col-md-3">
