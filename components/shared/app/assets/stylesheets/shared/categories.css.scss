@@ -21,6 +21,7 @@
 
 .categories-tree .category-description {
   margin-top: 0px;
+  padding-bottom: 5px;
 }
 
 // collection
@@ -62,6 +63,10 @@
         margin-top: 0;
       }
 
+      > div > h4 {
+        font-size: 22px;
+      }
+
       > ul {
         @extend .list-unstyled;
 
@@ -77,8 +82,15 @@
             margin-left: 30px;
 
             > li {
+              font-size: 13px;
+              max-width: 305px;
+              vertical-align: top;
               margin-right: 20px;
               margin-bottom: 10px;
+
+              > div > h4  {
+                font-size: 15px;
+              }
             }
           }
         }
@@ -87,6 +99,6 @@
   }
 
   h4 {
-    margin-bottom: 0;
+    margin-bottom: 3px;
   }
 }
