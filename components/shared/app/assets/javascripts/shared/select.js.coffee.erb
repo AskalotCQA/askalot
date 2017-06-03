@@ -49,6 +49,20 @@ class window.Select extends Module
           page: page - 1
         results: (data, page) ->
           data
+    categories_with_metadata:
+      formatResult: (category) ->
+        originalOption = category.element
+        markup = '<span>' + category.text + ' '
+        markup += $(originalOption).data('icon') if (typeof $(originalOption).data('icon') != 'undefined')
+        markup += '</span>'
+      formatSelection: (category) ->
+        originalOption = category.element
+        markup = '<span>' + category.text + ' '
+        markup += $(originalOption).data('icon') if (typeof $(originalOption).data('icon') != 'undefined')
+        markup += '</span>'
+      matcher: (term, text, option) ->
+        removeDiacritics(text.toLowerCase()).indexOf(removeDiacritics(term.toLowerCase()))>=0 || removeDiacritics($(option).data("description").toLowerCase()).indexOf(removeDiacritics(term.toLowerCase()))>=0
+
     filter:
       createSearchChoice: (term, data) -> return if data.length == 0
 

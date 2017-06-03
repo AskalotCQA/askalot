@@ -273,7 +273,7 @@ sk:
         name: "Názov"
         uuid: "UUID"
         tags: "Tagy"
-        shared: "Zobraziť otázky aj v ostatných súvisiacich kategóriach"
+        shared: "Zobraziť otázky aj z ostatných súvisiacich kategóriach"
         askable: "Otázky môžu byť položené priamo v tejto kategórii"
         teacher_assistants: "Asistenti učiteľa"
         copy: "Kategória bude skopírovaná do vybranej rodičovskej kateǵorie"
