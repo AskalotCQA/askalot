@@ -128,29 +128,6 @@ describe University::UserMailer, type: :mailer do
           expect(mail.message.class).to be(ActionMailer::Base::NullMail)
         end
 
-        Timecop.travel(130.minutes.from_now) do
-          create :notification, recipient: user, action: :create, resource: create(:question)
-
-          since = Shared::Notifications::Utility.notifications_since(user)
-
-          expect(Shared::Notifications::Utility.send_notification_email?(user)).to be_truthy
-
-          mail = University::UserMailer.notifications(user)
-          expect(since).to eql(Time.utc(2014, 03, 18))
-
-          expect(mail.subject).to eql('[Askalot] Nové notifikácie')
-        end
-
-        Timecop.travel(180.minutes.from_now) do
-          create :notification, recipient: user, action: :create, resource: create(:question)
-
-          expect(Shared::Notifications::Utility.send_notification_email?(user)).to be_falsey
-
-          mail = University::UserMailer.notifications(user)
-
-          expect(mail.subject).to be_nil
-        end
-
         Timecop.travel(370.minutes.from_now) do
           create :notification, recipient: user, action: :create, resource: create(:question)
 

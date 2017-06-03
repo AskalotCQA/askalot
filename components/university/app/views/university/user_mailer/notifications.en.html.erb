@@ -16,6 +16,12 @@
   <% end %>
 </ol>
 
+<% if @user.mail_notification_delay != 0 %>
+  <p class="text-muted">
+    Your notifications were sent <%= Shared::Configuration.mailer.notification_delay %> hours after the last email because you have not read all your notification in the last <%= Shared::Configuration.mailer.check_unread_notifications_hours %> hours yet.
+  </p>
+<% end %>
+
 <p>
   <%= link_to "Show unread notifications", shared.notifications_url(tab: :unread) %>
   <span class="text-muted">&middot;</span>

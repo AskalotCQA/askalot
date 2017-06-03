@@ -24,6 +24,12 @@
   <% end %>
 </ul>
 
+<% if @user.mail_notification_delay != 0 %>
+  <p class="text-muted">
+    Notifikácie Vám boli poslané <%= Shared::Configuration.mailer.notification_delay %> hodiny od posledného e-mailu, pretože za posledných <%= Shared::Configuration.mailer.check_unread_notifications_hours %> hodín máte niektoré neprečítané notifikácie.
+  </p>
+<% end %>
+
 <p>
   <%= link_to "Zobraziť neprečítané notifikácie", @contexts[0].try(:askalot_page_url) + '#' + shared.notifications_url(tab: :unread) %>
   <span class="text-muted">&middot;</span>
