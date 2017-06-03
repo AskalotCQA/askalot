@@ -27,7 +27,7 @@ module Shared::FormHelper
     options.merge! include_blank: true
     html_options.deep_merge! class: :'form-control', data: { as: :select2, role: grouped ? :categories_with_metadata : :categories }
 
-    grouped_collection_select(id, collection, :leaves_with_metadata, label, ->(el){el.first.id}, ->(el){el.first.full_public_name}, options, html_options) if grouped
+    return grouped_collection_select(id, collection, :leaves_with_metadata, label, ->(el){el.first.id}, ->(el){el.first.full_public_name}, options, html_options) if grouped
     collection_select(id, collection, value, label, options, html_options) unless grouped
   end
 
