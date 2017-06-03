@@ -49,7 +49,7 @@ class window.Select extends Module
           page: page - 1
         results: (data, page) ->
           data
-    categories:
+    categories_with_metadata:
       formatResult: (category) ->
         originalOption = category.element
         markup = '<span>' + category.text + ' '
