@@ -20,7 +20,9 @@ module Shared::DashboardHelper
   end
 
   def active_tab_class(user, tab)
-    if tab == :activites
+    if tab == :activites && user.prefered_activity_tab == 'all'
+      return 'active'
+    elsif tab == :'activities-in-followed' && user.prefered_activity_tab == 'followed_categories'
       return 'active'
     end
 

@@ -76,7 +76,7 @@ sk:
     profile: "Profil"
     notifications: "Notifikácie"
     social: "Sociálne siete"
-    privacy: "Súkromie"
+    preferences: "Preferencie"
     account: "Účet"
 
     show:
@@ -103,8 +103,11 @@ sk:
       profile: "Úprava profilu"
       notifications: "Správa notifikácii"
       social: "Sociálne siete"
-      privacy: "Správa súkromia"
+      preferences: "Preferencie"
       account: "Nastavenia účtu"
+      prefered_activity_tab:
+        all: "Všetky aktivity"
+        followed_categories: "Aktivity v nasledovaných kategóriách"
 
     update:
       success: "Úspešne ste aktualizovali Váš profil."
