@@ -23,21 +23,11 @@ module Shared::FormHelper
     collection_select(id, collection, value, label, options, html_options)
   end
 
-  def category_collection_select(id, collection = Shared::Category.askable.includes(:assignments).order(:name), value = :id, label = :name_with_teacher_supported, options = {}, html_options = {})
-    tags = collection.inject({}) do |hash, category|
-      hash[category.send :id] = category.effective_tags
-      hash
-    end
-
-    descriptions = collection.inject({}) do |hash, category|
-      hash[category.send :id] = category.description
-      hash
-    end
-
+  def category_collection_select(id, collection = Shared::Category.askable.includes(:assignments).order(:name), value = :id, label = :full_public_name, options = {}, html_options = {})
     options.merge! include_blank: true
-    html_options.deep_merge! class: :'form-control', data: { as: :select2, values: tags, descriptions: descriptions }
+    html_options.deep_merge! class: :'form-control', data: { as: :select2, role: :categories }
 
-    collection_select(id, collection, value, label, options, html_options)
+    grouped_collection_select(id, collection, :leaves_with_metadata, label, ->(el){el.first.id}, ->(el){el.first.full_public_name}, options, html_options)
   end
 
   def role_collection_select(id, collection = Shared::Role.all.order(:name), value = :id, label = :name, options = {}, html_options = {})

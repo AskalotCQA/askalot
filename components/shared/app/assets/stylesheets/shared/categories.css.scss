@@ -14,8 +14,13 @@
 
 .category-description {
   color: $gray;
-  padding-top: 3px;
-  padding-bottom: 4px;
+  font-style: italic;
+  margin-top: -10px;
+  padding-bottom: 15px;
+}
+
+.categories-tree .category-description {
+  margin-top: 0px;
 }
 
 // collection

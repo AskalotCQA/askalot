@@ -37,11 +37,10 @@ $(document).ready ->
   # Callbacks for default category tags
   select = new Select.of('#question_category_id')
   select.on 'change', (event) ->
-    value = event.added.id
-
-    tags = JSON.parse(select.attr('data-values'))
-    html = templates['questions/category_tags'](tags: tags[value])
+    originalOption = $('#question_category_id option[value="' + event.val  + '"]')
+    html = templates['questions/category_tags'](tags: originalOption.data('tags'))
     $('ul#question-category-tags').html(html)
 
-    descriptions = JSON.parse(select.attr('data-descriptions'))
-    $('.category-description').html(descriptions[value])
+    $('.category-description').html(originalOption.data('description'))
+
+    $('.tooltip').remove()

@@ -35,6 +35,13 @@ window.fixes = ->
   $('[data-toggle="buttons"] [checked="checked"]').parent().addClass('active')
   $('[data-toggle="popover"]').popover(container: 'body')
   $('[data-toggle="tooltip"]').tooltip(container: 'body')
+
+  # To bind tooltip also for dynamically created elements (e.g. in select2 for category selection)
+  $('body').tooltip({
+    selector: '[data-toggle="tooltip"]',
+    container: 'body'
+  })
+
   $('[data-toggle="tooltip"]').on 'show.bs.tooltip', -> $(this).removeAttr('title')
 
   $('[data-toggle="buttons"] label').on 'click', ->
