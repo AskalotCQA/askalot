@@ -261,7 +261,7 @@ en:
         name: "Name"
         uuid: "UUID"
         tags: "Tags"
-        shared: "Show questions also in other related categories"
+        shared: "Show questions also from other related categories"
         askable: "Questions can be asked directly in this category"
         teacher_assistants: "Teacher assistants"
         copy: "Category will be copied to specified category"

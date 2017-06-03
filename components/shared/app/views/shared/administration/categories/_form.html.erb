@@ -28,7 +28,7 @@
 
   <div class="form-group">
     <%= f.label :parent_id, t('administration.category.create.parent') %>
-    <%= f.category_collection_select :parent_id, Shared::Category.order(:depth, :name).all, :id, :full_tree_name %>
+    <%= f.category_collection_select :parent_id, Shared::Category.order(:depth, :name).all, false, :id, :full_tree_name %>
   </div>
 
   <% if Rails.module.mooc? %>

@@ -16,7 +16,7 @@ module University
       @question.category      = @category
       @question.question_type = Shared::QuestionType.questions.first
 
-      @questions = @category.questions.order(touched_at: :desc)
+      @questions = @category.related_questions.order(touched_at: :desc)
       @questions = @questions.page(params[:page]).per(20)
     end
 

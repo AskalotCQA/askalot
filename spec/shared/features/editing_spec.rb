@@ -1,14 +1,15 @@
 require 'spec_helper'
 
 describe 'Editing', type: :feature do
+  let(:author)          { create :user }
   let(:user)            { create :user }
   let(:user2)           { create :user }
   let(:teacher)         { create :teacher }
-  let!(:question)       { create :question, :with_tags, title: 'Elasticsearch prablem' }
-  let!(:answer_user)    { create :answer, question: question, author: question.author }
-  let!(:answer_teacher) { create :answer, question: question, author: teacher }
-  let!(:answer_user2)   { create :answer, question: question, author: user2 }
-  let!(:comment)        { create :comment, commentable: question, author: question.author }
+  let!(:question)       { create :question, :with_tags, author: author, title: 'Elasticsearch prablem', created_at: Time.now - 10.minutes }
+  let!(:answer_user)    { create :answer, question: question, author: question.author, created_at: Time.now - 10.minutes  }
+  let!(:answer_teacher) { create :answer, question: question, author: teacher, created_at: Time.now - 10.minutes  }
+  let!(:answer_user2)   { create :answer, question: question, author: user2, created_at: Time.now - 10.minutes  }
+  let!(:comment)        { create :comment, commentable: question, author: question.author, created_at: Time.now - 10.minutes  }
   let(:administrator)   { create :administrator }
 
   context 'when question has no evaluation' do
@@ -122,6 +123,8 @@ describe 'Editing', type: :feature do
     let!(:watching)       { create :watching, watcher: user_watcher, watchable: category }
 
     it 'sends notification to new watchers' do
+      question.update(created_at: Time.now - 10.minutes)
+
       login_as question.author
 
       visit shared.question_path question

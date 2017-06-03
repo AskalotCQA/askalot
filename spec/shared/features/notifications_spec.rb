@@ -359,7 +359,7 @@ describe 'Notifications', type: :feature do
       expect(notifications.size).to eq(2)
 
       within "#dropdown-notification-#{notification_1.id}" do
-        all('.btn-xs.pull-right')[0].click
+        all('.btn-xs.pull-right')[0].trigger('click')
       end
 
       expect(page).to have_css('.notification-read')

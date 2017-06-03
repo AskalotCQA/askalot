@@ -63,8 +63,7 @@ class QuestionsController < ApplicationController
     if params[:slido]
       old_user      = current_user
       slido         = Shared::User.where(login: 'slido').first
-      current_user  = slido
-      @current_user = current_user
+      @current_user = slido
     end
 
     @question = Shared::Question.new(create_params)
@@ -72,12 +71,16 @@ class QuestionsController < ApplicationController
     authorize! :ask, @question
 
     if params[:attachments]
-      params[:attachments].each { |a| @question.attachments.new(file: a, author: current_user) }
+      params[:attachments].each { |a| @question.attachments.new({file: a}.merge(author: current_user)) }
     end
 
     if @question.save
       process_markdown_for @question do |user|
         dispatch_event :mention, @question, for: user
+      end
+
+      if params[:slido]
+        @current_user = old_user
       end
 
       # TODO (zbell) refactor: do not compose watchers here
@@ -93,7 +96,6 @@ class QuestionsController < ApplicationController
       prefix = request.referrer.include?('third_party') ? '/third_party' : ''
 
       if params[:slido]
-        current_user  = old_user
         @current_user = old_user
       end
 
