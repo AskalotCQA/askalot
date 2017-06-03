@@ -37,7 +37,7 @@
       <h3><%= t 'category.navigation' %></h3>
       <ul class="nav">
         <% visible_depth = Shared::CategoryDepth.visible_depths.first %>
-        <% categories.each do |category| %>
+        <% categories.sort_by(&:full_tree_name).each do |category| %>
           <% if category.depth == visible_depth %>
             <li>
               <%= link_to category.name, "##{tab.to_s}-#{category.id}", analytics_attributes(:categories, :scroll, category.id) %>
