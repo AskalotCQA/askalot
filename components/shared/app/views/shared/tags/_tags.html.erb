@@ -14,6 +14,12 @@
         </div>
       <% end %>
     </div>
+
+    <% if remote %>
+      <%= paginate tags, remote: true, data: { state: true, scroll: :body, fade: '#tags' } %>
+    <% else %>
+      <%= paginate tags %>
+    <% end %>
   <% else %>
     <div class="alert alert-warning">
       <%= t('tag.no_records') %>
