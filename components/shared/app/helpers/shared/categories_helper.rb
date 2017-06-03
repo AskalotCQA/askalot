@@ -1,21 +1,4 @@
 module Shared::CategoriesHelper
-  def group_categories_by_prefix(categories)
-    mixed  = []
-    groups = categories.inject(Hash.new) do |groups, category|
-      if match = category.name.match(/[A-Z]{2,}\s/)
-        (groups[match[0].strip.downcase.to_sym] ||= []) << category
-      else
-        mixed << category
-      end
-
-      groups
-    end
-
-    groups.sort_by { |key, _| key }
-    groups[:mixed] = mixed
-    groups
-  end
-
   def link_to_category(category, options = {}, content = category.full_public_name)
     link_to content, shared.questions_path(category: category.id), options
   end
@@ -76,6 +59,8 @@ module Shared::CategoriesHelper
   end
 
   def tree_view(objects, &block)
+    objects = objects.sort_by(&:full_tree_name)
+
     parents = objects.group_by(&:parent_id)
     output  = ''
 
@@ -108,9 +93,5 @@ module Shared::CategoriesHelper
 
   def active_categories(categories, questions_counts)
     categories.select { |category| (questions_counts[category.id] || 0) > 0 }
-  end
-
-  def askable_leaves_categories(context)
-    Shared::Category.find(context).leaves.where(askable: true).visible.not_unknown.unscope(:order).order(:full_public_name)
   end
 end

@@ -143,3 +143,7 @@ a .fa {
 // tables
 
 @include table-row-variant('info', $state-info-bg);
+
+.tooltip {
+  z-index: 99999;
+}

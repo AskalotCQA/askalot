@@ -433,16 +433,15 @@ GEM
     rvm-capistrano (1.5.5)
       capistrano (~> 2.15.4)
     sass (3.2.19)
-    sass-rails (4.0.4)
+    sass-rails (4.0.5)
       railties (>= 4.0.0, < 5.0)
       sass (~> 3.2.2)
-      sprockets (~> 2.8, < 2.12)
+      sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
-    select2-rails (3.4.9)
-      sass-rails
+    select2-rails (3.5.10)
       thor (~> 0.14)
     selenium-webdriver (2.44.0)
       childprocess (~> 0.5)
@@ -466,7 +465,7 @@ GEM
       simplecov-html (~> 0.8.0)
     simplecov-html (0.8.0)
     slop (3.6.0)
-    sprockets (2.11.3)
+    sprockets (2.12.4)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -588,7 +587,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.3)
   scout!
   sdoc
-  select2-rails (~> 3.4.9)
+  select2-rails (~> 3.5.10)
   selenium-webdriver
   shared!
   sidekiq (~> 4.2)
