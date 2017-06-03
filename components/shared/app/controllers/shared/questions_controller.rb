@@ -63,8 +63,7 @@ class QuestionsController < ApplicationController
     if params[:slido]
       old_user      = current_user
       slido         = Shared::User.where(login: 'slido').first
-      current_user  = slido
-      @current_user = current_user
+      @current_user = slido
     end
 
     @question = Shared::Question.new(create_params)
@@ -80,6 +79,10 @@ class QuestionsController < ApplicationController
         dispatch_event :mention, @question, for: user
       end
 
+      if params[:slido]
+        @current_user = old_user
+      end
+
       # TODO (zbell) refactor: do not compose watchers here
       dispatch_event :create, @question, for: @question.parent_watchers + @question.tags.map(&:watchers).flatten, anonymous: @question.anonymous
       register_watching_for @question
@@ -93,7 +96,6 @@ class QuestionsController < ApplicationController
       prefix = request.referrer.include?('third_party') ? '/third_party' : ''
 
       if params[:slido]
-        current_user  = old_user
         @current_user = old_user
       end
 
