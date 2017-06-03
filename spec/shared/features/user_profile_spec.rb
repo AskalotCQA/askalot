@@ -167,7 +167,7 @@ describe 'User Profile', type: :feature do
     end
 
     it 'edits user privacy', js: true do
-      click_link 'Súkromie'
+      click_link 'Preferencie'
 
       # TODO (smolnar) create helper for label checkbox
       find('label', text: 'Skryť meno ostatným používateľom').click
