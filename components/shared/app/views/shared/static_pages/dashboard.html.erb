@@ -1,29 +1,28 @@
 <% use_container true %>
 
 <% if session[:facebook_modal] %>
-  <%= render 'shared/facebook/joining' %>
-  <%= render 'shared/facebook/restoring' %>
+    <%= render 'shared/facebook/joining' %>
+    <%= render 'shared/facebook/restoring' %>
 <% end %>
 
 <%= flash_messages { |content| content_tag :section, content } %>
 
 <div class="dashboard">
-  <div class="pull-right">
-    <ul class="list list-inline">
-      <li class="remove-grid-md">
-        <%= icon_link_to 'question-circle', t('home.ask'), shared.new_question_path, class: 'btn btn-primary col-xs-6' %>
-        <% if @question %>
-          <%= icon_link_to :comment, t('home.answer'), shared.question_path(@question), class: 'btn btn-success col-xs-6' %>
-        <% end %>
-        <%= icon_link_to :tasks, t('home.questions'), shared.questions_path, class: 'btn btn-info col-xs-12' %>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 headline">
+        <h1>Askalot<small><%= t 'home.headline' %></small></h1>
+      </div>
+    </div>
+  </div>
 
-        &nbsp;
-
-        <div id="fulltext-search" class="pull-right">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <div id="fulltext-search">
           <%= form_tag shared.search_questions_path, id: :fulltext_search, method: :get do %>
               <%= hidden_field_tag :poll, params[:poll] %>
               <div class="form-group">
-
                 <div class="input-group select2-bootstrap-prepend">
                   <div class="input-group-addon">
                     <%= tooltip_icon_tag :search, t('question.search.fulltext'), placement: :bottom %>
@@ -36,63 +35,45 @@
               </div>
           <% end %>
         </div>
-      </li>
-    </ul>
-  </div>
 
-  <div class="headline">
-    <h1>Askalot</h1>
+        <%= icon_link_to 'question-circle', t('home.ask'), shared.new_question_path, class: 'btn btn-primary col-xs-12' %>
+        <br><br>
+        <% if @question %>
+            <%= icon_link_to :comment, t('home.answer'), shared.question_path(@question), class: 'btn btn-success col-xs-12' %>
+            <br><br>
+        <% end %>
+        <%= icon_link_to :tasks, t('home.questions'), shared.questions_path, class: 'btn btn-info col-xs-12' %>
+        <br><br>
 
-    <p><%= t 'home.headline' %></p>
-  </div>
+        <%= render 'shared/static_pages/dashboard/news', news: @news %>
+      </div>
 
-  <div>
-    <p class="dashboard-description"><%= t('home.dashboard.description', date: l(current_user.dashboard_last_sign_in_at, format: :dashboard)).html_safe %></p>
-  </div>
+      <div class="col-sm-8">
+        <p class="dashboard-description"><%= t('home.dashboard.description', date: l(current_user.dashboard_last_sign_in_at, format: :dashboard)).html_safe %></p>
 
-  <div class="row">
-    <div class="col-md-6">
-      <%= icon_link_to 'check-circle-o', t('home.reset_dashboard_time'), shared.reset_dashboard_time_user_path(current_user), class: 'btn btn-default col-xs-12', id: 'reset_dashboard' %>
-
-      <div class="links row">
-          <%= dashboard_link 'question-circle fa-fw', @new_questions, t('home.dashboard.new_questions', count: @new_questions), questions_path(from_dashboard: 'new_questions'), 'link-icon-questions' %>
-          <%= dashboard_link 'question-circle  fa-fw', @new_questions_watched, t('home.dashboard.new_questions_in_watched_categories', count: @new_questions_watched), questions_path(from_dashboard: 'new_questions_in_watched_categories'), 'link-icon-questions-followed' %>
-
-          <%= dashboard_link 'exclamation-circle fa-fw', @new_answers, t('home.dashboard.new_answers', count: @new_answers), questions_path(from_dashboard: 'new_answers'), 'link-icon-answers' %>
-          <%= dashboard_link 'exclamation-circle fa-fw', @new_answers_watched, t('home.dashboard.new_answers_in_watched_categories', count: @new_answers_watched), questions_path(from_dashboard: 'new_answers_in_watched_categories'), 'link-icon-answers-followed' %>
-
-          <%= dashboard_link 'comments-o fa-fw', @new_comments, t('home.dashboard.new_comments', count: @new_comments), questions_path(from_dashboard: 'new_comments'), 'link-icon-comments' %>
-          <%= dashboard_link 'comments-o fa-fw', @new_comments_watched, t('home.dashboard.new_comments_in_watched_categories', count: @new_comments_watched), questions_path(from_dashboard: 'new_comments_in_watched_categories'), 'link-icon-comments-followed' %>
-        </div>
-    </div>
-
-    <div class="col-md-6">
-      <div>
         <ul class="nav nav-tabs" role="tablist">
-          <li role="presentation" class="<%= active_tab_class(@all_news, current_user, :activites) %>">
+          <li role="presentation" class="<%= active_tab_class(current_user, :activites) %>">
             <a href="#activities" aria-controls="activities" role="tab" data-toggle="tab"><%= t 'home.dashboard.activities' %></a>
           </li>
-          <li role="presentation" class="<%= active_tab_class(@all_news, current_user, :news) %>">
-            <a href="#news" aria-controls="news" role="tab" data-toggle="tab"><%= t 'home.dashboard.news' %>
-              <% if @all_news.first && current_user.dashboard_last_sign_in_at < @all_news.first.created_at %>
-                  <div class="label label-success label-new-news">
-                    <%= t('home.dashboard.more_new_news') %>
-                  </div>
-              <% end %>
-            </a>
 
+          <li role="presentation" class="<%= active_tab_class(current_user, :'activities-in-followed') %>">
+            <a href="#activities-in-followed" aria-controls="activities-in-followed" role="tab" data-toggle="tab"><%= t 'home.dashboard.activities_in_followed' %></a>
+          </li>
+
+          <li role="presentation" class="pull-right">
+            <%= icon_link_to 'check-circle-o', t('home.reset_dashboard_time'), shared.reset_dashboard_time_user_path(current_user), class: 'btn btn-default col-xs-12', id: 'reset_dashboard' %>
           </li>
         </ul>
 
         <div class="tab-content">
-          <div role="tabpanel" class="tab-pane <%= active_tab_class(@all_news, current_user, :activites) %>" id="activities">
+          <div role="tabpanel" class="tab-pane <%= active_tab_class(current_user, :activites) %>" id="activities">
             <%= render 'shared/static_pages/dashboard/activities', activities: @activities %>
-            <br>
             <%= link_to t('home.dashboard.show_activities'), activities_path %>
           </div>
 
-          <div role="tabpanel" class="tab-pane <%= active_tab_class(@all_news, current_user, :news) %>" id="news">
-            <%= render 'shared/static_pages/dashboard/news', news: @all_news %>
+          <div role="tabpanel" class="tab-pane <%= active_tab_class(current_user, :'activities-in-followed') %>" id="activities-in-followed">
+            <%= render 'shared/static_pages/dashboard/activities_in_followed', activities: @followed_activities %>
+            <%= link_to t('home.dashboard.show_activities_in_followed'), activities_path(tab: 'followed_categories') %>
           </div>
         </div>
       </div>

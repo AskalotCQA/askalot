@@ -14,5 +14,6 @@
   <div class="alert alert-info">
     <%= t('activity.none.global') %>
     <%= t('activity.none.followees') if tab.to_sym == :followees && current_user.followees.none? %>
+    <%= t('activity.none.followed_categories') if tab.to_sym == :followed_categories && Shared::Activities::ActivitiesFilter.categories_in_watched_contexts(current_user).empty? %>
   </div>
 <% end %>

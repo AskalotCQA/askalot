@@ -1,0 +1,15 @@
+<% activities.group_by { |e| e.resource.to_question }.select { |question, _| question.deleted_at.nil? }.each_with_index do |(question, activities), index| %>
+  <% break if index >= 6 %>
+  <div class="row">
+    <div class="col-md-4 col-sm-5">
+      <% activities.sort_by(&:created_at).each do |activity| %>
+          <%= render 'shared/static_pages/dashboard/activity', activity: activity %>
+      <% end %>
+    </div>
+
+    <div class="col-md-8 col-sm-7">
+      <%= render 'shared/questions/question_preview', question: question, length: 150 %>
+    </div>
+  </div>
+  <hr>
+<% end %>

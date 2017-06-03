@@ -19,9 +19,11 @@ en:
 
     dashboard:
       activities: Activities
+      activities_in_followed: Activities in followed categories
       news: News
-      new_news: New
-      more_new_news: New
+      all_news: All News
+      new_news: News
+      more_new_news: News
       new_questions:
         one: new question
         other: new questions
@@ -32,15 +34,16 @@ en:
         one: new comment
         other: new comments
       new_questions_in_watched_categories:
-        one: new question in watched categories
-        other: new questions in watched categories
+        one: new question
+        other: new questions
       new_answers_in_watched_categories:
-        one: new answer in watched categories
-        other: new answers in watched categories
+        one: new answer
+        other: new answers
       new_comments_in_watched_categories:
-        one: new comment in watched categories
-        other: new comments in watched categories
+        one: new comment
+        other: new comments
       show_activities: Show all activities
+      show_activities_in_followed: Show all activities in followed categories
       no_activity: "No activity has happened since your last login %{date}."
       description: "Since your last login %{date}, these activities have happened in Askalot."
 

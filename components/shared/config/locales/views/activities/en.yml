@@ -16,6 +16,7 @@ en:
     none:
       global: "No activity."
       followees: "You are not following anyone yet."
+      followed_categories: "You are not following any categories yet."
 
     note:
       global: "Shown activity includes additions, updates and deletions of questions, answers and respective labels, comments and evaluations by all users."
