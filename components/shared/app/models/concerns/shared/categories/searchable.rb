@@ -67,6 +67,20 @@ module Shared::Categories
               }
             },
 
+            description: {
+                type: :multi_field,
+                fields: {
+                    description: {
+                        type: :string,
+                        analyzer: :text,
+                    },
+                    untouched: {
+                        type: :string,
+                        index: :not_analyzed
+                    }
+                }
+            },
+
             context: {
                 type: :integer
             }
@@ -77,6 +91,7 @@ module Shared::Categories
       probe.index.mapper.define(
         id:   -> { id },
         name: -> { full_public_name },
+        description: -> { description },
         context: -> { related_contexts.pluck(:id) }
       )
 
@@ -89,8 +104,10 @@ module Shared::Categories
           query: {
             query_string: {
               query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
+              analyzer: :text,
+              analyze_wildcard: true,
               default_operator: :and,
-              fields: [:name]
+              fields: [:name, :description]
             }
           },
           filter: {

@@ -67,6 +67,20 @@ module Shared::Users
               }
             },
 
+            name: {
+                type: :multi_field,
+                fields: {
+                    name: {
+                        type: :string,
+                        analyzer: :text,
+                    },
+                    untouched: {
+                        type: :string,
+                        index: :not_analyzed
+                    }
+                }
+            },
+
             context: {
               type: :integer
             }
@@ -77,6 +91,7 @@ module Shared::Users
       probe.index.mapper.define(
         id:    -> { id },
         nick:  -> { nick },
+        name:  -> { name if show_name == true },
         about: -> { about },
         context: -> { related_contexts.pluck(:id) },
       )
@@ -90,8 +105,10 @@ module Shared::Users
           query: {
             query_string: {
               query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
+              analyzer: :text,
+              analyze_wildcard: true,
               default_operator: :and,
-              fields: [:nick, :about]
+              fields: [:nick, :name, :about]
             }
           },
           filter: {

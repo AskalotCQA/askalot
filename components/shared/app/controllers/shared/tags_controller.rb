@@ -13,7 +13,9 @@ class TagsController < ApplicationController
             when :recent then Shared::Tag.in_context(@context_id).recent
             when :popular then Shared::Tag.in_context(@context_id).popular
             else Shared::Tag.in_context(@context_id).order(:name)
-            end
+    end
+
+    @tags = @tags.page(params[:page]).per(60)
   end
 
   # TODO (smolnar)
