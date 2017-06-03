@@ -23,11 +23,12 @@ module Shared::FormHelper
     collection_select(id, collection, value, label, options, html_options)
   end
 
-  def category_collection_select(id, collection = Shared::Category.askable.includes(:assignments).order(:name), value = :id, label = :full_public_name, options = {}, html_options = {})
+  def category_collection_select(id, collection = Shared::Category.askable.includes(:assignments).order(:name), grouped = true, value = :id, label = :full_public_name, options = {}, html_options = {})
     options.merge! include_blank: true
-    html_options.deep_merge! class: :'form-control', data: { as: :select2, role: :categories }
+    html_options.deep_merge! class: :'form-control', data: { as: :select2, role: grouped ? :categories_with_metadata : :categories }
 
-    grouped_collection_select(id, collection, :leaves_with_metadata, label, ->(el){el.first.id}, ->(el){el.first.full_public_name}, options, html_options)
+    grouped_collection_select(id, collection, :leaves_with_metadata, label, ->(el){el.first.id}, ->(el){el.first.full_public_name}, options, html_options) if grouped
+    collection_select(id, collection, value, label, options, html_options) unless grouped
   end
 
   def role_collection_select(id, collection = Shared::Role.all.order(:name), value = :id, label = :name, options = {}, html_options = {})
