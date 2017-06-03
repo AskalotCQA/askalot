@@ -108,6 +108,10 @@ en:
       prefered_activity_tab:
         all: "All"
         followed_categories: "Followed categories"
+      notification_frequency:
+        daily: "Daily"
+        instantly: "Instantly"
+        help: "If you choose instant email notifications, you will receive email with notifications shorty after there is activity in questions/categories/tags you follow. If you will not read the notification sent, we will delay next notifications so your email inbox will not get flooded with e-mails from Askalot.<br><br>If you choose daily notification email, you will receive email with unread notifications once per day."
 
     update:
       success: "You have successfully updated your profile."

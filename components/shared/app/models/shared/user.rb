@@ -73,6 +73,7 @@ class User < ActiveRecord::Base
   symbolize :role, in: ROLES
 
   before_validation :resolve_nick, on: :create
+  before_validation :set_last_mail_notification_date, on: :create
 
   after_create :create_reputation_profile
 
@@ -184,6 +185,10 @@ class User < ActiveRecord::Base
 
   def create_reputation_profile
     User::Profile.create(user: self, targetable_id: 1, targetable_type: 'Reputation', property: 'Reputation', value: 0, probability: 0.0)
+  end
+
+  def set_last_mail_notification_date
+    self.last_mail_notification_sent_at ||= Date.today + 5.hours
   end
 end
 end

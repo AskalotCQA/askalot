@@ -26,12 +26,18 @@ class UserMailer < ActionMailer::Base
 
   layout 'university/mailer'
 
-  def notifications(user, from:)
-    @from = from
-    @user = user
-    @notifications = @user.notifications.unread.where('created_at >= ?', @from)
+  def notifications(user)
+    return unless Shared::Notifications::Utility.send_notification_email?(user)
+
+    @user          = user
+    @from          = Shared::Notifications::Utility.notifications_since(user)
+    @notifications = Shared::Notifications::Utility.unread_notifications(user)
 
     return if @notifications.empty?
+
+    # order is significant
+    Shared::Notifications::Utility.update_delay(user)
+    Shared::Notifications::Utility.update_last_notification_sent_at(user)
 
     mail to: @user.email, subject: t('user_mailer.subject'), content_type: 'text/html'
   end

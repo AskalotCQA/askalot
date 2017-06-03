@@ -108,6 +108,10 @@ sk:
       prefered_activity_tab:
         all: "Všetky aktivity"
         followed_categories: "Aktivity v nasledovaných kategóriách"
+      notifications_frequency:
+        daily: "Denne"
+        instantly: "Okamžite"
+        help: "Ak si nastavíte okamžité posielanie emailových notifikácií, tak Vám budeme neprečítané notifikácie zasielať už krátko po tom, ako sa v systéme Askalot stane aktivita v otázkach/kategóriách/tagoch, ktoré sledujete. Ak akurát nebudete mať na prečítanie týchto notifikácií čas a budú pribúdať ďalšie, tak Vám tieto nasledujúce notifikácie pošleme až po dlhšej dobe. Zabránime tak nežiadanému spamovaniu.<br><br>Ak si nastavíte posielanie notifikácií raz za deň, tak Vás neprečítané notifikácie budú čakať každý deň ráno."
 
     update:
       success: "Úspešne ste aktualizovali Váš profil."

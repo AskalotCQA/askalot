@@ -1,6 +1,6 @@
 <%= render 'shared/user_mailer/header' %>
 
-<h4 class="title">Prehľad Vašich notifikácií od <%= tooltip_time_tag @from %></h4>
+<h4 class="title">Prehľad Vašich notifikácií od <%= time_tag @from, format: :normal %></h4>
 
 <ul class="notifications">
   <% @notifications_in_contexts.each do |notifications| %>
@@ -16,7 +16,7 @@
 
           <%= link_to_user notification.initiator_or_anonymous, page_url_prefix: true, current_user: @user %>
           <span class="text-muted">&middot;</span>
-          <%= tooltip_time_tag notification.created_at, class: 'text-muted', format: :normal, placement: :bottom %>
+          <%= time_tag notification.created_at, class: 'text-muted', format: :normal %>
         </li>
       <% end %>
     </ol>
@@ -27,7 +27,7 @@
 <p>
   <%= link_to "Zobraziť neprečítané notifikácie", @contexts[0].try(:askalot_page_url) + '#' + shared.notifications_url(tab: :unread) %>
   <span class="text-muted">&middot;</span>
-  <%= link_to "Zrušiť odoberanie notifikácii", @contexts[0].try(:askalot_page_url) + '#' + shared.edit_user_registration_url(tab: :notifications) %>
+  <%= link_to "Zrušiť odoberanie notifikácii alebo zmeniť ich frekvenciu", @contexts[0].try(:askalot_page_url) + '#' + shared.edit_user_registration_url(tab: :notifications) %>
 </p>
 
 <%= render 'shared/user_mailer/footer' %>
