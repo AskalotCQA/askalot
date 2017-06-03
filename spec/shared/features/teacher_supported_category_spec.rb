@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Teacher Supported Category', type: :feature, js: true do
+describe 'Teacher Supported Category', type: :feature do
 
   let(:user) { create :user }
   let(:user2) { create :user }
@@ -21,24 +21,24 @@ describe 'Teacher Supported Category', type: :feature, js: true do
 
     click_link 'Kategórie'
 
-    list = all('i.fa-graduation-cap')
+    list = all('#all i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
-    expect(list[0]['data-original-title']).to eql('Podporovaná učiteľom: ' + user.name)
+    expect(list[0][:title]).to eql('Podporovaná učiteľom: ' + user.name)
 
     click_link 'Otázky'
 
     list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
-    expect(list[0]['data-original-title']).to eql('Podporovaná učiteľom: ' + user.name)
+    expect(list[0][:title]).to eql('Podporovaná učiteľom: ' + user.name)
 
     click_link 'Pridať otázku', match: :first
 
-    list = all('#question_category_id > option')
+    list = all('#question_category_id option')
 
-    expect(list.count).to eql(2)
-    expect(list[1].text).to eql(category.name + ' (podporovaná učiteľom)')
+    expect(list.count).to eql(3)
+    expect(list[1][:'data-icon']).to eql('<i title="Podporovaná učiteľom: John Nash" data-toggle="tooltip" data-placement="top" data-trigger="hover" class="fa fa-graduation-cap supported-category-icon-lg"></i>')
   end
 
   it 'shows icons if it contains 2 teachers' do
@@ -52,24 +52,24 @@ describe 'Teacher Supported Category', type: :feature, js: true do
 
     click_link 'Kategórie'
 
-    list = all('i.fa-graduation-cap')
+    list = all('#all i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
-    expect(list[0]['data-original-title']).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
+    expect(list[0][:title]).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
 
     click_link 'Otázky'
 
     list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
-    expect(list[0]['data-original-title']).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
+    expect(list[0][:title]).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
 
     click_link 'Pridať otázku', match: :first
 
-    list = all('#question_category_id > option')
+    list = all('#question_category_id option')
 
-    expect(list.count).to eql(2)
-    expect(list[1].text).to eql(category.name + ' (podporovaná učiteľom)')
+    expect(list.count).to eql(3)
+    expect(list[1][:'data-icon']).to eql('<i title="Podporovaná učiteľmi: John Nash, John Nash" data-toggle="tooltip" data-placement="top" data-trigger="hover" class="fa fa-graduation-cap supported-category-icon-lg"></i>')
   end
 
   it 'doesn\'t show icons if it contains only administrators and students' do
@@ -95,10 +95,10 @@ describe 'Teacher Supported Category', type: :feature, js: true do
 
     click_link 'Pridať otázku', match: :first
 
-    list = all('#question_category_id > option')
+    list = all('#question_category_id option')
 
-    expect(list.count).to eql(2)
-    expect(list[1].text).to eql(category.name)
+    expect(list.count).to eql(3)
+    expect(list[1][:'data-icon']).to eq('')
   end
 
   it 'doesn\'t show icons if it has no users' do
@@ -120,10 +120,10 @@ describe 'Teacher Supported Category', type: :feature, js: true do
 
     click_link 'Pridať otázku', match: :first
 
-    list = all('#question_category_id > option')
+    list = all('#question_category_id option')
 
-    expect(list.count).to eql(2)
-    expect(list[1].text).to eql(category.name)
+    expect(list.count).to eql(3)
+    expect(list[1][:'data-icon']).to eq('')
   end
 
 end

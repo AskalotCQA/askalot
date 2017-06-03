@@ -3,8 +3,9 @@ FactoryGirl.define do
     sequence(:name) { |n| "Category ##{n}" }
     sequence(:uuid) { |n| "uuid#{n}" }
     askable true
+    visible true
 
-    parent_id 2
+    parent_id 3
 
     trait :with_tags do
       sequence(:tags) { |n| ["category-#{n}"] }
