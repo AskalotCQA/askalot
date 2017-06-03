@@ -1,10 +1,10 @@
 <li>
   <div class="row">
-    <div class="col-xs-4">
-      <%= link_to_category assignment.category %>
+    <div class="col-xs-5">
+      <%= link_to_category assignment.category, {}, assignment.category.full_tree_name %>
     </div>
 
-    <div class="col-xs-4">
+    <div class="col-xs-3">
       <%= link_to_user assignment.user %>
       <span class="text-muted">(<%= assignment.user.login %>)</span>
     </div>

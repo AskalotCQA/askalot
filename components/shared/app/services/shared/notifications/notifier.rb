@@ -5,6 +5,8 @@ module Shared::Notifications
     attr_accessor :factory
 
     def publish(action, initiator, resource, options = {})
+      return if action == :update && too_new_since_resource_creation?(resource) || too_new_since_last_notification?(resource)
+
       recipients = (Array.wrap(options[:for] || resource.watchers) - [initiator]).uniq
       context = Shared::Context::Manager.current_context_id
       notifications = []
@@ -21,6 +23,22 @@ module Shared::Notifications
 
     def factory
       @factory ||= Shared::Notification
+    end
+
+    private
+
+    def too_new_since_resource_creation?(resource)
+      (Time.now - resource.created_at) < 300 # 300 seconds
+    end
+
+    def too_new_since_last_notification?(resource)
+      return false if resource.notifications.nil?
+
+      last_notification = resource.notifications.where(action: :update).order(created_at: :desc).first
+
+      return false if last_notification.nil?
+
+      (Time.now - last_notification.created_at) < 90
     end
   end
 end

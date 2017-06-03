@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Activities', type: :feature do
   let(:user)      { create :user }
-  let!(:question) { create :question, :with_tags, author: user }
+  let!(:question) { create :question, :with_tags, author: user, created_at: Time.now - 10.minutes }
   let!(:category) { create :category }
 
   before :each do
