@@ -49,7 +49,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: ab_groupings; Type: TABLE; Schema: public; Owner: -
+-- Name: activities; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE activities (
@@ -1018,7 +1018,7 @@ ALTER SEQUENCE mooc_category_contents_id_seq OWNED BY mooc_category_contents.id;
 
 
 --
--- Name: mooclet_events; Type: TABLE; Schema: public; Owner: -
+-- Name: news; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE news (
@@ -1266,7 +1266,7 @@ ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
 
 
 --
--- Name: recommendations; Type: TABLE; Schema: public; Owner: -
+-- Name: roles; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE roles (
@@ -1525,6 +1525,7 @@ CREATE TABLE users (
     dashboard_last_sign_in_at timestamp without time zone DEFAULT now(),
     attachments_count integer,
     lists_count integer DEFAULT 0 NOT NULL,
+    send_facebook_notifications boolean
     send_mail_notifications_frequency character varying DEFAULT 'daily'::character varying,
     last_mail_notification_sent_at timestamp without time zone,
     mail_notification_delay integer DEFAULT 0,
@@ -1948,7 +1949,7 @@ ALTER TABLE ONLY watchings ALTER COLUMN id SET DEFAULT nextval('watchings_id_seq
 
 
 --
--- Name: ab_groupings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY activities
@@ -2156,7 +2157,7 @@ ALTER TABLE ONLY mooc_category_contents
 
 
 --
--- Name: mooclet_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: news_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY news
@@ -2204,7 +2205,7 @@ ALTER TABLE ONLY questions
 
 
 --
--- Name: recommendations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: roles_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY roles
@@ -2276,7 +2277,7 @@ ALTER TABLE ONLY watchings
 
 
 --
--- Name: index_ab_groupings_on_ab_group_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_activities_on_action; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE INDEX index_activities_on_action ON activities USING btree (action);
@@ -3165,7 +3166,7 @@ CREATE INDEX index_questions_on_votes_lb_wsci_bp ON questions USING btree (votes
 
 
 --
--- Name: index_recommendations_on_question_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
 CREATE UNIQUE INDEX index_roles_on_name ON roles USING btree (name);
@@ -3878,6 +3879,8 @@ INSERT INTO schema_migrations (version) VALUES ('20161202180133');
 INSERT INTO schema_migrations (version) VALUES ('20170115175555');
 
 INSERT INTO schema_migrations (version) VALUES ('20170203140643');
+
+INSERT INTO schema_migrations (version) VALUES ('20170602121937');
 
 INSERT INTO schema_migrations (version) VALUES ('20170602193255');
 

@@ -11,7 +11,7 @@ module Shared::Facebook
       controller  = options.delete(:controller)
       application = FbGraph2::Auth.new(Shared::Configuration.facebook.application.id, Shared::Configuration.facebook.application.secret)
 
-      notifications.select { |notification| notification.recipient.omniauth_token }.each do |notification|
+      notifications.select { |notification| has_token_and_wants_notifications(notification.recipient) }.each do |notification|
         content          = ActionView::Base.full_sanitizer.sanitize(controller.render_to_string(partial: 'shared/facebook/notification_content', locals: { notification: notification }))
         link             = controller.render_to_string(partial: 'shared/facebook/notification_link', locals: { notification: notification, content: content }).strip
         token            = notification.recipient.omniauth_token
@@ -27,6 +27,10 @@ module Shared::Facebook
           nil
         end
       end
+    end
+
+    def has_token_and_wants_notifications(recipient)
+      recipient.omniauth_token && recipient.send_facebook_notifications
     end
   end
 end

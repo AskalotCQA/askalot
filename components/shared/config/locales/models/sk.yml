@@ -362,6 +362,7 @@ sk:
         hide_email: "Skryť e-mail ostatným používateľom"
 
         send_email_notifications: "Zasielať e-mailové notifikácie"
+        send_facebook_notifications: "Zasielať facebookové notifikácie"
         prefered_activity_tab: "Preferovaný zoznam aktivít na nástenke"
 
     symbolizes:
