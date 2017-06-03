@@ -2,12 +2,6 @@
   .remove-grid-md > * {
     float: none; width: auto;
   }
-
-  .dashboard {
-    #fulltext-search {
-      max-width: 300px;
-    }
-  }
 }
 
 .dashboard-description {
@@ -19,23 +13,52 @@
 }
 
 .dashboard {
+  margin-top: 20px;
+
   .headline {
     margin-bottom: 10px;
 
     h1 {
       font-variant: small-caps;
-      margin-top: 25px;
+      margin-top: 0px;
+
+      small {
+        @extend .text-muted;
+
+        font-variant: normal;
+        font-style: italic;
+        margin-left: 10px;
+        font-size: 14px;
+      }
     }
+  }
 
-    p {
-      @extend .text-muted;
+  .alert {
+    width: 100%;
+    float: left;
+  }
 
-      font-style: italic;
+  .activity-on-dashboard {
+    margin-bottom: 5px;
+    text-align: right;
+  }
+
+  .question-preview {
+    padding-left: 0;
+  }
+
+  .news-well {
+    margin-top: 10px;
+
+    h4 {
+      margin-top: 0;
     }
   }
 
   #reset_dashboard {
     margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid #ddd;
   }
 
   .links {
@@ -44,7 +67,7 @@
       background-color: #eceff4;
       float: left;
       position: relative;
-      height: 110px;
+      height: 40px;
       display: table-cell;
       width: 100%;
       margin-bottom: 20px;
@@ -84,10 +107,10 @@
         color: #fff;
         background-color: $dashboard-link-bg-color;
         position: absolute;
-        width: 110px;
-        height: 110px;
-        line-height: 110px;
-        font-size: 3em;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 20px;
         @include transition(background-color 1s 0s);
 
         i {
@@ -148,7 +171,7 @@
 
       .link-text {
         color: #877676;
-        margin-left: 110px;
+        margin-left: 50px;
         height: 100%;
 
         .vertical-table {
@@ -164,13 +187,13 @@
 
         .number {
           text-align: center;
-          font-size: 2.2em;
+          font-size: 15px;
         }
 
         .description {
           text-transform: uppercase;
           text-align: center;
-          font-size: 0.8em;
+          font-size: 12px;
         }
       }
     }

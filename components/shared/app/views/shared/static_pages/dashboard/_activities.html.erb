@@ -1,11 +1,17 @@
+<div class="links row">
+  <%= dashboard_link 'question-circle fa-fw', @new_questions, t('home.dashboard.new_questions', count: @new_questions), questions_path(from_dashboard: 'new_questions'), 'link-icon-questions' %>
+  <%= dashboard_link 'exclamation-circle fa-fw', @new_answers, t('home.dashboard.new_answers', count: @new_answers), questions_path(from_dashboard: 'new_answers'), 'link-icon-answers' %>
+  <%= dashboard_link 'comments-o fa-fw', @new_comments, t('home.dashboard.new_comments', count: @new_comments), questions_path(from_dashboard: 'new_comments'), 'link-icon-comments' %>
+</div>
+
 <% if activities.any? %>
-  <ol class="activities">
-    <% activities.each do |activity| %>
-      <%= render 'shared/static_pages/dashboard/activity', activity: activity %>
-    <% end %>
-  </ol>
+  <%= render 'shared/static_pages/dashboard/grouped_activities', activities: activities %>
 <% else %>
-  <div class="alert alert-info">
-    <%= t('home.dashboard.no_activity', date: l(current_user.dashboard_last_sign_in_at, format: :dashboard)).html_safe %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="alert alert-info">
+        <%= t('home.dashboard.no_activity', date: l(current_user.dashboard_last_sign_in_at, format: :dashboard)).html_safe %>
+      </div>
+    </div>
   </div>
 <% end %>
