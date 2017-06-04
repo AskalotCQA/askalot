@@ -33,29 +33,12 @@ module Shared::Activities
       answers_labelings    = answers.map(&:labelings).flatten
 
       query = '('
-
-      questions.each do |e|
-        query << "(resource_type = 'Shared::Question' AND resource_id = #{e.id}) OR "
-      end
-
-      answers.each do |e|
-        query << "(resource_type = 'Shared::Answer' AND resource_id = #{e.id}) OR "
-      end
-
-      [answer_comments + question_comments].flatten.each do |e|
-        query << "(resource_type = 'Shared::Comment' AND resource_id = #{e.id}) OR "
-      end
-
-      [question_evaluations + answers_evaluations].flatten.each do |e|
-        query << "(resource_type = 'Shared::Evaluation' AND resource_id = #{e.id}) OR "
-      end
-
-      answers_labelings.each do |e|
-        query << "(resource_type = 'Shared::Labeling' AND resource_id = #{e.id}) OR "
-      end
-
-      query = query[0..-5] + ')'
-      query = '(1 = 0)' if query == ')'
+      query += "(resource_type = 'Shared::Question' AND resource_id in ( #{questions.map{|e| e.id}.join(",")})) OR "
+      query += "(resource_type = 'Shared::Answer' AND resource_id in (#{answers.map{|e| e.id}.join(",")})) OR "
+      query += "(resource_type = 'Shared::Comment' AND resource_id in (#{[answer_comments + question_comments].flatten.map{|e| e.id}.join(",")})) OR "
+      query += "(resource_type = 'Shared::Evaluation' AND resource_id in (#{[question_evaluations + answers_evaluations].flatten.map{|e| e.id}.join(",")})) OR "
+      query += "(resource_type = 'Shared::Labeling' AND resource_id in (#{answers_labelings.map{|e| e.id}.join(",")}))"
+      query += ')'
 
       Shared::Activity.where(query)
     end

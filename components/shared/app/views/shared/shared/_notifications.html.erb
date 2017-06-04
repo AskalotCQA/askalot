@@ -7,8 +7,6 @@
     <% end %>
     <li class="divider"></li>
     <li><%= link_to t('notification.clean.submit'), shared.clean_notifications_path, { data: { remote: true } } %></li>
-    <li class="divider"></li>
-    <li><%= link_to_notifications notifications, body: t('notification.more') %></li>
   <% end %>
 <% else %>
   <li class="hidden-xs"><%= link_to_notifications notifications, body: icon_tag(:'circle-o') %></li>

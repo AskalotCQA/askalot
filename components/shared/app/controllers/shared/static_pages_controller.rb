@@ -23,30 +23,35 @@ class StaticPagesController < ApplicationController
     context_questions         = service.dashboard_questions @context_id, current_user
     context_answers           = service.dashboard_answers @context_id, current_user
     context_question_comments = service.dashboard_question_comments context_questions, current_user
-    context_question_answers  = service.dashboard_answer_comments context_answers, current_user
+    context_answer_comments   = service.dashboard_answer_comments context_answers, current_user
 
     @new_questions = service.dashboard_count context_questions, current_user
     @new_answers   = service.dashboard_count context_answers, current_user
-    @new_comments  = service.dashboard_count(context_question_comments, current_user) + service.dashboard_count(context_question_answers, current_user)
+    @new_comments  = service.dashboard_count(context_question_comments, current_user) + service.dashboard_count(context_answer_comments, current_user)
 
     context_questions         = service.dashboard_questions_watched current_user
     context_answers           = service.dashboard_answers_watched current_user
     context_question_comments = service.dashboard_question_comments context_questions, current_user
-    context_question_answers  = service.dashboard_answer_comments context_answers, current_user
+    context_answer_comments   = service.dashboard_answer_comments context_answers, current_user
 
     @new_questions_watched = service.dashboard_count context_questions, current_user
     @new_answers_watched   = service.dashboard_count context_answers, current_user
-    @new_comments_watched  = service.dashboard_count(context_question_comments, current_user) + service.dashboard_count(context_question_answers, current_user)
+    @new_comments_watched  = service.dashboard_count(context_question_comments, current_user) + service.dashboard_count(context_answer_comments, current_user)
 
     limit = 30
 
     @news = Shared::News.where('created_at >= ?', current_user.dashboard_last_sign_in_at).order('news.id DESC').active.limit(1).first
+
     @activities = Shared::Activity.includes(:resource, :initiator).in_context(@context_id).global.not_of(current_user)
                   .where(resource_type: [Shared::Answer, Shared::Comment, Shared::Evaluation, Shared::Question])
-                  .where('activities.created_at >= ?', current_user.dashboard_last_sign_in_at).order('activities.id DESC').limit(limit)
+                  .where('activities.created_at >= ?', current_user.dashboard_last_sign_in_at)
+                  .order('activities.id DESC')
+                  .limit(limit)
 
-    @followed_activities = Shared::Activities::ActivitiesFilter.activities_for_followed_categories(current_user)
-        .order(created_at: :desc).where('activities.created_at >= ?', current_user.dashboard_last_sign_in_at).order('activities.id DESC').limit(limit)
+    @followed_activities = Shared::Activities::ActivitiesFilter.activities_for_followed_categories(current_user).in_context(@context_id).not_of(current_user)
+                  .where('activities.created_at >= ?', current_user.dashboard_last_sign_in_at)
+                  .order('activities.id DESC')
+                  .limit(limit)
   end
 
   def help
