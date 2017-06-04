@@ -1,4 +1,4 @@
-<% activities.group_by { |e| e.resource.to_question }.select { |question, _| question.deleted_at.nil? }.each_with_index do |(question, activities), index| %>
+<% activities.group_by { |e| e.resource.to_question }.select { |question, _| question.deleted == false }.each_with_index do |(question, activities), index| %>
   <% break if index >= 6 %>
   <div class="row">
     <div class="col-md-4 col-sm-5">
