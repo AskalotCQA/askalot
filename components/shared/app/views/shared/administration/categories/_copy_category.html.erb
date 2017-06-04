@@ -1,5 +1,5 @@
 <%= form_for 'copy-categories', :html => { :id => 'copy-categories-parent-id' } do |f| %>
-    <%= f.category_collection_select :parent_id, Shared::Category.order(:depth, :name).all, :id, :full_tree_name, {grouped: false}, {role: :categories} %>
+    <%= f.category_collection_select :parent_id, Shared::Category.order(:depth, :name).all, :id, :full_tree_name, {grouped: false}, {data: {role: :categories}} %>
 <% end %>
 <button class="btn btn-success copy-categories"
         data-wait="<%= t 'administration.category.index.wait' %>"
