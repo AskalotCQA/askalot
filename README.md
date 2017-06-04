@@ -16,7 +16,6 @@ Askalot is a CQA (Community Question and Answer) system of next generation.
 * Rails 4.2
 * PostgreSQL 9.3
 * Elasticsearch 1.7
-* Redis 2.8
 
 ## Installation
 
@@ -34,7 +33,6 @@ Copy and edit configuration files.
 cp config/configuration.{yml.example,yml}
 cp config/database.{yml.example,yml}
 cp config/newrelic.{yml.example,yml}
-cp config/sidekiq.{yml.example,yml}
 ```
 
 There are two types of environments: *university* and *mooc* which are currently implemented as *fiit* and *edx* environments.

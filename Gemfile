@@ -73,7 +73,7 @@ gem 'forgery'
 gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
 gem 'nokogiri'
-gem 'scout', github: 'adrianhuna/scout'
+gem 'scout', github: 'smolnar/scout'
 gem 'statistics2'
 gem 'symbolize'
 gem 'lda-ruby'
@@ -87,9 +87,6 @@ gem 'data-anonymization', '~> 0.6.5'
 # search
 gem 'elasticsearch'
 
-# activejob
-gem 'sidekiq', '~> 4.2'
-
 # file upload
 gem 'paperclip', '~> 4.3'
 gem 'activesupport-json_encoder'
@@ -102,7 +99,6 @@ end
 group :development do
   gem 'capistrano', '~> 2.15.5'
   gem 'capistrano-ext'
-  gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
   gem 'rvm-capistrano', require: false
   gem 'bump', github: 'pavolzbell/bump'
 end

@@ -5,5 +5,3 @@ load 'deploy'
 
 # Remove next line to skip loading any of the default tasks
 load 'config/deploy'
-
-require 'capistrano/sidekiq'

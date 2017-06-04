@@ -24,10 +24,6 @@ Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, window_size: [1600, 1200], inspector: true, timeout: 60)
 end
 
-# Sidekiq
-require 'sidekiq/testing'
-Sidekiq::Testing.inline!
-
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }

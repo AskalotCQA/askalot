@@ -21,7 +21,6 @@ Gemfile.lock.tags
 config/configuration.yml
 config/database.yml
 config/newrelic.yml
-config/sidekiq.yml
 
 coverage
 
@@ -38,5 +37,3 @@ public/attachments/*
 tmp
 spec/specs_with_statuses_mooc.txt
 spec/specs_with_statuses_university.txt
-
-.byebug_history

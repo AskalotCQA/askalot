@@ -1,5 +1,3 @@
-require 'sidekiq/web'
-
 Shared::Engine.routes.draw do
   scope '/' do
     concern :closeable do
@@ -58,10 +56,6 @@ Shared::Engine.routes.draw do
 
     post 'facebook',              to: 'facebook#index'
     post 'facebook/notification', to: 'facebook#notification'
-
-    authenticate :user, lambda { |u| u.role == :administrator } do
-      mount Sidekiq::Web => '/sidekiq'
-    end
 
     resources :categories, only: [:index] do
       concerns :searchable
