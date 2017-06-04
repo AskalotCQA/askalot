@@ -143,7 +143,7 @@ describe 'Editing', type: :feature do
 
       visit shared.root_path
 
-      click_link 'Zobraziť viac'
+      click_link "1 neprečítaná notifikácia"
 
       within "#unread" do
         expect(page).to have_content("Upravenie otázky #{question.title}")
