@@ -41,7 +41,7 @@ class StaticPagesController < ApplicationController
     limit = 30
 
     @news = Shared::News.where('created_at >= ?', current_user.dashboard_last_sign_in_at).order('news.id DESC').active.limit(1).first
-    @activities = Shared::Activity.in_context(@context_id).global.not_of(current_user)
+    @activities = Shared::Activity.includes(:resource, :initiator).in_context(@context_id).global.not_of(current_user)
                   .where(resource_type: [Shared::Answer, Shared::Comment, Shared::Evaluation, Shared::Question])
                   .where('activities.created_at >= ?', current_user.dashboard_last_sign_in_at).order('activities.id DESC').limit(limit)
 

@@ -23,7 +23,7 @@ module Shared::Activities
     end
 
     def activities_for_followed_categories(user)
-      categories           = categories_in_watched_contexts(user)
+      categories           = categories_in_watched_contexts(user).includes(:questions, :answers, questions: [:comments, :evaluations], answers: [:comments, :evaluations, :labelings])
       questions            = categories.map(&:questions).flatten
       answers              = questions.map(&:answers).flatten
       answer_comments      = answers.map(&:comments).flatten
@@ -31,7 +31,6 @@ module Shared::Activities
       question_evaluations = questions.map(&:evaluations).flatten
       answers_evaluations  = answers.map(&:evaluations).flatten
       answers_labelings    = answers.map(&:labelings).flatten
-
 
       query = '('
 
