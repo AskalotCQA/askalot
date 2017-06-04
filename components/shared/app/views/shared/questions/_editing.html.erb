@@ -33,7 +33,7 @@
 
             <div class="form-group">
               <%= f.label :category_id %>
-              <%= f.category_collection_select :category_id, Shared::Category.where(askable: true, depth: Shared::CategoryDepth.visible_depths.first).visible.not_unknown.unscope(:order).order(:full_public_name) %>
+              <%= f.category_collection_select :category_id, Shared::Category.where(askable: true, depth: Shared::CategoryDepth.visible_depths.first).visible.not_unknown.unscope(:order).order(:full_public_name), :id, :full_public_name, {grouped: true}, {role: :categories_with_metadata} %>
             </div>
             <div class="form-group">
               <%= f.label :title %>

@@ -1,6 +1,6 @@
 <div class="form-group">
   <%= f.label :category_id %>
-  <%= f.category_collection_select :category_id, @categories, false,:id, :full_tree_name %>
+  <%= f.category_collection_select :category_id, @categories, :id, :full_tree_name, {grouped: false}, {role: :categories} %>
 </div>
 
 <div class="form-group">
