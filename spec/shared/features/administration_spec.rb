@@ -28,11 +28,11 @@ describe 'Administration', type: :feature do
     click_button 'Kopírovať kategórie'
 
     expect(page).to have_text('Kategórie boli úspešne upravené')
-    expect(Shared::Category.count).to eql(3)
+    expect(Shared::Category.count).to eql(5)
   end
 
   it 'can update category settings', js: true do
-    expect(all(".treetable-checkbox[name='shared[]']:checked").count).to eql(2)
+    expect(all(".treetable-checkbox[name='shared[]']:checked").count).to eql(4)
 
     find(:css, ".treetable-checkbox[name='shared[]'][value='#{Shared::Category.last.id}']").set(false)
     find(:css, ".treetable-checkbox[name='askable[]'][value='#{Shared::Category.last.id}']").set(false)
@@ -47,7 +47,7 @@ describe 'Administration', type: :feature do
     expect(Shared::Category.last.shared).to eql(false)
     expect(Shared::Category.last.askable).to eql(false)
     expect(Shared::Category.last.visible).to eql(false)
-    expect(all(".treetable-checkbox[name='shared[]']:checked").count).to eql(1)
+    expect(all(".treetable-checkbox[name='shared[]']:checked").count).to eql(3)
   end
 
   it 'creates new category', js: true do
@@ -58,6 +58,6 @@ describe 'Administration', type: :feature do
     click_button 'Pridať kategóriu'
 
     expect(page).to have_text('Kategória bola úspešne pridaná.')
-    expect(Shared::Category.count).to eql(3)
+    expect(Shared::Category.count).to eql(5)
   end
 end

@@ -6,7 +6,7 @@ describe Shared::CategoryQuestion, type: :model do
     category = create :category
     create :question, category: category
 
-    expect(Shared::CategoryQuestion.all.count).to eql(3)
+    expect(Shared::CategoryQuestion.all.count).to eql(4)
     expect(Shared::CategoryQuestion.where(category_id: category.id).count).to eql(1)
     expect(Shared::CategoryQuestion.where(category_id: category.parent_id).count).to eql(1)
   end
@@ -54,7 +54,7 @@ describe Shared::CategoryQuestion, type: :model do
         expect(category.category_questions.count).to eql(1)
         expect(category_shared.category_questions.count).to eql(1)
         expect(category_unshared.category_questions.count).to eql(0)
-        expect(question.category_questions.count).to eql(6)
+        expect(question.category_questions.count).to eql(8)
       end
     end
 
@@ -71,7 +71,7 @@ describe Shared::CategoryQuestion, type: :model do
         expect(category.category_questions.count).to eql(1)
         expect(category_shared.category_questions.count).to eql(0)
         expect(category_unshared.category_questions.count).to eql(0)
-        expect(question.category_questions.count).to eql(3)
+        expect(question.category_questions.count).to eql(4)
       end
     end
 
@@ -88,7 +88,7 @@ describe Shared::CategoryQuestion, type: :model do
         expect(category.category_questions.count).to eql(1)
         expect(category_shared.category_questions.count).to eql(1)
         expect(category_unshared.category_questions.count).to eql(1)
-        expect(question.category_questions.count).to eql(9)
+        expect(question.category_questions.count).to eql(12)
       end
     end
   end

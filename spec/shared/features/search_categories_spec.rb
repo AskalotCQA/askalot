@@ -9,9 +9,9 @@ describe 'Search Categories', type: :feature do
 
     login_as user
 
-    create :category, name: 'rails', description: 'rails-description'
-    create :category, name: 'ruby', description: 'ruby-description'
-    create :category, name: 'linux', description: 'linux-description'
+    create :category, name: 'rails', description: 'rails-desc'
+    create :category, name: 'ruby', description: 'ruby-desc'
+    create :category, name: 'linux', description: 'linux-desc'
   end
 
   it 'searches categories by name' do
@@ -37,21 +37,21 @@ describe 'Search Categories', type: :feature do
 
     click_link 'Kategórie'
 
-    expect(page).to     have_content('rails-description')
-    expect(page).to     have_content('ruby-description')
-    expect(page).to     have_content('linux-description')
+    expect(page).to     have_content('rails-desc')
+    expect(page).to     have_content('ruby-desc')
+    expect(page).to     have_content('linux-desc')
 
     fill_in 'q', with: 'r'
     click_button 'search-submit'
 
-    expect(page).to     have_content('rails-description')
-    expect(page).to     have_content('ruby-description')
-    expect(page).not_to have_content('linux-description')
+    expect(page).to     have_content('rails-desc')
+    expect(page).to     have_content('ruby-desc')
+    expect(page).not_to have_content('linux-desc')
 
     fill_in 'q', with: 'ux'
     click_button 'search-submit'
 
-    expect(page).to     have_content('linux-description')
+    expect(page).to     have_content('linux-desc')
   end
 
   it 'displays categories description in category view' do
@@ -59,10 +59,10 @@ describe 'Search Categories', type: :feature do
 
     click_link 'Kategórie'
 
-    expect(page).to     have_content('rails-description')
+    expect(page).to     have_content('rails-desc')
 
     click_link 'rails', match: :first
 
-    expect(page).to     have_content('rails-description')
+    expect(page).to     have_content('rails-desc')
   end
 end

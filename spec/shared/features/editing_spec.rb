@@ -124,6 +124,7 @@ describe 'Editing', type: :feature do
 
     it 'sends notification to new watchers' do
       question.update(created_at: Time.now - 10.minutes)
+      comment.update(created_at: Time.now - 8.minutes)
 
       login_as question.author
 
