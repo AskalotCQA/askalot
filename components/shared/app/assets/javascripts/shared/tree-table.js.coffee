@@ -17,3 +17,9 @@ $('.treetable').on 'click', '.treetable-checkbox', (e) ->
 
   if (e.ctrlKey)
     $('.treetable-parent-' + id + ' input[name="' + name + '"]').prop 'checked', checked
+
+$('.treetable .default-collapsed .treetable-expander').each (index, element) ->
+  id = $(element).data 'id'
+  $(element).removeClass 'treetable-expander-expanded'
+  $(element).addClass 'treetable-expander-collapsed'
+  $('.treetable-parent-' + id).hide()

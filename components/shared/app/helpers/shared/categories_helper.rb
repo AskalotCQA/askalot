@@ -36,6 +36,7 @@ module Shared::CategoriesHelper
         node = nodes.last.pop()
         indent = indent_span * (path.size)
         tr_class = path.map { |id| "treetable-parent-#{id}" unless id.nil? }.join(' ')
+        tr_class += ' default-collapsed' if node[:depth] == 1 and node[:askable] == false or node[:depth] == 3
 
         if parents.include?(node.id)
           expander = "<span class=\"treetable-expander treetable-expander-expanded\" data-id=\"#{node.id}\"></span>"
