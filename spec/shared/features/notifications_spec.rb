@@ -42,7 +42,7 @@ describe 'Notifications', type: :feature do
 
       login_as watcher
 
-      expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::img[@alt='#{user.nick}']")
+      expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::a[text()='#{user.nick}']")
     end
 
     it 'notifies parent category watchers about new question' do
@@ -72,7 +72,7 @@ describe 'Notifications', type: :feature do
 
       login_as watcher
 
-      expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::img[@alt='#{user.nick}']")
+      expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::a[text()='#{user.nick}']")
     end
 
     it 'notifies parent category watchers about new question 2' do
@@ -103,7 +103,7 @@ describe 'Notifications', type: :feature do
 
       login_as watcher
 
-      expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::img[@alt='#{user.nick}']")
+      expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::a[text()='#{user.nick}']")
 
       click_link 'Odhlásiť', match: :first
 
@@ -135,7 +135,7 @@ describe 'Notifications', type: :feature do
 
       login_as watcher
 
-      expect(page).to have_xpath("//a[text()='2 neprečítané notifikácie']/../../descendant::img[@alt='#{user.nick}']")
+      expect(page).to have_xpath("//a[text()='2 neprečítané notifikácie']/../../descendant::a[text()='#{user.nick}']")
 
       click_link 'Odhlásiť', match: :first
 
@@ -164,7 +164,7 @@ describe 'Notifications', type: :feature do
 
       login_as watcher
 
-      expect(page).to have_xpath("//a[text()='2 neprečítané notifikácie']/../../descendant::img[@alt='#{user.nick}']")
+      expect(page).to have_xpath("//a[text()='2 neprečítané notifikácie']/../../descendant::a[text()='#{user.nick}']")
     end
 
     context 'with anonymous question' do
@@ -189,7 +189,7 @@ describe 'Notifications', type: :feature do
 
         login_as watcher
 
-        expect(page).to have_xpath('//a[text()="1 neprečítaná notifikácia"]/../../descendant::img[@alt="anonymous"]')
+        expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../descendant::span[text()='Anonym']")
       end
     end
   end
