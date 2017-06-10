@@ -16,6 +16,34 @@ module Shared::StatisticsHelper
     return mean, Math.sqrt(sum / (values.count - 1)).to_f
   end
 
+  def min(values)
+    values.min
+  end
+
+  def max(values)
+    values.max
+  end
+
+
+  def data_fraction_tag(numeration, denomination)
+    content_tag(:td, numeration.size, class: :'text-right') +
+    content_tag(:td, denomination.size != 0 ? number_to_percentage(100 * numeration.size / denomination.size.to_f, precision: 2) : :'?%', class: :'text-right')
+  end
+
+  def data_description_tag(values)
+    if values.any?
+      min   = min(values)
+      mean  = mean(values)
+      max   = max (values)
+    else
+      min = mean = max = :'?'
+    end
+
+    content_tag(:td, min, class: :'text-right') +
+    content_tag(:td, number_with_precision(mean, precision: 2), class: :'text-right') +
+    content_tag(:td, max, class: :'text-right')
+  end
+
   def data_tag(value, options = {})
     classes = Array.wrap options[:class]
 
@@ -29,29 +57,5 @@ module Shared::StatisticsHelper
     end
 
     content_tag :td, value, options.merge(class: classes.reject(&:blank?))
-  end
-
-  def data_description_tag(relation, *chain)
-    if block_given?
-      values = relation.map { |o| yield o }
-    else
-      values = chain.any? ? relation.map { |o| chain.inject(o) { |r, m| r.send(m) }.size } : relation.to_a
-    end
-
-    if values.any?
-      median          = median(values)
-      mean, deviation = mean_and_standard_deviation(values)
-    else
-      median = mean = deviation = :'?'
-    end
-
-    content_tag(:td, number_with_precision(median, precision: 2), class: :'text-right') +
-    content_tag(:td, number_with_precision(mean, precision: 2), class: :'text-right') +
-    content_tag(:td, number_with_precision(deviation, precision: 2), class: :'text-right')
-  end
-
-  def data_fraction_tag(numeration, denomination)
-    content_tag(:td, numeration.size, class: :'text-right') +
-    content_tag(:td, denomination.size != 0 ? number_to_percentage(100 * numeration.size / denomination.size.to_f, precision: 2) : :'?%', class: :'text-right')
   end
 end

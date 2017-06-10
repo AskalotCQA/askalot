@@ -1,0 +1,116 @@
+<section>
+  <div class="row">
+    <div class="col-md-4">
+      <h3><%= t('statistic.index.users') %></h3>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'fraction_header', title: t('statistic.index.overall'),      numeration: @users, denomination: @users %>
+        <tbody>
+        <%= render 'fraction_data', title: t('statistic.index.users_with_question'),  numeration: @questions.pluck(:author_id), denomination: @users %>
+        <%= render 'fraction_data', title: t('statistic.index.users_with_answer'),    numeration: @answers.pluck(:author_id),   denomination: @users %>
+        <%= render 'fraction_data', title: t('statistic.index.users_with_comment'),   numeration: (@questions.map{|q| q.comments.pluck(:author_id)} + @answers.map{|a| a.comments.pluck(:author_id)}).uniq,  denomination: @users %>
+        <%= render 'fraction_data', title: t('statistic.index.users_with_vote'),      numeration: (@questions.map{|q| q.votes.pluck(:voter_id)} + @answers.map{|a| a.votes.pluck(:voter_id)}).uniq,  denomination: @users %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <h3><%= t('statistic.index.questions') %></h3>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'fraction_header', title: t('statistic.index.overall'),                numeration: @questions, denomination: @questions %>
+        <tbody>
+        <%= render 'fraction_data', title: t('statistic.index.questions_without_answer'), numeration: @questions.unanswered,  denomination: @questions %>
+        <%= render 'fraction_data', title: t('statistic.index.questions_with_answer'),    numeration: @questions.answered,    denomination: @questions %>
+        <%= render 'fraction_data', title: t('statistic.index.questions_resolved'),       numeration: @questions.solved,      denomination: @questions %>
+        <%= render 'fraction_data', title: t('statistic.index.questions_evaluated'),      numeration: @questions.evaluated,   denomination: @answers %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <h3><%= t('statistic.index.answers') %></h3>
+
+      <table class="table table-bordered table-condensed">
+        <%= render 'fraction_header', title: t('statistic.index.overall'),                numeration: @answers, denomination: @answers %>
+        <tbody>
+        <%= render 'fraction_data', title: t('statistic.index.answers_best'),             numeration: @answers.best,      denomination: @answers %>
+        <%= render 'fraction_data', title: t('statistic.index.answers_evaluated'),        numeration: @answers.evaluated, denomination: @answers %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-md-4">
+      <table class="table table-bordered table-condensed">
+        <%= render 'description_header', title: t('statistic.index.bindings') %>
+        <tbody>
+        <%= render 'description_data', title: t('statistic.index.questions_per_user'),   values: @users.map{|u| u.questions.where(id: @questions.pluck(:id)).size } %>
+        <%= render 'description_data', title: t('statistic.index.answers_per_user'),     values: @users.map{|u| join_question(u.answers, @questions).size } %>
+        <%= render 'description_data', title: t('statistic.index.comments_per_user'),    values: @users.map{|u| join_questions(u.comments, :commentable, @questions).size + join_questions_through_answers(u.comments, :commentable, @questions).size } %>
+        <%= render 'description_data', title: t('statistic.index.votes_per_user'),       values: @users.map{|u| join_questions(u.votes, :votable, @questions).size + join_questions_through_answers(u.votes, :votable, @questions).size } %>
+        <%= render 'description_data', title: t('statistic.index.views_per_user'),       values: @users.map{|u| join_question(u.views, @questions).size } %>
+        <%= render 'description_data', title: t('statistic.index.favorites_per_user'),   values: @users.map{|u| join_question(u.favorites, @questions).size } %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <table class="table table-bordered table-condensed">
+        <%= render 'description_header', title: t('statistic.index.bindings') %>
+        <tbody>
+        <%= render 'description_data', title: t('statistic.index.answers_per_question'),        values: @questions.map{|q| q.answers.size } %>
+        <%= render 'description_data', title: t('statistic.index.best_answers_per_question'),   values: @questions.map{|q| q.answers.best.size } %>
+        <%= render 'description_data', title: t('statistic.index.views_per_question'),          values: @questions.map{|q| q.views.size } %>
+        <%= render 'description_data', title: t('statistic.index.favorites_per_question'),      values: @questions.map{|q| q.favorites.size } %>
+        <%= render 'description_data', title: t('statistic.index.comments_per_question'),       values: @questions.map{|q| q.comments.size }  %>
+        <%= render 'description_data', title: t('statistic.index.votes_per_question'),          values: @questions.map{|q| q.votes.size } %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <table class="table table-bordered table-condensed">
+        <%= render 'description_header', title: t('statistic.index.bindings') %>
+        <tbody>
+        <%= render 'description_data', title: t('statistic.index.comments_per_answer'),          values: @answers.map{|q| q.comments.size } %>
+        <%= render 'description_data', title: t('statistic.index.votes_per_answer'),             values: @answers.map{|q| q.votes.size } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="row" style="margin-top: 15px;">
+    <div class="col-md-4">
+    </div>
+
+    <div class="col-md-4">
+      <table class="table table-bordered table-condensed">
+        <%= render 'fraction_header', title: t('statistic.index.evaluation'),          numeration: @questions.evaluated, denomination: @questions %>
+        <tbody>
+        <%= render 'fraction_data', title: t('statistic.index.evaluation_very_bad'),   numeration: @questions.evaluated.where(evaluations: { value: -2 }), denomination: @questions %>
+        <%= render 'fraction_data', title: t('statistic.index.evaluation_bad'),        numeration: @questions.evaluated.where(evaluations: { value: -1 }), denomination: @questions %>
+        <%= render 'fraction_data', title: t('statistic.index.evaluation_good'),       numeration: @questions.evaluated.where(evaluations: { value:  0 }), denomination: @questions %>
+        <%= render 'fraction_data', title: t('statistic.index.evaluation_very_good'),  numeration: @questions.evaluated.where(evaluations: { value: +1 }), denomination: @questions %>
+        <%= render 'fraction_data', title: t('statistic.index.evaluation_great'),      numeration: @questions.evaluated.where(evaluations: { value: +2 }), denomination: @questions %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <table class="table table-bordered table-condensed">
+        <%= render 'fraction_header', title: t('statistic.index.evaluation'),         numeration: @answers.evaluated, denomination: @answers %>
+        <tbody>
+        <%= render 'fraction_data', title: t('statistic.index.evaluation_very_bad'),  numeration: @answers.evaluated.where(evaluations: { value: -2 }), denomination: @answers %>
+        <%= render 'fraction_data', title: t('statistic.index.evaluation_bad'),       numeration: @answers.evaluated.where(evaluations: { value: -1 }), denomination: @answers %>
+        <%= render 'fraction_data', title: t('statistic.index.evaluation_good'),      numeration: @answers.evaluated.where(evaluations: { value:  0 }), denomination: @answers %>
+        <%= render 'fraction_data', title: t('statistic.index.evaluation_very_good'), numeration: @answers.evaluated.where(evaluations: { value: +1 }), denomination: @answers %>
+        <%= render 'fraction_data', title: t('statistic.index.evaluation_great'),     numeration: @answers.evaluated.where(evaluations: { value: +2 }), denomination: @answers %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

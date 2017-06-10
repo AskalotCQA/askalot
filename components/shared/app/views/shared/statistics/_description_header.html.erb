@@ -1,8 +1,8 @@
 <thead>
   <tr class="active">
     <th class="col-md-10"><%= title %></th>
-    <th><%= content_tag :em, 'x&#771;'.html_safe, tooltip_attributes(t('statistic.description_header.median')) %></th>
+    <th><%= content_tag :em, 'Min'.html_safe, tooltip_attributes(t('statistic.description_header.min')) %></th>
     <th><%= content_tag :em, 'x&#772;'.html_safe, tooltip_attributes(t('statistic.description_header.average')) %></th>
-    <th><%= content_tag :em, '&sigma;'.html_safe, tooltip_attributes(t('statistic.description_header.standard_deviation')) %></th>
+    <th><%= content_tag :em, 'Max'.html_safe, tooltip_attributes(t('statistic.description_header.max')) %></th>
   </tr>
 </thead>
