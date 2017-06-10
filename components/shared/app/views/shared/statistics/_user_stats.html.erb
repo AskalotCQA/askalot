@@ -1,0 +1,79 @@
+<section >
+  <div class="row">
+    <div class="col-md-12">
+      <h3><%= t('statistic.index.users') %></h3>
+
+      <% if @users.any? %>
+          <div class="responsive-block">
+            <table class="table table-bordered table-condensed table-statistical" data-sortable="true">
+              <thead>
+              <tr class="active">
+                <th colspan="2" rowspan="2" class="text-center"><%= t('statistic.index.user') %></th>
+
+                <th colspan="4" data-sorter="false"><%= t('statistic.index.questions') %></th>
+                <th colspan="2" data-sorter="false"><%= t('statistic.index.answers') %></th>
+                <th colspan="3" data-sorter="false"><%= t('statistic.index.comments') %></th>
+                <th colspan="3" data-sorter="false"><%= t('statistic.index.votes') %></th>
+                <th colspan="1" data-sorter="false"><%= t('statistic.index.views') %></th>
+                <th colspan="1" data-sorter="false"><%= t('statistic.index.favourites') %></th>
+              </tr>
+              <tr class="active">
+                <th><%= t('statistic.index.overall') %></th>
+                <th><%= t('statistic.index.questions_without_answer') %></th>
+                <th><%= t('statistic.index.questions_with_answer') %></th>
+                <th><%= t('statistic.index.questions_resolved') %></th>
+
+                <th><%= t('statistic.index.overall') %></th>
+                <th><%= t('statistic.index.answers_best') %></th>
+
+                <th><%= t('statistic.index.overall') %></th>
+                <th><%= t('statistic.index.questions_more') %></th>
+                <th><%= t('statistic.index.answers_more') %></th>
+
+                <th><%= t('statistic.index.overall') %></th>
+                <th><%= t('statistic.index.questions_more') %></th>
+                <th><%= t('statistic.index.answers_more') %></th>
+
+                <th><%= t('statistic.index.overall') %></th>
+
+                <th><%= t('statistic.index.overall') %></th>
+              </tr>
+              </thead>
+              <tbody>
+              <% @users.each_with_index do |user, i| %>
+                  <tr>
+                    <td class="text-right"><%= i + 1 %></td>
+                    <%= data_tag(user) { |u| [link_to(u.name || u.nick, user_path(u.nick)), { administrator: :'text-muted', teacher: :info , teacher_assistant: :info }[u.role]] } %>
+
+                    <%= data_tag user.questions.where(id: @questions.pluck(:id)).size %>
+                    <%= data_tag user.questions.where(id: @questions.pluck(:id)).unanswered.size %>
+                    <%= data_tag user.questions.where(id: @questions.pluck(:id)).answered.size %>
+                    <%= data_tag user.questions.where(id: @questions.pluck(:id)).solved.size %>
+
+                    <%= data_tag join_question(user.answers, @questions).size %>
+                    <%= data_tag join_question(user.answers.labeled_with(:best), @questions).size %>
+
+                    <%= data_tag join_questions(user.comments, :commentable, @questions).size + join_questions_through_answers(user.comments, :commentable, @questions).size %>
+                    <%= data_tag join_questions(user.comments, :commentable, @questions).size %>
+                    <%= data_tag join_questions_through_answers(user.comments, :commentable, @questions).size %>
+
+                    <%= data_tag join_questions(user.votes, :votable, @questions).size + join_questions_through_answers(user.votes, :votable, @questions).size %>
+                    <%= data_tag join_questions(user.votes, :votable, @questions).size %>
+                    <%= data_tag join_questions_through_answers(user.votes, :votable, @questions).size %>
+
+                    <%= data_tag join_question(user.views, @questions).size %>
+
+                    <%= data_tag join_question(user.favorites, @questions).size %>
+                  </tr>
+              <% end %>
+              </tbody>
+            </table>
+          </div>
+      <% else %>
+          <div class="alert alert-warning">
+            <%= t('statistic.index.no_users') %>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</section>

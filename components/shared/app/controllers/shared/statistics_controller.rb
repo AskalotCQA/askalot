@@ -4,20 +4,11 @@ module Shared
 class StatisticsController < ApplicationController
   before_action :authenticate_user!
 
+  default_tab :overall, only: :index
+
   def index
     authorize! :observe, nil
 
-    @users     = Shared::User.order(:name)
-    @questions = Shared::Question.all
-    @answers   = Shared::Answer.all
-
-    filter_by_date
-    filter_by_tags
-  end
-
-  private
-
-  def filter_by_date
     now = DateTime.now
 
     @from = Date.parse(params[:from]) rescue now.change(month: 9, day: 1).instance_eval { |from| now.month < 9 ? (from - 1.year) : from }.to_date
@@ -29,11 +20,26 @@ class StatisticsController < ApplicationController
     params[:from] = @from.strftime '%-d.%-m.%Y'
     params[:to]   = @to.strftime   '%-d.%-m.%Y'
 
+    params[:to]   = @to.strftime   '%-d.%-m.%Y'
+
+    if params[:category].present?
+      @users     = Shared::User.order(:name)
+      @questions = Shared::Question
+      @answers   = Shared::Answer
+
+      filter_by_date
+      filter_by_category
+    end
+  end
+
+  private
+
+  def filter_by_date
     @questions = @questions.where(created_at: @from..@to)
   end
 
-  def filter_by_tags
-    @questions = @questions.tagged_with(params[:tags]).uniq if params[:tags].present?
+  def filter_by_category
+    @questions = @questions.in_context(params[:category])
     @answers   = join_question(Shared::Answer, @questions).uniq
 
     users  = (@questions.pluck(:author_id) + @answers.pluck(:author_id)).to_set

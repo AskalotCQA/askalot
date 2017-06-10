@@ -2,11 +2,8 @@
 
 <%= form_tag statistics_path, method: :get, class: :'form-horizontal statistics-filter', role: :form do %>
   <div class="form-group">
-    <div class="col-md-4">
-      <div class="input-group select2-bootstrap-prepend">
-        <span class="input-group-addon"><%= icon_tag :tags %></span>
-        <%= text_field_tag :tags, params[:tags], class: :'form-control', data: { as: :select2, role: :tags } %>
-      </div>
+    <div class="col-md-5">
+      <%= select_tag :category, options_for_select(Shared::Category.askable.not_unknown.order(:depth, :full_tree_name).all.collect{ |c| [c.full_tree_name, c.id]}, params[:category]), include_blank: true, class: :'form-control', data: { as: :select2, role: :category } %>
     </div>
     <div class="col-md-4">
       <div class="input-group">
@@ -16,7 +13,7 @@
         <%= text_field_tag :to, params[:to], class: :'form-control', data: { as: :datepicker } %>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
       <button type="submit" class="btn btn-default"><%= t('statistic.index.filter') %></button>
     </div>
   </div>
@@ -24,225 +21,32 @@
     <div class="col-md-12">
       <p class="help-block">
         <em>
-          <%= t('statistic.index.answering') %>
-          <br/>
-          <%= t('statistic.index.voting') %>
+          <%= t('statistic.index.users_included') %>
         </em>
       </p>
     </div>
   </div>
 <% end %>
 
-<section>
-  <div class="row">
-    <div class="col-md-4">
-      <h3><%= t('statistic.index.users') %></h3>
 
-      <table class="table table-bordered table-condensed">
-        <%= render 'fraction_header', title: t('statistic.index.overall'), numeration: @users, denomination: @users %>
-        <tbody>
-          <%= render 'fraction_data', title: t('statistic.index.without_question'), numeration: @users.where(questions_count: 0), denomination: @users %>
-          <%= render 'fraction_data', title: t('statistic.index.without_answer'),   numeration: @users.where(answers_count: 0),   denomination: @users %>
-          <%= render 'fraction_data', title: t('statistic.index.without_comment'),  numeration: @users.where(comments_count: 0),  denomination: @users %>
-        </tbody>
-      </table>
-
-      <table class="table table-bordered table-condensed">
-        <%= render 'description_header', title: t('statistic.index.questions') %>
-        <tbody>
-          <%= render 'description_data', title: t('statistic.index.questions_add'), relation: @users, chain: :questions %>
-        </tbody>
-        <tbody>
-          <%= render 'description_data', title: t('statistic.index.questions_show'),      relation: @users, chain: [:questions, :viewed_by_others] %>
-          <%= render 'description_data', title: t('statistic.index.questions_vote'),      relation: @users, chain: [:questions, :voted] %>
-          <%= render 'description_data', title: t('statistic.index.questions_comment'),   relation: @users, chain: [:questions, :commented] %>
-          <%= render 'description_data', title: t('statistic.index.questions_favourite'), relation: @users, chain: [:questions, :favored] %>
-        </tbody>
-        <tbody>
-          <%= render 'description_data', title: t('statistic.index.questions_not_answer'), relation: @users, chain: [:questions, :unanswered] %>
-          <%= render 'description_data', title: t('statistic.index.questions_answer'),     relation: @users, chain: [:questions, :answered] %>
-          <%= render 'description_data', title: t('statistic.index.questions_resolve'),    relation: @users, chain: [:questions, :solved] %>
-        </tbody>
-      </table>
-
-      <table class="table table-bordered table-condensed">
-        <%= render 'description_header', title: t('statistic.index.answers') %>
-        <tbody>
-          <%= render 'description_data', title: t('statistic.index.answers_add'), relation: @users, chain: :answers %>
-        </tbody>
-        <tbody>
-          <%= render 'description_data', title: t('statistic.index.answers_vote'),    relation: @users, chain: [:answers, :voted] %>
-          <%= render 'description_data', title: t('statistic.index.answers_comment'), relation: @users, chain: [:answers, :commented] %>
-        </tbody>
-        <tbody>
-          <%= render 'description_data', title: t('statistic.index.answers_best'), relation: @users, chain: [:answers, :best] %>
-          <%= render 'description_data', title: t('statistic.index.answers_help'), relation: @users, chain: [:answers, :helpful] %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="col-md-4">
-      <h3><%= t('statistic.index.questions') %></h3>
-
-      <table class="table table-bordered table-condensed">
-        <%= render 'fraction_header', title: t('statistic.index.overall'), numeration: @questions, denomination: @questions %>
-        <tbody>
-          <%= render 'fraction_data', title: t('statistic.index.questions_without_answer'), numeration: @questions.unanswered, denomination: @questions %>
-          <%= render 'fraction_data', title: t('statistic.index.questions_with_answer'),    numeration: @questions.answered,   denomination: @questions %>
-          <%= render 'fraction_data', title: t('statistic.index.questions_resolved'),       numeration: @questions.solved,     denomination: @questions %>
-        </tbody>
-      </table>
-
-      <table class="table table-bordered table-condensed">
-        <%= render 'fraction_header', title: t('statistic.index.vote'), numeration: @questions.evaluated, denomination: @questions %>
-        <tbody>
-          <%= render 'fraction_data', title: t('statistic.index.vote_very_bad'),   numeration: @questions.evaluated.where(evaluations: { value: -2 }), denomination: @questions %>
-          <%= render 'fraction_data', title: t('statistic.index.vote_bad'),        numeration: @questions.evaluated.where(evaluations: { value: -1 }), denomination: @questions %>
-          <%= render 'fraction_data', title: t('statistic.index.vote_good'),       numeration: @questions.evaluated.where(evaluations: { value:  0 }), denomination: @questions %>
-          <%= render 'fraction_data', title: t('statistic.index.vote_very_good'),  numeration: @questions.evaluated.where(evaluations: { value: +1 }), denomination: @questions %>
-          <%= render 'fraction_data', title: t('statistic.index.vote_great'),      numeration: @questions.evaluated.where(evaluations: { value: +2 }), denomination: @questions %>
-        </tbody>
-      </table>
-
-      <table class="table table-bordered table-condensed">
-        <%= render 'description_header', title: t('statistic.index.bindings') %>
-        <tbody>
-          <%= render 'description_data', title: t('statistic.index.bindings_answers'), relation: @questions, chain: [:answers] %>
-          <%= render 'description_data', title: t('statistic.index.bindings_best'),    relation: @questions, chain: [:answers, :best] %>
-          <%= render 'description_data', title: t('statistic.index.bindings_help'),    relation: @questions, chain: [:answers, :helpful] %>
-        </tbody>
-        <tbody>
-          <%= render 'description_data', title: t('statistic.index.bindings_show'),      relation: @questions, chain: [:views] %>
-          <%= render 'description_data', title: t('statistic.index.bindings_vote'),      relation: @questions, chain: [:votes] %>
-          <%= render 'description_data', title: t('statistic.index.bindings_comment'),   relation: @questions, chain: [:comments] %>
-          <%= render 'description_data', title: t('statistic.index.bindings_favourite'), relation: @questions, chain: [:favorites] %>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="col-md-4">
-      <h3><%= t('statistic.index.answers') %></h3>
-
-      <table class="table table-bordered table-condensed">
-        <%= render 'fraction_header', title: t('statistic.index.overall'), numeration: @answers, denomination: @answers %>
-        <tbody>
-          <%= render 'fraction_data', title: t('statistic.index.bindings_best_all'), numeration: @answers.best,      denomination: @answers %>
-          <%= render 'fraction_data', title: t('statistic.index.bindings_help_all'), numeration: @answers.helpful,   denomination: @answers %>
-          <%= render 'fraction_data', title: t('statistic.index.bindings_vote_all'), numeration: @answers.evaluated, denomination: @answers %>
-        <tbody>
-      </table>
-
-      <table class="table table-bordered table-condensed">
-        <%= render 'fraction_header', title: t('statistic.index.vote'), numeration: @answers.evaluated, denomination: @answers %>
-        <tbody>
-          <%= render 'fraction_data', title: t('statistic.index.vote_very_bad'),  numeration: @answers.evaluated.where(evaluations: { value: -2 }), denomination: @answers %>
-          <%= render 'fraction_data', title: t('statistic.index.vote_bad'),       numeration: @answers.evaluated.where(evaluations: { value: -1 }), denomination: @answers %>
-          <%= render 'fraction_data', title: t('statistic.index.vote_good'),      numeration: @answers.evaluated.where(evaluations: { value:  0 }), denomination: @answers %>
-          <%= render 'fraction_data', title: t('statistic.index.vote_very_good'), numeration: @answers.evaluated.where(evaluations: { value: +1 }), denomination: @answers %>
-          <%= render 'fraction_data', title: t('statistic.index.vote_great'),     numeration: @answers.evaluated.where(evaluations: { value: +2 }), denomination: @answers %>
-        </tbody>
-      </table>
-
-      <table class="table table-bordered table-condensed">
-        <%= render 'description_header', title: t('statistic.index.bindings') %>
-        <tbody>
-          <%= render 'description_data', title: t('statistic.index.vote_on_answer'),    relation: @answers, chain: [:votes] %>
-          <%= render 'description_data', title: t('statistic.index.comment_on_answer'), relation: @answers, chain: [:comments] %>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="row">
-    <div class="col-md-12">
-      <h3><%= t('statistic.index.users') %></h3>
-
-      <% if @users.any? %>
-        <div class="responsive-block">
-          <table class="table table-bordered table-condensed table-statistical" data-sortable="true">
-            <thead>
-              <tr class="active">
-                <th colspan="2" rowspan="3" class="text-center"><%= t('statistic.index.user') %></th>
-
-                <th colspan="5" data-sorter="false"><%= t('statistic.index.questions') %></th>
-                <th colspan="5" data-sorter="false"><%= t('statistic.index.answers') %></th>
-                <th colspan="3" data-sorter="false"><%= t('statistic.index.comments') %></th>
-                <th colspan="3" data-sorter="false"><%= t('statistic.index.votes') %></th>
-                <th colspan="1" data-sorter="false"><%= t('statistic.index.views') %></th>
-                <th colspan="1" data-sorter="false"><%= t('statistic.index.favourites') %></th>
-              </tr>
-              <tr class="active">
-                <th rowspan="2"><%= t('statistic.index.completely') %></th>
-                <th colspan="4" data-sorter="false"><%= t('statistic.index.users_more') %></th>
-
-                <th rowspan="2"><%= t('statistic.index.completely') %></th>
-                <th colspan="4" data-sorter="false"><%= t('statistic.index.users_more') %></th>
-
-                <th rowspan="2"><%= t('statistic.index.completely') %></th>
-                <th rowspan="2"><%= t('statistic.index.questions_more') %></th>
-                <th rowspan="2"><%= t('statistic.index.answers_more') %></th>
-
-                <th rowspan="2"><%= t('statistic.index.completely') %></th>
-                <th rowspan="2"><%= t('statistic.index.questions_more') %></th>
-                <th rowspan="2"><%= t('statistic.index.answers_more') %></th>
-
-                <th rowspan="2"><%= t('statistic.index.questions_more') %></th>
-
-                <th rowspan="2"><%= t('statistic.index.questions_more') %></th>
-              </tr>
-              <tr class="active">
-                <th><%= t('statistic.index.shown') %></th>
-                <th><%= t('statistic.index.voted') %></th>
-                <th><%= t('statistic.index.commented') %></th>
-                <th><%= t('statistic.index.favourited') %></th>
-
-                <th><%= t('statistic.index.voted') %></th>
-                <th><%= t('statistic.index.commented') %></th>
-                <th><%= t('statistic.index.best') %></th>
-                <th><%= t('statistic.index.auxiliary') %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @users.each_with_index do |user, i| %>
-                <tr>
-                  <td class="text-right"><%= i + 1 %></td>
-                  <%= data_tag(user) { |u| [link_to(u.name || u.nick, user_path(u.nick)), { administrator: :'text-muted', teacher: :info , teacher_assistant: :info }[u.role]] } %>
-
-                  <%= data_tag user.questions.where(id: @questions).size %>
-                  <%= data_tag user.questions.where(id: @questions).viewed.size %>
-                  <%= data_tag user.questions.where(id: @questions).voted.size %>
-                  <%= data_tag user.questions.where(id: @questions).commented.size %>
-                  <%= data_tag user.questions.where(id: @questions).favored.size %>
-
-                  <%= data_tag join_question(user.answers, @questions).size %>
-                  <%= data_tag join_question(user.answers.voted, @questions).size %>
-                  <%= data_tag join_question(user.answers.commented, @questions).size %>
-                  <%= data_tag join_question(user.answers.labeled_with(:best), @questions).size %>
-                  <%= data_tag join_question(user.answers.labeled_with(:helpful), @questions).size %>
-
-                  <%= data_tag join_questions(user.comments, :commentable, @questions).size + join_questions_through_answers(user.comments, :commentable, @questions).size %>
-                  <%= data_tag join_questions(user.comments, :commentable, @questions).size %>
-                  <%= data_tag join_questions_through_answers(user.comments, :commentable, @questions).size %>
-
-                  <%= data_tag join_questions(user.votes, :votable, @questions).size + join_questions_through_answers(user.votes, :votable, @questions).size %>
-                  <%= data_tag join_questions(user.votes, :votable, @questions).size %>
-                  <%= data_tag join_questions_through_answers(user.votes, :votable, @questions).size %>
-
-                  <%= data_tag join_question(user.views, @questions).size %>
-
-                  <%= data_tag join_question(user.favorites, @questions).size %>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+<% if @questions.nil? %>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="alert alert-info">
+          <%= t('statistic.index.no_filter') %>
         </div>
-      <% else %>
-        <div class="alert alert-warning">
-          <%= t('statistic.index.no_users') %>
-        </div>
-      <% end %>
+      </div>
     </div>
-  </div>
-</section>
+<% else %>
+    <div class="tab-navigation">
+      <ul class="nav nav-tabs">
+        <%= tab_link_tag t('statistic.tab.overall'), :overall, statistics_path(params.symbolize_keys.merge tab: :overall), analytics_attributes(:statistic, :switch, :tab) %>
+        <%= tab_link_tag t('statistic.tab.users'), :users, statistics_path(params.symbolize_keys.merge tab: :users), analytics_attributes(:statistic, :switch, :users) %>
+      </ul>
+    </div>
+
+    <div class="tab-content">
+      <%= render_tab_content 'overall_stats', :overall, locals: { users: @users, questions: @questions, answers: @answers, tab: :overall } %>
+      <%= render_tab_content 'user_stats', :users, locals: { users: @users, questions: @questions, answers: @answers, tab: :users } %>
+    </div>
+<% end %>
