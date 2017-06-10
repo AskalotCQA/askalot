@@ -14,7 +14,7 @@
           <%= icon_tag :check %>
         <% end %>
       <% else %>
-        <%= link_to shared.unread_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.unread.submit'), placement: :bottom).merge(class: 'btn btn-primitive btn-xs pull-right text-muted') do %>
+        <%= link_to shared.unread_notification_path(notification, params: { tab: params[:tab] }), tooltip_attributes(t('notification.unread.submit'), placement: :bottom).merge(class: 'btn btn-primitive btn-xs pull-right') do %>
           <%= icon_tag :check %>
         <% end %>
       <% end %>
