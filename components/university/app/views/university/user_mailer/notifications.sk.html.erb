@@ -18,7 +18,9 @@
 
 <% if @user.mail_notification_delay != 0 %>
   <p class="text-muted">
-    Notifikácie Vám boli poslané <%= Shared::Configuration.mailer.notification_delay %> hodiny od posledného e-mailu, pretože za posledných <%= Shared::Configuration.mailer.check_unread_notifications_hours %> hodín máte niektoré neprečítané notifikácie.
+    Tieto notifikácie sme Vám poslali s oneskorením (<%= Shared::Configuration.mailer.notification_delay %> hodiny) od posledného e-mailu s notifikáciami.
+    <br/>
+    Nechceme Vás spamovať, keďže ste si ešte nestihli prečítať predchádzajúce notifikácie za posledných <%= Shared::Configuration.mailer.check_unread_notifications_hours %> hodín.
   </p>
 <% end %>
 
