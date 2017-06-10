@@ -4,7 +4,7 @@ class Administration::AssignmentsController < AdministrationController
 
   def index
     @assignments  = Shared::Assignment.includes(:user, :category, :role).where('admin_visible = true').order('categories.full_public_name', 'users.nick')
-    @categories   = Shared::Category.order(:depth, :full_public_name).all
+    @categories   = Shared::Category.order(:depth, :full_tree_name).all
     @users        = Shared::User::order(:login).all
     @assignment ||= Shared::Assignment.new
 
