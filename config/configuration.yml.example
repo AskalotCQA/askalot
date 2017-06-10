@@ -13,6 +13,8 @@ defaults: &defaults
     username: TODO
     password: TODO
     alias: 'Askalot <askalot@fiit.stuba.sk>'
+    check_unread_notifications_hours: 24
+    notification_delay: 4
 
   secret_token: TODO
 

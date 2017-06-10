@@ -79,6 +79,11 @@ describe Shared::User, type: :model do
     expect(user).to be_valid
   end
 
+  it 'set last mail notification date' do
+    user = create :user
+    expect(user.last_mail_notification_sent_at).to eq(Date.today + 5.hours)
+  end
+
   context 'when login is set' do
     it 'requires nick' do
       user = build :user, login: 'peter'

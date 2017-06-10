@@ -6,7 +6,7 @@ module University::Mailers
 
     def self.deliver_notifications!
       users.joins(:notifications).where('notifications.created_at >= ?', 1.day.ago).uniq.find_each.map { |user|
-        University::UserMailer.notifications(user, from: 1.day.ago)
+        University::UserMailer.notifications(user)
       }.map(&:deliver_now!)
     end
   end

@@ -33,11 +33,11 @@ if env_type != 'staging'
       rake 'reputation:adjust'
     end
 
-    every 5.minutes do
-      rake 'slido:questions'
-    end
+    # every 5.minutes do
+    #   rake 'slido:questions'
+    # end
 
-    every 1.day, at: '5:32am' do
+    every 5.minutes do
       runner 'University::Mailers::UserMailerService.deliver_notifications!'
     end
 
@@ -51,7 +51,7 @@ if env_type != 'staging'
   end
 
   if env_name == 'edx'
-    every 1.day, at: '5:32am' do
+    every 5.minutes do
       runner 'Mooc::Mailers::UserMailerService.deliver_notifications!'
     end
   end

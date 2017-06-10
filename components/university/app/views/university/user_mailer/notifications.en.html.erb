@@ -1,6 +1,6 @@
 <%= render 'shared/user_mailer/header' %>
 
-<h4 class="title">Summary of your notifications from <%= tooltip_time_tag @from %></h4>
+<h4 class="title">Summary of your notifications from <%= time_tag @from, format: :normal %></h4>
 
 <ol class="notifications">
   <% @notifications.each do |notification| %>
@@ -11,15 +11,23 @@
 
       <%= link_to_user notification.initiator_or_anonymous, absolute_url: true %>
       <span class="text-muted">&middot;</span>
-      <%= tooltip_time_tag notification.created_at, class: 'text-muted', format: :normal, placement: :bottom %>
+      <%= time_tag notification.created_at, class: 'text-muted', format: :normal %>
     </li>
   <% end %>
 </ol>
 
+<% if @user.mail_notification_delay != 0 %>
+  <p class="text-muted">
+    These notifications were sent with a delay (<%= Shared::Configuration.mailer.notification_delay %> hours) after the last notification email.
+    <br/>
+    We do not want to spam you, since you have not read all your notifications in the last <%= Shared::Configuration.mailer.check_unread_notifications_hours %> hours yet.
+  </p>
+<% end %>
+
 <p>
   <%= link_to "Show unread notifications", shared.notifications_url(tab: :unread) %>
   <span class="text-muted">&middot;</span>
-  <%= link_to "Cancel e-mail notifications", shared.edit_user_registration_url(tab: :notifications) %>
+  <%= link_to "Cancel e-mail notifications or change frequency", shared.edit_user_registration_url(tab: :notifications) %>
 </p>
 
 <%= render 'shared/user_mailer/footer' %>

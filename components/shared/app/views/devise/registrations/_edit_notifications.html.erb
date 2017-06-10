@@ -20,5 +20,11 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
+    <div class="form-group">
+      <%= f.label :send_mail_notifications_frequency %>
+      <%= f.select :send_mail_notifications_frequency, [[t('user.edit.notifications_frequency.daily'), 'daily'], [t('user.edit.notifications_frequency.instantly'), 'instantly']], {}, class: 'form-control' %>
+      <div class="help-block"><%= t('user.edit.notifications_frequency.help').html_safe %></div>
+    </div>
+
+    <button type="submit" class="btn btn-success"><%= t('user.save_account') %></button>
 <% end %>
