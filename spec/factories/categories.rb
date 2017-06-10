@@ -5,7 +5,7 @@ FactoryGirl.define do
     askable true
     visible true
 
-    parent_id 3
+    parent_id Rails.module.mooc? ? 2 : 3
 
     trait :with_tags do
       sequence(:tags) { |n| ["category-#{n}"] }

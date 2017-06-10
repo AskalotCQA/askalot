@@ -6,7 +6,9 @@ describe Shared::CategoryQuestion, type: :model do
     category = create :category
     create :question, category: category
 
-    expect(Shared::CategoryQuestion.all.count).to eql(4)
+    count = Rails.module.mooc? ? 3 : 4
+
+    expect(Shared::CategoryQuestion.all.count).to eql(count)
     expect(Shared::CategoryQuestion.where(category_id: category.id).count).to eql(1)
     expect(Shared::CategoryQuestion.where(category_id: category.parent_id).count).to eql(1)
   end
@@ -51,10 +53,12 @@ describe Shared::CategoryQuestion, type: :model do
         category_unshared.reload
         question.reload
 
+        count = Rails.module.mooc? ? 6 : 8
+
         expect(category.category_questions.count).to eql(1)
         expect(category_shared.category_questions.count).to eql(1)
         expect(category_unshared.category_questions.count).to eql(0)
-        expect(question.category_questions.count).to eql(8)
+        expect(question.category_questions.count).to eql(count)
       end
     end
 
@@ -68,10 +72,12 @@ describe Shared::CategoryQuestion, type: :model do
         category_shared.reload
         category_unshared.reload
 
+        count = Rails.module.mooc? ? 3 : 4
+
         expect(category.category_questions.count).to eql(1)
         expect(category_shared.category_questions.count).to eql(0)
         expect(category_unshared.category_questions.count).to eql(0)
-        expect(question.category_questions.count).to eql(4)
+        expect(question.category_questions.count).to eql(count)
       end
     end
 
@@ -85,10 +91,12 @@ describe Shared::CategoryQuestion, type: :model do
         category_shared.reload
         category_unshared.reload
 
+        count = Rails.module.mooc? ? 9 : 12
+
         expect(category.category_questions.count).to eql(1)
         expect(category_shared.category_questions.count).to eql(1)
         expect(category_unshared.category_questions.count).to eql(1)
-        expect(question.category_questions.count).to eql(12)
+        expect(question.category_questions.count).to eql(count)
       end
     end
   end

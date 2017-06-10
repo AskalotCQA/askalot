@@ -17,7 +17,5 @@ category = Shared::Category.find_or_create_by! name: :section, uuid: :section_uu
 
 if Rails.env_type.test?
   unit    = Shared::Category.find_or_create_by! name: 'Unit', parent_id: category.id
-
-  # we have the same category depths configuration for both test envs so this category must be created
   subunit = Shared::Category.find_or_create_by! name: 'SubUnit', parent_id: unit.id
 end
