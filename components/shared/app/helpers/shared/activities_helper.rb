@@ -13,8 +13,7 @@ module Shared::ActivitiesHelper
   def activity_content(activity, options = {})
     content = activity_content_by_attributes(activity.action, activity.initiator, activity.resource, options)
 
-    mute = options.delete(:mute) || lambda { |_| false }
-    mute.call(activity) ? content_tag(:span, content, class: :'text-muted') : content
+    options.delete(:mute).try(:call, activity) ? content_tag(:span, content, class: :'text-muted') : content
   end
 
   def activity_content_by_attributes(action, initiator, resource, options = {})
