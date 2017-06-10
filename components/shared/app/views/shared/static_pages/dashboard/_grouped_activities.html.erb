@@ -2,7 +2,7 @@
   <% break if index >= 6 %>
   <div class="row">
     <div class="col-md-4 col-sm-5">
-      <% activities.sort_by(&:created_at).each do |activity| %>
+      <% activities.sort_by(&:created_at).reverse.each do |activity| %>
           <%= render 'shared/static_pages/dashboard/activity', activity: activity %>
       <% end %>
     </div>
