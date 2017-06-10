@@ -364,7 +364,7 @@ sk:
         send_email_notifications: "Zasielať e-mailové notifikácie"
         send_facebook_notifications: "Zasielať facebookové notifikácie"
         prefered_activity_tab: "Preferovaný zoznam aktivít na nástenke"
-        send_mail_notifications_frequency: "E-mail notifications frequency"
+        send_mail_notifications_frequency: "Frekvencia emailových notifikácií"
 
     symbolizes:
       shared/question_type:
