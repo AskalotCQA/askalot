@@ -16,7 +16,7 @@ describe University::Mailers::UserMailerService do
 
         email = double(:email)
 
-        allow(University::UserMailer).to receive(:notifications).with(users[2], from: 1.days.ago) { email }
+        allow(University::UserMailer).to receive(:notifications).with(users[2]) { email }
 
         expect(email).to receive(:deliver_now!)
 
