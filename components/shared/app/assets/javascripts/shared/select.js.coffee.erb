@@ -62,7 +62,6 @@ class window.Select extends Module
         markup += '</span>'
       matcher: (term, text, option) ->
         removeDiacritics(text.toLowerCase()).indexOf(removeDiacritics(term.toLowerCase()))>=0 || removeDiacritics($(option).data("description").toLowerCase()).indexOf(removeDiacritics(term.toLowerCase()))>=0
-
     filter:
       createSearchChoice: (term, data) -> return if data.length == 0
 
