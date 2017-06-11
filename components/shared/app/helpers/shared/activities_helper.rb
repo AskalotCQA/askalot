@@ -32,11 +32,8 @@ module Shared::ActivitiesHelper
       resource_body = activity_resource_body(action, resource, resource_options)
       question_body = activity_question_body(action, question, question_options)
 
-      # TODO(zbell) note that unlinked content also lacks any struct info about deletion: no muted spans
-      if options.delete(:unlink)
-        options[:mute] = true
-
-        return translate content, resource: resource_body, question: question_body
+      if question_options[:deleted]
+        options[:mute] = lambda { |_| true }
       end
 
       resource_link = link_to_activity_by_attributes action, initiator, resource, resource_options.merge(body: resource_body)
