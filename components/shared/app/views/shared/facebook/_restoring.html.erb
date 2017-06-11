@@ -1,20 +1,18 @@
-<% if current_user.facebook_uid && !FbGraph2::Auth.new(Shared::Configuration.facebook.application.id, Shared::Configuration.facebook.application.secret).debug_token!(current_user.omniauth_token).is_valid %>
-  <div id="facebook-restoring" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header bg-primary">
-          <h2 class="modal-title"><%= icon_tag :facebook, fixed: true %> <%= t('facebook.restore.title') %></h2>
-        </div>
-        <div class="modal-body">
-          <%= link_to t('facebook.restore.message'), auth_facebook_path %>
-          <%= t('facebook.restore.benefit') %><br/>
-          <small class="text-muted"><%= t('facebook.restore.note') %></small>
-        </div>
-        <div class="modal-footer">
-          <%= link_to t('facebook.restore.submit'), auth_facebook_path, class: 'btn btn-success' %>
-          <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('facebook.restore.close') %></button>
-        </div>
+<div id="facebook-restoring" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h2 class="modal-title"><%= icon_tag :facebook, fixed: true %> <%= t('facebook.restore.title') %></h2>
+      </div>
+      <div class="modal-body">
+        <%= link_to t('facebook.restore.message'), auth_facebook_path %>
+        <%= t('facebook.restore.benefit') %><br/>
+        <small class="text-muted"><%= t('facebook.restore.note') %></small>
+      </div>
+      <div class="modal-footer">
+        <%= link_to t('facebook.restore.submit'), auth_facebook_path, class: 'btn btn-success' %>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('facebook.restore.close') %></button>
       </div>
     </div>
   </div>
-<% end %>
+</div>

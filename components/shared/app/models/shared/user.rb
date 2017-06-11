@@ -154,6 +154,8 @@ class User < ActiveRecord::Base
     self.facebook_friends = friends.to_s
     self.facebook_likes   = likes.to_s
 
+    self.send_facebook_notifications = true
+
     self.save!
   end
 

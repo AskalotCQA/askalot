@@ -1,10 +1,5 @@
 <% use_container true %>
 
-<% if session[:facebook_modal] %>
-    <%= render 'shared/facebook/joining' %>
-    <%= render 'shared/facebook/restoring' %>
-<% end %>
-
 <%= flash_messages { |content| content_tag :section, content } %>
 
 <div class="dashboard">

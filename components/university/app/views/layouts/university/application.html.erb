@@ -13,6 +13,14 @@
     <%= render 'layouts/university/header' -%>
     <% if use_container? %>
       <div id="main" class="container">
+        <% if @facebook_modal_joining %>
+            <%= render 'shared/facebook/joining' %>
+        <% end %>
+
+        <% if @facebook_modal_restoring %>
+            <%= render 'shared/facebook/restoring' %>
+        <% end %>
+
         <%= flash_messages -%>
         <%= yield -%>
       </div>
