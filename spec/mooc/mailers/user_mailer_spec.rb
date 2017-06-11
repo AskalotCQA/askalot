@@ -81,6 +81,7 @@ describe Mooc::UserMailer, type: :mailer do
           expect(mail.subject).to eql('[Askalot] Nové notifikácie')
           expect(mail.body.encoded).to include('Pridanie otázky')
           expect(mail.body.encoded).to include('18. Marec 2014')
+          expect(mail.body.encoded).not_to include('Tieto notifikácie sme Vám poslali s oneskorením')
         end
       end
 
@@ -101,6 +102,7 @@ describe Mooc::UserMailer, type: :mailer do
           expect(mail.subject).to eql('[Askalot] Nové notifikácie')
           expect(mail.body.encoded).to include('Pridanie otázky')
           expect(mail.body.encoded).to include('18. Marec 2014')
+          expect(mail.body.encoded).not_to include('Tieto notifikácie sme Vám poslali s oneskorením')
 
           expect(user.last_mail_notification_sent_at).to eq(Time.now)
 
@@ -140,6 +142,7 @@ describe Mooc::UserMailer, type: :mailer do
             mail = Mooc::UserMailer.notifications(user)
 
             expect(mail.subject).to eql('[Askalot] Nové notifikácie')
+            expect(mail.body.encoded).to include('Tieto notifikácie sme Vám poslali s oneskorením')
           end
 
           Timecop.travel(480.minutes.from_now) do
@@ -160,6 +163,7 @@ describe Mooc::UserMailer, type: :mailer do
             mail = Mooc::UserMailer.notifications(user)
 
             expect(mail.subject).to eql('[Askalot] Nové notifikácie')
+            expect(mail.body.encoded).to include('Tieto notifikácie sme Vám poslali s oneskorením')
           end
         end
       end

@@ -16,6 +16,12 @@ module Shared::Notifications
       Shared::Notification.for(user).unread.where('created_at >= ?', Shared::Configuration.mailer.check_unread_notifications_hours.hours.ago)
     end
 
+    def unread_notifications_in_interval_and_since_last_cron(user)
+      Shared::Notification.for(user).unread
+          .where('created_at >= ?', Shared::Configuration.mailer.check_unread_notifications_hours.hours.ago)
+          .where('created_at <= ?', 6.minutes.ago)
+    end
+
     def notifications_since(user)
       user.send_mail_notifications_frequency == 'daily' ? 1.day.ago : user.last_mail_notification_sent_at
     end

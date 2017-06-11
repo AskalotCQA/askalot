@@ -24,7 +24,7 @@
   <% end %>
 </ul>
 
-<% if @user.send_mail_notifications_frequency == 'instantly' && Shared::Notifications::Utility.unread_notifications_in_interval(@user).any? %>
+<% if @user.send_mail_notifications_frequency == 'instantly' && Shared::Notifications::Utility.unread_notifications_in_interval_and_since_last_cron(@user).any? %>
   <p class="text-muted">
     Tieto notifikácie sme Vám poslali s oneskorením (<%= Shared::Configuration.mailer.notification_delay %> hodiny) od posledného e-mailu s notifikáciami.
     <br/>
