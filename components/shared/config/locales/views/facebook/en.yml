@@ -3,7 +3,7 @@ en:
     join:
       title: "Askalot is on Facebook"
       message: "Join us on Facebook"
-      benefit: " and watch what interesting happened in Askalot! Be informed about events in Askalot by automatic notifications in Facebook social network."
+      benefit: " and watch what interesting happened in Askalot! Be informed about events in Askalot by automatic notifications in Facebook social network. Facebook notifications can be enabled/disabled in your profile anytime later."
       note: "During integration Askalot views only information in public user profile."
       submit: "Join"
       close: "Close"
@@ -11,7 +11,7 @@ en:
     restore:
       title: "Askalot is on Facebook"
       message: "Stay with us on Facebook social network."
-      benefit: "and continue to be informed about events in Askalot by automatic notifications."
+      benefit: "and continue to be informed about events in Askalot by automatic notifications. Facebook notifications can be enabled/disabled in your profile anytime later."
       note: "During integration Askalot views only information in public user profile."
       submit: "Stay"
       close: "Close"

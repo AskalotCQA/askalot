@@ -3,7 +3,7 @@ sk:
     join:
       title: "Askalot na Facebook"
       message: "Pridaj sa k nám na Facebook"
-      benefit: "a sleduj čo zaujímavé sa udialo v Askalote! Buď informovaný o dianí v Askalote pomocou automatických notifikácií na sociálnej sieti Facebook."
+      benefit: "a sleduj čo zaujímavé sa udialo v Askalote! Buď informovaný o dianí v Askalote pomocou automatických notifikácií na sociálnej sieti Facebook. Zasielanie notifikácií na Facebook vieš kedykoľvek zapnúť/vypnúť vo svojom profile."
       note: "Pri integrácii s Askalotom sa prezrie iba verejný profil používateľa."
       submit: "Pridať"
       close: "Zavrieť"
@@ -11,7 +11,7 @@ sk:
     restore:
       title: "Askalot na Facebook"
       message: "Zostaň s nami na sociálnej sieti Facebook"
-      benefit: "a naďalej buď informovaný o dianí v Askalote pomocou automatických notifikácií."
+      benefit: "a naďalej buď informovaný o dianí v Askalote pomocou automatických notifikácií. Zasielanie notifikácií na Facebook vieš kedykoľvek zapnúť/vypnúť vo svojom profile."
       note: "Pri integrácii s Askalotom sa prezrie iba verejný profil používateľa."
       submit: "Zostať"
       close: "Zavrieť"
