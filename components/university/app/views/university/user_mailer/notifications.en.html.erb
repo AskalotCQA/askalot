@@ -16,7 +16,7 @@
   <% end %>
 </ol>
 
-<% if @user.send_mail_notifications_frequency == 'instantly' && Shared::Notifications::Utility.unread_notifications_in_interval_and_since_last_cron(@user).any? %>
+<% if @user.send_mail_notifications_frequency == 'instantly' && Shared::Notifications::Utility.unread_notifications_in_interval(@user).any? %>
   <p class="text-muted">
     These notifications were sent with a delay (<%= Shared::Configuration.mailer.notification_delay %> hours) after the last notification email.
     <br/>

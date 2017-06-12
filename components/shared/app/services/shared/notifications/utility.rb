@@ -13,13 +13,9 @@ module Shared::Notifications
     end
 
     def unread_notifications_in_interval(user)
-      Shared::Notification.for(user).unread.where('created_at >= ?', Shared::Configuration.mailer.check_unread_notifications_hours.hours.ago)
-    end
-
-    def unread_notifications_in_interval_and_since_last_cron(user)
       Shared::Notification.for(user).unread
           .where('created_at >= ?', Shared::Configuration.mailer.check_unread_notifications_hours.hours.ago)
-          .where('created_at <= ?', 6.minutes.ago)
+          .where('created_at <= ?', user.last_mail_notification_sent_at)
     end
 
     def notifications_since(user)
