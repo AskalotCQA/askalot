@@ -34,15 +34,14 @@ class UserMailer < ActionMailer::Base
     end
     @notifications_in_contexts = @notifications_in_contexts.select { |n| n.count > 0 } unless @notifications_in_contexts.nil?
 
-    return if @notifications_in_contexts.empty?
-
     Shared::Notifications::Utility.update_delay(user)
 
+    return if @notifications_in_contexts.empty?
     return unless Shared::Notifications::Utility.send_notification_email?(user)
 
-    Shared::Notifications::Utility.update_last_notification_sent_at(user)
-
     mail to: @user.email, subject: t('user_mailer.subject'), content_type: 'text/html'
+
+    Shared::Notifications::Utility.update_last_notification_sent_at(user)
   end
 end
 end

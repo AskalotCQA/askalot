@@ -31,15 +31,14 @@ class UserMailer < ActionMailer::Base
     @from          = Shared::Notifications::Utility.notifications_since(user)
     @notifications = Shared::Notifications::Utility.unread_notifications(user)
 
-    return if @notifications.empty?
-
     Shared::Notifications::Utility.update_delay(user)
 
+    return if @notifications.empty?
     return unless Shared::Notifications::Utility.send_notification_email?(user)
 
-    Shared::Notifications::Utility.update_last_notification_sent_at(user)
-
     mail to: @user.email, subject: t('user_mailer.subject'), content_type: 'text/html'
+
+    Shared::Notifications::Utility.update_last_notification_sent_at(user)
   end
 end
 end
