@@ -15,7 +15,7 @@ module Shared::NotificationsHelper
     if notification.resource.nil? || notification.resource.deleted?
       ("<a>" + capture(&block) + "</a>").html_safe if block_given?
     else
-      link_to_activity notification, notification_options(notification, options), &block
+      link_to_activity notification, options, &block
     end
   end
 

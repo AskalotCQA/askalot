@@ -13,7 +13,8 @@ module Shared::ActivitiesHelper
   def activity_content(activity, options = {})
     content = activity_content_by_attributes(activity.action, activity.initiator, activity.resource, options)
 
-    options.delete(:mute).try(:call, activity) ? content_tag(:span, content, class: :'text-muted') : content
+    mute = options.delete(:mute) || lambda { |_| false }
+    mute.call(activity) ? content_tag(:span, content, class: :'text-muted') : content
   end
 
   def activity_content_by_attributes(action, initiator, resource, options = {})
@@ -34,6 +35,10 @@ module Shared::ActivitiesHelper
 
       if question_options[:deleted]
         options[:mute] = lambda { |_| true }
+      end
+
+      if options.delete(:unlink)
+        return translate content, resource: resource_body, question: question_body
       end
 
       resource_link = link_to_activity_by_attributes action, initiator, resource, resource_options.merge(body: resource_body)
