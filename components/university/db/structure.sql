@@ -2827,6 +2827,13 @@ CREATE INDEX index_categories_on_slido_username ON categories USING btree (slido
 
 
 --
+-- Name: index_categories_questions_on_category_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_categories_questions_on_category_id ON categories_questions USING btree (category_id);
+
+
+--
 -- Name: index_categories_questions_on_deletor_id; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3730,6 +3737,13 @@ CREATE INDEX index_users_on_role ON users USING btree (role);
 
 
 --
+-- Name: index_users_on_send_email_notifications; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_send_email_notifications ON users USING btree (send_email_notifications);
+
+
+--
 -- Name: index_users_on_stack_exchange_uuid; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -4291,4 +4305,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170602134212');
 INSERT INTO schema_migrations (version) VALUES ('20170602193255');
 
 INSERT INTO schema_migrations (version) VALUES ('20170603164809');
+
+INSERT INTO schema_migrations (version) VALUES ('20170612145623');
 

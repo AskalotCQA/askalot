@@ -49,6 +49,69 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: ab_groupings; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE ab_groupings (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    ab_group_id integer NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: ab_groupings_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ab_groupings_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ab_groupings_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE ab_groupings_id_seq OWNED BY ab_groupings.id;
+
+
+--
+-- Name: ab_groups; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE ab_groups (
+    id integer NOT NULL,
+    value character varying(255) NOT NULL,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: ab_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE ab_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: ab_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE ab_groups_id_seq OWNED BY ab_groups.id;
+
+
+--
 -- Name: activities; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1018,6 +1081,39 @@ ALTER SEQUENCE mooc_category_contents_id_seq OWNED BY mooc_category_contents.id;
 
 
 --
+-- Name: mooclet_events; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE mooclet_events (
+    id integer NOT NULL,
+    request_type character varying(255),
+    url character varying(255),
+    body text,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: mooclet_events_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE mooclet_events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: mooclet_events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE mooclet_events_id_seq OWNED BY mooclet_events.id;
+
+
+--
 -- Name: news; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -1263,6 +1359,39 @@ CREATE SEQUENCE questions_id_seq
 --
 
 ALTER SEQUENCE questions_id_seq OWNED BY questions.id;
+
+
+--
+-- Name: recommendations; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE recommendations (
+    id integer NOT NULL,
+    question_id integer NOT NULL,
+    user_id integer NOT NULL,
+    clicked_at timestamp without time zone,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+--
+-- Name: recommendations_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE recommendations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: recommendations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE recommendations_id_seq OWNED BY recommendations.id;
 
 
 --
@@ -1526,7 +1655,7 @@ CREATE TABLE users (
     attachments_count integer,
     lists_count integer DEFAULT 0 NOT NULL,
     send_facebook_notifications boolean,
-    send_mail_notifications_frequency character varying DEFAULT 'daily'::character varying,
+    send_mail_notifications_frequency character varying DEFAULT 'instantly'::character varying,
     last_mail_notification_sent_at timestamp without time zone,
     mail_notification_delay integer DEFAULT 0,
     prefered_activity_tab character varying DEFAULT 'all'::character varying
@@ -1659,6 +1788,20 @@ CREATE SEQUENCE watchings_id_seq
 --
 
 ALTER SEQUENCE watchings_id_seq OWNED BY watchings.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ab_groupings ALTER COLUMN id SET DEFAULT nextval('ab_groupings_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ab_groups ALTER COLUMN id SET DEFAULT nextval('ab_groups_id_seq'::regclass);
 
 
 --
@@ -1847,6 +1990,13 @@ ALTER TABLE ONLY mooc_category_contents ALTER COLUMN id SET DEFAULT nextval('moo
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
+ALTER TABLE ONLY mooclet_events ALTER COLUMN id SET DEFAULT nextval('mooclet_events_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
 ALTER TABLE ONLY news ALTER COLUMN id SET DEFAULT nextval('news_id_seq'::regclass);
 
 
@@ -1883,6 +2033,13 @@ ALTER TABLE ONLY question_types ALTER COLUMN id SET DEFAULT nextval('question_ty
 --
 
 ALTER TABLE ONLY questions ALTER COLUMN id SET DEFAULT nextval('questions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY recommendations ALTER COLUMN id SET DEFAULT nextval('recommendations_id_seq'::regclass);
 
 
 --
@@ -1946,6 +2103,22 @@ ALTER TABLE ONLY votes ALTER COLUMN id SET DEFAULT nextval('votes_id_seq'::regcl
 --
 
 ALTER TABLE ONLY watchings ALTER COLUMN id SET DEFAULT nextval('watchings_id_seq'::regclass);
+
+
+--
+-- Name: ab_groupings_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ab_groupings
+    ADD CONSTRAINT ab_groupings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: ab_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ab_groups
+    ADD CONSTRAINT ab_groups_pkey PRIMARY KEY (id);
 
 
 --
@@ -2157,6 +2330,14 @@ ALTER TABLE ONLY mooc_category_contents
 
 
 --
+-- Name: mooclet_events_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY mooclet_events
+    ADD CONSTRAINT mooclet_events_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: news_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -2202,6 +2383,14 @@ ALTER TABLE ONLY question_types
 
 ALTER TABLE ONLY questions
     ADD CONSTRAINT questions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: recommendations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY recommendations
+    ADD CONSTRAINT recommendations_pkey PRIMARY KEY (id);
 
 
 --
@@ -2274,6 +2463,20 @@ ALTER TABLE ONLY votes
 
 ALTER TABLE ONLY watchings
     ADD CONSTRAINT watchings_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_ab_groupings_on_ab_group_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ab_groupings_on_ab_group_id ON ab_groupings USING btree (ab_group_id);
+
+
+--
+-- Name: index_ab_groupings_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_ab_groupings_on_user_id ON ab_groupings USING btree (user_id);
 
 
 --
@@ -2491,6 +2694,13 @@ CREATE INDEX index_categories_on_rgt ON categories USING btree (rgt);
 --
 
 CREATE INDEX index_categories_on_slido_username ON categories USING btree (slido_username);
+
+
+--
+-- Name: index_categories_questions_on_category_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_categories_questions_on_category_id ON categories_questions USING btree (category_id);
 
 
 --
@@ -3166,6 +3376,20 @@ CREATE INDEX index_questions_on_votes_lb_wsci_bp ON questions USING btree (votes
 
 
 --
+-- Name: index_recommendations_on_question_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_recommendations_on_question_id ON recommendations USING btree (question_id);
+
+
+--
+-- Name: index_recommendations_on_user_id; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_recommendations_on_user_id ON recommendations USING btree (user_id);
+
+
+--
 -- Name: index_roles_on_name; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -3359,6 +3583,13 @@ CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (re
 --
 
 CREATE INDEX index_users_on_role ON users USING btree (role);
+
+
+--
+-- Name: index_users_on_send_email_notifications; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX index_users_on_send_email_notifications ON users USING btree (send_email_notifications);
 
 
 --
@@ -3887,4 +4118,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170602134212');
 INSERT INTO schema_migrations (version) VALUES ('20170602193255');
 
 INSERT INTO schema_migrations (version) VALUES ('20170603164809');
+
+INSERT INTO schema_migrations (version) VALUES ('20170612145623');
 
