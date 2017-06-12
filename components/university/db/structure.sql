@@ -27,20 +27,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
---
--- Name: pg_stat_statements; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements WITH SCHEMA public;
-
-
---
--- Name: EXTENSION pg_stat_statements; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION pg_stat_statements IS 'track execution statistics of all SQL statements executed';
-
-
 SET search_path = public, pg_catalog;
 
 --
@@ -1755,10 +1741,10 @@ CREATE TABLE users (
     attachments_count integer,
     lists_count integer DEFAULT 0 NOT NULL,
     send_facebook_notifications boolean,
-    prefered_activity_tab character varying DEFAULT 'all'::character varying,
     send_mail_notifications_frequency character varying DEFAULT 'daily'::character varying,
     last_mail_notification_sent_at timestamp without time zone,
-    mail_notification_delay integer DEFAULT 0
+    mail_notification_delay integer DEFAULT 0,
+    prefered_activity_tab character varying DEFAULT 'all'::character varying
 );
 
 

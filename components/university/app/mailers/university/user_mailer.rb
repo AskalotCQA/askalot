@@ -31,8 +31,6 @@ class UserMailer < ActionMailer::Base
     @from          = Shared::Notifications::Utility.notifications_since(user)
     @notifications = Shared::Notifications::Utility.unread_notifications(user)
 
-    Shared::Notifications::Utility.update_delay(user)
-
     return if @notifications.empty?
     return unless Shared::Notifications::Utility.send_notification_email?(user)
 

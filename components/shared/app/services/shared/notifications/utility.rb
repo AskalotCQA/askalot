@@ -3,6 +3,8 @@ module Shared::Notifications
     extend self
 
     def send_notification_email?(user)
+      update_delay(user)
+
       return (DateTime.now.to_i - user.last_mail_notification_sent_at.to_i) >= 1.day if user.send_mail_notifications_frequency == 'daily'
 
       DateTime.now > user.last_mail_notification_sent_at + user.mail_notification_delay.hours
