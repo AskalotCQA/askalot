@@ -107,7 +107,7 @@ sk:
       account: "Nastavenia účtu"
       prefered_activity_tab:
         all: "Všetky aktivity"
-        followed_categories: "Aktivity v nasledovaných kategóriách"
+        followed_categories: "Aktivity v sledovaných kategóriách"
       notifications_frequency:
         daily: "Denne"
         instantly: "Okamžite"

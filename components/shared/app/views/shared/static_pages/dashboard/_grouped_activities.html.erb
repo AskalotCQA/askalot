@@ -1,14 +1,14 @@
 <% activities.group_by { |e| e.resource.to_question }.reject { |question, _| question.deleted }.each_with_index do |(question, activities), index| %>
   <% break if index >= 6 %>
   <div class="row">
-    <div class="col-md-4 col-sm-5">
+    <div class="col-md-8 col-sm-7 col-sm-push-4">
+      <%= render 'shared/questions/question_preview', question: question, length: 150 %>
+    </div>
+
+    <div class="col-md-4 col-sm-5 col-sm-pull-8">
       <% activities.sort_by(&:created_at).reverse.each do |activity| %>
           <%= render 'shared/static_pages/dashboard/activity', activity: activity %>
       <% end %>
-    </div>
-
-    <div class="col-md-8 col-sm-7">
-      <%= render 'shared/questions/question_preview', question: question, length: 150 %>
     </div>
   </div>
   <hr>

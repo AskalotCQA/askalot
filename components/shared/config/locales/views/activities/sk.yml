@@ -5,7 +5,7 @@ sk:
     tab:
       global: "Všetkých"
       followees: "Nasledovaných"
-      followed_categories: "V nasledovaných kategóriách"
+      followed_categories: "V sledovaných kategóriách"
 
     index:
       title: "Prehľad aktivity"
