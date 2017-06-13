@@ -5,7 +5,7 @@ module Shared::Notifications
     attr_accessor :factory
 
     def publish(action, initiator, resource, options = {})
-      return if action == :update && too_new_since_resource_creation?(resource) || too_new_since_last_notification?(resource)
+      return [] if action == :update && too_new_since_resource_creation?(resource) || too_new_since_last_notification?(resource)
 
       recipients = (Array.wrap(options[:for] || resource.watchers) - [initiator]).uniq
       context = Shared::Context::Manager.current_context_id
