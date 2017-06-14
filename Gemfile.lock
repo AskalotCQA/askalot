@@ -186,7 +186,7 @@ GEM
       i18n (~> 0.5)
     faraday (0.12.1)
       multipart-post (>= 1.2, < 3)
-    fb_graph2 (0.9.1)
+    fb_graph2 (0.8.0)
       activesupport (>= 3.2)
       httpclient (>= 2.4)
       multi_json
@@ -526,7 +526,7 @@ DEPENDENCIES
   exception_notification
   factory_girl_rails
   faker (= 1.1.2)
-  fb_graph2
+  fb_graph2 (= 0.8.0)
   font-awesome-rails (~> 4.7.0.1)
   forgery
   garelic
