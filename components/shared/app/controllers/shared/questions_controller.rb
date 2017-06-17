@@ -133,7 +133,7 @@ class QuestionsController < ApplicationController
 
     @question.favorites.reload
 
-    dispatch_event dispatch_event_action_for(@favorite), @favorite, for: @question.watchers
+    dispatch_event dispatch_event_action_for(@favorite), @favorite, for: @question.author
   end
 
   def suggest
