@@ -15,9 +15,8 @@ module Shared::Facebook::Modal
           @facebook_modal_joining = true
         end
 
-        if current_user.send_facebook_notifications && !FbGraph2::Auth.new(Shared::Configuration.facebook.application.id, Shared::Configuration.facebook.application.secret).debug_token!(current_user.omniauth_token).is_valid
-          current_user.send_facebook_notifications = false
-          current_user.save
+        if session[:facebook_modal] == nil && current_user.send_facebook_notifications && !FbGraph2::Auth.new(Shared::Configuration.facebook.application.id, Shared::Configuration.facebook.application.secret).debug_token!(current_user.omniauth_token).is_valid
+          session[:facebook_modal] = true
 
           @facebook_modal_restoring = true
         end

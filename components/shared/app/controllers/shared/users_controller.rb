@@ -43,6 +43,7 @@ class UsersController < ApplicationController
     authorize! :edit, current_user
 
     if current_user.update_attributes(user_params)
+      session[:facebook_modal] = nil
       form_message :notice, t('user.update.success'), key: params[:tab]
     else
       form_error_messages_for current_user, key: params[:tab]
