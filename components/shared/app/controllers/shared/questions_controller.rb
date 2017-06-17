@@ -137,7 +137,7 @@ class QuestionsController < ApplicationController
   end
 
   def suggest
-    @questions = Shared::Question.in_context(@context_id).where('questions.id = ? or questions.title like ?', params[:q].to_i, "#{params[:q]}%")
+    @questions = Shared::Question.search_by(search_params).results.limit(10).sort_by(&:created_at).reverse!
 
     render json: @questions, root: false
   end

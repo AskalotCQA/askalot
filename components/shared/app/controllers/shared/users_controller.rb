@@ -84,7 +84,7 @@ class UsersController < ApplicationController
   end
 
   def suggest
-    @users = Shared::User.in_context(@context_id).where('nick like ?', "#{params[:q]}%")
+    @users = Shared::User.search_by(search_params).results.limit(10).sort_by(&:current_sign_in_at).reverse!
 
     render json: @users, root: false
   end

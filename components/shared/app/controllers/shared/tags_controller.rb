@@ -18,21 +18,10 @@ class TagsController < ApplicationController
     @tags = @tags.page(params[:page]).per(60)
   end
 
-  # TODO (smolnar)
-  # * use elasticsearch
-  # * consider pagination
-
   def suggest
-    @tags = Shared::Tag.search_by(q: params[:q]).first(10)
+    @tags = Shared::Tag.search_by(q: params[:q]).results.limit(10)
 
-    render json: {
-      results: @tags.map { |tag|
-        {
-          id:   tag.name,
-          text: "#{tag.name} (#{tag.count})"
-        }
-      },
-    }
+    render json: @tags, root: :results, adapter: :json
   end
 end
 end

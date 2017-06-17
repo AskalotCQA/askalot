@@ -111,7 +111,7 @@ module Shared::Tags
             }
           },
           sort: {
-            :'name.untouched' => :asc
+            :'count' => :desc
           }
         )
       end

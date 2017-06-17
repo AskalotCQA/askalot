@@ -11,7 +11,7 @@ class window.Markdown
   textcomplete:
     strategies:
       gemoji:
-        match:    /(^|\s*):([\-+\w]*)$/
+        match:    /(^|\s+):([\-+\w]*)$/
         template: (value) -> templates['markdown/textcomplete/gemoji'](icon: value)
         replace:  (value)  -> "$1:#{value}: "
         index:    2
@@ -22,7 +22,7 @@ class window.Markdown
           try callback(values)
 
       users:
-        match:    /(^|\s*)@(\w*)$/
+        match:    /(^|\s+)@(\w*)$/
         template: (value) -> templates['markdown/textcomplete/users'](user: value)
         replace:  (value) -> "$1@#{value.nick} "
         index:    2
@@ -31,7 +31,7 @@ class window.Markdown
           $.get base_url + '/users/suggest', q: term, (data) -> try callback(data)
 
       questions:
-        match:    /(^|\s*)#(\w*)$/
+        match:    /(^|\s+)#(\w*)$/
         template: (value) -> templates['markdown/textcomplete/questions'](question: value)
         replace:  (value) -> "$1##{value.id} "
         index:    2

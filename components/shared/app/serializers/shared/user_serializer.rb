@@ -1,5 +1,6 @@
+module Shared
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :nick, :gravatar_url
+  attributes :id, :nick, :gravatar_url
 
   def gravatar_url
     Helper.gravatar_url(object.email)
@@ -8,4 +9,5 @@ class UserSerializer < ActiveModel::Serializer
   module Helper
     extend Shared::GravatarHelper
   end
+end
 end
