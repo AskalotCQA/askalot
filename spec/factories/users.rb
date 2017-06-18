@@ -13,6 +13,8 @@ FactoryGirl.define do
     show_email true
     show_name  true
 
+    send_mail_notifications_frequency 'daily'
+
     role :student
 
     factory :student, class: Shared::User do
