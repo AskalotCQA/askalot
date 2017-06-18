@@ -23,6 +23,7 @@ set :rvm_ruby_string, :local              # use the same ruby as used locally fo
 set :rvm_autolibs_flag, 'read-only'       # more info: rvm help autolibs
 
 set :deploy_via, :remote_cache
+set :copy_exclude, [ '.git' ]
 set :git_enable_submodules, 1
 set :ssh_options, { forward_agent: true }
 
