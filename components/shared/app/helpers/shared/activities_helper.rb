@@ -23,6 +23,10 @@ module Shared::ActivitiesHelper
     if resource.class.name == 'Shared::Following'
       follower_link = link_to_activity_by_attributes action, initiator, resource, options.merge(length: 50)
 
+      if options.delete(:unlink)
+        return translate(content, follower: resource.follower.nick).html_safe
+      end
+
       translate(content, follower: follower_link).html_safe
     else
       question = resource.to_question

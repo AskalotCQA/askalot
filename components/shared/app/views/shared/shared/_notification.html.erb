@@ -10,7 +10,8 @@
 
     <div class="col-xs-10">
       <%= link_to_notification(notification) do %>
-          <%= strip_links(notification_content notification).html_safe  %>
+          <%= (notification_content notification, unlink: true).html_safe
+          %>
       <% end %>
       <div class="dropdown-notification-info">
         <small><span class="text-muted"><%= link_to_user notification.initiator_or_anonymous %> &middot; </span><%= tooltip_time_tag notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %></small>

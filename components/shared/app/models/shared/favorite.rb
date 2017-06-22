@@ -4,7 +4,7 @@ class Favorite < ActiveRecord::Base
   include Notifiable
 
   belongs_to :favorer, class_name: :'Shared::User', counter_cache: true
-  belongs_to :question, counter_cache: true
+  belongs_to :question, -> { unscope where: :deleted }, counter_cache: true
 
   has_many :related_categories, -> { distinct }, through: :question, source: :related_categories
 
