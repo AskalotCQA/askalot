@@ -2,6 +2,7 @@ module Shared
   class Attachment < ActiveRecord::Base
     include Authorable
     include Deletable
+    include Notifiable
 
     belongs_to :attachmentable, polymorphic: true
 
