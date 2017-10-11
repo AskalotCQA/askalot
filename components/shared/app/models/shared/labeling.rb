@@ -4,7 +4,7 @@ class Labeling < ActiveRecord::Base
   include Notifiable
 
   belongs_to :author, class_name: :'Shared::User'
-  belongs_to :answer
+  belongs_to :answer, -> { unscope where: :deleted }
   belongs_to :label
 
   scope :by,   lambda { |user| where author: user }
