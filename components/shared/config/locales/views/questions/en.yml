@@ -74,7 +74,8 @@ en:
       closed: "Question is closed."
 
     tab:
-      recent: "Recent"
+      newest: "Newest"
+      recent: "Active"
       unanswered: "Unanswered"
       answered: "Answered"
       solved: "Solved"
