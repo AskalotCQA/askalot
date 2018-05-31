@@ -25,6 +25,7 @@ defaults: &defaults
     confirmations: true
     unlocks: true
     omniauth: true
+    slido_events: false
 
   poll:
     default: 60
