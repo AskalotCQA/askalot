@@ -97,7 +97,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    attributes = [:email, :nick, :about, :gravatar_email, :show_name, :show_email, :send_email_notifications, :prefered_activity_tab, :send_facebook_notifications]
+    attributes = [:email, :nick, :about, :gravatar_email, :show_name, :show_email, :send_email_notifications,
+                  :prefered_activity_tab, :send_facebook_notifications, :send_mail_notifications_frequency]
 
     attributes += Shared::Social.networks.keys
     attributes += [:first, :last] if can? :change_name, current_user
