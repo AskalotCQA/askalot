@@ -11,6 +11,7 @@ class Activity < ActiveRecord::Base
   default_scope -> { where.not(action: :mention).where(resource_type: [Answer, Comment, Evaluation, Labeling, Question]) }
 
   scope :global,          lambda { unscope(where: :anonymous) }
+  scope :not_anonymous,   lambda { where(anonymous: false) }
   scope :of,              lambda { |user| where(initiator: user) }
   scope :not_of,          lambda { |user| where.not(initiator: user) }
   scope :by_followees_of, lambda { |user| where(initiator: user.followees.pluck(:followee_id)) }
