@@ -114,7 +114,8 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'capybara', '~> 3.1'
-  gem 'selenium-webdriver'
+  gem 'capybara-selenium'
+  gem 'chromedriver-helper'
   gem 'guard-rspec'
 
   # database

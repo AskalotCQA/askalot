@@ -10,9 +10,24 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'cancan/matchers'
+require 'selenium/webdriver'
+
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.register_driver :headless_chrome do |app|
+  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: { args: %w(headless disable-gpu) }
+  )
+
+  Capybara::Selenium::Driver.new app,
+                                 browser: :chrome,
+                                 desired_capabilities: capabilities
+end
 
 Capybara.default_selector  = :css
-Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :selenium_chrome_headless
+Capybara.javascript_driver = ENV['DRIVER'] ? ENV['DRIVER'].to_sym : :headless_chrome
 Capybara.server            = :webrick
 
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
