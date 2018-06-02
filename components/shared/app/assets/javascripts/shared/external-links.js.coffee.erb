@@ -1,1 +1,1 @@
-$("a:not([href^=#], [href^='<%= Rails.application.config.relative_url_root.to_s %>/'], [href*='edx.org'])").attr('target', '_blank');
+$("a:not([href^=\"#\"], [href^=\"<%= Rails.application.config.relative_url_root.to_s %>/\"], [href*='edx.org'])").attr('target', '_blank');

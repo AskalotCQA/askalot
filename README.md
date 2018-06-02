@@ -47,8 +47,10 @@ RAILS_ENV=edx_development rake db:create db:structure:load DB_STRUCTURE=componen
 
 ## Testing
 
-1. Install [PhantomJS](http://phantomjs.org/) (v2.1).
-2. Run specs with:
+Default driver for feature tests that contain javascript is headless chrome. 
+Make sure you have [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) installed.
+
+Run specs with:
 
 ```
 RAILS_ENV=fiit_test rake db:create db:structure:load DB_STRUCTURE=components/university/db/structure.sql

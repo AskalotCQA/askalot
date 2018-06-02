@@ -6,7 +6,7 @@ gem 'thor', '0.19.1'
 gem 'responders', '~> 2.0'
 
 # database
-gem 'pg'
+gem 'pg', '~> 0.17.0'
 
 # monitoring
 gem 'pghero'
@@ -39,7 +39,6 @@ gem 'select2-rails', '~> 3.5.10'
 gem 'jquery-tablesorter', '~> 1.9.5'
 gem 'rails-timeago', '~> 2.0'
 gem 'momentjs-rails'
-gem 'jquery-textcomplete-rails', '~> 0.1.2'
 gem 'handlebars_assets'
 gem 'jquery-ui-rails'
 gem 'd3_rails', '~> 3.4.6'
@@ -107,17 +106,15 @@ end
 
 group :development, :test do
   # debugging
-  gem 'pry'
+  gem 'pry-byebug'
   gem 'hirb'
-  gem 'byebug'
 
   # testing
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails', '~> 3.6'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
-  gem 'capybara'
-  gem 'selenium-webdriver', require: false
-  gem 'poltergeist', require: false
+  gem 'capybara', '~> 3.1'
+  gem 'selenium-webdriver'
   gem 'guard-rspec'
 
   # database

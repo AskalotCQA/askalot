@@ -4,6 +4,7 @@
 .sass-cache
 .tags
 .vim
+.byebug_history
 
 .~lock.*
 *.*~
@@ -35,6 +36,8 @@ log/*.log
 public/javascripts
 public/attachments/*
 !public/attachments/.gitkeep
+
+vendor/bundle
 
 tmp
 spec/specs_with_statuses_mooc.txt
