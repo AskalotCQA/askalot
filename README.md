@@ -47,9 +47,6 @@ RAILS_ENV=edx_development rake db:create db:structure:load DB_STRUCTURE=componen
 
 ## Testing
 
-Default driver for feature tests that contain javascript is headless chrome. 
-Make sure you have [chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) installed.
-
 Run specs with:
 
 ```
