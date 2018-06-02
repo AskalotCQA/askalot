@@ -19,6 +19,11 @@ Askalot::Application.configure do
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
+  # Uncomment if you are going to play with rails_panel
+  # logfile = File.open( 'log/development.log', 'a' )
+  # logfile.sync = true
+  # config.logger = Logger.new(logfile)
+
   # Raise an error on page load if there are pending migrations
   config.active_record.migration_error = :page_load
 
@@ -34,6 +39,7 @@ Askalot::Application.configure do
   # Precompilation for I18n-js
   config.assets.initialize_on_precompile = true
 
+  # Comment if you are going to play with rails_panel
   config.relative_url_root = '/askalot'
 
   config.after_initialize do

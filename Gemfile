@@ -1,8 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'rails', '~> 4.2.0'
-# http://stackoverflow.com/questions/41207432/expected-string-default-value-for-jbuilder-got-true-boolean-error-in-a
-gem 'thor', '0.19.1'
 gem 'responders', '~> 2.0'
 
 # database
@@ -16,33 +14,33 @@ gem 'pg_query'
 gem 'squire', '~> 1.3.6'
 
 # authentification
-# gem 'devise', '~> 3.1.1'
-gem 'cancan', '~> 1.6.10'
+gem 'cancancan', '~> 2.1.0'
 gem 'net-ldap'
 
 # facebook
 gem 'omniauth-facebook'
-gem 'fb_graph2', '0.8.0'
+gem 'fb_graph2', '1.1.0'
 
 # stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0.0'
 gem 'bootstrap-sass', '~> 3.1.1'
 gem 'font-awesome-rails', '~> 4.7.0.1'
 
 # javascripts
 gem 'therubyracer', platforms: :ruby
-gem 'coffee-rails', '~> 4.0.0'
+gem 'coffee-rails', '~> 4.2.0'
 gem 'jquery-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'bootstrap-datepicker-rails', '~> 1.3.0'
+gem 'bootstrap-datepicker-rails', '~> 1.8.0'
 gem 'select2-rails', '~> 3.5.10'
-gem 'jquery-tablesorter', '~> 1.9.5'
-gem 'rails-timeago', '~> 2.0'
+gem 'jquery-tablesorter', '~> 1.25.2'
+gem 'rails-timeago', '~> 2.16'
 gem 'momentjs-rails'
 gem 'handlebars_assets'
 gem 'jquery-ui-rails'
-gem 'd3_rails', '~> 3.4.6'
-gem 'cal-heatmap-rails', '~> 0.0.1'
+gem 'd3_rails', '~> 3.5.11'
+gem 'cal-heatmap-rails', '~> 3.6.0'
+gem 'icheck-rails'
 
 # markdown
 gem 'redcarpet'
@@ -55,11 +53,11 @@ gem 'roadie'
 gem 'letter_opener', group: :development
 
 # internationalization
-gem 'rails-i18n', '~> 4.0.0'
-gem 'i18n-js', '~> 2.1.2'
+gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x' # For 4.x
+gem 'i18n-js', '~> 3.0.7'
 
 # pagination
-gem 'kaminari', '~> 0.15.1'
+gem 'kaminari', '~> 1.1.0'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 
 # scheduling
@@ -69,7 +67,6 @@ gem 'whenever'
 gem 'actionview-encoded_mail_to'
 gem 'active_model_serializers'
 gem 'forgery'
-gem 'jbuilder', '~> 1.2'
 gem 'murmurhash3'
 gem 'nokogiri'
 gem 'scout', github: 'smolnar/scout'
@@ -79,7 +76,7 @@ gem 'lda-ruby'
 gem 'tf_idf'
 gem 'timecop'
 gem 'awesome_nested_set'
-gem 'ims-lti', :git => 'https://github.com/instructure/ims-lti.git'
+gem 'ims-lti', '~> 1.2.0'
 gem 'non-stupid-digest-assets'
 gem 'data-anonymization', '~> 0.6.5'
 
@@ -89,7 +86,8 @@ gem 'elasticsearch'
 # file upload
 gem 'paperclip', '~> 4.3'
 gem 'activesupport-json_encoder'
-gem 'remotipart', '~> 1.2'
+gem 'remotipart', '~> 1.4'
+gem 'meta_request'
 
 group :doc do
   gem 'sdoc', require: false
@@ -119,14 +117,14 @@ group :development, :test do
   gem 'guard-rspec'
 
   # database
-  gem 'faker', '1.1.2'
+  gem 'faker', '1.8.0'
 
   # code metrics
   gem 'simplecov', require: false
   gem 'codeclimate-test-reporter', require: false
 
   # mass import
-  gem 'activerecord-import', '~> 0.10.0'
+  gem 'activerecord-import', '~> 0.23.0'
 end
 
 group :demo, :staging, :production, :experimental do

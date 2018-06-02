@@ -1,4 +1,4 @@
-<%= form_for resource, as: :user, url: shared.profile_users_path(tab: tab), html: { method: :patch } do |f| %>
+<%= form_for resource, as: :user, url: shared.profile_users_path(tab: tab), html: { method: :patch, id: :edit_user_profile } do |f| %>
   <%= form_messages_for resource, key: tab %>
 
   <div class="form-group">

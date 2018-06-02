@@ -7,6 +7,7 @@
 #= require jquery-ui/effect.all
 #= require handlebars.runtime
 #= require textcomplete/textcomplete.min
+#= require 'icheck'
 #= require_tree ./handlebars
 #= require_tree ./templates
 #

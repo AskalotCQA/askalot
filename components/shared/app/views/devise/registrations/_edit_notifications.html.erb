@@ -1,23 +1,18 @@
-<%= form_for resource, as: :user, url: shared.profile_users_path(tab: tab), html: { method: :patch } do |f| %>
+<%= form_for resource, as: :user, url: shared.profile_users_path(tab: tab), html: { method: :patch, id: :edit_user_notifications } do |f| %>
   <%= form_messages_for resource, key: tab %>
 
-  <div class="form-group">
-    <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-default">
-        <%= f.check_box :send_email_notifications, checked: resource.send_email_notifications %>
-        <%= Shared::User.human_attribute_name :send_email_notifications %> <%= icon_tag resource.send_email_notifications ? :check : :'square-o' %>
-      </label>
-    </div>
+  <div class="form-group icheck">
+    <label>
+      <%= f.check_box :send_email_notifications, checked: resource.send_email_notifications, data: { as: :icheck } %>
+      <%= Shared::User.human_attribute_name :send_email_notifications %>
+    </labeL>
   </div>
 
-
-  <div class="form-group">
-    <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-default">
-        <%= f.check_box :send_facebook_notifications, checked: resource.send_facebook_notifications || resource.send_facebook_notifications.nil? %>
-        <%= Shared::User.human_attribute_name :send_facebook_notifications %> <%= icon_tag resource.send_facebook_notifications || resource.send_facebook_notifications.nil? ? :check : :'square-o' %>
-      </label>
-    </div>
+  <div class="form-group icheck">
+    <label>
+      <%= f.check_box :send_facebook_notifications, checked: resource.send_facebook_notifications || resource.send_facebook_notifications.nil?, data: { as: :icheck } %>
+      <%= Shared::User.human_attribute_name :send_facebook_notifications %>
+    </labeL>
   </div>
 
     <div class="form-group">

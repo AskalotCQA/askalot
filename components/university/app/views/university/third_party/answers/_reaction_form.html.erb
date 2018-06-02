@@ -22,11 +22,7 @@
       <button type="submit" class="btn btn-primary"><%= t 'answer.forum.new.submit' %></button>
 
       <% if question.original_anonymous_author? current_user %>
-        <div class="btn-group" data-toggle="buttons">
-          <label class="btn btn-primitive btn-sm">
-            <%= f.check_box :anonymous, checked: true %> <%= Shared::Answer.human_attribute_name :anonymous %> <%= icon_tag :'check-square-o' %>
-          </label>
-        </div>
+        <%= render 'shared/shared/anonymous_checkbox', f: f, checked: true %>
       <% end %>
     <% end %>
   </div>

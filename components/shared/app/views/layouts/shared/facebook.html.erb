@@ -11,7 +11,6 @@
   </head>
   <body class="facebook">
     <%= yield -%>
-    <%= render 'shared/shared/fixes' -%>
     <%= javascript_include_tag 'shared/application' -%>
     <%= yield :scripts -%>
     <%= Garelic.monitoring 'UA-47906233-1' if Rails.env_type.production? -%>

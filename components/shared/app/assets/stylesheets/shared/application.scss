@@ -1,5 +1,7 @@
 // List of initial requirements (order is significant).
 //
+//= link_tree ../../images
+//
 //=require cal-heatmap
 //=require gemoji
 //=require markdown
@@ -31,6 +33,7 @@
 @import 'search';
 @import 'errors';
 @import 'treetable';
+@import 'icheck/square/blue';
 
 @import 'header';
 @import 'home';
@@ -63,3 +66,4 @@
 @import 'fixes';
 
 @import 'simple-view';
+@import 'icheck';

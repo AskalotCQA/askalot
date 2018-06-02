@@ -62,7 +62,7 @@ RSpec.configure do |config|
   config.include Warden::Test::Helpers, type: :request
   config.include Shared::AuthenticationHelper, type: :feature
   config.include Shared::CapybaraHelpers, type: :feature
-  config.include Devise::TestHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Shared::EmailHelper
   config.include Shared::FixtureHelper
   config.include Shared::Logging

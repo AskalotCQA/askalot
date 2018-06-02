@@ -14,7 +14,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   def after_sign_up_path_for(resource)
     if resource.email.empty? && !Shared::Configuration.devise.require_email
-      resource.confirm!
+      resource.confirm
       shared.welcome2_path
     else
       shared.welcome_path
