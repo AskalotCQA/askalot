@@ -84,7 +84,7 @@ gem 'data-anonymization', '~> 0.6.5'
 gem 'elasticsearch'
 
 # file upload
-gem 'paperclip', '~> 4.3'
+gem 'paperclip', '~> 6.0'
 gem 'activesupport-json_encoder'
 gem 'remotipart', '~> 1.4'
 gem 'meta_request'
