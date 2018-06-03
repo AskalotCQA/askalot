@@ -34,7 +34,9 @@ before_script:
 script:
   - RAILS_ENV=fiit_test bundle exec rake rspec:test
   - RAILS_ENV=fiit_test bundle exec rake rspec:test_failed
+  - RAILS_ENV=fiit_test bundle exec rake rspec:test_failed
   - RAILS_ENV=edx_test bundle exec rake rspec:test
+  - RAILS_ENV=edx_test bundle exec rake rspec:test_failed
   - RAILS_ENV=edx_test bundle exec rake rspec:test_failed
 
 after_success:
