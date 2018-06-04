@@ -367,7 +367,7 @@ describe 'Markdown', type: :feature do
 
       click_link 'Upraviť profil'
 
-      fill_in 'user[about]', with: "<script>alert('hello')</script><img src=# onerror=alert('hellot');>"
+      fill_in 'user[about]', with: "<script>alert('hello')</script><img src='#' onerror=alert('hellot');>"
 
       within '#profile' do
         click_button 'Uložiť'
@@ -378,6 +378,8 @@ describe 'Markdown', type: :feature do
       html = page.evaluate_script("document.getElementsByClassName('user-profile-about')[0].innerHTML.trim()")
 
       expect(html).to include("<p>alert('hello')<img src=\"#\"></p>")
+
+      sleep 1 # some kind of race condition is happening
     end
   end
 end

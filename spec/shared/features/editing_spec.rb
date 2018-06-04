@@ -48,6 +48,12 @@ describe 'Editing', type: :feature do
     it 'can edit answer', js: true do
       visit shared.question_path question
 
+      # the test in chromedriver is somewhat broken because animated elements
+      # so the solution is to remove fading animation
+      #
+      # https://github.com/teamcapybara/capybara/issues/1890
+      # https://bugs.chromium.org/p/chromedriver/issues/detail?id=1771&q=sendkeys&sort=-id&colspec=ID%20Status%20Pri%20Owner%20Summary
+
       click_link "answer-#{answer_user.id}-edit-modal"
 
       within "#answer-#{answer_user.id}-editing" do

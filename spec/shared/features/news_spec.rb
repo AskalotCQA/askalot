@@ -52,6 +52,13 @@ describe 'News', type: :feature do
 
       visit shared.administration_news_index_path
 
+      # the test in chromedriver is somewhat broken because animated elements
+      # so the solution is to remove fading animation
+      #
+      # https://github.com/teamcapybara/capybara/issues/1890
+      # https://bugs.chromium.org/p/chromedriver/issues/detail?id=1771&q=sendkeys&sort=-id&colspec=ID%20Status%20Pri%20Owner%20Summary
+      page.driver.browser.execute_script("$('.fade').removeClass('fade')")
+
       find(:css, "a#news-#{news.id}-edit-modal").click
 
       within "#news-#{news.id}-editing" do
