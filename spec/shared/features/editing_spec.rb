@@ -53,6 +53,7 @@ describe 'Editing', type: :feature do
       #
       # https://github.com/teamcapybara/capybara/issues/1890
       # https://bugs.chromium.org/p/chromedriver/issues/detail?id=1771&q=sendkeys&sort=-id&colspec=ID%20Status%20Pri%20Owner%20Summary
+      page.driver.browser.execute_script("$('.fade').removeClass('fade')")
 
       click_link "answer-#{answer_user.id}-edit-modal"
 
