@@ -51,8 +51,8 @@ RSpec.configure do |config|
   # Choose type of spec based on it's directory
   config.infer_spec_type_from_file_location!
 
-  # FactoryGirl
-  config.include FactoryGirl::Syntax::Methods
+  # FactoryBot
+  config.include FactoryBot::Syntax::Methods
 
   # Engine routes
   config.include Shared::Engine.routes.url_helpers, type: :feature

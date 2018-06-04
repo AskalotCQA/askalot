@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :comment, class: Shared::Comment do
     association :author
 

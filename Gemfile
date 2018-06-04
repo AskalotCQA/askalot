@@ -110,7 +110,7 @@ group :development, :test do
   # testing
   gem 'rspec-rails', '~> 3.6'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'capybara', '~> 3.1'
   gem 'capybara-selenium'
   gem 'chromedriver-helper'

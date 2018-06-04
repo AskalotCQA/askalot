@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :slido_event, class: Shared::SlidoEvent do
     sequence(:name)       { |n| "Slido Event ##{n}" }
     sequence(:uuid)       { |n| n }

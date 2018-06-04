@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :evaluation, class: Shared::Evaluation do
     association :author
 

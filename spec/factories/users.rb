@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user, class: Shared::User, aliases: [:author, :followee, :follower, :favorer, :voter, :watcher, :viewer, :recipient, :initiator] do
     sequence(:login) { |n| "user_#{n}" }
     sequence(:email) { |n| "user_#{n}@example.com" }

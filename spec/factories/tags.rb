@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :tag, class: Shared::Tag do
     sequence(:name) { |n| "tag-#{n}" }
     max_time { rand(18000..100000.0) }

@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :category, class: Shared::Category do
     sequence(:name) { |n| "Category ##{n}" }
     sequence(:uuid) { |n| "uuid#{n}" }
