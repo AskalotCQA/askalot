@@ -13,6 +13,9 @@ en:
     not_found:
       title: "Not Found"
       description: "The page you were looking for does not exists."
+    unprocessable_entity:
+      title: "Unprocessable request"
+      description: "Sorry, we couldn't handle your request. Please try again."
 
   errors: &errors
     format: "%{attribute} – %{message}."

@@ -67,5 +67,9 @@ module Askalot
 
     # Raise standard errors in `after_rollback`/`after_commit` callbacks
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.action_dispatch.rescue_responses = {
+      'ActionController::InvalidAuthenticityToken' => :unprocessable_entity,
+    }
   end
 end
