@@ -246,7 +246,7 @@ class Category < ActiveRecord::Base
   end
 
   def related_contexts
-    depth = Rails.module.mooc? ? 0 : 1;
+    depth = Rails.module.mooc? ? 0 : 1
 
     self_and_ancestors.where(depth: depth)
   end
@@ -284,7 +284,15 @@ class Category < ActiveRecord::Base
   end
 
   def leaves_with_metadata
+    year_category = self
+
+    while year_category.depth > 1
+      year_category = year_category.parent
+    end
+
     leaves = self.leaves.includes(:assignments, :parent).where(askable: true).visible.not_unknown.unscope(:order).order(:full_public_name)
+    leaves = leaves.unscope(where: :askable) unless year_category.askable
+
     leaves.map {|category| [category, {data: {tags: category.effective_tags, icon: category.has_teachers? ? (ApplicationController.new.render_to_string partial: 'shared/categories/teacher_icon', locals: {category: category}, layout: false) : '', description: category.description.nil? ? category.parent.description : category.description }}]}
   end
 

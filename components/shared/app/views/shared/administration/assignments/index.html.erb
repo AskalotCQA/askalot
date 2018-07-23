@@ -1,4 +1,8 @@
 <%= render layout: 'shared/administration/layout' do %>
+    <% if Rails.module.university? %>
+        <%= render 'shared/administration/shared/categories_filter' %>
+    <% end %>
+
   <%= render 'shared/administration/assignments/form', assignment: @assignment %>
 
   <ol class="administration-assignments">

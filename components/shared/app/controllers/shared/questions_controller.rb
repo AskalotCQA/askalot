@@ -11,7 +11,7 @@ class QuestionsController < ApplicationController
   include Shared::Markdown::Process
   include Shared::Watchings::Register
 
-  default_tab :recent,  only: :index
+  default_tab :newest,  only: :index
   default_tab :results, only: :search
 
   before_action :authenticate_user!
@@ -30,11 +30,12 @@ class QuestionsController < ApplicationController
 
     @questions_controls_scope = @questions
     @questions = case params[:tab].to_sym
+                 when :active     then @questions.active
                  when :unanswered then @questions.unanswered.by_votes
                  when :answered   then @questions.answered_but_not_best.by_votes
                  when :solved     then @questions.solved.by_votes
                  when :favored    then @questions.favored.by_votes
-                 else @questions.recent
+                 else @questions.newest
                  end
 
     @questions = filter_questions(@questions)
