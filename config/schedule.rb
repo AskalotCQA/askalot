@@ -50,6 +50,34 @@ if env_type != 'staging'
     end
   end
 
+  if env_name == 'novisad'
+    every 1.day, at: '4:32am' do
+      rake 'reputation:adjust'
+    end
+
+    every 5.minutes do
+      runner 'University::Mailers::UserMailerService.deliver_notifications!'
+    end
+
+    every 10.minutes do
+      runner 'Shared::Mailers::CommunityMailerService.deliver_all_emails!'
+    end
+  end
+
+  if env_name == 'lugano'
+    every 1.day, at: '4:32am' do
+      rake 'reputation:adjust'
+    end
+
+    every 5.minutes do
+      runner 'University::Mailers::UserMailerService.deliver_notifications!'
+    end
+
+    every 10.minutes do
+      runner 'Shared::Mailers::CommunityMailerService.deliver_all_emails!'
+    end
+  end
+
   if env_name == 'edx'
     every 5.minutes do
       runner 'Mooc::Mailers::UserMailerService.deliver_notifications!'
