@@ -6,14 +6,11 @@
   <%= render 'shared/administration/assignments/form', assignment: @assignment %>
 
   <ol class="administration-assignments">
-    <% @assignments.each do |assignment| %>
-      <%= render 'shared/administration/assignments/assignment', assignment: assignment %>
-    <% end %>
+    <%= render partial: 'shared/administration/assignments/assignment', collection: @assignments, as: :assignment %>
   </ol>
 
   <ol class="administration-users">
-    <% Shared::User.includes(:assignments).where.not(role: :student).order(:nick).each do |user| %>
-      <%= render 'shared/administration/assignments/user', user: user %>
-    <% end %>
+    <% users = Shared::User.includes(:assignments).where.not(role: :student).order(:nick) %>
+    <%= render partial: 'shared/administration/assignments/user', collection: users, as: :user %>
   </ol>
 <% end %>

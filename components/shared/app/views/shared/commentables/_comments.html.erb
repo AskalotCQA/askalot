@@ -5,9 +5,8 @@
     </p>
 
     <ol class="<%= model %>-comments">
-      <% comments.order(:created_at).each do |comment| %>
-        <%= render 'shared/commentables/comment', commentable: commentable, comment: comment, remote: remote ||= false %>
-      <% end %>
+      <!-- TODO: the order could be probably removed -->
+      <%= render partial: 'shared/commentables/comment', collection: comments.order(:created_at), as: :comment, locals: { commentable: commentable, remote: remote ||= false } %>
     </ol>
   </div>
 <% end %>
