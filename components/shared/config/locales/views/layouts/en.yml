@@ -68,6 +68,9 @@ en:
     help: "Help"
     news: "News"
     repositories: "Repository"
+    language:
+      slovak: "Slovenčina"
+      english: "English"
 
   body:
     unread:

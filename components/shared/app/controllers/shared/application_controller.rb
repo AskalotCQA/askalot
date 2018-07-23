@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper Mooc::Engine.helpers if Rails.module.mooc?
 
   before_action :determine_context
+  before_action :set_locale
 
   protected
 
@@ -51,6 +52,20 @@ class ApplicationController < ActionController::Base
       @contexts ||= Shared::Category.roots
     else
       @contexts ||= current_user.assigned_categories(:teacher).select { |t| t.parent_id.nil? }
+    end
+  end
+
+  private
+
+  def set_locale
+    return unless params[:lang] || cookies[:lang]
+
+    lang = params[:lang] || cookies[:lang]
+    lang = ['en', 'sk'].include?(lang) ? lang : 'sk'
+
+    if I18n.locale != lang
+      I18n.locale = lang
+      cookies[:lang] = lang
     end
   end
 end

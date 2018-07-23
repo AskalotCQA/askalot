@@ -2,27 +2,41 @@
 
 <footer>
   <div class="container">
-    <div class="list-center">
-      <ul>
-        <li><%= link_to t('footer.about'), url_to_site('teamasked#about') %></li>
-        <li><%= link_to t('footer.authors'), url_to_site('teamasked#authors') %></li>
-        <li><%= link_to t('footer.contact'), url_to_site('teamasked#contact') %></li>
-        <li><%= link_to t('footer.changelogs'), shared.changelogs_path %></li>
-        <li><%= link_to t('footer.news'), shared.news_index_path %></li>
-        <li><%= link_to t('footer.help'), shared.help_path %></li>
-      </ul>
+    <div class="col-md-2">
     </div>
 
-    <hr/>
+    <div class="col-md-8">
+      <div class="list-center">
+        <ul>
+          <li><%= link_to t('footer.about'), url_to_site('teamasked#about') %></li>
+          <li><%= link_to t('footer.authors'), url_to_site('teamasked#authors') %></li>
+          <li><%= link_to t('footer.contact'), url_to_site('teamasked#contact') %></li>
+          <li><%= link_to t('footer.changelogs'), shared.changelogs_path %></li>
+          <li><%= link_to t('footer.news'), shared.news_index_path %></li>
+          <li><%= link_to t('footer.help'), shared.help_path %></li>
+        </ul>
+      </div>
 
-    <div class="list-center">
-      <ul>
-        <li><span>Copyright <%= Time.now.year %></span></li>
-        <li><a class="text-capital" href="<%= url_to_site "teamnaruby" %>">na&#x042f;uby</a></li>
-        <li><a class="text-capital" href="<%= url_to_site "teamasked" %>">AskEd</a></li>
-        <li><%= link_to Askalot::VERSION::STRING, url_to_repository("releases/tag/v#{Askalot::VERSION::STRING}") %></li>
-        <li><%= mail_to 'askalot@fiit.stuba.sk' %></li>
-      </ul>
+      <hr/>
+
+      <div class="list-center">
+        <ul>
+          <li><span>Copyright <%= Time.now.year %></span></li>
+          <li><a class="text-capital" href="<%= url_to_site "teamnaruby" %>">na&#x042f;uby</a></li>
+          <li><a class="text-capital" href="<%= url_to_site "teamasked" %>">AskEd</a></li>
+          <li><%= link_to Askalot::VERSION::STRING, url_to_repository("releases/tag/v#{Askalot::VERSION::STRING}") %></li>
+          <li><%= mail_to 'askalot@fiit.stuba.sk' %></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-2">
+      <select id="language-picker" class="pull-right" onchange="languageChange(this)">
+        <option value="<%= url_for(params.merge(lang: 'en')) %>"><%= t('footer.language.english') %></option>
+        <option value="<%= url_for(params.merge(lang: 'sk')) %>" <%= I18n.locale.to_s == 'sk' ? 'selected="selected"' : '' %>>
+          <%= t('footer.language.slovak') %>
+        </option>
+      </select>
     </div>
   </div>
 </footer>
