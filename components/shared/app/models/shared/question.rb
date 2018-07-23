@@ -47,8 +47,8 @@ class Question < ActiveRecord::Base
   scope :with_document, lambda { where.not(document: nil) }
 
   scope :random,       lambda { with_category.select('questions.*, random()').order('random()') }
-  scope :recent,       lambda { with_category.order(touched_at: :desc) }
   scope :newest,       lambda { with_category.order(created_at: :desc) }
+  scope :active,       lambda { with_category.where('touched_at >= ?', 7.day.ago).order(touched_at: :desc) }
   scope :unanswered,   lambda { unclosed.with_category.includes(:answers).where(answers: { question_id: nil }) }
   scope :answered,     lambda { with_category.joins(:answers).uniq }
   scope :all_answered, lambda { joins(:answers).uniq }
