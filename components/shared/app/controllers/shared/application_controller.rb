@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   include Shared::Events::Log
 
   include Shared::Facebook::Modal
-  include Shared::Slido::Flash
+  include Shared::Slido::Flash if Shared::Configuration.enable.slido_events?
   include (Rails.module.classify + '::Application').constantize
 
   helper_method :contexts
