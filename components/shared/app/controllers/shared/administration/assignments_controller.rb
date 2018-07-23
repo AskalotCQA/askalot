@@ -2,11 +2,26 @@ module Shared
 class Administration::AssignmentsController < AdministrationController
   authorize_resource class: Shared::Assignment
 
+  include Administration::FilterableCategories
+
   def index
-    @assignments  = Shared::Assignment.includes(:user, :category, :role).where('admin_visible = true').order('categories.full_public_name', 'users.nick')
-    @categories   = Shared::Category.order(:depth, :full_tree_name).all
-    @users        = Shared::User::order(:login).all
-    @assignment ||= Shared::Assignment.new
+    @assignments = Shared::Assignment.includes(:user, :role, category: :parent).where('admin_visible = true').order('categories.full_public_name', 'users.nick')
+    @categories  = Shared::Category.includes(:parent).order(:depth, :full_tree_name)
+    @users       = Shared::User::order(:login).all
+    @assignment  ||= Shared::Assignment.new
+    @roles       = Shared::Role.all.order(:name)
+
+    if Rails.module.university?
+      parent_ids = params.fetch('filter-categories', {}).fetch(:parent_id, []).reject(&:blank?)
+
+      if parent_ids.empty?
+        parent_ids                  = Array(Shared::Category.where(name: Shared::Tag.current_academic_year_value).first.id)
+        params['filter-categories'] = { parent_id: parent_ids }
+      end
+
+      @assignments = include_only_child_categories(@assignments, parent_ids)
+      @categories  = include_only_child_categories(@categories, parent_ids)
+    end
 
     @assignments.each { |a| a.category.name = a.category.parent.name + ' - ' + a.category.name unless a.category.root? }
   end

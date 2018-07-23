@@ -2,9 +2,7 @@
 
 <% if notifications.any? %>
   <ol class="notifications">
-    <% notifications.each do |notification| %>
-      <%= render 'shared/notifications/notification', notification: notification %>
-    <% end %>
+    <%= render partial: 'shared/notifications/notification', collection: notifications, as: :notification %>
   </ol>
 
   <%= paginate notifications, params: { tab: tab } %>

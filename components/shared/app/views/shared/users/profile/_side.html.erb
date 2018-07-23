@@ -1,7 +1,11 @@
 <div class="row">
   <div class="col-xs-5 col-sm-5 col-md-12">
+    <% alumni_class = user.alumni? ? 'alumni' : '' %>
     <div class="user-profile-avatar">
-      <%= user_avatar_tag user, image: { class: :'img-responsive', size: 263 }, url: gravatar_url(user.gravatar_email, size: 400) %>
+      <%= user_avatar_tag user, image: { class: :"img-responsive #{alumni_class}", size: 263 }, url: gravatar_url(user.gravatar_email, size: 400) %>
+      <% if alumni_class == 'alumni' %>
+        <div class="alumni-overlay"><%= t('user.tab.alumni') %></div>
+      <% end %>
       <%= render 'shared/users/reputation', user: user, size: :lg %>
     </div>
   </div>

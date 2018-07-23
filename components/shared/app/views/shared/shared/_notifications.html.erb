@@ -2,9 +2,7 @@
   <%= navbar_dropdown_tag :'dot-circle-o', notifications.unscope(:limit).size, '#', class: :'hidden-xs notifications-dropdown', join: :append do %>
     <li><%= link_to_notifications notifications %></li>
     <li class="divider"></li>
-    <% notifications.each do |notification| %>
-      <%= render 'shared/shared/notification', notification: notification %>
-    <% end %>
+    <%= render partial: 'shared/shared/notification', collection: notifications, as: :notification %>
     <li class="divider"></li>
     <li><%= link_to t('notification.clean.submit'), shared.clean_notifications_path, { data: { remote: true } } %></li>
   <% end %>

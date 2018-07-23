@@ -15,9 +15,7 @@
 
 <% if answers.any? %>
   <ol class="question-answers">
-    <% answers.each do |answer| %>
-      <%= render 'shared/questions/answer', answer: answer %>
-    <% end %>
+    <%= render partial: 'shared/questions/answer', collection: answers, as: :answer %>
   </ol>
 
   <hr/>

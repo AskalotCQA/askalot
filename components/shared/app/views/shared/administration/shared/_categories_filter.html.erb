@@ -1,0 +1,4 @@
+<%= form_for 'filter-categories', method: :get, html: { id: 'filter-categories-parent-id', class: 'form-inline' } do |f| %>
+    <%= f.category_collection_select :parent_id, Shared::Category.order(:depth, :name).where(depth: 1), :id, :full_tree_name, {selected: params.dig(:'filter-categories', :parent_id), grouped: false}, data: {role: :categories}, multiple: true %>
+    <%= f.submit t('administration.category.index.filter_categories'), class: 'btn btn-success filter-categories' %>
+<% end %>

@@ -1,8 +1,6 @@
 <% if questions.any? %>
   <ol class="user-questions">
-    <% questions.each do |question| %>
-      <%= render 'shared/users/profile/question', question: question %>
-    <% end %>
+    <%= render partial: 'shared/users/profile/question', collection: questions, as: :question %>
   </ol>
 
   <%= paginate questions, params: { tab: :questions } %>

@@ -71,5 +71,6 @@ module Askalot
     config.action_dispatch.rescue_responses = {
       'ActionController::InvalidAuthenticityToken' => :unprocessable_entity,
     }
+    config.web_console.development_only = false
   end
 end

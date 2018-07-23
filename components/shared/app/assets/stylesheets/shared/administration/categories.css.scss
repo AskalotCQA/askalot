@@ -12,12 +12,16 @@
   margin-bottom: 15px;
 }
 
-#copy-categories-parent-id {
+#copy-categories-parent-id, #filter-categories-parent-id {
   display:inline-block;
-  width: 70%;
+  width: 74%;
 }
 
-.copy-categories {
+.copy-categories, .filter-categories {
   display:inline-block;
   float: right;
+}
+
+#s2id_filter-categories_parent_id {
+  width: calc(100% - 210px);
 }

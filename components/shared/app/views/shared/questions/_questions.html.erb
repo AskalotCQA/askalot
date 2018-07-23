@@ -1,9 +1,7 @@
 <div id="questions" class="questions tab-content">
   <% if questions.any? %>
     <ol class="list-unstyled">
-      <% questions.each do |question| %>
-        <%= render 'question', question: question %>
-      <% end %>
+      <%= render partial: 'question', collection: questions, as: :question %>
     </ol>
 
     <% if remote %>

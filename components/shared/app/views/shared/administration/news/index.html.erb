@@ -2,8 +2,6 @@
   <%= render 'shared/administration/news/form' %>
 
   <ol class="administration-changelogs">
-    <% @all_news.each do |news| %>
-      <%= render 'shared/administration/news/news', news: news %>
-    <% end %>
+    <%= render partial: 'shared/administration/news/news', collection: @all_news, as: :news %>
   </ol>
 <% end %>

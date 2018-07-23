@@ -22,13 +22,17 @@ en:
       very_good: "Excellent"
 
       question:
+        very_bad: "Very bad question"
         bad: "Bad question"
         neutral: "Good question"
-        good: "Great question"
+        good: "Very good question"
+        very_good: "Excellent question"
 
       answer:
+        very_bad: "Very bad answer"
         bad: "Bad answer"
         neutral: "Good answer"
         good: "Great answer"
+        very_good: "Excellent answer"
 
     deleted: "Evaluation was deleted"

@@ -74,7 +74,8 @@ sk:
       closed: "Otázka je uzatvorená."
 
     tab:
-      recent: "Aktuálne"
+      newest: "Všetky"
+      active: "Aktívne"
       unanswered: "Bez odpovede"
       answered: "Odpovedané"
       solved: "Vyriešené"

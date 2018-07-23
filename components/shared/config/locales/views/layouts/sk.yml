@@ -74,6 +74,9 @@ sk:
     help: "Pomoc"
     news: "Novinky"
     repositories: "Repozitár"
+    language:
+      slovak: "Slovenčina"
+      english: "English"
 
   body:
     unread:
