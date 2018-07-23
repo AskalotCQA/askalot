@@ -1,10 +1,11 @@
 // List of initial requirements (order is significant).
 //
+//= link_tree ../../images
+//
 //=require cal-heatmap
 //=require gemoji
 //=require markdown
 //=require select2
-//=require jquery-textcomplete
 //
 //=require_self
 //
@@ -32,6 +33,7 @@
 @import 'search';
 @import 'errors';
 @import 'treetable';
+@import 'icheck/square/blue';
 
 @import 'header';
 @import 'home';
@@ -64,3 +66,4 @@
 @import 'fixes';
 
 @import 'simple-view';
+@import 'icheck';

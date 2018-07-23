@@ -6,6 +6,8 @@
 #= require bootstrap
 #= require jquery-ui/effect.all
 #= require handlebars.runtime
+#= require textcomplete/textcomplete.min
+#= require 'icheck'
 #= require_tree ./handlebars
 #= require_tree ./templates
 #
@@ -23,7 +25,6 @@
 #= require moment
 #= require moment/sk.js
 #= require moment/en-gb.js
-#= require jquery-textcomplete
 #
 #= require bootstrap-markdown
 #= require ./markdown-editor-buttons

@@ -58,7 +58,7 @@ class window.Markdown
   constructor: (id) ->
     @id = id
 
-    @bindTextcomplete()
+    @bindTextcomplete(id)
 
   preview: ->
     @render (html) =>
@@ -78,9 +78,12 @@ class window.Markdown
         text: text
       success: (html) -> callback(html)
 
-  bindTextcomplete: ->
-    for _, options of @textcomplete.strategies
-      $("##{@id}-text textarea").textcomplete(options)
+  bindTextcomplete: (id) ->
+    editor = new Textcomplete.editors.Textarea($("##{@id}-text textarea")[0]);
+    textcomplete = new Textcomplete(editor);
+    strategiesArray = (value for own prop, value of @textcomplete.strategies)
+
+    textcomplete.register(strategiesArray)
 
   delay: do ->
     timer = 0;

@@ -66,18 +66,20 @@
       <div class="help-block"><%= t 'attachment.help_block' %></div>
     </div>
 
-    <button type="submit" class="btn btn-primary"><%= t 'question.new.submit' %></button>
+    <button type="submit" class="btn btn-primary pull-left"><%= t 'question.new.submit' %></button>
 
-    <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-primitive btn-sm">
-        <%= f.check_box :anonymous %> <%= Shared::Question.human_attribute_name :anonymous %> <%= icon_tag :'square-o' %>
-      </label>
+      <div class="icheck pull-left">
+        <label>
+          <%= f.check_box :anonymous, checked: false, data: { as: :icheck } %>
+          <%= Shared::Question.human_attribute_name :anonymous %>
+        </labeL>
 
-      <% if current_user.role?(:teacher) || current_user.role?(:administrator) && Rails.module.university? %>
-          <label class="btn btn-primitive btn-sm">
-            <%= check_box_tag :slido %> <%= t 'question.new.slido' %> <%= icon_tag :'square-o' %>
-          </label>
-      <% end %>
-    </div>
+        <% if current_user.role?(:teacher) || current_user.role?(:administrator) && Rails.module.university? %>
+            <label>
+              <%= check_box_tag :slido, '1', false, data: { as: :icheck } %>
+              <%= t 'question.new.slido' %>
+            </labeL>
+        <% end %>
+      </div>
   <% end %>
 </div>

@@ -190,11 +190,7 @@ describe 'User Profile', type: :feature do
 
         label = find('label', text: 'Zasielať e-mailové notifikácie')
 
-        expect(label[:class]).to include('active')
-
         label.click
-
-        expect(label[:class]).not_to include('active')
 
         click_button 'Uložiť'
 

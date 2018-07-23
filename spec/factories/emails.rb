@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :email, class: Shared::Email do
     user nil
     subject "MyText"

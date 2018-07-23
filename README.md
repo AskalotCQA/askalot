@@ -47,8 +47,7 @@ RAILS_ENV=edx_development rake db:create db:structure:load DB_STRUCTURE=componen
 
 ## Testing
 
-1. Install [PhantomJS](http://phantomjs.org/) (v2.1).
-2. Run specs with:
+Run specs with:
 
 ```
 RAILS_ENV=fiit_test rake db:create db:structure:load DB_STRUCTURE=components/university/db/structure.sql

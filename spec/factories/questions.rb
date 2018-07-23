@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :question, class: Shared::Question do
     sequence(:title) { |n| "Title #{n}" }
 

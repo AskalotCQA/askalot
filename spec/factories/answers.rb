@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :answer, class: Shared::Answer do
     association :author
     association :question

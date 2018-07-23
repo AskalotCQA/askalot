@@ -6,6 +6,7 @@ services:
   - elasticsearch
 
 addons:
+  chrome: stable
   postgresql: "9.3"
   code_climate:
     repo_token:
@@ -13,21 +14,12 @@ addons:
 
 cache:
   - bundler: true
-  - directories:
-    - "travis_phantomjs"
 
 sudo: false
 bundler_args: --without development
 
 before_install:
-  - "export PHANTOMJS_VERSION=2.1.1"
-  - "phantomjs --version"
-  - "export PATH=$PWD/travis_phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin:$PATH"
-  - "phantomjs --version"
-  - "if [ $(phantomjs --version) != $PHANTOMJS_VERSION ]; then rm -rf $PWD/travis_phantomjs; mkdir -p $PWD/travis_phantomjs; fi"
-  - "if [ $(phantomjs --version) != $PHANTOMJS_VERSION ]; then wget https://github.com/Medium/phantomjs/releases/download/v$PHANTOMJS_VERSION/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -O $PWD/travis_phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2; fi"
-  - "if [ $(phantomjs --version) != $PHANTOMJS_VERSION ]; then tar -xvf $PWD/travis_phantomjs/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -C $PWD/travis_phantomjs; fi"
-  - "phantomjs --version"
+  - curl -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.5.deb && sudo dpkg -i --force-confnew elasticsearch-1.7.5.deb && sudo service elasticsearch restart
 
 before_script:
   - export TZ='Europe/Bratislava'
@@ -42,7 +34,9 @@ before_script:
 script:
   - RAILS_ENV=fiit_test bundle exec rake rspec:test
   - RAILS_ENV=fiit_test bundle exec rake rspec:test_failed
+  - RAILS_ENV=fiit_test bundle exec rake rspec:test_failed
   - RAILS_ENV=edx_test bundle exec rake rspec:test
+  - RAILS_ENV=edx_test bundle exec rake rspec:test_failed
   - RAILS_ENV=edx_test bundle exec rake rspec:test_failed
 
 after_success:

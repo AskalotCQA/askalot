@@ -30,6 +30,11 @@ window.fixes = ->
 
   $('[data-spy="affix"]').affix(offset: { top: 52 })
 
+  $('[data-as="icheck"]').iCheck(
+    checkboxClass: 'icheckbox_square-blue',
+    radioClass: 'iradio_square-blue',
+  );
+
   $('[data-time-ago]').timeago()
 
   $('[data-toggle="buttons"] [checked="checked"]').parent().addClass('active')

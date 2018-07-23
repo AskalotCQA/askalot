@@ -28,7 +28,7 @@ describe 'Question Polling', type: :feature, js: true do
     expect(list.size).to eq(2)
 
     expect(page).to have_content('Elasticsearch problem')
-    expect(page).to have_content('Aktualizované pred menej než minútou')
+    expect(page).to have_content('Aktualizované pred menej ako minútou')
 
     expect(last_event.data[:params]).to include(poll: 'true')
   end
@@ -52,7 +52,7 @@ describe 'Question Polling', type: :feature, js: true do
 
     expect(page).to have_content('Elasticsearch problem')
 
-    click_link 'Aktualizované pred menej než minútou'
+    click_link 'Aktualizované pred menej ako minútou'
 
     within '#questions-controls' do
       expect(page).to have_content('Aktualizovať automaticky')

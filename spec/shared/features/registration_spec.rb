@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'Registration', type: :feature do
+describe 'Registration', type: :feature, js: true do
   context 'with provided login' do
     it 'signs up user' do
       visit shared.root_path

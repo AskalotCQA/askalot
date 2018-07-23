@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :favorite, class: Shared::Favorite do
     association :question
     association :favorer

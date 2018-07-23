@@ -1,0 +1,14 @@
+.icheck {
+  &.pull-left {
+    margin-left: 10px;
+  }
+
+  label {
+    font-weight: normal;
+    cursor: pointer;
+
+    > div {
+      margin-right: 2px;
+    }
+  }
+}

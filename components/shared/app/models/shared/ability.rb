@@ -1,4 +1,4 @@
-# see: https://github.com/ryanb/cancan/wiki/Defining-Abilities
+# https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
 
 module Shared
 class Ability

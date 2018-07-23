@@ -27,8 +27,8 @@ describe Shared::TagsController, type: :controller do
 
       json = {
         results: [
+          { id: 'testing', text: 'testing (1)' },
           { id: 'test', text: 'test (1)' },
-          { id: 'testing', text: 'testing (1)' }
         ]
       }.to_json
 

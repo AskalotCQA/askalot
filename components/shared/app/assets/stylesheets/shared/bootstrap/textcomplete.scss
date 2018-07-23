@@ -1,5 +1,7 @@
-.textcomplete-wrapper {
-  .dropdown-menu > li.textcomplete-item > a {
+.dropdown-menu.textcomplete-dropdown {
+  padding: 0;
+
+  > li.textcomplete-item > a {
     padding: $padding-small-vertical $padding-small-horizontal;
 
     img {

@@ -18,9 +18,9 @@ Gem::Specification.new do |s|
 
   # TODO(huna) list all dependencies
   s.add_dependency 'rails', '~> 4.2.0'
-  s.add_dependency 'devise', '~> 3.5.0'
+  s.add_dependency 'devise', '~> 4.4.0'
 
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'capybara'
-  s.add_development_dependency 'factory_girl_rails'
+  s.add_development_dependency 'factory_bot_rails'
 end

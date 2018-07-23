@@ -1,22 +1,18 @@
-<%= form_for resource, as: :user, url: shared.profile_users_path(tab: tab), html: { method: :patch } do |f| %>
+<%= form_for resource, as: :user, url: shared.profile_users_path(tab: tab), html: { method: :patch, id: :edit_user_preferences } do |f| %>
   <%= form_messages_for resource, key: tab %>
 
-  <div class="form-group">
-    <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-default">
-        <%= f.reversed_check_box :show_name, checked: !resource.show_name %>
-        <%= Shared::User.human_attribute_name :hide_name %> <%= icon_tag resource.show_name ? :'square-o' : :check %>
-      </label>
-    </div>
+  <div class="form-group icheck">
+    <label>
+      <%= f.reversed_check_box :show_name, checked: !resource.show_name, data: { as: :icheck } %>
+      <%= Shared::User.human_attribute_name :hide_name %>
+    </label>
   </div>
 
-  <div class="form-group">
-    <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-default">
-        <%= f.reversed_check_box :show_email, checked: !resource.show_email %>
-        <%= Shared::User.human_attribute_name :hide_email %> <%= icon_tag resource.show_email ? :'square-o' : :check %>
-      </label>
-    </div>
+  <div class="form-group icheck">
+    <label>
+      <%= f.reversed_check_box :show_email, checked: !resource.show_email, data: { as: :icheck } %>
+      <%= Shared::User.human_attribute_name :hide_email %>
+    </labeL>
   </div>
 
   <div class="form-group">
