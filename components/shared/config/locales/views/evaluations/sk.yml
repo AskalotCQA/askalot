@@ -22,13 +22,17 @@ sk:
       very_good: "Výborne"
 
       question:
+        very_bad: "Veľmi zlá otázka"
         bad: "Zlá otázka"
         neutral: "Dobrá otázka"
-        good: "Výborná otázka"
+        good: "Veľmi dobrá otázka"
+        very_good: "Výborná otázka"
 
       answer:
+        very_bad: "Veľmi zlá odpoveď"
         bad: "Zlá odpoveď"
         neutral: "Dobrá odpoveď"
-        good: "Výborná odpoveď"
+        good: "Veľmi dobrá odpoveď"
+        very_good: "Výborná odpoveď"
 
     deleted: "Ohodnotenie bolo zmazané"

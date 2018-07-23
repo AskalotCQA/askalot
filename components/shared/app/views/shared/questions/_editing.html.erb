@@ -33,7 +33,27 @@
 
             <div class="form-group">
               <%= f.label :category_id %>
-              <%= f.category_collection_select :category_id, Shared::Category.where(askable: true, depth: Shared::CategoryDepth.visible_depths.first).visible.not_unknown.unscope(:order).order(:full_public_name), :id, :full_public_name, {grouped: true}, {data: {role: :categories_with_metadata}} %>
+              <%
+                # TODO: Too much logic in view
+                if Rails.module.university? && Shared::Context::Manager.current_context_id != -1
+                  year_category = @question.category
+
+                  while year_category.depth > 1
+                    year_category = year_category.parent
+                  end
+
+                  if year_category == Shared::Context::Manager.current_context_id
+                    categories = Shared::Category.where(askable: true).visible
+                  else
+                    categories = Shared::Category.all_in_contexts(year_category.id)
+                  end
+
+                  categories = categories.where(depth: Shared::CategoryDepth.visible_depths.first).not_unknown.unscope(:order).order(:full_public_name)
+                else
+                  categories = Shared::Category.where(askable: true, depth: Shared::CategoryDepth.visible_depths.first).visible.not_unknown.unscope(:order).order(:full_public_name)
+                end
+              %>
+              <%= f.category_collection_select :category_id, categories, :id, :full_public_name, {grouped: true}, {data: {role: :categories_with_metadata}} %>
             </div>
             <div class="form-group">
               <%= f.label :title %>
