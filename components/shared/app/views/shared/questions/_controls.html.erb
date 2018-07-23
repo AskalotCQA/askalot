@@ -8,6 +8,7 @@
   </div>
 
   <ul class="nav nav-tabs">
+    <%= tab_link_tag_with_count t('question.tab.newest'), :newest, shared.questions_path(params.symbolize_keys.except(:page).merge tab: :newest), filter_questions(@questions_controls_scope.newest).size, analytics_attributes(:questions, :switch, :newest).merge(remote: true) %>
     <%= tab_link_tag_with_count t('question.tab.recent'), :recent, shared.questions_path(params.symbolize_keys.except(:page).merge tab: :recent), filter_questions(@questions_controls_scope.recent).size, analytics_attributes(:questions, :switch, :recent).merge(remote: true) %>
     <%= tab_link_tag_with_count t('question.tab.unanswered'), :unanswered, shared.questions_path(params.symbolize_keys.except(:page).merge tab: :unanswered), filter_questions(@questions_controls_scope.unanswered).size, analytics_attributes(:questions, :switch, :unanswered).merge(remote: true) %>
     <%= tab_link_tag_with_count t('question.tab.answered'), :answered, shared.questions_path(params.symbolize_keys.except(:page).merge tab: :answered), filter_questions(@questions_controls_scope.answered_but_not_best).size, analytics_attributes(:questions, :switch, :answered).merge(remote: true) %>

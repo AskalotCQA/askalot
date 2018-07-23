@@ -3,9 +3,22 @@ class Administration::CategoriesController < AdministrationController
   authorize_resource class: Shared::Category
 
   include CategoriesHelper
+  include Administration::FilterableCategories
 
   def index
     @categories = Shared::Category.includes(:assignments).order(:lft)
+
+    if Rails.module.university?
+      parent_ids = params.fetch('filter-categories', {}).fetch(:parent_id, []).reject(&:blank?)
+
+      if parent_ids.empty?
+        parent_ids                  = Array(Shared::Category.where(name: Shared::Tag.current_academic_year_value).first.id)
+        params['filter-categories'] = { parent_id: parent_ids }
+      end
+
+      @categories = include_only_child_categories(@categories, parent_ids)
+    end
+
     @category ||= Shared::Category.new
   end
 

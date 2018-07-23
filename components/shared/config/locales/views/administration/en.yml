@@ -33,6 +33,7 @@ en:
         wait: "Wait, please..."
         success: "Categories were updated successfully"
         copy_categories: "Copy categories"
+        filter_categories: "Show data for categories"
         empty: "No parent category chosen"
 
       create:

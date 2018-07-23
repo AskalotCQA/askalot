@@ -1,5 +1,9 @@
 <%= render layout: 'shared/administration/layout' do %>
-  <div class="text-right">
+  <% if Rails.module.university? %>
+    <%= render 'shared/administration/shared/categories_filter' %>
+  <% end %>
+
+  <div class="pull-right">
     <%= link_to t('administration.category.create.action'), shared.new_administration_category_path, class: 'btn btn-primary' %>
   </div>
 
