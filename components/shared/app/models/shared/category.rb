@@ -290,7 +290,7 @@ class Category < ActiveRecord::Base
       year_category = year_category.parent
     end
 
-    leaves = self.leaves.includes(:assignments).where(askable: true).visible.not_unknown.unscope(:order).order(:full_public_name)
+    leaves = self.leaves.includes(:assignments, :parent).where(askable: true).visible.not_unknown.unscope(:order).order(:full_public_name)
     leaves = leaves.unscope(where: :askable) unless year_category.askable
 
     leaves.map {|category| [category, {data: {tags: category.effective_tags, icon: category.has_teachers? ? (ApplicationController.new.render_to_string partial: 'shared/categories/teacher_icon', locals: {category: category}, layout: false) : '', description: category.description.nil? ? category.parent.description : category.description }}]}
