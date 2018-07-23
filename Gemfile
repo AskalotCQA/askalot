@@ -101,6 +101,8 @@ group :development do
   gem 'capistrano-ext'
   gem 'rvm-capistrano', require: false
   gem 'bump', github: 'pavolzbell/bump'
+  gem 'web-console'
+  gem 'bullet'
 end
 
 group :development, :test do

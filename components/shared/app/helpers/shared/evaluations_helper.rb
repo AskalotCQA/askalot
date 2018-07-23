@@ -1,6 +1,6 @@
 module Shared::EvaluationsHelper
   Infinity = 1.0 / 0.0
-  Boundary = 2.0 / 3.0
+  Neutral  = 0.0
 
   def evaluation_badge_tag(evaluable, options = {})
     data  = evaluation_data evaluable
@@ -26,9 +26,11 @@ module Shared::EvaluationsHelper
 
   def evaluation_data(evaluable)
     case evaluable.evaluations.average(:value).to_f
-    when -Infinity...-Boundary then { color: :'evaluated-bad',     icon: :'thumbs-o-down', rank: :bad }
-    when -Boundary...+Boundary then { color: :'evaluated-neutral', icon: :'hand-o-right',  rank: :neutral }
-    when +Boundary.. +Infinity then { color: :'evaluated-good',    icon: :'thumbs-o-up',   rank: :good }
+    when -Infinity..-2 then { color: :'evaluated-bad',     icon: :'thumbs-o-down', rank: :very_bad }
+    when -2..-1        then { color: :'evaluated-bad',     icon: :'thumbs-o-down', rank: :bad }
+    when -1..1         then { color: :'evaluated-neutral', icon: :'hand-o-right',  rank: :neutral }
+    when 1..2          then { color: :'evaluated-good',    icon: :'thumbs-o-up',   rank: :good }
+    when 2...+Infinity then { color: :'evaluated-good',    icon: :'thumbs-o-up',   rank: :very_good }
     else fail
     end
   end

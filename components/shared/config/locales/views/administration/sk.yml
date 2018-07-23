@@ -33,6 +33,7 @@ sk:
         wait: "Čakajte, prosím..."
         success: "Kategórie boli úspešne upravené"
         copy_categories: "Kopírovať kategórie"
+        filter_categories: "Zobraziť dáta pre kategórie"
         empty: "Nie je vybratá rodičovská kategória"
 
       create:

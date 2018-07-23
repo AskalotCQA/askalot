@@ -97,6 +97,10 @@ class User < ActiveRecord::Base
     false
   end
 
+  def alumni?
+    alumni
+  end
+
   def gravatar_email
     (value = read_attribute :gravatar_email).blank? ? email : value
   end

@@ -2,9 +2,7 @@
 
 <% if watchings.any? %>
   <ol class="watchings">
-    <% watchings.each do |watching| %>
-      <%= render 'watching', watching: watching %>
-    <% end %>
+    <%= render partial: 'watching', collection: watchings, as: :watching %>
   </ol>
 
   <%= render 'clean', model: tab.to_s.singularize %>

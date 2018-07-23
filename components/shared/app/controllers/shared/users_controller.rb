@@ -27,8 +27,13 @@ class UsersController < ApplicationController
     @anonymous  = Shared::Question.in_context(@context_id).by(@user).where(anonymous: true).order(created_at: :desc)
     @answers    = Shared::Answer.in_context(@context_id).by(@user).where(anonymous: false).order(created_at: :desc)
     @favorites  = Shared::Favorite.in_context(@context_id).by(@user).order(created_at: :desc)
-    @activities = Shared::Activity.in_context(@context_id).of(@user).global.order(created_at: :desc) if current_user == @user
-    @activities = Shared::Activity.in_context(@context_id).of(@user).order(created_at: :desc) unless current_user == @user
+    @activities = Shared::Activity.in_context(@context_id).of(@user).order(created_at: :desc)
+
+    if current_user == @user
+      @activities = @activities.global
+    else
+      @activities = @activities.not_anonymous
+    end
 
     @questions  = @questions.page(tab_page :questions).per(10)
     @anonymous  = @anonymous.page(tab_page :anonymous).per(10)
@@ -97,7 +102,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    attributes = [:email, :nick, :about, :gravatar_email, :show_name, :show_email, :send_email_notifications, :prefered_activity_tab, :send_facebook_notifications]
+    attributes = [:email, :nick, :about, :gravatar_email, :show_name, :show_email, :send_email_notifications,
+                  :prefered_activity_tab, :send_facebook_notifications, :send_mail_notifications_frequency]
 
     attributes += Shared::Social.networks.keys
     attributes += [:first, :last] if can? :change_name, current_user

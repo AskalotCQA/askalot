@@ -50,5 +50,6 @@
 #= require ./analytics
 #= require ./external-links
 #= require ./fixes
+#= require ./footer
 #
 #= require ./facebook

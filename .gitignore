@@ -24,6 +24,8 @@ config/newrelic.yml
 
 coverage
 
+.byebug_history
+
 data/android_dump
 data/so_dump
 
