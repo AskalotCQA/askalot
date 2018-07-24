@@ -2,7 +2,7 @@ module Askalot
   module VERSION
     MAJOR = 3
     MINOR = 1
-    PATCH = 3
+    PATCH = 4
 
     PRE = nil
 
