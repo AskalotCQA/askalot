@@ -112,7 +112,8 @@ module Shared::Tags
           },
           sort: {
             :'count' => :desc
-          }
+          },
+          page: params[:page].to_i
         )
       end
     end

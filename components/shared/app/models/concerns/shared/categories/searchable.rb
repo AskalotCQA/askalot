@@ -117,7 +117,8 @@ module Shared::Categories
           },
           sort: {
             :'name.untouched' => :asc
-          }
+          },
+          page: params[:page].to_i
         )
       end
     end

@@ -184,7 +184,8 @@ module Shared::Questions
           },
           sort: {
             :'title.untouched' => :asc
-          }
+          },
+          page: params[:page].to_i
         )
       end
     end
