@@ -310,7 +310,7 @@ class Category < ActiveRecord::Base
     return unless watchings
 
     watchings.each do |watching|
-      watching.copy(category_copy.id, category_copy.root.id) if watching.watcher.role == :teacher || self.teachers.include?(watching.watcher) || self.full_tree_name.include?('Všeobecné')
+      watching.copy(category_copy.id, category_copy.related_contexts.first.id) if watching.watcher.role == :teacher || self.teachers.include?(watching.watcher) || self.full_tree_name.include?('Všeobecné')
     end
   end
 
