@@ -22,7 +22,7 @@ module Shared::Facebook::Modal
 
           begin
             token_expired = !FbGraph2::Auth.new(Shared::Configuration.facebook.application.id, Shared::Configuration.facebook.application.secret).debug_token!(current_user.omniauth_token).is_valid
-          rescue FbGraph2::Exception::InternalServerError
+          rescue FbGraph2::Exception
             token_expired = false
           end
 
