@@ -1,7 +1,9 @@
 <div id="questions" class="questions tab-content">
   <% if questions.any? %>
     <ol class="list-unstyled">
-      <%= render partial: 'question', collection: questions, as: :question %>
+      <% questions.each do |question| %>
+        <%= render 'shared/users/profile/question', question: question %>
+      <% end %>
     </ol>
 
     <% if remote %>

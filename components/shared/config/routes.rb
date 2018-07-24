@@ -31,7 +31,7 @@ Shared::Engine.routes.draw do
 
     root 'static_pages#home'
 
-    devise_for :users, class_name: 'Shared::User', controllers: { sessions: 'shared/sessions', registrations: 'shared/registrations' }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout }, module: :devise
+    devise_for :users, class_name: 'Shared::User', controllers: { sessions: 'shared/sessions', registrations: 'shared/registrations' }, path: '', path_names: { sign_up: :join, sign_in: :login, sign_out: :logout, confirmations: :confirmations }, module: :devise
 
     resources :users, only: [:index] do
       patch :profile,  on: :collection, to: 'users#update'

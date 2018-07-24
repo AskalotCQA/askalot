@@ -2,9 +2,6 @@ language: ruby
 rvm:
   - 2.4.4
 
-services:
-  - elasticsearch
-
 addons:
   chrome: stable
   postgresql: "9.3"

@@ -16,13 +16,38 @@ describe 'Show Questions', type: :feature, js: true do
     login_as user
   end
 
-  it 'shows list of new questions' do
+  it 'shows list of all questions' do
     visit shared.root_path
 
     click_link 'Otázky'
 
     within '#questions-controls' do
-      click_link 'Aktuálne'
+      click_link 'Všetky'
+
+      wait_for_remote
+    end
+
+    list = all('#questions > ol > li')
+
+    expect(list.size).to eq(17)
+
+    within list[0] do
+      expect(page).to have_content(newest_question.title)
+      expect(page).to have_content(newest_question.category.name)
+
+      newest_question.tags.pluck(:name).each do |tag|
+        expect(page).to have_content(tag)
+      end
+    end
+  end
+
+  it 'shows list of active questions' do
+    visit shared.root_path
+
+    click_link 'Otázky'
+
+    within '#questions-controls' do
+      click_link 'Aktívne'
 
       wait_for_remote
     end
