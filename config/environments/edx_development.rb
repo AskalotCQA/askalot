@@ -47,4 +47,13 @@ Askalot::Application.configure do
     'Access-Control-Allow-Methods' => 'POST, GET, PUT, DELETE, OPTIONS',
     'Access-Control-Allow-Headers' => 'X-CSRFToken'
   }
+
+  config.web_console.development_only = false
+
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.bullet_logger = true
+    Bullet.console = true
+    Bullet.add_footer = true
+  end
 end

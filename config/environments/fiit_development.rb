@@ -42,6 +42,8 @@ Askalot::Application.configure do
   # Comment if you are going to play with rails_panel
   config.relative_url_root = '/askalot'
 
+  config.web_console.development_only = false
+
   config.after_initialize do
     Bullet.enable = true
     Bullet.bullet_logger = true

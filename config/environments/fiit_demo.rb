@@ -93,7 +93,7 @@ Askalot::Application.configure do
 
   config.middleware.use ExceptionNotification::Rack,
     email: {
-      email_prefix: '[TP][error] ',
+      email_prefix: '[Askalot][error] ',
       sender_address: %{'Askalot' <askalot@fiit.stuba.sk>},
       exception_recipients: %w{askalot@fiit.stuba.sk}
   }
