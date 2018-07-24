@@ -23,7 +23,6 @@ before_install:
 
 before_script:
   - export TZ='Europe/Bratislava'
-  - gem install bundler
   - "cp config/database.yml.example config/database.yml"
   - "cp config/configuration.yml.example config/configuration.yml"
   - RAILS_ENV=fiit_test bundle exec rake db:create
