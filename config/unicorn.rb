@@ -1,6 +1,6 @@
 root = File.expand_path "#{File.dirname(__FILE__)}/.."
 
-worker_processes_map = { default: 2, fiit_production: 2, fiit_demo: 2, fiit_staging: 2, edx_production: 2, edx_demo: 2, edx_staging: 2, lugano_production: 2, novisad_production: 2 }
+worker_processes_map = { default: 2, fiit_production: 4, fiit_demo: 1, fiit_staging: 1, edx_production: 1, edx_demo: 1, edx_staging: 1, lugano_production: 1, novisad_production: 1 }
 
 worker_processes worker_processes_map[(ENV['RAILS_ENV'] || :default).to_sym]
 timeout          15
