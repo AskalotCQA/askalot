@@ -2,7 +2,7 @@
   <% if questions.any? %>
     <ol class="list-unstyled">
       <% questions.each do |question| %>
-        <%= render 'shared/users/profile/question', question: question %>
+        <%= render 'question', question: question %>
       <% end %>
     </ol>
 
