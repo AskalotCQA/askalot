@@ -81,6 +81,7 @@ gem 'awesome_nested_set'
 gem 'ims-lti', '~> 1.2.0'
 gem 'non-stupid-digest-assets'
 gem 'data-anonymization', '~> 0.6.5'
+gem 'meta_request', group: :development
 
 # search
 gem 'elasticsearch'
@@ -89,7 +90,6 @@ gem 'elasticsearch'
 gem 'paperclip', '~> 6.0'
 gem 'activesupport-json_encoder'
 gem 'remotipart', '~> 1.4'
-gem 'meta_request'
 
 group :doc do
   gem 'sdoc', require: false
