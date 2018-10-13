@@ -12,7 +12,7 @@ class Administration::CategoriesController < AdministrationController
       parent_ids = params.fetch('filter-categories', {}).fetch(:parent_id, []).reject(&:blank?)
 
       if parent_ids.empty?
-        parent_ids                  = Array(Shared::Category.where(name: Shared::Tag.current_academic_year_value).first.id)
+        parent_ids                  = Array(Shared::Category.where(depth: 1).last.id)
         params['filter-categories'] = { parent_id: parent_ids }
       end
 
