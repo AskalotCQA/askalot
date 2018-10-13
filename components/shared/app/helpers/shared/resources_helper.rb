@@ -2,6 +2,7 @@ module Shared::ResourcesHelper
   def link_to_resource(resource, options = {})
     body = options.delete(:body)
     url  = options.delete(:url)
+    mute = options.delete(:mute)
 
     body_options = extract_truncate_options! options
     url_options  = options.extract! :anchor, :params

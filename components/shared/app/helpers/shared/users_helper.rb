@@ -36,6 +36,7 @@ module Shared::UsersHelper
 
   def link_to_user(user, options = {})
     authorable = options.delete(:authorable)
+    mute = options.delete(:mute)
 
     user = (user == authorable.author ? authorable.author_or_anonymous : user) if authorable
 

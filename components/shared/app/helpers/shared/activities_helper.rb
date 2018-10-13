@@ -28,7 +28,7 @@ module Shared::ActivitiesHelper
       question = resource.to_question
 
       resource_options = options.clone
-      question_options = options.merge(deleted: question.deleted?, length: 50)
+      question_options = options.clone.merge(deleted: question.deleted?, length: 50)
 
       resource_body = activity_resource_body(action, resource, resource_options)
       question_body = activity_question_body(action, question, question_options)
