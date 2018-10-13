@@ -51,7 +51,7 @@ gem 'gemoji', '~> 1.5.0'
 gem 'loofah'
 
 # mailer
-gem 'roadie'
+gem 'roadie-rails'
 gem 'letter_opener', group: :development
 
 # internationalization

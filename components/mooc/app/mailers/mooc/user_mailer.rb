@@ -1,6 +1,8 @@
 module Mooc
 class UserMailer < ActionMailer::Base
-  default from: ::Shared::Configuration.mailer.alias, css: 'shared/mailers/layout'
+  include Roadie::Rails::Automatic
+
+  default from: ::Shared::Configuration.mailer.alias
 
   helper Shared::ActivitiesHelper
   helper Shared::AnswersHelper
