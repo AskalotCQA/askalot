@@ -12,11 +12,15 @@ module Shared::NotificationsHelper
   end
 
   def link_to_notification(notification, options = {}, &block)
-    link_to_activity notification, options, &block
+    link_to_activity notification, notification_options(notification, options), &block
   end
 
   def link_to_notification_by_attributes(action, initiator, resource, options = {}, &block)
     link_to_activity_by_attributes action, initiator, resource, options, &block
+  end
+
+  def notification_labels(notification, options = {})
+    activity_labels(notification)
   end
 
   def link_to_notifications(notifications, options = {})

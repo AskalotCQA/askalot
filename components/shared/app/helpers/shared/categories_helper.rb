@@ -1,6 +1,7 @@
 module Shared::CategoriesHelper
   def link_to_category(category, options = {}, content = category.full_public_name)
-    link_to content, shared.questions_path(category: category.id), options
+    path = options.delete(:absolute_url) ? shared.questions_url(category: category.id) : shared.questions_path(category: category.id)
+    link_to content, path, options
   end
 
   def names_for_teachers(teachers)

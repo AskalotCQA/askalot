@@ -4,9 +4,17 @@
   @extend .activities;
 }
 
+.dropdown-notification-summary {
+  margin: 4px 0px 3px 0px;
+  padding: 0px 5px;
+  min-width: 400px;
+  font-size: 13px;
+  line-height: 21px;
+}
+
 .dropdown-notification {
   margin: 0;
-  padding: 5px;
+  padding: 4px 5px;
   min-width: 400px;
   font-size: 13px;
 }
@@ -16,14 +24,9 @@
 }
 
 .dropdown-notification:hover {
-  text-decoration: none;
-  color: #262626;
-  background-color: whitesmoke;
-}
-
-.dropdown-notification > div > div > a {
-  text-decoration: none;
 }
 
 .dropdown-notification-info {
+  margin-top: -2px;
 }
+

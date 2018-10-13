@@ -9,12 +9,17 @@
     </div>
 
     <div class="col-xs-10">
-      <%= link_to_notification(notification) do %>
-          <%= (notification_content notification, unlink: true).html_safe
-          %>
-      <% end %>
+      <%= notification_content notification %>
       <div class="dropdown-notification-info">
-        <small><span class="text-muted"><%= link_to_user notification.initiator_or_anonymous %> &middot; </span><%= tooltip_time_tag notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %></small>
+        <small class="text-muted">
+          <% unless notification_labels(notification).empty? %>
+            <%= link_to_category notification_labels(notification).first %>
+            &middot;
+          <% end %>
+          <%= link_to_user notification.initiator_or_anonymous %>
+          &middot;
+          <%= tooltip_time_tag notification.created_at, class: :'text-muted', format: :normal, placement: :bottom %>
+        </small>
       </div>
     </div>
 

@@ -1,10 +1,26 @@
 <% if notifications.any? %>
   <%= navbar_dropdown_tag :'dot-circle-o', notifications.unscope(:limit).size, '#', class: :'hidden-xs notifications-dropdown', join: :append do %>
-    <li><%= link_to_notifications notifications %></li>
+    <li class="dropdown-notification-summary">
+      <div class="row">
+        <div class="col-xs-1">
+          <div class="pull-right" style="margin-right: -20px;">
+            <%= icon_tag 'bell-o', class: 'text-success', fixed: true %>
+          </div>
+        </div>
+
+        <div class="col-xs-10">
+          <%= link_to_notifications notifications %>
+        </div>
+
+        <div class="col-xs-1">
+          <%= link_to shared.clean_notifications_path, tooltip_attributes(t('notification.clean.submit'), placement: :bottom).deep_merge(class: 'btn btn-default btn-xs pull-right', data: { remote: true }) do %>
+            <%= icon_tag :check %>
+          <% end %>
+        </div>
+      </div>
+    </li>
     <li class="divider"></li>
     <%= render partial: 'shared/shared/notification', collection: notifications, as: :notification %>
-    <li class="divider"></li>
-    <li><%= link_to t('notification.clean.submit'), shared.clean_notifications_path, { data: { remote: true } } %></li>
   <% end %>
 <% else %>
   <li class="hidden-xs"><%= link_to_notifications notifications, body: icon_tag(:'circle-o') %></li>

@@ -1,10 +1,6 @@
 <% provide(:title, t('activity.index.title')) %>
 
 <div class="tab-navigation">
-  <div class="pull-right">
-    <%= link_to t('changelog.navigation'), changelogs_path, class: 'btn btn-link' %>
-  </div>
-
   <ul class="nav nav-tabs">
     <%= tab_link_tag t('activity.tab.global'), :all, activities_path(params.symbolize_keys.except(:page).merge tab: :all), analytics_attributes(:activity, :switch, :global) %>
     <%= tab_link_tag t('activity.tab.followees'), :followees, activities_path(params.symbolize_keys.except(:page).merge tab: :followees), analytics_attributes(:activity, :switch, :followees) %>

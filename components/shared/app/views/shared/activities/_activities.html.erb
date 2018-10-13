@@ -1,13 +1,13 @@
 <% if activities.any? %>
   <ol class="activities">
-    <% activities.each do |activity| %>
-      <%= render 'activity', activity: activity %>
-    <% end %>
+    <%= render partial: 'activity', collection: activities, as: :activity %>
   </ol>
 
-  <div class="activities-note">
-    <small class="text-muted"><%= t("activity.note.#{tab.to_s}") %></small>
-  </div>
+  <% if tab == :followees %>
+    <div class="activities-note">
+      <small class="text-muted"><%= t("activity.note.#{tab.to_s}") %></small>
+    </div>
+  <% end %>
 
   <%= paginate activities, params: { tab: tab } %>
 <% else %>

@@ -6,12 +6,17 @@
   <% @notifications.each do |notification| %>
     <li>
       <%= notification_content notification, absolute_url: true %>
-
-      <span class="text-muted">&middot;</span>
-
-      <%= link_to_user notification.initiator_or_anonymous, absolute_url: true %>
-      <span class="text-muted">&middot;</span>
-      <%= time_tag notification.created_at, class: 'text-muted', format: :normal %>
+      <div class="dropdown-notification-info">
+        <small class="text-muted">
+          <% unless notification_labels(notification).empty? %>
+            <%= link_to_category notification.resource.to_question.category, absolute_url: true %>
+            &middot;
+          <% end %>
+          <%= link_to_user notification.initiator_or_anonymous, absolute_url: true %>
+          &middot;
+          <%= time_tag notification.created_at, class: 'text-muted', format: :normal %>
+        </small>
+      </div>
     </li>
   <% end %>
 </ol>

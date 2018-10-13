@@ -23,10 +23,6 @@ module Shared::ActivitiesHelper
     if resource.class.name == 'Shared::Following'
       follower_link = link_to_activity_by_attributes action, initiator, resource, options.merge(length: 50)
 
-      if options.delete(:unlink)
-        return translate(content, follower: resource.follower.nick).html_safe
-      end
-
       translate(content, follower: follower_link).html_safe
     else
       question = resource.to_question
@@ -41,12 +37,8 @@ module Shared::ActivitiesHelper
         options[:mute] = lambda { |_| true }
       end
 
-      if options.delete(:unlink)
-        return translate content, resource: resource_body, question: question_body
-      end
-
       resource_link = link_to_activity_by_attributes action, initiator, resource, resource_options.merge(body: resource_body)
-      question_link = link_to_activity_by_attributes action, initiator, resource, question_options.merge(body: question_body)
+      question_link = link_to_question question, question_options.merge(body: question_body)
 
       translate(content, resource: resource_link, question: question_link).html_safe
     end
@@ -74,6 +66,14 @@ module Shared::ActivitiesHelper
     when :watching   then fail
     else fail
     end
+  end
+
+  def activity_labels(action, options = {})
+    if action.resource.class.name == 'Shared::Following'
+      return []
+    end
+
+    return [action.resource.to_question.category]
   end
 
   private
@@ -113,11 +113,11 @@ module Shared::ActivitiesHelper
     end
   end
 
-  def activity_question_body(action, question, options = {})
-    question_title_preview question, extract_truncate_options!(options)
-  end
-
   def activity_resource_body(action, resource, options = {})
     translate "activity.content.#{action == :mention ? :mention : :persistence}.#{resource.class.name.demodulize.downcase}"
+  end
+
+  def activity_question_body(action, question, options = {})
+    question_title_preview question, extract_truncate_options!(options)
   end
 end
