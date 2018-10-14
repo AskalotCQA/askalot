@@ -350,6 +350,7 @@ en:
         hide_email: "Hide e-mail from other users"
 
         send_email_notifications: "Send e-mail notifications"
+        send_facebook_notifications: "Send Facebook notifications"
         prefered_activity_tab: "Prefered activity tab on dashboard"
         send_mail_notifications_frequency: "E-mail notifications frequency"
 

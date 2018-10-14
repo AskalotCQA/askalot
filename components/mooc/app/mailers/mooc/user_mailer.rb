@@ -1,6 +1,7 @@
 module Mooc
 class UserMailer < ActionMailer::Base
   include Roadie::Rails::Automatic
+  self.relative_url_root = nil
 
   default from: ::Shared::Configuration.mailer.alias
 
