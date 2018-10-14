@@ -123,7 +123,6 @@ group :development, :test do
 
   # code metrics
   gem 'simplecov', require: false
-  gem 'codeclimate-test-reporter', require: false
 
   # mass import
   gem 'activerecord-import', '~> 0.23.0'

@@ -5,9 +5,6 @@ rvm:
 addons:
   chrome: stable
   postgresql: "9.3"
-  code_climate:
-    repo_token:
-      secure: "qGGKazOsim5RO1DKsmX6llrLgAsD8O15M07DPqlqq+YBb1ApRTf5bTvG43qYM9SeUIjg3F112WPw42gYHNB+avPBv/AB54S5mr595t/xqeDylTeEQGCHTf/UlWX2FtXem7BL7TDx8g+iXh84VVoMFJHMLntNP+KtALOwcgPw6IbT9sHfhoEqqW8rwylhsdFDUbQDXiy1f9SWOTEMGNpmwu4DBGtjHMHQlJWdtnFagPAobuD93i61y2+rTJv8NTDsLt4EH3TpqXgXD3RUqz9t+sVNyvr/wkdzJE2+AR8VZCUWFuAmUz1y76dVKU1k8yN+ajk6sU9Xf+qfoDV7pEp2am4LX4uuWav1nvN+QBWsirsPuQKrhE4pokNkLMexGvYwdinMcVvYSWpPSK6eh36AWRxVzmC1MD0Czb8KDuDMJVDuLaZYNiLNDXlHrCkVtB9RIV9psjKxF+ntQPocVNd6IxNqHBkO4YiZxlc3ltc26ML9QYjJo0u+xUFhVqvbfU7I1tgmmxt1Us56mBT8RVyXqWpE/rEv1HKHtdzZXQpVPJgjAjuSYh2Cm3f1ziMiJNSyraeoiNeTeehZDQqAunbnpTIaCbl8KNUBm0BKb0HdZU5cC99g8YsSN+H5QIc8dbBQuyPJIpfufTfDSH79LYgidxXsbLw9xYEDN8eC03Zf/fU="
 
 cache:
   - bundler: true
@@ -26,14 +23,20 @@ before_script:
   - RAILS_ENV=fiit_test bundle exec rake db:structure:load DB_STRUCTURE=components/university/db/structure.sql
   - RAILS_ENV=edx_test bundle exec rake db:create
   - RAILS_ENV=edx_test bundle exec rake db:structure:load DB_STRUCTURE=components/mooc/db/structure.sql
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
 
 script:
   - RAILS_ENV=fiit_test bundle exec rake rspec:test
+  - ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.fiit.json
   - RAILS_ENV=fiit_test bundle exec rake rspec:test_failed
   - RAILS_ENV=fiit_test bundle exec rake rspec:test_failed
   - RAILS_ENV=edx_test bundle exec rake rspec:test
+  - ./cc-test-reporter format-coverage -t simplecov -o coverage/codeclimate.edx.json
   - RAILS_ENV=edx_test bundle exec rake rspec:test_failed
   - RAILS_ENV=edx_test bundle exec rake rspec:test_failed
 
-after_success:
-  - bundle exec codeclimate-test-reporter
+after_script:
+  - ./cc-test-reporter sum-coverage coverage/codeclimate.*.json -p 2
+  - ./cc-test-reporter upload-coverage
