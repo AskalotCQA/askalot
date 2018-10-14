@@ -31,19 +31,19 @@ $(document).ready ->
   )
 
   $.extend $.tablesorter.themes.bootstrap,
-      table:       ''
-      header:      ''
-      footerRow:   ''
-      footerCells: ''
-      icons:       ''
-      sortNone:    'fa fa-sort'
-      sortAsc:     'fa fa-sort-up'
-      sortDesc:    'fa fa-sort-down'
-      active:      ''
-      hover:       ''
-      filterRow:   ''
-      even:        ''
-      odd:         ''
+      table:        ''
+      header:       ''
+      footerRow:    ''
+      footerCells:  ''
+      icons:        ''
+      iconSortNone: 'fa fa-sort'
+      iconSortAsc:  'fa fa-sort-up'
+      iconSortDesc: 'fa fa-sort-down'
+      active:       ''
+      hover:        ''
+      filterRow:    ''
+      even:         ''
+      odd:          ''
 
   $.tablesorter.addWidget
     id: 'numbering'
@@ -53,18 +53,7 @@ $(document).ready ->
 
   $('table[data-sortable="true"]').tablesorter
     theme:         'bootstrap'
-    tableClass:    'table'
-    cssAsc:        'table-header-asc'
-    cssDesc:       'table-header-desc'
-    cssChildRow:   'table-children'
-    cssHeader:     'table-header'
-    cssHeaderRow:  'table-headers'
-    cssIcon:       'table-icon'
-    cssInfoBlock:  'table-info'
-    cssProcessing: 'table-processing'
-
     headerTemplate: '{content} <span>{icon}</span>'
-    # TODO (smolnar) refactor this to something like: widgets: [('numbering' if $(this).attr('data-numbering')), 'uitheme']
     widgets: ['numbering', 'uitheme']
 
     sortLocaleCompare: true

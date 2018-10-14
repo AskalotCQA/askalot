@@ -3,7 +3,7 @@
 <%= form_tag statistics_path, method: :get, class: :'form-horizontal statistics-filter', role: :form do %>
   <div class="form-group">
     <div class="col-md-5">
-      <%= select_tag :category, options_for_select(Shared::Category.askable.not_unknown.order(:depth, :full_tree_name).all.collect{ |c| [c.full_tree_name, c.id]}, params[:category]), include_blank: true, class: :'form-control', data: { as: :select2, role: :category } %>
+      <%= select_tag :category, options_for_select(Shared::Category.order(:depth, :full_tree_name).all.collect{ |c| [c.full_tree_name, c.id]}, params[:category]), include_blank: true, class: :'form-control', data: { as: :select2, role: :category } %>
     </div>
     <div class="col-md-4">
       <div class="input-group">

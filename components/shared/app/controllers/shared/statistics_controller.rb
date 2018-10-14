@@ -23,7 +23,7 @@ class StatisticsController < ApplicationController
     params[:to]   = @to.strftime   '%-d.%-m.%Y'
 
     if params[:category].present?
-      @users     = Shared::User.order(:name)
+      @users     = Shared::User.order(:last)
       @questions = Shared::Question
       @answers   = Shared::Answer
 
@@ -39,7 +39,7 @@ class StatisticsController < ApplicationController
   end
 
   def filter_by_category
-    @questions = @questions.in_context(params[:category])
+    @questions = @questions.includes(:category_questions).where(categories_questions: { category_id: params[:category], shared: false })
     @answers   = join_question(Shared::Answer, @questions).uniq
 
     users  = (@questions.pluck(:author_id) + @answers.pluck(:author_id)).to_set

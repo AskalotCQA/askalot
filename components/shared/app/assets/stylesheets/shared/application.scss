@@ -8,6 +8,7 @@
 //=require select2
 //
 //=require_self
+//=require jquery-tablesorter/theme.bootstrap
 //
 // List of imports (order is significant).
 
@@ -25,7 +26,6 @@
 @import 'bootstrap/datepicker';
 @import 'bootstrap/markdown';
 @import 'bootstrap/multiselect';
-@import 'bootstrap/tablesorter';
 @import 'bootstrap/textcomplete';
 
 @import 'assets';
