@@ -3,7 +3,7 @@ root = File.expand_path "#{File.dirname(__FILE__)}/.."
 worker_processes_map = { default: 2, fiit_production: 4, fiit_demo: 1, fiit_staging: 1, edx_production: 1, edx_demo: 1, edx_staging: 1, lugano_production: 1, novisad_production: 1 }
 
 worker_processes worker_processes_map[(ENV['RAILS_ENV'] || :default).to_sym]
-timeout          15
+timeout          120
 preload_app      true
 listen           "#{root}/shared/.unicorn.sock", backlog: 64
 pid              "#{root}/tmp/pids/unicorn.pid"
