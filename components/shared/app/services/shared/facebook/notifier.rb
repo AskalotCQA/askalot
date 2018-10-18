@@ -23,7 +23,7 @@ module Shared::Facebook
 
         begin
           FbGraph2::User.me(token).fetch.notification! access_token: application.access_token!, href: link, template: content
-        rescue FbGraph::InvalidRequest
+        rescue FbGraph2::Exception::InvalidRequest
           nil
         end
       end

@@ -19,7 +19,7 @@ gem 'net-ldap'
 
 # facebook
 gem 'omniauth-facebook'
-gem 'fb_graph2', '1.1.0'
+gem 'fb_graph2', '0.8.0'    # must be fixed to v0.8.0, notifications are accidentally removed in next version
 
 # stylesheets
 # sass gem must be fixed to this particular version due to a bug described in https://github.com/sass/sass/issues/2214
