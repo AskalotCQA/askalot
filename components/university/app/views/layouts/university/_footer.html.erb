@@ -32,8 +32,8 @@
 
     <div class="col-md-2">
       <select id="language-picker" class="pull-right" onchange="languageChange(this)">
-        <option value="<%= url_for(root_path(lang: 'en')) %>"><%= t('footer.language.english') %></option>
-        <option value="<%= url_for(root_path(lang: 'sk')) %>" <%= I18n.locale.to_s == 'sk' ? 'selected="selected"' : '' %>>
+        <option value="<%= url_for(shared.root_path(lang: 'en')) %>"><%= t('footer.language.english') %></option>
+        <option value="<%= url_for(shared.root_path(lang: 'sk')) %>" <%= I18n.locale.to_s == 'sk' ? 'selected="selected"' : '' %>>
           <%= t('footer.language.slovak') %>
         </option>
       </select>

@@ -14,7 +14,7 @@ module Shared
     rescue_from CanCan::AccessDenied do |exception|
       flash[:alert] = t('cancan.access_denied')
 
-      redirect_to root_path
+      redirect_to shared.root_path
     end
   end
 
