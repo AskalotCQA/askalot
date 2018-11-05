@@ -28,6 +28,8 @@ module Shared::QuestionsHelper
   end
 
   def question_label(label, options = {})
+    return nil if label.nil?
+
     model, tags, classes = question_label_attributes label
 
     filter = ((params[:tags] || '').split(',') + tags).uniq.join(',')
