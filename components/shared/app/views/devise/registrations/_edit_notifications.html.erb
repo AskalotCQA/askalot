@@ -8,12 +8,14 @@
     </labeL>
   </div>
 
+  <% if Shared::Configuration.facebook.enabled %>
   <div class="form-group icheck">
     <label>
       <%= f.check_box :send_facebook_notifications, checked: resource.send_facebook_notifications || resource.send_facebook_notifications.nil?, data: { as: :icheck } %>
       <%= Shared::User.human_attribute_name :send_facebook_notifications %>
     </labeL>
   </div>
+  <% end %>
 
     <div class="form-group">
       <%= f.label :send_mail_notifications_frequency %>
