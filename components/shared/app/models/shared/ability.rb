@@ -53,12 +53,7 @@ class Ability
     can :evaluate, [Shared::Question, Shared::Answer] do |resource|
       user.assigned?(resource.to_question.category, :teacher)
     end
-
-    # but assigned teacher can not vote for question or answer
-    cannot :vote, [Shared::Question, Shared::Answer] do |resource|
-      user.assigned?(resource.to_question.category, :teacher)
-    end
-
+    
     # assigned teacher can close questions
     can :close, [Shared::Question] do |resource|
       resource.answers.empty? && !resource.closed && user.assigned?(resource.to_question.category, :teacher)
