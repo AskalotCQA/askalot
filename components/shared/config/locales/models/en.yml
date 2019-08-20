@@ -265,7 +265,7 @@ en:
         askable: "Questions can be asked directly in this category"
         teacher_assistants: "Teacher assistants"
         copy: "Category will be copied to specified category"
-        visible: "Category is included in list of all categories and as an option in new question form"
+        visible: "Category and its questions are visible in the system"
 
       shared/changelog:
         text: "Text"

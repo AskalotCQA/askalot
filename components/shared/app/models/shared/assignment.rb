@@ -34,7 +34,7 @@ class Assignment < ActiveRecord::Base
       delete_assignments_from_descendants
 
       category.descendants.each do |c|
-        Shared::Assignment.create(role: role, user: user, category: c, admin_visible: false, parent: id)
+        Shared::Assignment.find_or_create_by!(role: role, user: user, category: c, admin_visible: false, parent: id)
       end
     end
 

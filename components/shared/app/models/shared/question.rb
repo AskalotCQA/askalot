@@ -49,7 +49,7 @@ class Question < ActiveRecord::Base
   scope :random,       lambda { with_category.select('questions.*, random()').order('random()') }
   scope :newest,       lambda { with_category.order(created_at: :desc) }
   scope :active,       lambda { with_category.where('touched_at >= ?', 7.day.ago).order(touched_at: :desc) }
-  scope :unanswered,   lambda { unclosed.with_category.includes(:answers).where(answers: { question_id: nil }) }
+  scope :unanswered,   lambda { with_category.unclosed.includes(:answers).where(answers: { question_id: nil }) }
   scope :answered,     lambda { with_category.joins(:answers).uniq }
   scope :all_answered, lambda { joins(:answers).uniq }
   scope :solved,       lambda { with_category.where(with_best_answer: true) }
@@ -101,13 +101,19 @@ class Question < ActiveRecord::Base
     return unless self.category
     return unless Shared::CategoryQuestion.table_exists?
 
-    self.category.self_and_ancestors.each do |ancestor|
-      Shared::CategoryQuestion.find_or_create_by! question_id: self.id, category_id: ancestor.id, shared: false
+    # register question to me and my ancestors
+    if self.category.visible
+      self.category.self_and_ancestors.each do |ancestor|
+        Shared::CategoryQuestion.find_or_create_by! question_id: self.id, category_id: ancestor.id, shared: false
+      end
     end
 
+    # register question to all my versions and their ancestors
     self.category.all_versions.shared.each do |shared|
-      shared.self_and_ancestors.each do |c|
-        Shared::CategoryQuestion.find_or_create_by! question_id: self.id, category_id: c.id, shared: true, shared_through_category: shared
+      if shared.visible
+        shared.self_and_ancestors.each do |c|
+          Shared::CategoryQuestion.find_or_create_by! question_id: self.id, category_id: c.id, shared: true, shared_through_category: shared
+        end
       end
     end
 

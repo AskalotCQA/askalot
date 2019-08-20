@@ -26,13 +26,11 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true
 
-  before_save  :update_changed
-  before_save  :update_uuid
-  after_create :save_parent_tags
-  after_create :save_assignments
+  before_save  :remember_what_changed
+  before_save  :check_uuid
+  after_save   :update_categories
   after_save   :update_categories_questions
-  after_save   :update_public_tags
-  after_save   :refresh_names
+  after_save   :update_assignments
 
   scope :with_slido, -> { where.not(slido_username: nil) }
   scope :with_questions, lambda { joins(:related_questions).uniq }
@@ -47,65 +45,6 @@ class Category < ActiveRecord::Base
 
   self.table_name = 'categories'
 
-  def update_changed
-    @what_changed = changed || []
-  end
-
-  def update_uuid
-    return true unless self.uuid.blank?
-
-    random_token = rand(36**5).to_s(36)
-    self.uuid    = "#{self.name.to_s.parameterize}-#{random_token}"
-
-    true
-  end
-
-  def refresh_names
-    return true unless Shared::Category.column_names.include? 'full_public_name'
-
-    refresh_descs            = false
-    name_changed             = @what_changed.include? 'name'
-    parent_id_changed        = @what_changed.include? 'parent_id'
-    full_tree_name_changed   = @what_changed.include? 'full_tree_name'
-    full_public_name_changed = @what_changed.include? 'full_public_name'
-
-    if !full_tree_name_changed && (name_changed || parent_id_changed)
-      self.refresh_full_tree_name
-
-      refresh_descs = true
-    end
-
-    if !full_public_name_changed && (name_changed || parent_id_changed)
-      self.refresh_full_public_name
-
-      refresh_descs = true
-    end
-
-    if refresh_descs
-      self.save validate: false
-
-      self.descendants.each do |category|
-        category.refresh_full_tree_name
-        category.refresh_full_public_name
-        category.save validate: false
-      end
-    end
-
-    true
-  end
-
-  def refresh_full_tree_name
-    self.full_tree_name = self.self_and_ancestors.select { |item| item.name != 'root' }.map { |item| item.name }.join(' - ')
-  end
-
-  def refresh_full_public_name
-    depths = CategoryDepth.public_depths
-    names  = self.ancestors.select { |item| depths.include? item.depth }.map { |item| item.name }
-    names << self.name
-
-    self.full_public_name = names.join(' - ')
-  end
-
   def count
     questions.reload.size
   end
@@ -115,34 +54,15 @@ class Category < ActiveRecord::Base
   end
 
   def tags=(values)
-    tags_array = Shared::Tags::Extractor.extract(values)
-    self.public_tags = (self.public_tags + tags_array).uniq if Shared::Category.column_names.include? 'public_tags'
-    new_tags = tags_array - tags
-    deleted_tags = tags - tags_array
-
-    add_tags_to_descendants new_tags if new_tags.size > 0
-    delete_tags_from_descendants deleted_tags if deleted_tags.size > 0
-    write_attribute(:tags, tags_array)
+    write_attribute(:tags, Shared::Tags::Extractor.extract(values))
   end
 
   def public_tags=(values)
     write_attribute(:public_tags, Shared::Tags::Extractor.extract(values))
   end
 
-  def add_tags_to_descendants tags
-    self_and_descendants.each do |category|
-      category.public_tags = (category.public_tags + tags).uniq
-
-      category.save
-    end
-  end
-
-  def delete_tags_from_descendants tags
-    self_and_descendants.each do |category|
-      category.public_tags -= tags
-
-      category.save
-    end
+  def has_teachers?
+    teachers.length > 0
   end
 
   def teachers
@@ -152,13 +72,22 @@ class Category < ActiveRecord::Base
     list.map { |t| t.user }
   end
 
-  def has_teachers?
-    teachers.length > 0
-  end
-
   def name_with_teacher_supported
     return "#{full_public_name}#{I18n.t('category.teacher_supported')}" if has_teachers?
     full_public_name
+  end
+
+  def leaves_with_metadata
+    year_category = self
+
+    while year_category.depth > 1
+      year_category = year_category.parent
+    end
+
+    leaves = self.leaves.includes(:assignments, :parent).where(askable: true).visible.not_unknown.unscope(:order).order(:full_public_name)
+    leaves = leaves.unscope(where: :askable) unless year_category.askable
+
+    leaves.map {|category| [category, {data: {tags: category.effective_tags, icon: category.has_teachers? ? (ApplicationController.new.render_to_string partial: 'shared/categories/teacher_icon', locals: {category: category}, layout: false) : '', description: category.description.nil? ? category.parent.description : category.description }}]}
   end
 
   def self.all_in_contexts(contexts, relation = nil)
@@ -176,79 +105,14 @@ class Category < ActiveRecord::Base
     Shared::Category.where(uuid: self.uuid).where.not(id: self.id)
   end
 
-  def save_parent_tags
-    return true unless Shared::Category.column_names.include? 'public_tags'
-
-    self.public_tags += ancestors.map { |ancestor| ancestor.tags }.flatten
-
-    self.save!
-    true
-  end
-
-  def save_assignments
-    return if self.parent.nil?
-
-    self.ancestors.each do |ancestor|
-      ancestor.assignments.map{ |assignment| assignment.add_assignments_to_descendants }
-    end
-  end
-
-  def update_public_tags
-    return true unless Shared::Category.column_names.include? 'public_tags'
-
-    if @what_changed.include? 'parent_id'
-      self_and_descendants.each do |category|
-        category.public_tags = category.self_and_ancestors.map { |ancestor| ancestor.tags }.flatten.uniq.sort
-
-        category.save
-      end
-    end
-
-    true
-  end
-
-  def update_categories_questions
-    if @what_changed.include? 'parent_id'
-      self.category_questions.delete_all
-      self.reload_categories_questions
-    end
-
-    if @what_changed.include? 'shared'
-      if self.shared
-        self.reload_categories_questions
-      else
-        self.category_questions_shared_through_me.destroy_all
-      end
-    end
-
-    true
-  end
-
-  def reload_categories_questions
-    # register my questions to my ascendants and shared categories
-    self.self_and_descendants.each do |category|
-      category.questions.each do |question|
-        question.register_question
-      end
-    end
-
-    # register questions from shared categories to me and my ascendants
-    self.all_versions.each do |shared_category|
-      shared_category.questions.each do |question|
-        question.register_question
-      end
-    end
-  end
-
-  def self.rebuild!
-    super
-    self.update_all("#{depth_column_name} = ((select count(*) from #{self.quoted_table_name} t where t.lft <= #{self.quoted_table_name}.lft and t.rgt >= #{self.quoted_table_name}.rgt) - 1)")
-  end
-
   def related_contexts
     depth = Rails.module.mooc? ? 0 : 1
 
     self_and_ancestors.where(depth: depth)
+  end
+
+  def available_in_current_context?
+    self.related_contexts.where(id: Shared::Context::Manager.current_context_id).count > 0
   end
 
   def can_have_subcategories?
@@ -259,10 +123,6 @@ class Category < ActiveRecord::Base
     self.lti_id.blank?
   end
 
-  def available_in_current_context?
-    self.related_contexts.where(id: Shared::Context::Manager.current_context_id).count > 0
-  end
-
   def visible?
     Shared::CategoryDepth.visible_depths.include? self.depth
   end
@@ -270,6 +130,123 @@ class Category < ActiveRecord::Base
   def parent_watchers
     self_and_ancestors.map(&:watchers).flatten
   end
+
+
+
+  def remember_what_changed
+    @what_changed = changed || []
+  end
+
+  def check_uuid
+    return true unless self.uuid.blank?
+
+    random_token = rand(36**5).to_s(36)
+    self.uuid    = "#{self.name.to_s.parameterize}-#{random_token}"
+  end
+
+  def update_categories
+    return true unless Shared::Category.column_names.include? 'full_public_name'
+
+    self.self_and_descendants.each do |category|
+      category.refresh_full_tree_name
+      category.refresh_full_public_name
+      category.refresh_public_tags
+
+      if (category.changed & ['full_tree_name', 'full_public_name', 'public_tags']).any?
+        category.save
+      end
+    end
+  end
+
+  def refresh_full_tree_name
+    return true unless Shared::Category.column_names.include? 'full_tree_name'
+
+    self.full_tree_name = self.self_and_ancestors.select { |category| category.name != 'root' }.map { |category| category.name }.join(' - ')
+  end
+
+  def refresh_full_public_name
+    return true unless Shared::Category.column_names.include? 'full_public_name'
+
+    depths = CategoryDepth.public_depths
+    names  = self.ancestors.select { |category| depths.include? category.depth }.map { |category| category.name }
+    names << self.name
+
+    self.full_public_name = names.join(' - ')
+  end
+
+  def refresh_public_tags
+    return true unless Shared::Category.column_names.include? 'public_tags'
+
+    self.public_tags = self.self_and_ancestors.map { |category| category.tags }.flatten
+  end
+
+  def update_assignments
+    if (@what_changed & ['parent_id']).any?
+      self.ancestors.each do |ancestor|
+        ancestor.assignments.each do |assignment|
+          assignment.add_assignments_to_descendants
+        end
+      end
+    end
+  end
+
+  def update_categories_questions
+    if (@what_changed & ['parent_id', 'visible', 'uuid', 'shared']).any?
+      self.related_questions.each do |question|
+        question.category_questions.delete_all
+        question.register_question
+      end
+
+      self.questions.each do |question|
+        question.category_questions.delete_all
+        question.register_question
+      end
+
+      if self.shared
+        # register questions from shared categories to me
+        self.all_versions.each do |category|
+          category.questions.each do |question|
+            question.register_question
+          end
+        end
+      else
+        self.category_questions_shared_through_me.destroy_all
+      end
+    end
+  end
+
+
+
+
+  # complete reload of categories_questions, used by migrations only
+  def reload_categories_questions
+    self.self_and_descendants.each do |category|
+      category.category_questions.delete_all
+    end
+
+    self.self_and_descendants.each do |category|
+      # register my questions
+      category.questions.each do |question|
+        question.register_question
+      end
+
+      # register questions from all my versions
+      self.all_versions.each do |category|
+        category.questions.each do |question|
+          question.register_question
+        end
+      end
+    end
+  end
+
+  def self.rebuild!
+    super
+    self.update_all("#{depth_column_name} = ((select count(*) from #{self.quoted_table_name} t where t.lft <= #{self.quoted_table_name}.lft and t.rgt >= #{self.quoted_table_name}.rgt) - 1)")
+  end
+
+
+
+
 
   def copy(parent_cat, parent_id)
     category_copy = self.duplicate
@@ -281,19 +258,6 @@ class Category < ActiveRecord::Base
     duplicate_assignments(category_copy)
 
     category_copy
-  end
-
-  def leaves_with_metadata
-    year_category = self
-
-    while year_category.depth > 1
-      year_category = year_category.parent
-    end
-
-    leaves = self.leaves.includes(:assignments, :parent).where(askable: true).visible.not_unknown.unscope(:order).order(:full_public_name)
-    leaves = leaves.unscope(where: :askable) unless year_category.askable
-
-    leaves.map {|category| [category, {data: {tags: category.effective_tags, icon: category.has_teachers? ? (ApplicationController.new.render_to_string partial: 'shared/categories/teacher_icon', locals: {category: category}, layout: false) : '', description: category.description.nil? ? category.parent.description : category.description }}]}
   end
 
   protected

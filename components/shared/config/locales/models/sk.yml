@@ -277,7 +277,7 @@ sk:
         askable: "Otázky môžu byť položené priamo v tejto kategórii"
         teacher_assistants: "Asistenti učiteľa"
         copy: "Kategória bude skopírovaná do vybranej rodičovskej kateǵorie"
-        visible: "Kategória je zobrazovaná v zozname kategórií a vo formulári na pýtanie sa otázok"
+        visible: "Kategória a jej otázky sú viditeľné v systéme"
 
       shared/changelog:
         text: "Text"
