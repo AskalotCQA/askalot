@@ -19,6 +19,7 @@ gem 'net-ldap'
 
 # facebook
 gem 'omniauth-facebook'
+gem 'omniauth-rails_csrf_protection'  # omniauth is vulnerable to Cross-Site Request Forgery, must be fixed by this gem, more info at https://github.com/omniauth/omniauth/pull/809#issuecomment-502079405
 gem 'fb_graph2', '0.8.0'    # must be fixed to v0.8.0, notifications are accidentally removed in next version
 
 # stylesheets
