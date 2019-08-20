@@ -168,7 +168,7 @@ class QuestionsController < ApplicationController
   end
 
   def update_params
-    params.require(:question).permit(:title, :text, :category_id, :tag_list, :question_type_id)
+    params.require(:question).permit(:title, :text, :category_id, :tag_list, :anonymous, :question_type_id)
   end
 
   protected
