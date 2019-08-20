@@ -39,6 +39,7 @@ en:
       forum: "Start a discussion"
       same_category_link: "ask a question in the same category."
       same_category: "Browse questions tagged"
+      anonymous_note: "Ask your question anonymously only if it is really necessary. If there will not be a clear reason to post a question anonymously, you may be asked to edit it and ask it non-anonymously."
       slido: 'Add as slido'
 
     create:

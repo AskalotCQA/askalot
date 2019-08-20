@@ -4,7 +4,7 @@
   <div class="col-md-6">
     <h1 class="form-title"><%= t 'question.new.title' %></h1>
 
-    <%= form_for @question, html: { multipart: true } do |f| %>
+    <%= form_for @question, html: {multipart: true} do |f| %>
       <%= form_messages_for @question %>
 
       <% if Shared::QuestionType.public_types.size > 1 %>
@@ -56,7 +56,7 @@
             <% end %>
           <% end %>
         </ul>
-        <%= f.text_field :tag_list, class: :'form-control', data: { as: :select2, role: :tags }, placeholder: t('question.tag.placeholder') %>
+        <%= f.text_field :tag_list, class: :'form-control', data: {as: :select2, role: :tags}, placeholder: t('question.tag.placeholder') %>
       </div>
 
       <div class="form-group">
@@ -65,21 +65,30 @@
         <div class="help-block"><%= t 'attachment.help_block' %></div>
       </div>
 
+      <% if current_user.role?(:student) || current_user.role?(:administrator) %>
+        <div class="form-group">
+          <div class="icheck">
+            <label>
+              <%= f.check_box :anonymous, checked: false, data: {as: :icheck} %>
+              <%= Shared::Question.human_attribute_name :anonymous %>
+            </label>
+          </div>
+          <div class="help-block"><%= t 'question.new.anonymous_note' %></div>
+        </div>
+      <% end %>
+
+      <% if current_user.role?(:administrator) && Rails.module.university? %>
+        <div class="form-group">
+          <div class="icheck">
+            <label>
+              <%= check_box_tag :slido, '1', false, data: {as: :icheck} %>
+              <%= t 'question.new.slido' %>
+            </labeL>
+          </div>
+        </div>
+      <% end %>
+
       <button type="submit" class="btn btn-primary pull-left"><%= t 'question.new.submit' %></button>
-
-      <div class="icheck pull-left">
-        <label>
-          <%= f.check_box :anonymous, checked: false, data: { as: :icheck } %>
-          <%= Shared::Question.human_attribute_name :anonymous %>
-        </labeL>
-
-        <% if current_user.role?(:teacher) || current_user.role?(:administrator) && Rails.module.university? %>
-          <label>
-            <%= check_box_tag :slido, '1', false, data: { as: :icheck } %>
-            <%= t 'question.new.slido' %>
-          </labeL>
-        <% end %>
-      </div>
     <% end %>
   </div>
 
