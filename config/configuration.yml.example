@@ -26,6 +26,8 @@ defaults: &defaults
     unlocks: true
     omniauth: true
     slido_events: true
+    anonymous_student_questions: true
+    anonymous_teacher_questions: false
 
   poll:
     default: 60

@@ -37,13 +37,31 @@
       <div class="help-block"><%= t 'attachment.help_block' %></div>
     </div>
 
-    <button type="submit" class="btn btn-primary pull-left"><%= t 'question.new.submit' %></button>
+    <% if current_user.role?(:student) && Shared::Configuration.enable.anonymous_student_questions ||
+        current_user.role?(:teacher) && Shared::Configuration.enable.anonymous_teacher_questions ||
+        current_user.role?(:administrator) %>
+      <div class="form-group">
+        <div class="icheck">
+          <label>
+            <%= f.check_box :anonymous, checked: false, data: {as: :icheck} %>
+            <%= Shared::Question.human_attribute_name :anonymous %>
+          </label>
+        </div>
+        <div class="help-block"><%= t 'question.new.anonymous_note' %></div>
+      </div>
+    <% end %>
 
-    <div class="icheck pull-left">
-      <label>
-        <%= f.check_box :anonymous, checked: false, data: { as: :icheck } %>
-        <%= Shared::Question.human_attribute_name :anonymous %>
-      </labeL>
-    </div>
+    <% if current_user.role?(:administrator) && Rails.module.university? %>
+      <div class="form-group">
+        <div class="icheck">
+          <label>
+            <%= check_box_tag :slido, '1', false, data: {as: :icheck} %>
+            <%= t 'question.new.slido' %>
+          </labeL>
+        </div>
+      </div>
+    <% end %>
+
+    <button type="submit" class="btn btn-primary pull-left"><%= t 'question.new.submit' %></button>
   <% end %>
 </div>

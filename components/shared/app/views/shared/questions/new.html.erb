@@ -65,7 +65,9 @@
         <div class="help-block"><%= t 'attachment.help_block' %></div>
       </div>
 
-      <% if current_user.role?(:student) || current_user.role?(:administrator) %>
+      <% if current_user.role?(:student) && Shared::Configuration.enable.anonymous_student_questions ||
+            current_user.role?(:teacher) && Shared::Configuration.enable.anonymous_teacher_questions ||
+            current_user.role?(:administrator) %>
         <div class="form-group">
           <div class="icheck">
             <label>
