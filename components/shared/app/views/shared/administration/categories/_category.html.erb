@@ -1,5 +1,6 @@
 <td>
   <%= link_to_category category, tooltip_attributes(category.full_public_name).merge(target: '_blank') %>
+  <%= hidden_field_tag 'category_ids[]', category.id %>
 </td>
 
 <td>
