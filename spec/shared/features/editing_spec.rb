@@ -22,15 +22,13 @@ describe 'Editing', type: :feature do
 
       click_link "question-#{question.id}-edit-modal"
 
-      within "#question-#{question.id}-editing" do
-        fill_in 'question_title', with: 'Elasticsearch problem'
-        fill_in 'question_text',  with: 'I have a problem with Elasticsearch Client in Ruby.'
+      fill_in 'question_title', with: 'Elasticsearch problem'
+      fill_in 'question_text',  with: 'I have a problem with Elasticsearch Client in Ruby.'
 
-        fill_in_select2 'question_tag_list', with: 'elasticsearch'
-        fill_in_select2 'question_tag_list', with: 'ruby'
+      fill_in_select2 'question_tag_list', with: 'elasticsearch'
+      fill_in_select2 'question_tag_list', with: 'ruby'
 
-        click_button 'Uložiť'
-      end
+      click_button 'Uložiť'
 
       expect(page).to have_content('Otázka bola úspešne aktualizovaná.')
 
