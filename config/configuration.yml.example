@@ -28,6 +28,8 @@ defaults: &defaults
     slido_events: true
     anonymous_student_questions: true
     anonymous_teacher_questions: false
+    hide_name: true
+    hide_email: true
 
   poll:
     default: 60

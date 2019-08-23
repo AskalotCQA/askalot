@@ -77,6 +77,9 @@ class User < ActiveRecord::Base
 
   after_create :create_reputation_profile
 
+  after_find { self.show_name = true if !Shared::Configuration.enable.hide_name }
+  after_find { self.show_email = true if !Shared::Configuration.enable.hide_email }
+
   self.table_name = 'users'
 
   def activities_seen_by(user)
