@@ -84,7 +84,7 @@ describe 'Add Comment', type: :feature do
       end
     end
 
-    it 'adds new comment not anonymously' do
+    it 'adds new comment not anonymously', js: true do
       visit shared.root_path
 
       click_link 'Otázky'
@@ -93,7 +93,7 @@ describe 'Add Comment', type: :feature do
       within '#question-comments' do
         click_link 'Pridať komentár'
 
-        find(:css, '#comment_anonymous').set(false)
+        uncheck 'comment_anonymous', allow_label_click: true
 
         fill_in 'comment[text]', with: 'I think this is wrong!'
 

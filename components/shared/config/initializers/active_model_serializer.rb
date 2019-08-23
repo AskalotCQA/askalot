@@ -1,0 +1,1 @@
+ActiveModelSerializers.logger.level = Logger::Severity::UNKNOWN

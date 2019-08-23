@@ -10,12 +10,12 @@ describe 'Activities', type: :feature do
   end
 
   context 'when asking question' do
-    it 'creates an activity' do
+    it 'creates an activity', js: true do
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
-      select category.name, from: 'question_category_id'
+      select2 category.name, from: 'question_category_id'
 
       fill_in 'question_title', with: 'Lorem ipsum?'
       fill_in 'question_text',  with: 'Lorem ipsum'

@@ -12,7 +12,7 @@ describe 'Teacher Supported Category', type: :feature do
     login_as user
   end
 
-  it 'shows icons if it contains 1 teacher' do
+  it 'shows icons if it contains 1 teacher', js: true do
     Shared::Assignment.create({ category_id: category.id, role_id: 2, user_id: user.id })
 
     expect(category.teachers.count).to eql(1)
@@ -24,24 +24,24 @@ describe 'Teacher Supported Category', type: :feature do
     list = all('#all i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
-    expect(list[0][:title]).to eql('Podporovaná učiteľom: ' + user.name)
+    expect(list[0]["data-original-title"]).to eql('Podporovaná učiteľom: ' + user.name)
 
     click_link 'Otázky'
 
     list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
-    expect(list[0][:title]).to eql('Podporovaná učiteľom: ' + user.name)
+    expect(list[0]["data-original-title"]).to eql('Podporovaná učiteľom: ' + user.name)
 
     click_link 'Pridať otázku', match: :first
 
-    list = all('#question_category_id option')
+    list = all('#question_category_id option', visible: false)
 
     expect(list.count).to eql(3)
     expect(list[1][:'data-icon']).to eql('<i title="Podporovaná učiteľom: John Nash" data-toggle="tooltip" data-placement="top" data-trigger="hover" class="fa fa-graduation-cap supported-category-icon-lg"></i>')
   end
 
-  it 'shows icons if it contains 2 teachers' do
+  it 'shows icons if it contains 2 teachers', js: true do
     Shared::Assignment.create({ category_id: category.id, role_id: 2, user_id: user.id })
     Shared::Assignment.create({ category_id: category.id, role_id: 3, user_id: user2.id })
     Shared::Assignment.create({ category_id: category.id, role_id: 2, user_id: user3.id })
@@ -55,24 +55,24 @@ describe 'Teacher Supported Category', type: :feature do
     list = all('#all i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
-    expect(list[0][:title]).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
+    expect(list[0]["data-original-title"]).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
 
     click_link 'Otázky'
 
     list = all('i.fa-graduation-cap')
 
     expect(list.count).to eql(1)
-    expect(list[0][:title]).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
+    expect(list[0]["data-original-title"]).to eql('Podporovaná učiteľmi: ' + user.name + ', ' + user3.name)
 
     click_link 'Pridať otázku', match: :first
 
-    list = all('#question_category_id option')
+    list = all('#question_category_id option', visible: false)
 
     expect(list.count).to eql(3)
     expect(list[1][:'data-icon']).to eql('<i title="Podporovaná učiteľmi: John Nash, John Nash" data-toggle="tooltip" data-placement="top" data-trigger="hover" class="fa fa-graduation-cap supported-category-icon-lg"></i>')
   end
 
-  it 'doesn\'t show icons if it contains only administrators and students' do
+  it 'doesn\'t show icons if it contains only administrators and students', js: true do
     Shared::Assignment.create({ category_id: category.id, role_id: 3, user_id: user.id })
     Shared::Assignment.create({ category_id: category.id, role_id: 1, user_id: user2.id })
     Shared::Assignment.create({ category_id: category.id, role_id: 3, user_id: user3.id })
@@ -95,13 +95,13 @@ describe 'Teacher Supported Category', type: :feature do
 
     click_link 'Pridať otázku', match: :first
 
-    list = all('#question_category_id option')
+    list = all('#question_category_id option', visible: false)
 
     expect(list.count).to eql(3)
     expect(list[1][:'data-icon']).to eq('')
   end
 
-  it 'doesn\'t show icons if it has no users' do
+  it 'doesn\'t show icons if it has no users', js: true do
     expect(category.teachers.count).to eql(0)
 
     visit shared.root_path
@@ -120,7 +120,7 @@ describe 'Teacher Supported Category', type: :feature do
 
     click_link 'Pridať otázku', match: :first
 
-    list = all('#question_category_id option')
+    list = all('#question_category_id option', visible: false)
 
     expect(list.count).to eql(3)
     expect(list[1][:'data-icon']).to eq('')

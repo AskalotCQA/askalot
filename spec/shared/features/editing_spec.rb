@@ -129,7 +129,7 @@ describe 'Editing', type: :feature do
     let!(:category)       { create :category, name: 'Ostatné' }
     let!(:watching)       { create :watching, watcher: user_watcher, watchable: category }
 
-    it 'sends notification to new watchers' do
+    it 'sends notification to new watchers', js: true do
       question.update(created_at: Time.now - 10.minutes)
       comment.update(created_at: Time.now - 8.minutes)
 
@@ -139,12 +139,16 @@ describe 'Editing', type: :feature do
 
       click_link "question-#{question.id}-edit-modal"
 
-      within "#question-#{question.id}-editing" do
-        select category.name, from: 'question_category_id'
-        click_button 'Uložiť'
+      select2 category.name, from: 'question_category_id'
+      click_button 'Uložiť'
+
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
       end
 
-      click_link 'Odhlásiť', match: :first
+      within :css, '.user-menu-dropdown' do
+        click_link 'Odhlásiť'
+      end
 
       login_as user_watcher
 

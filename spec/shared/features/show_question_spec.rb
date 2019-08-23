@@ -56,7 +56,7 @@ describe 'Show Question', type: :feature do
   end
 
   context 'when selecting a category' do
-    let(:category) { create :category, name: 'Elasticsearch', tags: [:elasticsearch, :lucene] }
+    let(:category) { create :category, name: 'Elasticsearch', tags: [:elasticsearch, :lucene], public_tags: [:elasticsearch, :lucene] }
     let(:question) { create :question, title: 'Elasticsearch config', category: category }
 
     before :each do
@@ -87,7 +87,7 @@ describe 'Show Question', type: :feature do
         expect(page).to have_content('Elasticsearch')
 
         category.tags.each do |tag|
-          expect(page).to have_content("#{tag}")
+          expect(page).to have_content(/#{tag}/i)
         end
       end
     end

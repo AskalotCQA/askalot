@@ -59,7 +59,13 @@ describe 'Context filtering', type: :feature do
       fill_in 'answer_text', with: 'Hey, look at this.'
       click_button 'Odpovedať'
 
-      click_link 'Odhlásiť', match: :first
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
+      within :css, '.user-menu-dropdown' do
+        click_link 'Odhlásiť'
+      end
 
       login_as user2
 

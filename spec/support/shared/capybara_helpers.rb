@@ -43,7 +43,7 @@ module Shared::CapybaraHelpers
   def fill_in_select2(selector, options = {})
     page.find(:css, "#s2id_#{selector} input.select2-input").set options[:with]
 
-    page.document.find(:css, 'ul.select2-results .select2-result-label').click
+    page.document.find(:css, 'ul.select2-results .select2-result-label', match: :first).click
 
     wait_for_remote
   end

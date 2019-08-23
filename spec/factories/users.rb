@@ -12,6 +12,7 @@ FactoryBot.define do
 
     show_email true
     show_name  true
+    current_sign_in_at Time.now
 
     send_mail_notifications_frequency 'daily'
 

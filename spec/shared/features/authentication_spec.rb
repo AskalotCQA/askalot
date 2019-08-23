@@ -23,7 +23,7 @@ describe 'Authentication', type: :feature do
   end
 
   context 'when registered' do
-    it 'signs in user successfully' do
+    it 'signs in user successfully', js: true do
       allow(Shared::Stuba::AIS).to receive(:authenticate).and_return(nil)
 
       visit shared.root_path
@@ -38,7 +38,11 @@ describe 'Authentication', type: :feature do
       #expect(page).to have_content('Úspešne prihlásený.')
       expect(page).to have_content(user.nick)
 
-      within :css, '.navbar-right li .dropdown-menu' do
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
+      within :css, '.user-menu-dropdown' do
         click_link 'Odhlásiť'
       end
 

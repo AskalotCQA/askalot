@@ -48,7 +48,7 @@ describe 'Add Question', type: :feature do
     end
   end
 
-  it 'adds new question anonymously' do
+  it 'adds new question anonymously', js: true do
     visit shared.root_path
 
     click_link 'Opýtať sa otázku'
@@ -56,9 +56,9 @@ describe 'Add Question', type: :feature do
     fill_in 'question_title', with: 'Lorem ipsum title?'
     fill_in 'question_text',  with: 'Lorem ipsum'
 
-    select category.name, from: 'question_category_id'
+    select2 category.name, from: 'question_category_id'
 
-    check 'Opýtať sa anonymne'
+    check 'Opýtať sa anonymne', allow_label_click: true
 
     click_button 'Opýtať'
 
@@ -67,9 +67,16 @@ describe 'Add Question', type: :feature do
     end
   end
 
-  it 'adds new question as slido' do
+  it 'adds new question as slido', js: true do
     if Rails.module.university?
-      page.driver.submit :delete, '/logout', {}
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
+      within :css, '.user-menu-dropdown' do
+        click_link 'Odhlásiť'
+      end
+
       admin = create :administrator
       login_as admin
 
@@ -80,9 +87,9 @@ describe 'Add Question', type: :feature do
       fill_in 'question_title', with: 'Lorem ipsum title?'
       fill_in 'question_text',  with: 'Lorem ipsum'
 
-      select category.name, from: 'question_category_id'
+      select2 category.name, from: 'question_category_id'
 
-      check 'Pridať ako slido'
+      check 'Pridať ako slido', allow_label_click: true
 
       click_button 'Opýtať'
 
@@ -97,7 +104,7 @@ describe 'Add Question', type: :feature do
   context 'when creating new question from a question\'s page' do
     let!(:question) { create :question, :with_tags }
 
-    it 'selects the same category' do
+    it 'selects the same category', js: true do
       visit shared.root_path
 
       click_link 'Otázky'
@@ -106,25 +113,25 @@ describe 'Add Question', type: :feature do
       click_link 'sa opýtaj otázku v rovnakej kategórii.'
 
       expect(page).to have_content('Nová otázka')
-      expect(page).to have_field('question_category_id', with: question.category_id)
+      expect(page).to have_field('question_category_id', with: question.category_id, visible: false)
     end
   end
 
   context 'when creating new question from questions index page' do
-    it 'does not select category if it is not leaf category' do
+    it 'does not select category if it is not leaf category', js: true do
       visit shared.questions_path(category: 1)
 
       click_link 'Pridať otázku', match: :first
 
       expect(page).to have_content('Nová otázka')
-      expect(page).not_to have_field('question_category_id', with: 1)
-      expect(page).to have_field('question_category_id', with: '')
+      expect(page).not_to have_field('question_category_id', with: 1, visible: false)
+      expect(page).to have_field('question_category_id', with: '', visible: false)
     end
   end
 
   context 'when selecting category' do
     before :each do
-      create :category, name: 'Westside Playground', description: 'Category description', tags: ['westside', 'ali-gz']
+      create :category, name: 'Westside Playground', description: 'Category description', tags: ['westside', 'ali-gz'], public_tags: ['westside', 'ali-gz']
     end
 
     it 'shows automaticaly assigned tags', js: true do

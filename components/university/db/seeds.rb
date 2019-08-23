@@ -10,6 +10,7 @@ root = Shared::Category.find_or_create_by! name: :root, uuid: :root_uuid, full_t
 year = Shared::Category.find_or_create_by! name: Shared::Tag.current_academic_year_value, parent_id: root.id
 
 if Rails.env_type.test?
-  subject = Shared::Category.find_or_create_by! name: 'Subject', parent_id: year.id
+  grade = Shared::Category.find_or_create_by! name: 'Grade', parent_id: year.id
+  subject = Shared::Category.find_or_create_by! name: 'Subject', parent_id: grade.id
   part    = Shared::Category.find_or_create_by! name: 'Part', parent_id: subject.id
 end

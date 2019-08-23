@@ -21,22 +21,22 @@ describe 'Administration', type: :feature do
   end
 
   it 'copies categories', js: true do
-    find(:css, ".treetable-checkbox[name='copied[]'][value='#{Shared::Category.last.id}']").set(true)
+    find(:css, ".treetable-checkbox[name='copied[]'][value='#{Shared::Category.find_by(depth: 2).id }']").set(true)
 
     select2 Shared::Context::Manager.context_category.name, from: 'copy-categories_parent_id'
 
     click_button 'Kopírovať kategórie'
 
     expect(page).to have_text('Kategórie boli úspešne upravené')
-    expect(Shared::Category.count).to eql(5)
+    expect(Shared::Category.count).to eql(Rails.module.mooc? ? 5 : 6)
   end
 
   it 'can update category settings', js: true do
     expect(all(".treetable-checkbox[name='shared[]']:checked").count).to eql(4)
 
-    find(:css, ".treetable-checkbox[name='shared[]'][value='#{Shared::Category.last.id}']").set(false)
-    find(:css, ".treetable-checkbox[name='askable[]'][value='#{Shared::Category.last.id}']").set(false)
-    find(:css, ".treetable-checkbox[name='visible[]'][value='#{Shared::Category.last.id}']").set(false)
+    find(:css, ".treetable-checkbox[name='shared[]'][value='#{Shared::Category.find_by(depth: 2).id}']").set(false)
+    find(:css, ".treetable-checkbox[name='askable[]'][value='#{Shared::Category.find_by(depth: 2).id}']").set(false)
+    find(:css, ".treetable-checkbox[name='visible[]'][value='#{Shared::Category.find_by(depth: 2).id}']").set(false)
 
     select2 Shared::Context::Manager.context_category.name, from: 'copy-categories_parent_id'
 
@@ -44,9 +44,9 @@ describe 'Administration', type: :feature do
 
     expect(page).to have_text('Kategórie boli úspešne upravené')
 
-    expect(Shared::Category.last.shared).to eql(false)
-    expect(Shared::Category.last.askable).to eql(false)
-    expect(Shared::Category.last.visible).to eql(false)
+    expect(Shared::Category.find_by(depth: 2).shared).to eql(false)
+    expect(Shared::Category.find_by(depth: 2).askable).to eql(false)
+    expect(Shared::Category.find_by(depth: 2).visible).to eql(false)
     expect(all(".treetable-checkbox[name='shared[]']:checked").count).to eql(3)
   end
 
@@ -58,6 +58,6 @@ describe 'Administration', type: :feature do
     click_button 'Pridať kategóriu'
 
     expect(page).to have_text('Kategória bola úspešne pridaná.')
-    expect(Shared::Category.count).to eql(5)
+    expect(Shared::Category.count).to eql(Rails.module.mooc? ? 5 : 6)
   end
 end

@@ -10,6 +10,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 require 'cancan/matchers'
+require 'webdrivers/chromedriver'
 require 'selenium/webdriver'
 
 Capybara.register_driver :chrome do |app|
@@ -17,13 +18,16 @@ Capybara.register_driver :chrome do |app|
 end
 
 Capybara.register_driver :headless_chrome do |app|
-  capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-      chromeOptions: { args: %w(headless disable-gpu) }
-  )
+  options = Selenium::WebDriver::Chrome::Options.new
 
-  Capybara::Selenium::Driver.new app,
-                                 browser: :chrome,
-                                 desired_capabilities: capabilities
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-gpu')
+  options.add_argument('--disable-dev-shm-usage')
+  options.add_argument('--window-size=1400,1400')
+  options.add_argument('--disable-features=VizDisplayCompositor')
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
 Capybara.default_selector  = :css
@@ -80,9 +84,5 @@ RSpec.configure do |config|
     Shared::Configuration.poll.default          = 60
 
     Shared::Context::Manager.current_context_id = Rails.module.university? ? 2 : 1
-  end
-
-  config.before(:each, type: :feature, js: true) do
-    Capybara.current_session.driver.browser.manage.window.resize_to(1400, 700)
   end
 end

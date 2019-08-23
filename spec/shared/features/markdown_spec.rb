@@ -44,12 +44,12 @@ describe 'Markdown', type: :feature do
       end
     end
 
-    it 'embeds emoji icons' do
+    it 'embeds emoji icons', js: true do
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
-      select  category.name,    from: 'question_category_id'
+      select2  category.name,    from: 'question_category_id'
       fill_in 'question_title', with: 'Lorem ipsum?'
       fill_in 'question_text',  with: ':poop:'
 
@@ -60,14 +60,14 @@ describe 'Markdown', type: :feature do
       end
     end
 
-    it 'embeds references to user' do
+    it 'embeds references to user', js: true do
       other = create :user, login: :smolnar
 
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
-      select  category.name,    from: 'question_category_id'
+      select2  category.name,    from: 'question_category_id'
       fill_in 'question_title', with: 'Lorem ipsum?'
       fill_in 'question_text',  with: '@smolnar'
 
@@ -87,14 +87,14 @@ describe 'Markdown', type: :feature do
       expect(last_notification.action).to    eql(:mention)
     end
 
-    it 'embeds reference to question' do
+    it 'embeds reference to question', js: true do
       question = create :question
 
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
-      select  category.name,    from: 'question_category_id'
+      select2  category.name,    from: 'question_category_id'
       fill_in 'question_title', with: 'Lorem ipsum?'
       fill_in 'question_text',  with: "##{question.id}"
 
@@ -122,14 +122,14 @@ describe 'Markdown', type: :feature do
     end
 
     context 'with link for question' do
-      it 'embeds reference to question' do
+      it 'embeds reference to question', js: true do
         question = create :question
 
         visit shared.root_path
 
         click_link 'Opýtať sa otázku'
 
-        select  category.name,    from: 'question_category_id'
+        select2  category.name,    from: 'question_category_id'
         fill_in 'question_title', with: 'Lorem ipsum?'
         fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{shared.question_path(question)}"
 
@@ -142,14 +142,14 @@ describe 'Markdown', type: :feature do
     end
 
     context 'with link for user' do
-      it 'embeds reference to user' do
+      it 'embeds reference to user', js: true do
         user = create :user, login: :smolnar
 
         visit shared.root_path
 
         click_link 'Opýtať sa otázku'
 
-        select  category.name,    from: 'question_category_id'
+        select2  category.name,    from: 'question_category_id'
         fill_in 'question_title', with: 'Lorem ipsum?'
         fill_in 'question_text',  with: "https://askalot.fiit.stuba.sk#{shared.user_path(user.nick)}"
 

@@ -26,6 +26,7 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true
 
+  before_save  :remember_what_changed
   before_save  :check_uuid
   after_save   :update_categories
   after_save   :update_categories_questions
@@ -40,7 +41,6 @@ class Category < ActiveRecord::Base
   scope :visible, -> { where(visible: true) }
 
   attr_accessor :copied
-  attr_reader :what_changed
 
   self.table_name = 'categories'
 
@@ -132,6 +132,10 @@ class Category < ActiveRecord::Base
 
 
 
+  def remember_what_changed
+    @what_changed = changed || []
+  end
+
   def check_uuid
     return true unless self.uuid.blank?
 
@@ -176,7 +180,7 @@ class Category < ActiveRecord::Base
   end
 
   def update_assignments
-    if (what_changed & ['full_tree_name']).any?
+    if (@what_changed & ['full_tree_name']).any?
       self.ancestors.each do |ancestor|
         ancestor.assignments.each do |assignment|
           assignment.add_assignments_to_descendants
@@ -186,14 +190,14 @@ class Category < ActiveRecord::Base
   end
 
   def update_categories_questions
-    if (what_changed & ['uuid']).any?
+    if (@what_changed & ['uuid']).any?
       self.related_questions.each do |question|
         question.category_questions.delete_all
         question.register_question
       end
     end
 
-    if (what_changed & ['full_tree_name', 'visible', 'shared', 'uuid']).any?
+    if (@what_changed & ['full_tree_name', 'visible', 'shared', 'uuid']).any?
       self.questions.each do |question|
         question.category_questions.delete_all
         question.register_question

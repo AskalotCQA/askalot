@@ -3,9 +3,7 @@ require 'spec_helper'
 describe 'Notifications', type: :feature do
   let(:user)      { create :user }
   let!(:question) { create :question, :with_tags }
-  let!(:category_parent_parent) { create :category, parent: Shared::Category.last }
-  let!(:category_parent) { create :category, parent: category_parent_parent }
-  let!(:category) { create :category, askable: true, parent: category_parent }
+  let!(:category) { create :category, askable: true }
 
   let(:watcher)   { create :user }
   let(:tag)       { create :tag }
@@ -15,14 +13,14 @@ describe 'Notifications', type: :feature do
   end
 
   context 'with category' do
-    it 'notifies watchers about new question' do
+    it 'notifies watchers about new question', js: true do
       category.toggle_watching_by!(watcher)
 
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
-      select category.name, from: 'question_category_id'
+      select2 category.name, from: 'question_category_id'
 
       fill_in 'question_title', with: 'Lorem ipsum?'
       fill_in 'question_text',  with: 'Lorem ipsum'
@@ -38,21 +36,31 @@ describe 'Notifications', type: :feature do
       expect(last_notification.action).to    eql(:create)
       expect(last_notification.resource).to  eql(question)
 
-      click_link 'Odhlásiť', match: :first
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
+      within :css, '.user-menu-dropdown' do
+        click_link 'Odhlásiť'
+      end
 
       login_as watcher
+
+      within :css, '.notifications-dropdown' do
+        find('a.dropdown-toggle').click
+      end
 
       expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../../../descendant::a[text()='#{user.nick}']")
     end
 
-    it 'notifies parent category watchers about new question' do
-      category_parent.toggle_watching_by!(watcher)
+    it 'notifies parent category watchers about new question', js: true do
+      category.parent.toggle_watching_by!(watcher)
 
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
-      select category.name, from: 'question_category_id'
+      select2 category.name, from: 'question_category_id'
 
       fill_in 'question_title', with: 'Lorem ipsum?'
       fill_in 'question_text',  with: 'Lorem ipsum'
@@ -68,22 +76,32 @@ describe 'Notifications', type: :feature do
       expect(last_notification.action).to    eql(:create)
       expect(last_notification.resource).to  eql(question)
 
-      click_link 'Odhlásiť', match: :first
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
+      within :css, '.user-menu-dropdown' do
+        click_link 'Odhlásiť'
+      end
 
       login_as watcher
+
+      within :css, '.notifications-dropdown' do
+        find('a.dropdown-toggle').click
+      end
 
       expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../../../descendant::a[text()='#{user.nick}']")
     end
 
-    it 'notifies parent category watchers about new question 2' do
-      category_parent_parent.toggle_watching_by!(watcher)
-      category_parent.toggle_watching_by!(watcher)
+    it 'notifies parent category watchers about new question 2', js: true do
+      category.parent.parent.toggle_watching_by!(watcher)
+      category.parent.toggle_watching_by!(watcher)
 
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
-      select category.name, from: 'question_category_id'
+      select2 category.name, from: 'question_category_id'
 
       fill_in 'question_title', with: 'Lorem ipsum?'
       fill_in 'question_text',  with: 'Lorem ipsum'
@@ -99,23 +117,39 @@ describe 'Notifications', type: :feature do
       expect(last_notification.action).to    eql(:create)
       expect(last_notification.resource).to  eql(question)
 
-      click_link 'Odhlásiť', match: :first
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
+      within :css, '.user-menu-dropdown' do
+        click_link 'Odhlásiť'
+      end
 
       login_as watcher
 
+      within :css, '.notifications-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
       expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../../../descendant::a[text()='#{user.nick}']")
 
-      click_link 'Odhlásiť', match: :first
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
+      within :css, '.user-menu-dropdown' do
+        click_link 'Odhlásiť'
+      end
 
       login_as user
 
-      category_parent_parent.toggle_watching_by!(watcher)
+      category.parent.parent.toggle_watching_by!(watcher)
 
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
-      select category.name, from: 'question_category_id'
+      select2 category.name, from: 'question_category_id'
 
       fill_in 'question_title', with: 'Lorem ipsum2?'
       fill_in 'question_text',  with: 'Lorem ipsum2'
@@ -131,23 +165,39 @@ describe 'Notifications', type: :feature do
       expect(last_notification.action).to    eql(:create)
       expect(last_notification.resource).to  eql(question)
 
-      click_link 'Odhlásiť', match: :first
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
+      within :css, '.user-menu-dropdown' do
+        click_link 'Odhlásiť'
+      end
 
       login_as watcher
 
+      within :css, '.notifications-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
       expect(page).to have_xpath("//a[text()='2 neprečítané notifikácie']/../../../../descendant::a[text()='#{user.nick}']")
 
-      click_link 'Odhlásiť', match: :first
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
+      within :css, '.user-menu-dropdown' do
+        click_link 'Odhlásiť'
+      end
 
       login_as user
 
-      category_parent.toggle_watching_by!(watcher)
+      category.parent.toggle_watching_by!(watcher)
 
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
-      select category.name, from: 'question_category_id'
+      select2 category.name, from: 'question_category_id'
 
       fill_in 'question_title', with: 'Lorem ipsum3?'
       fill_in 'question_text',  with: 'Lorem ipsum3'
@@ -160,34 +210,54 @@ describe 'Notifications', type: :feature do
 
       expect(last_notification.resource).not_to eql(question)
 
-      click_link 'Odhlásiť', match: :first
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
+      within :css, '.user-menu-dropdown' do
+        click_link 'Odhlásiť'
+      end
 
       login_as watcher
+
+      within :css, '.notifications-dropdown' do
+        find('a.dropdown-toggle').click
+      end
 
       expect(page).to have_xpath("//a[text()='2 neprečítané notifikácie']/../../../../descendant::a[text()='#{user.nick}']")
     end
 
     context 'with anonymous question' do
-      it 'notifies watchers about new question and hides asker' do
+      it 'notifies watchers about new question and hides asker', js: true do
         category.toggle_watching_by!(watcher)
 
         visit shared.root_path
 
         click_link 'Opýtať sa otázku'
 
-        select category.name, from: 'question_category_id'
+        select2 category.name, from: 'question_category_id'
 
         fill_in 'question_title', with: 'Lorem ipsum?'
         fill_in 'question_text',  with: 'Lorem ipsum'
-        check 'question_anonymous'
+        check 'question_anonymous', allow_label_click: true
 
         click_button 'Opýtať'
 
         expect(notifications.size).to eql(1)
 
-        click_link 'Odhlásiť', match: :first
+        within :css, '.user-menu-dropdown' do
+          find('a.dropdown-toggle').click
+        end
+
+        within :css, '.user-menu-dropdown' do
+          click_link 'Odhlásiť'
+        end
 
         login_as watcher
+
+        within :css, '.notifications-dropdown' do
+          find('a.dropdown-toggle').click
+        end
 
         expect(page).to have_xpath("//a[text()='1 neprečítaná notifikácia']/../../../../descendant::span[text()='Anonym']")
       end
@@ -195,18 +265,18 @@ describe 'Notifications', type: :feature do
   end
 
   context 'with tag' do
-    it 'notifies watchers about new question' do
+    it 'notifies watchers about new question', js: true do
       tag.toggle_watching_by!(watcher)
 
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
 
-      select category.name, from: 'question_category_id'
+      select2 category.name, from: 'question_category_id'
 
       fill_in 'question_title',    with: 'Lorem ipsum?'
       fill_in 'question_text',     with: 'Lorem ipsum'
-      fill_in 'question_tag_list', with: tag.name
+      fill_in_select2 'question_tag_list', with: tag.name
 
       click_button 'Opýtať'
 

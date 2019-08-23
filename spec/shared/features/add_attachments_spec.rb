@@ -16,7 +16,7 @@ describe 'Add Attachment', type: :feature do
     end
   end
 
-  it 'adds new question with attachment' do
+  it 'adds new question with attachment', js: true do
     visit shared.root_path
 
     click_link 'Opýtať sa otázku'
@@ -27,10 +27,14 @@ describe 'Add Attachment', type: :feature do
 
     expect(page).to have_content('Prílohy – Súbor – musí byť obrázok, čistý text, PDF alebo PPT')
 
+    visit shared.root_path
+
+    click_link 'Opýtať sa otázku'
+
     fill_in 'question_title', with: 'Lorem ipsum title?'
     fill_in 'question_text',  with: 'Lorem ipsum'
 
-    select category.name, from: 'question_category_id'
+    select2 category.name, from: 'question_category_id'
 
     attach_file('attachments[]', test_fixture_path('shared/attachments/image.jpg'))
 

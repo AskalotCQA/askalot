@@ -9,7 +9,7 @@ describe 'News', type: :feature do
       login_as administrator
     end
 
-    it 'adds new news and show on homepage' do
+    it 'adds new news and show on homepage', js: true do
       visit shared.root_path
 
       click_link 'Administrácia', match: :first
@@ -17,7 +17,7 @@ describe 'News', type: :feature do
 
       fill_in 'news[title]', with: 'Test news'
       fill_in 'news[description]', with: 'News'
-      check 'Zobraziť na domovskej stránke'
+      check 'Zobraziť na domovskej stránke', allow_label_click: true
       date = Date.today.strftime('%-d. %-m. %Y')
 
       click_button 'Pridať novinku'
@@ -36,7 +36,13 @@ describe 'News', type: :feature do
         expect(page).to have_content('News')
       end
 
-      click_link 'Odhlásiť', match: :first
+      within :css, '.user-menu-dropdown' do
+        find('a.dropdown-toggle').click
+      end
+
+      within :css, '.user-menu-dropdown' do
+        click_link 'Odhlásiť'
+      end
 
       visit shared.root_path
 

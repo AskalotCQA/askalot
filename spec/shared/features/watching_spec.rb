@@ -10,7 +10,7 @@ describe 'Watching', type: :feature do
   end
 
   context 'with question' do
-    it 'registers author as watcher as question' do
+    it 'registers author as watcher as question', js: true do
       visit shared.root_path
 
       click_link 'Opýtať sa otázku'
@@ -18,7 +18,7 @@ describe 'Watching', type: :feature do
       fill_in 'question_title', with: 'Watched question'
       fill_in 'question_text',  with: 'Lorem ipsum'
 
-      select category.name, from: 'question_category_id'
+      select2 category.name, from: 'question_category_id'
 
       click_button 'Opýtať'
 
