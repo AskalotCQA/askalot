@@ -17,7 +17,7 @@ class WatchingsController < ApplicationController
           WHEN (watchable_id IN (#{Shared::Category::all_in_contexts(@context_id).select('id').to_sql})) THEN 1
           ELSE 2
         END",
-        'categories.full_tree_name'
+        'categories.full_tree_name desc'
       ).page(tab_page :categories).per(count)
   end
 

@@ -39,9 +39,9 @@ module Shared::Core
               end
             else
               if part.upcase == part
-                uppercase << part.split(/\-/).map(&:titlecase).join(' - ')
+                uppercase << part.split(/\-/).map(&:titlecase).join('-')
               else
-                mixedcase << part.split(/\-/).map(&:titlecase).join(' - ')
+                mixedcase << part.split(/\-/).map(&:titlecase).join('-')
               end
             end
           end

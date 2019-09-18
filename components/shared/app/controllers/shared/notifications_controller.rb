@@ -22,7 +22,7 @@ class NotificationsController < ApplicationController
   end
 
   def clean
-    @update_notifications = Shared::Notification.in_context(@context_id).where(recipient: current_user).unread
+    @update_notifications = Shared::Notification.in_context(@context_id).for(current_user).unread
     @notifications        = @update_notifications.each { |notification| notification.unread = false }
 
     if @update_notifications.update_all(unread: false, read_at: nil)
