@@ -271,8 +271,8 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.1.0)
-    json-jwt (1.9.4)
-      activesupport
+    json-jwt (1.11.0)
+      activesupport (>= 4.2)
       aes_key_wrap
       bindata
     jsonapi-renderer (0.2.0)
@@ -321,7 +321,7 @@ GEM
     mimemagic (0.3.2)
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
-    minitest (5.11.3)
+    minitest (5.13.0)
     momentjs-rails (2.20.1)
       railties (>= 3.1)
     multi_json (1.13.1)
