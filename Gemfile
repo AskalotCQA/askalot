@@ -60,7 +60,7 @@ gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'rails-4-x' # For 4.x
 gem 'i18n-js', '~> 3.0.7'
 
 # pagination
-gem 'kaminari', '~> 1.1.0'
+gem 'kaminari', '~> 1.2.1'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 
 # scheduling
