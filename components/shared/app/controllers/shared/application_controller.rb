@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   helper Mooc::Engine.helpers if Rails.module.mooc?
 
   before_action :determine_context
-  before_action :set_locale
+  around_action :set_locale
 
   protected
 
@@ -57,16 +57,12 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def set_locale
-    return unless params[:lang] || cookies[:lang]
-
-    lang = params[:lang] || cookies[:lang]
+  def set_locale(&action)
+    lang = params[:lang] || cookies[:lang] || I18n.default_locale
     lang = ['en', 'sk'].include?(lang) ? lang : 'sk'
 
-    if I18n.locale != lang
-      I18n.locale = lang
-      cookies[:lang] = lang
-    end
+    I18n.with_locale(lang, &action)
+    cookies[:lang] = lang
   end
 end
 end
