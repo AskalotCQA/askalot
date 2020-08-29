@@ -1,13 +1,13 @@
 language: ruby
 rvm:
-  - 2.4.4
+  - 2.6.6
 
 services:
     - postgresql
 
 addons:
   chrome: stable
-  postgresql: "9.6"
+  postgresql: "12.4"
 
 cache:
   - bundler: true
@@ -18,7 +18,7 @@ bundler_args: --without development
 before_install:
   - gem uninstall -v '>= 2' -i $(rvm gemdir)@global -ax bundler || true
   - gem install bundler -v '< 2'
-  - curl -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-1.7.5.deb && sudo dpkg -i --force-confnew elasticsearch-1.7.5.deb && sudo service elasticsearch restart
+  - curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.8.12.deb && sudo dpkg -i --force-confnew elasticsearch-6.8.12.deb && sudo service elasticsearch restart
 
 before_script:
   - export TZ='Europe/Bratislava'

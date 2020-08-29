@@ -54,29 +54,27 @@ module Shared::Categories
             },
 
             name: {
-              type: :multi_field,
+              type: :text,
               fields: {
                 name: {
-                  type: :string,
+                  type: :text,
                   analyzer: :text,
                 },
                 untouched: {
-                  type: :string,
-                  index: :not_analyzed
+                  type: :keyword
                 }
               }
             },
 
             description: {
-                type: :multi_field,
+                type: :text,
                 fields: {
                     description: {
-                        type: :string,
+                        type: :text,
                         analyzer: :text,
                     },
                     untouched: {
-                        type: :string,
-                        index: :not_analyzed
+                        type: :keyword
                     }
                 }
             },
@@ -102,18 +100,22 @@ module Shared::Categories
       def search_by(params, context = Shared::Context::Manager.current_context_id)
         search(
           query: {
-            query_string: {
-              query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
-              analyzer: :text,
-              analyze_wildcard: true,
-              default_operator: :and,
-              fields: [:name, :description]
-            }
-          },
-          filter: {
-            term: {
-              context: context
-            }
+            bool: {
+              must: {
+                query_string: {
+                  query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
+                  analyzer: :text,
+                  analyze_wildcard: true,
+                  default_operator: :and,
+                  fields: [:name, :description]
+                }
+              },
+              filter: {
+                term: {
+                  context: context
+                }
+              },
+            },
           },
           sort: {
             :'name.untouched' => :asc

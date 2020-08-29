@@ -69,71 +69,66 @@ module Shared::Questions
             },
 
             title: {
-              type: :multi_field,
+              type: :text,
               fields: {
                 title: {
-                  type: :string,
+                  type: :text,
                   analyzer: :text,
                 },
                 untouched: {
-                  type: :string,
-                  index: :not_analyzed
+                  type: :keyword
                 }
               }
             },
 
             text: {
-              type: :multi_field,
+              type: :text,
               fields: {
                 text: {
-                  type: :string,
+                  type: :text,
                   analyzer: :text,
                 },
                 untouched: {
-                  type: :string,
-                  index: :not_analyzed
+                  type: :keyword
                 }
               }
             },
 
             tags: {
-              type: :multi_field,
+              type: :text,
               fields: {
                 tags: {
-                  type: :string,
+                  type: :text,
                   analyzer: :tags,
                 },
                 untouched: {
-                  type: :string,
-                  index: :not_analyzed
+                  type: :keyword
                 }
               }
             },
 
             answers: {
-              type: :multi_field,
+              type: :text,
               fields: {
                 answers: {
-                  type: :string,
+                  type: :text,
                   analyzer: :answers,
                 },
                 untouched: {
-                  type: :string,
-                  index: :not_analyzed
+                  type: :keyword
                 }
               }
             },
 
             comments: {
-              type: :multi_field,
-              fileds: {
+              type: :text,
+              fields: {
                 comments: {
-                  type: :string,
+                  type: :text,
                   analyzer: :comments,
                 },
                 untouched: {
-                  type: :string,
-                  index: :not_analyzed
+                  type: :keyword
                 }
               }
             },
@@ -169,18 +164,22 @@ module Shared::Questions
       def search_by(params, context = Shared::Context::Manager.current_context_id)
         search(
           query: {
-            query_string: {
-              query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
-              analyzer: :text,
-              analyze_wildcard: true,
-              default_operator: :and,
-              fields: [:title, :text, :tags, :answers, :comments, :evaluations]
-            }
-          },
-          filter: {
-            term: {
-                context: context
-            }
+            bool: {
+              must: {
+                query_string: {
+                  query: probe.sanitizer.sanitize_query("*#{params[:q]}*"),
+                  analyzer: :text,
+                  analyze_wildcard: true,
+                  default_operator: :and,
+                  fields: [:title, :text, :tags, :answers, :comments, :evaluations]
+                }
+              },
+              filter: {
+                term: {
+                    context: context
+                }
+              },
+            },
           },
           sort: {
             :'title.untouched' => :asc

@@ -4,7 +4,7 @@ gem 'rails', '~> 4.2.0'
 gem 'responders', '~> 2.0'
 
 # database
-gem 'pg', '~> 0.17.0'
+gem 'pg', '~> 0.20.0'
 
 # monitoring
 gem 'pghero'
@@ -72,7 +72,6 @@ gem 'active_model_serializers'
 gem 'forgery'
 gem 'murmurhash3'
 gem 'nokogiri'
-gem 'scout', github: 'smolnar/scout'
 gem 'statistics2'
 gem 'symbolize'
 gem 'lda-ruby'
