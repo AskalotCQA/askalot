@@ -77,7 +77,7 @@ class QuestionsController < ApplicationController
 
     if @question.save
       process_markdown_for @question do |user|
-        dispatch_event :mention, @question, for: user
+        dispatch_event :mention, @question, for: user, anonymous: @question.anonymous
       end
 
       if params[:slido]

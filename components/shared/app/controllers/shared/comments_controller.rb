@@ -22,7 +22,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       process_markdown_for @comment do |user|
-        dispatch_event :mention, @comment, for: user
+        dispatch_event :mention, @comment, for: user, anonymous: @comment.anonymous
       end
 
       dispatch_event :create, @comment, for: @question.watchers, anonymous: @comment.anonymous

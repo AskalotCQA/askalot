@@ -31,7 +31,7 @@ module Shared::Editables::Update
 
         if @editable.respond_to? :text
           process_markdown_for @editable do |user|
-            dispatch_event :mention, @editable, for: user
+            dispatch_event :mention, @editable, for: user, anonymous: ([Shared::Question, Shared::Answer, Shared::Comment].member?(@editable.class) && @editable.anonymous)
           end
         end
 

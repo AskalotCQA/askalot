@@ -22,7 +22,7 @@ class AnswersController < ApplicationController
 
     if @answer.save
       process_markdown_for @answer do |user|
-        dispatch_event :mention, @answer, for: user
+        dispatch_event :mention, @answer, for: user, anonymous: @answer.anonymous
       end
 
       dispatch_event :create, @answer, for: @question.watchers, anonymous: @answer.anonymous
