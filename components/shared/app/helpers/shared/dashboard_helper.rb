@@ -1,7 +1,7 @@
 module Shared::DashboardHelper
   def dashboard_link(icon, number, description, path, type)
     html = <<-HTML
-      <div class="col-xs-4">
+      <div class="dashboard-link">
         <a href="#{path}">
           <div class="link-icon #{type}">#{fa_icon icon}</div>
           <div class="link-text">

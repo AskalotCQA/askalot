@@ -63,6 +63,15 @@
   }
 
   .links {
+    .dashboard-link {
+      @extend .col-xs-4;
+
+      // For extra small devices
+      @media (max-width: 501px) {
+        width: 100%;
+      }
+    }
+
     a {
       vertical-align: middle;
       background-color: #eceff4;
