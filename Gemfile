@@ -26,7 +26,7 @@ gem 'fb_graph2', '0.8.0'    # must be fixed to v0.8.0, notifications are acciden
 # sass gem must be fixed to this particular version due to a bug described in https://github.com/sass/sass/issues/2214
 gem 'sass', '3.4.22'
 gem 'sass-rails', '~> 5.0.0'
-gem 'bootstrap-sass', '~> 3.1.1'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'font-awesome-rails', '~> 4.7.0.1'
 
 # javascripts
