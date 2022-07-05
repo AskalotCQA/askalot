@@ -1,11 +1,11 @@
 GIT
-  remote: git://github.com/pavolzbell/bump.git
+  remote: https://github.com/pavolzbell/bump.git
   revision: 136e59f21d8effccd4c259e7b22066f27a904942
   specs:
     bump (0.3.0)
 
 GIT
-  remote: git://github.com/svenfuchs/rails-i18n.git
+  remote: https://github.com/svenfuchs/rails-i18n.git
   revision: f8c83ec753439d7286b9168bbb246e354866cb9e
   branch: rails-4-x
   specs:
@@ -291,7 +291,9 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mimemagic (0.3.2)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.14.1)
@@ -390,8 +392,8 @@ GEM
       activesupport (>= 4.2.0, < 5.0)
       nokogiri (~> 1.6)
       rails-deprecated_sanitizer (>= 1.0.1)
-    rails-html-sanitizer (1.2.0)
-      loofah (~> 2.2, >= 2.2.2)
+    rails-html-sanitizer (1.4.3)
+      loofah (~> 2.3)
     rails-timeago (2.16.0)
       actionpack (>= 3.1)
       activesupport (>= 3.1)
